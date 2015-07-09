@@ -569,21 +569,32 @@ Started Oct 2005  Syd Adams
     </pfd>
 </primus2000>
 
+    <cdu>
+			<input type="string"/>
+      <serviceable type="bool">true</serviceable>
+      <display>NAV IDENT</display>
+      <ident>
+        <model>Citation X</model>
+      </ident>
+    </cdu>
+
+
+<!--
     <cdu n="0">
-        <page type="string">PROGRESS</page>
+        <page type="string">NAV IDENT</page>
         <L type="string" n="0"></L>
         <L type="string" n="1"></L>
         <L type="string" n="2"></L>
         <L type="string" n="3"></L>
         <L type="string" n="4"></L>
-        <L type="string" n="5"></L>
+        <L type="string" n="5"></L>			
         <R type="string" n="0"></R>
         <R type="string" n="1"></R>
         <R type="string" n="2"></R>
         <R type="string" n="3"></R>
         <R type="string" n="4"></R>
         <R type="string" n="5"></R>
-        <S type="string" n="0"></S>
+	      <S type="string" n="0"></S>
         <S type="string" n="1"></S>
     </cdu>
 
@@ -604,8 +615,8 @@ Started Oct 2005  Syd Adams
         <S type="string" n="0"></S>
         <S type="string" n="1"></S>
     </cdu>
-
-    </instrumentation>
+-->
+   </instrumentation>
 
     <controls>
         <gear>
@@ -729,6 +740,22 @@ Started Oct 2005  Syd Adams
         <dialogs>
             <file>Aircraft/CitationX/Nasal/dialogs.nas</file>
         </dialogs>
+				<procedures>
+						<file>Aircraft/CitationX/Models/Instruments/CDU/Procedures/fmsDB.nas</file>
+						<file>Aircraft/CitationX/Models/Instruments/CDU/Procedures/fmsWP.nas</file>
+						<file>Aircraft/CitationX/Models/Instruments/CDU/Procedures/fmsTP.nas</file>
+						<file>Aircraft/CitationX/Models/Instruments/CDU/Procedures/fmsTransition.nas</file>
+				</procedures>
+				<displaypages>
+						<file>Aircraft/CitationX/Models/Instruments/CDU/DispPages/CduStart.nas</file>
+						<file>Aircraft/CitationX/Models/Instruments/CDU/DispPages/FltPlan.nas</file>
+						<file>Aircraft/CitationX/Models/Instruments/CDU/DispPages/FltList.nas</file>
+						<file>Aircraft/CitationX/Models/Instruments/CDU/DispPages/FltDeparture.nas</file>
+						<file>Aircraft/CitationX/Models/Instruments/CDU/DispPages/FltDestination.nas</file>
+				</displaypages>
+				<cdu>
+						<file>Aircraft/CitationX/Models/Instruments/CDU/CDU.nas</file>
+				</cdu>
     </nasal>
 
 </PropertyList>
