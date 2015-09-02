@@ -1,27 +1,122 @@
 <?xml version="1.0"?>
-<!--    FMZ P2000    -->
+
+<!--    FMZ 2000    -->
+<!-- C. Le Moigne (clm76) -->
+
 <PropertyList>
 
-  <params>
-    <header>instrumentation/cdu[1]/page</header>
-    <L0>instrumentation/cdu[1]/L[0]</L0>
-    <L1>instrumentation/cdu[1]/L[1]</L1>
-    <L2>instrumentation/cdu[1]/L[2]</L2>
-    <L3>instrumentation/cdu[1]/L[3]</L3>
-    <L4>instrumentation/cdu[1]/L[4]</L4>
-    <L5>instrumentation/cdu[1]/L[5]</L5>
-    <R0>instrumentation/cdu[1]/R[0]</R0>
-    <R1>instrumentation/cdu[1]/R[1]</R1>
-    <R2>instrumentation/cdu[1]/R[2]</R2>
-    <R3>instrumentation/cdu[1]/R[3]</R3>
-    <R4>instrumentation/cdu[1]/R[4]</R4>
-    <R5>instrumentation/cdu[1]/R[5]</R5>
-    <S0>instrumentation/cdu[1]/S[0]</S0>
-    <S1>instrumentation/cdu[1]/S[1]</S1>
-  </params>
-
-
     <path>CDU.ac</path>
+
+<!-- CDU Knob -->
+
+    <animation>
+        <type>rotate</type>
+        <object-name>CDU-knob</object-name>
+        <property>controls/lighting/cdu1</property>
+        <factor>-270</factor>
+        <center>
+            <x-m>0</x-m>
+            <y-m>0.0632</y-m>
+            <z-m>-0.005</z-m>
+        </center>
+        <axis>
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>CDU-knob</object-name>
+        <action>
+            <button>1</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.1</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>controls/lighting/cdu1</property>
+                <step>0.05</step>
+                <min>0</min>
+                <max>1.0</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>CDU-knob</object-name>
+        <action>
+            <button>2</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.1</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>controls/lighting/cdu1</property>
+                <step>-0.05</step>
+                <min>0</min>
+                <max>1.0</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>CDU-knob</object-name>
+        <action>
+            <button>3</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.1</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>controls/lighting/cdu1</property>
+                <step>0.05</step>
+                <min>0</min>
+                <max>1.0</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>CDU-knob</object-name>
+        <action>
+            <button>4</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.1</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>controls/lighting/cdu1</property>
+                <step>-0.05</step>
+                <min>0</min>
+                <max>1.0</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+    </animation>
+
+  <params>
+    <header>instrumentation/cdu/page</header>
+    <L0>instrumentation/cdu/L[0]</L0>
+    <L1>instrumentation/cdu/L[1]</L1>
+    <L2>instrumentation/cdu/L[2]</L2>
+    <L3>instrumentation/cdu/L[3]</L3>
+    <L4>instrumentation/cdu/L[4]</L4>
+		<L5>instrumentation/cdu/L[5]</L5>
+		<L6>instrumentation/cdu/L[6]</L6>
+    <R0>instrumentation/cdu/R[0]</R0>
+    <R1>instrumentation/cdu/R[1]</R1>
+    <R2>instrumentation/cdu/R[2]</R2>
+    <R3>instrumentation/cdu/R[3]</R3>
+    <R4>instrumentation/cdu/R[4]</R4>
+    <R5>instrumentation/cdu/R[5]</R5>
+		<R6>instrumentation/cdu/R[6]</R6>
+		<S0>instrumentation/cdu/input</S0>
+
+  </params>
 
     <text>
         <name>Page</name>
@@ -77,8 +172,8 @@
         <type>text-value</type>
         <property alias="../../params/L1"/>
         <font>helvetica_bold.txf</font>
-        <character-size>0.005</character-size>
-        <character-aspect-ratio type="double">1.2</character-aspect-ratio>
+        <character-size>0.006</character-size>
+        <character-aspect-ratio type="double">1.1</character-aspect-ratio>
         <font-resolution>
             <width type="int">32</width>
             <height type="int">32</height>
@@ -117,8 +212,8 @@
         <type>text-value</type>
         <property alias="../../params/L3"/>
         <font>helvetica_bold.txf</font>
-        <character-size>0.005</character-size>
-        <character-aspect-ratio type="double">1.2</character-aspect-ratio>
+        <character-size>0.006</character-size>
+        <character-aspect-ratio type="double">1.1</character-aspect-ratio>
         <font-resolution>
             <width type="int">32</width>
             <height type="int">32</height>
@@ -156,6 +251,26 @@
         <axis-alignment>yz-plane</axis-alignment>
         <type>text-value</type>
         <property alias="../../params/L5"/>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.006</character-size>
+        <character-aspect-ratio type="double">1.1</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">32</width>
+            <height type="int">32</height>
+        </font-resolution>
+    </text>
+
+    <text>
+        <name>L6</name>
+        <offsets>
+            <x-m>0.003</x-m>
+            <y-m>-0.048</y-m>
+            <z-m>0.012</z-m>
+        </offsets>
+        <alignment>left-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>text-value</type>
+        <property alias="../../params/L6"/>
         <font>helvetica_bold.txf</font>
         <character-size>0.005</character-size>
         <character-aspect-ratio type="double">1.2</character-aspect-ratio>
@@ -199,8 +314,8 @@
         <type>text-value</type>
         <property alias="../../params/R1"/>
         <font>helvetica_bold.txf</font>
-        <character-size>0.005</character-size>
-        <character-aspect-ratio type="double">1.2</character-aspect-ratio>
+        <character-size>0.006</character-size>
+        <character-aspect-ratio type="double">1.1</character-aspect-ratio>
         <font-resolution>
             <width type="int">32</width>
             <height type="int">32</height>
@@ -239,8 +354,8 @@
         <type>text-value</type>
         <property alias="../../params/R3"/>
         <font>helvetica_bold.txf</font>
-        <character-size>0.005</character-size>
-        <character-aspect-ratio type="double">1.2</character-aspect-ratio>
+        <character-size>0.006</character-size>
+        <character-aspect-ratio type="double">1.1</character-aspect-ratio>
         <font-resolution>
             <width type="int">32</width>
             <height type="int">32</height>
@@ -279,6 +394,26 @@
         <type>text-value</type>
         <property alias="../../params/R5"/>
         <font>helvetica_bold.txf</font>
+        <character-size>0.006</character-size>
+        <character-aspect-ratio type="double">1.1</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">32</width>
+            <height type="int">32</height>
+        </font-resolution>
+    </text>
+
+    <text>
+        <name>R6</name>
+        <offsets>
+            <x-m>0.003</x-m>
+            <y-m>0.048</y-m>
+            <z-m>0.012</z-m>
+        </offsets>
+        <alignment>right-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>text-value</type>
+        <property alias="../../params/R6"/>
+        <font>helvetica_bold.txf</font>
         <character-size>0.005</character-size>
         <character-aspect-ratio type="double">1.2</character-aspect-ratio>
         <font-resolution>
@@ -287,48 +422,27 @@
         </font-resolution>
     </text>
 
-<!-- scratchpad -->
+<!-- Scratchpad-->
 
     <text>
         <name>S0</name>
         <offsets>
             <x-m>0.003</x-m>
-            <y-m>-0.048</y-m>
-            <z-m>0.011</z-m>
+            <y-m>-0.0</y-m>
+            <z-m>0.005</z-m>
         </offsets>
-        <alignment>right-center</alignment>
+        <alignment>center-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
         <type>text-value</type>
         <property alias="../../params/S0"/>
         <font>helvetica_bold.txf</font>
-        <character-size>0.005</character-size>
-        <character-aspect-ratio type="double">1.2</character-aspect-ratio>
+        <character-size>0.007</character-size>
+        <character-aspect-ratio type="double">1</character-aspect-ratio>
         <font-resolution>
             <width type="int">32</width>
             <height type="int">32</height>
         </font-resolution>
     </text>
-
-   <text>
-        <name>S1</name>
-        <offsets>
-            <x-m>0.003</x-m>
-            <y-m>0.048</y-m>
-            <z-m>0.011</z-m>
-        </offsets>
-        <alignment>right-center</alignment>
-        <axis-alignment>yz-plane</axis-alignment>
-        <type>text-value</type>
-        <property alias="../../params/S1"/>
-        <font>helvetica_bold.txf</font>
-        <character-size>0.005</character-size>
-        <character-aspect-ratio type="double">1.2</character-aspect-ratio>
-        <font-resolution>
-            <width type="int">32</width>
-            <height type="int">32</height>
-        </font-resolution>
-    </text>
-
 
     <animation>
         <type>select</type>
@@ -339,38 +453,70 @@
         <object-name>L3</object-name>
         <object-name>L4</object-name>
         <object-name>L5</object-name>
+        <object-name>L6</object-name>
         <object-name>R0</object-name>
         <object-name>R1</object-name>
         <object-name>R2</object-name>
         <object-name>R3</object-name>
         <object-name>R4</object-name>
         <object-name>R5</object-name>
+        <object-name>R6</object-name>
         <object-name>S0</object-name>
-        <object-name>S</object-name>
-        <condition>
+				<condition>
+					<and>				
             <greater-than>
                 <property>systems/electrical/outputs/efis</property>
                 <value>15</value>
             </greater-than>
+            <greater-than>
+                <property>controls/lighting/cdu1</property>
+                <value>0.02</value>
+            </greater-than>
+					</and>					
         </condition>
     </animation>
 
-
+    <animation>
+        <name>white</name>
+        <type>material</type>
+        <object-name>Page</object-name> 
+       	<object-name>L0</object-name>
+        <object-name>L2</object-name>
+        <object-name>L4</object-name>
+        <object-name>R0</object-name>
+        <object-name>R2</object-name>
+        <object-name>R4</object-name>
+        <emission>
+            <red-prop>sim/color-set/white/r</red-prop>
+            <green-prop>sim/color-set/white/g</green-prop>
+            <blue-prop>sim/color-set/white/b</blue-prop>
+            <alpha-prop>sim/color-set/white/a</alpha-prop>
+        </emission>
+        <ambient>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </ambient>
+        <diffuse>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </diffuse>
+        <specular>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </specular>
+    </animation>
 
     <animation>
         <name>green</name>
         <type>material</type>
-        <object-name>L0</object-name>
         <object-name>L1</object-name>
-        <object-name>L2</object-name>
         <object-name>L3</object-name>
-        <object-name>L4</object-name>
         <object-name>L5</object-name>
-        <object-name>R0</object-name>
         <object-name>R1</object-name>
-        <object-name>R2</object-name>
         <object-name>R3</object-name>
-        <object-name>R4</object-name>
         <object-name>R5</object-name>
         <emission>
             <red-prop>sim/color-set/green/r</red-prop>
@@ -396,16 +542,15 @@
     </animation>
 
     <animation>
-        <name>cyan</name>
+        <name>magenta</name>
         <type>material</type>
-        <object-name>Page</object-name>
-        <object-name>S0</object-name>
-        <object-name>S1</object-name>
+        <object-name>L6</object-name>
+        <object-name>R6</object-name>
         <emission>
-            <red-prop>sim/color-set/cyan/r</red-prop>
-            <green-prop>sim/color-set/cyan/g</green-prop>
-            <blue-prop>sim/color-set/cyan/b</blue-prop>
-            <alpha-prop>sim/color-set/cyan/a</alpha-prop>
+            <red-prop>sim/color-set/magenta/r</red-prop>
+            <green-prop>sim/color-set/magenta/g</green-prop>
+            <blue-prop>sim/color-set/magenta/b</blue-prop>
+            <alpha-prop>sim/color-set/magenta/a</alpha-prop>
         </emission>
         <ambient>
             <red>0</red>
@@ -423,5 +568,759 @@
             <blue>0</blue>
         </specular>
     </animation>
+
+    <animation>
+        <name>yellow</name>
+        <type>material</type>
+        <object-name>S0</object-name>
+        <emission>
+            <red-prop>sim/color-set/yellow/r</red-prop>
+            <green-prop>sim/color-set/yellow/g</green-prop>
+            <blue-prop>sim/color-set/yellow/b</blue-prop>
+            <alpha-prop>sim/color-set/yellow/a</alpha-prop>
+        </emission>
+        <ambient>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </ambient>
+        <diffuse>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </diffuse>
+        <specular>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </specular>
+    </animation>
+
+<!-- Hotspots -->
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.next</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.next();</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.prev</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.previous();</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.fpl</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<condition>
+				<or>
+					<equals>
+						<property>instrumentation/cdu/display</property>
+						<value>NAVIDENT[0]</value>
+					</equals>
+					<equals>
+						<property>instrumentation/cdu/display</property>
+						<value>POS INIT[0]</value>
+					</equals>
+				</or>
+			</condition>
+			<command>nasal</command>
+			<script>cdu.key('FPL');</script>
+		</binding>
+		<binding>
+			<condition>
+				<not>
+					<property>instrumentation/cdu/display</property>
+					<value>NAVIDENT[0]</value>
+				</not>
+			</condition>
+			<command>nasal</command>
+			<script>cdu.next();</script>
+		</binding>
+
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.nav</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<condition>
+				<or>
+					<equals>
+						<property>instrumentation/cdu/display</property>
+						<value>NAVIDENT[0]</value>
+					</equals>
+					<equals>
+						<property>instrumentation/cdu/display</property>
+						<value>POS INIT[0]</value>
+					</equals>
+				</or>
+			</condition>
+			<command>nasal</command>
+			<script>cdu.key('NAV');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.l1</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.key('B1L');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.l2</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.key('B2L');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.l3</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.key('B3L');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.l4</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.key('B4L');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.r1</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.key('B1R');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.r2</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.key('B2R');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.r3</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.key('B3R');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.r4</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.key('B4R');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.0</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.input('0');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.1</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.input('1');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.2</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.input('2');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.3</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.input('3');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.4</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.input('4');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.5</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.input('5');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.6</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.input('6');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.7</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.input('7');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.8</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.input('8');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.9</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.input('9');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.A</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.input('A');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.B</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.input('B');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.C</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.input('C');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.D</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.input('D');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.E</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.input('E');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.F</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.input('F');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.G</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.input('G');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.H</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.input('H');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.I</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.input('I');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.J</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.input('J');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.K</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.input('K');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.L</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.input('L');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.M</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.input('M');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.N</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.input('N');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.O</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.input('O');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.P</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.input('P');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.Q</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.input('Q');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.R</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.input('R');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.S</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.input('S');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.T</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.input('T');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.U</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.input('U');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.V</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.input('V');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.W</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.input('W');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.X</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.input('X');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.Y</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.input('Y');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.Z</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.input('Z');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.minus</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.plusminus();</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.sp</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.input(' ');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.slash</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.input('/');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.del</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.delete();</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.clr</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>setprop("/instrumentation/cdu/input","");</script>
+		</binding>
+	</action>
+</animation>
+
 
 </PropertyList>

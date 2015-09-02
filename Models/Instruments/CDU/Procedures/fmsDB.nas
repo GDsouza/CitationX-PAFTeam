@@ -155,7 +155,7 @@ var fmsDB = {
           append(me.wptps, tp);
         }
         if (name == "Sid_Waypoint" or name == "Star_Waypoint") {
-          ##print("--  end Sid/Star Waypoint wp: "~wp.wp_name);
+          ##print("--  end Sid/Star Waypoint wp: "~wp.wp_name~");
           append(tp.wpts, wp);
         }
         if (name == "App_Waypoint") {
@@ -199,6 +199,10 @@ var fmsDB = {
              wp.alt_cstr_ind = 1;
            }
          }
+#         if (name == "AltitudeRestriction") {
+#           var data = pop(xmlStack);
+#           wp.alt_res = data;
+#         }
          if (name == "Latitude") {
            var data = pop(xmlStack);
            wp.wp_lat = data;
@@ -259,13 +263,21 @@ var fmsDB = {
       }
 
      ############ constructor ####################
-      root = getprop("/sim/aircraft-dir");
-     fn = call(func parsexml(root~"/Models/Instruments/CDU//Database/NavData/"~icao~".xml", start, end, data),nil, var err = []);
+#			root = getprop("/sim/fg-scenery");
+#			fn = call(func parsexml(root~"/Airports/"~left(icao,1)~"/"~substr(icao,1,1)~"/"~substr(icao,2,1)~ "/"~icao~".procedures.xml", start, end, data),nil,var err = []);
+
+#			root = getprop("/sim/fg-aircraft");
+#			fn = call(func parsexml(root~"/CitationX/Models/Instruments/CDU/Database/NavData/"~icao~".xml", start, end, data),nil,var err = []);
+
+			root = getprop("/sim/fg-aircraft");
+			fn = call(func parsexml(root~"/TerraSync/Airports/"~left(icao,1)~"/"~substr(icao,1,1)~"/"~substr(icao,2,1)~ "/"~icao~".procedures.xml", start, end, data),nil,var err = []);
+
+
       if (size(err)) {
-         print("[FMS] failed to find SID/STAR database file for: "~icao);
-         foreach(var e; err) {
-           print("[FMS] error: "~e);
-         }
+#         print("[FMS] failed to find SID/STAR database file for: "~icao);
+#         foreach(var e; err) {
+#           print("[FMS] error: "~e);
+#        }
          return nil;  # return nil to the caller, to indicate error.
       }
       return me;
@@ -325,32 +337,32 @@ var fmsDB = {
     # getApproachList
     #
     getApproachList : func(runway) {
-      var iapList = [];
+      var appList = [];
       foreach(var s; me.wptps) {
         if (s.tp_type == "Approach") {
           foreach(var r; s.runways) {
 						##print("r = "~r);
             if (r == runway or r == "All") {
-              append(iapList, s);
+              append(appList, s);
             }
           }
         }
       }
-			return iapList;
+			return appList;
     },
 
     #################################
     # getAllApproachList
     #
     getAllApproachList : func {
-      var iapList = [];
+      var appList = [];
       foreach(var s; me.wptps) {
         if (s.tp_type == "Approach") {
 							#print(s.wp_name);
-              append(iapList, s);
+              append(appList, s);
         }
       }
-			return iapList;
+			return appList;
     },
 
 
@@ -360,12 +372,37 @@ var fmsDB = {
     #
     getSid : func(name) {
      foreach(var s; me.wptps) {
-        ##print("[SID] wp_name: "~s.wp_name~", name: "~name~", type: "~s.tp_type);
         if (s.tp_type == "sid" and s.wp_name == name) {
+        #print("[SID] wp_name: "~s.wp_name~", type: "~s.tp_type~", ");
          return s;
         }
       }
     },
+
+    ##############################
+    #  getSidWpt
+    #
+    getSidWpt : func(SidName) {
+			var wptList = [];
+     	foreach(var s; me.wptps) {
+        if (s.tp_type == "sid" and s.wp_name == SidName) {
+					foreach(var r;s.wpts) {
+						##print("wp : "~r.wp_name~" -- "~ r.alt_cstr~" - "~r.alt_res);
+#						if (r.alt_res == "ABOVE") {
+#							var alt_calc = math.ceil((r.alt_res/100)*100);
+#							r.alt_res = alt_calc;
+#						}					
+#						if (r.alt_res == "BELOW") {
+#							var alt_calc = math.floor((r.alt_res/100)*100);
+#							r.alt_res = alt_calc;
+#						}					
+						append(wptList,r);
+					}
+        }
+      }
+			return wptList;
+    },
+
 
     ###############################
     #  getStar

@@ -153,7 +153,10 @@ var init_switches = func{
     props.globals.getNode("controls/electric/external-power",0,"BOOL");
     setprop("controls/lighting/instrument-lights-norm",0.8);
     setprop("controls/lighting/efis-norm",0.8);
+    setprop("controls/lighting/cdu",0.4);
+    setprop("controls/lighting/cdu1",0.4);
     setprop("controls/lighting/panel-norm",0.8);
+    setprop("controls/lighting/nav-lights",0);
 
     append(lights_input,props.globals.initNode("controls/lighting/landing-light[0]",0,"BOOL"));
     append(lights_output,props.globals.initNode("systems/electrical/outputs/landing-light[0]",0,"DOUBLE"));
@@ -213,8 +216,6 @@ var init_switches = func{
     append(rbus_input,AVswitch);
     append(rbus_output,props.globals.initNode("systems/electrical/outputs/efis",0,"DOUBLE"));
     append(rbus_load,1);
-
-
     append(lbus_input,AVswitch);
     append(lbus_output,props.globals.initNode("systems/electrical/outputs/adf",0,"DOUBLE"));
     append(lbus_load,1);
@@ -345,9 +346,7 @@ lighting = func(bv) {
         load += lights_load[i] * srvc;
         lights_output[i].setValue(bv * srvc);
     }
-
-return load;
-
+		return load;
 }
 
 update_electrical = func {

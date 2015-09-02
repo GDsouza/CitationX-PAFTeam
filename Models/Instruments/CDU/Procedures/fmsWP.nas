@@ -22,6 +22,7 @@ var fmsWP = {
         me.wp_lon  = 0.0;       # longitude
         me.alt_cstr = 0;        # alt constraint from db or calculated altitude in ft
         me.alt_cstr_ind = 0;    # if the alt is a programmed constraint or just calculated (as part of STAR)
+				me.alt_res = "";				# Altitude restriction
         me.spd_cstr = 0;        # spd constraint in kts, mach or zero
         me.spd_cstr_ind = 0;    # 0 - calculated speed, 1 - constraint
         me.hdg_radial = 0.0;    # either heading/track or radial

@@ -4,6 +4,11 @@
 
     <path>CitationX.ac</path>
 
+  <!-- Tutorial marker -->
+  <model>
+    <path>Models/Aircraft/marker.xml</path>
+  </model>
+
     <nasal>
         <load>
             var livery_update = aircraft.livery_update.new("Aircraft/CitationX/Models/Liveries", 10);

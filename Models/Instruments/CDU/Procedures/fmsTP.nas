@@ -17,8 +17,6 @@ var fmsTP = {
         me.wpts    = [];   # array of fmsWP
         me.rwy_tw  = [];   # array of runway transition waypoints if SID or approach transition for STAR
         me.transitions = [];  # array of transition paths
-
-
         return me;
     },
 

@@ -2,8 +2,8 @@
 ### C. LE MOIGNE (clm76) - 2015 ###
 
 var fltArrv = func(dest_airport) {
-	var DspL = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:""};
-	var DspR = {line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
+		var DspL = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:""};
+		var DspR = {line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
 	page = "ARRIVAL     1 / 1";
 	DspL.line1l = "< RUNWAY";
 	DspL.line3l = "< STAR";
@@ -16,8 +16,8 @@ var fltArrv = func(dest_airport) {
 }
 
 var fltArwy = func(dest_airport,nrPage,display) {
-	var DspL = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:""};
-	var DspR = {line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
+		var DspL = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:""};
+		var DspR = {line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
 		var xfile = airportinfo(dest_airport).runways;
 		cdu.dspPages(xfile,display);
 		nbPage = getprop("/instrumentation/cdu/nbpage");
@@ -44,17 +44,19 @@ var fltArwy = func(dest_airport,nrPage,display) {
 }
 
 var fltStars = func(dest_airport,dest_rwy,display) {
-	var DspL = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:""};
-	var DspR = {line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
-		var DestARPT = procedures.fmsDB.new(dest_airport);
+		var DspL = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:""};
+		var DspR = {line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
 		var xfile = [];
-		if (dest_rwy != "") {		
-			var STARlist = DestARPT.getSTARList(dest_rwy);
-		} else {
-			var STARlist = DestARPT.getAllSTARList();
+		var DestARPT = procedures.fmsDB.new(dest_airport);
+		if (DestARPT !=nil) {
+			if (dest_rwy != "") {		
+				var STARlist = DestARPT.getSTARList(dest_rwy);
+			} else {
+					var STARlist = DestARPT.getAllSTARList();
 			}		
-		foreach(var STAR; STARlist) {
-			append(xfile, STAR.wp_name);
+			foreach(var STAR; STARlist) {
+				append(xfile, STAR.wp_name);
+			}
 		}
 		cdu.dspPages(xfile,display);
 		nbPage = getprop("/instrumentation/cdu/nbpage");
@@ -80,18 +82,20 @@ var fltStars = func(dest_airport,dest_rwy,display) {
 }
 
 var fltAppr = func(dest_airport,dest_rwy,display) {
-	var DspL = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:""};
-	var DspR = {line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
+		var DspL = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:""};
+		var DspR = {line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
 		var DestARPT = procedures.fmsDB.new(dest_airport);
 		var xfile = [];
-		if (dest_rwy != "") {
-			var rwy = dest_rwy;			
-			var iaplist = DestARPT.getApproachList(rwy);
-		} else {
-			var iaplist = DestARPT.getAllApproachList();
-		}		
-		foreach(var APPR; iaplist) {
-			append(xfile, APPR.wp_name);
+		append(xfile,"DEFAULT");
+		if (DestARPT !=nil) {
+			if (dest_rwy != "") {		
+				var Applist = DestARPT.getApproachList(dest_rwy);
+			} else {
+				var Applist = DestARPT.getAllApproachList();
+			}		
+			foreach(var APPR; Applist) {
+				append(xfile, APPR.wp_name);
+			}
 		}
 		cdu.dspPages(xfile,display);				
 		nbPage = getprop("/instrumentation/cdu/nbpage");

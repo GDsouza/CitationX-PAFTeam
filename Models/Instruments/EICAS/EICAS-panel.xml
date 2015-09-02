@@ -11,7 +11,7 @@
             <name>eicas page norm</name>
             <condition>
                 <and>
-                    <property>instrumentation/primus1000/eicas/serviceable</property>
+                    <property>instrumentation/primus2000/eicas/serviceable</property>
                     <greater-than>
                         <property>systems/electrical/outputs/efis</property>
                         <value>15</value>

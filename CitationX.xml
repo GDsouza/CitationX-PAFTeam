@@ -2,7 +2,7 @@
  Syd Adams
  Cessna CE-750 Citation X
  Max Cruise M=0.92 -37,000 ft @ 30,000lbs
-Airspeed Limits Vmo 350 KIAS Mmo 0.92
+Airspeed Limits Vmo 600 KIAS Mmo 0.92
 
 Engine Rolls Royce :
 TO thrust 6,764 lbs
@@ -11,11 +11,11 @@ Press. Ratio 23:1
 1586 lbs dry weight
 FFlow 0.3222 kg/s 100% pwr takeoff (1278 lbs/hr per engine)
 
- Vmca 110 KIAS 15degree flap
-Vmcl App 5 flap  = 129 KIAS
-                  15 flap = 120
-         Lnd   15 flap = 118
-                  full flap = 108
+Vmca 110 KIAS 15	degree flap
+Vmcl 	App 5 flap = 129 KIAS
+        	15 flap = 120
+			Lnd 15 flap = 118
+			full flap = 108
 Wingspan 19.4 m
 Wing area 50 m2
 tailplane span  7.9m
@@ -33,7 +33,7 @@ Fuel 12938 lbs jet
     <control-setting axis="/controls/gear/gear-down" value="1"/>
   </approach>
 
-  <cruise speed="505" alt="37000" fuel="0.2">
+  <cruise speed="515" alt="41000" fuel="0.2">
     <control-setting axis="/controls/engines/engine[0]/throttle-lever" value="0.90"/>
     <control-setting axis="/controls/engines/engine[1]/throttle-lever" value="0.90"/>
     <control-setting axis="/controls/flight/flaps" value="0.0"/>
@@ -207,4 +207,5 @@ Takeoff thrust Fuel flow 0.3222 kg/s
 
 <weight x="7.0" y="0.0" z="0" mass-prop="/sim/weight[0]/weight-lb"/>
   <weight x="-0.7" y="0" z="0" mass-prop="/sim/weight[1]/weight-lb"/>
+	<weight x="-1.5" y="0" z="0" mass-prop="/sim/weight[2]/weight-lb"/>
 </airplane>

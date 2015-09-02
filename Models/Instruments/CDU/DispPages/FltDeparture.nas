@@ -1,7 +1,6 @@
 ### Display FltDeparture ###
 ### C. LE MOIGNE (clm76) - 2015 ###
 
-#var fltDep = func(dep_rwy,displayPage,nbPage,nrPage,xfile) {
 var fltDep = func(dep_airport,dep_rwy,nrPage,display) {
 	var DspL = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:""};
 	var DspR = {line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
@@ -35,6 +34,7 @@ var fltSids = func(dep_airport,dep_rwy,nrPage,display) {
 	var DspR = {line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
 		var DepARPT = procedures.fmsDB.new(dep_airport);
 		var xfile = [];		
+		append(xfile,"DEFAULT");
 		var SList = DepARPT.getSIDList(dep_rwy);
 		foreach(var SID; SList) {
 			append(xfile, SID.wp_name);

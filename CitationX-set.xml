@@ -28,11 +28,12 @@ Started Oct 2005  Syd Adams
             <splash-texture>Aircraft/CitationX/Splash.png</splash-texture>
         </startup>
 
-
         <tutorials>
-            <tutorial include="Tutorials/startup_tutorial.xml"/>
+            <tutorial include="Tutorials/startup.xml"/>
+            <tutorial include="Tutorials/cdu.xml"/>
             <tutorial include="Tutorials/navigation.xml"/>
         </tutorials>
+				<checklists include="Tutorials/checklists.xml"/>
 
         <model>
             <path>Aircraft/CitationX/Models/Citation-X.xml</path>
@@ -253,8 +254,15 @@ Started Oct 2005  Syd Adams
 
         <weight n="1">
             <name>Passengers</name>
-            <weight-lb>6400</weight-lb>
-            <max-lb>14300</max-lb>
+            <weight-lb>2040</weight-lb>
+            <max-lb>2040</max-lb>
+            <min-lb>0</min-lb>
+        </weight>
+
+        <weight n="2">
+            <name>Cargo</name>
+            <weight-lb>0</weight-lb>
+            <max-lb>8000</max-lb>
             <min-lb>0</min-lb>
         </weight>
 
@@ -407,7 +415,6 @@ Started Oct 2005  Syd Adams
     </consumables>
 
     <instrumentation>
-
         <mk-viii>                             <!-- http://wiki.flightgear.org/index.php/GPWS -->
            <serviceable>true</serviceable>    <!-- EGPWS_ENABLE -->
            <configuration-module>
@@ -571,51 +578,12 @@ Started Oct 2005  Syd Adams
 
     <cdu>
 			<input type="string"/>
-      <serviceable type="bool">true</serviceable>
-      <display>NAV IDENT</display>
+      <serviceable type="bool">1</serviceable>
+      <display>NAVIDENT[0]</display>
       <ident>
         <model>Citation X</model>
       </ident>
     </cdu>
-
-
-<!--
-    <cdu n="0">
-        <page type="string">NAV IDENT</page>
-        <L type="string" n="0"></L>
-        <L type="string" n="1"></L>
-        <L type="string" n="2"></L>
-        <L type="string" n="3"></L>
-        <L type="string" n="4"></L>
-        <L type="string" n="5"></L>			
-        <R type="string" n="0"></R>
-        <R type="string" n="1"></R>
-        <R type="string" n="2"></R>
-        <R type="string" n="3"></R>
-        <R type="string" n="4"></R>
-        <R type="string" n="5"></R>
-	      <S type="string" n="0"></S>
-        <S type="string" n="1"></S>
-    </cdu>
-
-    <cdu n="1">
-        <page type="string">ACTIVE FLT PLAN</page>
-        <L type="string" n="0"></L>
-        <L type="string" n="1"></L>
-        <L type="string" n="2"></L>
-        <L type="string" n="3"></L>
-        <L type="string" n="4"></L>
-        <L type="string" n="5"></L>
-        <R type="string" n="0"></R>
-        <R type="string" n="1"></R>
-        <R type="string" n="2"></R>
-        <R type="string" n="3"></R>
-        <R type="string" n="4"></R>
-        <R type="string" n="5"></R>
-        <S type="string" n="0"></S>
-        <S type="string" n="1"></S>
-    </cdu>
--->
    </instrumentation>
 
     <controls>
@@ -652,8 +620,13 @@ Started Oct 2005  Syd Adams
             <vertical-speed-fpm type="int">0</vertical-speed-fpm>
             <nav-source type="string">NAV1</nav-source>
             <bank-limit type="int">27</bank-limit>
+            <target-speed-kt type="int">275</target-speed-kt>
+            <target-speed-mach type="double">0.83</target-speed-mach>
+
+<!--old
             <target-speed-kt type="int">80</target-speed-kt>
             <target-speed-mach type="double">0.40</target-speed-mach>
+-->
             <changeover type="bool">0</changeover>
             <heading-bug-deg type="int">0</heading-bug-deg>
             <vertical-speed-fpm type="int">0</vertical-speed-fpm>
@@ -752,6 +725,9 @@ Started Oct 2005  Syd Adams
 						<file>Aircraft/CitationX/Models/Instruments/CDU/DispPages/FltList.nas</file>
 						<file>Aircraft/CitationX/Models/Instruments/CDU/DispPages/FltDeparture.nas</file>
 						<file>Aircraft/CitationX/Models/Instruments/CDU/DispPages/FltDestination.nas</file>
+						<file>Aircraft/CitationX/Models/Instruments/CDU/DispPages/NavPages.nas</file>
+						<file>Aircraft/CitationX/Models/Instruments/CDU/DispPages/Performance.nas</file>
+
 				</displaypages>
 				<cdu>
 						<file>Aircraft/CitationX/Models/Instruments/CDU/CDU.nas</file>
