@@ -68,6 +68,10 @@ var key = func(v) {
 					v = "";
 					cduDisplay = "PRF-PAGE[0]";
 			}		
+			if (v == "PROG" and getprop("instrumentation/cdu/pos-init") == 1) {
+					v = "";
+					cduDisplay = "PRG-PAGE[0]";
+			}		
 
 		}
 
@@ -76,10 +80,12 @@ var key = func(v) {
 			var ligne = "";
 			if (v == "B4L" or v == "FPL") {
 				v = "";
+				cduInput = "";
 				cduDisplay = "FLT-PLAN[0]";
 			} 
 			else if (v == "NAV") {
 				v = "";
+				cduInput = "";
 				cduDisplay = "NAV-PAGE[0]";
 			} 
 			else {
@@ -95,7 +101,7 @@ var key = func(v) {
 					setprop("autopilot/route-manager/file-path",fltPath);
 					setprop("autopilot/route-manager/input","@LOAD");							
 					setprop("autopilot/route-manager/flight-plan",fltName);
-					setprop("autopilot/route-manager/active",1);
+					setprop("autopilot/route-manager/input","@ACTIVATE");	
 					v = "";	
 				cduDisplay = "FLT-PLAN[1]";
 				}
@@ -442,11 +448,16 @@ var key = func(v) {
 				cduInput = "";
 				cduDisplay = "PRF-PAGE[0]";
 			}	
-
+			if (v == "PROG") {
+				v = "";
+				cduInput = "";
+				cduDisplay = "PRG-PAGE[0]";
+			}	
 		}		
 
 		#### NAV PAGES ####
 		if (cduDisplay == "NAV-PAGE[0]") {
+			if (v == "PROG") {v = "";cduDisplay = "PRG-PAGE[0]"}			
 			if (v == "B1L" or v == "B1R") {v = "";cduDisplay = "FLT-LIST[0]"}
 			if (v == "B2L") {
 				if (destAirport == "") {
@@ -488,7 +499,6 @@ var key = func(v) {
 				cduDisplay = "FLT-ARWY[0]";
 			}
 		}
-
 		if (left(cduDisplay,8) == "NAV-PAGE") {
 			if (v == "NAV") {v = "";cduDisplay = "NAV-PAGE[0]"}
 		}
@@ -498,6 +508,7 @@ var key = func(v) {
 			setprop("instrumentation/cdu/nbpage",3);
 			if (v == "B4R") {v = "";cduDisplay = "PRF-PAGE[1]"}
 			if (v == "NAV") {v = "";cduDisplay = "NAV-PAGE[0]"}
+			if (v == "PROG") {v = "";cduDisplay = "PRG-PAGE[0]"}			
 			if (v == "FPL" or v == "B4L") {
 				if (getprop("instrumentation/cdu/pos-init") == 0) {
 					v = "";
@@ -579,6 +590,25 @@ var key = func(v) {
 				else {
 					cduDisplay = "PRF-PAGE[0]";
 				}
+			}
+		}
+
+		#### PROG PAGES ####
+		if (cduDisplay == "PRG-PAGE[0]") {
+			setprop("instrumentation/cdu/nbpage",3);
+			if (v == "B4L") {v = "";cduDisplay = "PRG-PAGE[3]"}
+			if (v == "B4R") {v = "";cduDisplay = "PRF-PAGE[1]"}
+			if (v == "NAV") {v = "";cduDisplay = "NAV-PAGE[0]"}
+			if (v == "FPL") {
+				if (getprop("instrumentation/cdu/pos-init") == 0) {
+					v = "";
+					cduDisplay = "POS INIT[0]";				
+				} else if (destAirport == ""){
+						v = "";
+						cduInput = "*NO DEST AIRPORT*";
+						cduDisplay = "FLT-PLAN[0]";
+				}
+				else {v = "";cduDisplay = "FLT-PLAN[1]"}
 			}
 		}
 
@@ -714,6 +744,7 @@ var cdu = func{
 	### Waypoints ###
 	var num = getprop("autopilot/route-manager/route/num");
 	var flt_closed = getprop("autopilot/route-manager/active");
+	var marker = getprop("autopilot/internal/nav-id");
 
 	### Display ###
 	var display = getprop("/instrumentation/cdu/display");
@@ -775,23 +806,23 @@ var cdu = func{
 		}
 	
 		if (display == "FLT-PLAN[1]") {
-			displaypages.fltPlan_1(dep_airport, dep_rwy, dest_airport, dest_rwy, num, flt_closed);
+			displaypages.fltPlan_1(dep_airport, dep_rwy, dest_airport, dest_rwy, num, flt_closed, marker);
 		}
 
 		if (display == "FLT-PLAN[2]") {
-			displaypages.fltPlan_2(dest_airport,dest_rwy,num,flt_closed);
+			displaypages.fltPlan_2(dest_airport,dest_rwy,num,flt_closed,marker);
 		}
 
 		if (display == "FLT-PLAN[3]") {
-			displaypages.fltPlan_3(dest_airport,dest_rwy,num,flt_closed);
+			displaypages.fltPlan_3(dest_airport,dest_rwy,num,flt_closed,marker);
 		}
 
 		if (display == "FLT-PLAN[4]") {
-			displaypages.fltPlan_4(dest_airport,dest_rwy,num,flt_closed);
+			displaypages.fltPlan_4(dest_airport,dest_rwy,num,flt_closed,marker);
 		}
 
 		if (display == "FLT-PLAN[5]" and num > 0) {
-			displaypages.fltPlan_5(dest_airport,dest_rwy,num);
+			displaypages.fltPlan_5(dest_airport,dest_rwy,num,marker);
 		}
 
 		if (display == "NAV-PAGE[0]") {
@@ -814,6 +845,10 @@ var cdu = func{
 		}
 		if (display == "PRF-PAGE[2]") {
 			displaypages.perfPage_2();
+		}
+
+		if (display == "PRG-PAGE[0]") {
+			displaypages.progPage_0(dest_airport,marker);
 		}
 
 	}							

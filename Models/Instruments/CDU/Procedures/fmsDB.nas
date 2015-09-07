@@ -263,12 +263,6 @@ var fmsDB = {
       }
 
      ############ constructor ####################
-#			root = getprop("/sim/fg-scenery");
-#			fn = call(func parsexml(root~"/Airports/"~left(icao,1)~"/"~substr(icao,1,1)~"/"~substr(icao,2,1)~ "/"~icao~".procedures.xml", start, end, data),nil,var err = []);
-
-#			root = getprop("/sim/fg-aircraft");
-#			fn = call(func parsexml(root~"/CitationX/Models/Instruments/CDU/Database/NavData/"~icao~".xml", start, end, data),nil,var err = []);
-
 			root = getprop("/sim/fg-aircraft");
 			fn = call(func parsexml(root~"/TerraSync/Airports/"~left(icao,1)~"/"~substr(icao,1,1)~"/"~substr(icao,2,1)~ "/"~icao~".procedures.xml", start, end, data),nil,var err = []);
 

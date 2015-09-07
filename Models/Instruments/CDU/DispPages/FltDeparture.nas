@@ -35,9 +35,11 @@ var fltSids = func(dep_airport,dep_rwy,nrPage,display) {
 		var DepARPT = procedures.fmsDB.new(dep_airport);
 		var xfile = [];		
 		append(xfile,"DEFAULT");
-		var SList = DepARPT.getSIDList(dep_rwy);
-		foreach(var SID; SList) {
-			append(xfile, SID.wp_name);
+		if (DepARPT != nil) {
+			var SList = DepARPT.getSIDList(dep_rwy);
+			foreach(var SID; SList) {
+				append(xfile, SID.wp_name);
+			}
 		}
 		cdu.dspPages(xfile,display);		
 		nbPage = getprop("/instrumentation/cdu/nbpage");

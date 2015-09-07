@@ -14,7 +14,7 @@ var fltList = func(display) {
 		displayPage = nrPage + 1;
 		var nbFiles = size(xfile);
 		if (nbFiles == 0) {
-				setprop("instrumentation/cdu/input","NO FILE Loaded");		
+				setprop("instrumentation/cdu/input","*NO FILE*");		
 				displayPage = 0;
 		}
 		page = "FLIGHT PLANS LIST   "~displayPage~" / "~nbPage;			

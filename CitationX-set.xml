@@ -3,6 +3,7 @@
 ************************************************************************
 Cessna Citation-X
 Started Oct 2005  Syd Adams
+Completed 2015 C. Le Moigne
 ************************************************************************
 -->
 <PropertyList>
@@ -727,7 +728,7 @@ Started Oct 2005  Syd Adams
 						<file>Aircraft/CitationX/Models/Instruments/CDU/DispPages/FltDestination.nas</file>
 						<file>Aircraft/CitationX/Models/Instruments/CDU/DispPages/NavPages.nas</file>
 						<file>Aircraft/CitationX/Models/Instruments/CDU/DispPages/Performance.nas</file>
-
+						<file>Aircraft/CitationX/Models/Instruments/CDU/DispPages/Progress.nas</file>
 				</displaypages>
 				<cdu>
 						<file>Aircraft/CitationX/Models/Instruments/CDU/CDU.nas</file>

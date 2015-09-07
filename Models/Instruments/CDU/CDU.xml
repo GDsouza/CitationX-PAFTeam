@@ -665,6 +665,19 @@
 
 <animation>
 	<type>pick</type>
+	<object-name>btn.prog</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.key('PROG');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
 	<object-name>btn.l1</object-name>
 	<action>
 		<button>0</button>

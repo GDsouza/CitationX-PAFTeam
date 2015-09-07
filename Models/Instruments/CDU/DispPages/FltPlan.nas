@@ -28,9 +28,13 @@ var fltPlan_0 = func(dep_airport,dep_rwy,dest_airport,dest_rwy) {
 	cdu.DspSet(page,DspL,DspR);
 }
 
-var fltPlan_1 = func(dep_airport,dep_rwy,dest_airport,dest_rwy,num,flt_closed) {
+var fltPlan_1 = func(dep_airport,dep_rwy,dest_airport,dest_rwy,num,flt_closed,marker) {
 		var DspL = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:""};
 		var DspR = {line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
+		var rep = "";
+		var path = "autopilot/route-manager/route/wp[";
+		var legb = "]/leg-bearing-true-deg";
+		var legd = "]/leg-distance-nm";
 			page = "ACTIVE FLT PLAN     1 / 5";
 			DspL.line1l = " ORIGIN / ETD";
 			DspL.line2l = "----";
@@ -45,38 +49,53 @@ var fltPlan_1 = func(dep_airport,dep_rwy,dest_airport,dest_rwy,num,flt_closed) {
 				DspR.line6r = dest_airport~" "~ dest_rwy;
 			}
 			if (dep_airport != "") {
-				DspL.line2l = dep_airport ~" "~ dep_rwy;
+				var ind = 0;
+				if (getprop(path~ind~"]/id")==marker) {rep="   <--"}
+				else {rep=""}
+				DspL.line2l = dep_airport ~" "~ dep_rwy~rep;
 			}
 			if (num == 2 and flt_closed == 1) {
-				DspL.line3l = "   "~sprintf("%3i   %3i",getprop("autopilot/route-manager/route/wp[1]/leg-bearing-true-deg"),getprop("autopilot/route-manager/route/wp[1]/leg-distance-nm"));
+				var ind = 1;
+				DspL.line3l = sprintf("   %3i   %.1f",getprop(path~ind~legb),getprop(path~ind~legd));
 				DspL.line4l = dest_airport~" "~ dest_rwy;
 			}	else if (num >2) {
-				DspL.line3l = "   "~sprintf("%3i   %3i",getprop("autopilot/route-manager/route/wp[1]/leg-bearing-true-deg"),getprop("autopilot/route-manager/route/wp[1]/leg-distance-nm"));
-				DspL.line4l = getprop("autopilot/route-manager/route/wp[1]/id");
+				var ind = 1;
+				DspL.line3l = sprintf("   %3i   %.1f",getprop(path~ind~legb),getprop(path~ind~legd));
+					if (getprop(path~ind~"]/id")==marker) {rep="   <--"}
+					else {rep=""}
+				DspL.line4l = getprop(path~ind~"]/id")~rep;
 				DspR.line3r = "-----";
-				if (getprop("autopilot/route-manager/route/wp[1]/altitude-ft") > 0) {
-					DspR.line3r = sprintf("%3i",int(getprop("autopilot/route-manager/route/wp[1]/altitude-ft")/100)*100);
+				if (getprop(path~ind~"]/altitude-ft") > 0) {
+					DspR.line3r = sprintf("%3i",int(getprop(path~ind~"]/altitude-ft")/100)*100);
 				}
 				DspR.line4r = "";
 			}
 			if (num == 3 and flt_closed == 1) {
-				DspL.line5l = "   "~sprintf("%3i   %3i",getprop("autopilot/route-manager/route/wp[2]/leg-bearing-true-deg"),getprop("autopilot/route-manager/route/wp[2]/leg-distance-nm"));
+				var ind = 2;
+				DspL.line5l = sprintf("   %3i   %.1f",getprop(path~ind~legb),getprop(path~ind~legd));
 				DspL.line6l = dest_airport~" "~ dest_rwy;
 			} else if (num > 3 or (num == 3 and dest_airport == "")) {
-				DspL.line5l = "   "~sprintf("%3i   %3i",getprop("autopilot/route-manager/route/wp[2]/leg-bearing-true-deg"),getprop("autopilot/route-manager/route/wp[2]/leg-distance-nm"));
-				DspL.line6l = getprop("autopilot/route-manager/route/wp[2]/id");
+				var ind = 2;
+				DspL.line5l = sprintf("   %3i   %.1f",getprop(path~ind~legb),getprop(path~ind~legd));
+				if (getprop(path~ind~"]/id")==marker) {rep="   <--"}
+				else {rep=""}
+				DspL.line6l = getprop(path~ind~"]/id")~rep;
 				DspR.line5r = "-----";
-				if (getprop("autopilot/route-manager/route/wp[2]/altitude-ft") > 0) {
-					DspR.line5r = sprintf("%3i",int(getprop("autopilot/route-manager/route/wp[2]/altitude-ft")/100)*100);
+				if (getprop(path~ind~"]/altitude-ft") > 0) {
+					DspR.line5r = sprintf("%3i",int(getprop(path~ind~"]/altitude-ft")/100)*100);
 				}
 				DspR.line6r = "";
 			}
 	cdu.DspSet(page,DspL,DspR);
 }
 
-var fltPlan_2 = func(dest_airport,dest_rwy,num,flt_closed) {
+var fltPlan_2 = func(dest_airport,dest_rwy,num,flt_closed,marker) {
 		var DspL = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:""};
 		var DspR = {line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
+		var rep = "";
+		var path = "autopilot/route-manager/route/wp[";
+		var legb = "]/leg-bearing-true-deg";
+		var legd = "]/leg-distance-nm";
 			page = "ACTIVE FLT PLAN     2 / 5";
 			DspL.line1l = " VIA TO";
 			DspL.line2l = "----";
@@ -90,50 +109,66 @@ var fltPlan_2 = func(dest_airport,dest_rwy,num,flt_closed) {
 			DspR.line7r = "ARRIVAL >";
 
 			if (num == 4 and flt_closed == 1) {
-				DspL.line1l = "   "~sprintf("%3i   %3i",getprop("autopilot/route-manager/route/wp[3]/leg-bearing-true-deg"),getprop("autopilot/route-manager/route/wp[3]/leg-distance-nm"));
+				var ind = 3;
+				DspL.line1l = sprintf("   %3i   %.1f",getprop(path~ind~legb),getprop(path~ind~legd));
 				DspL.line2l = dest_airport~" "~ dest_rwy;
 			}	
 			else if (num > 4 or (num == 4 and dest_airport == "")) {
-				DspL.line1l = "   "~sprintf("%3i   %3i",getprop("autopilot/route-manager/route/wp[3]/leg-bearing-true-deg"),getprop("autopilot/route-manager/route/wp[3]/leg-distance-nm"));
-				DspL.line2l = getprop("autopilot/route-manager/route/wp[3]/id");
+				var ind = 3;
+				DspL.line1l = sprintf("   %3i   %.1f",getprop(path~ind~legb),getprop(path~ind~legd));
+				if (getprop(path~ind~"]/id")==marker) {rep="   <--"}
+				else {rep=""}
+				DspL.line2l = getprop(path~ind~"]/id")~rep;
 				DspR.line1r = "-----";
-				if (getprop("autopilot/route-manager/route/wp[3]/altitude-ft") > 0) {
-					DspR.line1r = sprintf("%3i",int(getprop("autopilot/route-manager/route/wp[3]/altitude-ft")/100)*100);
+				if (getprop(path~ind~"]/altitude-ft") > 0) {
+					DspR.line1r = sprintf("%3i",int(getprop(path~ind~"]/altitude-ft")/100)*100);
 				}
 				DspR.line2r = "";
 			}
 			if (num == 5 and flt_closed == 1) {
-				DspL.line3l = "   "~sprintf("%3i   %3i",getprop("autopilot/route-manager/route/wp[4]/leg-bearing-true-deg"),getprop("autopilot/route-manager/route/wp[4]/leg-distance-nm"));
+				var ind = 4;
+				DspL.line3l = sprintf("   %3i   %.1f",getprop(path~ind~legb),getprop(path~ind~legd));
 				DspL.line4l = dest_airport~" "~ dest_rwy;
 			}	
 			else if (num > 5 or (num == 5 and dest_airport == "")) {
-				DspL.line3l = "   "~sprintf("%3i   %3i",getprop("autopilot/route-manager/route/wp[4]/leg-bearing-true-deg"),getprop("autopilot/route-manager/route/wp[4]/leg-distance-nm"));
-				DspL.line4l = getprop("autopilot/route-manager/route/wp[4]/id");
+				var ind = 4;
+				DspL.line3l = sprintf("   %3i   %.1f",getprop(path~ind~legb),getprop(path~ind~legd));
+				if (getprop(path~ind~"]/id")==marker) {rep="   <--"}
+				else {rep=""}
+				DspL.line4l = getprop(path~ind~"]/id")~rep;
 				DspR.line3r = "-----";
-				if (getprop("autopilot/route-manager/route/wp[4]/altitude-ft") > 0) {
-					DspR.line3r = sprintf("%3i",int(getprop("autopilot/route-manager/route/wp[4]/altitude-ft")/100)*100);
+				if (getprop(path~ind~"]/altitude-ft") > 0) {
+					DspR.line3r = sprintf("%3i",int(getprop(path~ind~"]/altitude-ft")/100)*100);
 				}
 				DspR.line4r = "";
 			}
 			if (num == 6 and flt_closed == 1) {
-				DspL.line5l = "   "~sprintf("%3i   %3i",getprop("autopilot/route-manager/route/wp[5]/leg-bearing-true-deg"),getprop("autopilot/route-manager/route/wp[5]/leg-distance-nm"));
+				var ind = 5;
+				DspL.line5l = sprintf("   %3i   %.1f",getprop(path~ind~legb),getprop(path~ind~legd));
 				DspL.line6l = dest_airport~" "~ dest_rwy;
 			}	
 			else if (num > 6 or (num == 6 and dest_airport == "")) {
-				DspL.line5l = "   "~sprintf("%3i   %3i",getprop("autopilot/route-manager/route/wp[5]/leg-bearing-true-deg"),getprop("autopilot/route-manager/route/wp[5]/leg-distance-nm"));
-				DspL.line6l = getprop("autopilot/route-manager/route/wp[5]/id");
+				var ind = 5;
+				DspL.line5l = sprintf("   %3i   %.1f",getprop(path~ind~legb),getprop(path~ind~legd));
+				if (getprop(path~ind~"]/id")==marker) {rep="   <--"}
+				else {rep=""}
+				DspL.line6l = getprop(path~ind~"]/id")~rep;
 				DspR.line5r = "-----";
-				if (getprop("autopilot/route-manager/route/wp[5]/altitude-ft") > 0) {
-					DspR.line5r = sprintf("%3i",int(getprop("autopilot/route-manager/route/wp[5]/altitude-ft")/100)*100);
+				if (getprop(path~ind~"]/altitude-ft") > 0) {
+					DspR.line5r = sprintf("%3i",int(getprop(path~ind~"]/altitude-ft")/100)*100);
 				}
 				DspR.line6r = "";
 			}
 	cdu.DspSet(page,DspL,DspR);
 }
 
-var fltPlan_3 = func(dest_airport,dest_rwy,num,flt_closed) {
+var fltPlan_3 = func(dest_airport,dest_rwy,num,flt_closed,marker) {
 		var DspL = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:""};
 		var DspR = {line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
+		var rep = "";
+		var path = "autopilot/route-manager/route/wp[";
+		var legb = "]/leg-bearing-true-deg";
+		var legd = "]/leg-distance-nm";
 			page = "ACTIVE FLT PLAN     3 / 5";
 			DspL.line1l = "VIA TO";
 			DspL.line2l = "----";
@@ -146,50 +181,66 @@ var fltPlan_3 = func(dest_airport,dest_rwy,num,flt_closed) {
 			DspR.line6r = dest_airport~" "~ dest_rwy;
 			DspR.line7r = "ARRIVAL >";
 			if (num == 7 and flt_closed == 1) {
-				DspL.line1l = "   "~sprintf("%3i   %3i",getprop("autopilot/route-manager/route/wp[6]/leg-bearing-true-deg"),getprop("autopilot/route-manager/route/wp[6]/leg-distance-nm"));
+				var ind = 6;
+				DspL.line1l = sprintf("   %3i   %.1f",getprop(path~ind~legb),math.ceil(getprop(path~ind~legd)));
 				DspL.line2l = dest_airport~" "~ dest_rwy;
 			}	
 			else if (num > 7 or (num == 7 and dest_airport == "")) {
-				DspL.line1l = "   "~sprintf("%3i   %3i",getprop("autopilot/route-manager/route/wp[6]/leg-bearing-true-deg"),getprop("autopilot/route-manager/route/wp[6]/leg-distance-nm"));
-				DspL.line2l = getprop("autopilot/route-manager/route/wp[6]/id");
+				var ind = 6;
+				DspL.line1l = sprintf("   %3i   %.1f",getprop(path~ind~legb),math.ceil(getprop(path~ind~legd)));
+				if (getprop(path~ind~"]/id")==marker) {rep="   <--"}
+				else {rep=""}
+				DspL.line2l = getprop(path~ind~"]/id")~rep;
 				DspR.line1r = "-----";
-				if (getprop("autopilot/route-manager/route/wp[6]/altitude-ft") > 0) {
-					DspR.line1r = sprintf("%3i",int(getprop("autopilot/route-manager/route/wp[6]/altitude-ft")/100)*100);
+				if (getprop(path~ind~"]/altitude-ft") > 0) {
+					DspR.line1r = sprintf("%3i",int(getprop(path~ind~"]/altitude-ft")/100)*100);
 				}
 				DspR.line2r = "";
 			}
 			if (num == 8 and flt_closed == 1) {
-				DspL.line3l = "   "~sprintf("%3i   %3i",getprop("autopilot/route-manager/route/wp[7]/leg-bearing-true-deg"),getprop("autopilot/route-manager/route/wp[7]/leg-distance-nm"));
+				var ind = 7;
+				DspL.line3l = sprintf("   %3i   %.1f",getprop(path~ind~legb),math.ceil(getprop(path~ind~legd)));
 				DspL.line4l = dest_airport~" "~ dest_rwy;
 			}	
 			else if (num > 8 or (num == 8 and dest_airport == "")) {
-				DspL.line3l = "   "~sprintf("%3i   %3i",getprop("autopilot/route-manager/route/wp[7]/leg-bearing-true-deg"),getprop("autopilot/route-manager/route/wp[7]/leg-distance-nm"));
-				DspL.line4l = getprop("autopilot/route-manager/route/wp[7]/id");
+				var ind = 7;
+				DspL.line3l = sprintf("   %3i   %.1f",getprop(path~ind~legb),math.ceil(getprop(path~ind~legd)));
+				if (getprop(path~ind~"]/id")==marker) {rep="   <--"}
+				else {rep=""}
+				DspL.line4l = getprop(path~ind~"]/id")~rep;
 				DspR.line3r = "-----";
-				if (getprop("autopilot/route-manager/route/wp[7]/altitude-ft") > 0) {
-					DspR.line3r = sprintf("%3i",int(getprop("autopilot/route-manager/route/wp[7]/altitude-ft")/100)*100);
+				if (getprop(path~ind~"]/altitude-ft") > 0) {
+					DspR.line3r = sprintf("%3i",int(getprop(path~ind~"]/altitude-ft")/100)*100);
 				}
 				DspR.line4r = "";
 			}
 			if (num == 9 and flt_closed == 1) {
-				DspL.line5l = "   "~sprintf("%3i   %3i",getprop("autopilot/route-manager/route/wp[8]/leg-bearing-true-deg"),getprop("autopilot/route-manager/route/wp[8]/leg-distance-nm"));
+				var ind = 8;
+				DspL.line5l = sprintf("   %3i   %.1f",getprop(path~ind~legb),math.ceil(getprop(path~ind~legd)));
 				DspL.line6l = dest_airport~" "~ dest_rwy;
 			}	
 			else if (num > 9 or (num == 3 and dest_airport == "")) {
-				DspL.line5l = "   "~sprintf("%3i   %3i",getprop("autopilot/route-manager/route/wp[8]/leg-bearing-true-deg"),getprop("autopilot/route-manager/route/wp[8]/leg-distance-nm"));
-				DspL.line6l = getprop("autopilot/route-manager/route/wp[8]/id");
+				var ind = 8;
+				DspL.line5l = sprintf("   %3i   %.1f",getprop(path~ind~legb),math.ceil(getprop(path~ind~legd)));
+				if (getprop(path~ind~"]/id")==marker) {rep="   <--"}
+				else {rep=""}
+				DspL.line6l = getprop(path~ind~"]/id")~rep;
 				DspR.line5r = "-----";
-				if (getprop("autopilot/route-manager/route/wp[8]/altitude-ft") > 0) {
-					DspR.line5r = sprintf("%3i",int(getprop("autopilot/route-manager/route/wp[8]/altitude-ft")/100)*100);
+				if (getprop(path~ind~"]/altitude-ft") > 0) {
+					DspR.line5r = sprintf("%3i",int(getprop(path~ind~"]/altitude-ft")/100)*100);
 				}
 				DspR.line6r = "";
 			}
 	cdu.DspSet(page,DspL,DspR);
 }
 
-var fltPlan_4 = func(dest_airport,dest_rwy,num,flt_closed) {
+var fltPlan_4 = func(dest_airport,dest_rwy,num,flt_closed,marker) {
 		var DspL = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:""};
 		var DspR = {line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
+		var rep = "";
+		var path = "autopilot/route-manager/route/wp[";
+		var legb = "]/leg-bearing-true-deg";
+		var legd = "]/leg-distance-nm";
 			page = "ACTIVE FLT PLAN     4 / 5";
 			DspL.line1l = "VIA TO";
 			DspL.line2l = "----";
@@ -203,39 +254,48 @@ var fltPlan_4 = func(dest_airport,dest_rwy,num,flt_closed) {
 			DspR.line7r = "ARRIVAL >";
 
 			if (num == 10 and flt_closed == 1) {
-				DspL.line1l = "   "~sprintf("%3i   %3i",getprop("autopilot/route-manager/route/wp[9]/leg-bearing-true-deg"),getprop("autopilot/route-manager/route/wp[9]/leg-distance-nm"));
+				var ind = 9;
+				DspL.line1l = sprintf("   %3i   %.1f",getprop(path~ind~legb),math.ceil(getprop(path~ind~legd)));
 				DspL.line2l = dest_airport~" "~ dest_rwy;
 			}	
 			else if (num > 10 or (num == 10 and dest_airport == "")) {
-				DspL.line1l = "   "~sprintf("%3i   %3i",getprop("autopilot/route-manager/route/wp[9]/leg-bearing-true-deg"),getprop("autopilot/route-manager/route/wp[9]/leg-distance-nm"));
-				DspL.line2l = getprop("autopilot/route-manager/route/wp[9]/id");
+				var ind = 9;
+				DspL.line1l = sprintf("   %3i   %.1f",getprop(path~ind~legb),math.ceil(getprop(path~ind~legd)));
+				if (getprop(path~ind~"]/id")==marker) {rep="   <--"}
+				else {rep=""}
+				DspL.line2l = getprop(path~ind~"]/id")~rep;
 				DspR.line1r = "-----";
-				if (getprop("autopilot/route-manager/route/wp[9]/altitude-ft") > 0) {
-					DspR.line1r = sprintf("%3i",int(getprop("autopilot/route-manager/route/wp[9]/altitude-ft")/100)*100);
+				if (getprop(path~ind~"]/altitude-ft") > 0) {
+					DspR.line1r = sprintf("%3i",int(getprop(path~ind~"]/altitude-ft")/100)*100);
 				}
 				DspR.line2r = "";
 			}
 			if (num == 11 and flt_closed == 1) {
-				DspL.line3l = "   "~sprintf("%3i   %3i",getprop("autopilot/route-manager/route/wp[10]/leg-bearing-true-deg"),getprop("autopilot/route-manager/route/wp[10]/leg-distance-nm"));
+				var ind = 10;
+				DspL.line3l = sprintf("   %3i   %.1f",getprop(path~ind~legb),math.ceil(getprop(path~ind~legd)));
 				DspL.line4l = dest_airport~" "~ dest_rwy;
 			}	
 			else if (num > 11 or (num == 11 and dest_airport == "")) {
-				DspL.line3l = "   "~sprintf("%3i   %3i",getprop("autopilot/route-manager/route/wp[10]/leg-bearing-true-deg"),getprop("autopilot/route-manager/route/wp[10]/leg-distance-nm"));
-				DspL.line4l = getprop("autopilot/route-manager/route/wp[10]/id");
+				var ind = 10;
+				DspL.line3l = sprintf("   %3i   %.1f",getprop(path~ind~legb),math.ceil(getprop(path~ind~legd)));
+				if (getprop(path~ind~"]/id")==marker) {rep="   <--"}
+				else {rep=""}
+				DspL.line4l = getprop(path~ind~"]/id")~rep;
 				DspR.line3r = "-----";
-				if (getprop("autopilot/route-manager/route/wp[10]/altitude-ft") > 0) {
-					DspR.line3r = sprintf("%3i",int(getprop("autopilot/route-manager/route/wp[10]/altitude-ft")/100)*100);
+				if (getprop(path~ind~"]/altitude-ft") > 0) {
+					DspR.line3r = sprintf("%3i",int(getprop(path~ind~"]/altitude-ft")/100)*100);
 				}
 				DspR.line4r = "";
 			}
 			if (num == 12 and flt_closed == 1) {
-				DspL.line5l = "   "~sprintf("%3i   %3i",getprop("autopilot/route-manager/route/wp[11]/leg-bearing-true-deg"),getprop("autopilot/route-manager/route/wp[11]/leg-distance-nm"));
+				var ind = 11;
+				DspL.line5l = sprintf("%3i   %.1f",getprop(path~ind~legb),math.ceil(getprop(path~ind~legd)));
 				DspL.line6l = dest_airport~" "~ dest_rwy;
 			}
 	cdu.DspSet(page,DspL,DspR);
 	}
 
-var fltPlan_5 = func(dest_airport,dest_rwy,num) {
+var fltPlan_5 = func(dest_airport,dest_rwy,num,marker) {
 		var DspL = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:""};
 		var DspR = {line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
 		if (num <= 1) {
@@ -246,7 +306,6 @@ var fltPlan_5 = func(dest_airport,dest_rwy,num) {
 			var i = num - 1;
 			var j = num - 2;
 		}
-
 			page = "ACTIVE FLT PLAN     5 / 5";
 			DspL.line1l = "   "~sprintf("%3i   %3i",getprop("autopilot/route-manager/route/wp["~j~"]/leg-bearing-true-deg"),getprop("autopilot/route-manager/route/wp["~j~"]/leg-distance-nm"));
 			DspL.line2l = getprop("autopilot/route-manager/route/wp["~j~"]/id");
