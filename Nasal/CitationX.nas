@@ -131,7 +131,7 @@ var Annun = props.globals.getNode("instrumentation/annunciators",1);
 var MstrWarn =Annun.getNode("master-warning",1);
 var MstrCaution = Annun.getNode("master-caution",1);
 var PWR2 =0;
-aircraft.livery.init("Aircraft/CitationX/Models/Liveries");
+#aircraft.livery.init("Aircraft/CitationX/Models/Liveries");
 aircraft.light.new("instrumentation/annunciators", [0.5, 0.5], MstrCaution);
 var FHmeter = aircraft.timer.new("/instrumentation/clock/flight-meter-sec", 10,1);
 var LHeng= JetEngine.new(0);

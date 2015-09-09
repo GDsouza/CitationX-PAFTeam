@@ -1,4 +1,4 @@
-### Display Performanes Data ###
+### Display Performances Data ###
 ### C. LE MOIGNE (clm76) - 2015 ###
 
 var perfPage_0 = func() {

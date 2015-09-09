@@ -24,7 +24,8 @@ dihedral 2 degrees
 
 Fuel 12938 lbs jet
 -->
-<airplane mass="21700">
+<airplane mass="21700" version="YASIM_VERSION_CURRENT">
+	
   <approach speed="110" aoa="6" fuel="0.2">
     <control-setting axis="/controls/engines/engine[0]/throttle-lever" value="0.35"/>
     <control-setting axis="/controls/engines/engine[1]/throttle-lever" value="0.35"/>
