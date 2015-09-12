@@ -20,7 +20,7 @@
       <icao type="string">LFOH</icao>
     </wp>
     <wp n="1">
-      <type type="string">basic</type>
+      <type type="string">navaid</type>
       <departure type="bool">false</departure>
       <generated type="bool">false</generated>
       <alt-restrict type="string">at</alt-restrict>
@@ -30,7 +30,7 @@
       <lat type="double">49.4899902</lat>
     </wp>
     <wp n="2">
-      <type type="string">basic</type>
+      <type type="string">navaid</type>
       <departure type="bool">false</departure>
       <generated type="bool">false</generated>
       <alt-restrict type="string">at</alt-restrict>

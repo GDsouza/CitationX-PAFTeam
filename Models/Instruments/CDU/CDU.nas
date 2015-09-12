@@ -103,6 +103,7 @@ var key = func(v) {
 					setprop("autopilot/route-manager/flight-plan",fltName);
 					setprop("autopilot/route-manager/input","@ACTIVATE");	
 					v = "";	
+				cduInput ="";
 				cduDisplay = "FLT-PLAN[1]";
 				}
 			}
@@ -532,9 +533,12 @@ var key = func(v) {
 				v = "";
 				if (left(cduInput,2) == "0.") {
 					setprop("autopilot/settings/target-speed-mach",cduInput);				
+					setprop("autopilot/settings/target-speed-kt",cduInput*661.47);
 				} else {
 						setprop("autopilot/settings/target-speed-kt",cduInput);
+						setprop("autopilot/settings/target-speed-mach",cduInput*0.0015118);
 				}					
+				cduInput = "";
 			}
 
 			if (v == "B2L") {

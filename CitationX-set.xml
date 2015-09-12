@@ -286,7 +286,6 @@ Completed 2015 C. Le Moigne
                         <script>dialogs.options.open()</script>
                     </binding>
                 </item>
-<!--
                 <item>
                     <label>Select Livery</label>
                     <binding>
@@ -294,7 +293,6 @@ Completed 2015 C. Le Moigne
                         <script>aircraft.livery.dialog.toggle()</script>
                     </binding>
                 </item>
--->
             </menu>
         </default>
     </menubar>
@@ -537,7 +535,7 @@ Completed 2015 C. Le Moigne
     <airspeed-indicator>
         <index n="0" type="double">100</index>
         <index n="1" type="double">120</index>
-        <ias-limit>350.0</ias-limit>
+        <ias-limit>560</ias-limit>	<!--old = 350 -->
         <mach-limit>0.85</mach-limit>
         <alt-threshold>8000.0</alt-threshold>
     </airspeed-indicator>
@@ -623,8 +621,8 @@ Completed 2015 C. Le Moigne
             <vertical-speed-fpm type="int">0</vertical-speed-fpm>
             <nav-source type="string">NAV1</nav-source>
             <bank-limit type="int">27</bank-limit>
-            <target-speed-kt type="int">275</target-speed-kt>
-            <target-speed-mach type="double">0.83</target-speed-mach>
+            <target-speed-kt type="int">250</target-speed-kt>
+            <target-speed-mach type="double">0.38</target-speed-mach>
 
 <!--old
             <target-speed-kt type="int">80</target-speed-kt>

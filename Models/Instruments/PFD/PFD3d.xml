@@ -234,9 +234,9 @@
             <subtype>textranslate</subtype>
             <property>orientation/pitch-deg</property>
             <interpolation>
-                <entry><ind>-90.0</ind><dep>-0.41</dep></entry>
-                <entry><ind>0.0</ind><dep>0.0</dep></entry>
-                <entry><ind>90.0</ind><dep>0.41</dep></entry>
+              <entry><ind>-90.0</ind><dep>-0.60</dep></entry> <!--orig. -0.41-->
+              <entry><ind>2.36</ind><dep>0.0</dep></entry>	<!-- orig. ind=0 -->
+              <entry><ind>90.0</ind><dep>0.60</dep></entry> <!-- orig. 0.41 -->
             </interpolation>
             <axis>
                 <x>0</x>
@@ -474,7 +474,7 @@
         <object-name>vsi.needle</object-name>
         <property>autopilot/internal/vert-speed-fpm</property>
         <interpolation>
-            <entry><ind>-4000.0</ind><dep>-73.33</dep></entry>
+            <entry><ind>-4000</ind><dep>-73.33</dep></entry>
             <entry><ind>0.0</ind><dep>0.0</dep></entry>
             <entry><ind>4000</ind><dep>73.33</dep></entry>
         </interpolation>
