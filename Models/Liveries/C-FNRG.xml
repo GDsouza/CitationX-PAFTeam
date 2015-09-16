@@ -4,8 +4,8 @@
 <sim>
     <model>
         <livery>
-            <name type="string">Black Stripes</name>
-            <texture>livery1.png</texture>
+            <name type="string">C-FNRG</name>
+            <texture>Liveries/C-FNRG.png</texture>
         </livery>
     </model>
 </sim>
