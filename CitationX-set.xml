@@ -1,15 +1,15 @@
-<?xml version = '1.0' encoding = 'UTF-8' ?>
+<?xml version="1.0" encoding="ISO-8859-1"?> 
 <!--
 ************************************************************************
 Cessna Citation-X
 Started Oct 2005  Syd Adams
-Completed 2015 C. Le Moigne
+Completed 2015 C. Le Moigne, C-Thiriot (PATTEN).
 ************************************************************************
 -->
 <PropertyList>
     <sim>
         <description>Cessna Citation-X</description>
-        <author>Syd Adams</author>
+        <author>Syd Adams, 2015 C. Le Moigne,C-Thiriot (PATTEN), PAF TEAM</author>
         <status>devel</status>
         <flight-model>yasim</flight-model>
         <aero>CitationX</aero>

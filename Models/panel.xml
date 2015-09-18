@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="ISO-8859-1"?> 
 
 <PropertyList>
 
@@ -6,7 +6,7 @@
 
 
     <model>
-        <path>Aircraft/CitationX/Models/Instruments/aoa.xml</path>
+        <path>Aircraft/CitationX/Models/Instruments/AOA/aoa.xml</path>
         <offsets>
             <x-m>0.002</x-m>
             <y-m>-0.506</y-m>
@@ -15,7 +15,7 @@
     </model>
 
     <model>
-        <path>Aircraft/CitationX/Models/Instruments/aoa.xml</path>
+        <path>Aircraft/CitationX/Models/Instruments/AOA/aoa.xml</path>
         <offsets>
             <x-m>0.002</x-m>
             <y-m>0.515</y-m>
@@ -24,7 +24,7 @@
     </model>
 
     <model>
-        <path>Aircraft/CitationX/Models/Instruments/ALT.xml</path>
+        <path>Aircraft/CitationX/Models/Instruments/ALT/ALT.xml</path>
         <offsets>
             <x-m>0.002</x-m>
             <y-m>-0.230</y-m>
@@ -33,7 +33,7 @@
     </model>
 
     <model>
-        <path>Aircraft/CitationX/Models/Instruments/STBYai.xml</path>
+        <path>Aircraft/CitationX/Models/Instruments/STBYai/STBYai.xml</path>
         <offsets>
             <x-m>0.001</x-m>
             <y-m>-0.137</y-m>
@@ -42,7 +42,7 @@
     </model>
 
     <model>
-        <path>Aircraft/CitationX/Models/Instruments/hsi.xml</path>
+        <path>Aircraft/CitationX/Models/Instruments/HSI/hsi.xml</path>
         <offsets>
             <x-m>0.002</x-m>
             <y-m>-0.044</y-m>
