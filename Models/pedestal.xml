@@ -638,7 +638,7 @@
         <binding>
             <command>property-adjust</command>
             <property>autopilot/settings/asel</property>
-            <step>1</step>
+            <step>5</step>
             <min>0</min>
             <max>655</max>
             <wrap>0</wrap>
@@ -650,7 +650,7 @@
         <binding>
             <command>property-adjust</command>
             <property>autopilot/settings/asel</property>
-            <step>-1</step>
+            <step>-5</step>
             <min>0</min>
             <max>655</max>
             <wrap>0</wrap>

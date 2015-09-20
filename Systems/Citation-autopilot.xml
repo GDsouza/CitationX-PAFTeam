@@ -206,11 +206,11 @@
         <initialize-to>output</initialize-to>
         <enable>
             <condition>
-                <equals>
+               <equals>
                     <property>autopilot/locks/altitude</property>
                     <value>PTCH</value>
                 </equals>
-            </condition>
+           </condition>
         </enable>
         <input>
             <property>autopilot/settings/target-pitch-deg</property>
@@ -356,7 +356,7 @@
             <Ti>10.0</Ti>
             <Td>0.000001</Td>
             <min>-30</min> <!-- origin -30 -->
-            <max>110</max> <!-- origin = 66-->
+            <max>80</max> <!-- origin = 66-->
         </config>
     </pid-controller>
 
@@ -464,7 +464,91 @@
         </config>
     </pid-controller>
 
+<!-- Speed Control  -->
 
+    <pid-controller>
+        <name>Speed Control</name>
+        <debug>false</debug>
+				<enable>
+					<condition>
+						<and>
+							<equals>
+								<property>/autopilot/settings/nav-source</property>
+									<value>FMS</value>
+							</equals>
+							<equals>
+									<property>/autopilot/locks/altitude</property>
+										<value>VALT</value>
+							</equals>
+							<equals>
+								<property>/autopilot/locks/AP-status</property>
+									<value>AP1</value>
+							</equals>
+						</and>
+					</condition>
+				</enable>
+				<input>
+					<prop>instrumentation/airspeed-indicator/indicated-speed-kt</prop>
+				</input>
+				<reference>
+					<prop>autopilot/settings/target-speed-kt</prop>
+				</reference>
+				<output>
+					<prop>controls/engines/engine[0]/throttle</prop>
+					<prop>controls/engines/engine[1]/throttle</prop>		
+				</output>
+        <config>
+            <Kp>0.1</Kp> <!-- old 0.1 -->
+            <beta>1.0</beta>
+            <alpha>0.1</alpha>
+            <gamma>0.0</gamma>
+            <Ti>10.0</Ti>	<!-- old 10.0 -->
+            <Td>0.001</Td>
+            <min>0.20</min> <!-- old 0.25 -->
+            <max>0.99</max> <!-- old 0.95 -->
+        </config>
+    </pid-controller>
+
+<!--
+		<pi-simple-controller>
+			<name>speed</name>
+			<debug>false</debug>
+				<enable>
+					<condition>
+						<and>
+							<equals>
+								<property>/autopilot/settings/nav-source</property>
+									<value>FMS</value>
+							</equals>
+							<equals>
+								<property>/autopilot/locks/altitude</property>
+									<value>VALT</value>
+							</equals>
+							<equals>
+								<property>/autopilot/locks/AP-status</property>
+									<value>AP1</value>
+							</equals>
+						</and>
+					</condition>
+				</enable>
+				<input>
+					<prop>instrumentation/airspeed-indicator/indicated-speed-kt</prop>
+				</input>
+				<reference>
+					<prop>autopilot/settings/target-speed-kt</prop>
+				</reference>
+				<output>
+					<prop>controls/engines/engine[0]/throttle</prop>
+					<prop>controls/engines/engine[1]/throttle</prop>		
+				</output>
+				<config>
+					<Kp>0.1</Kp>
+					<Ki>0.0</Ki>
+					<min>0.25</min>
+					<max>1</max>
+				</config>
+		</pi-simple-controller>
+-->
 <!-- Internal Tests  -->
 
 
@@ -652,7 +736,10 @@
                 </equals>
             </condition>
         </enable>
+				<input>instrumentation/settings/target-altitude-ft</input>
+<!--
         <input>instrumentation/gps/wp/wp[1]/altitude-ft</input>
+-->
         <output>autopilot/settings/vnav-alt</output>
         <type>noise-spike</type>
         <max-rate-of-change>500</max-rate-of-change>

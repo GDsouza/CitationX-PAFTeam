@@ -1284,8 +1284,6 @@
         </action>
     </animation>
 
-
-
     <animation>
         <type>pick</type>
         <object-name>FD.AP</object-name>
@@ -1363,7 +1361,7 @@
         <binding>
             <command>property-assign</command>
             <property>autopilot/settings/asel</property>
-            <value>100</value>
+            <value>410</value>
         </binding>
     </action>
     <action>
@@ -1372,7 +1370,7 @@
         <binding>
             <command>property-adjust</command>
             <property>autopilot/settings/asel</property>
-            <step>1</step>
+            <step>5</step>
             <min>0</min>
             <max>655</max>
             <wrap>0</wrap>
@@ -1384,7 +1382,7 @@
         <binding>
             <command>property-adjust</command>
             <property>autopilot/settings/asel</property>
-            <step>-1</step>
+            <step>-5</step>
             <min>0</min>
             <max>655</max>
             <wrap>0</wrap>
@@ -1582,6 +1580,22 @@
                 <min>0</min>
                 <max>3</max>
                 <wrap>0</wrap>
+            </binding>
+        </action>
+    </animation>
+
+<!-- MFD -->
+
+    <animation>
+        <type>pick</type>
+        <object-name>MFD.btn5</object-name>
+        <visible>true</visible>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <command>nasal</command>
+                <script>citation.mfd_vspeed;</script>
             </binding>
         </action>
     </animation>

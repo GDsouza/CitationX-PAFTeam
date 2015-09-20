@@ -36,15 +36,15 @@ var FD_set_mode = func(btn){
     var VAmode=getprop(Vertical_arm);
 
 
-    if(btn=="ap"){
+			if(btn=="ap"){
         Coord = getprop(AutoCoord);
         if(getprop(AP)!="AP1"){
-            setprop(Lateral_arm,"");setprop(Vertical_arm,"");
-            if(Vmode=="PTCH")set_pitch();
-            if(Lmode=="ROLL")set_roll();
-            if(getprop("position/altitude-agl-ft") > minimums) {
+					setprop(Lateral_arm,"");setprop(Vertical_arm,"");
+          if(Vmode=="PTCH")set_pitch();
+          if(Lmode=="ROLL")set_roll(); 
+          if(getprop("position/altitude-agl-ft") > minimums) {
                 setprop(AP,"AP1");setprop(AutoCoord,0);}
-        } else kill_Ap("");
+				}	else kill_Ap("");
     }elsif(btn=="hdg"){
         if(Lmode!="HDG") setprop(Lateral,"HDG") else set_roll();
         setprop(Lateral_arm,"");setprop(Vertical_arm,"");
@@ -84,7 +84,7 @@ var FD_set_mode = func(btn){
             if(NAVSRC=="FMS"){
                 setprop(Vertical,"VALT");
                 setprop(Lateral,"LNAV");
-            }
+           }
             }else set_pitch();
     }elsif(btn=="app"){
         setprop(Lateral_arm,"");setprop(Vertical_arm,"");
@@ -366,15 +366,80 @@ var get_ETE= func{
     setprop("autopilot/internal/nav-ttw",ttw);
 }
 
+### Speed Control ###
 
+var speed_Control = func {
+	var lock_alt = getprop("autopilot/locks/altitude");
+	var ap_stat = getprop("autopilot/locks/AP-status");
+	var tot_dist = getprop("autopilot/route-manager/total-distance");
+	var dist_rem = getprop("autopilot/route-manager/distance-remaining-nm");
+	var dist_dep = tot_dist-dist_rem;
+	var alt_ind = getprop("instrumentation/altimeter/indicated-altitude-ft");
+	var cruise_alt = getprop("autopilot/route-manager/cruise/altitude-ft");
+	var cruise_spd = getprop("autopilot/route-manager/cruise/speed-kts");
+	var target_spd = "autopilot/settings/target-speed-kt";
+	var dep_spd = getprop("autopilot/settings/dep-speed-kt");
+	var climb_spd = getprop("autopilot/settings/climb-speed-kt");
+	var descent_spd = getprop("autopilot/settings/descent-speed-kt");
+	var app_spd = getprop("autopilot/settings/app-speed-kt");
+	var app_dist = getprop("autopilot/route-manager/distance-remaining-nm"); 
+	var app5_spd = getprop("autopilot/settings/app5-speed-kt");
+	var app15_spd = getprop("autopilot/settings/app15-speed-kt");
+	var app39_spd = getprop("autopilot/settings/app39-speed-kt");
+	var target_alt = "autopilot/settings/target-altitude-ft";
+	var tg_alt = getprop(target_alt);
+	var wp_alt = getprop("autopilot/route-manager/wp/altitude-ft");
+	var next_wp = "autopilot/route-manager/route/wp[";
+	var wp_ind = getprop("autopilot/route-manager/current-wp");
+	var num = getprop("autopilot/route-manager/route/num");
+
+	### Takeoff ###
+	if (NAVSRC == "FMS" and lock_alt == "VALT") {
+		if (wp_ind==-1) {wp_ind=0}
+		if (dist_dep <= 4.0 or alt_ind <= 2500) {setprop(target_spd,dep_spd)}
+		setprop("autopilot/route-manager/wp/altitude-ft",getprop(next_wp~wp_ind~"]/altitude-ft"));
+	}
+	### En route ###
+	if (ap_stat == "AP1" and NAVSRC == "FMS" and lock_alt == "VALT") {
+		setprop("autopilot/route-manager/cruise/altitude-ft",getprop("autopilot/settings/asel"));
+		if (dist_dep <= 4.0 or alt_ind <= 2500) {setprop(target_spd,dep_spd)}
+		else if (app_dist < 12) {
+				if (getprop("controls/flight/flaps")==0.142) {
+					setprop(target_spd,app5_spd);
+				}
+				if (getprop("controls/flight/flaps")==0.428) {
+					setprop(target_spd,app15_spd);
+				}
+				if (getprop("controls/flight/flaps")==1) {
+					setprop(target_spd,app39_spd);
+				}	
+				else {setprop(target_spd,app_spd)}
+			### cruise ###
+		}	else {
+			### WP without altitude ###
+			if (wp_alt <= 0.0) {
+				setprop(target_alt,cruise_alt*100);
+			} else {
+			### WP with altitude ###
+				setprop(target_alt,wp_alt);
+			}
+				### Climb ###
+			if (alt_ind < (tg_alt-100) or tg_alt > (alt_ind+5000)) {
+				setprop(target_spd,climb_spd);
+			} else if (tg_alt < (alt_ind-500)) {print("descent");setprop(target_spd,descent_spd);					
+			} else {setprop(target_spd,cruise_spd) }			
+		}	
+	}
+}
 ###  Main loop ###
 
 var update_fd = func {
     update_nav();
+		speed_Control();
     if(count==0)monitor_AP_errors();
     if(count==1)monitor_L_armed();
     if(count==2)monitor_V_armed();
-     if(count==3)get_ETE();
+    if(count==3)get_ETE();
     count+=1;
     if(count>3)count=0;
     settimer(update_fd, 0);

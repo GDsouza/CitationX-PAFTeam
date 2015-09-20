@@ -30,39 +30,27 @@ var posInit = func(my_lat,my_long,dep_airport,dep_rwy) {
 		page = "POSITION INIT    1/1";
 		DspL.line1l = "LAST POS";
 		DspR.line2r = "LOAD";
+		DspL.line3l = "REF WPT";
 		DspR.line4r = "LOAD";
+		DspL.line5l = "GPS 1 POS";
 		DspR.line6r = "LOAD";
-		if (getprop("instrumentation/cdu/load_pos1") == 1) {		
+		if (getprop("instrumentation/cdu/pos-init") == 1) {		
 			DspL.line2l = my_lat~" "~my_long;
 			DspR.line1r = "(LOADED)";
 			DspR.line2r = "";
-		} else {
-				DspL.line2l = "";
-			}
-		if (getprop("instrumentation/cdu/load_pos2") == 1) {		
 			DspL.line3l = dep_airport ~ "-" ~ dep_rwy ~ "   REF WPT";
 			DspR.line3r = "(LOADED)";
 			DspR.line4r = "";
-		} else {
-				DspL.line3l = "REF WPT";
-			}
 			DspL.line4l = "---*--.-  ---*--.-";
 			DspL.line5l = "GPS 1 POS";
-		if (getprop("instrumentation/cdu/load_pos3") == 1) {		
 			DspL.line6l = my_lat~" "~my_long;
 			DspR.line5r = "(LOADED)";
 			DspR.line6r = "";
-		} else {
-				DspL.line6l = "";
-			}
-		DspL.line7l = "< POS SENSORS";
-		if (getprop("instrumentation/cdu/load_pos1") == 1 and
-			getprop("instrumentation/cdu/load_pos2") == 1 and
-			getprop("instrumentation/cdu/load_pos3") == 1) {
 			DspR.line7r = "FLT PLAN >";
-			setprop("/instrumentation/cdu/pos-init",1);
-		} else {	
-		  DspR.line7r = "";
+		} else {
+				DspL.line2l = "";
+				DspL.line6l = "";
+			  DspR.line7r = "";
 		}
 	cdu.DspSet(page,DspL,DspR);
 }

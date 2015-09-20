@@ -3,13 +3,13 @@
 ************************************************************************
 Cessna Citation-X
 Started Oct 2005  Syd Adams
-Completed 2015 C. Le Moigne, C-Thiriot (PATTEN).
+Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 ************************************************************************
 -->
 <PropertyList>
     <sim>
         <description>Cessna Citation-X</description>
-        <author>Syd Adams, 2015 C. Le Moigne,C-Thiriot (PATTEN), PAF TEAM</author>
+        <author>Syd Adams, 2015 C. Le Moigne(clm76), C-Thiriot (PATTEN), PAF TEAM</author>
         <status>devel</status>
         <flight-model>yasim</flight-model>
         <aero>CitationX</aero>
@@ -255,7 +255,7 @@ Completed 2015 C. Le Moigne, C-Thiriot (PATTEN).
 
         <weight n="1">
             <name>Passengers</name>
-            <weight-lb>2040</weight-lb>
+            <weight-lb>0</weight-lb>
             <max-lb>2040</max-lb>
             <min-lb>0</min-lb>
         </weight>
@@ -631,7 +631,7 @@ Completed 2015 C. Le Moigne, C-Thiriot (PATTEN).
             <changeover type="bool">0</changeover>
             <heading-bug-deg type="int">0</heading-bug-deg>
             <vertical-speed-fpm type="int">0</vertical-speed-fpm>
-            <asel type="int">100</asel>
+            <asel type="int">410</asel>
         </settings>
         <locks>
             <heading>ROLL</heading>

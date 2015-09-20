@@ -235,9 +235,9 @@
             <subtype>textranslate</subtype>
             <property>orientation/pitch-deg</property>
             <interpolation>
-              <entry><ind>-90.0</ind><dep>-0.60</dep></entry> <!--orig. -0.41-->
-              <entry><ind>2.36</ind><dep>0.0</dep></entry>	<!-- orig. ind=0 -->
-              <entry><ind>90.0</ind><dep>0.60</dep></entry> <!-- orig. 0.41 -->
+              <entry><ind>-90.0</ind><dep>-0.50</dep></entry> <!--orig. -0.41-->
+              <entry><ind>1.4</ind><dep>0.0</dep></entry>	<!-- orig. ind=0 -->
+              <entry><ind>90.0</ind><dep>0.50</dep></entry> <!-- orig. 0.41 -->
             </interpolation>
             <axis>
                 <x>0</x>
