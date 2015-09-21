@@ -35,7 +35,6 @@ var FD_set_mode = func(btn){
     var Vmode=getprop(Vertical);
     var VAmode=getprop(Vertical_arm);
 
-
 			if(btn=="ap"){
         Coord = getprop(AutoCoord);
         if(getprop(AP)!="AP1"){
@@ -51,7 +50,13 @@ var FD_set_mode = func(btn){
     }elsif(btn=="alt"){
         setprop(Lateral_arm,"");setprop(Vertical_arm,"");
         if(Vmode!="ALT"){
-            setprop(Vertical,"ALT");setprop("autopilot/settings/asel",(getprop("instrumentation/altimeter/mode-c-alt-ft") * 0.01));
+					var n=(getprop("instrumentation/altimeter/mode-c-alt-ft"))*0.01;
+					var m=int(n/10);
+					var p=(n/10)-m;
+					if (p>0 and p<0.5) {p=0.5;m=m+p}
+						else if(p>=0.5 and p<1) {m=m+1}
+						else {p=0}
+            setprop(Vertical,"ALT");setprop("autopilot/settings/asel",m*10);
         } else set_pitch();
     }elsif(btn=="flc"){
         var flcmode = "FLC";
@@ -379,6 +384,8 @@ var speed_Control = func {
 	var cruise_spd = getprop("autopilot/route-manager/cruise/speed-kts");
 	var target_spd = "autopilot/settings/target-speed-kt";
 	var dep_spd = getprop("autopilot/settings/dep-speed-kt");
+	var dep_agl = getprop("autopilot/settings/dep-agl-limit-ft");
+	var dep_lim = getprop("autopilot/settings/dep-limit-nm");
 	var climb_spd = getprop("autopilot/settings/climb-speed-kt");
 	var descent_spd = getprop("autopilot/settings/descent-speed-kt");
 	var app_spd = getprop("autopilot/settings/app-speed-kt");
@@ -393,13 +400,13 @@ var speed_Control = func {
 	var wp_ind = getprop("autopilot/route-manager/current-wp");
 	var num = getprop("autopilot/route-manager/route/num");
 
-	### Takeoff ###
+		### Takeoff ###
 	if (NAVSRC == "FMS" and lock_alt == "VALT") {
 		if (wp_ind==-1) {wp_ind=0}
-		if (dist_dep <= 4.0 or alt_ind <= 2500) {setprop(target_spd,dep_spd)}
+		if (dist_dep <= dep_lim or alt_ind <= dep_agl) {setprop(target_spd,dep_spd)}
 		setprop("autopilot/route-manager/wp/altitude-ft",getprop(next_wp~wp_ind~"]/altitude-ft"));
 	}
-	### En route ###
+		### En route ###
 	if (ap_stat == "AP1" and NAVSRC == "FMS" and lock_alt == "VALT") {
 		setprop("autopilot/route-manager/cruise/altitude-ft",getprop("autopilot/settings/asel"));
 		if (dist_dep <= 4.0 or alt_ind <= 2500) {setprop(target_spd,dep_spd)}
@@ -426,7 +433,7 @@ var speed_Control = func {
 				### Climb ###
 			if (alt_ind < (tg_alt-100) or tg_alt > (alt_ind+5000)) {
 				setprop(target_spd,climb_spd);
-			} else if (tg_alt < (alt_ind-500)) {print("descent");setprop(target_spd,descent_spd);					
+			} else if (tg_alt < (alt_ind-500)) {setprop(target_spd,descent_spd);					
 			} else {setprop(target_spd,cruise_spd) }			
 		}	
 	}
