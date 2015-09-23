@@ -7,6 +7,45 @@
 
     <path>CDU.ac</path>
 
+  <animation>
+    <object-name>CGU-screen-off</object-name>
+    <object-name>CDU-screen</object-name>
+  </animation>
+
+  <animation>
+    <type>select</type>
+    <object-name>CDU-screen-off</object-name>
+    <condition>
+      <and>
+        <equals>
+          <property>controls/electric/avionics-switch</property>
+          <value> 0 </value>
+        </equals>
+        <greater-than>
+          <property>systems/electrical/outputs/instrument-lights</property>
+          <value> 0 </value>
+        </greater-than>
+      </and>
+    </condition>
+  </animation>
+
+  <animation>
+    <type>select</type>
+    <object-name>CDU-screen</object-name>
+    <condition>
+      <and>
+        <equals>
+          <property>controls/electric/avionics-switch</property>
+          <value> 1 </value>
+        </equals>
+        <greater-than>
+          <property>systems/electrical/outputs/instrument-lights</property>
+          <value> 0.0001 </value>
+        </greater-than>
+      </and>
+    </condition>
+  </animation>
+
 <!-- CDU Knob -->
 
     <animation>
