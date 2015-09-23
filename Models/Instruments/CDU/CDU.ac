@@ -3,7 +3,6 @@ MATERIAL "inst-glow" rgb 0.8 0.8 0.8 amb 0.8 0.8 0.8 emis 0.1 0.1 0.1 spec 0.126
 MATERIAL "gloss.001" rgb 0.733333 0.733333 0.733333 amb 0.733333 0.733333 0.733333 emis 0.1 0.1 0.1 spec 0.31023 0.31023 0.31023 shi 14 trans 0
 MATERIAL "ac3dmat1" rgb 1 1 1 amb 0.2 0.2 0.2 emis 0.1 0.1 0.1 spec 0.2 0.2 0.2 shi 128 trans 0
 MATERIAL "grn.003" rgb 0 0.317284 0.175341 amb 0 0 0 emis 0.1 0.1 0.1 spec 0.519753 1 0.717443 shi 32 trans 0
-MATERIAL "Black.005" rgb 0 0 0 amb 0 0 0 emis 0.1 0.1 0.1 spec 0 0 0 shi 32 trans 0
 MATERIAL "DEFAUT" rgb 0.8 0.8 0.8 amb 1 1 1 emis 0.1 0.1 0.1 spec 1 1 1 shi 50 trans 0
 OBJECT world
 kids 71
@@ -1274,6 +1273,7 @@ name "CDU-screen"
 loc 0 0 -0
 data 10
 CDU-screen
+texture "cdu.png"
 texrep 1 1
 crease 30.000001
 numvert 4
@@ -1292,7 +1292,7 @@ refs 4
 kids 0
 OBJECT poly
 name "CDU-screen-off"
-loc 0 0 -0
+loc 0.000905 0 -0
 data 14
 CDU-screen-off
 texture "cdu.png"
@@ -1305,7 +1305,7 @@ numvert 4
 0.002 0.075159 -0.056607
 numsurf 1
 SURF 0x10
-mat 5
+mat 4
 refs 4
 3 0.995997190475 0.99258518219
 0 0.671380877495 0.99258518219
