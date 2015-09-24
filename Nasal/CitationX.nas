@@ -75,6 +75,8 @@ var JetEngine = {
         if(!me.engine_off){
             me.fan.setValue(me.n1.getValue());
             me.turbine.setValue(me.n2.getValue());
+						setprop("controls/engines/engine[0]/starter",0);
+						setprop("controls/engines/engine[1]/starter",0);
             if(getprop("controls/engines/grnd_idle"))thr *=0.92;
             me.throttle_lever.setValue(thr);
         }else{
@@ -228,13 +230,15 @@ var Startup = func{
     setprop("controls/lighting/nav-lights",1);
     setprop("controls/lighting/beacon",1);
     setprop("controls/lighting/strobe",1);
-    setprop("controls/engines/engine[0]/cutoff",0);
-    setprop("controls/engines/engine[1]/cutoff",0);
+    setprop("controls/engines/engine[0]/cutoff",1);
+    setprop("controls/engines/engine[1]/cutoff",1);
     setprop("controls/engines/engine[0]/ignition",1);
     setprop("controls/engines/engine[1]/ignition",1);
     setprop("engines/engine[0]/running",1);
     setprop("engines/engine[1]/running",1);
     setprop("controls/engines/throttle_idle",1);
+		setprop("controls/engines/engine[0]/starter",1);
+		setprop("controls/engines/engine[1]/starter",1);
 }
 
 var Shutdown = func{

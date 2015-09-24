@@ -326,7 +326,7 @@
         <brakes>
             <name>brake-lever-off</name>
             <mode>once</mode>
-            <path>Aircraft/Biplan/Sounds/brake-lever.wav</path>
+            <path>Aircraft/CitationX/Sounds/brake-lever.wav</path>
             <condition>
                 <not>
                     <property>controls/gear/brake-parking</property>
@@ -350,7 +350,7 @@
         <brakes>
             <name>brake-lever-on</name>
             <mode>once</mode>
-            <path>Aircraft/Biplan/Sounds/brake-lever.wav</path>
+            <path>Aircraft/CitationX/Sounds/brake-lever.wav</path>
             <condition>
                 <and>
                     <property>controls/gear/brake-parking</property>
