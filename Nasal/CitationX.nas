@@ -212,6 +212,11 @@ controls.gearDown = func(v) {
     }
 }
 
+controls.stepSpoilers = func(v) {
+    if (v < 0) {setprop("/controls/flight/speedbrake", 0)}
+		else if (v > 0) {setprop("/controls/flight/speedbrake", 1)}
+}
+
 var Startup = func{
     setprop("controls/electric/engine[0]/generator",1);
     setprop("controls/electric/engine[1]/generator",1);

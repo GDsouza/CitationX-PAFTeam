@@ -249,12 +249,6 @@ var init_switches = func{
     append(lbus_input,AVswitch);
     append(lbus_output,props.globals.initNode("systems/electrical/outputs/nav[1]",0,"DOUBLE"));
     append(lbus_load,1);
-    append(lbus_input,AVswitch);
-    append(lbus_output,props.globals.initNode("systems/electrical/outputs/cdu",0,"DOUBLE"));
-    append(lbus_load,1);
-    append(lbus_input,AVswitch);
-    append(lbus_output,props.globals.initNode("systems/electrical/outputs/cdu1",0,"DOUBLE"));
-    append(lbus_load,1);
 }
 
 
