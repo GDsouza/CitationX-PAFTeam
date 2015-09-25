@@ -64,7 +64,6 @@ var JetEngine = {
         m.starter = props.globals.initNode("controls/engines/engine["~eng_num~"]/starter",0,"BOOL");
         m.fuel_pph=m.eng.initNode("fuel-flow_pph",0,"DOUBLE");
         m.fuel_gph=m.eng.initNode("fuel-flow-gph");
-
         m.Lfuel = setlistener(m.fuel_out, func m.shutdown(m.fuel_out.getValue()),0,0);
         m.CutOff = setlistener(m.cutoff, func (ct){m.engine_off=ct.getValue()},1,0);
     return m;
@@ -75,8 +74,6 @@ var JetEngine = {
         if(!me.engine_off){
             me.fan.setValue(me.n1.getValue());
             me.turbine.setValue(me.n2.getValue());
-						setprop("controls/engines/engine[0]/starter",0);
-						setprop("controls/engines/engine[1]/starter",0);
             if(getprop("controls/engines/grnd_idle"))thr *=0.92;
             me.throttle_lever.setValue(thr);
         }else{
@@ -95,7 +92,6 @@ var JetEngine = {
                 }
             }
         }
-        
         me.fuel_pph.setValue(me.fuel_gph.getValue()*me.fdensity);
     },
 
@@ -171,6 +167,13 @@ setlistener("sim/model/autostart", func(strt){
     }
 },0,0);
 
+setlistener("/engines/engine[0]/turbine",func(turb) {
+		if(turb.getValue() >20) {setprop("/controls/engines/engine[0]/starter",0)}
+},0,0);
+
+setlistener("/engines/engine[1]/turbine",func(turb) {
+		if(turb.getValue() >20) {setprop("/controls/engines/engine[1]/starter",0)}
+},0,0);
 
 setlistener("/gear/gear[1]/wow", func(ww){
     if(ww.getBoolValue()){
@@ -302,7 +305,7 @@ var update_systems = func{
     tire.get_rotation("yasim");
     stall_horn();
     if(getprop("velocities/airspeed-kt")>40)setprop("controls/cabin-door/open",0);
-#annunciators_loop();
+		#annunciators_loop();
     var grspd =getprop("velocities/groundspeed-kt");
     var wspd = (45-grspd) * 0.022222;
     if(wspd>1.0)wspd=1.0;
