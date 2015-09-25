@@ -190,7 +190,7 @@
             <binding>
                 <command>property-assign</command>
                 <property>controls/APU/off-start-run</property>
-                <value>2</value>
+                <value>1</value>
             </binding>
             <mod-up>
                 <binding>
@@ -217,7 +217,7 @@
                 <binding>
                     <command>property-assign</command>
                     <property>controls/APU/off-start-run</property>
-                    <value>1</value>
+                    <value>0</value>
                 </binding>
             </mod-up>
             <binding>
