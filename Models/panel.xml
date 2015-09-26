@@ -534,6 +534,15 @@
             <property>sim/sound/click</property>
         </binding>
         </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>Batt1-switch</tooltip-id>
+                <label>Batt 1: %s</label>
+                <mapping>on-off</mapping>
+           <property>controls/electric/battery-switch[0]</property>
+            </binding>
+        </hovered>
     </animation>
 
     <animation>
@@ -550,6 +559,15 @@
             <property>sim/sound/click</property>
         </binding>
         </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>Batt2-switch</tooltip-id>
+                <label>Batt 2: %s</label>
+                <mapping>on-off</mapping>
+            <property>controls/electric/battery-switch[1]</property>
+            </binding>
+        </hovered>
     </animation>
 
     <animation>
@@ -566,6 +584,15 @@
             <property>sim/sound/click</property>
         </binding>
         </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>Lhgen-switch</tooltip-id>
+                <label>LH-Gen: %s</label>
+                <mapping>on-off</mapping>
+            <property>controls/electric/engine[0]/generator</property>
+            </binding>
+        </hovered>
     </animation>
 
     <animation>
@@ -582,6 +609,15 @@
             <property>sim/sound/click</property>
         </binding>
     </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>Rhgen-switch</tooltip-id>
+                <label>RH-Gen: %s</label>
+                <mapping>on-off</mapping>
+            <property>controls/electric/engine[1]/generator</property>
+            </binding>
+        </hovered>
     </animation>
 
     <animation>
@@ -597,8 +633,16 @@
             <command>property-toggle</command>
             <property>sim/sound/click</property>
         </binding>
-
         </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>Avn-switch</tooltip-id>
+                <label>Avionic: %s</label>
+                <mapping>on-off</mapping>
+            <property>controls/electric/avionics-switch</property>
+            </binding>
+        </hovered>
     </animation>
 
 <animation>
@@ -626,6 +670,15 @@
             <property>sim/sound/click</property>
         </binding>
     </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>Ign1-switch</tooltip-id>
+                <label>LH Ignition: %s</label>
+                <mapping>on-off</mapping>
+            <property>controls/engines/engine[0]/ignition</property>
+            </binding>
+        </hovered>
 </animation>
 
 <animation>
@@ -653,6 +706,15 @@
             <property>sim/sound/click</property>
         </binding>
     </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>Ign2-switch</tooltip-id>
+                <label>RH Ignition: %s</label>
+                <mapping>on-off</mapping>
+            <property>controls/engines/engine[1]/ignition</property>
+            </binding>
+        </hovered>
 </animation>
 
 <animation>
@@ -678,6 +740,15 @@
        </binding>
      </mod-up>
     </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>LH-starter</tooltip-id>
+                <label>LH Starter: %s</label>
+                <mapping>push</mapping>
+            <property>controls/engines/engine[0]/starter</property>
+            </binding>
+        </hovered>
 </animation>
 
 <animation>
@@ -703,6 +774,15 @@
        </binding>
      </mod-up>
     </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>RH-starter</tooltip-id>
+                <label>RH Starter: %s</label>
+                <mapping>push</mapping>
+            <property>controls/engines/engine[1]/starter</property>
+            </binding>
+        </hovered>
 </animation>
 
 <animation>
@@ -759,6 +839,15 @@
             <property>sim/sound/click</property>
         </binding>
     </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>Anti-coll-switch</tooltip-id>
+                <label>Anti-collision: %s</label>
+                <mapping>on-off</mapping>
+            <property>controls/lighting/strobe</property>
+            </binding>
+        </hovered>
 </animation>
 
 <animation>
@@ -776,6 +865,15 @@
             <property>sim/sound/click</property>
         </binding>
     </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>Recog-switch</tooltip-id>
+                <label>Recog: %s</label>
+                <mapping>on-off</mapping>
+            <property>controls/lighting/recog-lights</property>
+            </binding>
+        </hovered>
 </animation>
 
 <animation>
@@ -793,6 +891,15 @@
             <property>sim/sound/click</property>
         </binding>
     </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>Nav-switch</tooltip-id>
+                <label>Nav-light: %s</label>
+                <mapping>on-off</mapping>
+            <property>controls/lighting/nav-lights</property>
+            </binding>
+        </hovered>
 </animation>
 
 <animation>
@@ -810,6 +917,15 @@
             <property>sim/sound/click</property>
         </binding>
     </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>Logo-switch</tooltip-id>
+                <label>Logho-light: %s</label>
+                <mapping>on-off</mapping>
+            <property>controls/lighting/logo-lights</property>
+            </binding>
+        </hovered>
 </animation>
 
 <!-- PFD -->

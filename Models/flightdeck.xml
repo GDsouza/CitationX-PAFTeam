@@ -162,6 +162,15 @@
                 <property>controls/APU/master</property>
             </binding>
         </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>APU-master-switch</tooltip-id>
+                <label>APU-master: %s</label>
+                <mapping>on-off</mapping>
+            <property>controls/APU/master</property>
+            </binding>
+        </hovered>
     </animation>
 
     <animation>
@@ -226,6 +235,15 @@
                 <value>0</value>
             </binding>
         </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>APU-switch</tooltip-id>
+                <label>APU-on-off: %s</label>
+                <mapping>on-off</mapping>
+            <property>controls/APU/off-start-run</property>
+            </binding>
+        </hovered>
     </animation>
 
     <animation>
