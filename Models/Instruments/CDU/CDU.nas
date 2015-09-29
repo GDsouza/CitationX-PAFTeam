@@ -5,7 +5,6 @@
 var init = func {
 	setprop("autopilot/route-manager/flight-plan","");
 	setprop("autopilot/route-manager/departure/airport",getprop("/sim/airport/closest-airport-id"));
-	setprop("autopilot/route-manager/flp-path",getprop("sim/aircraft-dir") ~ "/Models/Instruments/CDU/FlightPlan/");
 	setprop("autopilot/route-manager/departure/runway",getprop("sim/atc/runway"));
 	setprop("autopilot/route-manager/cruise/speed-kts",515);
 	setprop("autopilot/route-manager/cruise/speed-mach",0.78);
@@ -38,8 +37,8 @@ var key = func(v) {
 	var destAirport = getprop("autopilot/route-manager/destination/airport");
 	var destRwy = getprop("autopilot/route-manager/destination/runway");
 	var depAirport = getprop ("autopilot/route-manager/departure/airport");
-	var currentPath = getprop("autopilot/route-manager/flp-path");
 	var num = getprop("autopilot/route-manager/route/num");
+	var savePath = getprop("/sim/fg-home")~"/FlightPlans/";
 	var fltPath = "";
 	var fltName = depAirport ~ "-" ~ destAirport;
 	var i = substr(cduDisplay,9,1);
@@ -103,10 +102,9 @@ var key = func(v) {
 				if (v == "B3R") {ligne = "R[5]"}
 				if (getprop("instrumentation/cdu/"~ligne) !="") {
 					fltName = getprop("instrumentation/cdu/"~ligne);
-					fltPath = currentPath ~ fltName;
+					fltPath = savePath ~ fltName;
 					setprop("autopilot/route-manager/file-path",fltPath);
 					setprop("autopilot/route-manager/input","@LOAD");							
-					setprop("autopilot/route-manager/flight-plan",fltName);
 					setprop("autopilot/route-manager/input","@ACTIVATE");	
 					v = "";	
 				cduInput ="";
@@ -393,10 +391,9 @@ var key = func(v) {
 			if (v == "B3R") {
 				if (cduDisplay == "FLT-PLAN[0]") {
 					fltName = cduInput;
-					fltPath = currentPath ~ fltName;
+					fltPath = savePath ~ fltName;
 					setprop("autopilot/route-manager/file-path",fltPath);
 					setprop("autopilot/route-manager/input","@LOAD");
-					setprop("autopilot/route-manager/flight-plan",fltName);
 					cduInput = "";
 					cduDisplay = "FLT-PLAN[1]";
 				}
@@ -429,10 +426,10 @@ var key = func(v) {
 					}
 					else {										
 						fltName = cduInput;
-						fltPath = currentPath ~ fltName;
+						fltPath = savePath ~ fltName;
 						setprop("autopilot/route-manager/file-path",fltPath);
 						setprop("autopilot/route-manager/input","@SAVE");
-						setprop("autopilot/route-manager/flight-plan",fltName);
+#						procedures.saveFlp.new(cduInput);						
 						cduInput = "";
 					}
 				}
@@ -680,7 +677,6 @@ var key = func(v) {
 
 		setprop("/instrumentation/cdu/display",cduDisplay);
 		setprop("/instrumentation/cdu/input",cduInput);
-
 }
 
 var insertWayp = func(ind,cduInput,alt) {

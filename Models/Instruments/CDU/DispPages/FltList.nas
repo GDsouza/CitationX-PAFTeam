@@ -5,8 +5,8 @@
 var fltList = func(display) {
 	var DspL = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:""};
 	var DspR = {line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
-		var currentPath = getprop("autopilot/route-manager/flp-path");
-		var xfile = subvec(directory(currentPath),2);
+		var savePath = getprop("/sim/fg-home")~"/FlightPlans/";
+		var xfile = subvec(directory(savePath),2);
 		cdu.dspPages(xfile,display);				
 		nbPage = getprop("/instrumentation/cdu/nbpage");
 		if (size(display) < 12) {var nrPage = substr(display,9,1)}

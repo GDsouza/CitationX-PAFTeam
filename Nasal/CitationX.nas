@@ -296,6 +296,34 @@ var stall_horn = func{
     setprop("sim/sound/stall-horn",alert);
 }
 
+var v_sound = func{
+		var Wtot = getprop("yasim/gross-weight-lbs");
+		var Flaps = getprop("controls/flight/flaps");
+
+		if (getprop("velocities/airspeed-kt")> 20) {
+			if (Flaps <= 0.142) {
+				if (Wtot <27000) {v1=122;vr=126}
+				if (Wtot >=27000 and Wtot <29000) {v1=123;vr=126}
+				if (Wtot >=29000 and Wtot <31000) {v1=125;vr=126}
+				if (Wtot >=31000 and Wtot <33000) {v1=vr=126}
+				if (Wtot >=33000 and Wtot <34000) {v1=vr=127}
+				if (Wtot >=34000 and Wtot <35000) {v1=vr=130}
+				if (Wtot >=35000 and Wtot <36100) {v1=vr=132}
+				if (Wtot >=36100) {v1=vr=134}
+			} else if (Flaps > 0.142) {
+				if (Wtot <31000) {v1=115;vr=117}
+				if (Wtot >=31000 and Wtot <33000) {v1=116;vr=120}
+				if (Wtot >=33000 and Wtot <34000) {v1=121;vr=126}
+				if (Wtot >=34000 and Wtot <35000) {v1=124;vr=128}
+				if (Wtot >=35000 and Wtot <36100) {v1=126;vr=131}
+				if (Wtot >=36100) {v1=129;vr=133}
+			}
+			setprop("controls/flight/v1",v1);
+			setprop("controls/flight/vr",vr);
+		}
+}
+
+
 ########## MAIN ##############
 
 var update_systems = func{
@@ -304,6 +332,7 @@ var update_systems = func{
     FHupdate(0);
     tire.get_rotation("yasim");
     stall_horn();
+		v_sound();
     if(getprop("velocities/airspeed-kt")>40)setprop("controls/cabin-door/open",0);
 		#annunciators_loop();
     var grspd =getprop("velocities/groundspeed-kt");
