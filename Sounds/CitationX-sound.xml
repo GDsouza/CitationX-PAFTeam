@@ -114,6 +114,23 @@
         <max-dist>2000.0</max-dist>
     </engine>
 
+<!-- REVERSE -->
+
+    <engine>
+        <name>reverse</name>
+	    <path>Aircraft/CitationX/Sounds/6-lights.wav</path>
+        <mode>once</mode>
+        <condition>
+            <greater-than>
+                <property>surface-positions/reverser-norm</property>
+                <value>0.9</value>
+            </greater-than>
+            <and>
+                <property>sim/current-view/internal</property>
+            </and>
+        </condition>
+    </engine>
+
     <engine>
         <name>reverser</name>
         <path>Sounds/exhaust_loop.wav</path>

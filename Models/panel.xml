@@ -921,7 +921,7 @@
             <binding>
                 <command>set-tooltip</command>
                 <tooltip-id>Logo-switch</tooltip-id>
-                <label>Logho-light: %s</label>
+                <label>Logo-light: %s</label>
                 <mapping>on-off</mapping>
             <property>controls/lighting/logo-lights</property>
             </binding>
