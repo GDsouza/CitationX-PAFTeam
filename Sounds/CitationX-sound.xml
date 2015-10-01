@@ -529,11 +529,7 @@
                     <property>autopilot/internal/vert-speed-fpm</property>
                     <value>500</value>
                 </greater-than-equals>
-                <less-than>
-                    <property>instrumentation/gps/indicated-altitude-ft</property>
-                    <value>300</value>
-                </less-than> 
-                <greater-than>
+               <greater-than>
                     <property>orientation/pitch-deg</property>
                     <value>7</value>
                 </greater-than>
@@ -542,7 +538,7 @@
                     <value>17</value>
                 </less-than>
 					       <less-than>
-                    <property>instrumentation/gps/indicated-altitude-f</property>
+                    <property>instrumentation/gps/indicated-altitude-ft</property>
                     <value>500</value>
                 </less-than>
             </and>
