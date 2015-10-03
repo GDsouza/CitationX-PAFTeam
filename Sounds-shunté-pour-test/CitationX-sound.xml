@@ -132,21 +132,6 @@
     </engine>
 
     <engine>
-        <name>reverse-action</name>
-	    <path>Aircraft/CitationX/Sounds/reverse.wav</path>
-        <mode>once</mode>
-        <condition>
-            <greater-than>
-                <property>surface-positions/reverser-norm</property>
-                <value>0.1</value>
-            </greater-than>
-            <and>
-                <property>sim/current-view/internal</property>
-            </and>
-        </condition>
-    </engine>
-
-    <engine>
         <name>reverser</name>
         <path>Sounds/exhaust_loop.wav</path>
         <condition>
@@ -178,7 +163,7 @@
         <reference-dist>100.0</reference-dist>
         <max-dist>1000.0</max-dist>
     </engine>
-<!--  RUMBLE -->
+
     <rumble>
         <name>rumble</name>
         <path>Sounds/rumble.wav</path>
@@ -204,7 +189,7 @@
         <reference-dist>10.0</reference-dist>
         <max-dist>50.0</max-dist>
     </rumble>
-<!--  GEAR -->
+
     <gear>
         <name>gear</name>
         <path>Sounds/gear.wav</path>
@@ -247,42 +232,6 @@
         </position>
         <reference-dist>2.0</reference-dist>
         <max-dist>10.0</max-dist>
-    </gear>
-<!--  gear down -->
-    <gear>
-        <name>gear-down</name>
-	    <path>Aircraft/CitationX/Sounds/gear-down.wav</path>
-        <mode>once</mode>
-        <condition>
-            <or>
-                <equals>
-                    <property>gear/gear[0]/position-norm</property>
-                    <value>1</value>
-                </equals>
-                <equals>
-                    <property>gear/gear[0]/position-norm</property>
-                    <value>1</value>
-                </equals>
-            </or>
-        </condition>
-    </gear>
-<!--  gear up -->
-    <gear>
-        <name>gear-up</name>
-	    <path>Aircraft/CitationX/Sounds/gear-up.wav</path>
-        <mode>once</mode>
-        <condition>
-            <or>
-                <equals>
-                    <property>gear/gear[0]/position-norm</property>
-                    <value>0</value>
-                </equals>
-                <equals>
-                    <property>gear/gear[0]/position-norm</property>
-                    <value>0</value>
-                </equals>
-            </or>
-        </condition>
     </gear>
 
     <gear>
@@ -565,7 +514,7 @@
         <name>Positive climb rate</name>
         <mode>once</mode>
         <type>avionics</type>
-        <path>Aircraft/CitationX/Sounds/p-climb.wav</path>
+        <path>Aircraft/CitationX/Sounds/proc.wav</path>
         <condition>
             <and>
                 <less-than>
