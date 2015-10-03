@@ -329,10 +329,10 @@
         <reference-dist>10.0</reference-dist>
         <max-dist>1000.0</max-dist>
     </squeal>
-
+<!-- FLAPS -->
     <flap>
         <name>flaps</name>
-        <path>Sounds/flaps.wav</path>
+        <path>Aircraft/CitationX/Sounds/flaps.wav</path>
             <property>surface-positions/flap-pos-norm</property>
         <mode>in-transit</mode>
         <volume>
@@ -347,6 +347,35 @@
         <max-dist>10.0</max-dist>
     </flap>
 
+    <flaps4>
+        <name>flaps4</name>
+	    <path>Aircraft/CitationX/Sounds/flaps4-cp.wav</path>
+        <mode>once</mode>
+        <condition>
+            <or>
+                <equals>
+                    <property>surface-positions/flap-pos-norm</property>
+                    <value>1</value>
+                </equals>
+                <equals>
+                    <property>surface-positions/flap-pos-norm</property>
+                    <value>1</value>
+                </equals>
+            </or>
+            <and>
+                <not>
+                    <property>gear/gear[0]/wow</property>
+                    <property>gear/gear[1]/wow</property>
+                    <property>gear/gear[2]/wow</property>
+                </not>
+            </and>
+        </condition>
+        <volume>
+            <property>sim/sound/volume</property>
+        </volume>
+    </flaps4>
+
+<!-- SPEED BRAKE -->
     <speedbrake>
         <name>speedbrake</name>
         <path>Sounds/flaps.wav</path>
@@ -364,6 +393,16 @@
         <max-dist>10.0</max-dist>
     </speedbrake>
 
+    <speedbrakecp>
+        <name>speedbrake-cp</name>
+        <path>Sounds/speed-brake.wav</path>
+            <property>surface-positions/speedbrake-pos-norm</property>
+        <mode>once</mode>
+        <volume>
+            <property>sim/sound/volume</property>
+        </volume>
+    </speedbrakecp>
+<!-- WIND -->
     <wind>
         <name>wind</name>
         <path>Sounds/wind.wav</path>
