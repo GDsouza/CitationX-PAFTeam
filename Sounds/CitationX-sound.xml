@@ -535,6 +535,22 @@
         <mode>once</mode>
     </warnings>
 
+<!-- Announcements -->
+
+    <announcement>
+        <name>welcome</name>
+        <path>Aircraft/CitationX/Sounds/welcome.wav</path>
+        <mode>once</mode>
+      <condition>
+        <property>controls/electric/battery-switch[1]</property>
+      </condition>
+      <position>
+        <x>-7.00 </x>
+        <y> 0.00 </y>
+        <z> 0.00 </z>
+      </position>
+   </announcement>
+
     <!-- Speed callouts -->
     <callout>
         <name>80 knots</name>
