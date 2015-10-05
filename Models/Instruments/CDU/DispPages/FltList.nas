@@ -5,7 +5,7 @@
 var fltList = func(display) {
 	var DspL = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:""};
 	var DspR = {line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
-		var savePath = getprop("/sim/fg-home")~"/FlightPlans/";
+		var savePath = getprop("/sim/fg-home")~"/aircraft-data/FlightPlans/";
 		var xfile = subvec(directory(savePath),2);
 		cdu.dspPages(xfile,display);				
 		nbPage = getprop("/instrumentation/cdu/nbpage");

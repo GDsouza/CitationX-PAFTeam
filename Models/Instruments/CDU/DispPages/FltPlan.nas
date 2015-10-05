@@ -47,7 +47,7 @@ var fltPlan_1 = func(dep_airport,dep_rwy,dest_airport,dest_rwy,num,flt_closed,ma
 			DspL.line7l = "< DEPARTURE";
 			DspR.line1r = "SPD CMD  ";		
 			DspR.line2r = spd_kt~" / "~spd_mc;			
-			DspR.line5r = "DEST  ";
+			DspR.line5r = "DEST ";
 			DspR.line7r = "ARRIVAL >";
 			if (dest_airport != "") {
 				DspR.line6r = dest_airport~" "~ dest_rwy;
@@ -110,7 +110,7 @@ var fltPlan_2 = func(dest_airport,dest_rwy,num,flt_closed,marker) {
 			DspL.line5l = " VIA TO";
 			DspL.line6l = "----";
 			DspL.line7l = "< DEPARTURE";
-			DspR.line5r = " DEST";
+			DspR.line5r = "DEST ";
 			DspR.line6r = dest_airport~" "~ dest_rwy;
 			DspR.line7r = "ARRIVAL >";
 
@@ -178,14 +178,14 @@ var fltPlan_3 = func(dest_airport,dest_rwy,num,flt_closed,marker) {
 		var spd_kt = getprop("/autopilot/settings/target-speed-kt");
 		var spd_mc = sprintf("%.2f",getprop("/autopilot/settings/target-speed-mach"));		
 			page = "ACTIVE FLT PLAN     3 / 5";
-			DspL.line1l = "VIA TO";
+			DspL.line1l = " VIA TO";
 			DspL.line2l = "----";
 			DspL.line3l = " VIA TO";
 			DspL.line4l = "----";
 			DspL.line5l = " VIA TO";
 			DspL.line6l = "----";
 			DspL.line7l = "< DEPARTURE";
-			DspR.line5r = " DEST";
+			DspR.line5r = "DEST ";
 			DspR.line6r = dest_airport~" "~ dest_rwy;
 			DspR.line7r = "ARRIVAL >";
 			if (num == 7 and flt_closed == 1) {
@@ -252,14 +252,14 @@ var fltPlan_4 = func(dest_airport,dest_rwy,num,flt_closed,marker) {
 		var spd_kt = getprop("/autopilot/settings/target-speed-kt");
 		var spd_mc = sprintf("%.2f",getprop("/autopilot/settings/target-speed-mach"));		
 			page = "ACTIVE FLT PLAN     4 / 5";
-			DspL.line1l = "VIA TO";
+			DspL.line1l = " VIA TO";
 			DspL.line2l = "----";
 			DspL.line3l = " VIA TO";
 			DspL.line4l = "----";
 			DspL.line5l = " VIA TO";
 			DspL.line6l = "----";
 			DspL.line7l = "< DEPARTURE";
-			DspR.line5r = " DEST";
+			DspR.line5r = "DEST ";
 			DspR.line6r = dest_airport~" "~ dest_rwy;
 			DspR.line7r = "ARRIVAL >";
 
@@ -330,8 +330,8 @@ var fltPlan_5 = func(dest_airport,dest_rwy,num,marker) {
 			DspR.line4r = "";
 			DspR.line5r = "";
 			DspR.line6r = "------------";
-			if (getprop("autopilot/route-manager/input") == "@SAVE") {
-				DspR.line5r = "*SAVED*";
+			if (getprop("autopilot/route-manager/flight-plan")) {
+				DspR.line5r = "SAVED";
 				DspR.line6r = getprop("autopilot/route-manager/flight-plan");
 			}
 			if (getprop("autopilot/route-manager/active")) {

@@ -115,7 +115,6 @@
     </engine>
 
 <!-- REVERSE -->
-
     <engine>
         <name>reverse</name>
 	    <path>Aircraft/CitationX/Sounds/6-lights.wav</path>
@@ -178,6 +177,7 @@
         <reference-dist>100.0</reference-dist>
         <max-dist>1000.0</max-dist>
     </engine>
+
 <!--  RUMBLE -->
     <rumble>
         <name>rumble</name>
@@ -204,6 +204,7 @@
         <reference-dist>10.0</reference-dist>
         <max-dist>50.0</max-dist>
     </rumble>
+
 <!--  GEAR -->
     <gear>
         <name>gear</name>
@@ -248,40 +249,50 @@
         <reference-dist>2.0</reference-dist>
         <max-dist>10.0</max-dist>
     </gear>
+
 <!--  gear down -->
     <gear>
         <name>gear-down</name>
 	    <path>Aircraft/CitationX/Sounds/gear-down.wav</path>
         <mode>once</mode>
         <condition>
-            <or>
-                <equals>
-                    <property>gear/gear[0]/position-norm</property>
-                    <value>1</value>
-                </equals>
-                <equals>
-                    <property>gear/gear[0]/position-norm</property>
-                    <value>1</value>
-                </equals>
-            </or>
+					<and>
+						<equals>
+							<property>gear/gear[0]/position-norm</property>
+							<value>1</value>
+						</equals>
+						<equals>
+							<property>gear/gear[1]/position-norm</property>
+							<value>1</value>
+						</equals>
+						<equals>
+							<property>gear/gear[2]/position-norm</property>
+							<value>1</value>
+						</equals>
+          </and>
         </condition>
     </gear>
+
 <!--  gear up -->
     <gear>
         <name>gear-up</name>
 	    <path>Aircraft/CitationX/Sounds/gear-up.wav</path>
         <mode>once</mode>
         <condition>
-            <or>
-                <equals>
-                    <property>gear/gear[0]/position-norm</property>
-                    <value>0</value>
-                </equals>
-                <equals>
-                    <property>gear/gear[0]/position-norm</property>
-                    <value>0</value>
-                </equals>
-            </or>
+					<and>
+						<equals>
+							<property>gear/gear[0]/position-norm</property>
+							<value>0</value>
+						</equals>
+						<equals>
+							<property>gear/gear[1]/position-norm</property>
+							<value>0</value>
+						</equals>
+						<equals>
+							<property>gear/gear[2]/position-norm</property>
+							<value>0</value>
+						</equals>
+					</and>
         </condition>
     </gear>
 
@@ -329,6 +340,7 @@
         <reference-dist>10.0</reference-dist>
         <max-dist>1000.0</max-dist>
     </squeal>
+
 <!-- FLAPS -->
     <flap>
         <name>flaps</name>
@@ -402,6 +414,7 @@
             <property>sim/sound/volume</property>
         </volume>
     </speedbrakecp>
+
 <!-- WIND -->
     <wind>
         <name>wind</name>
@@ -428,8 +441,7 @@
         <max-dist>5.0</max-dist>
     </wind>
 
-               <!--  BRAKES   -->
-
+<!--  BRAKES   -->
         <brakes>
             <name>brake-lever-off</name>
             <mode>once</mode>
@@ -546,7 +558,7 @@
                 </greater-than>
                 <less-than>
                     <property>velocities/airspeed-kt</property>
-                    <value>88</value>
+                    <value>90</value>
                 </less-than>
             </and>
         </condition>
