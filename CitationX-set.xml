@@ -332,7 +332,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
             <float  n="1" alias="/surface-positions/speedbrake-pos-norm"/>
 						<float  n="2" alias="/surface-positions/reverser-norm"/>
 <!--				    <string  alias="/sim/multiplay/callsign"/> -->
--->        </generic>
+        </generic>
     </multiplay>
 
     <flight-recorder>
@@ -631,6 +631,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
             <battery type="double">0</battery>
             <running type="bool">0</running>
             <off-start-run type="int">0</off-start-run>
+						<test type="bool">0</test>
         </APU>
     </controls>
 

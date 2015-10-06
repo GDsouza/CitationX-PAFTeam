@@ -145,7 +145,10 @@
         <object-name>APUegt</object-name>
         <object-name>APUvolts</object-name>
         <condition>
+					<or>
             <property>controls/APU/master</property>
+						<property>controls/APU/test</property>
+					</or>
         </condition>
     </animation>
 
@@ -278,5 +281,51 @@
             <z>0</z>
         </axis>
     </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>APU.test</object-name>	
+        <property>controls/APU/test</property>
+				<factor>-0.005</factor>
+        <axis>
+            <x>0</x>
+            <y>-1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+<animation>
+    <type>pick</type>
+    <object-name>APU.test</object-name>
+    <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+        </binding>
+        <binding>
+            <command>property-assign</command>
+            <property>controls/APU/test</property>
+							<value>1</value>
+        </binding>
+		    <mod-up>
+       		<binding>
+         		<command>property-assign</command>
+            <property>controls/APU/test</property>
+							<value>0</value>
+       </binding>
+     </mod-up>
+    </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>APU.test</tooltip-id>
+                <label>Test APU</label>
+                <mapping>push</mapping>
+            		<property>controls/APU/test</property>
+            </binding>
+        </hovered>
+</animation>
 
 </PropertyList>
