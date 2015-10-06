@@ -330,10 +330,29 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
             <int n="6" alias="/systems/electrical/outputs/nav-lights"/>
             <float  alias="/controls/cabin-door/position-norm"/>
             <float  n="1" alias="/surface-positions/speedbrake-pos-norm"/>
-            <float  n="2" alias="/surface-positions/reverser-norm"/>
-   <!--     <string  alias="/sim/multiplay/callsign"/>   -->
-        </generic>
+						<float  n="2" alias="/surface-positions/reverser-norm"/>
+<!--				    <string  alias="/sim/multiplay/callsign"/> -->
+-->        </generic>
     </multiplay>
+
+    <flight-recorder>
+      <replay-config type="int">0</replay-config>
+      <config n="0" include="/Aircraft/Generic/flightrecorder/generic-jet.xml">
+        <name type="string">CitationX - Flight Recorder</name>
+        <signal>
+          <type>bool</type>
+          <property type="string">/controls/engines/engine[%i]/reverser</property>
+        </signal>
+        <signal>
+          <type>float</type>
+	  <property type="string">/surface-positions/reverser-norm[%i]</property>
+        </signal>
+        <signal>
+          <type>float</type>
+          <property type="string">/controls/cabin-door/position-norm</property>
+        </signal>
+      </config>
+    </flight-recorder>
 
     <color-set>
         <white>
@@ -721,6 +740,8 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 						<file>Aircraft/CitationX/Models/Instruments/CDU/Procedures/fmsWP.nas</file>
 						<file>Aircraft/CitationX/Models/Instruments/CDU/Procedures/fmsTP.nas</file>
 						<file>Aircraft/CitationX/Models/Instruments/CDU/Procedures/fmsTransition.nas</file>
+						<file>Aircraft/CitationX/Models/Instruments/CDU/Procedures/SaveFlp.nas</file>
+
 				</procedures>
 				<displaypages>
 						<file>Aircraft/CitationX/Models/Instruments/CDU/DispPages/CduStart.nas</file>
