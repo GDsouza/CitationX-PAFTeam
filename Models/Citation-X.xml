@@ -1424,7 +1424,9 @@
         <object-name>LH N2</object-name>
         <object-name>RH N2</object-name>
         <object-name>APUrpm</object-name>
+        <object-name>APUrpmTest</object-name>
         <object-name>APUegt</object-name>
+        <object-name>APUegtTest</object-name>
         <object-name>APUvolts</object-name>
         <emission>
             <red>1.0</red>
@@ -1483,11 +1485,81 @@
         <type>material</type>
         <object-name>APU.test</object-name>
 					<condition>
-						<property>controls/APU/test</property> 
+						<equals>
+							<property>controls/APU/test</property> 
+							<value>1</value>
+						</equals>
 					</condition> 
-      <emission>
+	      <emission>
             <red>1.0</red>
             <green>0.0</green>
+            <blue>0.0</blue>
+        </emission>
+        <ambient>
+            <red>1</red>
+            <green>1</green>
+            <blue>1</blue>
+        </ambient>
+        <diffuse>
+            <red>1</red>
+            <green>1</green>
+            <blue>1</blue>
+        </diffuse>
+        <specular>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </specular>
+    </animation>
+
+    <animation>
+        <name>Red amb</name>
+        <type>material</type>
+        <object-name>light-R</object-name>
+					<condition>
+						<and>
+							<equals>
+								<property>controls/electric/std-by-pwr</property> 
+									<value>1</value>
+							</equals>
+                <property>controls/electric/battery-switch[0]</property>
+						</and>
+					</condition> 
+      	<emission>
+            <red>1.0</red>
+            <green>0.0</green>
+            <blue>0.0</blue>
+        </emission>
+        <ambient>
+            <red>1</red>
+            <green>0</green>
+            <blue>0</blue>
+        </ambient>
+        <diffuse>
+            <red>1</red>
+            <green>0</green>
+            <blue>0</blue>
+        </diffuse>
+        <specular>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </specular>
+    </animation>
+
+    <animation>
+        <name>Green amb</name>
+        <type>material</type>
+        <object-name>light-G</object-name>
+					<condition>
+						<equals>
+							<property>controls/electric/std-by-pwr</property> 
+								<value>-1</value>
+						</equals>
+					</condition> 
+      	<emission>
+            <red>0.0</red>
+            <green>1.0</green>
             <blue>0.0</blue>
         </emission>
         <ambient>

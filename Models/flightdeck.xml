@@ -76,6 +76,28 @@
     </text>
 
     <text>
+        <name>APUrpmTest</name>
+        <offsets>
+            <x-m>-0.876</x-m>
+            <y-m>0.700</y-m>
+            <z-m>0.517</z-m>
+        </offsets>
+        <alignment>center-center</alignment>
+        <axis-alignment>xz-plane</axis-alignment>
+        <type type="string">number-value</type>
+        <property>controls/APU/rpm-test</property>
+        <scale>1</scale>
+        <format>%3.0f</format>
+        <font>led.txf</font>
+        <character-size>0.009</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
+        </font-resolution>
+    </text>
+
+    <text>
         <name>APUegt</name>
         <offsets>
             <x-m>-0.876</x-m>
@@ -87,6 +109,28 @@
         <type type="string">number-value</type>
         <property>controls/APU/rpm</property>
         <scale>710.0</scale>
+        <format>%3.0f</format>
+        <font>led.txf</font>
+        <character-size>0.009</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
+        </font-resolution>
+    </text>
+
+    <text>
+        <name>APUegtTest</name>
+        <offsets>
+            <x-m>-0.876</x-m>
+            <y-m>0.700</y-m>
+            <z-m>0.494</z-m>
+        </offsets>
+        <alignment>center-center</alignment>
+        <axis-alignment>xz-plane</axis-alignment>
+        <type type="string">number-value</type>
+        <property>controls/APU/rpm-test</property>
+        <scale>10</scale>
         <format>%3.0f</format>
         <font>led.txf</font>
         <character-size>0.009</character-size>
@@ -143,12 +187,28 @@
         <type>select</type>
         <object-name>APUrpm</object-name>
         <object-name>APUegt</object-name>
-        <object-name>APUvolts</object-name>
         <condition>
-					<or>
             <property>controls/APU/master</property>
-						<property>controls/APU/test</property>
-					</or>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>APUrpmTest</object-name>
+        <object-name>APUegtTest</object-name>
+        <condition>
+            <property>controls/APU/test</property>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>APUvolts</object-name>
+        	<condition>
+						<or>
+            	<property>controls/APU/master</property>
+            	<property>controls/APU/test</property>
+						</or>
         </condition>
     </animation>
 
@@ -174,10 +234,10 @@
             </binding>
 						<binding>
 							<condition>
-								<not>
-                	<property>controls/APU/master</property>
-								</not>
-							</condition>
+									<not>
+	                	<property>controls/APU/master</property>
+									</not>
+						</condition>
 								<command>property-assign</command>
                 	<property>controls/APU/running</property>
                 	<value>0</value>
@@ -309,13 +369,38 @@
             <property>controls/APU/test</property>
 							<value>1</value>
         </binding>
-		    <mod-up>
+        <binding>
+            <command>property-assign</command>
+            <property>controls/APU/rpm-test</property>
+							<value>50</value>
+        </binding>
+        <binding>
+					<condition>
+						<not>
+							<property>controls/APU/master</property>
+						</not>
+					</condition>
+            <command>property-assign</command>
+            <property>controls/APU/battery</property>
+							<value>24</value>
+       </binding>
+			<mod-up>
        		<binding>
          		<command>property-assign</command>
             <property>controls/APU/test</property>
 							<value>0</value>
-       </binding>
-     </mod-up>
+        </binding>
+        <binding>
+            <command>property-assign</command>
+            <property>controls/APU/rpm-test</property>
+							<value>0</value>
+        </binding>
+        <binding>
+            <command>property-assign</command>
+            <property>controls/APU/battery</property>
+							<value>0</value>
+        </binding>
+			</mod-up>
     </action>
         <hovered>
             <binding>
@@ -327,5 +412,44 @@
             </binding>
         </hovered>
 </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>APU.bleed</object-name>
+        <property>controls/APU/bleed</property>
+        <factor>30</factor>
+        <center>
+           <x-m>-0.930</x-m>
+            <y-m>0.698</y-m>
+            <z-m>0.570</z-m>
+        </center>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>APU.bleed</object-name>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <command>property-toggle</command>
+                <property>controls/APU/bleed</property>
+            </binding>
+	       </action>
+				 <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>APU-bleed air</tooltip-id>
+                <label>APU-bleed air: %s</label>
+                <mapping>on-off</mapping>
+            <property>controls/APU/bleed</property>
+            </binding>
+        </hovered>
+    </animation>
 
 </PropertyList>

@@ -8,9 +8,7 @@
         <name>left engine int</name>
         <path>Aircraft/CitationX/Sounds/turbojet_fan_int.wav</path>
         <condition>
-            <and>
                 <property>sim/current-view/internal</property>
-            </and>
         </condition>
         <mode>looped</mode>
         <pitch>
@@ -31,9 +29,7 @@
         <name>right engine int</name>
         <path>Aircraft/CitationX/Sounds/turbojet_fan_int.wav</path>
         <condition>
-            <and>
                 <property>sim/current-view/internal</property>
-            </and>
         </condition>
         <mode>looped</mode>
         <pitch>
@@ -53,17 +49,15 @@
     <engine>
         <name>left n1</name>
         <path>Sounds/turbojet_fan.wav</path>
-                <condition>
-                    <greater-than>
-                    <property>engines/engine[0]/fan</property>
-                    <value>1</value>
-                    </greater-than>
-            <and>
-                <not>
-                    <property>sim/current-view/internal</property>
-                </not>
-            </and>
-                </condition>
+					<condition>
+						<greater-than>
+							<property>engines/engine[0]/fan</property>
+								<value>1</value>
+						</greater-than>
+						<not>
+							<property>sim/current-view/internal</property>
+						</not>
+					</condition>
             <mode>looped</mode>
         <volume>
             <property>sim/sound/volume</property>
@@ -112,6 +106,88 @@
         </position>
         <reference-dist>10.0</reference-dist>
         <max-dist>2000.0</max-dist>
+    </engine>
+
+<!-- GENERATORS -->
+
+    <engine>
+        <name>left gen</name>
+        <path>Aircraft/CitationX/Sounds/gen-start.wav</path>
+        <condition>
+					<and>
+						<property>sim/current-view/internal</property>						
+						<property>controls/electric/engine[0]/generator</property>
+            <property>controls/electric/battery-switch[0]</property>
+					</and>
+        </condition>
+        <mode>once</mode>
+        <position>
+            <x> 3.0  </x>
+            <y> 1.7 </y>
+            <z> 0.6 </z>
+        </position>
+        <reference-dist>1.0</reference-dist>
+        <max-dist>15.0</max-dist>
+    </engine>
+
+    <engine>
+        <name>left gen1</name>
+        <path>Aircraft/CitationX/Sounds/gen.wav</path>
+        <condition>
+					<and>
+						<property>sim/current-view/internal</property>						
+						<property>controls/electric/engine[0]/generator</property>
+            <property>controls/electric/battery-switch[0]</property>
+					</and>
+        </condition>
+        <mode>looped</mode>
+        <position>
+            <x> 3.0  </x>
+            <y> 1.7 </y>
+            <z> 0.6 </z>
+        </position>
+        <reference-dist>1.0</reference-dist>
+        <max-dist>15.0</max-dist>
+    </engine>
+
+    <engine>
+        <name>right gen</name>
+        <path>Aircraft/CitationX/Sounds/gen-start.wav</path>
+        <condition>
+					<and>
+						<property>sim/current-view/internal</property>						
+						<property>controls/electric/engine[1]/generator</property>
+            <property>controls/electric/battery-switch[0]</property>
+					</and>
+        </condition>
+        <mode>once</mode>
+        <position>
+            <x> 3.0  </x>
+            <y> 1.7 </y>
+            <z> 0.6 </z>
+        </position>
+        <reference-dist>1.0</reference-dist>
+        <max-dist>15.0</max-dist>
+    </engine>
+
+    <engine>
+        <name>right gen1</name>
+        <path>Aircraft/CitationX/Sounds/gen.wav</path>
+        <condition>
+					<and>
+						<property>sim/current-view/internal</property>						
+						<property>controls/electric/engine[1]/generator</property>
+            <property>controls/electric/battery-switch[0]</property>
+					</and>
+        </condition>
+        <mode>looped</mode>
+        <position>
+            <x> 3.0  </x>
+            <y> 1.7 </y>
+            <z> 0.6 </z>
+        </position>
+        <reference-dist>1.0</reference-dist>
+        <max-dist>15.0</max-dist>
     </engine>
 
 <!-- REVERSE -->
