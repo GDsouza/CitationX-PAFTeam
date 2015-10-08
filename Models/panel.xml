@@ -381,9 +381,9 @@
         <property>controls/engines/engine[0]/ignition</property>
         <factor>15</factor>
         <center>
-            <x-m>0.043</x-m>
-            <y-m>0</y-m>
-            <z-m>-0.041</z-m>
+            <x-m> 0.043 </x-m>
+            <y-m> 0.000 </y-m>
+            <z-m>-0.041 </z-m>
         </center>
         <axis>
             <x>0</x>
@@ -398,9 +398,9 @@
         <property>controls/engines/engine[1]/ignition</property>
         <factor>15</factor>
         <center>
-           <x-m>0.043</x-m>
-            <y-m>0</y-m>
-            <z-m>-0.041</z-m>
+            <x-m> 0.043 </x-m>
+            <y-m> 0.000 </y-m>
+            <z-m>-0.041 </z-m>
         </center>
         <axis>
             <x>0</x>
@@ -415,9 +415,9 @@
         <property>controls/electric/std-by-pwr</property>
         <factor>15</factor>
         <center>
-           <x-m>0.043</x-m>
-            <y-m>0</y-m>
-            <z-m>-0.041</z-m>
+            <x-m> 0.0669 </x-m>
+            <y-m>-0.1977 </y-m>
+            <z-m>-0.0646 </z-m>
         </center>
         <axis>
             <x>0</x>
