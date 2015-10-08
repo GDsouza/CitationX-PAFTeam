@@ -162,8 +162,8 @@
         </condition>
         <mode>once</mode>
         <position>
-            <x> 3.0  </x>
-            <y> 1.7 </y>
+            <x> 3.0 </x>
+            <y>-1.7 </y>
             <z> 0.6 </z>
         </position>
         <reference-dist>1.0</reference-dist>
@@ -182,8 +182,8 @@
         </condition>
         <mode>looped</mode>
         <position>
-            <x> 3.0  </x>
-            <y> 1.7 </y>
+            <x> 3.0 </x>
+            <y>-1.7 </y>
             <z> 0.6 </z>
         </position>
         <reference-dist>1.0</reference-dist>
