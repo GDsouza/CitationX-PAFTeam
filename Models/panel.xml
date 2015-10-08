@@ -116,6 +116,20 @@
     </animation>
 
     <animation>
+        <type>select</type>
+        <object-name>heater-screen</object-name>
+        <condition>
+           <and>
+        <property>controls/electric/battery-switch</property>
+            <less-than>
+        <property>controls/electric/avionics-switch</property>
+                <value>1</value>
+            </less-than>
+           </and>
+        </condition>
+    </animation>
+
+    <animation>
         <type>rotate</type>
         <object-name>Gear.lever</object-name>
         <property>controls/gear/gear-down</property>

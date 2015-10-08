@@ -190,6 +190,20 @@
         <max-dist>15.0</max-dist>
     </engine>
 
+<!-- AVIONICS-->
+
+    <avionics>
+        <name>avionics</name>
+        <path>Aircraft/CitationX/Sounds/avionics.wav</path>
+        <condition>
+        <property>controls/electric/avionics-switch</property>
+                <value>1</value>					
+        </condition>
+        <mode>once</mode>
+        <reference-dist>1.0</reference-dist>
+        <max-dist>15.0</max-dist>
+    </avionics>
+
 <!-- REVERSE -->
     <engine>
         <name>reverse</name>
