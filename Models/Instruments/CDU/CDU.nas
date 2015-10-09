@@ -38,7 +38,7 @@ var key = func(v) {
 	var destRwy = getprop("autopilot/route-manager/destination/runway");
 	var depAirport = getprop ("autopilot/route-manager/departure/airport");
 	var num = getprop("autopilot/route-manager/route/num");
-	var savePath = getprop("/sim/fg-home")~"/FlightPlans/";
+	var savePath = getprop("/sim/fg-home")~"/aircraft-data/FlightPlans/";
 	var fltPath = "";
 	var fltName = depAirport ~ "-" ~ destAirport;
 	var i = substr(cduDisplay,9,1);
@@ -102,7 +102,7 @@ var key = func(v) {
 				if (v == "B3R") {ligne = "R[5]"}
 				if (getprop("instrumentation/cdu/"~ligne) !="") {
 					fltName = getprop("instrumentation/cdu/"~ligne);
-					fltPath = savePath ~ fltName;
+					fltPath = savePath ~ fltName~".xml";
 					setprop("autopilot/route-manager/file-path",fltPath);
 					setprop("autopilot/route-manager/input","@LOAD");							
 					setprop("autopilot/route-manager/input","@ACTIVATE");	
@@ -398,12 +398,14 @@ var key = func(v) {
 					cduDisplay = "FLT-PLAN[1]";
 				}
 				if (cduDisplay == "FLT-PLAN[1]"or cduDisplay == "FLT-PLAN[2]" or cduDisplay == "FLT-PLAN[3]" or cduDisplay == "FLT-PLAN[4]") {
-					if (getprop("instrumentation/cdu/R[4]") == " DEST" and cduInput == "*DELETE*") {
+					if (getprop("instrumentation/cdu/R[4]") == "DEST " and cduInput == "*DELETE*") {
 							setprop("autopilot/route-manager/destination/airport","");
 							cduInput = "";
 							cduDisplay = "FLT-PLAN[0]";
-					} else if (getprop("instrumentation/cdu/R[4]") == " DEST" or cduInput == "*LAST WAYPOINT*") {
-							cduInput = destAirport;
+					} else if (getprop("instrumentation/cdu/R[4]") == "DEST " or cduInput == "*LAST WAYPOINT*") {
+							if (getprop("autopilot/route-manager/destination/runway")=="") {
+								cduInput = "*NO DEST RUNWAY";
+							} else {cduInput = destAirport}
 					}	else {
 							if (cduDisplay == "FLT-PLAN[1]") {var ind = 2}					
 							if (cduDisplay == "FLT-PLAN[2]") {var ind = 5}
@@ -416,20 +418,22 @@ var key = func(v) {
 					if (depAirport == ""){
 						cduInput = "*NO DEPT AIRPORT*";
 					}
-					if (getprop("autopilot/route-manager/departure/runway") == "") {
+					else if (getprop("autopilot/route-manager/departure/runway")=="") {
 						cduInput = "*NO DEPT RUNWAY*";
-					} else if (getprop("autopilot/route-manager/destination/runway") == "") {
+					} 
+					else if (getprop("autopilot/route-manager/destination/runway")=="") {
 						cduInput = "*NO DEST RUNWAY*";
 					}
-					if (!getprop("autopilot/route-manager/active")) {
+					else if (!getprop("autopilot/route-manager/active")) {
 						cduInput = "*PLAN NOT ACTIVATED*";
 					}
 					else {										
-						fltName = cduInput;
+						fltName = cduInput~".xml";
 						fltPath = savePath ~ fltName;
 						setprop("autopilot/route-manager/file-path",fltPath);
-						setprop("autopilot/route-manager/input","@SAVE");
-#						procedures.saveFlp.new(cduInput);						
+						setprop("autopilot/route-manager/input","@SAVE");				
+						correctFlp(fltName);  # correction flightplan (bug Fg)#
+						setprop("autopilot/route-manager/flight-plan",cduInput);
 						cduInput = "";
 					}
 				}
@@ -688,6 +692,21 @@ var insertWayp = func(ind,cduInput,alt) {
 		setprop("autopilot/route-manager/input","@INSERT" ~ind~ ":" ~wpt~ "@" ~cduInput);
 		setprop("autopilot/route-manager/input","@DELETE"~(ind+1));
 		}
+}
+
+var correctFlp = func(fltName) {
+	var filename = getprop("/sim/fg-home")~"/aircraft-data/FlightPlans/"~fltName;
+	var data = io.read_properties(filename);
+	var wpt = data.getValues().route.wp;
+	var wps = data.getChild("route").getChildren();
+	for (var n=1;n<size(wpt)-1;n+=1) {
+		foreach(var name;keys(wpt[n])) {
+			if (name == "departure" or name =="approach") {
+				wps[n].setBoolValue(name,0);
+			}
+		}
+	}
+	io.write_properties(filename,data);
 }
 
 var delete = func {

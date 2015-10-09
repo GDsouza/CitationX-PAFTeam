@@ -21,12 +21,12 @@ var fltList = func(display) {
 		DspL.line7l = "< FLT PLAN";
 		forindex(ind;xfile) {		
 				var n = ind-(6*nrPage);	
-				if(n==0) {DspL.line2l = xfile[ind]};
-				if(n==1) {DspL.line4l = xfile[ind]};
-				if(n==2) {DspL.line6l = xfile[ind]};
-				if(n==3) {DspR.line2r = xfile[ind]};
-				if(n==4) {DspR.line4r = xfile[ind]};
-				if(n==5) {DspR.line6r = xfile[ind]};			
+				if(n==0) {DspL.line2l = left(xfile[ind],size(xfile[ind])-4)};
+				if(n==1) {DspL.line4l = left(xfile[ind],size(xfile[ind])-4)};
+				if(n==2) {DspL.line6l = left(xfile[ind],size(xfile[ind])-4)};
+				if(n==3) {DspR.line2r = left(xfile[ind],size(xfile[ind])-4)};
+				if(n==4) {DspR.line4r = left(xfile[ind],size(xfile[ind])-4)};
+				if(n==5) {DspR.line6r = left(xfile[ind],size(xfile[ind])-4)};
 		}
 	cdu.DspSet(page,DspL,DspR);
 }

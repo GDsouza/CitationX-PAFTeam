@@ -225,6 +225,10 @@
                 <property>controls/APU/master</property>
             </binding>
 						<binding>
+            	<command>property-toggle</command>
+            	<property>sim/sound/click</property>
+						</binding>
+						<binding>
 							<condition>
                 <property>controls/APU/master</property>
 							</condition>
@@ -291,6 +295,10 @@
                 <command>property-toggle</command>
                 <property>controls/APU/off-start-run</property>
  	          </binding>
+						<binding>
+            	<command>property-toggle</command>
+            	<property>sim/sound/click</property>
+						</binding>
             <binding>
 							<condition>
 								<and>
@@ -440,6 +448,10 @@
                 <command>property-toggle</command>
                 <property>controls/APU/bleed</property>
             </binding>
+						<binding>
+            	<command>property-toggle</command>
+            	<property>sim/sound/click</property>
+						</binding>
 	       </action>
 				 <hovered>
             <binding>
