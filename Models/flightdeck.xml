@@ -292,8 +292,9 @@
             <button>0</button>
             <repeatable>false</repeatable>
             <binding>
-                <command>property-toggle</command>
-                <property>controls/APU/off-start-run</property>
+                <command>property-assign</command>
+                <property>controls/APU/start-stop</property>
+									<value>1.0</value>
  	          </binding>
 						<binding>
             	<command>property-toggle</command>
@@ -303,43 +304,96 @@
 							<condition>
 								<and>
 									<property>controls/APU/master</property>
-									<property>controls/APU/off-start-run</property>
+									<property>controls/APU/start-stop</property>
 								</and>
 							</condition>
               <command>property-assign</command>
                 <property>controls/APU/running</property>
                 <value>1</value>
             </binding>
+					<mod-up>
+			       <binding>
+         				<command>property-assign</command>
+         					<property>controls/APU/start-stop</property>
+         						<value>0</value>
+       				</binding>
+     			</mod-up>
+       </action>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>APU.on</object-name>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
             <binding>
-							<condition>
-									<not>
-										<property>controls/APU/off-start-run</property>
-									</not>
-							</condition>
-							<command>property-assign</command>
-                <property>controls/APU/off-start-run</property>
-                <value>0</value>
+                <command>property-assign</command>
+                <property>controls/APU/start-stop</property>
+									<value>1.0</value>
+ 	          </binding>
+						<binding>
+            	<command>property-toggle</command>
+            	<property>sim/sound/click</property>
 						</binding>
             <binding>
 							<condition>
-									<not>
-										<property>controls/APU/off-start-run</property>
-									</not>
+								<and>
+									<property>controls/APU/master</property>
+									<property>controls/APU/start-stop</property>
+								</and>
 							</condition>
+              <command>property-assign</command>
+                <property>controls/APU/running</property>
+                <value>1</value>
+            </binding>
+					<mod-up>
+			       <binding>
+         				<command>property-assign</command>
+         					<property>controls/APU/start-stop</property>
+         						<value>0</value>
+       				</binding>
+     			</mod-up>
+       </action>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>APU.off</object-name>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <command>property-assign</command>
+                <property>controls/APU/start-stop</property>
+									<value>-1</value>
+ 	          </binding>
+						<binding>
+            	<command>property-toggle</command>
+            	<property>sim/sound/click</property>
+						</binding>
+            <binding>
               <command>property-assign</command>
                 <property>controls/APU/running</property>
                 <value>false</value>
             </binding> 
+					<mod-up>
+			       <binding>
+         				<command>property-assign</command>
+         					<property>controls/APU/start-stop</property>
+         						<value>0</value>
+       				</binding>
+     			</mod-up>
        </action>
     </animation>
 
     <animation>
         <type>rotate</type>
         <object-name>APU.on_off</object-name>
-        <property>controls/APU/off-start-run</property>
+        <property>controls/APU/start-stop</property>
         <factor>30</factor>
         <center>
-           <x-m>-0.892</x-m>
+           <x-m>-0.830</x-m>
             <y-m>0.698</y-m>
             <z-m>0.434</z-m>
         </center>

@@ -774,7 +774,7 @@
 	    <path>Aircraft/CitationX/Sounds/apu_start.wav</path>
 	    <condition>
 		<and>
-		    <property>controls/APU/off-start-run</property>
+		    <property>controls/APU/start-stop</property>
 		    <greater-than>
 			<property>controls/APU/rpm</property>
 			<value>0</value>
@@ -808,7 +808,7 @@
 	    <condition>
 		<and>
 		    <not>
-			<property>controls/APU/off-start-run</property>
+			<property>controls/APU/start-stopgg</property>
 		    </not>
 		    <greater-than>
 			<property>controls/APU/rpm</property>

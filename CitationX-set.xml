@@ -630,7 +630,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
             <master type="bool">0</master>
             <battery type="double">0</battery>
             <running type="bool">0</running>
-            <off-start-run type="int">0</off-start-run>
+            <start-stop type="double">0</start-stop>
 						<test type="bool">0</test>
 						<bleed type="bool">0</bleed>
         </APU>
