@@ -1451,6 +1451,41 @@
     </animation>
 
     <animation>
+        <name>orange illum</name>
+        <type>material</type>
+        <object-name>APUready</object-name>
+					<condition>
+						<or>
+							<equals>
+								<property>controls/APU/rpm</property> 
+								<value>1</value>
+							</equals>
+							<property>controls/APU/test</property> 
+						</or>
+					</condition> 
+	      <emission>
+            <red>1.0</red>
+            <green>0.4</green>
+            <blue>0.0</blue>
+        </emission>
+        <ambient>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </ambient>
+        <diffuse>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </diffuse>
+        <specular>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </specular>
+    </animation>
+
+    <animation>
         <name>white amb</name>
         <type>material</type>
         <object-name>CoPilot-reg</object-name>
@@ -1481,7 +1516,7 @@
     </animation>
 
     <animation>
-        <name>Red amb</name>
+        <name>Red illum</name>
         <type>material</type>
         <object-name>APU.test</object-name>
 					<condition>
@@ -1496,14 +1531,14 @@
             <blue>0.0</blue>
         </emission>
         <ambient>
-            <red>1</red>
-            <green>1</green>
-            <blue>1</blue>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
         </ambient>
         <diffuse>
-            <red>1</red>
-            <green>1</green>
-            <blue>1</blue>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
         </diffuse>
         <specular>
             <red>0</red>
@@ -1513,7 +1548,7 @@
     </animation>
 
     <animation>
-        <name>Red amb</name>
+        <name>Red illum</name>
         <type>material</type>
         <object-name>light-R</object-name>
 					<condition>
@@ -1531,12 +1566,12 @@
             <blue>0.0</blue>
         </emission>
         <ambient>
-            <red>1</red>
+            <red>0</red>
             <green>0</green>
             <blue>0</blue>
         </ambient>
         <diffuse>
-            <red>1</red>
+            <red>0</red>
             <green>0</green>
             <blue>0</blue>
         </diffuse>
@@ -1548,7 +1583,7 @@
     </animation>
 
     <animation>
-        <name>Green amb</name>
+        <name>Green illum</name>
         <type>material</type>
         <object-name>light-G</object-name>
 					<condition>
@@ -1563,14 +1598,14 @@
             <blue>0.0</blue>
         </emission>
         <ambient>
-            <red>1</red>
-            <green>1</green>
-            <blue>1</blue>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
         </ambient>
         <diffuse>
-            <red>1</red>
-            <green>1</green>
-            <blue>1</blue>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
         </diffuse>
         <specular>
             <red>0</red>
