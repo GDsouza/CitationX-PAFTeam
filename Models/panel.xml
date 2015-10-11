@@ -2116,7 +2116,7 @@
 
 
 <!-- MATERIALS -->
-
+<!--                  dans Citation-x.xml
     <animation>
         <name>orange illum</name>
         <type>material</type>
@@ -2176,5 +2176,5 @@
             <blue>0</blue>
         </specular>
     </animation>
-
+-->
 </PropertyList>

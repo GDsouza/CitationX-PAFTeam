@@ -773,56 +773,57 @@
 	    <mode>once</mode>
 	    <path>Aircraft/CitationX/Sounds/apu_start.wav</path>
 	    <condition>
-		<and>
-		    <property>controls/APU/start-stop</property>
-		    <greater-than>
-			<property>controls/APU/rpm</property>
-			<value>0</value>
-		    </greater-than>
-		    <less-than>
-			<property>controls/APU/rpm</property>
-			<value>99</value>
-		    </less-than>
-		</and>
+				<and>
+					<property>controls/APU/running</property>
+			    <less-than>
+						<property>controls/APU/rpm</property>
+							<value>0.99</value>
+		    	</less-than>
+				</and>
 	    </condition>
 	    <reference-dist>10</reference-dist>
 	    <max-dist>30</max-dist>
 	</apu>
+
 	<apu>
 	    <name>APU running</name>
 	    <mode>looped</mode>
 	    <path>Aircraft/CitationX/Sounds/apu_run.wav</path>
 	    <condition>
-		<greater-than-equals>
-		    <property>controls/APU/rpm</property>
-		    <value>99</value>
-		</greater-than-equals>
+				<and>
+					<greater-than-equals>
+			    	<property>controls/APU/rpm</property>
+			    		<value>0.99</value>
+					</greater-than-equals>
+					<less-than>
+	           <property>engines/engine[0]/turbine</property>
+							<value>73</value>
+					</less-than>
+				</and>
 	    </condition>
 	    <reference-dist>10</reference-dist>
 	    <max-dist>30</max-dist>
 	</apu>
+
 	<apu>
 	    <name>APU shutdown</name>
 	    <mode>once</mode>
 	    <path>Aircraft/CitationX/Sounds/apu_shutdown.wav</path>
 	    <condition>
-		<and>
-		    <not>
-			<property>controls/APU/start-stopgg</property>
-		    </not>
-		    <greater-than>
-			<property>controls/APU/rpm</property>
-			<value>0</value>
-		    </greater-than>
-		    <less-than>
-			<property>controls/APU/rpm</property>
-			<value>99</value>
-		    </less-than>
-		</and>
+				<and>
+					<not>
+						<property>controls/APU/running</property>
+					</not>
+				  <greater-than>
+						<property>controls/APU/rpm</property>
+							<value>0</value>
+				  </greater-than>
+				</and>
 	    </condition>
 	    <reference-dist>10</reference-dist>
 	    <max-dist>30</max-dist>
 	</apu>
+-->
 </fx>
 
 </PropertyList>

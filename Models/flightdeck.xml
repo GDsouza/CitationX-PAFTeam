@@ -65,7 +65,7 @@
         <type type="string">number-value</type>
         <property>controls/APU/rpm</property>
         <scale>100.0</scale>
-        <format>%3.1f</format>
+        <format>%3.0f</format>
         <font>led.txf</font>
         <character-size>0.009</character-size>
         <character-aspect-ratio type="double">1.0</character-aspect-ratio>
@@ -210,7 +210,12 @@
         <object-name>APUrpm</object-name>
         <object-name>APUegt</object-name>
         <condition>
+					<and>
             <property>controls/APU/master</property>
+							<not>
+            		<property>controls/APU/test</property>
+							</not>
+					</and>
         </condition>
     </animation>
 
@@ -238,13 +243,18 @@
         <type>select</type>
         <object-name>APUready</object-name>
         	<condition>
-						<or>
+						<and>
+							<not>
+								<property>controls/electric/APU-generator</property> 
+							</not>
+							<or>
 							<equals>
             		<property>controls/APU/rpm</property>
 									<value>1</value>
 							</equals>
             	<property>controls/APU/test</property>
 						</or>
+					</and>
         </condition>
     </animation>
 
@@ -270,7 +280,7 @@
 							</condition>
 								<command>property-assign</command>
                 <property>controls/APU/battery</property>
-                <value>28</value>
+                <value>24</value>
             </binding>
 						<binding>
 							<condition>
@@ -355,6 +365,16 @@
        				</binding>
      			</mod-up>
        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>APU-start-stop</tooltip-id>
+                <label>APU-start-stop: %s</label>
+                <mapping>heading</mapping>
+            <property>controls/APU/start-stop</property>
+            </binding>
+        </hovered>
+
     </animation>
 
     <animation>
@@ -413,6 +433,16 @@
                 <property>controls/APU/running</property>
                 <value>false</value>
             </binding> 
+            <binding>
+              <command>property-assign</command>
+                <property>controls/electric/APU-generator</property>
+                <value>false</value>
+            </binding> 
+            <binding>
+              <command>property-assign</command>
+                <property>controls/APU/battery</property>
+                <value>24</value>
+            </binding> 
 					<mod-up>
 			       <binding>
          				<command>property-assign</command>
@@ -452,10 +482,10 @@
         </axis>
     </animation>
 
-<animation>
-    <type>pick</type>
-    <object-name>APU.test</object-name>
-    <action>
+		<animation>
+    	<type>pick</type>
+    	<object-name>APU.test</object-name>
+   		<action>
         <button>0</button>
         <repeatable>false</repeatable>
         <binding>
@@ -494,13 +524,18 @@
 							<value>0</value>
         </binding>
         <binding>
-            <command>property-assign</command>
-            <property>controls/APU/battery</property>
-							<value>0</value>
+					<condition> 
+						<not>
+							<property>controls/APU/master</property>					
+						</not>
+					</condition>
+			      <command>property-assign</command>
+            	<property>controls/APU/battery</property>
+								<value>0</value>
         </binding>
 			</mod-up>
-    </action>
-        <hovered>
+    		</action>
+        	<hovered>
             <binding>
                 <command>set-tooltip</command>
                 <tooltip-id>APU.test</tooltip-id>
@@ -509,7 +544,71 @@
             		<property>controls/APU/test</property>
             </binding>
         </hovered>
-</animation>
+		</animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>APU.gen</object-name>
+        <property>controls/electric/APU-generator</property>
+        <factor>30</factor>
+        <center>
+           <x-m>-0.830</x-m>
+            <y-m>0.698</y-m>
+            <z-m>0.570</z-m>
+        </center>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>APU.gen</object-name>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <command>property-toggle</command>
+                <property>controls/electric/APU-generator</property>
+            </binding>
+						<binding>
+            	<command>property-toggle</command>
+            	<property>sim/sound/click</property>
+						</binding>
+						<binding>
+							<condition>
+								<greater-than> 
+               		<property>controls/APU/rpm</property>
+										<value>0.99</value>
+								</greater-than>	
+							</condition>
+							<command>property-assign</command>
+                <property>controls/APU/battery</property>
+                <value>28</value>
+            </binding>
+						<binding>
+							<condition>
+									<not>
+	                	<property>controls/electric/APU-generator</property>
+									</not>
+						</condition>
+								<command>property-assign</command>
+                	<property>controls/APU/battery</property>
+                	<value>24</value>
+						</binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>APU-gen</tooltip-id>
+                <label>APU-generator: %s</label>
+                <mapping>on-off</mapping>
+            <property>controls/electric/APU-generator</property>
+            </binding>
+        </hovered>
+    </animation>
 
     <animation>
         <type>rotate</type>
@@ -529,29 +628,70 @@
     </animation>
 
     <animation>
-        <type>pick</type>
-        <object-name>APU.bleed</object-name>
-        <action>
-            <button>0</button>
-            <repeatable>false</repeatable>
-            <binding>
-                <command>property-toggle</command>
-                <property>controls/APU/bleed</property>
-            </binding>
-						<binding>
-            	<command>property-toggle</command>
-            	<property>sim/sound/click</property>
-						</binding>
-	       </action>
-				 <hovered>
-            <binding>
-                <command>set-tooltip</command>
-                <tooltip-id>APU-bleed air</tooltip-id>
-                <label>APU-bleed air: %s</label>
-                <mapping>on-off</mapping>
-            <property>controls/APU/bleed</property>
-            </binding>
-        </hovered>
+			<type>pick</type>
+			<object-name>APU.bleed</object-name>
+			<action>
+				<button>0</button>
+				<repeatable>false</repeatable>
+				<binding>
+					<command>property-adjust</command>
+						<property>controls/APU/bleed</property>
+							<step>1</step>
+							<min>0</min>
+							<max>2</max>
+							<wrap>false</wrap>
+				</binding>
+				<binding>
+					<condition>
+						<equals>
+							<property>controls/APU/bleed</property>
+								<value>2</value>
+						</equals>
+					</condition>
+					<command>property-assign</command>
+						<property>controls/APU/bleed-max</property>
+							<value>1</value>					
+				</binding>
+				<binding>
+					<condition>
+						<equals>
+							<property>controls/APU/bleed</property>
+								<value>0</value>
+						</equals>
+					</condition>
+					<command>property-assign</command>
+						<property>controls/APU/bleed-max</property>
+							<value>0</value>					
+				</binding>
+<!--				<binding>
+					<command>property-adjust</command>
+						<condition>
+							<equals>
+								<property>controls/APU/bleed-max</property>	
+									<value>1</value>
+							</equals>
+						</condition>
+							<property>controls/APU/bleed</property>
+							<step>-1</step>
+							<max>2</max>
+							<min>0</min>
+							<wrap>false</wrap>
+				</binding>
+-->
+				<binding>
+					<command>property-toggle</command>
+						<property>sim/sound/click</property>
+				</binding>
+			</action>
+			<hovered>
+				<binding>
+					<command>set-tooltip</command>
+						<tooltip-id>APU-bleed air</tooltip-id>
+						<label>APU-bleed air: %s</label>
+						<mapping>heading</mapping>
+						<property>controls/APU/bleed</property>
+				</binding>
+			</hovered>
     </animation>
 
 </PropertyList>
