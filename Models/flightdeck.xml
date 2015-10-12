@@ -587,6 +587,9 @@
 							<command>property-assign</command>
                 <property>controls/APU/battery</property>
                 <value>28</value>
+							<command>property-assign</command>
+                <property>systems/electrical/left-emer-bus</property>
+                <value>0</value>
             </binding>
 						<binding>
 							<condition>

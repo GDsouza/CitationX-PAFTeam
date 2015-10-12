@@ -119,12 +119,11 @@
         <type>select</type>
         <object-name>heater-screen</object-name>
         <condition>
-           <and>
-        <property>controls/electric/battery-switch</property>
-            <less-than>
-        <property>controls/electric/avionics-switch</property>
-                <value>1</value>
-            </less-than>
+					<and>
+						<property>controls/electric/battery-switch[1]</property>
+            <not>
+							<property>controls/electric/avionics-switch</property>
+						</not>
            </and>
         </condition>
     </animation>
@@ -246,10 +245,10 @@
         <type>select</type>
         <object-name>Bus1.norm</object-name>
         <condition>
-            <greater-than>
-                <property>systems/electrical/left-bus</property>
-                <value>5</value>
-            </greater-than>
+					<and>
+						<property>systems/electrical/left-bus-norm</property>
+						<property>controls/electric/battery-switch[0]</property>
+					</and>
         </condition>
     </animation>
 
@@ -257,10 +256,10 @@
         <type>select</type>
         <object-name>Bus1.emer</object-name>
         <condition>
-            <greater-than>
-                <property>systems/electrical/left-emer-bus</property>
-                <value>5</value>
-            </greater-than>
+					<and>
+	          <property>systems/electrical/left-emer-bus</property>
+						<property>controls/electric/battery-switch[0]</property>
+					</and>
         </condition>
     </animation>
 
@@ -268,10 +267,10 @@
         <type>select</type>
         <object-name>Bus2.norm</object-name>
         <condition>
-            <greater-than>
-                <property>systems/electrical/right-bus</property>
-                <value>5</value>
-            </greater-than>
+					<and>
+						<property>systems/electrical/right-bus-norm</property>
+						<property>controls/electric/battery-switch[1]</property>
+					</and>
         </condition>
     </animation>
 
@@ -279,10 +278,10 @@
         <type>select</type>
         <object-name>Bus2.emer</object-name>
         <condition>
-            <greater-than>
-                <property>systems/electrical/right-emer-bus</property>
-                <value>5</value>
-            </greater-than>
+					<and>
+	          <property>systems/electrical/right-emer-bus</property>
+						<property>controls/electric/battery-switch[1]</property>
+					</and>
         </condition>
     </animation>
 
@@ -298,9 +297,31 @@
         <type>select</type>
         <object-name>Xtie.clsd</object-name>
         <condition>
+					<and>
+						<property>controls/electric/battery-switch[0]</property>
             <not>
                 <property>systems/electrical/xtie</property>
             </not>
+					</and>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>Xpower.avail</object-name>
+        <condition>
+					<and>
+						<property>controls/electric/APU-generator</property>
+						<property>controls/electric/external-power</property>
+					</and>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>Xpower.on</object-name>
+        <condition>
+          <property>controls/electric/external-power</property>
         </condition>
     </animation>
 
@@ -557,12 +578,16 @@
         <action>
             <button>0</button>
             <binding>
-                <command>property-toggle</command>
-                <property>controls/electric/battery-switch[0]</property>
+               <command>property-toggle</command>
+               <property>controls/electric/battery-switch[0]</property>
             </binding>
-        <binding>
-            <command>property-toggle</command>
-            <property>sim/sound/click</property>
+						<binding>
+							<command>nasal</command>
+							<script>citation.batt_switch();</script>
+						</binding>
+        		<binding>
+            	<command>property-toggle</command>
+            	<property>sim/sound/click</property>
         </binding>
         </action>
         <hovered>
@@ -582,9 +607,13 @@
         <action>
             <button>0</button>
             <binding>
-                <command>property-toggle</command>
+              <command>property-toggle</command>
                 <property>controls/electric/battery-switch[1]</property>
             </binding>
+						<binding>
+							<command>nasal</command>
+							<script>citation.batt_switch();</script>
+						</binding>
         <binding>
             <command>property-toggle</command>
             <property>sim/sound/click</property>
@@ -774,6 +803,115 @@
         </hovered>
 	</animation>
 
+
+	<animation>
+    <type>pick</type>
+    <object-name>LHstarter</object-name>
+    <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+        </binding>
+				<binding>
+					<condition>
+						<and>
+       				<property>controls/engines/engine[0]/ignition</property>
+       				<property>systems/electrical/left-bus-norm</property>							
+						</and>
+					</condition>
+       		<command>property-assign</command>
+       			<property>controls/engines/engine[0]/starter</property>
+       				<value>1</value>
+				</binding>
+				<mod-up>
+					<binding>
+						<command>property-assign</command>
+							<property>controls/engines/engine[0]/starter</property>
+							<value>0</value>
+					</binding>
+				</mod-up>
+		</action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>LH-starter</tooltip-id>
+                <label>LH Starter: %s</label>
+                <mapping>push</mapping>
+            <property>controls/engines/engine[0]/starter</property>
+            </binding>
+        </hovered>
+	</animation>
+
+	<animation>
+    <type>pick</type>
+    <object-name>RHstarter</object-name>
+    <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+        </binding>
+				<binding>
+					<condition>
+						<and>
+       				<property>controls/engines/engine[1]/ignition</property>
+       				<property>systems/electrical/left-bus-norm</property>							
+						</and>
+					</condition>
+       		<command>property-assign</command>
+       			<property>controls/engines/engine[1]/starter</property>
+       				<value>1</value>
+				</binding>
+				<mod-up>
+					<binding>
+						<command>property-assign</command>
+							<property>controls/engines/engine[1]/starter</property>
+							<value>0</value>
+					</binding>
+				</mod-up>
+    </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>RH-starter</tooltip-id>
+                <label>RH Starter: %s</label>
+                <mapping>push</mapping>
+            <property>controls/engines/engine[1]/starter</property>
+            </binding>
+        </hovered>
+	</animation>
+
+	<animation>
+    <type>pick</type>
+    <object-name>Ext.power</object-name>
+    <object-name>Xpower.on</object-name>
+    <object-name>Xpower.avail</object-name>
+    <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+        </binding>
+     <binding>
+       <command>property-toggle</command>
+       <property>controls/electric/external-power</property>
+     </binding>
+    </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>Ext-pwr</tooltip-id>
+                <label>Ext-pwr: %s</label>
+                <mapping>on-off</mapping>
+            		<property>controls/electric/external-power</property>
+            </binding>
+        </hovered>
+</animation>
+
 	<animation>
     <type>pick</type>
     <object-name>std.by.pwr</object-name>
@@ -812,74 +950,6 @@
             </binding>
         </hovered>
 	</animation>
-
-<animation>
-    <type>pick</type>
-    <object-name>LHstarter</object-name>
-    <action>
-        <button>0</button>
-        <repeatable>false</repeatable>
-        <binding>
-            <command>property-toggle</command>
-            <property>sim/sound/click</property>
-        </binding>
-     <binding>
-       <command>property-assign</command>
-       <property>controls/engines/engine[0]/starter</property>
-       <value>1</value>
-     </binding>
-     <mod-up>
-       <binding>
-         <command>property-assign</command>
-         <property>controls/engines/engine[0]/starter</property>
-         <value>0</value>
-       </binding>
-     </mod-up>
-    </action>
-        <hovered>
-            <binding>
-                <command>set-tooltip</command>
-                <tooltip-id>LH-starter</tooltip-id>
-                <label>LH Starter: %s</label>
-                <mapping>push</mapping>
-            <property>controls/engines/engine[0]/starter</property>
-            </binding>
-        </hovered>
-</animation>
-
-<animation>
-    <type>pick</type>
-    <object-name>RHstarter</object-name>
-    <action>
-        <button>0</button>
-        <repeatable>false</repeatable>
-        <binding>
-            <command>property-toggle</command>
-            <property>sim/sound/click</property>
-        </binding>
-     <binding>
-       <command>property-assign</command>
-       <property>controls/engines/engine[1]/starter</property>
-       <value>1</value>
-     </binding>
-     <mod-up>
-       <binding>
-         <command>property-assign</command>
-         <property>controls/engines/engine[1]/starter</property>
-         <value>0</value>
-       </binding>
-     </mod-up>
-    </action>
-        <hovered>
-            <binding>
-                <command>set-tooltip</command>
-                <tooltip-id>RH-starter</tooltip-id>
-                <label>RH Starter: %s</label>
-                <mapping>push</mapping>
-            <property>controls/engines/engine[1]/starter</property>
-            </binding>
-        </hovered>
-</animation>
 
 <animation>
     <type>pick</type>
