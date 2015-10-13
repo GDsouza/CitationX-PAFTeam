@@ -345,13 +345,18 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
         </signal>
         <signal>
           <type>float</type>
-	  <property type="string">/surface-positions/reverser-norm[%i]</property>
+	 				 <property type="string">/surface-positions/reverser-norm[%i]</property>
         </signal>
         <signal>
           <type>float</type>
           <property type="string">/controls/cabin-door/position-norm</property>
         </signal>
-      </config>
+        <signal>
+          <type>float</type>
+          <property type="string">surface-positions/slat-pos-norm</property>
+        </signal>
+
+     </config>
     </flight-recorder>
 
     <color-set>
