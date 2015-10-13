@@ -1,8 +1,9 @@
 AC3Db
 MATERIAL "panel" rgb 0.8 0.8 0.8  amb 1 1 1  emis 0.1 0.1 0.1  spec 1 1 1  shi 50  trans 0
 MATERIAL "LABELS" rgb 1 1 1  amb 1 1 1  emis 0.1 0.1 0.1  spec 0 0 0  shi 1  trans 0
+MATERIAL "LABELS" rgb 1 1 1  amb 1 1 1  emis 0 0 0  spec 0.1 0.1 0.1  shi 1  trans 1
 OBJECT world
-kids 195
+kids 197
 OBJECT poly
 name "AVN.switch"
 loc 0.040556 -0.043292 0.289801
@@ -108651,4 +108652,39 @@ refs 3
 7 0 0
 8 0 0
 0 0 0
+kids 0
+OBJECT poly
+name "stdby_pwr.on"
+crease 45.000000
+numvert 4
+0.0669029 -0.0623913 0.18724
+0.0669029 -0.0623913 0.207222
+0.0556383 -0.0515824 0.207222
+0.0556383 -0.0515824 0.18724
+numsurf 1
+SURF 0x10
+mat 2
+refs 4
+3 0 1
+2 1 1
+1 1 0
+0 0 0
+kids 0
+OBJECT poly
+name "stdby_pwr.test"
+loc 0.016677 -0.0168712 0
+crease 45.000000
+numvert 4
+0.0511298 -0.0481331 0.18724
+0.0511298 -0.0481331 0.207222
+0.0615071 -0.0582426 0.207222
+0.0615071 -0.0582426 0.18724
+numsurf 1
+SURF 0x10
+mat 2
+refs 4
+0 0 1
+1 1 1
+2 1 0
+3 0 0
 kids 0

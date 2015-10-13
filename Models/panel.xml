@@ -780,6 +780,7 @@
 	<animation>
     <type>pick</type>
     <object-name>std.by.pwr</object-name>
+    <object-name>stdby_pwr.on</object-name>
     <action>
 				<button>0</button>
         <repeatable>false</repeatable>
@@ -803,6 +804,44 @@
         </hovered>
 	</animation>
 
+	<animation>
+    <type>pick</type>
+    <object-name>stdby_pwr.test</object-name>
+    <action>
+				<button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+      		<condition>
+						<not>
+           		<property>controls/electric/std-by-pwr</property>
+						</not>
+        	</condition>
+					<command>property-assign</command>
+						<property>controls/electric/std-by-pwr</property>
+							<value>-1</value>
+        </binding>
+        <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+        </binding>
+			<mod-up>
+       <binding>
+         <command>property-assign</command>
+         <property>controls/electric/std-by-pwr</property>
+         <value>0</value>
+       </binding>
+     </mod-up>
+    </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>std.by.pwr</tooltip-id>
+                <label>Stdby Pwr test: %s</label>
+                <mapping>on-off</mapping>
+            <property>controls/electric/std-by-pwr</property>
+            </binding>
+        </hovered>
+	</animation>
 
 	<animation>
     <type>pick</type>
@@ -911,45 +950,6 @@
             </binding>
         </hovered>
 </animation>
-
-	<animation>
-    <type>pick</type>
-    <object-name>std.by.pwr</object-name>
-    <action>
-				<button>1</button>
-        <repeatable>false</repeatable>
-        <binding>
-      		<condition>
-						<not>
-           		<property>controls/electric/std-by-pwr</property>
-						</not>
-        	</condition>
-					<command>property-assign</command>
-						<property>controls/electric/std-by-pwr</property>
-							<value>-1</value>
-        </binding>
-        <binding>
-            <command>property-toggle</command>
-            <property>sim/sound/click</property>
-        </binding>
-			<mod-up>
-       <binding>
-         <command>property-assign</command>
-         <property>controls/electric/std-by-pwr</property>
-         <value>0</value>
-       </binding>
-     </mod-up>
-    </action>
-        <hovered>
-            <binding>
-                <command>set-tooltip</command>
-                <tooltip-id>std.by.pwr</tooltip-id>
-                <label>Stdby Pwr: %s</label>
-                <mapping>on-off</mapping>
-            <property>controls/electric/std-by-pwr</property>
-            </binding>
-        </hovered>
-	</animation>
 
 <animation>
     <type>pick</type>

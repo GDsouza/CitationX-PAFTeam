@@ -175,7 +175,29 @@
 				<text type="string">READY TO LOAD</text>
         <format>%s</format>
         <font>helvetica_bold.txf</font>
-        <character-size>0.0036</character-size>
+        <character-size>0.0034</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
+        </font-resolution>
+				<kerning>none</kerning>
+    </text>
+
+    <text>
+        <name>APUbleed</name>
+        <offsets>
+            <x-m>-0.875</x-m>
+            <y-m>0.698</y-m>
+            <z-m>0.571</z-m>
+        </offsets>
+        <alignment>center-center</alignment>
+        <axis-alignment>xz-plane</axis-alignment>
+        <type type="string">literal</type>
+				<text type="string">BLEED VALVE OPEN</text>
+        <format>%s</format>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.0031</character-size>
         <character-aspect-ratio type="double">1.0</character-aspect-ratio>
         <font-resolution>
             <width type="int">64</width>
@@ -255,6 +277,26 @@
             	<property>controls/APU/test</property>
 						</or>
 					</and>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>APUbleed</object-name>
+        	<condition>
+						<or>
+							<and>
+								<greater-than>
+									<property>controls/APU/bleed</property> 
+										<value>0</value>
+								</greater-than>
+								<equals>
+  	          		<property>controls/APU/rpm</property>
+										<value>1</value>
+								</equals>
+							</and>
+            	<property>controls/APU/test</property>
+						</or>
         </condition>
     </animation>
 

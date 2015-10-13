@@ -608,7 +608,15 @@
         <name>chime1</name>
         <type>avionics</type>
         <path>Aircraft/CitationX/Sounds/chime1.wav</path>
-        <property>instrumentation/annunciators/master-caution</property>
+				<condition>
+					<or>
+		        <property>instrumentation/annunciators/master-caution</property>
+						<equals>
+							<property>controls/electric/std-by-pwr</property>							
+								<value>-1</value>
+						</equals>
+					</or>
+				</condition>
         <mode>once</mode>
     </warnings>
 
@@ -836,6 +844,28 @@
           		<property>controls/APU/test</property>
 					</or>
 				</and>
+      </condition>
+	</apu>
+
+	<apu>
+	    <name>APU bleed</name>
+      <type>avionics</type>
+      <mode>once</mode>
+      <path>Aircraft/CitationX/Sounds/chime1.wav</path>
+      <condition>
+				<or>
+					<and>
+						<equals>
+  	      		<property>controls/APU/rpm</property>
+								<value>1</value>
+						</equals>
+						<greater-than>
+  	      			<property>controls/APU/bleed</property>
+									<value>0</value>
+						</greater-than>
+					</and>
+         		<property>controls/APU/test</property>
+				</or>
       </condition>
 	</apu>
 

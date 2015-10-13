@@ -1429,6 +1429,7 @@
         <object-name>APUegtTest</object-name>
         <object-name>APUvolts</object-name>
         <object-name>APUready</object-name> 
+        <object-name>APUbleed</object-name> 
        <emission>
             <red>1.0</red>
             <green>0.4</green>
