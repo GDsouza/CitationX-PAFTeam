@@ -675,6 +675,7 @@
     <animation>
 			<type>pick</type>
 			<object-name>APU.bleed</object-name>
+			<object-name>bleed.max</object-name>
 			<action>
 				<button>0</button>
 				<repeatable>false</repeatable>
@@ -748,49 +749,6 @@
 					<command>property-assign</command>
 						<property>controls/APU/bleed-max</property>
 							<value>0</value>					
-				</binding>
-				<binding>
-					<condition>
-						<equals>
-							<property>controls/APU/bleed</property>
-								<value>0</value>
-						</equals>
-					</condition>
-					<command>property-assign</command>
-						<property>controls/APU/bleed-max</property>
-							<value>0</value>					
-				</binding>
-				<binding>
-					<command>property-toggle</command>
-						<property>sim/sound/click</property>
-				</binding>
-			</action>
-    </animation>
-
-    <animation>
-			<type>pick</type>
-			<object-name>bleed.max</object-name>
-			<action>
-				<button>0</button>
-				<repeatable>false</repeatable>
-				<binding>
-					<command>property-adjust</command>
-						<property>controls/APU/bleed</property>
-							<step>1</step>
-							<min>0</min>
-							<max>2</max>
-							<wrap>false</wrap>
-				</binding>
-				<binding>
-					<condition>
-						<equals>
-							<property>controls/APU/bleed</property>
-								<value>2</value>
-						</equals>
-					</condition>
-					<command>property-assign</command>
-						<property>controls/APU/bleed-max</property>
-							<value>1</value>					
 				</binding>
 				<binding>
 					<condition>

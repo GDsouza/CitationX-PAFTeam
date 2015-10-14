@@ -150,7 +150,7 @@ setlistener("/sim/signals/fdm-initialized", func {
 });
 
 var init_switches = func{
-    var AVswitch=props.globals.initNode("controls/electric/avionics-switch",0,"BOOL");
+    var AVswitch=props.globals.initNode("controls/electric/avionics-switch",0,"INT");
     setprop("controls/lighting/instruments-norm",0.8);
     setprop("controls/lighting/engines-norm",0.8);
     props.globals.initNode("controls/electric/ammeter-switch",0,"BOOL");

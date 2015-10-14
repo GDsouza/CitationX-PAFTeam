@@ -102,10 +102,6 @@
 
     <animation>
         <type>select</type>
-        <object-name>PFD1</object-name>
-        <object-name>PFD2</object-name>
-        <object-name>MFD1</object-name>
-        <object-name>MFD2</object-name>
         <object-name>EICAS1</object-name>
         <condition>
             <greater-than>
@@ -117,13 +113,34 @@
 
     <animation>
         <type>select</type>
+        <object-name>PFD1</object-name>
+        <object-name>PFD2</object-name>
+        <object-name>MFD1</object-name>
+        <object-name>MFD2</object-name>
+        <condition>
+					<and>
+            <greater-than>
+                <property>systems/electrical/outputs/efis</property>
+                <value>15</value>
+            </greater-than>
+						<equals>
+                <property>controls/electric/avionics-switch</property>
+									<value>2</value>
+						</equals>
+					</and>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
         <object-name>heater-screen</object-name>
         <condition>
 					<and>
 						<property>controls/electric/battery-switch[1]</property>
-            <not>
+            <less-than>
 							<property>controls/electric/avionics-switch</property>
-						</not>
+								<value>2</value>								
+						</less-than>
            </and>
         </condition>
     </animation>
@@ -683,13 +700,18 @@
     <animation>
         <type>pick</type>
         <object-name>AVN.switch</object-name>
+        <object-name>AVN.on</object-name>
         <action>
             <button>0</button>
             <binding>
-                <command>property-toggle</command>
-                <property>controls/electric/avionics-switch</property>
+							<command>property-adjust</command>
+								<property>controls/electric/avionics-switch</property>
+								<step>1</step>
+								<min>0</min>
+								<max>2</max>
+							<wrap>false</wrap>
             </binding>
-    <binding>
+    				<binding>
             <command>property-toggle</command>
             <property>sim/sound/click</property>
         </binding>
@@ -699,7 +721,36 @@
                 <command>set-tooltip</command>
                 <tooltip-id>Avn-switch</tooltip-id>
                 <label>Avionic: %s</label>
-                <mapping>on-off</mapping>
+                <mapping>heading</mapping>
+            <property>controls/electric/avionics-switch</property>
+            </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>AVN.off</object-name>
+        <action>
+            <button>0</button>
+            <binding>
+							<command>property-adjust</command>
+								<property>controls/electric/avionics-switch</property>
+								<step>-1</step>
+								<min>0</min>
+								<max>2</max>
+							<wrap>false</wrap>
+            </binding>
+    				<binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+        </binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>Avn-switch</tooltip-id>
+                <label>Avionic: %s</label>
+                <mapping>heading</mapping>
             <property>controls/electric/avionics-switch</property>
             </binding>
         </hovered>

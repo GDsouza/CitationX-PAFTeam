@@ -472,6 +472,10 @@
                 <property>controls/lighting/cdu</property>
                 <value>0.02</value>
             </greater-than>
+            <equals>
+                <property>controls/electric/avionics-switch</property>
+                <value>2</value>
+            </equals>
 					</and>					
         </condition>
     </animation>
