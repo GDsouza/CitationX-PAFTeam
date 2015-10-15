@@ -25,6 +25,28 @@
         </offsets>
     </model>
 
+    <model>
+        <name>pilot-seat</name>
+        <path>Aircraft/CitationX/Models/Seats/pilot-seat.xml</path>
+        <offsets>
+            <x-m> 0.00 </x-m>
+            <y-m> 0.00 </y-m>
+            <z-m> 0.00</z-m>
+            <pitch-deg>0</pitch-deg>
+        </offsets>
+    </model>
+
+    <model>
+        <name>copilot-seat</name>
+        <path>Aircraft/CitationX/Models/Seats/copilot-seat.xml</path>
+        <offsets>
+            <x-m> 0.00 </x-m>
+            <y-m> 0.00 </y-m>
+            <z-m> 0.00</z-m>
+            <pitch-deg>0</pitch-deg>
+        </offsets>
+    </model>
+
     <animation>
         <type>select</type>
         <object-name>panel1</object-name>
