@@ -225,7 +225,7 @@ controls.stepSpoilers = func(v) {
 var Startup = func{
     setprop("controls/electric/engine[0]/generator",1);
     setprop("controls/electric/engine[1]/generator",1);
-    setprop("controls/electric/avionics-switch",1);
+    setprop("controls/electric/avionics-switch",2);
     setprop("controls/electric/battery-switch",1);
     setprop("controls/electric/battery-switch[1]",1);
     setprop("controls/electric/inverter-switch",1);
