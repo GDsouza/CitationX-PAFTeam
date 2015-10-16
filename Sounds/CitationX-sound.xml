@@ -604,6 +604,39 @@
         </condition>
     </click>
 
+    <!-- Alarms -->
+    <alarm>
+        <name>Master warning</name>
+        <mode>looped</mode>
+        <path>Aircraft/CitationX/Sounds/warning.wav</path>
+        <condition>
+            <property>sim/alarms/master-warning</property>
+        </condition>
+    </alarm>
+    <alarm>
+        <name>Overspeed alarm</name>
+        <mode>looped</mode>
+        <path>Aircraft/CitationX/Sounds/overspeed.wav</path>
+        <condition>
+            <property>sim/alarms/overspeed-alarm</property>
+        </condition>
+    </alarm>
+    <alarm>
+        <name>Autopilot disconnect</name>
+        <mode>once</mode>
+        <type>avionics</type>
+        <path>Aircraft/CitationX/Sounds/autopilot-disconnect.wav</path>
+        <condition>
+            <equals>
+                <property>controls/autoflight/disengage-pos-norm</property>     
+                <value>1</value>
+            </equals>
+        </condition>
+        <volume>
+            <offset>1</offset>
+        </volume>
+    </alarm>
+
     <warnings>
         <name>chime1</name>
         <type>avionics</type>
