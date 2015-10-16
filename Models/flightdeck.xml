@@ -56,6 +56,52 @@
         </condition>
     </animation>
 
+    <!-- Pilots -->
+    <model>
+	<name>Captain</name>
+        <path>Aircraft/CitationX/Models/Pilot/pilot.xml</path>
+	<overlay>
+	    <params>
+		<texture>old.png</texture>
+		<legs>
+		    <upper-animation>
+			<offset-deg>90</offset-deg>
+		    </upper-animation>
+		    <lower-animation>
+			<offset-deg>-90</offset-deg>
+		    </lower-animation>
+		</legs>
+	    </params>
+	</overlay>
+	<offsets>
+	    <x-m>-0.57713 </x-m>
+	    <y-m>-0.35988</y-m>
+	    <z-m> 0.50333 </z-m>
+	</offsets>
+    </model>
+    <model>
+	<name>First officer</name>
+        <path>Aircraft/CitationX/Models/Pilot/copilot.xml</path>
+	<overlay>
+	    <params>
+		<texture>default.png</texture>
+		<legs>
+		    <upper-animation>
+			<offset-deg>90</offset-deg>
+		    </upper-animation>
+		    <lower-animation>
+			<offset-deg>-90</offset-deg>
+		    </lower-animation>
+		</legs>
+	    </params>
+	</overlay>
+	<offsets>
+	    <x-m>-0.57713 </x-m>
+	    <y-m> 0.38295</y-m>
+	    <z-m> 0.50333 </z-m>
+	</offsets>
+    </model>
+
 <!-- Instruments-->
 
     <animation>
