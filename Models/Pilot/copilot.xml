@@ -200,9 +200,9 @@
 			<z>0</z>
 		</axis>
 		<center>
-			<x-m>0.149</x-m>
-			<y-m>0</y-m>
-			<z-m>-0.02</z-m>
+			<x-m> 0.1704 </x-m>
+			<y-m>-0.0033 </y-m>
+			<z-m>-0.1214</z-m>
 		</center>
 	</animation>
 	<animation>
