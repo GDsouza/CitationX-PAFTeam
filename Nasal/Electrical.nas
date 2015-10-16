@@ -323,7 +323,8 @@ rh_bus = func(bv) {
 
     for(var i=0; i<size(rbus_input); i+=1) {
         var srvc = rbus_input[i].getValue();
-        load += rbus_load[i] * srvc;
+				if (srvc ==2) {srvc=1} ## switch avionics ##
+       load += rbus_load[i] * srvc;
         rbus_output[i].setValue(bus_volts * srvc);
     }
     return load;
@@ -335,6 +336,7 @@ lh_bus = func(bv) {
 
     for(var i=0; i<size(lbus_input); i+=1) {
         var srvc = lbus_input[i].getValue();
+				if (srvc ==2) {srvc=1} ## switch avionics ##
         load += lbus_load[i] * srvc;
         lbus_output[i].setValue(bv * srvc);
     }

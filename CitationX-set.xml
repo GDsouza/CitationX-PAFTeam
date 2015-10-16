@@ -440,18 +440,16 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
     </consumables>
 
     <instrumentation>
-        <mk-viii>                             <!-- http://wiki.flightgear.org/index.php/GPWS -->
-           <serviceable>true</serviceable>    <!-- EGPWS_ENABLE -->
+        <mk-viii>
+           <serviceable>true</serviceable>
            <configuration-module>
-              <category-1>   1 </category-1>  <!-- AIRCRAFT_MODE_TYPE_SELECT -->
-              <category-8>                    <!-- RADIO_ALTITUDE_INPUT_SELECT -->
-                 3 <!-- YASim --> 
-              </category-8>
+              <category-1>1 </category-1>  <!-- AIRCRAFT_MODE_TYPE_SELECT -->
+              <category-8>3</category-8> <!-- RADIO ALTITUDE YASIM-->
            </configuration-module>
            <inputs>                           <!-- Module I/O -->
             <arinc429>
                <decision-height-ncd> false </decision-height-ncd>
-               <decision-height> 250 </decision-height>
+               <decision-height> 200 </decision-height>
             </arinc429>
            </inputs>
            <speaker>
@@ -462,7 +460,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
         <tcas>
             <serviceable type="bool">true</serviceable>
             <inputs>
-                <mode type="int">0</mode>       <!-- 0=off, 1=standby, 2=TA-only, 3=auto(TA/RA) -->
+                <mode type="int">0</mode> <!-- 0=off, 1=standby, 2=TA-only, 3=auto(TA/RA) -->
             </inputs>
             <!--voice>
                 <file-prefix type="string">Sounds/tcas/</file-prefix>
