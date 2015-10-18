@@ -255,14 +255,14 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 
         <weight n="1">
             <name>Passengers</name>
-            <weight-lb>0</weight-lb>
+            <weight-lb>2040</weight-lb>
             <max-lb>2040</max-lb>
             <min-lb>0</min-lb>
         </weight>
 
         <weight n="2">
             <name>Cargo</name>
-            <weight-lb>0</weight-lb>
+            <weight-lb>4000</weight-lb>
             <max-lb>8000</max-lb>
             <min-lb>0</min-lb>
         </weight>
