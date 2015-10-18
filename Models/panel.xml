@@ -1003,38 +1003,17 @@
 </animation>
 
 <animation>
-    <type>pick</type>
-    <object-name>Gear.lever</object-name>
-    <action>
-        <button>0</button>
-        <repeatable>false</repeatable>
-        <binding>
-            <command>nasal</command>
-            <script>controls.gearDown(1)</script>
-        </binding>
-        <mod-up>
-            <binding>
-                <command>nasal</command>
-                <script>controls.gearDown(0)</script>
-            </binding>
-        </mod-up>
-    </action>
-    <action>
-        <button>1</button>
-        <repeatable>false</repeatable>
-        <binding>
-            <command>nasal</command>
-            <script>controls.gearDown(-1)</script>
-        </binding>
-        <mod-up>
-            <binding>
-                <command>nasal</command>
-                <script>controls.gearDown(0)</script>
-            </binding>
-        </mod-up>
+		<type>pick</type>
+		<object-name>Gear.lever</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>	
+				<command>nasal</command>
+				<script>controls.gear()</script>
+			</binding>
     </action>
 </animation>
-
 
 <animation>
     <type>pick</type>
