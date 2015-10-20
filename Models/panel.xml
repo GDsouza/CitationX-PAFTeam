@@ -4,7 +4,7 @@
 
     <path>panel.ac</path>
 
-
+  <!-- Instruments -->
     <model>
         <path>Aircraft/CitationX/Models/Instruments/AOA/aoa.xml</path>
         <offsets>
@@ -162,7 +162,7 @@
         </axis>
     </animation>
 
-<!-- Instruments-->
+<!-- Alarms-->
 
     <animation>
         <type>select</type>
@@ -180,6 +180,7 @@
         </condition>
     </animation>
 
+<!-- Reverse -->
     <animation>
         <type>select</type>
         <object-name>reverser.arm</object-name>
@@ -586,6 +587,40 @@
             <z-m>0.166</z-m>
         </center>
     </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>Fcrossfeed</object-name>
+        <property>controls/fuel/tank[0]/to_engine</property>
+        <factor>-70</factor>
+        <center>
+            <x-m>0.034 </x-m>
+            <y-m>-0.439</y-m>
+            <z-m>0 </z-m>
+        </center>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>-1</z>
+        </axis>
+    </animation>
+    <animation>
+        <type>rotate</type>
+        <object-name>Fcrossfeed</object-name>
+        <property>controls/fuel/tank[1]/to_engine</property>
+        <factor>70</factor>
+        <center>
+            <x-m>0.034 </x-m>
+            <y-m>-0.439</y-m>
+            <z-m>0 </z-m>
+        </center>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>-1</z>
+        </axis>
+    </animation>
+
 
 <!-- hotspots -->
 
@@ -1002,7 +1037,75 @@
         </hovered>
 </animation>
 
-<animation>
+  <animation>
+    <type>pick</type>
+    <object-name>Lxfeed</object-name>
+    <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+        </binding>
+				<binding>
+				<condition>
+					<not>
+      			<property>controls/fuel/tank[1]/to_engine</property> 
+					</not>
+				</condition>
+					<command>property-toggle</command>
+      			<property>controls/fuel/tank[0]/to_engine</property>
+ 						<value>1</value>       
+				</binding>
+			</action>
+	</animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>Rxfeed</object-name>
+    <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+        </binding>
+				<binding>
+				<condition>
+					<not>
+      			<property>controls/fuel/tank[0]/to_engine</property> 
+					</not>
+				</condition>
+					<command>property-toggle</command>
+      			<property>controls/fuel/tank[1]/to_engine</property>      
+				</binding>
+			</action>
+	</animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>Xfeed.off</object-name>
+    <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+        </binding>
+				<binding>
+          <command>property-assign</command>					
+      		<property>controls/fuel/tank[0]/to_engine</property> 
+						<value>0</value>
+				</binding>
+				<binding>
+          <command>property-assign</command>					
+      		<property>controls/fuel/tank[1]/to_engine</property> 
+						<value>0</value>
+				</binding>
+			</action>
+	</animation>
+
+	<animation>
 		<type>pick</type>
 		<object-name>Gear.lever</object-name>
 		<action>
@@ -1013,7 +1116,7 @@
 				<script>controls.gear()</script>
 			</binding>
     </action>
-</animation>
+	</animation>
 
 <animation>
     <type>pick</type>
