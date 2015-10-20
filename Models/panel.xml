@@ -594,8 +594,8 @@
         <property>controls/fuel/tank[0]/to_engine</property>
         <factor>-70</factor>
         <center>
-            <x-m>0.034 </x-m>
-            <y-m>-0.439</y-m>
+            <x-m>0.040 </x-m>
+            <y-m>-0.440</y-m>
             <z-m>0 </z-m>
         </center>
         <axis>
@@ -610,8 +610,8 @@
         <property>controls/fuel/tank[1]/to_engine</property>
         <factor>70</factor>
         <center>
-            <x-m>0.034 </x-m>
-            <y-m>-0.439</y-m>
+            <x-m>0.040 </x-m>
+            <y-m>-0.440</y-m>
             <z-m>0 </z-m>
         </center>
         <axis>
@@ -1058,6 +1058,15 @@
  						<value>1</value>       
 				</binding>
 			</action>
+      <hovered>
+        <binding>
+          <command>set-tooltip</command>
+          	<tooltip-id>Lxfeed</tooltip-id>
+            <label>L-Xfeed: %s</label>
+            <mapping>on-off</mapping>
+        		<property>controls/fuel/tank[0]/to_engine</property>
+          </binding>
+      </hovered>
 	</animation>
 
   <animation>
@@ -1080,6 +1089,15 @@
       			<property>controls/fuel/tank[1]/to_engine</property>      
 				</binding>
 			</action>
+			<hovered>
+				<binding>
+          <command>set-tooltip</command>
+            <tooltip-id>Rxfeed</tooltip-id>
+            <label>R-Xfeed: %s</label>
+            <mapping>on-off</mapping>
+        		<property>controls/fuel/tank[1]/to_engine</property>
+        </binding>
+      </hovered>
 	</animation>
 
   <animation>
@@ -1103,6 +1121,14 @@
 						<value>0</value>
 				</binding>
 			</action>
+			<hovered>
+				<binding>
+          <command>set-tooltip</command>
+            <tooltip-id>Xfeed</tooltip-id>
+            <label>Xfeed off</label>
+            <mapping>on-off</mapping>
+        </binding>
+      </hovered>
 	</animation>
 
 	<animation>
