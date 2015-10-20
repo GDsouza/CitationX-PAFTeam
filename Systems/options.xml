@@ -28,6 +28,15 @@
         </binding>
     </checkbox>
 
+    <checkbox>
+        <halign>left</halign>
+        <label>Crew visible</label>
+        <property>sim/model/crew</property>
+        <binding>
+            <command>dialog-apply</command>
+        </binding>
+    </checkbox>
+
   <button>
     <legend>Close</legend>
     <default>true</default>
