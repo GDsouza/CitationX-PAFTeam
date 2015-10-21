@@ -56,6 +56,59 @@
         </condition>
     </animation>
 
+    <!-- Yokes -->
+<animation>
+   <type>select</type>
+   <object-name>yoke</object-name>
+   <condition>
+     <not>
+       <property>sim/model/hide-yoke</property>
+     </not>
+   </condition>
+ </animation>
+
+ <animation>
+   <type>pick</type>
+   <object-name>yoke</object-name>
+   <visible>true</visible>
+   <action>
+     <button>0</button>
+     <repeatable>false</repeatable>
+     <binding>
+       <command>property-toggle</command>
+       <property>sim/model/hide-yoke</property>
+     </binding>
+   </action>
+   <hovered>
+     <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>show-hide-yoke</tooltip-id>
+        <label>Show/Hide Yoke</label>
+     </binding>
+   </hovered>
+ </animation>
+
+ <animation>
+   <type>pick</type>
+   <object-name>base-pied-yoke</object-name>
+   <visible>true</visible>
+   <action>
+     <button>0</button>
+     <repeatable>true</repeatable>
+     <binding>
+       <command>property-toggle</command>
+       <property>sim/model/hide-yoke</property>
+     </binding>
+   </action>
+   <hovered>
+     <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>show-hide-yoke</tooltip-id>
+        <label>Show/Hide Yoke</label>
+     </binding>
+   </hovered>
+ </animation>
+
     <!-- Pilots -->
   <model>
 		<name>Captain</name>
