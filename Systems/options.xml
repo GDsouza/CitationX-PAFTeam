@@ -33,7 +33,11 @@
         <label>Crew visible</label>
         <property>sim/model/crew</property>
         <binding>
-            <command>dialog-apply</command>
+					<condition>
+						<property>sim/current-view/internal</property>
+							<value>0</value>
+					</condition>
+          <command>dialog-apply</command>
         </binding>
     </checkbox>
 

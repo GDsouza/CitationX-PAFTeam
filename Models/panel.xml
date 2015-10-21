@@ -591,7 +591,7 @@
     <animation>
         <type>rotate</type>
         <object-name>Fcrossfeed</object-name>
-        <property>controls/fuel/tank[0]/to_engine</property>
+        <property>controls/engines/engine[1]/feed_tank</property>
         <factor>-70</factor>
         <center>
             <x-m>0.040 </x-m>
@@ -607,7 +607,7 @@
     <animation>
         <type>rotate</type>
         <object-name>Fcrossfeed</object-name>
-        <property>controls/fuel/tank[1]/to_engine</property>
+        <property>controls/engines/engine[0]/feed_tank</property>
         <factor>70</factor>
         <center>
             <x-m>0.040 </x-m>
@@ -1048,14 +1048,8 @@
             <property>sim/sound/click</property>
         </binding>
 				<binding>
-				<condition>
-					<not>
-      			<property>controls/fuel/tank[1]/to_engine</property> 
-					</not>
-				</condition>
 					<command>property-toggle</command>
-      			<property>controls/fuel/tank[0]/to_engine</property>
- 						<value>1</value>       
+      			<property>controls/engines/engine[1]/feed_tank</property>      
 				</binding>
 			</action>
       <hovered>
@@ -1080,13 +1074,8 @@
             <property>sim/sound/click</property>
         </binding>
 				<binding>
-				<condition>
-					<not>
-      			<property>controls/fuel/tank[0]/to_engine</property> 
-					</not>
-				</condition>
 					<command>property-toggle</command>
-      			<property>controls/fuel/tank[1]/to_engine</property>      
+      			<property>controls/engines/engine[0]/feed_tank</property>      
 				</binding>
 			</action>
 			<hovered>
@@ -1112,12 +1101,12 @@
         </binding>
 				<binding>
           <command>property-assign</command>					
-      		<property>controls/fuel/tank[0]/to_engine</property> 
+      		<property>controls/engines/engine[0]/feed_tank</property> 
 						<value>0</value>
 				</binding>
 				<binding>
           <command>property-assign</command>					
-      		<property>controls/fuel/tank[1]/to_engine</property> 
+      		<property>controls/engines/engine[1]/feed_tank</property> 
 						<value>0</value>
 				</binding>
 			</action>
