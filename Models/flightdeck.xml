@@ -57,6 +57,15 @@
     </animation>
 
     <!-- Yokes -->
+
+  <animation>
+    <name>yoke</name>
+    <object-name>L-manche-yoke</object-name>
+    <object-name>R-manche-yoke</object-name>
+    <object-name>L-yoke</object-name>
+    <object-name>R-yoke</object-name>
+  </animation>
+
 <animation>
    <type>select</type>
    <object-name>yoke</object-name>
