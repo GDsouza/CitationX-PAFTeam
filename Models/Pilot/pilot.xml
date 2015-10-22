@@ -30,19 +30,26 @@
 			</yaw-animation>
 		</head>
 		<arms>
-			<upper-animation>
-				<property type="string"></property>
-				<factor type="float">0</factor>
+			<roll-animation>
+				<property type="string">controls/flight/aileron</property>
+				<factor type="float">-7</factor>
 				<offset-deg type="float">0</offset-deg>
-				<min type="float">0</min>
-				<max type="float">0</max>
+				<min type="float">-15</min>
+				<max type="float">15</max>
+			</roll-animation>
+			<upper-animation>
+				<property type="string">controls/flight/elevator</property>
+				<factor type="float">10</factor>
+				<offset-deg type="float">-4</offset-deg>
+				<min type="float">-20</min>
+				<max type="float">20</max>
 			</upper-animation>
 			<lower-animation>
-				<property type="string"></property>
-				<factor type="float">0</factor>
-				<offset-deg type="float">0</offset-deg>
-				<min type="float">0</min>
-				<max type="float">0</max>
+				<property type="string">controls/flight/elevator</property>
+				<factor type="float">-20</factor>
+				<offset-deg type="float">8</offset-deg>
+				<min type="float">-15</min>
+				<max type="float">15</max>
 			</lower-animation>
 		</arms>
 		<legs>
@@ -179,6 +186,29 @@
 			<z-m>0.127</z-m>
 		</center>
 	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>LeftLowerArm</object-name>
+		<object-name>LeftHand</object-name>
+		<object-name>RightLowerArm</object-name>
+		<object-name>RightHand</object-name>
+		<property alias="../../params/arms/roll-animation/property" />
+		<factor alias="../../params/arms/roll-animation/factor" />
+		<offset-deg alias="../../params/arms/roll-animation/offset-deg" />
+		<min alias="../../params/arms/roll-animation/min" />
+		<max alias="../../params/arms/roll-animation/max" />
+		<center>
+			<x-m>0.06</x-m>
+			<y-m>0</y-m>
+			<z-m>0</z-m>
+		</center>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>1</z>
+		</axis>
+	</animation> 
 
 	<!-- Legs -->
 	<animation>

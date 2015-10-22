@@ -58,17 +58,81 @@
 
     <!-- Yokes -->
 
-  <animation>
-    <name>yoke</name>
-    <object-name>L-manche-yoke</object-name>
-    <object-name>R-manche-yoke</object-name>
-    <object-name>L-yoke</object-name>
-    <object-name>R-yoke</object-name>
-  </animation>
+    <animation>
+        <type>rotate</type>
+        <object-name>L-yoke</object-name>
+        <property>controls/flight/aileron</property>
+        <factor>-30</factor>
+        <center>
+            <x-m>0</x-m>
+            <y-m>-0.375</y-m>
+            <z-m>0.55</z-m>
+        </center>
+        <axis>
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>L-manche-yoke</object-name>
+		    <object-name>L-yoke</object-name>
+        <property>controls/flight/elevator</property>
+        <factor>-4</factor>
+        <center>
+            <x-m>-0.85</x-m>
+            <y-m>-0.375</y-m>
+            <z-m>0</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>R-yoke</object-name>
+        <property>controls/flight/aileron</property>
+        <factor>-30</factor>
+        <center>
+            <x-m>0</x-m>
+            <y-m>0.375</y-m>
+            <z-m>0.55</z-m>
+        </center>
+        <axis>
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>R-manche-yoke</object-name>
+		    <object-name>R-yoke</object-name>
+        <property>controls/flight/elevator</property>
+        <factor>-4</factor>
+        <center>
+            <x-m>-0.85</x-m>
+            <y-m>0.375</y-m>
+            <z-m>0</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
 
 <animation>
    <type>select</type>
-   <object-name>yoke</object-name>
+        <object-name>L-manche-yoke</object-name>
+		    <object-name>L-yoke</object-name>
    <condition>
      <not>
        <property>sim/model/hide-yoke</property>
@@ -78,7 +142,8 @@
 
  <animation>
    <type>pick</type>
-   <object-name>yoke</object-name>
+        <object-name>L-manche-yoke</object-name>
+		    <object-name>L-yoke</object-name>
    <visible>true</visible>
    <action>
      <button>0</button>
