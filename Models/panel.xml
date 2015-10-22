@@ -1048,6 +1048,11 @@
             <property>sim/sound/click</property>
         </binding>
 				<binding>
+					<condition>
+						<not>
+        			<property>controls/engines/engine[0]/feed_tank</property>							
+						</not>
+					</condition>
 					<command>property-toggle</command>
       			<property>controls/engines/engine[1]/feed_tank</property>      
 				</binding>
@@ -1058,7 +1063,7 @@
           	<tooltip-id>Lxfeed</tooltip-id>
             <label>L-Xfeed: %s</label>
             <mapping>on-off</mapping>
-        		<property>controls/fuel/tank[0]/to_engine</property>
+        		<property>controls/engines/engine[1]/feed_tank</property>
           </binding>
       </hovered>
 	</animation>
@@ -1074,6 +1079,11 @@
             <property>sim/sound/click</property>
         </binding>
 				<binding>
+					<condition>
+						<not>
+        			<property>controls/engines/engine[1]/feed_tank</property>							
+						</not>
+					</condition>
 					<command>property-toggle</command>
       			<property>controls/engines/engine[0]/feed_tank</property>      
 				</binding>
