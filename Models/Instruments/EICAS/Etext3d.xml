@@ -385,6 +385,26 @@
         </font-resolution>
     </text>
 
+    <text>
+        <name>crossfeed</name>
+        <offsets>
+            <x-m>0.0</x-m>
+            <y-m>-0.016</y-m>
+            <z-m>0.01</z-m>
+        </offsets>
+        <alignment>center-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type type="string">literal</type>
+        <text>FUEL XFEED OPEN</text>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.006</character-size>
+        <character-aspect-ratio type="double">1.2</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
+        </font-resolution>
+    </text>
+
 <!-- COLORS -->
 
     <animation>
@@ -439,6 +459,39 @@
             <green-prop>sim/color-set/cyan/g</green-prop>
             <blue-prop>sim/color-set/cyan/b</blue-prop>
             <alpha-prop>sim/color-set/cyan/a</alpha-prop>
+        </emission>
+        <ambient>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </ambient>
+        <diffuse>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </diffuse>
+        <specular>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </specular>
+    </animation>
+
+    <animation>
+        <name>white</name>
+        <type>material</type>
+        <object-name>crossfeed</object-name>
+					<condition>
+						<or>
+								<property>controls/engines/engine[0]/feed_tank</property>
+								<property>controls/engines/engine[1]/feed_tank</property>
+						</or>							
+					</condition>
+        <emission>
+            <red-prop>sim/color-set/white/r</red-prop>
+            <green-prop>sim/color-set/white/g</green-prop>
+            <blue-prop>sim/color-set/white/b</blue-prop>
+            <alpha-prop>sim/color-set/white/a</alpha-prop>
         </emission>
         <ambient>
             <red>0</red>

@@ -133,6 +133,8 @@
    <type>select</type>
         <object-name>L-manche-yoke</object-name>
 		    <object-name>L-yoke</object-name>
+        <object-name>R-manche-yoke</object-name>
+		    <object-name>R-yoke</object-name>
    <condition>
      <not>
        <property>sim/model/hide-yoke</property>
@@ -144,6 +146,8 @@
    <type>pick</type>
         <object-name>L-manche-yoke</object-name>
 		    <object-name>L-yoke</object-name>
+        <object-name>R-manche-yoke</object-name>
+		    <object-name>R-yoke</object-name>
    <visible>true</visible>
    <action>
      <button>0</button>

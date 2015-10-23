@@ -18,7 +18,6 @@
         </binding>
     </checkbox>
 
-
     <checkbox>
         <halign>left</halign>
         <label>Shadeless Cockpit</label>
@@ -30,13 +29,22 @@
 
     <checkbox>
         <halign>left</halign>
-        <label>Crew visible</label>
+        <label>Show Pilots</label>
         <property>sim/model/crew</property>
         <binding>
 					<condition>
 						<property>sim/current-view/internal</property>
 							<value>0</value>
 					</condition>
+          <command>dialog-apply</command>
+        </binding>
+    </checkbox>
+
+    <checkbox>
+        <halign>left</halign>
+        <label>Hide Yokes</label>
+       <property>sim/model/hide-yoke</property>
+        <binding>
           <command>dialog-apply</command>
         </binding>
     </checkbox>
