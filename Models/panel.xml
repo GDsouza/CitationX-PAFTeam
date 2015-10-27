@@ -104,10 +104,13 @@
         <type>select</type>
         <object-name>EICAS1</object-name>
         <condition>
+					<and>
+           	<property>systems/electrical/right-bus-norm</property>
             <greater-than>
-                <property>systems/electrical/outputs/efis</property>
-                <value>15</value>
+              <property>systems/electrical/outputs/efis</property>
+               	<value>15</value>
             </greater-than>
+					</and>
         </condition>
     </animation>
 
@@ -119,10 +122,7 @@
         <object-name>MFD2</object-name>
         <condition>
 					<and>
-            <greater-than>
-                <property>systems/electrical/outputs/efis</property>
-                <value>15</value>
-            </greater-than>
+           <property>systems/electrical/right-bus-norm</property>
 						<equals>
                 <property>controls/electric/avionics-switch</property>
 									<value>2</value>
@@ -136,7 +136,7 @@
         <object-name>heater-screen</object-name>
         <condition>
 					<and>
-						<property>controls/electric/battery-switch[1]</property>
+						<property>systems/electrical/left-bus-norm</property>
             <less-than>
 							<property>controls/electric/avionics-switch</property>
 								<value>2</value>								
@@ -168,17 +168,55 @@
         <type>select</type>
         <object-name>Mstr.Caution</object-name>
         <condition>
-            <property>instrumentation/annunciators/master-caution</property>
+					<and>
+						<property>instrumentation/annunciators/caution</property>
+            <greater-than>
+              <property>systems/electrical/outputs/efis</property>
+               	<value>15</value>
+            </greater-than>
+					</and>
         </condition>
     </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Mstr.Caution1</object-name>
+        <action>
+            <button>0</button>
+            <binding>
+               <command>property-assign</command>
+               		<property>instrumentation/annunciators/ack-caution</property>
+										<value>1</value>-->
+            </binding>
+				</action>
+		</animation>
 
     <animation>
         <type>select</type>
         <object-name>Mstr.Warning</object-name>
         <condition>
-            <property>instrumentation/annunciators/master-warning</property>
+					<and>
+						<property>instrumentation/annunciators/warning</property>
+            <greater-than>
+              <property>systems/electrical/outputs/efis</property>
+               	<value>15</value>
+            </greater-than>
+					</and>
         </condition>
     </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Mstr.Warning1</object-name>
+        <action>
+            <button>0</button>
+            <binding>
+               <command>property-assign</command>
+               <property>instrumentation/annunciators/ack-warning</property>
+									<value>1</value>
+            </binding>
+				</action>
+		</animation>
 
 <!-- Reverse -->
     <animation>

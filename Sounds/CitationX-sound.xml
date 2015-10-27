@@ -196,28 +196,39 @@
 
 <!-- AVIONICS-->
 
-    <avionics>
-        <name>avionics</name>
+    <avionics1>
+        <name>avionics1</name>
         <path>Aircraft/CitationX/Sounds/avionics.wav</path>
         <condition>
 					<and>
             <property>controls/electric/battery-switch[1]</property>
-						<or>
 							<equals>
  		       			<property>controls/electric/avionics-switch</property>			
 								<value>1</value>
 							</equals>
-							<equals>
- 		       			<property>controls/electric/avionics-switch</property>			
-								<value>2</value>
-							</equals>
-						</or>
 					</and>
         </condition>
         <mode>once</mode>
         <reference-dist>1.0</reference-dist>
         <max-dist>15.0</max-dist>
-    </avionics>
+    </avionics1>
+
+    <avionics2>
+        <name>avionics2</name>
+        <path>Aircraft/CitationX/Sounds/avionics.wav</path>
+        <condition>
+					<and>
+            <property>controls/electric/battery-switch[1]</property>
+							<equals>
+ 		       			<property>controls/electric/avionics-switch</property>			
+								<value>2</value>
+							</equals>
+					</and>
+        </condition>
+        <mode>once</mode>
+        <reference-dist>1.0</reference-dist>
+        <max-dist>15.0</max-dist>
+    </avionics2>
 
 <!-- FUEL -->
 
@@ -650,7 +661,12 @@
         <mode>looped</mode>
         <path>Aircraft/CitationX/Sounds/warning.wav</path>
         <condition>
-            <property>sim/alarms/master-warning</property>
+					<and>
+            <property>instrumentation/annunciators/master-warning</property>
+						<not>
+            	<property>instrumentation/annunciators/ack-warning</property>
+						</not>
+					</and>
         </condition>
     </alarm>
     <alarm>
@@ -682,15 +698,14 @@
         <type>avionics</type>
         <path>Aircraft/CitationX/Sounds/chime1.wav</path>
 				<condition>
-					<or>
+					<and>
 		        <property>instrumentation/annunciators/master-caution</property>
-						<equals>
-							<property>controls/electric/std-by-pwr</property>							
-								<value>-1</value>
-						</equals>
-					</or>
+						<not>
+            	<property>instrumentation/annunciators/ack-caution</property>
+						</not>
+					</and>
 				</condition>
-        <mode>once</mode>
+        <mode>looped</mode>
     </warnings>
 
     <warnings>
@@ -699,9 +714,12 @@
         <path>Aircraft/CitationX/Sounds/chime2.wav</path>
 				<condition>
 					<or>
-		        <property>instrumentation/annunciators/master-warning</property>
 		        <property>systems/electrical/left-emer-bus</property>
 		        <property>systems/electrical/right-emer-bus</property>
+						<equals>
+							<property>controls/electric/std-by-pwr</property>							
+								<value>-1</value>
+						</equals>
 					</or>
 				</condition>
         <mode>looped</mode>
@@ -733,114 +751,114 @@
 
     <!-- Speed callouts -->
     <callout>
-        <name>80 knots</name>
-        <mode>once</mode>
-        <type>avionics</type>
-        <path>Aircraft/CitationX/Sounds/80kt.wav</path>
-        <condition>
-            <and>
-                <or>
-                    <property>gear/gear[0]/wow</property>
-                    <property>gear/gear[1]/wow</property>
-                    <property>gear/gear[2]/wow</property>
-                </or>
-                <less-than>
-                    <property>velocities/airspeed-kt</property>
-                    <property>autopilot/internal/lookahead-5-sec-airspeed-kt</property>
-                </less-than>
-                <greater-than>
-                    <property>velocities/airspeed-kt</property>
-                    <value>80</value>
-                </greater-than>
-                <less-than>
-                    <property>velocities/airspeed-kt</property>
-                    <value>90</value>
-                </less-than>
-            </and>
+      <name>80 knots</name>
+      <mode>once</mode>
+      <type>avionics</type>
+      <path>Aircraft/CitationX/Sounds/80kt.wav</path>
+      	<condition>
+          <and>
+            <or>
+              <property>gear/gear[0]/wow</property>
+              <property>gear/gear[1]/wow</property>
+              <property>gear/gear[2]/wow</property>
+            </or>
+          	<less-than>
+              <property>velocities/airspeed-kt</property>
+              <property>autopilot/internal/lookahead-5-sec-airspeed-kt</property>
+            </less-than>
+            <greater-than>
+              <property>velocities/airspeed-kt</property>
+                <value>80</value>
+            </greater-than>
+            <less-than>
+              <property>velocities/airspeed-kt</property>
+                <value>90</value>
+            </less-than>
+          </and>
         </condition>
     </callout>
 
     <callout>
-        <name>V1</name>
-        <mode>once</mode>
-        <type>avionics</type>
-        <path>Aircraft/CitationX/Sounds/v1.wav</path>
-        <condition>
-            <and>
-                <or>
-                    <property>gear/gear[0]/wow</property>
-                    <property>gear/gear[1]/wow</property>
-                    <property>gear/gear[2]/wow</property>
-                </or>
-                <less-than>
-                    <property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
-                    <property>autopilot/internal/lookahead-5-sec-airspeed-kt</property>
-                </less-than>
-               <greater-than>
-                   <property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
-                    <property>controls/flight/v1</property>
-                </greater-than>
-            </and>
-        </condition>
+    	<name>V1</name>
+      <mode>once</mode>
+      <type>avionics</type>
+      <path>Aircraft/CitationX/Sounds/v1.wav</path>
+      <condition>
+        <and>
+          <or>
+            <property>gear/gear[0]/wow</property>
+            <property>gear/gear[1]/wow</property>
+            <property>gear/gear[2]/wow</property>
+          </or>
+          <less-than>
+            <property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
+            <property>autopilot/internal/lookahead-5-sec-airspeed-kt</property>
+          </less-than>
+         	<greater-than>
+           	<property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
+            <property>controls/flight/v1</property>
+          </greater-than>
+        </and>
+      </condition>
     </callout>
 
     <callout>
-        <name>Vr</name>
-        <mode>once</mode>
-        <type>avionics</type>
-        <path>Aircraft/CitationX/Sounds/vr.wav</path>
-        <condition>
-            <and>
-                <or>
-                    <property>gear/gear[0]/wow</property>
-                    <property>gear/gear[1]/wow</property>
-                    <property>gear/gear[2]/wow</property>
-                </or>
-                <less-than>
-                    <property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
-                    <property>autopilot/internal/lookahead-5-sec-airspeed-kt</property>
-                </less-than>
-               	<greater-than>
-                   <property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
-                    <property>controls/flight/vr</property>
-                </greater-than>
-            </and>
-        </condition>
+			<name>Vr</name>
+			<mode>once</mode>
+			<type>avionics</type>
+			<path>Aircraft/CitationX/Sounds/vr.wav</path>
+			<condition>
+        <and>
+          <or>
+            <property>gear/gear[0]/wow</property>
+            <property>gear/gear[1]/wow</property>
+            <property>gear/gear[2]/wow</property>
+          </or>
+          <less-than>
+            <property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
+            <property>autopilot/internal/lookahead-5-sec-airspeed-kt</property>
+          </less-than>
+       		<greater-than>
+						<property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
+						<property>controls/flight/vr</property>
+          </greater-than>
+        </and>
+      </condition>
     </callout>
 
-    <callout>
-        <name>Positive climb rate</name>
-        <mode>once</mode>
-        <type>avionics</type>
-        <path>Aircraft/CitationX/Sounds/p-climb.wav</path>
-        <condition>
-            <and>
-                <less-than>
-                    <property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
-                    <property>autopilot/internal/lookahead-5-sec-airspeed-kt</property>
-                </less-than>
-                <greater-than>
-                    <property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
-                    <value>180</value>
-                </greater-than>
-                <greater-than-equals>
-                    <property>autopilot/internal/vert-speed-fpm</property>
-                    <value>500</value>
-                </greater-than-equals>
-               <greater-than>
-                    <property>orientation/pitch-deg</property>
-                    <value>7</value>
-                </greater-than>
-                <less-than>
-                    <property>orientation/pitch-deg</property>
-                    <value>17</value>
-                </less-than>
-					       <less-than>
-                    <property>position/altitude-agl-ft</property>
-                    <value>500</value>
-                </less-than>
-            </and>
-        </condition>
+		<callout>
+			<name>Positive climb rate</name>
+      <mode>once</mode>
+      <type>avionics</type>
+      <path>Aircraft/CitationX/Sounds/p-climb.wav</path>
+      <condition>
+        <and>
+          <less-than>
+            <property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
+            <property>autopilot/internal/lookahead-5-sec-airspeed-kt</property>
+          </less-than>
+          <greater-than>
+            <property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
+              <value>180</value>
+          </greater-than>
+          <greater-than-equals>
+            <property>autopilot/internal/vert-speed-fpm</property>
+              <value>500</value>
+          </greater-than-equals>
+					<greater-than>
+            <property>orientation/pitch-deg</property>
+              <value>7</value>
+          </greater-than>
+          <less-than>
+            <property>orientation/pitch-deg</property>
+              <value>17</value>
+          </less-than>
+					<less-than>
+            <property>position/altitude-agl-ft</property>
+              <value>500</value>
+          </less-than>
+        </and>
+      </condition>
     </callout>
 
 	<apu>

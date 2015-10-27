@@ -186,6 +186,7 @@ Primus 2000 EICAS
         <property>engines/engine[0]/oilp-norm</property>
         <interpolation>
             <entry><ind>0.0</ind><dep>0.0</dep></entry>
+            <entry><ind>0.083</ind><dep>0.004</dep></entry>
             <entry><ind>1.0</ind><dep>0.0190</dep></entry>
         </interpolation>
         <axis>
@@ -198,9 +199,10 @@ Primus 2000 EICAS
     <animation>
         <type>textranslate</type>
         <object-name>oilpsi.001</object-name>
-        <property>engines/engine[0]/oilt-norm</property>
+        <property>engines/engine[0]/oilp-norm</property>
         <interpolation>
             <entry><ind>0.0</ind><dep>0.0</dep></entry>
+            <entry><ind>0.083</ind><dep>0.016</dep></entry>
             <entry><ind>1.0</ind><dep>0.0781</dep></entry>
         </interpolation>
         <axis>
@@ -216,6 +218,7 @@ Primus 2000 EICAS
         <property>engines/engine[1]/oilp-norm</property>
         <interpolation>
             <entry><ind>0.0</ind><dep>0.0</dep></entry>
+            <entry><ind>0.083</ind><dep>0.004</dep></entry>
             <entry><ind>1.0</ind><dep>0.0190</dep></entry>
         </interpolation>
         <axis>
@@ -228,9 +231,10 @@ Primus 2000 EICAS
     <animation>
         <type>textranslate</type>
         <object-name>oilpsi.002</object-name>
-        <property>engines/engine[1]/oilt-norm</property>
+        <property>engines/engine[1]/oilp-norm</property>
         <interpolation>
             <entry><ind>0.0</ind><dep>0.0</dep></entry>
+            <entry><ind>0.083</ind><dep>0.016</dep></entry>
             <entry><ind>1.0</ind><dep>0.0781</dep></entry>
         </interpolation>
         <axis>

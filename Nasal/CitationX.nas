@@ -126,11 +126,8 @@ var JetEngine = {
 var FDM="";
 var Grd_Idle=props.globals.initNode("controls/engines/grnd-idle",1,"BOOL");
 var Annun = props.globals.getNode("instrumentation/annunciators",1);
-var MstrWarn =Annun.getNode("master-warning",1);
-var MstrCaution = Annun.getNode("master-caution",1);
 var PWR2 =0;
 aircraft.livery.init("Aircraft/CitationX/Models/Liveries");
-aircraft.light.new("instrumentation/annunciators", [0.5, 0.5], MstrCaution);
 var FHmeter = aircraft.timer.new("/instrumentation/clock/flight-meter-sec", 10,1);
 var LHeng= JetEngine.new(0);
 var RHeng= JetEngine.new(1);
@@ -139,8 +136,6 @@ var tire=TireSpeed.new(3,0.430,0.615,0.615);
 #######################################
 
 var fdm_init = func(){
-    MstrWarn.setBoolValue(0);
-    MstrCaution.setBoolValue(0);
     FDM=getprop("/sim/flight-model");
     setprop("controls/engines/N1-limit",95.0);
 }
@@ -186,6 +181,7 @@ setlistener("/gear/gear[1]/wow", func(ww){
 },0,0);
 
 setlistener("/controls/gear/antiskid", func(as){
+	print(as);
     var test=as.getBoolValue();
     if(!test){
     MstrCaution.setBoolValue(1 * PWR2);
@@ -216,14 +212,6 @@ controls.gear = func {
 			setprop("/controls/gear/gear-down",0);
 	}	else {setprop("/controls/gear/gear-down",1)}
 }
-
-# controls.gearDown = func(v) {
-#    if (v < 0) {
-#        if(!getprop("gear/gear[1]/wow"))setprop("/controls/gear/gear-down", 0);
-#    } elsif (v > 0) {
-#      setprop("/controls/gear/gear-down", 1);
-#    }
-#}
 
 controls.stepSpoilers = func(v) {
     if (v < 0) {setprop("/controls/flight/speedbrake", 0)}
@@ -284,25 +272,6 @@ var FHupdate = func(tenths){
         setprop("instrumentation/clock/flight-meter-min",int(fmin));
     }
 
-var stall_horn = func{
-    var alert=0;
-    var kias=getprop("velocities/airspeed-kt");
-    if(kias>150){setprop("sim/sound/stall-horn",alert);return;};
-    var wow1=getprop("gear/gear[1]/wow");
-    var wow2=getprop("gear/gear[2]/wow");
-    if(!wow1 or !wow2){
-        var grdn=getprop("controls/gear/gear-down");
-        var flap=getprop("controls/flight/flaps");
-        if(kias<100){
-            alert=1;
-        }elsif(kias<120){
-            if(!grdn )alert=1;
-        }else{
-            if(flap==0)alert=1;
-        }
-    }
-    setprop("sim/sound/stall-horn",alert);
-}
 
 var v_sound = func{
 		var Wtot = getprop("yasim/gross-weight-lbs");
@@ -331,7 +300,6 @@ var v_sound = func{
 		}
 }
 
-
 ########## MAIN ##############
 
 var update_systems = func{
@@ -339,7 +307,6 @@ var update_systems = func{
     RHeng.update();
     FHupdate(0);
     tire.get_rotation("yasim");
-    stall_horn();
 		v_sound();
     if(getprop("velocities/airspeed-kt")>40)setprop("controls/cabin-door/open",0);
 		#annunciators_loop();
