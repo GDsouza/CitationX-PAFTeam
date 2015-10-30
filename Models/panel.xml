@@ -220,13 +220,19 @@
 
 <!-- Reverse -->
     <animation>
-        <type>select</type>
-        <object-name>reverser.arm</object-name>
-        <condition>
+			<type>select</type>
+			<object-name>reverser.arm</object-name>
+				<condition>
+					<or>
             <greater-than>
-            <property>surface-positions/reverser-norm</property>
-            <value>0.2</value>
+            	<property>surface-positions/reverser-norm</property>
+            		<value>0.2</value>
             </greater-than>
+						<equals>
+            	<property>instrumentation/annunciators/test-select</property>
+								<value>4</value>
+						</equals>
+					</or>
         </condition>
     </animation>
 
@@ -234,10 +240,16 @@
         <type>select</type>
         <object-name>reverser.unlock</object-name>
         <condition>
+					<or>
             <greater-than>
-            <property>surface-positions/reverser-norm</property>
-            <value>0.4</value>
+            	<property>surface-positions/reverser-norm</property>
+            		<value>0.4</value>
             </greater-than>
+						<equals>
+            	<property>instrumentation/annunciators/test-select</property>
+								<value>4</value>
+						</equals>
+					</or>
         </condition>
     </animation>
 
@@ -245,54 +257,219 @@
         <type>select</type>
         <object-name>reverser.deploy</object-name>
         <condition>
+					<or>
             <greater-than>
-            <property>surface-positions/reverser-norm</property>
-            <value>0.9</value>
+            	<property>surface-positions/reverser-norm</property>
+            		<value>0.9</value>
             </greater-than>
+						<equals>
+            	<property>instrumentation/annunciators/test-select</property>
+								<value>4</value>
+						</equals>
+					</or>
         </condition>
     </animation>
 
 <!-- panel switches / annunciators-->
 
-    <animation>
-        <type>select</type>
-        <object-name>gearUnlocked</object-name>
+		<animation>
+			<type>select</type>
+				<object-name>gearUnlocked</object-name>
         <condition>
+					<or>
             <property>gear/unlocked</property>
+						<equals>
+            	<property>instrumentation/annunciators/test-select</property>
+								<value>2</value>
+						</equals>
+					</or>
+			</condition>
+		</animation>
+
+    <animation>
+			<type>select</type>
+			<object-name>NSgearlamp</object-name>
+			<condition>
+				<or>			
+					<equals>
+						<property>gear/gear[0]/position-norm</property>
+							<value>1</value>
+          </equals>
+					<equals>
+          	<property>instrumentation/annunciators/test-select</property>
+							<value>2</value>
+					</equals>
+				</or>
       </condition>
     </animation>
 
     <animation>
-        <type>select</type>
-        <object-name>NSgearlamp</object-name>
-        <condition>
-            <equals>
-                <property>gear/gear[0]/position-norm</property>
-                <value>1</value>
-            </equals>
-        </condition>
+      <type>select</type>
+      <object-name>LHgearlamp</object-name>
+      <condition>
+				<or>			
+					<equals>
+						<property>gear/gear[1]/position-norm</property>
+							<value>1</value>
+          </equals>
+					<equals>
+          	<property>instrumentation/annunciators/test-select</property>
+							<value>2</value>
+					</equals>
+				</or>
+      </condition>
     </animation>
 
     <animation>
-        <type>select</type>
-        <object-name>LHgearlamp</object-name>
-        <condition>
-            <equals>
-                <property>gear/gear[1]/position-norm</property>
-                <value>1</value>
-            </equals>
-        </condition>
+      <type>select</type>
+      <object-name>RHgearlamp</object-name>
+      <condition>
+				<or>			
+					<equals>
+						<property>gear/gear[2]/position-norm</property>
+							<value>1</value>
+          </equals>
+					<equals>
+          	<property>instrumentation/annunciators/test-select</property>
+							<value>2</value>
+					</equals>
+				</or>
+      </condition>
+    </animation>
+
+<!-- COLORS -->
+
+    <animation>
+        <name>yellow</name>
+        <type>material</type>
+      	<object-name>Bottle.armed</object-name>
+      	<condition>
+					<equals>
+          	<property>instrumentation/annunciators/test-select</property>
+							<value>3</value>
+					</equals>
+      </condition>
+        <emission>
+            <red-prop>sim/color-set/yellow/r</red-prop>
+            <green-prop>sim/color-set/yellow/g</green-prop>
+            <blue-prop>sim/color-set/yellow/b</blue-prop>
+            <alpha-prop>sim/color-set/yellow/a</alpha-prop>
+        </emission>
+        <ambient>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </ambient>
+        <diffuse>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </diffuse>
+        <specular>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </specular>
     </animation>
 
     <animation>
-        <type>select</type>
-        <object-name>RHgearlamp</object-name>
-        <condition>
-            <equals>
-                <property>gear/gear[2]/position-norm</property>
-                <value>1</value>
-            </equals>
-        </condition>
+        <name>red</name>
+        <type>material</type>
+      	<object-name>Eng.fire</object-name>
+      	<condition>
+					<equals>
+          	<property>instrumentation/annunciators/test-select</property>
+							<value>3</value>
+					</equals>
+      </condition>
+        <emission>
+            <red-prop>sim/color-set/red/r</red-prop>
+            <green-prop>sim/color-set/red/g</green-prop>
+            <blue-prop>sim/color-set/red/b</blue-prop>
+            <alpha-prop>sim/color-set/red/a</alpha-prop>
+        </emission>
+        <ambient>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </ambient>
+        <diffuse>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </diffuse>
+        <specular>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </specular>
+    </animation>
+
+    <animation>
+        <name>amber</name>
+        <type>material</type>
+      	<object-name>reverser.arm</object-name>
+      	<object-name>reverser.unlock</object-name>
+      	<condition>
+					<equals>
+          	<property>instrumentation/annunciators/test-select</property>
+							<value>4</value>
+					</equals>
+      </condition>
+        <emission>
+            <red-prop>sim/color-set/amber/r</red-prop>
+            <green-prop>sim/color-set/amber/g</green-prop>
+            <blue-prop>sim/color-set/amber/b</blue-prop>
+            <alpha-prop>sim/color-set/amber/a</alpha-prop>
+        </emission>
+        <ambient>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </ambient>
+        <diffuse>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </diffuse>
+        <specular>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </specular>
+    </animation>
+
+    <animation>
+        <name>white</name>
+        <type>material</type>
+      	<object-name>reverser.deploy</object-name>
+      	<condition>
+					<equals>
+          	<property>instrumentation/annunciators/test-select</property>
+							<value>4</value>
+					</equals>
+      </condition>
+        <emission>
+            <red-prop>sim/color-set/white/r</red-prop>
+            <green-prop>sim/color-set/white/g</green-prop>
+            <blue-prop>sim/color-set/white/b</blue-prop>
+            <alpha-prop>sim/color-set/white/a</alpha-prop>
+        </emission>
+        <ambient>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </ambient>
+        <diffuse>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </diffuse>
+        <specular>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </specular>
     </animation>
 
 <!-- Panel animations -->

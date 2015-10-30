@@ -171,6 +171,91 @@
     </animation>
 
     <animation>
+        <name>Red illum</name>
+        <type>material</type>
+        <object-name>Test.lamp</object-name>
+        <condition>
+					<and>
+						<not-equals>
+							<property>instrumentation/annunciators/test-select</property>
+								<value>0</value>
+							</not-equals>
+            <greater-than>
+              <property>systems/electrical/outputs/efis</property>
+               	<value>15</value>
+            </greater-than>
+					</and>
+        </condition>
+	      <emission>
+            <red>1.0</red>
+            <green>0.0</green>
+            <blue>0.0</blue>
+        </emission>
+        <ambient>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </ambient>
+        <diffuse>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </diffuse>
+        <specular>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </specular>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>Test.knob</object-name>
+        <property>instrumentation/annunciators/test-select</property>
+        <factor>36</factor>
+        <center>
+            <x-m>0.364</x-m>
+            <y-m>0.136</y-m>
+            <z-m>0</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>-1</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Test.knob</object-name>
+        <action>
+            <button>0</button>
+            <binding>
+                <command>property-adjust</command>
+                <property>instrumentation/annunciators/test-select</property>
+                <step>1</step>
+                <min>0</min>
+                <max>10</max>
+                <wrap>true</wrap>
+            </binding>
+        </action>
+         <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>Test knob</tooltip-id>
+                <label>Test alarms: %s</label>
+                <property>instrumentation/annunciators/test-select</property>
+								<mapping>nasal</mapping>
+								<script>
+									var modes = ['OFF','SMOKE DET','LDG GR','FIRE WARN','THRUST REV','FLAP','W/S TEMP','OVER SPD','AOA','ANNUN'];
+									return modes[arg[0]];
+								</script>
+            </binding>
+       </hovered>
+   </animation>
+
+
+    <animation>
         <type>textranslate</type>
         <object-name>Atrim.needle</object-name>
         <property>controls/flight/aileron-trim</property>

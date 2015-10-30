@@ -445,14 +445,20 @@
         <type>avionics</type>
         <path>Sounds/gear-hrn.wav</path>
         <condition>
-            <property>instrumentation/alerts/gear-horn</property>
+					<or>
+            <property>instrumentation/alerts/gear-hrn</property>
+						<equals>
+            	<property>instrumentation/annunciators/test-select</property>
+								<value>2</value>
+						</equals>
+					</or>
         </condition>
         <mode>looped</mode>
-        <volume>
+<!--        <volume>
             <property>instrumentation/alerts/gear-horn</property>
             <factor>0.7</factor>
         </volume>
-        <position>
+-->        <position>
             <x> 2.5 </x>
             <y> 0.0 </y>
             <z> 0.0 </z>
@@ -669,14 +675,22 @@
 					</and>
         </condition>
     </alarm>
+
     <alarm>
         <name>Overspeed alarm</name>
         <mode>looped</mode>
         <path>Aircraft/CitationX/Sounds/overspeed.wav</path>
         <condition>
+					<or>
             <property>sim/alarms/overspeed-alarm</property>
+						<equals>
+							<property>instrumentation/annunciators/test-select</property>
+								<value>7</value>
+						</equals>
+					</or>
         </condition>
     </alarm>
+
     <alarm>
         <name>Autopilot disconnect</name>
         <mode>once</mode>
