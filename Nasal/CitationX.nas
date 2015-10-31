@@ -126,6 +126,7 @@ var JetEngine = {
 var FDM="";
 var Grd_Idle=props.globals.initNode("controls/engines/grnd-idle",1,"BOOL");
 var Annun = props.globals.getNode("instrumentation/annunciators",1);
+props.globals.initNode("controls/flight/flaps-select",0,"INT");
 var PWR2 =0;
 aircraft.livery.init("Aircraft/CitationX/Models/Liveries");
 var FHmeter = aircraft.timer.new("/instrumentation/clock/flight-meter-sec", 10,1);
@@ -216,6 +217,40 @@ controls.gear = func {
 controls.stepSpoilers = func(v) {
     if (v < 0) {setprop("/controls/flight/speedbrake", 0)}
 		else if (v > 0) {setprop("/controls/flight/speedbrake", 1)}
+}
+
+controls.flapsDown = func(step) {
+		var flaps_pos = getprop("controls/flight/flaps");
+		var flaps_path = "controls/flight/flaps";
+		var flaps_select = "controls/flight/flaps-select";
+    if (step == 0) {
+				setprop(flaps_path, 0);
+				setprop(flaps_select,0);
+		}
+		if (step == 1) {
+			if (flaps_pos == 0) {
+				setprop(flaps_path, 0.0428);
+				setprop(flaps_select,1);
+			}
+			if (flaps_pos == 0.0428) {
+				setprop(flaps_path, 0.142);
+				setprop(flaps_select,2);
+			}
+			if (flaps_pos == 0.142) {
+				setprop(flaps_path, 0.428);
+				setprop(flaps_select,3);
+			}
+			if (flaps_pos == 0.428) {
+				setprop(flaps_path,1);
+				setprop(flaps_select,4);
+			}
+		}
+		if (step == -1) {
+			if (flaps_pos == 1) {setprop(flaps_path, 0.428)}
+			if (flaps_pos == 0.428) {setprop(flaps_path, 0.142)}
+			if (flaps_pos == 0.142) {setprop(flaps_path, 0.0428)}
+			if (flaps_pos == 0.0428) {setprop(flaps_path,0)}
+    }
 }
 
 var Startup = func{

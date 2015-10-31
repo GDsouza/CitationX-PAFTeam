@@ -46,6 +46,8 @@
         </offsets>
     </model>
 
+<!--SPEEDBRAKE -->
+
     <animation>
         <type>rotate</type>
         <object-name>Speedbrk.lever</object-name>
@@ -63,9 +65,89 @@
         </axis>
     </animation>
 
+	<animation>
+    <type>pick</type>
+    <object-name>Speedbrk.lever</object-name>
+    <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+            <command>property-toggle</command>
+            <property>controls/flight/speedbrake</property>
+        </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>SpeedBrake</tooltip-id>
+        <label>Speedbrake: %s</label>
+        <mapping>on-off</mapping>
+        <property>controls/flight/speedbrake</property>
+        </binding>
+    </hovered>
+	</animation>
+
+<!-- PARKING BRAKE -->
+
+    <animation>
+      <type>pick</type>
+      <object-name>ParkBrake</object-name>
+      <visible>true</visible>
+      <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+          <command>property-toggle</command>
+          <property>controls/gear/brake-parking</property>
+        </binding>
+      </action>
+       <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>ParkBrake</tooltip-id>
+                <label>Parking Brake: %s</label>
+                <mapping>on-off</mapping>
+                <property>controls/gear/brake-parking</property>
+            </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>ParkBrake</object-name>	
+        <property>controls/gear/brake-parking</property>
+				<factor>-0.03</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+	<animation>
+        <type>rotate</type>
+        <object-name>ParkBrake</object-name>	
+				<property>controls/gear/brake-parking</property>
+        <factor>-90</factor>
+        <center>
+            <x-m>0</x-m>
+            <y-m>0.002</y-m>
+            <z-m>-0.222</z-m>
+        </center>
+        <axis>
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+   </animation>
+
+<!-- FLAPS -->
+
     <animation>
         <type>translate</type>
         <object-name>FlapLever</object-name>
+		    <object-name>Flap.dwn</object-name>
+		    <object-name>Flap.up</object-name>
         <property>controls/flight/flaps</property>
         <interpolation>
             <entry><ind>0</ind><dep>0</dep></entry>
@@ -81,6 +163,68 @@
         </axis>
     </animation>
 
+<animation>
+    <type>pick</type>
+    <object-name>Flap.dwn</object-name>
+    <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+            <command>nasal</command>
+            <script>controls.flapsDown(1)</script>
+        </binding>
+    </action>
+    <hovered>
+			<binding>
+				<command>set-tooltip</command>
+				<tooltip-id>Flaps down</tooltip-id>
+				<label>Flaps : %s</label>
+				<property>controls/flight/flaps-select</property>
+				<mapping>nasal</mapping>
+				<script>
+					var modes = ['UP','SLATS','5 deg','15 deg','FULL'];
+					return modes[arg[0]];
+				</script>
+			</binding>
+		</hovered>
+
+</animation>
+
+<animation>
+    <type>pick</type>
+    <object-name>Flap.up</object-name>
+    <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+            <command>nasal</command>
+            <script>controls.flapsDown(-1)</script>
+        </binding>
+    </action>
+</animation>
+
+<animation>
+		<type>pick</type>
+		<object-name>Flap.reset</object-name>
+		<action>
+    	<button>0</button>
+    	<repeatable>false</repeatable>
+    	<binding>
+				<command>nasal</command>
+				<script>controls.flapsDown(0)</script>
+			</binding>
+    </action>
+    <hovered>
+			<binding>
+				<command>set-tooltip</command>
+				<tooltip-id>Flaps reset</tooltip-id>
+				<label>Flaps reset : "UP"</label>
+			</binding>
+		</hovered>
+</animation>
+
+<!--THROTTLES -->
+		<!-- LH -->
     <animation>
         <type>rotate</type>
         <object-name>LHthrottle</object-name>
@@ -99,187 +243,6 @@
             <z>0.0</z>
         </axis>
     </animation>
-
-    <animation>
-        <type>rotate</type>
-        <object-name>RHthrottle</object-name>
-        <object-name>RHthrottle_up</object-name>
-        <object-name>RHthrottle_dwn</object-name>
-        <property>controls/engines/engine[1]/throttle</property>
-        <factor>65</factor>
-        <center>
-            <x-m>0.425</x-m>
-            <y-m>0.0</y-m>
-            <z-m>-0.201</z-m>
-        </center>
-        <axis>
-            <x>0.0</x>
-            <y>-1.0</y>
-            <z>0.0</z>
-        </axis>
-    </animation>
-
-    <animation>
-        <type>rotate</type>
-        <object-name>Taxi.switch</object-name>
-        <property>controls/lighting/taxi-lights</property>
-        <factor>30</factor>
-        <center>
-            <x-m>0.532</x-m>
-            <y-m>0</y-m>
-            <z-m>-0.133</z-m>
-        </center>
-        <axis>
-            <x>0</x>
-            <y>-1</y>
-            <z>0</z>
-        </axis>
-    </animation>
-
-    <animation>
-        <type>rotate</type>
-        <object-name>LHLlight.switch</object-name>
-        <property>controls/lighting/landing-light[0]</property>
-        <factor>30</factor>
-        <center>
-            <x-m>0.532</x-m>
-            <y-m>0</y-m>
-            <z-m>-0.133</z-m>
-        </center>
-        <axis>
-            <x>0</x>
-            <y>-1</y>
-            <z>0</z>
-        </axis>
-    </animation>
-
-    <animation>
-        <type>rotate</type>
-        <object-name>RHLlight.switch</object-name>
-        <property>controls/lighting/landing-light[1]</property>
-        <factor>30</factor>
-        <center>
-            <x-m>0.532</x-m>
-            <y-m>0</y-m>
-            <z-m>-0.133</z-m>
-        </center>
-        <axis>
-            <x>0</x>
-            <y>-1</y>
-            <z>0</z>
-        </axis>
-    </animation>
-
-    <animation>
-        <name>Red illum</name>
-        <type>material</type>
-        <object-name>Test.lamp</object-name>
-        <condition>
-					<and>
-						<not-equals>
-							<property>instrumentation/annunciators/test-select</property>
-								<value>0</value>
-							</not-equals>
-            <greater-than>
-              <property>systems/electrical/outputs/efis</property>
-               	<value>15</value>
-            </greater-than>
-					</and>
-        </condition>
-	      <emission>
-            <red>1.0</red>
-            <green>0.0</green>
-            <blue>0.0</blue>
-        </emission>
-        <ambient>
-            <red>0</red>
-            <green>0</green>
-            <blue>0</blue>
-        </ambient>
-        <diffuse>
-            <red>0</red>
-            <green>0</green>
-            <blue>0</blue>
-        </diffuse>
-        <specular>
-            <red>0</red>
-            <green>0</green>
-            <blue>0</blue>
-        </specular>
-    </animation>
-
-    <animation>
-        <type>rotate</type>
-        <object-name>Test.knob</object-name>
-        <property>instrumentation/annunciators/test-select</property>
-        <factor>36</factor>
-        <center>
-            <x-m>0.364</x-m>
-            <y-m>0.136</y-m>
-            <z-m>0</z-m>
-        </center>
-        <axis>
-            <x>0</x>
-            <y>0</y>
-            <z>-1</z>
-        </axis>
-    </animation>
-
-    <animation>
-        <type>pick</type>
-        <object-name>Test.knob</object-name>
-        <action>
-            <button>0</button>
-            <binding>
-                <command>property-adjust</command>
-                <property>instrumentation/annunciators/test-select</property>
-                <step>1</step>
-                <min>0</min>
-                <max>10</max>
-                <wrap>true</wrap>
-            </binding>
-        </action>
-         <hovered>
-            <binding>
-                <command>set-tooltip</command>
-                <tooltip-id>Test knob</tooltip-id>
-                <label>Test alarms: %s</label>
-                <property>instrumentation/annunciators/test-select</property>
-								<mapping>nasal</mapping>
-								<script>
-									var modes = ['OFF','SMOKE DET','LDG GR','FIRE WARN','THRUST REV','FLAP','W/S TEMP','OVER SPD','AOA','ANNUN'];
-									return modes[arg[0]];
-								</script>
-            </binding>
-       </hovered>
-   </animation>
-
-
-    <animation>
-        <type>textranslate</type>
-        <object-name>Atrim.needle</object-name>
-        <property>controls/flight/aileron-trim</property>
-        <factor>0.0346</factor>
-        <axis>
-            <x>-1</x>
-            <y>0</y>
-            <z>0</z>
-        </axis>
-    </animation>
-
-    <animation>
-        <type>textranslate</type>
-        <object-name>Rtrim.needle</object-name>
-        <property>controls/flight/rudder-trim</property>
-        <factor>0.0346</factor>
-        <axis>
-            <x>-1</x>
-            <y>0</y>
-            <z>0</z>
-        </axis>
-    </animation>
-
-<!-- Picks -->
 
   <animation>
     <type>pick</type>
@@ -406,6 +369,26 @@
 		</action>
   </animation>
 
+		<!-- RH -->
+    <animation>
+        <type>rotate</type>
+        <object-name>RHthrottle</object-name>
+        <object-name>RHthrottle_up</object-name>
+        <object-name>RHthrottle_dwn</object-name>
+        <property>controls/engines/engine[1]/throttle</property>
+        <factor>65</factor>
+        <center>
+            <x-m>0.425</x-m>
+            <y-m>0.0</y-m>
+            <z-m>-0.201</z-m>
+        </center>
+        <axis>
+            <x>0.0</x>
+            <y>-1.0</y>
+            <z>0.0</z>
+        </axis>
+    </animation>
+
   <animation>
     <type>pick</type>
     <visible>true</visible>
@@ -531,53 +514,26 @@
 		</action>
   </animation>
 
-<animation>
-    <type>pick</type>
-    <object-name>Speedbrk.lever</object-name>
-    <action>
-        <button>0</button>
-        <repeatable>false</repeatable>
-        <binding>
-            <command>property-toggle</command>
-            <property>controls/flight/speedbrake</property>
-        </binding>
-    </action>
-</animation>
+<!-- TAXI LIGHTS -->
 
-<animation>
-    <type>pick</type>
-    <object-name>FlapLever</object-name>
-    <action>
-        <button>0</button>
-        <repeatable>false</repeatable>
-        <binding>
-            <command>nasal</command>
-            <script>controls.flapsDown(1)</script>
-        </binding>
-        <mod-up>
-            <binding>
-                <command>nasal</command>
-                <script>controls.flapsDown(0)</script>
-            </binding>
-        </mod-up>
-    </action>
-    <action>
-        <button>1</button>
-        <repeatable>false</repeatable>
-        <binding>
-            <command>nasal</command>
-            <script>controls.flapsDown(-1)</script>
-        </binding>
-        <mod-up>
-            <binding>
-                <command>nasal</command>
-                <script>controls.flapsDown(0)</script>
-            </binding>
-        </mod-up>
-    </action>
-</animation>
+    <animation>
+        <type>rotate</type>
+        <object-name>Taxi.switch</object-name>
+        <property>controls/lighting/taxi-lights</property>
+        <factor>30</factor>
+        <center>
+            <x-m>0.532</x-m>
+            <y-m>0</y-m>
+            <z-m>-0.133</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>-1</y>
+            <z>0</z>
+        </axis>
+    </animation>
 
-<animation>
+	<animation>
     <type>pick</type>
     <object-name>Taxi.switch</object-name>
     <action>
@@ -592,9 +548,37 @@
             <property>sim/sound/click</property>
         </binding>
     </action>
-</animation>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>Taxi Light</tooltip-id>
+        <label>Taxi Light: %s</label>
+        <mapping>on-off</mapping>
+        <property>controls/lighting/taxi-lights</property>
+        </binding>
+    </hovered>
+	</animation>
 
-<animation>
+<!-- LANDING LIGHTS -->
+
+    <animation>
+        <type>rotate</type>
+        <object-name>LHLlight.switch</object-name>
+        <property>controls/lighting/landing-light[0]</property>
+        <factor>30</factor>
+        <center>
+            <x-m>0.532</x-m>
+            <y-m>0</y-m>
+            <z-m>-0.133</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>-1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+	<animation>
     <type>pick</type>
     <object-name>LHLlight.switch</object-name>
     <action>
@@ -609,9 +593,35 @@
             <property>sim/sound/click</property>
         </binding>
     </action>
-</animation>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>Landing Light LH</tooltip-id>
+        <label>Landing Light LH: %s</label>
+        <mapping>on-off</mapping>
+        <property>controls/lighting/landing-light[0]</property>
+        </binding>
+    </hovered>
+	</animation>
 
-<animation>
+    <animation>
+        <type>rotate</type>
+        <object-name>RHLlight.switch</object-name>
+        <property>controls/lighting/landing-light[1]</property>
+        <factor>30</factor>
+        <center>
+            <x-m>0.532</x-m>
+            <y-m>0</y-m>
+            <z-m>-0.133</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>-1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+	<animation>
     <type>pick</type>
     <object-name>RHLlight.switch</object-name>
     <action>
@@ -626,9 +636,106 @@
             <property>sim/sound/click</property>
         </binding>
     </action>
-</animation>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>Landing Light LH</tooltip-id>
+        <label>Landing Light RH: %s</label>
+        <mapping>on-off</mapping>
+        <property>controls/lighting/landing-light[1]</property>
+        </binding>
+    </hovered>
+	</animation>
 
-<animation>
+<!-- BUTTON & LAMP TEST-->
+
+    <animation>
+        <type>rotate</type>
+        <object-name>Test.knob</object-name>
+        <property>instrumentation/annunciators/test-select</property>
+        <factor>36</factor>
+        <center>
+            <x-m>0.364</x-m>
+            <y-m>0.136</y-m>
+            <z-m>0</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>-1</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Test.knob</object-name>
+        <action>
+            <button>0</button>
+            <binding>
+                <command>property-adjust</command>
+                <property>instrumentation/annunciators/test-select</property>
+                <step>1</step>
+                <min>0</min>
+                <max>10</max>
+                <wrap>true</wrap>
+            </binding>
+        </action>
+         <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>Test knob</tooltip-id>
+                <label>Test alarms: %s</label>
+                <property>instrumentation/annunciators/test-select</property>
+								<mapping>nasal</mapping>
+								<script>
+									var modes = ['OFF','SMOKE DET','LDG GR','FIRE WARN','THRUST REV','FLAP','W/S TEMP','OVER SPD','AOA','ANNUN'];
+									return modes[arg[0]];
+								</script>
+            </binding>
+       </hovered>
+   </animation>
+
+    <animation>
+        <name>Red illum</name>
+        <type>material</type>
+        <object-name>Test.lamp</object-name>
+        <condition>
+					<and>
+						<not-equals>
+							<property>instrumentation/annunciators/test-select</property>
+								<value>0</value>
+							</not-equals>
+            <greater-than>
+              <property>systems/electrical/outputs/efis</property>
+               	<value>15</value>
+            </greater-than>
+					</and>
+        </condition>
+	      <emission>
+            <red>1.0</red>
+            <green>0.0</green>
+            <blue>0.0</blue>
+        </emission>
+        <ambient>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </ambient>
+        <diffuse>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </diffuse>
+        <specular>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </specular>
+    </animation>
+
+<!-- CRS KNOB -->
+
+	<animation>
     <type>pick</type>
     <object-name>RIC1.crs</object-name>
     <action>
@@ -664,9 +771,17 @@
             <wrap>1</wrap>
         </binding>
     </action>
-</animation>
+    <hovered>
+			<binding>
+				<command>set-tooltip</command>
+				<tooltip-id>CRS 1</tooltip-id>
+    	  <label>CRS 1 selected : %.0f</label>
+    	  <property>instrumentation/nav/radials/selected-deg</property>
+   	   </binding>
+	  </hovered>
+	</animation>
 
-<animation>
+	<animation>
     <type>pick</type>
     <object-name>RIC2.crs</object-name>
     <action>
@@ -702,9 +817,19 @@
             <wrap>1</wrap>
         </binding>
     </action>
-</animation>
+    <hovered>
+			<binding>
+				<command>set-tooltip</command>
+				<tooltip-id>CRS 2</tooltip-id>
+    	  <label>CRS 2 selected : %.0f</label>
+    	  <property>instrumentation/nav[1]/radials/selected-deg</property>
+   	   </binding>
+	  </hovered>
+	</animation>
 
-<animation>
+<!-- ALT KNOB -->
+
+	<animation>
     <type>pick</type>
     <object-name>RIC1.alt</object-name>
     <object-name>RIC2.alt</object-name>
@@ -741,9 +866,19 @@
             <wrap>0</wrap>
         </binding>
     </action>
-</animation>
+    <hovered>
+			<binding>
+				<command>set-tooltip</command>
+				<tooltip-id>AP-ALT</tooltip-id>
+				<label>ALT selected: %.0f</label>
+				<property>autopilot/settings/asel</property>
+			</binding>
+		</hovered>
+	</animation>
 
-<animation>
+<!-- HDG KNOB -->
+
+	<animation>
     <type>pick</type>
     <object-name>RIC1.hdg</object-name>
     <object-name>RIC2.hdg</object-name>
@@ -780,11 +915,20 @@
             <wrap>1</wrap>
         </binding>
     </action>
-</animation>
+    <hovered>
+			<binding>
+				<command>set-tooltip</command>
+				<tooltip-id>AP-ALT</tooltip-id>
+				<label>HDG selected: %.0f</label>
+				<property>autopilot/settings/heading-bug-deg</property>
+			</binding>
+		</hovered>
+	</animation>
 
-<animation>
+<!-- AILERON TRIM -->
+	<animation>
     <type>pick</type>
-    <object-name>Atrim.switch</object-name>
+    <object-name>LH.trim</object-name>
     <action>
         <button>0</button>
         <repeatable>true</repeatable>
@@ -797,8 +941,21 @@
             <wrap>0</wrap>
         </binding>
     </action>
+    <hovered>
+			<binding>
+				<command>set-tooltip</command>
+				<tooltip-id>Aileron trim</tooltip-id>
+				<label>Aileron trim : %.2f</label>
+				<property>controls/flight/aileron-trim</property>
+			</binding>
+		</hovered>
+	</animation>
+
+	<animation>
+    <type>pick</type>
+    <object-name>RH.trim</object-name>
     <action>
-        <button>1</button>
+        <button>0</button>
         <repeatable>true</repeatable>
         <binding>
             <command>property-adjust</command>
@@ -809,15 +966,47 @@
             <wrap>0</wrap>
         </binding>
     </action>
-</animation>
+    <hovered>
+			<binding>
+				<command>set-tooltip</command>
+				<tooltip-id>Aileron trim</tooltip-id>
+				<label>Aileron trim : %.2f</label>
+				<property>controls/flight/aileron-trim</property>
+			</binding>
+		</hovered>
+	</animation>
 
-<animation>
+	<animation>
+        <type>textranslate</type>
+        <object-name>Atrim.needle</object-name>
+        <property>controls/flight/aileron-trim</property>
+        <factor>0.0346</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+	</animation>
+
+
+<!-- RUDDER TRIM -->
+
+	<animation>
     <type>pick</type>
     <object-name>RUDDER.knob</object-name>
     <action>
         <button>0</button>
         <repeatable>true</repeatable>
         <binding>
+					<command>property-assign</command>
+          <property>controls/flight/rudder-trim</property>
+					<value>0</value>
+        </binding>
+    </action>
+    <action>
+        <button>3</button>
+        <repeatable>true</repeatable>
+        <binding>
             <command>property-adjust</command>
             <property>controls/flight/rudder-trim</property>
             <step>0.01</step>
@@ -827,7 +1016,7 @@
         </binding>
     </action>
     <action>
-        <button>1</button>
+        <button>4</button>
         <repeatable>true</repeatable>
         <binding>
             <command>property-adjust</command>
@@ -838,60 +1027,26 @@
             <wrap>0</wrap>
         </binding>
     </action>
+    <hovered>
+			<binding>
+				<command>set-tooltip</command>
+				<tooltip-id>Rudder trim</tooltip-id>
+				<label>Rudder trim : %.2f</label>
+				<property>controls/flight/rudder-trim</property>
+			</binding>
+		</hovered>
 </animation>
 
-<!-- Parking Brake -->
-
-    <animation>
-      <type>pick</type>
-      <object-name>ParkBrake</object-name>
-      <visible>true</visible>
-      <action>
-        <button>0</button>
-        <repeatable>false</repeatable>
-        <binding>
-          <command>property-toggle</command>
-          <property>controls/gear/brake-parking</property>
-        </binding>
-      </action>
-       <hovered>
-            <binding>
-                <command>set-tooltip</command>
-                <tooltip-id>ParkBrake</tooltip-id>
-                <label>Parking Brake: %s</label>
-                <mapping>on-off</mapping>
-                <property>controls/gear/brake-parking</property>
-            </binding>
-        </hovered>
-    </animation>
-
-    <animation>
-        <type>translate</type>
-        <object-name>ParkBrake</object-name>	
-        <property>controls/gear/brake-parking</property>
-				<factor>-0.03</factor>
+  <animation>
+        <type>textranslate</type>
+        <object-name>Rtrim.needle</object-name>
+        <property>controls/flight/rudder-trim</property>
+        <factor>0.0346</factor>
         <axis>
             <x>-1</x>
             <y>0</y>
             <z>0</z>
         </axis>
     </animation>
-
-	<animation>
-        <type>rotate</type>
-        <object-name>ParkBrake</object-name>	
-				<property>controls/gear/brake-parking</property>
-        <factor>-90</factor>
-        <center>
-            <x-m>0</x-m>
-            <y-m>0.002</y-m>
-            <z-m>-0.222</z-m>
-        </center>
-        <axis>
-            <x>1</x>
-            <y>0</y>
-            <z>0</z>
-        </axis>
-   </animation>
 
 </PropertyList>

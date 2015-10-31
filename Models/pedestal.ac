@@ -1,8 +1,8 @@
 AC3Db
 MATERIAL "pedestal" rgb 0.8 0.8 0.8  amb 1 1 1  emis 0.1 0.1 0.1  spec 1 1 1  shi 50  trans 0
-MATERIAL "LABELS" rgb 1 1 1  amb 1 1 1  emis 0.1 0.1 0.1  spec 0 0 0  shi 1  trans 0
+MATERIAL "LABELS" rgb 1 1 1  amb 1 1 1  emis 0.1 0.1 0.1  spec 0 0 0  shi 1  trans 1
 OBJECT world
-kids 72
+kids 76
 OBJECT poly
 name "AP.engage"
 data 9
@@ -390,6 +390,44 @@ refs 4
 27 0.533332 0.928302
 26 0.514894 0.928302
 30 0.514894 0.914833
+kids 0
+OBJECT poly
+name "LH.trim"
+loc 0 0.000381127 -0.0319679
+texture "interior.png"
+crease 40.000000
+numvert 4
+0.792368 -0.154291 0.065628
+0.835565 -0.158105 0.065628
+0.793549 -0.154396 0.032991
+0.834383 -0.158001 0.032991
+numsurf 1
+SURF 0x10
+mat 1
+refs 4
+1 0.686294 0.394314
+3 0.685705 0.402917
+2 0.665359 0.402917
+0 0.664771 0.394314
+kids 0
+OBJECT poly
+name "RH.trim"
+loc 0 0.000496581 0.039743
+texture "interior.png"
+crease 40.000000
+numvert 4
+0.835565 -0.158105 -0.0816323
+0.792368 -0.154291 -0.0816323
+0.834383 -0.158001 -0.0487746
+0.793549 -0.154396 -0.0487746
+numsurf 1
+SURF 0x10
+mat 1
+refs 4
+2 0.685705 0.424385
+0 0.686294 0.432989
+1 0.664771 0.432989
+3 0.665359 0.424385
 kids 0
 OBJECT poly
 name "Blkknob.015"
@@ -16209,9 +16247,7 @@ refs 3
 104 0.972111 0.892557
 kids 0
 OBJECT poly
-name "Circle.028"
-data 10
-Circle.028
+name "Flap.reset"
 texture "interior.png"
 crease 30.000002
 numvert 9
@@ -20370,6 +20406,42 @@ refs 4
 18 0.9063 0.786913
 17 0.854799 0.786913
 16 0.854799 0.782879
+kids 0
+OBJECT poly
+name "Flap.up"
+texture "interior.png"
+crease 30.000002
+numvert 4
+0.442135 -0.104659 -0.118974
+0.420725 -0.104409 -0.118974
+0.420725 -0.104409 -0.138931
+0.442135 -0.104659 -0.138931
+numsurf 1
+SURF 0x10
+mat 1
+refs 4
+3 0.9063 0.782879
+2 0.9063 0.786913
+1 0.854799 0.786913
+0 0.854799 0.782879
+kids 0
+OBJECT poly
+name "Flap.dwn"
+texture "interior.png"
+crease 30.000002
+numvert 4
+0.464999 -0.104659 -0.118974
+0.44231 -0.104409 -0.118974
+0.44231 -0.104409 -0.138931
+0.464999 -0.104659 -0.138931
+numsurf 1
+SURF 0x10
+mat 1
+refs 4
+3 0.9063 0.782879
+2 0.9063 0.786913
+1 0.854799 0.786913
+0 0.854799 0.782879
 kids 0
 OBJECT poly
 name "GrdIdle.switch"
