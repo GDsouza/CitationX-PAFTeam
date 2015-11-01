@@ -19,7 +19,7 @@ var fuelsys = {
 			m.fuel.getNode("tank[1]/selected",1),
 			m.fuel.getNode("tank[2]/selected",1) ];		
 		m.xfer = [m.Xfuel.getNode("xfer-L"),m.Xfuel.getNode("xfer-R")];
-		m.level2= [m.fuel.getNode("tank[2]/level-lbs")];
+		m.level2= m.fuel.getNode("tank[2]/level-lbs");
 
 		return m
     },
