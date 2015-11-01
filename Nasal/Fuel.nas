@@ -9,16 +9,17 @@ var fuelsys = {
 
 		m.engine = props.globals.getNode("controls/engines",1);
 		m.fuel = props.globals.getNode("consumables/fuel",1);
+		m.Xfuel = props.globals.getNode("controls/fuel",1); 
 
 		m.sel = [ m.engine.getNode("engine[0]/feed_tank",1),
 			m.engine.getNode("engine[1]/feed_tank",1) ];
-
 		m.cutoff = [ m.engine.getNode("engine[0]/cutoff",1),
-			m.engine.getNode("engine[1]/cutoff",1) ];
-	
+			m.engine.getNode("engine[1]/cutoff",1) ];	
 		m.tank = [ m.fuel.getNode("tank[0]/selected",1),
 			m.fuel.getNode("tank[1]/selected",1),
-			m.fuel.getNode("tank[2]/selected",1) ];
+			m.fuel.getNode("tank[2]/selected",1) ];		
+		m.xfer = [m.Xfuel.getNode("xfer-L"),m.Xfuel.getNode("xfer-R")];
+		m.level2= [m.fuel.getNode("tank[2]/level-lbs")];
 
 		return m
     },
@@ -33,27 +34,11 @@ var fuelsys = {
 
 	update : func{		
 
-		### Fuel gauges ###
-
-#		var tank_level_l = getprop("consumables/fuel/tank[0]/level-gal_us");
-#		var tank_level_r = getprop("consumables/fuel/tank[1]/level-gal_us");
-#		var tank_level_ctr = getprop("consumables/fuel/tank[2]/level-gal_us");
-
-#		if (getprop("systems/electrical/volts") > 12) {
-#			setprop("consumables/fuel/tank[0]/tank-level",tank_level_l);
-#			setprop("consumables/fuel/tank[1]/tank-level",tank_level_r);
-#			setprop("consumables/fuel/tank[2]/tank-level",tank_level_ctr);
-#		} else {
-#			setprop("consumables/fuel/tank[0]/tank-level",0);
-#			setprop("consumables/fuel/tank[1]/tank-level",0);
-#			setprop("consumables/fuel/tank[2]/tank-level",0);
-#		}	
-
-		if (me.tank[2].getValue() > 10) {
+		if (me.level2.getValue() > 10) {
 			me.tank[0].setBoolValue(0);		
 			me.tank[1].setBoolValue(0);			
 		} else {
-			me.tank[2].setBoolValue(0);					
+			me.tank[2].setBoolValue(0);						
 	### X-Feed ###
 			if (me.sel[0].getValue() == -1 and me.sel[1].getValue() == -1) {
 				me.tank[0].setBoolValue(0);		
@@ -87,7 +72,7 @@ var fuelsys = {
 		}
 		settimer(func {me.update();},0);
 	},
-	
+
 #	boost_pump : func{
 #		var fgph = [ getprop("engines/engine[0]/fuel-flow-gph"),
 #					getprop("engines/engine[1]/fuel-flow-gph") ];				
@@ -105,6 +90,30 @@ var fuelsys = {
 #		settimer(func {me.boost_pump();},0);
 #	},	
 };
+
+var gravity_xflow = func{
+		var xflow_switch = getprop("controls/fuel/gravity-xflow");
+		var level_L = getprop("consumables/fuel/tank[0]/level-lbs");		
+		var level_R = getprop("consumables/fuel/tank[1]/level-lbs");
+		var efis = getprop("systems/electrical/outputs/efis");
+
+		var timer = maketimer(0.1,func {	
+			if(level_L > level_R + 1) {
+				level_L -= 1;
+				level_R += 1;
+				setprop("consumables/fuel/tank[0]/level-lbs",level_L);				
+				setprop("consumables/fuel/tank[1]/level-lbs",level_R);
+			}	else if (level_R > level_L + 1){
+				level_R -= 1;
+				level_L += 1;
+				setprop("consumables/fuel/tank[0]/level-lbs",level_L);				
+				setprop("consumables/fuel/tank[1]/level-lbs",level_R);	
+			} else {timer.stop()}
+		});
+
+		if (efis and xflow_switch) {timer.start()}
+};
+
 var fuel = fuelsys.new();
 	setlistener("/sim/signals/fdm-initialized", func {
 	fuel.init_fuel();

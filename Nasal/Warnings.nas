@@ -75,6 +75,8 @@ var EICAS = {
 				EICAS.update_listeners()},1,0);
 			setlistener("consumables/fuel/tank[2]/level-lbs", func {
 				EICAS.update_listeners()},1,0);
+			setlistener("controls/fuel/gravity-xflow", func {
+				EICAS.update_listeners()},1,0);
 			setlistener("controls/engines/engine[0]/feed_tank", func {
 				EICAS.update_listeners()},1,0);
 			setlistener("controls/engines/engine[1]/feed_tank", func {
@@ -119,6 +121,7 @@ var EICAS = {
 				me.level_tank_L = getprop("consumables/fuel/tank[0]/level-lbs");
 				me.level_tank_R = getprop("consumables/fuel/tank[1]/level-lbs");
 				me.level_tank_C = getprop("consumables/fuel/tank[2]/level-lbs");
+				me.grav_xflow = getprop("controls/fuel/gravity-xflow");
 				me.xfeed_L = getprop("controls/engines/engine[0]/feed_tank");
 				me.xfeed_R = getprop("controls/engines/engine[1]/feed_tank");
 				me.gen_L = getprop("controls/electric/engine[0]/generator");
@@ -134,9 +137,9 @@ var EICAS = {
 		},
 
 		update : func {
-	    me.enabled = (getprop("systems/electrical/outputs/efis") and
+	    me.enabled = getprop("systems/electrical/outputs/efis") and
                             (getprop("sim/freeze/replay-state")!=1) and
-                            me.serviceable.getValue());
+                            me.serviceable.getValue();
 			me.state = getprop("instrumentation/annunciators/state");
       me.msg_l0 = [];
 			me.msg_l1 = [];
@@ -239,6 +242,10 @@ var EICAS = {
 				if (me.xfeed_L or me.xfeed_R) {
           	append(me.msg_l0,"FUEL XFEED OPEN");
 				}
+				if (me.grav_xflow) {
+          	append(me.msg_l0,"FUEL XFEED OPEN");
+				}
+
 			me.AnnunOutput();
 
 			### TESTS ###
@@ -248,8 +255,6 @@ var EICAS = {
 				me.msg_l1 = [];
 				me.msg_l2 = [];
 				me.msg_l3 = [];
-#				me.nb_caution = 0;
-#				me.my_warning = 0;
 				WarningAck.setBoolValue(0);
 				CautionAck.setBoolValue(0);
 				me.warn_l3.setValue("");
@@ -324,14 +329,14 @@ var EICAS = {
 				var msg0 = "               \n";
 				var msg_tmp = "";
 				
-					### LEVEL 3 ###
+					### LEVEL 3 - RED ###
         for(var i=0; i<size(me.msg_l3); i+=1) {
             msg = msg ~ me.msg_l3[i] ~ "\n";
 						msg_tmp = msg_tmp~msg0;				
         }
         me.warn_l3.setValue(msg);
 
-					### LEVEL 2 ###
+					### LEVEL 2 - AMBER ###
 				msg = msg_tmp;
         for(var i=0; i<size(me.msg_l2); i+=1) {
             msg = msg ~ me.msg_l2[i] ~ "\n";
@@ -339,7 +344,7 @@ var EICAS = {
         }
 				me.warn_l2.setValue(msg);
 
-					### LEVEL 1 ###
+					### LEVEL 1 - CYAN ###
 				msg = msg_tmp;
         for(var i=0; i<size(me.msg_l1); i+=1) {
             msg = msg ~ me.msg_l1[i] ~ "\n";
@@ -347,7 +352,7 @@ var EICAS = {
         }
 				me.warn_l1.setValue(msg);
 
-					### LEVEL 0 ###
+					### LEVEL 0 - WHITE ###
 				msg = msg_tmp;
         for(var i=0; i<size(me.msg_l0); i+=1) {
             msg = msg ~ me.msg_l0[i] ~ "\n";
@@ -358,6 +363,7 @@ var EICAS = {
 
 		AnnunOutput : func {	### ANNUNCIATORS ###
 
+					### WARNING ###
 				if (me.nb_warning == 0) {
 					MstrWarning.setBoolValue(0);										
 					Warn.setBoolValue(0);
