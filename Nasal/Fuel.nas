@@ -1,7 +1,8 @@
 ## Fuel System  ##
 ## Christian Le Moigne - octobre 2015 ##
 
-### Chaque réacteur est alimenté par le réservoir d'aile correspondant. Le réservoir central, dans le fuselage, maintient le niveau des réservoirs d'aile constants jusqu'à ce qu'il soit vide. ###
+### Chaque réacteur est alimenté par le réservoir d'aile correspondant. Le réservoir central, dans le fuselage, est fictivement séparé en 2 compartiments (tank2 & tank3), reliés entre eux. Chaque compartiment alimente le récteur correspondant jusqu'à ce qu'il ne reste plus que 500 lbs dans le réservoir central. Les réservoirs d'ailes prennent ensuite le relais.
+###
 
 var fuelsys = {
     new : func {
@@ -17,9 +18,14 @@ var fuelsys = {
 			m.engine.getNode("engine[1]/cutoff",1) ];	
 		m.tank = [ m.fuel.getNode("tank[0]/selected",1),
 			m.fuel.getNode("tank[1]/selected",1),
-			m.fuel.getNode("tank[2]/selected",1) ];		
+			m.fuel.getNode("tank[2]/selected",1),		
+			m.fuel.getNode("tank[3]/selected",1) ];		
 		m.xfer = [m.Xfuel.getNode("xfer-L"),m.Xfuel.getNode("xfer-R")];
-		m.level2= m.fuel.getNode("tank[2]/level-lbs");
+		m.level0 = m.fuel.getNode("tank[0]/level-lbs");
+		m.level1 = m.fuel.getNode("tank[1]/level-lbs");
+		m.level2 = m.fuel.getNode("tank[2]/level-lbs");
+		m.level3 = m.fuel.getNode("tank[3]/level-lbs");
+		m.totalCtrTk = m.fuel.getNode("total-ctrtk-lbs");
 
 		return m
     },
@@ -28,49 +34,107 @@ var fuelsys = {
 		me.tank[0].setBoolValue(0); 	
 		me.tank[1].setBoolValue(0);		
 		me.tank[2].setBoolValue(1);		
+		me.tank[3].setBoolValue(1);
 		me.sel[0].setIntValue(0);
 		me.sel[1].setIntValue(0);
 	},
 
 	update : func{		
+		me.totalCtrTk.setValue(me.level2.getValue() + me.level3.getValue());
+		var diffLevel2_3 = abs((me.level2.getValue() - me.level3.getValue())/2);		
 
-		if (me.level2.getValue() > 10) {
-			me.tank[0].setBoolValue(0);		
-			me.tank[1].setBoolValue(0);			
-		} else {
-			me.tank[2].setBoolValue(0);						
-	### X-Feed ###
-			if (me.sel[0].getValue() == -1 and me.sel[1].getValue() == -1) {
-				me.tank[0].setBoolValue(0);		
-				me.tank[1].setBoolValue(0);			
-			} else if (me.sel[0].getValue() == 0 and me.sel[1].getValue() == -1){
+			### TANK 2-3 BALANCE ###
+		if (me.level2.getValue() > me.level3.getValue()) {
+				me.level2.setValue(me.level2.getValue() - diffLevel2_3);
+				me.level3.setValue(me.level3.getValue() + diffLevel2_3);
+		}
+		if (me.level2.getValue() < me.level3.getValue()) {
+				me.level2.setValue(me.level2.getValue() + diffLevel2_3);
+				me.level3.setValue(me.level3.getValue() - diffLevel2_3);
+		}
+
+			### XFER ###	
+
+		if (me.totalCtrTk.getValue() > 500) {
+			if (me.xfer[0].getValue() == 2) {
 				me.tank[0].setBoolValue(1);		
-				me.tank[1].setBoolValue(0);				
-			} else if (me.sel[0].getValue() == 1 and me.sel[1].getValue() == -1){
+				me.tank[2].setBoolValue(0);			
+				me.oof();
+			} else {
 				me.tank[0].setBoolValue(0);		
-				me.tank[1].setBoolValue(1);				
-				props.globals.getNode("engines/engine[1]/out-of-fuel").setValue(1);
-			} else if (me.sel[0].getValue() == -1 and me.sel[1].getValue() == 0){
-				me.tank[0].setBoolValue(0);		
-				me.tank[1].setBoolValue(1);					
-			} else if (me.sel[0].getValue() == 0 and me.sel[1].getValue() == 0) {
-					if (me.cutoff[0].getValue() == 1) {me.tank[0].setBoolValue(0)}
-						else{me.tank[0].setBoolValue(1)}		
-					if (me.cutoff[1].getValue() == 1) {me.tank[1].setBoolValue(0)}	
-						else {me.tank[1].setBoolValue(1)}		
-			} else if (me.sel[0].getValue() == 1 and me.sel[1].getValue() == 0){
-				me.tank[0].setBoolValue(0);		
+				me.tank[2].setBoolValue(1);							
+			}
+			if (me.xfer[1].getValue() == 2) {
 				me.tank[1].setBoolValue(1);		
-			} else if (me.sel[0].getValue() == -1 and me.sel[1].getValue() == 1){
-				me.tank[0].setBoolValue(1);		
-				me.tank[1].setBoolValue(0);			
-				props.globals.getNode("engines/engine[0]/out-of-fuel").setValue(1);
-			} else if (me.sel[0].getValue() == 0 and me.sel[1].getValue() == 1){
-				me.tank[0].setBoolValue(1);		
-				me.tank[1].setBoolValue(0);				
+				me.tank[3].setBoolValue(0);			
+				me.oof();
+			} else {
+				me.tank[1].setBoolValue(0);		
+				me.tank[3].setBoolValue(1);			
+			}
+		}
+		if (me.totalCtrTk.getValue() <= 500) {
+			if (me.totalCtrTk.getValue() > 0.5) {
+				if (me.xfer[0].getValue() == 1) {
+					me.tank[0].setBoolValue(0);		
+					me.tank[2].setBoolValue(1);			
+				} else {
+					if (me.sel[0].getValue() == 0 and !me.cutoff[0].getValue()){
+						me.tank[0].setBoolValue(1);		
+						me.tank[2].setBoolValue(0);					
+					} else {
+							me.xfeed();										
+							me.oof();
+					}
+				}
+				if (me.xfer[1].getValue() == 1) {
+					me.tank[1].setBoolValue(0);		
+					me.tank[3].setBoolValue(1);			
+				}	else {
+					if (me.sel[1].getValue() == 0 and !me.cutoff[1].getValue()){
+						me.tank[1].setBoolValue(1);		
+						me.tank[3].setBoolValue(0);					
+					} else {
+							me.xfeed();										
+							me.oof();
+					}
+				}
+				if (me.xfer[0].getValue() == 0 and me.xfer[1].getValue() == 0) {
+					me.xfeed();
+					me.oof();
+				}					 
+			} else {											### TK 2-3 EMPTY ###
+					me.xfeed();	
+					me.oof();
 			}
 		}
 		settimer(func {me.update();},0);
+	},
+
+	xfeed : func {
+		me.tank[2].setBoolValue(0);			
+		me.tank[3].setBoolValue(0);			
+		if (me.sel[0].getValue() == 1) {
+			me.tank[0].setBoolValue(0);		
+			me.tank[1].setBoolValue(1);		
+		} else if (me.sel[1].getValue() == 1) {
+				me.tank[0].setBoolValue(1);		
+				me.tank[1].setBoolValue(0);				
+		} else {
+				if (me.cutoff[0].getValue() == 1) {me.tank[0].setBoolValue(0)}
+					else {me.tank[0].setBoolValue(1)}		
+				if (me.cutoff[1].getValue() == 1) {me.tank[1].setBoolValue(0)}	
+					else {me.tank[1].setBoolValue(1)}		
+		}
+	},		
+
+	oof : func {		### OUT OF FUEL ###
+		if (me.level0.getValue() <= 0.5 and (me.sel[0].getValue() == 0 or me.sel[1].getValue() == 1)) {
+			setprop("engines/engine[0]/out-of-fuel",1);
+		}
+		if (me.level1.getValue() <= 0.5 and (me.sel[1].getValue() == 0 or me.sel[0].getValue() == 1) ) {
+			setprop("engines/engine[1]/out-of-fuel",1);
+		}
 	},
 
 #	boost_pump : func{

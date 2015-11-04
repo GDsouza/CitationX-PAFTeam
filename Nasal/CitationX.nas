@@ -223,10 +223,6 @@ controls.flapsDown = func(step) {
 		var flaps_pos = getprop("controls/flight/flaps");
 		var flaps_path = "controls/flight/flaps";
 		var flaps_select = "controls/flight/flaps-select";
-    if (step == 0) {
-				setprop(flaps_path, 0);
-				setprop(flaps_select,0);
-		}
 		if (step == 1) {
 			if (flaps_pos == 0) {
 				setprop(flaps_path, 0.0428);
@@ -251,6 +247,10 @@ controls.flapsDown = func(step) {
 			if (flaps_pos == 0.142) {setprop(flaps_path, 0.0428)}
 			if (flaps_pos == 0.0428) {setprop(flaps_path,0)}
     }
+    if (step == 2) {
+				setprop(flaps_path, 0);
+				setprop(flaps_select,0);
+		}
 }
 
 var Startup = func{

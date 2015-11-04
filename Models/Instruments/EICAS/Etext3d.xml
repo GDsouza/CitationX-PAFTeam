@@ -118,7 +118,7 @@
         <alignment>center-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
         <type type="string">number-value</type>
-        <property>consumables/fuel/tank[2]/level-lbs</property>
+        <property>consumables/fuel/total-ctrtk-lbs</property>
         <format>%04.0f</format>
         <font>helvetica_bold.txf</font>
         <character-size>0.006</character-size>

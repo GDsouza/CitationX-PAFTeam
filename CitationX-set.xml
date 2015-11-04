@@ -433,10 +433,16 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
                 <selected type="bool">1</selected>
             </tank>
             <tank n="2">
-                <name>CTR tank</name>
-                <level-lbs>2000.0</level-lbs>
+                <name>CTR tank1</name>
+                <level-lbs>1000.0</level-lbs>
                 <selected type="bool">1</selected>
             </tank>
+            <tank n="3">
+                <name>CTR tank2</name>
+                <level-lbs>1000.0</level-lbs>
+                <selected type="bool">1</selected>
+            </tank>
+
         </fuel>
     </consumables>
 

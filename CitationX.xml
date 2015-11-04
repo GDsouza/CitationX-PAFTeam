@@ -133,8 +133,8 @@ Fuel 12938 lbs jet
 <!--    Total fuel = 12931 lbs   -->
   <tank x="0.7" y="1.0" z="-0.9" capacity="3510" jet="true"/>
   <tank x="0.7" y="-1.0" z="-0.9" capacity="3510" jet="true"/>
-  <tank x="0.8" y="0.0" z="-1.2" capacity="5980" jet="true"/>
-  <tank x="0" y="0" z="0" capacity="0"/>
+  <tank x="0.8" y="0.0" z="-1.2" capacity="2990" jet="true"/>
+  <tank x="0.8" y="0.0" z="-1.2" capacity="2990" jet="true"/>
 
 <gear x="8.014" y="0.00" z="-2.2" compression="0.1" spring="0.5"><!--orig:c=0.5-->
     <control-input axis="/controls/gear/steering" control="STEER" invert="true"/>

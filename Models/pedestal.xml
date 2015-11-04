@@ -211,7 +211,7 @@
     	<repeatable>false</repeatable>
     	<binding>
 				<command>nasal</command>
-				<script>controls.flapsDown(0)</script>
+				<script>controls.flapsDown(2)</script>
 			</binding>
     </action>
     <hovered>
@@ -222,7 +222,7 @@
 			</binding>
 		</hovered>
 </animation>
-
+-->
 <!--THROTTLES -->
 		<!-- LH -->
     <animation>

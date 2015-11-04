@@ -73,13 +73,17 @@ var EICAS = {
 				EICAS.update_listeners()},1,0);
 			setlistener("consumables/fuel/tank[1]/level-lbs", func {
 				EICAS.update_listeners()},1,0);
-			setlistener("consumables/fuel/tank[2]/level-lbs", func {
+			setlistener("consumables/fuel/total-ctrtk-lbs", func {
 				EICAS.update_listeners()},1,0);
 			setlistener("controls/fuel/gravity-xflow", func {
 				EICAS.update_listeners()},1,0);
 			setlistener("controls/engines/engine[0]/feed_tank", func {
 				EICAS.update_listeners()},1,0);
 			setlistener("controls/engines/engine[1]/feed_tank", func {
+				EICAS.update_listeners()},1,0);
+			setlistener("controls/fuel/xfer-L", func {
+				EICAS.update_listeners()},1,0);
+			setlistener("controls/fuel/xfer-R", func {
 				EICAS.update_listeners()},1,0);
 			setlistener("controls/electric/engine[0]/generator", func {
 				EICAS.update_listeners()},1,0);
@@ -120,10 +124,12 @@ var EICAS = {
 				me.boost_pump_R = getprop("controls/fuel/tank[1]/boost-pump");
 				me.level_tank_L = getprop("consumables/fuel/tank[0]/level-lbs");
 				me.level_tank_R = getprop("consumables/fuel/tank[1]/level-lbs");
-				me.level_tank_C = getprop("consumables/fuel/tank[2]/level-lbs");
+				me.total_fuel = getprop("consumables/fuel/total-ctrtk-lbs");
 				me.grav_xflow = getprop("controls/fuel/gravity-xflow");
 				me.xfeed_L = getprop("controls/engines/engine[0]/feed_tank");
 				me.xfeed_R = getprop("controls/engines/engine[1]/feed_tank");
+				me.xfer_L = getprop("controls/fuel/xfer-L");
+				me.xfer_R = getprop("controls/fuel/xfer-R");
 				me.gen_L = getprop("controls/electric/engine[0]/generator");
 				me.gen_R = getprop("controls/electric/engine[1]/generator");
 				me.oil_L = getprop("systems/hydraulics/psi-norm[0]");
@@ -170,14 +176,10 @@ var EICAS = {
 					me.nb_warning +=1;
 				}
 				if(me.wow and !me.eng0_shutdown and !me.eng1_shutdown and (
-					me.throttle_L	< 0.8
-					or me.throttle_R < 0.8
-					or me.ext_pwr
-					or me.flaps < 0.140
-					or me.flaps > 0.430
-					or me.speedbrake
-					or me.parkbrake
-					or me.level_tank_C <=10)) {
+						me.ext_pwr
+						or me.speedbrake
+						or me.parkbrake
+						or me.total_fuel <= 500)) {
 					append(me.msg_l3,"NO TAKEOFF");
 					me.nb_warning +=1;
 				}			
@@ -224,7 +226,10 @@ var EICAS = {
 				if (me.parkbrake) {
 					append(me.msg_l1,"PARK BRK SET");
 				}
-				if(me.wow and (me.throttle_L	< 0.8 or me.throttle_R < 0.8)) {
+				if(me.wow and (me.throttle_L	< 0.8
+						or me.throttle_R < 0.8)
+						or me.flaps < 0.140
+						or me.flaps > 0.430) {
 					append(me.msg_l1,"NO TAKEOFF");
 				}			
 
@@ -239,6 +244,14 @@ var EICAS = {
 				}	else if (me.boost_pump_R) {
           	append(me.msg_l0,"BOOST PUMP R");
 				}
+				if (me.xfer_L and me.xfer_R) {
+          	append(me.msg_l0,"CTR XFER XSIT L-R");
+				}	else if (me.xfer_L) {
+          	append(me.msg_l0,"CTR XFER XSIT L");
+				}	else if (me.xfer_R) {
+          	append(me.msg_l0,"CTR XFER XSIT R");
+				}
+
 				if (me.xfeed_L or me.xfeed_R) {
           	append(me.msg_l0,"FUEL XFEED OPEN");
 				}
