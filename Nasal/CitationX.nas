@@ -127,6 +127,8 @@ var FDM="";
 var Grd_Idle=props.globals.initNode("controls/engines/grnd-idle",1,"BOOL");
 var Annun = props.globals.getNode("instrumentation/annunciators",1);
 props.globals.initNode("controls/flight/flaps-select",0,"INT");
+props.globals.initNode("controls/fuel/tank[0]/boost_pump",0,"INT");
+props.globals.initNode("controls/fuel/tank[1]/boost_pump",0,"INT");
 var PWR2 =0;
 aircraft.livery.init("Aircraft/CitationX/Models/Liveries");
 var FHmeter = aircraft.timer.new("/instrumentation/clock/flight-meter-sec", 10,1);

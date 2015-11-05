@@ -1352,6 +1352,152 @@
         </action>
     </animation>
 
+<!-- FUEL BOOST LH -->
+
+    <animation>
+        <type>rotate</type>
+        <object-name>Fuelboost.Lh</object-name>
+        <property>controls/fuel/tank[0]/boost_pump</property>
+        <factor>15</factor>
+        <center>
+            <x-m>0.066</x-m>
+            <y-m>0</y-m>
+            <z-m>-0.060</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>-1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Fuelboost.Lh</object-name>
+        <object-name>FuelboostLh.on</object-name> 
+       <action>
+            <button>0</button>
+            <binding>
+               <command>property-adjust</command>
+               <property>controls/fuel/tank[0]/boost_pump</property>
+								<step>1</step>
+								<min>0</min>
+								<max>2</max>
+							<wrap>false</wrap>
+            </binding>
+        		<binding>
+            	<command>property-toggle</command>
+            	<property>sim/sound/click</property>
+        </binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>Fuelboost L</tooltip-id>
+                <label>Fuelboost L : %s</label>
+           			<property>controls/fuel/tank[0]/boost_pump</property>
+                <mapping>nasal</mapping>
+								<script>
+									var modes = ['NORM','OFF','ON'];
+									return modes[arg[0]];
+								</script>
+            </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>FuelboostLh.norm</object-name> 
+       <action>
+            <button>0</button>
+            <binding>
+               <command>property-adjust</command>
+               <property>controls/fuel/tank[0]/boost_pump</property>
+								<step>-1</step>
+								<min>0</min>
+								<max>2</max>
+							<wrap>false</wrap>
+            </binding>
+        		<binding>
+            	<command>property-toggle</command>
+            	<property>sim/sound/click</property>
+        </binding>
+        </action>
+    </animation>
+
+<!-- FUEL BOOST RH -->
+
+    <animation>
+        <type>rotate</type>
+        <object-name>Fuelboost.Rh</object-name>
+        <property>controls/fuel/tank[1]/boost_pump</property>
+        <factor>15</factor>
+        <center>
+            <x-m>0.066</x-m>
+            <y-m>0</y-m>
+            <z-m>-0.060</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>-1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Fuelboost.Rh</object-name>
+        <object-name>FuelboostRh.on</object-name> 
+       <action>
+            <button>0</button>
+            <binding>
+               <command>property-adjust</command>
+               <property>controls/fuel/tank[1]/boost_pump</property>
+								<step>1</step>
+								<min>0</min>
+								<max>2</max>
+							<wrap>false</wrap>
+            </binding>
+        		<binding>
+            	<command>property-toggle</command>
+            	<property>sim/sound/click</property>
+        </binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>Fuelboost R</tooltip-id>
+                <label>Fuelboost R : %s</label>
+           			<property>controls/fuel/tank[1]/boost_pump</property>
+                <mapping>nasal</mapping>
+								<script>
+									var modes = ['NORM','OFF','ON'];
+									return modes[arg[0]];
+								</script>
+            </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>FuelboostRh.norm</object-name> 
+       <action>
+            <button>0</button>
+            <binding>
+               <command>property-adjust</command>
+               <property>controls/fuel/tank[1]/boost_pump</property>
+								<step>-1</step>
+								<min>0</min>
+								<max>2</max>
+							<wrap>false</wrap>
+            </binding>
+        		<binding>
+            	<command>property-toggle</command>
+            	<property>sim/sound/click</property>
+        </binding>
+        </action>
+    </animation>
+
 <!-- PANEL ANIMATIONS -->
 
     <animation>

@@ -111,7 +111,7 @@ var fuelsys = {
 		settimer(func {me.update();},0);
 	},
 
-	xfeed : func {
+	xfeed : func { 					### CROSSFEED ###
 		me.tank[2].setBoolValue(0);			
 		me.tank[3].setBoolValue(0);			
 		if (me.sel[0].getValue() == 1) {
@@ -128,7 +128,7 @@ var fuelsys = {
 		}
 	},		
 
-	oof : func {		### OUT OF FUEL ###
+	oof : func {						### OUT OF FUEL ###
 		if (me.level0.getValue() <= 0.5 and (me.sel[0].getValue() == 0 or me.sel[1].getValue() == 1)) {
 			setprop("engines/engine[0]/out-of-fuel",1);
 		}
@@ -137,22 +137,19 @@ var fuelsys = {
 		}
 	},
 
-#	boost_pump : func{
-#		var fgph = [ getprop("engines/engine[0]/fuel-flow-gph"),
-#					getprop("engines/engine[1]/fuel-flow-gph") ];				
-		
-#		if (getprop("controls/fuel/tank[0]/boost-pump") and 
-#				getprop("systems/electrical/volts") > 12) {
-#			setprop("engines/engine[0]/fuel-flow-gph",fgph[0] * 1.1);
-#		}
+	boostpump : func {			### BOOST PUMPS ###
+		var fgph = [ getprop("engines/engine[0]/fuel-flow-gph"),
+					getprop("engines/engine[1]/fuel-flow-gph") ];				
 
-#		if (getprop("controls/fuel/tank[1]/boost-pump") and
-#				getprop("systems/electrical/volts") > 12) {
-#			setprop("engines/engine[1]/fuel-flow-gph",fgph[1] * 1.1);
-#		}
+		if (getprop("controls/fuel/tank[0]/boost_pump") == 2 ){
+			setprop("engines/engine[0]/fuel-flow-gph",fgph[0] * 1.1);
+		}
 
-#		settimer(func {me.boost_pump();},0);
-#	},	
+		if (getprop("controls/fuel/tank[1]/boost_pump") == 2) {
+			setprop("engines/engine[1]/fuel-flow-gph",fgph[1] * 1.1);
+		}
+		settimer(func {me.boostpump();},0);
+	},
 };
 
 var gravity_xflow = func{
@@ -176,11 +173,11 @@ var gravity_xflow = func{
 		});
 
 		if (efis and xflow_switch) {timer.start()}
-};
+};	
 
 var fuel = fuelsys.new();
 	setlistener("/sim/signals/fdm-initialized", func {
 	fuel.init_fuel();
 	fuel.update();
-#	fuel.boost_pump();
+	fuel.boostpump();
 },0,0);

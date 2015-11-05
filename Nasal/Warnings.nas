@@ -1,10 +1,11 @@
 ### Citation X ###
 ### Christian Le Moigne - 2015 ###
-
-### msg level 0 = white 					###
-### msg level 1 = cyan 						###
-### msg level 2 = caution = amber ###
-### msg level 3 = alert = red 		###
+###														 ###
+###        MESSAGES            ###
+### level 0 = white 					 ###
+### level 1 = cyan 						 ###
+### level 2 = caution = amber  ###
+### level 3 = alert = red 		 ###
 
 ### ANNUNCIATORS ###
 var Test_annun = props.globals.initNode("instrumentation/annunciators/test-select",0,"INT");
@@ -65,9 +66,9 @@ var EICAS = {
 				EICAS.update_listeners()},1,0);
 			setlistener("position/altitude-ft", func {
 				EICAS.update_listeners()},1,0);
-			setlistener("controls/fuel/tank[0]/boost-pump", func {
+			setlistener("controls/fuel/tank[0]/boost_pump", func {
 				EICAS.update_listeners()},1,0);
-			setlistener("controls/fuel/tank[1]/boost-pump", func {
+			setlistener("controls/fuel/tank[1]/boost_pump", func {
 				EICAS.update_listeners()},1,0);
 			setlistener("consumables/fuel/tank[0]/level-lbs", func {
 				EICAS.update_listeners()},1,0);
@@ -120,8 +121,8 @@ var EICAS = {
 				me.ext_pwr = getprop("controls/electric/external-power");
 				me.cabin_door = getprop("controls/cabin-door/open");
 				me.altitude = getprop("position/altitude-ft");
-				me.boost_pump_L = getprop("controls/fuel/tank[0]/boost-pump");
-				me.boost_pump_R = getprop("controls/fuel/tank[1]/boost-pump");
+				me.boost_pump_L = getprop("controls/fuel/tank[0]/boost_pump");
+				me.boost_pump_R = getprop("controls/fuel/tank[1]/boost_pump");
 				me.level_tank_L = getprop("consumables/fuel/tank[0]/level-lbs");
 				me.level_tank_R = getprop("consumables/fuel/tank[1]/level-lbs");
 				me.total_fuel = getprop("consumables/fuel/total-ctrtk-lbs");
@@ -200,13 +201,13 @@ var EICAS = {
           append(me.msg_l2,"CABIN ALTITUDE");
 					me.nb_caution +=1;
 				}
-				if (me.level_tank_L < 500 and me.level_tank_R < 500) {
+				if (me.level_tank_L < 100 and me.level_tank_R < 100) {
           append(me.msg_l2,"FUEL LEVEL L-R");
 					me.nb_caution +=2;
-				}	else if( me.level_tank_L < 500) {
+				}	else if( me.level_tank_L < 100) {
           append(me.msg_l2,"FUEL LEVEL L");
 					me.nb_caution +=1;
-				}	else if( me.level_tank_R < 500) {
+				}	else if( me.level_tank_R < 100) {
           append(me.msg_l2,"FUEL LEVEL R");
 					me.nb_caution +=1;
 				}
