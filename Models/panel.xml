@@ -1425,12 +1425,12 @@
         </action>
     </animation>
 
-<!-- FUEL BOOST RH -->
+<!-- FADEC LH -->
 
     <animation>
         <type>rotate</type>
-        <object-name>Fuelboost.Rh</object-name>
-        <property>controls/fuel/tank[1]/boost_pump</property>
+        <object-name>Fadec.Lh</object-name>
+        <property>controls/engines/engine[0]/fadec</property>
         <factor>15</factor>
         <center>
             <x-m>0.066</x-m>
@@ -1446,32 +1446,37 @@
 
     <animation>
         <type>pick</type>
-        <object-name>Fuelboost.Rh</object-name>
-        <object-name>FuelboostRh.on</object-name> 
+        <object-name>FadecLh</object-name>
+        <object-name>FadecLh.reset</object-name> 
        <action>
             <button>0</button>
             <binding>
-               <command>property-adjust</command>
-               <property>controls/fuel/tank[1]/boost_pump</property>
-								<step>1</step>
-								<min>0</min>
-								<max>2</max>
+               <command>property-assign</command>
+               <property>controls/engines/engine[0]/fadec</property>
+         					<value>1</value>
 							<wrap>false</wrap>
             </binding>
         		<binding>
             	<command>property-toggle</command>
             	<property>sim/sound/click</property>
         </binding>
+					<mod-up>
+			       <binding>
+         				<command>property-assign</command>
+         					<property>controls/engines/engine[0]/fadec</property>
+         						<value>0</value>
+       				</binding>
+     			</mod-up>
         </action>
         <hovered>
             <binding>
                 <command>set-tooltip</command>
-                <tooltip-id>Fuelboost R</tooltip-id>
-                <label>Fuelboost R : %s</label>
-           			<property>controls/fuel/tank[1]/boost_pump</property>
+                <tooltip-id>Fadec LH</tooltip-id>
+                <label>Fadec LH : %s</label>
+           			<property>controls/engines/engine[0]/fadec</property>
                 <mapping>nasal</mapping>
 								<script>
-									var modes = ['NORM','OFF','ON'];
+									var modes = ['NORM','RESET','SELECT'];
 									return modes[arg[0]];
 								</script>
             </binding>
@@ -1480,22 +1485,136 @@
 
     <animation>
         <type>pick</type>
-        <object-name>FuelboostRh.norm</object-name> 
+        <object-name>FadecLh.select</object-name> 
        <action>
             <button>0</button>
             <binding>
-               <command>property-adjust</command>
-               <property>controls/fuel/tank[1]/boost_pump</property>
-								<step>-1</step>
-								<min>0</min>
-								<max>2</max>
+               <command>property-assign</command>
+               <property>controls/engines/engine[0]/fadec</property>
+								<value>-1</value>
+							<wrap>false</wrap>
+            </binding>
+					<mod-up>
+			       <binding>
+         				<command>property-assign</command>
+         					<property>controls/engines/engine[0]/fadec</property>
+         						<value>0</value>
+       				</binding>
+     			</mod-up>
+        		<binding>
+            	<command>property-toggle</command>
+            	<property>sim/sound/click</property>
+        		</binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>Fadec Lh</tooltip-id>
+                <label>Fadec LH : %s</label>
+           			<property>controls/engines/engine[0]/fadec</property>
+                <mapping>nasal</mapping>
+								<script>
+									var modes = ['NORM','RESET','SELECT'];
+									return modes[arg[0]];
+								</script>
+            </binding>
+        </hovered>
+    </animation>
+
+<!-- FADEC RH -->
+
+    <animation>
+        <type>rotate</type>
+        <object-name>Fadec.Rh</object-name>
+        <property>controls/engines/engine[1]/fadec</property>
+        <factor>15</factor>
+        <center>
+            <x-m>0.066</x-m>
+            <y-m>0</y-m>
+            <z-m>-0.060</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>-1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>FadecRh</object-name>
+        <object-name>FadecRh.reset</object-name> 
+       <action>
+            <button>0</button>
+            <binding>
+               <command>property-assign</command>
+               <property>controls/engines/engine[1]/fadec</property>
+         					<value>1</value>
 							<wrap>false</wrap>
             </binding>
         		<binding>
             	<command>property-toggle</command>
             	<property>sim/sound/click</property>
         </binding>
+					<mod-up>
+			       <binding>
+         				<command>property-assign</command>
+         					<property>controls/engines/engine[1]/fadec</property>
+         						<value>0</value>
+       				</binding>
+     			</mod-up>
         </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>Fadec RH</tooltip-id>
+                <label>Fadec RH : %s</label>
+           			<property>controls/engines/engine[1]/fadec</property>
+                <mapping>nasal</mapping>
+								<script>
+									var modes = ['NORM','RESET','SELECT'];
+									return modes[arg[0]];
+								</script>
+            </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>FadecRh.select</object-name> 
+       <action>
+            <button>0</button>
+            <binding>
+               <command>property-assign</command>
+               <property>controls/engines/engine[1]/fadec</property>
+								<value>-1</value>
+							<wrap>false</wrap>
+            </binding>
+					<mod-up>
+			       <binding>
+         				<command>property-assign</command>
+         					<property>controls/engines/engine[1]/fadec</property>
+         						<value>0</value>
+       				</binding>
+     			</mod-up>
+        		<binding>
+            	<command>property-toggle</command>
+            	<property>sim/sound/click</property>
+        		</binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>Fadec Rh</tooltip-id>
+                <label>Fadec RH : %s</label>
+           			<property>controls/engines/engine[1]/fadec</property>
+                <mapping>nasal</mapping>
+								<script>
+									var modes = ['NORM','RESET','SELECT'];
+									return modes[arg[0]];
+								</script>
+            </binding>
+        </hovered>
     </animation>
 
 <!-- PANEL ANIMATIONS -->
