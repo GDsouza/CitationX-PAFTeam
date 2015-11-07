@@ -117,10 +117,10 @@
             <Kp>-1.5</Kp>
             <Ki>0.0</Ki>
             <min>
-                <value>-40</value> <!--orig -30 -->
+                <value>-30</value> <!--orig -30 -->
             </min>
             <max>
-                <value>40</value>		<!--orig 30 -->
+                <value>30</value>		<!--orig 30 -->
             </max>
         </config>
     </pi-simple-controller>
@@ -144,8 +144,8 @@
         <config>
             <Kp>-2.0</Kp>
             <Ki>0.0</Ki>
-            <min>-40</min> 	<!--orig -30 -->
-            <max>40</max>		<!--orig 30 -->
+            <min>-30</min> 	<!--orig -30 -->
+            <max>30</max>		<!--orig 30 -->
         </config>
     </pi-simple-controller>
 
@@ -551,7 +551,6 @@
 -->
 <!-- Internal Tests  -->
 
-
     <filter>
         <name>nav1 heading deflection</name>
         <debug>false</debug>
@@ -596,7 +595,7 @@
     </filter>
 
     <filter>
-        <name>nav1 gs drate</name>
+        <name>nav1 gs rate</name>
         <debug>false</debug>
         <feedback-if-disabled>true</feedback-if-disabled>
         <initialize-to>output</initialize-to>
