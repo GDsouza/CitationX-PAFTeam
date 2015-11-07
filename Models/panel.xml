@@ -5,6 +5,25 @@
     <path>panel.ac</path>
 
   <!-- Instruments -->
+
+    <model>
+        <path>Aircraft/CitationX/Models/Instruments/AP/ap1.xml</path>
+        <offsets>
+            <x-m>0.00</x-m>
+            <y-m>0.00</y-m>
+            <z-m>0.00</z-m>
+        </offsets>
+    </model>
+
+    <model>
+        <path>Aircraft/CitationX/Models/Instruments/AP/ap2.xml</path>
+        <offsets>
+            <x-m>0.00</x-m>
+            <y-m>0.00</y-m>
+            <z-m>0.00</z-m>
+        </offsets>
+    </model>
+
     <model>
         <path>Aircraft/CitationX/Models/Instruments/AOA/aoa.xml</path>
         <offsets>
@@ -2448,146 +2467,6 @@
             </binding>
         </action>
     </animation>
-
-<!-- AP Controls -->
-
-<animation>
-    <type>pick</type>
-    <object-name>RIC1.crs</object-name>
-    <action>
-        <button>0</button>
-        <repeatable>false</repeatable>
-        <binding>
-            <command>property-assign</command>
-            <property>instrumentation/nav/radials/selected-deg</property>
-            <property>orientation/heading-magnetic-deg</property>
-        </binding>
-    </action>
-    <action>
-        <button>3</button>
-        <repeatable>true</repeatable>
-        <binding>
-            <command>property-adjust</command>
-            <property>instrumentation/nav/radials/selected-deg</property>
-            <step>1</step>
-            <min>0</min>
-            <max>360</max>
-            <wrap>1</wrap>
-        </binding>
-    </action>
-    <action>
-        <button>4</button>
-        <repeatable>true</repeatable>
-        <binding>
-            <command>property-adjust</command>
-            <property>instrumentation/nav/radials/selected-deg</property>
-            <step>-1</step>
-            <min>0</min>
-            <max>360</max>
-            <wrap>1</wrap>
-        </binding>
-    </action>
-        <hovered>
-            <binding>
-                <command>set-tooltip</command>
-                <tooltip-id>CRS-selected</tooltip-id>
-                <label>CRS: %.0f</label>
-            <property>instrumentation/nav/radials/selected-deg</property>
-            </binding>
-        </hovered>
-</animation>
-
-<animation>
-    <type>pick</type>
-    <object-name>RIC1.alt</object-name>
-    <action>
-        <button>0</button>
-        <repeatable>false</repeatable>
-        <binding>
-            <command>property-assign</command>
-            <property>autopilot/settings/asel</property>
-            <value>410</value>
-        </binding>
-    </action>
-    <action>
-        <button>3</button>
-        <repeatable>true</repeatable>
-        <binding>
-            <command>property-adjust</command>
-            <property>autopilot/settings/asel</property>
-            <step>5</step>
-            <min>0</min>
-            <max>655</max>
-            <wrap>0</wrap>
-        </binding>
-    </action>
-    <action>
-        <button>4</button>
-        <repeatable>true</repeatable>
-        <binding>
-            <command>property-adjust</command>
-            <property>autopilot/settings/asel</property>
-            <step>-5</step>
-            <min>0</min>
-            <max>655</max>
-            <wrap>0</wrap>
-        </binding>
-    </action>
-        <hovered>
-            <binding>
-                <command>set-tooltip</command>
-                <tooltip-id>AP-ALT</tooltip-id>
-                <label>ALT selected: %.0f</label>
-            <property>autopilot/settings/asel</property>
-            </binding>
-        </hovered>
-</animation>
-
-<animation>
-    <type>pick</type>
-    <object-name>RIC1.hdg</object-name>
-    <action>
-        <button>0</button>
-        <repeatable>false</repeatable>
-        <binding>
-            <command>property-assign</command>
-            <property>autopilot/settings/heading-bug-deg</property>
-            <property>orientation/heading-magnetic-deg</property>
-        </binding>
-    </action>
-    <action>
-        <button>3</button>
-        <repeatable>true</repeatable>
-        <binding>
-            <command>property-adjust</command>
-            <property>autopilot/settings/heading-bug-deg</property>
-            <step>1</step>
-            <min>0</min>
-            <max>360</max>
-            <wrap>1</wrap>
-        </binding>
-    </action>
-    <action>
-        <button>4</button>
-        <repeatable>true</repeatable>
-        <binding>
-            <command>property-adjust</command>
-            <property>autopilot/settings/heading-bug-deg</property>
-            <step>-1</step>
-            <min>0</min>
-            <max>360</max>
-            <wrap>1</wrap>
-        </binding>
-    </action>
-        <hovered>
-            <binding>
-                <command>set-tooltip</command>
-                <tooltip-id>HDG</tooltip-id>
-                <label>HDG selected: %.0f</label>
-            <property>autopilot/settings/heading-bug-deg</property>
-            </binding>
-        </hovered>
-</animation>
 
 <!-- FMC -->
 
