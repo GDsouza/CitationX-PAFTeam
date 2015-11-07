@@ -54,52 +54,6 @@
 
 <animation>
     <type>pick</type>
-    <object-name>RIC2.alt</object-name>
-    <action>
-        <button>0</button>
-        <repeatable>false</repeatable>
-        <binding>
-            <command>property-assign</command>
-            <property>autopilot/settings/asel</property>
-            <value>410</value>
-        </binding>
-    </action>
-    <action>
-        <button>3</button>
-        <repeatable>true</repeatable>
-        <binding>
-            <command>property-adjust</command>
-            <property>autopilot/settings/asel</property>
-            <step>5</step>
-            <min>0</min>
-            <max>655</max>
-            <wrap>0</wrap>
-        </binding>
-    </action>
-    <action>
-        <button>4</button>
-        <repeatable>true</repeatable>
-        <binding>
-            <command>property-adjust</command>
-            <property>autopilot/settings/asel</property>
-            <step>-5</step>
-            <min>0</min>
-            <max>655</max>
-            <wrap>0</wrap>
-        </binding>
-    </action>
-        <hovered>
-            <binding>
-                <command>set-tooltip</command>
-                <tooltip-id>AP-ALT</tooltip-id>
-                <label>ALT selected: %.0f</label>
-            <property>autopilot/settings/asel</property>
-            </binding>
-        </hovered>
-</animation>
-
-<animation>
-    <type>pick</type>
     <object-name>RIC2.hdg</object-name>
     <action>
         <button>0</button>
@@ -143,6 +97,5 @@
             </binding>
         </hovered>
 </animation>
-
 
 </PropertyList>
