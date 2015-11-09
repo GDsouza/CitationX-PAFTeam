@@ -46,6 +46,26 @@
         </offsets>
     </model>
 
+    <model>
+        <path>Models/Instruments/RMU/RMU-sup1.xml</path>
+        <offsets>
+            <x-m>0.250</x-m>
+            <y-m>-0.103</y-m>
+            <z-m>-0.110</z-m>
+            <pitch-deg>-85.0</pitch-deg>
+        </offsets>
+    </model>
+
+    <model>
+        <path>Models/Instruments/RMU/RMU-sup2.xml</path>
+        <offsets>
+            <x-m>0.250</x-m>
+            <y-m>0.111</y-m>
+            <z-m>-0.110</z-m>
+            <pitch-deg>-85.0</pitch-deg>
+        </offsets>
+    </model>
+
 <!--SPEEDBRAKE -->
 
     <animation>
