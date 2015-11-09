@@ -129,6 +129,12 @@ var Annun = props.globals.getNode("instrumentation/annunciators",1);
 props.globals.initNode("controls/flight/flaps-select",0,"INT");
 props.globals.initNode("controls/fuel/tank[0]/boost_pump",0,"INT");
 props.globals.initNode("controls/fuel/tank[1]/boost_pump",0,"INT");
+props.globals.initNode("sim/model/show-pilot",1,"BOOL");
+props.globals.initNode("sim/model/show-copilot",1,"BOOL");
+props.globals.initNode("sim/model/show-yoke_L",1,"BOOL");
+props.globals.initNode("sim/model/show-yoke_R",1,"BOOL");
+props.globals.initNode("sim/model/mem-yoke_L",1,"BOOL");
+props.globals.initNode("sim/model/mem-yoke_R",1,"BOOL");
 var PWR2 =0;
 aircraft.livery.init("Aircraft/CitationX/Models/Liveries");
 var FHmeter = aircraft.timer.new("/instrumentation/clock/flight-meter-sec", 10,1);
@@ -207,6 +213,40 @@ setlistener("/sim/freeze/fuel", func(ffr){
     Annun.getNode("fuel-gauge").setBoolValue(0);
     }
 },0,0);
+
+setlistener("/sim/current-view/internal", func {
+		var mem_yokeL = getprop("sim/model/mem-yoke_L");
+		var mem_yokeR = getprop("sim/model/mem-yoke_R");
+		if (getprop("/sim/current-view/internal") == 0) {
+			setprop("sim/model/show-yoke_L",1);
+			setprop("sim/model/show-yoke_R",1);
+			setprop("sim/model/show-pilot",1);
+			setprop("sim/model/show-copilot",1);
+		} 
+		else {
+			setprop("sim/model/show-yoke_L",mem_yokeL);
+			setprop("sim/model/show-pilot",mem_yokeL);
+			setprop("sim/model/show-yoke_R",mem_yokeR);
+			setprop("sim/model/show-copilot",mem_yokeR);
+		}
+},0,0);
+
+controls.pilots = func(){
+			if (getprop("sim/model/show-yoke_L") == 0) {
+				setprop("sim/model/show-pilot",0);
+				setprop("sim/model/mem-yoke_L",0);
+			} else {			
+				setprop("sim/model/show-pilot",1);
+				setprop("sim/model/mem-yoke_L",1);
+			}
+			if (getprop("sim/model/show-yoke_R") == 0) {
+				setprop("sim/model/show-copilot",0);
+				setprop("sim/model/mem-yoke_R",0);
+			} else {			
+				setprop("sim/model/show-copilot",1);
+				setprop("sim/model/mem-yoke_R",1);
+			}
+}
 
 controls.gear = func {
   if(getprop("gear/gear[1]/wow")) {

@@ -228,9 +228,9 @@ var EICAS = {
 					append(me.msg_l1,"PARK BRK SET");
 				}
 				if(me.wow and (me.throttle_L	< 0.8
-						or me.throttle_R < 0.8)
+						or me.throttle_R < 0.8
 						or me.flaps < 0.140
-						or me.flaps > 0.430) {
+						or me.flaps > 0.430)) {
 					append(me.msg_l1,"NO TAKEOFF");
 				}			
 

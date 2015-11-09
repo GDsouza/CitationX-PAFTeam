@@ -137,8 +137,8 @@ var FD_set_mode = func(btn){
 var nav_src_set=func(src){
     setprop(Lateral_arm,"");
 		setprop(Vertical_arm,"");
-    set_pitch();
-		set_roll();
+#    set_pitch();
+#		set_roll();
     if(src=="fms"){
         if(getprop("autopilot/route-manager/route/num")>0)setprop(NAVprop,"FMS");
     }else{

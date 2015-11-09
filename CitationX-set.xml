@@ -44,7 +44,8 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
             <gctest type="bool">1</gctest>
             <shadow-2d  type="bool" userarchive="y">0</shadow-2d>
             <shadeless  type="bool" userarchive="y">0</shadeless>
-						<crew type="bool" userarchive="y">1</crew>
+						<nav1-visible type="bool" userarchive="y">1</nav1-visible>
+						<nav2-visible type="bool" userarchive="y">1</nav2-visible>
         </model>
 
         <view n="0">

@@ -4,7 +4,21 @@
 
 <path>ap2.ac</path>
 
-<!-- AP Controls -->
+<!-- NAV2 Controls -->
+
+    <animation>
+        <type>select</type>
+        <condition>
+            <property>sim/model/nav2-visible</property>
+        </condition>
+        <object-name>Nav2-socle</object-name>
+        <object-name>Contours-molettes</object-name>
+        <object-name>RIC2.crs</object-name>
+        <object-name>RIC2.alt</object-name>
+        <object-name>RIC2.hdg</object-name>
+        <object-name>etiquettes-nav2</object-name>
+        <object-name>vis-nav2</object-name>
+    </animation>
 
 <animation>
     <type>pick</type>
@@ -14,7 +28,7 @@
         <repeatable>false</repeatable>
         <binding>
             <command>property-assign</command>
-            <property>instrumentation/nav/radials/selected-deg</property>
+            <property>instrumentation/nav[1]/radials/selected-deg</property>
             <property>orientation/heading-magnetic-deg</property>
         </binding>
     </action>
@@ -23,7 +37,7 @@
         <repeatable>true</repeatable>
         <binding>
             <command>property-adjust</command>
-            <property>instrumentation/nav/radials/selected-deg</property>
+            <property>instrumentation/nav[1]/radials/selected-deg</property>
             <step>1</step>
             <min>0</min>
             <max>360</max>
@@ -35,7 +49,7 @@
         <repeatable>true</repeatable>
         <binding>
             <command>property-adjust</command>
-            <property>instrumentation/nav/radials/selected-deg</property>
+            <property>instrumentation/nav[1]/radials/selected-deg</property>
             <step>-1</step>
             <min>0</min>
             <max>360</max>
@@ -45,9 +59,9 @@
         <hovered>
             <binding>
                 <command>set-tooltip</command>
-                <tooltip-id>CRS-selected</tooltip-id>
-                <label>CRS: %.0f</label>
-            <property>instrumentation/nav/radials/selected-deg</property>
+                <tooltip-id>CRS2-selected</tooltip-id>
+                <label>CRS2 sel: %.0f</label>
+            <property>instrumentation/nav[1]/radials/selected-deg</property>
             </binding>
         </hovered>
 </animation>
@@ -92,8 +106,54 @@
             <binding>
                 <command>set-tooltip</command>
                 <tooltip-id>HDG</tooltip-id>
-                <label>HDG selected: %.0f</label>
+                <label>HDG sel: %.0f</label>
             <property>autopilot/settings/heading-bug-deg</property>
+            </binding>
+        </hovered>
+</animation>
+
+<animation>
+    <type>pick</type>
+    <object-name>RIC2.alt</object-name>
+    <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+            <command>property-assign</command>
+            <property>autopilot/settings/asel</property>
+            <value>410</value>
+        </binding>
+    </action>
+    <action>
+        <button>3</button>
+        <repeatable>true</repeatable>
+        <binding>
+            <command>property-adjust</command>
+            <property>autopilot/settings/asel</property>
+            <step>5</step>
+            <min>0</min>
+            <max>655</max>
+            <wrap>0</wrap>
+        </binding>
+    </action>
+    <action>
+        <button>4</button>
+        <repeatable>true</repeatable>
+        <binding>
+            <command>property-adjust</command>
+            <property>autopilot/settings/asel</property>
+            <step>-5</step>
+            <min>0</min>
+            <max>655</max>
+            <wrap>0</wrap>
+        </binding>
+    </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>AP-ALT</tooltip-id>
+                <label>ALT sel: %.0f</label>
+            <property>autopilot/settings/asel</property>
             </binding>
         </hovered>
 </animation>

@@ -29,21 +29,12 @@
 
     <checkbox>
         <halign>left</halign>
-        <label>Show Pilots</label>
-        <property>sim/model/crew</property>
+        <label>Show Nav Modules</label>
+        <property>sim/model/nav1-visible</property>
         <binding>
-					<condition>
-						<property>sim/current-view/internal</property>
-							<value>0</value>
-					</condition>
-          <command>dialog-apply</command>
-        </binding>
-    </checkbox>
-
-    <checkbox>
-        <halign>left</halign>
-        <label>Hide Yokes</label>
-       <property>sim/model/hide-yoke</property>
+          <command>property-toggle</command>
+        	<property>sim/model/nav2-visible</property> 
+       </binding>
         <binding>
           <command>dialog-apply</command>
         </binding>

@@ -775,7 +775,7 @@
 			<binding>
 				<command>set-tooltip</command>
 				<tooltip-id>CRS 1</tooltip-id>
-    	  <label>CRS 1 selected : %.0f</label>
+    	  <label>CRS 1 sel : %.0f</label>
     	  <property>instrumentation/nav/radials/selected-deg</property>
    	   </binding>
 	  </hovered>
@@ -821,7 +821,7 @@
 			<binding>
 				<command>set-tooltip</command>
 				<tooltip-id>CRS 2</tooltip-id>
-    	  <label>CRS 2 selected : %.0f</label>
+    	  <label>CRS 2 sel : %.0f</label>
     	  <property>instrumentation/nav[1]/radials/selected-deg</property>
    	   </binding>
 	  </hovered>
@@ -870,7 +870,7 @@
 			<binding>
 				<command>set-tooltip</command>
 				<tooltip-id>AP-ALT</tooltip-id>
-				<label>ALT selected: %.0f</label>
+				<label>ALT sel: %.0f</label>
 				<property>autopilot/settings/asel</property>
 			</binding>
 		</hovered>
@@ -918,8 +918,8 @@
     <hovered>
 			<binding>
 				<command>set-tooltip</command>
-				<tooltip-id>AP-ALT</tooltip-id>
-				<label>HDG selected: %.0f</label>
+				<tooltip-id>AP-HDG</tooltip-id>
+				<label>HDG sel: %.0f</label>
 				<property>autopilot/settings/heading-bug-deg</property>
 			</binding>
 		</hovered>

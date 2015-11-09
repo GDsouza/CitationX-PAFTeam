@@ -128,17 +128,21 @@
         </axis>
     </animation>
 
+	<animation>
+		<type>select</type>
+				<object-name>L-manche-yoke</object-name>
+				<object-name>L-yoke</object-name>
+		<condition>
+				<property>sim/model/show-yoke_L</property>
+		</condition>
+	</animation>
 
-<animation>
+	<animation>
    <type>select</type>
-        <object-name>L-manche-yoke</object-name>
-		    <object-name>L-yoke</object-name>
         <object-name>R-manche-yoke</object-name>
 		    <object-name>R-yoke</object-name>
    <condition>
-     <not>
-       <property>sim/model/hide-yoke</property>
-     </not>
+       <property>sim/model/show-yoke_R</property>
    </condition>
  </animation>
 
@@ -146,6 +150,31 @@
    <type>pick</type>
         <object-name>L-manche-yoke</object-name>
 		    <object-name>L-yoke</object-name>
+   <visible>true</visible>
+   <action>
+     <button>0</button>
+     <repeatable>false</repeatable>
+     <binding>
+       <command>property-assign</command>
+       <property>sim/model/show-yoke_L</property>
+				<value>0</value>
+     </binding>
+			<binding>	
+				<command>nasal</command>
+				<script>controls.pilots()</script>
+			</binding>
+   </action>
+   <hovered>
+     <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>show-hide-yoke</tooltip-id>
+        <label>Show/Hide Yoke</label>
+     </binding>
+   </hovered>
+ </animation>
+
+ <animation>
+   <type>pick</type>
         <object-name>R-manche-yoke</object-name>
 		    <object-name>R-yoke</object-name>
    <visible>true</visible>
@@ -153,9 +182,14 @@
      <button>0</button>
      <repeatable>false</repeatable>
      <binding>
-       <command>property-toggle</command>
-       <property>sim/model/hide-yoke</property>
+       <command>property-assign</command>
+       <property>sim/model/show-yoke_R</property>
+				<value>0</value>
      </binding>
+			<binding>	
+				<command>nasal</command>
+				<script>controls.pilots()</script>
+			</binding>
    </action>
    <hovered>
      <binding>
@@ -174,9 +208,19 @@
      <button>0</button>
      <repeatable>true</repeatable>
      <binding>
-       <command>property-toggle</command>
-       <property>sim/model/hide-yoke</property>
+       <command>property-assign</command>
+       <property>sim/model/show-yoke_L</property>
+				<value>1</value>
      </binding>
+     <binding>
+       <command>property-assign</command>
+       <property>sim/model/show-yoke_R</property>
+				<value>1</value>
+     </binding>
+			<binding>	
+				<command>nasal</command>
+				<script>controls.pilots()</script>
+			</binding>
    </action>
    <hovered>
      <binding>
@@ -192,7 +236,7 @@
 		<name>Captain</name>
     <path>Aircraft/CitationX/Models/Pilot/pilot.xml</path>
 		<condition>
-			<property>sim/model/crew</property>
+			<property>sim/model/show-pilot</property>
 		</condition>
 		<overlay>
 	    <params>
@@ -218,7 +262,7 @@
 		<name>First officer</name>
       <path>Aircraft/CitationX/Models/Pilot/copilot.xml</path>
 			<condition>
-				<property>sim/model/crew</property>
+				<property>sim/model/show-copilot</property>
 			</condition>
 			<overlay>
 	    	<params>
