@@ -7,7 +7,7 @@
   <!-- Instruments -->
 
     <model>
-        <path>Aircraft/CitationX/Models/Instruments/AP/ap1.xml</path>
+        <path>Aircraft/CitationX/Models/Instruments/NAV/nav1.xml</path>
         <offsets>
             <x-m>0.00</x-m>
             <y-m>0.00</y-m>
@@ -16,7 +16,7 @@
     </model>
 
     <model>
-        <path>Aircraft/CitationX/Models/Instruments/AP/ap2.xml</path>
+        <path>Aircraft/CitationX/Models/Instruments/NAV/nav2.xml</path>
         <offsets>
             <x-m>0.00</x-m>
             <y-m>0.00</y-m>
