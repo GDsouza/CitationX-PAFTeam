@@ -66,15 +66,24 @@
         <repeatable>false</repeatable>
         <binding>
           <command>property-toggle</command>
-          <property>controls/separate-door/open</property>
+          <property>controls/separation-door/open</property>
         </binding>
       </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>Separation-door</tooltip-id>
+                <label>Separation-door: %s</label>
+                <mapping>open-close</mapping>
+           			<property>controls/separation-door/open</property>
+            </binding>
+        </hovered>
     </animation> 
 
     <animation>
         <type>translate</type>
         <object-name>L-cabin-door</object-name>	
-        <property>controls/separate-door/open</property>
+        <property>controls/separation-door/open</property>
 				<factor>0.13</factor>
         <axis>
             <x>0</x>
@@ -92,15 +101,24 @@
         <repeatable>false</repeatable>
         <binding>
           <command>property-toggle</command>
-          <property>controls/separate-door/open</property>
+          <property>controls/separation-door/open</property>
         </binding>
       </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>Separation-door</tooltip-id>
+                <label>Separation-door: %s</label>
+                <mapping>open-close</mapping>
+           			<property>controls/separation-door/open</property>
+            </binding>
+        </hovered>
     </animation> 
 
     <animation>
         <type>translate</type>
         <object-name>R-cabin-door</object-name>	
-        <property>controls/separate-door/open</property>
+        <property>controls/separation-door/open</property>
 				<factor>0.13</factor>
         <axis>
             <x>0</x>
