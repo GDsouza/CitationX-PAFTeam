@@ -105,19 +105,22 @@ var FD_set_mode = func(btn){
       }else set_pitch();
 
     }elsif(btn=="app"){
-			setprop(Lateral_arm,"");setprop(Vertical_arm,"");
+			setprop(Lateral_arm,"");
+			setprop(Vertical_arm,"");
 			set_apr();
 			setprop("autopilot/settings/low-bank",0);
 
     }elsif(btn=="vs"){
-			setprop(Lateral_arm,"");setprop(Vertical_arm,"");
+			setprop(Lateral_arm,"");
+			setprop(Vertical_arm,"");
 			if(Vmode!="VS"){
 				var tgt_vs = (int(getprop("autopilot/internal/vert-speed-fpm") * 0.01)) * 100;
 				setprop(Vertical,"VS");setprop("autopilot/settings/vertical-speed-fpm",tgt_vs);
 			} else set_pitch();
 
     }elsif(btn=="stby"){
-			setprop(Lateral_arm,"");setprop(Vertical_arm,"");
+			setprop(Lateral_arm,"");
+			setprop(Vertical_arm,"");
 			set_pitch();
 			set_roll();
 			setprop("autopilot/settings/low-bank",0);
@@ -331,7 +334,7 @@ var monitor_V_armed = func{
             if(getprop("autopilot/internal/gs-in-range")){
                 var gs_err=getprop("autopilot/internal/gs-deflection");
                 var gs_dst=getprop("autopilot/internal/nav-distance");
-                if(gs_dst <= 7.0){
+                if(gs_dst <= 20.0){ ### old = 7.0 ###
                     if(gs_err >-0.25 and gs_err < 0.25){
                         setprop(Vertical,"GS");
                         setprop(Vertical_arm,"");

@@ -4,7 +4,8 @@
 
     <path>cabin.ac</path>
 
-<!-- CABIN DOOR -->
+<!-- EXT CABIN DOOR -->
+
 	<animation>
 	<type>translate</type>
         <object-name>Cabin.inrdoor</object-name>
@@ -54,7 +55,62 @@
         </axis>
     </animation>
 
+<!-- SEPARATE CABIN DOOR -->
+ 
+   <animation>
+      <type>pick</type>
+      <object-name>L-cabin-door</object-name>
+      <visible>true</visible>
+      <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+          <command>property-toggle</command>
+          <property>controls/separate-door/open</property>
+        </binding>
+      </action>
+    </animation> 
+
+    <animation>
+        <type>translate</type>
+        <object-name>L-cabin-door</object-name>	
+        <property>controls/separate-door/open</property>
+				<factor>0.13</factor>
+        <axis>
+            <x>0</x>
+            <y>-1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+   <animation>
+      <type>pick</type>
+      <object-name>R-cabin-door</object-name>
+      <visible>true</visible>
+      <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+          <command>property-toggle</command>
+          <property>controls/separate-door/open</property>
+        </binding>
+      </action>
+    </animation> 
+
+    <animation>
+        <type>translate</type>
+        <object-name>R-cabin-door</object-name>	
+        <property>controls/separate-door/open</property>
+				<factor>0.13</factor>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
 <!-- SEATS -->
+
     <model>
         <name>cabin-seat1</name>
         <path>Aircraft/CitationX/Models/Seats/cabin-seat1.xml</path>
