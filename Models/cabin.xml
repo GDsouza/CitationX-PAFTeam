@@ -55,29 +55,50 @@
         </axis>
     </animation>
 
-<!-- SEPARATE CABIN DOOR -->
+<!-- CABIN SEPARATION DOORS -->
  
    <animation>
       <type>pick</type>
       <object-name>L-cabin-door</object-name>
+      <object-name>R-cabin-door</object-name>
       <visible>true</visible>
-      <action>
+			<action>
         <button>0</button>
         <repeatable>false</repeatable>
         <binding>
-          <command>property-toggle</command>
-          <property>controls/separation-door/open</property>
+					<condition>
+						<equals>
+		          <property>controls/separation-door/open</property>						
+							<value>1.0</value>
+						</equals>
+					</condition>
+		         <command>property-interpolate</command>
+		          <property>controls/separation-door/open</property>
+							<value type="double">0.0</value>
+					<time>2</time>
         </binding>
-      </action>
-        <hovered>
-            <binding>
-                <command>set-tooltip</command>
-                <tooltip-id>Separation-door</tooltip-id>
-                <label>Separation-door: %s</label>
-                <mapping>open-close</mapping>
-           			<property>controls/separation-door/open</property>
-            </binding>
-        </hovered>
+        <binding>
+					<condition>
+						<equals>
+		          <property>controls/separation-door/open</property>						
+							<value>0.0</value>
+						</equals>
+					</condition>
+		         <command>property-interpolate</command>
+		          <property>controls/separation-door/open</property>
+							<value type="double">1.0</value>
+					<time>2</time>
+        </binding>
+			</action>
+    	<hovered>
+				<binding>
+          <command>set-tooltip</command>
+            <tooltip-id>Separation-doors</tooltip-id>
+            <label>Separation doors: %s</label>
+            <mapping>open-close</mapping>
+       			<property>controls/separation-door/open</property>
+        </binding>
+      </hovered>
     </animation> 
 
     <animation>
@@ -92,29 +113,6 @@
         </axis>
     </animation>
 
-   <animation>
-      <type>pick</type>
-      <object-name>R-cabin-door</object-name>
-      <visible>true</visible>
-      <action>
-        <button>0</button>
-        <repeatable>false</repeatable>
-        <binding>
-          <command>property-toggle</command>
-          <property>controls/separation-door/open</property>
-        </binding>
-      </action>
-        <hovered>
-            <binding>
-                <command>set-tooltip</command>
-                <tooltip-id>Separation-door</tooltip-id>
-                <label>Separation-door: %s</label>
-                <mapping>open-close</mapping>
-           			<property>controls/separation-door/open</property>
-            </binding>
-        </hovered>
-    </animation> 
-
     <animation>
         <type>translate</type>
         <object-name>R-cabin-door</object-name>	
@@ -123,6 +121,76 @@
         <axis>
             <x>0</x>
             <y>1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+<!-- TOILET DOORS -->
+ 
+   <animation>
+      <type>pick</type>
+      <object-name>L-toilet-door</object-name>
+      <object-name>R-toilet-door</object-name>
+      <visible>true</visible>
+			<action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+					<condition>
+						<equals>
+		          <property>controls/toilet-door/open</property>						
+							<value>0.0</value>
+						</equals>
+					</condition>
+		         <command>property-interpolate</command>
+		          <property>controls/toilet-door/open</property>
+							<value type="double">1.0</value>
+					<time>2</time>
+        </binding>
+        <binding>
+					<condition>
+						<equals>
+		          <property>controls/toilet-door/open</property>						
+							<value>1.0</value>
+						</equals>
+					</condition>
+		         <command>property-interpolate</command>
+		          <property>controls/toilet-door/open</property>
+							<value type="double">0.0</value>
+					<time>2</time>
+        </binding>
+			</action>
+    	<hovered>
+				<binding>
+          <command>set-tooltip</command>
+            <tooltip-id>Toilet-doors</tooltip-id>
+            <label>Toilet-doors: %s</label>
+            <mapping>open-close</mapping>
+       			<property>controls/toilet-door/open</property>
+        </binding>
+      </hovered>
+    </animation> 
+
+    <animation>
+        <type>translate</type>
+        <object-name>L-toilet-door</object-name>	
+        <property>controls/toilet-door/open</property>
+				<factor>0.13</factor>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>R-toilet-door</object-name>	
+        <property>controls/toilet-door/open</property>
+				<factor>0.13</factor>
+        <axis>
+            <x>0</x>
+            <y>-1</y>
             <z>0</z>
         </axis>
     </animation>

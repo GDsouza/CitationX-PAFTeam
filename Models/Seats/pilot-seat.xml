@@ -11,11 +11,31 @@
       <action>
         <button>0</button>
         <repeatable>false</repeatable>
-        <binding>
-          <command>property-toggle</command>
-          <property>sim/model/pilot-seat</property>
+       <binding>
+					<condition>
+						<equals>
+		          <property>sim/model/pilot-seat</property>						
+							<value>0</value>
+						</equals>
+					</condition>
+		         <command>property-interpolate</command>
+		          <property>sim/model/pilot-seat</property>
+							<value type="double">1</value>
+					<time>2</time>
         </binding>
-      </action>
+        <binding>
+					<condition>
+						<equals>
+		          <property>sim/model/pilot-seat</property>						
+							<value>1</value>
+						</equals>
+					</condition>
+		         <command>property-interpolate</command>
+		          <property>sim/model/pilot-seat</property>
+							<value type="double">0</value>
+					<time>2</time>
+        </binding>
+     </action>
        <hovered>
           <binding>
             <command>set-tooltip</command>
