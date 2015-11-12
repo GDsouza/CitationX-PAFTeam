@@ -936,7 +936,7 @@
 					</condition>
             <command>property-adjust</command>
 						<property>instrumentation/kt-70/inputs/digit2</property>
-            <step>1</step>
+            <step>-1</step>
 						<min>0</min>
 						<max>9</max>
 						<wrap>1</wrap>
@@ -950,7 +950,7 @@
 					</condition>
             <command>property-adjust</command>
 							<property>instrumentation/adf/frequencies/selected-khz</property>
-	            <step>1</step>
+	            <step>-1</step>
 							<min>190</min>
 							<max>1800</max>
 							<wrap>1</wrap>
