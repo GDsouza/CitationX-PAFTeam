@@ -89,10 +89,10 @@
             <Ti>10</Ti>
             <Td>0.0</Td>
             <min>
-                <value>-27</value>
+                <value>-30</value>
             </min>
             <max>
-                <value>27</value>
+                <value>30</value>
             </max>
         </config>
     </pid-controller>

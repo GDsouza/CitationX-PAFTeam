@@ -230,6 +230,30 @@
         <max-dist>15.0</max-dist>
     </avionics2>
 
+<!-- WAYPOINTS -->
+
+    <waypoints>
+        <name>waypoints</name>
+        <path>Aircraft/CitationX/Sounds/wp.wav</path>
+        <condition>
+					<and>
+						<not>
+							<equals>
+            		<property>autopilot/internal/nav-id</property>
+								<value>""</value>
+							</equals>
+						</not>
+						<less-than>
+ 		       		<property>autopilot/internal/nav-distance</property>			
+								<value>1.0</value>
+						</less-than>
+					</and>
+        </condition>
+        <mode>once</mode>
+        <reference-dist>1.0</reference-dist>
+        <max-dist>15.0</max-dist>
+    </waypoints>
+
 <!-- FUEL -->
 
 		<fuel>
@@ -343,7 +367,7 @@
         <max-dist>50.0</max-dist>
     </rumble>
 
-<!--  GEAR -->
+<!--  GEARS -->
     <gear>
         <name>gear</name>
         <path>Sounds/gear.wav</path>
@@ -661,7 +685,7 @@
         </condition>
     </click>
 
-    <!-- Alarms -->
+    <!-- ALARMS -->
     <alarm>
         <name>Master warning</name>
         <mode>looped</mode>
@@ -747,7 +771,7 @@
         <mode>once</mode>
     </warnings>
 
-<!-- Announcements -->
+<!-- ANNOUNCEMENTS -->
 
     <announcement>
         <name>welcome</name>
@@ -874,6 +898,8 @@
         </and>
       </condition>
     </callout>
+
+<!-- APU -->
 
 	<apu>
 	    <name>APU starting</name>
