@@ -105,10 +105,15 @@ var FD_set_mode = func(btn){
       }else set_pitch();
 
     }elsif(btn=="app"){
-			setprop(Lateral_arm,"");
-			setprop(Vertical_arm,"");
-			set_apr();
-			setprop("autopilot/settings/low-bank",0);
+			if (Vmode!="GS") {
+				setprop(Lateral_arm,"");
+				setprop(Vertical_arm,"");
+				set_apr();
+				setprop("autopilot/settings/low-bank",0);
+			} else {
+				setprop(Vertical,"ALT");
+				setprop(Vertical_arm,"");
+			}
 
     }elsif(btn=="vs"){
 			setprop(Lateral_arm,"");
@@ -226,7 +231,7 @@ var set_apr=func{
 				setprop(Lateral,"HDG");
 				setprop(Vertical,"GS"); ### rajout ###
 			}
-		}else if(NAVSRC == "NAV2" or NAVSRC == "FMS"){
+		}else if(NAVSRC == "NAV2"){
 			if(getprop("instrumentation/nav[1]/nav-loc") and getprop("instrumentation/nav[1]/has-gs")){
 				setprop(Lateral_arm,"LOC");
 				setprop(Vertical_arm,"GS");

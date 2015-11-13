@@ -82,11 +82,11 @@
             <prop>autopilot/internal/roll-filter</prop>
         </output>
         <config>
-            <Kp>-1.5</Kp>
+            <Kp>-20</Kp> <!--old -1.5-->
             <beta>1.0</beta>
             <alpha>0.1</alpha>
             <gamma>0.0</gamma>
-            <Ti>10</Ti>
+            <Ti>10</Ti> <!-- old 10 -->
             <Td>0.0</Td>
             <min>
                 <value>-30</value>
@@ -238,9 +238,9 @@
             <prop>/autopilot/internal/target-climb-rate-fps</prop>
         </output>
         <config>
-            <Kp>0.5</Kp>
-            <Ki>0.0</Ki>
-            <min>-15.0</min>
+            <Kp>0.7</Kp> <!-- old 0.5 -->
+            <Ki>0</Ki>
+            <min>-50.0</min>
             <max>66.0</max>
         </config>
     </pi-simple-controller>
@@ -262,11 +262,11 @@
             <prop>/autopilot/internal/pitch-filter</prop>
         </output>
         <config>
-            <Kp>0.20</Kp>
+            <Kp>0.20</Kp> <!-- old 0.20 -->
             <beta>1.0</beta>
             <alpha>0.1</alpha>
-            <gamma>0.0</gamma>
-            <Ti>10.0</Ti>
+            <gamma>0.1</gamma>
+            <Ti>10.0</Ti> <!-- old 10 -->
             <Td>0.00001</Td>
             <min>-5</min>
             <max>5</max>
@@ -294,10 +294,10 @@
             <prop>autopilot/internal/pitch-filter</prop>
         </output>
         <config>
-            <Kp>0.5</Kp>
+            <Kp>0.7</Kp> <!-- old 0.5 -->
             <Ki>0.0</Ki>
-            <min>-30.0</min>
-            <max>15.0</max>
+            <min>-15.0</min> <!-- old -30.0 -->
+            <max>15.0</max>	<!-- old 15.0 -->
         </config>
     </pi-simple-controller>
 
@@ -453,12 +453,12 @@
             <prop>controls/flight/elevator-trim</prop>
         </output>
         <config>
-            <Kp>-0.015</Kp>
+            <Kp>-0.015</Kp> <!-- old -0.015 -->
             <beta>1.0</beta>
             <alpha>0.1</alpha>
             <gamma>0.0</gamma>
-            <Ti>10.0</Ti>
-            <Td>0.01</Td>
+            <Ti>10.0</Ti>	<!-- old 10.0 -->
+            <Td>0.01</Td> <!-- old 0.01 -->
             <min>-1</min>
             <max>1</max>
         </config>
