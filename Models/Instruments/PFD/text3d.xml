@@ -128,7 +128,7 @@
         <offsets>
             <x-m>0.00</x-m>
             <y-m>-0.059</y-m>
-            <z-m>-0.014</z-m>
+            <z-m>-0.020</z-m>
         </offsets>
         <alignment>center-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -149,7 +149,7 @@
         <offsets>
             <x-m>0.0</x-m>
             <y-m>-0.059</y-m>
-            <z-m>-0.022</z-m>
+            <z-m>-0.028</z-m>
         </offsets>
         <alignment>center-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -210,7 +210,6 @@
         </font-resolution>
     </text>
 
-
     <text>
         <name>VSI-annun</name>
         <offsets>
@@ -238,7 +237,7 @@
         <offsets>
             <x-m>0.0</x-m>
             <y-m>-0.058</y-m>
-            <z-m>0.003</z-m>
+            <z-m>0.002</z-m>
         </offsets>
         <alignment>center-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -259,7 +258,7 @@
         <offsets>
             <x-m>0.0</x-m>
             <y-m>-0.058</y-m>
-            <z-m>-0.004</z-m>
+            <z-m>-0.006</z-m>
         </offsets>
         <alignment>center-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>

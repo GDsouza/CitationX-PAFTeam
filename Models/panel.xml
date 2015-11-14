@@ -2241,7 +2241,7 @@
         <condition>
             <less-than>
                 <property>autopilot/settings/bank-limit</property>
-                <value>27</value>
+                <value>30</value>
             </less-than>
         </condition>
     </animation>
@@ -2354,8 +2354,8 @@
             <binding>
                 <command>property-cycle</command>
                 <property>autopilot/settings/bank-limit</property>
-                <value>27</value>
-                <value>14</value>
+                <value>30</value>
+                <value>15</value>
             </binding>
         </action>
     </animation>
