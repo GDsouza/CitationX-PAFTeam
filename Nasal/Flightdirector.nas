@@ -58,14 +58,7 @@ var FD_set_mode = func(btn){
 			setprop(Lateral_arm,"");
 			setprop(Vertical_arm,"");
 			if(Vmode!="ALT"){
-				var n=(getprop("instrumentation/altimeter/mode-c-alt-ft"))*0.01;
-				var m=int(n/10);
-				var p=(n/10)-m;
-				if (p>0 and p<0.5) {p=0.5;m=m+p}
-				else if(p>=0.5 and p<1) {m=m+1}
-				else {p=0}
         setprop(Vertical,"ALT");
-				setprop("autopilot/settings/asel",m*10);
       } else {set_pitch()}
 
     }elsif(btn=="flc"){
@@ -213,17 +206,17 @@ var pitch_wheel=func(dir){
 
 ########    FD INTERNAL ACTIONS  #############
 
-var set_pitch=func{
+var set_pitch = func{
     setprop(Vertical,"PTCH");
 		setprop("autopilot/settings/target-pitch-deg",getprop("orientation/pitch-deg"));
 }
 
-var set_roll=func{
+var set_roll = func{
     setprop(Lateral,"ROLL");
 		setprop("autopilot/settings/target-roll-deg",0.0);
 }
 
-var set_apr=func{
+var set_apr = func{
     if(NAVSRC == "NAV1"){
 			if(getprop("instrumentation/nav/nav-loc") and getprop("instrumentation/nav/has-gs")){
 				setprop(Lateral_arm,"LOC");
@@ -239,6 +232,16 @@ var set_apr=func{
 				setprop(Vertical,"GS"); ### rajout ###
       }
 		}
+}
+
+var set_alt = func {
+				var n=(getprop("instrumentation/altimeter/mode-c-alt-ft"))*0.01;
+				var m=int(n/10);
+				var p=(n/10)-m;
+				if (p>0 and p<0.5) {p=0.5;m=m+p}
+				else if(p>=0.5 and p<1) {m=m+1}
+				else {p=0}
+				setprop("autopilot/settings/asel",m*10);
 }
 
 setlistener("autopilot/settings/minimums", func(mn) {

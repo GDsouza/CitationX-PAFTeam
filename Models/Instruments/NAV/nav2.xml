@@ -119,9 +119,8 @@
         <button>0</button>
         <repeatable>false</repeatable>
         <binding>
-            <command>property-assign</command>
-            <property>autopilot/settings/asel</property>
-            <value>410</value>
+					<command>nasal</command>
+					<script>citation.set_alt();</script>
         </binding>
     </action>
     <action>

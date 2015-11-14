@@ -227,10 +227,7 @@ var EICAS = {
 				if (me.parkbrake) {
 					append(me.msg_l1,"PARK BRK SET");
 				}
-				if(me.wow and (me.throttle_L	< 0.8
-#						or me.throttle_R < 0.8
-						or me.flaps < 0.140
-						or me.flaps > 0.430)) {
+				if(me.wow and (me.flaps < 0.140	or me.flaps > 0.430)) {
 					append(me.msg_l1,"NO TAKEOFF");
 				}			
 
@@ -257,7 +254,7 @@ var EICAS = {
           	append(me.msg_l0,"FUEL XFEED OPEN");
 				}
 				if (me.grav_xflow) {
-          	append(me.msg_l0,"FUEL XFEED OPEN");
+          	append(me.msg_l0,"FUEL XFLOW OPEN");
 				}
 
 			me.AnnunOutput();

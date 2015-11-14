@@ -2569,18 +2569,7 @@
     <animation>
         <type>pick</type>
         <object-name>FMC.knob1</object-name>
-        <action>
-            <button>1</button>
-            <repeatable>false</repeatable>
-            <binding>
-                <command>property-adjust</command>
-                <property>instrumentation/primus2000/sc840/nav1ptr</property>
-                <step>-1</step>
-                <min>0</min>
-                <max>3</max>
-                <wrap>0</wrap>
-            </binding>
-        </action>
+        <object-name>Nav1.up</object-name>
         <action>
             <button>0</button>
             <repeatable>false</repeatable>
@@ -2592,24 +2581,51 @@
                 <max>3</max>
                 <wrap>0</wrap>
             </binding>
+    				<binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+        </binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>Nav1_select</tooltip-id>
+                <label>Nav1 select: %s </label> 
+                <property>instrumentation/primus2000/sc840/nav1ptr</property> 
+               <mapping>nasal</mapping>
+								<script>
+									var modes = ['OFF','VOR1','ADF1','FMS1'];
+									return modes[arg[0]];
+								</script>
+            </binding>
+        </hovered>
+   </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Nav1.dwn</object-name>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <command>property-adjust</command>
+                <property>instrumentation/primus2000/sc840/nav1ptr</property>
+                <step>-1</step>
+                <min>0</min>
+                <max>3</max>
+                <wrap>0</wrap>
+            </binding>
+    				<binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+        </binding>
         </action>
     </animation>
 
     <animation>
         <type>pick</type>
         <object-name>FMC.knob2</object-name>
-        <action>
-            <button>1</button>
-            <repeatable>false</repeatable>
-            <binding>
-                <command>property-adjust</command>
-                <property>instrumentation/primus2000/sc840/nav2ptr</property>
-                <step>-1</step>
-                <min>0</min>
-                <max>3</max>
-                <wrap>0</wrap>
-            </binding>
-        </action>
+        <object-name>Nav2.up</object-name>
         <action>
             <button>0</button>
             <repeatable>false</repeatable>
@@ -2621,6 +2637,44 @@
                 <max>3</max>
                 <wrap>0</wrap>
             </binding>
+    				<binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+        </binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>Nav2_select</tooltip-id>
+                <label>Nav2 select: %s </label> 
+                <property>instrumentation/primus2000/sc840/nav2ptr</property> 
+               <mapping>nasal</mapping>
+								<script>
+									var modes = ['OFF','VOR2','ADF2','FMS2'];
+									return modes[arg[0]];
+								</script>
+            </binding>
+        </hovered>
+   </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Nav2.dwn</object-name>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <command>property-adjust</command>
+                <property>instrumentation/primus2000/sc840/nav2ptr</property>
+                <step>-1</step>
+                <min>0</min>
+                <max>3</max>
+                <wrap>0</wrap>
+            </binding>
+    				<binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+        </binding>
         </action>
     </animation>
 
