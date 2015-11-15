@@ -105,7 +105,7 @@
         <type>translate</type>
         <object-name>L-cabin-door</object-name>	
         <property>controls/separation-door/open</property>
-				<factor>0.13</factor>
+				<factor>0.15</factor>
         <axis>
             <x>0</x>
             <y>-1</y>
@@ -117,7 +117,7 @@
         <type>translate</type>
         <object-name>R-cabin-door</object-name>	
         <property>controls/separation-door/open</property>
-				<factor>0.13</factor>
+				<factor>0.14</factor>
         <axis>
             <x>0</x>
             <y>1</y>

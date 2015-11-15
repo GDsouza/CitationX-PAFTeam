@@ -418,7 +418,7 @@
         <max-dist>10.0</max-dist>
     </gear>
 
-<!--  gear down -->
+<!--  GEAR DOWN -->
     <gear>
         <name>gear-down</name>
 	    <path>Aircraft/CitationX/Sounds/gear-down.wav</path>
@@ -441,7 +441,7 @@
         </condition>
     </gear>
 
-<!--  gear up -->
+<!--  GEAR UP -->
     <gear>
         <name>gear-up</name>
 	    <path>Aircraft/CitationX/Sounds/gear-up.wav</path>
@@ -685,6 +685,97 @@
         </condition>
     </click>
 
+    <!-- DOORS -->
+
+        <doors>
+            <name>cabin-door-open</name>
+            <mode>once</mode>
+            <path>Aircraft/CitationX/Sounds/cabin-door.wav</path>
+            <condition>
+                <greater-than>
+                    <property>controls/separation-door/open</property>
+                    <value>0.1</value>
+                </greater-than>
+            </condition>
+            <volume>
+                <property>sim/signals/fdm-initialized</property>
+                <factor>1</factor>
+            </volume>
+            <position>
+                <x>-6.6 </x>
+                <y> 0.0 </y>
+                <z> 0.6 </z>
+            </position>
+        </doors>
+
+        <doors>
+            <name>cabin-door-closed</name>
+            <mode>once</mode>
+            <path>Aircraft/CitationX/Sounds/cabin-door.wav</path>
+            <condition>
+              <and>
+                <less-than>
+                    <property>controls/separation-door/open</property>>
+                    <value>1</value>
+                </less-than>
+              </and>                          
+            </condition>
+            <volume>
+                <property>sim/signals/fdm-initialized</property>
+                <factor>1</factor>
+            </volume>
+            <position>
+                <x>-6.6 </x>
+                <y> 0.0 </y>
+                <z> 0.6 </z>
+            </position>
+        </doors>
+
+        <doors>
+            <name>toilet-door-open</name>
+            <mode>once</mode>
+            <path>Aircraft/CitationX/Sounds/cabin-door.wav</path>
+            <condition>
+                <greater-than>
+                    <property>controls/toilet-door/open</property>
+                    <value>0.1</value>
+                </greater-than>
+            </condition>
+            <volume>
+                <property>sim/signals/fdm-initialized</property>
+                <factor>1</factor>
+            </volume>
+            <position>
+                <x>-0.6 </x>
+                <y> 0.0 </y>
+                <z> 0.6 </z>
+            </position>
+        </doors>
+
+        <doors>
+            <name>toilet-door-closed</name>
+            <mode>once</mode>
+            <path>Aircraft/CitationX/Sounds/cabin-door.wav</path>
+            <condition>
+              <and>
+                <less-than>
+                    <property>controls/toilet-door/open</property>>
+                    <value>1</value>
+                </less-than>
+              </and>                          
+            </condition>
+            <volume>
+                <property>sim/signals/fdm-initialized</property>
+                <factor>1</factor>
+            </volume>
+            <position>
+                <x>-0.6 </x>
+                <y> 0.0 </y>
+                <z> 0.6 </z>
+            </position>
+        </doors>
+
+
     <!-- ALARMS -->
     <alarm>
         <name>Master warning</name>
@@ -787,7 +878,7 @@
       </position>
    </announcement>
 
-    <!-- Speed callouts -->
+    <!-- SPEED CALLOUTS -->
     <callout>
       <name>80 knots</name>
       <mode>once</mode>
