@@ -3,7 +3,7 @@ MATERIAL "panel" rgb 0.8 0.8 0.8  amb 1 1 1  emis 0.1 0.1 0.1  spec 1 1 1  shi 5
 MATERIAL "transparent" rgb 1 1 1  amb 1 1 1  emis 0.1 0.1 0.1  spec 0.1 0.1 0.1  shi 1  trans 1
 MATERIAL "LABELS" rgb 1 1 1  amb 1 1 1  emis 0.1 0.1 0.1  spec 0 0 0  shi 1  trans 0
 OBJECT world
-kids 223
+kids 225
 OBJECT poly
 name "AVN.off"
 loc 0.174844 -0.043128 0.024399
@@ -48214,7 +48214,7 @@ refs 4
 1 0.356331 0.925369
 kids 0
 OBJECT poly
-name "FD.ptch-up"
+name "FD.nose"
 data 10
 FD.ptch-up
 texture "interior.png"
@@ -48371,6 +48371,42 @@ refs 4
 23 0.502375 0.871265
 22 0.502375 0.859366
 26 0.522727 0.859366
+kids 0
+OBJECT poly
+name "FD.nose-up"
+loc 0.0707658 0.506554 -0.186233
+crease 45.000000
+numvert 4
+0.00312069 -0.141093 0.15254
+0.00312069 -0.141093 0.168818
+0.00281025 -0.117 0.168818
+0.00281025 -0.117 0.15254
+numsurf 1
+SURF 0x10
+mat 1
+refs 4
+3 0 1
+2 1 1
+1 1 0
+0 0 0
+kids 0
+OBJECT poly
+name "FD.nose-dwn"
+loc 0.0712382 0.547151 -0.186233
+crease 45.000000
+numvert 4
+0.00281025 -0.117 0.15254
+0.00281025 -0.117 0.168818
+0.00312069 -0.141093 0.168818
+0.00312069 -0.141093 0.15254
+numsurf 1
+SURF 0x10
+mat 1
+refs 4
+0 0 1
+1 1 1
+2 1 0
+3 0 0
 kids 0
 OBJECT poly
 name "FD.stby"

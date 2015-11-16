@@ -1,7 +1,7 @@
 #############################################################################
 # Flight Director/Autopilot controller.
 # Syd Adams
-#
+# C. Le Moigne (2015)
 ###  Initialization #######
 
 var Lateral = "autopilot/locks/heading";

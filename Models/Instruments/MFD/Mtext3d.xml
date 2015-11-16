@@ -36,6 +36,47 @@
         <property>autopilot/settings/heading-bug-deg</property>
         <format>%03.0f</format>
         <font>helvetica_bold.txf</font>
+        <character-size>0.008</character-size>
+        <character-aspect-ratio type="double">1.2</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">32</width>
+            <height type="int">32</height>
+        </font-resolution>
+    </text>
+
+    <text>
+        <name>WX-label</name>
+        <offsets>
+            <x-m>0.0</x-m>
+            <y-m>-0.065</y-m>
+            <z-m>-0.029</z-m>
+        </offsets>
+        <alignment>center-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>literal</type>
+        <text>WX</text>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.006</character-size>
+        <character-aspect-ratio type="double">1.3</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
+        </font-resolution>
+    </text>
+
+		<text>
+        <name>WX-value</name>
+        <offsets>
+            <x-m>0.000</x-m>
+            <y-m>-0.052</y-m>
+            <z-m>-0.029</z-m>
+        </offsets>
+        <alignment>center-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type type="string">number-value</type>
+        <property>instrumentation/nd/range</property>
+        <format>%02.0f</format>
+        <font>helvetica_bold.txf</font>
         <character-size>0.006</character-size>
         <character-aspect-ratio type="double">1.2</character-aspect-ratio>
         <font-resolution>
@@ -49,14 +90,14 @@
         <offsets>
             <x-m>0.0</x-m>
             <y-m>-0.063</y-m>
-            <z-m>-0.035</z-m>
+            <z-m>-0.038</z-m>
         </offsets>
         <alignment>center-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
         <type>literal</type>
         <text>BANK</text>
         <font>helvetica_bold.txf</font>
-        <character-size>0.005</character-size>
+        <character-size>0.006</character-size>
         <character-aspect-ratio type="double">1.3</character-aspect-ratio>
         <font-resolution>
             <width type="int">64</width>
@@ -69,7 +110,7 @@
         <offsets>
             <x-m>0.000</x-m>
             <y-m>-0.052</y-m>
-            <z-m>-0.035</z-m>
+            <z-m>-0.038</z-m>
         </offsets>
         <alignment>center-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -78,6 +119,69 @@
         <format>%02.0f</format>
         <font>helvetica_bold.txf</font>
         <character-size>0.006</character-size>
+        <character-aspect-ratio type="double">1.2</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">32</width>
+            <height type="int">32</height>
+        </font-resolution>
+    </text>
+
+		<text>
+        <name>Hour</name>
+        <offsets>
+            <x-m>0.000</x-m>
+            <y-m>-0.067</y-m>
+            <z-m>-0.015</z-m>
+        </offsets>
+        <alignment>center-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type type="string">number-value</type>
+        <property>sim/time/real/hour</property>
+        <format>%02.0f</format>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.007</character-size>
+        <character-aspect-ratio type="double">1.2</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">32</width>
+            <height type="int">32</height>
+        </font-resolution>
+    </text>
+
+		<text>
+        <name>Minute</name>
+        <offsets>
+            <x-m>0.000</x-m>
+            <y-m>-0.059</y-m>
+            <z-m>-0.015</z-m>
+        </offsets>
+        <alignment>center-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type type="string">number-value</type>
+        <property>sim/time/real/minute</property>
+        <format>%02.0f</format>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.007</character-size>
+        <character-aspect-ratio type="double">1.2</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">32</width>
+            <height type="int">32</height>
+        </font-resolution>
+    </text>
+
+		<text>
+        <name>Second</name>
+        <offsets>
+            <x-m>0.000</x-m>
+            <y-m>-0.051</y-m>
+            <z-m>-0.015</z-m>
+        </offsets>
+        <alignment>center-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type type="string">number-value</type>
+        <property>sim/time/real/second</property>
+        <format>%02.0f</format>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.007</character-size>
         <character-aspect-ratio type="double">1.2</character-aspect-ratio>
         <font-resolution>
             <width type="int">32</width>
@@ -97,7 +201,7 @@
         <type type="string">text-value</type>
         <property>autopilot/internal/nav-type</property>
         <font>helvetica_bold.txf</font>
-        <character-size>0.006</character-size>
+        <character-size>0.007</character-size>
         <character-aspect-ratio type="double">1.3</character-aspect-ratio>
         <font-resolution>
             <width type="int">32</width>
@@ -275,7 +379,6 @@
         </font-resolution>
     </text>
 
-
     <animation>
         <name>green</name>
         <type>material</type>
@@ -310,7 +413,11 @@
         <type>material</type>
         <object-name>RNG1</object-name>
         <object-name>RNG2</object-name>
+        <object-name>WX-label</object-name>
         <object-name>Bank-label</object-name>
+        <object-name>Hour</object-name>
+        <object-name>Minute</object-name>
+        <object-name>Second</object-name>
         <emission>
             <red>0.9</red>
             <green>0.9</green>
@@ -367,6 +474,7 @@
         <name>cyan</name>
         <type>material</type>
         <object-name>HDGannun</object-name>
+        <object-name>WX-value</object-name>
         <object-name>Bank-value</object-name>
         <emission>
             <red>0</red>

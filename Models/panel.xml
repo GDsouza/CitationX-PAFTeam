@@ -2404,22 +2404,15 @@
 
     <animation>
         <type>pick</type>
-        <object-name>FD.ptch-up</object-name>
-        <visible>true</visible>
+        <object-name>FD.nose</object-name>
+        <object-name>FD.nose-up</object-name> 
+       <visible>true</visible>
         <action>
             <button>0</button>
             <repeatable>true</repeatable>
             <binding>
                 <command>nasal</command>
                 <script>citation.pitch_wheel(-1)</script>
-            </binding>
-        </action>
-        <action>
-            <button>1</button>
-            <repeatable>true</repeatable>
-            <binding>
-                <command>nasal</command>
-                <script>citation.pitch_wheel(1)</script>
             </binding>
         </action>
         <action>
@@ -2432,6 +2425,20 @@
         </action>
         <action>
             <button>4</button>
+            <repeatable>true</repeatable>
+            <binding>
+                <command>nasal</command>
+                <script>citation.pitch_wheel(1)</script>
+            </binding>
+        </action>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>FD.nose-dwn</object-name>
+       <visible>true</visible>
+        <action>
+            <button>0</button>
             <repeatable>true</repeatable>
             <binding>
                 <command>nasal</command>

@@ -2,7 +2,7 @@ AC3Db
 MATERIAL "cyan" rgb 0 0.8 0.8  amb 0 0.8 0.8  emis 0 0.8 0.8  spec 1 1 1  shi 32  trans 0
 MATERIAL "lit" rgb 1 1 1  amb 1 1 1  emis 1 1 1  spec 0 0 0  shi 32  trans 0
 OBJECT world
-kids 20
+kids 17
 OBJECT poly
 name "Lhdg-arrow"
 crease 30.000000
@@ -191,24 +191,6 @@ refs 4
 18 0.571241 0.611144
 19 0.426664 0.611144
 21 0.426664 0.564615
-kids 0
-OBJECT poly
-name "MFD.ete"
-texture "MFD.png"
-crease 30.000000
-numvert 4
-0.0005 -0.019454 -0.055486
-0.0005 -0.023468 -0.055486
-0.0005 -0.023468 -0.047274
-0.0005 -0.019454 -0.047274
-numsurf 1
-SURF 0x0
-mat 1
-refs 4
-0 0.0800781 0.527344
-3 0.0117188 0.527344
-2 0.0117188 0.496094
-1 0.0800781 0.496094
 kids 0
 OBJECT poly
 name "MFD.hdg-bracket"
@@ -982,42 +964,6 @@ refs 4
 3 0.919922 0.583984
 2 0.919922 0.519531
 1 0.984375 0.519531
-kids 0
-OBJECT poly
-name "MFD.wxoff"
-texture "MFD.png"
-crease 30.000000
-numvert 4
-0.0005 -0.025946 0.050794
-0.0005 -0.030406 0.050794
-0.0005 -0.030406 0.068531
-0.0005 -0.025946 0.068531
-numsurf 1
-SURF 0x0
-mat 1
-refs 4
-0 0.152344 0.279297
-3 0.0136719 0.279297
-2 0.0136719 0.244141
-1 0.152344 0.244141
-kids 0
-OBJECT poly
-name "MFD.wxoff.001"
-texture "MFD.png"
-crease 30.000000
-numvert 4
-0.0005 -0.01334 0.051114
-0.0005 -0.017801 0.051114
-0.0005 -0.017801 0.066451
-0.0005 -0.01334 0.066451
-numsurf 1
-SURF 0x0
-mat 1
-refs 4
-0 0.132812 0.361328
-3 0.0117188 0.361328
-2 0.0117188 0.328125
-1 0.132812 0.328125
 kids 0
 OBJECT poly
 name "MFD.wxoff.002"
