@@ -2,7 +2,7 @@
 
 <PropertyList>
 
-<path>ALT.ac</path>
+<path>alt.ac</path>
 
     <animation>
         <type>textranslate</type>
@@ -208,5 +208,172 @@
             <z>0</z>
         </axis>
     </animation>
+<!-- INHG KNOB -->
+  <animation>
+    <type>rotate</type>
+    <object-name>inhg.knob</object-name>
+    <property>instrumentation/altimeter/setting-hpa</property>
+    <factor>5</factor>
+    <center>
+      <x-m>  0.00925 </x-m>
+      <y-m> -0.03106 </y-m>
+      <z-m> -0.03340 </z-m>
+    </center>
+    <axis>
+      <x>-1</x>
+      <y>0</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>knob</type>
+    <object-name>inhg.knob</object-name>
+    <action>
+      <binding>
+        <command>property-adjust</command>
+        <property>/instrumentation/altimeter/setting-hpa</property>
+        <factor>1</factor>
+        <min>950.0</min>
+        <max>1050.0</max>
+        <wrap>false</wrap>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>alt-setting</tooltip-id>
+        <label>QNH: %.0f</label>
+        <property>instrumentation/altimeter/setting-hpa</property>
+      </binding>
+    </hovered>   
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <visible>false</visible>
+    <object-name>inhg.dn</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>true</repeatable>
+      <binding>
+        <command>property-adjust</command>
+        <property>instrumentation/altimeter/setting-hpa</property>
+        <step>-1</step>
+        <min>950.0</min>
+        <max>1050.0</max>
+        <wrap>0</wrap>
+      </binding>
+    </action>
+    <action>
+      <button>1</button>
+      <repeatable>true</repeatable>
+      <binding>
+        <command>property-adjust</command>
+        <property>instrumentation/altimeter/setting-hpa</property>
+        <step>-5</step>
+        <min>950.0</min>
+        <max>1050.0</max>
+        <wrap>0</wrap>
+      </binding>
+    </action>
+    <action>
+      <name>increase</name>
+      <button>4</button>
+      <repeatable>true</repeatable>
+      <binding>
+        <command>property-adjust</command>
+        <property>instrumentation/altimeter/setting-hpa</property>
+        <step>1</step>
+        <min>950.0</min>
+        <max>1050.0</max>
+        <wrap>0</wrap>
+      </binding>
+    </action>
+    <action>
+      <name>decrease</name>
+      <button>3</button>
+      <repeatable>true</repeatable>
+      <binding>
+        <command>property-adjust</command>
+        <property>instrumentation/altimeter/setting-hpa</property>
+        <step>-1</step>
+        <min>950.0</min>
+        <max>1050.0</max>
+        <wrap>0</wrap>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>alt-setting</tooltip-id>
+        <label>QNH: %.0f</label>
+        <property>instrumentation/altimeter/setting-hpa</property>
+      </binding>
+    </hovered>   
+  </animation>
+  <animation>
+    <type>pick</type>
+    <visible>false</visible>
+    <object-name>inhg.up</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>true</repeatable>
+      <binding>
+        <command>property-adjust</command>
+        <property>instrumentation/altimeter/setting-hpa</property>
+        <step>1</step>
+        <min>950.0</min>
+        <max>1050.0</max>
+        <wrap>0</wrap>
+      </binding>
+    </action>
+    <action>
+      <button>1</button>
+      <repeatable>true</repeatable>
+      <binding>
+        <command>property-adjust</command>
+        <property>instrumentation/altimeter/setting-hpa</property>
+        <step>5</step>
+        <min>950.0</min>
+        <max>1050.0</max>
+        <wrap>0</wrap>
+      </binding>
+    </action>
+    <action>
+      <name>increase</name>
+      <button>4</button>
+      <repeatable>true</repeatable>
+      <binding>
+        <command>property-adjust</command>
+        <property>instrumentation/altimeter/setting-hpa</property>
+        <step>1</step>
+        <min>950.0</min>
+        <max>1050.0</max>
+        <wrap>0</wrap>
+      </binding>
+    </action>
+    <action>
+      <name>decrease</name>
+      <button>3</button>
+      <repeatable>true</repeatable>
+      <binding>
+        <command>property-adjust</command>
+        <property>instrumentation/altimeter/setting-hpa</property>
+        <step>-1</step>
+        <min>950.0</min>
+        <max>1050.0</max>
+        <wrap>0</wrap>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>alt-setting</tooltip-id>
+        <label>QNH: %.0f</label>
+        <property>instrumentation/altimeter/setting-hpa</property>
+      </binding>
+    </hovered>
+  </animation>
 
 </PropertyList>
