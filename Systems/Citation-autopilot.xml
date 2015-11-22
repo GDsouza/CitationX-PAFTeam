@@ -173,7 +173,7 @@
         <debug>false</debug>
         <enable>
             <prop>autopilot/locks/AP-status</prop>
-            <value>AP1</value>
+            <value>AP</value>
         </enable>
         <input>
             <prop>/orientation/roll-deg</prop>
@@ -377,10 +377,10 @@
             <prop>autopilot/internal/pitch-filter</prop>
         </output>
         <config>
-            <Kp>0.15</Kp>
-            <Ki>0.0</Ki>
-            <min>-20</min>
-            <max>20</max>
+            <Kp>0.15</Kp> 	<!-- origin 0.15 -->
+            <Ki>0.0</Ki>		<!-- origin 0.0 -->
+            <min>-20</min> 	<!-- origin -20 -->
+            <max>20</max>		<!-- origin 20 -->
         </config>
     </pi-simple-controller>
 
@@ -441,7 +441,7 @@
         <debug>false</debug>
         <enable>
             <prop>autopilot/locks/AP-status</prop>
-            <value>AP1</value>
+            <value>AP</value>
         </enable>
         <input>
             <prop>orientation/pitch-deg</prop>
@@ -472,17 +472,23 @@
 				<enable>
 					<condition>
 						<and>
-							<equals>
-								<property>/autopilot/settings/nav-source</property>
-									<value>FMS</value>
-							</equals>
+							<or>
+                <equals>
+                    <property>autopilot/settings/nav-source</property>
+                    <value>FMS1</value>
+                </equals>
+                <equals>
+                    <property>autopilot/settings/nav-source</property>
+                    <value>FMS2</value>
+                </equals>
+							</or>
 							<equals>
 									<property>/autopilot/locks/altitude</property>
 										<value>VALT</value>
 							</equals>
 							<equals>
 								<property>/autopilot/locks/AP-status</property>
-									<value>AP1</value>
+									<value>AP</value>
 							</equals>
 						</and>
 					</condition>
@@ -516,17 +522,23 @@
 				<enable>
 					<condition>
 						<and>
-							<equals>
-								<property>/autopilot/settings/nav-source</property>
-									<value>FMS</value>
-							</equals>
+							<or>
+                <equals>
+                    <property>autopilot/settings/nav-source</property>
+                    <value>FMS1</value>
+                </equals>
+                <equals>
+                    <property>autopilot/settings/nav-source</property>
+                    <value>FMS2</value>
+                </equals>
+							</or>
 							<equals>
 								<property>/autopilot/locks/altitude</property>
 									<value>VALT</value>
 							</equals>
 							<equals>
 								<property>/autopilot/locks/AP-status</property>
-									<value>AP1</value>
+									<value>AP</value>
 							</equals>
 						</and>
 					</condition>
@@ -686,10 +698,16 @@
         <initialize-to>output</initialize-to>
         <enable>
             <condition>
+							<or>
                 <equals>
                     <property>autopilot/settings/nav-source</property>
-                    <value>FMS</value>
+                    <value>FMS1</value>
                 </equals>
+                <equals>
+                    <property>autopilot/settings/nav-source</property>
+                    <value>FMS2</value>
+                </equals>
+							</or>
             </condition>
         </enable>
         <input>
@@ -708,10 +726,16 @@
         <initialize-to>output</initialize-to>
         <enable>
             <condition>
+							<or>
                 <equals>
                     <property>autopilot/settings/nav-source</property>
-                    <value>FMS</value>
+                    <value>FMS1</value>
                 </equals>
+                <equals>
+                    <property>autopilot/settings/nav-source</property>
+                    <value>FMS2</value>
+                </equals>
+							</or>
             </condition>
         </enable>
         <input>
@@ -729,10 +753,16 @@
         <initialize-to>output</initialize-to>
         <enable>
             <condition>
+							<or>
                 <equals>
                     <property>autopilot/settings/nav-source</property>
-                    <value>FMS</value>
+                    <value>FMS1</value>
                 </equals>
+                <equals>
+                    <property>autopilot/settings/nav-source</property>
+                    <value>FMS2</value>
+                </equals>
+							</or>
             </condition>
         </enable>
 				<input>instrumentation/settings/target-altitude-ft</input>

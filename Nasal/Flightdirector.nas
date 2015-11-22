@@ -37,13 +37,13 @@ var FD_set_mode = func(btn){
 
 		if(btn=="ap"){
 			Coord = getprop(AutoCoord);
-			if(getprop(AP)!="AP1"){
+			if(getprop(AP)!="AP"){
 				setprop(Lateral_arm,"");
 				setprop(Vertical_arm,"");
         if(Vmode=="PTCH")set_pitch();
         if(Lmode=="ROLL")set_roll(); 
         if(getprop("position/altitude-agl-ft") > minimums) {
-					setprop(AP,"AP1");
+					setprop(AP,"AP");
 					setprop(AutoCoord,0);
 				}
 			}	else {kill_Ap("")}
@@ -64,7 +64,7 @@ var FD_set_mode = func(btn){
     }elsif(btn=="flc"){
 			var flcmode = "FLC";
 			var asel = "ASEL";
-			if(NAVSRC=="FMS"){flcmode="VFLC";asel = "VASEL";}
+			if(left(NAVSRC,3)=="FMS"){flcmode="VFLC";asel = "VASEL";}
 			if(Vmode!=flcmode){
 				var mc =getprop("instrumentation/airspeed-indicator/indicated-mach");
 				var kt=int(getprop("instrumentation/airspeed-indicator/indicated-speed-kt"));
@@ -91,7 +91,7 @@ var FD_set_mode = func(btn){
 
 		}elsif(btn=="vnav"){
 			if(Vmode!="VALT"){
-				if(NAVSRC=="FMS"){
+				if(left(NAVSRC,3)=="FMS"){
 					setprop(Vertical,"VALT");
 					setprop(Lateral,"LNAV");
          }
@@ -138,10 +138,10 @@ var FD_set_mode = func(btn){
 var nav_src_set=func(src){
     setprop(Lateral_arm,"");
 		setprop(Vertical_arm,"");
-#    set_pitch();
-#		set_roll();
     if(src=="fms"){
-        if(getprop("autopilot/route-manager/route/num")>0)setprop(NAVprop,"FMS");
+			if(getprop("autopilot/route-manager/route/num")>0) {
+        if (NAVSRC!="FMS1")setprop(NAVprop,"FMS1") else setprop(NAVprop,"FMS2");
+			}
     }else{
         if (NAVSRC!="NAV1")setprop(NAVprop,"NAV1") else setprop(NAVprop,"NAV2");
     }
@@ -170,7 +170,7 @@ var set_nav_mode=func{
             setprop(Lateral,"HDG");
 					}
         }
-    } else if(NAVSRC=="FMS"){
+    } else if(left(NAVSRC,3)=="FMS"){
         if (getprop("autopilot/route-manager/active")) {
 					setprop(Lateral,"LNAV");
 		    }
@@ -217,19 +217,21 @@ var set_roll = func{
 }
 
 var set_apr = func{
-    if(NAVSRC == "NAV1"){
+    if(NAVSRC == "NAV1" or NAVSRC == "FMS2"){
 			if(getprop("instrumentation/nav/nav-loc") and getprop("instrumentation/nav/has-gs")){
 				setprop(Lateral_arm,"LOC");
 				setprop(Vertical_arm,"GS");
 				setprop(Lateral,"HDG");
-				setprop(Vertical,"GS"); ### rajout ###
+				setprop(Vertical,"GS"); 
 			}
-		}else if(NAVSRC == "NAV2"){
+		}else if(NAVSRC == "NAV2" or NAVSRC == "FMS1"){
 			if(getprop("instrumentation/nav[1]/nav-loc") and getprop("instrumentation/nav[1]/has-gs")){
 				setprop(Lateral_arm,"LOC");
 				setprop(Vertical_arm,"GS");
+				setprop(Lateral,"");
+				setprop(Vertical,"");
 				setprop(Lateral,"HDG");
-				setprop(Vertical,"GS"); ### rajout ###
+				setprop(Vertical,"GS");
       }
 		}
 }
@@ -277,8 +279,9 @@ var update_nav=func{
         setprop("autopilot/internal/to-flag",getprop("instrumentation/nav["~ind~"]/to-flag"));
         setprop("autopilot/internal/from-flag",getprop("instrumentation/nav["~ind~"]/from-flag"));
 
-    }elsif(NAVSRC == "FMS"){
-        setprop("autopilot/internal/nav-type","FMS1");
+    }elsif(NAVSRC == "FMS1" or NAVSRC == "FMS2"){
+				if (NAVSRC == "FMS1") {ind = 1} else {ind = 2}
+        setprop("autopilot/internal/nav-type","FMS"~ind);
         setprop("autopilot/internal/in-range",1);
         setprop("autopilot/internal/gs-in-range",0);
         setprop("autopilot/internal/nav-distance",getprop("instrumentation/gps/wp/wp[1]/distance-nm"));
@@ -342,7 +345,7 @@ var monitor_V_armed = func{
             if(getprop("autopilot/internal/gs-in-range")){
                 var gs_err=getprop("autopilot/internal/gs-deflection");
                 var gs_dst=getprop("autopilot/internal/nav-distance");
-                if(gs_dst <= 20.0){ ### old = 7.0 ###
+                if(gs_dst <= 15.0){ ### old = 7.0 ###
                     if(gs_err >-0.25 and gs_err < 0.25){
                         setprop(Vertical,"GS");
                         setprop(Vertical_arm,"");
@@ -391,7 +394,7 @@ var get_ETE= func{
             min=int(tmpmin);
         }
         ttw=sprintf("ETE %s:%02i",hr,min);
-    }elsif(NAVSRC == "FMS"){
+    }elsif(left(NAVSRC,3) == "FMS"){
         min = getprop("autopilot/route-manager/ete");
         min=int(min * 0.016666);
         if(min>60){
@@ -405,7 +408,7 @@ var get_ETE= func{
     setprop("autopilot/internal/nav-ttw",ttw);
 }
 
-### FMS Speed Control ###
+### FMS Speed & Altitude Controls ###
 
 var speed_Control = func {
 	var lock_alt = getprop("autopilot/locks/altitude");
@@ -415,7 +418,7 @@ var speed_Control = func {
 	var dist_dep = tot_dist-dist_rem;
 	var alt_ind = getprop("instrumentation/altimeter/indicated-altitude-ft");
 	var cruise_alt = getprop("autopilot/route-manager/cruise/altitude-ft");
-	var cruise_spd = getprop("autopilot/route-manager/cruise/speed-kts");
+	var cruise_spd = getprop("autopilot/settings/cruise-speed-kt");
 	var target_spd = "autopilot/settings/target-speed-kt";
 	var dep_spd = getprop("autopilot/settings/dep-speed-kt");
 	var dep_agl = getprop("autopilot/settings/dep-agl-limit-ft");
@@ -431,45 +434,58 @@ var speed_Control = func {
 	var tg_alt = getprop(target_alt);
 	var wp_alt = getprop("autopilot/route-manager/wp/altitude-ft");
 	var next_wp = "autopilot/route-manager/route/wp[";
-	var wp_ind = getprop("autopilot/route-manager/current-wp");
+	var curr_wp = getprop("autopilot/route-manager/current-wp");
 	var num = getprop("autopilot/route-manager/route/num");
 
 		### Takeoff ###
-	if (NAVSRC == "FMS" and lock_alt == "VALT") {
-		if (wp_ind==-1) {wp_ind=0}
-		if (dist_dep <= dep_lim or alt_ind <= dep_agl) {setprop(target_spd,dep_spd)}
-		setprop("autopilot/route-manager/wp/altitude-ft",getprop(next_wp~wp_ind~"]/altitude-ft"));
+	if (left(NAVSRC,3) == "FMS" and lock_alt == "VALT") {
+		if (curr_wp==-1) {curr_wp=0}
+		if (dist_dep < dep_lim and alt_ind < dep_agl) {setprop(target_spd,dep_spd)}
+			if (getprop(next_wp~curr_wp~"]/altitude-ft") <= 0.0) {
+				setprop(target_alt, getprop(next_wp~(curr_wp+1)~"]/altitude-ft"));
+			} else {
+				setprop(target_alt, getprop(next_wp~curr_wp~"]/altitude-ft"));
+			}
 	}
 		### En route ###
-	if (ap_stat == "AP1" and NAVSRC == "FMS" and lock_alt == "VALT") {
+	if (ap_stat == "AP" and left(NAVSRC,3) == "FMS" and lock_alt == "VALT") {
 		setprop("autopilot/route-manager/cruise/altitude-ft",getprop("autopilot/settings/asel"));
-		if (dist_dep <= dep_lim or alt_ind <= dep_agl) {setprop(target_spd,dep_spd)}
-		else if (app_dist < 12) {
-				set_apr();
-				if (getprop("controls/flight/flaps")==0.142) {
+		if (dist_dep < dep_lim or alt_ind < dep_agl) {setprop(target_spd,dep_spd)}
+
+				### Approach ###
+		else if (app_dist < 30) {
+				if (getprop(next_wp~curr_wp~"]/id") == "APP-4") {
+					setprop(target_alt,getprop(next_wp~(curr_wp+1)~"]/altitude-ft"));
+					setprop(target_spd,app_spd)
+				}	else if (getprop("controls/flight/flaps")==0.142) {
 					setprop(target_spd,app5_spd);
-				}
-				if (getprop("controls/flight/flaps")==0.428) {
+				} else if (getprop("controls/flight/flaps")==0.428) {
 					setprop(target_spd,app15_spd);
-				}
-				if (getprop("controls/flight/flaps")==1) {
+				} else if (getprop("controls/flight/flaps")==1) {
 					setprop(target_spd,app39_spd);
-				}	
-				else {setprop(target_spd,app_spd)}
-			### cruise ###
+				}	else {setprop(target_spd,app_spd)}
+				if (app_dist <= 10) {
+					if (NAVSRC == "FMS1") {setprop(NAVprop,"NAV2")}
+					if (NAVSRC == "FMS2") {setprop(NAVprop,"NAV1")}
+					set_apr();
+				}
+
+				### Cruise ###
 		}	else {
-			### WP without altitude ###
-			if (wp_alt <= 0.0) {
+						### WP without altitude ###
+			if (getprop(next_wp~curr_wp~"]/altitude-ft") <= 0.0) {
 				setprop(target_alt,cruise_alt*100);
 			} else {
-			### WP with altitude ###
-				setprop(target_alt,wp_alt);
+						### WP with altitude ###
+				setprop(target_alt,getprop(next_wp~curr_wp~"]/altitude-ft"));
 			}
-				### Climb ###
-			if (alt_ind < (tg_alt-100) or tg_alt > (alt_ind+5000)) {
+						### Climb ###
+			if (alt_ind < (tg_alt-250) or tg_alt > (alt_ind+5000)) {
 				setprop(target_spd,climb_spd);
-			} else if (tg_alt < (alt_ind-500)) {setprop(target_spd,descent_spd);					
-			} else {setprop(target_spd,cruise_spd) }			
+			} else if (tg_alt < (alt_ind-500)) {setprop(target_spd,descent_spd);
+			} else {
+				if (cruise_spd != 0) {setprop(target_spd,cruise_spd) }			
+			}
 		}	
 	}
 }

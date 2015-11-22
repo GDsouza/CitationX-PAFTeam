@@ -34,7 +34,7 @@
         <type type="string">text-value</type>
         <property>autopilot/locks/heading</property>
         <font>helvetica_bold.txf</font>
-        <character-size>0.009</character-size>
+        <character-size>0.008</character-size>
         <character-aspect-ratio type="double">1.4</character-aspect-ratio>
         <font-resolution>
             <width type="int">64</width>
@@ -54,7 +54,7 @@
         <type type="string">text-value</type>
         <property>autopilot/locks/altitude</property>
         <font>helvetica_bold.txf</font>
-        <character-size>0.009</character-size>
+        <character-size>0.008</character-size>
         <character-aspect-ratio type="double">1.4</character-aspect-ratio>
         <font-resolution>
             <width type="int">64</width>
@@ -66,15 +66,15 @@
         <name>AP-lat-armed</name>
         <offsets>
             <x-m>0.00</x-m>
-            <y-m>-0.031</y-m>
-            <z-m>0.101</z-m>
+            <y-m>-0.017</y-m>
+            <z-m>0.094</z-m>
         </offsets>
         <alignment>center-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
         <type type="string">text-value</type>
         <property>autopilot/locks/heading-arm</property>
         <font>helvetica_bold.txf</font>
-        <character-size>0.009</character-size>
+        <character-size>0.008</character-size>
         <character-aspect-ratio type="double">1.4</character-aspect-ratio>
         <font-resolution>
             <width type="int">64</width>
@@ -86,15 +86,15 @@
         <name>AP-vert-armed</name>
         <offsets>
             <x-m>0.0</x-m>
-            <y-m>0.025</y-m>
-            <z-m>0.101</z-m>
+            <y-m>0.012</y-m>
+            <z-m>0.094</z-m>
         </offsets>
         <alignment>center-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
         <type type="string">text-value</type>
         <property>autopilot/locks/altitude-arm</property>
         <font>helvetica_bold.txf</font>
-        <character-size>0.009</character-size>
+        <character-size>0.008</character-size>
         <character-aspect-ratio type="double">1.4</character-aspect-ratio>
         <font-resolution>
             <width type="int">64</width>
@@ -112,7 +112,7 @@
         <alignment>right-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
         <type type="string">number-value</type>
-        <property>instrumentation/gps/wp/wp[1]/altitude-ft</property>
+        <property>autopilot/settings/target-altitude-ft</property> -->
         <format>%5.0f</format>
         <font>helvetica_bold.txf</font>
         <character-size>0.007</character-size>
@@ -478,6 +478,14 @@
                 <equals>
                     <property>autopilot/locks/altitude</property>
                     <value>VFLC</value>
+                </equals>
+                <equals>
+                    <property>autopilot/internal/nav-type</property>
+                    <value>FMS1</value>
+                </equals>
+                <equals>
+                    <property>autopilot/internal/nav-type</property>
+                    <value>FMS2</value>
                 </equals>
             </or>
         </condition>

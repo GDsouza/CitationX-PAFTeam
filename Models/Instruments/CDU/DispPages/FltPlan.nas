@@ -1,313 +1,329 @@
 ### Display Flightplan ###
 ### C. LE MOIGNE (clm76) - 2015 ###
 
+
 var fltPlan_0 = func(dep_airport,dep_rwy,dest_airport,dest_rwy) {
-		var DspL = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:""};
-		var DspR = {line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
+	var Dsp = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
+		line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
+	var rep = "";
+	var path = "autopilot/route-manager/route/wp[";
+	var legb = "]/leg-bearing-true-deg";
+	var legd = "]/leg-distance-nm";
 			page = "ACTIVE FLT PLAN     1 / 1";
-			DspL.line1l = " ORIGIN / ETD";
-			DspL.line2l = "----";
+			Dsp.line1l = " ORIGIN / ETD";
+			Dsp.line2l = "----";
 			if (dep_airport != "") {
-				DspL.line2l = dep_airport ~" "~ dep_rwy;
+				Dsp.line2l = dep_airport ~" "~ dep_rwy;
 			}
-			DspL.line3l = "< LOAD FPL";
-			DspL.line4l = "";
-			DspL.line5l = "     RECALL OR CREATE";
-			DspL.line6l = "       FPL NAMED";
-			DspL.line7l = "< FPL LIST";
-			DspR.line1r = "";
-			DspR.line2r = "";
-			DspR.line3r = "DEST  ";
-			DspR.line4r = "----";
+			Dsp.line3l = "< LOAD FPL";
+			Dsp.line4l = "";
+			Dsp.line5l = "     RECALL OR CREATE";
+			Dsp.line6l = "       FPL NAMED";
+			Dsp.line7l = "< FPL LIST";
+			Dsp.line1r = "";
+			Dsp.line2r = "";
+			Dsp.line3r = "DEST  ";
+			Dsp.line4r = "----";
 			if (dest_airport != "") {
-				DspR.line4r = dest_airport ~" "~ dest_rwy;
+				Dsp.line4r = dest_airport ~" "~ dest_rwy;
 			}
-			DspR.line5r = "";
-			DspR.line6r = "---------";
-			DspR.line7r = "PERF INIT >";
-	cdu.DspSet(page,DspL,DspR);
+			Dsp.line5r = "";
+			Dsp.line6r = "---------";
+			Dsp.line7r = "PERF INIT >";
+	cdu.DspSet(page,Dsp);
 }
 
 var fltPlan_1 = func(dep_airport,dep_rwy,dest_airport,dest_rwy,num,flt_closed,marker) {
-		var DspL = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:""};
-		var DspR = {line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
-		var rep = "";
-		var path = "autopilot/route-manager/route/wp[";
-		var legb = "]/leg-bearing-true-deg";
-		var legd = "]/leg-distance-nm";
-		var spd_kt = getprop("/autopilot/settings/target-speed-kt");
-		var spd_mc = sprintf("%.2f",getprop("/autopilot/settings/target-speed-mach"));		
+	var Dsp = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
+		line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
+	var rep = "";
+	var path = "autopilot/route-manager/route/wp[";
+	var legb = "]/leg-bearing-true-deg";
+	var legd = "]/leg-distance-nm";
+	var spd = 0;
 			page = "ACTIVE FLT PLAN     1 / 5";
-			DspL.line1l = " ORIGIN / ETD";
-			DspL.line2l = "----";
-			DspL.line3l = " VIA TO";
-			DspL.line4l = "----";
-			DspL.line5l = " VIA TO";
-			DspL.line6l = "----";
-			DspL.line7l = "< DEPARTURE";
-			DspR.line1r = "SPD CMD  ";		
-			DspR.line2r = spd_kt~" / "~spd_mc;			
-			DspR.line5r = "DEST ";
-			DspR.line7r = "ARRIVAL >";
+			Dsp.line1l = " ORIGIN / ETD";
+			Dsp.line2l = "----";
+			Dsp.line3l = " VIA TO";
+			Dsp.line4l = "----";
+			Dsp.line5l = " VIA TO";
+			Dsp.line6l = "----";
+			Dsp.line7l = "< DEPARTURE";
+			Dsp.line1r = "SPD CMD  ";		
+			Dsp.line5r = "DEST ";
+			Dsp.line7r = "ARRIVAL >";
 			if (dest_airport != "") {
-				DspR.line6r = dest_airport~" "~ dest_rwy;
+				Dsp.line6r = dest_airport~" "~ dest_rwy;
 			}
 			if (dep_airport != "") {
 				var ind = 0;
 				if (getprop(path~ind~"]/id")==marker) {rep="   <--"}
 				else {rep=""}
-				DspL.line2l = dep_airport ~" "~ dep_rwy~rep;
+				Dsp.line2l = dep_airport ~" "~ dep_rwy~rep;
 			}
 			if (num == 2 and flt_closed == 1) {
 				var ind = 1;
-				DspL.line3l = sprintf("   %3i   %.1f",getprop(path~ind~legb),getprop(path~ind~legd));
-				DspL.line4l = dest_airport~" "~ dest_rwy;
+				Dsp.line3l = sprintf("   %3i   %.1f",getprop(path~ind~legb),getprop(path~ind~legd));
+				Dsp.line4l = dest_airport~" "~ dest_rwy;
 			}	else if (num >2) {
 				var ind = 1;
-				DspL.line3l = sprintf("   %3i   %.1f",getprop(path~ind~legb),getprop(path~ind~legd));
+				Dsp.line3l = sprintf("   %3i   %.1f",getprop(path~ind~legb),getprop(path~ind~legd));
 					if (getprop(path~ind~"]/id")==marker) {rep="   <--"}
 					else {rep=""}
-				DspL.line4l = getprop(path~ind~"]/id")~rep;	
-				DspR.line3r = "-----";
+				Dsp.line4l = getprop(path~ind~"]/id")~rep;	
+				Dsp.line3r = "-----";
 				if (getprop(path~ind~"]/altitude-ft") > 0) {
-					DspR.line3r = sprintf("%3i",int(getprop(path~ind~"]/altitude-ft")/100)*100);
+					Dsp.line3r = sprintf("%3i",int(getprop(path~ind~"]/altitude-ft")/100)*100);
 				}
-				DspR.line4r = spd_kt~" / "~spd_mc;
+				Dsp.line4r = set_Speed(path,ind,spd);
 			}
 			if (num == 3 and flt_closed == 1) {
 				var ind = 2;
-				DspL.line5l = sprintf("   %3i   %.1f",getprop(path~ind~legb),getprop(path~ind~legd));
-				DspL.line6l = dest_airport~" "~ dest_rwy;
+				Dsp.line5l = sprintf("   %3i   %.1f",getprop(path~ind~legb),getprop(path~ind~legd));
+				Dsp.line6l = dest_airport~" "~ dest_rwy;
 			} else if (num > 3 or (num == 3 and dest_airport == "")) {
 				var ind = 2;
-				DspL.line5l = sprintf("   %3i   %.1f",getprop(path~ind~legb),getprop(path~ind~legd));
+				Dsp.line5l = sprintf("   %3i   %.1f",getprop(path~ind~legb),getprop(path~ind~legd));
 				if (getprop(path~ind~"]/id")==marker) {rep="   <--"}
 				else {rep=""}
-				DspL.line6l = getprop(path~ind~"]/id")~rep;
-				DspR.line5r = "-----";
+				Dsp.line6l = getprop(path~ind~"]/id")~rep;
+				Dsp.line5r = "-----";
 				if (getprop(path~ind~"]/altitude-ft") > 0) {
-					DspR.line5r = sprintf("%3i",int(getprop(path~ind~"]/altitude-ft")/100)*100);
+					Dsp.line5r = sprintf("%3i",int(getprop(path~ind~"]/altitude-ft")/100)*100);
 				}
-				DspR.line6r = spd_kt~" / "~spd_mc;	
+				Dsp.line6r = set_Speed(path,ind,spd);
 			}
-	cdu.DspSet(page,DspL,DspR);
+	cdu.DspSet(page,Dsp);
 }
 
 var fltPlan_2 = func(dest_airport,dest_rwy,num,flt_closed,marker) {
-		var DspL = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:""};
-		var DspR = {line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
-		var rep = "";
-		var path = "autopilot/route-manager/route/wp[";
-		var legb = "]/leg-bearing-true-deg";
-		var legd = "]/leg-distance-nm";
-		var spd_kt = getprop("/autopilot/settings/target-speed-kt");
-		var spd_mc = sprintf("%.2f",getprop("/autopilot/settings/target-speed-mach"));		
+	var Dsp = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
+		line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
+	var rep = "";
+	var path = "autopilot/route-manager/route/wp[";
+	var legb = "]/leg-bearing-true-deg";
+	var legd = "]/leg-distance-nm";
+	var spd = 0;
 			page = "ACTIVE FLT PLAN     2 / 5";
-			DspL.line1l = " VIA TO";
-			DspL.line2l = "----";
-			DspL.line3l = " VIA TO";
-			DspL.line4l = "----";
-			DspL.line5l = " VIA TO";
-			DspL.line6l = "----";
-			DspL.line7l = "< DEPARTURE";
-			DspR.line5r = "DEST ";
-			DspR.line6r = dest_airport~" "~ dest_rwy;
-			DspR.line7r = "ARRIVAL >";
+			Dsp.line1l = " VIA TO";
+			Dsp.line2l = "----";
+			Dsp.line3l = " VIA TO";
+			Dsp.line4l = "----";
+			Dsp.line5l = " VIA TO";
+			Dsp.line6l = "----";
+			Dsp.line7l = "< DEPARTURE";
+			Dsp.line5r = "DEST ";
+			Dsp.line6r = dest_airport~" "~ dest_rwy;
+			Dsp.line7r = "ARRIVAL >";
 
 			if (num == 4 and flt_closed == 1) {
 				var ind = 3;
-				DspL.line1l = sprintf("   %3i   %.1f",getprop(path~ind~legb),getprop(path~ind~legd));
-				DspL.line2l = dest_airport~" "~ dest_rwy;
+				Dsp.line1l = sprintf("   %3i   %.1f",getprop(path~ind~legb),getprop(path~ind~legd));
+				Dsp.line2l = dest_airport~" "~ dest_rwy;
 			}	
 			else if (num > 4 or (num == 4 and dest_airport == "")) {
 				var ind = 3;
-				DspL.line1l = sprintf("   %3i   %.1f",getprop(path~ind~legb),getprop(path~ind~legd));
+				Dsp.line1l = sprintf("   %3i   %.1f",getprop(path~ind~legb),getprop(path~ind~legd));
 				if (getprop(path~ind~"]/id")==marker) {rep="   <--"}
 				else {rep=""}
-				DspL.line2l = getprop(path~ind~"]/id")~rep;
-				DspR.line1r = "-----";
+				Dsp.line2l = getprop(path~ind~"]/id")~rep;
+				Dsp.line1r = "-----";
 				if (getprop(path~ind~"]/altitude-ft") > 0) {
-					DspR.line1r = sprintf("%3i",int(getprop(path~ind~"]/altitude-ft")/100)*100);
+					Dsp.line1r = sprintf("%3i",int(getprop(path~ind~"]/altitude-ft")/100)*100);
 				}
-				DspR.line2r = spd_kt~" / "~spd_mc;	
+				Dsp.line2r = set_Speed(path,ind,spd);
 			}
 			if (num == 5 and flt_closed == 1) {
 				var ind = 4;
-				DspL.line3l = sprintf("   %3i   %.1f",getprop(path~ind~legb),getprop(path~ind~legd));
-				DspL.line4l = dest_airport~" "~ dest_rwy;
+				Dsp.line3l = sprintf("   %3i   %.1f",getprop(path~ind~legb),getprop(path~ind~legd));
+				Dsp.line4l = dest_airport~" "~ dest_rwy;
 			}	
 			else if (num > 5 or (num == 5 and dest_airport == "")) {
 				var ind = 4;
-				DspL.line3l = sprintf("   %3i   %.1f",getprop(path~ind~legb),getprop(path~ind~legd));
+				Dsp.line3l = sprintf("   %3i   %.1f",getprop(path~ind~legb),getprop(path~ind~legd));
 				if (getprop(path~ind~"]/id")==marker) {rep="   <--"}
 				else {rep=""}
-				DspL.line4l = getprop(path~ind~"]/id")~rep;
-				DspR.line3r = "-----";
+				Dsp.line4l = getprop(path~ind~"]/id")~rep;
+				Dsp.line3r = "-----";
 				if (getprop(path~ind~"]/altitude-ft") > 0) {
-					DspR.line3r = sprintf("%3i",int(getprop(path~ind~"]/altitude-ft")/100)*100);
+					Dsp.line3r = sprintf("%3i",int(getprop(path~ind~"]/altitude-ft")/100)*100);
 				}
-				DspR.line4r = spd_kt~" / "~spd_mc;	
+				Dsp.line4r = set_Speed(path,ind,spd);
 			}
 			if (num == 6 and flt_closed == 1) {
 				var ind = 5;
-				DspL.line5l = sprintf("   %3i   %.1f",getprop(path~ind~legb),getprop(path~ind~legd));
-				DspL.line6l = dest_airport~" "~ dest_rwy;
+				Dsp.line5l = sprintf("   %3i   %.1f",getprop(path~ind~legb),getprop(path~ind~legd));
+				Dsp.line6l = dest_airport~" "~ dest_rwy;
 			}	
 			else if (num > 6 or (num == 6 and dest_airport == "")) {
 				var ind = 5;
-				DspL.line5l = sprintf("   %3i   %.1f",getprop(path~ind~legb),getprop(path~ind~legd));
+				Dsp.line5l = sprintf("   %3i   %.1f",getprop(path~ind~legb),getprop(path~ind~legd));
 				if (getprop(path~ind~"]/id")==marker) {rep="   <--"}
 				else {rep=""}
-				DspL.line6l = getprop(path~ind~"]/id")~rep;
-				DspR.line5r = "-----";
+				Dsp.line6l = getprop(path~ind~"]/id")~rep;
+				Dsp.line5r = "-----";
 				if (getprop(path~ind~"]/altitude-ft") > 0) {
-					DspR.line5r = sprintf("%3i",int(getprop(path~ind~"]/altitude-ft")/100)*100);
+					Dsp.line5r = sprintf("%3i",int(getprop(path~ind~"]/altitude-ft")/100)*100);
 				}
-				DspR.line6r = spd_kt~" / "~spd_mc;	
+				Dsp.line6r = set_Speed(path,ind,spd);
 			}
-	cdu.DspSet(page,DspL,DspR);
+	cdu.DspSet(page,Dsp);
 }
 
 var fltPlan_3 = func(dest_airport,dest_rwy,num,flt_closed,marker) {
-		var DspL = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:""};
-		var DspR = {line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
-		var rep = "";
-		var path = "autopilot/route-manager/route/wp[";
-		var legb = "]/leg-bearing-true-deg";
-		var legd = "]/leg-distance-nm";
-		var spd_kt = getprop("/autopilot/settings/target-speed-kt");
-		var spd_mc = sprintf("%.2f",getprop("/autopilot/settings/target-speed-mach"));		
+	var Dsp = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
+		line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
+	var rep = "";
+	var path = "autopilot/route-manager/route/wp[";
+	var legb = "]/leg-bearing-true-deg";
+	var legd = "]/leg-distance-nm";
+	var spd = 0;
 			page = "ACTIVE FLT PLAN     3 / 5";
-			DspL.line1l = " VIA TO";
-			DspL.line2l = "----";
-			DspL.line3l = " VIA TO";
-			DspL.line4l = "----";
-			DspL.line5l = " VIA TO";
-			DspL.line6l = "----";
-			DspL.line7l = "< DEPARTURE";
-			DspR.line5r = "DEST ";
-			DspR.line6r = dest_airport~" "~ dest_rwy;
-			DspR.line7r = "ARRIVAL >";
+			Dsp.line1l = " VIA TO";
+			Dsp.line2l = "----";
+			Dsp.line3l = " VIA TO";
+			Dsp.line4l = "----";
+			Dsp.line5l = " VIA TO";
+			Dsp.line6l = "----";
+			Dsp.line7l = "< DEPARTURE";
+			Dsp.line5r = "DEST ";
+			Dsp.line6r = dest_airport~" "~ dest_rwy;
+			Dsp.line7r = "ARRIVAL >";
 			if (num == 7 and flt_closed == 1) {
 				var ind = 6;
-				DspL.line1l = sprintf("   %3i   %.1f",getprop(path~ind~legb),math.ceil(getprop(path~ind~legd)));
-				DspL.line2l = dest_airport~" "~ dest_rwy;
+				Dsp.line1l = sprintf("   %3i   %.1f",getprop(path~ind~legb),math.ceil(getprop(path~ind~legd)));
+				Dsp.line2l = dest_airport~" "~ dest_rwy;
 			}	
 			else if (num > 7 or (num == 7 and dest_airport == "")) {
 				var ind = 6;
-				DspL.line1l = sprintf("   %3i   %.1f",getprop(path~ind~legb),math.ceil(getprop(path~ind~legd)));
+				Dsp.line1l = sprintf("   %3i   %.1f",getprop(path~ind~legb),math.ceil(getprop(path~ind~legd)));
 				if (getprop(path~ind~"]/id")==marker) {rep="   <--"}
 				else {rep=""}
-				DspL.line2l = getprop(path~ind~"]/id")~rep;
-				DspR.line1r = "-----";
+				Dsp.line2l = getprop(path~ind~"]/id")~rep;
+				Dsp.line1r = "-----";
 				if (getprop(path~ind~"]/altitude-ft") > 0) {
-					DspR.line1r = sprintf("%3i",int(getprop(path~ind~"]/altitude-ft")/100)*100);
+					Dsp.line1r = sprintf("%3i",int(getprop(path~ind~"]/altitude-ft")/100)*100);
 				}
-				DspR.line2r = spd_kt~" / "~spd_mc;	
+				Dsp.line2r = set_Speed(path,ind,spd);
 			}
 			if (num == 8 and flt_closed == 1) {
 				var ind = 7;
-				DspL.line3l = sprintf("   %3i   %.1f",getprop(path~ind~legb),math.ceil(getprop(path~ind~legd)));
-				DspL.line4l = dest_airport~" "~ dest_rwy;
+				Dsp.line3l = sprintf("   %3i   %.1f",getprop(path~ind~legb),math.ceil(getprop(path~ind~legd)));
+				Dsp.line4l = dest_airport~" "~ dest_rwy;
 			}	
 			else if (num > 8 or (num == 8 and dest_airport == "")) {
 				var ind = 7;
-				DspL.line3l = sprintf("   %3i   %.1f",getprop(path~ind~legb),math.ceil(getprop(path~ind~legd)));
+				Dsp.line3l = sprintf("   %3i   %.1f",getprop(path~ind~legb),math.ceil(getprop(path~ind~legd)));
 				if (getprop(path~ind~"]/id")==marker) {rep="   <--"}
 				else {rep=""}
-				DspL.line4l = getprop(path~ind~"]/id")~rep;
-				DspR.line3r = "-----";
+				Dsp.line4l = getprop(path~ind~"]/id")~rep;
+				Dsp.line3r = "-----";
 				if (getprop(path~ind~"]/altitude-ft") > 0) {
-					DspR.line3r = sprintf("%3i",int(getprop(path~ind~"]/altitude-ft")/100)*100);
+					Dsp.line3r = sprintf("%3i",int(getprop(path~ind~"]/altitude-ft")/100)*100);
 				}
-				DspR.line4r = spd_kt~" / "~spd_mc;	
+				Dsp.line4r = set_Speed(path,ind,spd);
 			}
 			if (num == 9 and flt_closed == 1) {
 				var ind = 8;
-				DspL.line5l = sprintf("   %3i   %.1f",getprop(path~ind~legb),math.ceil(getprop(path~ind~legd)));
-				DspL.line6l = dest_airport~" "~ dest_rwy;
+				Dsp.line5l = sprintf("   %3i   %.1f",getprop(path~ind~legb),math.ceil(getprop(path~ind~legd)));
+				Dsp.line6l = dest_airport~" "~ dest_rwy;
 			}	
-			else if (num > 9 or (num == 3 and dest_airport == "")) {
+			else if (num > 9 or (num == 9 and dest_airport == "")) {
 				var ind = 8;
-				DspL.line5l = sprintf("   %3i   %.1f",getprop(path~ind~legb),math.ceil(getprop(path~ind~legd)));
+				Dsp.line5l = sprintf("   %3i   %.1f",getprop(path~ind~legb),math.ceil(getprop(path~ind~legd)));
 				if (getprop(path~ind~"]/id")==marker) {rep="   <--"}
 				else {rep=""}
-				DspL.line6l = getprop(path~ind~"]/id")~rep;
-				DspR.line5r = "-----";
+				Dsp.line6l = getprop(path~ind~"]/id")~rep;
+				Dsp.line5r = "-----";
 				if (getprop(path~ind~"]/altitude-ft") > 0) {
-					DspR.line5r = sprintf("%3i",int(getprop(path~ind~"]/altitude-ft")/100)*100);
+					Dsp.line5r = sprintf("%3i",int(getprop(path~ind~"]/altitude-ft")/100)*100);
 				}
-				DspR.line6r = spd_kt~" / "~spd_mc;	
+				Dsp.line6r = set_Speed(path,ind,spd);
 			}
-	cdu.DspSet(page,DspL,DspR);
+	cdu.DspSet(page,Dsp);
 }
 
 var fltPlan_4 = func(dest_airport,dest_rwy,num,flt_closed,marker) {
-		var DspL = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:""};
-		var DspR = {line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
-		var rep = "";
-		var path = "autopilot/route-manager/route/wp[";
-		var legb = "]/leg-bearing-true-deg";
-		var legd = "]/leg-distance-nm";
-		var spd_kt = getprop("/autopilot/settings/target-speed-kt");
-		var spd_mc = sprintf("%.2f",getprop("/autopilot/settings/target-speed-mach"));		
+	var Dsp = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
+		line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
+	var rep = "";
+	var path = "autopilot/route-manager/route/wp[";
+	var legb = "]/leg-bearing-true-deg";
+	var legd = "]/leg-distance-nm";
+	var spd = 0;
 			page = "ACTIVE FLT PLAN     4 / 5";
-			DspL.line1l = " VIA TO";
-			DspL.line2l = "----";
-			DspL.line3l = " VIA TO";
-			DspL.line4l = "----";
-			DspL.line5l = " VIA TO";
-			DspL.line6l = "----";
-			DspL.line7l = "< DEPARTURE";
-			DspR.line5r = "DEST ";
-			DspR.line6r = dest_airport~" "~ dest_rwy;
-			DspR.line7r = "ARRIVAL >";
-
+			Dsp.line1l = " VIA TO";
+			Dsp.line2l = "----";
+			Dsp.line3l = " VIA TO";
+			Dsp.line4l = "----";
+			Dsp.line5l = " VIA TO";
+			Dsp.line6l = "----";
+			Dsp.line7l = "< DEPARTURE";
+			Dsp.line5r = "DEST ";
+			Dsp.line6r = dest_airport~" "~ dest_rwy;
+			Dsp.line7r = "ARRIVAL >";
 			if (num == 10 and flt_closed == 1) {
 				var ind = 9;
-				DspL.line1l = sprintf("   %3i   %.1f",getprop(path~ind~legb),math.ceil(getprop(path~ind~legd)));
-				DspL.line2l = dest_airport~" "~ dest_rwy;
+				Dsp.line1l = sprintf("   %3i   %.1f",getprop(path~ind~legb),math.ceil(getprop(path~ind~legd)));
+				Dsp.line2l = dest_airport~" "~ dest_rwy;
 			}	
 			else if (num > 10 or (num == 10 and dest_airport == "")) {
 				var ind = 9;
-				DspL.line1l = sprintf("   %3i   %.1f",getprop(path~ind~legb),math.ceil(getprop(path~ind~legd)));
+				Dsp.line1l = sprintf("   %3i   %.1f",getprop(path~ind~legb),math.ceil(getprop(path~ind~legd)));
 				if (getprop(path~ind~"]/id")==marker) {rep="   <--"}
 				else {rep=""}
-				DspL.line2l = getprop(path~ind~"]/id")~rep;
-				DspR.line1r = "-----";
+				Dsp.line2l = getprop(path~ind~"]/id")~rep;
+				Dsp.line1r = "-----";
 				if (getprop(path~ind~"]/altitude-ft") > 0) {
-					DspR.line1r = sprintf("%3i",int(getprop(path~ind~"]/altitude-ft")/100)*100);
+					Dsp.line1r = sprintf("%3i",int(getprop(path~ind~"]/altitude-ft")/100)*100);
 				}
-				DspR.line2r = spd_kt~" / "~spd_mc;	
+				Dsp.line2r = set_Speed(path,ind,spd);
 			}
 			if (num == 11 and flt_closed == 1) {
 				var ind = 10;
-				DspL.line3l = sprintf("   %3i   %.1f",getprop(path~ind~legb),math.ceil(getprop(path~ind~legd)));
-				DspL.line4l = dest_airport~" "~ dest_rwy;
+				Dsp.line3l = sprintf("   %3i   %.1f",getprop(path~ind~legb),math.ceil(getprop(path~ind~legd)));
+				Dsp.line4l = dest_airport~" "~ dest_rwy;
 			}	
 			else if (num > 11 or (num == 11 and dest_airport == "")) {
 				var ind = 10;
-				DspL.line3l = sprintf("   %3i   %.1f",getprop(path~ind~legb),math.ceil(getprop(path~ind~legd)));
+				Dsp.line3l = sprintf("   %3i   %.1f",getprop(path~ind~legb),math.ceil(getprop(path~ind~legd)));
 				if (getprop(path~ind~"]/id")==marker) {rep="   <--"}
 				else {rep=""}
-				DspL.line4l = getprop(path~ind~"]/id")~rep;
-				DspR.line3r = "-----";
+				Dsp.line4l = getprop(path~ind~"]/id")~rep;
+				Dsp.line3r = "-----";
 				if (getprop(path~ind~"]/altitude-ft") > 0) {
-					DspR.line3r = sprintf("%3i",int(getprop(path~ind~"]/altitude-ft")/100)*100);
+					Dsp.line3r = sprintf("%3i",int(getprop(path~ind~"]/altitude-ft")/100)*100);
 				}
-				DspR.line4r = spd_kt~" / "~spd_mc;	
+				Dsp.line4r = set_Speed(path,ind,spd);
 			}
 			if (num == 12 and flt_closed == 1) {
 				var ind = 11;
-				DspL.line5l = sprintf("%3i   %.1f",getprop(path~ind~legb),math.ceil(getprop(path~ind~legd)));
-				DspL.line6l = dest_airport~" "~ dest_rwy;
+				Dsp.line5l = sprintf("%3i   %.1f",getprop(path~ind~legb),math.ceil(getprop(path~ind~legd)));
+				Dsp.line6l = dest_airport~" "~ dest_rwy;
 			}
-	cdu.DspSet(page,DspL,DspR);
-	}
+			else if (num > 12 or (num == 12 and dest_airport == "")) {
+				var ind = 11;
+				Dsp.line5l = sprintf("   %3i   %.1f",getprop(path~ind~legb),math.ceil(getprop(path~ind~legd)));
+				if (getprop(path~ind~"]/id")==marker) {rep="   <--"}
+				else {rep=""}
+				Dsp.line6l = getprop(path~ind~"]/id")~rep;
+				Dsp.line5r = "-----";
+				if (getprop(path~ind~"]/altitude-ft") > 0) {
+					Dsp.line5r = sprintf("%3i",int(getprop(path~ind~"]/altitude-ft")/100)*100);
+				}
+				Dsp.line6r = set_Speed(path,ind,spd);
+				}
+	cdu.DspSet(page,Dsp);
+}
 
 var fltPlan_5 = func(dest_airport,dest_rwy,num,marker) {
-		var DspL = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:""};
-		var DspR = {line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
+	var Dsp = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
+		line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
+	var rep = "";
+	var path = "autopilot/route-manager/route/wp[";
+	var legb = "]/leg-bearing-true-deg";
+	var legd = "]/leg-distance-nm";
+	var spd = 0;
 		if (num <= 1) {
 			var i = 0;
 			var j = 0;
@@ -317,27 +333,35 @@ var fltPlan_5 = func(dest_airport,dest_rwy,num,marker) {
 			var j = num - 2;
 		}
 			page = "ACTIVE FLT PLAN     5 / 5";
-			DspL.line1l = "   "~sprintf("%3i   %3i",getprop("autopilot/route-manager/route/wp["~j~"]/leg-bearing-true-deg"),getprop("autopilot/route-manager/route/wp["~j~"]/leg-distance-nm"));
-			DspL.line2l = getprop("autopilot/route-manager/route/wp["~j~"]/id");
-			DspL.line3l = "   "~sprintf("%3i   %3i",getprop("autopilot/route-manager/route/wp["~i~"]/leg-bearing-true-deg"),getprop("autopilot/route-manager/route/wp["~i~"]/leg-distance-nm"));
-			DspL.line4l = dest_airport~" "~ dest_rwy;
-			DspL.line5l = "       SAVE ACTIVE FLT";
-			DspL.line6l = "          PLAN TO";
-			DspL.line7l = "< DEPARTURE";
-			DspR.line1r = "";
-			DspR.line2r = "";
-			DspR.line3r = "";
-			DspR.line4r = "";
-			DspR.line5r = "";
-			DspR.line6r = "------------";
+			Dsp.line1l = "   "~sprintf("%3i   %3i",getprop("autopilot/route-manager/route/wp["~j~"]/leg-bearing-true-deg"),getprop("autopilot/route-manager/route/wp["~j~"]/leg-distance-nm"));
+			Dsp.line2l = getprop("autopilot/route-manager/route/wp["~j~"]/id");
+			Dsp.line3l = "   "~sprintf("%3i   %3i",getprop("autopilot/route-manager/route/wp["~i~"]/leg-bearing-true-deg"),getprop("autopilot/route-manager/route/wp["~i~"]/leg-distance-nm"));
+			Dsp.line4l = dest_airport~" "~ dest_rwy;
+			Dsp.line5l = "       SAVE ACTIVE FLT";
+			Dsp.line6l = "          PLAN TO";
+			Dsp.line7l = "< DEPARTURE";
+			Dsp.line1r = "";
+			Dsp.line2r = set_Speed(path,j,spd);
+			Dsp.line3r = "";
+			Dsp.line4r = "";
+			Dsp.line5r = "";
+			Dsp.line6r = "------------";
 			if (getprop("autopilot/route-manager/flight-plan")) {
-				DspR.line5r = "SAVED";
-				DspR.line6r = getprop("autopilot/route-manager/flight-plan");
+				Dsp.line5r = "SAVED";
+				Dsp.line6r = getprop("autopilot/route-manager/flight-plan");
 			}
 			if (getprop("autopilot/route-manager/active")) {
-				DspR.line7r = "PERF INIT >";
-			} else {DspR.line7r = ""}
+				Dsp.line7r = "PERF INIT >";
+			} else {Dsp.line7r = ""}
 
-	cdu.DspSet(page,DspL,DspR);
+	cdu.DspSet(page,Dsp);
 }
 
+var set_Speed = func(path,ind,spd) {
+	var search = find("-",getprop(path~ind~"]/id"));
+		if (search != -1) {
+			var spd_kt = getprop("autopilot/settings/climb-speed-kt");
+			spd = spd_kt~" / "~ sprintf("%.2f",spd_kt*0.0015);
+		}
+		else {spd = "  /   "}		
+}
