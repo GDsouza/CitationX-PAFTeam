@@ -195,11 +195,10 @@
         </axis>
     </animation>
 
-<!-- SEATS -->
-
+<!-- CABIN SEATS -->
     <model>
-        <name>cabin-seat1</name>
-        <path>Aircraft/CitationX/Models/Seats/cabin-seat1.xml</path>
+        <name>Cabin-seats</name>
+        <path>Aircraft/CitationX/Models/Seats/Cabin-seats.xml</path>
         <offsets>
             <x-m> 0.00 </x-m>
             <y-m> 0.00 </y-m>
@@ -207,39 +206,5 @@
             <pitch-deg>0</pitch-deg>
         </offsets>
     </model>
-
-    <model>
-        <name>cabin-seat2</name>
-        <path>Aircraft/CitationX/Models/Seats/cabin-seat2.xml</path>
-        <offsets>
-            <x-m> 0.00 </x-m>
-            <y-m> 0.00 </y-m>
-            <z-m> 0.00</z-m>
-            <pitch-deg>0</pitch-deg>
-        </offsets>
-    </model>
-
-    <model>
-        <name>cabin-seat3</name>
-        <path>Aircraft/CitationX/Models/Seats/cabin-seat3.xml</path>
-        <offsets>
-            <x-m> 0.00 </x-m>
-            <y-m> 0.00 </y-m>
-            <z-m> 0.00</z-m>
-            <pitch-deg>0</pitch-deg>
-        </offsets>
-    </model>
-
-    <model>
-        <name>cabin-seat4</name>
-        <path>Aircraft/CitationX/Models/Seats/cabin-seat4.xml</path>
-        <offsets>
-            <x-m> 0.00 </x-m>
-            <y-m> 0.00 </y-m>
-            <z-m> 0.00</z-m>
-            <pitch-deg>0</pitch-deg>
-        </offsets>
-    </model>
-
 
 </PropertyList>
