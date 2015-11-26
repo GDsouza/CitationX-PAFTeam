@@ -4,6 +4,24 @@
 
     <path>cabin.ac</path>
 
+  <!-- Chrome Effect for interior parts -->
+  <animation>
+    <type>material</type>
+    <object-name>Cabin-LightsSup</object-name>
+    <object-name>Sphere</object-name>
+    <emission>
+      <red>   0.32 </red>
+      <green> 0.25 </green>
+      <blue>  0.25 </blue>
+    </emission>
+  </animation>
+
+    <effect>
+      <inherits-from>Aircraft/CitationX/Models/Effects/test_reflect</inherits-from>
+    <object-name>Cabin-LightsSup</object-name>
+    <object-name>Sphere</object-name>
+    </effect>
+
 <!-- EXT CABIN DOOR -->
 
 	<animation>
