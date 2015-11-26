@@ -22,6 +22,12 @@
     <object-name>Sphere</object-name>
     </effect>
 
+    <effect>
+      <inherits-from>Aircraft/CitationX/Models/Effects/skin-reflect</inherits-from>
+    <object-name>Cabin-LightsSup</object-name>
+    <object-name>Sphere</object-name>
+    </effect>
+
 <!-- EXT CABIN DOOR -->
 
 	<animation>
