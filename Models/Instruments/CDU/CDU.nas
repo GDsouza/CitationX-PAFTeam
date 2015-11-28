@@ -22,13 +22,18 @@ var init = func {
 	setprop("autopilot/settings/app15-speed-kt",160);
 	setprop("autopilot/settings/app39-speed-kt",140);
 	setprop("autopilot/route-manager/wp[]/altitude-ft",0);
+	setprop("/instrumentation/cdu/input-n",1);
 }
 
 var input = func (v) {
+	var n = getprop("/instrumentation/cdu/input-n");
 		if (left(getprop("/instrumentation/cdu/input"),1) == "*") {
 			setprop("/instrumentation/cdu/input",	"");
 		}		
-		setprop("/instrumentation/cdu/input",getprop("/instrumentation/cdu/input")~v);
+		if (n < 14) {   # limitation à 13 caractères #
+			setprop("/instrumentation/cdu/input",getprop("/instrumentation/cdu/input")~v);
+			setprop("/instrumentation/cdu/input-n", n+=1);
+		}
 }
 
 var key = func(v) {
@@ -40,7 +45,7 @@ var key = func(v) {
 	var num = getprop("autopilot/route-manager/route/num");
 	var savePath = getprop("/sim/fg-home")~"/aircraft-data/FlightPlans/";
 	var fltPath = "";
-	var fltName = depAirport ~ "-" ~ destAirport;
+	var fltName = "";
 	var i = substr(cduDisplay,9,1);
 	var j = 0;
 
@@ -329,7 +334,9 @@ var key = func(v) {
 							cduDisplay = "FLT-PLAN[0]";
 						}
 						else {
+							if (find(destAirport,getprop("autopilot/route-manager/route/wp["~j~"]/id")) == -1) {
 							setprop("autopilot/route-manager/input","@DELETE"~j);
+							}
 							setprop("autopilot/route-manager/active",0);
 							cduInput = "";
 						}
@@ -782,20 +789,6 @@ var previous = func {
 		page -= 1;
 		setprop("/instrumentation/cdu/display",dspShort ~ "["~page~"]");
 	}
-#		setprop("/instrumentation/cdu/nrpage",page);
-#		if (page >= 1 and page < 5) {
-#			page -= 1;
-#		}	else if (page == 5) {
-#			page = 0;
-#		}			
-#		setprop("/instrumentation/cdu/display",dspShort~"["~ page~"]");		
-#	} else {
-#			if (page > 0) {
-#				page -= 1;
-#				setprop("/instrumentation/cdu/display",dspShort ~ "["~page~"]");
-#				setprop("/instrumentation/cdu/nrpage",page);
-#			}
-#	}
 }
 
 var next = func {
