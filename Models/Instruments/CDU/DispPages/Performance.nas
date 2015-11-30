@@ -25,7 +25,7 @@ var perfPage_0 = func() {
 var perfPage_1 = func() {
 	var Dsp = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
 		line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
-		var ClimbSpeed_kt = getprop("autopilot/settings/climb-speed-kt");
+		var ClimbSpeed_kt = sprintf("%.0f",getprop("autopilot/settings/climb-speed-kt"));
 		var ClimbSpeed_mc = sprintf("%.2f",getprop("autopilot/settings/climb-speed-kt")*0.0015);
 		var DescSpeed_kt = getprop("autopilot/settings/descent-speed-kt");
 		var DescSpeed_mc = sprintf("%.2f",getprop("autopilot/settings/descent-speed-kt")*0.0015);

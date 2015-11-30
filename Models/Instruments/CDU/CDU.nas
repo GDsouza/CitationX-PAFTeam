@@ -546,7 +546,7 @@ var key = func(v) {
 				if (cduInput != "") {
 					if (left(cduInput,2) == "0.") {
 						setprop("autopilot/settings/climb-speed-mach",cduInput);				
-						setprop("autopilot/settings/climb-speed-kt",cduInput*661.47);
+						setprop("autopilot/settings/climb-speed-kt",int(cduInput*661.47));
 					} else {
 							setprop("autopilot/settings/climb-speed-kt",cduInput);
 							setprop("autopilot/settings/climb-speed-mach",cduInput*0.0015118);
@@ -559,7 +559,7 @@ var key = func(v) {
 				if (cduInput != "") {
 					if (left(cduInput,2) == "0.") {
 						setprop("autopilot/settings/cruise-speed-mach",cduInput);
-						setprop("autopilot/settings/cruise-speed-kt",cduInput*661.47);
+						setprop("autopilot/settings/cruise-speed-kt",int(cduInput*661.47));
 					} else {
 							setprop("autopilot/settings/cruise-speed-kt",cduInput);
 							setprop("autopilot/settings/cruise-speed-mach",cduInput*0.0015118);
@@ -577,7 +577,7 @@ var key = func(v) {
 				if (cduInput != "") {
 					if (left(cduInput,2) == "0.") {
 						setprop("autopilot/settings/descent-speed-mach",cduInput);
-						setprop("autopilot/settings/descent-speed-kt",cduInput*661.47);
+						setprop("autopilot/settings/descent-speed-kt",int(cduInput*661.47));
 					} else {
 							setprop("autopilot/settings/descent-speed-kt",cduInput);
 							setprop("autopilot/settings/descent-speed-mach",cduInput*0.0015118);
