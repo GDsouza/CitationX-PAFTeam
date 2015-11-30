@@ -22,17 +22,15 @@ var init = func {
 	setprop("autopilot/settings/app15-speed-kt",160);
 	setprop("autopilot/settings/app39-speed-kt",140);
 	setprop("autopilot/route-manager/wp[]/altitude-ft",0);
-	setprop("/instrumentation/cdu/input-n",1);
 }
 
 var input = func (v) {
-	var n = getprop("/instrumentation/cdu/input-n");
+	var n = size(getprop("/instrumentation/cdu/input"));
 		if (left(getprop("/instrumentation/cdu/input"),1) == "*") {
 			setprop("/instrumentation/cdu/input",	"");
 		}		
-		if (n < 14) {   # limitation à 13 caractères #
+		if (n < 13) {
 			setprop("/instrumentation/cdu/input",getprop("/instrumentation/cdu/input")~v);
-			setprop("/instrumentation/cdu/input-n", n+=1);
 		}
 }
 
