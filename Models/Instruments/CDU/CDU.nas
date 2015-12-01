@@ -17,7 +17,7 @@ var init = func {
 	setprop("autopilot/settings/dep-agl-limit-ft",2500);
 	setprop("autopilot/settings/dep-limit-nm",4);
 	setprop("autopilot/settings/app-speed-kt",200);
-	setprop("autopilot/settings/dist-to-dest-nm",15);
+	setprop("autopilot/settings/dist-to-dest-nm",30);
 	setprop("autopilot/settings/app5-speed-kt",180);
 	setprop("autopilot/settings/app15-speed-kt",160);
 	setprop("autopilot/settings/app39-speed-kt",140);
@@ -702,9 +702,25 @@ var key = func(v) {
 
 		#### PROG PAGES ####
 		if (cduDisplay == "PRG-PAGE[0]") {
-			setprop("instrumentation/cdu/nbpage",3);
-			if (v == "B4L") {v = "";cduDisplay = "PRG-PAGE[3]"}
+			setprop("instrumentation/cdu/nbpage",2);
+#			if (v == "B4L") {v = "";cduDisplay = "PRG-PAGE[3]"}
 #			if (v == "B4R") {v = "";cduDisplay = "CHK-LIST[0]"}
+			if (v == "NAV") {v = "";cduDisplay = "NAV-PAGE[0]"}
+			if (v == "FPL") {
+				if (getprop("instrumentation/cdu/pos-init") == 0) {
+					v = "";
+					cduDisplay = "POS INIT[0]";				
+				} else if (destAirport == ""){
+						v = "";
+						cduInput = "*NO DEST AIRPORT*";
+						cduDisplay = "FLT-PLAN[0]";
+				}
+				else {v = "";cduDisplay = "FLT-PLAN[1]"}
+			}
+		}
+			### en cours de construction ###
+		if (cduDisplay == "PRG-PAGE[1]") {
+			setprop("instrumentation/cdu/nbpage",2);
 			if (v == "NAV") {v = "";cduDisplay = "NAV-PAGE[0]"}
 			if (v == "FPL") {
 				if (getprop("instrumentation/cdu/pos-init") == 0) {

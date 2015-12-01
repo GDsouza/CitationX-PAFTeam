@@ -298,7 +298,7 @@ var fltPlan_4 = func(dest_airport,dest_rwy,num,flt_closed,marker) {
 			}
 			if (num == 12 and flt_closed == 1) {
 				var ind = 11;
-				Dsp.line5l = sprintf("%3i   %.1f",getprop(path~ind~legb),math.ceil(getprop(path~ind~legd)));
+				Dsp.line5l = sprintf("   %3i   %.1f",getprop(path~ind~legb),math.ceil(getprop(path~ind~legd)));
 				Dsp.line6l = dest_airport~" "~ dest_rwy;
 			}
 			else if (num > 12 or (num == 12 and dest_airport == "")) {
