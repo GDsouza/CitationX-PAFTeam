@@ -465,7 +465,7 @@ var speed_Control = func {
 				} else if (getprop("controls/flight/flaps")==1) {
 					setprop(target_spd,app39_spd);
 				}	else {setprop(target_spd,app_spd)}
-				if (app_dist <= 10) {
+				if (app_dist <= 7) {
 					if (NAVSRC == "FMS1") {setprop(NAVprop,"NAV2")}
 					if (NAVSRC == "FMS2") {setprop(NAVprop,"NAV1")}
 					set_apr();

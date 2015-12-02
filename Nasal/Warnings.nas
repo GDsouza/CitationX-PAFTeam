@@ -249,12 +249,14 @@ var EICAS = {
 				}	else if (me.xfer_R) {
           	append(me.msg_l0,"CTR XFER XSIT R");
 				}
-
 				if (me.xfeed_L or me.xfeed_R) {
           	append(me.msg_l0,"FUEL XFEED OPEN");
 				}
 				if (me.grav_xflow) {
           	append(me.msg_l0,"FUEL XFLOW OPEN");
+				}
+				if (me.ext_pwr) {
+						append(me.msg_l0,"EXT POWER ON");
 				}
 
 			me.AnnunOutput();
