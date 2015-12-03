@@ -259,17 +259,18 @@
             <prop>autopilot/internal/target-climb-rate-fps</prop>
         </reference>
         <output>
-            <prop>/autopilot/internal/pitch-filter</prop>
+<!--            <prop>/autopilot/internal/pitch-filter</prop> -->
+            <prop>autopilot/settings/target-pitch-deg</prop>
         </output>
         <config>
-            <Kp>0.20</Kp> <!-- old 0.20 -->
+            <Kp>0.05</Kp> <!-- old 0.20 -->
             <beta>1.0</beta>
             <alpha>0.1</alpha>
-            <gamma>0.1</gamma>
-            <Ti>10.0</Ti> <!-- old 10 -->
-            <Td>0.00001</Td>
-            <min>-5</min>
-            <max>5</max>
+            <gamma>0.1</gamma>p
+            <Ti>30.0</Ti> <!-- old 10 -->
+            <Td>0.01</Td> <!-- old 0.00001 -->
+            <u_min>-5</u_min>
+            <u_max>5</u_max>
         </config>
     </pid-controller>
 
