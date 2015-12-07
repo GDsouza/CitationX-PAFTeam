@@ -17,7 +17,7 @@ var Coord = 0;
 var minimums=getprop("autopilot/settings/minimums");
 var wx_range=[10,25,50,100,200,300];
 var wx_index=3;
-
+var TOD = 0;
 
 #####################################
 
@@ -425,8 +425,7 @@ var speed_Control = func {
 	var dep_lim = getprop("autopilot/settings/dep-limit-nm");
 	var climb_spd = getprop("autopilot/settings/climb-speed-kt");
 	var descent_spd = getprop("autopilot/settings/descent-speed-kt");
-	var app_spd = getprop("autopilot/settings/app-speed-kt");
-	var app_dist = getprop("autopilot/route-manager/distance-remaining-nm"); 
+	var app_spd = getprop("autopilot/settings/app-speed-kt"); 
 	var app_dist_set = getprop("autopilot/settings/dist-to-dest-nm");
 	var app5_spd = getprop("autopilot/settings/app5-speed-kt");
 	var app15_spd = getprop("autopilot/settings/app15-speed-kt");
@@ -437,6 +436,8 @@ var speed_Control = func {
 	var next_wp = "autopilot/route-manager/route/wp[";
 	var curr_wp = getprop("autopilot/route-manager/current-wp");
 	var num = getprop("autopilot/route-manager/route/num");
+	var asel = getprop("autopilot/settings/asel");
+	var fms = getprop("instrumentation/primus2000/sc840/nav1ptr");
 
 		### Takeoff ###
 	if (left(NAVSRC,3) == "FMS" and lock_alt == "VALT") {
@@ -449,45 +450,58 @@ var speed_Control = func {
 		}
 	}
 		### En route ###
-	if (ap_stat == "AP" and left(NAVSRC,3) == "FMS" and lock_alt == "VALT") {
-		setprop("autopilot/route-manager/cruise/altitude-ft",getprop("autopilot/settings/asel"));
-		if (dist_dep < dep_lim and alt_ind < dep_agl) {setprop(target_spd,dep_spd)}
+	if (ap_stat == "AP") {
+		if (left(NAVSRC,3) == "FMS" and lock_alt == "VALT") {
+			setprop("autopilot/route-manager/cruise/altitude-ft",asel*100);
+			if (dist_rem <= alt_ind/300) {TOD = 1}
+			if (dist_dep < dep_lim and alt_ind < dep_agl) {setprop(target_spd,dep_spd)}
 
 				### Approach ###
-		else if (app_dist <= app_dist_set) {
+			else if (dist_rem <= app_dist_set or TOD == 1) {
 				if (getprop(next_wp~curr_wp~"]/id") == "APP-4") {
 					setprop(target_alt,getprop(next_wp~(curr_wp+1)~"]/altitude-ft"));
-					setprop(target_spd,app_spd)
-				}	else if (getprop("controls/flight/flaps")==0.142) {
-					setprop(target_spd,app5_spd);
-				} else if (getprop("controls/flight/flaps")==0.428) {
-					setprop(target_spd,app15_spd);
-				} else if (getprop("controls/flight/flaps")==1) {
-					setprop(target_spd,app39_spd);
-				}	else {setprop(target_spd,app_spd)}
-				if (app_dist <= 7) {
+					setprop(target_spd,app_spd);
+				}
+				if (dist_rem <= 7) {
 					if (NAVSRC == "FMS1") {setprop(NAVprop,"NAV2")}
 					if (NAVSRC == "FMS2") {setprop(NAVprop,"NAV1")}
 					set_apr();
 				}
 
 				### Cruise ###
-		}	else {
-						### WP without altitude ###
-			if (getprop(next_wp~curr_wp~"]/altitude-ft") <= 0.0) {
-				setprop(target_alt,cruise_alt*100);
-			} else {
-						### WP with altitude ###
-				setprop(target_alt,getprop(next_wp~curr_wp~"]/altitude-ft"));
+			}	else {
+							### WP without altitude ###
+				if (getprop(next_wp~curr_wp~"]/altitude-ft") <= 0.0) {
+					setprop(target_alt,cruise_alt);
+				} else {
+							### WP with altitude ###
+					setprop(target_alt,getprop(next_wp~curr_wp~"]/altitude-ft"));
+				}
+
+							### Climb ###
+				if (tg_alt > (alt_ind+5000)) {
+					setprop(target_spd,climb_spd);
+				} else if (tg_alt < (alt_ind-1000)) {
+						setprop(target_spd,descent_spd);
+				}	else {
+					if (cruise_spd != 0) {
+						if (getprop(next_wp~curr_wp~"]/speed")) {
+							setprop("autopilot/settings/cruise-speed-kt",getprop(next_wp~curr_wp~"]/speed"));
+						}	
+						setprop(target_spd,cruise_spd);			
+					}
+				}	
 			}
-						### Climb ###
-			if (alt_ind < (tg_alt-250) or tg_alt > (alt_ind+5000)) {
-				setprop(target_spd,climb_spd);
-			} else if (tg_alt < (alt_ind-500)) {setprop(target_spd,descent_spd);
-			} else {
-				if (cruise_spd != 0) {setprop(target_spd,cruise_spd) }			
-			}
-		}	
+		}
+		if (fms == 3 and (NAVSRC == "NAV1" or NAVSRC == "NAV2")) {
+			if (getprop("controls/flight/flaps")==0.142) {
+				setprop(target_spd,app5_spd);
+			} else if (getprop("controls/flight/flaps")==0.428) {
+				setprop(target_spd,app15_spd);
+			} else if (getprop("controls/flight/flaps")==1) {
+				setprop(target_spd,app39_spd);
+			}	else {setprop(target_spd,app_spd)}
+		}			
 	}
 }
 ###  Main loop ###

@@ -3,13 +3,13 @@
 
 
 var fltPlan_0 = func(dep_airport,dep_rwy,dest_airport,dest_rwy) {
-	var Dsp = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
+	var Dsp = {page:"",line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
 		line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
 	var rep = "";
 	var path = "autopilot/route-manager/route/wp[";
 	var legb = "]/leg-bearing-true-deg";
 	var legd = "]/leg-distance-nm";
-			page = "ACTIVE FLT PLAN     1 / 1";
+			Dsp.page = "ACTIVE FLT PLAN     1 / 1";
 			Dsp.line1l = " ORIGIN / ETD";
 			Dsp.line2l = "----";
 			if (dep_airport != "") {
@@ -30,18 +30,18 @@ var fltPlan_0 = func(dep_airport,dep_rwy,dest_airport,dest_rwy) {
 			Dsp.line5r = "";
 			Dsp.line6r = "---------";
 			Dsp.line7r = "PERF INIT >";
-	cdu.DspSet(page,Dsp);
+	cdu.DspSet(Dsp);
 }
 
 var fltPlan_1 = func(dep_airport,dep_rwy,dest_airport,dest_rwy,num,flt_closed,marker) {
-	var Dsp = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
+	var Dsp = {page:"",line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
 		line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
 	var rep = "";
 	var path = "autopilot/route-manager/route/wp[";
 	var legb = "]/leg-bearing-true-deg";
 	var legd = "]/leg-distance-nm";
 	var spd = 0;
-			page = "ACTIVE FLT PLAN     1 / 5";
+			Dsp.page = "ACTIVE FLT PLAN     1 / 5";
 			Dsp.line1l = " ORIGIN / ETD";
 			Dsp.line2l = "----";
 			Dsp.line3l = " VIA TO";
@@ -93,18 +93,18 @@ var fltPlan_1 = func(dep_airport,dep_rwy,dest_airport,dest_rwy,num,flt_closed,ma
 				}
 				Dsp.line6r = set_Speed(path,ind,spd);
 			}
-	cdu.DspSet(page,Dsp);
+	cdu.DspSet(Dsp);
 }
 
 var fltPlan_2 = func(dest_airport,dest_rwy,num,flt_closed,marker) {
-	var Dsp = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
+	var Dsp = {page:"",line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
 		line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
 	var rep = "";
 	var path = "autopilot/route-manager/route/wp[";
 	var legb = "]/leg-bearing-true-deg";
 	var legd = "]/leg-distance-nm";
 	var spd = 0;
-			page = "ACTIVE FLT PLAN     2 / 5";
+			Dsp.page = "ACTIVE FLT PLAN     2 / 5";
 			Dsp.line1l = " VIA TO";
 			Dsp.line2l = "----";
 			Dsp.line3l = " VIA TO";
@@ -167,18 +167,18 @@ var fltPlan_2 = func(dest_airport,dest_rwy,num,flt_closed,marker) {
 				}
 				Dsp.line6r = set_Speed(path,ind,spd);
 			}
-	cdu.DspSet(page,Dsp);
+	cdu.DspSet(Dsp);
 }
 
 var fltPlan_3 = func(dest_airport,dest_rwy,num,flt_closed,marker) {
-	var Dsp = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
+	var Dsp = {page:"",line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
 		line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
 	var rep = "";
 	var path = "autopilot/route-manager/route/wp[";
 	var legb = "]/leg-bearing-true-deg";
 	var legd = "]/leg-distance-nm";
 	var spd = 0;
-			page = "ACTIVE FLT PLAN     3 / 5";
+			Dsp.page = "ACTIVE FLT PLAN     3 / 5";
 			Dsp.line1l = " VIA TO";
 			Dsp.line2l = "----";
 			Dsp.line3l = " VIA TO";
@@ -240,18 +240,18 @@ var fltPlan_3 = func(dest_airport,dest_rwy,num,flt_closed,marker) {
 				}
 				Dsp.line6r = set_Speed(path,ind,spd);
 			}
-	cdu.DspSet(page,Dsp);
+	cdu.DspSet(Dsp);
 }
 
 var fltPlan_4 = func(dest_airport,dest_rwy,num,flt_closed,marker) {
-	var Dsp = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
+	var Dsp = {page:"",line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
 		line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
 	var rep = "";
 	var path = "autopilot/route-manager/route/wp[";
 	var legb = "]/leg-bearing-true-deg";
 	var legd = "]/leg-distance-nm";
 	var spd = 0;
-			page = "ACTIVE FLT PLAN     4 / 5";
+			Dsp.page = "ACTIVE FLT PLAN     4 / 5";
 			Dsp.line1l = " VIA TO";
 			Dsp.line2l = "----";
 			Dsp.line3l = " VIA TO";
@@ -313,11 +313,11 @@ var fltPlan_4 = func(dest_airport,dest_rwy,num,flt_closed,marker) {
 				}
 				Dsp.line6r = set_Speed(path,ind,spd);
 				}
-	cdu.DspSet(page,Dsp);
+	cdu.DspSet(Dsp);
 }
 
 var fltPlan_5 = func(dest_airport,dest_rwy,num,marker) {
-	var Dsp = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
+	var Dsp = {page:"",line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
 		line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
 	var rep = "";
 	var path = "autopilot/route-manager/route/wp[";
@@ -332,7 +332,7 @@ var fltPlan_5 = func(dest_airport,dest_rwy,num,marker) {
 			var i = num - 1;
 			var j = num - 2;
 		}
-			page = "ACTIVE FLT PLAN     5 / 5";
+			Dsp.page = "ACTIVE FLT PLAN     5 / 5";
 			Dsp.line1l = "   "~sprintf("%3i   %3i",getprop("autopilot/route-manager/route/wp["~j~"]/leg-bearing-true-deg"),getprop("autopilot/route-manager/route/wp["~j~"]/leg-distance-nm"));
 			Dsp.line2l = getprop("autopilot/route-manager/route/wp["~j~"]/id");
 			Dsp.line3l = "   "~sprintf("%3i   %3i",getprop("autopilot/route-manager/route/wp["~i~"]/leg-bearing-true-deg"),getprop("autopilot/route-manager/route/wp["~i~"]/leg-distance-nm"));
@@ -354,14 +354,23 @@ var fltPlan_5 = func(dest_airport,dest_rwy,num,marker) {
 				Dsp.line7r = "PERF INIT >";
 			} else {Dsp.line7r = ""}
 
-	cdu.DspSet(page,Dsp);
+	cdu.DspSet(Dsp);
 }
 
 var set_Speed = func(path,ind,spd) {
-	var search = find("-",getprop(path~ind~"]/id"));
-		if (search != -1) {
-			var spd_kt = getprop("autopilot/settings/climb-speed-kt");
+		var search = find("-",getprop(path~ind~"]/id"));
+		if (getprop(path~ind~"]/speed")) {
+			var speed = path~ind~"]/speed";
+			var spd_kt = getprop(speed);
+			if (left(spd_kt,2) == "0.") {	## conversion mach -> kt ##
+				spd_kt = sprintf("%.0f",int(spd_kt*661.47));
+				setprop(speed,spd_kt);
+			}
 			spd = spd_kt~" / "~ sprintf("%.2f",spd_kt*0.0015);
+		} else {
+				if (search != -1) {
+					var spd_kt = getprop("autopilot/settings/climb-speed-kt");
+					spd = spd_kt~" / "~ sprintf("%.2f",spd_kt*0.0015);
+				} else {spd = "  /   "}
 		}
-		else {spd = "  /   "}		
 }

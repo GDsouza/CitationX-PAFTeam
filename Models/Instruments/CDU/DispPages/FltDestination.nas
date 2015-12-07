@@ -2,7 +2,7 @@
 ### C. LE MOIGNE (clm76) - 2015 ###
 
 var fltArrv = func(dest_airport) {
-	var Dsp = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
+	var Dsp = {page:"",line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
 		line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
 	page = "ARRIVAL     1 / 1";
 	Dsp.line1l = "< RUNWAY";
@@ -12,19 +12,19 @@ var fltArrv = func(dest_airport) {
 	Dsp.line1r = "AIRPORT ";
 	Dsp.line2r = dest_airport;
 	Dsp.line7r = "LANDING >";
-	cdu.DspSet(page,Dsp);
+	cdu.DspSet(Dsp);
 }
 
-var fltArwy = func(dest_airport,nrPage,display) {
-	var Dsp = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
+var fltArwy = func(dest_airport,display) {
+	var Dsp = {page:"",line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
 		line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
 		var xfile = airportinfo(dest_airport).runways;
 		cdu.dspPages(xfile,display);
 		nbPage = getprop("/instrumentation/cdu/nbpage");
-		if (size(display) < 12) {nrPage = substr(display,9,1)}
-			else {nrPage = substr(display,9,2)}
+		if (size(display) < 12) {var nrPage = substr(display,9,1)}
+			else {var nrPage = substr(display,9,2)}
 		var displayPage = nrPage+1;
-		page = dest_airport~" RUNWAYS "~displayPage~" / "~nbPage;
+		Dsp.page = dest_airport~" RUNWAYS "~displayPage~" / "~nbPage;
 		Dsp.line7l = "< ARRIVAL";
 		Dsp.line7r = "";
 		var ind = 0;
@@ -40,11 +40,11 @@ var fltArwy = func(dest_airport,nrPage,display) {
 				ind+=1;	
 			}	
 		}
-	cdu.DspSet(page,Dsp);
+	cdu.DspSet(Dsp);
 }
 
 var fltStars = func(dest_airport,dest_rwy,display) {
-	var Dsp = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
+	var Dsp = {page:"",line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
 		line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
 		var xfile = [];
 		var DestARPT = procedures.fmsDB.new(dest_airport);
@@ -62,7 +62,7 @@ var fltStars = func(dest_airport,dest_rwy,display) {
 		nbPage = getprop("/instrumentation/cdu/nbpage");
 		if (size(display) < 12) {var nrPage = substr(display,9,1)}
 			else {var nrPage = substr(display,9,2)}
-		page = dest_airport~" STAR "~(nrPage+1)~" / "~nbPage;
+		Dsp.page = dest_airport~" STAR "~(nrPage+1)~" / "~nbPage;
 		Dsp.line7l = "< ARRIVAL";
 		Dsp.line7r = "RUNWAY >";
 		var ind = 0;
@@ -78,11 +78,11 @@ var fltStars = func(dest_airport,dest_rwy,display) {
 				ind+=1;	
 			}	
 		}
-	cdu.DspSet(page,Dsp);
+	cdu.DspSet(Dsp);
 }
 
 var fltAppr = func(dest_airport,dest_rwy,display) {
-	var Dsp = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
+	var Dsp = {page:"",line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
 		line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
 		var DestARPT = procedures.fmsDB.new(dest_airport);
 		var xfile = [];
@@ -101,7 +101,7 @@ var fltAppr = func(dest_airport,dest_rwy,display) {
 		nbPage = getprop("/instrumentation/cdu/nbpage");
 		if (size(display) < 12) {var nrPage = substr(display,9,1)}
 			else {var nrPage = substr(display,9,2)}
-		page = dest_airport~" APPROACH "~(nrPage+1)~" / "~nbPage;
+		Dsp.page = dest_airport~" APPROACH "~(nrPage+1)~" / "~nbPage;
 		Dsp.line7l = "< ARRIVAL";
 		Dsp.line7r = "RUNWAY >";
 		var ind = 0;
@@ -117,6 +117,6 @@ var fltAppr = func(dest_airport,dest_rwy,display) {
 			ind+=1;	
 			}	
 		}
-	cdu.DspSet(page,Dsp);
+	cdu.DspSet(Dsp);
 }
 

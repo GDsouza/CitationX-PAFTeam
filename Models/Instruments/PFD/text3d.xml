@@ -480,13 +480,14 @@
                     <value>VFLC</value>
                 </equals>
                 <equals>
-                    <property>autopilot/internal/nav-type</property>
-                    <value>FMS1</value>
+                    <property>instrumentation/primus2000/sc840/nav1ptr</property>
+                    <value>3</value>
                 </equals>
                 <equals>
-                    <property>autopilot/internal/nav-type</property>
-                    <value>FMS2</value>
+                    <property>instrumentation/primus2000/sc840/nav2ptr</property>
+                    <value>3</value>
                 </equals>
+
             </or>
         </condition>
     </animation>

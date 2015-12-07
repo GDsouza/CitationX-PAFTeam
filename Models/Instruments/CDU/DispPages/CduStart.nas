@@ -2,9 +2,9 @@
 ### C. LE MOIGNE (clm76) - 2015 ###
 
 var navIdent = func {
-	var Dsp = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
+	var Dsp = {page:"",line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
 		line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
-		page = "NAV IDENT     1/1";
+		Dsp.page = "NAV IDENT     1/1";
 		Dsp.line1l = "DATE";
 		Dsp.line2l = getprop("instrumentation/cdu/date");
 		Dsp.line3l = "TIME";
@@ -20,13 +20,13 @@ var navIdent = func {
 		Dsp.line6r = "WORLD 2-01";
 		Dsp.line7r = "POS INIT >";
 		setprop("instrumentation/cdu/nbpage",0);
-	cdu.DspSet(page,Dsp);
+	cdu.DspSet(Dsp);
 }
 
 var posInit = func(my_lat,my_long,dep_airport,dep_rwy) {
-	var Dsp = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
+	var Dsp = {page:"",line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
 		line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
-		page = "POSITION INIT    1/1";
+		Dsp.page = "POSITION INIT    1/1";
 		Dsp.line1l = "LAST POS";
 		Dsp.line2r = "LOAD";
 		Dsp.line3l = "REF WPT";
@@ -51,6 +51,6 @@ var posInit = func(my_lat,my_long,dep_airport,dep_rwy) {
 				Dsp.line6l = "";
 			  Dsp.line7r = "";
 		}
-	cdu.DspSet(page,Dsp);
+	cdu.DspSet(Dsp);
 }
 

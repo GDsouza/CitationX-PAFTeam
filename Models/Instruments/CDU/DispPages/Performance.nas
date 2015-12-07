@@ -2,9 +2,9 @@
 ### C. LE MOIGNE (clm76) - 2015 ###
 
 var perfPage_0 = func() {
-	var Dsp = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
+	var Dsp = {page:"",line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
 		line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
-			page = "PERFORMANCE INIT  1 / 3";
+			Dsp.page = "PERFORMANCE INIT  1 / 3";
 			Dsp.line1l = "";
 			Dsp.line2l = "";
 			Dsp.line3l = "  ACFT TYPE";
@@ -19,11 +19,11 @@ var perfPage_0 = func() {
 			Dsp.line5r = "";
 			Dsp.line6r = "";
 			Dsp.line7r = "NEXT PAGE >";
-	cdu.DspSet(page,Dsp);
+	cdu.DspSet(Dsp);
 }
 
 var perfPage_1 = func() {
-	var Dsp = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
+	var Dsp = {page:"",line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
 		line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
 		var ClimbSpeed_kt = sprintf("%.0f",getprop("autopilot/settings/climb-speed-kt"));
 		var ClimbSpeed_mc = sprintf("%.2f",getprop("autopilot/settings/climb-speed-kt")*0.0015);
@@ -32,8 +32,7 @@ var perfPage_1 = func() {
 		var CruiseSpeed_kt = getprop("autopilot/settings/cruise-speed-kt");
 		var CruiseSpeed_mc = sprintf("%.2f",getprop("autopilot/settings/cruise-speed-mach"));
 		var Cruise_alt = getprop("autopilot/settings/asel");
-
-			page = "PERFORMANCE INIT  2 / 3";
+			Dsp.page = "PERFORMANCE INIT  2 / 3";
 			Dsp.line1l = " CLIMB";
 			Dsp.line2l = ClimbSpeed_kt~" / "~ClimbSpeed_mc;
 			Dsp.line3l = " CRUISE";
@@ -48,16 +47,16 @@ var perfPage_1 = func() {
 			Dsp.line5r = "";
 			Dsp.line6r = "";
 			Dsp.line7r = "";
-	cdu.DspSet(page,Dsp);
+	cdu.DspSet(Dsp);
 }
 
 var perfPage_2 = func() {
-	var Dsp = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
+	var Dsp = {page:"",line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
 		line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
 		var DepSpeed = getprop("autopilot/settings/dep-speed-kt");
 		var Agl = getprop("autopilot/settings/dep-agl-limit-ft");
 		var Nm = sprintf("%.1f",getprop("autopilot/settings/dep-limit-nm"));
-			page = "DEPARTURE SPEED  1 / 1";
+			Dsp.page = "DEPARTURE SPEED  1 / 1";
 			Dsp.line1l = " SPEED LIMIT";
 			Dsp.line2l = DepSpeed~"";
 			Dsp.line3l = " AGL <-------- LIMIT --------> NM";
@@ -72,15 +71,15 @@ var perfPage_2 = func() {
 			Dsp.line5r = "";
 			Dsp.line6r = "";
 			Dsp.line7r = "RETURN > ";
-	cdu.DspSet(page,Dsp);
+	cdu.DspSet(Dsp);
 }
 
 var perfPage_3 = func() {
-	var Dsp = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
+	var Dsp = {page:"",line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
 		line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
 		var AppSpeed = getprop("autopilot/settings/app-speed-kt");
 		var DistToDest = getprop("autopilot/settings/dist-to-dest-nm");
-			page = "APPROACH SPEED  1 / 2";
+			Dsp.page = "APPROACH SPEED  1 / 2";
 			Dsp.line1l = " SPEED";
 			Dsp.line2l = AppSpeed~"";
 			Dsp.line3l = " DIST TO DESTINATION";
@@ -95,16 +94,16 @@ var perfPage_3 = func() {
 			Dsp.line5r = "";
 			Dsp.line6r = "";
 			Dsp.line7r = "RETURN > ";
-	cdu.DspSet(page,Dsp);
+	cdu.DspSet(Dsp);
 }
 
 var perfPage_4 = func() {
-	var Dsp = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
+	var Dsp = {page:"",line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
 		line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
 		var AppSpeed5 = getprop("autopilot/settings/app5-speed-kt");
 		var AppSpeed15 = getprop("autopilot/settings/app15-speed-kt");
 		var AppSpeed39 = getprop("autopilot/settings/app39-speed-kt");
-			page = "APPROACH SPEED  2 / 2";
+			Dsp.page = "APPROACH SPEED  2 / 2";
 			Dsp.line1l = " FLAPS 5";
 			Dsp.line2l = AppSpeed5~"";
 			Dsp.line3l = " FLAPS 15";
@@ -119,17 +118,17 @@ var perfPage_4 = func() {
 			Dsp.line5r = "";
 			Dsp.line6r = "";
 			Dsp.line7r = "RETURN > ";
-	cdu.DspSet(page,Dsp);
+	cdu.DspSet(Dsp);
 }
 
 var perfPage_5 = func() {
-	var Dsp = {line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
+	var Dsp = {page:"",line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
 		line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
 		var Wfuel = sprintf("%3i", math.ceil(getprop("consumables/fuel/total-fuel-lbs")));
 		var Wcrew = getprop("sim/weight[0]/weight-lb");
 		var Wpass = getprop("sim/weight[1]/weight-lb");
 		var Wcarg = getprop("sim/weight[2]/weight-lb");
-			page = "PERFORMANCE INIT  3 / 3";
+			Dsp.page = "PERFORMANCE INIT  3 / 3";
 			Dsp.line1l = " BOW";
 			Dsp.line2l = "21700";
 			Dsp.line3l = " FUEL";
@@ -144,6 +143,6 @@ var perfPage_5 = func() {
 			Dsp.line5r = "GROSS WT  ";
 			Dsp.line6r = sprintf("%3i",21700 + Wfuel + Wcrew + Wpass + Wcarg);
 			Dsp.line7r = "RETURN >";
-	cdu.DspSet(page,Dsp);
+	cdu.DspSet(Dsp);
 }
 
