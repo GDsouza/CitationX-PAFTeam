@@ -64,17 +64,20 @@ var navSel_0 = func {
 	cdu.DspSet(Dsp);
 }
 
-var navSel_1 = func {
+var navSel_1 = func (navSel,navWp,g_speed,dist) {
 	var Dsp = {page:"",line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",
 		line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:""};
-#			Dsp.page = "     "~input~"   1 / 1";
+	var ete_h = int(dist/g_speed);
+	var ete_mn = int((dist/g_speed-ete_h)*60);
+			Dsp.page = "     "~navSel~"   1 / 1";
 			Dsp.line1l = " ORGIN        DIST / ETE";
-			Dsp.line2l = left(input,4);
+			Dsp.line2l = left(navSel,4)~"      "~sprintf("%.0f",dist)~" / "~sprintf("%02d",ete_h)~" + "~sprintf("%02d",ete_mn);
 			Dsp.line3l = " VIA TO";
-			Dsp.line4l = "----";
+			if (size(navWp) != 0) {Dsp.line4l = navWp[0]} else {Dsp.line4l = "----"}
 			Dsp.line1r = "GS ";
+			Dsp.line2r = " @  "~g_speed;
 			Dsp.line3r = "DEST ";
-#			Dsp.line4r = substr(input,5,4);
+			Dsp.line4r = substr(navSel,5,4);
 			Dsp.line7l = "< FPL LIST";
 			Dsp.line7r = "FPL SEL >";
 	cdu.DspSet(Dsp);

@@ -47,13 +47,13 @@ Fuel 12938 lbs jet
   width="1.8" taper="0.2" midpoint="1.0" idrag="1.1"/><!--nose-->
 
   <fuselage ax="6.87" ay="0" az="0.0" bx="-1.45" by="0" bz="0"
-  width="1.8" taper="1.0" midpoint="0.5" idrag="1.3"/><!--fuselage-->
+  width="1.8" taper="1.0" midpoint="0.5" idrag="1.1"/><!--fuselage-->
 
   <fuselage ax="-1.45" ay="0" az="0.0" bx="-7.622" by="0" bz="0.37"
-  width="1.8" taper="0.2" midpoint="0.0" idrag="1.2"/><!--tail-->
+  width="1.8" taper="0.2" midpoint="0.0" idrag="1.1"/><!--tail-->
 
   <fuselage ax="6.85" ay="0" az="-0.56" bx="-4.18" by="0" bz="-0.56"
-  width="1.8" taper="0.5" midpoint="0.3" idrag="1.2"/><!--belly-->
+  width="1.8" taper="0.5" midpoint="0.3" idrag="1.1"/><!--belly-->
 
   <fuselage ax="0.748" ay="1.7" az="0.6" bx="-5.38" by="1.7" bz="0.6"
   width="1.4" taper="0.7" midpoint="0.2" idrag="1.1"/><!--LH engine-->
@@ -62,12 +62,12 @@ Fuel 12938 lbs jet
   width="1.4" taper="0.7" midpoint="0.2" idrag="1.1"/><!--RH engine-->
 
 
-  <wing x="1.120" y="0.90" z="-1.0" length="11" chord="4.2"
-  sweep="0" dihedral="2" taper="0.0822" camber="0.0" incidence="1.0" idrag="1.2">
+  <wing x="1.40" y="0.90" z="-1.0" length="10.8" chord="3.8"
+  sweep="34.4" dihedral="2.8" taper="0.22" camber="0.0" incidence="1.5" idrag="1.2">
 			<!--origin : s="33", d="2", t="0.0822",c="0.0", no incidence -->
     <stall aoa="15" width="10" peak="1.5"/>
     <flap0 start="0" end=".67" lift="1.5" drag="1.6"/>
-    <flap1 start=".688" end=".858" lift="1.3" drag="1.2"/>
+    <flap1 start=".688" end=".858" lift="1.3" drag="1.4"/>
     <slat start=".2" end=".8" aoa="3" drag="1.0"/>
     <spoiler start=".309" end=".48" lift="1.0" drag="3.0"/>
     <control-input axis="/controls/flight/flaps" control="FLAP0"/>
@@ -87,8 +87,8 @@ Fuel 12938 lbs jet
     <control-output control="SPOILER" prop="sim/multiplay/generic/float[1]"/>
   </wing>
 
-  <hstab x="-8.562" y="0.15" z="2.98" length="4.95" chord="2.2"
-  sweep="40" taper="0.3" dihedral="2.0" camber="0"  effectiveness="1.5">
+  <hstab x="-8.562" y="0.15" z="2.98" length="4.85" chord="2.1"
+  sweep="37" taper="0.3" dihedral="1.4" camber="0"  effectiveness="1.5">
     <stall aoa="18" width="4" peak="1.5"/>
     <flap0 start="0" end="1" lift="1.5" drag="1.2"/>
     <control-input axis="/controls/flight/elevator" control="FLAP0"/>
@@ -97,7 +97,7 @@ Fuel 12938 lbs jet
   </hstab>
 
   <vstab x="-6.0" y="0.0" z="0.61" length="4.50" chord="3.2"
-  sweep="35" taper="0.8">
+  sweep="46" taper="0.8">
     <stall aoa="14" width="3" peak="1.5"/>
     <flap0 start="0" end="1" lift="1.4" drag="1.2"/>
     <control-input axis="/controls/flight/rudder" control="FLAP0" invert="true"/>

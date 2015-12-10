@@ -2,6 +2,11 @@
 ### C. Le Moigne (clm76) - 2015  ###
 ###
 
+var navSel = "";
+var navWp = [];
+var g_speed = 300;
+var dist = 0;
+
 var init = func {
 	setprop("autopilot/route-manager/flight-plan","");
 	setprop("autopilot/route-manager/departure/airport",getprop("/sim/airport/closest-airport-id"));
@@ -506,12 +511,33 @@ var key = func(v) {
 			if (v == "B4R" and cduInput !="") {cduDisplay = "NAV-SELT[0]"}
 			if (ligne != "") {
 				cduInput = getprop("instrumentation/cdu/"~ligne);
+				navSel = cduInput;
 			}						
 		}
 		if (cduDisplay == "NAV-SELT[0]") {
-			if (v == "B1L") {cduDisplay = "NAV-SELT[1]"}
+			navWp = [];
+			if (v == "B1L") {
+				cduDisplay = "NAV-SELT[1]";
+				cduInput = ""}
+				var dep_apt = findAirportsByICAO(left(navSel,4));
+				var dest_apt = findAirportsByICAO(substr(navSel,5,4));
+				var a = dep_apt[0].lat*math.pi/180;
+				var b = dest_apt[0].lat*math.pi/180;
+				var c = dep_apt[0].lon*math.pi/180;
+				var d = dest_apt[0].lon*math.pi/180;
+				dist = calc_dist(a,b,c,d);
 		}
-
+		if (cduDisplay == "NAV-SELT[1]") {
+			if (v == "B2L") {
+				if (cduInput != "") {
+					append(navWp,cduInput);
+					cduInput = "";
+				}				
+			}
+			if (v == "B1R") {
+				if (cduInput !="") {g_speed = cduInput; cduInput = ""}		
+			}
+		}
 		#### PERF PAGES ####
 		if (cduDisplay == "PRF-PAGE[0]") {
 			setprop("instrumentation/cdu/nbpage",6);
@@ -757,6 +783,7 @@ var insertWayp = func(ind,cduInput) {
 
 var correctFlp = func(fltName) {
 	var filename = getprop("/sim/fg-home")~"/aircraft-data/FlightPlans/"~fltName;
+	var num = getprop("autopilot/route-manager/route/num");
 	var data = io.read_properties(filename);
 	var wpt = data.getValues().route.wp;
 	var wps = data.getChild("route").getChildren();
@@ -768,6 +795,10 @@ var correctFlp = func(fltName) {
 		}
 	}
 	io.write_properties(filename,data);
+}
+
+var calc_dist = func(a,b,c,d) {
+	dist = math.acos(math.sin(a)*math.sin(b)+math.cos(a)*math.cos(b)*math.cos(c-d))*3440.065;
 }
 
 var delete = func {
@@ -975,7 +1006,7 @@ var cdu = func{
 		if (display == "NAV-PAGE[1]") {displaypages.navPage_1()}
 		if (left(display,8) == "NAV-LIST") {displaypages.navList()}
 		if (display == "NAV-SELT[0]") {displaypages.navSel_0()}
-		if (display == "NAV-SELT[1]") {displaypages.navSel_1()}
+		if (display == "NAV-SELT[1]") {displaypages.navSel_1(navSel,navWp,g_speed,dist)}
 
 		if (display == "PRF-PAGE[0]") {displaypages.perfPage_0()}
 		if (display == "PRF-PAGE[1]") {displaypages.perfPage_1()}

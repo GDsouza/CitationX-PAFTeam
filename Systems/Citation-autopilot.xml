@@ -220,7 +220,7 @@
         <max-rate-of-change>10.0</max-rate-of-change>
     </filter>
 
-    <pi-simple-controller>
+    <pid-controller>
         <name>Altitude Hold 1</name>
         <debug>false</debug>
         <enable>
@@ -231,21 +231,25 @@
             <prop>instrumentation/altimeter/indicated-altitude-ft</prop>
         </input>
         <reference>
-            <prop>/autopilot/settings/asel</prop>
+						<prop>autopilot/settings/asel</prop>
             <scale>100</scale>
         </reference>
         <output>
             <prop>/autopilot/internal/target-climb-rate-fps</prop>
         </output>
         <config>
-            <Kp>0.7</Kp> <!-- old 0.7 -->
-            <Ki>0</Ki>	<!-- old 0 -->
-            <min>-50.0</min> <!-- old -50.0 -->
-            <max>66.0</max>	<!-- old 66.0 -->
+            <Kp>0.25</Kp> <!--origin = 0.25-->
+            <beta>1.0</beta>
+            <alpha>0.1</alpha>
+            <gamma>0.0</gamma>
+            <Ti>10.0</Ti> <!-- origin 10.0 -->
+            <Td>0.000001</Td>
+            <min>-20</min> <!-- origin -30 -->
+            <max>66</max> <!-- origin = 66-->
         </config>
-    </pi-simple-controller>
+    </pid-controller>
 
-    <pid-controller>
+    <pi-simple-controller>
         <name>Altitude 2</name>
         <debug>false</debug>
         <enable>
@@ -259,20 +263,15 @@
             <prop>autopilot/internal/target-climb-rate-fps</prop>
         </reference>
         <output>
-<!--            <prop>/autopilot/internal/pitch-filter</prop> -->
-            <prop>autopilot/settings/target-pitch-deg</prop>
+            <prop>/autopilot/internal/pitch-filter</prop>
         </output>
         <config>
-            <Kp>0.20</Kp> <!-- old 0.20 -->
-            <beta>1.0</beta>
-            <alpha>0.1</alpha>
-            <gamma>0.1</gamma>p
-            <Ti>10.0</Ti> <!-- old 10 -->
-            <Td>0.001</Td> <!-- old 0.00001 -->
-            <u_min>-5</u_min> <!--old -5 -->
-            <u_max>5</u_max> <!-- old 5 -->
+            <Kp>0.20</Kp> 	<!-- origin 0.15 -->
+            <Ki>0.0</Ki>		<!-- origin 0.0 -->
+            <min>-30</min> 	<!-- origin -20 -->
+            <max>30</max>		<!-- origin 20 -->
         </config>
-    </pid-controller>
+    </pi-simple-controller>
 
     <pi-simple-controller>
         <name>GS</name>
