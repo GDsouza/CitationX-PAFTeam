@@ -131,7 +131,10 @@
         <object-name>EICAS1</object-name>
         <condition>
 					<and>
-           	<property>systems/electrical/right-bus-norm</property>
+						<or>
+	           	<property>systems/electrical/right-bus-norm</property>
+	           	<property>systems/electrical/right-emer-bus</property>
+						</or>
             <greater-than>
               <property>systems/electrical/outputs/efis</property>
                	<value>15</value>
