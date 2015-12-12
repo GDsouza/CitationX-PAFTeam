@@ -99,6 +99,33 @@
         </offsets>
     </model>
 
+<!-- Annunciators -->
+    <animation>
+        <type>select</type>
+        <object-name>FD.stby-annun</object-name>
+        <object-name>FD.YD-annun</object-name>
+        <object-name>FD.MTRIM-annun</object-name>
+        <object-name>FD.hdg-annun</object-name>
+        <object-name>FD.nav-annun</object-name>
+        <object-name>FD.bc-annun</object-name>
+        <object-name>FD.vnav-annun</object-name>
+        <object-name>FD.app-annun</object-name>
+        <object-name>FD.alt-annun</object-name>
+        <object-name>FD.flc-annun</object-name>
+        <object-name>FD.co-annun</object-name>
+        <object-name>FD.vs-annun</object-name>
+        <object-name>FD.bank-annun</object-name>
+        <condition>
+          <and>
+         		<property>systems/electrical/right-bus-norm</property>
+						<equals>
+              <property>controls/electric/avionics-switch</property>
+								<value>2</value>
+						</equals>
+					</and>
+				</condition>
+    </animation>
+<!-- ***********  -->
     <animation>
         <type>select</type>
         <object-name>EICAS1</object-name>
@@ -243,6 +270,25 @@
 								<value>2</value>
 						</equals>
 					</or>
+			</condition>
+		</animation>
+
+    <animation>
+			<type>select</type>
+			<object-name>NSgearlamp</object-name>
+      <object-name>LHgearlamp</object-name>
+      <object-name>RHgearlamp</object-name>
+			<condition>
+				<or>			
+					<greater-than>
+						<property>systems/electrical/left-bus</property>
+						<value>15</value>
+					</greater-than>
+					<greater-than>
+						<property>systems/electrical/right-bus</property>
+						<value>15</value>
+					</greater-than>
+				</or>
 			</condition>
 		</animation>
 
@@ -2073,16 +2119,21 @@
         <type>select</type>
         <object-name>FD.stby-annun</object-name>
         <condition>
-            <and>
-                <equals>
-                    <property>autopilot/locks/heading</property>
-                    <value>ROLL</value>
-                </equals>
-                <equals>
-                    <property>autopilot/locks/altitude</property>
-                    <value>PTCH</value>
-                </equals>
-            </and>
+          <and>
+         		<property>systems/electrical/right-bus-norm</property>
+						<equals>
+              <property>controls/electric/avionics-switch</property>
+								<value>2</value>
+						</equals>
+						<equals>
+							<property>autopilot/locks/heading</property>
+								<value>ROLL</value>
+						</equals>
+						<equals>
+            	<property>autopilot/locks/altitude</property>
+              <value>PTCH</value>
+            </equals>
+          </and>
         </condition>
     </animation>
 

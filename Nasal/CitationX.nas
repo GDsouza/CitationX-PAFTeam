@@ -337,6 +337,9 @@ var Shutdown = func{
     setprop("controls/engines/engine[1]/ignition",0);
     setprop("engines/engine[0]/running",0);
     setprop("engines/engine[1]/running",0);
+		setprop("instrumentation/annunciators/ack-caution",1);
+		setprop("instrumentation/annunciators/ack-warning",1);
+		setprop("controls/electric/external-power",0);
 }
 
 var FHupdate = func(tenths){
