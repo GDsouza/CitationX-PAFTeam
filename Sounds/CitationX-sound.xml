@@ -238,10 +238,15 @@
         <condition>
 					<and>
 						<not>
-							<equals>
-            		<property>autopilot/internal/nav-id</property>
-								<value>""</value>
-							</equals>
+							<or>
+				        <property>gear/gear[0]/wow</property>
+				        <property>gear/gear[1]/wow</property>
+				        <property>gear/gear[2]/wow</property>
+								<equals>
+				      		<property>autopilot/internal/nav-id</property>
+									<value>""</value>
+								</equals>
+							</or>
 						</not>
 						<less-than>
  		       		<property>autopilot/internal/nav-distance</property>			
@@ -368,10 +373,11 @@
     </rumble>
 
 <!--  GEARS -->
+
     <gear>
         <name>gear</name>
         <path>Sounds/gear.wav</path>
-        <property>gear/gear[0]/position-norm</property>
+		    <property>gear/gear[0]/position-norm</property>
         <mode>in-transit</mode>
 			  <volume>
 			    <factor>0.005</factor>
@@ -398,14 +404,20 @@
         <path>Sounds/gear-lck.wav</path>
         <condition>
             <or>
-                <equals>
-                    <property>gear/gear[0]/position-norm</property>
-                    <value>0</value>
-                </equals>
-                <equals>
-                    <property>gear/gear[0]/position-norm</property>
-                    <value>1</value>
-                </equals>
+              <equals>
+                  <property>gear/gear[0]/position-norm</property>
+                  <value>0</value>
+              </equals>
+							<and>
+                <greater-than>
+                    <property>gear/gear[1]/position-norm</property>
+                    <value>0.95</value>
+                </greater-than>
+                <less-than>
+                    <property>gear/gear[1]/position-norm</property>
+                    <value>0.99</value>
+                </less-than>
+							</and>
             </or>
         </condition>
         <mode>once</mode>
@@ -425,19 +437,16 @@
         <mode>once</mode>
         <condition>
 					<and>
-						<equals>
-							<property>gear/gear[0]/position-norm</property>
-							<value>1</value>
-						</equals>
-						<equals>
-							<property>gear/gear[1]/position-norm</property>
-							<value>1</value>
-						</equals>
-						<equals>
-							<property>gear/gear[2]/position-norm</property>
-							<value>1</value>
-						</equals>
-          </and>
+						<property>controls/gear/gear-down</property>						
+						<less-than>
+							<property>gear/gear[1]/position-norm</property>							
+							<value>0.99</value>
+						</less-than>
+						<greater-than>
+							<property>gear/gear[1]/position-norm</property>							
+							<value>0.65</value>
+						</greater-than>
+         </and>
         </condition>
     </gear>
 
@@ -688,14 +697,18 @@
     <!-- DOORS -->
 
         <doors>
-            <name>cabin-door-open</name>
+            <name>separation-door-open</name>
             <mode>once</mode>
             <path>Aircraft/CitationX/Sounds/cabin-door.wav</path>
             <condition>
                 <greater-than>
                     <property>controls/separation-door/open</property>
-                    <value>0.1</value>
+                    <value>0.01</value>
                 </greater-than>
+                <less-than>
+                    <property>controls/separation-door/open</property>>
+                    <value>0.99</value>
+                </less-than>
             </condition>
             <volume>
                 <property>sim/signals/fdm-initialized</property>
@@ -709,7 +722,7 @@
         </doors>
 
         <doors>
-            <name>cabin-door-closed</name>
+            <name>separation-door-closed</name>
             <mode>once</mode>
             <path>Aircraft/CitationX/Sounds/cabin-door.wav</path>
             <condition>
@@ -718,9 +731,9 @@
                     <property>controls/separation-door/open</property>>
                     <value>1</value>
                 </less-than>
-              </and>                          
+             </and>                          
             </condition>
-            <volume>
+           <volume>
                 <property>sim/signals/fdm-initialized</property>
                 <factor>1</factor>
             </volume>
@@ -738,7 +751,7 @@
             <condition>
                 <greater-than>
                     <property>controls/toilet-door/open</property>
-                    <value>0.1</value>
+                    <value>0.01</value>
                 </greater-than>
             </condition>
             <volume>
@@ -762,6 +775,10 @@
                     <property>controls/toilet-door/open</property>>
                     <value>1</value>
                 </less-than>
+                <greater-than>
+                    <property>controls/toilet-door/open</property>>
+                    <value>0.01</value>
+                </greater-than>
               </and>                          
             </condition>
             <volume>
@@ -869,7 +886,13 @@
         <path>Aircraft/CitationX/Sounds/welcome.wav</path>
         <mode>once</mode>
       <condition>
-        <property>controls/electric/battery-switch[1]</property>
+				<and>
+					<equals>
+	          <property>controls/electric/avionics-switch</property>
+						<value>2</value>
+					</equals>
+					<property>systems/electrical/right-bus-norm</property>
+				</and>
       </condition>
       <position>
         <x>-7.00 </x>
