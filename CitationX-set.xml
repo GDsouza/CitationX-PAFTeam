@@ -619,7 +619,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 
     <controls>
         <gear>
-            <brake-parking>1</brake-parking>
+            <brake-parking>1.0</brake-parking>
         </gear>
         <engines>
             <engine n="0">

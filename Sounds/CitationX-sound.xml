@@ -377,8 +377,17 @@
     <gear>
         <name>gear</name>
         <path>Sounds/gear.wav</path>
-		    <property>gear/gear[0]/position-norm</property>
-        <mode>in-transit</mode>
+        <mode>looped</mode>
+				<condition>
+					<greater-than>
+				    <property>gear/gear[0]/position-norm</property>
+						<value>0.01</value>
+					</greater-than>
+					<less-than>
+				    <property>gear/gear[0]/position-norm</property>
+						<value>0.99</value>
+					</less-than>
+				</condition>
 			  <volume>
 			    <factor>0.005</factor>
 			    <min>0.1</min>
@@ -625,15 +634,17 @@
     </wind>
 
 <!--  BRAKES   -->
+
         <brakes>
             <name>brake-lever-off</name>
             <mode>once</mode>
             <path>Aircraft/CitationX/Sounds/brake-lever.wav</path>
             <condition>
-                <not>
-                    <property>controls/gear/brake-parking</property>
-                </not>
-            </condition>
+              <equals>
+                <property>controls/gear/brake-parking</property>
+								<value>0.0</value>								
+              </equals>
+           </condition>
             <volume>
                 <property>sim/signals/fdm-initialized</property>
             </volume>
@@ -654,10 +665,14 @@
             <mode>once</mode>
             <path>Aircraft/CitationX/Sounds/brake-lever.wav</path>
             <condition>
-                <and>
-                    <property>controls/gear/brake-parking</property>
-                    <value>0</value>
-                </and>
+              <less-than>
+                <property>controls/gear/brake-parking</property>
+								<value>0.99</value>								
+              </less-than>
+              <greater-than>
+                <property>controls/gear/brake-parking</property>
+								<value>0.90</value>								
+              </greater-than>
             </condition>
             <volume>
                 <property>sim/signals/fdm-initialized</property>

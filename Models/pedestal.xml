@@ -117,8 +117,28 @@
         <button>0</button>
         <repeatable>false</repeatable>
         <binding>
-          <command>property-toggle</command>
-          <property>controls/gear/brake-parking</property>
+					<condition>
+						<equals>
+			        <property>controls/gear/brake-parking</property>
+							<value>1.0</value>
+						</equals>
+					</condition>
+	        <command>property-interpolate</command>
+		        <property>controls/gear/brake-parking</property>
+						<value type="double">0.0</value>
+					<time>1</time>
+        </binding>
+        <binding>
+					<condition>
+						<equals>
+			        <property>controls/gear/brake-parking</property>
+							<value>0.0</value>
+						</equals>
+					</condition>
+	        <command>property-interpolate</command>
+		        <property>controls/gear/brake-parking</property>
+						<value type="double">1.0</value>
+					<time>1</time>
         </binding>
       </action>
        <hovered>
