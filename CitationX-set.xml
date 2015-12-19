@@ -647,6 +647,30 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
         </APU>
     </controls>
 
+    <gear>
+		<gear n="0">
+			<tyre-smoke type="int">0</tyre-smoke>
+			<sprayspeed-ms type="double">0</sprayspeed-ms>
+			<spray-density type="double">0</spray-density>
+			<caster-angle-deg-damped type="double">0</caster-angle-deg-damped>
+			<position-norm type="double">1</position-norm>
+		</gear>
+		<gear n="1">
+			<tyre-smoke type="int">0</tyre-smoke>
+			<sprayspeed-ms type="double">0</sprayspeed-ms>
+			<spray-density type="double">0</spray-density>
+			<caster-angle-deg-damped type="double">0</caster-angle-deg-damped>
+			<position-norm type="double">1</position-norm>
+		</gear>
+		<gear n="2">
+			<tyre-smoke type="int">0</tyre-smoke>
+			<sprayspeed-ms type="double">0</sprayspeed-ms>
+			<spray-density type="double">0</spray-density>
+			<caster-angle-deg-damped type="double">0</caster-angle-deg-damped>
+			<position-norm type="double">1</position-norm>
+		</gear>
+	</gear>
+
     <autopilot>
         <settings>
             <minimums type="int">200</minimums>
@@ -770,6 +794,9 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 				<cdu>
 						<file>Aircraft/CitationX/Models/Instruments/CDU/CDU.nas</file>
 				</cdu>
+				<tyresmoke>
+					<file>Aircraft/CitationX/Nasal/tyresmoke.nas</file>
+				</tyresmoke>
     </nasal>
 
 </PropertyList>

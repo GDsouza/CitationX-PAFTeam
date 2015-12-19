@@ -588,7 +588,7 @@
     </animation>
 
 <!-- Gear-->
-<!-- nose-->
+			<!-- nose-->
 
     <animation>
         <type>rotate</type>
@@ -1418,6 +1418,36 @@
       <pitch-deg>0</pitch-deg>
       <heading-deg>0</heading-deg>
     </offsets>
+  </model>
+
+  <model>
+      <name>tyre-smoke-n</name>
+      <path>Aircraft/CitationX/Models/Effects/tyre-smoke-nose.xml</path>
+      <offsets>
+          <x-m>-8.098</x-m>
+          <y-m> 0.0</y-m>
+          <z-m>-2.003</z-m>
+      </offsets>
+  </model>
+
+  <model>
+      <name>tyre-smoke-n</name>
+      <path>Aircraft/CitationX/Models/Effects/tyre-smoke-left.xml</path>
+      <offsets>
+          <x-m> 0.122</x-m>
+          <y-m>-1.354</y-m>
+          <z-m>-2.145</z-m>
+      </offsets>
+  </model>
+
+  <model>
+      <name>tyre-smoke-n</name>
+      <path>Aircraft/CitationX/Models/Effects/tyre-smoke-right.xml</path>
+      <offsets>
+          <x-m> 0.122</x-m>
+          <y-m> 1.354</y-m>
+          <z-m>-2.145</z-m>
+      </offsets>
   </model>
 
 <!-- MATERIALS -->
