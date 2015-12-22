@@ -958,11 +958,11 @@
             <property>gear/gear[2]/wow</property>
           </or>
           <less-than>
-            <property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
+            <property>velocities/airspeed-kt</property>
             <property>autopilot/internal/lookahead-5-sec-airspeed-kt</property>
           </less-than>
          	<greater-than>
-           	<property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
+           	<property>velocities/airspeed-kt</property>
             <property>controls/flight/v1</property>
           </greater-than>
         </and>
@@ -982,11 +982,11 @@
             <property>gear/gear[2]/wow</property>
           </or>
           <less-than>
-            <property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
+            <property>velocities/airspeed-kt</property>
             <property>autopilot/internal/lookahead-5-sec-airspeed-kt</property>
           </less-than>
        		<greater-than>
-						<property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
+						<property>velocities/airspeed-kt</property>
 						<property>controls/flight/vr</property>
           </greater-than>
         </and>
@@ -1001,11 +1001,11 @@
       <condition>
         <and>
           <less-than>
-            <property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
+            <property>velocities/airspeed-kt</property>
             <property>autopilot/internal/lookahead-5-sec-airspeed-kt</property>
           </less-than>
           <greater-than>
-            <property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
+            <property>velocities/airspeed-kt</property>
               <value>180</value>
           </greater-than>
           <greater-than-equals>

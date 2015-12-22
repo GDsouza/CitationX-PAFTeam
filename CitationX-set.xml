@@ -30,6 +30,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
         </startup>
 
         <tutorials>
+            <tutorial include="Tutorials/APU_start.xml"/>
             <tutorial include="Tutorials/startup.xml"/>
             <tutorial include="Tutorials/cdu.xml"/>
             <tutorial include="Tutorials/navigation.xml"/>
@@ -337,7 +338,8 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
         </generic>
     </multiplay>
 
-    <flight-recorder>
+    <flight-recorder include="Systems/flight-recorder.xml"/>
+<!--
       <replay-config type="int">0</replay-config>
       <config n="0" include="/Aircraft/Generic/flightrecorder/generic-jet.xml">
         <name type="string">CitationX - Flight Recorder</name>
@@ -357,10 +359,13 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
           <type>float</type>
           <property type="string">surface-positions/slat-pos-norm</property>
         </signal>
-
+        <signal>
+          <type>int</type>
+          <property type="string">controls/electric/avionics-switch</property>
+        </signal>
      </config>
     </flight-recorder>
-
+-->
     <color-set>
         <white>
             <r type="float">0.9</r>

@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<PropertyList>
+    <name>APU Startup</name>
+    <description>Manual APU Startup</description>
+
+    <init>
+        <set>
+            <property>sim/current-view/view-number</property>
+            <value>0</value>
+        </set>
+        <set>
+            <property>sim/model/show-yoke_R</property>
+            <value>1</value>
+        </set>
+
+        <set>
+            <property>controls/APU/master</property>
+            <value>0</value>
+        </set>
+        <set>
+            <property>controls/APU/running</property>
+            <value>0.0</value>
+        </set>
+        <set>
+            <property>controls/electric/APU-generator</property>
+            <value>0</value>
+        </set>
+        <set>
+            <property>controls/APU/bleed</property>
+            <value>0</value>
+        </set>
+        <set>
+            <property>controls/electric/battery-switch[1]</property>
+            <value>0</value>
+        </set>
+    </init>
+
+    <step>
+        <message>
+            Hide Yoke (click on yoke){|.}
+        </message>
+        <view>
+    			<heading-offset-deg>294.2</heading-offset-deg>
+    			<pitch-offset-deg>-10.6</pitch-offset-deg>
+    			<roll-offset-deg>0.0</roll-offset-deg>
+    			<field-of-view>100.4</field-of-view>
+        </view>
+				<marker>
+			    <x-m>-7.3455</x-m>
+			    <y-m>0.1488</y-m>
+			    <z-m>0.1488</z-m>
+			    <scale>4.75</scale>
+				</marker>
+        <error>
+					<message>
+            Hide Yoke (click on yoke){|.}
+          </message>
+          <condition>
+							<property>sim/model/show-yoke_R</property>
+          </condition>
+        </error>
+        <exit>
+					<condition>
+						<not>
+							<property>sim/model/show-yoke_R</property>
+            </not>
+					</condition>
+        </exit>
+    </step>
+
+		<step>
+			<message>
+				Set APU Master to ON{|.}
+			</message>
+			<view>
+				<heading-offset-deg>289.7</heading-offset-deg>
+				<pitch-offset-deg>-19.6</pitch-offset-deg>
+				<field-of-view>52.5</field-of-view>
+			</view>
+			<marker>
+				<x-m>-7.4438</x-m>
+				<y-m>0.7000</y-m>
+				<z-m>-0.1331</z-m>
+				<scale>2.45</scale>
+			</marker>
+			<error>
+				<message>
+					Set APU Master to ON{|.}
+				</message>
+				<condition>
+					<not>
+						<property>controls/APU/master</property>
+					</not>
+				</condition>
+			</error>
+			<exit>
+				<condition>
+					<property>controls/APU/master</property>
+				</condition>
+			</exit>
+		</step>
+
+		<step>
+			<message>
+				Set APU Start to ON{|.}
+			</message>
+			<view>
+				<heading-offset-deg>289.7</heading-offset-deg>
+				<pitch-offset-deg>-19.6</pitch-offset-deg>
+				<field-of-view>52.5</field-of-view>
+			</view>
+			<marker>
+				<x-m>-7.5057</x-m>
+				<y-m>0.7000</y-m>
+				<z-m>-0.1331</z-m>
+				<scale>2.45</scale>
+			</marker>
+			<error>
+				<message>
+					Set APU Start to ON{|.}
+				</message>
+				<condition>
+					<not>
+						<property>controls/APU/running</property>
+					</not>
+				</condition>
+			</error>
+			<exit>
+				<condition>
+					<property>controls/APU/running</property>
+				</condition>
+			</exit>
+		</step>
+
+		<step>
+			<message>
+				Wait for "READY TO LOAD"{|.}
+			</message>
+			<view>
+				<heading-offset-deg>289.7</heading-offset-deg>
+				<pitch-offset-deg>-19.6</pitch-offset-deg>
+				<field-of-view>28.7</field-of-view>
+			</view>
+				<marker>
+			    <x-m>-7.4876</x-m>
+			    <y-m>0.7000</y-m>
+			    <z-m>0.0033</z-m>
+			    <scale>2.45</scale>
+				</marker>
+			<error>
+				<message>
+					Wait for "READY TO LOAD"{|.}
+				</message>
+					<condition>
+						<not> 
+           		<property>controls/APU/rpm</property>
+						</not>	
+					</condition>
+			</error>
+			<exit>
+					<condition>
+						<greater-than> 
+           		<property>controls/APU/rpm</property>
+								<value>0.99</value>
+						</greater-than>	
+					</condition>
+			</exit>
+		</step>
+
+		<step>
+			<message>
+				Switch on GENERATOR{|.}
+			</message>
+			<view>
+				<heading-offset-deg>289.7</heading-offset-deg>
+				<pitch-offset-deg>-19.6</pitch-offset-deg>
+				<field-of-view>28.7</field-of-view>
+			</view>
+				<marker>
+			    <x-m>-7.4471</x-m>
+			    <y-m>0.7000</y-m>
+			    <z-m>0.0033</z-m>
+			    <scale>2.45</scale>
+				</marker>
+			<error>
+				<message>
+					Switch on GENERATOR{|.}
+				</message>
+				<condition>
+						<not>
+							<property>controls/electric/APU-generator</property>
+						</not>
+				</condition>
+			</error>
+			<exit>
+				<condition>
+						<property>controls/electric/APU-generator</property>
+				</condition>
+			</exit>
+		</step>
+
+		<step>
+			<message>
+				Switch on BLEED AIR{|.}
+			</message>
+			<view>
+				<heading-offset-deg>289.7</heading-offset-deg>
+				<pitch-offset-deg>-19.6</pitch-offset-deg>
+				<field-of-view>28.7</field-of-view>
+			</view>
+				<marker>
+			    <x-m>-7.5372</x-m>
+			    <y-m>0.7000</y-m>
+			    <z-m>0.0033</z-m>
+			    <scale>2.45</scale>
+				</marker>
+			<error>
+				<message>
+					Switch on BLEED AIR{|.}
+				</message>
+				<condition>
+					<equals>
+						<property>controls/APU/bleed</property>
+						<value>0</value>
+					</equals>
+				</condition>
+			</error>
+			<exit>
+				<condition>
+					<equals>
+						<property>controls/APU/bleed</property>
+						<value>1</value>
+					</equals>
+				</condition>
+			</exit>
+		</step>
+
+		<step>
+			<message>
+				APU Started {|.}
+				Tutorial finished {|.}
+				Load MANUAL STARTUP to start engines {|.}
+			</message>
+		</step>
+
+    <end>
+       <view>
+            <heading-offset-deg>0</heading-offset-deg>
+            <pitch-offset-deg>-12</pitch-offset-deg>
+            <field-of-view>55</field-of-view>
+        </view>
+    </end>
+</PropertyList>

@@ -3,6 +3,105 @@
 <PropertyList>
 
 	<checklist>  
+    <title>APU start</title>
+			<item>
+      	<name>Master</name>
+      	<value>ON</value>
+				<marker>
+			    <x-m>-7.4463</x-m>
+			    <y-m>0.6950</y-m>
+			    <z-m>-0.1355</z-m>
+			    <scale>2.1</scale>
+				</marker>
+				<condition>
+						<property>controls/APU/master</property>
+				</condition>
+				<binding>
+					<command>property-toggle</command>
+					<property>controls/APU/master</property>
+				</binding>
+			</item>
+
+			<item>
+				<name>Start</name>
+				<value>ON</value>
+				<marker>
+			    <x-m>-7.5083</x-m>
+			    <y-m>0.6950</y-m>
+			    <z-m>-0.1355</z-m>
+			    <scale>2.1</scale>
+				</marker>
+				<condition>
+          <property>controls/APU/running</property>
+				</condition>
+				<binding>
+          <command>property-toggle</command>
+            <property>controls/APU/running</property>
+ 				</binding>
+			</item>
+
+			<item>
+				<name>            					Wait for</name>
+				<value>READY TO LOAD</value>
+				<marker>
+			    <x-m>-7.4884</x-m>
+			    <y-m>0.6950</y-m>
+			    <z-m>-0.000</z-m>
+			    <scale>2.1</scale>
+				</marker>
+					<condition>
+						<greater-than> 
+           		<property>controls/APU/rpm</property>
+								<value>0.99</value>
+						</greater-than>	
+					</condition>
+			</item>
+
+			<item>
+				<name>Generator</name>
+				<value>ON</value>
+				<marker>
+			    <x-m>-7.4463</x-m>
+			    <y-m>0.6950</y-m>
+			    <z-m>-0.0017</z-m>
+			    <scale>2.1</scale>
+				</marker>
+					<condition>
+						<and>
+							<greater-than> 
+	           		<property>controls/APU/rpm</property>
+								<value>0.99</value>
+							</greater-than>	
+							<property>controls/electric/APU-generator</property>
+						</and>
+					</condition>
+				<binding>
+          <command>property-toggle</command>
+            <property>controls/electric/APU-generator</property>
+ 				</binding>
+			</item>
+
+			<item>
+				<name>Bleed air</name>
+				<value>ON</value>
+				<marker>
+			    <x-m>-7.5372</x-m>
+			    <y-m>0.6975</y-m>
+			    <z-m>-0.0</z-m>
+			    <scale>2.1</scale>
+				</marker>
+				<condition>
+					<property>controls/APU/bleed</property>
+				</condition>
+				<binding>
+          <command>property-toggle</command>
+            <property>controls/APU/bleed</property>
+ 				</binding>
+			</item>
+
+	</checklist>  
+
+	<checklist>  
     <title>Engines start</title>
 			<item>
 				<name>Preflight check</name>	
@@ -65,6 +164,29 @@
 			</item>
 
 			<item>
+				<name>If APU not running, Set EXT PWR</name>
+				<value>ON</value>
+				<marker>
+			    <x-m>-7.7165</x-m>
+			    <y-m>-0.1909</y-m>
+			    <z-m>-0.1496</z-m>
+			    <scale>1.40</scale>
+				</marker>
+				<condition>
+					<and>
+						<not>
+							<property>controls/electric/APU/running</property>
+						</not>
+							<property>controls/electric/external-power</property>
+					</and>
+				</condition>
+				<binding>
+					<command>property-toggle</command>
+					<property>controls/electric/external-power</property>
+				</binding>
+			</item>
+
+			<item>
 				<name>Batt.1</name>
 				<value>ON</value>
 				<marker>
@@ -79,6 +201,25 @@
 				<binding>
 					<command>property-toggle</command>
 					<property>controls/electric/battery-switch[0]</property>
+						<value>1</value>
+				</binding>
+			</item>
+
+			<item>
+				<name>Batt.2</name>
+				<value>ON</value>
+				<marker>
+			    <x-m>-7.7066</x-m>
+			    <y-m>-0.2116</y-m>
+			    <z-m>-0.1380</z-m>
+			    <scale>1.40</scale>
+				</marker>
+				<condition>
+						<property>controls/electric/battery-switch[1]</property>
+				</condition>
+				<binding>
+					<command>property-toggle</command>
+					<property>controls/electric/battery-switch[1]</property>
 						<value>1</value>
 				</binding>
 			</item>
@@ -122,26 +263,7 @@
 			</item>
 
 			<item>
-				<name>Batt.2</name>
-				<value>ON</value>
-				<marker>
-			    <x-m>-7.7066</x-m>
-			    <y-m>-0.2116</y-m>
-			    <z-m>-0.1380</z-m>
-			    <scale>1.40</scale>
-				</marker>
-				<condition>
-						<property>controls/electric/battery-switch[1]</property>
-				</condition>
-				<binding>
-					<command>property-toggle</command>
-					<property>controls/electric/battery-switch[1]</property>
-						<value>1</value>
-				</binding>
-			</item>
-
-			<item>
-				<name>Avionics</name>
+				<name>Avionics (2 steps)</name>
 				<value>ON</value>
 				<marker>
 			    <x-m>-7.6826</x-m>
@@ -155,7 +277,7 @@
 				<binding>
 					<command>property-toggle</command>
 					<property>controls/electric/avionics-switch</property>
-						<value>1</value>
+						<value>2</value>
 				</binding>
 			</item>
 
@@ -262,7 +384,7 @@
 				<name>Nav Lights</name>
 				<value>ON</value>
 				<marker>
-			    <x-m>-7.6848</x-m>
+			    <x-m>-7.6451</x-m>
 			    <y-m>0.4008</y-m>
 			    <z-m>-0.1760</z-m>
 			    <scale>1.25</scale>
@@ -320,30 +442,46 @@
 			</item>
 
 			<item>
+				<name>EXT PWR</name>
+				<value>OFF</value>
+				<marker>
+			    <x-m>-7.7165</x-m>
+			    <y-m>-0.1909</y-m>
+			    <z-m>-0.1496</z-m>
+			    <scale>1.40</scale>
+				</marker>
+				<condition>
+					<not>
+							<property>controls/electric/external-power</property>
+					</not>
+				</condition>
+				<binding>
+					<command>property-toggle</command>
+					<property>controls/electric/external-power</property>
+				</binding>
+			</item>
+
+			<item>
 				<name>Release Park Brake (left click) or (shift b)</name>
 				<value>and you are ready to roll !</value>
 			</item>
   </checklist>
 
 	<checklist> 
+   <title>Autopilot</title>
+			<item>
+      	<name>See the Tutorial_Autopilot.pdf in CitationX/Tutorials</name>
+				<value></value>
+		</item>
+  </checklist>
+
+
+	<checklist> 
    <title>CDU</title>
 			<item>
-      	<name>CDU-knob</name>
-      	<value>On</value>
-      	<marker>
-        	<x-m>-7.6430</x-m>
-        	<y-m>-0.0190</y-m>
-        	<z-m>-0.1835</z-m>
-        	<scale>1.4</scale>
-      	</marker>
-      	<condition>
-        	<greater-than>
-          	<property>controls/lighting/cdu</property>
-          	<value>0.02</value>
-        	</greater-than>
-      	</condition>
+      	<name>See the Tutorial_CDU.pdf in CitationX/Tutorials</name>
+				<value></value>
 		</item>
-
   </checklist>
   
 </PropertyList>

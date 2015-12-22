@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
 <PropertyList>
-    <name>Manual Startup</name>
-    <description>Manual Startup</description>
-
+    <name>Engines Startup</name>
+    <description>Engines Startup</description>
+		<step-time>2</step-time>
     <init>
         <set>
             <property>sim/current-view/view-number</property>
@@ -38,6 +38,10 @@
             <value>0</value>
         </set>
         <set>
+            <property>controls/electric/avionics-switch</property>
+            <value>0</value>
+        </set> 
+       <set>
             <property>controls/engines/engine[0]/cutoff</property>
             <value>1</value>
         </set>
@@ -65,6 +69,39 @@
 
     <step>
         <message>
+            Hide Yoke (click on yoke){|.}
+        </message>
+        <view>
+    			<heading-offset-deg>0.0</heading-offset-deg>
+    			<pitch-offset-deg>-11.8</pitch-offset-deg>
+    			<roll-offset-deg>0.0</roll-offset-deg>
+    			<field-of-view>96.2</field-of-view>
+        </view>
+				<marker>
+			    <x-m>-7.4612</x-m>
+			    <y-m>-0.3769</y-m>
+			    <z-m>0.0661</z-m>
+			    <scale>5.5</scale>
+				</marker>
+        <error>
+					<message>
+            Hide Yoke (click on yoke){|.}
+          </message>
+          <condition>
+							<property>sim/model/show-yoke_L</property>
+          </condition>
+        </error>
+        <exit>
+					<condition>
+						<not>
+							<property>sim/model/show-yoke_RL</property>
+            </not>
+					</condition>
+        </exit>
+    </step>
+
+    <step>
+        <message>
             PARK BRAKE to "ON" (pull){|.}
         </message>
         <view>
@@ -84,25 +121,21 @@
             Set PARK BRAKE to "ON"{|.}
           </message>
           <condition>
-						<equals>
+						<not>
 							<property>controls/gear/brake-parking</property>
-              <value>0</value>
-            </equals>
+            </not>
           </condition>
         </error>
         <exit>
 					<condition>
-						<equals>
 							<property>controls/gear/brake-parking</property>
-							<value>1</value>
-            </equals>
 					</condition>
         </exit>
     </step>
 
 		<step>
 			<message>
-				Set THROTTLESs to "IDLE" position{|.}
+				Set THROTTLESs to "IDLE" position (20%){|.}
 				"OFF" position will shut down engines{|.}
 				with park brake set{|.}
 			</message>
@@ -119,7 +152,7 @@
 			</marker>
 			<error>
 				<message>
-					Set THROTTLES to "IDLE" position{|.}
+					Set THROTTLES to "IDLE" position 20%){|.}
 					"OFF" position will shut down engines{|.}
 					with park brake set{|.}
 				</message>
@@ -154,6 +187,43 @@
 
 		<step>
 			<message>
+				If APU not running, set Ext Pwr ON {|.}
+			</message>
+			<view>
+				<heading-offset-deg>350.578</heading-offset-deg>
+				<pitch-offset-deg>-39.3</pitch-offset-deg>
+				<field-of-view>18</field-of-view>
+			</view>
+				<marker>
+			    <x-m>-7.7165</x-m>
+			    <y-m>-0.1909</y-m>
+			    <z-m>-0.1496</z-m>
+			    <scale>1.30</scale>
+				</marker>
+			<error>
+				<message>
+					Set Ext Pwr ON{|.}
+				</message>
+				<condition>
+					<and>
+						<not>
+							<property>controls/electric/APU/running</property>
+						</not>
+						<not>
+							<property>controls/electric/external-power</property>
+						</not>
+					</and>
+				</condition>
+			</error>
+			<exit>
+				<condition>
+						<property>controls/electric/external-power</property>
+				</condition>
+			</exit>
+		</step>
+
+		<step>
+			<message>
 				Switch on BATT 1{|.}
 			</message>
 			<view>
@@ -172,90 +242,14 @@
 					Switch on BATT 1{|.}
 				</message>
 				<condition>
-					<and>
 						<not>
 							<property>controls/electric/battery-switch</property>
 						</not>
-					</and>
 				</condition>
 			</error>
 			<exit>
 				<condition>
-					<and>
 						<property>controls/electric/battery-switch</property>
-					</and>
-				</condition>
-			</exit>
-		</step>
-
-		<step>
-			<message>
-				Switch on LH GEN{|.}
-			</message>
-			<view>
-				<heading-offset-deg>350.578</heading-offset-deg>
-				<pitch-offset-deg>-39.3</pitch-offset-deg>
-				<field-of-view>18</field-of-view>
-			</view>
-				<marker>
-			    <x-m>-7.7066</x-m>
-			    <y-m>-0.2893</y-m>
-			    <z-m>-0.1380</z-m>
-			    <scale>1.40</scale>
-				</marker>
-			<error>
-				<message>
-					Switch on LH GEN{|.}
-				</message>
-				<condition>
-					<and>
-						<not>
-							<property>controls/electric/engine[0]/generator</property>
-						</not>
-					</and>
-				</condition>
-			</error>
-			<exit>
-				<condition>
-					<and>
-						<property>controls/electric/engine[0]/generator</property>
-					</and>
-				</condition>
-			</exit>
-		</step>
-
-		<step>
-			<message>
-				Switch on RH GEN{|.}
-			</message>
-			<view>
-				<heading-offset-deg>350.578</heading-offset-deg>
-				<pitch-offset-deg>-39.3</pitch-offset-deg>
-				<field-of-view>18</field-of-view>
-			</view>
-				<marker>
-			    <x-m>-7.7066</x-m>
-			    <y-m>-0.2488</y-m>
-			    <z-m>-0.1380</z-m>
-			    <scale>1.40</scale>
-				</marker>
-			<error>
-				<message>
-					Switch on RH GEN{|.}
-				</message>
-				<condition>
-					<and>
-						<not>
-							<property>controls/electric/engine[1]/generator</property>
-						</not>
-					</and>
-				</condition>
-			</error>
-			<exit>
-				<condition>
-					<and>
-						<property>controls/electric/engine[1]/generator</property>
-					</and>
 				</condition>
 			</exit>
 		</step>
@@ -280,25 +274,85 @@
 					Switch on BATT 2{|.}
 				</message>
 				<condition>
-					<and>
 						<not>
 							<property>controls/electric/battery-switch[1]</property>
 						</not>
-					</and>
 				</condition>
 			</error>
 			<exit>
 				<condition>
-					<and>
 						<property>controls/electric/battery-switch[1]</property>
-					</and>
 				</condition>
 			</exit>
 		</step>
 
 		<step>
 			<message>
-				Switch on AVIONICS.{|.}
+				Switch on LH GEN{|.}
+			</message>
+			<view>
+				<heading-offset-deg>350.578</heading-offset-deg>
+				<pitch-offset-deg>-39.3</pitch-offset-deg>
+				<field-of-view>18</field-of-view>
+			</view>
+				<marker>
+			    <x-m>-7.7066</x-m>
+			    <y-m>-0.2893</y-m>
+			    <z-m>-0.1380</z-m>
+			    <scale>1.40</scale>
+				</marker>
+			<error>
+				<message>
+					Switch on LH GEN{|.}
+				</message>
+				<condition>
+						<not>
+							<property>controls/electric/engine[0]/generator</property>
+						</not>
+				</condition>
+			</error>
+			<exit>
+				<condition>
+						<property>controls/electric/engine[0]/generator</property>
+				</condition>
+			</exit>
+		</step>
+
+		<step>
+			<message>
+				Switch on RH GEN{|.}
+			</message>
+			<view>
+				<heading-offset-deg>350.578</heading-offset-deg>
+				<pitch-offset-deg>-39.3</pitch-offset-deg>
+				<field-of-view>18</field-of-view>
+			</view>
+				<marker>
+			    <x-m>-7.7066</x-m>
+			    <y-m>-0.2488</y-m>
+			    <z-m>-0.1380</z-m>
+			    <scale>1.40</scale>
+				</marker>
+			<error>
+				<message>
+					Switch on RH GEN{|.}
+				</message>
+				<condition>
+						<not>
+							<property>controls/electric/engine[1]/generator</property>
+						</not>
+				</condition>
+			</error>
+			<exit>
+				<condition>
+						<property>controls/electric/engine[1]/generator</property>
+				</condition>
+			</exit>
+		</step>
+
+		<step>
+			<message>
+				Switch on AVIONICS (2 steps){|.}
 			</message>
 			<view>
 				<heading-offset-deg>350.578</heading-offset-deg>
@@ -312,17 +366,53 @@
 			    <scale>1.40</scale>
 			</marker>
 			<error>
-				<message>Switch on AVIONICS.{|.}
+				<message>Switch on AVIONICS{|.}
+				</message>
+				<condition>
+					<equals>
+						<property>controls/electric/avionics-switch</property>
+						<value>0</value>
+					</equals>
+				</condition>
+			</error>
+			<exit>
+				<condition>
+					<equals>
+						<property>controls/electric/avionics-switch</property>
+						<value>2</value>
+					</equals>
+				</condition>
+			</exit>
+		</step>
+
+		<step>
+			<message>
+				Push Master Alarm Reset to stop alarm{|.}
+			</message>
+			<view>
+				<heading-offset-deg>0.0</heading-offset-deg>
+				<pitch-offset-deg>-12.4</pitch-offset-deg>
+				<field-of-view>62.4</field-of-view>
+			</view>
+			<marker>
+				<x-m>-7.8157</x-m>
+					<y-m>-0.3512</y-m>
+			    <z-m>0.1843</z-m>
+			    <scale>2.45</scale>
+			</marker>
+			<error>
+				<message>
+					Push Master Alarm Reset to stop alarm{|.}
 				</message>
 				<condition>
 					<not>
-						<property>controls/electric/avionics-switch</property>
+						<property>instrumentation/annunciators/ack-warning</property>
 					</not>
 				</condition>
 			</error>
 			<exit>
 				<condition>
-					<property>controls/electric/avionics-switch</property>
+					<property>instrumentation/annunciators/ack-warning</property>
 				</condition>
 			</exit>
 		</step>
@@ -332,9 +422,9 @@
 				Switch on LEFT IGNITION{|.}
 			</message>
 			<view>
-				<heading-offset-deg>350.578</heading-offset-deg>
-				<pitch-offset-deg>-39.3</pitch-offset-deg>
-				<field-of-view>18</field-of-view>
+				<heading-offset-deg>348.46</heading-offset-deg>
+				<pitch-offset-deg>-34.37</pitch-offset-deg>
+				<field-of-view>40</field-of-view>
 			</view>
 			<marker>
 			   <x-m>-7.6826</x-m>
@@ -387,7 +477,7 @@
 					<not>
 						<property>controls/engines/engine[0]/cutoff</property>
 					</not>
-						</condition>
+				</condition>
 			</exit>
     </step>
 
@@ -396,9 +486,9 @@
 				Switch on RIGHT IGNITION{|.}
 			</message>
 			<view>
-				<heading-offset-deg>350.578</heading-offset-deg>
-				<pitch-offset-deg>-39.3</pitch-offset-deg>
-				<field-of-view>18</field-of-view>
+				<heading-offset-deg>348.46</heading-offset-deg>
+				<pitch-offset-deg>-34.37</pitch-offset-deg>
+				<field-of-view>40</field-of-view>
 			</view>
 			<marker>
 		    <x-m>-7.6826</x-m>
@@ -450,6 +540,75 @@
 				<condition>
 					<not>
 						<property>controls/engines/engine[1]/cutoff</property>
+					</not>
+				</condition>
+			</exit>
+		</step>
+
+		<step>
+			<message>
+				Push Master Alarm Reset to stop alarm{|.}
+			</message>
+			<view>
+				<heading-offset-deg>0.0</heading-offset-deg>
+				<pitch-offset-deg>-12.4</pitch-offset-deg>
+				<field-of-view>62.4</field-of-view>
+			</view>
+			<marker>
+				<x-m>-7.8157</x-m>
+					<y-m>-0.3512</y-m>
+			    <z-m>0.1843</z-m>
+			    <scale>2.45</scale>
+			</marker>
+			<error>
+				<message>
+					Push Master Alarm Reset to stop alarm{|.}
+				</message>
+				<condition>
+					<not>
+						<property>instrumentation/annunciators/ack-warning</property>
+					</not>
+				</condition>
+			</error>
+			<exit>
+				<condition>
+					<property>instrumentation/annunciators/ack-warning</property>
+				</condition>
+			</exit>
+		</step>
+
+		<step>
+			<message>
+				Set Ext Pwr OFF {|.}
+			</message>
+			<view>
+				<heading-offset-deg>350.578</heading-offset-deg>
+				<pitch-offset-deg>-39.3</pitch-offset-deg>
+				<field-of-view>18</field-of-view>
+			</view>
+				<marker>
+			    <x-m>-7.7165</x-m>
+			    <y-m>-0.1909</y-m>
+			    <z-m>-0.1496</z-m>
+			    <scale>1.30</scale>
+				</marker>
+			<error>
+				<message>
+					Set Ext Pwr OFF{|.}
+				</message>
+				<condition>
+					<and>
+						<not>
+							<property>controls/electric/APU/running</property>
+						</not>
+							<property>controls/electric/external-power</property>
+					</and>
+				</condition>
+			</error>
+			<exit>
+				<condition>
+					<not>
+						<property>controls/electric/external-power</property>
 					</not>
 				</condition>
 			</exit>
@@ -593,7 +752,7 @@
 				and you are ready  to roll ! {|.}
 			</message>
 		</step>
-
+-->
     <end>
        <view>
             <heading-offset-deg>0</heading-offset-deg>
@@ -601,4 +760,5 @@
             <field-of-view>55</field-of-view>
         </view>
     </end>
+
 </PropertyList>
