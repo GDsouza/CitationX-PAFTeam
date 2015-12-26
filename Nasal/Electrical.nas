@@ -159,8 +159,8 @@ var init_switches = func{
 		setprop("controls/electric/std-by-pwr",0);
     setprop("controls/lighting/instrument-lights-norm",0.8);
     setprop("controls/lighting/efis-norm",0.8);
-    setprop("controls/lighting/cdu",0.4);
-    setprop("controls/lighting/cdu1",0.4);
+    setprop("controls/lighting/cdu",0.6);
+    setprop("controls/lighting/cdu1",0.6);
     setprop("controls/lighting/panel-norm",0.8);
     setprop("controls/lighting/nav-lights",0);
 

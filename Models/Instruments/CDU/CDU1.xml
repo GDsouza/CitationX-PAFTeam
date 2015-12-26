@@ -8,7 +8,6 @@
     <path>CDU.ac</path>
 
 <!-- CDU Knob -->
-
     <animation>
         <type>rotate</type>
         <object-name>CDU-knob</object-name>
@@ -115,7 +114,6 @@
     <R5>instrumentation/cdu/R[5]</R5>
 		<R6>instrumentation/cdu/R[6]</R6>
 		<S0>instrumentation/cdu/input</S0>
-
   </params>
 
     <text>
@@ -152,7 +150,7 @@
         <type>text-value</type>
         <property alias="../../params/L0"/>
         <font>helvetica_bold.txf</font>
-        <character-size>0.005</character-size>
+        <character-size>0.006</character-size>
         <character-aspect-ratio type="double">1.2</character-aspect-ratio>
         <font-resolution>
             <width type="int">32</width>
@@ -192,7 +190,7 @@
         <type>text-value</type>
         <property alias="../../params/L2"/>
         <font>helvetica_bold.txf</font>
-        <character-size>0.005</character-size>
+        <character-size>0.006</character-size>
         <character-aspect-ratio type="double">1.2</character-aspect-ratio>
         <font-resolution>
             <width type="int">32</width>
@@ -232,7 +230,7 @@
         <type>text-value</type>
         <property alias="../../params/L4"/>
         <font>helvetica_bold.txf</font>
-        <character-size>0.005</character-size>
+        <character-size>0.006</character-size>
         <character-aspect-ratio type="double">1.2</character-aspect-ratio>
         <font-resolution>
             <width type="int">32</width>
@@ -272,7 +270,7 @@
         <type>text-value</type>
         <property alias="../../params/L6"/>
         <font>helvetica_bold.txf</font>
-        <character-size>0.005</character-size>
+        <character-size>0.006</character-size>
         <character-aspect-ratio type="double">1.2</character-aspect-ratio>
         <font-resolution>
             <width type="int">32</width>
@@ -294,7 +292,7 @@
         <type>text-value</type>
         <property alias="../../params/R0"/>
         <font>helvetica_bold.txf</font>
-        <character-size>0.005</character-size>
+        <character-size>0.006</character-size>
         <character-aspect-ratio type="double">1.2</character-aspect-ratio>
         <font-resolution>
             <width type="int">32</width>
@@ -334,7 +332,7 @@
         <type>text-value</type>
         <property alias="../../params/R2"/>
         <font>helvetica_bold.txf</font>
-        <character-size>0.005</character-size>
+        <character-size>0.006</character-size>
         <character-aspect-ratio type="double">1.2</character-aspect-ratio>
         <font-resolution>
             <width type="int">32</width>
@@ -374,7 +372,7 @@
         <type>text-value</type>
         <property alias="../../params/R4"/>
         <font>helvetica_bold.txf</font>
-        <character-size>0.005</character-size>
+        <character-size>0.006</character-size>
         <character-aspect-ratio type="double">1.2</character-aspect-ratio>
         <font-resolution>
             <width type="int">32</width>
@@ -414,7 +412,7 @@
         <type>text-value</type>
         <property alias="../../params/R6"/>
         <font>helvetica_bold.txf</font>
-        <character-size>0.005</character-size>
+        <character-size>0.006</character-size>
         <character-aspect-ratio type="double">1.2</character-aspect-ratio>
         <font-resolution>
             <width type="int">32</width>
@@ -444,6 +442,8 @@
         </font-resolution>
     </text>
 
+<!-- -->
+
     <animation>
         <type>select</type>
         <object-name>Page</object-name>
@@ -462,8 +462,8 @@
         <object-name>R5</object-name>
         <object-name>R6</object-name>
         <object-name>S0</object-name>
-        <object-name>CDU-lamp</object-name>
         <object-name>CDU-screen</object-name>
+        <object-name>CDU-lamp</object-name>
 				<condition>
 					<and>				
             <greater-than>
@@ -488,8 +488,7 @@
         <object-name>Page</object-name> 
        	<object-name>L0</object-name>
         <object-name>L2</object-name>
-        <object-name>L4</object-name>
-        <object-name>R0</object-name>
+	      <object-name>R0</object-name>
         <object-name>R2</object-name>
         <object-name>R4</object-name>
         <emission>
@@ -497,6 +496,76 @@
             <green-prop>sim/color-set/white/g</green-prop>
             <blue-prop>sim/color-set/white/b</blue-prop>
             <alpha-prop>sim/color-set/white/a</alpha-prop>
+						<factor-prop>controls/lighting/cdu1</factor-prop>
+        </emission>
+        <ambient>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </ambient>
+        <diffuse>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </diffuse>
+        <specular>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </specular>
+    </animation>
+
+    <animation>
+        <name>white</name>
+        <type>material</type>
+        <object-name>L4</object-name>
+				<condition>
+					<not-equals>
+						<property>instrumentation/cdu/display</property>
+						<value>NAV-SELT[1]</value>
+					</not-equals>
+				</condition>
+        <emission>
+            <red-prop>sim/color-set/white/r</red-prop>
+            <green-prop>sim/color-set/white/g</green-prop>
+            <blue-prop>sim/color-set/white/b</blue-prop>
+            <alpha-prop>sim/color-set/white/a</alpha-prop>
+						<factor-prop>controls/lighting/cdu1</factor-prop>
+        </emission>
+        <ambient>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </ambient>
+        <diffuse>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </diffuse>
+        <specular>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </specular>
+    </animation>
+
+
+    <animation>
+        <name>green</name>
+        <type>material</type>
+        <object-name>L4</object-name>
+				<condition>
+					<equals>
+						<property>instrumentation/cdu/display</property>
+						<value>NAV-SELT[1]</value>
+					</equals>
+				</condition>
+        <emission>
+            <red-prop>sim/color-set/green/r</red-prop>
+            <green-prop>sim/color-set/green/g</green-prop>
+            <blue-prop>sim/color-set/green/b</blue-prop>
+            <alpha-prop>sim/color-set/green/a</alpha-prop>
+						<factor-prop>controls/lighting/cdu1</factor-prop>
         </emission>
         <ambient>
             <red>0</red>
@@ -520,16 +589,15 @@
         <type>material</type>
         <object-name>L1</object-name>
         <object-name>L3</object-name>
-        <object-name>L5</object-name>
         <object-name>R1</object-name>
         <object-name>R3</object-name>
         <object-name>R5</object-name>
-        <object-name>CDU-lamp</object-name>
         <emission>
             <red-prop>sim/color-set/green/r</red-prop>
             <green-prop>sim/color-set/green/g</green-prop>
             <blue-prop>sim/color-set/green/b</blue-prop>
             <alpha-prop>sim/color-set/green/a</alpha-prop>
+						<factor-prop>controls/lighting/cdu1</factor-prop>
         </emission>
         <ambient>
             <red>0</red>
@@ -549,6 +617,98 @@
     </animation>
 
     <animation>
+        <name>green</name>
+        <type>material</type>
+        <object-name>L5</object-name>
+				<condition>
+					<and>
+						<not-equals>
+							<property>instrumentation/cdu/display</property>
+							<value>NAV-SELT[1]</value>
+						</not-equals>
+						<not-equals>
+							<property>instrumentation/cdu/display</property>
+							<value>FLT-PLAN[5]</value>
+						</not-equals>
+					</and>
+				</condition>					
+        <emission>
+            <red-prop>sim/color-set/green/r</red-prop>
+            <green-prop>sim/color-set/green/g</green-prop>
+            <blue-prop>sim/color-set/green/b</blue-prop>
+            <alpha-prop>sim/color-set/green/a</alpha-prop>
+						<factor-prop>controls/lighting/cdu1</factor-prop>
+        </emission>
+        <ambient>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </ambient>
+        <diffuse>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </diffuse>
+        <specular>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </specular>
+    </animation>
+
+    <animation>
+        <name>amber</name>
+        <type>material</type>
+        <object-name>L5</object-name>
+				<condition>
+					<or>
+						<equals>
+							<property>instrumentation/cdu/display</property>
+							<value>NAV-SELT[1]</value>
+						</equals>
+						<equals>
+							<property>instrumentation/cdu/display</property>
+							<value>FLT-PLAN[5]</value>
+						</equals>
+					</or>
+				</condition>					
+        <emission>
+            <red-prop>sim/color-set/amber/r</red-prop>
+            <green-prop>sim/color-set/amber/g</green-prop>
+            <blue-prop>sim/color-set/amber/b</blue-prop>
+            <alpha-prop>sim/color-set/amber/a</alpha-prop>
+						<factor-prop>controls/lighting/cdu1</factor-prop>
+        </emission>
+        <ambient>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </ambient>
+        <diffuse>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </diffuse>
+        <specular>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </specular>
+    </animation>
+
+    <animation>
+        <name>green</name>
+        <type>material</type>
+        <object-name>CDU-lamp</object-name>
+        <emission>
+            <red-prop>sim/color-set/green/r</red-prop>
+            <green-prop>sim/color-set/green/g</green-prop>
+            <blue-prop>sim/color-set/green/b</blue-prop>
+            <alpha-prop>sim/color-set/green/a</alpha-prop>
+        </emission>
+    </animation>
+
+    <animation>
         <name>magenta</name>
         <type>material</type>
         <object-name>L6</object-name>
@@ -558,6 +718,7 @@
             <green-prop>sim/color-set/magenta/g</green-prop>
             <blue-prop>sim/color-set/magenta/b</blue-prop>
             <alpha-prop>sim/color-set/magenta/a</alpha-prop>
+						<factor-prop>controls/lighting/cdu1</factor-prop>
         </emission>
         <ambient>
             <red>0</red>
@@ -585,6 +746,7 @@
             <green-prop>sim/color-set/yellow/g</green-prop>
             <blue-prop>sim/color-set/yellow/b</blue-prop>
             <alpha-prop>sim/color-set/yellow/a</alpha-prop>
+						<factor-prop>controls/lighting/cdu1</factor-prop>
         </emission>
         <ambient>
             <red>0</red>
@@ -638,32 +800,9 @@
 		<button>0</button>
 		<repeatable>false</repeatable>
 		<binding>
-			<condition>
-				<or>
-					<equals>
-						<property>instrumentation/cdu/display</property>
-						<value>NAVIDENT[0]</value>
-					</equals>
-					<equals>
-						<property>instrumentation/cdu/display</property>
-						<value>POS INIT[0]</value>
-					</equals>
-				</or>
-			</condition>
 			<command>nasal</command>
 			<script>cdu.key('FPL');</script>
 		</binding>
-		<binding>
-			<condition>
-				<not>
-					<property>instrumentation/cdu/display</property>
-					<value>NAVIDENT[0]</value>
-				</not>
-			</condition>
-			<command>nasal</command>
-			<script>cdu.next();</script>
-		</binding>
-
 	</action>
 </animation>
 
@@ -674,20 +813,34 @@
 		<button>0</button>
 		<repeatable>false</repeatable>
 		<binding>
-			<condition>
-				<or>
-					<equals>
-						<property>instrumentation/cdu/display</property>
-						<value>NAVIDENT[0]</value>
-					</equals>
-					<equals>
-						<property>instrumentation/cdu/display</property>
-						<value>POS INIT[0]</value>
-					</equals>
-				</or>
-			</condition>
 			<command>nasal</command>
 			<script>cdu.key('NAV');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.perf</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.key('PERF');</script>
+		</binding>
+	</action>
+</animation>
+
+<animation>
+	<type>pick</type>
+	<object-name>btn.prog</object-name>
+	<action>
+		<button>0</button>
+		<repeatable>false</repeatable>
+		<binding>
+			<command>nasal</command>
+			<script>cdu.key('PROG');</script>
 		</binding>
 	</action>
 </animation>
@@ -1285,7 +1438,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.input(' ');</script>
+			<script>cdu.input('.');</script>
 		</binding>
 	</action>
 </animation>

@@ -3,9 +3,10 @@
 ###
 
 var navSel = "";
-var navWp = [];
+var navWp = std.Vector.new();
 var g_speed = 300;
 var dist = 0;
+var flp_closed = 0;
 
 var init = func {
 	setprop("autopilot/route-manager/flight-plan","");
@@ -509,35 +510,63 @@ var key = func(v) {
 			if (v == "B2R") {ligne = "R[3]"}
 			if (v == "B3R") {ligne = "R[5]"}
 			if (v == "B4R" and cduInput !="") {cduDisplay = "NAV-SELT[0]"}
-			if (ligne != "") {
-				cduInput = getprop("instrumentation/cdu/"~ligne);
-				navSel = cduInput;
-			}						
+			if (ligne != "") {cduInput = getprop("instrumentation/cdu/"~ligne)}
+			if (cduInput != "") {navSel = cduInput}
 		}
 		if (cduDisplay == "NAV-SELT[0]") {
-			navWp = [];
 			if (v == "B1L") {
 				cduDisplay = "NAV-SELT[1]";
-				cduInput = ""}
-				var dep_apt = findAirportsByICAO(left(navSel,4));
-				var dest_apt = findAirportsByICAO(substr(navSel,5,4));
-				var a = dep_apt[0].lat*math.pi/180;
-				var b = dest_apt[0].lat*math.pi/180;
-				var c = dep_apt[0].lon*math.pi/180;
-				var d = dest_apt[0].lon*math.pi/180;
-				dist = calc_dist(a,b,c,d);
+				cduInput = "";
+				navWp.clear();
+				flp_closed = 0;
+				navWp.append(left(navSel,4));
+				var path = getprop("/sim/fg-home")~"/aircraft-data/FlightPlans/";
+				var filename = path~navSel~".xml";
+				var xfile = subvec(directory(path),2);
+				var v = std.Vector.new(xfile);
+				if (v.contains(navSel~".xml")) {
+					var data = io.read_properties(filename);
+					var wpt = data.getValues().route.wp;
+					var wps = data.getChild("route").getChildren();
+					for (var n=1;n<size(wpt)-1;n+=1) {
+						foreach (var name;keys(wpt[n])) {
+							if (wps[n].getValue("type") == "navaid" and name == "ident") {
+								navWp.append(wps[n].getValue(name));
+							}
+						}
+					}
+				}
+				navWp.append(substr(navSel,5,4));
+				dist = calc_dist(navWp,dist);
+			}
 		}
 		if (cduDisplay == "NAV-SELT[1]") {
-			if (v == "B2L") {
-				if (cduInput != "") {
-					append(navWp,cduInput);
-					cduInput = "";
+			if (v == "B2L" or v == "B3L") {
+				if (cduInput =="*DELETE*" and size(navWp.vector) > 2) {
+					navWp.pop(size(navWp.vector)-2);
+				} else if (cduInput != "" and cduInput != "*DELETE*") {
+						if (cduInput == navWp.vector[size(navWp.vector)-1]) {;
+							flp_closed = 1;;
+						} else {navWp.insert(-1,cduInput)}
 				}				
+				dist = calc_dist(navWp,dist);
+				cduInput = "";
 			}
+			if (v == "B4L") {cduDisplay = "NAV-LIST[0]"}
 			if (v == "B1R") {
 				if (cduInput !="") {g_speed = cduInput; cduInput = ""}		
 			}
+			if (v == "B2R") {cduInput = navWp.vector[size(navWp.vector)-1]}	
+			if (v == "B3R") {
+				navSel = navSel~cduInput;
+				fltName = navSel~".xml";
+				fltPath = savePath~fltName;
+				setprop("autopilot/route-manager/file-path",fltPath);
+#				setprop("autopilot/route-manager/input","@SAVE");								
+				cduInput = "";
+			}
 		}
+
 		#### PERF PAGES ####
 		if (cduDisplay == "PRF-PAGE[0]") {
 			setprop("instrumentation/cdu/nbpage",6);
@@ -767,7 +796,7 @@ var key = func(v) {
 		setprop("/instrumentation/cdu/input",cduInput);
 }
 
-#### ------------------------ ROUTINES --------------------------------- ####
+#### ------ROUTINES ------####
 
 var insertWayp = func(ind,cduInput) {
 		var wpt = getprop("autopilot/route-manager/route/wp["~ind~"]/id");
@@ -783,7 +812,6 @@ var insertWayp = func(ind,cduInput) {
 
 var correctFlp = func(fltName) {
 	var filename = getprop("/sim/fg-home")~"/aircraft-data/FlightPlans/"~fltName;
-	var num = getprop("autopilot/route-manager/route/num");
 	var data = io.read_properties(filename);
 	var wpt = data.getValues().route.wp;
 	var wps = data.getChild("route").getChildren();
@@ -797,8 +825,37 @@ var correctFlp = func(fltName) {
 	io.write_properties(filename,data);
 }
 
-var calc_dist = func(a,b,c,d) {
-	dist = math.acos(math.sin(a)*math.sin(b)+math.cos(a)*math.cos(b)*math.cos(c-d))*3440.065;
+var calc_dist = func(navWp,dist) {
+	var apt_dep = airportinfo(navWp.vector[0]);
+	var apt_dest = airportinfo(navWp.vector[size(navWp.vector)-1]);
+print(size(navWp.vector));
+	foreach(var item;navWp.vector) {
+		print(item);
+	}
+	if (size(navWp.vector) == 2) {
+		var (course,dist) = courseAndDistance(apt_dep,apt_dest);	
+	}else if (size(navWp.vector) == 3){
+		var wp = findNavaidsByID(navWp.vector[1]);		
+		wp = wp[0];
+		var (course,dist1) = courseAndDistance(apt_dep,wp);
+		var (course,dist2) = courseAndDistance(apt_dest,wp);
+		dist = dist1+dist2;
+	} else {
+			dist = 0;
+			for (var i=1;i<size(navWp.vector)-2;i+=1) {
+				var wp1 = findNavaidsByID(navWp.vector[i]);
+				wp1 = wp1[0];
+				if (i == 1) {var wp_first = wp1}
+				var wp2 = findNavaidsByID(navWp.vector[i+1]);
+				wp2 = wp2[0];
+				var (course,dist1) = courseAndDistance(wp1,wp2);			
+				dist = dist + dist1;
+			}
+			var(course,dist_first) = courseAndDistance(apt_dep,wp_first);
+			var(course,dist_last) = courseAndDistance(wp2,apt_dest);
+			dist = dist + dist_first+dist_last;
+	}
+	return dist;
 }
 
 var delete = func {
@@ -1006,7 +1063,7 @@ var cdu = func{
 		if (display == "NAV-PAGE[1]") {displaypages.navPage_1()}
 		if (left(display,8) == "NAV-LIST") {displaypages.navList()}
 		if (display == "NAV-SELT[0]") {displaypages.navSel_0()}
-		if (display == "NAV-SELT[1]") {displaypages.navSel_1(navSel,navWp,g_speed,dist)}
+		if (display == "NAV-SELT[1]") {displaypages.navSel_1(navSel,navWp,g_speed,dist,flp_closed)}
 
 		if (display == "PRF-PAGE[0]") {displaypages.perfPage_0()}
 		if (display == "PRF-PAGE[1]") {displaypages.perfPage_1()}
