@@ -2869,6 +2869,67 @@
         </action>
     </animation>
 
+<!-- REFLETS PORTES -->
+
+   <animation>
+      <type>pick</type>
+      <object-name>L-cabin-door</object-name>
+      <object-name>R-cabin-door</object-name>
+      <visible>true</visible>
+			<action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+					<condition>
+						<equals>
+		          <property>controls/separation-door/open</property>						
+							<value>1.0</value>
+						</equals>
+					</condition>
+		         <command>property-interpolate</command>
+		          <property>controls/separation-door/open</property>
+							<value type="double">0.0</value>
+					<time>2</time>
+        </binding>
+        <binding>
+					<condition>
+						<equals>
+		          <property>controls/separation-door/open</property>						
+							<value>0.0</value>
+						</equals>
+					</condition>
+		         <command>property-interpolate</command>
+		          <property>controls/separation-door/open</property>
+							<value type="double">1.0</value>
+					<time>2</time>
+        </binding>
+			</action>
+    </animation> 
+
+    <animation>
+        <type>translate</type>
+        <object-name>L-cabin-door</object-name>	
+        <property>controls/separation-door/open</property>
+				<factor>0.030</factor>
+        <axis>
+            <x>0</x>
+            <y>-1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>R-cabin-door</object-name>	
+        <property>controls/separation-door/open</property>
+				<factor>0.030</factor>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
 <!-- 3D TEXT  -->
 
     <text>
