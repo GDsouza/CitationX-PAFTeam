@@ -811,8 +811,8 @@
     <!-- ALARMS -->
     <alarm>
         <name>Master warning</name>
-        <mode>looped</mode>
-        <path>Aircraft/CitationX/Sounds/warning.wav</path>
+        <mode>once</mode>
+        <path>Aircraft/CitationX/Sounds/chime2.wav</path>
         <condition>
 					<and>
             <property>instrumentation/annunciators/master-warning</property>
@@ -822,6 +822,21 @@
 					</and>
         </condition>
     </alarm>
+
+    <warnings>
+        <name>chime1</name>
+        <type>avionics</type>
+        <path>Aircraft/CitationX/Sounds/chime2.wav</path>
+				<condition>
+					<and>
+		        <property>instrumentation/annunciators/master-caution</property>
+						<not>
+            	<property>instrumentation/annunciators/ack-caution</property>
+						</not>
+					</and>
+				</condition>
+        <mode>once</mode>
+    </warnings>
 
     <alarm>
         <name>Overspeed alarm</name>
@@ -857,7 +872,7 @@
     <warnings>
         <name>chime1</name>
         <type>avionics</type>
-        <path>Aircraft/CitationX/Sounds/chime1.wav</path>
+        <path>Aircraft/CitationX/Sounds/chime2.wav</path>
 				<condition>
 					<and>
 		        <property>instrumentation/annunciators/master-caution</property>
@@ -866,7 +881,7 @@
 						</not>
 					</and>
 				</condition>
-        <mode>looped</mode>
+        <mode>once</mode>
     </warnings>
 
     <warnings>
