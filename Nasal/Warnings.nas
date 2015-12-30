@@ -178,6 +178,7 @@ var EICAS = {
 				}
 				if(me.wow and !me.eng0_shutdown and !me.eng1_shutdown and (
 						me.ext_pwr
+						or me.parkbrake 
 						or me.speedbrake
 						or me.total_fuel <= 500)) {
 					append(me.msg_l3,"NO TAKEOFF");
