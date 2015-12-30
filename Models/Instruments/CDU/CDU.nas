@@ -4,6 +4,7 @@
 
 var navSel = "";
 var navWp = std.Vector.new();
+var navRwy = std.Vector.new(["",""]);
 var g_speed = 300;
 var dist = 0;
 var flp_closed = 0;
@@ -437,12 +438,13 @@ var key = func(v) {
 						cduInput = "*PLAN NOT ACTIVATED*";
 					}
 					else {										
-						fltName = cduInput~".xml";
-						fltPath = savePath ~ fltName;
+						if (size(cduInput) > 2) {cduInput = left(cduInput,2)}
+						fltName = depAirport~"-"~destAirport~cduInput;
+						fltPath = savePath~fltName~".xml";
 						setprop("autopilot/route-manager/file-path",fltPath);
 						setprop("autopilot/route-manager/input","@SAVE");				
-						correctFlp(fltName);  # correction flightplan (bug Fg)#
-						setprop("autopilot/route-manager/flight-plan",cduInput);
+						correctFlp(fltPath);  # correction flightplan (bug Fg)#
+						setprop("autopilot/route-manager/flight-plan",fltName);
 						cduInput = "";
 					}
 				}
@@ -518,14 +520,18 @@ var key = func(v) {
 				cduDisplay = "NAV-SELT[1]";
 				cduInput = "";
 				navWp.clear();
+				navRwy.vector[0]="";
+				navRwy.vector[1]="";
 				flp_closed = 0;
-				navWp.append(left(navSel,4));
 				var path = getprop("/sim/fg-home")~"/aircraft-data/FlightPlans/";
-				var filename = path~navSel~".xml";
+				fltName = path~navSel~".xml";
 				var xfile = subvec(directory(path),2);
 				var v = std.Vector.new(xfile);
 				if (v.contains(navSel~".xml")) {
-					var data = io.read_properties(filename);
+					var data = io.read_properties(fltName);
+					var dep_rwy = data.getChild("departure").getValue("runway");
+					navWp.append(left(navSel,4));
+					navRwy.vector[0] = dep_rwy;
 					var wpt = data.getValues().route.wp;
 					var wps = data.getChild("route").getChildren();
 					for (var n=1;n<size(wpt)-1;n+=1) {
@@ -535,12 +541,21 @@ var key = func(v) {
 							}
 						}
 					}
+					var dest_rwy = data.getChild("destination").getValue("runway");
+					navWp.append(substr(navSel,5,4));
+					navRwy.vector[1] = dest_rwy;
+				} else {
+					navWp.append(left(navSel,4));
+					navWp.append(substr(navSel,5,4));
 				}
-				navWp.append(substr(navSel,5,4));
 				dist = calc_dist(navWp,dist);
 			}
 		}
 		if (cduDisplay == "NAV-SELT[1]") {
+			if (v == "B1L" and cduInput !="") {
+				navRwy.vector[0] = cduInput;
+				cduInput = "";
+			}
 			if (v == "B2L" or v == "B3L") {
 				if (cduInput =="*DELETE*" and size(navWp.vector) > 2) {
 					navWp.pop(size(navWp.vector)-2);
@@ -556,14 +571,19 @@ var key = func(v) {
 			if (v == "B1R") {
 				if (cduInput !="") {g_speed = cduInput; cduInput = ""}		
 			}
-			if (v == "B2R") {cduInput = navWp.vector[size(navWp.vector)-1]}	
+			if (v == "B2R") {
+				if (cduInput != "") {
+					navRwy.vector[1] = cduInput;
+					cduInput = "";
+				} else {
+					cduInput = navWp.vector[size(navWp.vector)-1]}	
+				}
 			if (v == "B3R") {
+				if (size(cduInput) > 2) {cduInput = left(cduInput,2)}		
 				navSel = navSel~cduInput;
-				fltName = navSel~".xml";
-				fltPath = savePath~fltName;
-				setprop("autopilot/route-manager/file-path",fltPath);
-#				setprop("autopilot/route-manager/input","@SAVE");								
-				cduInput = "";
+				fltName = savePath~navSel~".xml";
+				saveFlp(fltName,navWp,navRwy);
+				cduInput = "*SAVED*";
 			}
 		}
 
@@ -810,9 +830,55 @@ var insertWayp = func(ind,cduInput) {
 		cduInput = "";
 }
 
-var correctFlp = func(fltName) {
-	var filename = getprop("/sim/fg-home")~"/aircraft-data/FlightPlans/"~fltName;
-	var data = io.read_properties(filename);
+var saveFlp = func(fltName,navWp,navRwy) {
+	var dep_info = airportinfo(navWp.vector[0]);
+	var dest_info = airportinfo(navWp.vector[size(navWp.vector)-1]);
+	var data = props.Node.new({
+		version : 2,
+		destination : {
+			airport : navWp.vector[size(navWp.vector)-1],
+			runway : navRwy.vector[1],
+			lon : dest_info.lon,
+			lat : dest_info.lat
+		},
+		departure : {
+			airport : navWp.vector[0],
+			runway : navRwy.vector[0], 
+			lon : dep_info.lon,
+			lat : dep_info.lat
+		},
+		route : {
+			wp : {
+				type : "runway",
+				departure : "true",
+				ident : navRwy.vector[0],
+				icao : navWp.vector[0]
+			}
+		}
+	});
+	for (var n=1;n<size(navWp.vector)-1;n+=1) {
+		var navaid = findNavaidsByID(navWp.vector[n]);
+		navaid = navaid[0];
+		var my_data = {
+			type : "navaid",
+			ident : navaid.id,
+			lon : navaid.lon,
+			lat : navaid.lat
+		};			
+		data.getChild("route").addChild("wp").setValues(my_data);
+	}
+	var last_wp = {
+		type : "runway",
+		approach : "true",
+		ident : navRwy.vector[size(navRwy.vector)-1],
+		icao : navWp.vector[size(navWp.vector)-1]
+	};
+	data.getChild("route").addChild("wp").setValues(last_wp);
+	io.write_properties(fltName,data);
+}
+
+var correctFlp = func(fltPath) {
+	var data = io.read_properties(fltPath);
 	var wpt = data.getValues().route.wp;
 	var wps = data.getChild("route").getChildren();
 	for (var n=1;n<size(wpt)-1;n+=1) {
@@ -822,12 +888,12 @@ var correctFlp = func(fltName) {
 			}
 		}
 	}
-	io.write_properties(filename,data);
+	io.write_properties(fltPath,data);
 }
 
 var calc_dist = func(navWp,dist) {
-	var apt_dep = airportinfo(navWp.vector[0]);
-	var apt_dest = airportinfo(navWp.vector[size(navWp.vector)-1]);
+	var apt_dep = airportinfo(left(navWp.vector[0],4));
+	var apt_dest = airportinfo(left(navWp.vector[size(navWp.vector)-1],4));
 print(size(navWp.vector));
 	foreach(var item;navWp.vector) {
 		print(item);
@@ -1056,14 +1122,14 @@ var cdu = func{
 		}
 
 		if (display == "FLT-PLAN[5]" and num > 0) {
-			displaypages.fltPlan_5(dest_airport,dest_rwy,num,marker);
+			displaypages.fltPlan_5(dep_airport,dest_airport,dest_rwy,num,marker);
 		}
 
 		if (display == "NAV-PAGE[0]") {displaypages.navPage_0()}
 		if (display == "NAV-PAGE[1]") {displaypages.navPage_1()}
 		if (left(display,8) == "NAV-LIST") {displaypages.navList()}
 		if (display == "NAV-SELT[0]") {displaypages.navSel_0()}
-		if (display == "NAV-SELT[1]") {displaypages.navSel_1(navSel,navWp,g_speed,dist,flp_closed)}
+		if (display == "NAV-SELT[1]") {displaypages.navSel_1(navSel,navWp,navRwy,g_speed,dist,flp_closed)}
 
 		if (display == "PRF-PAGE[0]") {displaypages.perfPage_0()}
 		if (display == "PRF-PAGE[1]") {displaypages.perfPage_1()}

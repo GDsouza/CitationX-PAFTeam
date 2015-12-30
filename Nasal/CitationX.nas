@@ -299,6 +299,7 @@ controls.flapsDown = func(step) {
 }
 
 var Startup = func{
+    setprop("controls/electric/external-power",1);
     setprop("controls/electric/engine[0]/generator",1);
     setprop("controls/electric/engine[1]/generator",1);
     setprop("controls/electric/avionics-switch",2);
@@ -392,14 +393,12 @@ var update_systems = func{
     tire.get_rotation("yasim");
 		v_sound();
     if(getprop("velocities/airspeed-kt")>40)setprop("controls/cabin-door/open",0);
-		#annunciators_loop();
     var grspd =getprop("velocities/groundspeed-kt");
     var wspd = (45-grspd) * 0.022222;
     if(wspd>1.0)wspd=1.0;
     if(wspd<0.001)wspd=0.001;
     var rudder_pos=getprop("controls/flight/rudder") or 0;
     var str=-(rudder_pos*wspd);
-
     setprop("/controls/gear/steering",str);
 settimer(update_systems,0);
 }

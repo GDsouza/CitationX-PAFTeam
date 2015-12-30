@@ -316,7 +316,7 @@ var fltPlan_4 = func(dest_airport,dest_rwy,num,flt_closed,marker) {
 	cdu.DspSet(Dsp);
 }
 
-var fltPlan_5 = func(dest_airport,dest_rwy,num,marker) {
+var fltPlan_5 = func(dep_airport,dest_airport,dest_rwy,num,marker) {
 	var Dsp = {page:"",line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
 		line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
 	var rep = "";
@@ -338,14 +338,14 @@ var fltPlan_5 = func(dest_airport,dest_rwy,num,marker) {
 			Dsp.line3l = "   "~sprintf("%3i   %3i",getprop("autopilot/route-manager/route/wp["~i~"]/leg-bearing-true-deg"),getprop("autopilot/route-manager/route/wp["~i~"]/leg-distance-nm"));
 			Dsp.line4l = dest_airport~" "~ dest_rwy;
 			Dsp.line5l = "";
-			Dsp.line6l = "      SAVE FLP TO";
+			Dsp.line6l = "     SAVE FLP TO";
 			Dsp.line7l = "< DEPARTURE";
 			Dsp.line1r = "";
 			Dsp.line2r = set_Speed(path,j,spd);
 			Dsp.line3r = "";
 			Dsp.line4r = "";
 			Dsp.line5r = "";
-			Dsp.line6r = "-----------";
+			Dsp.line6r = dep_airport~"-"~dest_airport~"--";
 			if (getprop("autopilot/route-manager/flight-plan")) {
 				Dsp.line5r = "SAVED";
 				Dsp.line6r = getprop("autopilot/route-manager/flight-plan");

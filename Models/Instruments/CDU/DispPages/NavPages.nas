@@ -64,14 +64,14 @@ var navSel_0 = func {
 	cdu.DspSet(Dsp);
 }
 
-var navSel_1 = func (navSel,navWp,g_speed,dist,flp_closed) {
+var navSel_1 = func (navSel,navWp,navRwy,g_speed,dist,flp_closed) {
 	var Dsp = {page:"",line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",
 		line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:""};
 	var ete_h = int(dist/g_speed);
 	var ete_mn = int((dist/g_speed-ete_h)*60);
 			Dsp.page = "     "~navSel~"   1 / 1";
 			Dsp.line1l = " ORGIN        DIST / ETE";
-			Dsp.line2l = left(navSel,4)~"      "~sprintf("%.0f",dist)~" / "~sprintf("%02d",ete_h)~" + "~sprintf("%02d",ete_mn);
+			Dsp.line2l = navWp.vector[0]~" "~navRwy.vector[0]~"   "~sprintf("%.0f",dist)~" / "~sprintf("%02d",ete_h)~" + "~sprintf("%02d",ete_mn);
 			Dsp.line3l = " VIA TO";
 				for (var i=1;i<size(navWp.vector)-1;i+=1) {
 					if (i <4) {
@@ -87,7 +87,7 @@ var navSel_1 = func (navSel,navWp,g_speed,dist,flp_closed) {
 					if (i>=4 and i<8) {
 						Dsp.line5l = Dsp.line5l~navWp.vector[size(navWp.vector)-1];
 					}
-					Dsp.line6l = "     SAVE FLP TO ";
+					Dsp.line6l = "     SAVE FLP TO";
 					if (size(navSel) == 9 ){Dsp.line6r = navSel~"--"}
 					if (size(navSel) == 10 ){Dsp.line6r = navSel~"-"}
 					if (size(navSel) >= 11 ){Dsp.line6r = left(navSel,11)}					
@@ -96,7 +96,7 @@ var navSel_1 = func (navSel,navWp,g_speed,dist,flp_closed) {
 			Dsp.line1r = "GS ";
 			Dsp.line2r = " @  "~g_speed;
 			Dsp.line3r = "DEST ";
-			Dsp.line4r = substr(navSel,5,4);
+			Dsp.line4r = navWp.vector[size(navWp.vector)-1]~" "~navRwy.vector[1];
 			Dsp.line7l = "< FPL LIST";
 	cdu.DspSet(Dsp);
 }
