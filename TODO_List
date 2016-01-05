@@ -1,0 +1,43 @@
+### TO DO LIST au 05/01/2016 ###
+
+
+CDU : Terminer le pavé NAV
+			Rajouter une page au plan de vol (FPL)
+			Terminer le pavé PROG
+			Renseigner le pavé DIR (???)
+			Séparer les deux CDU
+
+PFD : Coder le bouton "MINIMUMS"
+			Coder le bouton "RA/BARO"
+
+MFD : Coder les boutons du bas
+
+APU : Coder le bouton MAP LIGHT
+			Coder l'enregistreur horaire
+
+EICAS : Coder les boutons du bas
+
+PANEL : Coder le pavé de boutons à gauche du PFD (pilote et co-pilote)
+				Coder le pavé de boutons des lights sous le PFD
+				Créer l'éclairage du tableau de bord
+				Coder l'interrupteur FUEL BOOST RH
+				Coder le pavé de boutons sous PFD et MFD Co-pilote
+				Coder le pavé températures co-pilote
+				Coder le pavé pressurisation co-pilote
+				Animer le levier manuel du train d'atterrissage
+
+PEDESTAL : 	Animer les boutons de TRIM à gauche des throttles
+						Animer les boutons sous les throttles
+
+PILOTE AUTO : Vérifier toutes les fonctions
+
+CABINE : 	Eclairage de la cabine
+					Mettre une texture de ? derrière les portes du fond
+					Animer les accoudoirs du co-pilote
+					Animer l'accoudoir gauche du pilote
+
+DIVERS : 	Checklists vocales
+					Gérer les immatriculations en fonction des Liveries (?)
+
+
+
