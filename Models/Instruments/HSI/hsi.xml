@@ -161,10 +161,6 @@ STBY HSI
             <wrap>0</wrap>
             </binding>
         </action>
-    </animation>
-    <animation>
-        <type>knob</type>
-        <object-name>HSI.knob</object-name>
         <action>
             <button>3</button>
             <name>decrease</name>
@@ -178,133 +174,14 @@ STBY HSI
             <wrap>0</wrap>
             </binding>
         </action>
+				<hovered>
+				  <binding>
+				    <command>set-tooltip</command>
+				    <tooltip-id>nav-radials</tooltip-id>
+				    <label>Radials-Sel-Deg: %.0f</label>
+				    <property>instrumentation/nav/radials/selected-deg</property>
+				  </binding>
+				</hovered>   
     </animation>
-
-    <animation>
-        <type>pick</type>
-        <object-name>HSI-R</object-name>
-        <action>
-            <button>0</button>
-            <repeatable>true</repeatable>
-             <binding>
-             <command>property-adjust</command>
-            <property>instrumentation/nav/radials/selected-deg</property>
-            <step>-1</step>
-            <min>0</min>
-            <max>360</max>
-            <wrap>1</wrap>
-            </binding>
-        </action>
-        <action>
-            <button>1</button>
-            <repeatable>true</repeatable>
-            <binding>
-            <command>property-adjust</command>
-            <property>instrumentation/nav/radials/selected-deg</property>
-            <step>1</step>
-            <min>0</min>
-            <max>360</max>
-            <wrap>1</wrap>
-           </binding>
-       </action>
-       <action>
-            <name>increase</name>
-            <button>4</button>
-            <repeatable>true</repeatable>
-            <binding>
-            <command>property-adjust</command>
-            <property>instrumentation/nav/radials/selected-deg</property>
-            <step>1</step>
-            <min>0</min>
-            <max>360</max>
-            <wrap>1</wrap>
-            </binding>
-      </action>
-      <action>
-            <name>decrease</name>
-            <button>3</button>
-            <repeatable>true</repeatable>
-            <binding>
-            <command>property-adjust</command>
-            <property>instrumentation/nav/radials/selected-deg</property>
-            <step>-1</step>
-            <min>0</min>
-            <max>360</max>
-            <wrap>1</wrap>
-            </binding>
-      </action>
-    <hovered>
-      <binding>
-        <command>set-tooltip</command>
-        <tooltip-id>nav-radials</tooltip-id>
-        <label>Radials-Sel-Deg: %.0f</label>
-            <property>instrumentation/nav/radials/selected-deg</property>
-      </binding>
-    </hovered>   
-    </animation>
-
-    <animation>
-        <type>pick</type>
-        <object-name>HSI-L</object-name>
-        <action>
-            <button>0</button>
-            <repeatable>true</repeatable>
-             <binding>
-             <command>property-adjust</command>
-            <property>instrumentation/nav/radials/selected-deg</property>
-            <step>-1</step>
-            <min>0</min>
-            <max>360</max>
-            <wrap>1</wrap>
-            </binding>
-        </action>
-        <action>
-            <button>1</button>
-            <repeatable>true</repeatable>
-            <binding>
-            <command>property-adjust</command>
-            <property>instrumentation/nav/radials/selected-deg</property>
-            <step>1</step>
-            <min>0</min>
-            <max>360</max>
-            <wrap>1</wrap>
-           </binding>
-       </action>
-       <action>
-            <name>increase</name>
-            <button>4</button>
-            <repeatable>true</repeatable>
-            <binding>
-            <command>property-adjust</command>
-            <property>instrumentation/nav/radials/selected-deg</property>
-            <step>1</step>
-            <min>0</min>
-            <max>360</max>
-            <wrap>1</wrap>
-            </binding>
-      </action>
-      <action>
-            <name>decrease</name>
-            <button>3</button>
-            <repeatable>true</repeatable>
-            <binding>
-            <command>property-adjust</command>
-            <property>instrumentation/nav/radials/selected-deg</property>
-            <step>-1</step>
-            <min>0</min>
-            <max>360</max>
-            <wrap>1</wrap>
-            </binding>
-      </action>
-    <hovered>
-      <binding>
-        <command>set-tooltip</command>
-        <tooltip-id>nav-radials</tooltip-id>
-        <label>Radials-Sel-Deg: %.0f</label>
-            <property>instrumentation/nav/radials/selected-deg</property>
-      </binding>
-    </hovered>   
-    </animation>
-
 
 </PropertyList>

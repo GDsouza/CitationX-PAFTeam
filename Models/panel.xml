@@ -2020,7 +2020,7 @@
             <binding>
                 <command>property-assign</command>
                 <property>instrumentation/altimeter/setting-inhg</property>
-                <value>29.92</value>
+                <value>29.92001</value>
             </binding>
         </action>
     </animation>
@@ -2459,16 +2459,7 @@
     <animation>
         <type>pick</type>
         <object-name>FD.nose</object-name>
-        <object-name>FD.nose-up</object-name> 
        <visible>true</visible>
-        <action>
-            <button>0</button>
-            <repeatable>true</repeatable>
-            <binding>
-                <command>nasal</command>
-                <script>citation.pitch_wheel(-1)</script>
-            </binding>
-        </action>
         <action>
             <button>3</button>
             <repeatable>true</repeatable>
@@ -2479,20 +2470,6 @@
         </action>
         <action>
             <button>4</button>
-            <repeatable>true</repeatable>
-            <binding>
-                <command>nasal</command>
-                <script>citation.pitch_wheel(1)</script>
-            </binding>
-        </action>
-    </animation>
-
-    <animation>
-        <type>pick</type>
-        <object-name>FD.nose-dwn</object-name>
-       <visible>true</visible>
-        <action>
-            <button>0</button>
             <repeatable>true</repeatable>
             <binding>
                 <command>nasal</command>
@@ -2550,7 +2527,7 @@
 
     <animation>
         <type>rotate</type>
-        <object-name>FMC2.knob1</object-name>
+        <object-name>FMC1.knob1</object-name>
         <property>instrumentation/primus2000/sc840/nav1ptr</property>
         <factor>40</factor>
         <axis>
@@ -2584,7 +2561,7 @@
 
     <animation>
         <type>rotate</type>
-        <object-name>FMC2.knob2</object-name>
+        <object-name>FMC1.knob2</object-name>
         <property>instrumentation/primus2000/sc840/nav2ptr</property>
         <factor>40</factor>
         <axis>
@@ -2602,6 +2579,7 @@
     <animation>
         <type>pick</type>
         <object-name>FMC.nav</object-name>
+        <object-name>FMC1.nav</object-name>
         <visible>true</visible>
         <action>
             <button>0</button>
@@ -2616,6 +2594,7 @@
     <animation>
         <type>pick</type>
         <object-name>FMC.fms</object-name>
+        <object-name>FMC1.fms</object-name>
         <visible>true</visible>
         <action>
             <button>0</button>
@@ -2630,14 +2609,30 @@
     <animation>
         <type>pick</type>
         <object-name>FMC.knob1</object-name>
-        <object-name>Nav1.up</object-name>
+        <object-name>FMC1.knob1</object-name>
         <action>
-            <button>0</button>
+            <button>3</button>
             <repeatable>false</repeatable>
             <binding>
                 <command>property-adjust</command>
                 <property>instrumentation/primus2000/sc840/nav1ptr</property>
                 <step>1</step>
+                <min>0</min>
+                <max>3</max>
+                <wrap>0</wrap>
+            </binding>
+    				<binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+        </binding>
+        </action>
+        <action>
+            <button>4</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <command>property-adjust</command>
+                <property>instrumentation/primus2000/sc840/nav1ptr</property>
+                <step>-1</step>
                 <min>0</min>
                 <max>3</max>
                 <wrap>0</wrap>
@@ -2664,14 +2659,15 @@
 
     <animation>
         <type>pick</type>
-        <object-name>Nav1.dwn</object-name>
+        <object-name>FMC.knob2</object-name>
+        <object-name>FMC1.knob2</object-name>
         <action>
-            <button>0</button>
+            <button>3</button>
             <repeatable>false</repeatable>
             <binding>
                 <command>property-adjust</command>
-                <property>instrumentation/primus2000/sc840/nav1ptr</property>
-                <step>-1</step>
+                <property>instrumentation/primus2000/sc840/nav2ptr</property>
+                <step>1</step>
                 <min>0</min>
                 <max>3</max>
                 <wrap>0</wrap>
@@ -2681,19 +2677,13 @@
             <property>sim/sound/click</property>
         </binding>
         </action>
-    </animation>
-
-    <animation>
-        <type>pick</type>
-        <object-name>FMC.knob2</object-name>
-        <object-name>Nav2.up</object-name>
         <action>
-            <button>0</button>
+            <button>4</button>
             <repeatable>false</repeatable>
             <binding>
                 <command>property-adjust</command>
                 <property>instrumentation/primus2000/sc840/nav2ptr</property>
-                <step>1</step>
+                <step>-1</step>
                 <min>0</min>
                 <max>3</max>
                 <wrap>0</wrap>
@@ -2717,27 +2707,6 @@
             </binding>
         </hovered>
    </animation>
-
-    <animation>
-        <type>pick</type>
-        <object-name>Nav2.dwn</object-name>
-        <action>
-            <button>0</button>
-            <repeatable>false</repeatable>
-            <binding>
-                <command>property-adjust</command>
-                <property>instrumentation/primus2000/sc840/nav2ptr</property>
-                <step>-1</step>
-                <min>0</min>
-                <max>3</max>
-                <wrap>0</wrap>
-            </binding>
-    				<binding>
-            <command>property-toggle</command>
-            <property>sim/sound/click</property>
-        </binding>
-        </action>
-    </animation>
 
 <!-- MFD -->
 

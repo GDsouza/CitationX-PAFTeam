@@ -155,6 +155,7 @@ var fdm_init = func(){
 setlistener("/sim/signals/fdm-initialized", func {
     fdm_init();
     settimer(update_systems,2);
+		setprop("instrumentation/altimeter/setting-inhg",29.92001);
 });
 
 setlistener("/sim/signals/reinit", func {
