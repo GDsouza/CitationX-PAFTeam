@@ -313,14 +313,20 @@ var key = func(v) {
 					if (v == "B3L") {	j = 11 };		
 				} 
 				if (cduDisplay == "FLT-PLAN[5]") {
-					if (v == "B1L") {	j = 11 };
-					if (v == "B2L") {	j = 12 };
+					if (v == "B1L") {	j = 12 };
+					if (v == "B2L") {	j = 13 };
+					if (v == "B3L") {	j = 14 };		
+				} 
+
+				if (cduDisplay == "FLT-PLAN[6]") {
+					if (v == "B1L") {	j = 15 };
+					if (v == "B2L") {	j = 16 };
 				}
 
 				if (destAirport == cduInput and cduInput !="") {
 					setprop("autopilot/route-manager/input","@ACTIVATE");		
 					setprop("instrumentation/cdu/display-prev",cduDisplay);
-					cduDisplay = "FLT-PLAN[5]";
+					cduDisplay = "FLT-PLAN[6]";
 					cduInput = "";
 				} 
 				if (cduDisplay == "FLT-PLAN["~i~"]") {
@@ -332,7 +338,7 @@ var key = func(v) {
 							cduDisplay = "FLT-PLAN[0]";
 							cduInput = "";
 						}
-						if (j == 12) {
+						if (j == 16) {
 							setprop("autopilot/route-manager/destination/airport","");
 							setprop("autopilot/route-manager/active",0);
 							cduInput = "";
@@ -357,12 +363,12 @@ var key = func(v) {
 						cduInput = "*Enter Dest. Airport*";
 					}
 					else {
-						if (getprop("autopilot/route-manager/route/num") != 12) {
+						if (getprop("autopilot/route-manager/route/num") != 16) {
 							setprop("autopilot/route-manager/input", "@INSERT" ~j~ ":" ~cduInput);
 							setprop("autopilot/route-manager/route/wp["~j~"]/speed",0);
 							cduInput = "";						
 						}
-						if (getprop("autopilot/route-manager/route/num") == 12) {
+						if (getprop("autopilot/route-manager/route/num") == 16) {
 							cduInput = "*LAST WAYPOINT*";
 						}
 					}
@@ -380,6 +386,7 @@ var key = func(v) {
 					if (cduDisplay == "FLT-PLAN[2]") {var ind = 3}
 					if (cduDisplay == "FLT-PLAN[3]") {var ind = 6}					
 					if (cduDisplay == "FLT-PLAN[4]") {var ind = 9}
+					if (cduDisplay == "FLT-PLAN[5]") {var ind = 12}
 					insertWayp(ind,cduInput);
 					cduInput = "";
 				}
@@ -390,11 +397,12 @@ var key = func(v) {
 						setprop("autopilot/route-manager/destination/airport",cduInput);
 						cduInput = "";
 						cduDisplay = "FLT-PLAN[1]";
-				} else if (cduDisplay == "FLT-PLAN[1]" or cduDisplay == "FLT-PLAN[2]" or cduDisplay == "FLT-PLAN[3]" or cduDisplay == "FLT-PLAN[4]") {
+				} else if (cduDisplay == "FLT-PLAN[1]" or cduDisplay == "FLT-PLAN[2]" or cduDisplay == "FLT-PLAN[3]" or cduDisplay == "FLT-PLAN[4]" or cduDisplay == "FLT-PLAN[5]") {
 					if (cduDisplay == "FLT-PLAN[1]") {var ind = 1}					
 					if (cduDisplay == "FLT-PLAN[2]") {var ind = 4}
 					if (cduDisplay == "FLT-PLAN[3]") {var ind = 7}					
 					if (cduDisplay == "FLT-PLAN[4]") {var ind = 10}
+					if (cduDisplay == "FLT-PLAN[5]") {var ind = 13}
 					insertWayp(ind,cduInput);
 					cduInput = "";
 				}			}
@@ -408,7 +416,7 @@ var key = func(v) {
 					cduInput = "";
 					cduDisplay = "FLT-PLAN[1]";
 				}
-				if (cduDisplay == "FLT-PLAN[1]"or cduDisplay == "FLT-PLAN[2]" or cduDisplay == "FLT-PLAN[3]" or cduDisplay == "FLT-PLAN[4]") {
+				if (cduDisplay == "FLT-PLAN[1]"or cduDisplay == "FLT-PLAN[2]" or cduDisplay == "FLT-PLAN[3]" or cduDisplay == "FLT-PLAN[4]" or cduDisplay == "FLT-PLAN[5]") {
 					if (getprop("instrumentation/cdu/R[4]") == "DEST " and cduInput == "*DELETE*") {
 							setprop("autopilot/route-manager/destination/airport","");
 							cduInput = "";
@@ -421,10 +429,11 @@ var key = func(v) {
 							if (cduDisplay == "FLT-PLAN[1]") {var ind = 2}					
 							if (cduDisplay == "FLT-PLAN[2]") {var ind = 5}
 							if (cduDisplay == "FLT-PLAN[3]") {var ind = 8}					
+							if (cduDisplay == "FLT-PLAN[4]") {var ind = 11}
 							insertWayp(ind,cduInput);
 					}
 				}			
-				if (cduDisplay == "FLT-PLAN[5]") {
+				if (cduDisplay == "FLT-PLAN[6]") {
 					if (depAirport == ""){
 						cduInput = "*NO DEPT AIRPORT*";
 					}
@@ -450,7 +459,7 @@ var key = func(v) {
 				}
 			}
 			if (v == "B4R") {
-				if (cduDisplay == "FLT-PLAN[0]" or (cduDisplay == "FLT-PLAN[5]" and getprop("autopilot/route-manager/active"))) {
+				if (cduDisplay == "FLT-PLAN[0]" or (cduDisplay == "FLT-PLAN[6]" and getprop("autopilot/route-manager/active"))) {
 					cduDisplay = "PRF-INIT[0]";
 				}
 				else {cduDisplay = "FLT-ARRV[0]"}
@@ -972,7 +981,7 @@ var next = func {
 		if (display == "FLT-PLAN[1]" and destAirport != "" and destRwy == "") {
 			setprop("/instrumentation/cdu/input", "*NO DEST RUNWAY*");
 		}
-		if (page <= 4 and getprop("autopilot/route-manager/route/num") > 0) {
+		if (page <= 5 and getprop("autopilot/route-manager/route/num") > 0) {
 			page += 1;			
 			setprop("/instrumentation/cdu/display","FLT-PLAN["~page~"]");
 		}		
@@ -1120,9 +1129,11 @@ var cdu = func{
 		if (display == "FLT-PLAN[4]") {
 			displaypages.fltPlan_4(dest_airport,dest_rwy,num,flt_closed,marker);
 		}
-
-		if (display == "FLT-PLAN[5]" and num > 0) {
-			displaypages.fltPlan_5(dep_airport,dest_airport,dest_rwy,num,marker);
+		if (display == "FLT-PLAN[5]") {
+			displaypages.fltPlan_5(dest_airport,dest_rwy,num,flt_closed,marker);
+		}
+		if (display == "FLT-PLAN[6]" and num > 0) {
+			displaypages.fltPlan_6(dep_airport,dest_airport,dest_rwy,num,marker);
 		}
 
 		if (display == "NAV-PAGE[0]") {displaypages.navPage_0()}

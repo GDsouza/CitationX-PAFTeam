@@ -628,7 +628,7 @@
 						</not-equals>
 						<not-equals>
 							<property>instrumentation/cdu/display</property>
-							<value>FLT-PLAN[5]</value>
+							<value>FLT-PLAN[6]</value>
 						</not-equals>
 					</and>
 				</condition>					
@@ -668,7 +668,7 @@
 						</equals>
 						<equals>
 							<property>instrumentation/cdu/display</property>
-							<value>FLT-PLAN[5]</value>
+							<value>FLT-PLAN[6]</value>
 						</equals>
 					</or>
 				</condition>					
