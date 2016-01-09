@@ -2027,6 +2027,37 @@
 
     <animation>
         <type>pick</type>
+        <object-name>PFD.ra-baro</object-name>
+        <visible>true</visible>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <command>property-toggle</command>
+                <property>autopilot/settings/minimums-mode</property>
+            </binding>
+        </action>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>PFD.baro</object-name>
+        <property>instrumentation/altimeter/setting-inhg</property>
+				<factor>1000</factor>
+        <axis>
+            <x>-1.0</x>
+            <y>0.0</y>
+            <z>0.0</z>
+        </axis>
+        <center>
+            <x-m>0.00</x-m>
+            <y-m>-0.305</y-m>
+            <z-m>0.0364</z-m>
+        </center>
+    </animation>
+
+    <animation>
+        <type>pick</type>
         <object-name>PFD.baro</object-name>
         <action>
             <button>3</button>
@@ -2054,6 +2085,70 @@
                 <wrap>false</wrap>
             </binding>
         </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>Set Inhg</tooltip-id>
+                <label>Set Inhg: %4.2f </label> 
+                <property>instrumentation/altimeter/setting-inhg</property>
+            </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>PFD.minimums</object-name>
+        <property>autopilot/settings/minimums</property>
+        <factor>-50</factor>
+        <axis>
+            <x>-1.0</x>
+            <y>0.0</y>
+            <z>0.0</z>
+        </axis>
+        <center>
+            <x-m>0.00</x-m>
+            <y-m>-0.444</y-m>
+            <z-m>0.0364</z-m>
+        </center>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>PFD.minimums</object-name>
+        <action>
+            <button>3</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.2</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>autopilot/settings/minimums</property>
+                <step>50</step>
+                <min>0</min>
+                <max>1000</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+        <action>
+            <button>4</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.2</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>autopilot/settings/minimums</property>
+                <step>-50</step>
+                <min>0</min>
+                <max>1000</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>Minimums</tooltip-id>
+                <label>Minimums: %s </label> 
+                <property>autopilot/settings/minimums</property> 								
+            </binding>
+        </hovered>
     </animation>
 
 <!-- MFD -->
@@ -2454,6 +2549,23 @@
                 <script>citation.FD_set_mode("stby")</script>
             </binding>
         </action>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>FD.nose</object-name>
+        <property>autopilot/settings/target-pitch-deg</property>
+        <factor>10</factor>
+        <axis>
+            <x>0.0</x>
+            <y>1.0</y>
+            <z>0.0</z>
+        </axis>
+        <center>
+            <x-m>0.057</x-m>
+            <y-m>0.0</y-m>
+            <z-m>0.398</z-m>
+        </center>
     </animation>
 
     <animation>

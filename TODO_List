@@ -2,7 +2,7 @@
 
 
 CDU : Terminer le pavé NAV
-			Rajouter une page au plan de vol (FPL) - Fait 07/01/2016
+		#	Rajouter une page au plan de vol (FPL) - Fait 07/01/2016
 			Terminer le pavé PROG
 			Renseigner le pavé DIR (???)
 			Séparer les deux CDU
@@ -33,8 +33,8 @@ PILOTE AUTO : Vérifier toutes les fonctions
 
 CABINE : 	Eclairage de la cabine
 					Mettre une texture de ? derrière les portes du fond
-					Animer les accoudoirs du co-pilote
-					Animer l'accoudoir gauche du pilote
+				#	Animer les accoudoirs du co-pilote - Fait 08/01/2016
+				#	Animer l'accoudoir gauche du pilote - Fait 08/01/2016
                     Poursuivre la modélisation du mobilier (tablettes, bar, etc...)
                     Animation des tablettes
                     Améliorer l'escalier

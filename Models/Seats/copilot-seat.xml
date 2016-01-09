@@ -4,5 +4,70 @@
 
     <path>copilot-seat.ac</path>
 
+    <animation>
+      <type>pick</type>
+      <object-name>accoudoir-L</object-name>
+      <object-name>accoudoir-R</object-name>
+      <visible>true</visible>
+      <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+       <binding>
+					<condition>
+						<equals>
+		          <property>sim/model/copilot-seat</property>						
+							<value>0</value>
+						</equals>
+					</condition>
+		         <command>property-interpolate</command>
+		          <property>sim/model/copilot-seat</property>
+							<value type="double">1</value>
+					<time>2</time>
+        </binding>
+        <binding>
+					<condition>
+						<equals>
+		          <property>sim/model/copilot-seat</property>						
+							<value>1</value>
+						</equals>
+					</condition>
+		         <command>property-interpolate</command>
+		          <property>sim/model/copilot-seat</property>
+							<value type="double">0</value>
+					<time>2</time>
+        </binding>
+     </action>
+       <hovered>
+          <binding>
+            <command>set-tooltip</command>
+            <tooltip-id>accoudoir-R</tooltip-id>
+            <label>Accoudoir : %s</label>
+            <property>sim/model/copilot-seat</property>
+						<mapping>nasal</mapping>
+						<script>
+							var modes = ['DOWN','UP'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+	<animation>
+        <type>rotate</type>
+	      <object-name>accoudoir-L</object-name>
+        <object-name>accoudoir-R</object-name>	
+				<property>sim/model/copilot-seat</property>
+        <factor>90</factor>
+        <center>
+            <x-m>-0.22</x-m>
+            <y-m>0</y-m>
+            <z-m>0.45</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+   </animation>
 
 </PropertyList>

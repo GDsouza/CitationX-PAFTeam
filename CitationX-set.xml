@@ -679,6 +679,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
     <autopilot>
         <settings>
             <minimums type="int">200</minimums>
+						<minimums-mode type="string">RA</minimums-mode>
             <target-roll-deg type="double">0</target-roll-deg>
             <target-pitch-deg type="double">0</target-pitch-deg>
             <vertical-speed-fpm type="int">0</vertical-speed-fpm>

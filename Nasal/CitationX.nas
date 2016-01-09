@@ -138,6 +138,7 @@ props.globals.initNode("sim/model/mem-yoke_R",1,"BOOL");
 props.globals.initNode("controls/separation-door/open",1,"DOUBLE");
 props.globals.initNode("controls/toilet-door/open",0,"DOUBLE");
 props.globals.initNode("sim/model/pilot-seat",0,"DOUBLE");
+props.globals.initNode("sim/model/copilot-seat",0,"DOUBLE");
 var PWR2 =0;
 aircraft.livery.init("Aircraft/CitationX/Models/Liveries");
 var FHmeter = aircraft.timer.new("/instrumentation/clock/flight-meter-sec", 10,1);
