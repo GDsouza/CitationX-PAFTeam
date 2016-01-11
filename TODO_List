@@ -7,8 +7,8 @@ CDU : Terminer le pavé NAV
 			Renseigner le pavé DIR (???)
 			Séparer les deux CDU
 
-PFD : Coder le bouton "MINIMUMS"
-			Coder le bouton "RA/BARO"
+PFD :# Coder le bouton "MINIMUMS" - Fait 11/01/2016
+		 # Coder le bouton "RA/BARO" - Fait 11/01/2016
 
 MFD : Coder les boutons du bas
 
@@ -35,9 +35,9 @@ CABINE : 	Eclairage de la cabine
 					Mettre une texture de ? derrière les portes du fond
 				#	Animer les accoudoirs du co-pilote - Fait 08/01/2016
 				#	Animer l'accoudoir gauche du pilote - Fait 08/01/2016
-                    Poursuivre la modélisation du mobilier (tablettes, bar, etc...)
-                    Animation des tablettes
-                    Améliorer l'escalier
+          Poursuivre la modélisation du mobilier (tablettes, bar, etc...)
+          Animation des tablettes
+          Améliorer l'escalier
                     
 DIVERS : 	Checklists vocales
 					Gérer les immatriculations en fonction des Liveries (?)
