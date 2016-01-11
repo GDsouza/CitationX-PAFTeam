@@ -147,7 +147,7 @@
                 <entry><ind>20000.000</ind><dep>0.225</dep></entry>
                 <entry><ind>20000.001</ind><dep>0.300</dep></entry>
                 <entry><ind>25000.000</ind><dep>0.300</dep></entry>
-                <entry><ind>250000.001</ind><dep>0.375</dep></entry>
+                <entry><ind>25000.001</ind><dep>0.375</dep></entry>
                 <entry><ind>30000.000</ind><dep>0.375</dep></entry>
                 <entry><ind>30000.001</ind><dep>0.450</dep></entry>
                 <entry><ind>35000.000</ind><dep>0.450</dep></entry>
@@ -259,6 +259,90 @@
         </transform>
     </animation>
 
+<!-- minimums -->
+
+    <animation>
+        <type>select</type>
+        <object-name>min.head</object-name>
+        <condition>
+          <less-than-equals>
+              <property>instrumentation/pfd/minimum-diff</property>
+              <value>0</value>
+          </less-than-equals>
+					<greater-than-equals>
+              <property>instrumentation/pfd/minimum-diff</property>
+              <value>-600</value>
+					</greater-than-equals>			
+        </condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>min.tail</object-name>
+        <condition>
+					<equals>
+            <property>autopilot/settings/minimums-mode</property>
+						<value>BA</value>
+					</equals>
+          <less-than-equals>
+            <property>instrumentation/pfd/minimum-diff</property>
+            <value>0</value>
+          </less-than-equals>
+					<greater-than-equals>
+            <property>instrumentation/pfd/minimum-diff</property>
+            <value>-600</value>
+					</greater-than-equals>			
+        </condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>min.head1</object-name>
+        <condition>
+          <greater-than-equals>
+              <property>instrumentation/pfd/minimum-diff</property>
+              <value>0</value>
+          </greater-than-equals>
+          <less-than-equals>
+            <property>instrumentation/pfd/minimum-diff</property>
+            <value>600</value>
+          </less-than-equals>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>min.tail1</object-name>
+        <condition>
+					<equals>
+            <property>autopilot/settings/minimums-mode</property>
+						<value>BA</value>
+					</equals>
+          <greater-than-equals>
+              <property>instrumentation/pfd/minimum-diff</property>
+              <value>0</value>
+          </greater-than-equals>
+          <less-than-equals>
+            <property>instrumentation/pfd/minimum-diff</property>
+            <value>600</value>
+          </less-than-equals>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>min.head</object-name>
+        <object-name>min.tail</object-name>
+        <object-name>min.head1</object-name>
+        <object-name>min.tail1</object-name>
+        <property>instrumentation/pfd/minimum-diff</property>
+        <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>1</z>
+        </axis>
+        <factor>0.000068</factor>
+    </animation>
 <!-- hsi rose -->
 
     <animation>

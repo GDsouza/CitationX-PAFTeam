@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<PropertyList>
+
+	<filter>
+		<name>Baro altitude Minimum</name> 
+		<type>gain</type>
+		<update-interval-secs type="double">0.05</update-interval-secs>
+		<gain>1.0</gain>
+		<input>
+			<condition>
+				<equals>
+					<property>autopilot/settings/minimums-mode</property>
+					<value>BA</value>
+				</equals>
+			</condition>
+			<property>instrumentation/pfd/minimums-baro</property>
+		</input>
+		<input>
+			<condition>
+				<equals>
+					<property>autopilot/settings/minimums-mode</property>
+					<value>RA</value>
+				</equals>
+			</condition>
+					<property>instrumentation/pfd/minimums-radio</property>
+		</input>
+		<reference>
+			<condition>
+				<equals>
+					<property>autopilot/settings/minimums-mode</property>
+					<value>BA</value>
+				</equals>
+			</condition>
+			<property>instrumentation/altimeter/indicated-altitude-ft</property>
+		</reference>
+		<reference>
+			<condition>
+				<equals>
+					<property>autopilot/settings/minimums-mode</property>
+					<value>RA</value>
+				</equals>
+			</condition>
+			<property>position/altitude-agl-ft</property>
+		</reference>
+		<output>instrumentation/pfd/minimum-diff</output>
+		<min>-610</min>
+		<max>610</max>
+	</filter>
+
+</PropertyList>

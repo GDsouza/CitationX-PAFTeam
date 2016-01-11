@@ -235,12 +235,14 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
             <path>Aircraft/CitationX/Systems/instrumentation.xml</path>
         </instrumentation>
 
-
     <systems>
         <path>Aircraft/CitationX/Systems/systems.xml</path>
         <autopilot>
             <path>Aircraft/CitationX/Systems/Citation-autopilot.xml</path>
         </autopilot>
+        <property-rule n="100">
+            <path>Aircraft/CitationX/Systems/pfd.xml</path>
+        </property-rule>
     </systems>
 
     <sound>
@@ -453,6 +455,11 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
     </consumables>
 
     <instrumentation>
+				<pfd>
+					<minimums-baro type="int">200</minimums-baro>
+					<minimums-radio type="int">200</minimums-radio>
+				</pfd>
+
         <mk-viii>
            <serviceable>true</serviceable>
            <configuration-module>
@@ -581,36 +588,36 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
         </inputs>
     </kr-87>
 
-<primus2000>
-    <dc840>
-        <hsi type="bool">0</hsi>
-        <wx type="bool">0</wx>
-        <et type="bool">0</et>
-        <tcas type="bool">0</tcas>
-        <acft-sys type="bool">0</acft-sys>
-        <mfd-map type="bool">1</mfd-map>
-        <mfd-wx type="bool">0</mfd-wx>
-        <norm type="bool">0</norm>
-        <abn type="bool">0</abn>
-        <emer type="bool">0</emer>
-        <skp type="bool">0</skp>
-        <pag type="bool">0</pag>
-        <rcl type="bool">0</rcl>
-        <ent type="bool">0</ent>
-    </dc840>
-    <sc840>
-        <nav1ptr type="double">0</nav1ptr>
-        <nav2ptr type="double">0</nav2ptr>
-    </sc840>
-    <eicas>
-        <serviceable type="bool">1</serviceable>
-    </eicas>
-    <mfd>
-        <menu-num type="int">0</menu-num>
-    </mfd>
-    <pfd>
-    </pfd>
-</primus2000>
+		<primus2000>
+				<dc840>
+				    <hsi type="bool">0</hsi>
+				    <wx type="bool">0</wx>
+				    <et type="bool">0</et>
+				    <tcas type="bool">0</tcas>
+				    <acft-sys type="bool">0</acft-sys>
+				    <mfd-map type="bool">1</mfd-map>
+				    <mfd-wx type="bool">0</mfd-wx>
+				    <norm type="bool">0</norm>
+				    <abn type="bool">0</abn>
+				    <emer type="bool">0</emer>
+				    <skp type="bool">0</skp>
+				    <pag type="bool">0</pag>
+				    <rcl type="bool">0</rcl>
+				    <ent type="bool">0</ent>
+				</dc840>
+				<sc840>
+				    <nav1ptr type="double">0</nav1ptr>
+				    <nav2ptr type="double">0</nav2ptr>
+				</sc840>
+				<eicas>
+				    <serviceable type="bool">1</serviceable>
+				</eicas>
+				<mfd>
+				    <menu-num type="int">0</menu-num>
+				</mfd>
+				<pfd>
+				</pfd>
+		</primus2000>
 
     <cdu>
 			<input type="string"/>
@@ -678,8 +685,8 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 
     <autopilot>
         <settings>
-            <minimums type="int">200</minimums>
 						<minimums-mode type="string">RA</minimums-mode>
+            <minimums type="int">200</minimums>
             <target-roll-deg type="double">0</target-roll-deg>
             <target-pitch-deg type="double">0</target-pitch-deg>
             <vertical-speed-fpm type="int">0</vertical-speed-fpm>
@@ -719,7 +726,6 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
             <gs-in-range type="bool">0</gs-in-range>
         </internal>
     </autopilot>
-
 
     <input>
         <keyboard>

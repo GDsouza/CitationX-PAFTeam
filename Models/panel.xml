@@ -2026,20 +2026,6 @@
     </animation>
 
     <animation>
-        <type>pick</type>
-        <object-name>PFD.ra-baro</object-name>
-        <visible>true</visible>
-        <action>
-            <button>0</button>
-            <repeatable>false</repeatable>
-            <binding>
-                <command>property-toggle</command>
-                <property>autopilot/settings/minimums-mode</property>
-            </binding>
-        </action>
-    </animation>
-
-    <animation>
         <type>rotate</type>
         <object-name>PFD.baro</object-name>
         <property>instrumentation/altimeter/setting-inhg</property>
@@ -2147,6 +2133,30 @@
                 <tooltip-id>Minimums</tooltip-id>
                 <label>Minimums: %s </label> 
                 <property>autopilot/settings/minimums</property> 								
+            </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>PFD.ra-baro</object-name>
+        <visible>true</visible>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+						<command>property-cycle</command>
+                <property>autopilot/settings/minimums-mode</property>
+								<value>BA</value>
+								<value>RA</value>
+						</binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>RA-BARO</tooltip-id>
+                <label>RADIO-BARO: %s </label> 
+                <property>autopilot/settings/minimums-mode</property> 								
             </binding>
         </hovered>
     </animation>

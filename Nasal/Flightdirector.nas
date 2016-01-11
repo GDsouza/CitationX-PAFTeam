@@ -34,6 +34,9 @@ var FD_set_mode = func(btn){
     var LAmode=getprop(Lateral_arm);
     var Vmode=getprop(Vertical);
     var VAmode=getprop(Vertical_arm);
+		var min_mode = getprop("autopilot/settings/minimums-mode");
+		var agl_alt = getprop("position/altitude-agl-ft");
+		var ind_alt = getprop("instrumentation/altimeter/indicated-altitude-ft");
 
 		if(btn=="ap"){
 			Coord = getprop(AutoCoord);
@@ -42,9 +45,17 @@ var FD_set_mode = func(btn){
 				setprop(Vertical_arm,"");
         if(Vmode=="PTCH")set_pitch();
         if(Lmode=="ROLL")set_roll(); 
-        if(getprop("position/altitude-agl-ft") > minimums) {
-					setprop(AP,"AP");
-					setprop(AutoCoord,0);
+				if (min_mode = "RA") {
+					if(agl_alt > minimums) {
+						setprop(AP,"AP");
+						setprop(AutoCoord,0);
+					}
+				}
+				if (min_mode = "BA") {
+					if(ind_alt > minimums){
+						setprop(AP,"AP");
+						setprop(AutoCoord,0);
+					}					
 				}
 			}	else {kill_Ap("")}
 
@@ -248,12 +259,15 @@ var set_alt = func {
 
 setlistener("autopilot/settings/minimums", func(mn) {
     minimums=mn.getValue();
+		var min_mode = getprop("autopilot/settings/minimums-mode");
+		if (min_mode == "RA") {setprop("instrumentation/pfd/minimums-radio",minimums)}
+		if (min_mode == "BA") {setprop("instrumentation/pfd/minimums-baro",minimums)}
 },1,0);
 
 
 setlistener(NAVprop, func(Nv) {
     NAVSRC=Nv.getValue();
-},1,0);
+},0,0);
 
 var update_nav=func{
     var sgnl = "- - -";
@@ -357,8 +371,11 @@ var monitor_V_armed = func{
 }
 
 var monitor_AP_errors= func{
-    var ralt=getprop("position/altitude-agl-ft");
-    if(ralt<minimums)kill_Ap("");
+		var min_mode = getprop("autopilot/settings/minimums-mode");
+		var agl_alt = getprop("position/altitude-agl-ft");
+		var ind_alt = getprop("instrumentation/altimeter/indicated-altitude-ft");
+		if (min_mode == "RA") {if(agl_alt<minimums)kill_Ap("")};
+		if (min_mode == "BA") {if(ind_alt<minimums)kill_Ap("")};
     var rlimit=getprop("orientation/roll-deg");
     if(rlimit > 45 or rlimit< -45)kill_Ap("AP-FAIL");
     var plimit=getprop("orientation/pitch-deg");
