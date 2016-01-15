@@ -9,6 +9,11 @@ CDU : Terminer le pavé NAV
 
 PFD :# Coder le bouton "MINIMUMS" - Fait 11/01/2016
 		 # Coder le bouton "RA/BARO" - Fait 11/01/2016
+     # Coder le curseur d'altitude - Fait 12/01/2016
+     # Coder le trend d'altitude - Fait 12/01/2016
+		 # Coder le trend de vitesse - fait 13/01/2016
+     # Coder les V1, VR, V2 & VE sur le speedtape- Fait 14/01/2016 
+			 Coder les VMO sur le speedtape
 
 MFD : Coder les boutons du bas
 
@@ -38,7 +43,8 @@ CABINE : 	Eclairage de la cabine
           Poursuivre la modélisation du mobilier (tablettes, bar, etc...)
           Animation des tablettes
           Améliorer l'escalier
-                    
+					Mettre les palonniers 
+                   
 DIVERS : 	Checklists vocales
 					Gérer les immatriculations en fonction des Liveries (?)
 

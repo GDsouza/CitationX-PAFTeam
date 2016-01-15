@@ -321,6 +321,7 @@ var Startup = func{
     setprop("controls/engines/throttle_idle",1);
 		setprop("controls/engines/engine[0]/starter",1);
 		setprop("controls/engines/engine[1]/starter",1);
+		setprop("controls/flight/flaps",0.428);
 }
 
 var Shutdown = func{
@@ -343,6 +344,7 @@ var Shutdown = func{
 		setprop("instrumentation/annunciators/ack-caution",1);
 		setprop("instrumentation/annunciators/ack-warning",1);
 		setprop("controls/electric/external-power",0);
+		setprop("controls/flight/flaps",0);
 }
 
 var FHupdate = func(tenths){
@@ -362,27 +364,31 @@ var FHupdate = func(tenths){
 var v_sound = func{
 		var Wtot = getprop("yasim/gross-weight-lbs");
 		var Flaps = getprop("controls/flight/flaps");
+		var v1=0;
+		var vr=0;
+		var v2=0;
 
 		if (getprop("velocities/airspeed-kt")> 20) {
 			if (Flaps <= 0.142) {
-				if (Wtot <27000) {v1=122}
-				if (Wtot >=27000 and Wtot <29000) {v1=123}
-				if (Wtot >=29000 and Wtot <31000) {v1=125}
-				if (Wtot >=31000 and Wtot <33000) {v1=126}
-				if (Wtot >=33000 and Wtot <34000) {v1=127}
-				if (Wtot >=34000 and Wtot <35000) {v1=130}
-				if (Wtot >=35000 and Wtot <36100) {v1=132}
-				if (Wtot >=36100) {v1=134}
+				if (Wtot <27000) {v1=122;vr=126;v2=139}
+				if (Wtot >=27000 and Wtot <29000) {v1=123;vr=126;v2=139}
+				if (Wtot >=29000 and Wtot <31000) {v1=125;vr=126;v2=138}
+				if (Wtot >=31000 and Wtot <33000) {v1=126;vr=126;v2=138}
+				if (Wtot >=33000 and Wtot <34000) {v1=127;vr=127;v2=138}
+				if (Wtot >=34000 and Wtot <35000) {v1=130;vr=130;v2=140}
+				if (Wtot >=35000 and Wtot <36100) {v1=132;vr=132;v2=143}
+				if (Wtot >=36100) {v1=134;vr=134;v2=144}
 			} else if (Flaps > 0.142) {
-				if (Wtot <31000) {v1=115}
-				if (Wtot >=31000 and Wtot <33000) {v1=116}
-				if (Wtot >=33000 and Wtot <34000) {v1=121}
-				if (Wtot >=34000 and Wtot <35000) {v1=124}
-				if (Wtot >=35000 and Wtot <36100) {v1=126}
-				if (Wtot >=36100) {v1=129}
+				if (Wtot <31000) {v1=115;vr=118;v2=129}
+				if (Wtot >=31000 and Wtot <33000) {v1=116;vr=120;v2=128}
+				if (Wtot >=33000 and Wtot <34000) {v1=121;vr=126;v2=131}
+				if (Wtot >=34000 and Wtot <35000) {v1=124;vr=128;v2=133}
+				if (Wtot >=35000 and Wtot <36100) {v1=126;vr=131;v2=135}
+				if (Wtot >=36100) {v1=129;vr=133;v2=137}
 			}
 			setprop("controls/flight/v1",v1);
-			setprop("controls/flight/vr",v1+20);
+			setprop("controls/flight/vr",vr);
+			setprop("controls/flight/v2",v2);
 		}
 }
 

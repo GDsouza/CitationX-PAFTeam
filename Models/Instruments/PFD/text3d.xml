@@ -2,7 +2,7 @@
 
 <PropertyList>
 
-<text>
+		<text>
         <name>AP-status</name>
         <offsets>
             <x-m>0.0</x-m>
@@ -300,7 +300,7 @@
         <name>ALT-annun</name>
         <offsets>
             <x-m>0.0</x-m>
-            <y-m>0.047</y-m>
+            <y-m>0.049</y-m>
             <z-m>0.093</z-m>
         </offsets>
         <alignment>left-bottom</alignment>
@@ -322,7 +322,7 @@
         <name>ALT-min</name>
         <offsets>
             <x-m>0.0</x-m>
-            <y-m>0.062</y-m>
+            <y-m>0.064</y-m>
             <z-m>0.093</z-m>
         </offsets>
         <alignment>left-bottom</alignment>
@@ -353,6 +353,86 @@
         <truncate>true</truncate>
         <font>helvetica_bold.txf</font>
         <character-size>0.01</character-size>
+        <character-aspect-ratio type="double">1.2</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
+        </font-resolution>
+    </text>
+
+    <text>
+        <name>v1-text</name>
+        <offsets>
+            <x-m>0.0</x-m>
+            <y-m>-0.047</y-m>
+            <z-m>0.0482</z-m>
+        </offsets>
+        <alignment>left-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>literal</type>
+        <text>-1</text>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.004</character-size>
+        <character-aspect-ratio type="double">1.2</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
+        </font-resolution>
+    </text>
+
+    <text>
+        <name>vr-text</name>
+        <offsets>
+            <x-m>0.0</x-m>
+            <y-m>-0.047</y-m>
+            <z-m>0.0482</z-m>
+        </offsets>
+        <alignment>left-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>literal</type>
+        <text>-R</text>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.004</character-size>
+        <character-aspect-ratio type="double">1.2</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
+        </font-resolution>
+    </text>
+
+    <text>
+        <name>v2-text</name>
+        <offsets>
+            <x-m>0.0</x-m>
+            <y-m>-0.047</y-m>
+            <z-m>0.0482</z-m>
+        </offsets>
+        <alignment>left-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>literal</type>
+        <text>-2</text>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.004</character-size>
+        <character-aspect-ratio type="double">1.2</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
+        </font-resolution>
+    </text>
+
+    <text>
+        <name>ve-text</name>
+        <offsets>
+            <x-m>0.0</x-m>
+            <y-m>-0.047</y-m>
+            <z-m>0.0482</z-m>
+        </offsets>
+        <alignment>left-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>literal</type>
+        <text>-E</text>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.004</character-size>
         <character-aspect-ratio type="double">1.2</character-aspect-ratio>
         <font-resolution>
             <width type="int">64</width>
@@ -449,8 +529,8 @@
         <name>Ralt</name>
         <offsets>
             <x-m>0.0</x-m>
-            <y-m>0.018	</y-m>
-            <z-m>0.010</z-m>
+            <y-m>0.018</y-m>
+            <z-m>0.008</z-m>
         </offsets>
         <alignment>left-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -470,8 +550,8 @@
         <name>Ralt</name>
         <offsets>
             <x-m>0.0</x-m>
-            <y-m>0.030	</y-m>
-            <z-m>0.010</z-m>
+            <y-m>0.030</y-m>
+            <z-m>0.008</z-m>
         </offsets>
         <alignment>left-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -491,25 +571,24 @@
         <type>select</type>
         <object-name>SPD-annun</object-name>
         <condition>
-            <or>
-                <equals>
-                    <property>autopilot/locks/altitude</property>
-                    <value>FLC</value>
-                </equals>
-                <equals>
-                    <property>autopilot/locks/altitude</property>
-                    <value>VFLC</value>
-                </equals>
-                <equals>
-                    <property>instrumentation/primus2000/sc840/nav1ptr</property>
-                    <value>3</value>
-                </equals>
-                <equals>
-                    <property>instrumentation/primus2000/sc840/nav2ptr</property>
-                    <value>3</value>
-                </equals>
-
-            </or>
+		      <or>
+		        <equals>
+	            <property>autopilot/locks/altitude</property>
+	            <value>FLC</value>
+		        </equals>
+		        <equals>
+	            <property>autopilot/locks/altitude</property>
+	            <value>VFLC</value>
+		        </equals>
+		        <equals>
+	            <property>instrumentation/primus2000/sc840/nav1ptr</property>
+	            <value>3</value>
+		        </equals>
+		        <equals>
+	            <property>instrumentation/primus2000/sc840/nav2ptr</property>
+	            <value>3</value>
+		        </equals>
+		      </or>
         </condition>
     </animation>
 
@@ -532,17 +611,6 @@
                 <property>autopilot/locks/altitude</property>
                 <value>VALT</value>
             </equals>
-        </condition>
-    </animation>
-
-    <animation>
-        <type>select</type>
-        <object-name>Ralt</object-name>
-        <condition>
-            <less-than>
-                <property>position/altitude-agl-ft</property>
-                <property>autopilot/route-manager/min-lock-altitude-agl-ft</property>
-            </less-than>
         </condition>
     </animation>
 
@@ -587,7 +655,7 @@
         <object-name>CRSlabel</object-name>
         <object-name>HDGlabel</object-name>
         <object-name>Mach</object-name>
-        <emission>
+       <emission>
             <red-prop>sim/color-set/white/r</red-prop>
             <green-prop>sim/color-set/white/g</green-prop>
             <blue-prop>sim/color-set/white/b</blue-prop>
@@ -652,6 +720,10 @@
         <object-name>VSI-tgt</object-name>
         <object-name>inhg</object-name>
         <object-name>Kt</object-name>
+        <object-name>v1-text</object-name>
+        <object-name>vr-text</object-name> 
+        <object-name>v2-text</object-name>
+        <object-name>ve-text</object-name>
         <emission>
             <red-prop>sim/color-set/cyan/r</red-prop>
             <green-prop>sim/color-set/cyan/g</green-prop>

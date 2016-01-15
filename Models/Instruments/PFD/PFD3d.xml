@@ -13,8 +13,8 @@
             <property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
             <interpolation>
                 <entry><ind>0.0</ind><dep>0.0</dep></entry>
-                <entry><ind>100.000</ind><dep>0.4536</dep></entry>
-                <entry><ind>100.001</ind><dep>0.0</dep></entry>
+                <entry><ind>90.000</ind><dep>0.4536</dep></entry>
+                <entry><ind>90.001</ind><dep>0.0</dep></entry>
                 <entry><ind>180.000</ind><dep>0.4536</dep></entry>
                 <entry><ind>180.001</ind><dep>0.0</dep></entry>
                 <entry><ind>270.000</ind><dep>0.4536</dep></entry>
@@ -35,8 +35,8 @@
             <property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
             <interpolation>
                 <entry><ind>0.0</ind><dep>0.0</dep></entry>
-                <entry><ind>100.000</ind><dep>0.0</dep></entry>
-                <entry><ind>100.001</ind><dep>0.11</dep></entry>
+                <entry><ind>90.000</ind><dep>0.0</dep></entry>
+                <entry><ind>90.001</ind><dep>0.11</dep></entry>
                 <entry><ind>180.000</ind><dep>0.11</dep></entry>
                 <entry><ind>180.001</ind><dep>0.22</dep></entry>
                 <entry><ind>270.000</ind><dep>0.22</dep></entry>
@@ -259,6 +259,80 @@
         </transform>
     </animation>
 
+<!-- altitude cursor -->
+
+    <animation>
+      <object-name>AltitudeCursor</object-name>
+			  <property>instrumentation/pfd/target-altitude-diff</property>
+       <type>translate</type>
+        <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>1</z>
+        </axis>
+ 		<!-- <factor>0.000068</factor> -->
+				<interpolation>
+					<entry>
+						<ind>0.0</ind>
+						<dep>0.0</dep>
+					</entry>
+					<entry>
+						<ind>615.0</ind>
+						<dep>0.04182</dep>
+					</entry>
+					<entry>
+						<ind>2000.0</ind>
+						<dep>0.04182</dep>
+					</entry>
+				</interpolation>
+    </animation>
+
+<!-- Altitude Trend -->
+
+    <animation>
+        <object-name>alttrend.up</object-name>
+        <property>instrumentation/pfd/alt-trend-up</property>
+        <type>textranslate</type>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+        </axis>
+        <factor>1.2</factor> 			
+    </animation>
+
+    <animation>
+        <object-name>alttrend.dwn</object-name>
+        <property>instrumentation/pfd/alt-trend-down</property>
+        <type>textranslate</type>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+        </axis>
+        <factor>1.2</factor>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>alttrend.up</object-name>
+        <condition>
+            <less-than>
+                <property>instrumentation/pfd/alt-trend-up</property>
+                <value>0.239</value>
+            </less-than>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>alttrend.dwn</object-name>
+        <condition>
+            <greater-than>
+                <property>instrumentation/pfd/alt-trend-down</property>
+                <value>-0.239</value>
+            </greater-than>
+        </condition>
+    </animation>
+
 <!-- minimums -->
 
     <animation>
@@ -343,6 +417,166 @@
         </axis>
         <factor>0.000068</factor>
     </animation>
+
+<!-- Speed Trend -->
+
+    <animation>
+        <object-name>speedtrend.up</object-name>
+        <property>instrumentation/pfd/speed-trend-up</property>
+        <type>textranslate</type>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+        </axis>
+        <factor>1</factor> <!-- 0.048/+70knots-->
+    </animation>
+    <animation>
+        <object-name>speedtrend.dwn</object-name>
+        <property>instrumentation/pfd/speed-trend-down</property>
+        <type>textranslate</type>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+        </axis>
+        <factor>1</factor> <!-- 0.048/+70knots-->
+    </animation>
+    <animation>
+        <type>select</type>
+        <object-name>speedtrend.up</object-name>
+        <condition>
+            <less-than>
+                <property>instrumentation/pfd/speed-trend-up</property>
+                <value>0.239</value>
+            </less-than>
+        </condition>
+    </animation>
+    <animation>
+        <type>select</type>
+        <object-name>speedtrend.dwn</object-name>
+        <condition>
+            <greater-than>
+                <property>instrumentation/pfd/speed-trend-down</property>
+                <value>-0.239</value>
+            </greater-than>
+        </condition>
+    </animation>
+
+<!-- V1 animation -->
+
+    <animation>
+        <type>select</type>
+        <object-name>v1-text</object-name>
+        <condition>
+          <less-than>
+              <property>instrumentation/pfd/v1-diff</property>
+              <value>45</value>
+          </less-than>
+          <greater-than>
+              <property>instrumentation/pfd/v1-diff</property>
+              <value>0</value>
+          </greater-than>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>v1-text</object-name>
+        <property>instrumentation/pfd/v1-diff</property>
+        <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>1</z>
+        </axis>
+        <factor>0.00092</factor>
+    </animation>
+
+<!-- Vr animation -->
+
+    <animation>
+        <type>select</type>
+        <object-name>vr-text</object-name>
+        <condition>
+          <less-than>
+              <property>instrumentation/pfd/vr-diff</property>
+              <value>45</value>
+          </less-than>
+          <greater-than>
+              <property>instrumentation/pfd/vr-diff</property>
+              <value>0</value>
+          </greater-than>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>vr-text</object-name>
+        <property>instrumentation/pfd/vr-diff</property>
+        <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>1</z>
+        </axis>
+        <factor>0.00092</factor>
+    </animation>
+
+<!-- V2 animation -->
+
+    <animation>
+        <type>select</type>
+        <object-name>v2-text</object-name>
+        <condition>
+          <less-than>
+              <property>instrumentation/pfd/v2-diff</property>
+              <value>45</value>
+          </less-than>
+          <greater-than>
+              <property>instrumentation/pfd/v2-diff</property>
+              <value>0</value>
+          </greater-than>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>v2-text</object-name>
+        <property>instrumentation/pfd/v2-diff</property>
+        <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>1</z>
+        </axis>
+        <factor>0.00092</factor>
+    </animation>
+
+<!-- Ve animation -->
+
+    <animation>
+        <type>select</type>
+        <object-name>ve-text</object-name>
+        <condition>
+          <less-than>
+              <property>instrumentation/pfd/ve-diff</property>
+              <value>45</value>
+          </less-than>
+          <greater-than>
+              <property>instrumentation/pfd/ve-diff</property>
+              <value>0</value>
+          </greater-than>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>ve-text</object-name>
+        <property>instrumentation/pfd/ve-diff</property>
+        <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>1</z>
+        </axis>
+        <factor>0.00092</factor>
+    </animation>
+
 <!-- hsi rose -->
 
     <animation>
@@ -602,7 +836,7 @@
 
 <!-- Text -->
 
-<model>
+		<model>
         <name>text3d</name>
         <path>Aircraft/CitationX/Models/Instruments/PFD/text3d.xml</path>
         <offsets>
@@ -647,5 +881,6 @@
             <property>instrumentation/marker-beacon/inner</property>
          </condition>
     </animation>
+
 
 </PropertyList>

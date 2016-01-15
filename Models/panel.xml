@@ -2564,6 +2564,12 @@
     <animation>
         <type>rotate</type>
         <object-name>FD.nose</object-name>
+					<condition>
+						<equals>
+							<property>autopilot/locks/altitude</property>
+							<value>PTCH</value>
+						</equals>
+					</condition>
         <property>autopilot/settings/target-pitch-deg</property>
         <factor>10</factor>
         <axis>
@@ -2586,8 +2592,8 @@
             <button>3</button>
             <repeatable>true</repeatable>
             <binding>
-                <command>nasal</command>
-                <script>citation.pitch_wheel(-1)</script>
+              <command>nasal</command>
+              <script>citation.pitch_wheel(-1)</script>
             </binding>
         </action>
         <action>
