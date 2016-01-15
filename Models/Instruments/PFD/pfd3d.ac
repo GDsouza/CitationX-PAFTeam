@@ -3,8 +3,9 @@ MATERIAL "ac3dmat1" rgb 1 1 1  amb 0.2 0.2 0.2  emis 0 0 0  spec 0.2 0.2 0.2  sh
 MATERIAL "lit" rgb 1 1 1  amb 1 1 1  emis 1 1 1  spec 0 0 0  shi 32  trans 0
 MATERIAL "whitelines" rgb 0.925308 0.925308 0.925308  amb 0.925308 0.925308 0.925308  emis 1 1 1  spec 0 0 0  shi 32  trans 0
 MATERIAL "green.001" rgb 0.12549 0.898039 0.133333  amb 0.12549 0.898039 0.133333  emis 0.12549 0.898039 0.133333  spec 0.036419 0.036419 0.036419  shi 0  trans 0
-MATERIAL "Material.001" rgb 0.996078 0 1  amb 0.996078 0 1  emis 1 0 1  spec 0.996078 0 1  shi 0  trans 0
+MATERIAL "Material.001" rgb 0.996 0 1  amb 0.996 0 1  emis 1 0 1  spec 0.996 0 1  shi 0  trans 0
 MATERIAL "cyan.001" rgb 0 1 1  amb 0 1 1  emis 0 1 0.980392  spec 1 1 1  shi 32  trans 0
+MATERIAL "ac3dmat3" rgb 1 0 0  amb 1 0 0  emis 1 0 0  spec 1 0 0  shi 0  trans 0
 OBJECT world
 kids 48
 OBJECT poly
@@ -142,7 +143,7 @@ name "AltitudeCursor"
 loc -7.16799e-05 0.0476089 -0.0520749
 data 6
 Circle
-texture "/home/chris/fg/My_Aircraft/777/Models/Instruments/PFD/pfd3d.png"
+texture "symbols.png"
 crease 30.000000
 numvert 12
 0 -0.00555931 0.00615614
@@ -161,13 +162,13 @@ numsurf 1
 SURF 0x10
 mat 4
 refs 7
-10 0.746094 0.246094
-11 0.746094 0.246094
-0 0.746094 0.246094
-2 0.746094 0.246094
-4 0.746094 0.246094
-6 0.746094 0.246094
-8 0.746094 0.246094
+10 0.941406 0.814453
+11 0.941406 0.814453
+0 0.941406 0.814453
+2 0.941406 0.814453
+4 0.941406 0.814453
+6 0.941406 0.814453
+8 0.941406 0.814453
 kids 0
 OBJECT poly
 name "alttrend.up"
@@ -230,33 +231,6 @@ name "PFD.overspeed"
 crease 30.000000
 kids 0
 OBJECT poly
-name "PFD.ovspd"
-texture "symbols.png"
-crease 30.000000
-numvert 6
--7.7e-05 0.089993 0.047909
--7.7e-05 0.047836 0.047911
--7.7e-05 0.00456 0.047909
--8.6e-05 0.089993 0.044086
--8.6e-05 0.047836 0.044087
--8.6e-05 0.00456 0.044086
-numsurf 2
-SURF 0x0
-mat 1
-refs 4
-0 0.673828 0.390625
-1 0.673828 0.199219
-4 0.701172 0.199219
-3 0.701172 0.390625
-SURF 0x0
-mat 1
-refs 4
-5 0.701172 0.0078125
-4 0.701172 0.199219
-1 0.673828 0.199219
-2 0.673828 0.0078125
-kids 0
-OBJECT poly
 name "speedtrend.up"
 loc 0 0.0681057 0.046779
 texture "pfd-2.png"
@@ -293,6 +267,25 @@ refs 4
 1 0.65625 0.978516
 2 0.65625 0.488281
 3 0.625 0.488281
+kids 0
+OBJECT poly
+name "vmo"
+loc 0 0.0475477 0.0490389
+texture "pfd-2.png"
+crease 45.000000
+numvert 4
+0 -0.04105 -0.00079257
+0 -0.04105 0.00079257
+0 0.04105 0.00079257
+0 0.04105 -0.00079257
+numsurf 1
+SURF 0x10
+mat 6
+refs 4
+3 0.888672 0.462891
+2 0.919922 0.462891
+1 0.919922 0.00390625
+0 0.888672 0.00390625
 kids 0
 OBJECT poly
 name "PFD.screen"
