@@ -9,6 +9,8 @@
     <type>material</type>
     <object-name>Cabin-LightsSup</object-name>
     <object-name>Sphere</object-name>
+    <object-name>poignees</object-name>
+    <object-name>baguette</object-name>
     <emission>
       <red>   0.32 </red>
       <green> 0.25 </green>
@@ -20,6 +22,8 @@
       <inherits-from>Aircraft/CitationX/Models/Effects/test_reflect</inherits-from>
     <object-name>Cabin-LightsSup</object-name>
     <object-name>Sphere</object-name>
+    <object-name>poignees</object-name>
+    <object-name>baguette</object-name>
     </effect>
 
     <effect>
