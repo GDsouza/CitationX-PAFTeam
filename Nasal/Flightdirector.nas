@@ -65,6 +65,7 @@ var FD_set_mode = func(btn){
 				set_roll();
       	setprop(Lateral_arm,"");setprop(Vertical_arm,"");
 			}
+
     }elsif(btn=="alt"){
 			setprop(Lateral_arm,"");
 			setprop(Vertical_arm,"");
@@ -94,7 +95,7 @@ var FD_set_mode = func(btn){
 						setprop("autopilot/settings/target-speed-mach",mc);
 					}
         }
-			} else set_pitch();
+			} else {set_pitch()}
 
 		}elsif(btn=="nav"){
 			set_nav_mode();
@@ -106,7 +107,7 @@ var FD_set_mode = func(btn){
 					setprop(Vertical,"VALT");
 					setprop(Lateral,"LNAV");
          }
-      }else set_pitch();
+      }else {set_pitch()}
 
     }elsif(btn=="app"){
 			if (Vmode!="GS") {
@@ -125,7 +126,7 @@ var FD_set_mode = func(btn){
 			if(Vmode!="VS"){
 				var tgt_vs = (int(getprop("autopilot/internal/vert-speed-fpm") * 0.01)) * 100;
 				setprop(Vertical,"VS");setprop("autopilot/settings/vertical-speed-fpm",tgt_vs);
-			} else set_pitch();
+			} else {set_pitch()}
 
     }elsif(btn=="stby"){
 			setprop(Lateral_arm,"");

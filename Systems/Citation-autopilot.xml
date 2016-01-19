@@ -256,7 +256,7 @@
             <prop>/autopilot/locks/altitude</prop>
             <value>ALT</value>
         </enable>
-        <input>
+	      <input>
             <prop>velocities/vertical-speed-fps</prop>
         </input>
         <reference>
@@ -384,7 +384,7 @@
         </config>
     </pi-simple-controller>
 
-    <pi-simple-controller>
+    <pid-controller>
         <name>flc</name>
         <debug>false</debug>
         <enable>
@@ -408,15 +408,20 @@
             <prop>autopilot/settings/target-speed-kt</prop>
         </reference>
         <output>
-            <prop>autopilot/internal/pitch-filter</prop>
+					<prop>controls/engines/engine[0]/throttle</prop>
+					<prop>controls/engines/engine[1]/throttle</prop>		
         </output>
         <config>
-            <Kp>-0.5</Kp>
-            <Ki>0.0</Ki>
-            <min>-15</min>
-            <max>15</max>
+            <Kp>0.05</Kp>
+            <beta>1.0</beta>
+            <alpha>0.1</alpha>
+            <gamma>0.0</gamma>
+            <Ti>0.1</Ti>
+            <Td>0.00001</Td>
+            <min>0.20</min>
+            <max>0.99</max>
         </config>
-    </pi-simple-controller>
+    </pid-controller>
 
     <filter>
         <name>pitch command</name>

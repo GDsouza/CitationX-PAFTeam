@@ -273,15 +273,15 @@
  		<!-- <factor>0.000068</factor> -->
 				<interpolation>
 					<entry>
+						<ind>-615.0</ind>
+						<dep>-0.04182</dep>
+					</entry>
+					<entry>
 						<ind>0.0</ind>
 						<dep>0.0</dep>
 					</entry>
 					<entry>
 						<ind>615.0</ind>
-						<dep>0.04182</dep>
-					</entry>
-					<entry>
-						<ind>2000.0</ind>
 						<dep>0.04182</dep>
 					</entry>
 				</interpolation>
@@ -418,6 +418,51 @@
         <factor>0.000068</factor>
     </animation>
 
+<!-- speed cursor -->
+
+    <animation>
+        <type>select</type>
+        <object-name>SpeedCursor</object-name>
+           <condition>
+             <or>
+              <equals>
+                  <property>/autopilot/locks/altitude</property>
+                  <value>FLC</value>
+              </equals>
+              <equals>
+                  <property>/autopilot/locks/altitude</property>
+                  <value>VFLC</value>
+              </equals>
+             </or>
+           </condition>
+    </animation>
+		
+    <animation>
+      <object-name>SpeedCursor</object-name>
+			  <property>instrumentation/pfd/target-speed-diff</property>
+       <type>translate</type>
+        <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>1</z>
+        </axis>
+				<interpolation>
+					<entry>
+						<ind>-40</ind>
+						<dep>-0.041</dep>
+					</entry>
+					<entry>
+						<ind>0</ind>
+						<dep>0</dep>
+					</entry>
+					<entry>
+						<ind>40.0</ind>
+						<dep>0.041</dep>
+					</entry>
+				</interpolation>
+
+    </animation>
+
 <!-- Speed Trend -->
 
     <animation>
@@ -428,7 +473,7 @@
             <x>0</x>
             <y>1</y>
         </axis>
-        <factor>1</factor> <!-- 0.048/+70knots-->
+        <factor>1</factor> 
     </animation>
     <animation>
         <object-name>speedtrend.dwn</object-name>
@@ -438,7 +483,7 @@
             <x>0</x>
             <y>1</y>
         </axis>
-        <factor>1</factor> <!-- 0.048/+70knots-->
+        <factor>1</factor> 
     </animation>
     <animation>
         <type>select</type>
@@ -575,6 +620,19 @@
             <z>1</z>
         </axis>
         <factor>0.00092</factor>
+    </animation>
+
+<!-- Vmo animation -->
+
+    <animation>
+        <object-name>vmo</object-name>
+        <property>instrumentation/pfd/vmo-diff</property>
+        <type>textranslate</type>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+        </axis>
+        <factor>0.00420</factor>
     </animation>
 
 <!-- hsi rose -->
