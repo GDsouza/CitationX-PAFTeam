@@ -108,6 +108,8 @@ var EICAS = {
 				EICAS.update_listeners()},1,0);
 			setlistener("instrumentation/annunciators/test-select", func {
 				EICAS.update_listeners()},1,0);
+			setlistener("instrumentation/pfd/vmo-diff", func {
+				EICAS.update_listeners()},1,0);
 
 			me.my_caution = 0;
 			me.my_warning = 0;
@@ -141,6 +143,7 @@ var EICAS = {
 				me.throttle_R = getprop("controls/engines/engine[1]/throttle");
 				me.wow = getprop("gear/gear[0]/wow");
 				me.test = getprop("instrumentation/annunciators/test-select");
+				me.vmo = getprop("instrumentation/pfd/vmo-diff");
 		},
 
 		update : func {
@@ -184,6 +187,13 @@ var EICAS = {
 					append(me.msg_l3,"NO TAKEOFF");
 					me.nb_warning +=1;
 				}			
+				if(me.vmo >= -59) {
+					append(me.msg_l3,"OVERSPEED");
+					setprop("sim/alarms/overspeed-alarm",1);
+					me.nb_warning +=1;
+				} else {
+					setprop("sim/alarms/overspeed-alarm",0);
+				}
 
 					### LEVEL 2 ###
 				if(!me.gen_L and me.gen_R) {

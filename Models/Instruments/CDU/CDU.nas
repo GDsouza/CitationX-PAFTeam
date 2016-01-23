@@ -13,10 +13,10 @@ var init = func {
 	setprop("autopilot/route-manager/flight-plan","");
 	setprop("autopilot/route-manager/departure/airport",getprop("/sim/airport/closest-airport-id"));
 	setprop("autopilot/route-manager/departure/runway",getprop("sim/atc/runway"));
-	setprop("autopilot/settings/cruise-speed-kt",515);
-	setprop("autopilot/settings/cruise-speed-mach",0.78);
-	setprop("autopilot/route-manager/cruise/altitude-ft",41000);
-	setprop("autopilot/route-manager/cruise/flight-level",410);
+	setprop("autopilot/settings/cruise-speed-kt",330);
+	setprop("autopilot/settings/cruise-speed-mach",0.50);
+	setprop("autopilot/route-manager/cruise/altitude-ft",10000);
+	setprop("autopilot/route-manager/cruise/flight-level",100);
 	setprop("autopilot/settings/asel",getprop("autopilot/route-manager/cruise/flight-level"));
 	setprop("autopilot/settings/climb-speed-kt",250);
 	setprop("autopilot/settings/descent-speed-kt",200);

@@ -1,6 +1,11 @@
+### Citation X ####
+### Révision C. Le Moigne (clm76) - 2015-2016  ###
+
+### Global variables ###
+var fl_tot = 0;
+
 ### tire rotation per minute by circumference ####
 #var tire=TireSpeed.new(# of gear,diam[0],diam[1],diam[2], ...);
-
 var TireSpeed = {
     new : func(number){
         m = { parents : [TireSpeed] };
@@ -139,13 +144,15 @@ props.globals.initNode("controls/separation-door/open",1,"DOUBLE");
 props.globals.initNode("controls/toilet-door/open",0,"DOUBLE");
 props.globals.initNode("sim/model/pilot-seat",0,"DOUBLE");
 props.globals.initNode("sim/model/copilot-seat",0,"DOUBLE");
+props.globals.initNode("sim/alarms/overspeed-alarm",0,"BOOL");
+props.globals.initNode("sim/alarms/stall-warning",0,"BOOL");
+props.globals.initNode("instrumentation/clock/flight-meter-hour",0,"DOUBLE");
 var PWR2 =0;
 aircraft.livery.init("Aircraft/CitationX/Models/Liveries");
 var FHmeter = aircraft.timer.new("/instrumentation/clock/flight-meter-sec", 10,1);
 var LHeng= JetEngine.new(0);
 var RHeng= JetEngine.new(1);
 var tire=TireSpeed.new(3,0.430,0.615,0.615);
-
 #######################################
 
 var fdm_init = func(){
@@ -157,6 +164,8 @@ setlistener("/sim/signals/fdm-initialized", func {
     fdm_init();
     settimer(update_systems,2);
 		setprop("instrumentation/altimeter/setting-inhg",29.92001);
+		setprop("instrumentation/clock/flight-meter-sec",0);
+		FH_load();
 });
 
 setlistener("/sim/signals/reinit", func {
@@ -184,15 +193,58 @@ setlistener("/engines/engine[1]/turbine",func(turb) {
 		if(turb.getValue() >20) {setprop("/controls/engines/engine[1]/starter",0)}
 },0,0);
 
+### Flight Meter hour ###
+
 setlistener("/gear/gear[1]/wow", func(ww){
     if(ww.getBoolValue()){
         FHmeter.stop();
-        Grd_Idle.setBoolValue(1);
+        Grd_Idle.setBoolValue(1);			
+				FH_write();
     }else{
         FHmeter.start();
         Grd_Idle.setBoolValue(0);
     }
 },0,0);
+
+var FHupdate = func(tenths){
+    var fmeter = getprop("/instrumentation/clock/flight-meter-sec");
+    var fhour = fmeter/3600;
+    setprop("instrumentation/clock/flight-meter-hour",fhour);
+    var fmin = fhour - int(fhour);
+    if(tenths !=0){
+        fmin *=100;
+    }else{
+        fmin *=60;
+    }
+    setprop("instrumentation/clock/flight-meter-min",int(fmin));
+		setprop("instrumentation/clock/flight-meter-tot",fl_tot+fhour);
+}
+
+var FH_load = func{
+		var FH_path = getprop("/sim/fg-home")~"/aircraft-data/";
+		var name = FH_path~"CitationX-FHmeter.xml";
+		var xfile = subvec(directory(FH_path),2);
+		var v = std.Vector.new(xfile);
+		if (!v.contains("CitationX-FHmeter.xml")) {
+			var data = props.Node.new({
+					TotalFlight : 0
+			});		
+			io.write_properties(name,data);
+		} 
+		var data = io.read_properties(name);
+		fl_tot = data.getValue("TotalFlight");
+		setprop("/instrumentation/clock/flight-meter-tot",fl_tot);
+}
+
+var FH_write = func {
+		var FH_path = getprop("/sim/fg-home")~"/aircraft-data/CitationX-FHmeter.xml";
+		var data = io.read_properties(FH_path);
+		var name = data.getChild("TotalFlight");
+		name.setDoubleValue(fl_tot);
+		io.write_properties(FH_path,data);
+}
+
+######################
 
 setlistener("/controls/gear/antiskid", func(as){
 	print(as);
@@ -346,20 +398,6 @@ var Shutdown = func{
 		setprop("controls/electric/external-power",0);
 		setprop("controls/flight/flaps",0);
 }
-
-var FHupdate = func(tenths){
-        var fmeter = getprop("/instrumentation/clock/flight-meter-sec");
-        var fhour = fmeter/3600;
-        setprop("instrumentation/clock/flight-meter-hour",fhour);
-        var fmin = fhour - int(fhour);
-        if(tenths !=0){
-            fmin *=100;
-        }else{
-            fmin *=60;
-        }
-        setprop("instrumentation/clock/flight-meter-min",int(fmin));
-    }
-
 
 var v_sound = func{
 		var Wtot = getprop("yasim/gross-weight-lbs");

@@ -57,12 +57,23 @@
       <update-interval-secs type="double">0.05</update-interval-secs>
       <gain>1.0</gain>
       <input>
-				<expression>
-					<prod>
-		        <property>autopilot/settings/asel</property>
-						<value>100</value>
-					</prod>
-				</expression>
+				<condition>
+					<not-equals>
+						<property>autopilot/locks/altitude</property>
+						<value>VALT</value>
+					</not-equals>
+				</condition>
+	      <property>autopilot/settings/asel</property>
+				<scale>100</scale>
+      </input>
+      <input>
+				<condition>
+					<equals>
+						<property>autopilot/locks/altitude</property>
+						<value>VALT</value>
+					</equals>
+				</condition>
+	      <property>autopilot/settings/target-altitude-ft</property>
       </input>
       <reference>
 				<property>instrumentation/altimeter/indicated-altitude-ft</property>
@@ -284,7 +295,7 @@
                 <table>
                     <property>instrumentation/altimeter/indicated-altitude-ft</property> 
                     <entry><ind>0</ind><dep>270</dep></entry>
-                    <entry><ind>8000</ind><dep>270</dep></entry>
+                    <entry><ind>8000</ind><dep>345</dep></entry>
                     <entry><ind>24000</ind><dep>345</dep></entry>
                     <entry><ind>35000</ind><dep>275</dep></entry>
                     <entry><ind>41000</ind><dep>240</dep></entry>
@@ -304,7 +315,7 @@
           <property>instrumentation/pfd/max-airspeed-kts</property>
       </input>
       <reference>
-          <property>velocities/airspeed-kt</property>
+          <property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
           <offset>-60</offset>
       </reference>
       <output>instrumentation/pfd/vmo-diff</output>

@@ -12,14 +12,14 @@ PFD :# Coder le bouton "MINIMUMS" - Fait 11/01/2016
      # Coder le curseur d'altitude - Fait 12/01/2016
      # Coder le trend d'altitude - Fait 12/01/2016
 		 # Coder le trend de vitesse - fait 13/01/2016
-     # Coder les V1, VR, V2 & VE sur le speedtape- Fait 14/01/2016 
+     # Ajouter V1, VR, V2 & VE sur le speedtape- Fait 14/01/2016 
 		 # Coder les VMO sur le speedtape - Fait 19/01/2016
 		 # Coder le curseur de vitesse (mode FLC) - Fait 19/01/2016
 
 MFD : Coder les boutons du bas
 
 APU : Coder le bouton MAP LIGHT
-			Coder l'enregistreur horaire
+		 # Coder l'enregistreur horaire - Fait 23/01/2016
 
 EICAS : Coder les boutons du bas
 
@@ -35,7 +35,8 @@ PANEL : Coder le pavé de boutons à gauche du PFD (pilote et co-pilote)
 PEDESTAL : 	Animer les boutons de TRIM à gauche des throttles
 						Animer les boutons sous les throttles
 
-PILOTE AUTO : Vérifier toutes les fonctions
+Pil auto : Vérifier toutes les fonctions
+					# Mise en conformité fonction FLC - Fait 21/01/2016				
 
 CABINE : 	Eclairage de la cabine
 					Mettre une texture de ? derrière les portes du fond

@@ -456,6 +456,7 @@ var speed_Control = func {
 	var num = getprop("autopilot/route-manager/route/num");
 	var asel = getprop("autopilot/settings/asel");
 	var fms = getprop("instrumentation/primus2000/sc840/nav1ptr");
+	var vmo = 0;
 
 		### Takeoff ###
 	if (left(NAVSRC,3) == "FMS" and lock_alt == "VALT") {
@@ -498,14 +499,27 @@ var speed_Control = func {
 
 							### Climb ###
 				if (tg_alt > (alt_ind+5000)) {
-					setprop(target_spd,climb_spd);
+					var my_spd = climb_spd;
+					speed_table(alt_ind,my_spd,vmo);
+					setprop(target_spd,my_spd);
 				} else if (tg_alt < (alt_ind-1000)) {
-						setprop(target_spd,descent_spd);
+						var my_spd = descent_spd;
+						speed_table(alt_ind,my_spd,vmo);
+						setprop(target_spd,my_spd);
 				}	else {
+
+							### Cruise ###
 					if (cruise_spd != 0) {
 						if (getprop(next_wp~curr_wp~"]/speed")) {
 							setprop("autopilot/settings/cruise-speed-kt",getprop(next_wp~curr_wp~"]/speed"));
 						}	
+						if (alt_ind <= 8000) {vmo = 270}
+						if (alt_ind > 8000 and alt_ind <=24000) {vmo=345}
+						if (alt_ind > 24000 and alt_ind <=35000) {vmo=345-(alt_ind-24000)*0.006364}
+						if (alt_ind > 35000 and alt_ind <=41000) {vmo=275-(alt_ind-35000)*0.005833}
+						if (alt_ind > 41000 and alt_ind <=51000) {vmo=240-(alt_ind-35000)*0.005000}
+						if (alt_ind > 51000) {vmo=190}
+						if (cruise_spd >= vmo) {cruise_spd = vmo-5}
 						setprop(target_spd,cruise_spd);			
 					}
 				}	
@@ -522,6 +536,13 @@ var speed_Control = func {
 		}			
 	}
 }
+
+var speed_table = func(alt_ind,my_spd,vmo) {
+	if(alt_ind >39000 and alt_ind <= 41000 and my__spd > 250) {my_spd = 250};
+	if(alt_ind >41000 and alt_ind <= 43000 and my_spd > 240) {my_spd = 240};
+	if(alt_ind >43000 and my_spd > 200) {my_spd = 200};
+}
+
 ###  Main loop ###
 
 var update_fd = func {
