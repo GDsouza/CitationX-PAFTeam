@@ -77,33 +77,10 @@ var perfPage_2 = func() {
 var perfPage_3 = func() {
 	var Dsp = {page:"",line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
 		line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
-		var AppSpeed = getprop("autopilot/settings/app-speed-kt");
-		var DistToDest = getprop("autopilot/settings/dist-to-dest-nm");
-			Dsp.page = "APPROACH SPEED  1 / 2";
-			Dsp.line1l = " SPEED";
-			Dsp.line2l = AppSpeed~"";
-			Dsp.line3l = " DIST TO DESTINATION";
-			Dsp.line4l = DistToDest~"";
-			Dsp.line5l = " FIRST APP WPT";
-			Dsp.line6l = "YES";
-			Dsp.line7l = "< NEXT PAGE";
-			Dsp.line1r = "";
-			Dsp.line2r = "";
-			Dsp.line3r = "";
-			Dsp.line4r = "";
-			Dsp.line5r = "";
-			Dsp.line6r = "";
-			Dsp.line7r = "RETURN > ";
-	cdu.DspSet(Dsp);
-}
-
-var perfPage_4 = func() {
-	var Dsp = {page:"",line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
-		line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
 		var AppSpeed5 = getprop("autopilot/settings/app5-speed-kt");
 		var AppSpeed15 = getprop("autopilot/settings/app15-speed-kt");
 		var AppSpeed39 = getprop("autopilot/settings/app39-speed-kt");
-			Dsp.page = "APPROACH SPEED  2 / 2";
+			Dsp.page = "APPROACH SPEED  1 / 1";
 			Dsp.line1l = " FLAPS 5";
 			Dsp.line2l = AppSpeed5~"";
 			Dsp.line3l = " FLAPS 15";
@@ -121,7 +98,7 @@ var perfPage_4 = func() {
 	cdu.DspSet(Dsp);
 }
 
-var perfPage_5 = func() {
+var perfPage_4 = func() {
 	var Dsp = {page:"",line1l:"",line2l:"",line3l:"",line4l:"",line5l:"",line6l:"",line7l:"",line8l:"",
 		line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
 		var Wfuel = sprintf("%3i", math.ceil(getprop("consumables/fuel/total-fuel-lbs")));

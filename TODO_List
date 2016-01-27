@@ -37,6 +37,7 @@ PEDESTAL : 	Animer les boutons de TRIM à gauche des throttles
 
 Pil auto : Vérifier toutes les fonctions
 					# Mise en conformité fonction FLC - Fait 21/01/2016				
+					# Vérification fonction VNAV - Fait 27/01/2016
 
 CABINE : 	Eclairage de la cabine
 					Mettre une texture de ? derrière les portes du fond

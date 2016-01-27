@@ -457,72 +457,90 @@ var speed_Control = func {
 	var asel = getprop("autopilot/settings/asel");
 	var fms = getprop("instrumentation/primus2000/sc840/nav1ptr");
 	var vmo = 0;
+	var TOD = 0;
 
 		### Takeoff ###
-	if (left(NAVSRC,3) == "FMS" and lock_alt == "VALT") {
+	if (left(NAVSRC,3) == "FMS" and lock_alt == "VALT" and ap_stat != "AP") {
 		if (curr_wp==-1) {curr_wp=0}
-		if (dist_dep < dep_lim and alt_ind < dep_agl) {setprop(target_spd,dep_spd)}
-		if (getprop(next_wp~curr_wp~"]/altitude-ft") <= 0.0) {
-			setprop(target_alt, getprop(next_wp~(curr_wp+1)~"]/altitude-ft"));
-		} else {
-			setprop(target_alt, getprop(next_wp~curr_wp~"]/altitude-ft"));
+			if (dist_dep < dep_lim and alt_ind < dep_agl) {setprop(target_spd,dep_spd)}
+			if (getprop(next_wp~curr_wp~"]/altitude-ft") > 0) {
+				setprop(target_alt, getprop(next_wp~curr_wp~"]/altitude-ft"));
+			} else {
+					if (getprop(next_wp~(curr_wp+1)~"]/altitude-ft") > 0) {
+						setprop(target_alt, getprop(next_wp~(curr_wp+1)~"]/altitude-ft"));
+				} else { setprop(target_alt,cruise_alt)}
+			}						
 		}
-	}
 		### En route ###
 	if (ap_stat == "AP") {
 		if (left(NAVSRC,3) == "FMS" and lock_alt == "VALT") {
+
+			### Altitude ###
 			setprop("autopilot/route-manager/cruise/altitude-ft",asel*100);
-			if (dist_rem <= alt_ind/300) {TOD = 1}
-			if (dist_dep < dep_lim and alt_ind < dep_agl) {setprop(target_spd,dep_spd)}
 
-				### Approach ###
-			else if (dist_rem <= app_dist_set or TOD == 1) {
-				if (getprop(next_wp~curr_wp~"]/id") == "APP-4") {
-					setprop(target_alt,getprop(next_wp~(curr_wp+1)~"]/altitude-ft"));
-					setprop(target_spd,app_spd);
-				}
-				if (dist_rem <= 7) {
-					if (NAVSRC == "FMS1") {setprop(NAVprop,"NAV2")}
-					if (NAVSRC == "FMS2") {setprop(NAVprop,"NAV1")}
-					set_apr();
-				}
+				### Before TOD ###
+			if (dist_rem > asel/3.5) {
+				if (getprop(next_wp~curr_wp~"]/altitude-ft") > 0){
+					setprop(target_alt,getprop(next_wp~(curr_wp)~"]/altitude-ft"));
+					if (getprop(next_wp~curr_wp~"]/altitude-ft") < alt_ind-100)	{
+						setprop(target_alt,getprop(next_wp~curr_wp~"]/altitude-ft"));
+						setprop("autopilot/settings/asel",getprop(target_alt)/100);
+					}
+				} else {setprop(target_alt,asel*100)}
 
-				### Cruise ###
-			}	else {
-							### WP without altitude ###
-				if (getprop(next_wp~curr_wp~"]/altitude-ft") <= 0.0) {
-					setprop(target_alt,cruise_alt);
-				} else {
-							### WP with altitude ###
-					setprop(target_alt,getprop(next_wp~curr_wp~"]/altitude-ft"));
-				}
+				### After TOD ###
+			} else {
+					TOD = 1;					
+					if (getprop(next_wp~(curr_wp)~"]/altitude-ft") > 0){
+					setprop(target_alt,getprop(next_wp~(curr_wp)~"]/altitude-ft"));
+					} else {
+							for (var i=curr_wp;i<(num-1);i+=1) {
+								if (getprop(next_wp~i~"]/altitude-ft") > 0) {
+									setprop(target_alt,getprop(next_wp~i~"]/altitude-ft"));
+									i = num;
+								}
+							}
+					}
+			}
+			if (dist_rem <= 7) {
+				if (NAVSRC == "FMS1") {setprop(NAVprop,"NAV2")}
+				if (NAVSRC == "FMS2") {setprop(NAVprop,"NAV1")}
+				set_apr();
+			}
 
+			### Speed ###
+
+							### Departure ###
+			if (dist_dep < dep_lim and alt_ind < dep_agl) {
+				setprop(target_spd,dep_spd);
+			} else {		
+				if (TOD) {setprop(target_spd,descent_spd)}
+				else {
 							### Climb ###
-				if (tg_alt > (alt_ind+5000)) {
-					var my_spd = climb_spd;
-					speed_table(alt_ind,my_spd,vmo);
-					setprop(target_spd,my_spd);
-				} else if (tg_alt < (alt_ind-1000)) {
-						var my_spd = descent_spd;
+					if (tg_alt > (alt_ind+1000)) {
+						var my_spd = climb_spd;
 						speed_table(alt_ind,my_spd,vmo);
 						setprop(target_spd,my_spd);
-				}	else {
-
-							### Cruise ###
-					if (cruise_spd != 0) {
-						if (getprop(next_wp~curr_wp~"]/speed")) {
-							setprop("autopilot/settings/cruise-speed-kt",getprop(next_wp~curr_wp~"]/speed"));
-						}	
-						if (alt_ind <= 8000) {vmo = 270}
-						if (alt_ind > 8000 and alt_ind <=24000) {vmo=345}
-						if (alt_ind > 24000 and alt_ind <=35000) {vmo=345-(alt_ind-24000)*0.006364}
-						if (alt_ind > 35000 and alt_ind <=41000) {vmo=275-(alt_ind-35000)*0.005833}
-						if (alt_ind > 41000 and alt_ind <=51000) {vmo=240-(alt_ind-35000)*0.005000}
-						if (alt_ind > 51000) {vmo=190}
-						if (cruise_spd >= vmo) {cruise_spd = vmo-5}
-						setprop(target_spd,cruise_spd);			
-					}
-				}	
+								### Descent ###
+					} else if (tg_alt < (alt_ind-1000)) {
+							setprop(target_spd,descent_spd);
+					}	else {
+								### Cruise ###
+						if (cruise_spd != 0) {
+							if (getprop(next_wp~curr_wp~"]/speed")) {
+								setprop("autopilot/settings/cruise-speed-kt",getprop(next_wp~curr_wp~"]/speed"));
+							}	
+							if (alt_ind <= 8000) {vmo = 270}
+							if (alt_ind > 8000 and alt_ind <=24000) {vmo=345}
+							if (alt_ind > 24000 and alt_ind <=35000) {vmo=345-(alt_ind-24000)*0.006364}
+							if (alt_ind > 35000 and alt_ind <=41000) {vmo=275-(alt_ind-35000)*0.005833}
+							if (alt_ind > 41000 and alt_ind <=51000) {vmo=240-(alt_ind-35000)*0.005000}
+							if (alt_ind > 51000) {vmo=190}
+							if (cruise_spd >= vmo) {cruise_spd = vmo-5}
+							setprop(target_spd,cruise_spd);			
+						}
+					}	
+				}
 			}
 		}
 		if (fms == 3 and (NAVSRC == "NAV1" or NAVSRC == "NAV2")) {

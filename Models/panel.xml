@@ -2739,6 +2739,22 @@
         <object-name>FMC.knob1</object-name>
         <object-name>FMC1.knob1</object-name>
         <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <command>property-adjust</command>
+                <property>instrumentation/primus2000/sc840/nav1ptr</property>
+                <step>1</step>
+                <min>0</min>
+                <max>3</max>
+                <wrap>0</wrap>
+            </binding>
+    				<binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+	        </binding>
+        </action>
+        <action>
             <button>3</button>
             <repeatable>false</repeatable>
             <binding>
@@ -2752,7 +2768,7 @@
     				<binding>
             <command>property-toggle</command>
             <property>sim/sound/click</property>
-        </binding>
+	        </binding>
         </action>
         <action>
             <button>4</button>
@@ -2768,7 +2784,7 @@
     				<binding>
             <command>property-toggle</command>
             <property>sim/sound/click</property>
-        </binding>
+	        </binding>
         </action>
         <hovered>
             <binding>
@@ -2790,6 +2806,22 @@
         <object-name>FMC.knob2</object-name>
         <object-name>FMC1.knob2</object-name>
         <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <command>property-adjust</command>
+                <property>instrumentation/primus2000/sc840/nav2ptr</property>
+                <step>1</step>
+                <min>0</min>
+                <max>3</max>
+                <wrap>0</wrap>
+            </binding>
+    				<binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+	        </binding>
+        </action>
+        <action>
             <button>3</button>
             <repeatable>false</repeatable>
             <binding>
@@ -2803,7 +2835,7 @@
     				<binding>
             <command>property-toggle</command>
             <property>sim/sound/click</property>
-        </binding>
+ 	       </binding>
         </action>
         <action>
             <button>4</button>
@@ -2819,7 +2851,7 @@
     				<binding>
             <command>property-toggle</command>
             <property>sim/sound/click</property>
-        </binding>
+ 	       </binding>
         </action>
         <hovered>
             <binding>

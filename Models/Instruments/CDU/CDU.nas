@@ -598,7 +598,7 @@ var key = func(v) {
 
 		#### PERF PAGES ####
 		if (cduDisplay == "PRF-PAGE[0]") {
-			setprop("instrumentation/cdu/nbpage",6);
+			setprop("instrumentation/cdu/nbpage",5);
 			if (v == "B4R") {v = "";cduDisplay = "PRF-PAGE[1]"}
 			if (v == "NAV") {v = "";cduDisplay = "NAV-PAGE[0]"}
 			if (v == "PROG") {v = "";cduDisplay = "PRG-PAGE[0]"}			
@@ -698,25 +698,6 @@ var key = func(v) {
 			if (v == "B1L") {
 				v = "";
 				if (cduInput != "") {
-					setprop("autopilot/settings/app-speed-kt",cduInput);	
-				}
-				cduInput ="";
-			}
-			if (v == "B2L") {
-				v = "";
-				if (cduInput != "") {
-					setprop("autopilot/settings/dist-to-dest-nm",cduInput);	
-				}
-				cduInput = "";
-			}
-			if (v == "B4L") {v = "";cduDisplay = "PRF-PAGE[4]"}
-			if (v == "B4R") {v = "";cduDisplay = "PRF-PAGE[0]"}
-		}
-
-		if (cduDisplay == "PRF-PAGE[4]") {	
-			if (v == "B1L") {
-				v = "";
-				if (cduInput != "") {
 					setprop("autopilot/settings/app5-speed-kt",cduInput);	
 				}
 				cduInput = "";
@@ -735,11 +716,11 @@ var key = func(v) {
 				}
 				cduInput = "";
 			}
-			if (v == "B4L") {v = "";cduDisplay = "PRF-PAGE[5]"}
+			if (v == "B4L") {v = "";cduDisplay = "PRF-PAGE[4]"}
 			if (v == "B4R") {v = "";cduDisplay = "PRF-PAGE[0]"}
 		}
 
-		if (cduDisplay == "PRF-PAGE[5]") {	
+		if (cduDisplay == "PRF-PAGE[4]") {	
 			if (v == "B2L"){
 				v = "";					
 				if (cduInput != "") {
@@ -1147,7 +1128,6 @@ var cdu = func{
 		if (display == "PRF-PAGE[2]") {displaypages.perfPage_2()}
 		if (display == "PRF-PAGE[3]") {displaypages.perfPage_3()}
 		if (display == "PRF-PAGE[4]") {displaypages.perfPage_4()}
-		if (display == "PRF-PAGE[5]") {displaypages.perfPage_5()}
 
 		if (display == "PRG-PAGE[0]") {displaypages.progPage_0(dest_airport,marker)}
 

@@ -341,9 +341,6 @@
         </input>
         <reference>
 						<prop>autopilot/settings/target-altitude-ft</prop>
-<!--
-            <prop>instrumentation/gps/wp/wp[1]/altitude-ft</prop>
--->
         </reference>
         <output>
             <prop>/autopilot/internal/target-climb-rate-fps</prop>
@@ -355,8 +352,8 @@
             <gamma>0.0</gamma>
             <Ti>10.0</Ti> <!-- origin 10.0 -->
             <Td>0.000001</Td>
-            <min>-45</min> <!-- origin -30 -->
-            <max>65</max> <!-- origin = 66-->
+            <min>-30</min> <!-- origin -30 -->
+            <max>66</max> <!-- origin = 66-->
         </config>
     </pid-controller>
 
@@ -379,7 +376,7 @@
         <config>
             <Kp>0.30</Kp> 	<!-- origin 0.15 -->
             <Ki>0.0</Ki>		<!-- origin 0.0 -->
-            <min>-30</min> 	<!-- origin -20 -->
+            <min>-20</min> 	<!-- origin -20 -->
             <max>30</max>		<!-- origin 20 -->
         </config>
     </pi-simple-controller>
