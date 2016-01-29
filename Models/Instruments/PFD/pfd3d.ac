@@ -7,7 +7,7 @@ MATERIAL "Material.001" rgb 0.996 0 1  amb 0.996 0 1  emis 1 0 1  spec 0.996 0 1
 MATERIAL "cyan.001" rgb 0 1 1  amb 0 1 1  emis 0 1 0.980392  spec 1 1 1  shi 32  trans 0
 MATERIAL "ac3dmat3" rgb 1 0 0  amb 1 0 0  emis 1 0 0  spec 1 0 0  shi 0  trans 0
 OBJECT world
-kids 49
+kids 50
 OBJECT poly
 name "Imarker"
 texture "symbols.png"
@@ -313,6 +313,25 @@ refs 4
 2 0.919922 0.423828
 1 0.919922 0.0800781
 0 0.888672 0.0800781
+kids 0
+OBJECT poly
+name "v_stall"
+loc 0 0.0475477 0.0485906
+texture "pfd-2.png"
+crease 45.000000
+numvert 4
+0 0.04105 -0.00079257
+0 0.04105 0.00079257
+0 -0.04105 0.00079257
+0 -0.04105 -0.00079257
+numsurf 1
+SURF 0x10
+mat 6
+refs 4
+0 0.888672 0.351562
+1 0.919922 0.351562
+2 0.919922 0.00390577
+3 0.888672 0.00390577
 kids 0
 OBJECT poly
 name "PFD.screen"

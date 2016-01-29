@@ -15,6 +15,7 @@ PFD :# Coder le bouton "MINIMUMS" - Fait 11/01/2016
      # Ajouter V1, VR, V2 & VE sur le speedtape- Fait 14/01/2016 
 		 # Coder les VMO sur le speedtape - Fait 19/01/2016
 		 # Coder le curseur de vitesse (mode FLC) - Fait 19/01/2016
+		 # Ajouter les vitesses de décrochage - Fait 29/01/2016
 
 MFD : Coder les boutons du bas
 

@@ -374,6 +374,11 @@ var Startup = func{
 		setprop("controls/engines/engine[0]/starter",1);
 		setprop("controls/engines/engine[1]/starter",1);
 		setprop("controls/flight/flaps",0.428);
+		setlistener("systems/electrical/right-bus",func {
+			if (getprop("systems/electrical/right-bus") > 27) {
+				setprop("controls/electric/external-power",0);
+			}
+		});
 }
 
 var Shutdown = func{

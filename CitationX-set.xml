@@ -548,7 +548,6 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
         </tcas-display>
 
         <alerts>
-            <gear-horn type="bool">0</gear-horn>
             <master-warning type="bool">0</master-warning>
             <master-caution type="bool">0</master-caution>
         </alerts>

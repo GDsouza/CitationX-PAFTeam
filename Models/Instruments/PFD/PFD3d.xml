@@ -635,6 +635,26 @@
         <factor>0.00420</factor>
     </animation>
 
+<!-- Stall speed animation -->
+
+    <animation>
+        <object-name>v_stall</object-name>
+        <property>instrumentation/pfd/stall-diff</property>
+        <type>textranslate</type>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+        </axis>
+        <factor>-0.00420</factor>
+    </animation>
+    <animation>
+        <type>select</type>
+        <object-name>v_stall</object-name>
+        <condition>
+            <property>instrumentation/pfd/stall-warning</property>
+        </condition>
+    </animation>
+
 <!-- hsi rose -->
 
     <animation>

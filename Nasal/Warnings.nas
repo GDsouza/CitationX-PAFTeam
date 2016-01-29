@@ -344,6 +344,7 @@ var EICAS = {
 				}
 			}
 			me.EicasOutput();			
+			stall_speed();
 			settimer(func {me.update();},0);
 		},
 
@@ -424,6 +425,7 @@ var EICAS = {
 				}
 				me.my_caution = me.nb_caution;
 		},
+
 };
 
 var annun_timer = func {
@@ -433,25 +435,44 @@ var annun_timer = func {
 	},3);
 }
 
-var stall_horn = func {
+var	stall_speed = func {
     var alert=0;
     var kias=getprop("velocities/airspeed-kt");
-    if(kias>150){setprop("sim/sound/stall-horn",alert);return;};
     var wow1=getprop("gear/gear[1]/wow");
-    var wow2=getprop("gear/gear[2]/wow");
-    if(!wow1 or !wow2){
-        var grdn=getprop("controls/gear/gear-down");
-        var flap=getprop("controls/flight/flaps");
-        if(kias<100){
-            alert=1;
-        }elsif(kias<120){
-            if(!grdn )alert=1;
-        }else{
-            if(flap==0)alert=1;
-        }
+    var wow2=getprop("gear/gear[2]/wow");;
+		var stall_warn=getprop("instrumentation/pfd/stall-warning");
+    var grdn=getprop("controls/gear/gear-down");
+    var flap=getprop("controls/flight/flaps");
+
+		if (getprop("position/altitude-agl-ft") > 400) {
+			setprop("instrumentation/pfd/stall-warning",1);
+		} else if (wow1 or wow2){
+				setprop("instrumentation/pfd/stall-warning",0);		
+		}
+
+    if(stall_warn and (!wow1 or !wow2)){
+			if (flap == 0.0){
+				setprop("instrumentation/pfd/stall-speed",145);			
+      	if(kias<145){alert=1}
+			}
+			if (flap == 0.0428){
+				setprop("instrumentation/pfd/stall-speed",135);
+				if (kias<135){alert=1}
+			}
+			if (flap == 0.142){
+				setprop("instrumentation/pfd/stall-speed",130);
+				if (kias<130){alert=1}
+			}
+			if (flap == 0.428){
+				setprop("instrumentation/pfd/stall-speed",125);
+				if (kias<125){alert=1}
+			}
+			if (flap == 1){
+				setprop("instrumentation/pfd/stall-speed",115);
+				if (kias<115){alert=1}
+			}
     }
-    setprop("sim/sound/stall-horn",alert);
-		settimer(stall_horn,0);
+   setprop("sim/sound/stall-horn",alert);
 }
 
 ### MAIN ###
@@ -459,5 +480,4 @@ var alarms = EICAS.new();
 	setlistener("/sim/signals/fdm-initialized", func {
 		alarms.init();
 		alarms.update();	
-    stall_horn();
 	},0,0);

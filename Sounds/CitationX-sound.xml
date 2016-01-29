@@ -853,6 +853,21 @@
         </condition>
     </alarm>
 
+    <warnings>
+        <name>Stall alarm</name>
+        <mode>looped</mode>
+        <path>Aircraft/CitationX/Sounds/stall.wav</path>
+				<condition>
+					<and>
+						<greater-than>
+			        <property>systems/electrical/right-bus</property>
+							<value>20</value>
+						</greater-than>
+			      <property>sim/sound/stall-horn</property>
+					</and>
+				</condition>
+    </warnings>
+
     <alarm>
         <name>Autopilot disconnect</name>
         <mode>once</mode>
@@ -899,14 +914,6 @@
 					</or>
 				</condition>
         <mode>looped</mode>
-    </warnings>
-
-    <warnings>
-        <name>gear-horn</name>
-        <type>avionics</type>
-        <path>Aircraft/CitationX/Sounds/horn.wav</path>
-        <property>sim/sound/stall-horn</property>
-        <mode>once</mode>
     </warnings>
 
 <!-- ANNOUNCEMENTS -->
