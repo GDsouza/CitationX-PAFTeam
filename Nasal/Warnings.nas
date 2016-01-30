@@ -144,6 +144,7 @@ var EICAS = {
 				me.wow = getprop("gear/gear[0]/wow");
 				me.test = getprop("instrumentation/annunciators/test-select");
 				me.vmo = getprop("instrumentation/pfd/vmo-diff");
+				me.stall = getprop("sim/sound/stall-horn");
 		},
 
 		update : func {
@@ -193,6 +194,10 @@ var EICAS = {
 					me.nb_warning +=1;
 				} else {
 					setprop("sim/alarms/overspeed-alarm",0);
+				}
+				if(me.stall and me.altitude > 35000) {
+					append(me.msg_l3,"MINIMUM SPEED");
+					me.nb_warning +=1;
 				}
 
 					### LEVEL 2 ###
@@ -444,32 +449,36 @@ var	stall_speed = func {
     var grdn=getprop("controls/gear/gear-down");
     var flap=getprop("controls/flight/flaps");
 
+		### Activation Stall System ###
 		if (getprop("position/altitude-agl-ft") > 400) {
 			setprop("instrumentation/pfd/stall-warning",1);
 		} else if (wow1 or wow2){
 				setprop("instrumentation/pfd/stall-warning",0);		
 		}
-
+		### Set Stall Speed Alarm / Flaps ###
     if(stall_warn and (!wow1 or !wow2)){
 			if (flap == 0.0){
 				setprop("instrumentation/pfd/stall-speed",145);			
-      	if(kias<145){alert=1}
+      	if(kias<=145){
+					alert=1;
+					setprop("controls/flight/flaps",0.0428); ### Extension Slats ###
+				}
 			}
 			if (flap == 0.0428){
 				setprop("instrumentation/pfd/stall-speed",135);
-				if (kias<135){alert=1}
+				if (kias<=135){alert=1}
 			}
 			if (flap == 0.142){
 				setprop("instrumentation/pfd/stall-speed",130);
-				if (kias<130){alert=1}
+				if (kias<=130){alert=1}
 			}
 			if (flap == 0.428){
 				setprop("instrumentation/pfd/stall-speed",125);
-				if (kias<125){alert=1}
+				if (kias<=125){alert=1}
 			}
 			if (flap == 1){
 				setprop("instrumentation/pfd/stall-speed",115);
-				if (kias<115){alert=1}
+				if (kias<=115){alert=1}
 			}
     }
    setprop("sim/sound/stall-horn",alert);

@@ -647,11 +647,18 @@
         </axis>
         <factor>-0.00420</factor>
     </animation>
+
     <animation>
         <type>select</type>
         <object-name>v_stall</object-name>
         <condition>
+					<and>
             <property>instrumentation/pfd/stall-warning</property>
+						<less-than>
+			        <property>velocities/airspeed-kt</property>						
+							<value>200</value>
+						</less-than>
+					</and>
         </condition>
     </animation>
 

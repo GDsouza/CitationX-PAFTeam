@@ -315,7 +315,7 @@
           <property>instrumentation/pfd/max-airspeed-kts</property>
       </input>
       <reference>
-          <property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
+          <property>velocities/airspeed-kt</property>
           <offset>-60</offset>
       </reference>
       <output>instrumentation/pfd/vmo-diff</output>
