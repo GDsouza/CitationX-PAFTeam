@@ -11,6 +11,8 @@
     <object-name>Sphere</object-name>
     <object-name>poignees</object-name>
     <object-name>baguette</object-name>
+    <object-name>seau</object-name>
+    <object-name>bouteille1</object-name>
     <emission>
       <red>   0.32 </red>
       <green> 0.25 </green>
@@ -24,12 +26,16 @@
     <object-name>Sphere</object-name>
     <object-name>poignees</object-name>
     <object-name>baguette</object-name>
+    <object-name>seau</object-name>
+    <object-name>bouteille1</object-name>
     </effect>
 
     <effect>
       <inherits-from>Aircraft/CitationX/Models/Effects/skin-reflect</inherits-from>
     <object-name>Cabin-LightsSup</object-name>
     <object-name>Sphere</object-name>
+    <object-name>seau</object-name>
+    <object-name>bouteille1</object-name>
     </effect>
 
 <!-- EXT CABIN DOOR -->
