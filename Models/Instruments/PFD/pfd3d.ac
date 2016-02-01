@@ -7,7 +7,7 @@ MATERIAL "Material.001" rgb 0.996 0 1  amb 0.996 0 1  emis 1 0 1  spec 0.996 0 1
 MATERIAL "cyan.001" rgb 0 1 1  amb 0 1 1  emis 0 1 0.980392  spec 1 1 1  shi 32  trans 0
 MATERIAL "ac3dmat3" rgb 1 0 0  amb 1 0 0  emis 1 0 0  spec 1 0 0  shi 0  trans 0
 OBJECT world
-kids 50
+kids 51
 OBJECT poly
 name "Imarker"
 texture "symbols.png"
@@ -332,6 +332,25 @@ refs 4
 1 0.919922 0.341796
 2 0.919922 0.0039058
 3 0.888672 0.0039058
+kids 0
+OBJECT poly
+name "Vspeed"
+loc 0.000382274 0.0220265 0.0568268
+texture "speedtape.png"
+crease 45.000000
+numvert 4
+0 -0.0156368 -0.00904553
+0 -0.0156368 0.00904553
+0 0.0156368 0.00904553
+0 0.0156368 -0.00904553
+numsurf 1
+SURF 0x30
+mat 1
+refs 4
+3 0.015625 0.183594
+2 0.046875 0.183594
+1 0.046875 0.0976562
+0 0.015625 0.0976562
 kids 0
 OBJECT poly
 name "PFD.screen"

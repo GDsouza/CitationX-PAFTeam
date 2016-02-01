@@ -142,7 +142,7 @@
 		    <property>autopilot/settings/target-speed-kt</property>
       </input>
       <reference>
-				<property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
+			<property>velocities/airspeed-kt</property>
       </reference>
       <output>instrumentation/pfd/target-speed-diff</output>
       <min>-100</min>
@@ -255,6 +255,96 @@
 		</reference>
 		<output>instrumentation/pfd/ve-diff</output>
 		<min>0</min>
+		<max>60</max>
+	</filter>
+
+<!-- Va marker -->
+
+	<filter>
+    <name>Va marker positioning</name> 
+		<type>gain</type>
+		<update-interval-secs type="double">0.05</update-interval-secs>
+		<gain>1.1</gain>
+		<input>
+			<property>controls/flight/va</property>
+		</input>
+		<reference>
+			<property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
+		</reference>
+		<output>instrumentation/pfd/va-diff</output>
+		<min>-60</min>
+		<max>60</max>
+	</filter>
+
+<!-- Vf5 marker -->
+
+	<filter>
+    <name>V5 marker positioning</name> 
+		<type>gain</type>
+		<update-interval-secs type="double">0.05</update-interval-secs>
+		<gain>1.1</gain>
+		<input>
+			<property>controls/flight/vf5</property>
+		</input>
+		<reference>
+			<property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
+		</reference>
+		<output>instrumentation/pfd/vf5-diff</output>
+		<min>-60</min>
+		<max>60</max>
+	</filter>
+
+<!-- Vf15 marker -->
+
+	<filter>
+    <name>V15 marker positioning</name> 
+		<type>gain</type>
+		<update-interval-secs type="double">0.05</update-interval-secs>
+		<gain>1.1</gain>
+		<input>
+			<property>controls/flight/vf15</property>
+		</input>
+		<reference>
+			<property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
+		</reference>
+		<output>instrumentation/pfd/vf15-diff</output>
+		<min>-60</min>
+		<max>60</max>
+	</filter>
+
+<!-- Vf35 marker -->
+
+	<filter>
+    <name>V35 marker positioning</name> 
+		<type>gain</type>
+		<update-interval-secs type="double">0.05</update-interval-secs>
+		<gain>1.1</gain>
+		<input>
+			<property>controls/flight/vf35</property>
+		</input>
+		<reference>
+			<property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
+		</reference>
+		<output>instrumentation/pfd/vf35-diff</output>
+		<min>-60</min>
+		<max>60</max>
+	</filter>
+
+<!-- Vref marker -->
+
+	<filter>
+    <name>Vref marker positioning</name> 
+		<type>gain</type>
+		<update-interval-secs type="double">0.05</update-interval-secs>
+		<gain>1.1</gain>
+		<input>
+			<property>controls/flight/vref</property>
+		</input>
+		<reference>
+			<property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
+		</reference>
+		<output>instrumentation/pfd/vref-diff</output>
+		<min>-60</min>
 		<max>60</max>
 	</filter>
 

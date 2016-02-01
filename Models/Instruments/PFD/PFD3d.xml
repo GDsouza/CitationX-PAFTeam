@@ -463,6 +463,30 @@
 
     </animation>
 
+<!-- speed indication -->
+
+    <animation>
+        <type>select</type>
+        <object-name>Vspeed</object-name>
+        <object-name>IE-text</object-name>
+        <object-name>IR-text</object-name>
+        <object-name>IR-value</object-name>
+        <object-name>I2-text</object-name>
+        <object-name>I2-value</object-name>
+        <object-name>I1-text</object-name>
+        <object-name>I1-value</object-name>
+        <condition>
+					<and>
+	          <property>gear/gear[1]/wow</property>
+		        <less-than>
+		            <property>velocities/airspeed-kt</property>
+		            <value>30</value>
+		        </less-than>
+					</and>
+        </condition>
+    </animation>
+
+
 <!-- Speed Trend -->
 
     <animation>
@@ -512,6 +536,7 @@
         <type>select</type>
         <object-name>v1-text</object-name>
         <condition>
+          <property>gear/gear[1]/wow</property>
           <less-than>
               <property>instrumentation/pfd/v1-diff</property>
               <value>45</value>
@@ -541,6 +566,7 @@
         <type>select</type>
         <object-name>vr-text</object-name>
         <condition>
+          <property>gear/gear[1]/wow</property>
           <less-than>
               <property>instrumentation/pfd/vr-diff</property>
               <value>45</value>
@@ -570,6 +596,7 @@
         <type>select</type>
         <object-name>v2-text</object-name>
         <condition>
+          <property>gear/gear[1]/wow</property>
           <less-than>
               <property>instrumentation/pfd/v2-diff</property>
               <value>45</value>
@@ -614,6 +641,182 @@
         <type>translate</type>
         <object-name>ve-text</object-name>
         <property>instrumentation/pfd/ve-diff</property>
+        <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>1</z>
+        </axis>
+        <factor>0.00092</factor>
+    </animation>
+
+<!-- Va animation -->
+
+    <animation>
+        <type>select</type>
+        <object-name>va-text</object-name>
+        <condition>
+					<not>
+            <property>gear/gear[1]/wow</property>
+					</not>
+          <less-than>
+              <property>instrumentation/pfd/va-diff</property>
+              <value>45</value>
+          </less-than>
+          <greater-than>
+              <property>instrumentation/pfd/va-diff</property>
+              <value>-45</value>
+          </greater-than>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>va-text</object-name>
+        <property>instrumentation/pfd/va-diff</property>
+        <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>1</z>
+        </axis>
+        <factor>0.00092</factor>
+    </animation>
+
+<!-- Vf5 animation -->
+
+    <animation>
+        <type>select</type>
+        <object-name>vf5-text</object-name>
+        <condition>
+					<not>
+            <property>gear/gear[1]/wow</property>
+					</not>
+					<greater-than>
+            <property>controls/flight/flaps</property>
+						<value>0.0427</value>
+					</greater-than>
+					<less-than>
+            <property>controls/flight/flaps</property>						
+						<value>0.143</value>
+					</less-than>
+         <less-than>
+              <property>instrumentation/pfd/vf5-diff</property>
+              <value>45</value>
+          </less-than>
+          <greater-than>
+              <property>instrumentation/pfd/vf5-diff</property>
+              <value>-45</value>
+          </greater-than>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>vf5-text</object-name>
+        <property>instrumentation/pfd/vf5-diff</property>
+        <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>1</z>
+        </axis>
+        <factor>0.00092</factor>
+    </animation>
+
+<!-- Vf15 animation -->
+
+    <animation>
+        <type>select</type>
+        <object-name>vf15-text</object-name>
+        <condition>
+					<not>
+            <property>gear/gear[1]/wow</property>
+					</not>
+					<equals>
+            <property>controls/flight/flaps</property>						
+						<value>0.428</value>
+					</equals>
+          <less-than>
+              <property>instrumentation/pfd/vf15-diff</property>
+              <value>45</value>
+          </less-than>
+          <greater-than>
+              <property>instrumentation/pfd/vf15-diff</property>
+              <value>-45</value>
+          </greater-than>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>vf15-text</object-name>
+        <property>instrumentation/pfd/vf15-diff</property>
+        <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>1</z>
+        </axis>
+        <factor>0.00092</factor>
+    </animation>
+
+<!-- Vf35 animation -->
+
+    <animation>
+        <type>select</type>
+        <object-name>vf35-text</object-name>
+        <condition>
+					<not>
+            <property>gear/gear[1]/wow</property>
+					</not>
+					<equals>
+            <property>controls/flight/flaps</property>						
+						<value>1</value>
+					</equals>
+          <less-than>
+              <property>instrumentation/pfd/vf35-diff</property>
+              <value>45</value>
+          </less-than>
+          <greater-than>
+              <property>instrumentation/pfd/vf35-diff</property>
+              <value>-45</value>
+          </greater-than>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>vf35-text</object-name>
+        <property>instrumentation/pfd/vf35-diff</property>
+        <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>1</z>
+        </axis>
+        <factor>0.00092</factor>
+    </animation>
+
+<!-- Vref animation -->
+
+    <animation>
+        <type>select</type>
+        <object-name>vref-text</object-name>
+        <condition>
+					<not>
+            <property>gear/gear[1]/wow</property>
+					</not>
+          <less-than>
+              <property>instrumentation/pfd/vref-diff</property>
+              <value>45</value>
+          </less-than>
+          <greater-than>
+              <property>instrumentation/pfd/vref-diff</property>
+              <value>-45</value>
+          </greater-than>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>vref-text</object-name>
+        <property>instrumentation/pfd/vref-diff</property>
         <axis>
             <x>0</x>
             <y>0</y>

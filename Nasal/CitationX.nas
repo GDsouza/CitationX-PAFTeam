@@ -404,12 +404,18 @@ var Shutdown = func{
 		setprop("controls/flight/flaps",0);
 }
 
-var v_sound = func{
+var speed_ref = func{
 		var Wtot = getprop("yasim/gross-weight-lbs");
 		var Flaps = getprop("controls/flight/flaps");
 		var v1=0;
 		var vr=0;
 		var v2=0;
+		var vref=0;
+
+		setprop("controls/flight/va",200);
+		setprop("controls/flight/vf5",180);
+		setprop("controls/flight/vf15",160);
+		setprop("controls/flight/vf35",140);
 
 		if (getprop("velocities/airspeed-kt")> 20) {
 			if (Flaps <= 0.142) {
@@ -433,6 +439,17 @@ var v_sound = func{
 			setprop("controls/flight/vr",vr);
 			setprop("controls/flight/v2",v2);
 		}
+		if (!getprop("gear/gear[1]/wow")) {
+			if (Wtot >=23000 and Wtot <24000) {vref=108}
+			if (Wtot >=24000 and Wtot <25000) {vref=110}
+			if (Wtot >=25000 and Wtot <26000) {vref=113}
+			if (Wtot >=26000 and Wtot <28000) {vref=115}
+			if (Wtot >=28000 and Wtot <30000) {vref=121}
+			if (Wtot >=30000 and Wtot <31000) {vref=125}
+			if (Wtot >=31000 and Wtot <31800) {vref=129}
+			if (Wtot >=31800) {vref=131}
+			setprop("controls/flight/vref",vref);
+		}
 }
 
 ########## MAIN ##############
@@ -442,7 +459,7 @@ var update_systems = func{
     RHeng.update();
     FHupdate(0);
     tire.get_rotation("yasim");
-		v_sound();
+		speed_ref();
     if(getprop("velocities/airspeed-kt")>40)setprop("controls/cabin-door/open",0);
     var grspd =getprop("velocities/groundspeed-kt");
     var wspd = (45-grspd) * 0.022222;
