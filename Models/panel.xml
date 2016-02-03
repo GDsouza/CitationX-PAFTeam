@@ -3059,6 +3059,322 @@
         </axis>
     </animation>
 
+<!--Day / Night Switch -->
+
+  <animation>
+    <type>rotate</type>
+    <object-name>DayNightSwitch</object-name>
+    <property>controls/lighting/day-night</property>
+		<factor>30</factor>
+    <center>
+      <x-m>0.017</x-m>
+      <y-m>0</y-m>
+      <z-m>-0.004</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>-1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>DayNightSwitch</object-name>
+    <action>
+      <button>0</button>
+	    <repeatable>false</repeatable>
+      <binding>
+        <command>property-toggle</command>
+        <property>controls/lighting/day-night</property>
+      </binding>
+      <binding>
+          <command>property-toggle</command>
+          <property>sim/sound/click</property>
+      </binding>
+    </action>
+  </animation>
+
+<!--Emerg Light Switch -->
+
+  <animation>
+    <type>rotate</type>
+    <object-name>EmLightSwitch</object-name>
+    <property>controls/lighting/emer-light</property>
+		<factor>15</factor>
+    <center>
+      <x-m>0.017</x-m>
+      <y-m>0</y-m>
+      <z-m>-0.008</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>-1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>EmLightSwitch</object-name>
+    <object-name>Em.norm</object-name>
+    <action>
+      <button>0</button>
+      <binding>
+        <command>property-adjust</command>
+        <property>controls/lighting/emer-light</property>
+					<step>1</step>
+					<min>0</min>
+					<max>2</max>
+					<wrap>false</wrap>
+      </binding>
+      <binding>
+          <command>property-toggle</command>
+          <property>sim/sound/click</property>
+      </binding>
+    </action>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>Em.off</object-name>
+    <action>
+      <button>0</button>
+      <binding>
+        <command>property-adjust</command>
+        <property>controls/lighting/emer-light</property>
+					<step>-1</step>
+					<min>0</min>
+					<max>2</max>
+					<wrap>false</wrap>
+      </binding>
+      <binding>
+          <command>property-toggle</command>
+          <property>sim/sound/click</property>
+      </binding>
+    </action>
+  </animation>
+
+<!--Flood knob -->
+
+  <animation>
+    <type>rotate</type>
+    <object-name>Floodknob</object-name>
+    <property>controls/lighting/flood</property>
+		<factor>-270</factor>
+    <center>
+      <x-m>0.042</x-m>
+      <y-m>-0.504</y-m>
+      <z-m>-0.040</z-m>
+    </center>
+    <axis>
+      <x>1</x>
+      <y>0</y>
+      <z>1</z>
+    </axis>
+  </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Floodknob</object-name>
+        <action>
+            <button>3</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.1</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>controls/lighting/flood</property>
+                <step>0.05</step>
+                <min>0</min>
+                <max>1.0</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Floodknob</object-name>
+        <action>
+            <button>4</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.1</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>controls/lighting/flood</property>
+                <step>-0.05</step>
+                <min>0</min>
+                <max>1.0</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+    </animation>
+
+<!--Instruments lights knob -->
+
+  <animation>
+    <type>rotate</type>
+    <object-name>Elknob</object-name>
+    <property>controls/lighting/instruments-norm</property>
+		<factor>-270</factor>
+    <center>
+      <x-m>0.042</x-m>
+      <y-m>-0.477</y-m>
+      <z-m>-0.040</z-m>
+    </center>
+    <axis>
+      <x>1</x>
+      <y>0</y>
+      <z>1</z>
+    </axis>
+  </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Elknob</object-name>
+        <action>
+            <button>3</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.1</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>controls/lighting/instruments-norm</property>
+                <step>0.05</step>
+                <min>0</min>
+                <max>1.0</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Elknob</object-name>
+        <action>
+            <button>4</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.1</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>controls/lighting/instruments-norm</property>
+                <step>-0.05</step>
+                <min>0</min>
+                <max>1.0</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+    </animation>
+
+<!--LH knob -->
+
+  <animation>
+    <type>rotate</type>
+    <object-name>Lhknob</object-name>
+    <property>controls/lighting/lh-lights</property>
+		<factor>-270</factor>
+    <center>
+      <x-m>0.036</x-m>
+      <y-m>-0.504</y-m>
+      <z-m>-0.094</z-m>
+    </center>
+    <axis>
+      <x>1</x>
+      <y>0</y>
+      <z>1</z>
+    </axis>
+  </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Lhknob</object-name>
+        <action>
+            <button>3</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.1</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>controls/lighting/lh-lights</property>
+                <step>0.05</step>
+                <min>0</min>
+                <max>1.0</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Lhknob</object-name>
+        <action>
+            <button>4</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.1</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>controls/lighting/lh-lights</property>
+                <step>-0.05</step>
+                <min>0</min>
+                <max>1.0</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+    </animation>
+
+<!--CTR knob -->
+
+  <animation>
+    <type>rotate</type>
+    <object-name>Ctrknob</object-name>
+    <property>controls/lighting/ctr-lights</property>
+		<factor>-270</factor>
+    <center>
+      <x-m>0.035</x-m>
+      <y-m>-0.477</y-m>
+      <z-m>-0.096</z-m>
+    </center>
+    <axis>
+      <x>1</x>
+      <y>0</y>
+      <z>1</z>
+    </axis>
+  </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Ctrknob</object-name>
+        <action>
+            <button>3</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.1</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>controls/lighting/ctr-lights</property>
+                <step>0.05</step>
+                <min>0</min>
+                <max>1.0</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Ctrknob</object-name>
+        <action>
+            <button>4</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.1</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>controls/lighting/ctr-lights</property>
+                <step>-0.05</step>
+                <min>0</min>
+                <max>1.0</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+    </animation>
+
 <!-- 3D TEXT  -->
 
     <text>
@@ -3102,6 +3418,21 @@
             <height type="int">64</height>
         </font-resolution>
     </text>
+
+<!-- Engines Indicator -->
+
+    <animation>
+        <type>select</type>
+        <object-name>LH N1</object-name>
+        <object-name>RH N1</object-name>
+        <object-name>LH ITT</object-name>
+        <object-name>RH ITT</object-name>
+        <object-name>LH N2</object-name>
+        <object-name>RH N2</object-name>
+        <condition>
+                <property>systems/electrical/left-bus-norm</property>
+        </condition>
+    </animation>
 
 <text>
         <name>LH N1</name>
@@ -3230,21 +3561,5 @@
             <height type="int">64</height>
         </font-resolution>
     </text>
-
-    <animation>
-        <type>select</type>
-        <object-name>LH N1</object-name>
-        <object-name>RH N1</object-name>
-        <object-name>LH ITT</object-name>
-        <object-name>RH ITT</object-name>
-        <object-name>LH N2</object-name>
-        <object-name>RH N2</object-name>
-        <condition>
-            <greater-than>
-                <property>systems/electrical/left-bus</property>
-                <value>5</value>
-            </greater-than>
-        </condition>
-    </animation>
 
 </PropertyList>

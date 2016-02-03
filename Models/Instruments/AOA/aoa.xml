@@ -11,11 +11,17 @@ AOA
         <type>material</type>
         <object-name>AOA</object-name>
         <object-name>AoA.needle</object-name>
+        <condition>
+						<or>
+	           	<property>systems/electrical/left-emer-bus</property>
+	           	<property>systems/electrical/left-bus-norm</property>
+						</or>
+        </condition>
         <emission>
-            <red>0.8</red>
-            <green>0.3</green>
-            <blue>0.2</blue>
-            <factor-prop>systems/electrical/outputs/instrument-lights</factor-prop>
+            <red>1</red>
+            <green>1</green>
+            <blue>1</blue>
+            <factor-prop>controls/lighting/instruments-norm</factor-prop>
         </emission>
     </animation>
 

@@ -151,17 +151,16 @@ setlistener("/sim/signals/fdm-initialized", func {
 
 var init_switches = func{
     var AVswitch=props.globals.initNode("controls/electric/avionics-switch",0,"INT");
-    setprop("controls/lighting/instruments-norm",0.8);
+    setprop("controls/lighting/instruments-norm",0.0);
     setprop("controls/lighting/engines-norm",0.8);
     props.globals.initNode("controls/electric/ammeter-switch",0,"BOOL");
     props.globals.getNode("systems/electrical/serviceable",0,"BOOL");
     props.globals.getNode("controls/electric/external-power",0,"BOOL");
 		setprop("controls/electric/std-by-pwr",0);
-    setprop("controls/lighting/instrument-lights-norm",0.8);
     setprop("controls/lighting/efis-norm",0.8);
     setprop("controls/lighting/cdu",0.6);
     setprop("controls/lighting/cdu1",0.6);
-    setprop("controls/lighting/panel-norm",0.8);
+#    setprop("controls/lighting/panel-norm",0.8);
     setprop("controls/lighting/nav-lights",0);
 
     append(lights_input,props.globals.initNode("controls/lighting/landing-light[0]",0,"BOOL"));
@@ -176,9 +175,9 @@ var init_switches = func{
     append(lights_input,props.globals.initNode("controls/lighting/cabin-lights",0,"BOOL"));
     append(lights_output,props.globals.initNode("systems/electrical/outputs/cabin-lights",0,"DOUBLE"));
     append(lights_load,1);
-    append(lights_input,props.globals.initNode("controls/lighting/instrument-lights",0,"BOOL"));
-    append(lights_output,props.globals.initNode("systems/electrical/outputs/instrument-lights",0,"DOUBLE"));
-    append(lights_load,1);
+#    append(lights_input,props.globals.initNode("controls/lighting/instrument-lights",0,"BOOL"));
+#    append(lights_output,props.globals.initNode("systems/electrical/outputs/instrument-lights",0,"DOUBLE"));
+#    append(lights_load,1);
     append(lights_input,props.globals.initNode("controls/lighting/map-lights",0,"BOOL"));
     append(lights_output,props.globals.initNode("systems/electrical/outputs/map-lights",0,"DOUBLE"));
     append(lights_load,1);
@@ -393,7 +392,6 @@ var batt_switch=func{
 			setprop(r_norm,0);
 			setprop(r_emer,0);
 	}			
-
 }
 
 update_electrical = func {

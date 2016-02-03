@@ -9,6 +9,25 @@ Syd Adams
 <path>STBYai.ac</path>
 
     <animation>
+        <type>material</type>
+        <object-name>STBYai.ball</object-name>
+        <object-name>STBYai.rollneedle</object-name>
+        <object-name>cage.flag</object-name>
+        <condition>
+						<or>
+	           	<property>systems/electrical/left-emer-bus</property>
+	           	<property>systems/electrical/left-bus-norm</property>
+						</or>
+        </condition>
+        <emission>
+            <red>1</red>
+            <green>1</green>
+            <blue>1</blue>
+            <factor-prop>controls/lighting/instruments-norm</factor-prop>
+        </emission>
+    </animation>
+
+    <animation>
         <type>texmultiple</type>
         <object-name>STBYai.ball</object-name>
         <transform>

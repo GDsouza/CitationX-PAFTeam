@@ -9,6 +9,27 @@ STBY HSI
     <path>hsi.ac</path>
 
     <animation>
+        <type>material</type>
+        <object-name>hdgring</object-name>
+        <object-name>CRSneedle2</object-name>
+        <object-name>CRSneedle2.001</object-name>
+        <object-name>HSI.gsneedle</object-name>
+        <object-name>ADF.needle</object-name>
+        <condition>
+						<or>
+	           	<property>systems/electrical/left-emer-bus</property>
+	           	<property>systems/electrical/left-bus-norm</property>
+						</or>
+        </condition>
+        <emission>
+            <red>1</red>
+            <green>1</green>
+            <blue>1</blue>
+            <factor-prop>controls/lighting/instruments-norm</factor-prop>
+        </emission>
+    </animation>
+
+    <animation>
         <type>rotate</type>
         <object-name>hdgring</object-name>
         <property>instrumentation/heading-indicator/indicated-heading-deg</property>

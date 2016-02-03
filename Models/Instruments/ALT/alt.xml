@@ -5,6 +5,37 @@
 <path>alt.ac</path>
 
     <animation>
+        <type>material</type>
+        <object-name>iastape</object-name>
+        <object-name>ALT.needle</object-name>
+        <object-name>alttxt.004</object-name>
+        <object-name>alttxt.003</object-name>
+        <object-name>alttxt.002</object-name>
+        <object-name>alttxt.001</object-name>
+        <object-name>alttxt</object-name>
+        <object-name>inhg.001</object-name>
+        <object-name>inhg.002</object-name>
+        <object-name>inhg.003</object-name>
+        <object-name>inhg.004</object-name>
+        <object-name>kpa.001</object-name>
+        <object-name>kpa.002</object-name>
+        <object-name>kpa.003</object-name>
+        <object-name>kpa.004</object-name>
+        <condition>
+						<or>
+	           	<property>systems/electrical/left-emer-bus</property>
+	           	<property>systems/electrical/left-bus-norm</property>
+						</or>
+        </condition>
+        <emission>
+            <red>1</red>
+            <green>1</green>
+            <blue>1</blue>
+            <factor-prop>controls/lighting/instruments-norm</factor-prop>
+        </emission>
+    </animation>
+
+    <animation>
         <type>textranslate</type>
         <object-name>iastape</object-name>
         <property>instrumentation/airspeed-indicator/indicated-speed-kt</property>

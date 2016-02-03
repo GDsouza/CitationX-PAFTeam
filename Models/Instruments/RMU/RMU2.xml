@@ -6,6 +6,65 @@
 <path>rmu.ac</path>
 
     <animation>
+        <type>material</type>
+        <object-name>Com.1</object-name>
+        <object-name>Com.2</object-name>
+        <object-name>Com.3</object-name>
+        <object-name>Com.4</object-name>
+        <object-name>Com.5</object-name>
+        <object-name>Com.11</object-name>
+        <object-name>Com.12</object-name>
+        <object-name>Com.13</object-name>
+        <object-name>Com.14</object-name>
+        <object-name>Com.15</object-name>
+        <object-name>Nav.1</object-name>
+        <object-name>Nav.2</object-name>
+        <object-name>Nav.3</object-name>
+        <object-name>Nav.4</object-name>
+        <object-name>Nav.5</object-name>
+        <object-name>Nav.11</object-name>
+        <object-name>Nav.12</object-name>
+        <object-name>Nav.13</object-name>
+        <object-name>Nav.14</object-name>
+        <object-name>Nav.15</object-name>
+        <object-name>Atc.1</object-name>
+        <object-name>Atc.2</object-name>
+        <object-name>Atc.3</object-name>
+        <object-name>Atc.4</object-name>
+        <object-name>Adf.2</object-name>
+        <object-name>Adf.3</object-name>
+        <object-name>Adf.4</object-name>
+        <object-name>Adf.5</object-name>
+        <object-name>Com.num</object-name>
+        <object-name>Nav.num</object-name>
+        <object-name>Atc.num</object-name>
+        <object-name>Adf.num</object-name>
+        <object-name>RMU.period</object-name>
+        <object-name>RMU.screen</object-name>
+        <object-name>RMU.selector</object-name>
+        <object-name>RMU.sq</object-name>
+        <object-name>RMU.dim</object-name>
+        <object-name>RMU.half</object-name>
+        <object-name>RMU.sto</object-name>
+        <object-name>RMU.id</object-name>
+        <object-name>RMU.pge</object-name>
+        <object-name>RMU.tst</object-name>
+        <object-name>RMU.dme</object-name>
+        <condition>
+						<or>
+	           	<property>systems/electrical/left-emer-bus</property>
+	           	<property>systems/electrical/left-bus-norm</property>
+						</or>
+        </condition>
+        <emission>
+            <red>1</red>
+            <green>1</green>
+            <blue>1</blue>
+            <factor-prop>controls/lighting/instruments-norm</factor-prop>
+        </emission>
+    </animation>
+
+    <animation>
         <type>select</type>
         <condition>
             <greater-than>
