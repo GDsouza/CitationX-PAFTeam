@@ -19,6 +19,45 @@
         <object-name>vis-nav1</object-name>
     </animation>
 
+    <animation>
+      <type>material</type>
+      <object-name>Nav1-socle</object-name>
+      <object-name>Contours-molettes</object-name>
+      <object-name>etiquettes-nav1</object-name>
+			<condition>
+				<or>
+					<property>systems/electrical/left-emer-bus</property>
+					<property>systems/electrical/right-emer-bus</property>
+					<property>systems/electrical/left-bus-norm</property>
+					<property>systems/electrical/right-bus-norm</property>
+				</or>
+			</condition>
+      <emission>
+          <red>1</red>
+          <green>1</green>
+          <blue>1</blue>
+          <factor-prop>controls/lighting/flood-norm</factor-prop>
+      </emission>
+    </animation>
+
+    <animation>
+      <type>material</type>
+        <object-name>RIC1.crs</object-name>
+        <object-name>RIC1.hdg</object-name>
+        <condition>
+						<or>
+	           	<property>systems/electrical/left-emer-bus</property>
+	           	<property>systems/electrical/left-bus-norm</property>
+						</or>
+        </condition>
+        <emission>
+            <red>1</red>
+            <green>1</green>
+            <blue>1</blue>
+            <factor-prop>controls/lighting/instruments-norm</factor-prop>
+        </emission>
+    </animation>
+
 <animation>
     <type>pick</type>
     <object-name>RIC1.crs</object-name>

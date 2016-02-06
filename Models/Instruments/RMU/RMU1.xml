@@ -50,6 +50,18 @@
         <object-name>RMU.pge</object-name>
         <object-name>RMU.tst</object-name>
         <object-name>RMU.dme</object-name>
+        <object-name>RMU.swp1</object-name>
+        <object-name>RMU.swp2</object-name>
+        <object-name>RMU.comm</object-name>
+        <object-name>RMU.atc</object-name>
+        <object-name>RMU.btn1</object-name>
+        <object-name>RMU.btn2</object-name>
+        <object-name>RMU.btn3</object-name>
+        <object-name>RMU.btn4</object-name>
+        <object-name>RMU.btn5</object-name>
+        <object-name>RMU.btn6</object-name>
+        <object-name>RMU.nav</object-name>
+        <object-name>RMU.adf</object-name>
         <condition>
 						<or>
 	           	<property>systems/electrical/left-emer-bus</property>
@@ -107,7 +119,22 @@
         <object-name>RMU.period</object-name>
         <object-name>RMU.selector</object-name>
         <object-name>RMU.screen</object-name>
+        <object-name>RMU.lamp</object-name>
     </animation>
+
+    <animation>
+        <name>green</name>
+        <type>material</type>
+        <object-name>RMU.lamp</object-name>
+        <emission>
+            <red-prop>sim/color-set/green/r</red-prop>
+            <green-prop>sim/color-set/green/g</green-prop>
+            <blue-prop>sim/color-set/green/b</blue-prop>
+            <alpha-prop>sim/color-set/green/a</alpha-prop>
+        </emission>
+    </animation>
+
+
 
  <params>
   <rmu-x>/instrumentation/rmu/unit[0]/selected-xoffset</rmu-x>

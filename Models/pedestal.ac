@@ -16336,9 +16336,8 @@ refs 3
 3 0.139519 0.484115
 kids 0
 OBJECT poly
-name "Cnsl_1"
-data 6
-Cnsl_1
+name "Console.001"
+loc -1.72853e-06 0 -0.000101026
 texture "interior.png"
 crease 40.000000
 numvert 233
@@ -18704,6 +18703,7 @@ refs 4
 kids 0
 OBJECT poly
 name "Console.002"
+loc -1.72853e-06 0 -0.000101026
 data 11
 Console.002
 texture "interior.png"
@@ -19479,6 +19479,7 @@ refs 4
 kids 0
 OBJECT poly
 name "Console.003"
+loc -1.72853e-06 0 -0.000101026
 data 11
 Console.003
 texture "interior.png"
@@ -23307,27 +23308,7 @@ refs 4
 38 0 0
 kids 0
 OBJECT poly
-name "Plane.124_0"
-data 11
-Plane.124_0
-texture "interior.png"
-crease 30.000002
-numvert 4
-0.541816 -0.132904 0.044313
-0.541816 -0.132904 0.056625
-0.545975 -0.133267 0.056625
-0.545975 -0.133267 0.044313
-numsurf 1
-SURF 0x10
-mat 0
-refs 4
-3 0.874388 0.198995
-0 0.874388 0.210143
-1 0.839673 0.210143
-2 0.839673 0.198995
-kids 0
-OBJECT poly
-name "Plane.124_1"
+name "Label.0"
 data 11
 Plane.124_1
 texture "interior.png"
@@ -24868,7 +24849,25 @@ refs 4
 549 0.880783 0.00543276
 kids 0
 OBJECT poly
-name "Plane.124_2"
+name "Label.1"
+texture "interior.png"
+crease 30.000002
+numvert 4
+0.541816 -0.132904 0.044313
+0.541816 -0.132904 0.056625
+0.545975 -0.133267 0.056625
+0.545975 -0.133267 0.044313
+numsurf 1
+SURF 0x10
+mat 0
+refs 4
+3 0.874388 0.198995
+0 0.874388 0.210143
+1 0.839673 0.210143
+2 0.839673 0.198995
+kids 0
+OBJECT poly
+name "Label.2"
 data 11
 Plane.124_2
 texture "interior.png"
@@ -26192,9 +26191,7 @@ refs 3
 8 0.121994 0.711546
 kids 0
 OBJECT poly
-name "RDR.stab.001"
-data 12
-RDR.stab.001
+name "RDR.trb"
 texture "interior.png"
 crease 30.000002
 numvert 17

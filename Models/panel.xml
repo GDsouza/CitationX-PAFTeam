@@ -125,6 +125,75 @@
 					</and>
 				</condition>
     </animation>
+
+    <animation>
+        <type>material</type>
+        <object-name>FD.stby</object-name>
+        <object-name>FD.YD</object-name>
+        <object-name>FD.MTRIM</object-name>
+        <object-name>FD.hdg</object-name>
+        <object-name>FD.nav</object-name>
+        <object-name>FD.bc</object-name>
+        <object-name>FD.vnav</object-name>
+        <object-name>FD.app</object-name>
+        <object-name>FD.alt</object-name>
+        <object-name>FD.flc</object-name>
+        <object-name>FD.co</object-name>
+        <object-name>FD.vs</object-name>
+        <object-name>FD.AP</object-name>
+        <object-name>FD.PFDSEL</object-name>
+        <object-name>FD.bank</object-name>
+        <object-name>FMC.nav</object-name>
+        <object-name>FMC.fms</object-name>
+        <object-name>FMC1.nav</object-name>
+        <object-name>FMC1.fms</object-name>
+        <object-name>dau1.rev</object-name>
+        <object-name>dau2.rev</object-name>
+        <object-name>sgtest.btn</object-name>
+        <object-name>adcrev.btn</object-name>
+        <object-name>irsrev.btn</object-name>
+        <object-name>pfdhsi.btn</object-name>
+        <object-name>pfdwx.btn</object-name>
+        <object-name>et.btn</object-name>
+        <object-name>tcas.btn</object-name>
+        <object-name>acftsys.btn</object-name>
+        <object-name>mfdmap.btn</object-name>
+        <object-name>mfdwx.btn</object-name>
+        <object-name>norm.btn</object-name>
+        <object-name>abn.btn</object-name>
+        <object-name>emer.btn</object-name>
+        <object-name>skp.btn</object-name>
+        <object-name>pag.btn</object-name>
+        <object-name>rcl.btn</object-name>
+        <object-name>ent.btn</object-name>
+        <object-name>prev.btn</object-name>
+        <object-name>prev.btn.001</object-name>
+        <object-name>MFD.btn0</object-name>
+        <object-name>MFD.btn1</object-name>
+        <object-name>MFD.btn2</object-name>
+        <object-name>MFD.btn3</object-name>
+        <object-name>MFD.btn4</object-name>
+        <object-name>MFD.btn5</object-name>
+        <object-name>EICAS.btn0</object-name>
+        <object-name>EICAS.btn1</object-name>
+        <object-name>EICAS.btn2</object-name>
+        <object-name>EICAS.btn3</object-name>
+        <object-name>EICAS.btn4</object-name>
+        <object-name>EICAS.btn5</object-name>
+        <condition>
+						<or>
+	           	<property>systems/electrical/left-emer-bus</property>
+	           	<property>systems/electrical/left-bus-norm</property>
+						</or>
+        </condition>
+        <emission>
+            <red>1</red>
+            <green>1</green>
+            <blue>1</blue>
+            <factor-prop>controls/lighting/instruments-norm</factor-prop>
+        </emission>
+    </animation>
+
 <!-- ***********  -->
     <animation>
         <type>select</type>
@@ -3155,6 +3224,29 @@
     </action>
   </animation>
 
+<!--Flood Light-->
+
+    <animation>
+        <type>material</type>
+        <object-name>mainpanel_1</object-name>
+        <object-name>Plane.012</object-name>
+        <object-name>labels</object-name>
+				<condition>
+					<or>
+						<property>systems/electrical/left-emer-bus</property>
+						<property>systems/electrical/right-emer-bus</property>
+						<property>systems/electrical/left-bus-norm</property>
+						<property>systems/electrical/right-bus-norm</property>
+					</or>
+				</condition>
+        <emission>
+            <red>1</red>
+            <green>1</green>
+            <blue>1</blue>
+            <factor-prop>controls/lighting/flood-norm</factor-prop>
+        </emission>
+    </animation>
+
 <!--Flood knob -->
 
   <animation>
@@ -3186,7 +3278,7 @@
                 <property>controls/lighting/flood</property>
                 <step>0.05</step>
                 <min>0</min>
-                <max>1.0</max>
+                <max>1</max>
                 <wrap>false</wrap>
             </binding>
         </action>
@@ -3204,7 +3296,7 @@
                 <property>controls/lighting/flood</property>
                 <step>-0.05</step>
                 <min>0</min>
-                <max>1.0</max>
+                <max>1</max>
                 <wrap>false</wrap>
             </binding>
         </action>

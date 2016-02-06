@@ -483,6 +483,78 @@
     </animation>
 
     <animation>
+        <type>material</type>
+        <object-name>btn.0</object-name>
+        <object-name>btn.1</object-name>
+        <object-name>btn.2</object-name>
+        <object-name>btn.3</object-name>
+        <object-name>btn.4</object-name>
+        <object-name>btn.5</object-name>
+        <object-name>btn.6</object-name>
+        <object-name>btn.7</object-name>
+        <object-name>btn.8</object-name>
+        <object-name>btn.9</object-name>
+        <object-name>btn.A</object-name>
+        <object-name>btn.B</object-name>
+        <object-name>btn.C</object-name>
+        <object-name>btn.D</object-name>
+        <object-name>btn.E</object-name>
+        <object-name>btn.F</object-name>
+        <object-name>btn.G</object-name>
+        <object-name>btn.H</object-name>
+        <object-name>btn.I</object-name>
+        <object-name>btn.J</object-name>
+        <object-name>btn.K</object-name>
+        <object-name>btn.L</object-name>
+        <object-name>btn.M</object-name>
+        <object-name>btn.N</object-name>
+        <object-name>btn.O</object-name>
+        <object-name>btn.P</object-name>
+        <object-name>btn.Q</object-name>
+        <object-name>btn.R</object-name>
+        <object-name>btn.S</object-name>
+        <object-name>btn.T</object-name>
+        <object-name>btn.U</object-name>
+        <object-name>btn.V</object-name>
+        <object-name>btn.W</object-name>
+        <object-name>btn.X</object-name>
+        <object-name>btn.Y</object-name>
+        <object-name>btn.Z</object-name>
+        <object-name>btn.clr</object-name>
+        <object-name>btn.del</object-name>
+        <object-name>btn.dir</object-name>
+        <object-name>btn.fpl</object-name>
+        <object-name>btn.l1</object-name>
+        <object-name>btn.l2</object-name>
+        <object-name>btn.l3</object-name>
+        <object-name>btn.l4</object-name>
+        <object-name>btn.minus</object-name>
+        <object-name>btn.nav</object-name>
+        <object-name>btn.next</object-name>
+        <object-name>btn.perf</object-name>
+        <object-name>btn.prev</object-name>
+        <object-name>btn.prog</object-name>
+        <object-name>btn.r1</object-name>
+        <object-name>btn.r2</object-name>
+        <object-name>btn.r3</object-name>
+        <object-name>btn.r4</object-name>
+        <object-name>btn.slash</object-name>
+        <object-name>btn.sp</object-name>
+        <condition>
+						<or>
+	           	<property>systems/electrical/left-emer-bus</property>
+	           	<property>systems/electrical/left-bus-norm</property>
+						</or>
+        </condition>
+        <emission>
+            <red>1</red>
+            <green>1</green>
+            <blue>1</blue>
+            <factor-prop>controls/lighting/instruments-norm</factor-prop>
+        </emission>
+    </animation>
+
+    <animation>
         <name>white</name>
         <type>material</type>
         <object-name>Page</object-name> 

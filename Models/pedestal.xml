@@ -66,6 +66,60 @@
         </offsets>
     </model>
 
+<!-- Lights -->
+
+    <animation>
+        <type>material</type>
+        <object-name>Flap.reset</object-name>
+    <object-name>RIC1.hdg</object-name>
+    <object-name>RIC2.hdg</object-name>
+    <object-name>RIC1.crs</object-name>
+    <object-name>RIC2.crs</object-name>
+    <object-name>RDR.trb</object-name>
+    <object-name>RDR.stab</object-name>
+    <object-name>RDR.tgt</object-name>
+    <object-name>RDR.sect</object-name>
+        <condition>
+						<or>
+	           	<property>systems/electrical/left-emer-bus</property>
+	           	<property>systems/electrical/left-bus-norm</property>
+						</or>
+        </condition>
+        <emission>
+            <red>1</red>
+            <green>1</green>
+            <blue>1</blue>
+            <factor-prop>controls/lighting/instruments-norm</factor-prop>
+        </emission>
+    </animation>
+
+    <animation>
+        <type>material</type>
+        <object-name>Console.001</object-name>
+        <object-name>Console.002</object-name>
+        <object-name>Console.003</object-name>
+        <object-name>Throttle.base</object-name>
+        <object-name>Throttle.base.001</object-name>
+        <object-name>Label.0</object-name>
+        <object-name>Label.1</object-name>
+        <object-name>Label.2</object-name>
+				<condition>
+					<or>
+						<property>systems/electrical/left-emer-bus</property>
+						<property>systems/electrical/right-emer-bus</property>
+						<property>systems/electrical/left-bus-norm</property>
+						<property>systems/electrical/right-bus-norm</property>
+					</or>
+				</condition>
+        <emission>
+            <red>1</red>
+            <green>1</green>
+            <blue>1</blue>
+            <factor-prop>controls/lighting/flood-norm</factor-prop>
+        </emission>
+    </animation>
+
+
 <!--SPEEDBRAKE -->
 
     <animation>
