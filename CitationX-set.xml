@@ -244,7 +244,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
             <path>Aircraft/CitationX/Systems/pfd.xml</path>
         </property-rule>
         <property-rule n="101">
-            <path>Aircraft/CitationX/Models/Lights/lights.xml</path>
+            <path>Aircraft/CitationX/Models/Lights/Lights.xml</path>
         </property-rule>
     </systems>
 

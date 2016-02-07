@@ -3128,7 +3128,7 @@
         </axis>
     </animation>
 
-<!--Day / Night Switch -->
+<!--Day / Night Anti Ice Switch -->
 
   <animation>
     <type>rotate</type>
@@ -3162,6 +3162,15 @@
           <property>sim/sound/click</property>
       </binding>
     </action>
+    <hovered>
+        <binding>
+            <command>set-tooltip</command>
+            <tooltip-id>DayNightSwitch</tooltip-id>
+            <label>Anti Ice Lights : %s</label>
+	          <property>controls/lighting/day-night</property>
+            <mapping>on-off</mapping>
+        </binding>
+    </hovered>
   </animation>
 
 <!--Emerg Light Switch -->
@@ -3202,6 +3211,19 @@
           <property>sim/sound/click</property>
       </binding>
     </action>
+    <hovered>
+        <binding>
+            <command>set-tooltip</command>
+            <tooltip-id>EmerSwitch</tooltip-id>
+            <label>Emergency Lights : %s</label>
+	          <property>controls/lighting/emer-light</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['OFF','ON','NORM'];
+							return modes[arg[0]];
+						</script>
+        </binding>
+    </hovered>
   </animation>
 
   <animation>
@@ -3222,9 +3244,23 @@
           <property>sim/sound/click</property>
       </binding>
     </action>
+    <hovered>
+        <binding>
+            <command>set-tooltip</command>
+            <tooltip-id>EmerSwitch</tooltip-id>
+            <label>Emergency Lights : %s</label>
+	          <property>controls/lighting/emer-light</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['OFF','ON','NORM'];
+							return modes[arg[0]];
+						</script>
+        </binding>
+    </hovered>
+
   </animation>
 
-<!--Flood Light-->
+<!--Flood Lights-->
 
     <animation>
         <type>material</type>
@@ -3282,6 +3318,15 @@
                 <wrap>false</wrap>
             </binding>
         </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>Floodknob</tooltip-id>
+                <label>Floods : %s%%</label>
+                <mapping>percent</mapping>
+           <property>controls/lighting/flood</property>
+            </binding>
+        </hovered>
     </animation>
 
     <animation>
@@ -3337,6 +3382,15 @@
                 <wrap>false</wrap>
             </binding>
         </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>ELknob</tooltip-id>
+                <label>Instrum Lights : %s%%</label>
+                <mapping>percent</mapping>
+           <property>controls/lighting/instruments-norm</property>
+            </binding>
+        </hovered>
     </animation>
 
     <animation>
@@ -3392,6 +3446,15 @@
                 <wrap>false</wrap>
             </binding>
         </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>LHknob</tooltip-id>
+                <label>Left Light : %s%%</label>
+                <mapping>percent</mapping>
+           <property>controls/lighting/lh-lights</property>
+            </binding>
+        </hovered>
     </animation>
 
     <animation>
@@ -3447,6 +3510,15 @@
                 <wrap>false</wrap>
             </binding>
         </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>CTRknob</tooltip-id>
+                <label>Center Light : %s%%</label>
+                <mapping>percent</mapping>
+           <property>controls/lighting/ctr-lights</property>
+            </binding>
+        </hovered>
     </animation>
 
     <animation>
