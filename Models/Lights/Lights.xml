@@ -20,4 +20,16 @@
       <output>controls/lighting/flood-norm</output>
 	</filter>
 
+<!-- Center Panel Light -->
+
+  <model>
+    <name>CenterPanel</name>
+    <path>Models/Lights/CenterPanel.xml</path>
+    <offsets>
+      <x-m>-6.613</x-m>
+      <y-m>0</y-m>
+      <z-m>-0.590</z-m>
+    </offsets>
+  </model>
+
 </PropertyList>

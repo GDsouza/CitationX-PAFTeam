@@ -47,6 +47,20 @@
         </offsets>
     </model>
 
+<!-- Center Panel Light -->
+<!--
+  <model>
+    <name>CenterPanel</name>
+    <path>Models/Lights/CenterPanel.xml</path>
+    <offsets>
+      <x-m>-0.5</x-m>
+      <y-m>0.12</y-m>
+      <z-m>-0.2</z-m>
+    </offsets>
+  </model>
+-->
+<!--  -->
+
     <animation>
         <type>select</type>
         <object-name>panel1</object-name>
