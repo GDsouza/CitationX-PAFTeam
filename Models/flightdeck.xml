@@ -47,20 +47,6 @@
         </offsets>
     </model>
 
-<!-- Center Panel Light -->
-<!--
-  <model>
-    <name>CenterPanel</name>
-    <path>Models/Lights/CenterPanel.xml</path>
-    <offsets>
-      <x-m>-0.5</x-m>
-      <y-m>0.12</y-m>
-      <z-m>-0.2</z-m>
-    </offsets>
-  </model>
--->
-<!--  -->
-
     <animation>
         <type>select</type>
         <object-name>panel1</object-name>
@@ -1033,6 +1019,70 @@
 						<property>sim/sound/click</property>
 				</binding>
 			</action>
+    </animation>
+
+<!--Map Light knob -->
+
+  <animation>
+    <type>rotate</type>
+    <object-name>MapLight.knob</object-name>
+    <property>controls/lighting/map-light</property>
+		<factor>-270</factor>
+    <center>
+      <x-m>-0.918</x-m>
+      <y-m>0</y-m>
+      <z-m>0.626</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>-1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>MapLight.knob</object-name>
+        <action>
+            <button>3</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.1</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>controls/lighting/map-light</property>
+                <step>0.05</step>
+                <min>0</min>
+                <max>1.0</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>MapLight.knob</tooltip-id>
+                <label>Map Light : %s%%</label>
+                <mapping>percent</mapping>
+           <property>controls/lighting/map-light</property>
+            </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>MapLight.knob</object-name>
+        <action>
+            <button>4</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.1</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>controls/lighting/map-light</property>
+                <step>-0.05</step>
+                <min>0</min>
+                <max>1.0</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
     </animation>
 
 </PropertyList>

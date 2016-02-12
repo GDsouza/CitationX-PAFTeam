@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+ <path>MapLight.ac</path>
+
+    <animation>
+        <type>select</type>
+        <object-name>MapLight.cone</object-name>
+        <condition>
+						<or>
+	           	<property>systems/electrical/left-emer-bus</property>
+	           	<property>systems/electrical/left-bus-norm</property>
+						</or>
+        </condition>
+    </animation>
+
+   <animation>
+			<type>light</type>
+			<light-type>spot</light-type>
+			<object-name>MapLight.cone</object-name> 
+			<nopreview/>
+			<position>
+				<x>-0.80</x>
+				<y>0.30</y>
+				<z>1.10</z>
+			</position>
+			<direction>
+				<x>-0.09</x>
+				<y>0.10</y>
+				<z>-1</z>
+			</direction>
+			<ambient>
+				<r>0.9</r>
+				<g>0.7</g>
+				<b>0.5</b>
+				<a>1</a>
+			</ambient>
+			<diffuse>
+				<r>0.7</r>
+				<g>0.4</g>
+				<b>0.3</b>
+				<a>1</a>
+			</diffuse>
+			<specular>
+				<r>0.7</r>
+				<g>0.4</g>
+				<b>0.3</b>
+				<a>1</a>
+			</specular>
+			<dim-factor>
+				<property>controls/lighting/lh-lights</property>
+			</dim-factor>
+			<attenuation>
+				<c>1.0</c>
+				<l>2</l>
+				<q>3</q>
+			</attenuation>
+			<near-m>0.001</near-m>
+			<far-m>1.0</far-m>
+			<cutoff>30</cutoff>
+    </animation>
+<!--
+    <animation>
+        <type>material</type>
+        <object-name>MapLight.cone</object-name>
+        <emission>
+            <red>1</red>
+            <green>1</green>
+            <blue>1</blue>
+            <factor-prop>controls/lighting/lh-lights</factor-prop>
+        </emission>
+    </animation>
+-->
+</PropertyList>

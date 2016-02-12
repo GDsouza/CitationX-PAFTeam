@@ -2,7 +2,7 @@
 
 <PropertyList>
 
-<!-- Flood -->
+<!-- Flood Filter-->
 
   <filter>
       <name>Flood average</name>
@@ -23,12 +23,36 @@
 <!-- Center Panel Light -->
 
   <model>
-    <name>CenterPanel</name>
+    <name>CenterPanelLight</name>
     <path>Models/Lights/CenterPanel.xml</path>
     <offsets>
       <x-m>-6.613</x-m>
       <y-m>0</y-m>
       <z-m>-0.590</z-m>
+    </offsets>
+  </model>
+
+<!-- Left Light -->
+
+  <model>
+    <name>LeftLight</name>
+    <path>Models/Lights/LeftLight.xml</path>
+    <offsets>
+      <x-m>-6.507</x-m>
+      <y-m>-0.658</y-m>
+      <z-m>-0.573</z-m>
+    </offsets>
+  </model>
+
+<!-- Map Light -->
+
+  <model>
+    <name>MapLight</name>
+    <path>Models/Lights/MapLight.xml</path>
+    <offsets>
+      <x-m>-6.510</x-m>
+      <y-m>0.100</y-m>
+      <z-m>-0.565</z-m>
     </offsets>
   </model>
 

@@ -229,7 +229,490 @@
         </axis>
     </animation>
 
+<!-- Bar doors -->
+
+    <animation>
+        <type>rotate</type>
+        <object-name>1-R-bar-door</object-name>
+        <property>controls/bar/bar-door-1</property>
+				<factor>-120</factor>
+        <center>
+            <x-m>-5.745</x-m>
+            <y-m>0.530</y-m>
+            <z-m>0</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>0.04</y>
+            <z>-0.8</z>
+        </axis>
+    </animation>
+
+		<animation>
+			<type>pick</type>
+			<object-name>1-R-bar-door</object-name>
+			<visible>true</visible>
+			<action>
+				<button>0</button>
+				<repeatable>false</repeatable>
+				<binding>
+					<condition>
+						<equals>
+				      <property>controls/bar/bar-door-1</property>						
+							<value>0.0</value>
+						</equals>
+					</condition>
+				  <command>property-interpolate</command>
+				  <property>controls/bar/bar-door-1</property>
+					<value type="double">1.0</value>
+					<time>2</time>
+				</binding>
+				<binding>
+					<condition>
+						<equals>
+				      <property>controls/bar/bar-door-1</property>						
+							<value>1.0</value>
+						</equals>
+					</condition>
+				     <command>property-interpolate</command>
+				      <property>controls/bar/bar-door-1</property>
+							<value type="double">0.0</value>
+					<time>2</time>
+				</binding>
+			</action>
+    	<hovered>
+				<binding>
+          <command>set-tooltip</command>
+            <tooltip-id>Bar-door-1</tooltip-id>
+            <label>Bar door 1: %s</label>
+            <mapping>open-close</mapping>
+       			<property>controls/bar/bar-door-1</property>
+        </binding>
+      </hovered>
+		</animation> 
+
+    <animation>
+        <type>rotate</type>
+        <object-name>2-R-bar-door</object-name>
+        <property>controls/bar/bar-door-2</property>
+				<factor>120</factor>
+        <center>
+            <x-m>-5.960</x-m>
+            <y-m>0.250</y-m>
+            <z-m>0</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>-1</z>
+        </axis>
+    </animation>
+
+		<animation>
+			<type>pick</type>
+			<object-name>2-R-bar-door</object-name>
+			<visible>true</visible>
+			<action>
+				<button>0</button>
+				<repeatable>false</repeatable>
+				<binding>
+					<condition>
+						<equals>
+				      <property>controls/bar/bar-door-2</property>						
+							<value>0.0</value>
+						</equals>
+					</condition>
+				  <command>property-interpolate</command>
+				  <property>controls/bar/bar-door-2</property>
+					<value type="double">1.0</value>
+					<time>2</time>
+				</binding>
+				<binding>
+					<condition>
+						<equals>
+				      <property>controls/bar/bar-door-2</property>						
+							<value>1.0</value>
+						</equals>
+					</condition>
+				     <command>property-interpolate</command>
+				      <property>controls/bar/bar-door-2</property>
+							<value type="double">0.0</value>
+					<time>2</time>
+				</binding>
+			</action>
+    	<hovered>
+				<binding>
+          <command>set-tooltip</command>
+            <tooltip-id>Bar-door-2</tooltip-id>
+            <label>Bar door 2: %s</label>
+            <mapping>open-close</mapping>
+       			<property>controls/bar/bar-door-2</property>
+        </binding>
+      </hovered>
+		</animation> 
+
+    <animation>
+        <type>rotate</type>
+        <object-name>3-R-bar-door</object-name>
+        <property>controls/bar/bar-door-3</property>
+				<factor>-120</factor>
+        <center>
+            <x-m>-6.075</x-m>
+            <y-m>0.230</y-m>
+            <z-m>0</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>0.01</y>
+            <z>-0.8</z>
+        </axis>
+    </animation>
+
+		<animation>
+			<type>pick</type>
+			<object-name>3-R-bar-door</object-name>
+			<visible>true</visible>
+			<action>
+				<button>0</button>
+				<repeatable>false</repeatable>
+				<binding>
+					<condition>
+						<equals>
+				      <property>controls/bar/bar-door-3</property>						
+							<value>0.0</value>
+						</equals>
+					</condition>
+				  <command>property-interpolate</command>
+				  <property>controls/bar/bar-door-3</property>
+					<value type="double">1.0</value>
+					<time>2</time>
+				</binding>
+				<binding>
+					<condition>
+						<equals>
+				      <property>controls/bar/bar-door-3</property>						
+							<value>1.0</value>
+						</equals>
+					</condition>
+				     <command>property-interpolate</command>
+				      <property>controls/bar/bar-door-3</property>
+							<value type="double">0.0</value>
+					<time>2</time>
+				</binding>
+			</action>
+    	<hovered>
+				<binding>
+          <command>set-tooltip</command>
+            <tooltip-id>Bar-door-3</tooltip-id>
+            <label>Bar door 3: %s</label>
+            <mapping>open-close</mapping>
+       			<property>controls/bar/bar-door-3</property>
+        </binding>
+      </hovered>
+		</animation> 
+
+    <animation>
+        <type>rotate</type>
+        <object-name>4-R-bar-door</object-name>
+        <property>controls/bar/bar-door-4</property>
+				<factor>100</factor>
+        <center>
+            <x-m>-6.532</x-m>
+            <y-m>0.230</y-m>
+            <z-m>0</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>0.02</y>
+            <z>-0.8</z>
+        </axis>
+    </animation>
+
+		<animation>
+			<type>pick</type>
+			<object-name>4-R-bar-door</object-name>
+			<visible>true</visible>
+			<action>
+				<button>0</button>
+				<repeatable>false</repeatable>
+				<binding>
+					<condition>
+						<equals>
+				      <property>controls/bar/bar-door-4</property>						
+							<value>0.0</value>
+						</equals>
+					</condition>
+				  <command>property-interpolate</command>
+				  <property>controls/bar/bar-door-4</property>
+					<value type="double">1.0</value>
+					<time>2</time>
+				</binding>
+				<binding>
+					<condition>
+						<equals>
+				      <property>controls/bar/bar-door-4</property>						
+							<value>1.0</value>
+						</equals>
+					</condition>
+				     <command>property-interpolate</command>
+				      <property>controls/bar/bar-door-4</property>
+							<value type="double">0.0</value>
+					<time>2</time>
+				</binding>
+			</action>
+    	<hovered>
+				<binding>
+          <command>set-tooltip</command>
+            <tooltip-id>Bar-door-4</tooltip-id>
+            <label>Bar door 4: %s</label>
+            <mapping>open-close</mapping>
+       			<property>controls/bar/bar-door-4</property>
+        </binding>
+      </hovered>
+		</animation> 
+
+    <animation>
+        <type>rotate</type>
+        <object-name>R-bar-UL</object-name>
+        <property>controls/bar/bar-door-5</property>
+				<factor>90</factor>
+        <center>
+            <x-m>0</x-m>
+            <y-m>0.215</y-m>
+            <z-m>-0.278</z-m>
+        </center>
+        <axis>
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+		<animation>
+			<type>pick</type>
+			<object-name>R-bar-UL</object-name>
+			<visible>true</visible>
+			<action>
+				<button>0</button>
+				<repeatable>false</repeatable>
+				<binding>
+					<condition>
+						<equals>
+				      <property>controls/bar/bar-door-5</property>						
+							<value>0.0</value>
+						</equals>
+					</condition>
+				  <command>property-interpolate</command>
+				  <property>controls/bar/bar-door-5</property>
+					<value type="double">1.0</value>
+					<time>2</time>
+				</binding>
+				<binding>
+					<condition>
+						<equals>
+				      <property>controls/bar/bar-door-5</property>						
+							<value>1.0</value>
+						</equals>
+					</condition>
+				     <command>property-interpolate</command>
+				      <property>controls/bar/bar-door-5</property>
+							<value type="double">0.0</value>
+					<time>2</time>
+				</binding>
+			</action>
+    	<hovered>
+				<binding>
+          <command>set-tooltip</command>
+            <tooltip-id>Bar-door-5</tooltip-id>
+            <label>Bar door 5: %s</label>
+            <mapping>open-close</mapping>
+       			<property>controls/bar/bar-door-5</property>
+        </binding>
+      </hovered>
+		</animation> 
+
+    <animation>
+        <type>rotate</type>
+        <object-name>R-bar-UR</object-name>
+        <property>controls/bar/bar-door-6</property>
+				<factor>90</factor>
+        <center>
+            <x-m>0</x-m>
+            <y-m>0.215</y-m>
+            <z-m>-0.278</z-m>
+        </center>
+        <axis>
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+		<animation>
+			<type>pick</type>
+			<object-name>R-bar-UR</object-name>
+			<visible>true</visible>
+			<action>
+				<button>0</button>
+				<repeatable>false</repeatable>
+				<binding>
+					<condition>
+						<equals>
+				      <property>controls/bar/bar-door-6</property>						
+							<value>0.0</value>
+						</equals>
+					</condition>
+				  <command>property-interpolate</command>
+				  <property>controls/bar/bar-door-6</property>
+					<value type="double">1.0</value>
+					<time>2</time>
+				</binding>
+				<binding>
+					<condition>
+						<equals>
+				      <property>controls/bar/bar-door-6</property>						
+							<value>1.0</value>
+						</equals>
+					</condition>
+				     <command>property-interpolate</command>
+				      <property>controls/bar/bar-door-6</property>
+							<value type="double">0.0</value>
+					<time>2</time>
+				</binding>
+			</action>
+    	<hovered>
+				<binding>
+          <command>set-tooltip</command>
+            <tooltip-id>Bar-door-6</tooltip-id>
+            <label>Bar door 6: %s</label>
+            <mapping>open-close</mapping>
+       			<property>controls/bar/bar-door-6</property>
+        </binding>
+      </hovered>
+		</animation> 
+
+    <animation>
+        <type>rotate</type>
+        <object-name>R-bar-DL</object-name>
+        <property>controls/bar/bar-door-7</property>
+				<factor>90</factor>
+        <center>
+            <x-m>0</x-m>
+            <y-m>0.215</y-m>
+            <z-m>-0.457</z-m>
+        </center>
+        <axis>
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+		<animation>
+			<type>pick</type>
+			<object-name>R-bar-DL</object-name>
+			<visible>true</visible>
+			<action>
+				<button>0</button>
+				<repeatable>false</repeatable>
+				<binding>
+					<condition>
+						<equals>
+				      <property>controls/bar/bar-door-7</property>						
+							<value>0.0</value>
+						</equals>
+					</condition>
+				  <command>property-interpolate</command>
+				  <property>controls/bar/bar-door-7</property>
+					<value type="double">1.0</value>
+					<time>2</time>
+				</binding>
+				<binding>
+					<condition>
+						<equals>
+				      <property>controls/bar/bar-door-7</property>						
+							<value>1.0</value>
+						</equals>
+					</condition>
+				     <command>property-interpolate</command>
+				      <property>controls/bar/bar-door-7</property>
+							<value type="double">0.0</value>
+					<time>2</time>
+				</binding>
+			</action>
+    	<hovered>
+				<binding>
+          <command>set-tooltip</command>
+            <tooltip-id>Bar-door-7</tooltip-id>
+            <label>Bar door 7: %s</label>
+            <mapping>open-close</mapping>
+       			<property>controls/bar/bar-door-7</property>
+        </binding>
+      </hovered>
+		</animation> 
+
+    <animation>
+        <type>rotate</type>
+        <object-name>R-bar-DR</object-name>
+        <property>controls/bar/bar-door-8</property>
+				<factor>90</factor>
+        <center>
+            <x-m>0</x-m>
+            <y-m>0.215</y-m>
+            <z-m>-0.460</z-m>
+        </center>
+        <axis>
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+		<animation>
+			<type>pick</type>
+			<object-name>R-bar-DR</object-name>
+			<visible>true</visible>
+			<action>
+				<button>0</button>
+				<repeatable>false</repeatable>
+				<binding>
+					<condition>
+						<equals>
+				      <property>controls/bar/bar-door-8</property>						
+							<value>0.0</value>
+						</equals>
+					</condition>
+				  <command>property-interpolate</command>
+				  <property>controls/bar/bar-door-8</property>
+					<value type="double">1.0</value>
+					<time>2</time>
+				</binding>
+				<binding>
+					<condition>
+						<equals>
+				      <property>controls/bar/bar-door-8</property>						
+							<value>1.0</value>
+						</equals>
+					</condition>
+				     <command>property-interpolate</command>
+				      <property>controls/bar/bar-door-8</property>
+							<value type="double">0.0</value>
+					<time>2</time>
+				</binding>
+			</action>
+    	<hovered>
+				<binding>
+          <command>set-tooltip</command>
+            <tooltip-id>Bar-door-8</tooltip-id>
+            <label>Bar door 8: %s</label>
+            <mapping>open-close</mapping>
+       			<property>controls/bar/bar-door-8</property>
+        </binding>
+      </hovered>
+		</animation> 
+
 <!-- CABIN SEATS -->
+
     <model>
         <name>Cabin-seats</name>
         <path>Aircraft/CitationX/Models/Seats/Cabin-seats.xml</path>
