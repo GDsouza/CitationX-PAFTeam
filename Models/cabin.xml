@@ -13,6 +13,28 @@
     <object-name>baguette</object-name>
     <object-name>seau</object-name>
     <object-name>bouteille1</object-name>
+    <object-name>R-bar</object-name>
+    <object-name>1-R-bar-door</object-name>
+    <object-name>2-R-bar-door</object-name>
+    <object-name>3-R-bar-door</object-name>
+    <object-name>4-R-bar-door</object-name>
+    <object-name>R-bar-UL</object-name>
+    <object-name>R-bar-UR</object-name>
+    <object-name>R-bar-DL</object-name>
+    <object-name>R-bar-DR</object-name>
+    <object-name>bar-L</object-name>
+    <object-name>H-bar-door</object-name>
+    <object-name>R-H-bar-door</object-name>
+    <object-name>L-H-bar-door</object-name>
+    <object-name>L-Low-bar-door</object-name>
+    <object-name>R-Low-bar-door</object-name>
+    <object-name>meubles</object-name>
+    <object-name>meubles4</object-name>
+    <object-name>L-cabin-door</object-name>
+    <object-name>R-cabin-door</object-name>
+    <object-name>L-toilet-door</object-name>
+    <object-name>R-toilet-door</object-name>
+    <object-name>plinthe</object-name>
     <emission>
       <red>   0.32 </red>
       <green> 0.25 </green>
@@ -28,6 +50,28 @@
     <object-name>baguette</object-name>
     <object-name>seau</object-name>
     <object-name>bouteille1</object-name>
+    <object-name>R-bar</object-name>
+    <object-name>1-R-bar-door</object-name>
+    <object-name>2-R-bar-door</object-name>
+    <object-name>3-R-bar-door</object-name>
+    <object-name>4-R-bar-door</object-name>
+    <object-name>R-bar-UL</object-name>
+    <object-name>R-bar-UR</object-name>
+    <object-name>R-bar-DL</object-name>
+    <object-name>R-bar-DR</object-name>
+    <object-name>bar-L</object-name>
+    <object-name>H-bar-door</object-name>
+    <object-name>R-H-bar-door</object-name>
+    <object-name>L-H-bar-door</object-name>
+    <object-name>L-Low-bar-door</object-name>
+    <object-name>R-Low-bar-door</object-name>
+    <object-name>meubles</object-name>
+    <object-name>meubles4</object-name>
+    <object-name>L-cabin-door</object-name>
+    <object-name>R-cabin-door</object-name>
+    <object-name>L-toilet-door</object-name>
+    <object-name>R-toilet-door</object-name>
+    <object-name>plinthe</object-name>
     </effect>
 
     <effect>
@@ -36,6 +80,28 @@
     <object-name>Sphere</object-name>
     <object-name>seau</object-name>
     <object-name>bouteille1</object-name>
+    <object-name>R-bar</object-name>
+    <object-name>1-R-bar-door</object-name>
+    <object-name>2-R-bar-door</object-name>
+    <object-name>3-R-bar-door</object-name>
+    <object-name>4-R-bar-door</object-name>
+    <object-name>R-bar-UL</object-name>
+    <object-name>R-bar-UR</object-name>
+    <object-name>R-bar-DL</object-name>
+    <object-name>R-bar-DR</object-name>
+    <object-name>bar-L</object-name>
+    <object-name>H-bar-door</object-name>
+    <object-name>R-H-bar-door</object-name>
+    <object-name>L-H-bar-door</object-name>
+    <object-name>L-Low-bar-door</object-name>
+    <object-name>R-Low-bar-door</object-name>
+    <object-name>meubles</object-name>
+    <object-name>meubles4</object-name>
+    <object-name>L-cabin-door</object-name>
+    <object-name>R-cabin-door</object-name>
+    <object-name>L-toilet-door</object-name>
+    <object-name>R-toilet-door</object-name>
+    <object-name>plinthe</object-name>
     </effect>
 
     <effect>
