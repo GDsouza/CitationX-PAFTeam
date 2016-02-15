@@ -38,6 +38,14 @@
     <object-name>bouteille1</object-name>
     </effect>
 
+    <effect>
+      <inherits-from>Effects/model-transparent</inherits-from>
+    <object-name>verre</object-name>
+      <condition>
+        <property>sim/rendering/rembrandt/enabled</property>
+      </condition>
+    </effect> 
+
 <!-- EXT CABIN DOOR -->
 
 	<animation>
@@ -236,16 +244,14 @@
         <object-name>1-R-bar-door</object-name>
         <property>controls/bar/bar-door-1</property>
 				<factor>-120</factor>
-        <center>
-            <x-m>-5.745</x-m>
-            <y-m>0.530</y-m>
-            <z-m>0</z-m>
-        </center>
-        <axis>
-            <x>0</x>
-            <y>0.04</y>
-            <z>-0.8</z>
-        </axis>
+    <axis>
+      <x1-m> -5.745 </x1-m>
+      <y1-m>  0.489 </y1-m>
+      <z1-m>  0.488 </z1-m>
+      <x2-m> -5.745  </x2-m>
+      <y2-m>  0.511 </y2-m>
+      <z2-m>  0.123 </z2-m>
+    </axis>
     </animation>
 
 		<animation>
@@ -296,16 +302,14 @@
         <object-name>2-R-bar-door</object-name>
         <property>controls/bar/bar-door-2</property>
 				<factor>120</factor>
-        <center>
-            <x-m>-5.960</x-m>
-            <y-m>0.250</y-m>
-            <z-m>0</z-m>
-        </center>
-        <axis>
-            <x>0</x>
-            <y>0</y>
-            <z>-1</z>
-        </axis>
+    <axis>
+      <x1-m> -5.959 </x1-m>
+      <y1-m>  0.236 </y1-m>
+      <z1-m>  0.587 </z1-m>
+      <x2-m> -5.959  </x2-m>
+      <y2-m>  0.237 </y2-m>
+      <z2-m>  0.144 </z2-m>
+    </axis>
     </animation>
 
 		<animation>
