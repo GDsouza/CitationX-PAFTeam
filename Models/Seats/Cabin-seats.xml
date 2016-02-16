@@ -3,6 +3,26 @@
 <PropertyList>
 
     <path>Cabin-seats.ac</path>
+  <animation>
+    <type>material</type>
+    <object-name>Seats</object-name>
+    <object-name>Reg-Seats</object-name>
+    <emission>
+      <red>   0.28 </red>
+      <green> 0.28 </green>
+      <blue>  0.25 </blue>
+    </emission>
+  </animation>
 
+    <effect>
+      <inherits-from>Aircraft/CitationX/Models/Effects/skin-reflect</inherits-from>
+    <object-name>Seats</object-name>
+    <object-name>Reg-Seats</object-name>
+    </effect>
+
+    <effect>
+      <inherits-from>Aircraft/CitationX/Models/Effects/test_reflect</inherits-from>
+    <object-name>Reg-Seats</object-name>
+    </effect>
 
 </PropertyList>
