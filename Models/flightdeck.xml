@@ -4,6 +4,18 @@
 
     <path>flightdeck.ac</path>
 
+  <animation>
+    <type>material</type>
+    <object-name>Map.light</object-name>
+    <object-name>Map.sphere</object-name>
+    <object-name>porte-bouteille</object-name>
+    <emission>
+      <red>   0.50 </red>
+      <green> 0.55 </green>
+      <blue>  0.18 </blue>
+    </emission>
+  </animation>
+
     <model>
         <name>panel1</name>
         <path>Aircraft/CitationX/Models/panel.xml</path>

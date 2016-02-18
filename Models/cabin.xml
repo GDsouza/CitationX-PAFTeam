@@ -7,8 +7,6 @@
   <!-- Chrome Effect for interior parts -->
   <animation>
     <type>material</type>
-    <object-name>Cabin-LightsSup</object-name>
-    <object-name>Sphere</object-name>
     <object-name>poignees</object-name>
     <object-name>baguette</object-name>
     <object-name>seau</object-name>
@@ -35,10 +33,34 @@
     <object-name>L-toilet-door</object-name>
     <object-name>R-toilet-door</object-name>
     <object-name>plinthe</object-name>
+    <object-name>cache-tablette-1</object-name>
+    <object-name>cache-tablette-2</object-name>
+    <object-name>cache-tablette-3</object-name>
+    <object-name>cache-tablette-4</object-name>
+    <object-name>console-tablette</object-name>
+    <object-name>tablette-1-1</object-name>
+    <object-name>tablette-1-2</object-name>
+    <object-name>tablette-2-1</object-name>
+    <object-name>tablette-2-2</object-name>
+    <object-name>tablette-3-1</object-name>
+    <object-name>tablette-3-2</object-name>
+    <object-name>tablette-4-1</object-name>
+    <object-name>tablette-4-2</object-name>
     <emission>
       <red>   0.32 </red>
       <green> 0.25 </green>
       <blue>  0.25 </blue>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>Cabin-LightsSup</object-name>
+    <object-name>Sphere</object-name>
+    <emission>
+      <red>   0.50 </red>
+      <green> 0.55 </green>
+      <blue>  0.18 </blue>
     </emission>
   </animation>
 
@@ -72,6 +94,19 @@
     <object-name>L-toilet-door</object-name>
     <object-name>R-toilet-door</object-name>
     <object-name>plinthe</object-name>
+    <object-name>cache-tablette-1</object-name>
+    <object-name>cache-tablette-2</object-name>
+    <object-name>cache-tablette-3</object-name>
+    <object-name>cache-tablette-4</object-name>
+    <object-name>console-tablette</object-name>
+    <object-name>tablette-1-1</object-name>
+    <object-name>tablette-1-2</object-name>
+    <object-name>tablette-2-1</object-name>
+    <object-name>tablette-2-2</object-name>
+    <object-name>tablette-3-1</object-name>
+    <object-name>tablette-3-2</object-name>
+    <object-name>tablette-4-1</object-name>
+    <object-name>tablette-4-2</object-name>
     </effect>
 
     <effect>
@@ -102,6 +137,19 @@
     <object-name>L-toilet-door</object-name>
     <object-name>R-toilet-door</object-name>
     <object-name>plinthe</object-name>
+    <object-name>cache-tablette-1</object-name>
+    <object-name>cache-tablette-2</object-name>
+    <object-name>cache-tablette-3</object-name>
+    <object-name>cache-tablette-4</object-name>
+    <object-name>console-tablette</object-name>
+    <object-name>tablette-1-1</object-name>
+    <object-name>tablette-1-2</object-name>
+    <object-name>tablette-2-1</object-name>
+    <object-name>tablette-2-2</object-name>
+    <object-name>tablette-3-1</object-name>
+    <object-name>tablette-3-2</object-name>
+    <object-name>tablette-4-1</object-name>
+    <object-name>tablette-4-2</object-name>
     </effect>
 
     <effect>

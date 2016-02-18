@@ -44,10 +44,10 @@ Pil auto : Vérifier toutes les fonctions
 					# Vérification fonction VNAV - Fait 27/01/2016
 
 CABINE : 	Eclairage de la cabine
-					Mettre une texture de ? derrière les portes du fond
+				#	Mettre une texture de ? derrière les portes du fond
 				#	Animer les accoudoirs du co-pilote - Fait 08/01/2016
 				#	Animer l'accoudoir gauche du pilote - Fait 08/01/2016
-          Poursuivre la modélisation du mobilier (tablettes, bar, etc...)
+          #Poursuivre la modélisation du mobilier (tablettes, bar, etc...)
           Animation des tablettes
           Améliorer l'escalier
 					Mettre les palonniers 
