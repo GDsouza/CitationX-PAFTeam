@@ -566,6 +566,7 @@ var speed_table = func(alt_ind,my_spd,vmo) {
 var update_fd = func {
     update_nav();
 		speed_Control();
+		setprop("autopilot/settings/altitude-setting-ft",getprop("autopilot/settings/asel")*100);
     if(count==0)monitor_AP_errors();
     if(count==1)monitor_L_armed();
     if(count==2)monitor_V_armed();

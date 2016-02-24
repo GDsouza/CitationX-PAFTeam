@@ -99,6 +99,17 @@
         </offsets>
     </model>
 
+    <model>
+        <name>CabPress</name>
+        <path>Aircraft/CitationX/Models/Instruments/Press/CabPress.xml</path>
+        <offsets>
+          <x-m>0.027</x-m>
+          <y-m>0.542</y-m>
+          <z-m>-0.029</z-m>
+					<pitch-deg>-45</pitch-deg>
+        </offsets>
+    </model>
+
 <!-- Annunciators -->
     <animation>
         <type>select</type>
@@ -415,6 +426,67 @@
       </condition>
     </animation>
 
+<!-- Emergency Brake -->
+
+    <animation>
+        <type>rotate</type>
+        <object-name>Emer-brake</object-name>
+        <property>controls/gear/emer-brake</property>
+        <factor>90</factor>
+        <center>
+            <x-m>-0.025</x-m>
+            <y-m>0</y-m>
+            <z-m>-0.15</z-m>
+        </center>
+        <axis>
+            <x>0.0</x>
+            <y>1.0</y>
+            <z>0.0</z>
+        </axis>
+    </animation>
+
+	<animation>
+		<type>pick</type>
+		<object-name>Emer-brake</object-name>
+			<action>
+				<button>0</button>
+				<repeatable>false</repeatable>
+				<binding>
+					<condition>
+						<equals>
+				      <property>controls/gear/emer-brake</property>						
+							<value>0.0</value>
+						</equals>
+					</condition>
+				  <command>property-interpolate</command>
+				  <property>controls/gear/emer-brake</property>
+					<value type="double">1.0</value>
+					<time>2</time>
+				</binding>
+				<binding>
+					<condition>
+						<equals>
+				      <property>controls/gear/emer-brake</property>						
+							<value>1.0</value>
+						</equals>
+					</condition>
+				     <command>property-interpolate</command>
+				      <property>controls/gear/emer-brake</property>
+							<value type="double">0.0</value>
+					<time>2</time>
+				</binding>
+			</action>
+    	<hovered>
+				<binding>
+          <command>set-tooltip</command>
+            <tooltip-id>Emer-Gear</tooltip-id>
+            <label>Emergency brake: %s</label>
+            <mapping>open-close</mapping>
+       			<property>controls/gear/emer-brake</property>
+        </binding>
+      </hovered>
+		</animation> 
+
 <!-- REVERSER -->
 
     <animation>
@@ -467,74 +539,6 @@
 					</or>
         </condition>
     </animation>
-
-    <animation>
-        <name>amber</name>
-        <type>material</type>
-      	<object-name>reverser.arm</object-name>
-      	<object-name>reverser.unlock</object-name>
-      	<condition>
-					<equals>
-          	<property>instrumentation/annunciators/test-select</property>
-							<value>4</value>
-					</equals>
-      </condition>
-        <emission>
-            <red-prop>sim/color-set/amber/r</red-prop>
-            <green-prop>sim/color-set/amber/g</green-prop>
-            <blue-prop>sim/color-set/amber/b</blue-prop>
-            <alpha-prop>sim/color-set/amber/a</alpha-prop>
-        </emission>
-        <ambient>
-            <red>0</red>
-            <green>0</green>
-            <blue>0</blue>
-        </ambient>
-        <diffuse>
-            <red>0</red>
-            <green>0</green>
-            <blue>0</blue>
-        </diffuse>
-        <specular>
-            <red>0</red>
-            <green>0</green>
-            <blue>0</blue>
-        </specular>
-    </animation>
-
-    <animation>
-        <name>white</name>
-        <type>material</type>
-      	<object-name>reverser.deploy</object-name>
-      	<condition>
-					<equals>
-          	<property>instrumentation/annunciators/test-select</property>
-							<value>4</value>
-					</equals>
-      </condition>
-        <emission>
-            <red-prop>sim/color-set/white/r</red-prop>
-            <green-prop>sim/color-set/white/g</green-prop>
-            <blue-prop>sim/color-set/white/b</blue-prop>
-            <alpha-prop>sim/color-set/white/a</alpha-prop>
-        </emission>
-        <ambient>
-            <red>0</red>
-            <green>0</green>
-            <blue>0</blue>
-        </ambient>
-        <diffuse>
-            <red>0</red>
-            <green>0</green>
-            <blue>0</blue>
-        </diffuse>
-        <specular>
-            <red>0</red>
-            <green>0</green>
-            <blue>0</blue>
-        </specular>
-    </animation>
-
 <!--ENGINE FIRE ALARMS -->
 
     <animation>
@@ -1562,6 +1566,79 @@
         </action>
     </animation>
 
+<!-- FUEL BOOST LH -->
+
+    <animation>
+        <type>rotate</type>
+        <object-name>Fuelboost.Rh</object-name>
+        <property>controls/fuel/tank[1]/boost_pump</property>
+        <factor>15</factor>
+        <center>
+            <x-m>0.066</x-m>
+            <y-m>0</y-m>
+            <z-m>-0.060</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>-1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Fuelboost.Rh</object-name>
+        <object-name>FuelboostRh.on</object-name> 
+       <action>
+            <button>0</button>
+            <binding>
+               <command>property-adjust</command>
+               <property>controls/fuel/tank[1]/boost_pump</property>
+								<step>1</step>
+								<min>0</min>
+								<max>2</max>
+							<wrap>false</wrap>
+            </binding>
+        		<binding>
+            	<command>property-toggle</command>
+            	<property>sim/sound/click</property>
+        </binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>Fuelboost R</tooltip-id>
+                <label>Fuelboost R : %s</label>
+           			<property>controls/fuel/tank[1]/boost_pump</property>
+                <mapping>nasal</mapping>
+								<script>
+									var modes = ['NORM','OFF','ON'];
+									return modes[arg[0]];
+								</script>
+            </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>FuelboostRh.norm</object-name> 
+       <action>
+            <button>0</button>
+            <binding>
+               <command>property-adjust</command>
+               <property>controls/fuel/tank[1]/boost_pump</property>
+								<step>-1</step>
+								<min>0</min>
+								<max>2</max>
+							<wrap>false</wrap>
+            </binding>
+        		<binding>
+            	<command>property-toggle</command>
+            	<property>sim/sound/click</property>
+        </binding>
+        </action>
+    </animation>
+
 <!-- FADEC LH -->
 
     <animation>
@@ -2031,7 +2108,7 @@
         <type>rotate</type>
         <object-name>Slipball1</object-name>
         <property>instrumentation/slip-skid-ball/indicated-slip-skid</property>
-                <interpolation>
+        <interpolation>
             <entry><ind>-2.0</ind><dep>-3.65</dep></entry>
             <entry><ind>2.0</ind><dep>3.65</dep></entry>
         </interpolation>
@@ -3502,6 +3579,299 @@
                 <wrap>false</wrap>
             </binding>
         </action>
+    </animation>
+
+<!--Pressurization Auto-Rate Knob -->
+
+
+  <animation>
+    <type>rotate</type>
+    <object-name>cv-rate.knob</object-name>
+    <property>controls/pressurization/cv-rate-fpm</property>
+		<factor>-0.33</factor>
+    <center>
+      <x-m>0.028</x-m>
+      <y-m>0.497</y-m>
+      <z-m>-0.0510</z-m>
+    </center>
+    <axis>
+      <x>1</x>
+      <y>0</y>
+      <z>1</z>
+    </axis>
+  </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>cv-rate.knob</object-name>
+        <action>
+            <button>3</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.1</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>controls/pressurization/cv-rate-fpm</property>
+                <step>100</step>
+                <min>100</min>
+                <max>1000</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>cv-rate.knob</tooltip-id>
+                <label>cv rate : %s</label>
+								<property>controls/pressurization/cv-rate-fpm</property>
+            </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>cv-rate.knob</object-name>
+        <action>
+            <button>4</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.1</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>controls/pressurization/cv-rate-fpm</property>
+                <step>-100</step>
+                <min>100</min>
+                <max>1000</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+    </animation>
+-->
+
+<!--Pressurization A Knob -->
+
+  <animation>
+    <type>rotate</type>
+    <object-name>A.knob</object-name>
+    <property>controls/pressurization/man-alt-ft</property>
+		<factor>-270</factor>
+<!--
+			<interpolation>
+		    <entry><ind>-1000</ind><dep>0</dep></entry>
+		    <entry><ind>14000</ind><dep>270</dep></entry>
+			</interpolation>
+-->
+    <center>
+      <x-m>0.029</x-m>
+      <y-m>0.5217</y-m>
+      <z-m>-0.0525</z-m>
+    </center>
+    <axis>
+      <x>1</x>
+      <y>0</y>
+      <z>1</z>
+    </axis>
+  </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>A.knob</object-name>
+        <action>
+            <button>3</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.1</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>controls/pressurization/man-alt-ft</property>
+                <step>500</step>
+                <min>-1000</min>
+                <max>14000</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>A.Knob</tooltip-id>
+                <label>Alt : %s</label>
+								<property>controls/pressurization/man-alt-ft</property>
+            </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>A.knob</object-name>
+        <action>
+            <button>4</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.1</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>controls/pressurization/man-alt-ft</property>
+                <step>-500</step>
+                <min>-1000</min>
+                <max>14000</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+    </animation>
+
+<!--Pressurization R Knob -->
+
+  <animation>
+    <type>rotate</type>
+    <object-name>R.knob</object-name>
+    <property>controls/pressurization/man-rate-fpm</property>
+		<factor>-0.30</factor>
+    <center>
+      <x-m>0.018</x-m>
+      <y-m>0.565</y-m>
+      <z-m>0</z-m>
+    </center>
+    <axis>
+      <x>1</x>
+      <y>0</y>
+      <z>1</z>
+    </axis>
+  </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>R.knob</object-name>
+        <action>
+            <button>3</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.1</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>controls/pressurization/man-rate-fpm</property>
+                <step>100</step>
+                <min>100</min>
+                <max>1000</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>R.Knob</tooltip-id>
+                <label>Range : %s</label>
+								<property>controls/pressurization/man-rate-fpm</property>
+            </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>R.knob</object-name>
+        <action>
+            <button>4</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.1</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>controls/pressurization/man-rate-fpm</property>
+                <step>-100</step>
+                <min>100</min>
+                <max>1000</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+    </animation>
+
+<!-- Pressurization ALT SEL Button -->
+
+    <animation>
+        <type>rotate</type>
+        <object-name>Alt.sel</object-name>
+        <property>controls/pressurization/alt-sel</property>
+        <factor>30</factor>
+        <center>
+            <x-m>0.066</x-m>
+            <y-m>0</y-m>
+            <z-m>-0.066</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>-1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Alt.sel</object-name>
+        <action>
+          <button>0</button>
+            <binding>
+               <command>property-toggle</command>
+               <property>controls/pressurization/alt-sel</property>
+            </binding>
+        		<binding>
+            	<command>property-toggle</command>
+            	<property>sim/sound/click</property>
+		        </binding>
+        </action>
+        <hovered>
+          <binding>
+            <command>set-tooltip</command>
+            <tooltip-id>Alt-Sel</tooltip-id>
+	          <property>controls/pressurization/alt-sel</property>
+            <label>ALT SEL : %s</label>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['NORM','ALT SEL'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+<!-- Pressurization MAN Button -->
+
+    <animation>
+        <type>rotate</type>
+        <object-name>Press.man</object-name>
+        <property>controls/pressurization/press-man</property>
+        <factor>30</factor>
+        <center>
+            <x-m>0.066</x-m>
+            <y-m>0</y-m>
+            <z-m>-0.066</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>-1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Press.man</object-name>
+        <action>
+            <button>0</button>
+            <binding>
+               <command>property-toggle</command>
+               <property>controls/pressurization/press-man</property>
+            </binding>
+        		<binding>
+            	<command>property-toggle</command>
+            	<property>sim/sound/click</property>
+        </binding>
+        </action>
+        <hovered>
+          <binding>
+            <command>set-tooltip</command>
+            <tooltip-id>Press-man</tooltip-id>
+            <label>Pressurize : %s</label>
+	          <property>controls/pressurization/press-man</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['NORM','MANUAL'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
     </animation>
 
 <!-- 3D TEXT  -->

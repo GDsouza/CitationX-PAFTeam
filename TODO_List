@@ -22,7 +22,7 @@ PFD :# Coder le bouton "MINIMUMS" - Fait 11/01/2016
 
 MFD : Coder les boutons du bas
 
-APU : Coder le bouton MAP LIGHT
+APU :# Coder le bouton MAP LIGHT - Fait 24/02/2016
 		 # Coder l'enregistreur horaire - Fait 23/01/2016
 
 EICAS : Coder les boutons du bas
@@ -33,7 +33,7 @@ PANEL : Coder le pavé de boutons à gauche du PFD (pilote et co-pilote)
 				Coder l'interrupteur FUEL BOOST RH
 				Coder le pavé de boutons sous PFD et MFD Co-pilote
 				Coder le pavé températures co-pilote
-				Coder le pavé pressurisation co-pilote
+				Coder le pavé pressurisation co-pilote # EN COURS 
 				Animer le levier manuel du train d'atterrissage
 
 PEDESTAL : 	Animer les boutons de TRIM à gauche des throttles
@@ -47,7 +47,7 @@ CABINE : 	Eclairage de la cabine
 				#	Mettre une texture de ? derrière les portes du fond
 				#	Animer les accoudoirs du co-pilote - Fait 08/01/2016
 				#	Animer l'accoudoir gauche du pilote - Fait 08/01/2016
-          #Poursuivre la modélisation du mobilier (tablettes, bar, etc...)
+        # Poursuivre la modélisation du mobilier (tablettes, bar, etc...)
           Animation des tablettes
           Améliorer l'escalier
 					Mettre les palonniers 

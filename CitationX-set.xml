@@ -185,22 +185,22 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
       <z-offset-m archive="y" type="double">-7.0</z-offset-m>
       <default-heading-offset-deg>0</default-heading-offset-deg>
       <pitch-offset-deg>-12.0</pitch-offset-deg>
-                <limits>
-                    <enabled type="bool">false</enabled>
-                    <left>
-                        <heading-max-deg type="double">120</heading-max-deg>
-                        <x-offset-max-m type="double">0.28</x-offset-max-m>
-                        <x-offset-threshold-deg type="double">0</x-offset-threshold-deg>
-                    </left>
-                    <right>
-                        <heading-max-deg type="double">170</heading-max-deg>
-                        <x-offset-max-m type="double">0.25</x-offset-max-m>
-                        <x-offset-threshold-deg type="double">0</x-offset-threshold-deg>
-                    </right>
-                </limits>
+      <limits>
+          <enabled type="bool">false</enabled>
+          <left>
+              <heading-max-deg type="double">120</heading-max-deg>
+              <x-offset-max-m type="double">0.28</x-offset-max-m>
+              <x-offset-threshold-deg type="double">0</x-offset-threshold-deg>
+          </left>
+          <right>
+              <heading-max-deg type="double">170</heading-max-deg>
+              <x-offset-max-m type="double">0.25</x-offset-max-m>
+              <x-offset-threshold-deg type="double">0</x-offset-threshold-deg>
+          </right>
+      </limits>
       <dynamic-view type="bool">false</dynamic-view>
     </config>
-    </view>
+  </view>
 
   <view n="103">
     <name>Panel</name>
@@ -220,7 +220,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
                 </limits>
       <dynamic-view type="bool">false</dynamic-view>
     </config>
-    </view>
+  </view>
 
         <allow-toggle-cockpit>true</allow-toggle-cockpit>
         <chase-distance-m type="double">-40.0</chase-distance-m>
@@ -238,13 +238,16 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
     <systems>
         <path>Aircraft/CitationX/Systems/systems.xml</path>
         <autopilot>
-            <path>Aircraft/CitationX/Systems/Citation-autopilot.xml</path>
+          <path>Aircraft/CitationX/Systems/Citation-autopilot.xml</path>
         </autopilot>
         <property-rule n="100">
             <path>Aircraft/CitationX/Systems/pfd.xml</path>
         </property-rule>
         <property-rule n="101">
             <path>Aircraft/CitationX/Models/Lights/Lights.xml</path>
+        </property-rule>
+        <property-rule n="102">
+            <path>Aircraft/CitationX/Systems/pressurization.xml</path>
         </property-rule>
     </systems>
 
@@ -698,11 +701,6 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
             <bank-limit type="int">30</bank-limit>
             <target-speed-kt type="int">250</target-speed-kt>
             <target-speed-mach type="double">0.38</target-speed-mach>
-
-<!--old
-            <target-speed-kt type="int">80</target-speed-kt>
-            <target-speed-mach type="double">0.40</target-speed-mach>
--->
             <changeover type="bool">0</changeover>
             <heading-bug-deg type="int">0</heading-bug-deg>
             <vertical-speed-fpm type="int">0</vertical-speed-fpm>
@@ -808,11 +806,14 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 						<file>Aircraft/CitationX/Models/Instruments/CDU/DispPages/Progress.nas</file>
 				</displaypages>
 				<cdu>
-						<file>Aircraft/CitationX/Models/Instruments/CDU/CDU.nas</file>
+					<file>Aircraft/CitationX/Models/Instruments/CDU/CDU.nas</file>
 				</cdu>
 				<tyresmoke>
 					<file>Aircraft/CitationX/Nasal/tyresmoke.nas</file>
 				</tyresmoke>
+				<pressurization>
+					<file>Aircraft/CitationX/Nasal/cabin-pressure.nas</file>
+				</pressurization>
     </nasal>
 
 </PropertyList>

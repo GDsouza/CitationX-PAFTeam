@@ -150,6 +150,7 @@ props.globals.initNode("controls/bar/bar-door-5",0,"DOUBLE");
 props.globals.initNode("controls/bar/bar-door-6",0,"DOUBLE");
 props.globals.initNode("controls/bar/bar-door-7",0,"DOUBLE");
 props.globals.initNode("controls/bar/bar-door-8",0,"DOUBLE");
+props.globals.initNode("controls/gear/emer-brake",0,"DOUBLE");
 props.globals.initNode("sim/model/pilot-seat",0,"DOUBLE");
 props.globals.initNode("sim/model/copilot-seat",0,"DOUBLE");
 props.globals.initNode("sim/alarms/overspeed-alarm",0,"BOOL");
