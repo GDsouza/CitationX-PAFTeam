@@ -787,11 +787,11 @@
             <condition>
               <and>
                 <less-than>
-                    <property>controls/toilet-door/open</property>>
+                    <property>controls/toilet-door/open</property>
                     <value>1</value>
                 </less-than>
                 <greater-than>
-                    <property>controls/toilet-door/open</property>>
+                    <property>controls/toilet-door/open</property>
                     <value>0.01</value>
                 </greater-than>
               </and>                          
@@ -807,6 +807,440 @@
             </position>
         </doors>
 
+    <!-- EXT DOOR -->
+
+        <doors>
+            <name>ext-cabin-door-open</name>
+            <mode>once</mode>
+            <path>Aircraft/CitationX/Sounds/ext-cabin-door-open.wav</path>
+            <condition>
+                <greater-than>
+                    <property>controls/cabin-door/position-norm</property>
+                    <value>0.01</value>
+                </greater-than>
+            </condition>
+            <volume>
+                <property>sim/signals/fdm-initialized</property>
+                <factor>1</factor>
+            </volume>
+            <position>
+                <x>-0.6 </x>
+                <y> 0.0 </y>
+                <z> 0.6 </z>
+            </position>
+        </doors>
+
+        <doors>
+            <name>ext-cabin-door-closed</name>
+            <mode>once</mode>
+            <path>Aircraft/CitationX/Sounds/ext-cabin-door-closed.wav</path>
+            <condition>
+              <and>
+                <less-than>
+                    <property>controls/cabin-door/position-norm</property>
+                    <value>1</value>
+                </less-than>
+                <greater-than>
+                    <property>controls/cabin-door/position-norm</property>
+                    <value>0.01</value>
+                </greater-than>
+              </and>                          
+            </condition>
+            <volume>
+                <property>sim/signals/fdm-initialized</property>
+                <factor>1</factor>
+            </volume>
+            <position>
+                <x>-0.6 </x>
+                <y> 0.0 </y>
+                <z> 0.6 </z>
+            </position>
+        </doors>
+    <!-- BAR DOORS -->
+                     <!-- Bar door 1 -->
+        <doors>
+            <name>bar-door-1-open</name>
+            <mode>once</mode>
+            <path>Aircraft/CitationX/Sounds/bar-door-open.wav</path>
+            <condition>
+                <greater-than>
+                    <property>controls/bar/bar-door-1</property>
+                    <value>0.01</value>
+                </greater-than>
+            </condition>
+            <volume>
+                <property>sim/signals/fdm-initialized</property>
+                <factor>1</factor>
+            </volume>
+            <position>
+                <x>-5.70 </x>
+                <y> 0.50 </y>
+                <z> 0.40 </z>
+            </position>
+        </doors>
+
+        <doors>
+            <name>bar-door-1-closed</name>
+            <mode>once</mode>
+            <path>Aircraft/CitationX/Sounds/bar-door-closed.wav</path>
+            <condition>
+              <and>
+                <less-than>
+                     <property>controls/bar/bar-door-1</property>
+                    <value>1</value>
+                </less-than>
+                <greater-than>
+                     <property>controls/bar/bar-door-1</property>
+                    <value>0.01</value>
+                </greater-than>
+              </and>                          
+            </condition>
+            <volume>
+                <property>sim/signals/fdm-initialized</property>
+                <factor>1</factor>
+            </volume>
+            <position>
+                <x>-5.70 </x>
+                <y> 0.50 </y>
+                <z> 0.40 </z>
+            </position>
+        </doors>
+                     <!-- Bar door 2 -->
+        <doors>
+            <name>bar-door-2-open</name>
+            <mode>once</mode>
+            <path>Aircraft/CitationX/Sounds/bar-door-open.wav</path>
+            <condition>
+                <greater-than>
+                    <property>controls/bar/bar-door-2</property>
+                    <value>0.01</value>
+                </greater-than>
+            </condition>
+            <volume>
+                <property>sim/signals/fdm-initialized</property>
+                <factor>1</factor>
+            </volume>
+            <position>
+                <x>-5.90 </x>
+                <y> 0.20 </y>
+                <z> 0.40 </z>
+            </position>
+        </doors>
+
+        <doors>
+            <name>bar-door-2-closed</name>
+            <mode>once</mode>
+            <path>Aircraft/CitationX/Sounds/bar-door-closed.wav</path>
+            <condition>
+              <and>
+                <less-than>
+                     <property>controls/bar/bar-door-2</property>
+                    <value>1</value>
+                </less-than>
+                <greater-than>
+                     <property>controls/bar/bar-door-2</property>
+                    <value>0.01</value>
+                </greater-than>
+              </and>                          
+            </condition>
+            <volume>
+                <property>sim/signals/fdm-initialized</property>
+                <factor>1</factor>
+            </volume>
+            <position>
+                <x>-5.90 </x>
+                <y> 0.20 </y>
+                <z> 0.40 </z>
+            </position>
+        </doors>
+                     <!-- Bar door 3 -->
+        <doors>
+            <name>bar-door-3-open</name>
+            <mode>once</mode>
+            <path>Aircraft/CitationX/Sounds/bar-door-open.wav</path>
+            <condition>
+                <greater-than>
+                    <property>controls/bar/bar-door-3</property>
+                    <value>0.01</value>
+                </greater-than>
+            </condition>
+            <volume>
+                <property>sim/signals/fdm-initialized</property>
+                <factor>1</factor>
+            </volume>
+            <position>
+                <x>-6.00 </x>
+                <y> 0.20 </y>
+                <z> 0.40 </z>
+            </position>
+        </doors>
+
+        <doors>
+            <name>bar-door-3-closed</name>
+            <mode>once</mode>
+            <path>Aircraft/CitationX/Sounds/bar-door-closed.wav</path>
+            <condition>
+              <and>
+                <less-than>
+                     <property>controls/bar/bar-door-3</property>
+                    <value>1</value>
+                </less-than>
+                <greater-than>
+                     <property>controls/bar/bar-door-3</property>
+                    <value>0.01</value>
+                </greater-than>
+              </and>                          
+            </condition>
+            <volume>
+                <property>sim/signals/fdm-initialized</property>
+                <factor>1</factor>
+            </volume>
+            <position>
+                <x>-6.00 </x>
+                <y> 0.20 </y>
+                <z> 0.40 </z>
+            </position>
+        </doors>
+                     <!-- Bar door 4 -->
+        <doors>
+            <name>bar-door-4-open</name>
+            <mode>once</mode>
+            <path>Aircraft/CitationX/Sounds/bar-door-open.wav</path>
+            <condition>
+                <greater-than>
+                    <property>controls/bar/bar-door-4</property>
+                    <value>0.01</value>
+                </greater-than>
+            </condition>
+            <volume>
+                <property>sim/signals/fdm-initialized</property>
+                <factor>1</factor>
+            </volume>
+            <position>
+                <x>-6.50 </x>
+                <y> 0.20 </y>
+                <z> 0.40 </z>
+            </position>
+        </doors>
+
+        <doors>
+            <name>bar-door-4-closed</name>
+            <mode>once</mode>
+            <path>Aircraft/CitationX/Sounds/bar-door-closed.wav</path>
+            <condition>
+              <and>
+                <less-than>
+                     <property>controls/bar/bar-door-4</property>
+                    <value>1</value>
+                </less-than>
+                <greater-than>
+                     <property>controls/bar/bar-door-4</property>
+                    <value>0.01</value>
+                </greater-than>
+              </and>                          
+            </condition>
+            <volume>
+                <property>sim/signals/fdm-initialized</property>
+                <factor>1</factor>
+            </volume>
+            <position>
+                <x>-6.50 </x>
+                <y> 0.20 </y>
+                <z> 0.40 </z>
+            </position>
+        </doors>
+                     <!-- Bar door 5 -->
+        <doors>
+            <name>bar-door-5-open</name>
+            <mode>once</mode>
+            <path>Aircraft/CitationX/Sounds/bar-door-open.wav</path>
+            <condition>
+                <greater-than>
+                    <property>controls/bar/bar-door-5</property>
+                    <value>0.01</value>
+                </greater-than>
+            </condition>
+            <volume>
+                <property>sim/signals/fdm-initialized</property>
+                <factor>1</factor>
+            </volume>
+            <position>
+                <x>-6.30 </x>
+                <y> 0.20 </y>
+                <z>-0.30 </z>
+            </position>
+        </doors>
+
+        <doors>
+            <name>bar-door-5-closed</name>
+            <mode>once</mode>
+            <path>Aircraft/CitationX/Sounds/bar-door-closed.wav</path>
+            <condition>
+              <and>
+                <less-than>
+                     <property>controls/bar/bar-door-5</property>
+                    <value>1</value>
+                </less-than>
+                <greater-than>
+                     <property>controls/bar/bar-door-5</property>
+                    <value>0.01</value>
+                </greater-than>
+              </and>                          
+            </condition>
+            <volume>
+                <property>sim/signals/fdm-initialized</property>
+                <factor>1</factor>
+            </volume>
+            <position>
+                <x>-6.30 </x>
+                <y> 0.20 </y>
+                <z>-0.30 </z>
+            </position>
+        </doors>
+                     <!-- Bar door 6 -->
+        <doors>
+            <name>bar-door-6-open</name>
+            <mode>once</mode>
+            <path>Aircraft/CitationX/Sounds/bar-door-open.wav</path>
+            <condition>
+                <greater-than>
+                    <property>controls/bar/bar-door-6</property>
+                    <value>0.01</value>
+                </greater-than>
+            </condition>
+            <volume>
+                <property>sim/signals/fdm-initialized</property>
+                <factor>1</factor>
+            </volume>
+            <position>
+                <x>-5.80 </x>
+                <y> 0.20 </y>
+                <z>-0.30 </z>
+            </position>
+        </doors>
+
+        <doors>
+            <name>bar-door-6-closed</name>
+            <mode>once</mode>
+            <path>Aircraft/CitationX/Sounds/bar-door-closed.wav</path>
+            <condition>
+              <and>
+                <less-than>
+                     <property>controls/bar/bar-door-6</property>
+                    <value>1</value>
+                </less-than>
+                <greater-than>
+                     <property>controls/bar/bar-door-6</property>
+                    <value>0.01</value>
+                </greater-than>
+              </and>                          
+            </condition>
+            <volume>
+                <property>sim/signals/fdm-initialized</property>
+                <factor>1</factor>
+            </volume>
+            <position>
+                <x>-5.80 </x>
+                <y> 0.20 </y>
+                <z>-0.30 </z>
+            </position>
+        </doors>
+                     <!-- Bar door 7 -->
+        <doors>
+            <name>bar-door-7-open</name>
+            <mode>once</mode>
+            <path>Aircraft/CitationX/Sounds/bar-door-open.wav</path>
+            <condition>
+                <greater-than>
+                    <property>controls/bar/bar-door-7</property>
+                    <value>0.01</value>
+                </greater-than>
+            </condition>
+            <volume>
+                <property>sim/signals/fdm-initialized</property>
+                <factor>1</factor>
+            </volume>
+            <position>
+                <x>-6.30 </x>
+                <y> 0.20 </y>
+                <z>-0.50 </z>
+            </position>
+        </doors>
+
+        <doors>
+            <name>bar-door-7-closed</name>
+            <mode>once</mode>
+            <path>Aircraft/CitationX/Sounds/bar-door-closed.wav</path>
+            <condition>
+              <and>
+                <less-than>
+                     <property>controls/bar/bar-door-7</property>
+                    <value>1</value>
+                </less-than>
+                <greater-than>
+                     <property>controls/bar/bar-door-7</property>
+                    <value>0.01</value>
+                </greater-than>
+              </and>                          
+            </condition>
+            <volume>
+                <property>sim/signals/fdm-initialized</property>
+                <factor>1</factor>
+            </volume>
+            <position>
+                <x>-6.30 </x>
+                <y> 0.20 </y>
+                <z>-0.50 </z>
+            </position>
+        </doors>
+                     <!-- Bar door 8 -->
+        <doors>
+            <name>bar-door-8-open</name>
+            <mode>once</mode>
+            <path>Aircraft/CitationX/Sounds/bar-door-open.wav</path>
+            <condition>
+                <greater-than>
+                    <property>controls/bar/bar-door-8</property>
+                    <value>0.01</value>
+                </greater-than>
+            </condition>
+            <volume>
+                <property>sim/signals/fdm-initialized</property>
+                <factor>1</factor>
+            </volume>
+            <position>
+                <x>-5.80 </x>
+                <y> 0.20 </y>
+                <z>-0.50 </z>
+            </position>
+        </doors>
+
+        <doors>
+            <name>bar-door-8-closed</name>
+            <mode>once</mode>
+            <path>Aircraft/CitationX/Sounds/bar-door-closed.wav</path>
+            <condition>
+              <and>
+                <less-than>
+                     <property>controls/bar/bar-door-8</property>
+                    <value>1</value>
+                </less-than>
+                <greater-than>
+                     <property>controls/bar/bar-door-8</property>
+                    <value>0.01</value>
+                </greater-than>
+              </and>                          
+            </condition>
+            <volume>
+                <property>sim/signals/fdm-initialized</property>
+                <factor>1</factor>
+            </volume>
+            <position>
+                <x>-5.80 </x>
+                <y> 0.20 </y>
+                <z>-0.50 </z>
+            </position>
+        </doors>
 
     <!-- ALARMS -->
     <alarm>
