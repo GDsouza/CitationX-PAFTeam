@@ -17,7 +17,6 @@ var Coord = 0;
 var minimums=getprop("autopilot/settings/minimums");
 var wx_range=[10,25,50,100,200,300];
 var wx_index=3;
-var TOD = 0;
 
 #####################################
 
@@ -458,6 +457,7 @@ var speed_Control = func {
 	var fms = getprop("instrumentation/primus2000/sc840/nav1ptr");
 	var vmo = 0;
 	var TOD = 0;
+	setprop("autopilot/locks/TOD",TOD);
 
 		### Takeoff ###
 	if (left(NAVSRC,3) == "FMS" and lock_alt == "VALT" and ap_stat != "AP") {
@@ -491,6 +491,7 @@ var speed_Control = func {
 				### After TOD ###
 			} else {
 					TOD = 1;					
+					setprop("autopilot/locks/TOD",TOD);
 					if (getprop(next_wp~(curr_wp)~"]/altitude-ft") > 0){
 					setprop(target_alt,getprop(next_wp~(curr_wp)~"]/altitude-ft"));
 					} else {

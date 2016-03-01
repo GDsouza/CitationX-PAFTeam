@@ -30,6 +30,12 @@ AOA
     <animation>
         <type>rotate</type>
         <object-name>Needle</object-name>
+        <condition>
+						<or>
+	           	<property>systems/electrical/right-emer-bus</property>
+	           	<property>systems/electrical/right-bus-norm</property>
+						</or>
+        </condition>
 				<property>controls/pressurization/alt-display</property>
 				<interpolation>
           <entry><ind>-1000</ind><dep>0</dep></entry>

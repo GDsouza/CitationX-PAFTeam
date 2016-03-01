@@ -129,8 +129,8 @@ var update_alt = func {
 	    }
 	}
 	if (mode.getValue() == 2) {
-	    if (pressure_alt.getValue() > landing_alt.getValue() + 2000) {
-		if (VS != 0) {
+    if (pressure_alt.getValue() > landing_alt.getValue() + 2000) {
+			if (VS != 0) {
 		    var climbtime = (pressure_alt.getValue() - cabin_target.getValue()) / VS;
 		    if (climbtime == 0) climbtime = 0.25;
 		    targ_rate = (cabin - cabin_target.getValue()) / climbtime;
@@ -276,6 +276,14 @@ var climb_desc = func {
 	descend_detector();
 	settimer(climb_desc, 30);
 }
+
+setlistener("controls/pressurization/alt-sel", func {
+	if (getprop("controls/pressurization/alt-sel") == 0) {	
+		setprop("controls/pressurization/test",1);
+		settimer(func {setprop("controls/pressurization/test",0)},15);
+	} else {setprop("controls/pressurization/test",0)}
+},0,0);
+
 setlistener("/sim/signals/fdm-initialized", func {
 	settimer(func {
 	    max_out.setValue(30000);

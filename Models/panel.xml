@@ -329,18 +329,31 @@
         </axis>
     </animation>
 
-	<animation>
-		<type>pick</type>
-		<object-name>Gear.lever</object-name>
-		<action>
-			<button>0</button>
-			<repeatable>false</repeatable>
-			<binding>	
-				<command>nasal</command>
-				<script>controls.gear()</script>
-			</binding>
-    </action>
-	</animation>
+    <animation>
+      <type>pick</type>
+      <object-name>Gear.lever</object-name>
+      <action>
+        <button>0</button>
+        <binding>
+ 	       	<condition>
+						<not>
+            	<property>gear/gear[1]/wow</property>
+						</not>		
+					</condition>
+					<command>property-toggle</command>
+            <property>controls/gear/gear-down</property>				
+     		</binding>
+      </action>
+      <hovered>
+        <binding>
+          <command>set-tooltip</command>
+          <tooltip-id>landing gear</tooltip-id>
+          <label>Landing Gear: %s</label>
+          <mapping>down-up</mapping>
+          <property>controls/gear/gear-down</property>
+        </binding>
+      </hovered>
+    </animation>
 
 		<animation>
 			<type>select</type>
@@ -3583,7 +3596,6 @@
 
 <!--Pressurization Auto-Rate Knob -->
 
-
   <animation>
     <type>rotate</type>
     <object-name>cv-rate.knob</object-name>
@@ -3872,6 +3884,43 @@
 						</script>
           </binding>
         </hovered>
+    </animation>
+
+<!-- Fault Light -->
+
+    <animation>
+        <name>Red illum</name>
+        <type>material</type>
+        <object-name>Light.fault</object-name>
+					<condition>
+						<and>
+							<property>controls/pressurization/test</property> 
+							<greater-than>
+								<property>systems/electrical/right-bus</property> 
+								<value>12</value>
+							</greater-than>
+						</and>
+					</condition> 
+      	<emission>
+            <red>1.0</red>
+            <green>0.0</green>
+            <blue>0.0</blue>
+        </emission>
+        <ambient>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </ambient>
+        <diffuse>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </diffuse>
+        <specular>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </specular>
     </animation>
 
 <!-- 3D TEXT  -->

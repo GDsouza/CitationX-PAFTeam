@@ -314,12 +314,12 @@ controls.pilots = func(){
 			}
 }
 
-controls.gear = func {
-  if(getprop("gear/gear[1]/wow")) {
-			setprop("/controls/gear/gear-down", 1);
-	} else if (getprop("/controls/gear/gear-down")== 1) {
-			setprop("/controls/gear/gear-down",0);
-	}	else {setprop("/controls/gear/gear-down",1)}
+controls.gearDown = func(v) {
+    if (v < 0) {
+        if(!getprop("gear/gear[1]/wow"))setprop("/controls/gear/gear-down", 0);
+    } elsif (v > 0) {
+      setprop("/controls/gear/gear-down", 1);
+    }
 }
 
 controls.stepSpoilers = func(v) {

@@ -1570,15 +1570,18 @@
 						<and>
 							<equals>
 								<property>controls/electric/std-by-pwr</property> 
-									<value>1</value>
+								<value>1</value>
 							</equals>
-                <property>controls/electric/battery-switch[0]</property>
+							<greater-than>
+	              <property>systems/electrical/right-bus</property>
+								<value>12</value>
+							</greater-than>
 						</and>
 					</condition> 
       	<emission>
-            <red>1.0</red>
-            <green>0.0</green>
-            <blue>0.0</blue>
+		        <red>1.0</red>
+		        <green>0.0</green>
+		        <blue>0.0</blue>
         </emission>
         <ambient>
             <red>0</red>
@@ -1602,10 +1605,16 @@
         <type>material</type>
         <object-name>light-G</object-name>
 					<condition>
-						<equals>
-							<property>controls/electric/std-by-pwr</property> 
+						<and>
+							<equals>
+								<property>controls/electric/std-by-pwr</property> 
 								<value>-1</value>
-						</equals>
+							</equals>
+							<greater-than>
+	              <property>systems/electrical/right-bus</property>
+								<value>12</value>
+							</greater-than>
+						</and>
 					</condition> 
       	<emission>
             <red>0.0</red>
