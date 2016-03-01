@@ -17,7 +17,7 @@ var Coord = 0;
 var minimums=getprop("autopilot/settings/minimums");
 var wx_range=[10,25,50,100,200,300];
 var wx_index=3;
-
+var rd_speed = props.globals.initNode("instrumentation/airspeed-indicator/round-speed-kt",0,"DOUBLE");
 #####################################
 
 setlistener("/sim/signals/fdm-initialized", func {
@@ -562,11 +562,17 @@ var speed_table = func(alt_ind,my_spd,vmo) {
 	if(alt_ind >43000 and my_spd > 200) {my_spd = 200};
 }
 
+var speed_round = func {
+	var ind_speed = getprop("instrumentation/airspeed-indicator/indicated-speed-kt");
+	rd_speed.setDoubleValue(math.round(ind_speed));
+}
+
 ###  Main loop ###
 
 var update_fd = func {
     update_nav();
 		speed_Control();
+		speed_round();
 		setprop("autopilot/settings/altitude-setting-ft",getprop("autopilot/settings/asel")*100);
     if(count==0)monitor_AP_errors();
     if(count==1)monitor_L_armed();

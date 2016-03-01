@@ -58,7 +58,7 @@
     <animation>
         <type>textranslate</type>
         <object-name>ias.d1</object-name>
-        <property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
+        <property>instrumentation/airspeed-indicator/round-speed-kt</property>
         <factor>0.001</factor>
         <step>100</step>
         <axis>
@@ -71,7 +71,7 @@
     <animation>
         <type>textranslate</type>
         <object-name>ias.d2</object-name>
-        <property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
+        <property>instrumentation/airspeed-indicator/round-speed-kt</property>
         <factor>0.01</factor>
         <step>10</step>
         <axis>
@@ -84,7 +84,7 @@
     <animation>
         <type>textranslate</type>
         <object-name>ias.d3</object-name>
-        <property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
+        <property>instrumentation/airspeed-indicator/round-speed-kt</property>
         <factor>0.1</factor>
         <axis>
             <x>0</x>

@@ -1,8 +1,6 @@
 ### Citation X ####
 ### Révision C. Le Moigne (clm76) - 2015-2016  ###
 
-### Global variables ###
-var fl_tot = 0;
 
 ### tire rotation per minute by circumference ####
 #var tire=TireSpeed.new(# of gear,diam[0],diam[1],diam[2], ...);
@@ -73,6 +71,8 @@ var JetEngine = {
         m.CutOff = setlistener(m.cutoff, func (ct){m.engine_off=ct.getValue()},1,0);
     return m;
     },
+
+
 #### update ####
     update : func{
         var thr = me.throttle.getValue();
@@ -128,6 +128,7 @@ var JetEngine = {
 
 };
 
+var fl_tot = 0;
 var FDM="";
 var Grd_Idle=props.globals.initNode("controls/engines/grnd-idle",1,"BOOL");
 var Annun = props.globals.getNode("instrumentation/annunciators",1);
@@ -156,6 +157,7 @@ props.globals.initNode("sim/model/copilot-seat",0,"DOUBLE");
 props.globals.initNode("sim/alarms/overspeed-alarm",0,"BOOL");
 props.globals.initNode("sim/alarms/stall-warning",0,"BOOL");
 props.globals.initNode("instrumentation/clock/flight-meter-hour",0,"DOUBLE");
+
 var PWR2 =0;
 aircraft.livery.init("Aircraft/CitationX/Models/Liveries");
 var FHmeter = aircraft.timer.new("/instrumentation/clock/flight-meter-sec", 10,1);
@@ -411,7 +413,7 @@ var Shutdown = func{
 		setprop("controls/flight/flaps",0);
 }
 
-var speed_ref = func{
+var speed_ref = func {
 		var Wtot = getprop("yasim/gross-weight-lbs");
 		var Flaps = getprop("controls/flight/flaps");
 		var v1=0;
