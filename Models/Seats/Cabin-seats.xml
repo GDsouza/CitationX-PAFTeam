@@ -7,6 +7,7 @@
     <type>material</type>
     <object-name>Seats</object-name>
     <object-name>Reg-Seats</object-name>
+    <object-name>Reg-Ceintures</object-name>
     <emission>
       <red>   0.28 </red>
       <green> 0.28 </green>
@@ -18,11 +19,13 @@
       <inherits-from>Aircraft/CitationX/Models/Effects/skin-reflect</inherits-from>
     <object-name>Seats</object-name>
     <object-name>Reg-Seats</object-name>
+    <object-name>Reg-Ceintures</object-name>
     </effect>
 
     <effect>
       <inherits-from>Aircraft/CitationX/Models/Effects/test_reflect</inherits-from>
     <object-name>Reg-Seats</object-name>
+    <object-name>Reg-Ceintures</object-name>
     </effect>
 
 </PropertyList>
