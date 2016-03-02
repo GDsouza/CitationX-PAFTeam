@@ -228,7 +228,6 @@
         <object-name>RHelevator</object-name>
     </animation>
 
-
     <animation>
         <type>rotate</type>
         <object-name>Cabin.lwrdoor</object-name>
@@ -1081,9 +1080,81 @@
 
 <!-- Ext Lights -->
 
+     <effect>
+       <inherits-from>Effects/model-transparent</inherits-from>
+         <object-name>navlights.on</object-name>
+       <condition>
+         <property>sim/rendering/rembrandt/enabled</property>
+       </condition>
+     </effect> 
+
+     <effect>
+       <inherits-from>Effects/model-transparent</inherits-from>
+         <object-name>navlights.on</object-name>
+       <condition>
+         <property>sim/rendering/rembrandt/enabled</property>
+       </condition>
+     </effect> 
+
+     <effect>
+       <inherits-from>Effects/model-transparent</inherits-from>
+         <object-name>Strb1</object-name>
+       <condition>
+         <property>sim/rendering/rembrandt/enabled</property>
+       </condition>
+     </effect> 
+
+     <effect>
+       <inherits-from>Effects/model-transparent</inherits-from>
+         <object-name>Strb2</object-name>
+       <condition>
+         <property>sim/rendering/rembrandt/enabled</property>
+       </condition>
+     </effect>
+
+     <effect>
+       <inherits-from>Effects/model-transparent</inherits-from>
+         <object-name>Bcn1</object-name>
+       <condition>
+         <property>sim/rendering/rembrandt/enabled</property>
+       </condition>
+     </effect>
+
+     <effect>
+       <inherits-from>Effects/model-transparent</inherits-from>
+         <object-name>Bcn2</object-name>
+       <condition>
+         <property>sim/rendering/rembrandt/enabled</property>
+       </condition>
+     </effect>
+
+     <effect>
+       <inherits-from>Effects/model-transparent</inherits-from>
+         <object-name>Taxi</object-name>
+       <condition>
+         <property>sim/rendering/rembrandt/enabled</property>
+       </condition>
+     </effect>
+
+     <effect>
+       <inherits-from>Effects/model-transparent</inherits-from>
+         <object-name>Land1</object-name>
+       <condition>
+         <property>sim/rendering/rembrandt/enabled</property>
+       </condition>
+     </effect>
+
+    <effect>
+       <inherits-from>Effects/model-transparent</inherits-from>
+         <object-name>Land2</object-name>
+       <condition>
+         <property>sim/rendering/rembrandt/enabled</property>
+       </condition>
+     </effect>
+
     <animation>
         <type>select</type>
-        <object-name>navlights.on</object-name>
+        <object-name>navlights.off</object-name>
         <condition>
             <greater-than>
                 <property>sim/multiplay/generic/int[6]</property>
