@@ -458,7 +458,7 @@ var speed_Control = func {
 	var vmo = 0;
 	var TOD = 0;
 	setprop("autopilot/locks/TOD",TOD);
-
+	setprop(target_alt,asel*100);
 		### Takeoff ###
 	if (left(NAVSRC,3) == "FMS" and lock_alt == "VALT" and ap_stat != "AP") {
 		if (curr_wp==-1) {curr_wp=0}
