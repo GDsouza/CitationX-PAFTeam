@@ -504,8 +504,9 @@ var speed_Control = func {
 					}
 			}
 			if (dist_rem <= 7) {
-				if (NAVSRC == "FMS1") {setprop(NAVprop,"NAV2")}
-				if (NAVSRC == "FMS2") {setprop(NAVprop,"NAV1")}
+				if (NAVSRC == "FMS1") {var ind = 1;setprop(NAVprop,"NAV2")}
+				if (NAVSRC == "FMS2") {var ind = 0;setprop(NAVprop,"NAV1")}
+				setprop("instrumentation/nav["~ind~"]/radials/selected-deg",int(getprop("autopilot/route-manager/route/wp["~(num-1)~"]/leg-bearing-true-deg")));
 				set_apr();
 			}
 
