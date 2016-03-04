@@ -212,8 +212,10 @@ setlistener("/gear/gear[1]/wow", func(ww){
         Grd_Idle.setBoolValue(1);			
 				FH_write();
     }else{
-        FHmeter.start();
         Grd_Idle.setBoolValue(0);
+        FHmeter.start();
+				### raz clock to prevent restart on bounce ###
+				setprop("/instrumentation/clock/flight-meter-sec",0);
     }
 },0,0);
 
@@ -249,6 +251,7 @@ var FH_load = func{
 
 var FH_write = func {
 		var FH_path = getprop("/sim/fg-home")~"/aircraft-data/CitationX-FHmeter.xml";
+		fl_tot = getprop("instrumentation/clock/flight-meter-tot");
 		var data = io.read_properties(FH_path);
 		var name = data.getChild("TotalFlight");
 		name.setDoubleValue(fl_tot);
