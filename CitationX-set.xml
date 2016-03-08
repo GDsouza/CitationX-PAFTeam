@@ -13,7 +13,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
         <status>devel</status>
         <flight-model>yasim</flight-model>
         <aero>CitationX</aero>
-        <fuel-fraction>0.5</fuel-fraction>
+        <fuel-fraction>0.60</fuel-fraction>
 
         <tags>
             <tag>bizjet</tag>
@@ -259,9 +259,9 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 
         <weight n="0">
             <name>Crew</name>
-            <weight-lb>400</weight-lb>
-            <max-lb>400</max-lb>
-            <min-lb>180</min-lb>
+            <weight-lb>340</weight-lb>
+            <max-lb>340</max-lb>
+            <min-lb>170</min-lb>
         </weight>
 
         <weight n="1">
@@ -433,33 +433,32 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
         </electrical>
     </systems>
 
-
+<!--
     <consumables>
         <fuel>
             <tank n="0">
                 <name>LH tank</name>
-                <level-lbs>2000.0</level-lbs>
+                <level-lbs>2100.0</level-lbs>
                 <selected type="bool">1</selected>
             </tank>
             <tank n="1">
                 <name>RH tank</name>
-                <level-lbs>2000.0</level-lbs>
+                <level-lbs>2100.0</level-lbs>
                 <selected type="bool">1</selected>
             </tank>
             <tank n="2">
                 <name>CTR tank1</name>
-                <level-lbs>1000.0</level-lbs>
+                <level-lbs>1800.0</level-lbs>
                 <selected type="bool">1</selected>
             </tank>
             <tank n="3">
                 <name>CTR tank2</name>
-                <level-lbs>1000.0</level-lbs>
+                <level-lbs>1800.0</level-lbs>
                 <selected type="bool">1</selected>
             </tank>
-
         </fuel>
     </consumables>
-
+-->
     <instrumentation>
 				<pfd>
 					<minimums-baro type="int">200</minimums-baro>

@@ -132,6 +132,7 @@ var fl_tot = 0;
 var FDM="";
 var Grd_Idle=props.globals.initNode("controls/engines/grnd-idle",1,"BOOL");
 var Annun = props.globals.getNode("instrumentation/annunciators",1);
+var cc = props.globals.initNode("controls/tables/table1/cache1/close",0,"BOOL");
 props.globals.initNode("controls/flight/flaps-select",0,"INT");
 props.globals.initNode("controls/fuel/tank[0]/boost_pump",0,"INT");
 props.globals.initNode("controls/fuel/tank[1]/boost_pump",0,"INT");
@@ -151,6 +152,7 @@ props.globals.initNode("controls/bar/bar-door-5",0,"DOUBLE");
 props.globals.initNode("controls/bar/bar-door-6",0,"DOUBLE");
 props.globals.initNode("controls/bar/bar-door-7",0,"DOUBLE");
 props.globals.initNode("controls/bar/bar-door-8",0,"DOUBLE");
+props.globals.initNode("controls/tables/table1/extend",0,"BOOL");
 props.globals.initNode("controls/gear/emer-brake",0,"DOUBLE");
 props.globals.initNode("sim/model/pilot-seat",0,"DOUBLE");
 props.globals.initNode("sim/model/copilot-seat",0,"DOUBLE");
@@ -160,16 +162,23 @@ props.globals.initNode("instrumentation/clock/flight-meter-hour",0,"DOUBLE");
 
 var PWR2 =0;
 aircraft.livery.init("Aircraft/CitationX/Models/Liveries");
-var FHmeter = aircraft.timer.new("/instrumentation/clock/flight-meter-sec", 10,1);
+var FHmeter = aircraft.timer.new("/instrumentation/clock/flight-meter-sec", 10,1); 
+var Table1_0 = aircraft.door.new("controls/tables/table1/table1-0",2);
+var Table1_1 = aircraft.door.new("controls/tables/table1/table1-1",2);
+var Table1_2 = aircraft.door.new("controls/tables/table1/table1-2",2);
+var Cache1 = aircraft.door.new("controls/tables/table1/cache1",1);
 var LHeng= JetEngine.new(0);
 var RHeng= JetEngine.new(1);
 var tire=TireSpeed.new(3,0.430,0.615,0.615);
-#######################################
+
+### Initialisation FDM ###
 
 var fdm_init = func(){
     FDM=getprop("/sim/flight-model");
     setprop("controls/engines/N1-limit",95.0);
 }
+
+### Listeners ###
 
 setlistener("/sim/signals/fdm-initialized", func {
     fdm_init();
@@ -204,6 +213,85 @@ setlistener("/engines/engine[1]/turbine",func(turb) {
 		if(turb.getValue() >20) {setprop("/controls/engines/engine[1]/starter",0)}
 },0,0);
 
+setlistener("/controls/gear/antiskid", func(as){
+	print(as);
+    var test=as.getBoolValue();
+    if(!test){
+    MstrCaution.setBoolValue(1 * PWR2);
+    Annun.getNode("antiskid").setBoolValue(1 * PWR2);
+    }else{
+    Annun.getNode("antiskid").setBoolValue(0);
+    }
+},0,0);
+
+setlistener("instrumentation/altimeter/setting-inhg", func(inhg){
+    setprop("instrumentation/altimeter/setting-kpa",inhg.getValue()*3.386389)
+},1,0);
+
+setlistener("/sim/freeze/fuel", func(ffr){
+    var test=ffr.getBoolValue();
+    if(test){
+    MstrCaution.setBoolValue(1 * PWR2);
+    Annun.getNode("fuel-gauge").setBoolValue(1 * PWR2);
+    }else{
+    Annun.getNode("fuel-gauge").setBoolValue(0);
+    }
+},0,0);
+
+setlistener("/sim/current-view/internal", func {
+		var mem_yokeL = getprop("sim/model/mem-yoke_L");
+		var mem_yokeR = getprop("sim/model/mem-yoke_R");
+		if (getprop("/sim/current-view/internal") == 0) {
+			setprop("sim/model/show-yoke_L",1);
+			setprop("sim/model/show-yoke_R",1);
+			setprop("sim/model/show-pilot",1);
+			setprop("sim/model/show-copilot",1);
+		} 
+		else {
+			setprop("sim/model/show-yoke_L",mem_yokeL);
+			setprop("sim/model/show-pilot",mem_yokeL);
+			setprop("sim/model/show-yoke_R",mem_yokeR);
+			setprop("sim/model/show-copilot",mem_yokeR);
+		}
+},0,0);
+
+### Tables animation ###
+
+var tables_anim = func {
+	if (getprop("controls/tables/table1/extend") and !cc.getBoolValue()) {
+			Cache1.open();			
+		if (getprop("controls/tables/table1/cache1/position-norm")==1.0) {
+			Table1_0.open();
+			if (getprop("controls/tables/table1/table1-0/position-norm")==1.0) {
+				Table1_1.open();
+				if (getprop("controls/tables/table1/table1-1/position-norm")==1.0) {
+					Table1_2.open();
+					if (getprop("controls/tables/table1/table1-2/position-norm")==1.0) {
+						cc.setBoolValue(1);
+						Cache1.close();
+					}
+				}				
+			}			
+		}
+	}
+
+	if (!getprop("controls/tables/table1/extend") and cc.getBoolValue()) {
+		Cache1.open();
+		if (getprop("controls/tables/table1/cache1/position-norm")==1.0) {
+			Table1_2.close();
+			if (getprop("controls/tables/table1/table1-2/position-norm")==0.0) {
+				Table1_1.close();
+				if (getprop("controls/tables/table1/table1-1/position-norm")==0.0) {
+					Table1_0.close();
+					if (getprop("controls/tables/table1/table1-0/position-norm")==0.0) {
+						cc.setBoolValue(0);
+						Cache1.close();
+					}
+				}
+			}
+		}
+	}
+}
 ### Flight Meter hour ###
 
 setlistener("/gear/gear[1]/wow", func(ww){
@@ -259,48 +347,6 @@ var FH_write = func {
 }
 
 ######################
-
-setlistener("/controls/gear/antiskid", func(as){
-	print(as);
-    var test=as.getBoolValue();
-    if(!test){
-    MstrCaution.setBoolValue(1 * PWR2);
-    Annun.getNode("antiskid").setBoolValue(1 * PWR2);
-    }else{
-    Annun.getNode("antiskid").setBoolValue(0);
-    }
-},0,0);
-
-setlistener("instrumentation/altimeter/setting-inhg", func(inhg){
-    setprop("instrumentation/altimeter/setting-kpa",inhg.getValue()*3.386389)
-},1,0);
-
-setlistener("/sim/freeze/fuel", func(ffr){
-    var test=ffr.getBoolValue();
-    if(test){
-    MstrCaution.setBoolValue(1 * PWR2);
-    Annun.getNode("fuel-gauge").setBoolValue(1 * PWR2);
-    }else{
-    Annun.getNode("fuel-gauge").setBoolValue(0);
-    }
-},0,0);
-
-setlistener("/sim/current-view/internal", func {
-		var mem_yokeL = getprop("sim/model/mem-yoke_L");
-		var mem_yokeR = getprop("sim/model/mem-yoke_R");
-		if (getprop("/sim/current-view/internal") == 0) {
-			setprop("sim/model/show-yoke_L",1);
-			setprop("sim/model/show-yoke_R",1);
-			setprop("sim/model/show-pilot",1);
-			setprop("sim/model/show-copilot",1);
-		} 
-		else {
-			setprop("sim/model/show-yoke_L",mem_yokeL);
-			setprop("sim/model/show-pilot",mem_yokeL);
-			setprop("sim/model/show-yoke_R",mem_yokeR);
-			setprop("sim/model/show-copilot",mem_yokeR);
-		}
-},0,0);
 
 controls.pilots = func(){
 			if (getprop("sim/model/show-yoke_L") == 0) {
@@ -472,6 +518,7 @@ var update_systems = func{
     FHupdate(0);
     tire.get_rotation("yasim");
 		speed_ref();
+		tables_anim();
     if(getprop("velocities/airspeed-kt")>40)setprop("controls/cabin-door/open",0);
     var grspd =getprop("velocities/groundspeed-kt");
     var wspd = (45-grspd) * 0.022222;
