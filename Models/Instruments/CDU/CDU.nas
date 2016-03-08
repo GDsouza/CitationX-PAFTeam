@@ -743,7 +743,7 @@ var key = func(v) {
 			if (v == "B1R"){
 				v = "";
 				if (cduInput != "") {
-					if (cduInput > 12) { cduInput = "*PASSENGERS MAX = 12*"}
+					if (cduInput > 8) { cduInput = "*PASSENGERS MAX = 8*"}
 					else {
 						setprop("sim/weight[1]/weight-lb",cduInput*170);
 					}

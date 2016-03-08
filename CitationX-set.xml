@@ -13,7 +13,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
         <status>devel</status>
         <flight-model>yasim</flight-model>
         <aero>CitationX</aero>
-        <fuel-fraction>0.60</fuel-fraction>
+        <fuel-fraction>0.65</fuel-fraction>
 
         <tags>
             <tag>bizjet</tag>
@@ -266,8 +266,8 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 
         <weight n="1">
             <name>Passengers</name>
-            <weight-lb>2040</weight-lb>
-            <max-lb>2040</max-lb>
+            <weight-lb>1360</weight-lb>
+            <max-lb>1360</max-lb>
             <min-lb>0</min-lb>
         </weight>
 

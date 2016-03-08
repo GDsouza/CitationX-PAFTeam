@@ -48,7 +48,7 @@ CABINE : 	Eclairage de la cabine
 				#	Animer les accoudoirs du co-pilote - Fait 08/01/2016
 				#	Animer l'accoudoir gauche du pilote - Fait 08/01/2016
         # Poursuivre la modélisation du mobilier (tablettes, bar, etc...)
-          Animation des tablettes
+        # Animation des tablettes - Fait 08/03/2016
           Améliorer l'escalier
 					Mettre les palonniers 
                    

@@ -33,19 +33,19 @@
     <object-name>L-toilet-door</object-name>
     <object-name>R-toilet-door</object-name>
     <object-name>plinthe</object-name>
-    <object-name>cache-tablette-1</object-name>
-    <object-name>cache-tablette-2</object-name>
-    <object-name>cache-tablette-3</object-name>
-    <object-name>cache-tablette-4</object-name>
+    <object-name>cache-table1</object-name>
+    <object-name>cache-table2</object-name>
+    <object-name>cache-table3</object-name>
+    <object-name>cache-table4</object-name>
     <object-name>console-tablette</object-name>
-    <object-name>tablette-1-1</object-name>
-    <object-name>tablette-1-2</object-name>
-    <object-name>tablette-2-1</object-name>
-    <object-name>tablette-2-2</object-name>
-    <object-name>tablette-3-1</object-name>
-    <object-name>tablette-3-2</object-name>
-    <object-name>tablette-4-1</object-name>
-    <object-name>tablette-4-2</object-name>
+    <object-name>table1-1</object-name>
+    <object-name>table1-2</object-name>
+    <object-name>table2-1</object-name>
+    <object-name>table2-2</object-name>
+    <object-name>table3-1</object-name>
+    <object-name>table3-2</object-name>
+    <object-name>table4-1</object-name>
+    <object-name>table4-2</object-name>
     <emission>
       <red>   0.32 </red>
       <green> 0.25 </green>
@@ -94,19 +94,19 @@
     <object-name>L-toilet-door</object-name>
     <object-name>R-toilet-door</object-name>
     <object-name>plinthe</object-name>
-    <object-name>cache-tablette-1</object-name>
-    <object-name>cache-tablette-2</object-name>
-    <object-name>cache-tablette-3</object-name>
-    <object-name>cache-tablette-4</object-name>
+    <object-name>cache-table1</object-name>
+    <object-name>cache-table2</object-name>
+    <object-name>cache-table3</object-name>
+    <object-name>cache-table4</object-name>
     <object-name>console-tablette</object-name>
-    <object-name>tablette-1-1</object-name>
-    <object-name>tablette-1-2</object-name>
-    <object-name>tablette-2-1</object-name>
-    <object-name>tablette-2-2</object-name>
-    <object-name>tablette-3-1</object-name>
-    <object-name>tablette-3-2</object-name>
-    <object-name>tablette-4-1</object-name>
-    <object-name>tablette-4-2</object-name>
+    <object-name>table1-1</object-name>
+    <object-name>table1-2</object-name>
+    <object-name>table2-1</object-name>
+    <object-name>table2-2</object-name>
+    <object-name>table3-1</object-name>
+    <object-name>table3-2</object-name>
+    <object-name>table4-1</object-name>
+    <object-name>table4-2</object-name>
     </effect>
 
     <effect>
@@ -137,19 +137,19 @@
     <object-name>L-toilet-door</object-name>
     <object-name>R-toilet-door</object-name>
     <object-name>plinthe</object-name>
-    <object-name>cache-tablette-1</object-name>
-    <object-name>cache-tablette-2</object-name>
-    <object-name>cache-tablette-3</object-name>
-    <object-name>cache-tablette-4</object-name>
+    <object-name>cache-table1</object-name>
+    <object-name>cache-table2</object-name>
+    <object-name>cache-table3</object-name>
+    <object-name>cache-table4</object-name>
     <object-name>console-tablette</object-name>
-    <object-name>tablette-1-1</object-name>
-    <object-name>tablette-1-2</object-name>
-    <object-name>tablette-2-1</object-name>
-    <object-name>tablette-2-2</object-name>
-    <object-name>tablette-3-1</object-name>
-    <object-name>tablette-3-2</object-name>
-    <object-name>tablette-4-1</object-name>
-    <object-name>tablette-4-2</object-name>
+    <object-name>table1-1</object-name>
+    <object-name>table1-2</object-name>
+    <object-name>table2-1</object-name>
+    <object-name>table2-2</object-name>
+    <object-name>table3-1</object-name>
+    <object-name>table3-2</object-name>
+    <object-name>table4-1</object-name>
+    <object-name>table4-2</object-name>
     </effect>
 
     <effect>
@@ -829,13 +829,13 @@
       </hovered>
 		</animation> 
 
-<!-- TABLES -->
+<!-- TABLE 1 -->
 
    <animation>
       <type>pick</type>
-      <object-name>cache-tablette-1</object-name>
-      <object-name>tablette-1-1</object-name>
-      <object-name>tablette-1-2</object-name>
+      <object-name>cache-table1</object-name>
+      <object-name>table1-1</object-name>
+      <object-name>table1-2</object-name>
       <visible>true</visible>
 			<action>
         <button>0</button>
@@ -858,8 +858,8 @@
 
     <animation>
         <type>rotate</type>
-        <object-name>cache-tablette-1</object-name>
-        <property>controls/tables/table1/cache1/position-norm</property>
+        <object-name>cache-table1</object-name>
+        <property>controls/tables/table1/cache/position-norm</property>
 				<factor>160</factor>
         <center>
             <x-m>0</x-m>
@@ -875,9 +875,9 @@
 
     <animation>
         <type>translate</type>
-        <object-name>tablette-1-1</object-name>	
-        <object-name>tablette-1-2</object-name>	
-        <property>controls/tables/table1/table1-0/position-norm</property>
+        <object-name>table1-1</object-name>	
+        <object-name>table1-2</object-name>	
+        <property>controls/tables/table1/tab0/position-norm</property>
 				<factor>0.19</factor>
         <axis>
             <x>0</x>
@@ -888,9 +888,9 @@
 
     <animation>
         <type>rotate</type>
-        <object-name>tablette-1-1</object-name>	
-        <object-name>tablette-1-2</object-name>	
-        <property>controls/tables/table1/table1-1/position-norm</property>
+        <object-name>table1-1</object-name>	
+        <object-name>table1-2</object-name>	
+        <property>controls/tables/table1/tab1/position-norm</property>
 				<factor>90</factor>
         <center>
             <x-m>0</x-m>
@@ -906,16 +906,292 @@
 
     <animation>
         <type>rotate</type>	
-        <object-name>tablette-1-2</object-name>	
-        <property>controls/tables/table1/table1-2/position-norm</property>
+        <object-name>table1-2</object-name>	
+        <property>controls/tables/table1/tab2/position-norm</property>
 				<factor>180</factor>
         <center>
             <x-m>0</x-m>
             <y-m>-0.6758</y-m>
-            <z-m>-0.0</z-m>
+            <z-m>0</z-m>
         </center>
         <axis>
             <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+<!-- TABLE 2 -->
+
+   <animation>
+      <type>pick</type>
+      <object-name>cache-table2</object-name>
+      <object-name>table2-1</object-name>
+      <object-name>table2-2</object-name>
+      <visible>true</visible>
+			<action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+         	<command>property-toggle</command>
+          <property>controls/tables/table2/extend</property>
+        </binding>
+			</action>
+    	<hovered>
+				<binding>
+          <command>set-tooltip</command>
+            <tooltip-id>Tables</tooltip-id>
+            <label>Table 2 : %s</label>
+            <mapping>open-close</mapping>
+       			<property>controls/tables/table2/extend</property>
+        </binding>
+      </hovered>
+    </animation> 
+
+    <animation>
+        <type>rotate</type>
+        <object-name>cache-table2</object-name>
+        <property>controls/tables/table2/cache/position-norm</property>
+				<factor>160</factor>
+        <center>
+            <x-m>0</x-m>
+            <y-m>-0.710</y-m>
+            <z-m>0.022</z-m>
+        </center>
+        <axis>
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>table2-1</object-name>	
+        <object-name>table2-2</object-name>	
+        <property>controls/tables/table2/tab0/position-norm</property>
+				<factor>0.19</factor>
+        <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>1</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>table2-1</object-name>	
+        <object-name>table2-2</object-name>	
+        <property>controls/tables/table2/tab1/position-norm</property>
+				<factor>90</factor>
+        <center>
+            <x-m>0</x-m>
+            <y-m>-0.662</y-m>
+            <z-m>-0.227</z-m>
+        </center>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>	
+        <object-name>table2-2</object-name>	
+        <property>controls/tables/table2/tab2/position-norm</property>
+				<factor>180</factor>
+        <center>
+            <x-m>0</x-m>
+            <y-m>-0.6758</y-m>
+            <z-m>0</z-m>
+        </center>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+<!-- TABLE 3 -->
+
+   <animation>
+      <type>pick</type>
+      <object-name>cache-table3</object-name>
+      <object-name>table3-1</object-name>
+      <object-name>table3-2</object-name>
+      <visible>true</visible>
+			<action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+         	<command>property-toggle</command>
+          <property>controls/tables/table3/extend</property>
+        </binding>
+			</action>
+    	<hovered>
+				<binding>
+          <command>set-tooltip</command>
+            <tooltip-id>Tables</tooltip-id>
+            <label>Table 3 : %s</label>
+            <mapping>open-close</mapping>
+       			<property>controls/tables/table3/extend</property>
+        </binding>
+      </hovered>
+    </animation> 
+
+    <animation>
+        <type>rotate</type>
+        <object-name>cache-table3</object-name>
+        <property>controls/tables/table3/cache/position-norm</property>
+				<factor>160</factor>
+        <center>
+            <x-m>0</x-m>
+            <y-m>0.710</y-m>
+            <z-m>0.022</z-m>
+        </center>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>table3-1</object-name>	
+        <object-name>table3-2</object-name>	
+        <property>controls/tables/table3/tab0/position-norm</property>
+				<factor>0.19</factor>
+        <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>1</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>table3-1</object-name>	
+        <object-name>table3-2</object-name>	
+        <property>controls/tables/table3/tab1/position-norm</property>
+				<factor>90</factor>
+        <center>
+            <x-m>0</x-m>
+            <y-m>0.662</y-m>
+            <z-m>-0.227</z-m>
+        </center>
+        <axis>
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>	
+        <object-name>table3-2</object-name>	
+        <property>controls/tables/table3/tab2/position-norm</property>
+				<factor>180</factor>
+        <center>
+            <x-m>0</x-m>
+            <y-m>0.6754</y-m>
+            <z-m>0.0</z-m>
+        </center>
+        <axis>
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+<!-- TABLE 4 -->
+
+   <animation>
+      <type>pick</type>
+      <object-name>cache-table4</object-name>
+      <object-name>table4-1</object-name>
+      <object-name>table4-2</object-name>
+      <visible>true</visible>
+			<action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+         	<command>property-toggle</command>
+          <property>controls/tables/table4/extend</property>
+        </binding>
+			</action>
+    	<hovered>
+				<binding>
+          <command>set-tooltip</command>
+            <tooltip-id>Tables</tooltip-id>
+            <label>Table 4 : %s</label>
+            <mapping>open-close</mapping>
+       			<property>controls/tables/table4/extend</property>
+        </binding>
+      </hovered>
+    </animation> 
+
+    <animation>
+        <type>rotate</type>
+        <object-name>cache-table4</object-name>
+        <property>controls/tables/table4/cache/position-norm</property>
+				<factor>160</factor>
+        <center>
+            <x-m>0</x-m>
+            <y-m>0.710</y-m>
+            <z-m>0.022</z-m>
+        </center>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>table4-1</object-name>	
+        <object-name>table4-2</object-name>	
+        <property>controls/tables/table4/tab0/position-norm</property>
+				<factor>0.19</factor>
+        <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>1</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>table4-1</object-name>	
+        <object-name>table4-2</object-name>	
+        <property>controls/tables/table4/tab1/position-norm</property>
+				<factor>90</factor>
+        <center>
+            <x-m>0</x-m>
+            <y-m>0.662</y-m>
+            <z-m>-0.227</z-m>
+        </center>
+        <axis>
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>	
+        <object-name>table4-2</object-name>	
+        <property>controls/tables/table4/tab2/position-norm</property>
+				<factor>180</factor>
+        <center>
+            <x-m>0</x-m>
+            <y-m>0.6754</y-m>
+            <z-m>0.0</z-m>
+        </center>
+        <axis>
+            <x>1</x>
             <y>0</y>
             <z>0</z>
         </axis>

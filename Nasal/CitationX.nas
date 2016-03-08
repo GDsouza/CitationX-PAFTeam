@@ -132,7 +132,6 @@ var fl_tot = 0;
 var FDM="";
 var Grd_Idle=props.globals.initNode("controls/engines/grnd-idle",1,"BOOL");
 var Annun = props.globals.getNode("instrumentation/annunciators",1);
-var cc = props.globals.initNode("controls/tables/table1/cache1/close",0,"BOOL");
 props.globals.initNode("controls/flight/flaps-select",0,"INT");
 props.globals.initNode("controls/fuel/tank[0]/boost_pump",0,"INT");
 props.globals.initNode("controls/fuel/tank[1]/boost_pump",0,"INT");
@@ -153,6 +152,7 @@ props.globals.initNode("controls/bar/bar-door-6",0,"DOUBLE");
 props.globals.initNode("controls/bar/bar-door-7",0,"DOUBLE");
 props.globals.initNode("controls/bar/bar-door-8",0,"DOUBLE");
 props.globals.initNode("controls/tables/table1/extend",0,"BOOL");
+props.globals.initNode("controls/tables/table4/extend",0,"BOOL");
 props.globals.initNode("controls/gear/emer-brake",0,"DOUBLE");
 props.globals.initNode("sim/model/pilot-seat",0,"DOUBLE");
 props.globals.initNode("sim/model/copilot-seat",0,"DOUBLE");
@@ -163,10 +163,6 @@ props.globals.initNode("instrumentation/clock/flight-meter-hour",0,"DOUBLE");
 var PWR2 =0;
 aircraft.livery.init("Aircraft/CitationX/Models/Liveries");
 var FHmeter = aircraft.timer.new("/instrumentation/clock/flight-meter-sec", 10,1); 
-var Table1_0 = aircraft.door.new("controls/tables/table1/table1-0",2);
-var Table1_1 = aircraft.door.new("controls/tables/table1/table1-1",2);
-var Table1_2 = aircraft.door.new("controls/tables/table1/table1-2",2);
-var Cache1 = aircraft.door.new("controls/tables/table1/cache1",1);
 var LHeng= JetEngine.new(0);
 var RHeng= JetEngine.new(1);
 var tire=TireSpeed.new(3,0.430,0.615,0.615);
@@ -258,34 +254,42 @@ setlistener("/sim/current-view/internal", func {
 ### Tables animation ###
 
 var tables_anim = func {
-	if (getprop("controls/tables/table1/extend") and !cc.getBoolValue()) {
-			Cache1.open();			
-		if (getprop("controls/tables/table1/cache1/position-norm")==1.0) {
-			Table1_0.open();
-			if (getprop("controls/tables/table1/table1-0/position-norm")==1.0) {
-				Table1_1.open();
-				if (getprop("controls/tables/table1/table1-1/position-norm")==1.0) {
-					Table1_2.open();
-					if (getprop("controls/tables/table1/table1-2/position-norm")==1.0) {
-						cc.setBoolValue(1);
-						Cache1.close();
-					}
-				}				
-			}			
-		}
-	}
+	for (var i=1; i<5;i+=1) {
+		var cc = props.globals.initNode("controls/tables/table"~i~"/cache/open",0,"BOOL");
+		var Table_0 = aircraft.door.new("controls/tables/table"~i~"/tab0",2);
+		var Table_1 = aircraft.door.new("controls/tables/table"~i~"/tab1",2);
+		var Table_2 = aircraft.door.new("controls/tables/table"~i~"/tab2",2);
+		var Cache = aircraft.door.new("controls/tables/table"~i~"/cache",1);
 
-	if (!getprop("controls/tables/table1/extend") and cc.getBoolValue()) {
-		Cache1.open();
-		if (getprop("controls/tables/table1/cache1/position-norm")==1.0) {
-			Table1_2.close();
-			if (getprop("controls/tables/table1/table1-2/position-norm")==0.0) {
-				Table1_1.close();
-				if (getprop("controls/tables/table1/table1-1/position-norm")==0.0) {
-					Table1_0.close();
-					if (getprop("controls/tables/table1/table1-0/position-norm")==0.0) {
-						cc.setBoolValue(0);
-						Cache1.close();
+		if (getprop("controls/tables/table"~i~"/extend") and !cc.getBoolValue()) {
+				Cache.open();			
+			if (getprop("controls/tables/table"~i~"/cache/position-norm")==1.0) {
+				Table_0.open();
+				if (getprop("controls/tables/table"~i~"/tab0/position-norm")==1.0) {
+					Table_1.open();
+					if (getprop("controls/tables/table"~i~"/tab1/position-norm")==1.0) {
+						Table_2.open();
+						if (getprop("controls/tables/table"~i~"/tab2/position-norm")==1.0) {
+							cc.setBoolValue(1);
+							Cache.close();
+						}
+					}				
+				}			
+			}
+		}
+
+		if (!getprop("controls/tables/table"~i~"/extend") and cc.getBoolValue()) {
+			Cache.open();
+			if (getprop("controls/tables/table"~i~"/cache/position-norm")==1.0) {
+				Table_2.close();
+				if (getprop("controls/tables/table"~i~"/tab2/position-norm")==0.0) {
+					Table_1.close();
+					if (getprop("controls/tables/table"~i~"/tab1/position-norm")==0.0) {
+						Table_0.close();
+						if (getprop("controls/tables/table"~i~"/tab0/position-norm")==0.0) {
+							cc.setBoolValue(0);
+							Cache.close();
+						}
 					}
 				}
 			}
