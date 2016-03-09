@@ -152,6 +152,8 @@ props.globals.initNode("controls/bar/bar-door-6",0,"DOUBLE");
 props.globals.initNode("controls/bar/bar-door-7",0,"DOUBLE");
 props.globals.initNode("controls/bar/bar-door-8",0,"DOUBLE");
 props.globals.initNode("controls/tables/table1/extend",0,"BOOL");
+props.globals.initNode("controls/tables/table2/extend",0,"BOOL");
+props.globals.initNode("controls/tables/table3/extend",0,"BOOL");
 props.globals.initNode("controls/tables/table4/extend",0,"BOOL");
 props.globals.initNode("controls/gear/emer-brake",0,"DOUBLE");
 props.globals.initNode("sim/model/pilot-seat",0,"DOUBLE");
@@ -253,16 +255,14 @@ setlistener("/sim/current-view/internal", func {
 
 ### Tables animation ###
 
-var tables_anim = func {
-	for (var i=1; i<5;i+=1) {
+var tables_anim = func(i) {
 		var cc = props.globals.initNode("controls/tables/table"~i~"/cache/open",0,"BOOL");
 		var Table_0 = aircraft.door.new("controls/tables/table"~i~"/tab0",2);
 		var Table_1 = aircraft.door.new("controls/tables/table"~i~"/tab1",2);
 		var Table_2 = aircraft.door.new("controls/tables/table"~i~"/tab2",2);
 		var Cache = aircraft.door.new("controls/tables/table"~i~"/cache",1);
 
-		if (getprop("controls/tables/table"~i~"/extend") and !cc.getBoolValue()) {
-				Cache.open();			
+		var timer_open = maketimer(0.1,func {
 			if (getprop("controls/tables/table"~i~"/cache/position-norm")==1.0) {
 				Table_0.open();
 				if (getprop("controls/tables/table"~i~"/tab0/position-norm")==1.0) {
@@ -272,14 +272,18 @@ var tables_anim = func {
 						if (getprop("controls/tables/table"~i~"/tab2/position-norm")==1.0) {
 							cc.setBoolValue(1);
 							Cache.close();
+							timer_open.stop();
 						}
 					}				
 				}			
 			}
+		});
+		if (getprop("controls/tables/table"~i~"/extend") and !cc.getBoolValue()) {
+			Cache.open();			
+			timer_open.start();
 		}
 
-		if (!getprop("controls/tables/table"~i~"/extend") and cc.getBoolValue()) {
-			Cache.open();
+		var timer_close = maketimer(0.1,func {
 			if (getprop("controls/tables/table"~i~"/cache/position-norm")==1.0) {
 				Table_2.close();
 				if (getprop("controls/tables/table"~i~"/tab2/position-norm")==0.0) {
@@ -289,13 +293,18 @@ var tables_anim = func {
 						if (getprop("controls/tables/table"~i~"/tab0/position-norm")==0.0) {
 							cc.setBoolValue(0);
 							Cache.close();
+							timer_close.stop();
 						}
 					}
 				}
 			}
+		});
+		if (!getprop("controls/tables/table"~i~"/extend") and cc.getBoolValue()) {
+			Cache.open();
+			timer_close.start();
 		}
-	}
 }
+
 ### Flight Meter hour ###
 
 setlistener("/gear/gear[1]/wow", func(ww){
@@ -522,7 +531,6 @@ var update_systems = func{
     FHupdate(0);
     tire.get_rotation("yasim");
 		speed_ref();
-		tables_anim();
     if(getprop("velocities/airspeed-kt")>40)setprop("controls/cabin-door/open",0);
     var grspd =getprop("velocities/groundspeed-kt");
     var wspd = (45-grspd) * 0.022222;

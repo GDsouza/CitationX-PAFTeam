@@ -844,6 +844,10 @@
          	<command>property-toggle</command>
           <property>controls/tables/table1/extend</property>
         </binding>
+				<binding>
+					<command>nasal</command>
+					<script>citation.tables_anim(1);</script>
+				</binding>
 			</action>
     	<hovered>
 				<binding>
@@ -936,6 +940,10 @@
          	<command>property-toggle</command>
           <property>controls/tables/table2/extend</property>
         </binding>
+				<binding>
+					<command>nasal</command>
+					<script>citation.tables_anim(2);</script>
+				</binding>
 			</action>
     	<hovered>
 				<binding>
@@ -1028,6 +1036,10 @@
          	<command>property-toggle</command>
           <property>controls/tables/table3/extend</property>
         </binding>
+				<binding>
+					<command>nasal</command>
+					<script>citation.tables_anim(3);</script>
+				</binding>
 			</action>
     	<hovered>
 				<binding>
@@ -1120,6 +1132,10 @@
          	<command>property-toggle</command>
           <property>controls/tables/table4/extend</property>
         </binding>
+				<binding>
+					<command>nasal</command>
+					<script>citation.tables_anim(4);</script>
+				</binding>
 			</action>
     	<hovered>
 				<binding>
