@@ -1242,6 +1242,286 @@
             </position>
         </doors>
 
+    <!-- TABLES -->
+                     <!-- Table 1 -->
+        <tables>
+            <name>table1-open</name>
+            <mode>once</mode>
+            <path>Aircraft/CitationX/Sounds/table-open.wav</path>
+            <condition>
+                <greater-than>
+                       <property>controls/tables/table1/extend</property>
+                    <value>0</value>
+                </greater-than>
+            </condition>
+            <volume>
+                <property>sim/signals/fdm-initialized</property>
+                <factor>1</factor>
+            </volume>
+            <position>
+                <x>-4.20 </x>
+                <y>-0.70 </y>
+                <z> 0.00 </z>
+            </position>
+        </tables>
+
+        <tables>
+            <name>table1-closed</name>
+            <mode>once</mode>
+            <path>Aircraft/CitationX/Sounds/table-closed.wav</path>
+            <condition>
+              <and>
+                <less-than>
+                    <property>controls/tables/table1/extend</property>
+                    <value>1</value>
+                </less-than>
+                <greater-than>
+                    <property>controls/tables/table1/tab0/position-norm</property>
+                    <value>0.01</value>
+                </greater-than>
+              </and>                          
+            </condition>
+            <volume>
+                <property>sim/signals/fdm-initialized</property>
+                <factor>1</factor>
+            </volume>
+            <position>
+                <x>-4.20 </x>
+                <y>-0.70 </y>
+                <z> 0.00 </z>
+            </position>
+        </tables>
+
+        <tables>
+            <name>cache-table1-closed</name>
+            <mode>in-transit</mode>
+            <path>Aircraft/CitationX/Sounds/cache-table.wav</path>
+                    <property>controls/tables/table1/cache/position-norm</property>
+            <volume>
+                <property>sim/signals/fdm-initialized</property>
+                <factor>1</factor>
+            </volume>
+            <position>
+                <x>-4.20 </x>
+                <y>-0.70 </y>
+                <z> 0.00 </z>
+            </position>
+        </tables>
+
+                     <!-- Table 2 -->
+        <tables>
+            <name>table2-open</name>
+            <mode>once</mode>
+            <path>Aircraft/CitationX/Sounds/table-open.wav</path>
+            <condition>
+                <greater-than>
+                       <property>controls/tables/table2/extend</property>
+                    <value>0</value>
+                </greater-than>
+            </condition>
+            <volume>
+                <property>sim/signals/fdm-initialized</property>
+                <factor>1</factor>
+            </volume>
+            <position>
+                <x>-1.80 </x>
+                <y>-0.70 </y>
+                <z> 0.00 </z>
+            </position>
+        </tables>
+
+        <tables>
+            <name>table2-closed</name>
+            <mode>once</mode>
+            <path>Aircraft/CitationX/Sounds/table-closed.wav</path>
+            <condition>
+              <and>
+                <less-than>
+                    <property>controls/tables/table2/extend</property>
+                    <value>1</value>
+                </less-than>
+                <greater-than>
+                    <property>controls/tables/table2/tab0/position-norm</property>
+                    <value>0.01</value>
+                </greater-than>
+              </and>                          
+            </condition>
+            <volume>
+                <property>sim/signals/fdm-initialized</property>
+                <factor>1</factor>
+            </volume>
+            <position>
+                <x>-1.80 </x>
+                <y>-0.70 </y>
+                <z> 0.00 </z>
+            </position>
+        </tables>
+
+        <tables>
+            <name>cache-table2-closed</name>
+            <mode>in-transit</mode>
+            <path>Aircraft/CitationX/Sounds/cache-table.wav</path>
+                    <property>controls/tables/table2/cache/position-norm</property>
+            <volume>
+                <property>sim/signals/fdm-initialized</property>
+                <factor>1</factor>
+            </volume>
+            <position>
+                <x>-4.20 </x>
+                <y>-0.70 </y>
+                <z> 0.00 </z>
+            </position>
+        </tables>
+
+                     <!-- Table 3 -->
+     <tables>
+            <name>table3-open</name>
+            <mode>once</mode>
+            <path>Aircraft/CitationX/Sounds/table-open.wav</path>
+            <condition>
+                <greater-than>
+                       <property>controls/tables/table3/extend</property>
+                    <value>0</value>
+                </greater-than>
+            </condition>
+            <volume>
+                <property>sim/signals/fdm-initialized</property>
+                <factor>1</factor>
+            </volume>
+            <position>
+                <x>-1.80 </x>
+                <y> 0.70 </y>
+                <z> 0.00 </z>
+            </position>
+        </tables>
+
+        <tables>
+            <name>table3-closed</name>
+            <mode>once</mode>
+            <path>Aircraft/CitationX/Sounds/table-closed.wav</path>
+            <condition>
+              <and>
+                <less-than>
+                    <property>controls/tables/table3/extend</property>
+                    <value>1</value>
+                </less-than>
+                <greater-than>
+                    <property>controls/tables/table3/tab0/position-norm</property>
+                    <value>0.01</value>
+                </greater-than>
+              </and>                          
+            </condition>
+            <volume>
+                <property>sim/signals/fdm-initialized</property>
+                <factor>1</factor>
+            </volume>
+            <position>
+                <x>-1.80 </x>
+                <y> 0.70 </y>
+                <z> 0.00 </z>
+            </position>
+        </tables>
+
+        <tables>
+            <name>cache-table3-closed</name>
+            <mode>in-transit</mode>
+            <path>Aircraft/CitationX/Sounds/cache-table.wav</path>
+                    <property>controls/tables/table3/cache/position-norm</property>
+            <volume>
+                <property>sim/signals/fdm-initialized</property>
+                <factor>1</factor>
+            </volume>
+            <position>
+                <x>-4.20 </x>
+                <y>-0.70 </y>
+                <z> 0.00 </z>
+            </position>
+        </tables>
+
+                     <!-- Table 4 -->
+        <tables>
+            <name>table4-open</name>
+            <mode>once</mode>
+            <path>Aircraft/CitationX/Sounds/table-open.wav</path>
+            <condition>
+                <greater-than>
+                    <property>controls/tables/table4/extend</property>
+                    <value>0</value>
+                </greater-than>
+            </condition>
+            <volume>
+                <property>sim/signals/fdm-initialized</property>
+                <factor>1</factor>
+            </volume>
+            <position>
+                <x>-4.10 </x>
+                <y> 0.70 </y>
+                <z> 0.40 </z>
+            </position>
+        </tables>
+
+        <tables>
+            <name>table4-closed</name>
+            <mode>once</mode>
+            <path>Aircraft/CitationX/Sounds/table-closed.wav</path>
+            <condition>
+              <and>
+                <less-than>
+                    <property>controls/tables/table4/extend</property>
+                    <value>1</value>
+                </less-than>
+                <greater-than>
+                    <property>controls/tables/table4/tab0/position-norm</property>
+                    <value>0.01</value>
+                </greater-than>
+              </and>                          
+            </condition>
+            <volume>
+                <property>sim/signals/fdm-initialized</property>
+                <factor>1</factor>
+            </volume>
+            <position>
+                <x>-4.10 </x>
+                <y> 0.70 </y>
+                <z> 0.40 </z>
+            </position>
+        </tables>
+
+        <tables>
+            <name>cache-table4-closed</name>
+            <mode>in-transit</mode>
+            <path>Aircraft/CitationX/Sounds/cache-table.wav</path>
+                    <property>controls/tables/table4/cache/position-norm</property>
+            <volume>
+                <property>sim/signals/fdm-initialized</property>
+                <factor>1</factor>
+            </volume>
+            <position>
+                <x>-4.20 </x>
+                <y>-0.70 </y>
+                <z> 0.00 </z>
+            </position>
+        </tables>
+
+    <!-- AMBIANCE -->
+
+          <ambiance>
+    		  <name>ambiance</name>
+    	        <path>Aircraft/CitationX/Sounds/ambiance.wav</path>
+      				<mode>once</mode>
+        				<property>sim/signals/fdm-initialized</property>
+            	    <volume>
+                		<property>sim/signals/fdm-initialized</property>
+         			     <factor>1</factor>
+            	   </volume>
+            <position>
+                <x>-5.20 </x>
+                <y> 0.00 </y>
+                <z> 0.90 </z>
+            </position>
+    	</ambiance>
+
+
     <!-- ALARMS -->
     <alarm>
         <name>Master warning</name>
