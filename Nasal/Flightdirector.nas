@@ -42,6 +42,7 @@ var FD_set_mode = func(btn){
 			if(getprop(AP)!="AP"){
 				setprop(Lateral_arm,"");
 				setprop(Vertical_arm,"");
+				setprop("autopilot/locks/disengage",0);
         if(Vmode=="PTCH")set_pitch();
         if(Lmode=="ROLL")set_roll(); 
 				if (min_mode = "RA") {
@@ -56,7 +57,7 @@ var FD_set_mode = func(btn){
 						setprop(AutoCoord,0);
 					}					
 				}
-			}	else {kill_Ap("")}
+			}	else {kill_Ap("");setprop("autopilot/locks/disengage",1)}
 
     }elsif(btn=="hdg") {
 			if(Lmode!="HDG") {setprop(Lateral,"HDG")}
