@@ -50,7 +50,7 @@ CABINE : 	Eclairage de la cabine
         # Poursuivre la modélisation du mobilier (tablettes, bar, etc...)
         # Animation des tablettes - Fait 08/03/2016
           Améliorer l'escalier
-					Mettre les palonniers 
+				#	Mettre les palonniers - FAIT 12/03/2016
                    
 DIVERS : 	Checklists vocales
 					Gérer les immatriculations en fonction des Liveries (?)
