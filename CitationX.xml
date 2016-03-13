@@ -146,6 +146,7 @@ Fuel 12938 lbs jet
   <gear x="-1.5" y="1.7" z="-2.55" compression="0.6" spring="0.5"><!--orig:c=0.5-->
     <control-input axis="/controls/gear/brake-left" control="BRAKE"/>
     <control-input axis="/controls/gear/brake-parking" control="BRAKE"/>
+    <control-input axis="/controls/gear/emer-brake" control="BRAKE"/>
     <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
     <control-speed control="EXTEND" transition-time="5"/>
     <control-output control="EXTEND" prop="/gear/gear[1]/position-norm"/>
@@ -154,6 +155,7 @@ Fuel 12938 lbs jet
   <gear x="-1.5" y="-1.7" z="-2.55" compression="0.6" spring="0.5"><!--orig:c=0.5-->
     <control-input axis="/controls/gear/brake-right" control="BRAKE"/>
     <control-input axis="/controls/gear/brake-parking" control="BRAKE"/>
+    <control-input axis="/controls/gear/emer-brake" control="BRAKE"/>
     <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
     <control-speed control="EXTEND" transition-time="5"/>
     <control-output control="EXTEND" prop="/gear/gear[2]/position-norm"/>

@@ -58,6 +58,8 @@ var EICAS = {
 				EICAS.update_listeners()},1,0);
 			setlistener("controls/gear/brake-parking", func {
 				EICAS.update_listeners()},1,0);
+			setlistener("controls/gear/emer-brake", func {
+				EICAS.update_listeners()},1,0);
 			setlistener("controls/electric/APU-generator", func {
 				EICAS.update_listeners()},1,0);
 			setlistener("controls/electric/external-power", func {
@@ -119,6 +121,7 @@ var EICAS = {
 				me.eng0_shutdown = getprop("controls/engines/engine[0]/cutoff");
 				me.eng1_shutdown = getprop("controls/engines/engine[1]/cutoff");
 				me.parkbrake = getprop("controls/gear/brake-parking");
+				me.emerbrake = getprop("controls/gear/emer-brake");
 				me.apu_running = getprop("controls/electric/APU-generator");
 				me.ext_pwr = getprop("controls/electric/external-power");
 				me.cabin_door = getprop("controls/cabin-door/open");
@@ -183,6 +186,7 @@ var EICAS = {
 				if(me.wow and !me.eng0_shutdown and !me.eng1_shutdown and (
 						me.ext_pwr
 						or me.parkbrake 
+						or me.emerbrake 
 						or me.speedbrake
 						or me.total_fuel <= 500)) {
 					append(me.msg_l3,"NO TAKEOFF");
@@ -241,6 +245,9 @@ var EICAS = {
 				}
 				if (me.parkbrake) {
 					append(me.msg_l1,"PARK BRK SET");
+				}
+				if (me.emerbrake) {
+					append(me.msg_l1,"EMERGENCY BRAKE");
 				}
 				if(me.wow and (me.flaps < 0.140	or me.flaps > 0.430)) {
 					append(me.msg_l1,"NO TAKEOFF");
