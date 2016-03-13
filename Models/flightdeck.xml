@@ -243,6 +243,68 @@
    </hovered>
  </animation>
 
+<!-- Rudder & brakes pedals -->
+
+ <animation>
+  <type>translate</type>
+  <object-name>LHpedal</object-name>
+  <object-name>LHverrin</object-name>
+  <property>controls/flight/rudder</property>
+  <factor>0.05</factor>
+  <axis>
+   <x>1.0</x>
+   <y>0.0</y>
+   <z>0.0</z>
+  </axis>
+ </animation>
+
+ <animation>
+  <type>rotate</type>
+  <object-name>LHpedal</object-name>
+  <property>controls/gear/brake-left</property>
+  <factor>-20</factor>
+  <axis>
+   <x>0.0</x>
+   <y>1.0</y>
+   <z>0.0</z>
+  </axis>
+  <center>
+   <x-m>-1.14629</x-m>
+   <y-m>0.0</y-m>
+   <z-m>0.180</z-m>
+  </center>
+ </animation>
+
+ <animation>
+  <type>translate</type>
+  <object-name>RHpedal</object-name>
+  <object-name>RHverrin</object-name>
+  <property>controls/flight/rudder</property>
+  <factor>-0.05</factor>
+  <axis>
+   <x>1.0</x>
+   <y>0.0</y>
+   <z>0.0</z>
+  </axis>
+ </animation>
+
+ <animation>
+  <type>rotate</type>
+  <object-name>RHpedal</object-name>
+  <property>controls/gear/brake-right</property>
+  <factor>-20</factor>
+  <axis>
+   <x>0.0</x>
+   <y>1.0</y>
+   <z>0.0</z>
+  </axis>
+  <center>
+   <x-m>-1.14629</x-m>
+   <y-m>0.0</y-m>
+   <z-m>0.180</z-m>
+  </center>
+ </animation>
+
     <!-- Pilots -->
   <model>
 		<name>Captain</name>
