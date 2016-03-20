@@ -66,7 +66,7 @@ var EICAS = {
 				EICAS.update_listeners()},1,0);
 			setlistener("controls/cabin-door/open", func {
 				EICAS.update_listeners()},1,0);
-			setlistener("position/altitude-ft", func {
+			setlistener("systems/pressurization/cabin-altitude-ft", func {
 				EICAS.update_listeners()},1,0);
 			setlistener("controls/fuel/tank[0]/boost_pump", func {
 				EICAS.update_listeners()},1,0);
@@ -125,7 +125,7 @@ var EICAS = {
 				me.apu_running = getprop("controls/electric/APU-generator");
 				me.ext_pwr = getprop("controls/electric/external-power");
 				me.cabin_door = getprop("controls/cabin-door/open");
-				me.altitude = getprop("position/altitude-ft");
+				me.altitude = getprop("systems/pressurization/cabin-altitude-ft");
 				me.boost_pump_L = getprop("controls/fuel/tank[0]/boost_pump");
 				me.boost_pump_R = getprop("controls/fuel/tank[1]/boost_pump");
 				me.level_tank_L = getprop("consumables/fuel/tank[0]/level-lbs");
@@ -165,7 +165,7 @@ var EICAS = {
 			if (me.enabled and me.test == 0) {		
 
 					### lEVEL 3 ###
-				if (me.altitude > 51000) {
+				if (me.altitude > 10000) {
           append(me.msg_l3,"CABIN ALTITUDE");
 					me.nb_warning +=1;
 				}
@@ -216,7 +216,7 @@ var EICAS = {
           append(me.msg_l2,"CABIN DOOR OPEN");
 					me.nb_caution +=1;
 				}
-				if (me.altitude > 50000) {
+				if (me.altitude > 8500) {
           append(me.msg_l2,"CABIN ALTITUDE");
 					me.nb_caution +=1;
 				}

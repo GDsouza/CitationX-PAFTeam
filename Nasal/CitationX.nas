@@ -155,12 +155,12 @@ props.globals.initNode("controls/tables/table1/extend",0,"BOOL");
 props.globals.initNode("controls/tables/table2/extend",0,"BOOL");
 props.globals.initNode("controls/tables/table3/extend",0,"BOOL");
 props.globals.initNode("controls/tables/table4/extend",0,"BOOL");
-#props.globals.initNode("controls/gear/emer-brake",0,"DOUBLE");
 props.globals.initNode("sim/model/pilot-seat",0,"DOUBLE");
 props.globals.initNode("sim/model/copilot-seat",0,"DOUBLE");
 props.globals.initNode("sim/alarms/overspeed-alarm",0,"BOOL");
 props.globals.initNode("sim/alarms/stall-warning",0,"BOOL");
 props.globals.initNode("instrumentation/clock/flight-meter-hour",0,"DOUBLE");
+props.globals.initNode("autopilot/locks/alt-mach",0,"BOOL");
 
 var PWR2 =0;
 aircraft.livery.init("Aircraft/CitationX/Models/Liveries");

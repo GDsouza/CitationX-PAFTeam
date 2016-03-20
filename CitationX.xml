@@ -69,7 +69,7 @@ Fuel 12938 lbs jet
     <flap0 start="0" end=".67" lift="1.5" drag="1.6"/>
     <flap1 start=".688" end=".858" lift="1.3" drag="1.4"/>
     <slat start=".2" end=".8" aoa="3" drag="1.0"/>
-    <spoiler start=".309" end=".48" lift="1.0" drag="3.0"/>
+    <spoiler start=".309" end=".48" lift="1.0" drag="6.0"/>
     <control-input axis="/controls/flight/flaps" control="FLAP0"/>
     <control-speed control="FLAP0" transition-time="9"/>
     <control-output control="FLAP0" prop="/surface-positions/flap-pos-norm"/>

@@ -339,7 +339,7 @@
     </text>
 
     <text>
-        <name>SPD-annun</name>
+        <name>SPD-kt</name>
         <offsets>
             <x-m>0.0</x-m>
             <y-m>-0.063</y-m>
@@ -351,6 +351,27 @@
         <property>autopilot/settings/target-speed-kt</property>
         <format>%3.0f</format>
         <truncate>true</truncate>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.01</character-size>
+        <character-aspect-ratio type="double">1.2</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
+        </font-resolution>
+    </text>
+
+    <text>
+        <name>SPD-mach</name>
+        <offsets>
+            <x-m>0.0</x-m>
+            <y-m>-0.063</y-m>
+            <z-m>0.096</z-m>
+        </offsets>
+        <alignment>left-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type type="string">number-value</type>
+				<property>autopilot/settings/target-speed-mach</property> 
+        <format>%.2f</format>
         <font>helvetica_bold.txf</font>
         <character-size>0.01</character-size>
         <character-aspect-ratio type="double">1.2</character-aspect-ratio>
@@ -805,28 +826,65 @@
 
 
     <animation>
-        <type>select</type>
-        <object-name>SPD-annun</object-name>
-        <condition>
-		      <or>
-		        <equals>
-	            <property>autopilot/locks/altitude</property>
-	            <value>FLC</value>
-		        </equals>
-		        <equals>
-	            <property>autopilot/locks/altitude</property>
-	            <value>VFLC</value>
-		        </equals>
-		        <equals>
-	            <property>instrumentation/primus2000/sc840/nav1ptr</property>
-	            <value>3</value>
-		        </equals>
-		        <equals>
-	            <property>instrumentation/primus2000/sc840/nav2ptr</property>
-	            <value>3</value>
-		        </equals>
-		      </or>
-        </condition>
+      <type>select</type>
+      <object-name>SPD-kt</object-name>
+      <condition>
+				<and>
+          <or>
+            <equals>
+              <property>/autopilot/locks/altitude</property>
+              <value>FLC</value>
+            </equals>
+            <equals>
+              <property>/autopilot/locks/altitude</property>
+              <value>VFLC</value>
+            </equals>
+					  <equals>
+				      <property>instrumentation/primus2000/sc840/nav1ptr</property>
+				      <value>3</value>
+					  </equals>
+					  <equals>
+				      <property>instrumentation/primus2000/sc840/nav2ptr</property>
+				      <value>3</value>
+					  </equals>
+          </or>
+					<less-than-equals>
+						<property>instrumentation/altimeter/indicated-altitude-ft</property>								
+						<value>30650</value>
+					</less-than-equals>
+				</and>
+      </condition>
+    </animation>
+
+    <animation>
+      <type>select</type>
+      <object-name>SPD-mach</object-name>
+      <condition>
+				<and>
+          <or>
+            <equals>
+              <property>/autopilot/locks/altitude</property>
+              <value>FLC</value>
+            </equals>
+            <equals>
+              <property>/autopilot/locks/altitude</property>
+              <value>VFLC</value>
+            </equals>
+					  <equals>
+				      <property>instrumentation/primus2000/sc840/nav1ptr</property>
+				      <value>3</value>
+					  </equals>
+					  <equals>
+				      <property>instrumentation/primus2000/sc840/nav2ptr</property>
+				      <value>3</value>
+					  </equals>
+          </or>
+					<greater-than>
+						<property>instrumentation/altimeter/indicated-altitude-ft</property>								
+						<value>30650</value>
+					</greater-than>
+				</and>
+       </condition>
     </animation>
 
     <animation>
@@ -960,7 +1018,8 @@
     <animation>
         <name>cyan</name>
         <type>material</type>
-        <object-name>SPD-annun</object-name>
+        <object-name>SPD-kt</object-name>
+        <object-name>SPD-mach</object-name>
         <object-name>VSI-tgt</object-name>
         <object-name>inhg</object-name>
         <object-name>Kt</object-name>

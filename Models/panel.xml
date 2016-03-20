@@ -3664,13 +3664,10 @@
     <type>rotate</type>
     <object-name>A.knob</object-name>
     <property>controls/pressurization/man-alt-ft</property>
-		<factor>-270</factor>
-<!--
 			<interpolation>
 		    <entry><ind>-1000</ind><dep>0</dep></entry>
-		    <entry><ind>14000</ind><dep>270</dep></entry>
+		    <entry><ind>14000</ind><dep>-270</dep></entry>
 			</interpolation>
--->
     <center>
       <x-m>0.029</x-m>
       <y-m>0.5217</y-m>
@@ -3735,8 +3732,8 @@
     <property>controls/pressurization/man-rate-fpm</property>
 		<factor>-0.30</factor>
     <center>
-      <x-m>0.018</x-m>
-      <y-m>0.565</y-m>
+      <x-m>0.019</x-m>
+      <y-m>0.5654</y-m>
       <z-m>0</z-m>
     </center>
     <axis>

@@ -14,12 +14,14 @@ var init = func {
 	setprop("autopilot/route-manager/departure/airport",getprop("/sim/airport/closest-airport-id"));
 	setprop("autopilot/route-manager/departure/runway",getprop("sim/atc/runway"));
 	setprop("autopilot/settings/cruise-speed-kt",330);
-	setprop("autopilot/settings/cruise-speed-mach",0.50);
+	setprop("autopilot/settings/cruise-speed-mach",0.86);
 	setprop("autopilot/route-manager/cruise/altitude-ft",10000);
 	setprop("autopilot/route-manager/cruise/flight-level",410);
 	setprop("autopilot/settings/asel",getprop("autopilot/route-manager/cruise/flight-level"));
 	setprop("autopilot/settings/climb-speed-kt",250);
+	setprop("autopilot/settings/climb-speed-mach",0.78);
 	setprop("autopilot/settings/descent-speed-kt",200);
+	setprop("autopilot/settings/descent-speed-mach",0.30);
 	setprop("autopilot/settings/dep-speed-kt",200);
 	setprop("autopilot/settings/dep-agl-limit-ft",2500);
 	setprop("autopilot/settings/dep-limit-nm",4);
@@ -626,10 +628,8 @@ var key = func(v) {
 				if (cduInput != "") {
 					if (left(cduInput,2) == "0.") {
 						setprop("autopilot/settings/climb-speed-mach",cduInput);				
-						setprop("autopilot/settings/climb-speed-kt",int(cduInput*661.47));
 					} else {
 							setprop("autopilot/settings/climb-speed-kt",cduInput);
-							setprop("autopilot/settings/climb-speed-mach",cduInput*0.0015118);
 					}					
 				}
 				cduInput = "";
@@ -639,10 +639,8 @@ var key = func(v) {
 				if (cduInput != "") {
 					if (left(cduInput,2) == "0.") {
 						setprop("autopilot/settings/cruise-speed-mach",cduInput);
-						setprop("autopilot/settings/cruise-speed-kt",int(cduInput*661.47));
 					} else {
 							setprop("autopilot/settings/cruise-speed-kt",cduInput);
-							setprop("autopilot/settings/cruise-speed-mach",cduInput*0.0015118);
 					}					
 				}
 				cduInput ="";
@@ -657,10 +655,8 @@ var key = func(v) {
 				if (cduInput != "") {
 					if (left(cduInput,2) == "0.") {
 						setprop("autopilot/settings/descent-speed-mach",cduInput);
-						setprop("autopilot/settings/descent-speed-kt",int(cduInput*661.47));
 					} else {
 							setprop("autopilot/settings/descent-speed-kt",cduInput);
-							setprop("autopilot/settings/descent-speed-mach",cduInput*0.0015118);
 					}					
 				}
 				cduInput = "";

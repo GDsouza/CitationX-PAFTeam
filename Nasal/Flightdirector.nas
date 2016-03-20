@@ -14,10 +14,18 @@ var AutoCoord="controls/flight/auto-coordination";
 var NAVSRC= getprop(NAVprop);
 var count=0;
 var Coord = 0;
+var TOD = 0;
 var minimums=getprop("autopilot/settings/minimums");
 var wx_range=[10,25,50,100,200,300];
 var wx_index=3;
 var rd_speed = props.globals.initNode("instrumentation/airspeed-indicator/round-speed-kt",0,"DOUBLE");
+var alt = "instrumentation/altimeter/indicated-altitude-ft";
+var v_speed = "autopilot/internal/vert-speed-fpm";
+var tg_spd_mc = "autopilot/settings/target-speed-mach";
+var ind_mc = "instrumentation/airspeed-indicator/indicated-mach";
+var tg_spd_kt = "autopilot/settings/target-speed-kt";
+var ind_kt = "instrumentation/airspeed-indicator/indicated-speed-kt";
+
 #####################################
 
 setlistener("/sim/signals/fdm-initialized", func {
@@ -35,7 +43,7 @@ var FD_set_mode = func(btn){
     var VAmode=getprop(Vertical_arm);
 		var min_mode = getprop("autopilot/settings/minimums-mode");
 		var agl_alt = getprop("position/altitude-agl-ft");
-		var ind_alt = getprop("instrumentation/altimeter/indicated-altitude-ft");
+		var ind_alt = getprop(alt);
 
 		if(btn=="ap"){
 			Coord = getprop(AutoCoord);
@@ -78,21 +86,21 @@ var FD_set_mode = func(btn){
 			var asel = "ASEL";
 			if(left(NAVSRC,3)=="FMS"){flcmode="VFLC";asel = "VASEL";}
 			if(Vmode!=flcmode){
-				var mc =getprop("instrumentation/airspeed-indicator/indicated-mach");
-				var kt=int(getprop("instrumentation/airspeed-indicator/indicated-speed-kt"));
+				var mc =getprop(ind_mc);
+				var kt=int(getprop(ind_kt));
 				if(!getprop("autopilot/settings/changeover")){
 					if(kt > 80 and kt <340){
 						setprop(Vertical,flcmode);
 						setprop(Vertical_arm,asel);
-						setprop("autopilot/settings/target-speed-kt",kt);
-						setprop("autopilot/settings/target-speed-mach",mc);
+						setprop(tg_spd_kt,kt);
+						setprop(tg_spd_mc,mc);
           }
 				}else{
-					if(mc > 0.40 and mc <0.85){
+					if(mc > 0.40 and mc <0.92){
 						setprop(Vertical,flcmode);
 						setprop(Vertical_arm,asel);
-						setprop("autopilot/settings/target-speed-kt",kt);
-						setprop("autopilot/settings/target-speed-mach",mc);
+						setprop(tg_spd_kt,kt);
+						setprop(tg_spd_mc,mc);
 					}
         }
 			} else {set_pitch()}
@@ -124,7 +132,7 @@ var FD_set_mode = func(btn){
 			setprop(Lateral_arm,"");
 			setprop(Vertical_arm,"");
 			if(Vmode!="VS"){
-				var tgt_vs = (int(getprop("autopilot/internal/vert-speed-fpm") * 0.01)) * 100;
+				var tgt_vs = (int(getprop(v_speed) * 0.01)) * 100;
 				setprop(Vertical,"VS");setprop("autopilot/settings/vertical-speed-fpm",tgt_vs);
 			} else {set_pitch()}
 
@@ -191,7 +199,7 @@ var set_nav_mode=func{
 
 #######  PITCH WHEEL ACTIONS #############
 
-var pitch_wheel=func(dir){
+var pitch_wheel=func(dir) {
     var Vmode=getprop(Vertical);
     var CO = getprop("autopilot/settings/changeover");
     var amt=0;
@@ -199,17 +207,19 @@ var pitch_wheel=func(dir){
         amt = int(getprop("autopilot/settings/vertical-speed-fpm")) + (dir* 100);
         amt = (amt < -8000 ? -8000 : amt > 6000 ? 6000 : amt);
         setprop("autopilot/settings/vertical-speed-fpm",amt);
-    }elsif(Vmode=="FLC" or Vmode=="VFLC"){
+    } else if(Vmode=="FLC" or Vmode=="VFLC"){
         if(!CO){
-            amt=getprop("autopilot/settings/target-speed-kt") + dir;
-            amt = (amt < 80 ? 80 : amt > 340 ? 340 : amt);
-            setprop("autopilot/settings/target-speed-kt",amt);
-        }else{
-            amt=getprop("autopilot/settings/target-speed-mach") + (dir*0.01);
-            amt = (amt < 0.40 ? 0.40 : amt > 0.85 ? 0.85 : amt);
-            setprop("autopilot/settings/target-speed-mach",amt);
-        }
-    }elsif(Vmode=="PTCH"){
+					if (getprop("autopilot/locks/alt-mach")) {
+	          amt=getprop(tg_spd_mc) + (dir*0.01);
+            amt = (amt < 0.40 ? 0.40 : amt > 0.91 ? 0.91 : amt);
+            setprop(tg_spd_mc,amt);
+					}	else {
+			        amt=getprop(tg_spd_kt) + dir;
+		          amt = (amt < 80 ? 80 : amt > 340 ? 340 : amt);
+		          setprop(tg_spd_kt,amt);
+	        }
+				}
+    } else if(Vmode=="PTCH"){
         amt=getprop("autopilot/settings/target-pitch-deg") + (dir*0.1);
         amt = (amt < -20 ? -20 : amt > 20 ? 20 : amt);
         setprop("autopilot/settings/target-pitch-deg",amt)
@@ -341,7 +351,7 @@ var monitor_L_armed = func{
 
 var monitor_V_armed = func{
     var Varm=getprop(Vertical_arm);
-    var myalt=getprop("instrumentation/altimeter/indicated-altitude-ft");
+    var myalt=getprop(alt);
     var asel=getprop("autopilot/settings/asel") * 100;
     var alterr=myalt-asel;
     if(Varm=="ASEL"){
@@ -374,7 +384,7 @@ var monitor_V_armed = func{
 var monitor_AP_errors= func{
 		var min_mode = getprop("autopilot/settings/minimums-mode");
 		var agl_alt = getprop("position/altitude-agl-ft");
-		var ind_alt = getprop("instrumentation/altimeter/indicated-altitude-ft");
+		var ind_alt = getprop(alt);
 		if (min_mode == "RA") {if(agl_alt<minimums)kill_Ap("")};
 		if (min_mode == "BA") {if(ind_alt<minimums)kill_Ap("")};
     var rlimit=getprop("orientation/roll-deg");
@@ -434,20 +444,25 @@ var speed_Control = func {
 	var tot_dist = getprop("autopilot/route-manager/total-distance");
 	var dist_rem = getprop("autopilot/route-manager/distance-remaining-nm");
 	var dist_dep = tot_dist-dist_rem;
-	var alt_ind = getprop("instrumentation/altimeter/indicated-altitude-ft");
+	var alt_ind = getprop(alt);
+	var alt_mc = getprop("autopilot/locks/alt-mach");
 	var cruise_alt = getprop("autopilot/route-manager/cruise/altitude-ft");
-	var cruise_spd = getprop("autopilot/settings/cruise-speed-kt");
-	var target_spd = "autopilot/settings/target-speed-kt";
+	var tg_spd_kt = "autopilot/settings/target-speed-kt";
+	var tg_spd_mc = "autopilot/settings/target-speed-mach";
 	var dep_spd = getprop("autopilot/settings/dep-speed-kt");
 	var dep_agl = getprop("autopilot/settings/dep-agl-limit-ft");
 	var dep_lim = getprop("autopilot/settings/dep-limit-nm");
-	var climb_spd = getprop("autopilot/settings/climb-speed-kt");
-	var descent_spd = getprop("autopilot/settings/descent-speed-kt");
+	var climb_kt = getprop("autopilot/settings/climb-speed-kt");
+	var climb_mc = getprop("autopilot/settings/climb-speed-mach");
+	var cruise_kt = getprop("autopilot/settings/cruise-speed-kt");
+	var cruise_mc = getprop("autopilot/settings/cruise-speed-mach");
+	var descent_kt = getprop("autopilot/settings/descent-speed-kt");
+	var descent_mc = getprop("autopilot/settings/descent-speed-mach");
 	var app_spd = getprop("autopilot/settings/app-speed-kt"); 
 	var app_dist_set = getprop("autopilot/settings/dist-to-dest-nm");
 	var app5_spd = getprop("autopilot/settings/app5-speed-kt");
 	var app15_spd = getprop("autopilot/settings/app15-speed-kt");
-	var app39_spd = getprop("autopilot/settings/app39-speed-kt");
+	var app35_spd = getprop("autopilot/settings/app39-speed-kt");
 	var target_alt = "autopilot/settings/target-altitude-ft";
 	var tg_alt = getprop(target_alt);
 	var wp_alt = getprop("autopilot/route-manager/wp/altitude-ft");
@@ -457,13 +472,15 @@ var speed_Control = func {
 	var asel = getprop("autopilot/settings/asel");
 	var fms = getprop("instrumentation/primus2000/sc840/nav1ptr");
 	var vmo = 0;
-	var TOD = 0;
+	var mmo = 0;
+	var alt_tod = alt_ind/100;
 	setprop("autopilot/locks/TOD",TOD);
 	setprop(target_alt,asel*100);
+	
 		### Takeoff ###
 	if (left(NAVSRC,3) == "FMS" and lock_alt == "VALT" and ap_stat != "AP") {
 		if (curr_wp==-1) {curr_wp=0}
-			if (dist_dep < dep_lim and alt_ind < dep_agl) {setprop(target_spd,dep_spd)}
+			if (dist_dep < dep_lim and alt_ind < dep_agl) {setprop(tg_spd_kt,dep_spd)}
 			if (getprop(next_wp~curr_wp~"]/altitude-ft") > 0) {
 				setprop(target_alt, getprop(next_wp~curr_wp~"]/altitude-ft"));
 			} else {
@@ -476,32 +493,32 @@ var speed_Control = func {
 	if (ap_stat == "AP") {
 		if (left(NAVSRC,3) == "FMS" and lock_alt == "VALT") {
 
-			### Altitude ###
+			### Altitude & TOD ###
 			setprop("autopilot/route-manager/cruise/altitude-ft",asel*100);
+			if (dist_rem <= alt_tod/3.5) {TOD = 1}
 
 				### Before TOD ###
-			if (dist_rem > asel/3.5) {
-				if (getprop(next_wp~curr_wp~"]/altitude-ft") > 0){
-					setprop(target_alt,getprop(next_wp~(curr_wp)~"]/altitude-ft"));
-					if (getprop(next_wp~curr_wp~"]/altitude-ft") < alt_ind-100)	{
-						setprop(target_alt,getprop(next_wp~curr_wp~"]/altitude-ft"));
-						setprop("autopilot/settings/asel",getprop(target_alt)/100);
-					}
-				} else {setprop(target_alt,asel*100)}
+				if (!TOD) {
+					if (getprop(next_wp~curr_wp~"]/altitude-ft") > 0){
+						setprop(target_alt,getprop(next_wp~(curr_wp)~"]/altitude-ft"));
+						if (getprop(next_wp~curr_wp~"]/altitude-ft") < alt_ind-100)	{
+							setprop(target_alt,getprop(next_wp~curr_wp~"]/altitude-ft"));
+							setprop("autopilot/settings/asel",getprop(target_alt)/100);
+						}
+					} else {setprop(target_alt,asel*100)}
 
 				### After TOD ###
-			} else {
-					TOD = 1;					
+			} else {				
 					setprop("autopilot/locks/TOD",TOD);
 					if (getprop(next_wp~(curr_wp)~"]/altitude-ft") > 0){
 					setprop(target_alt,getprop(next_wp~(curr_wp)~"]/altitude-ft"));
 					} else {
-							for (var i=curr_wp;i<(num-1);i+=1) {
-								if (getprop(next_wp~i~"]/altitude-ft") > 0) {
-									setprop(target_alt,getprop(next_wp~i~"]/altitude-ft"));
-									i = num;
-								}
+						for (var i=curr_wp;i<(num-1);i+=1) {
+							if (getprop(next_wp~i~"]/altitude-ft") > 0) {
+								setprop(target_alt,getprop(next_wp~i~"]/altitude-ft"));
+								i = num;
 							}
+						}
 					}
 			}
 			if (dist_rem <= 7) {
@@ -515,32 +532,38 @@ var speed_Control = func {
 
 							### Departure ###
 			if (dist_dep < dep_lim and alt_ind < dep_agl) {
-				setprop(target_spd,dep_spd);
+				setprop(tg_spd_kt,dep_spd);
 			} else {		
-				if (TOD) {setprop(target_spd,descent_spd)}
-				else {
+				if (TOD) {
+					if (alt_mc) {setprop(tg_spd_mc,descent_mc)}
+					if (!alt_mc) {setprop(tg_spd_kt,descent_kt)}
+				} else {
 							### Climb ###
 					if (tg_alt > (alt_ind+1000)) {
-						var my_spd = climb_spd;
-						speed_table(alt_ind,my_spd,vmo);
-						setprop(target_spd,my_spd);
+						var my_spd = climb_kt;
+						if (alt_mc) {
+							my_spd = climb_mc;
+							setprop(tg_spd_mc,my_spd);
+						} else {
+								setprop(tg_spd_kt,my_spd);
+						}
 								### Descent ###
 					} else if (tg_alt < (alt_ind-1000)) {
-							setprop(target_spd,descent_spd);
+							if (alt_mc) {setprop(tg_spd_mc,descent_mc)}
+							if (!alt_mc) {setprop(tg_spd_kt,descent_kt)}
 					}	else {
 								### Cruise ###
-						if (cruise_spd != 0) {
+						if (cruise_kt != 0) {
 							if (getprop(next_wp~curr_wp~"]/speed")) {
 								setprop("autopilot/settings/cruise-speed-kt",getprop(next_wp~curr_wp~"]/speed"));
 							}	
 							if (alt_ind <= 8000) {vmo = 270}
-							if (alt_ind > 8000 and alt_ind <=24000) {vmo=345}
-							if (alt_ind > 24000 and alt_ind <=35000) {vmo=345-(alt_ind-24000)*0.006364}
-							if (alt_ind > 35000 and alt_ind <=41000) {vmo=275-(alt_ind-35000)*0.005833}
-							if (alt_ind > 41000 and alt_ind <=51000) {vmo=240-(alt_ind-35000)*0.005000}
-							if (alt_ind > 51000) {vmo=190}
-							if (cruise_spd >= vmo) {cruise_spd = vmo-5}
-							setprop(target_spd,cruise_spd);			
+							if (alt_ind > 8000 and alt_ind < 30650) {vmo=350}
+							if (alt_mc) {mmo = 0.92}
+							if (cruise_kt >= vmo) {cruise_kt = vmo-5}
+							if (cruise_mc >= mmo) {cruise_mc = mmo-6}
+							setprop(tg_spd_kt,cruise_kt);			
+							setprop(tg_spd_mc,cruise_mc);	
 						}
 					}	
 				}
@@ -548,25 +571,33 @@ var speed_Control = func {
 		}
 		if (fms == 3 and (NAVSRC == "NAV1" or NAVSRC == "NAV2")) {
 			if (getprop("controls/flight/flaps")==0.142) {
-				setprop(target_spd,app5_spd);
+				setprop(tg_spd_kt,app5_spd);
 			} else if (getprop("controls/flight/flaps")==0.428) {
-				setprop(target_spd,app15_spd);
+				setprop(tg_spd_kt,app15_spd);
 			} else if (getprop("controls/flight/flaps")==1) {
-				setprop(target_spd,app39_spd);
-			}	else {setprop(target_spd,app_spd)}
+				setprop(tg_spd_kt,app35_spd);
+			}	else {setprop(tg_spd_kt,app_spd)}
 		}			
 	}
-}
-
-var speed_table = func(alt_ind,my_spd,vmo) {
-	if(alt_ind >39000 and alt_ind <= 41000 and my__spd > 250) {my_spd = 250};
-	if(alt_ind >41000 and alt_ind <= 43000 and my_spd > 240) {my_spd = 240};
-	if(alt_ind >43000 and my_spd > 200) {my_spd = 200};
 }
 
 var speed_round = func {
 	var ind_speed = getprop("instrumentation/airspeed-indicator/indicated-speed-kt");
 	rd_speed.setDoubleValue(math.round(ind_speed));
+}
+
+var alt_mach = func {
+	if (getprop(alt) >= 30650) {
+		setprop("autopilot/locks/alt-mach",1);
+#		if (left(NAVSRC,3) != "FMS") {
+			setprop(tg_spd_kt,getprop(ind_kt));
+#		}
+	}	else {
+		setprop("autopilot/locks/alt-mach",0);
+#		if (left(NAVSRC,3) != "FMS") {
+			setprop(tg_spd_mc,getprop(ind_mc));
+#		}
+	}
 }
 
 ###  Main loop ###
@@ -575,6 +606,7 @@ var update_fd = func {
     update_nav();
 		speed_Control();
 		speed_round();
+		alt_mach();
 		setprop("autopilot/settings/altitude-setting-ft",getprop("autopilot/settings/asel")*100);
     if(count==0)monitor_AP_errors();
     if(count==1)monitor_L_armed();

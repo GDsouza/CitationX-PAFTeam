@@ -700,7 +700,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
             <nav-source type="string">NAV1</nav-source>
             <bank-limit type="int">30</bank-limit>
             <target-speed-kt type="int">250</target-speed-kt>
-            <target-speed-mach type="double">0.38</target-speed-mach>
+            <target-speed-mach type="double">0.86</target-speed-mach>
             <changeover type="bool">0</changeover>
             <heading-bug-deg type="int">0</heading-bug-deg>
             <vertical-speed-fpm type="int">0</vertical-speed-fpm>
