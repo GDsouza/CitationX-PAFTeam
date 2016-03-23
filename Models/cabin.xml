@@ -160,6 +160,46 @@
       </condition>
     </effect> 
 
+<!-- TABLETS -->
+
+    <model>
+        <path>Aircraft/CitationX/Models/Instruments//TABLET/tablet.xml</path>
+        <offsets>
+            <x-m> -4.10196 </x-m>
+            <y-m> -0.85682 </y-m>
+            <z-m > 0.03616 </z-m>
+			<heading-deg>180</heading-deg>
+        </offsets>
+    </model>
+    <model>
+        <path>Aircraft/CitationX/Models/Instruments//TABLET/tablet.xml</path>
+        <offsets>
+            <x-m> -4.10196 </x-m>
+            <y-m>  0.85441 </y-m>
+            <z-m > 0.03616 </z-m>
+			<heading-deg>0.00</heading-deg>
+        </offsets>
+    </model>
+    <model>
+        <path>Aircraft/CitationX/Models/Instruments//TABLET/tablet.xml</path>
+        <offsets>
+            <x-m> -1.80114 </x-m>
+            <y-m>  0.85441 </y-m>
+            <z-m > 0.03616 </z-m>
+			<heading-deg>0.00</heading-deg>
+        </offsets>
+    </model>
+    <model>
+        <path>Aircraft/CitationX/Models/Instruments//TABLET/tablet.xml</path>
+        <offsets>
+            <x-m> -1.80114 </x-m>
+            <y-m> -0.85441 </y-m>
+            <z-m > 0.03616 </z-m>
+			<heading-deg>180</heading-deg>
+        </offsets>
+    </model>
+
+
 <!-- EXT CABIN DOOR -->
 
 	<animation>
