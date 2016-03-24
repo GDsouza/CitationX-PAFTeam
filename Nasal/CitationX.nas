@@ -161,7 +161,9 @@ props.globals.initNode("sim/alarms/overspeed-alarm",0,"BOOL");
 props.globals.initNode("sim/alarms/stall-warning",0,"BOOL");
 props.globals.initNode("instrumentation/clock/flight-meter-hour",0,"DOUBLE");
 props.globals.initNode("autopilot/locks/alt-mach",0,"BOOL");
-
+props.globals.initNode("autopilot/locks/fms-status",0,"BOOL");
+props.globals.initNode("autopilot/settings/nav-btn",0,"BOOL");
+props.globals.initNode("autopilot/settings/fms-btn",0,"BOOL");
 var PWR2 =0;
 aircraft.livery.init("Aircraft/CitationX/Models/Liveries");
 var FHmeter = aircraft.timer.new("/instrumentation/clock/flight-meter-sec", 10,1); 

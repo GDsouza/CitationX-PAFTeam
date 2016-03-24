@@ -79,7 +79,7 @@ var perfPage_3 = func() {
 		line1r:"",line2r:"",line3r:"",line4r:"",line5r:"",line6r:"",line7r:"",line8r:""};
 		var AppSpeed5 = getprop("autopilot/settings/app5-speed-kt");
 		var AppSpeed15 = getprop("autopilot/settings/app15-speed-kt");
-		var AppSpeed39 = getprop("autopilot/settings/app39-speed-kt");
+		var AppSpeed39 = getprop("autopilot/settings/app35-speed-kt");
 			Dsp.page = "APPROACH SPEED  1 / 1";
 			Dsp.line1l = " FLAPS 5";
 			Dsp.line2l = AppSpeed5~"";

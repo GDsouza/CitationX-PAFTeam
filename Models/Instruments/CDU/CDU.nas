@@ -29,7 +29,7 @@ var init = func {
 	setprop("autopilot/settings/dist-to-dest-nm",30);
 	setprop("autopilot/settings/app5-speed-kt",180);
 	setprop("autopilot/settings/app15-speed-kt",160);
-	setprop("autopilot/settings/app39-speed-kt",140);
+	setprop("autopilot/settings/app35-speed-kt",140);
 	setprop("autopilot/route-manager/wp[]/altitude-ft",0);
 }
 
@@ -708,7 +708,7 @@ var key = func(v) {
 			if (v == "B3L") {
 				v = "";
 				if (cduInput != "") {
-					setprop("autopilot/settings/app39-speed-kt",cduInput);	
+					setprop("autopilot/settings/app35-speed-kt",cduInput);	
 				}
 				cduInput = "";
 			}

@@ -462,7 +462,7 @@ var speed_Control = func {
 	var app_dist_set = getprop("autopilot/settings/dist-to-dest-nm");
 	var app5_spd = getprop("autopilot/settings/app5-speed-kt");
 	var app15_spd = getprop("autopilot/settings/app15-speed-kt");
-	var app35_spd = getprop("autopilot/settings/app39-speed-kt");
+	var app35_spd = getprop("autopilot/settings/app35-speed-kt");
 	var target_alt = "autopilot/settings/target-altitude-ft";
 	var tg_alt = getprop(target_alt);
 	var wp_alt = getprop("autopilot/route-manager/wp/altitude-ft");
@@ -471,6 +471,7 @@ var speed_Control = func {
 	var num = getprop("autopilot/route-manager/route/num");
 	var asel = getprop("autopilot/settings/asel");
 	var fms = getprop("instrumentation/primus2000/sc840/nav1ptr");
+	var fms_st = "autopilot/locks/fms-status";
 	var vmo = 0;
 	var mmo = 0;
 	var alt_tod = alt_ind/100;
@@ -493,23 +494,25 @@ var speed_Control = func {
 	if (ap_stat == "AP") {
 		if (left(NAVSRC,3) == "FMS" and lock_alt == "VALT") {
 
-			### Altitude & TOD ###
+			### Altitude ###
 			setprop("autopilot/route-manager/cruise/altitude-ft",asel*100);
-			if (dist_rem <= alt_tod/3.5) {TOD = 1}
 
 				### Before TOD ###
-				if (!TOD) {
-					if (getprop(next_wp~curr_wp~"]/altitude-ft") > 0){
-						setprop(target_alt,getprop(next_wp~(curr_wp)~"]/altitude-ft"));
-						if (getprop(next_wp~curr_wp~"]/altitude-ft") < alt_ind-100)	{
-							setprop(target_alt,getprop(next_wp~curr_wp~"]/altitude-ft"));
-							setprop("autopilot/settings/asel",getprop(target_alt)/100);
-						}
-					} else {setprop(target_alt,asel*100)}
+			if (!TOD) {
+				if (dist_rem <= alt_tod/3.0) {
+					TOD = 1;
+					setprop("autopilot/locks/TOD",TOD);
+				}
+				if (getprop(next_wp~curr_wp~"]/altitude-ft") > 0){
+					setprop(target_alt,getprop(next_wp~(curr_wp)~"]/altitude-ft"));
+					if (getprop(next_wp~curr_wp~"]/altitude-ft") < alt_ind-100)	{
+						setprop(target_alt,getprop(next_wp~curr_wp~"]/altitude-ft"));
+						setprop("autopilot/settings/asel",getprop(target_alt)/100);
+					}
+				} else {setprop(target_alt,asel*100)}
 
 				### After TOD ###
 			} else {				
-					setprop("autopilot/locks/TOD",TOD);
 					if (getprop(next_wp~(curr_wp)~"]/altitude-ft") > 0){
 					setprop(target_alt,getprop(next_wp~(curr_wp)~"]/altitude-ft"));
 					} else {
@@ -522,8 +525,8 @@ var speed_Control = func {
 					}
 			}
 			if (dist_rem <= 7) {
-				if (NAVSRC == "FMS1") {var ind = 1;setprop(NAVprop,"NAV2")}
-				if (NAVSRC == "FMS2") {var ind = 0;setprop(NAVprop,"NAV1")}
+				if (NAVSRC == "FMS1") {var ind = 1;setprop(fms_st,1);setprop(NAVprop,"NAV2")}
+				if (NAVSRC == "FMS2") {var ind = 0;setprop(fms_st,1);setprop(NAVprop,"NAV1")}
 				setprop("instrumentation/nav["~ind~"]/radials/selected-deg",int(getprop("autopilot/route-manager/route/wp["~(num-1)~"]/leg-bearing-true-deg")));
 				set_apr();
 			}

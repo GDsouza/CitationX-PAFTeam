@@ -231,9 +231,13 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
         </runways>
     </airport>
 
-        <instrumentation>
-            <path>Aircraft/CitationX/Systems/instrumentation.xml</path>
-        </instrumentation>
+    <instrumentation>
+        <path>Aircraft/CitationX/Systems/instrumentation.xml</path>
+				<mk-viii>
+					<name>mk-viii</name>
+					<number>0</number>
+				</mk-viii>
+    </instrumentation>
 
     <systems>
         <path>Aircraft/CitationX/Systems/systems.xml</path>
@@ -468,8 +472,9 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
         <mk-viii>
            <serviceable>true</serviceable>
            <configuration-module>
-              <category-1>1 </category-1>  <!-- AIRCRAFT_MODE_TYPE_SELECT -->
-              <category-8>3</category-8> <!-- RADIO ALTITUDE YASIM-->
+              <category-1> 1 </category-1>  <!-- AIRCRAFT_MODE_TYPE_SELECT -->
+							<category-4> 13 </category-4> <!-- ALTITUDE CALLOUTS -->
+              <category-8> 3 </category-8> <!-- RADIO ALTITUDE YASIM-->
            </configuration-module>
            <inputs>                           <!-- Module I/O -->
             <arinc429>
@@ -478,8 +483,13 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
             </arinc429>
            </inputs>
            <speaker>
+					    <max-dist> 2 </max-dist>        <!-- Max. distance where speaker is heard -->
+					    <reference-dist> 1 </reference-dist> <!-- Distance to pilot -->
               <volume>0.4</volume>
            </speaker>
+					 <voice>
+						   <file-prefix type="string">Sounds/mk-viii/</file-prefix>
+					 </voice>
         </mk-viii>
 
         <tcas>

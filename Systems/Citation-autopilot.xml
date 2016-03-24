@@ -352,7 +352,7 @@
             <gamma>0.0</gamma>
             <Ti>10.0</Ti> <!-- origin 10.0 -->
             <Td>0.000001</Td>
-            <min>-40</min> <!-- origin -30 -->
+            <min>-30</min> <!-- origin -30 -->
             <max>66</max> <!-- origin = 66-->
         </config>
     </pid-controller>
@@ -607,11 +607,18 @@
                     <property>autopilot/settings/nav-source</property>
                     <value>FMS2</value>
                 </equals>
+                <property>autopilot/locks/fms-status</property>
 							</or>
-							<equals>
-									<property>/autopilot/locks/altitude</property>
-										<value>VALT</value>
-							</equals>
+							<or>
+								<equals>
+										<property>/autopilot/locks/altitude</property>
+											<value>VALT</value>
+								</equals>
+								<equals>
+										<property>/autopilot/locks/altitude</property>
+											<value>GS</value>
+								</equals>
+							</or>
 							<equals>
 								<property>/autopilot/locks/AP-status</property>
 									<value>AP</value>

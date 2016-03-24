@@ -2875,7 +2875,34 @@
                 <command>nasal</command>
                 <script>citation.nav_src_set("nav");</script>
             </binding>
-        </action>
+       		<binding>
+         		<command>property-toggle</command>
+            <property>autopilot/settings/nav-btn</property>
+        </binding>
+				<mod-up>
+       		<binding>
+         		<command>property-toggle</command>
+            <property>autopilot/settings/nav-btn</property>
+	        </binding>
+				</mod-up>
+				<binding>
+		      <command>property-toggle</command>
+		      <property>sim/sound/click</property>
+ 	     </binding>
+      </action>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>FMC.nav</object-name>
+        <object-name>FMC1.nav</object-name>
+        <property>autopilot/settings/nav-btn</property>
+				<factor>0.0062</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
     </animation>
 
     <animation>
@@ -2890,7 +2917,34 @@
                 <command>nasal</command>
                 <script>citation.nav_src_set("fms");</script>
             </binding>
+       		<binding>
+         		<command>property-toggle</command>
+            <property>autopilot/settings/fms-btn</property>
+        </binding>
+				<mod-up>
+       		<binding>
+         		<command>property-toggle</command>
+            <property>autopilot/settings/fms-btn</property>
+	        </binding>
+				</mod-up>
+				<binding>
+		      <command>property-toggle</command>
+		      <property>sim/sound/click</property>
+ 	     </binding>
         </action>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>FMC.fms</object-name>
+        <object-name>FMC1.fms</object-name>
+        <property>autopilot/settings/fms-btn</property>
+				<factor>0.0062</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
     </animation>
 
     <animation>
