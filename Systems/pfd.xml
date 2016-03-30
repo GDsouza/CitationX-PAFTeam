@@ -385,9 +385,9 @@
               <table>
                   <property>instrumentation/altimeter/indicated-altitude-ft</property> 
                   <entry><ind>0</ind><dep>270</dep></entry>
-                  <entry><ind>8000</ind><dep>270</dep></entry>
-                  <entry><ind>8001</ind><dep>350</dep></entry>
-                  <entry><ind>30650</ind><dep>350</dep></entry>
+                  <entry><ind>6000</ind><dep>270</dep></entry>
+                  <entry><ind>7800</ind><dep>350</dep></entry>
+									<entry><ind>30650</ind><dep>350</dep></entry>
                   <entry><ind>41000</ind><dep>277</dep></entry>
                   <entry><ind>51000</ind><dep>220</dep></entry>
               </table>

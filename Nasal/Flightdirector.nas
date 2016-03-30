@@ -465,9 +465,15 @@ var speed_Control = func {
 	var app35_spd = getprop("autopilot/settings/app35-speed-kt");
 	var target_alt = "autopilot/settings/target-altitude-ft";
 	var tg_alt = getprop(target_alt);
-	var wp_alt = getprop("autopilot/route-manager/wp/altitude-ft");
-	var next_wp = "autopilot/route-manager/route/wp[";
-	var curr_wp = getprop("autopilot/route-manager/current-wp");
+	var n_wp = getprop("autopilot/route-manager/current-wp");
+	if (n_wp <1) {n_wp=1}
+	var last_wp_alt = getprop("autopilot/route-manager/route/wp["~(n_wp-1)~"]/altitude-ft");
+	var curr_wp_alt = getprop("autopilot/route-manager/route/wp["~n_wp~"]/altitude-ft");
+	var curr_wp_spd = getprop("autopilot/route-manager/route/wp["~n_wp~"]/speed");
+	var curr_wp_gen = getprop("autopilot/route-manager/route/wp["~n_wp~"]/generated");
+	var curr_wp_dist = getprop("autopilot/route-manager/route/wp["~n_wp~"]/distance-nm");
+	var next_wp_gen = getprop("autopilot/route-manager/route/wp["~(n_wp+1)~"]/generated");
+	var app_wp = "autopilot/route-manager/route/wp[";
 	var num = getprop("autopilot/route-manager/route/num");
 	var asel = getprop("autopilot/settings/asel");
 	var fms = getprop("instrumentation/primus2000/sc840/nav1ptr");
@@ -479,22 +485,16 @@ var speed_Control = func {
 	setprop(target_alt,asel*100);
 	
 		### Takeoff ###
-	if (left(NAVSRC,3) == "FMS" and lock_alt == "VALT" and ap_stat != "AP") {
-		if (curr_wp==-1) {curr_wp=0}
-			if (dist_dep < dep_lim and alt_ind < dep_agl) {setprop(tg_spd_kt,dep_spd)}
-			if (getprop(next_wp~curr_wp~"]/altitude-ft") > 0) {
-				setprop(target_alt, getprop(next_wp~curr_wp~"]/altitude-ft"));
-			} else {
-					if (getprop(next_wp~(curr_wp+1)~"]/altitude-ft") > 0) {
-						setprop(target_alt, getprop(next_wp~(curr_wp+1)~"]/altitude-ft"));
-				} else { setprop(target_alt,cruise_alt)}
-			}						
-		}
+	if (left(NAVSRC,3) == "FMS" and lock_alt == "VALT") {
+		if (dist_dep < dep_lim and alt_ind < dep_agl) {setprop(tg_spd_kt,dep_spd)}
+		if (curr_wp_alt > 0) {
+			setprop(target_alt, curr_wp_alt);
+		} 
+	}
+
 		### En route ###
 	if (ap_stat == "AP") {
 		if (left(NAVSRC,3) == "FMS" and lock_alt == "VALT") {
-
-			### Altitude ###
 			setprop("autopilot/route-manager/cruise/altitude-ft",asel*100);
 
 				### Before TOD ###
@@ -503,22 +503,22 @@ var speed_Control = func {
 					TOD = 1;
 					setprop("autopilot/locks/TOD",TOD);
 				}
-				if (getprop(next_wp~curr_wp~"]/altitude-ft") > 0){
-					setprop(target_alt,getprop(next_wp~(curr_wp)~"]/altitude-ft"));
-					if (getprop(next_wp~curr_wp~"]/altitude-ft") < alt_ind-100)	{
-						setprop(target_alt,getprop(next_wp~curr_wp~"]/altitude-ft"));
-						setprop("autopilot/settings/asel",getprop(target_alt)/100);
-					}
-				} else {setprop(target_alt,asel*100)}
-
+				if (curr_wp_alt > 0) {
+					if (!curr_wp_gen and next_wp_gen) { # maintien alt si next Wp = App #
+						setprop("autopilot/settings/asel",tg_alt/100);
+					} else if (curr_wp_gen and next_wp_gen and curr_wp_alt < last_wp_alt) {
+							setprop(target_alt, asel*100);
+					} else {setprop(target_alt,curr_wp_alt)}
+				} else {setprop(target_alt, asel*100)}					
+							
 				### After TOD ###
 			} else {				
-					if (getprop(next_wp~(curr_wp)~"]/altitude-ft") > 0){
-					setprop(target_alt,getprop(next_wp~(curr_wp)~"]/altitude-ft"));
+					if (curr_wp_alt > 0){
+					setprop(target_alt,curr_wp_alt);
 					} else {
-						for (var i=curr_wp;i<(num-1);i+=1) {
-							if (getprop(next_wp~i~"]/altitude-ft") > 0) {
-								setprop(target_alt,getprop(next_wp~i~"]/altitude-ft"));
+						for (var i=n_wp;i<(num-1);i+=1) {
+							if (getprop(app_wp~i~"]/altitude-ft") > 0) {
+								setprop(target_alt,getprop(app_wp~i~"]/altitude-ft"));
 								i = num;
 							}
 						}
@@ -557,11 +557,11 @@ var speed_Control = func {
 					}	else {
 								### Cruise ###
 						if (cruise_kt != 0) {
-							if (getprop(next_wp~curr_wp~"]/speed")) {
-								setprop("autopilot/settings/cruise-speed-kt",getprop(next_wp~curr_wp~"]/speed"));
+							if (curr_wp_spd) {
+								setprop("autopilot/settings/cruise-speed-kt",curr_wp_spd);
 							}	
-							if (alt_ind <= 8000) {vmo = 270}
-							if (alt_ind > 8000 and alt_ind < 30650) {vmo=350}
+							if (alt_ind <= 7800) {vmo = 270}
+							if (alt_ind > 7800 and alt_ind < 30650) {vmo=350}
 							if (alt_mc) {mmo = 0.92}
 							if (cruise_kt >= vmo) {cruise_kt = vmo-5}
 							if (cruise_mc >= mmo) {cruise_mc = mmo-6}

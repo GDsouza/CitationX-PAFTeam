@@ -155,6 +155,8 @@ props.globals.initNode("controls/tables/table1/extend",0,"BOOL");
 props.globals.initNode("controls/tables/table2/extend",0,"BOOL");
 props.globals.initNode("controls/tables/table3/extend",0,"BOOL");
 props.globals.initNode("controls/tables/table4/extend",0,"BOOL");
+props.globals.initNode("controls/tablets/scr1-on",0,"BOOL");
+props.globals.initNode("controls/tablets/scr1-selected",0,"BOOL");
 props.globals.initNode("sim/model/pilot-seat",0,"DOUBLE");
 props.globals.initNode("sim/model/copilot-seat",0,"DOUBLE");
 props.globals.initNode("sim/alarms/overspeed-alarm",0,"BOOL");
@@ -164,6 +166,7 @@ props.globals.initNode("autopilot/locks/alt-mach",0,"BOOL");
 props.globals.initNode("autopilot/locks/fms-status",0,"BOOL");
 props.globals.initNode("autopilot/settings/nav-btn",0,"BOOL");
 props.globals.initNode("autopilot/settings/fms-btn",0,"BOOL");
+props.globals.initNode("sim/sound/startup",0,"INT");
 var PWR2 =0;
 aircraft.livery.init("Aircraft/CitationX/Models/Liveries");
 var FHmeter = aircraft.timer.new("/instrumentation/clock/flight-meter-sec", 10,1); 
@@ -185,6 +188,7 @@ setlistener("/sim/signals/fdm-initialized", func {
     settimer(update_systems,2);
 		setprop("instrumentation/altimeter/setting-inhg",29.92001);
 		setprop("instrumentation/clock/flight-meter-sec",0);
+		setprop("sim/sound/startup",int(10*rand()));
 		FH_load();
 });
 

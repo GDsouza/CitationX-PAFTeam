@@ -880,7 +880,6 @@ var correctFlp = func(fltPath) {
 var calc_dist = func(navWp,dist) {
 	var apt_dep = airportinfo(left(navWp.vector[0],4));
 	var apt_dest = airportinfo(left(navWp.vector[size(navWp.vector)-1],4));
-print(size(navWp.vector));
 	foreach(var item;navWp.vector) {
 		print(item);
 	}
@@ -1117,7 +1116,7 @@ var cdu = func{
 		if (display == "NAV-PAGE[1]") {displaypages.navPage_1()}
 		if (left(display,8) == "NAV-LIST") {displaypages.navList()}
 		if (display == "NAV-SELT[0]") {displaypages.navSel_0()}
-		if (display == "NAV-SELT[1]") {displaypages.navSel_1(navSel,navWp,navRwy,g_speed,dist,flp_closed)}
+		if (display == "NAV-SELT[1]") {displaypages.navSel_1(navSel,navWp, navRwy,g_speed,dist,flp_closed)}
 
 		if (display == "PRF-PAGE[0]") {displaypages.perfPage_0()}
 		if (display == "PRF-PAGE[1]") {displaypages.perfPage_1()}

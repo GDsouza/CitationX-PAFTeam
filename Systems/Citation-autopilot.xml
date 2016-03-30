@@ -352,7 +352,7 @@
             <gamma>0.0</gamma>
             <Ti>10.0</Ti> <!-- origin 10.0 -->
             <Td>0.000001</Td>
-            <min>-30</min> <!-- origin -30 -->
+            <min>-25</min> <!-- origin -30 -->
             <max>66</max> <!-- origin = 66-->
         </config>
     </pid-controller>
@@ -623,7 +623,7 @@
 								<property>/autopilot/locks/AP-status</property>
 									<value>AP</value>
 							</equals>
-							<not>
+						<not>
 								<property>autopilot/locks/alt-mach</property>
 							</not>
 						</and>
