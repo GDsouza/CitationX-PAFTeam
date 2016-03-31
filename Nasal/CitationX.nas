@@ -155,8 +155,6 @@ props.globals.initNode("controls/tables/table1/extend",0,"BOOL");
 props.globals.initNode("controls/tables/table2/extend",0,"BOOL");
 props.globals.initNode("controls/tables/table3/extend",0,"BOOL");
 props.globals.initNode("controls/tables/table4/extend",0,"BOOL");
-props.globals.initNode("controls/tablets/scr1-on",0,"BOOL");
-props.globals.initNode("controls/tablets/scr1-selected",0,"BOOL");
 props.globals.initNode("sim/model/pilot-seat",0,"DOUBLE");
 props.globals.initNode("sim/model/copilot-seat",0,"DOUBLE");
 props.globals.initNode("sim/alarms/overspeed-alarm",0,"BOOL");

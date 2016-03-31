@@ -315,14 +315,6 @@
 		<overlay>
 	    <params>
 				<texture>old.png</texture>
-				<legs>
-		    	<upper-animation>
-						<offset-deg>90</offset-deg>
-		    	</upper-animation>
-		    		<lower-animation>
-					<offset-deg>-90</offset-deg>
-		    		</lower-animation>
-				</legs>
 	    </params>
 		</overlay>
 		<offsets>
@@ -341,15 +333,7 @@
 			<overlay>
 	    	<params>
 					<texture>default.png</texture>
-					<legs>
-		    		<upper-animation>
-							<offset-deg>90</offset-deg>
-		    		</upper-animation>
-		    		<lower-animation>
-							<offset-deg>-90</offset-deg>
-		    		</lower-animation>
-					</legs>
-	    	</params>
+		   	</params>
 			</overlay>
 			<offsets>
 	    	<x-m>-0.57713 </x-m>

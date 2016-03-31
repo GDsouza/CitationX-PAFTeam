@@ -56,18 +56,34 @@
 			<upper-animation>
 				<property type="string"></property>
 				<factor type="float">0</factor>
-				<offset-deg type="float">80</offset-deg>
+				<offset-deg type="float">0</offset-deg>
 				<min type="float">0</min>
 				<max type="float">80</max>
 			</upper-animation>
 			<lower-animation>
-				<property type="string"></property>
-				<factor type="float">0</factor>
-				<offset-deg type="float">-90</offset-deg>
-				<min type="float">-90</min>
-				<max type="float">0</max>
+				<property type="string">controls/flight/rudder</property>
+				<factor type="float">0.05</factor>
+				<offset-deg type="float">0</offset-deg>
+				<min type="float">0</min>
+				<max type="float">10</max>
 			</lower-animation>
 		</legs>
+		<feet>
+			<leftfoot>
+				<property type="string">controls/gear/brake-left</property>
+				<factor type="float">1</factor>
+				<offset-deg type="float">0</offset-deg>
+				<min type="float">0</min>
+				<max type="float">1</max>
+			</leftfoot>
+			<rightfoot>
+				<property type="string">controls/gear/brake-right</property>
+				<factor type="float">1</factor>
+				<offset-deg type="float">0</offset-deg>
+				<min type="float">0</min>
+				<max type="float">1</max>
+			</rightfoot>
+		</feet>
 	</params>
 
 	<animation>
@@ -211,34 +227,25 @@
 	</animation> 
 
 	<!-- Legs -->
+
 	<animation>
-		<type>rotate</type>
-		<object-name>LeftUpperLeg</object-name>
+		<type>translate</type>
 		<object-name>LeftLowerLeg</object-name>
 		<object-name>LeftFoot</object-name>
-		<object-name>RightUpperLeg</object-name>
-		<object-name>RightLowerLeg</object-name>
-		<object-name>RightFoot</object-name>
-		<property alias="../../params/legs/upper-animation/property" />
-		<factor alias="../../params/legs/upper-animation/factor" />
-		<offset-deg alias="../../params/legs/upper-animation/offset-deg" />
-		<min alias="../../params/legs/upper-animation/min" />
-		<max alias="../../params/legs/upper-animation/max" />
+		<property alias="../../params/legs/lower-animation/property" />
+		<factor alias="../../params/legs/lower-animation/factor" />
+		<offset-deg alias="../../params/legs/lower-animation/offset-deg" />
+		<min alias="../../params/legs/lower-animation/min" />
+		<max alias="../../params/legs/lower-animation/max" />
 		<axis>
-			<x>0</x>
-			<y>1</y>
+			<x>1</x>
+			<y>0</y>
 			<z>0</z>
 		</axis>
-		<center>
-			<x-m> 0.1704 </x-m>
-			<y-m>-0.0033 </y-m>
-			<z-m>-0.1214</z-m>
-		</center>
 	</animation>
+
 	<animation>
-		<type>rotate</type>
-		<object-name>LeftLowerLeg</object-name>
-		<object-name>LeftFoot</object-name>
+		<type>translate</type>
 		<object-name>RightLowerLeg</object-name>
 		<object-name>RightFoot</object-name>
 		<property alias="../../params/legs/lower-animation/property" />
@@ -247,15 +254,51 @@
 		<min alias="../../params/legs/lower-animation/min" />
 		<max alias="../../params/legs/lower-animation/max" />
 		<axis>
-			<x>0</x>
-			<y>1</y>
+			<x>-1</x>
+			<y>0</y>
 			<z>0</z>
 		</axis>
+	</animation>
+
+	<!-- feet -->
+	<animation>
+		<type>rotate</type>
+		<object-name>LeftFoot</object-name>
+		<property alias="../../params/feet/leftfoot/property" />
+		<factor alias="../../params/feet/leftfoot/factor" />
+		<offset-deg alias="../../params/feet/leftfoot/offset-deg" />
+		<min alias="../../params/feet/leftfoot/min" />
+		<max alias="../../params/feet/leftfoot/max" />
 		<center>
 			<x-m>0.28</x-m>
 			<y-m>0</y-m>
-			<z-m>-0.455</z-m>
+			<z-m>-0.7</z-m>
 		</center>
-	</animation>
+		<axis>
+			<x>0</x>
+			<y>-1</y>
+			<z>0</z>
+		</axis>
+	</animation> 
+
+	<animation>
+		<type>rotate</type>
+		<object-name>RightFoot</object-name>
+		<property alias="../../params/feet/rightfoot/property" />
+		<factor alias="../../params/feet/rightfoot/factor" />
+		<offset-deg alias="../../params/feet/rightfoot/offset-deg" />
+		<min alias="../../params/feet/rightfoot/min" />
+		<max alias="../../params/feet/rightfoot/max" />
+		<center>
+			<x-m>0.28</x-m>
+			<y-m>0</y-m>
+			<z-m>-0.7</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>-1</y>
+			<z>0</z>
+		</axis>
+	</animation> 
 
 </PropertyList>

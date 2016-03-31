@@ -14,7 +14,7 @@
 
   <!-- Tutorial marker -->
   <model>
-    <path>Models/Aircraft/marker.xml</path>
+    <path>Aircraft/CitationX/Models/marker.xml</path>
   </model>
     <nasal>
         <load>
