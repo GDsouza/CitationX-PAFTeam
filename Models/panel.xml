@@ -802,16 +802,24 @@
 
 <!-- STARTERS -->
 
+    <animation>
+        <type>translate</type>
+        <object-name>LHstarter</object-name>
+        <property>controls/engines/engine[0]/starter</property>
+				<factor>0.003</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>-1</z>
+        </axis>
+    </animation>
+
 	<animation>
     <type>pick</type>
     <object-name>LHstarter</object-name>
     <action>
         <button>0</button>
         <repeatable>false</repeatable>
-        <binding>
-            <command>property-toggle</command>
-            <property>sim/sound/click</property>
-        </binding>
 				<binding>
 					<condition>
 						<and>
@@ -823,6 +831,10 @@
        			<property>controls/engines/engine[0]/starter</property>
        				<value>1</value>
 				</binding>
+        <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+        </binding>
 				<mod-up>
 					<binding>
 						<command>property-assign</command>
@@ -841,6 +853,18 @@
             </binding>
         </hovered>
 	</animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>RHstarter</object-name>
+        <property>controls/engines/engine[1]/starter</property>
+				<factor>0.003</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>-1</z>
+        </axis>
+    </animation>
 
 	<animation>
     <type>pick</type>
@@ -1012,7 +1036,6 @@
     <animation>
         <type>pick</type>
         <object-name>AVN.switch</object-name>
-        <object-name>AVN.on</object-name>
         <action>
             <button>0</button>
             <binding>
@@ -1155,11 +1178,25 @@
 
 <!-- EXTERNAL POWER -->
 
+  <animation>
+    <type>translate</type>
+		  <object-name>Ext.power</object-name>
+		  <object-name>Xpower.on</object-name>
+		  <object-name>Xpower.avail</object-name>
+      <property>controls/electric/external-power</property>
+				<factor>-0.003</factor>
+        <axis>
+            <x>1</x>
+            <y>0</y>
+            <z>1</z>
+        </axis>
+    </animation>
+
 	<animation>
     <type>pick</type>
     <object-name>Ext.power</object-name>
     <object-name>Xpower.on</object-name>
-    <object-name>Xpower.avail</object-name>
+		<object-name>Xpower.avail</object-name>
     <action>
         <button>0</button>
         <repeatable>false</repeatable>
@@ -1189,7 +1226,7 @@
     <animation>
         <type>rotate</type>
         <object-name>Fcrossfeed</object-name>
-        <property>controls/engines/engine[1]/feed_tank</property>
+        <property>controls/engines/engine[1]/feed-tank</property>
         <factor>-70</factor>
         <center>
             <x-m>0.040 </x-m>
@@ -1205,7 +1242,7 @@
     <animation>
         <type>rotate</type>
         <object-name>Fcrossfeed</object-name>
-        <property>controls/engines/engine[0]/feed_tank</property>
+        <property>controls/engines/engine[0]/feed-tank</property>
         <factor>70</factor>
         <center>
             <x-m>0.040 </x-m>
@@ -1221,96 +1258,80 @@
 
   <animation>
     <type>pick</type>
-    <object-name>Lxfeed</object-name>
+    <object-name>Fcrossfeed</object-name>
     <action>
-        <button>0</button>
+        <button>3</button>
         <repeatable>false</repeatable>
+		    <binding>
+		      <command>property-adjust</command>
+		      <property>controls/engines/xfeed</property>
+						<step>1</step>
+						<min>-1</min>
+						<max>1</max>
+						<wrap>false</wrap>
+		    </binding>
+				<binding>
+					<command>nasal</command>
+					<script>citation.crossfeed();</script>
+				</binding>
         <binding>
             <command>property-toggle</command>
             <property>sim/sound/click</property>
         </binding>
-				<binding>
-					<condition>
-						<not>
-        			<property>controls/engines/engine[0]/feed_tank</property>							
-						</not>
-					</condition>
-					<command>property-toggle</command>
-      			<property>controls/engines/engine[1]/feed_tank</property>      
-				</binding>
 			</action>
       <hovered>
         <binding>
           <command>set-tooltip</command>
-          	<tooltip-id>Lxfeed</tooltip-id>
-            <label>L-Xfeed: %s</label>
-            <mapping>on-off</mapping>
-        		<property>controls/engines/engine[1]/feed_tank</property>
-          </binding>
-      </hovered>
+          	<tooltip-id>xfeed</tooltip-id>
+            <label>Xfeed: %s</label>
+       			<property>controls/engines/xfeed</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['OFF','R-tank','L-tank'];
+							return modes[arg[0]];
+						</script>
+		      </binding>
+		    </hovered>
 	</animation>
 
   <animation>
     <type>pick</type>
-    <object-name>Rxfeed</object-name>
+    <object-name>Fcrossfeed</object-name>
     <action>
-        <button>0</button>
+        <button>4</button>
         <repeatable>false</repeatable>
+		    <binding>
+		      <command>property-adjust</command>
+		      <property>controls/engines/xfeed</property>
+						<step>-1</step>
+						<min>-1</min>
+						<max>1</max>
+						<wrap>false</wrap>
+		    </binding>
+				<binding>
+					<command>nasal</command>
+					<script>citation.crossfeed();</script>
+				</binding>
         <binding>
             <command>property-toggle</command>
             <property>sim/sound/click</property>
         </binding>
-				<binding>
-					<condition>
-						<not>
-        			<property>controls/engines/engine[1]/feed_tank</property>							
-						</not>
-					</condition>
-					<command>property-toggle</command>
-      			<property>controls/engines/engine[0]/feed_tank</property>      
-				</binding>
 			</action>
-			<hovered>
-				<binding>
+      <hovered>
+        <binding>
           <command>set-tooltip</command>
-            <tooltip-id>Rxfeed</tooltip-id>
-            <label>R-Xfeed: %s</label>
-            <mapping>on-off</mapping>
-        		<property>controls/fuel/tank[1]/to_engine</property>
+          	<tooltip-id>xfeed</tooltip-id>
+            <label>Xfeed: %s</label>
+       			<property>controls/engines/xfeed</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['OFF','R-tank','L-tank'];
+							return modes[arg[0]];
+						</script>
         </binding>
       </hovered>
 	</animation>
 
-  <animation>
-    <type>pick</type>
-    <object-name>Xfeed.off</object-name>
-    <action>
-        <button>0</button>
-        <repeatable>false</repeatable>
-        <binding>
-            <command>property-toggle</command>
-            <property>sim/sound/click</property>
-        </binding>
-				<binding>
-          <command>property-assign</command>					
-      		<property>controls/engines/engine[0]/feed_tank</property> 
-						<value>0</value>
-				</binding>
-				<binding>
-          <command>property-assign</command>					
-      		<property>controls/engines/engine[1]/feed_tank</property> 
-						<value>0</value>
-				</binding>
-			</action>
-			<hovered>
-				<binding>
-          <command>set-tooltip</command>
-            <tooltip-id>Xfeed</tooltip-id>
-            <label>Xfeed off</label>
-            <mapping>on-off</mapping>
-        </binding>
-      </hovered>
-	</animation>
 
 <!-- FUEL GRAVITY XFLOW -->
 
@@ -1382,7 +1403,6 @@
     <animation>
         <type>pick</type>
         <object-name>Xfer.Lh</object-name>
-        <object-name>XferLH.off</object-name> 
        <action>
             <button>0</button>
             <binding>
@@ -1528,7 +1548,6 @@
     <animation>
         <type>pick</type>
         <object-name>Fuelboost.Lh</object-name>
-        <object-name>FuelboostLh.on</object-name> 
        <action>
             <button>0</button>
             <binding>
@@ -1579,7 +1598,7 @@
         </action>
     </animation>
 
-<!-- FUEL BOOST LH -->
+<!-- FUEL BOOST RH -->
 
     <animation>
         <type>rotate</type>
@@ -1601,7 +1620,6 @@
     <animation>
         <type>pick</type>
         <object-name>Fuelboost.Rh</object-name>
-        <object-name>FuelboostRh.on</object-name> 
        <action>
             <button>0</button>
             <binding>
@@ -1673,8 +1691,7 @@
 
     <animation>
         <type>pick</type>
-        <object-name>FadecLh</object-name>
-        <object-name>FadecLh.reset</object-name> 
+        <object-name>Fadec.Lh</object-name>
        <action>
             <button>0</button>
             <binding>
@@ -1769,8 +1786,7 @@
 
     <animation>
         <type>pick</type>
-        <object-name>FadecRh</object-name>
-        <object-name>FadecRh.reset</object-name> 
+        <object-name>Fadec.Rh</object-name>
        <action>
             <button>0</button>
             <binding>

@@ -30,7 +30,7 @@ EICAS : Coder les boutons du bas
 PANEL : Coder le pavé de boutons à gauche du PFD (pilote et co-pilote)
 				# Coder le pavé de boutons des lights sous le PFD - Fait 06-02-2016
 				# Créer l'éclairage du tableau de bord - Fait 06-02-2016
-				Coder l'interrupteur FUEL BOOST RH
+				# Coder l'interrupteur FUEL BOOST RH - Fait 02-04-2016
 				Coder le pavé de boutons sous PFD et MFD Co-pilote
 				Coder le pavé températures co-pilote
 				Coder le pavé pressurisation co-pilote # EN COURS 

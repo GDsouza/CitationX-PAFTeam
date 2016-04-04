@@ -12,8 +12,8 @@ var fuelsys = {
 		m.fuel = props.globals.getNode("consumables/fuel",1);
 		m.Xfuel = props.globals.getNode("controls/fuel",1); 
 
-		m.sel = [ m.engine.getNode("engine[0]/feed_tank",1),
-			m.engine.getNode("engine[1]/feed_tank",1) ];
+		m.sel = [ m.engine.getNode("engine[0]/feed-tank",1),
+			m.engine.getNode("engine[1]/feed-tank",1) ];
 		m.cutoff = [ m.engine.getNode("engine[0]/cutoff",1),
 			m.engine.getNode("engine[1]/cutoff",1) ];	
 		m.tank = [ m.fuel.getNode("tank[0]/selected",1),
@@ -148,7 +148,7 @@ var fuelsys = {
 		if (getprop("controls/fuel/tank[1]/boost_pump") == 2) {
 			setprop("engines/engine[1]/fuel-flow-gph",fgph[1] * 1.1);
 		}
-		settimer(func {me.boostpump();},0);
+		settimer(func {me.boostpump();},1);
 	},
 };
 
@@ -174,6 +174,22 @@ var gravity_xflow = func{
 
 		if (efis and xflow_switch) {timer.start()}
 };	
+
+var crossfeed = func {
+		var v = getprop("controls/engines/xfeed");
+    if (v == 0) {
+			setprop("controls/engines/engine[0]/feed-tank",0);
+			setprop("controls/engines/engine[1]/feed-tank",0);
+		}
+    if (v == -1) {
+			setprop("controls/engines/engine[1]/feed-tank",1);
+			setprop("controls/engines/engine[0]/feed-tank",0);
+		}
+    if (v == 1) {
+			setprop("controls/engines/engine[0]/feed-tank",1);
+			setprop("controls/engines/engine[1]/feed-tank",0);
+		}
+}
 
 var fuel = fuelsys.new();
 	setlistener("/sim/signals/fdm-initialized", func {

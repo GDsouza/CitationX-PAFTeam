@@ -80,9 +80,9 @@ var EICAS = {
 				EICAS.update_listeners()},1,0);
 			setlistener("controls/fuel/gravity-xflow", func {
 				EICAS.update_listeners()},1,0);
-			setlistener("controls/engines/engine[0]/feed_tank", func {
+			setlistener("controls/engines/engine[0]/feed-tank", func {
 				EICAS.update_listeners()},1,0);
-			setlistener("controls/engines/engine[1]/feed_tank", func {
+			setlistener("controls/engines/engine[1]/feed-tank", func {
 				EICAS.update_listeners()},1,0);
 			setlistener("controls/fuel/xfer-L", func {
 				EICAS.update_listeners()},1,0);
@@ -132,8 +132,8 @@ var EICAS = {
 				me.level_tank_R = getprop("consumables/fuel/tank[1]/level-lbs");
 				me.total_fuel = getprop("consumables/fuel/total-ctrtk-lbs");
 				me.grav_xflow = getprop("controls/fuel/gravity-xflow");
-				me.xfeed_L = getprop("controls/engines/engine[0]/feed_tank");
-				me.xfeed_R = getprop("controls/engines/engine[1]/feed_tank");
+				me.xfeed_L = getprop("controls/engines/engine[0]/feed-tank");
+				me.xfeed_R = getprop("controls/engines/engine[1]/feed-tank");
 				me.xfer_L = getprop("controls/fuel/xfer-L");
 				me.xfer_R = getprop("controls/fuel/xfer-R");
 				me.gen_L = getprop("controls/electric/engine[0]/generator");

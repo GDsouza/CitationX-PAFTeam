@@ -359,6 +359,54 @@
             <z-m>0.916</z-m>
         </center>
     </animation>
+
+<!-- Pitch wheel -->
+
+    <animation>
+        <type>rotate</type>
+        <object-name>Pitchwheel</object-name>
+					<condition>
+						<equals>
+							<property>autopilot/locks/altitude</property>
+							<value>PTCH</value>
+						</equals>
+					</condition>
+        <property>autopilot/settings/target-pitch-deg</property>
+        <factor>10</factor>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+        <center>
+            <x-m>0.448</x-m>
+            <y-m>0.0</y-m>
+            <z-m>-0.141</z-m>
+        </center>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Pitchwheel</object-name>
+       <visible>true</visible>
+        <action>
+            <button>3</button>
+            <repeatable>true</repeatable>
+            <binding>
+              <command>nasal</command>
+              <script>citation.pitch_wheel(-1)</script>
+            </binding>
+        </action>
+        <action>
+            <button>4</button>
+            <repeatable>true</repeatable>
+            <binding>
+                <command>nasal</command>
+                <script>citation.pitch_wheel(1)</script>
+            </binding>
+        </action>
+    </animation>
+
 <!-- text -->
 
     <text>

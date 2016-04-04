@@ -271,8 +271,8 @@
                 <value>15</value>
             </greater-than>
 						<or>
-  		       		<property>controls/engines/engine[0]/feed_tank</property>		
- 		       			<property>controls/engines/engine[1]/feed_tank</property>
+  		       		<property>controls/engines/engine[0]/feed-tank</property>		
+ 		       			<property>controls/engines/engine[1]/feed-tank</property>
 						</or>
 					</and>
         </condition>
