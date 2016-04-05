@@ -46,6 +46,14 @@
     <object-name>table3-2</object-name>
     <object-name>table4-1</object-name>
     <object-name>table4-2</object-name>
+    <object-name>porte-gobelet</object-name>
+    <object-name>baguette</object-name>
+    <object-name>bouteille1</object-name>
+    <object-name>verre</object-name>
+    <object-name>Bouteille</object-name>
+    <object-name>bouchon-bouteille</object-name>
+    <object-name>étiquette-bouteille</object-name>
+    <object-name>stock-Bouteille</object-name>
     <emission>
       <red>   0.32 </red>
       <green> 0.25 </green>
@@ -107,6 +115,14 @@
     <object-name>table3-2</object-name>
     <object-name>table4-1</object-name>
     <object-name>table4-2</object-name>
+    <object-name>porte-gobelet</object-name>
+    <object-name>baguette</object-name>
+    <object-name>bouteille1</object-name>
+    <object-name>verre</object-name>
+    <object-name>Bouteille</object-name>
+    <object-name>bouchon-bouteille</object-name>
+    <object-name>étiquette-bouteille</object-name>
+    <object-name>stock-Bouteille</object-name>
     </effect>
 
     <effect>
@@ -150,11 +166,20 @@
     <object-name>table3-2</object-name>
     <object-name>table4-1</object-name>
     <object-name>table4-2</object-name>
+    <object-name>porte-gobelet</object-name>
+    <object-name>baguette</object-name>
+    <object-name>bouteille1</object-name>
+    <object-name>verre</object-name>
+    <object-name>Bouteille</object-name>
+    <object-name>bouchon-bouteille</object-name>
+    <object-name>étiquette-bouteille</object-name>
+    <object-name>stock-Bouteille</object-name>
     </effect>
 
     <effect>
       <inherits-from>Effects/model-transparent</inherits-from>
     <object-name>verre</object-name>
+    <object-name>Bouteille</object-name>
       <condition>
         <property>sim/rendering/rembrandt/enabled</property>
       </condition>
