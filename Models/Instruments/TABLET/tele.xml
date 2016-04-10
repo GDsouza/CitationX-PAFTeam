@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<PropertyList>
+
+<path>tele.ac</path>
+
+    <animation>
+        <type>textranslate</type>
+        <object-name>led</object-name>
+        <property>systems/electrical/right-bus-norm</property>
+        <factor>0.09</factor>
+        <step>1</step>
+        <axis>
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>ecran.off</object-name>
+        <condition>
+            <not>
+              <property>systems/electrical/right-bus-norm</property>
+          	</not>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>ecran.w</object-name>
+        <condition>			
+              <property>systems/electrical/right-bus-norm</property>
+       	</condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>ecran.c</object-name>
+        <condition>
+					<and>				
+            <property>systems/electrical/right-bus-norm</property>
+						<greater-than>
+			        <property>position/altitude-agl-ft</property>
+							<value>200</value>
+						</greater-than>
+					</and>
+        </condition>
+    </animation>
+
+    <effect>
+      <inherits-from>Aircraft/CitationX/Models/Effects/test_reflect</inherits-from>
+        <object-name>bouton1</object-name>
+        <object-name>bouton2</object-name>
+        <object-name>bouton3</object-name>
+        <object-name>led</object-name>
+        <object-name>boitier</object-name>
+        <object-name>ecran.c</object-name>
+        <object-name>ecran.off</object-name>
+        <object-name>ecran.w</object-name>
+    </effect>
+
+    <effect>
+      <inherits-from>Aircraft/CitationX/Models/Effects/skin-reflect</inherits-from>
+        <object-name>bouton1</object-name>
+        <object-name>bouton2</object-name>
+        <object-name>bouton3</object-name>
+        <object-name>led</object-name>
+        <object-name>boitier</object-name>
+        <object-name>ecran.c</object-name>
+        <object-name>ecran.off</object-name>
+        <object-name>ecran.w</object-name>
+    </effect>
+
+</PropertyList>
