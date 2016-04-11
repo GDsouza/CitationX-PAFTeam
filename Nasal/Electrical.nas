@@ -154,6 +154,7 @@ var init_switches = func{
     setprop("controls/lighting/instruments-norm",0.0);
     setprop("controls/lighting/engines-norm",0.8);
     props.globals.initNode("controls/electric/ammeter-switch",0,"BOOL");
+    props.globals.initNode("controls/electric/seat-belts-switch",0,"INT");
     props.globals.getNode("systems/electrical/serviceable",0,"BOOL");
     props.globals.getNode("controls/electric/external-power",0,"BOOL");
 		setprop("controls/electric/std-by-pwr",0);

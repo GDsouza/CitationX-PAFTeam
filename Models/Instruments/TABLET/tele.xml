@@ -8,7 +8,7 @@
         <type>textranslate</type>
         <object-name>led</object-name>
         <property>systems/electrical/right-bus-norm</property>
-        <factor>0.09</factor>
+        <factor>0.10</factor>
         <step>1</step>
         <axis>
             <x>1</x>

@@ -238,7 +238,7 @@
             <prop>/autopilot/internal/target-climb-rate-fps</prop>
         </output>
         <config>
-            <Kp>0.15</Kp> <!--origin = 0.25-->
+            <Kp>0.25</Kp> <!--origin = 0.25-->
             <beta>1.0</beta>
             <alpha>0.1</alpha>
             <gamma>0.0</gamma>

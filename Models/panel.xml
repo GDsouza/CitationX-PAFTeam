@@ -3664,6 +3664,91 @@
         </action>
     </animation>
 
+<!-- SEAT BELTS SWITCH -->
+
+    <animation>
+        <type>rotate</type>
+        <object-name>Seat-belts.switch</object-name>
+        <property>controls/electric/seat-belts-switch</property>
+        <factor>15</factor>
+        <center>
+            <x-m>0.043</x-m>
+            <y-m>0</y-m>
+            <z-m>-0.041</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>-1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Seat-belts.switch</object-name>
+        <action>
+            <button>0</button>
+            <binding>
+							<command>property-adjust</command>
+								<property>controls/electric/seat-belts-switch</property>
+								<step>1</step>
+								<min>-1</min>
+								<max>1</max>
+							<wrap>false</wrap>
+            </binding>
+    				<binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+        </binding>
+        </action>
+        <hovered>
+          <binding>
+            <command>set-tooltip</command>
+            <tooltip-id>Seat belts</tooltip-id>
+            <label>Seat belts: %s</label>
+            <property>controls/electric/seat-belts-switch</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['OFF','ON','PASS SAFETY'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Pass.safety</object-name>
+        <action>
+            <button>0</button>
+            <binding>
+							<command>property-adjust</command>
+								<property>controls/electric/seat-belts-switch</property>
+								<step>-1</step>
+								<min>-1</min>
+								<max>1</max>
+							<wrap>false</wrap>
+            </binding>
+    				<binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+        </binding>
+        </action>
+        <hovered>
+            <binding>
+            <command>set-tooltip</command>
+            <tooltip-id>Seat belts</tooltip-id>
+            <label>Seat belts: %s</label>
+            <property>controls/electric/seat-belts-switch</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['OFF','ON','PASS SAFETY'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
 <!--Pressurization Auto-Rate Knob -->
 
   <animation>

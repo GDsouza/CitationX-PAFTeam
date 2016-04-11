@@ -346,6 +346,7 @@
     </engine>
 
 <!--  RUMBLE -->
+
     <rumble>
         <name>rumble</name>
         <path>Sounds/rumble.wav</path>
@@ -706,6 +707,388 @@
         </condition>
     </click>
 
+
+    <!-- AMBIANCE -->
+
+      <ambiance>
+    		  <name>ambiance</name>
+    	        <path>Aircraft/CitationX/Sounds/ambiance.wav</path>
+      				<mode>once</mode>
+        				<property>sim/signals/fdm-initialized</property>
+            	    <volume>
+                		<property>sim/signals/fdm-initialized</property>
+         			     <factor>1</factor>
+            	   </volume>
+            <position>
+                <x>-5.20 </x>
+                <y> 0.00 </y>
+                <z> 0.90 </z>
+            </position>
+    	</ambiance>
+
+   <!-- ALARMS -->
+
+    <alarm>
+        <name>Master warning</name>
+        <mode>once</mode>
+        <path>Aircraft/CitationX/Sounds/chime2.wav</path>
+        <condition>
+					<and>
+            <property>instrumentation/annunciators/master-warning</property>
+						<not>
+            	<property>instrumentation/annunciators/ack-warning</property>
+						</not>
+					</and>
+        </condition>
+    </alarm>
+
+    <warnings>
+        <name>chime1</name>
+        <path>Aircraft/CitationX/Sounds/chime2.wav</path>
+				<condition>
+					<and>
+		        <property>instrumentation/annunciators/master-caution</property>
+						<not>
+            	<property>instrumentation/annunciators/ack-caution</property>
+						</not>
+					</and>
+				</condition>
+        <mode>once</mode>
+    </warnings>
+
+    <alarm>
+        <name>Overspeed alarm</name>
+        <mode>looped</mode>
+        <path>Aircraft/CitationX/Sounds/overspeed.wav</path>
+        <condition>
+					<or>
+            <property>sim/alarms/overspeed-alarm</property>
+						<equals>
+							<property>instrumentation/annunciators/test-select</property>
+								<value>7</value>
+						</equals>
+					</or>
+        </condition>
+    </alarm>
+
+    <warnings>
+        <name>Stall alarm</name>
+        <mode>looped</mode>
+        <path>Aircraft/CitationX/Sounds/stall.wav</path>
+				<condition>
+					<and>
+						<greater-than>
+			        <property>systems/electrical/right-bus</property>
+							<value>20</value>
+						</greater-than>
+			      <property>sim/sound/stall-horn</property>
+					</and>
+				</condition>
+    </warnings>
+
+    <alarm>
+        <name>Autopilot disconnect</name>
+        <mode>once</mode>
+        <path>Aircraft/CitationX/Sounds/autopilot-disconnect.wav</path>
+        <condition>
+          <property>autopilot/locks/disengage</property>     
+        </condition>
+        <volume>
+            <offset>1</offset>
+        </volume>
+    </alarm>
+
+    <warnings>
+        <name>master-caution</name>
+        <path>Aircraft/CitationX/Sounds/chime2.wav</path>
+				<condition>
+					<and>
+		        <property>instrumentation/annunciators/master-caution</property>
+						<not>
+            	<property>instrumentation/annunciators/ack-caution</property>
+						</not>
+					</and>
+				</condition>
+        <mode>once</mode>
+    </warnings>
+
+    <warnings>
+        <name>std-by-pwr</name>
+        <path>Aircraft/CitationX/Sounds/chime2.wav</path>
+				<condition>
+					<or>
+		        <property>systems/electrical/left-emer-bus</property>
+		        <property>systems/electrical/right-emer-bus</property>
+						<equals>
+							<property>controls/electric/std-by-pwr</property>							
+								<value>-1</value>
+						</equals>
+					</or>
+				</condition>
+        <mode>looped</mode>
+    </warnings>
+
+    <warnings>
+        <name>fasten-seat-belts</name>
+        <path>Aircraft/CitationX/Sounds/seat-belt.wav</path>
+				<condition>
+					<or>
+		        <property>systems/electrical/left-emer-bus</property>
+		        <property>systems/electrical/right-emer-bus</property>
+						<equals>
+							<property>controls/electric/seat-belts-switch</property>							
+								<value>1</value>
+						</equals>
+					</or>
+				</condition>
+        <mode>once</mode>
+    </warnings>
+
+    <warnings>
+        <name>no-smoking</name>
+        <path>Aircraft/CitationX/Sounds/no-smoking.wav</path>
+				<condition>
+					<or>
+		        <property>systems/electrical/left-emer-bus</property>
+		        <property>systems/electrical/right-emer-bus</property>
+						<equals>
+							<property>controls/electric/seat-belts-switch</property>							
+								<value>-1</value>
+						</equals>
+					</or>
+				</condition>
+        <mode>once</mode>
+    </warnings>
+
+<!-- ANNOUNCEMENTS -->
+
+    <announcement>
+        <name>welcome</name>
+        <path>Aircraft/CitationX/Sounds/welcome.wav</path>
+        <mode>once</mode>
+      <condition>
+				<and>
+					<equals>
+	          <property>controls/electric/avionics-switch</property>
+						<value>2</value>
+					</equals>
+					<property>systems/electrical/right-bus-norm</property>
+				</and>
+      </condition>
+      <position>
+        <x>-7.00 </x>
+        <y> 0.00 </y>
+        <z> 0.00 </z>
+      </position>
+   </announcement>
+
+    <!-- SPEED CALLOUTS -->
+    <callout>
+      <name>80 knots</name>
+      <mode>once</mode>
+      <path>Aircraft/CitationX/Sounds/80kt.wav</path>
+      	<condition>
+          <and>
+            <or>
+              <property>gear/gear[0]/wow</property>
+              <property>gear/gear[1]/wow</property>
+              <property>gear/gear[2]/wow</property>
+            </or>
+          	<less-than>
+              <property>velocities/airspeed-kt</property>
+              <property>autopilot/internal/lookahead-5-sec-airspeed-kt</property>
+            </less-than>
+            <greater-than>
+              <property>velocities/airspeed-kt</property>
+                <value>80</value>
+            </greater-than>
+            <less-than>
+              <property>velocities/airspeed-kt</property>
+                <value>90</value>
+            </less-than>
+          </and>
+        </condition>
+    </callout>
+
+    <callout>
+    	<name>V1</name>
+      <mode>once</mode>
+      <path>Aircraft/CitationX/Sounds/v1.wav</path>
+      <condition>
+        <and>
+          <or>
+            <property>gear/gear[0]/wow</property>
+            <property>gear/gear[1]/wow</property>
+            <property>gear/gear[2]/wow</property>
+          </or>
+          <less-than>
+            <property>velocities/airspeed-kt</property>
+            <property>autopilot/internal/lookahead-5-sec-airspeed-kt</property>
+          </less-than>
+         	<greater-than>
+           	<property>velocities/airspeed-kt</property>
+            <property>controls/flight/v1</property>
+          </greater-than>
+        </and>
+      </condition>
+    </callout>
+
+    <callout>
+			<name>Vr</name>
+			<mode>once</mode>
+			<path>Aircraft/CitationX/Sounds/vr.wav</path>
+			<condition>
+        <and>
+          <or>
+            <property>gear/gear[0]/wow</property>
+            <property>gear/gear[1]/wow</property>
+            <property>gear/gear[2]/wow</property>
+          </or>
+          <less-than>
+            <property>velocities/airspeed-kt</property>
+            <property>autopilot/internal/lookahead-5-sec-airspeed-kt</property>
+          </less-than>
+       		<greater-than>
+						<property>velocities/airspeed-kt</property>
+						<property>controls/flight/vr</property>
+          </greater-than>
+        </and>
+      </condition>
+    </callout>
+
+		<callout>
+			<name>Positive climb rate</name>
+      <mode>once</mode>
+      <path>Aircraft/CitationX/Sounds/p-climb.wav</path>
+      <condition>
+        <and>
+          <less-than>
+            <property>velocities/airspeed-kt</property>
+            <property>autopilot/internal/lookahead-5-sec-airspeed-kt</property>
+          </less-than>
+          <greater-than>
+            <property>velocities/airspeed-kt</property>
+              <value>180</value>
+          </greater-than>
+          <greater-than-equals>
+            <property>autopilot/internal/vert-speed-fpm</property>
+              <value>500</value>
+          </greater-than-equals>
+					<greater-than>
+            <property>orientation/pitch-deg</property>
+              <value>7</value>
+          </greater-than>
+          <less-than>
+            <property>orientation/pitch-deg</property>
+              <value>17</value>
+          </less-than>
+					<less-than>
+            <property>position/altitude-agl-ft</property>
+              <value>500</value>
+          </less-than>
+        </and>
+      </condition>
+    </callout>
+
+<!-- APU -->
+
+	<apu>
+	    <name>APU starting</name>
+	    <mode>once</mode>
+	    <path>Aircraft/CitationX/Sounds/apu_start.wav</path>
+	    <condition>
+				<and>
+					<property>controls/APU/running</property>
+			    <less-than>
+						<property>controls/APU/rpm</property>
+							<value>0.99</value>
+		    	</less-than>
+				</and>
+	    </condition>
+	    <reference-dist>10</reference-dist>
+	    <max-dist>30</max-dist>
+	</apu>
+
+	<apu>
+	    <name>APU running</name>
+	    <mode>looped</mode>
+	    <path>Aircraft/CitationX/Sounds/apu_run.wav</path>
+	    <condition>
+				<and>
+					<greater-than-equals>
+			    	<property>controls/APU/rpm</property>
+			    		<value>0.99</value>
+					</greater-than-equals>
+					<less-than>
+	           <property>engines/engine[0]/turbine</property>
+							<value>73</value>
+					</less-than>
+				</and>
+	    </condition>
+	    <reference-dist>10</reference-dist>
+	    <max-dist>30</max-dist>
+	</apu>
+
+	<apu>
+	    <name>APU shutdown</name>
+	    <mode>once</mode>
+	    <path>Aircraft/CitationX/Sounds/apu_shutdown.wav</path>
+	    <condition>
+				<and>
+					<not>
+						<property>controls/APU/running</property>
+					</not>
+				  <greater-than>
+						<property>controls/APU/rpm</property>
+							<value>0</value>
+				  </greater-than>
+				</and>
+	    </condition>
+	    <reference-dist>10</reference-dist>
+	    <max-dist>30</max-dist>
+	</apu>
+
+	<apu>
+	    <name>APU warning</name>
+      <mode>once</mode>
+      <path>Aircraft/CitationX/Sounds/chime1.wav</path>
+      <condition>
+				<and>
+					<not>
+						<property>controls/electric/APU-generator</property> 
+					</not>
+					<or>
+						<equals>
+        			<property>controls/APU/rpm</property>
+								<value>1</value>
+						</equals>
+          		<property>controls/APU/test</property>
+					</or>
+				</and>
+      </condition>
+	</apu>
+
+	<apu>
+	    <name>APU bleed</name>
+      <mode>once</mode>
+      <path>Aircraft/CitationX/Sounds/chime1.wav</path>
+      <condition>
+				<or>
+					<and>
+						<equals>
+  	      		<property>controls/APU/rpm</property>
+								<value>1</value>
+						</equals>
+						<greater-than>
+  	      			<property>controls/APU/bleed</property>
+									<value>0</value>
+						</greater-than>
+					</and>
+         		<property>controls/APU/test</property>
+				</or>
+      </condition>
+	</apu>
+
     <!-- DOORS -->
 
         <doors>
@@ -853,6 +1236,7 @@
                 <z> 0.6 </z>
             </position>
         </doors>
+
     <!-- BAR DOORS -->
                      <!-- Bar door 1 -->
         <doors>
@@ -1483,354 +1867,6 @@
             <z> 0.00 </z>
           </position>
         </tables>
-
-    <!-- AMBIANCE -->
-
-          <ambiance>
-    		  <name>ambiance</name>
-    	        <path>Aircraft/CitationX/Sounds/ambiance.wav</path>
-      				<mode>once</mode>
-        				<property>sim/signals/fdm-initialized</property>
-            	    <volume>
-                		<property>sim/signals/fdm-initialized</property>
-         			     <factor>1</factor>
-            	   </volume>
-            <position>
-                <x>-5.20 </x>
-                <y> 0.00 </y>
-                <z> 0.90 </z>
-            </position>
-    	</ambiance>
-
-   <!-- ALARMS -->
-    <alarm>
-        <name>Master warning</name>
-        <mode>once</mode>
-        <path>Aircraft/CitationX/Sounds/chime2.wav</path>
-        <condition>
-					<and>
-            <property>instrumentation/annunciators/master-warning</property>
-						<not>
-            	<property>instrumentation/annunciators/ack-warning</property>
-						</not>
-					</and>
-        </condition>
-    </alarm>
-
-    <warnings>
-        <name>chime1</name>
-        <path>Aircraft/CitationX/Sounds/chime2.wav</path>
-				<condition>
-					<and>
-		        <property>instrumentation/annunciators/master-caution</property>
-						<not>
-            	<property>instrumentation/annunciators/ack-caution</property>
-						</not>
-					</and>
-				</condition>
-        <mode>once</mode>
-    </warnings>
-
-    <alarm>
-        <name>Overspeed alarm</name>
-        <mode>looped</mode>
-        <path>Aircraft/CitationX/Sounds/overspeed.wav</path>
-        <condition>
-					<or>
-            <property>sim/alarms/overspeed-alarm</property>
-						<equals>
-							<property>instrumentation/annunciators/test-select</property>
-								<value>7</value>
-						</equals>
-					</or>
-        </condition>
-    </alarm>
-
-    <warnings>
-        <name>Stall alarm</name>
-        <mode>looped</mode>
-        <path>Aircraft/CitationX/Sounds/stall.wav</path>
-				<condition>
-					<and>
-						<greater-than>
-			        <property>systems/electrical/right-bus</property>
-							<value>20</value>
-						</greater-than>
-			      <property>sim/sound/stall-horn</property>
-					</and>
-				</condition>
-    </warnings>
-
-    <alarm>
-        <name>Autopilot disconnect</name>
-        <mode>once</mode>
-        <path>Aircraft/CitationX/Sounds/autopilot-disconnect.wav</path>
-        <condition>
-          <property>autopilot/locks/disengage</property>     
-        </condition>
-        <volume>
-            <offset>1</offset>
-        </volume>
-    </alarm>
-
-    <warnings>
-        <name>chime1</name>
-        <path>Aircraft/CitationX/Sounds/chime2.wav</path>
-				<condition>
-					<and>
-		        <property>instrumentation/annunciators/master-caution</property>
-						<not>
-            	<property>instrumentation/annunciators/ack-caution</property>
-						</not>
-					</and>
-				</condition>
-        <mode>once</mode>
-    </warnings>
-
-    <warnings>
-        <name>chime2</name>
-        <path>Aircraft/CitationX/Sounds/chime2.wav</path>
-				<condition>
-					<or>
-		        <property>systems/electrical/left-emer-bus</property>
-		        <property>systems/electrical/right-emer-bus</property>
-						<equals>
-							<property>controls/electric/std-by-pwr</property>							
-								<value>-1</value>
-						</equals>
-					</or>
-				</condition>
-        <mode>looped</mode>
-    </warnings>
-
-<!-- ANNOUNCEMENTS -->
-
-    <announcement>
-        <name>welcome</name>
-        <path>Aircraft/CitationX/Sounds/welcome.wav</path>
-        <mode>once</mode>
-      <condition>
-				<and>
-					<equals>
-	          <property>controls/electric/avionics-switch</property>
-						<value>2</value>
-					</equals>
-					<property>systems/electrical/right-bus-norm</property>
-				</and>
-      </condition>
-      <position>
-        <x>-7.00 </x>
-        <y> 0.00 </y>
-        <z> 0.00 </z>
-      </position>
-   </announcement>
-
-    <!-- SPEED CALLOUTS -->
-    <callout>
-      <name>80 knots</name>
-      <mode>once</mode>
-      <path>Aircraft/CitationX/Sounds/80kt.wav</path>
-      	<condition>
-          <and>
-            <or>
-              <property>gear/gear[0]/wow</property>
-              <property>gear/gear[1]/wow</property>
-              <property>gear/gear[2]/wow</property>
-            </or>
-          	<less-than>
-              <property>velocities/airspeed-kt</property>
-              <property>autopilot/internal/lookahead-5-sec-airspeed-kt</property>
-            </less-than>
-            <greater-than>
-              <property>velocities/airspeed-kt</property>
-                <value>80</value>
-            </greater-than>
-            <less-than>
-              <property>velocities/airspeed-kt</property>
-                <value>90</value>
-            </less-than>
-          </and>
-        </condition>
-    </callout>
-
-    <callout>
-    	<name>V1</name>
-      <mode>once</mode>
-      <path>Aircraft/CitationX/Sounds/v1.wav</path>
-      <condition>
-        <and>
-          <or>
-            <property>gear/gear[0]/wow</property>
-            <property>gear/gear[1]/wow</property>
-            <property>gear/gear[2]/wow</property>
-          </or>
-          <less-than>
-            <property>velocities/airspeed-kt</property>
-            <property>autopilot/internal/lookahead-5-sec-airspeed-kt</property>
-          </less-than>
-         	<greater-than>
-           	<property>velocities/airspeed-kt</property>
-            <property>controls/flight/v1</property>
-          </greater-than>
-        </and>
-      </condition>
-    </callout>
-
-    <callout>
-			<name>Vr</name>
-			<mode>once</mode>
-			<path>Aircraft/CitationX/Sounds/vr.wav</path>
-			<condition>
-        <and>
-          <or>
-            <property>gear/gear[0]/wow</property>
-            <property>gear/gear[1]/wow</property>
-            <property>gear/gear[2]/wow</property>
-          </or>
-          <less-than>
-            <property>velocities/airspeed-kt</property>
-            <property>autopilot/internal/lookahead-5-sec-airspeed-kt</property>
-          </less-than>
-       		<greater-than>
-						<property>velocities/airspeed-kt</property>
-						<property>controls/flight/vr</property>
-          </greater-than>
-        </and>
-      </condition>
-    </callout>
-
-		<callout>
-			<name>Positive climb rate</name>
-      <mode>once</mode>
-      <path>Aircraft/CitationX/Sounds/p-climb.wav</path>
-      <condition>
-        <and>
-          <less-than>
-            <property>velocities/airspeed-kt</property>
-            <property>autopilot/internal/lookahead-5-sec-airspeed-kt</property>
-          </less-than>
-          <greater-than>
-            <property>velocities/airspeed-kt</property>
-              <value>180</value>
-          </greater-than>
-          <greater-than-equals>
-            <property>autopilot/internal/vert-speed-fpm</property>
-              <value>500</value>
-          </greater-than-equals>
-					<greater-than>
-            <property>orientation/pitch-deg</property>
-              <value>7</value>
-          </greater-than>
-          <less-than>
-            <property>orientation/pitch-deg</property>
-              <value>17</value>
-          </less-than>
-					<less-than>
-            <property>position/altitude-agl-ft</property>
-              <value>500</value>
-          </less-than>
-        </and>
-      </condition>
-    </callout>
-
-<!-- APU -->
-
-	<apu>
-	    <name>APU starting</name>
-	    <mode>once</mode>
-	    <path>Aircraft/CitationX/Sounds/apu_start.wav</path>
-	    <condition>
-				<and>
-					<property>controls/APU/running</property>
-			    <less-than>
-						<property>controls/APU/rpm</property>
-							<value>0.99</value>
-		    	</less-than>
-				</and>
-	    </condition>
-	    <reference-dist>10</reference-dist>
-	    <max-dist>30</max-dist>
-	</apu>
-
-	<apu>
-	    <name>APU running</name>
-	    <mode>looped</mode>
-	    <path>Aircraft/CitationX/Sounds/apu_run.wav</path>
-	    <condition>
-				<and>
-					<greater-than-equals>
-			    	<property>controls/APU/rpm</property>
-			    		<value>0.99</value>
-					</greater-than-equals>
-					<less-than>
-	           <property>engines/engine[0]/turbine</property>
-							<value>73</value>
-					</less-than>
-				</and>
-	    </condition>
-	    <reference-dist>10</reference-dist>
-	    <max-dist>30</max-dist>
-	</apu>
-
-	<apu>
-	    <name>APU shutdown</name>
-	    <mode>once</mode>
-	    <path>Aircraft/CitationX/Sounds/apu_shutdown.wav</path>
-	    <condition>
-				<and>
-					<not>
-						<property>controls/APU/running</property>
-					</not>
-				  <greater-than>
-						<property>controls/APU/rpm</property>
-							<value>0</value>
-				  </greater-than>
-				</and>
-	    </condition>
-	    <reference-dist>10</reference-dist>
-	    <max-dist>30</max-dist>
-	</apu>
-
-	<apu>
-	    <name>APU warning</name>
-      <mode>once</mode>
-      <path>Aircraft/CitationX/Sounds/chime1.wav</path>
-      <condition>
-				<and>
-					<not>
-						<property>controls/electric/APU-generator</property> 
-					</not>
-					<or>
-						<equals>
-        			<property>controls/APU/rpm</property>
-								<value>1</value>
-						</equals>
-          		<property>controls/APU/test</property>
-					</or>
-				</and>
-      </condition>
-	</apu>
-
-	<apu>
-	    <name>APU bleed</name>
-      <mode>once</mode>
-      <path>Aircraft/CitationX/Sounds/chime1.wav</path>
-      <condition>
-				<or>
-					<and>
-						<equals>
-  	      		<property>controls/APU/rpm</property>
-								<value>1</value>
-						</equals>
-						<greater-than>
-  	      			<property>controls/APU/bleed</property>
-									<value>0</value>
-						</greater-than>
-					</and>
-         		<property>controls/APU/test</property>
-				</or>
-      </condition>
-	</apu>
 
 </fx>
 

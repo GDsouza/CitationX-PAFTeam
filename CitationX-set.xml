@@ -323,6 +323,11 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
                 <name>Control B</name>
                 <desc>Speedbrakes</desc>
             </key>
+            <key>
+                <name>Control D</name>
+                <desc>Cabin Door</desc>
+            </key>
+
         </help>
 
         <flaps>

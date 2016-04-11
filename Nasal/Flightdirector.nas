@@ -465,6 +465,7 @@ var speed_Control = func {
 	var app35_spd = getprop("autopilot/settings/app35-speed-kt");
 	var target_alt = "autopilot/settings/target-altitude-ft";
 	var tg_alt = getprop(target_alt);
+	var dest_alt = getprop("autopilot/route-manager/destination/field-elevation-ft");
 	var n_wp = getprop("autopilot/route-manager/current-wp");
 	if (n_wp <1) {n_wp=1}
 	var last_wp_alt = getprop("autopilot/route-manager/route/wp["~(n_wp-1)~"]/altitude-ft");
@@ -513,16 +514,16 @@ var speed_Control = func {
 							
 				### After TOD ###
 			} else {				
-					if (curr_wp_alt > 0){
-					setprop(target_alt,curr_wp_alt);
-					} else {
-						for (var i=n_wp;i<(num-1);i+=1) {
-							if (getprop(app_wp~i~"]/altitude-ft") > 0) {
-								setprop(target_alt,getprop(app_wp~i~"]/altitude-ft"));
-								i = num;
-							}
-						}
+				if (curr_wp_alt > 0){
+				setprop(target_alt,curr_wp_alt);
+				} else {
+					for (var i=n_wp;i<(num-1);i+=1) {
+						if (getprop(app_wp~i~"]/altitude-ft") > 0) {
+							setprop(target_alt,math.round(getprop(app_wp~i~"]/altitude-ft")/100)*100);
+							i = num;
+						} else {setprop(target_alt,math.round(dest_alt/100)*100)}
 					}
+				}
 			}
 			if (dist_rem <= 7) {
 				if (NAVSRC == "FMS1") {var ind = 1;setprop(fms_st,1);setprop(NAVprop,"NAV2")}

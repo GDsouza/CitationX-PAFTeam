@@ -4,7 +4,7 @@ MATERIAL "transparent" rgb 1 1 1  amb 1 1 1  emis 0.1 0.1 0.1  spec 0.1 0.1 0.1 
 MATERIAL "LABELS" rgb 1 1 1  amb 1 1 1  emis 0.1 0.1 0.1  spec 0 0 0  shi 1  trans 0
 MATERIAL "reverser" rgb 1 1 1  amb 1 1 1  emis 0.1 0.1 0.1  spec 0.102 0.102 0.102  shi 1  trans 0
 OBJECT world
-kids 238
+kids 239
 OBJECT poly
 name "A.knob"
 loc 0.045107 -0.036443 -0.521614
@@ -73772,10 +73772,8 @@ refs 4
 25 0.397839 0.737948
 kids 0
 OBJECT poly
-name "Seat-belt-switch"
+name "Seat-belts.switch"
 loc 0.04011 -0.042685 -0.42535
-data 16
-Seat-belt-switch
 texture "interior.png"
 crease 50.000000
 numvert 41
@@ -74037,6 +74035,24 @@ refs 4
 40 0.398982 0.715529
 32 0.398982 0.737947
 25 0.397839 0.737948
+kids 0
+OBJECT poly
+name "Pass.safety"
+loc -0.00446031 0.00583228 -0.622593
+crease 45.000000
+numvert 4
+0.061507 -0.058243 0.18724
+0.061507 -0.058243 0.207222
+0.05113 -0.048133 0.207222
+0.05113 -0.048133 0.18724
+numsurf 1
+SURF 0x10
+mat 1
+refs 4
+3 0 1
+2 1 1
+1 1 0
+0 0 0
 kids 0
 OBJECT poly
 name "Slipball1"
