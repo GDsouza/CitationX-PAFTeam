@@ -1315,10 +1315,16 @@
 							<property>controls/electric/seat-belts-switch</property>
 							<value>-1</value>
 						</equals>
-            <greater-than>
-              <property>systems/electrical/outputs/efis</property>
-               	<value>15</value>
-            </greater-than>
+						<or>
+		          <greater-than>
+		            <property>systems/electrical/left-bus</property>
+		            <value>15</value>
+		          </greater-than>
+		          <greater-than>
+		            <property>systems/electrical/right-bus</property>
+		            <value>15</value>
+		          </greater-than>
+						</or>
 					</and>
         </condition>
 				<emission>
@@ -1335,13 +1341,25 @@
         <object-name>seatbelt-R.on</object-name>
         <object-name>seatbelt-L.on</object-name>
 				<condition>
-					<not-equals>
-						<property>controls/electric/seat-belts-switch</property>					
-						<value>0</value>
-					</not-equals>
+					<and>
+						<not-equals>
+							<property>controls/electric/seat-belts-switch</property>					
+							<value>0</value>
+						</not-equals>
+						<or>
+		          <greater-than>
+		            <property>systems/electrical/left-bus</property>
+		            <value>15</value>
+		          </greater-than>
+		          <greater-than>
+		            <property>systems/electrical/right-bus</property>
+		            <value>15</value>
+		          </greater-than>
+						</or>
+					</and>
 				</condition>
     </animation>
-
+<!--
     <animation>
         <type>select</type>
         <object-name>smoke-L.off</object-name>
@@ -1353,16 +1371,28 @@
 						</greater-than>
 				</condition>
     </animation>
-
+-->
     <animation>
         <type>select</type>
         <object-name>smoke-L.on</object-name>
         <object-name>smoke-R.on</object-name> 
 				<condition>
-					<equals>
-					  <property>controls/electric/seat-belts-switch</property>					
-						<value>-1</value>
-					</equals>
+					<and>
+						<equals>
+							<property>controls/electric/seat-belts-switch</property>					
+							<value>-1</value>
+						</equals>
+						<or>
+		          <greater-than>
+		            <property>systems/electrical/left-bus</property>
+		            <value>15</value>
+		          </greater-than>
+		          <greater-than>
+		            <property>systems/electrical/right-bus</property>
+		            <value>15</value>
+		          </greater-than>
+						</or>
+					</and>
 				</condition>
     </animation>
 
