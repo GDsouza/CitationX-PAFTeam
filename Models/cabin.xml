@@ -1359,19 +1359,7 @@
 					</and>
 				</condition>
     </animation>
-<!--
-    <animation>
-        <type>select</type>
-        <object-name>smoke-L.off</object-name>
-        <object-name>smoke-R.off</object-name> 
-				<condition>
-						<greater-than>
-							<property>controls/electric/seat-belts-switch</property>					
-							<value>-1</value>
-						</greater-than>
-				</condition>
-    </animation>
--->
+
     <animation>
         <type>select</type>
         <object-name>smoke-L.on</object-name>
