@@ -160,6 +160,12 @@ props.globals.initNode("sim/model/copilot-seat",0,"DOUBLE");
 props.globals.initNode("sim/alarms/overspeed-alarm",0,"BOOL");
 props.globals.initNode("sim/alarms/stall-warning",0,"BOOL");
 props.globals.initNode("instrumentation/clock/flight-meter-hour",0,"DOUBLE");
+props.globals.initNode("instrumentation/checklist[0]/norm",0,"BOOL");
+props.globals.initNode("instrumentation/checklist[0]/page",0,"BOOL");
+props.globals.initNode("instrumentation/checklist[0]/nr-page",0,"INT");
+props.globals.initNode("instrumentation/checklist[1]/norm",0,"BOOL");
+props.globals.initNode("instrumentation/checklist[1]/page",0,"BOOL");
+props.globals.initNode("instrumentation/checklist[1]/nr-page",0,"INT");
 props.globals.initNode("autopilot/locks/alt-mach",0,"BOOL");
 props.globals.initNode("autopilot/locks/fms-status",0,"BOOL");
 props.globals.initNode("autopilot/settings/nav-btn",0,"BOOL");
@@ -437,6 +443,7 @@ var Startup = func{
     setprop("controls/electric/battery-switch",1);
     setprop("controls/electric/battery-switch[1]",1);
     setprop("controls/electric/inverter-switch",1);
+    setprop("controls/electric/std-by-pwr",1);
     setprop("controls/lighting/nav-lights",1);
     setprop("controls/lighting/beacon",1);
     setprop("controls/lighting/strobe",1);
@@ -464,6 +471,7 @@ var Shutdown = func{
     setprop("controls/electric/battery-switch",0);
     setprop("controls/electric/battery-switch[1]",0);
     setprop("controls/electric/inverter-switch",0);
+    setprop("controls/electric/std-by-pwr",0);
     setprop("controls/lighting/nav-lights",0);
     setprop("controls/lighting/beacon",0);
     setprop("controls/lighting/strobe",0);

@@ -170,7 +170,8 @@
         <object-name>acftsys.btn</object-name>
         <object-name>mfdmap.btn</object-name>
         <object-name>mfdwx.btn</object-name>
-        <object-name>norm.btn</object-name>
+        <object-name>norm-L.btn</object-name>
+        <object-name>norm-R.btn</object-name>
         <object-name>abn.btn</object-name>
         <object-name>emer.btn</object-name>
         <object-name>skp.btn</object-name>
@@ -227,7 +228,36 @@
         <type>select</type>
         <object-name>PFD1</object-name>
         <object-name>PFD2</object-name>
+        <condition>
+					<and>
+           <property>systems/electrical/right-bus-norm</property>
+						<equals>
+                <property>controls/electric/avionics-switch</property>
+									<value>2</value>
+						</equals>
+					</and>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
         <object-name>MFD1</object-name>
+        <condition>
+					<and>
+           <property>systems/electrical/right-bus-norm</property>
+						<equals>
+                <property>controls/electric/avionics-switch</property>
+									<value>2</value>
+						</equals>
+						<not>
+                <property>instrumentation/checklist[0]/norm</property>
+						</not>
+					</and>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
         <object-name>MFD2</object-name>
         <condition>
 					<and>
@@ -236,6 +266,9 @@
                 <property>controls/electric/avionics-switch</property>
 									<value>2</value>
 						</equals>
+						<not>
+                <property>instrumentation/checklist[1]/norm</property>
+						</not>
 					</and>
         </condition>
     </animation>
@@ -552,6 +585,7 @@
 					</or>
         </condition>
     </animation>
+
 <!--ENGINE FIRE ALARMS -->
 
     <animation>
@@ -2348,6 +2382,26 @@
         </offsets>
     </model>
 
+    <model>
+        <name>chklst1</name>
+        <path>Aircraft/CitationX/Models/Instruments/MFD/checklist1.xml</path>
+        <offsets>
+            <x-m>0.002</x-m>
+            <y-m>-0.187</y-m>
+            <z-m>0.138</z-m>
+        </offsets>
+    </model>
+
+    <model>
+        <name>chklst2</name>
+        <path>Aircraft/CitationX/Models/Instruments/MFD/checklist2.xml</path>
+        <offsets>
+            <x-m>0.002</x-m>
+            <y-m>0.194</y-m>
+            <z-m>0.138</z-m>
+        </offsets>
+    </model>
+
     <animation>
         <type>pick</type>
         <object-name>MFD.knob</object-name>
@@ -3116,17 +3170,39 @@
 <!-- DC850 -->
 
     <animation>
+        <type>translate</type>
+        <object-name>pfdhsi.btn</object-name>	
+        <property>instrumentation/primus2000/dc840/pfd-hsi</property>
+				<factor>0.0027</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+				</axis>
+    </animation>
+    <animation>
         <type>pick</type>
         <object-name>pfdhsi.btn</object-name>
         <action>
             <button>0</button>
         <binding>
             <command>property-toggle</command>
-            <property>instrumentation/primus2000/dc840/hsi</property>
+            <property>instrumentation/primus2000/dc840/pfd-hsi</property>
         </binding>
         </action>
     </animation>
 
+    <animation>
+        <type>translate</type>
+        <object-name>pfdwx.btn</object-name>	
+        <property>instrumentation/primus2000/dc840/pfd-wx</property>
+				<factor>0.0027</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+				</axis>
+    </animation>
     <animation>
         <type>pick</type>
         <object-name>pfdwx.btn</object-name>
@@ -3134,11 +3210,22 @@
             <button>0</button>
         <binding>
             <command>property-toggle</command>
-            <property>instrumentation/primus2000/dc840/hsi</property>
+            <property>instrumentation/primus2000/dc840/pfd-wx</property>
         </binding>
         </action>
     </animation>
 
+    <animation>
+        <type>translate</type>
+        <object-name>et.btn</object-name>	
+        <property>instrumentation/primus2000/dc840/et</property>
+				<factor>0.0027</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+				</axis>
+    </animation>
     <animation>
         <type>pick</type>
         <object-name>et.btn</object-name>
@@ -3152,6 +3239,17 @@
         </action>
     </animation>
 
+    <animation>
+        <type>translate</type>
+        <object-name>tcas.btn</object-name>	
+        <property>instrumentation/primus2000/dc840/tcas</property>
+				<factor>0.0027</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+				</axis>
+    </animation>
     <animation>
         <type>pick</type>
         <object-name>tcas.btn</object-name>
@@ -3184,6 +3282,17 @@
     </animation>
 
     <animation>
+        <type>translate</type>
+        <object-name>acftsys.btn</object-name>	
+        <property>instrumentation/primus2000/dc840/acft</property>
+				<factor>0.0027</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+				</axis>
+    </animation>
+    <animation>
         <type>pick</type>
         <object-name>acftsys.btn</object-name>
         <action>
@@ -3196,6 +3305,17 @@
         </action>
     </animation>
 
+    <animation>
+        <type>translate</type>
+        <object-name>mfdmap.btn</object-name>	
+        <property>instrumentation/primus2000/dc840/mfd-map</property>
+				<factor>0.0027</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+				</axis>
+    </animation>
     <animation>
         <type>pick</type>
         <object-name>mfdmap.btn</object-name>
@@ -3215,6 +3335,17 @@
     </animation>
 
     <animation>
+        <type>translate</type>
+        <object-name>mfdwx.btn</object-name>	
+        <property>instrumentation/primus2000/dc840/mfd-wx</property>
+				<factor>0.0027</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+				</axis>
+    </animation>
+    <animation>
         <type>pick</type>
         <object-name>mfdwx.btn</object-name>
         <action>
@@ -3226,6 +3357,271 @@
             </binding>
         </action>
     </animation>
+
+<!-- Checklist1 -->
+
+    <animation>
+        <type>translate</type>
+        <object-name>norm-L.btn</object-name>	
+        <property>instrumentation/checklist[0]/norm</property>
+				<factor>0.0027</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>norm-L.btn</object-name>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <command>property-toggle</command>
+            <property>instrumentation/checklist[0]/norm</property>
+            </binding>
+        </action>
+    </animation>
+
+<!--
+    <animation>
+        <type>translate</type>
+        <object-name>abn.btn</object-name>	
+        <property>instrumentation/checklist[0]/abn</property>
+				<factor>0.0027</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>abn.btn</object-name>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <command>property-toggle</command>
+            <property>instrumentation/checklist[0]/abn</property>
+            </binding>
+        </action>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>emer.btn</object-name>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <command>property-toggle</command>
+            <property>instrumentation/checklist[0]/emer</property>
+            </binding>
+        </action>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>emer.btn</object-name>	
+        <property>instrumentation/checklist[0]/emer</property>
+				<factor>0.0027</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+-->
+    <animation>
+        <type>pick</type>
+        <object-name>page-L.up</object-name>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+              <command>nasal</command>
+            	<script>checklist.next(0);</script>
+            </binding>
+        </action>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>page-L.dwn</object-name>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+              <command>nasal</command>
+            	<script>checklist.previous(0);</script>
+            </binding>
+        </action>
+    </animation>
+
+<!--
+    <animation>
+        <type>pick</type>
+        <object-name>page-L.btn</object-name>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+          <binding>
+            <command>property-assign</command>
+            <property>instrumentation/checklist[0]/page</property>
+						<value>1</value>
+          </binding>
+					<mod-up>
+						<binding>
+							<command>property-assign</command>
+								<property>instrumentation/checklist[0]/page</property>
+								<value>0</value>
+						</binding>
+					</mod-up>
+    		</action>
+    </animation>
+-->
+
+<!-- Checklist2 -->
+
+    <animation>
+        <type>translate</type>
+        <object-name>norm-R.btn</object-name>	
+        <property>instrumentation/checklist[1]/norm</property>
+				<factor>0.0027</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>norm-R.btn</object-name>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <command>property-toggle</command>
+            <property>instrumentation/checklist[1]/norm</property>
+            </binding>
+        </action>
+    </animation>
+<!--
+    <animation>
+        <type>translate</type>
+        <object-name>abn.btn</object-name>	
+        <property>instrumentation/checklist[0]/abn</property>
+				<factor>0.0027</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>abn.btn</object-name>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <command>property-toggle</command>
+            <property>instrumentation/checklist[0]/abn</property>
+            </binding>
+        </action>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>emer.btn</object-name>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <command>property-toggle</command>
+            <property>instrumentation/checklist[0]/emer</property>
+            </binding>
+        </action>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>emer.btn</object-name>	
+        <property>instrumentation/checklist[0]/emer</property>
+				<factor>0.0027</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+-->
+    <animation>
+        <type>pick</type>
+        <object-name>page-R.up</object-name>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+              <command>nasal</command>
+            	<script>checklist.next(1);</script>
+            </binding>
+        </action>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>page-R.dwn</object-name>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+              <command>nasal</command>
+            	<script>checklist.previous(1);</script>
+            </binding>
+        </action>
+    </animation>
+
+<!--
+    <animation>
+        <type>translate</type>
+        <object-name>page-R.btn</object-name>	
+        <property>instrumentation/checklist[1]/page</property>
+				<factor>0.0027</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>page-R.btn</object-name>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+          <binding>
+            <command>property-assign</command>
+            <property>instrumentation/checklist[1]/page</property>
+						<value>1</value>
+          </binding>
+					<mod-up>
+						<binding>
+							<command>property-assign</command>
+								<property>instrumentation/checklist[1]/page</property>
+								<value>0</value>
+						</binding>
+					</mod-up>
+    		</action>
+    </animation>
+-->
 
 <!-- REFLETS PORTES -->
 
