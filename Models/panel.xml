@@ -3358,7 +3358,7 @@
         </action>
     </animation>
 
-<!-- Checklist1 -->
+<!-- Checklists -->
 
     <animation>
         <type>translate</type>
@@ -3385,57 +3385,6 @@
         </action>
     </animation>
 
-<!--
-    <animation>
-        <type>translate</type>
-        <object-name>abn.btn</object-name>	
-        <property>instrumentation/checklist[0]/abn</property>
-				<factor>0.0027</factor>
-        <axis>
-            <x>-1</x>
-            <y>0</y>
-            <z>0</z>
-        </axis>
-    </animation>
-
-    <animation>
-        <type>pick</type>
-        <object-name>abn.btn</object-name>
-        <action>
-            <button>0</button>
-            <repeatable>false</repeatable>
-            <binding>
-                <command>property-toggle</command>
-            <property>instrumentation/checklist[0]/abn</property>
-            </binding>
-        </action>
-    </animation>
-
-    <animation>
-        <type>pick</type>
-        <object-name>emer.btn</object-name>
-        <action>
-            <button>0</button>
-            <repeatable>false</repeatable>
-            <binding>
-                <command>property-toggle</command>
-            <property>instrumentation/checklist[0]/emer</property>
-            </binding>
-        </action>
-    </animation>
-
-    <animation>
-        <type>translate</type>
-        <object-name>emer.btn</object-name>	
-        <property>instrumentation/checklist[0]/emer</property>
-				<factor>0.0027</factor>
-        <axis>
-            <x>-1</x>
-            <y>0</y>
-            <z>0</z>
-        </axis>
-    </animation>
--->
     <animation>
         <type>pick</type>
         <object-name>page-L.up</object-name>
@@ -3462,31 +3411,6 @@
         </action>
     </animation>
 
-<!--
-    <animation>
-        <type>pick</type>
-        <object-name>page-L.btn</object-name>
-        <action>
-          <button>0</button>
-          <repeatable>false</repeatable>
-          <binding>
-            <command>property-assign</command>
-            <property>instrumentation/checklist[0]/page</property>
-						<value>1</value>
-          </binding>
-					<mod-up>
-						<binding>
-							<command>property-assign</command>
-								<property>instrumentation/checklist[0]/page</property>
-								<value>0</value>
-						</binding>
-					</mod-up>
-    		</action>
-    </animation>
--->
-
-<!-- Checklist2 -->
-
     <animation>
         <type>translate</type>
         <object-name>norm-R.btn</object-name>	
@@ -3511,57 +3435,6 @@
             </binding>
         </action>
     </animation>
-<!--
-    <animation>
-        <type>translate</type>
-        <object-name>abn.btn</object-name>	
-        <property>instrumentation/checklist[0]/abn</property>
-				<factor>0.0027</factor>
-        <axis>
-            <x>-1</x>
-            <y>0</y>
-            <z>0</z>
-        </axis>
-    </animation>
-
-    <animation>
-        <type>pick</type>
-        <object-name>abn.btn</object-name>
-        <action>
-            <button>0</button>
-            <repeatable>false</repeatable>
-            <binding>
-                <command>property-toggle</command>
-            <property>instrumentation/checklist[0]/abn</property>
-            </binding>
-        </action>
-    </animation>
-
-    <animation>
-        <type>pick</type>
-        <object-name>emer.btn</object-name>
-        <action>
-            <button>0</button>
-            <repeatable>false</repeatable>
-            <binding>
-                <command>property-toggle</command>
-            <property>instrumentation/checklist[0]/emer</property>
-            </binding>
-        </action>
-    </animation>
-
-    <animation>
-        <type>translate</type>
-        <object-name>emer.btn</object-name>	
-        <property>instrumentation/checklist[0]/emer</property>
-				<factor>0.0027</factor>
-        <axis>
-            <x>-1</x>
-            <y>0</y>
-            <z>0</z>
-        </axis>
-    </animation>
--->
     <animation>
         <type>pick</type>
         <object-name>page-R.up</object-name>
@@ -3588,40 +3461,6 @@
         </action>
     </animation>
 
-<!--
-    <animation>
-        <type>translate</type>
-        <object-name>page-R.btn</object-name>	
-        <property>instrumentation/checklist[1]/page</property>
-				<factor>0.0027</factor>
-        <axis>
-            <x>-1</x>
-            <y>0</y>
-            <z>0</z>
-        </axis>
-    </animation>
-
-    <animation>
-        <type>pick</type>
-        <object-name>page-R.btn</object-name>
-        <action>
-          <button>0</button>
-          <repeatable>false</repeatable>
-          <binding>
-            <command>property-assign</command>
-            <property>instrumentation/checklist[1]/page</property>
-						<value>1</value>
-          </binding>
-					<mod-up>
-						<binding>
-							<command>property-assign</command>
-								<property>instrumentation/checklist[1]/page</property>
-								<value>0</value>
-						</binding>
-					</mod-up>
-    		</action>
-    </animation>
--->
 
 <!-- REFLETS PORTES -->
 
@@ -3649,7 +3488,179 @@
         </axis>
     </animation>
 
-<!--Day / Night Anti Ice Switch -->
+<!--Anti Ice Switches -->
+
+  <animation>
+    <type>rotate</type>
+    <object-name>pitot.LH</object-name>
+    <property>controls/anti-ice/pitot-heat</property>
+		<factor>30</factor>
+    <center>
+      <x-m>0.017</x-m>
+      <y-m>0</y-m>
+      <z-m>-0.012</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>-1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>pitot.LH</object-name>
+    <action>
+      <button>0</button>
+	    <repeatable>false</repeatable>
+      <binding>
+        <command>property-toggle</command>
+        <property>controls/anti-ice/pitot-heat</property>
+      </binding>
+      <binding>
+          <command>property-toggle</command>
+          <property>sim/sound/click</property>
+      </binding>
+    </action>
+    <hovered>
+        <binding>
+            <command>set-tooltip</command>
+            <tooltip-id>PitotHeatLh</tooltip-id>
+            <label>Pitot Heat LH : %s</label>
+	          <property>controls/anti-ice/pitot-heat</property>
+            <mapping>on-off</mapping>
+        </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>pitot.RH</object-name>
+    <property>controls/anti-ice/pitot-heat[1]</property>
+		<factor>30</factor>
+    <center>
+      <x-m>0.017</x-m>
+      <y-m>0</y-m>
+      <z-m>-0.012</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>-1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>pitot.RH</object-name>
+    <action>
+      <button>0</button>
+	    <repeatable>false</repeatable>
+      <binding>
+        <command>property-toggle</command>
+        <property>controls/anti-ice/pitot-heat[1]</property>
+      </binding>
+      <binding>
+          <command>property-toggle</command>
+          <property>sim/sound/click</property>
+      </binding>
+    </action>
+    <hovered>
+        <binding>
+            <command>set-tooltip</command>
+            <tooltip-id>PitotHeatRh</tooltip-id>
+            <label>Pitot Heat RH : %s</label>
+	          <property>controls/anti-ice/pitot-heat[1]</property>
+            <mapping>on-off</mapping>
+        </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>windshield.LH</object-name>
+    <property>controls/anti-ice/window-heat</property>
+		<factor>30</factor>
+    <center>
+      <x-m>0.044</x-m>
+      <y-m>0</y-m>
+      <z-m>-0.040</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>-1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>windshield.LH</object-name>
+    <action>
+      <button>0</button>
+	    <repeatable>false</repeatable>
+      <binding>
+        <command>property-toggle</command>
+        <property>controls/anti-ice/window-heat</property>
+      </binding>
+      <binding>
+          <command>property-toggle</command>
+          <property>sim/sound/click</property>
+      </binding>
+    </action>
+    <hovered>
+        <binding>
+            <command>set-tooltip</command>
+            <tooltip-id>WindShieldLh</tooltip-id>
+            <label>Windshield LH : %s</label>
+	          <property>controls/anti-ice/window-heat</property>
+            <mapping>on-off</mapping>
+        </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>windshield.RH</object-name>
+    <property>controls/anti-ice/window-heat[1]</property>
+		<factor>30</factor>
+    <center>
+      <x-m>0.044</x-m>
+      <y-m>0</y-m>
+      <z-m>-0.040</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>-1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>windshield.RH</object-name>
+    <action>
+      <button>0</button>
+	    <repeatable>false</repeatable>
+      <binding>
+        <command>property-toggle</command>
+        <property>controls/anti-ice/window-heat[1]</property>
+      </binding>
+      <binding>
+          <command>property-toggle</command>
+          <property>sim/sound/click</property>
+      </binding>
+    </action>
+    <hovered>
+        <binding>
+            <command>set-tooltip</command>
+            <tooltip-id>WindShieldRh</tooltip-id>
+            <label>Windshield RH : %s</label>
+	          <property>controls/anti-ice/window-heat[1]</property>
+            <mapping>on-off</mapping>
+        </binding>
+    </hovered>
+  </animation>
 
   <animation>
     <type>rotate</type>

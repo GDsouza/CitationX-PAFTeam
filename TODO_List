@@ -21,6 +21,7 @@ PFD :# Coder le bouton "MINIMUMS" - Fait 11/01/2016
 		 # Ajouter les références VE, VR, V2, V1 avion au sol - Fait 01-02-2016
 
 MFD : Coder les boutons du bas
+		 # Créer les checklists - Fait 22/04/2016
 
 APU :# Coder le bouton MAP LIGHT - Fait 24/02/2016
 		 # Coder l'enregistreur horaire - Fait 23/01/2016
@@ -31,7 +32,7 @@ PANEL : Coder le pavé de boutons à gauche du PFD (pilote et co-pilote)
 				# Coder le pavé de boutons des lights sous le PFD - Fait 06-02-2016
 				# Créer l'éclairage du tableau de bord - Fait 06-02-2016
 				# Coder l'interrupteur FUEL BOOST RH - Fait 02-04-2016
-				Coder le pavé de boutons sous PFD et MFD Co-pilote
+				Coder le pavé de boutons sous PFD et MFD Co-pilote # EN COURS
 				Coder le pavé températures co-pilote
 				Coder le pavé pressurisation co-pilote # EN COURS 
 				Animer le levier manuel du train d'atterrissage
