@@ -49,7 +49,6 @@
     <object-name>porte-gobelet</object-name>
     <object-name>baguette</object-name>
     <object-name>bouteille1</object-name>
-    <object-name>verre</object-name>
     <object-name>Bouteille</object-name>
     <object-name>bouchon-bouteille</object-name>
     <object-name>étiquette-bouteille</object-name>
@@ -118,7 +117,6 @@
     <object-name>porte-gobelet</object-name>
     <object-name>baguette</object-name>
     <object-name>bouteille1</object-name>
-    <object-name>verre</object-name>
     <object-name>Bouteille</object-name>
     <object-name>bouchon-bouteille</object-name>
     <object-name>étiquette-bouteille</object-name>
@@ -169,7 +167,6 @@
     <object-name>porte-gobelet</object-name>
     <object-name>baguette</object-name>
     <object-name>bouteille1</object-name>
-    <object-name>verre</object-name>
     <object-name>Bouteille</object-name>
     <object-name>bouchon-bouteille</object-name>
     <object-name>étiquette-bouteille</object-name>
@@ -178,7 +175,6 @@
 
     <effect>
       <inherits-from>Effects/model-transparent</inherits-from>
-    <object-name>verre</object-name>
     <object-name>Bouteille</object-name>
       <condition>
         <property>sim/rendering/rembrandt/enabled</property>
