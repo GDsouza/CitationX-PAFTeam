@@ -3382,7 +3382,20 @@
                 <command>property-toggle</command>
             <property>instrumentation/checklist[0]/norm</property>
             </binding>
-        </action>
+						<binding>
+						    <command>property-toggle</command>
+						    <property>sim/sound/click</property>
+						</binding>
+		    </action>
+				<hovered>
+				    <binding>
+				        <command>set-tooltip</command>
+				        <tooltip-id>NormLBtn</tooltip-id>
+				        <label>Checklist Pilot : %s</label>
+					      <property>instrumentation/checklist[0]/norm</property>
+				        <mapping>on-off</mapping>
+				    </binding>
+				</hovered>
     </animation>
 
     <animation>
@@ -3396,6 +3409,15 @@
             	<script>checklist.next(0);</script>
             </binding>
         </action>
+				<hovered>
+				    <binding>
+				        <command>set-tooltip</command>
+				        <tooltip-id>PageLUpDwn</tooltip-id>
+				        <label>Checklist Up : %s</label>
+					      <property>instrumentation/checklist[0]/nr-page</property>
+				        <mapping>heading</mapping>
+				    </binding>
+				</hovered>
     </animation>
 
     <animation>
@@ -3409,6 +3431,15 @@
             	<script>checklist.previous(0);</script>
             </binding>
         </action>
+				<hovered>
+				    <binding>
+				        <command>set-tooltip</command>
+				        <tooltip-id>PageLUpDwn</tooltip-id>
+				        <label>Checklist Down : %s</label>
+					      <property>instrumentation/checklist[0]/nr-page</property>
+				        <mapping>heading</mapping>
+				    </binding>
+				</hovered>
     </animation>
 
     <animation>
@@ -3433,8 +3464,22 @@
                 <command>property-toggle</command>
             <property>instrumentation/checklist[1]/norm</property>
             </binding>
-        </action>
+						<binding>
+						    <command>property-toggle</command>
+						    <property>sim/sound/click</property>
+						</binding>
+		    </action>
+				<hovered>
+				    <binding>
+				        <command>set-tooltip</command>
+				        <tooltip-id>NormRBtn</tooltip-id>
+				        <label>Checklist Copilot : %s</label>
+					      <property>instrumentation/checklist[1]/norm</property>
+				        <mapping>on-off</mapping>
+				    </binding>
+				</hovered>
     </animation>
+
     <animation>
         <type>pick</type>
         <object-name>page-R.up</object-name>
@@ -3446,6 +3491,15 @@
             	<script>checklist.next(1);</script>
             </binding>
         </action>
+				<hovered>
+				    <binding>
+				        <command>set-tooltip</command>
+				        <tooltip-id>PageLUpDwn</tooltip-id>
+				        <label>Checklist Up : %s</label>
+					      <property>instrumentation/checklist[1]/nr-page</property>
+				        <mapping>heading</mapping>
+				    </binding>
+				</hovered>
     </animation>
 
     <animation>
@@ -3459,6 +3513,15 @@
             	<script>checklist.previous(1);</script>
             </binding>
         </action>
+				<hovered>
+				    <binding>
+				        <command>set-tooltip</command>
+				        <tooltip-id>PageLUpDwn</tooltip-id>
+				        <label>Checklist Down : %s</label>
+					      <property>instrumentation/checklist[1]/nr-page</property>
+				        <mapping>heading</mapping>
+				    </binding>
+				</hovered>
     </animation>
 
 
