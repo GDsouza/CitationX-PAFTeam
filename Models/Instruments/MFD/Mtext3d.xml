@@ -2,6 +2,7 @@
 
 <PropertyList>
 
+
 		<text>
         <name>MagHdg</name>
         <offsets>
@@ -49,7 +50,7 @@
         <offsets>
             <x-m>0.0</x-m>
             <y-m>-0.065</y-m>
-            <z-m>-0.029</z-m>
+            <z-m>-0.034</z-m>
         </offsets>
         <alignment>center-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -69,7 +70,7 @@
         <offsets>
             <x-m>0.000</x-m>
             <y-m>-0.052</y-m>
-            <z-m>-0.029</z-m>
+            <z-m>-0.034</z-m>
         </offsets>
         <alignment>center-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -90,7 +91,7 @@
         <offsets>
             <x-m>0.0</x-m>
             <y-m>-0.063</y-m>
-            <z-m>-0.038</z-m>
+            <z-m>-0.042</z-m>
         </offsets>
         <alignment>center-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -110,7 +111,7 @@
         <offsets>
             <x-m>0.000</x-m>
             <y-m>-0.052</y-m>
-            <z-m>-0.038</z-m>
+            <z-m>-0.042</z-m>
         </offsets>
         <alignment>center-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -131,7 +132,7 @@
         <offsets>
             <x-m>0.000</x-m>
             <y-m>-0.067</y-m>
-            <z-m>-0.015</z-m>
+            <z-m>-0.010</z-m>
         </offsets>
         <alignment>center-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -139,7 +140,7 @@
         <property>sim/time/real/hour</property>
         <format>%02.0f</format>
         <font>helvetica_bold.txf</font>
-        <character-size>0.007</character-size>
+        <character-size>0.006</character-size>
         <character-aspect-ratio type="double">1.2</character-aspect-ratio>
         <font-resolution>
             <width type="int">32</width>
@@ -152,7 +153,7 @@
         <offsets>
             <x-m>0.000</x-m>
             <y-m>-0.059</y-m>
-            <z-m>-0.015</z-m>
+            <z-m>-0.010</z-m>
         </offsets>
         <alignment>center-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -160,7 +161,7 @@
         <property>sim/time/real/minute</property>
         <format>%02.0f</format>
         <font>helvetica_bold.txf</font>
-        <character-size>0.007</character-size>
+        <character-size>0.006</character-size>
         <character-aspect-ratio type="double">1.2</character-aspect-ratio>
         <font-resolution>
             <width type="int">32</width>
@@ -173,7 +174,7 @@
         <offsets>
             <x-m>0.000</x-m>
             <y-m>-0.051</y-m>
-            <z-m>-0.015</z-m>
+            <z-m>-0.010</z-m>
         </offsets>
         <alignment>center-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -181,11 +182,195 @@
         <property>sim/time/real/second</property>
         <format>%02.0f</format>
         <font>helvetica_bold.txf</font>
-        <character-size>0.007</character-size>
+        <character-size>0.006</character-size>
         <character-aspect-ratio type="double">1.2</character-aspect-ratio>
         <font-resolution>
             <width type="int">32</width>
             <height type="int">32</height>
+        </font-resolution>
+    </text>
+
+    <text>
+        <name>Sep1</name>
+        <offsets>
+            <x-m>0.0</x-m>
+            <y-m>-0.0630</y-m>
+            <z-m>-0.010</z-m>
+        </offsets>
+        <alignment>center-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>literal</type>
+        <text>:</text>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.007</character-size>
+        <character-aspect-ratio type="double">1.3</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
+        </font-resolution>
+    </text>
+
+    <text>
+        <name>Sep1</name>
+        <offsets>
+            <x-m>0.0</x-m>
+            <y-m>-0.0547</y-m>
+            <z-m>-0.010</z-m>
+        </offsets>
+        <alignment>center-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>literal</type>
+        <text>:</text>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.007</character-size>
+        <character-aspect-ratio type="double">1.3</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
+        </font-resolution>
+    </text>
+
+    <text>
+        <name>Clock</name>
+        <offsets>
+            <x-m>0.0</x-m>
+            <y-m>-0.060</y-m>
+            <z-m>-0.016</z-m>
+        </offsets>
+        <alignment>center-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>literal</type>
+        <text>Clock</text>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.006</character-size>
+        <character-aspect-ratio type="double">1.3</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
+        </font-resolution>
+    </text>
+
+    <animation>
+        <type>select</type>
+        <object-name>ChronoHour</object-name>
+        <object-name>ChronoMin</object-name>
+        <object-name>ChronoSec</object-name>
+        <object-name>Sep2</object-name>
+        <condition>
+					<and>
+						<greater-than>
+		          <property>instrumentation/primus2000/dc840/etx</property>
+							<value>0</value>
+						</greater-than>
+						<property>systems/electrical/right-bus-norm</property>
+						<equals>
+              <property>controls/electric/avionics-switch</property>
+							<value>2</value>
+						</equals>
+					</and>
+        </condition>
+    </animation>
+
+		<text>
+        <name>ChronoHour</name>
+        <offsets>
+            <x-m>0.000</x-m>
+            <y-m>-0.067</y-m>
+            <z-m>-0.023</z-m>
+        </offsets>
+        <alignment>center-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type type="string">number-value</type>
+        <property>instrumentation/clock/chrono-hour</property>
+        <format>%02.0f</format>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.006</character-size>
+        <character-aspect-ratio type="double">1.2</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">32</width>
+            <height type="int">32</height>
+        </font-resolution>
+    </text>
+
+		<text>
+        <name>ChronoMin</name>
+        <offsets>
+            <x-m>0.000</x-m>
+            <y-m>-0.059</y-m>
+            <z-m>-0.023</z-m>
+        </offsets>
+        <alignment>center-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type type="string">number-value</type>
+        <property>instrumentation/clock/chrono-min</property>
+        <format>%02.0f</format>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.006</character-size>
+        <character-aspect-ratio type="double">1.2</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">32</width>
+            <height type="int">32</height>
+        </font-resolution>
+    </text>
+
+		<text>
+        <name>ChronoSec</name>
+        <offsets>
+            <x-m>0.000</x-m>
+            <y-m>-0.051</y-m>
+            <z-m>-0.023</z-m>
+        </offsets>
+        <alignment>center-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type type="string">number-value</type>
+        <property>instrumentation/clock/chrono-sec</property>
+        <format>%02.0f</format>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.006</character-size>
+        <character-aspect-ratio type="double">1.2</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">32</width>
+            <height type="int">32</height>
+        </font-resolution>
+    </text>
+
+    <text>
+        <name>Sep2</name>
+        <offsets>
+            <x-m>0.0</x-m>
+            <y-m>-0.0547</y-m>
+            <z-m>-0.023</z-m>
+        </offsets>
+        <alignment>center-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>literal</type>
+        <text>:</text>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.007</character-size>
+        <character-aspect-ratio type="double">1.3</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
+        </font-resolution>
+    </text>
+
+    <text>
+        <name>Sep2</name>
+        <offsets>
+            <x-m>0.0</x-m>
+            <y-m>-0.063</y-m>
+            <z-m>-0.023</z-m>
+        </offsets>
+        <alignment>center-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>literal</type>
+        <text>:</text>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.007</character-size>
+        <character-aspect-ratio type="double">1.3</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
         </font-resolution>
     </text>
 
@@ -415,9 +600,7 @@
         <object-name>RNG2</object-name>
         <object-name>WX-label</object-name>
         <object-name>Bank-label</object-name>
-        <object-name>Hour</object-name>
-        <object-name>Minute</object-name>
-        <object-name>Second</object-name>
+        <object-name>Clock</object-name>
         <emission>
             <red>0.9</red>
             <green>0.9</green>
@@ -448,6 +631,10 @@
         <object-name>Nav-dst</object-name>
         <object-name>Nav-ttw</object-name>
         <object-name>GSPD</object-name>
+        <object-name>ChronoHour</object-name>
+        <object-name>ChronoMin</object-name>
+        <object-name>ChronoSec</object-name>
+        <object-name>Sep2</object-name>
         <emission>
             <red>0.95</red>
             <green>0.2</green>
@@ -476,6 +663,10 @@
         <object-name>HDGannun</object-name>
         <object-name>WX-value</object-name>
         <object-name>Bank-value</object-name>
+        <object-name>Hour</object-name>
+        <object-name>Minute</object-name>
+        <object-name>Second</object-name>
+        <object-name>Sep1</object-name>
         <emission>
             <red>0</red>
             <green>1.0</green>

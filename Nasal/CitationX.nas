@@ -160,6 +160,7 @@ props.globals.initNode("sim/model/copilot-seat",0,"DOUBLE");
 props.globals.initNode("sim/alarms/overspeed-alarm",0,"BOOL");
 props.globals.initNode("sim/alarms/stall-warning",0,"BOOL");
 props.globals.initNode("instrumentation/clock/flight-meter-hour",0,"DOUBLE");
+props.globals.initNode("instrumentation/primus2000/dc840/etx",0,"INT");
 props.globals.initNode("instrumentation/checklist[0]/norm",0,"BOOL");
 props.globals.initNode("instrumentation/checklist[0]/page",0,"BOOL");
 props.globals.initNode("instrumentation/checklist[0]/nr-page",0,"INT");
@@ -173,10 +174,12 @@ props.globals.initNode("autopilot/settings/fms-btn",0,"BOOL");
 props.globals.initNode("sim/sound/startup",0,"INT");
 var PWR2 =0;
 aircraft.livery.init("Aircraft/CitationX/Models/Liveries");
-var FHmeter = aircraft.timer.new("/instrumentation/clock/flight-meter-sec", 10,1); 
+var FHmeter = aircraft.timer.new("/instrumentation/clock/flight-meter-sec", 1,1); 
+var Chrono = aircraft.timer.new("/instrumentation/clock/chrono", 1,1);
 var LHeng= JetEngine.new(0);
 var RHeng= JetEngine.new(1);
 var tire=TireSpeed.new(3,0.430,0.615,0.615);
+var et = 0;
 
 ### Initialisation FDM ###
 
@@ -192,7 +195,7 @@ setlistener("/sim/signals/fdm-initialized", func {
     settimer(update_systems,2);
 		setprop("instrumentation/altimeter/setting-inhg",29.92001);
 		setprop("instrumentation/clock/flight-meter-sec",0);
-		setprop("sim/sound/startup",int(10*rand()));
+#		setprop("sim/sound/startup",int(10*rand()));
 		FH_load();
 });
 
@@ -315,7 +318,21 @@ var tables_anim = func(i) {
 		}
 }
 
-### Flight Meter hour ###
+### Flight Meter and ET ###
+
+setlistener("instrumentation/primus2000/dc840/et", func(xx){
+	if(getprop("systems/electrical/right-bus-norm") and getprop("controls/electric/avionics-switch")==2) {
+		if(xx.getBoolValue()){
+			if(et <= 2){et +=1}
+			else{et = 0}
+			setprop("instrumentation/primus2000/dc840/etx",et);
+			if(et == 1){Chrono.start()}
+			if(et == 2){Chrono.stop()}
+			if(et == 3){Chrono.reset()}			
+			chrono_update();
+		}
+	}
+});
 
 setlistener("/gear/gear[1]/wow", func(ww){
     if(ww.getBoolValue()){
@@ -329,6 +346,24 @@ setlistener("/gear/gear[1]/wow", func(ww){
 				setprop("/instrumentation/clock/flight-meter-sec",0);
     }
 },0,0);
+
+var chrono_update = func {
+	if(!getprop("systems/electrical/right-bus-norm") or getprop("controls/electric/avionics-switch")< 2) {
+		Chrono.stop();
+		Chrono.reset();
+		et=0;
+		setprop("instrumentation/primus2000/dc840/etx",0)
+		}
+		var chrono_hour = 0;
+		var chrono_min = 0;
+		var chrono = int(getprop("instrumentation/clock/chrono"));
+		var chrono_sec = math.fmod(chrono,60);
+		chrono_hour = chrono/3600;
+		chrono_min = (chrono_hour - int(chrono_hour))*60;
+		setprop("instrumentation/clock/chrono-sec",chrono_sec);
+		setprop("instrumentation/clock/chrono-min",int(chrono_min)); 
+		setprop("instrumentation/clock/chrono-hour",int(chrono_hour));
+}
 
 var FHupdate = func(tenths){
     var fmeter = getprop("/instrumentation/clock/flight-meter-sec");
@@ -457,6 +492,10 @@ var Startup = func{
 		setprop("controls/engines/engine[0]/starter",1);
 		setprop("controls/engines/engine[1]/starter",1);
 		setprop("controls/flight/flaps",0.428);
+		setprop("controls/anti-ice/pitot-heat",1);
+		setprop("controls/anti-ice/pitot-heat[1]",1);
+		setprop("controls/anti-ice/window-heat",1);
+		setprop("controls/anti-ice/window-heat[1]",1);
 		setlistener("systems/electrical/right-bus",func {
 			if (getprop("systems/electrical/right-bus") > 27) {
 				setprop("controls/electric/external-power",0);
@@ -485,6 +524,10 @@ var Shutdown = func{
 		setprop("instrumentation/annunciators/ack-warning",1);
 		setprop("controls/electric/external-power",0);
 		setprop("controls/flight/flaps",0);
+		setprop("controls/anti-ice/pitot-heat",0);
+		setprop("controls/anti-ice/pitot-heat[1]",0);
+		setprop("controls/anti-ice/window-heat",0);
+		setprop("controls/anti-ice/window-heat[1]",0);
 }
 
 var speed_ref = func {
@@ -540,6 +583,7 @@ var speed_ref = func {
 var update_systems = func{
     LHeng.update();
     RHeng.update();
+		chrono_update();
     FHupdate(0);
     tire.get_rotation("yasim");
 		speed_ref();

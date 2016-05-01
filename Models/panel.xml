@@ -822,7 +822,7 @@
             <command>property-toggle</command>
             <property>sim/sound/click</property>
         </binding>
-    </action>
+	    </action>
         <hovered>
             <binding>
                 <command>set-tooltip</command>
@@ -3226,6 +3226,7 @@
             <z>0</z>
 				</axis>
     </animation>
+
     <animation>
         <type>pick</type>
         <object-name>et.btn</object-name>
@@ -3233,9 +3234,17 @@
             <button>0</button>
             <repeatable>false</repeatable>
             <binding>
-                <command>property-toggle</command>
-            <property>instrumentation/primus2000/dc840/et</property>
+              <command>property-assign</command>
+          		<property>instrumentation/primus2000/dc840/et</property>
+							<value>1</value>
             </binding>
+						<mod-up>
+							<binding>
+								<command>property-assign</command>
+									<property>instrumentation/primus2000/dc840/et</property>
+									<value>0</value>
+							</binding>
+						</mod-up>
         </action>
     </animation>
 
