@@ -2220,6 +2220,18 @@
     </model>
 
     <animation>
+        <type>translate</type>
+        <object-name>PFD.std</object-name>
+        <property>instrumentation/altimeter/std</property>
+				<factor>0.005</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
         <type>pick</type>
         <object-name>PFD.std</object-name>
         <visible>true</visible>
@@ -2229,14 +2241,25 @@
             <binding>
                 <command>property-assign</command>
                 <property>instrumentation/altimeter/setting-inhg</property>
-                <value>29.92001</value>
+                <value>29.92</value>
             </binding>
+						<binding>
+							<command>property-toggle</command>
+			        <property>instrumentation/altimeter/std</property>				
+						</binding>
+						<mod-up>
+				   		<binding>
+				     		<command>property-toggle</command>
+				        <property>instrumentation/altimeter/std</property>
+					    </binding>
+						</mod-up>
         </action>
     </animation>
 
+
     <animation>
         <type>rotate</type>
-        <object-name>PFD.baro</object-name>
+        <object-name>PFD_L.baro</object-name>
         <property>instrumentation/altimeter/setting-inhg</property>
 				<factor>1000</factor>
         <axis>
@@ -2252,8 +2275,26 @@
     </animation>
 
     <animation>
+        <type>rotate</type>
+        <object-name>PFD_R.baro</object-name>
+        <property>instrumentation/altimeter/setting-inhg</property>
+				<factor>1000</factor>
+        <axis>
+            <x>-1.0</x>
+            <y>0.0</y>
+            <z>0.0</z>
+        </axis>
+        <center>
+            <x-m>0.00</x-m>
+            <y-m>0.454</y-m>
+            <z-m>0.0364</z-m>
+        </center>
+    </animation>
+
+    <animation>
         <type>pick</type>
-        <object-name>PFD.baro</object-name>
+        <object-name>PFD_L.baro</object-name>
+        <object-name>PFD_R.baro</object-name>
         <action>
             <button>3</button>
             <repeatable>true</repeatable>
@@ -2292,7 +2333,7 @@
 
     <animation>
         <type>rotate</type>
-        <object-name>PFD.minimums</object-name>
+        <object-name>PFD_L.minimums</object-name>
         <property>autopilot/settings/minimums</property>
         <factor>-50</factor>
         <axis>
@@ -2308,8 +2349,26 @@
     </animation>
 
     <animation>
+        <type>rotate</type>
+        <object-name>PFD_R.minimums</object-name>
+        <property>autopilot/settings/minimums</property>
+        <factor>-50</factor>
+        <axis>
+            <x>-1.0</x>
+            <y>0.0</y>
+            <z>0.0</z>
+        </axis>
+        <center>
+            <x-m>0.00</x-m>
+            <y-m>0.315</y-m>
+            <z-m>0.0364</z-m>
+        </center>
+    </animation>
+
+    <animation>
         <type>pick</type>
-        <object-name>PFD.minimums</object-name>
+        <object-name>PFD_L.minimums</object-name>
+        <object-name>PFD_R.minimums</object-name>
         <action>
             <button>3</button>
             <repeatable>true</repeatable>
@@ -2347,6 +2406,18 @@
     </animation>
 
     <animation>
+        <type>translate</type>
+        <object-name>PFD.ra-baro</object-name>
+        <property>autopilot/settings/min-ba</property>
+				<factor>0.005</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
         <type>pick</type>
         <object-name>PFD.ra-baro</object-name>
         <visible>true</visible>
@@ -2354,19 +2425,29 @@
             <button>0</button>
             <repeatable>false</repeatable>
             <binding>
-						<command>property-cycle</command>
+							<command>property-cycle</command>
                 <property>autopilot/settings/minimums-mode</property>
 								<value>BA</value>
 								<value>RA</value>
 						</binding>
+						<binding>
+							<command>property-toggle</command>
+							<property>autopilot/settings/min-ba</property>
+						</binding>
+						<mod-up>
+				   		<binding>
+				     		<command>property-toggle</command>
+				        <property>autopilot/settings/min-ba</property>
+					    </binding>
+						</mod-up>
         </action>
         <hovered>
-            <binding>
-                <command>set-tooltip</command>
-                <tooltip-id>RA-BARO</tooltip-id>
-                <label>RADIO-BARO: %s </label> 
-                <property>autopilot/settings/minimums-mode</property> 								
-            </binding>
+          <binding>
+            <command>set-tooltip</command>
+            <tooltip-id>RA-BARO</tooltip-id>
+            <label>RADIO-BARO: %s </label> 
+            <property>autopilot/settings/minimums-mode</property>
+          </binding>
         </hovered>
     </animation>
 
@@ -2403,8 +2484,43 @@
     </model>
 
     <animation>
+        <type>rotate</type>
+        <object-name>MFD_L.knob</object-name>
+        <property>instrumentation/nd/range</property>
+        <factor>10</factor>
+        <axis>
+            <x>-1.0</x>
+            <y>0.0</y>
+            <z>0.0</z>
+        </axis>
+        <center>
+            <x-m>0.00</x-m>
+            <y-m>-0.117</y-m>
+            <z-m>0.0350</z-m>
+        </center>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>MFD_R.knob</object-name>
+        <property>instrumentation/nd/range</property>
+        <factor>10</factor>
+        <axis>
+            <x>-1.0</x>
+            <y>0.0</y>
+            <z>0.0</z>
+        </axis>
+        <center>
+            <x-m>0.00</x-m>
+            <y-m>0.264</y-m>
+            <z-m>0.0350</z-m>
+        </center>
+    </animation>
+
+    <animation>
         <type>pick</type>
-        <object-name>MFD.knob</object-name>
+        <object-name>MFD_L.knob</object-name>
+        <object-name>MFD_R.knob</object-name>
         <action>
             <button>0</button>
             <repeatable>false</repeatable>
