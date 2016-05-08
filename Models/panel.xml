@@ -3504,9 +3504,19 @@
             <button>0</button>
             <repeatable>false</repeatable>
             <binding>
-                <command>property-toggle</command>
-            <property>instrumentation/checklist[0]/norm</property>
+              <command>property-toggle</command>
+	            <property>instrumentation/checklist[0]/norm</property>
             </binding>
+            <binding>
+							<condition>
+								<not>
+			            <property>instrumentation/checklist[0]/norm</property>
+								</not>
+							</condition>
+              <command>property-assign</command>
+			          <property>instrumentation/checklist[0]/voice</property>
+								<value>0</value> 
+           </binding>
 						<binding>
 						    <command>property-toggle</command>
 						    <property>sim/sound/click</property>
@@ -3586,8 +3596,8 @@
             <button>0</button>
             <repeatable>false</repeatable>
             <binding>
-                <command>property-toggle</command>
-            <property>instrumentation/checklist[1]/norm</property>
+              <command>property-toggle</command>
+            	<property>instrumentation/checklist[1]/norm</property>
             </binding>
 						<binding>
 						    <command>property-toggle</command>
@@ -3645,6 +3655,57 @@
 				        <label>Checklist Down : %s</label>
 					      <property>instrumentation/checklist[1]/nr-page</property>
 				        <mapping>heading</mapping>
+				    </binding>
+				</hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>abn.btn</object-name>	
+        <property>instrumentation/checklist[0]/abn</property>
+				<factor>0.0027</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>abn.btn</object-name>
+       <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+              <command>property-toggle</command>
+	            <property>instrumentation/checklist[0]/abn</property>
+            </binding>
+            <binding>
+							<condition>
+		            <property>instrumentation/checklist[0]/norm</property>
+							</condition>
+              <command>property-toggle</command>
+	            <property>instrumentation/checklist[0]/voice</property>
+            </binding>
+						<binding>
+						    <command>property-toggle</command>
+						    <property>sim/sound/click</property>
+						</binding>
+						<mod-up>
+		          <binding>
+		            <command>property-toggle</command>
+			          <property>instrumentation/checklist[0]/abn</property>
+		          </binding>					
+						</mod-up>
+		    </action>
+				<hovered>
+				    <binding>
+				        <command>set-tooltip</command>
+				        <tooltip-id>abnBtn</tooltip-id>
+				        <label>Checklist voice : %s</label>
+					      <property>instrumentation/checklist[0]/abn</property>
+				        <mapping>on-off</mapping>
 				    </binding>
 				</hovered>
     </animation>

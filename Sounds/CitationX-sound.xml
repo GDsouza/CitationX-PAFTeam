@@ -882,6 +882,28 @@
       </position>
    </announcement>
 
+	<checklists>
+	    <name>prestart</name>
+      <mode>once</mode>
+      <path>Aircraft/CitationX/Sounds/prestart.wav</path>
+      <condition>
+				<and>
+      		<property>instrumentation/checklist[0]/norm</property>
+    			<property>instrumentation/checklist[0]/voice</property>
+         	<property>systems/electrical/right-bus-norm</property>
+					<equals>
+            <property>controls/electric/avionics-switch</property>
+						<value>2</value>
+					</equals>
+				</and>
+      </condition>
+      <position>
+        <x>	0.00 </x>
+        <y> 1.00 </y>
+        <z> 0.00 </z>
+      </position>
+	</checklists>
+
     <!-- SPEED CALLOUTS -->
     <callout>
       <name>80 knots</name>
