@@ -121,6 +121,8 @@
     <object-name>bouchon-bouteille</object-name>
     <object-name>étiquette-bouteille</object-name>
     <object-name>stock-Bouteille</object-name>
+    <object-name>block-annun.R</object-name>
+    <object-name>block-annun.L</object-name>
     </effect>
 
     <effect>
@@ -171,6 +173,8 @@
     <object-name>bouchon-bouteille</object-name>
     <object-name>étiquette-bouteille</object-name>
     <object-name>stock-Bouteille</object-name>
+    <object-name>block-annun.R</object-name>
+    <object-name>block-annun.L</object-name>
     </effect>
 
     <effect>
