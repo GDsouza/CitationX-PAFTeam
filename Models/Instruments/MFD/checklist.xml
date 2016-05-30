@@ -1,0 +1,861 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<PropertyList>
+
+	<path>checklist.ac</path>
+
+    <animation>
+        <type>select</type>
+        <object-name>chklist.background</object-name>
+        <condition>
+					<and>
+	          <property>instrumentation/checklists/norm</property>
+						<property>systems/electrical/right-bus-norm</property>
+						<equals>
+              <property>controls/electric/avionics-switch</property>
+							<value>2</value>
+						</equals>
+					</and>
+        </condition>
+    </animation>
+
+  <params>
+    <header>instrumentation/checklists/Tittle</header>
+    <L0>instrumentation/checklists/L[0]</L0>
+    <L1>instrumentation/checklists/L[1]</L1>
+    <L2>instrumentation/checklists/L[2]</L2>
+    <L3>instrumentation/checklists/L[3]</L3>
+    <L4>instrumentation/checklists/L[4]</L4>
+		<L5>instrumentation/checklists/L[5]</L5>
+		<L6>instrumentation/checklists/L[6]</L6>
+		<L7>instrumentation/checklists/L[7]</L7>
+		<L8>instrumentation/checklists/L[8]</L8>
+		<L9>instrumentation/checklists/L[9]</L9>
+		<L10>instrumentation/checklists/L[10]</L10>
+		<L11>instrumentation/checklists/L[11]</L11>
+		<L12>instrumentation/checklists/L[12]</L12>
+		<L13>instrumentation/checklists/L[13]</L13>
+		<L14>instrumentation/checklists/L[14]</L14>
+		<L15>instrumentation/checklists/L[15]</L15>
+    <R0>instrumentation/checklists/R[0]</R0>
+    <R1>instrumentation/checklists/R[1]</R1>
+    <R2>instrumentation/checklists/R[2]</R2>
+    <R3>instrumentation/checklists/R[3]</R3>
+    <R4>instrumentation/checklists/R[4]</R4>
+    <R5>instrumentation/checklists/R[5]</R5>
+		<R6>instrumentation/checklists/R[6]</R6>
+		<R7>instrumentation/checklists/R[7]</R7>
+		<R8>instrumentation/checklists/R[8]</R8>
+		<R9>instrumentation/checklists/R[9]</R9>
+		<R10>instrumentation/checklists/R[10]</R10>
+		<R11>instrumentation/checklists/R[11]</R11>
+		<R12>instrumentation/checklists/R[12]</R12>
+		<R13>instrumentation/checklists/R[13]</R13>
+		<R14>instrumentation/checklists/R[14]</R14>
+		<R15>instrumentation/checklists/R[15]</R15>
+
+  </params>
+
+    <animation>
+        <type>select</type>
+        <object-name>Tittle</object-name>
+        <object-name>L0</object-name>
+        <object-name>L1</object-name>
+        <object-name>L2</object-name>
+        <object-name>L3</object-name>
+        <object-name>L4</object-name>
+        <object-name>L5</object-name>
+        <object-name>L6</object-name>
+        <object-name>L7</object-name>
+        <object-name>L8</object-name>
+        <object-name>L9</object-name>
+        <object-name>L10</object-name>
+        <object-name>L11</object-name>
+        <object-name>L12</object-name>
+        <object-name>L13</object-name>
+        <object-name>L14</object-name>
+        <object-name>L15</object-name>
+        <object-name>R0</object-name>
+        <object-name>R1</object-name>
+        <object-name>R2</object-name>
+        <object-name>R3</object-name>
+        <object-name>R4</object-name>
+        <object-name>R5</object-name>
+        <object-name>R6</object-name>
+        <object-name>R7</object-name>
+        <object-name>R8</object-name>
+        <object-name>R9</object-name>
+        <object-name>R10</object-name>
+        <object-name>R11</object-name>
+        <object-name>R12</object-name>
+        <object-name>R13</object-name>
+        <object-name>R14</object-name>
+        <object-name>R15</object-name>
+        <condition>
+					<and>
+	          <property>instrumentation/checklists/norm</property>
+						<property>systems/electrical/right-bus-norm</property>
+						<equals>
+              <property>controls/electric/avionics-switch</property>
+							<value>2</value>
+						</equals>
+					</and>
+        </condition>
+    </animation>
+
+		<text>
+        <name>Tittle</name>
+        <offsets>
+            <x-m>0.001</x-m>
+            <y-m>0</y-m>
+            <z-m>0.100</z-m>
+        </offsets>
+        <alignment>center-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type type="string">text-value</type>
+        <property alias="../../params/header"/>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.009</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">32</width>
+            <height type="int">32</height>
+        </font-resolution>
+    </text>
+
+		<text>
+        <name>L0</name>
+        <offsets>
+            <x-m>0.001</x-m>
+            <y-m>-0.074</y-m>
+            <z-m>0.088</z-m>
+        </offsets>
+        <alignment>left-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>text-value</type>
+        <property alias="../../params/L0"/>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.008</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">32</width>
+            <height type="int">32</height>
+        </font-resolution>
+    </text>
+		<text>
+        <name>R0</name>
+        <offsets>
+            <x-m>0.001</x-m>
+            <y-m>0.077</y-m>
+            <z-m>0.088</z-m>
+        </offsets>
+        <alignment>right-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>text-value</type>
+        <property alias="../../params/R0"/>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.008</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">32</width>
+            <height type="int">32</height>
+        </font-resolution>
+    </text>
+
+		<text>
+        <name>L1</name>
+        <offsets>
+            <x-m>0.001</x-m>
+            <y-m>-0.074</y-m>
+            <z-m>0.078</z-m>
+        </offsets>
+        <alignment>left-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>text-value</type>
+        <property alias="../../params/L1"/>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.008</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">32</width>
+            <height type="int">32</height>
+        </font-resolution>
+    </text>
+		<text>
+        <name>R1</name>
+        <offsets>
+            <x-m>0.001</x-m>
+            <y-m>0.077</y-m>
+            <z-m>0.078</z-m>
+        </offsets>
+        <alignment>right-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>text-value</type>
+        <property alias="../../params/R1"/>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.008</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">32</width>
+            <height type="int">32</height>
+        </font-resolution>
+    </text>
+
+		<text>
+        <name>L2</name>
+        <offsets>
+            <x-m>0.001</x-m>
+            <y-m>-0.074</y-m>
+            <z-m>0.068</z-m>
+        </offsets>
+        <alignment>left-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>text-value</type>
+        <property alias="../../params/L2"/>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.008</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">32</width>
+            <height type="int">32</height>
+        </font-resolution>
+    </text>
+		<text>
+        <name>R2</name>
+        <offsets>
+            <x-m>0.001</x-m>
+            <y-m>0.077</y-m>
+            <z-m>0.068</z-m>
+        </offsets>
+        <alignment>right-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>text-value</type>
+        <property alias="../../params/R2"/>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.008</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">32</width>
+            <height type="int">32</height>
+        </font-resolution>
+    </text>
+
+		<text>
+        <name>L3</name>
+        <offsets>
+            <x-m>0.001</x-m>
+            <y-m>-0.074</y-m>
+            <z-m>0.058</z-m>
+        </offsets>
+        <alignment>left-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>text-value</type>
+        <property alias="../../params/L3"/>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.008</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">32</width>
+            <height type="int">32</height>
+        </font-resolution>
+    </text>
+		<text>
+        <name>R3</name>
+        <offsets>
+            <x-m>0.001</x-m>
+            <y-m>0.077</y-m>
+            <z-m>0.058</z-m>
+        </offsets>
+        <alignment>right-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>text-value</type>
+        <property alias="../../params/R3"/>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.008</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">32</width>
+            <height type="int">32</height>
+        </font-resolution>
+    </text>
+
+		<text>
+        <name>L4</name>
+        <offsets>
+            <x-m>0.001</x-m>
+            <y-m>-0.074</y-m>
+            <z-m>0.048</z-m>
+        </offsets>
+        <alignment>left-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>text-value</type>
+        <property alias="../../params/L4"/>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.008</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">32</width>
+            <height type="int">32</height>
+        </font-resolution>
+    </text>
+		<text>
+        <name>R4</name>
+        <offsets>
+            <x-m>0.001</x-m>
+            <y-m>0.077</y-m>
+            <z-m>0.048</z-m>
+        </offsets>
+        <alignment>right-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>text-value</type>
+        <property alias="../../params/R4"/>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.008</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">32</width>
+            <height type="int">32</height>
+        </font-resolution>
+    </text>
+
+		<text>
+        <name>L5</name>
+        <offsets>
+            <x-m>0.001</x-m>
+            <y-m>-0.074</y-m>
+            <z-m>0.038</z-m>
+        </offsets>
+        <alignment>left-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>text-value</type>
+        <property alias="../../params/L5"/>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.008</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">32</width>
+            <height type="int">32</height>
+        </font-resolution>
+    </text>
+		<text>
+        <name>R5</name>
+        <offsets>
+            <x-m>0.001</x-m>
+            <y-m>0.077</y-m>
+            <z-m>0.038</z-m>
+        </offsets>
+        <alignment>right-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>text-value</type>
+        <property alias="../../params/R5"/>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.008</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">32</width>
+            <height type="int">32</height>
+        </font-resolution>
+    </text>
+
+		<text>
+        <name>L6</name>
+        <offsets>
+            <x-m>0.001</x-m>
+            <y-m>-0.074</y-m>
+            <z-m>0.028</z-m>
+        </offsets>
+        <alignment>left-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>text-value</type>
+        <property alias="../../params/L6"/>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.008</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">32</width>
+            <height type="int">32</height>
+        </font-resolution>
+    </text>
+		<text>
+        <name>R6</name>
+        <offsets>
+            <x-m>0.001</x-m>
+            <y-m>0.077</y-m>
+            <z-m>0.028</z-m>
+        </offsets>
+        <alignment>right-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>text-value</type>
+        <property alias="../../params/R6"/>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.008</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">32</width>
+            <height type="int">32</height>
+        </font-resolution>
+    </text>
+
+		<text>
+        <name>L7</name>
+        <offsets>
+            <x-m>0.001</x-m>
+            <y-m>-0.074</y-m>
+            <z-m>0.018</z-m>
+        </offsets>
+        <alignment>left-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>text-value</type>
+        <property alias="../../params/L7"/>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.008</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">32</width>
+            <height type="int">32</height>
+        </font-resolution>
+    </text>
+		<text>
+        <name>R7</name>
+        <offsets>
+            <x-m>0.001</x-m>
+            <y-m>0.077</y-m>
+            <z-m>0.018</z-m>
+        </offsets>
+        <alignment>right-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>text-value</type>
+        <property alias="../../params/R7"/>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.008</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">32</width>
+            <height type="int">32</height>
+        </font-resolution>
+    </text>
+
+		<text>
+        <name>L8</name>
+        <offsets>
+            <x-m>0.001</x-m>
+            <y-m>-0.074</y-m>
+            <z-m>0.008</z-m>
+        </offsets>
+        <alignment>left-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>text-value</type>
+        <property alias="../../params/L8"/>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.008</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">32</width>
+            <height type="int">32</height>
+        </font-resolution>
+    </text>
+		<text>
+        <name>R8</name>
+        <offsets>
+            <x-m>0.001</x-m>
+            <y-m>0.077</y-m>
+            <z-m>0.008</z-m>
+        </offsets>
+        <alignment>right-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>text-value</type>
+        <property alias="../../params/R8"/>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.008</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">32</width>
+            <height type="int">32</height>
+        </font-resolution>
+    </text>
+
+		<text>
+        <name>L9</name>
+        <offsets>
+            <x-m>0.001</x-m>
+            <y-m>-0.074</y-m>
+            <z-m>-0.002</z-m>
+        </offsets>
+        <alignment>left-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>text-value</type>
+        <property alias="../../params/L9"/>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.008</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">32</width>
+            <height type="int">32</height>
+        </font-resolution>
+    </text>
+		<text>
+        <name>R9</name>
+        <offsets>
+            <x-m>0.001</x-m>
+            <y-m>0.077</y-m>
+            <z-m>-0.002</z-m>
+        </offsets>
+        <alignment>right-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>text-value</type>
+        <property alias="../../params/R9"/>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.008</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">32</width>
+            <height type="int">32</height>
+        </font-resolution>
+    </text>
+
+		<text>
+        <name>L10</name>
+        <offsets>
+            <x-m>0.001</x-m>
+            <y-m>-0.074</y-m>
+            <z-m>-0.012</z-m>
+        </offsets>
+        <alignment>left-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>text-value</type>
+        <property alias="../../params/L10"/>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.008</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">32</width>
+            <height type="int">32</height>
+        </font-resolution>
+    </text>
+		<text>
+        <name>R10</name>
+        <offsets>
+            <x-m>0.001</x-m>
+            <y-m>0.077</y-m>
+            <z-m>-0.012</z-m>
+        </offsets>
+        <alignment>right-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>text-value</type>
+        <property alias="../../params/R10"/>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.008</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">32</width>
+            <height type="int">32</height>
+        </font-resolution>
+    </text>
+
+		<text>
+        <name>L11</name>
+        <offsets>
+            <x-m>0.001</x-m>
+            <y-m>-0.074</y-m>
+            <z-m>-0.022</z-m>
+        </offsets>
+        <alignment>left-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>text-value</type>
+        <property alias="../../params/L11"/>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.008</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">32</width>
+            <height type="int">32</height>
+        </font-resolution>
+    </text>
+		<text>
+        <name>R11</name>
+        <offsets>
+            <x-m>0.001</x-m>
+            <y-m>0.077</y-m>
+            <z-m>-0.022</z-m>
+        </offsets>
+        <alignment>right-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>text-value</type>
+        <property alias="../../params/R11"/>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.008</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">32</width>
+            <height type="int">32</height>
+        </font-resolution>
+    </text>
+
+		<text>
+        <name>L12</name>
+        <offsets>
+            <x-m>0.001</x-m>
+            <y-m>-0.074</y-m>
+            <z-m>-0.032</z-m>
+        </offsets>
+        <alignment>left-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>text-value</type>
+        <property alias="../../params/L12"/>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.008</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">32</width>
+            <height type="int">32</height>
+        </font-resolution>
+    </text>
+		<text>
+        <name>R12</name>
+        <offsets>
+            <x-m>0.001</x-m>
+            <y-m>0.077</y-m>
+            <z-m>-0.032</z-m>
+        </offsets>
+        <alignment>right-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>text-value</type>
+        <property alias="../../params/R12"/>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.008</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">32</width>
+            <height type="int">32</height>
+        </font-resolution>
+    </text>
+
+		<text>
+        <name>L13</name>
+        <offsets>
+            <x-m>0.001</x-m>
+            <y-m>-0.074</y-m>
+            <z-m>-0.042</z-m>
+        </offsets>
+        <alignment>left-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>text-value</type>
+        <property alias="../../params/L13"/>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.008</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">32</width>
+            <height type="int">32</height>
+        </font-resolution>
+    </text>
+		<text>
+        <name>R13</name>
+        <offsets>
+            <x-m>0.001</x-m>
+            <y-m>0.077</y-m>
+            <z-m>-0.042</z-m>
+        </offsets>
+        <alignment>right-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>text-value</type>
+        <property alias="../../params/R13"/>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.008</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">32</width>
+            <height type="int">32</height>
+        </font-resolution>
+    </text>
+
+		<text>
+        <name>L14</name>
+        <offsets>
+            <x-m>0.001</x-m>
+            <y-m>-0.074</y-m>
+            <z-m>-0.052</z-m>
+        </offsets>
+        <alignment>left-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>text-value</type>
+        <property alias="../../params/L14"/>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.008</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">32</width>
+            <height type="int">32</height>
+        </font-resolution>
+    </text>
+		<text>
+        <name>R14</name>
+        <offsets>
+            <x-m>0.001</x-m>
+            <y-m>0.077</y-m>
+            <z-m>-0.052</z-m>
+        </offsets>
+        <alignment>right-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>text-value</type>
+        <property alias="../../params/R14"/>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.008</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">32</width>
+            <height type="int">32</height>
+        </font-resolution>
+    </text>
+
+		<text>
+        <name>L15</name>
+        <offsets>
+            <x-m>0.001</x-m>
+            <y-m>-0.074</y-m>
+            <z-m>-0.062</z-m>
+        </offsets>
+        <alignment>left-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>text-value</type>
+        <property alias="../../params/L15"/>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.008</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">32</width>
+            <height type="int">32</height>
+        </font-resolution>
+    </text>
+		<text>
+        <name>R15</name>
+        <offsets>
+            <x-m>0.001</x-m>
+            <y-m>0.077</y-m>
+            <z-m>-0.062</z-m>
+        </offsets>
+        <alignment>right-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>text-value</type>
+        <property alias="../../params/R15"/>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.008</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">32</width>
+            <height type="int">32</height>
+        </font-resolution>
+    </text>
+
+    <animation>
+        <name>magenta</name>
+        <type>material</type>
+        <object-name>Tittle</object-name>
+        <emission>
+            <red-prop>sim/color-set/magenta/r</red-prop>
+            <green-prop>sim/color-set/magenta/g</green-prop>
+            <blue-prop>sim/color-set/magenta/b</blue-prop>
+            <alpha-prop>sim/color-set/magenta/a</alpha-prop>
+        </emission>
+        <ambient>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </ambient>
+        <diffuse>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </diffuse>
+       <specular>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </specular>
+   </animation>
+
+    <animation>
+        <name>yellow</name>
+        <type>material</type>
+        <object-name>L0</object-name>
+        <object-name>L1</object-name>
+        <object-name>L2</object-name>
+        <object-name>L3</object-name>
+        <object-name>L4</object-name>
+        <object-name>L5</object-name>
+        <object-name>L6</object-name>
+        <object-name>L7</object-name>
+        <object-name>L8</object-name>
+        <object-name>L9</object-name>
+        <object-name>L10</object-name>
+        <object-name>L11</object-name>
+        <object-name>L12</object-name>
+        <object-name>L13</object-name>
+        <object-name>L14</object-name>
+        <object-name>L15</object-name>
+        <emission>
+            <red-prop>sim/color-set/yellow/r</red-prop>
+            <green-prop>sim/color-set/yellow/g</green-prop>
+            <blue-prop>sim/color-set/yellow/b</blue-prop>
+            <alpha-prop>sim/color-set/yellow/a</alpha-prop>
+        </emission>
+        <ambient>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </ambient>
+        <diffuse>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </diffuse>
+        <specular>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </specular>
+    </animation>
+
+    <animation>
+        <name>cyan</name>
+        <type>material</type>
+        <object-name>R0</object-name>
+        <object-name>R1</object-name>
+        <object-name>R2</object-name>
+        <object-name>R3</object-name>
+        <object-name>R4</object-name>
+        <object-name>R5</object-name>
+        <object-name>R6</object-name>
+        <object-name>R7</object-name>
+        <object-name>R8</object-name>
+        <object-name>R9</object-name>
+        <object-name>R10</object-name>
+        <object-name>R11</object-name>
+        <object-name>R12</object-name>
+        <object-name>R13</object-name>
+        <object-name>R14</object-name>
+        <object-name>R15</object-name>
+        <emission>
+            <red-prop>sim/color-set/cyan/r</red-prop>
+            <green-prop>sim/color-set/cyan/g</green-prop>
+            <blue-prop>sim/color-set/cyan/b</blue-prop>
+            <alpha-prop>sim/color-set/cyan/a</alpha-prop>
+        </emission>
+        <ambient>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </ambient>
+        <diffuse>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </diffuse>
+        <specular>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </specular>
+    </animation>
+
+</PropertyList>

@@ -662,7 +662,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
             </engine>
         </engines>
         <flight>
-            <speedbrake type="double">0</speedbrake>
+            <speedbrake type="bool">0</speedbrake>
 						<v1 type="double">124</v1>
 						<vr type="double">128</vr>
 						<v2 type="double">133</v2>
@@ -719,7 +719,6 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
             <changeover type="bool">0</changeover>
             <heading-bug-deg type="int">0</heading-bug-deg>
             <vertical-speed-fpm type="int">0</vertical-speed-fpm>
-            <asel type="int">410</asel>
         </settings>
         <locks>
             <heading>ROLL</heading>

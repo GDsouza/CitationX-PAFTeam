@@ -161,6 +161,8 @@ var EICAS = {
 			me.msg_l3 = [];
 			me.nb_warning = 0;
 			me.nb_caution = 0;
+			me.nb_l1 = 0;
+			me.nb_l0 = 0;
 
 			if (me.enabled and me.test == 0) {		
 
@@ -175,7 +177,7 @@ var EICAS = {
 				}
 				if (me.oil_L < 0.080 and me.oil_R < 0.080) {
           append(me.msg_l3,"OIL PRESS LOW L-R");
-					me.nb_warning +=2;
+					me.nb_warning +=1;
 				}	else if(me.oil_L < 0.4) {
           append(me.msg_l3,"OIL PRESS LOW L");
 					me.nb_warning +=1;
@@ -238,49 +240,67 @@ var EICAS = {
 					### LEVEL 1 ###
 				if (me.eng0_shutdown and me.eng1_shutdown){
 					append(me.msg_l1,"ENG SHUTDWN L-R");
+					me.nb_l1 +=1;
 				} else if (me.eng0_shutdown) {
 						append(me.msg_l1,"ENG SHUTDWN L");
+						me.nb_l1 +=1;
 				}	else if (me.eng1_shutdown) {
 						append(me.msg_l1,"ENG SHUTDWN R");
+						me.nb_l1 +=1;
 				}
 				if (me.parkbrake) {
 					append(me.msg_l1,"PARK BRK SET");
+					me.nb_l1 +=1;
 				}
 				if (me.emerbrake) {
 					append(me.msg_l1,"EMERGENCY BRAKE");
+					me.nb_l1 +=1;
 				}
 				if(me.wow and (me.flaps < 0.140	or me.flaps > 0.430)) {
 					append(me.msg_l1,"NO TAKEOFF");
+					me.nb_l1 +=1;
 				}			
 
 					### LEVEL 0 ###
 				if (me.apu_running) {
           append(me.msg_l0,"APU RUNNING");
+				#	me.nb_l0 +=1;
 				}
 				if (me.boost_pump_L and me.boost_pump_R) {
           	append(me.msg_l0,"BOOST PUMP L-R");
+						me.nb_l0 +=1;
 				}	else if (me.boost_pump_L) {
           	append(me.msg_l0,"BOOST PUMP L");
+						me.nb_l0 +=1;
 				}	else if (me.boost_pump_R) {
           	append(me.msg_l0,"BOOST PUMP R");
+						me.nb_l0 +=1;
 				}
 				if (me.xfer_L and me.xfer_R) {
           	append(me.msg_l0,"CTR XFER XSIT L-R");
+						me.nb_l0 +=1;
 				}	else if (me.xfer_L) {
           	append(me.msg_l0,"CTR XFER XSIT L");
+						me.nb_l0 +=1;
 				}	else if (me.xfer_R) {
           	append(me.msg_l0,"CTR XFER XSIT R");
+						me.nb_l0 +=1;
 				}
 				if (me.xfeed_L or me.xfeed_R) {
           	append(me.msg_l0,"FUEL XFEED OPEN");
+						me.nb_l0 +=1;
 				}
 				if (me.grav_xflow) {
           	append(me.msg_l0,"FUEL XFLOW OPEN");
+						me.nb_l0 +=1;
 				}
 				if (me.ext_pwr) {
 						append(me.msg_l0,"EXT POWER ON");
+						me.nb_l0 +=1;
 				}
 
+			nb_msg = me.nb_warning + me.nb_caution + me.nb_l1 + me.nb_l0;
+			setprop("instrumentation/annunciators/nb-warning",nb_msg);
 			me.AnnunOutput();
 
 			### TESTS ###

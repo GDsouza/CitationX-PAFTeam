@@ -1090,7 +1090,7 @@
 
      <effect>
        <inherits-from>Effects/model-transparent</inherits-from>
-         <object-name>navlights.on</object-name>
+         <object-name>navlights.off</object-name>
        <condition>
          <property>sim/rendering/rembrandt/enabled</property>
        </condition>
@@ -1154,12 +1154,9 @@
 
     <animation>
         <type>select</type>
-        <object-name>navlights.off</object-name>
+        <object-name>navlights.on</object-name>
         <condition>
-            <greater-than>
-                <property>sim/multiplay/generic/int[6]</property>
-                <value>1</value>
-            </greater-than>
+            <property>sim/multiplay/generic/int[6]</property>
         </condition>
     </animation>
 
@@ -1167,10 +1164,9 @@
         <type>select</type>
         <object-name>navlights.off</object-name>
         <condition>
-            <less-than>
+            <not>
                 <property>sim/multiplay/generic/int[6]</property>
-                <value>1.001</value>
-            </less-than>
+            </not>
         </condition>
     </animation>
 

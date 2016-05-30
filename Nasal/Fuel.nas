@@ -4,6 +4,9 @@
 ### Chaque réacteur est alimenté par le réservoir d'aile correspondant. Le réservoir central, dans le fuselage, est fictivement séparé en 2 compartiments (tank2 & tank3), reliés entre eux. Chaque compartiment alimente le récteur correspondant jusqu'à ce qu'il ne reste plus que 500 lbs dans le réservoir central. Les réservoirs d'ailes prennent ensuite le relais.
 ###
 
+props.globals.initNode("controls/fuel/xfer-L",0,"INT");
+props.globals.initNode("controls/fuel/xfer-R",0,"INT");
+
 var fuelsys = {
     new : func {
         m = { parents : [fuelsys] };
@@ -148,6 +151,7 @@ var fuelsys = {
 		if (getprop("controls/fuel/tank[1]/boost_pump") == 2) {
 			setprop("engines/engine[1]/fuel-flow-gph",fgph[1] * 1.1);
 		}
+
 		settimer(func {me.boostpump();},1);
 	},
 };

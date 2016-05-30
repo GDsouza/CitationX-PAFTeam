@@ -681,7 +681,7 @@
 							</condition>
 								<command>property-assign</command>
                 <property>controls/APU/battery</property>
-                <value>24</value>
+                <value>24.7</value>
             </binding>
 						<binding>
 							<condition>
@@ -842,7 +842,7 @@
             <binding>
               <command>property-assign</command>
                 <property>controls/APU/battery</property>
-                <value>24</value>
+                <value>24.7</value>
             </binding> 
 					<mod-up>
 			       <binding>
@@ -911,7 +911,7 @@
 					</condition>
             <command>property-assign</command>
             <property>controls/APU/battery</property>
-							<value>24</value>
+							<value>24.7</value>
        </binding>
 			<mod-up>
        		<binding>
@@ -1000,7 +1000,7 @@
 						</condition>
 								<command>property-assign</command>
                 	<property>controls/APU/battery</property>
-                	<value>24</value>
+                	<value>24.7</value>
 						</binding>
         </action>
         <hovered>

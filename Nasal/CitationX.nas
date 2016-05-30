@@ -61,7 +61,7 @@ var JetEngine = {
         m.turbine = m.eng.initNode("turbine",0,"DOUBLE");
         m.throttle_lever = props.globals.initNode("controls/engines/engine["~eng_num~"]/throttle-lever",0,"DOUBLE");
         m.throttle = props.globals.initNode("controls/engines/engine["~eng_num~"]/throttle",0,"DOUBLE");
-        m.ignition = props.globals.initNode("controls/engines/engine["~eng_num~"]/ignition",0,"DOUBLE");
+        m.ignition = props.globals.initNode("controls/engines/engine["~eng_num~"]/ignit",0,"INT");
         m.cutoff = props.globals.initNode("controls/engines/engine["~eng_num~"]/cutoff",1,"BOOL");
         m.fuel_out = props.globals.initNode("engines/engine["~eng_num~"]/out-of-fuel",0,"BOOL");
         m.starter = props.globals.initNode("controls/engines/engine["~eng_num~"]/starter",0,"BOOL");
@@ -113,9 +113,11 @@ var JetEngine = {
             me.fan.setValue(tmprpm);
             me.turbine.setValue(tmprpm2);
             if(tmprpm >= me.n1.getValue()){
-                var ign=1-me.ignition.getValue();
-                me.cutoff.setBoolValue(ign);
-                me.cycle_up=0;
+							if (me.ignition.getValue()==-1) {
+								var ign = 1+me.ignition.getValue();
+							} else {var ign=1-me.ignition.getValue()}
+              me.cutoff.setBoolValue(ign);
+              me.cycle_up=0;
             }
         }
     },
@@ -161,12 +163,9 @@ props.globals.initNode("sim/alarms/overspeed-alarm",0,"BOOL");
 props.globals.initNode("sim/alarms/stall-warning",0,"BOOL");
 props.globals.initNode("instrumentation/clock/flight-meter-hour",0,"DOUBLE");
 props.globals.initNode("instrumentation/primus2000/dc840/etx",0,"INT");
-props.globals.initNode("instrumentation/checklist[0]/norm",0,"BOOL");
-props.globals.initNode("instrumentation/checklist[0]/page",0,"BOOL");
-props.globals.initNode("instrumentation/checklist[0]/nr-page",0,"INT");
-props.globals.initNode("instrumentation/checklist[1]/norm",0,"BOOL");
-props.globals.initNode("instrumentation/checklist[1]/page",0,"BOOL");
-props.globals.initNode("instrumentation/checklist[1]/nr-page",0,"INT");
+props.globals.initNode("instrumentation/checklists/norm",0,"BOOL");
+props.globals.initNode("instrumentation/checklists/nr-page",0,"INT");
+props.globals.initNode("instrumentation/checklists/nr-voice",0,"INT");
 props.globals.initNode("autopilot/locks/alt-mach",0,"BOOL");
 props.globals.initNode("autopilot/locks/fms-status",0,"BOOL");
 props.globals.initNode("autopilot/settings/nav-btn",0,"BOOL");
@@ -459,10 +458,22 @@ controls.flapsDown = func(step) {
 			}
 		}
 		if (step == -1) {
-			if (flaps_pos == 1) {setprop(flaps_path, 0.428)}
-			if (flaps_pos == 0.428) {setprop(flaps_path, 0.142)}
-			if (flaps_pos == 0.142) {setprop(flaps_path, 0.0428)}
-			if (flaps_pos == 0.0428) {setprop(flaps_path,0)}
+			if (flaps_pos == 1) {
+				setprop(flaps_path, 0.428);
+				setprop(flaps_select,3);
+			}
+			if (flaps_pos == 0.428) {
+				setprop(flaps_path, 0.142);
+				setprop(flaps_select,2);
+			}
+			if (flaps_pos == 0.142) {
+				setprop(flaps_path, 0.0428);
+				setprop(flaps_select,1);
+			}
+			if (flaps_pos == 0.0428) {
+				setprop(flaps_path,0);
+				setprop(flaps_select,0);
+			}
     }
     if (step == 2) {
 				setprop(flaps_path, 0);
@@ -482,16 +493,17 @@ var Startup = func{
     setprop("controls/lighting/nav-lights",1);
     setprop("controls/lighting/beacon",1);
     setprop("controls/lighting/strobe",1);
+    setprop("controls/lighting/recog-lights",1);
     setprop("controls/engines/engine[0]/cutoff",1);
     setprop("controls/engines/engine[1]/cutoff",1);
-    setprop("controls/engines/engine[0]/ignition",1);
-    setprop("controls/engines/engine[1]/ignition",1);
+    setprop("controls/engines/engine[0]/ignit",-1);
+    setprop("controls/engines/engine[1]/ignit",-1);
     setprop("engines/engine[0]/running",1);
     setprop("engines/engine[1]/running",1);
-    setprop("controls/engines/throttle_idle",1);
 		setprop("controls/engines/engine[0]/starter",1);
 		setprop("controls/engines/engine[1]/starter",1);
 		setprop("controls/flight/flaps",0.428);
+		setprop("controls/flight/flaps-select",3);
 		setprop("controls/anti-ice/pitot-heat",1);
 		setprop("controls/anti-ice/pitot-heat[1]",1);
 		setprop("controls/anti-ice/window-heat",1);
@@ -514,16 +526,18 @@ var Shutdown = func{
     setprop("controls/lighting/nav-lights",0);
     setprop("controls/lighting/beacon",0);
     setprop("controls/lighting/strobe",0);
+    setprop("controls/lighting/recog-lights",0);
     setprop("controls/engines/engine[0]/cutoff",1);
     setprop("controls/engines/engine[1]/cutoff",1);
-    setprop("controls/engines/engine[0]/ignition",0);
-    setprop("controls/engines/engine[1]/ignition",0);
+    setprop("controls/engines/engine[0]/ignit",0);
+    setprop("controls/engines/engine[1]/ignit",0);
     setprop("engines/engine[0]/running",0);
     setprop("engines/engine[1]/running",0);
 		setprop("instrumentation/annunciators/ack-caution",1);
 		setprop("instrumentation/annunciators/ack-warning",1);
 		setprop("controls/electric/external-power",0);
 		setprop("controls/flight/flaps",0);
+		setprop("controls/flight/flaps-select",0);
 		setprop("controls/anti-ice/pitot-heat",0);
 		setprop("controls/anti-ice/pitot-heat[1]",0);
 		setprop("controls/anti-ice/window-heat",0);

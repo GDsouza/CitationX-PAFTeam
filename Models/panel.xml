@@ -170,12 +170,11 @@
         <object-name>acftsys.btn</object-name>
         <object-name>mfdmap.btn</object-name>
         <object-name>mfdwx.btn</object-name>
-        <object-name>norm-L.btn</object-name>
-        <object-name>norm-R.btn</object-name>
+        <object-name>norm.btn</object-name>
         <object-name>abn.btn</object-name>
         <object-name>emer.btn</object-name>
         <object-name>skp.btn</object-name>
-        <object-name>pag.btn</object-name>
+        <object-name>page.btn</object-name>
         <object-name>rcl.btn</object-name>
         <object-name>ent.btn</object-name>
         <object-name>prev.btn</object-name>
@@ -249,10 +248,13 @@
                 <property>controls/electric/avionics-switch</property>
 									<value>2</value>
 						</equals>
-						<not>
-                <property>instrumentation/checklist[0]/norm</property>
+<!--						<not>
+                <property>instrumentation/checklists/norm</property>
 						</not>
-					</and>
+-->						<not>
+                <property>instrumentation/checklists/chklst-pilot</property>
+						</not>
+				</and>
         </condition>
     </animation>
 
@@ -267,7 +269,7 @@
 									<value>2</value>
 						</equals>
 						<not>
-                <property>instrumentation/checklist[1]/norm</property>
+                <property>instrumentation/checklists/norm</property>
 						</not>
 					</and>
         </condition>
@@ -857,7 +859,12 @@
 				<binding>
 					<condition>
 						<and>
-       				<property>controls/engines/engine[0]/ignition</property>
+							<not>
+								<equals>
+		       				<property>controls/engines/engine[0]/ignit</property>
+									<value>0</value>
+								</equals>
+							</not>
        				<property>systems/electrical/left-bus-norm</property>							
 						</and>
 					</condition>
@@ -913,7 +920,12 @@
 				<binding>
 					<condition>
 						<and>
-       				<property>controls/engines/engine[1]/ignition</property>
+							<not>
+								<equals>
+		       				<property>controls/engines/engine[1]/ignit</property>
+									<value>0</value>
+								</equals>
+							</not>
        				<property>systems/electrical/left-bus-norm</property>							
 						</and>
 					</condition>
@@ -945,7 +957,7 @@
     <animation>
         <type>rotate</type>
         <object-name>Ign1.switch</object-name>
-        <property>controls/engines/engine[0]/ignition</property>
+        <property>controls/engines/engine[0]/ignit</property>
         <factor>15</factor>
         <center>
             <x-m> 0.043 </x-m>
@@ -966,39 +978,80 @@
         <button>0</button>
         <repeatable>false</repeatable>
         <binding>
-            <command>property-toggle</command>
-            <property>controls/engines/engine[0]/ignition</property>
+	          <command>property-adjust</command>
+            <property>controls/engines/engine[0]/ignit</property>
+						<step>1</step>
+						<min>-1</min>
+						<max>1</max>
+						<wrap>false</wrap>
         </binding>
         <binding>
-        <condition>
-            <not>
-                <property>controls/engines/engine[0]/ignition</property>
-            </not>
-        </condition>
-            <command>property-assign</command>
-            <property>controls/engines/engine[0]/cutoff</property>
-        <value>1</value>
+		      <condition>
+	          <equals>
+              <property>controls/engines/engine[0]/ignit</property>
+							<value>0</value>
+	          </equals>
+		      </condition>
+          <command>property-assign</command>
+          <property>controls/engines/engine[0]/cutoff</property>
+		      <value>1</value>
         </binding>
         <binding>
             <command>property-toggle</command>
             <property>sim/sound/click</property>
         </binding>
     </action>
-        <hovered>
-            <binding>
-                <command>set-tooltip</command>
-                <tooltip-id>Ign1-switch</tooltip-id>
-                <label>LH Ignition: %s</label>
-                <mapping>on-off</mapping>
-            <property>controls/engines/engine[0]/ignition</property>
-            </binding>
-        </hovered>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>Ign1-switch</tooltip-id>
+        <label>LH Ignition: %s</label>
+	     <property>controls/engines/engine[0]/ignit</property>
+        <mapping>nasal</mapping>
+				<script>
+					var modes = ['OFF','ON','NORM'];
+					return modes[arg[0]];
+				</script>
+      </binding>
+    </hovered>
+	</animation>
+
+	<animation>
+    <type>pick</type>
+    <object-name>Ign1.norm</object-name>
+    <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+	          <command>property-adjust</command>
+            <property>controls/engines/engine[0]/ignit</property>
+						<step>-1</step>
+						<min>-1</min>
+						<max>1</max>
+						<wrap>false</wrap>
+        </binding>
+        <binding>
+		      <condition>
+	          <equals>
+              <property>controls/engines/engine[0]/ignit</property>
+							<value>0</value>
+	          </equals>
+		      </condition>
+          <command>property-assign</command>
+          <property>controls/engines/engine[0]/cutoff</property>
+		      <value>1</value>
+        </binding>
+        <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+        </binding>
+    </action>
 	</animation>
 
     <animation>
         <type>rotate</type>
         <object-name>Ign2.switch</object-name>
-        <property>controls/engines/engine[1]/ignition</property>
+        <property>controls/engines/engine[1]/ignit</property>
         <factor>15</factor>
         <center>
             <x-m> 0.043 </x-m>
@@ -1019,14 +1072,21 @@
         <button>0</button>
         <repeatable>false</repeatable>
         <binding>
-            <command>property-toggle</command>
-            <property>controls/engines/engine[1]/ignition</property>
+	          <command>property-adjust</command>
+            <property>controls/engines/engine[1]/ignit</property>
+						<step>1</step>
+						<min>-1</min>
+						<max>1</max>
+						<wrap>false</wrap>
         </binding>
         <binding>
         <condition>
-            <not>
-                <property>controls/engines/engine[1]/ignition</property>
-            </not>
+		      <condition>
+	          <equals>
+              <property>controls/engines/engine[0]/ignit</property>
+							<value>0</value>
+	          </equals>
+		      </condition>
         </condition>
             <command>property-assign</command>
             <property>controls/engines/engine[1]/cutoff</property>
@@ -1037,15 +1097,51 @@
             <property>sim/sound/click</property>
         </binding>
     </action>
-        <hovered>
-            <binding>
-                <command>set-tooltip</command>
-                <tooltip-id>Ign2-switch</tooltip-id>
-                <label>RH Ignition: %s</label>
-                <mapping>on-off</mapping>
-            <property>controls/engines/engine[1]/ignition</property>
-            </binding>
-        </hovered>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>Ign2-switch</tooltip-id>
+        <label>RH Ignition: %s</label>
+		    <property>controls/engines/engine[1]/ignit</property>
+		    <mapping>nasal</mapping>
+				<script>
+					var modes = ['OFF','ON','NORM'];
+					return modes[arg[0]];
+				</script>
+      </binding>
+    </hovered>
+	</animation>
+
+	<animation>
+    <type>pick</type>
+    <object-name>Ign2.norm</object-name>
+    <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+	          <command>property-adjust</command>
+            <property>controls/engines/engine[1]/ignit</property>
+						<step>-1</step>
+						<min>-1</min>
+						<max>1</max>
+						<wrap>false</wrap>
+        </binding>
+        <binding>
+		      <condition>
+	          <equals>
+              <property>controls/engines/engine[1]/ignit</property>
+							<value>0</value>
+	          </equals>
+		      </condition>
+          <command>property-assign</command>
+          <property>controls/engines/engine[1]/cutoff</property>
+		      <value>1</value>
+        </binding>
+        <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+        </binding>
+    </action>
 	</animation>
 
 <!-- AVIONICS SWITCH -->
@@ -1985,8 +2081,8 @@
     <animation>
         <type>rotate</type>
         <object-name>AntiColl.switch</object-name>
-        <property>controls/lighting/strobe</property>
-        <factor>30</factor>
+        <property>controls/lighting/anti-coll</property>
+        <factor>20</factor>
         <center>
             <x-m>0.043</x-m>
             <y-m>0</y-m>
@@ -2003,31 +2099,68 @@
     <type>pick</type>
     <object-name>AntiColl.switch</object-name>
     <action>
-        <button>0</button>
-        <repeatable>false</repeatable>
-        <binding>
-            <command>property-toggle</command>
-            <property>controls/lighting/strobe</property>
-        </binding>
-        <binding>
-            <command>property-assign</command>
-            <property>controls/lighting/beacon</property>
-            <property>controls/lighting/strobe</property>
-        </binding>
-        <binding>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>property-adjust</command>
+        <property>controls/lighting/anti-coll</property>
+          <step>1</step>
+          <min>0</min>
+          <max>2</max>
+          <wrap>0</wrap>
+      </binding>
+     	<binding>
             <command>property-toggle</command>
             <property>sim/sound/click</property>
-        </binding>
+      </binding>
     </action>
-        <hovered>
-            <binding>
-                <command>set-tooltip</command>
-                <tooltip-id>Anti-coll-switch</tooltip-id>
-                <label>Anti-collision: %s</label>
-                <mapping>on-off</mapping>
-            <property>controls/lighting/strobe</property>
-            </binding>
-        </hovered>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>Anti-coll-switch</tooltip-id>
+        <label>Anti-collision: %s</label>
+        <property>controls/lighting/anti-coll</property>
+        <mapping>nasal</mapping>
+				<script>
+					var modes = ['OFF','Beacon','Strobe'];
+					return modes[arg[0]];
+				</script>
+        </binding>
+    </hovered>
+	</animation>
+
+	<animation>
+    <type>pick</type>
+    <object-name>AntiColl.off</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+          <command>property-adjust</command>
+          <property>controls/lighting/anti-coll</property>
+            <step>-1</step>
+            <min>0</min>
+            <max>2</max>
+            <wrap>0</wrap>
+      </binding>
+      <binding>
+          <command>property-toggle</command>
+          <property>sim/sound/click</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>Anti-coll-switch</tooltip-id>
+        <label>Anti-collision: %s</label>
+        <property>controls/lighting/anti-coll</property>
+        <mapping>nasal</mapping>
+				<script>
+					var modes = ['OFF','Beacon','Strobe'];
+					return modes[arg[0]];
+				</script>
+        </binding>
+    </hovered>
 	</animation>
 
 <!-- RECOG SWITCH -->
@@ -2465,7 +2598,7 @@
 
     <model>
         <name>chklst1</name>
-        <path>Aircraft/CitationX/Models/Instruments/MFD/checklist1.xml</path>
+        <path>Aircraft/CitationX/Models/Instruments/MFD/checklist.xml</path>
         <offsets>
             <x-m>0.002</x-m>
             <y-m>-0.187</y-m>
@@ -2473,9 +2606,20 @@
         </offsets>
     </model>
 
+		<animation>
+			<object-name>chklst1</object-name>
+			<type>select</type>
+			<condition>
+				<and>
+					<property>instrumentation/checklists/chklst-pilot</property>
+					<property>instrumentation/checklists/norm</property>
+				</and>
+			</condition>
+		</animation>
+
     <model>
         <name>chklst2</name>
-        <path>Aircraft/CitationX/Models/Instruments/MFD/checklist2.xml</path>
+        <path>Aircraft/CitationX/Models/Instruments/MFD/checklist.xml</path>
         <offsets>
             <x-m>0.002</x-m>
             <y-m>0.194</y-m>
@@ -3487,8 +3631,8 @@
 
     <animation>
         <type>translate</type>
-        <object-name>norm-L.btn</object-name>	
-        <property>instrumentation/checklist[0]/norm</property>
+        <object-name>norm.btn</object-name>	
+        <property>instrumentation/checklists/norm</property>
 				<factor>0.0027</factor>
         <axis>
             <x>-1</x>
@@ -3499,24 +3643,14 @@
 
     <animation>
         <type>pick</type>
-        <object-name>norm-L.btn</object-name>
+        <object-name>norm.btn</object-name>
         <action>
             <button>0</button>
             <repeatable>false</repeatable>
             <binding>
               <command>property-toggle</command>
-	            <property>instrumentation/checklist[0]/norm</property>
+	            <property>instrumentation/checklists/norm</property>
             </binding>
-            <binding>
-							<condition>
-								<not>
-			            <property>instrumentation/checklist[0]/norm</property>
-								</not>
-							</condition>
-              <command>property-assign</command>
-			          <property>instrumentation/checklist[0]/voice</property>
-								<value>0</value> 
-           </binding>
 						<binding>
 						    <command>property-toggle</command>
 						    <property>sim/sound/click</property>
@@ -3525,9 +3659,9 @@
 				<hovered>
 				    <binding>
 				        <command>set-tooltip</command>
-				        <tooltip-id>NormLBtn</tooltip-id>
+				        <tooltip-id>NormBtn</tooltip-id>
 				        <label>Checklist Pilot : %s</label>
-					      <property>instrumentation/checklist[0]/norm</property>
+					      <property>instrumentation/checklists/norm</property>
 				        <mapping>on-off</mapping>
 				    </binding>
 				</hovered>
@@ -3541,7 +3675,7 @@
             <repeatable>false</repeatable>
             <binding>
               <command>nasal</command>
-            	<script>checklist.next(0);</script>
+            	<script>checklist.next();</script>
             </binding>
         </action>
 				<hovered>
@@ -3549,7 +3683,7 @@
 				        <command>set-tooltip</command>
 				        <tooltip-id>PageLUpDwn</tooltip-id>
 				        <label>Checklist Up : %s</label>
-					      <property>instrumentation/checklist[0]/nr-page</property>
+					      <property>instrumentation/checklists/nr-page</property>
 				        <mapping>heading</mapping>
 				    </binding>
 				</hovered>
@@ -3563,7 +3697,7 @@
             <repeatable>false</repeatable>
             <binding>
               <command>nasal</command>
-            	<script>checklist.previous(0);</script>
+            	<script>checklist.previous();</script>
             </binding>
         </action>
 				<hovered>
@@ -3571,49 +3705,12 @@
 				        <command>set-tooltip</command>
 				        <tooltip-id>PageLUpDwn</tooltip-id>
 				        <label>Checklist Down : %s</label>
-					      <property>instrumentation/checklist[0]/nr-page</property>
+					      <property>instrumentation/checklists/nr-page</property>
 				        <mapping>heading</mapping>
 				    </binding>
 				</hovered>
     </animation>
 
-    <animation>
-        <type>translate</type>
-        <object-name>norm-R.btn</object-name>	
-        <property>instrumentation/checklist[1]/norm</property>
-				<factor>0.0027</factor>
-        <axis>
-            <x>-1</x>
-            <y>0</y>
-            <z>0</z>
-        </axis>
-    </animation>
-
-    <animation>
-        <type>pick</type>
-        <object-name>norm-R.btn</object-name>
-        <action>
-            <button>0</button>
-            <repeatable>false</repeatable>
-            <binding>
-              <command>property-toggle</command>
-            	<property>instrumentation/checklist[1]/norm</property>
-            </binding>
-						<binding>
-						    <command>property-toggle</command>
-						    <property>sim/sound/click</property>
-						</binding>
-		    </action>
-				<hovered>
-				    <binding>
-				        <command>set-tooltip</command>
-				        <tooltip-id>NormRBtn</tooltip-id>
-				        <label>Checklist Copilot : %s</label>
-					      <property>instrumentation/checklist[1]/norm</property>
-				        <mapping>on-off</mapping>
-				    </binding>
-				</hovered>
-    </animation>
 
     <animation>
         <type>pick</type>
@@ -3623,7 +3720,7 @@
             <repeatable>false</repeatable>
             <binding>
               <command>nasal</command>
-            	<script>checklist.next(1);</script>
+            	<script>checklist.next();</script>
             </binding>
         </action>
 				<hovered>
@@ -3631,7 +3728,7 @@
 				        <command>set-tooltip</command>
 				        <tooltip-id>PageLUpDwn</tooltip-id>
 				        <label>Checklist Up : %s</label>
-					      <property>instrumentation/checklist[1]/nr-page</property>
+					      <property>instrumentation/checklists/nr-page</property>
 				        <mapping>heading</mapping>
 				    </binding>
 				</hovered>
@@ -3645,7 +3742,7 @@
             <repeatable>false</repeatable>
             <binding>
               <command>nasal</command>
-            	<script>checklist.previous(1);</script>
+            	<script>checklist.previous();</script>
             </binding>
         </action>
 				<hovered>
@@ -3653,7 +3750,7 @@
 				        <command>set-tooltip</command>
 				        <tooltip-id>PageLUpDwn</tooltip-id>
 				        <label>Checklist Down : %s</label>
-					      <property>instrumentation/checklist[1]/nr-page</property>
+					      <property>instrumentation/checklists/nr-page</property>
 				        <mapping>heading</mapping>
 				    </binding>
 				</hovered>
@@ -3662,7 +3759,7 @@
     <animation>
         <type>translate</type>
         <object-name>abn.btn</object-name>	
-        <property>instrumentation/checklist[0]/abn</property>
+        <property>instrumentation/checklists/abn</property>
 				<factor>0.0027</factor>
         <axis>
             <x>-1</x>
@@ -3679,14 +3776,7 @@
             <repeatable>false</repeatable>
             <binding>
               <command>property-toggle</command>
-	            <property>instrumentation/checklist[0]/abn</property>
-            </binding>
-            <binding>
-							<condition>
-		            <property>instrumentation/checklist[0]/norm</property>
-							</condition>
-              <command>property-toggle</command>
-	            <property>instrumentation/checklist[0]/voice</property>
+	            <property>instrumentation/checklists/abn</property>
             </binding>
 						<binding>
 						    <command>property-toggle</command>
@@ -3695,7 +3785,7 @@
 						<mod-up>
 		          <binding>
 		            <command>property-toggle</command>
-			          <property>instrumentation/checklist[0]/abn</property>
+			          <property>instrumentation/checklists/abn</property>
 		          </binding>					
 						</mod-up>
 		    </action>
@@ -3704,12 +3794,103 @@
 				        <command>set-tooltip</command>
 				        <tooltip-id>abnBtn</tooltip-id>
 				        <label>Checklist voice : %s</label>
-					      <property>instrumentation/checklist[0]/abn</property>
+					      <property>instrumentation/checklists/abn</property>
 				        <mapping>on-off</mapping>
 				    </binding>
 				</hovered>
     </animation>
 
+    <animation>
+        <type>translate</type>
+        <object-name>skp.btn</object-name>	
+        <property>instrumentation/checklists/skip</property>
+				<factor>0.0027</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>skp.btn</object-name>
+       <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+              <command>property-toggle</command>
+	            <property>instrumentation/checklists/skip</property>
+            </binding>
+						<binding>
+						    <command>property-toggle</command>
+						    <property>sim/sound/click</property>
+						</binding>
+						<mod-up>
+		          <binding>
+		            <command>property-toggle</command>
+			          <property>instrumentation/checklists/skip</property>
+		          </binding>					
+						</mod-up>
+		    </action>
+				<hovered>
+				    <binding>
+				        <command>set-tooltip</command>
+				        <tooltip-id>skpBtn</tooltip-id>
+				        <label>Skip : %s</label>
+					      <property>instrumentation/checklists/skip</property>
+				        <mapping>on-off</mapping>
+				    </binding>
+				</hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>page.btn</object-name>	
+        <property>instrumentation/checklists/page-btn</property>
+				<factor>0.0027</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>page.btn</object-name>
+	      <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+          <binding>
+            <command>property-toggle</command>
+	            <property>instrumentation/checklists/page-btn</property>
+          </binding>
+          <binding>
+            <command>nasal</command>
+	            <script>checklist.page_btn()</script>
+          </binding>
+					<binding>
+					    <command>property-toggle</command>
+					    <property>sim/sound/click</property>
+					</binding>
+					<mod-up>
+		        <binding>
+		          <command>property-toggle</command>
+			          <property>instrumentation/checklists/page-btn</property>
+		        </binding>
+					</mod-up>
+		    </action>
+				<hovered>
+				    <binding>
+				        <command>set-tooltip</command>
+				        <tooltip-id>skpBtn</tooltip-id>
+				        <label>Page : %s</label>
+					      <property>instrumentation/checklists/chklst-pilot</property>
+				        <mapping>on-off</mapping>
+				    </binding>
+				</hovered>
+    </animation>
 
 <!-- REFLETS PORTES -->
 

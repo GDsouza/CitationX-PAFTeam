@@ -12,6 +12,8 @@
 # 7. Handle manual modes
 
 ### System vars ###
+props.globals.initNode("controls/pressurization/alt-selt",0,"BOOL");
+props.globals.initNode("controls/pressurization/press-man",0,"BOOL");
 var cabin_alt = props.globals.initNode("systems/pressurization/cabin-altitude-ft",0,"DOUBLE");
 var cabin_rate = props.globals.initNode("systems/pressurization/cabin-rate-fpm",500,"DOUBLE");
 var mode = props.globals.initNode("systems/pressurization/mode",0,"INT");
