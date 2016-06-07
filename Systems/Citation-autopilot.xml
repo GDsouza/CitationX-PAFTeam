@@ -8,12 +8,8 @@
         <name>ROLL hold</name>
         <debug>false</debug>
         <enable>
-					<condition>
-						<equals>
-		          <property>autopilot/locks/heading</property>
-		          <value>ROLL</value>
-						</equals>
-					</condition>
+          <property>autopilot/locks/heading</property>
+          <value>ROLL</value>
         </enable>
         <input>
             <property>orientation/roll-deg</property>
@@ -40,12 +36,8 @@
         <name>Heading Bug Hold</name>
         <debug>false</debug>
         <enable>
-            <condition>
-                <equals>
-                    <property>autopilot/locks/heading</property>
-                    <value>HDG</value>
-                </equals>
-            </condition>
+          <property>autopilot/locks/heading</property>
+          <value>HDG</value>
         </enable>
         <input>
             <property>autopilot/internal/heading-bug-error-deg</property>
@@ -73,12 +65,8 @@
         <name>Nav1</name>
         <debug>false</debug>
         <enable>
-					<condition>
-						<equals>
-		          <property>autopilot/locks/heading</property>
-		          <value>VOR</value>
-						</equals>
-					</condition>
+          <property>autopilot/locks/heading</property>
+          <value>VOR</value>
         </enable>
         <input>
             <property>autopilot/internal/ap_crs</property>
@@ -105,12 +93,8 @@
         <name>Loc</name>
         <debug>false</debug>
         <enable>
-					<condition>
-						<equals>
-		          <property>autopilot/locks/heading</property>
-		          <value>LOC</value>
-						</equals>
-					</condition>
+          <property>autopilot/locks/heading</property>
+          <value>LOC</value>
         </enable>
         <input>
             <property>autopilot/internal/ap_crs</property>
@@ -133,12 +117,8 @@
         <name>Lnav</name>
         <debug>false</debug>
         <enable>
-					<condition>
-						<equals>
-		          <property>autopilot/locks/heading</property>
-		          <value>LNAV</value>
-						</equals>
-					</condition>
+          <property>autopilot/locks/heading</property>
+          <value>LNAV</value>
         </enable>
         <input>
             <property>autopilot/internal/ap_crs</property>
@@ -177,12 +157,8 @@
         <name>Aileron Control</name>
         <debug>false</debug>
         <enable>
-					<condition> 
-						<equals>
-	 	          <property>autopilot/locks/AP-status</property>
-		          <value>AP</value>
-						</equals>
-					</condition>
+          <property>autopilot/locks/AP-status</property>
+          <value>AP</value>
         </enable>
         <input>
             <property>/orientation/roll-deg</property>
@@ -214,12 +190,8 @@
         <feedback-if-disabled>true</feedback-if-disabled>
         <initialize-to>output</initialize-to>
         <enable>
-            <condition>
-               <equals>
-                    <property>autopilot/locks/altitude</property>
-                    <value>PTCH</value>
-                </equals>
-           </condition>
+          <property>autopilot/locks/altitude</property>
+          <value>PTCH</value>
         </enable>
         <input>
             <property>autopilot/settings/target-pitch-deg</property>
@@ -233,12 +205,8 @@
         <name>Altitude Hold 1</name>
         <debug>false</debug>
         <enable>
-					<condition>
-						<equals>
-		          <property>/autopilot/locks/altitude</property>
-		          <value>ALT</value>
-						</equals>
-					</condition>
+          <property>/autopilot/locks/altitude</property>
+          <value>ALT</value>
         </enable>
         <input>
             <property>instrumentation/altimeter/indicated-altitude-ft</property>
@@ -266,12 +234,8 @@
         <name>Altitude 2</name>
         <debug>false</debug>
         <enable>
-					<condition>
-						<equals>
-		          <property>/autopilot/locks/altitude</property>
-		          <value>ALT</value>
-						</equals>
-					</condition>
+          <property>/autopilot/locks/altitude</property>
+          <value>ALT</value>
         </enable>
 	      <input>
             <property>velocities/vertical-speed-fps</property>
@@ -294,12 +258,8 @@
         <name>GS</name>
         <debug>false</debug>
         <enable>
-            <condition>
-                <equals>
-                    <property>/autopilot/locks/altitude</property>
-                    <value>GS</value>
-                </equals>
-            </condition>
+          <property>/autopilot/locks/altitude</property>
+          <value>GS</value>
         </enable>
         <input>
             <property>velocities/vertical-speed-fps</property>
@@ -322,10 +282,8 @@
         <name>Vertical Speed Hold</name>
         <debug>false</debug>
         <enable>
-					<condition>
             <property>/autopilot/locks/altitude</property>
             <value>VS</value>
-					</condition>
         </enable>
         <input>
             <property>/autopilot/internal/vert-speed-fpm</property>
@@ -352,12 +310,8 @@
         <name>Vnav Hold 1</name>
         <debug>false</debug>
         <enable>
-					<condition>
-						<equals>
 		          <property>/autopilot/locks/altitude</property>
 		          <value>VALT</value>
-						</equals>
-					</condition>
         </enable>
         <input>
             <property>instrumentation/altimeter/indicated-altitude-ft</property>
@@ -384,12 +338,8 @@
         <name>Vnav 2</name>
         <debug>false</debug>
         <enable>
-					<condition>
-						<equals>
-		          <property>/autopilot/locks/altitude</property>
-		          <value>VALT</value>
-						</equals>
-					</condition>
+          <property>/autopilot/locks/altitude</property>
+          <value>VALT</value>
         </enable>
         <input>
             <property>velocities/vertical-speed-fps</property>
@@ -593,12 +543,8 @@
         <name>Elevator Trim Control</name>
         <debug>false</debug>
         <enable>
-					<condition>
-						<equals>
-		          <property>autopilot/locks/AP-status</property>
-		          <value>AP</value>
-						</equals>
-					</condition>
+          <property>autopilot/locks/AP-status</property>
+          <value>AP</value>
         </enable>
         <input>
             <property>orientation/pitch-deg</property>
@@ -740,12 +686,8 @@
         <feedback-if-disabled>true</feedback-if-disabled>
         <initialize-to>output</initialize-to>
         <enable>
-            <condition>
-                <equals>
-                    <property>autopilot/settings/nav-source</property>
-                    <value>NAV1</value>
-                </equals>
-            </condition>
+          <property>autopilot/settings/nav-source</property>
+          <value>NAV1</value>
         </enable>
         <input>
             <property>instrumentation/nav/heading-needle-deflection</property>
@@ -762,12 +704,8 @@
         <feedback-if-disabled>true</feedback-if-disabled>
         <initialize-to>output</initialize-to>
         <enable>
-            <condition>
-                <equals>
-                    <property>autopilot/settings/nav-source</property>
-                    <value>NAV1</value>
-                </equals>
-            </condition>
+          <property>autopilot/settings/nav-source</property>
+          <value>NAV1</value>
         </enable>
         <input>
             <property>instrumentation/nav/gs-needle-deflection-norm</property>
@@ -783,12 +721,8 @@
         <feedback-if-disabled>true</feedback-if-disabled>
         <initialize-to>output</initialize-to>
         <enable>
-            <condition>
-                <equals>
-                    <property>autopilot/settings/nav-source</property>
-                    <value>NAV1</value>
-                </equals>
-            </condition>
+          <property>autopilot/settings/nav-source</property>
+          <value>NAV1</value>
         </enable>
         <input>
             <property>instrumentation/nav/gs-rate-of-climb</property>
@@ -804,12 +738,8 @@
         <feedback-if-disabled>true</feedback-if-disabled>
         <initialize-to>output</initialize-to>
         <enable>
-            <condition>
-                <equals>
-                    <property>autopilot/settings/nav-source</property>
-                    <value>NAV2</value>
-                </equals>
-            </condition>
+          <property>autopilot/settings/nav-source</property>
+          <value>NAV2</value>
         </enable>
         <input>
             <property>instrumentation/nav[1]/heading-needle-deflection</property>
@@ -826,12 +756,8 @@
         <feedback-if-disabled>true</feedback-if-disabled>
         <initialize-to>output</initialize-to>
         <enable>
-            <condition>
-                <equals>
-                    <property>autopilot/settings/nav-source</property>
-                    <value>NAV2</value>
-                </equals>
-            </condition>
+          <property>autopilot/settings/nav-source</property>
+          <value>NAV2</value>
         </enable>
         <input>
             <property>instrumentation/nav[1]/gs-needle-deflection-norm</property>
@@ -847,12 +773,8 @@
         <feedback-if-disabled>true</feedback-if-disabled>
         <initialize-to>output</initialize-to>
         <enable>
-            <condition>
-                <equals>
-                    <property>autopilot/settings/nav-source</property>
-                    <value>NAV2</value>
-                </equals>
-            </condition>
+          <property>autopilot/settings/nav-source</property>
+          <value>NAV2</value>
         </enable>
         <input>
             <property>instrumentation/nav[1]/gs-rate-of-climb</property>
@@ -950,10 +872,7 @@
         <debug>false</debug>
         <enable>
 					<condition>
-						<equals>
 		          <property>/instrumentation/primus2000/sc840/nav1ptr</property>
-		          <value>1</value>
-						</equals>
 					</condition>
         </enable>
         <input>
@@ -979,12 +898,8 @@
         <feedback-if-disabled>false</feedback-if-disabled>
         <initialize-to>input</initialize-to>
         <enable>
-            <condition>
-                <equals>
-                    <property>/instrumentation/primus2000/sc840/nav1ptr</property>
-                    <value>2</value>
-                </equals>
-            </condition>
+          <property>/instrumentation/primus2000/sc840/nav1ptr</property>
+          <value>2</value>
         </enable>
         <input>instrumentation/adf/indicated-bearing-deg</input>
         <output>/autopilot/internal/nav1-pointer</output>
@@ -996,12 +911,8 @@
 		    <name>FMS1 bearing </name>
 		    <debug>false</debug>
 		    <enable>
-					<condition>
-						<equals>
-			        <property>/instrumentation/primus2000/sc840/nav1ptr</property>
-			        <value>3</value>
-						</equals>
-					</condition> 
+	        <property>/instrumentation/primus2000/sc840/nav1ptr</property>
+	        <value>3</value>
 		     </enable>
 		      <input>
 		          <property>orientation/heading-magnetic-deg</property>
@@ -1025,10 +936,7 @@
         <debug>false</debug>
         <enable>
 					<condition>
-						<equals>
 		          <property>/instrumentation/primus2000/sc840/nav2ptr</property>
-		          <value>1</value>
-						</equals>
 					</condition>
         </enable>
         <input>
@@ -1054,12 +962,8 @@
         <feedback-if-disabled>false</feedback-if-disabled>
         <initialize-to>input</initialize-to>
         <enable>
-            <condition>
-                <equals>
-                    <property>/instrumentation/primus2000/sc840/nav2ptr</property>
-                    <value>2</value>
-                </equals>
-            </condition>
+          <property>/instrumentation/primus2000/sc840/nav2ptr</property>
+          <value>2</value>
         </enable>
         <input>instrumentation/adf[1]/indicated-bearing-deg</input>
         <output>/autopilot/internal/nav2-pointer</output>
@@ -1071,12 +975,8 @@
         <name>FMS2 bearing </name>
         <debug>false</debug>
         <enable>
-					<condition>
-						<equals>
-		          <property>/instrumentation/primus2000/sc840/nav2ptr</property>
-		          <value>3</value>
-						</equals>
-					</condition>
+		      <property>/instrumentation/primus2000/sc840/nav2ptr</property>
+		      <value>3</value>
         </enable>
         <input>
             <property>orientation/heading-magnetic-deg</property>

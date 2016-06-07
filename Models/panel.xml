@@ -1185,7 +1185,7 @@
             <binding>
                 <command>set-tooltip</command>
                 <tooltip-id>Avn-switch</tooltip-id>
-                <label>Avionic: %s</label>
+                <label>Avionics: %s</label>
                 <mapping>heading</mapping>
             <property>controls/electric/avionics-switch</property>
             </binding>
