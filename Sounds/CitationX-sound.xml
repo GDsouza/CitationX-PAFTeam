@@ -24,7 +24,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</prestart>
 
   <prestart>
@@ -43,7 +46,10 @@
 				</equals>
 			</and>
    </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</prestart>
 
   <prestart>
@@ -62,7 +68,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</prestart>
 
   <prestart>
@@ -81,7 +90,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</prestart>
 
   <prestart>
@@ -100,7 +112,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</prestart>
 
   <prestart>
@@ -119,7 +134,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</prestart>
 
   <prestart>
@@ -138,7 +156,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</prestart>
 
   <prestart>
@@ -157,7 +178,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</prestart>
 
   <prestart>
@@ -176,7 +200,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</prestart>
 
   <prestart>
@@ -195,7 +222,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</prestart>
 
   <prestart>
@@ -214,7 +244,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</prestart>
 
   <prestart>
@@ -233,7 +266,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 		<delay-sec>1</delay-sec>
 	</prestart>
 
@@ -253,7 +289,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</prestart>
 
   <prestart>
@@ -272,7 +311,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 		<delay-sec>1</delay-sec>
 	</prestart>
 
@@ -292,7 +334,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</prestart>
 
   <prestart>
@@ -311,7 +356,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 		<delay-sec>1</delay-sec>
 	</prestart>
 
@@ -331,7 +379,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</prestart>
 
   <prestart>
@@ -350,7 +401,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 		<delay-sec>1</delay-sec>
 	</prestart>
 
@@ -370,7 +424,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</prestart>
 
   <prestart>
@@ -389,7 +446,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</prestart>
 
   <prestart>
@@ -408,7 +468,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</prestart>
 
   <prestart>
@@ -427,7 +490,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</prestart>
 
   <prestart>
@@ -446,7 +512,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</prestart>
 
   <prestart>
@@ -465,7 +534,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</prestart>
 
   <prestart>
@@ -484,7 +556,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</prestart>
 
   <prestart>
@@ -503,7 +578,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</prestart>
 
   <prestart>
@@ -522,7 +600,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</prestart>
 
   <prestart>
@@ -541,7 +622,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</prestart>
 
   <prestart>
@@ -560,7 +644,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</prestart>
 
   <prestart>
@@ -579,7 +666,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</prestart>
 
 <!-- APU -->
@@ -600,7 +690,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</apu>
 
   <apu>
@@ -619,7 +712,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</apu>
 
   <apu>
@@ -638,7 +734,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</apu>
 
   <apu>
@@ -657,7 +756,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</apu>
 
   <apu>
@@ -676,7 +778,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</apu>
 
   <apu>
@@ -695,7 +800,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</apu>
 
   <apu>
@@ -714,7 +822,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</apu>
 
   <apu>
@@ -733,7 +844,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</apu>
 
   <apu>
@@ -752,7 +866,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</apu>
 
   <apu>
@@ -771,7 +888,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</apu>
 
   <apu>
@@ -790,7 +910,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</apu>
 
   <apu>
@@ -809,7 +932,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</apu>
 
   <apu>
@@ -828,7 +954,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</apu>
 
   <apu>
@@ -847,7 +976,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</apu>
 
   <apu>
@@ -866,7 +998,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</apu>
 
   <apu>
@@ -885,7 +1020,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</apu>
 
 <!-- page 2 - Startup -->
@@ -906,7 +1044,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
   </startup>
 
   <startup>
@@ -925,7 +1066,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</startup>
 
   <startup>
@@ -944,7 +1088,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</startup>
 
   <startup>
@@ -963,7 +1110,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</startup>
 
   <startup>
@@ -982,7 +1132,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</startup>
 
   <startup>
@@ -1001,7 +1154,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</startup>
 
   <startup>
@@ -1020,7 +1176,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</startup>
 
   <startup>
@@ -1039,7 +1198,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</startup>
 
   <startup>
@@ -1058,7 +1220,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</startup>
 
   <startup>
@@ -1077,7 +1242,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</startup>
 
   <startup>
@@ -1096,7 +1264,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</startup>
 
   <startup>
@@ -1115,7 +1286,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</startup>
 
   <startup>
@@ -1134,7 +1308,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</startup>
 
   <startup>
@@ -1153,7 +1330,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</startup>
 
   <startup>
@@ -1172,7 +1352,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 		<delay-sec>0</delay-sec>
 	</startup>
 
@@ -1192,7 +1375,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</startup>
 
 <!-- page 3 - Pressurization -->
@@ -1213,7 +1399,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</pressur>
 
   <pressur>
@@ -1232,7 +1421,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</pressur>
 
 <!-- Page 4 - Left Engine Start -->
@@ -1253,7 +1445,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</lstart>
 
   <lstart>
@@ -1272,7 +1467,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</lstart>
 
   <lstart>
@@ -1291,7 +1489,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</lstart>
 
   <lstart>
@@ -1310,7 +1511,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</lstart>
 
   <lstart>
@@ -1329,7 +1533,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</lstart>
 
   <lstart>
@@ -1348,7 +1555,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</lstart>
 
   <lstart>
@@ -1367,7 +1577,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</lstart>
 
   <lstart>
@@ -1386,7 +1599,11 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+				<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
+
 		<delay-sec>1</delay-sec>
 	</lstart>
 
@@ -1406,7 +1623,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</lstart>
 
   <lstart>
@@ -1425,7 +1645,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</lstart>
 
   <lstart>
@@ -1444,7 +1667,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</lstart>
 
   <lstart>
@@ -1463,7 +1689,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</lstart>
 
   <lstart>
@@ -1482,7 +1711,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</lstart>
 
   <lstart>
@@ -1501,7 +1733,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</lstart>
 
   <lstart>
@@ -1520,7 +1755,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</lstart>
 
   <lstart>
@@ -1539,7 +1777,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</lstart>
 
 <!-- Page 5 - Right engine Start -->
@@ -1560,7 +1801,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</rstart>
 
   <rstart>
@@ -1579,7 +1823,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</rstart>
 
   <rstart>
@@ -1598,7 +1845,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</rstart>
 
   <rstart>
@@ -1617,7 +1867,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</rstart>
 
   <rstart>
@@ -1636,7 +1889,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</rstart>
 
   <rstart>
@@ -1655,7 +1911,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</rstart>
 
   <rstart>
@@ -1674,7 +1933,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</rstart>
 
   <rstart>
@@ -1693,7 +1955,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 		<delay-sec>1</delay-sec>
 	</rstart>
 
@@ -1713,7 +1978,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</rstart>
 
   <rstart>
@@ -1732,7 +2000,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</rstart>
 
   <rstart>
@@ -1751,7 +2022,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</rstart>
 
   <rstart>
@@ -1770,7 +2044,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</rstart>
 
   <rstart>
@@ -1789,7 +2066,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</rstart>
 
   <rstart>
@@ -1808,7 +2088,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</rstart>
 
   <rstart>
@@ -1827,7 +2110,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</rstart>
 
   <rstart>
@@ -1846,7 +2132,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</rstart>
 
 <!-- Page 5 - Before Taxi -->
@@ -1867,7 +2156,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</btaxi>
 
   <btaxi>
@@ -1886,7 +2178,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</btaxi>
 
   <btaxi>
@@ -1905,7 +2200,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</btaxi>
 
   <btaxi>
@@ -1924,7 +2222,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</btaxi>
 
   <btaxi>
@@ -1943,7 +2244,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 		<delay-sec>0</delay-sec>
 	</btaxi>
 
@@ -1963,7 +2267,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</btaxi>
 
   <btaxi>
@@ -1982,7 +2289,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</btaxi>
 
   <btaxi>
@@ -2001,7 +2311,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</btaxi>
 
   <btaxi>
@@ -2020,7 +2333,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</btaxi>
 
   <btaxi>
@@ -2039,7 +2355,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</btaxi>
 
   <btaxi>
@@ -2058,7 +2377,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</btaxi>
 
   <btaxi>
@@ -2077,7 +2399,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 		<delay-sec>1</delay-sec>
 	</btaxi>
 
@@ -2097,7 +2422,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</btaxi>
 
   <btaxi>
@@ -2116,7 +2444,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 		<delay-sec>1</delay-sec>
 	</btaxi>
 
@@ -2136,7 +2467,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</btaxi>
 
   <btaxi>
@@ -2155,7 +2489,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</btaxi>
 
   <btaxi>
@@ -2174,7 +2511,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</btaxi>
 
   <btaxi>
@@ -2193,7 +2533,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</btaxi>
 
   <btaxi>
@@ -2212,7 +2555,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</btaxi>
 
   <btaxi>
@@ -2231,7 +2577,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</btaxi>
 
 <!-- Page 7 - Taxiing -->
@@ -2252,7 +2601,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</taxi>
 
   <taxi>
@@ -2271,7 +2623,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</taxi>
 
   <taxi>
@@ -2290,7 +2645,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</taxi>
 
   <taxi>
@@ -2309,7 +2667,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</taxi>
 
   <taxi>
@@ -2328,11 +2689,14 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</taxi>
 
   <taxi>
-		<name>pilot82</name>
+		<name>copilot83</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/advance-slowly.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -2347,11 +2711,14 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</taxi>
 
   <taxi>
-		<name>copilot83</name>
+		<name>copilot84</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/brakes.wav</path>
 		<mode>once</mode>
     <condition>
@@ -2366,11 +2733,14 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</taxi>
 
   <taxi>
-		<name>pilot83</name>
+		<name>pilot84</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/checked.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -2385,12 +2755,15 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 		<delay-sec>0</delay-sec>
 	</taxi>
 
   <taxi>
-		<name>copilot84</name>
+		<name>copilot85</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/flight-instruments.wav</path>
 		<mode>once</mode>
     <condition>
@@ -2405,11 +2778,14 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</taxi>
 
   <taxi>
-		<name>pilot84</name>
+		<name>pilot85</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/checked.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -2424,45 +2800,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
-	</taxi>
-
-  <taxi>
-		<name>copilot85</name>
-    <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/taxi-to-runway.wav</path>
-		<mode>once</mode>
-    <condition>
-			<and>
-				<equals>
-					<property>instrumentation/checklists/nr-voice</property>
-					<value>11</value>
-				</equals>
-				<equals>
-					<property>instrumentation/checklists/nr-page</property>
-					<value>7</value>
-				</equals>
-			</and>
-    </condition>
-		<volume>0.8</volume>
-	</taxi>
-
-  <taxi>
-		<name>pilot85</name>
-    <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/max-20kts.wav</path>
-		<mode>once</mode>
-		<condition>
-			<and>
-				<equals>
-					<property>instrumentation/checklists/nr-voice</property>
-					<value>12</value>
-				</equals>
-				<equals>
-					<property>instrumentation/checklists/nr-page</property>
-					<value>7</value>
-				</equals>
-			</and>
-		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</taxi>
 
 <!-- Page 8 - Before Takeoff -->
@@ -2483,7 +2824,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</btakeoff>
 
   <btakeoff>
@@ -2502,7 +2846,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</btakeoff>
 
   <btakeoff>
@@ -2521,7 +2868,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</btakeoff>
 
   <btakeoff>
@@ -2544,7 +2894,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</btakeoff>
 
   <btakeoff>
@@ -2567,7 +2920,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</btakeoff>
 
   <btakeoff>
@@ -2590,7 +2946,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</btakeoff>
 
   <btakeoff>
@@ -2609,7 +2968,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</btakeoff>
 
   <btakeoff>
@@ -2628,7 +2990,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</btakeoff>
 
   <btakeoff>
@@ -2647,7 +3012,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</btakeoff>
 
   <btakeoff>
@@ -2666,7 +3034,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</btakeoff>
 
   <btakeoff>
@@ -2685,7 +3056,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</btakeoff>
 
   <btakeoff>
@@ -2704,7 +3078,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</btakeoff>
 
   <btakeoff>
@@ -2723,7 +3100,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</btakeoff>
 
   <btakeoff>
@@ -2742,7 +3122,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</btakeoff>
 
   <btakeoff>
@@ -2761,7 +3144,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</btakeoff>
 
   <btakeoff>
@@ -2780,7 +3166,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</btakeoff>
 
   <btakeoff>
@@ -2799,7 +3188,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</btakeoff>
 
   <btakeoff>
@@ -2818,7 +3210,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</btakeoff>
 
 <!-- Page 9 - Takeoff -->
@@ -2839,7 +3234,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</takeoff>
 
   <takeoff>
@@ -2858,7 +3256,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</takeoff>
 
   <takeoff>
@@ -2877,7 +3278,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</takeoff>
 
   <takeoff>
@@ -2896,7 +3300,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</takeoff>
 
   <takeoff>
@@ -2915,7 +3322,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</takeoff>
 
   <takeoff>
@@ -2934,7 +3344,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</takeoff>
 
   <takeoff>
@@ -2956,7 +3369,10 @@
 				</not>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</takeoff>
 
   <takeoff>
@@ -2975,7 +3391,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</takeoff>
 
   <takeoff>
@@ -2998,7 +3417,10 @@
 				</greater-than>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</takeoff>
 
   <takeoff>
@@ -3017,7 +3439,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</takeoff>
 
   <takeoff>
@@ -3036,7 +3461,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</takeoff>
 
   <takeoff>
@@ -3055,7 +3483,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</takeoff>
 
   <takeoff>
@@ -3074,7 +3505,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</takeoff>
 
   <takeoff>
@@ -3093,7 +3527,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</takeoff>
 
   <takeoff>
@@ -3112,7 +3549,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</takeoff>
 
   <takeoff>
@@ -3131,7 +3571,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</takeoff>
 
   <takeoff>
@@ -3150,7 +3593,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</takeoff>
 
   <takeoff>
@@ -3169,7 +3615,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</takeoff>
 
   <takeoff>
@@ -3188,7 +3637,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</takeoff>
 
   <takeoff>
@@ -3207,7 +3659,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</takeoff>
 
 <!-- Page 10 - APU Shutdown -->
@@ -3228,7 +3683,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</apusd>
 
   <apusd>
@@ -3247,7 +3705,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</apusd>
 
   <apusd>
@@ -3266,7 +3727,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</apusd>
 
   <apusd>
@@ -3285,7 +3749,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</apusd>
 
   <apusd>
@@ -3304,7 +3771,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</apusd>
 
   <apusd>
@@ -3323,7 +3793,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</apusd>
 
   <apusd>
@@ -3342,7 +3815,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</apusd>
 
   <apusd>
@@ -3361,7 +3837,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</apusd>
 
   <apusd>
@@ -3380,7 +3859,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</apusd>
 
   <apusd>
@@ -3399,7 +3881,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</apusd>
 
 <!-- Page 11 - Cruise Climb -->
@@ -3420,7 +3905,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</crcl>
 
   <crcl>
@@ -3439,7 +3927,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</crcl>
 
   <crcl>
@@ -3458,7 +3949,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</crcl>
 
   <crcl>
@@ -3477,7 +3971,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</crcl>
 
   <crcl>
@@ -3496,7 +3993,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</crcl>
 
   <crcl>
@@ -3515,7 +4015,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</crcl>
 
   <crcl>
@@ -3534,7 +4037,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</crcl>
 
   <crcl>
@@ -3553,7 +4059,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</crcl>
 
   <crcl>
@@ -3572,7 +4081,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</crcl>
 
   <crcl>
@@ -3591,7 +4103,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</crcl>
 
 <!-- Page 12 - Cruise -->
@@ -3612,7 +4127,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</cruise>
 
   <cruise>
@@ -3631,7 +4149,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</cruise>
 
   <cruise>
@@ -3650,7 +4171,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</cruise>
 
   <cruise>
@@ -3669,7 +4193,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</cruise>
 
 <!-- Page 13 - Descent -->
@@ -3690,7 +4217,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</descent>
 
   <descent>
@@ -3709,7 +4239,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</descent>
 
   <descent>
@@ -3728,7 +4261,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</descent>
 
   <descent>
@@ -3748,7 +4284,10 @@
 				<property>controls/APU/running</property>				
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</descent>
 
   <descent>
@@ -3770,7 +4309,10 @@
 				</not>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</descent>
 
   <descent>
@@ -3789,7 +4331,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</descent>
 
   <descent>
@@ -3808,7 +4353,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</descent>
 
 <!-- Page 14 - Approach -->
@@ -3829,7 +4377,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</approach>
 
   <approach>
@@ -3848,7 +4399,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</approach>
 
   <approach>
@@ -3867,7 +4421,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</approach>
 
   <approach>
@@ -3886,7 +4443,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</approach>
 
   <approach>
@@ -3905,7 +4465,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</approach>
 
   <approach>
@@ -3924,7 +4487,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</approach>
 
   <approach>
@@ -3943,7 +4509,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</approach>
 
   <approach>
@@ -3962,7 +4531,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+				<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</approach>
 
   <approach>
@@ -3981,7 +4553,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</approach>
 
   <approach>
@@ -4000,7 +4575,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</approach>
 
   <approach>
@@ -4023,7 +4601,10 @@
 				</less-than>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</approach>
 
   <approach>
@@ -4042,7 +4623,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</approach>
 
   <approach>
@@ -4061,7 +4645,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</approach>
 
   <approach>
@@ -4080,7 +4667,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</approach>
 
   <approach>
@@ -4099,7 +4689,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</approach>
 
   <approach>
@@ -4118,7 +4711,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</approach>
 
   <approach>
@@ -4137,7 +4733,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</approach>
 
   <approach>
@@ -4156,7 +4755,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</approach>
 
   <approach>
@@ -4175,7 +4777,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</approach>
 
   <approach>
@@ -4194,7 +4799,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</approach>
 
   <approach>
@@ -4217,7 +4825,10 @@
 				</less-than>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</approach>
 
   <approach>
@@ -4236,7 +4847,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</approach>
 
   <approach>
@@ -4255,7 +4869,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</approach>
 
   <approach>
@@ -4274,7 +4891,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</approach>
 
   <approach>
@@ -4293,7 +4913,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</approach>
 
   <approach>
@@ -4312,7 +4935,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</approach>
 
 <!-- Page 15 - Before Landing -->
@@ -4333,7 +4959,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</blanding>
 
   <blanding>
@@ -4352,7 +4981,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</blanding>
 
   <blanding>
@@ -4371,7 +5003,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</blanding>
 
   <blanding>
@@ -4390,7 +5025,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</blanding>
 
   <blanding>
@@ -4409,7 +5047,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</blanding>
 
   <blanding>
@@ -4428,7 +5069,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</blanding>
 
 <!-- Page 17 - After Landing -->
@@ -4449,7 +5093,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</alanding>
 
   <alanding>
@@ -4468,7 +5115,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</alanding>
 
   <alanding>
@@ -4487,7 +5137,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</alanding>
 
   <alanding>
@@ -4506,7 +5159,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</alanding>
 
   <alanding>
@@ -4525,7 +5181,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</alanding>
 
   <alanding>
@@ -4544,7 +5203,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</alanding>
 
   <alanding>
@@ -4563,7 +5225,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</alanding>
 
   <alanding>
@@ -4582,7 +5247,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</alanding>
 
   <alanding>
@@ -4601,7 +5269,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</alanding>
 
   <alanding>
@@ -4620,7 +5291,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</alanding>
 
 <!-- Page 18 - Shutdown -->
@@ -4641,7 +5315,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</shutdown>
 
   <shutdown>
@@ -4660,7 +5337,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</shutdown>
 
   <shutdown>
@@ -4679,7 +5359,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</shutdown>
 
   <shutdown>
@@ -4698,7 +5381,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</shutdown>
 
   <shutdown>
@@ -4717,7 +5403,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</shutdown>
 
   <shutdown>
@@ -4736,7 +5425,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</shutdown>
 
   <shutdown>
@@ -4755,7 +5447,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</shutdown>
 
   <shutdown>
@@ -4774,7 +5469,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</shutdown>
 
   <shutdown>
@@ -4793,7 +5491,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</shutdown>
 
   <shutdown>
@@ -4812,7 +5513,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 		<delay-sec>1</delay-sec>
 	</shutdown>
 
@@ -4832,7 +5536,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</shutdown>
 
   <shutdown>
@@ -4851,7 +5558,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 		<delay-sec>1</delay-sec>
 	</shutdown>
 
@@ -4872,7 +5582,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</shutdown>
 
   <shutdown>
@@ -4891,7 +5604,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</shutdown>
 
   <shutdown>
@@ -4910,7 +5626,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</shutdown>
 
   <shutdown>
@@ -4929,7 +5648,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</shutdown>
 
   <shutdown>
@@ -4948,7 +5670,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</shutdown>
 
   <shutdown>
@@ -4967,7 +5692,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</shutdown>
 
   <shutdown>
@@ -4986,7 +5714,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</shutdown>
 
   <shutdown>
@@ -5005,7 +5736,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</shutdown>
 
   <shutdown>
@@ -5024,7 +5758,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</shutdown>
 
   <shutdown>
@@ -5043,7 +5780,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</shutdown>
 
   <shutdown>
@@ -5062,7 +5802,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</shutdown>
 
   <shutdown>
@@ -5081,7 +5824,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</shutdown>
 
 
@@ -5101,7 +5847,10 @@
 				</equals>
 			</and>
     </condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</shutdown>
 
   <shutdown>
@@ -5120,7 +5869,10 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>0.8</volume>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
 	</shutdown>
 
 <!-- Engines -->
@@ -5838,7 +6590,7 @@
         				<property>sim/signals/fdm-initialized</property>
             	    <volume>
                 		<property>sim/signals/fdm-initialized</property>
-         			     <factor>1</factor>
+         			     <factor>0.5</factor>
             	   </volume>
             <position>
                 <x>-5.20 </x>
@@ -6223,7 +6975,7 @@
             </condition>
             <volume>
                 <property>sim/signals/fdm-initialized</property>
-                <factor>1</factor>
+                <factor>0.5</factor>
             </volume>
             <position>
                 <x>-6.6 </x>
@@ -6246,7 +6998,7 @@
             </condition>
            <volume>
                 <property>sim/signals/fdm-initialized</property>
-                <factor>1</factor>
+                <factor>0.5</factor>
             </volume>
             <position>
                 <x>-6.6 </x>
@@ -6267,7 +7019,7 @@
             </condition>
             <volume>
                 <property>sim/signals/fdm-initialized</property>
-                <factor>1</factor>
+                <factor>0.5</factor>
             </volume>
             <position>
                 <x>-0.6 </x>
@@ -6294,7 +7046,7 @@
             </condition>
             <volume>
                 <property>sim/signals/fdm-initialized</property>
-                <factor>1</factor>
+                <factor>0.5</factor>
             </volume>
             <position>
                 <x>-0.6 </x>
@@ -6317,7 +7069,7 @@
             </condition>
             <volume>
                 <property>sim/signals/fdm-initialized</property>
-                <factor>1</factor>
+                <factor>0.5</factor>
             </volume>
             <position>
                 <x>-0.6 </x>
@@ -6344,7 +7096,7 @@
             </condition>
             <volume>
                 <property>sim/signals/fdm-initialized</property>
-                <factor>1</factor>
+                <factor>0.5</factor>
             </volume>
             <position>
                 <x>-0.6 </x>
@@ -6367,7 +7119,7 @@
             </condition>
             <volume>
                 <property>sim/signals/fdm-initialized</property>
-                <factor>1</factor>
+                <factor>0.5</factor>
             </volume>
             <position>
                 <x>-5.70 </x>
@@ -6394,7 +7146,7 @@
             </condition>
             <volume>
                 <property>sim/signals/fdm-initialized</property>
-                <factor>1</factor>
+                <factor>0.5</factor>
             </volume>
             <position>
                 <x>-5.70 </x>
@@ -6415,7 +7167,7 @@
             </condition>
             <volume>
                 <property>sim/signals/fdm-initialized</property>
-                <factor>1</factor>
+                <factor>0.5</factor>
             </volume>
             <position>
                 <x>-5.90 </x>
@@ -6442,7 +7194,7 @@
             </condition>
             <volume>
                 <property>sim/signals/fdm-initialized</property>
-                <factor>1</factor>
+                <factor>0.5</factor>
             </volume>
             <position>
                 <x>-5.90 </x>
@@ -6463,7 +7215,7 @@
             </condition>
             <volume>
                 <property>sim/signals/fdm-initialized</property>
-                <factor>1</factor>
+                <factor>0.5</factor>
             </volume>
             <position>
                 <x>-6.00 </x>
@@ -6490,7 +7242,7 @@
             </condition>
             <volume>
                 <property>sim/signals/fdm-initialized</property>
-                <factor>1</factor>
+                <factor>0.5</factor>
             </volume>
             <position>
                 <x>-6.00 </x>
@@ -6511,7 +7263,7 @@
             </condition>
             <volume>
                 <property>sim/signals/fdm-initialized</property>
-                <factor>1</factor>
+                <factor>0.5</factor>
             </volume>
             <position>
                 <x>-6.50 </x>
@@ -6538,7 +7290,7 @@
             </condition>
             <volume>
                 <property>sim/signals/fdm-initialized</property>
-                <factor>1</factor>
+                <factor>0.5</factor>
             </volume>
             <position>
                 <x>-6.50 </x>
@@ -6559,7 +7311,7 @@
             </condition>
             <volume>
                 <property>sim/signals/fdm-initialized</property>
-                <factor>1</factor>
+                <factor>0.5</factor>
             </volume>
             <position>
                 <x>-6.30 </x>
@@ -6586,7 +7338,7 @@
             </condition>
             <volume>
                 <property>sim/signals/fdm-initialized</property>
-                <factor>1</factor>
+                <factor>0.5</factor>
             </volume>
             <position>
                 <x>-6.30 </x>
@@ -6607,7 +7359,7 @@
             </condition>
             <volume>
                 <property>sim/signals/fdm-initialized</property>
-                <factor>1</factor>
+                <factor>0.5</factor>
             </volume>
             <position>
                 <x>-5.80 </x>
@@ -6634,7 +7386,7 @@
             </condition>
             <volume>
                 <property>sim/signals/fdm-initialized</property>
-                <factor>1</factor>
+                <factor>0.5</factor>
             </volume>
             <position>
                 <x>-5.80 </x>
@@ -6655,7 +7407,7 @@
             </condition>
             <volume>
                 <property>sim/signals/fdm-initialized</property>
-                <factor>1</factor>
+                <factor>0.5</factor>
             </volume>
             <position>
                 <x>-6.30 </x>
@@ -6682,7 +7434,7 @@
             </condition>
             <volume>
                 <property>sim/signals/fdm-initialized</property>
-                <factor>1</factor>
+                <factor>0.5</factor>
             </volume>
             <position>
                 <x>-6.30 </x>
@@ -6703,7 +7455,7 @@
             </condition>
             <volume>
                 <property>sim/signals/fdm-initialized</property>
-                <factor>1</factor>
+                <factor>0.5</factor>
             </volume>
             <position>
                 <x>-5.80 </x>
@@ -6730,7 +7482,7 @@
             </condition>
             <volume>
                 <property>sim/signals/fdm-initialized</property>
-                <factor>1</factor>
+                <factor>0.5</factor>
             </volume>
             <position>
                 <x>-5.80 </x>
@@ -6750,7 +7502,7 @@
           </condition>
           <volume>
             <property>sim/signals/fdm-initialized</property>
-            <factor>1</factor>
+            <factor>0.5</factor>
           </volume>
           <position>
             <x>-4.20 </x>
@@ -6776,7 +7528,7 @@
           </condition>
           <volume>
             <property>sim/signals/fdm-initialized</property>
-            <factor>1</factor>
+            <factor>0.5</factor>
           </volume>
           <position>
             <x>-4.20 </x>
@@ -6792,7 +7544,7 @@
             <property>controls/tables/table1/cache/position-norm</property>
           <volume>
             <property>sim/signals/fdm-initialized</property>
-            <factor>1</factor>
+            <factor>0.5</factor>
           </volume>
           <position>
             <x>-4.20 </x>
@@ -6811,7 +7563,7 @@
           </condition>
           <volume>
             <property>sim/signals/fdm-initialized</property>
-            <factor>1</factor>
+            <factor>0.5</factor>
           </volume>
           <position>
             <x>-1.80 </x>
@@ -6837,7 +7589,7 @@
           </condition>
           <volume>
             <property>sim/signals/fdm-initialized</property>
-            <factor>1</factor>
+            <factor>0.5</factor>
           </volume>
           <position>
             <x>-1.80 </x>
@@ -6853,7 +7605,7 @@
           <property>controls/tables/table2/cache/position-norm</property>
           <volume>
             <property>sim/signals/fdm-initialized</property>
-            <factor>1</factor>
+            <factor>0.5</factor>
           </volume>
           <position>
             <x>-4.20 </x>
@@ -6872,7 +7624,7 @@
         </condition>
         <volume>
           <property>sim/signals/fdm-initialized</property>
-          <factor>1</factor>
+          <factor>0.5</factor>
         </volume>
         <position>
           <x>-1.80 </x>
@@ -6898,7 +7650,7 @@
           </condition>
           <volume>
             <property>sim/signals/fdm-initialized</property>
-            <factor>1</factor>
+            <factor>0.5</factor>
           </volume>
           <position>
               <x>-1.80 </x>
@@ -6914,7 +7666,7 @@
             <property>controls/tables/table3/cache/position-norm</property>
           <volume>
             <property>sim/signals/fdm-initialized</property>
-            <factor>1</factor>
+            <factor>0.5</factor>
           </volume>
           <position>
             <x>-4.20 </x>
@@ -6933,7 +7685,7 @@
           </condition>
           <volume>
             <property>sim/signals/fdm-initialized</property>
-            <factor>1</factor>
+            <factor>0.5</factor>
           </volume>
           <position>
             <x>-4.10 </x>
@@ -6959,7 +7711,7 @@
           </condition>
           <volume>
             <property>sim/signals/fdm-initialized</property>
-            <factor>1</factor>
+            <factor>0.5</factor>
           </volume>
           <position>
             <x>-4.10 </x>
@@ -6975,7 +7727,7 @@
             <property>controls/tables/table4/cache/position-norm</property>
           <volume>
             <property>sim/signals/fdm-initialized</property>
-            <factor>1</factor>
+            <factor>0.5</factor>
         </volume>
           <position>
             <x>-4.20 </x>

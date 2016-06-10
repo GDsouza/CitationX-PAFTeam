@@ -55,8 +55,8 @@ var R6 = ['','FREE & CORRECT','ON','ON','CODE SET / STBY','SET','SET','SET','COP
 
 ### TAXIING ###
 var T7 = "TAXIING";
-var L7 = ['','Parking Brake','Taxi Area','Throttles','Brakes','Flight Instruments','Taxi to Runway'];
-var R7 = ['','OFF','CLEAR','ADVANCE SLOWLY','CHECK','CHECK','Max 20 kts'];
+var L7 = ['','Parking Brake','Taxi Area','Throttles','Brakes','Flight Instruments',''];
+var R7 = ['','OFF','CLEAR','ADVANCE SLOWLY','CHECK','CHECK','','TAXI TO RUNWAY : Max 20 kts   '];
 
 ### BEFORE TAKEOFF ###
 var T8 = "BEFORE TAKEOFF";
@@ -385,10 +385,9 @@ var voices_prop = func {
 	if (page == 7) {   ### Taxiing ###
 		if (!getprop("controls/gear/brake-parking")) {setprop("instrumentation/checklists/chk[0]",1)}
 		setprop("instrumentation/checklists/chk[1]",1);
-		if (getprop("controls/engines/engine/throttle") > 0.25 and getprop("controls/engines/engine[1]/throttle") > 0.25) {setprop("instrumentation/checklists/chk[2]",1)}
+		setprop("instrumentation/checklists/chk[2]",1);
 		if (getprop("controls/gear/brake-left") and getprop("controls/gear/brake-right")) {setprop("instrumentation/checklists/chk[3]",1)}
 		setprop("instrumentation/checklists/chk[4]",1);
-		setprop("instrumentation/checklists/chk[5]",1);
 	}
 
 	if (page == 8) {   ### Before Takeoff ###
