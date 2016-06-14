@@ -62,6 +62,7 @@
         <object-name>RMU.btn6</object-name>
         <object-name>RMU.nav</object-name>
         <object-name>RMU.adf</object-name>
+        <object-name>RMU.lamp</object-name>
         <condition>
 						<or>
 	           	<property>systems/electrical/left-emer-bus</property>
@@ -115,26 +116,81 @@
         <object-name>Com.num</object-name>
         <object-name>Nav.num</object-name>
         <object-name>Atc.num</object-name>
+        <object-name>Atc.mode</object-name>
         <object-name>Adf.num</object-name>
         <object-name>RMU.period</object-name>
         <object-name>RMU.selector</object-name>
         <object-name>RMU.screen</object-name>
         <object-name>RMU.lamp</object-name>
+        <object-name>Callsign</object-name>
     </animation>
 
     <animation>
-        <name>green</name>
+        <type>select</type>
+        <condition>
+            <greater-than>
+               <property>instrumentation/transponder/inputs/knob-mode</property>
+               <value>0</value>
+              </greater-than>
+        </condition>
+        <object-name>Atc.1</object-name>
+        <object-name>Atc.2</object-name>
+        <object-name>Atc.3</object-name>
+        <object-name>Atc.4</object-name>
+        <object-name>Callsign</object-name>
+		</animation>
+
+    <animation>
+				<name>green</name>
         <type>material</type>
-        <object-name>RMU.lamp</object-name>
-        <emission>
-            <red-prop>sim/color-set/green/r</red-prop>
-            <green-prop>sim/color-set/green/g</green-prop>
-            <blue-prop>sim/color-set/green/b</blue-prop>
-            <alpha-prop>sim/color-set/green/a</alpha-prop>
-        </emission>
+        <object-name>Atc.mode</object-name>
+				<emission>
+					<red>0</red>
+					<green>0.6</green>
+					<blue>0</blue>
+				</emission>
+        <ambient>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </ambient>
+        <diffuse>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </diffuse>
+        <specular>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </specular>
     </animation>
 
-
+    <animation>
+				<name>light-white</name>
+        <type>material</type>
+        <object-name>Callsign</object-name>
+				<emission>
+					<red>0.7</red>
+					<green>0.7</green>
+					<blue>0.7</blue>
+				</emission>
+        <ambient>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </ambient>
+        <diffuse>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </diffuse>
+        <specular>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </specular>
+    </animation>
 
  <params>
   <rmu-x>/instrumentation/rmu/unit[0]/selected-xoffset</rmu-x>
@@ -145,9 +201,7 @@
   <nav>/instrumentation/nav[0]/frequencies/selected-mhz</nav>
   <nav-stby>/instrumentation/nav[0]/frequencies/standby-mhz</nav-stby>
   <adf>/instrumentation/adf/frequencies/selected-khz</adf>
-  <atc1>/instrumentation/kt-70/inputs/digit1</atc1>
-  <atc2>/instrumentation/kt-70/inputs/digit2</atc2>
-  <atc-freq>/instrumentation/kt-70/outputs/id-code</atc-freq>
+  <atc-freq>/instrumentation/transponder/id-code</atc-freq>
 </params>
 
     <animation>
@@ -189,32 +243,43 @@
         </axis>
     </animation>
 
-<animation>
-    <type>translate</type>
-    <object-name>RMU.selector</object-name>
-    <property>instrumentation/rmu/unit/selected-xoffset</property>
-    <factor>0.0241</factor>
-    <axis>
-        <x>0</x>
-        <y>1</y>
-        <z>0</z>
-    </axis>
-</animation>
+		<animation>
+				<type>translate</type>
+				<object-name>RMU.selector</object-name>
+				<property>instrumentation/rmu/unit/selected-xoffset</property>
+				<factor>0.0241</factor>
+				<axis>
+				    <x>0</x>
+				    <y>1</y>
+				    <z>0</z>
+				</axis>
+		</animation>
 
-<animation>
-    <type>translate</type>
-    <object-name>RMU.selector</object-name>
-    <property>instrumentation/rmu/unit/selected-yoffset</property>
-    <factor>0.0173</factor>
-    <axis>
-        <x>0</x>
-        <y>0</y>
-        <z>-1</z>
-    </axis>
-</animation>
+		<animation>
+				<type>translate</type>
+				<object-name>RMU.selector</object-name>
+				<property>instrumentation/rmu/unit/selected-yoffset</property>
+				<factor>0.0173</factor>
+				<axis>
+				    <x>0</x>
+				    <y>0</y>
+				    <z>-1</z>
+				</axis>
+		</animation>
+
+		<animation>
+				<type>translate</type>
+				<object-name>RMU.selector</object-name>
+				<property>instrumentation/rmu/unit/selected-yoffset1</property>
+				<factor>0.006</factor>
+				<axis>
+				    <x>0</x>
+				    <y>0</y>
+				    <z>-1</z>
+				</axis>
+		</animation>
 
 <!-- Comm active-->
-
 
     <animation>
         <type>textranslate</type>
@@ -222,7 +287,7 @@
         <property alias="../../params/comm"/>
         <factor>0.001</factor>
         <step>100</step>
-	<bias>0.0005</bias>
+				<bias>0.0005</bias>
         <axis>
             <x>1</x>
             <y>0</y>
@@ -236,7 +301,7 @@
         <property alias="../../params/comm"/>
         <factor>0.01</factor>
         <step>10</step>
-	<bias>0.0005</bias>
+				<bias>0.0005</bias>
         <axis>
             <x>1</x>
             <y>0</y>
@@ -250,7 +315,7 @@
         <property alias="../../params/comm"/>
         <factor>0.1</factor>
         <step>1</step>
-	<bias>0.0005</bias>
+				<bias>0.0005</bias>
         <axis>
             <x>1</x>
             <y>0</y>
@@ -294,7 +359,7 @@
         <property alias="../../params/comm-stby"/>
         <factor>0.001</factor>
         <step>100</step>
-	<bias>0.0005</bias>
+				<bias>0.0005</bias>
         <axis>
             <x>1</x>
             <y>0</y>
@@ -308,7 +373,7 @@
         <property alias="../../params/comm-stby"/>
         <factor>0.01</factor>
         <step>10</step>
-	<bias>0.0005</bias>
+				<bias>0.0005</bias>
         <axis>
             <x>1</x>
             <y>0</y>
@@ -322,7 +387,7 @@
         <property alias="../../params/comm-stby"/>
         <factor>0.1</factor>
         <step>1</step>
-	<bias>0.0005</bias>
+				<bias>0.0005</bias>
         <axis>
             <x>1</x>
             <y>0</y>
@@ -337,7 +402,7 @@
         <factor>1.0</factor>
         <step>0.1</step>
         <bias>0.0005</bias>
-	<axis>
+				<axis>
             <x>1</x>
             <y>0</y>
             <z>0</z>
@@ -366,7 +431,7 @@
         <property alias="../../params/nav"/>
         <factor>0.001</factor>
         <step>100</step>
-	<bias>0.005</bias>
+				<bias>0.005</bias>
         <axis>
             <x>1</x>
             <y>0</y>
@@ -380,7 +445,7 @@
         <property alias="../../params/nav"/>
         <factor>0.01</factor>
         <step>10</step>
-	<bias>0.005</bias>
+				<bias>0.005</bias>
         <axis>
             <x>1</x>
             <y>0</y>
@@ -394,7 +459,7 @@
         <property alias="../../params/nav"/>
         <factor>0.1</factor>
         <step>1</step>
-	<bias>0.005</bias>
+				<bias>0.005</bias>
         <axis>
             <x>1</x>
             <y>0</y>
@@ -438,7 +503,7 @@
         <property alias="../../params/nav-stby"/>
         <factor>0.001</factor>
         <step>100</step>
-	<bias>0.005</bias>
+				<bias>0.005</bias>
         <axis>
             <x>1</x>
             <y>0</y>
@@ -452,7 +517,7 @@
         <property alias="../../params/nav-stby"/>
         <factor>0.01</factor>
         <step>10</step>
-	<bias>0.005</bias>
+				<bias>0.005</bias>
         <axis>
             <x>1</x>
             <y>0</y>
@@ -466,7 +531,7 @@
         <property alias="../../params/nav-stby"/>
         <factor>0.1</factor>
         <step>1</step>
-	<bias>0.005</bias>
+				<bias>0.005</bias>
         <axis>
             <x>1</x>
             <y>0</y>
@@ -527,8 +592,8 @@
         <property alias="../../params/adf"/>
         <factor>0.0001</factor>
         <step>1000</step>
-	<bias>0.05</bias>
-	<axis>
+				<bias>0.05</bias>
+				<axis>
             <x>1</x>
             <y>0</y>
             <z>0</z>
@@ -541,7 +606,7 @@
         <property alias="../../params/adf"/>
         <factor>0.001</factor>
         <step>100</step>
-	<bias>0.05</bias>
+				<bias>0.05</bias>
         <axis>
             <x>1</x>
             <y>0</y>
@@ -555,7 +620,7 @@
         <property alias="../../params/adf"/>
         <factor>0.01</factor>
         <step>10</step>
-	<bias>0.05</bias>
+				<bias>0.05</bias>
         <axis>
             <x>1</x>
             <y>0</y>
@@ -569,7 +634,7 @@
         <property alias="../../params/adf"/>
         <factor>0.1</factor>
         <step>1</step>
-	<bias>0.05</bias>
+				<bias>0.05</bias>
         <axis>
             <x>1</x>
             <y>0</y>
@@ -645,21 +710,95 @@
         </axis>
     </animation>
 
+    <text>
+        <name>Atc.mode</name>
+        <offsets>
+            <x-m>0.0021</x-m>
+            <y-m>-0.011</y-m>
+            <z-m>0.0045</z-m>
+        </offsets>
+        <alignment>center-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type type="string">text-value</type>
+        <property>instrumentation/transponder/inputs/display-mode</property>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.005</character-size>
+        <character-aspect-ratio type="double">1.4</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
+        </font-resolution>
+    </text>
+
+    <text>
+        <name>Callsign</name>
+        <offsets>
+            <x-m>0.002</x-m>
+            <y-m>-0.011</y-m>
+            <z-m>0</z-m>
+        </offsets>
+        <alignment>center-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type type="string">text-value</type>
+        <property>sim/multiplay/callsign</property>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.004</character-size>
+        <character-aspect-ratio type="double">1.4</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
+        </font-resolution>
+    </text>
+
 <!--#########  Hotspots ########## -->
+
+    <animation>
+        <type>translate</type>
+        <object-name>RMU.swp1</object-name>	
+        <property>instrumentation/rmu/unit/swp1</property>
+				<factor>0.0016</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
 
     <animation>
         <type>pick</type>
         <object-name>RMU.swp1</object-name>
         <visible>true</visible>
         <action>
-            <button>0</button>
-            <repeatable>false</repeatable>
-            <binding>
-		<command>property-swap</command>
-                <property>instrumentation/comm/frequencies/standby-mhz</property>
-		<property>instrumentation/comm/frequencies/selected-mhz</property>
-            </binding>
+          <button>0</button>
+          <repeatable>false</repeatable>
+          <binding>
+						<command>property-swap</command>
+		        <property>instrumentation/comm/frequencies/standby-mhz</property>
+						<property>instrumentation/comm/frequencies/selected-mhz</property>
+          </binding>
+          <binding>
+              <command>property-toggle</command>
+              <property>instrumentation/rmu/unit/swp1</property>
+          </binding>
+					<mod-up>
+	          <binding>
+	              <command>property-toggle</command>
+	              <property>instrumentation/rmu/unit/swp1</property>
+	          </binding>
+					</mod-up>
         </action>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>RMU.swp2</object-name>	
+        <property>instrumentation/rmu/unit/swp2</property>
+				<factor>0.0016</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
     </animation>
 
     <animation>
@@ -667,14 +806,37 @@
         <object-name>RMU.swp2</object-name>
         <visible>true</visible>
         <action>
-            <button>0</button>
-            <repeatable>false</repeatable>
-            <binding>
-                <command>property-swap</command>
-                <property>instrumentation/nav/frequencies/standby-mhz</property>
-		<property>instrumentation/nav/frequencies/selected-mhz</property>
-            </binding>
+          <button>0</button>
+          <repeatable>false</repeatable>
+          <binding>
+            <command>property-swap</command>
+            <property>instrumentation/nav/frequencies/standby-mhz</property>
+						<property>instrumentation/nav/frequencies/selected-mhz</property>
+          </binding>
+          <binding>
+              <command>property-toggle</command>
+              <property>instrumentation/rmu/unit/swp2</property>
+          </binding>
+					<mod-up>
+	          <binding>
+	              <command>property-toggle</command>
+	              <property>instrumentation/rmu/unit/swp2</property>
+	          </binding>
+					</mod-up>
+
         </action>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>RMU.comm</object-name>	
+        <property>instrumentation/rmu/unit/comm</property>
+				<factor>0.0016</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
     </animation>
 
     <animation>
@@ -687,19 +849,46 @@
             <binding>
                 <command>property-assign</command>
                 <property>instrumentation/rmu/unit/selected-yoffset</property>
-		<value>0</value>
+								<value>0</value>
+            </binding>
+            <binding>
+                <command>property-assign</command>
+                <property>instrumentation/rmu/unit/selected-yoffset1</property>
+								<value>0</value>
             </binding>
             <binding>
                 <command>property-assign</command>
                 <property>instrumentation/rmu/unit/selected-xoffset</property>
-		<value>0</value>
+								<value>0</value>
             </binding>
             <binding>
                 <command>property-assign</command>
                 <property>instrumentation/rmu/unit/selected</property>
-		<value>0</value>
+								<value>0</value>
             </binding>
+            <binding>
+                <command>property-toggle</command>
+                <property>instrumentation/rmu/unit/comm</property>
+            </binding>
+						<mod-up>
+		          <binding>
+		              <command>property-toggle</command>
+		              <property>instrumentation/rmu/unit/comm</property>
+		          </binding>
+						</mod-up>
         </action>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>RMU.nav</object-name>	
+        <property>instrumentation/rmu/unit/nav</property>
+				<factor>0.0016</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
     </animation>
 
     <animation>
@@ -707,49 +896,189 @@
         <object-name>RMU.nav</object-name>
         <visible>true</visible>
         <action>
-            <button>0</button>
-            <repeatable>false</repeatable>
+          <button>0</button>
+          <repeatable>false</repeatable>
+          <binding>
+              <command>property-assign</command>
+              <property>instrumentation/rmu/unit/selected-yoffset</property>
+							<value>0</value>
+          </binding>
+          <binding>
+              <command>property-assign</command>
+              <property>instrumentation/rmu/unit/selected-yoffset1</property>
+							<value>0</value>
+          </binding>
+          <binding>
+              <command>property-assign</command>
+              <property>instrumentation/rmu/unit/selected-xoffset</property>
+							<value>1</value>
+          </binding>
+          <binding>
+              <command>property-assign</command>
+              <property>instrumentation/rmu/unit/selected</property>
+							<value>1</value>
+          </binding>
             <binding>
-                <command>property-assign</command>
-                <property>instrumentation/rmu/unit/selected-yoffset</property>
-		<value>0</value>
+                <command>property-toggle</command>
+                <property>instrumentation/rmu/unit/nav</property>
             </binding>
-            <binding>
-                <command>property-assign</command>
-                <property>instrumentation/rmu/unit/selected-xoffset</property>
-		<value>1</value>
-            </binding>
-            <binding>
-                <command>property-assign</command>
-                <property>instrumentation/rmu/unit/selected</property>
-		<value>1</value>
-            </binding>
-        </action>
+						<mod-up>
+		          <binding>
+		              <command>property-toggle</command>
+		              <property>instrumentation/rmu/unit/nav</property>
+		          </binding>
+						</mod-up>
+      </action>
     </animation>
 
     <animation>
-        <type>pick</type>
-        <object-name>RMU.atc</object-name>
-        <visible>true</visible>
-        <action>
-            <button>0</button>
-            <repeatable>false</repeatable>
-            <binding>
-                <command>property-assign</command>
-                <property>instrumentation/rmu/unit/selected-yoffset</property>
-		<value>1</value>
-            </binding>
-            <binding>
-                <command>property-assign</command>
-                <property>instrumentation/rmu/unit/selected-xoffset</property>
-		<value>0</value>
-            </binding>
-            <binding>
-                <command>property-assign</command>
-                <property>instrumentation/rmu/unit/selected</property>
-		<value>2</value>
-            </binding>
-        </action>
+        <type>translate</type>
+        <object-name>RMU.atc</object-name>	
+        <property>instrumentation/rmu/unit/atc</property>
+				<factor>0.0016</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+		    <type>pick</type>
+		    <object-name>RMU.atc</object-name>
+		    <visible>true</visible>
+		    <action>
+		      <button>0</button>
+		      <repeatable>false</repeatable>
+		      <binding>
+		        <command>property-assign</command>
+		        <property>instrumentation/rmu/unit/selected-yoffset</property>
+						<value>1</value>
+		      </binding>
+		      <binding>
+		        <command>property-assign</command>
+		        <property>instrumentation/rmu/unit/selected-yoffset1</property>
+						<value>0</value>
+		      </binding>
+		      <binding>
+		        <command>property-assign</command>
+		        <property>instrumentation/rmu/unit/selected-xoffset</property>
+						<value>0</value>
+		      </binding>
+		      <binding>
+		        <command>property-assign</command>
+		        <property>instrumentation/rmu/unit/selected</property>
+						<value>2</value>
+		      </binding>
+          <binding>
+              <command>property-toggle</command>
+              <property>instrumentation/rmu/unit/atc</property>
+          </binding>
+					<mod-up>
+	          <binding>
+	              <command>property-toggle</command>
+	              <property>instrumentation/rmu/unit/atc</property>
+	          </binding>
+					</mod-up>
+	      </action>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>RMU.mode</object-name>	
+        <property>instrumentation/rmu/unit/mode</property>
+				<factor>0.0016</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+		    <type>pick</type>
+		    <object-name>RMU.mode</object-name>
+		    <visible>true</visible>
+		    <action>
+		      <button>0</button>
+		      <repeatable>false</repeatable>
+		      <binding>
+		          <command>property-assign</command>
+		          <property>instrumentation/rmu/unit/selected-yoffset</property>
+							<value>1</value>
+		      </binding>
+		        <binding>
+		            <command>property-assign</command>
+		            <property>instrumentation/rmu/unit/selected-yoffset1</property>
+								<value>1</value>
+		        </binding>
+		      <binding>
+		          <command>property-assign</command>
+		          <property>instrumentation/rmu/unit/selected-xoffset</property>
+							<value>0</value>
+		      </binding>
+		      <binding>
+		        <command>property-assign</command>
+		        <property>instrumentation/rmu/unit/selected</property>
+						<value>4</value>
+		      </binding>
+          <binding>
+              <command>property-toggle</command>
+              <property>instrumentation/rmu/unit/mode</property>
+          </binding>
+					<mod-up>
+		        <binding>
+		            <command>property-toggle</command>
+		            <property>instrumentation/rmu/unit/mode</property>
+		        </binding>
+					</mod-up>
+		    </action>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>RMU.id</object-name>	
+        <property>instrumentation/transponder/inputs/ident-btn</property>
+				<factor>0.0016</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+      <type>pick</type>
+      <object-name>RMU.id</object-name>
+      <visible>true</visible>
+      <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+          <command>property-assign</command>
+          <property>instrumentation/transponder/inputs/ident-btn</property>
+					<value>1</value>
+        </binding>
+				<mod-up>
+					<binding>
+     				<command>property-assign</command>
+   					<property>instrumentation/transponder/inputs/ident-btn</property>
+ 						<value>0</value>
+   				</binding>
+   			</mod-up>
+      </action>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>RMU.adf</object-name>	
+        <property>instrumentation/rmu/unit/adf</property>
+				<factor>0.0016</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
     </animation>
 
     <animation>
@@ -757,92 +1086,132 @@
         <object-name>RMU.adf</object-name>
         <visible>true</visible>
         <action>
-            <button>0</button>
-            <repeatable>false</repeatable>
-            <binding>
-                <command>property-assign</command>
-                <property>instrumentation/rmu/unit/selected-yoffset</property>
-		<value>1</value>
-            </binding>
-            <binding>
-                <command>property-assign</command>
-                <property>instrumentation/rmu/unit/selected-xoffset</property>
-		<value>1</value>
-            </binding>
-            <binding>
-                <command>property-assign</command>
-                <property>instrumentation/rmu/unit/selected</property>
-		<value>3</value>
-            </binding>
+          <button>0</button>
+          <repeatable>false</repeatable>
+          <binding>
+            <command>property-assign</command>
+            <property>instrumentation/rmu/unit/selected-yoffset</property>
+						<value>1</value>
+          </binding>
+          <binding>
+            <command>property-assign</command>
+            <property>instrumentation/rmu/unit/selected-yoffset1</property>
+						<value>0</value>
+          </binding>
+          <binding>
+            <command>property-assign</command>
+            <property>instrumentation/rmu/unit/selected-xoffset</property>
+						<value>1</value>
+          </binding>
+          <binding>
+            <command>property-assign</command>
+            <property>instrumentation/rmu/unit/selected</property>
+					<value>3</value>
+          </binding>
+          <binding>
+              <command>property-toggle</command>
+              <property>instrumentation/rmu/unit/adf</property>
+          </binding>
+					<mod-up>
+	        <binding>
+	            <command>property-toggle</command>
+	            <property>instrumentation/rmu/unit/adf</property>
+	        </binding>
+				</mod-up>
         </action>
     </animation>
 
     <animation>
-        <type>pick</type>
-        <object-name>RMU.knob</object-name>
-        <visible>true</visible>
-        <action>
-          <button>0</button>
-          <button>3</button>
-          <repeatable>true</repeatable>
-    			<interval-sec>0.2</interval-sec>
-          <binding>
+		  <type>pick</type>
+		  <object-name>RMU.knob</object-name>
+		  <visible>true</visible>
+		  <action>
+		    <button>0</button>
+		    <button>3</button>
+		    <repeatable>true</repeatable>
+				<interval-sec>0.2</interval-sec>
+		    <binding>
+					<condition>
+						<equals>
+							<property>instrumentation/rmu/unit/selected</property>
+							<value>0</value>
+						</equals>
+						</condition>
+		        <command>property-adjust</command>
+							<property>instrumentation/comm/frequencies/standby-mhz</property>
+		          	<step>1</step>
+								<min>118.000</min>
+								<max>136.000</max>
+							<wrap>1</wrap>
+		      </binding>
+		      <binding>
 						<condition>
 							<equals>
 								<property>instrumentation/rmu/unit/selected</property>
-								<value>0</value>
+								<value>1</value>
 							</equals>
-							</condition>
-              <command>property-adjust</command>
-								<property>instrumentation/comm/frequencies/standby-mhz</property>
-                	<step>1</step>
-									<min>118.000</min>
-									<max>136.000</max>
-								<wrap>1</wrap>
-            </binding>
-            <binding>
-							<condition>
-								<equals>
-									<property>instrumentation/rmu/unit/selected</property>
-										<value>1</value>
-								</equals>
-							</condition>
-                <command>property-adjust</command>
-									<property>instrumentation/nav/frequencies/standby-mhz</property>
-                		<step>1</step>
-										<min>108.000</min>
-										<max>118.000</max>
-										<wrap>1</wrap>
-            </binding>
-            <binding>
-							<condition>
-								<equals>
-									<property>instrumentation/rmu/unit/selected</property>
+						</condition>
+		          <command>property-adjust</command>
+								<property>instrumentation/nav/frequencies/standby-mhz</property>
+		          		<step>1</step>
+									<min>108.000</min>
+									<max>118.000</max>
+									<wrap>1</wrap>
+		      </binding>
+		      <binding>
+						<condition>
+							<equals>
+								<property>instrumentation/rmu/unit/selected</property>
 								<value>2</value>
-								</equals>
-							</condition>
-                <command>property-adjust</command>
-									<property>instrumentation/kt-70/inputs/digit1</property>
-                	<step>1</step>
-									<min>0</min>
-									<max>9</max>
-									<wrap>1</wrap>
-            </binding>
-            <binding>
-							<condition>
-								<equals>
-									<property>instrumentation/rmu/unit/selected</property>
-								<value>3</value>
-								</equals>
-							</condition>
-                <command>property-adjust</command>
-									<property>instrumentation/adf/frequencies/selected-khz</property>
-                	<step>100</step>
-									<min>190</min>
-									<max>1800</max>
-									<wrap>1</wrap>
-            </binding>
-        </action>
+							</equals>
+						</condition>
+		          <command>property-adjust</command>
+								<property>instrumentation/transponder/id-code[2]</property>
+		          	<step>1</step>
+								<min>0</min>
+								<max>78</max>
+								<wrap>1</wrap>
+		      </binding>
+				  <binding>
+						<condition>
+							<equals>
+								<property>instrumentation/rmu/unit/selected</property>
+								<value>2</value>
+							</equals>
+						</condition>
+				    <command>property-assign</command>
+							<property>instrumentation/transponder/down-2</property>
+							<value>0</value>
+				  </binding>
+		      <binding>
+						<condition>
+							<equals>
+								<property>instrumentation/rmu/unit/selected</property>
+							<value>3</value>
+							</equals>
+						</condition>
+		          <command>property-adjust</command>
+								<property>instrumentation/adf/frequencies/selected-khz</property>
+		          	<step>100</step>
+								<min>190</min>
+								<max>1800</max>
+								<wrap>1</wrap>
+		      </binding>
+				  <binding>
+						<condition>
+							<equals>
+								<property>instrumentation/rmu/unit/selected</property>
+								<value>4</value>
+							</equals>
+						</condition>
+		          <command>property-adjust</command>
+								<property>instrumentation/transponder/inputs/knob-mode</property>
+		          	<step>1</step>
+								<min>0</min>
+								<max>6</max>
+								<wrap>1</wrap>
+				  </binding>
+		  </action>
     </animation>
 
     <animation>
@@ -888,13 +1257,24 @@
 						</equals>
 					</condition>
           <command>property-adjust</command>
-						<property>instrumentation/kt-70/inputs/digit1</property>
+						<property>instrumentation/transponder/id-code[2]</property>
             <step>-1</step>
 						<min>0</min>
-						<max>9</max>
+						<max>78</max>
 						<wrap>1</wrap>
         </binding>
         <binding>
+					<condition>
+						<equals>
+							<property>instrumentation/rmu/unit/selected</property>
+							<value>2</value>
+						</equals>
+					</condition>
+          <command>property-assign</command>
+						<property>instrumentation/transponder/down-2</property>
+						<value>1</value>
+        </binding>
+	       <binding>
 					<condition>
 						<equals>
 							<property>instrumentation/rmu/unit/selected</property>
@@ -908,6 +1288,20 @@
 						<max>1800</max>
 						<wrap>1</wrap>
         </binding>
+			  <binding>
+					<condition>
+						<equals>
+							<property>instrumentation/rmu/unit/selected</property>
+							<value>4</value>
+						</equals>
+					</condition>
+	          <command>property-adjust</command>
+							<property>instrumentation/transponder/inputs/knob-mode</property>
+	          	<step>-1</step>
+							<min>0</min>
+							<max>6</max>
+							<wrap>1</wrap>
+			  </binding>
       </action>
     </animation>
 
@@ -956,11 +1350,22 @@
 						</equals>
 					</condition>
             <command>property-adjust</command>
-						<property>instrumentation/kt-70/inputs/digit2</property>
+						<property>instrumentation/transponder/id-code[1]</property>
             <step>1</step>
 						<min>0</min>
-						<max>9</max>
+						<max>78</max>
 						<wrap>1</wrap>
+        </binding>
+        <binding>
+					<condition>
+						<equals>
+							<property>instrumentation/rmu/unit/selected</property>
+							<value>2</value>
+						</equals>
+					</condition>
+          <command>property-assign</command>
+						<property>instrumentation/transponder/down-1</property>
+						<value>0</value>
         </binding>
         <binding>
 					<condition>
@@ -976,6 +1381,20 @@
 							<max>1800</max>
 							<wrap>1</wrap>
         </binding>
+			  <binding>
+					<condition>
+						<equals>
+							<property>instrumentation/rmu/unit/selected</property>
+							<value>4</value>
+						</equals>
+					</condition>
+	          <command>property-adjust</command>
+							<property>instrumentation/transponder/inputs/knob-mode</property>
+	          	<step>1</step>
+							<min>0</min>
+							<max>6</max>
+							<wrap>1</wrap>
+			  </binding>
 	    </action>
 		</animation>
 
@@ -1021,11 +1440,22 @@
 						</equals>
 					</condition>
             <command>property-adjust</command>
-						<property>instrumentation/kt-70/inputs/digit2</property>
+						<property>instrumentation/transponder/id-code[1]</property>
             <step>-1</step>
 						<min>0</min>
-						<max>9</max>
+						<max>78</max>
 						<wrap>1</wrap>
+        </binding>
+        <binding>
+					<condition>
+						<equals>
+							<property>instrumentation/rmu/unit/selected</property>
+							<value>2</value>
+						</equals>
+					</condition>
+          <command>property-assign</command>
+						<property>instrumentation/transponder/down-1</property>
+						<value>1</value>
         </binding>
         <binding>
 					<condition>
@@ -1041,6 +1471,20 @@
 							<max>1800</max>
 							<wrap>1</wrap>
         </binding>
+			  <binding>
+					<condition>
+						<equals>
+							<property>instrumentation/rmu/unit/selected</property>
+							<value>4</value>
+						</equals>
+					</condition>
+	          <command>property-adjust</command>
+							<property>instrumentation/transponder/inputs/knob-mode</property>
+	          	<step>-1</step>
+							<min>0</min>
+							<max>6</max>
+							<wrap>1</wrap>
+			  </binding>
 	    </action>
 		</animation>
 

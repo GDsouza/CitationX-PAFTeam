@@ -166,11 +166,17 @@ props.globals.initNode("instrumentation/primus2000/dc840/etx",0,"INT");
 props.globals.initNode("instrumentation/checklists/norm",0,"BOOL");
 props.globals.initNode("instrumentation/checklists/nr-page",0,"INT");
 props.globals.initNode("instrumentation/checklists/nr-voice",0,"INT");
+props.globals.initNode("instrumentation/transponder/id-code",7777,"DOUBLE");
+props.globals.initNode("instrumentation/transponder/id-code[1]",77,"INT");
+props.globals.initNode("instrumentation/transponder/id-code[2]",77,"INT");
+props.globals.initNode("instrumentation/transponder/inputs/display-mode","STANDBY");
+props.globals.initNode("instrumentation/transponder/inputs/knob-mode",1,"INT");
 props.globals.initNode("autopilot/locks/alt-mach",0,"BOOL");
 props.globals.initNode("autopilot/locks/fms-status",0,"BOOL");
 props.globals.initNode("autopilot/settings/nav-btn",0,"BOOL");
 props.globals.initNode("autopilot/settings/fms-btn",0,"BOOL");
 props.globals.initNode("sim/sound/startup",0,"INT");
+
 var PWR2 =0;
 aircraft.livery.init("Aircraft/CitationX/Models/Liveries");
 var FHmeter = aircraft.timer.new("/instrumentation/clock/flight-meter-sec", 1,1); 
@@ -592,12 +598,48 @@ var speed_ref = func {
 		}
 }
 
+var atc_id = func {
+	var diz = getprop("instrumentation/transponder/id-code[1]");
+	var cent = getprop("instrumentation/transponder/id-code[2]");
+	var dwn_1 = getprop("instrumentation/transponder/down-1");
+	var dwn_2 = getprop("instrumentation/transponder/down-2");
+	var dg_1 = diz-int(diz/10)*10;
+	var dg_2 = int(diz/10);
+	var dg_3 = cent-int(cent/10)*10;
+	var dg_4 = int(cent/10);	
+	var dg = [dg_1,dg_2,dg_3,dg_4];
+	for (var i=0;i<4;i+=1) {
+		if (i<2 and !dwn_1 and dg[i] >7) {dg[i]=0;dg[i+1]+=1}
+		if (i<2 and dwn_1 and dg[i] >7) {dg[i]=7}
+		if (i>1 and !dwn_2 and dg[i] >7) {dg[i]=0;dg[i+1]+=1}
+		if (i>1 and dwn_2 and dg[i] >7) {dg[i]=7}
+	}	
+	diz = dg[0]+dg[1]*10;
+	cent = dg[2]+dg[3]*10;
+	setprop("instrumentation/transponder/id-code[1]",diz);
+	setprop("instrumentation/transponder/id-code[2]",cent);
+	setprop("instrumentation/transponder/id-code",diz + (cent*100));
+}
+
+setlistener("instrumentation/transponder/inputs/knob-mode", func {
+	var knob_mode = getprop("instrumentation/transponder/inputs/knob-mode");
+	var mode_display = "";
+	if (knob_mode == 0) {mode_display = ""}
+	if (knob_mode == 1) {mode_display = "STANDBY"}
+	if (knob_mode == 2) {mode_display = "TEST"}
+	if (knob_mode == 3) {mode_display = "GROUND"}
+	if (knob_mode == 4) {mode_display = "ON"}
+	if (knob_mode == 5) {mode_display = "ALT"}
+	setprop("instrumentation/transponder/inputs/display-mode",mode_display);
+});
+
 ########## MAIN ##############
 
 var update_systems = func{
     LHeng.update();
     RHeng.update();
 		chrono_update();
+		atc_id();
     FHupdate(0);
     tire.get_rotation("yasim");
 		speed_ref();
