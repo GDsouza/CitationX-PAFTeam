@@ -30,7 +30,7 @@ var ind_kt = "instrumentation/airspeed-indicator/indicated-speed-kt";
 
 setlistener("/sim/signals/fdm-initialized", func {
     setprop("instrumentation/nd/range",wx_range[wx_index]);
-    print("Flight Director ...Check");
+    print("Flight Director ...Checked");
     settimer(update_fd, 30);
 });
 

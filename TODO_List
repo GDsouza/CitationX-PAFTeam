@@ -39,7 +39,7 @@ PANEL : Coder le pavé de boutons à gauche du PFD (pilote et co-pilote)
 
 PEDESTAL : 	Animer les boutons de TRIM à gauche des throttles
 						Animer les boutons sous les throttles
-						Coder le transpondeur						
+					#	Coder le transpondeur	- Fait 18/06/2016					
 
 Pil auto : Vérifier toutes les fonctions
 					# Mise en conformité fonction FLC - Fait 21/01/2016				

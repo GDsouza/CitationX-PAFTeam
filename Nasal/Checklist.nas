@@ -17,6 +17,11 @@ props.globals.initNode("instrumentation/checklists/chklst-pilot",0,"BOOL");
 for (var ind=0;ind<15;ind+=1) {
 	props.globals.initNode("instrumentation/checklists/chk["~ind~"]",0,"BOOL");
 }
+
+setlistener("/sim/signals/fdm-initialized", func {
+    print("Vocal Checklists ...Ok");
+});
+
 ####################### CHECKLISTS ######################
 
 ### PRESTART ###

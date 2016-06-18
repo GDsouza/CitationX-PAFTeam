@@ -151,7 +151,7 @@ var alternator2 = Alternator.new(1,"controls/electric/engine[1]/generator","/eng
 setlistener("/sim/signals/fdm-initialized", func {
     init_switches();
     settimer(update_electrical,5);
-    print("Electrical System ... ok");
+    print("Electrical System ... Ok");
 });
 
 var init_switches = func{

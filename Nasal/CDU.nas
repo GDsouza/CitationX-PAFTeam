@@ -1134,4 +1134,5 @@ var cdu = func{
 setlistener("/sim/signals/fdm-initialized", func {
 	init();
 	cdu();
+  print("CDU ...Ok");
 });
