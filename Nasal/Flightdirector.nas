@@ -612,6 +612,7 @@ var update_fd = func {
 		speed_round();
 		alt_mach();
 		setprop("autopilot/settings/altitude-setting-ft",getprop("autopilot/settings/asel")*100);
+		setprop("instrumentation/altimeter/mode-s-alt-ft",getprop("instrumentation/altimeter/mode-c-alt-ft"));
     if(count==0)monitor_AP_errors();
     if(count==1)monitor_L_armed();
     if(count==2)monitor_V_armed();
