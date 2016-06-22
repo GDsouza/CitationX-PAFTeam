@@ -633,12 +633,28 @@ setlistener("instrumentation/transponder/inputs/knob-mode", func {
 	setprop("instrumentation/transponder/inputs/display-mode",mode_display);
 });
 
+var mfd_wx = func {
+	var wx_set = getprop("instrumentation/primus2000/dc840/mfd-wx-set");
+	if (wx_set == "APT") {
+		setprop("instrumentation/nd/display/arpt",1);
+		setprop("instrumentation/nd/display/vor",0);
+	}
+	if (wx_set == "VOR") {
+		setprop("instrumentation/nd/display/arpt",0);
+		setprop("instrumentation/nd/display/vor",1);
+	}
+	if (wx_set == "BOTH") {
+		setprop("instrumentation/nd/display/arpt",1);
+		setprop("instrumentation/nd/display/vor",1);
+	}
+}
 ########## MAIN ##############
 
 var update_systems = func{
     LHeng.update();
     RHeng.update();
 		chrono_update();
+		mfd_wx();
 		atc_id();
     FHupdate(0);
     tire.get_rotation("yasim");

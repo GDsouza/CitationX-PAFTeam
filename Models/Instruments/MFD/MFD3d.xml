@@ -84,7 +84,16 @@ Primus 2000 MFD
         <type>select</type>
         <object-name>MFD.vor</object-name>
         <condition>
-            <property>instrumentation/primus2000/dc840/mfd-wx</property>
+					<or>
+						<equals>
+		          <property>instrumentation/primus2000/dc840/mfd-wx-set</property>
+							<value>VOR</value>
+						</equals>
+						<equals>
+		          <property>instrumentation/primus2000/dc840/mfd-wx-set</property>
+							<value>BOTH</value>
+						</equals>
+					</or>
         </condition>
     </animation>
 
@@ -92,7 +101,16 @@ Primus 2000 MFD
         <type>select</type>
         <object-name>MFD.apt</object-name>
         <condition>
-            <property>instrumentation/primus2000/dc840/mfd-wx</property>
+					<or>
+						<equals>
+		          <property>instrumentation/primus2000/dc840/mfd-wx-set</property>
+							<value>APT</value>
+						</equals>
+						<equals>
+		          <property>instrumentation/primus2000/dc840/mfd-wx-set</property>
+							<value>BOTH</value>
+						</equals>
+					</or>
         </condition>
     </animation>
 

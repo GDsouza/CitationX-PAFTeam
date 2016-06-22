@@ -3614,6 +3614,7 @@
             <z>0</z>
 				</axis>
     </animation>
+
     <animation>
         <type>pick</type>
         <object-name>mfdwx.btn</object-name>
@@ -3621,9 +3622,31 @@
             <button>0</button>
             <repeatable>false</repeatable>
             <binding>
-                <command>property-toggle</command>
-            <property>instrumentation/primus2000/dc840/mfd-wx</property>
+              <command>property-toggle</command>
+	            <property>instrumentation/primus2000/dc840/mfd-wx</property>
             </binding>
+            <binding>
+              <command>property-cycle</command>
+	            <property>instrumentation/primus2000/dc840/mfd-wx-set</property>
+							<value type="string">APT</value>
+							<value type="string">VOR</value>
+							<value type="string">BOTH</value>
+            </binding>
+						<binding>
+							<command>nasal</command>
+							<script>citation.mfd_wx();</script>
+						</binding>
+						<binding>
+						    <command>property-toggle</command>
+						    <property>sim/sound/click</property>
+						</binding>
+						<mod-up>
+		          <binding>
+		            <command>property-assign</command>
+			          <property>instrumentation/primus2000/dc840/mfd-wx</property>
+								<value>0</value>
+		          </binding>					
+						</mod-up>
         </action>
     </animation>
 

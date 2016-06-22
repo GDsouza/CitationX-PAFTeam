@@ -519,7 +519,6 @@
         </font-resolution>
     </text>
 
-
     <text>
         <name>RNG1</name>
         <offsets>
@@ -565,12 +564,101 @@
     </text>
 
     <animation>
+        <type>select</type>
+        <object-name>VOR</object-name>
+        <condition>
+					<and>
+						<or>
+							<equals>
+				        <property>instrumentation/primus2000/dc840/mfd-wx-set</property>
+								<value>VOR</value>
+							</equals>
+							<equals>
+				        <property>instrumentation/primus2000/dc840/mfd-wx-set</property>
+								<value>BOTH</value>
+							</equals>
+						</or>
+						<property>systems/electrical/right-bus-norm</property>
+						<equals>
+	            <property>controls/electric/avionics-switch</property>
+							<value>2</value>
+						</equals>
+					</and>
+        </condition>
+    </animation>
+
+    <text>
+        <name>VOR</name>
+        <offsets>
+            <x-m>0.0</x-m>
+            <y-m>0.074</y-m>
+            <z-m>0.014</z-m>
+        </offsets>
+        <alignment>center-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>literal</type>
+        <text>VOR</text>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.005</character-size>
+        <character-aspect-ratio type="double">1.3</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
+        </font-resolution>
+    </text>
+
+    <animation>
+        <type>select</type>
+        <object-name>APT</object-name>
+        <condition>
+					<and>
+						<or>
+							<equals>
+				        <property>instrumentation/primus2000/dc840/mfd-wx-set</property>
+								<value>APT</value>
+							</equals>
+							<equals>
+				        <property>instrumentation/primus2000/dc840/mfd-wx-set</property>
+								<value>BOTH</value>
+							</equals>
+						</or>
+						<property>systems/electrical/right-bus-norm</property>
+						<equals>
+	            <property>controls/electric/avionics-switch</property>
+							<value>2</value>
+						</equals>
+					</and>
+        </condition>
+    </animation>
+
+    <text>
+        <name>APT</name>
+        <offsets>
+            <x-m>0.0</x-m>
+            <y-m>0.074</y-m>
+            <z-m>0.022</z-m>
+        </offsets>
+        <alignment>center-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>literal</type>
+        <text>APT</text>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.005</character-size>
+        <character-aspect-ratio type="double">1.3</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
+        </font-resolution>
+    </text>
+
+    <animation>
         <name>green</name>
         <type>material</type>
         <object-name>MagHdg</object-name>
         <object-name>TAS</object-name>
         <object-name>GSPD</object-name>
         <object-name>SAT</object-name>
+        <object-name>VOR</object-name>
         <emission>
             <red>0.1</red>
             <green>0.9</green>
@@ -667,6 +755,7 @@
         <object-name>Minute</object-name>
         <object-name>Second</object-name>
         <object-name>Sep1</object-name>
+        <object-name>APT</object-name>
         <emission>
             <red>0</red>
             <green>1.0</green>

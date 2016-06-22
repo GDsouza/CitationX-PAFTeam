@@ -50,30 +50,31 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
         </model>
 
         <view n="0">
-            <name>Pilot</name>
-            <type>lookfrom</type>
-            <internal type="bool">true</internal>
-            <config>
-                <ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
-                <x-offset-m type="double">-0.375</x-offset-m>
-                <y-offset-m type="double">0.41</y-offset-m>
-                <z-offset-m type="double">-7.0</z-offset-m>
-                <pitch-offset-deg>-12</pitch-offset-deg>
-                <limits>
-                    <enabled type="bool">false</enabled>
-                    <left>
-                        <heading-max-deg type="double">120</heading-max-deg>
-                        <x-offset-max-m type="double">0.10</x-offset-max-m>
-                        <x-offset-threshold-deg type="double">45</x-offset-threshold-deg>
-                    </left>
-                    <right>
-                        <heading-max-deg type="double">160</heading-max-deg>
-                        <x-offset-max-m type="double">0.20</x-offset-max-m>
-                        <x-offset-threshold-deg type="double">65</x-offset-threshold-deg>
-                    </right>
-                </limits>
-            </config>
-        </view>
+          <name>Pilot</name>
+          <type>lookfrom</type>
+          <internal type="bool">true</internal>
+          <config>
+            <ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
+            <x-offset-m type="double">-0.375</x-offset-m>
+            <y-offset-m type="double">0.41</y-offset-m>
+            <z-offset-m type="double">-7.0</z-offset-m>
+            <pitch-offset-deg>-12</pitch-offset-deg>
+			      <default-field-of-view-deg>90</default-field-of-view-deg>
+            <limits>
+              <enabled type="bool">false</enabled>
+              <left>
+                  <heading-max-deg type="double">120</heading-max-deg>
+                  <x-offset-max-m type="double">0.10</x-offset-max-m>
+                  <x-offset-threshold-deg type="double">45</x-offset-threshold-deg>
+              </left>
+              <right>
+                  <heading-max-deg type="double">160</heading-max-deg>
+                  <x-offset-max-m type="double">0.20</x-offset-max-m>
+                  <x-offset-threshold-deg type="double">65</x-offset-threshold-deg>
+              </right>
+          </limits>
+        </config>
+      </view>
 
         <view n="1">
             <config>
@@ -125,19 +126,19 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
       <z-offset-m archive="y" type="double">-3.33</z-offset-m>
       <default-heading-offset-deg>0</default-heading-offset-deg>
       <pitch-offset-deg>0</pitch-offset-deg>
-                <limits>
-                    <enabled type="bool">false</enabled>
-                    <left>
-                        <heading-max-deg type="double">120</heading-max-deg>
-                        <x-offset-max-m type="double">0.28</x-offset-max-m>
-                        <x-offset-threshold-deg type="double">0</x-offset-threshold-deg>
-                    </left>
-                    <right>
-                        <heading-max-deg type="double">170</heading-max-deg>
-                        <x-offset-max-m type="double">0.25</x-offset-max-m>
-                        <x-offset-threshold-deg type="double">0</x-offset-threshold-deg>
-                    </right>
-                </limits>
+        <limits>
+            <enabled type="bool">false</enabled>
+            <left>
+                <heading-max-deg type="double">120</heading-max-deg>
+                <x-offset-max-m type="double">0.28</x-offset-max-m>
+                <x-offset-threshold-deg type="double">0</x-offset-threshold-deg>
+            </left>
+            <right>
+                <heading-max-deg type="double">170</heading-max-deg>
+                <x-offset-max-m type="double">0.25</x-offset-max-m>
+                <x-offset-threshold-deg type="double">0</x-offset-threshold-deg>
+            </right>
+        </limits>
       <dynamic-view type="bool">false</dynamic-view>
     </config>
     </view>
@@ -154,20 +155,20 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
       <y-offset-m archive="y" type="double">0.4</y-offset-m>
       <z-offset-m archive="y" type="double">-1.04</z-offset-m>
       <default-heading-offset-deg>0</default-heading-offset-deg>
-    <pitch-offset-deg>0</pitch-offset-deg>
-                <limits>
-                    <enabled type="bool">true</enabled>
-                    <left>
-                        <heading-max-deg type="double">120</heading-max-deg>
-                        <x-offset-max-m type="double">0.25</x-offset-max-m>
-                        <x-offset-threshold-deg type="double">45</x-offset-threshold-deg>
-                    </left>
-                    <right>
-                        <heading-max-deg type="double">120</heading-max-deg>
-                        <x-offset-max-m type="double">0.28</x-offset-max-m>
-                        <x-offset-threshold-deg type="double">45</x-offset-threshold-deg>
-                    </right>
-                </limits>
+	    <pitch-offset-deg>0</pitch-offset-deg>
+        <limits>
+            <enabled type="bool">true</enabled>
+            <left>
+                <heading-max-deg type="double">120</heading-max-deg>
+                <x-offset-max-m type="double">0.25</x-offset-max-m>
+                <x-offset-threshold-deg type="double">45</x-offset-threshold-deg>
+            </left>
+            <right>
+                <heading-max-deg type="double">120</heading-max-deg>
+                <x-offset-max-m type="double">0.28</x-offset-max-m>
+                <x-offset-threshold-deg type="double">45</x-offset-threshold-deg>
+            </right>
+        </limits>
       <dynamic-view type="bool">false</dynamic-view>
     </config>
     </view>
@@ -185,6 +186,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
       <z-offset-m archive="y" type="double">-7.0</z-offset-m>
       <default-heading-offset-deg>0</default-heading-offset-deg>
       <pitch-offset-deg>-12.0</pitch-offset-deg>
+      <default-field-of-view-deg>90</default-field-of-view-deg>
       <limits>
           <enabled type="bool">false</enabled>
           <left>
@@ -210,14 +212,15 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
       <from-model type="bool">true</from-model>
       <ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
       <heading-offset-deg type="double">0</heading-offset-deg>
-      <x-offset-m archive="y" type="double">-0.2</x-offset-m>
+      <x-offset-m archive="y" type="double">0</x-offset-m>
       <y-offset-m archive="y" type="double">0.2</y-offset-m>
-      <z-offset-m archive="y" type="double">-7.20</z-offset-m>
+      <z-offset-m archive="y" type="double">-7.10</z-offset-m>
       <default-heading-offset-deg>0</default-heading-offset-deg>
       <pitch-offset-deg>-12.0</pitch-offset-deg>
-                <limits>
-                    <enabled type="bool">false</enabled>
-                </limits>
+      <default-field-of-view-deg>90</default-field-of-view-deg>
+      <limits>
+          <enabled type="bool">false</enabled>
+      </limits>
       <dynamic-view type="bool">false</dynamic-view>
     </config>
   </view>
