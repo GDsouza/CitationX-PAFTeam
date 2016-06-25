@@ -636,17 +636,25 @@ setlistener("instrumentation/transponder/inputs/knob-mode", func {
 var mfd_wx = func {
 	var wx_set = getprop("instrumentation/primus2000/dc840/mfd-wx-set");
 	if (wx_set == "APT") {
-		setprop("instrumentation/nd/display/arpt",1);
-		setprop("instrumentation/nd/display/vor",0);
+		setprop("instrumentation/efis/inputs/arpt",1);
+		setprop("instrumentation/efis/inputs/lh-vor-adf",0);
 	}
 	if (wx_set == "VOR") {
-		setprop("instrumentation/nd/display/arpt",0);
-		setprop("instrumentation/nd/display/vor",1);
+		setprop("instrumentation/efis/inputs/arpt",0);
+		setprop("instrumentation/efis/inputs/lh-vor-adf",1);
 	}
 	if (wx_set == "BOTH") {
 		setprop("instrumentation/nd/display/arpt",1);
 		setprop("instrumentation/nd/display/vor",1);
 	}
+}
+
+var freq_limits = func {
+	var com_freq = "instrumentation/comm/frequencies/standby-mhz";
+	var nav_freq = "instrumentation/nav/frequencies/standby-mhz";
+	if (getprop(com_freq)<117.975) {setprop(com_freq,117.975)}
+	if (getprop(com_freq)>137.000) {setprop(com_freq,137.000)}
+	if (getprop(nav_freq)>117.950) {setprop(nav_freq,117.950)}
 }
 ########## MAIN ##############
 
@@ -656,6 +664,7 @@ var update_systems = func{
 		chrono_update();
 		mfd_wx();
 		atc_id();
+		freq_limits();
     FHupdate(0);
     tire.get_rotation("yasim");
 		speed_ref();

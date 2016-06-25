@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
-<!--    RADIO MANAGEMENT UNIT  2 -->
+<!--    RADIO MANAGEMENT UNIT  1 -->
 <PropertyList>
 
 <path>rmu.ac</path>
@@ -12,34 +12,40 @@
         <object-name>Com.3</object-name>
         <object-name>Com.4</object-name>
         <object-name>Com.5</object-name>
+        <object-name>Com.6</object-name>
         <object-name>Com.11</object-name>
         <object-name>Com.12</object-name>
         <object-name>Com.13</object-name>
         <object-name>Com.14</object-name>
         <object-name>Com.15</object-name>
+        <object-name>Com.16</object-name>
         <object-name>Nav.1</object-name>
         <object-name>Nav.2</object-name>
         <object-name>Nav.3</object-name>
         <object-name>Nav.4</object-name>
         <object-name>Nav.5</object-name>
+        <object-name>Nav.6</object-name>
         <object-name>Nav.11</object-name>
         <object-name>Nav.12</object-name>
         <object-name>Nav.13</object-name>
         <object-name>Nav.14</object-name>
         <object-name>Nav.15</object-name>
+        <object-name>Nav.16</object-name>
         <object-name>Atc.1</object-name>
         <object-name>Atc.2</object-name>
         <object-name>Atc.3</object-name>
         <object-name>Atc.4</object-name>
+        <object-name>Adf.1</object-name>
         <object-name>Adf.2</object-name>
         <object-name>Adf.3</object-name>
         <object-name>Adf.4</object-name>
-        <object-name>Adf.5</object-name>
         <object-name>Com.num</object-name>
         <object-name>Nav.num</object-name>
         <object-name>Atc.num</object-name>
         <object-name>Adf.num</object-name>
-        <object-name>RMU.period</object-name>
+        <object-name>Com.period</object-name>
+        <object-name>Nav.period</object-name>
+        <object-name>Adf.period</object-name>
         <object-name>RMU.screen</object-name>
         <object-name>RMU.selector</object-name>
         <object-name>RMU.sq</object-name>
@@ -90,35 +96,41 @@
         <object-name>Com.3</object-name>
         <object-name>Com.4</object-name>
         <object-name>Com.5</object-name>
+        <object-name>Com.6</object-name>
         <object-name>Com.11</object-name>
         <object-name>Com.12</object-name>
         <object-name>Com.13</object-name>
         <object-name>Com.14</object-name>
         <object-name>Com.15</object-name>
+        <object-name>Com.16</object-name>
         <object-name>Nav.1</object-name>
         <object-name>Nav.2</object-name>
         <object-name>Nav.3</object-name>
         <object-name>Nav.4</object-name>
         <object-name>Nav.5</object-name>
+        <object-name>Nav.6</object-name>
         <object-name>Nav.11</object-name>
         <object-name>Nav.12</object-name>
         <object-name>Nav.13</object-name>
         <object-name>Nav.14</object-name>
         <object-name>Nav.15</object-name>
+        <object-name>Nav.16</object-name>
         <object-name>Atc.1</object-name>
         <object-name>Atc.2</object-name>
         <object-name>Atc.3</object-name>
         <object-name>Atc.4</object-name>
+        <object-name>Adf.1</object-name>
         <object-name>Adf.2</object-name>
         <object-name>Adf.3</object-name>
         <object-name>Adf.4</object-name>
-        <object-name>Adf.5</object-name>
         <object-name>Com.num</object-name>
         <object-name>Nav.num</object-name>
         <object-name>Atc.num</object-name>
         <object-name>Atc.mode</object-name>
         <object-name>Adf.num</object-name>
-        <object-name>RMU.period</object-name>
+        <object-name>Adf.period</object-name>
+        <object-name>Com.period</object-name>
+        <object-name>Nav.period</object-name>
         <object-name>RMU.selector</object-name>
         <object-name>RMU.screen</object-name>
         <object-name>RMU.lamp</object-name>
@@ -128,11 +140,11 @@
     <animation>
         <type>select</type>
         <condition>
-            <greater-than>
-               <property>instrumentation/transponder/inputs/knob-mode</property>
-               <value>0</value>
-              </greater-than>
-        </condition>
+          <greater-than>
+ 	          <property>instrumentation/transponder/inputs/knob-mode</property>
+           	<value>0</value>
+          </greater-than>
+      </condition>
         <object-name>Atc.1</object-name>
         <object-name>Atc.2</object-name>
         <object-name>Atc.3</object-name>
@@ -287,7 +299,6 @@
         <property alias="../../params/comm"/>
         <factor>0.001</factor>
         <step>100</step>
-				<bias>0.0005</bias>
         <axis>
             <x>1</x>
             <y>0</y>
@@ -301,7 +312,6 @@
         <property alias="../../params/comm"/>
         <factor>0.01</factor>
         <step>10</step>
-				<bias>0.0005</bias>
         <axis>
             <x>1</x>
             <y>0</y>
@@ -315,7 +325,6 @@
         <property alias="../../params/comm"/>
         <factor>0.1</factor>
         <step>1</step>
-				<bias>0.0005</bias>
         <axis>
             <x>1</x>
             <y>0</y>
@@ -351,6 +360,20 @@
         </axis>
     </animation>
 
+    <animation>
+        <type>textranslate</type>
+        <object-name>Com.6</object-name>
+        <property alias="../../params/comm"/>
+        <factor>100.0</factor>
+        <step>0.001</step>
+        <bias>0.0005</bias>
+        <axis>
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
 <!-- Comm standby-->
 
     <animation>
@@ -359,7 +382,6 @@
         <property alias="../../params/comm-stby"/>
         <factor>0.001</factor>
         <step>100</step>
-				<bias>0.0005</bias>
         <axis>
             <x>1</x>
             <y>0</y>
@@ -373,7 +395,6 @@
         <property alias="../../params/comm-stby"/>
         <factor>0.01</factor>
         <step>10</step>
-				<bias>0.0005</bias>
         <axis>
             <x>1</x>
             <y>0</y>
@@ -387,7 +408,6 @@
         <property alias="../../params/comm-stby"/>
         <factor>0.1</factor>
         <step>1</step>
-				<bias>0.0005</bias>
         <axis>
             <x>1</x>
             <y>0</y>
@@ -423,6 +443,20 @@
         </axis>
     </animation>
 
+    <animation>
+        <type>textranslate</type>
+        <object-name>Com.16</object-name>
+        <property alias="../../params/comm-stby"/>
+        <factor>100.0</factor>
+        <step>0.001</step>
+        <bias>0.0005</bias>
+        <axis>
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
 <!-- Nav active-->
 
     <animation>
@@ -431,7 +465,6 @@
         <property alias="../../params/nav"/>
         <factor>0.001</factor>
         <step>100</step>
-				<bias>0.005</bias>
         <axis>
             <x>1</x>
             <y>0</y>
@@ -445,7 +478,6 @@
         <property alias="../../params/nav"/>
         <factor>0.01</factor>
         <step>10</step>
-				<bias>0.005</bias>
         <axis>
             <x>1</x>
             <y>0</y>
@@ -459,7 +491,6 @@
         <property alias="../../params/nav"/>
         <factor>0.1</factor>
         <step>1</step>
-				<bias>0.005</bias>
         <axis>
             <x>1</x>
             <y>0</y>
@@ -473,7 +504,6 @@
         <property alias="../../params/nav"/>
         <factor>1.0</factor>
         <step>0.1</step>
-        <bias>0.005</bias>
         <axis>
             <x>1</x>
             <y>0</y>
@@ -487,7 +517,19 @@
         <property alias="../../params/nav"/>
         <factor>10.0</factor>
         <step>0.01</step>
-        <bias>0.005</bias>
+        <axis>
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>textranslate</type>
+        <object-name>Nav.6</object-name>
+        <property alias="../../params/nav"/>
+        <factor>100.0</factor>
+        <step>0.001</step>
         <axis>
             <x>1</x>
             <y>0</y>
@@ -503,7 +545,6 @@
         <property alias="../../params/nav-stby"/>
         <factor>0.001</factor>
         <step>100</step>
-				<bias>0.005</bias>
         <axis>
             <x>1</x>
             <y>0</y>
@@ -517,7 +558,6 @@
         <property alias="../../params/nav-stby"/>
         <factor>0.01</factor>
         <step>10</step>
-				<bias>0.005</bias>
         <axis>
             <x>1</x>
             <y>0</y>
@@ -531,7 +571,6 @@
         <property alias="../../params/nav-stby"/>
         <factor>0.1</factor>
         <step>1</step>
-				<bias>0.005</bias>
         <axis>
             <x>1</x>
             <y>0</y>
@@ -545,7 +584,6 @@
         <property alias="../../params/nav-stby"/>
         <factor>1.0</factor>
         <step>0.1</step>
-        <bias>0.005</bias>
         <axis>
             <x>1</x>
             <y>0</y>
@@ -559,7 +597,19 @@
         <property alias="../../params/nav-stby"/>
         <factor>10.0</factor>
         <step>0.01</step>
-        <bias>0.005</bias>
+        <axis>
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>textranslate</type>
+        <object-name>Nav.16</object-name>
+        <property alias="../../params/nav-stby"/>
+        <factor>100.0</factor>
+        <step>0.001</step>
         <axis>
             <x>1</x>
             <y>0</y>
@@ -571,20 +621,14 @@
 
     <animation>
         <type>select</type>
-        <object-name>Adf.1</object-name>
         <condition>
-            <and>
-                <greater-than>
-                    <property alias="../../params/adf"/>
-                    <value>999.99</value>
-                </greater-than>
-                <greater-than>
-                    <property>systems/electrical/outputs/adf</property>
-                    <value>5</value>
-                </greater-than>
-            </and>
-        </condition>
-    </animation>
+          <greater-than>
+ 	          <property>instrumentation/adf[1]/frequencies/selected-khz</property>
+           	<value>999</value>
+          </greater-than>
+      	</condition>
+        <object-name>Adf.1</object-name>
+		</animation>
 
     <animation>
         <type>textranslate</type>
@@ -592,7 +636,6 @@
         <property alias="../../params/adf"/>
         <factor>0.0001</factor>
         <step>1000</step>
-				<bias>0.05</bias>
 				<axis>
             <x>1</x>
             <y>0</y>
@@ -606,7 +649,6 @@
         <property alias="../../params/adf"/>
         <factor>0.001</factor>
         <step>100</step>
-				<bias>0.05</bias>
         <axis>
             <x>1</x>
             <y>0</y>
@@ -620,7 +662,6 @@
         <property alias="../../params/adf"/>
         <factor>0.01</factor>
         <step>10</step>
-				<bias>0.05</bias>
         <axis>
             <x>1</x>
             <y>0</y>
@@ -634,21 +675,6 @@
         <property alias="../../params/adf"/>
         <factor>0.1</factor>
         <step>1</step>
-				<bias>0.05</bias>
-        <axis>
-            <x>1</x>
-            <y>0</y>
-            <z>0</z>
-        </axis>
-    </animation>
-
-    <animation>
-        <type>textranslate</type>
-        <object-name>Adf.5</object-name>
-        <property alias="../../params/adf"/>
-        <factor>1.0</factor>
-        <step>0.1</step>
-        <bias>0.05</bias>
         <axis>
             <x>1</x>
             <y>0</y>
@@ -1113,11 +1139,11 @@
               <property>instrumentation/rmu/unit[1]/adf</property>
           </binding>
 					<mod-up>
-	        <binding>
+		        <binding>
 	            <command>property-toggle</command>
 	            <property>instrumentation/rmu/unit[1]/adf</property>
-	        </binding>
-				</mod-up>
+		        </binding>
+					</mod-up>
         </action>
     </animation>
 
@@ -1129,7 +1155,7 @@
 		    <button>0</button>
 		    <button>3</button>
 		    <repeatable>true</repeatable>
-				<interval-sec>0.2</interval-sec>
+				<interval-sec>0.1</interval-sec>
 		    <binding>
 					<condition>
 						<equals>
@@ -1139,10 +1165,11 @@
 						</condition>
 		        <command>property-adjust</command>
 							<property>instrumentation/comm[1]/frequencies/standby-mhz</property>
-		          	<step>1</step>
-								<min>118.000</min>
-								<max>136.000</max>
-							<wrap>1</wrap>
+              <mask>integer</mask>
+	          	<step>1</step>
+							<min>117</min>
+							<max>137</max>
+              <resolution>1</resolution>
 		      </binding>
 		      <binding>
 						<condition>
@@ -1151,13 +1178,14 @@
 								<value>1</value>
 							</equals>
 						</condition>
-		          <command>property-adjust</command>
-								<property>instrumentation/nav[1]/frequencies/standby-mhz</property>
-		          		<step>1</step>
-									<min>108.000</min>
-									<max>118.000</max>
-									<wrap>1</wrap>
-		      </binding>
+	          <command>property-adjust</command>
+						<property>instrumentation/nav[1]/frequencies/standby-mhz</property>
+            <mask>integer</mask>
+          	<step>1</step>
+						<min>108</min>
+						<max>117</max>
+            <resolution>1</resolution>
+	      </binding>
 		      <binding>
 						<condition>
 							<equals>
@@ -1190,12 +1218,11 @@
 							<value>3</value>
 							</equals>
 						</condition>
-		          <command>property-adjust</command>
-								<property>instrumentation/adf[1]/frequencies/selected-khz</property>
-		          	<step>100</step>
-								<min>190</min>
-								<max>1800</max>
-								<wrap>1</wrap>
+	          <command>property-adjust</command>
+						<property>instrumentation/adf[1]/frequencies/selected-khz</property>
+          	<step>100</step>
+						<min>180</min>
+						<max>1750</max>
 		      </binding>
 				  <binding>
 						<condition>
@@ -1229,11 +1256,12 @@
 						</equals>
 					</condition>
           <command>property-adjust</command>
-						<property>instrumentation/comm[1]/frequencies/standby-mhz</property>
-            	<step>-1</step>
-							<min>118.000</min>
-							<max>136.000</max>
-							<wrap>1</wrap>
+					<property>instrumentation/comm[1]/frequencies/standby-mhz</property>
+          <mask>integer</mask>
+        	<step>-1</step>
+					<min>117</min>
+					<max>137</max>
+          <resolution>1</resolution>
         </binding>
         <binding>
 					<condition>
@@ -1244,10 +1272,11 @@
 					</condition>
             <command>property-adjust</command>
 							<property>instrumentation/nav[1]/frequencies/standby-mhz</property>
-                <step>-1</step>
-								<min>108.000</min>
-								<max>118.000</max>
-								<wrap>1</wrap>
+            <mask>integer</mask>
+          	<step>-1</step>
+						<min>108</min>
+						<max>117</max>
+            <resolution>1</resolution>
         </binding>
         <binding>
 					<condition>
@@ -1283,11 +1312,10 @@
 					</condition>
           <command>property-adjust</command>
 						<property>instrumentation/adf[1]/frequencies/selected-khz</property>
-            <step>-100</step>
-						<min>190</min>
-						<max>1800</max>
-						<wrap>1</wrap>
-        </binding>
+          	<step>-100</step>
+						<min>180</min>
+						<max>1750</max>
+       </binding>
 			  <binding>
 					<condition>
 						<equals>
@@ -1313,7 +1341,7 @@
 				<button>0</button>
         <button>3</button>
         <repeatable>true</repeatable>
-			  <interval-sec>0.2</interval-sec>
+			  <interval-sec>0.1</interval-sec>
         <binding>
 					<condition>
 						<equals>
@@ -1321,12 +1349,11 @@
 							<value>0</value>
 						</equals>
 					</condition>
-            <command>property-adjust</command>
-							<property>instrumentation/comm[1]/frequencies/standby-mhz</property>
-	            <step>0.025</step>
-							<min>118.000</min>
-							<max>136.000</max>
-							<wrap>1</wrap>
+          <command>property-adjust</command>
+					<property>instrumentation/comm[1]/frequencies/standby-mhz</property>
+          <step>0.025</step>
+					<min>117.975</min>
+					<max>137.000</max>
         </binding>
         <binding>
 					<condition>
@@ -1336,11 +1363,10 @@
 						</equals>
 					</condition>
           <command>property-adjust</command>
-						<property>instrumentation/nav[1]/frequencies/standby-mhz</property>
-            <step>0.050</step>
-						<min>108.000</min>
-						<max>118.000</max>
-						<wrap>1</wrap>
+					<property>instrumentation/nav[1]/frequencies/standby-mhz</property>
+          <step>0.025</step>
+					<min>108.000</min>
+					<max>117.950</max>
         </binding>
         <binding>
 					<condition>
@@ -1374,12 +1400,11 @@
 							<value>3</value>
 						</equals>
 					</condition>
-            <command>property-adjust</command>
-							<property>instrumentation/adf[1]/frequencies/selected-khz</property>
-	            <step>1</step>
-							<min>190</min>
-							<max>1800</max>
-							<wrap>1</wrap>
+          <command>property-adjust</command>
+					<property>instrumentation/adf[1]/frequencies/selected-khz</property>
+          <step>1</step>
+					<min>180</min>
+					<max>1750</max>
         </binding>
 			  <binding>
 					<condition>
@@ -1411,12 +1436,11 @@
 							<value>0</value>
 						</equals>
 					</condition>
-            <command>property-adjust</command>
-							<property>instrumentation/comm[1]/frequencies/standby-mhz</property>
-	            <step>-0.025</step>
-							<min>118.000</min>
-							<max>136.000</max>
-							<wrap>1</wrap>
+          <command>property-adjust</command>
+					<property>instrumentation/comm[1]/frequencies/standby-mhz</property>
+          <step>-0.025</step>
+					<min>117.975</min>
+					<max>137.000</max>
         </binding>
         <binding>
 					<condition>
@@ -1427,10 +1451,10 @@
 					</condition>
           <command>property-adjust</command>
 						<property>instrumentation/nav[1]/frequencies/standby-mhz</property>
-            <step>-0.050</step>
-						<min>108.000</min>
-						<max>118.000</max>
-						<wrap>1</wrap>
+					<property>instrumentation/nav[1]/frequencies/standby-mhz</property>
+          <step>-0.025</step>
+					<min>108.000</min>
+					<max>117.950</max>
         </binding>
         <binding>
 					<condition>
@@ -1464,12 +1488,11 @@
 							<value>3</value>
 						</equals>
 					</condition>
-            <command>property-adjust</command>
-							<property>instrumentation/adf[1]/frequencies/selected-khz</property>
-	            <step>-1</step>
-							<min>190</min>
-							<max>1800</max>
-							<wrap>1</wrap>
+          <command>property-adjust</command>
+					<property>instrumentation/adf[1]/frequencies/selected-khz</property>
+          <step>-1</step>
+					<min>180</min>
+					<max>1750</max>
         </binding>
 			  <binding>
 					<condition>
