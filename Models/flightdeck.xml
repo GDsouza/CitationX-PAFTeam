@@ -7,7 +7,9 @@
   <animation>
     <type>material</type>
     <object-name>Map.light</object-name>
+    <object-name>Left.light</object-name>
     <object-name>Map.sphere</object-name>
+    <object-name>Left.sphere</object-name>
     <object-name>porte-bouteille</object-name>
     <emission>
       <red>   0.50 </red>
@@ -15,6 +17,53 @@
       <blue>  0.18 </blue>
     </emission>
   </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>porte-bouteille</object-name>
+    <object-name>tringle</object-name>
+    <object-name>supports-tringle</object-name>
+    <emission>
+      <red>   0.10 </red>
+      <green> 0.15 </green>
+      <blue>  0.18 </blue>
+    </emission>
+  </animation>
+
+    <effect>
+      <inherits-from>Aircraft/CitationX/Models/Effects/test_reflect</inherits-from>
+    <object-name>Map.light</object-name>
+    <object-name>Left.light</object-name>
+    <object-name>Map.sphere</object-name>
+    <object-name>Left.sphere</object-name>
+    <object-name>porte-bouteille</object-name>
+    <object-name>tringle</object-name>
+    <object-name>supports-tringle</object-name>
+    </effect>
+
+    <effect>
+      <inherits-from>Aircraft/CitationX/Models/Effects/skin-reflect</inherits-from>
+    <object-name>Map.light</object-name>
+    <object-name>Left.light</object-name>
+    <object-name>Map.sphere</object-name>
+    <object-name>Left.sphere</object-name>
+    <object-name>porte-bouteille</object-name>
+    <object-name>tringle</object-name>
+    <object-name>supports-tringle</object-name>
+    </effect>
+
+    <animation>
+        <type>shader</type>
+        <shader>chrome</shader>
+        <texture>chrome.png</texture>
+    <object-name>Map.light</object-name>
+    <object-name>Left.light</object-name>
+    <object-name>Map.sphere</object-name>
+    <object-name>Left.sphere</object-name>
+    <object-name>porte-bouteille</object-name>
+    <object-name>tringle</object-name>
+    <object-name>supports-tringle</object-name>
+    </animation>
 
     <model>
         <name>panel1</name>
