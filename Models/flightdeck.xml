@@ -571,8 +571,8 @@
         <name>APUready</name>
         <offsets>
             <x-m>-0.875</x-m>
-            <y-m>0.698</y-m>
-            <z-m>0.562</z-m>
+            <y-m> 0.698</y-m>
+            <z-m> 0.562</z-m>
         </offsets>
         <alignment>center-center</alignment>
         <axis-alignment>xz-plane</axis-alignment>
@@ -1239,5 +1239,816 @@
             </binding>
         </action>
     </animation>
+
+<!-- text -->
+
+    <text>
+        <name>pilotAPUrpm</name>
+        <offsets>
+            <x-m>-0.873</x-m>
+            <y-m>-0.695</y-m>
+            <z-m> 0.571</z-m>
+        </offsets>
+        <alignment>center-center</alignment>
+        <axis-alignment>xz-plane</axis-alignment>
+        <type type="string">number-value</type>
+        <property>controls/APU/rpm</property>
+        <scale>100.0</scale>
+        <format>%3.0f</format>
+        <font>led.txf</font>
+        <character-size>0.009</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
+        </font-resolution>
+    </text>
+
+    <text>
+        <name>pilotAPUrpmTest</name>
+        <offsets>
+            <x-m>-0.876</x-m>
+            <y-m>-0.695</y-m>
+            <z-m> 0.517</z-m>
+        </offsets>
+        <alignment>center-center</alignment>
+        <axis-alignment>xz-plane</axis-alignment>
+        <type type="string">number-value</type>
+        <property>controls/APU/rpm-test</property>
+        <scale>1</scale>
+        <format>%3.0f</format>
+        <font>led.txf</font>
+        <character-size>0.009</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
+        </font-resolution>
+    </text>
+
+    <text>
+        <name>pilotAPUegt</name>
+        <offsets>
+            <x-m>-0.876</x-m>
+            <y-m>-0.695</y-m>
+            <z-m> 0.494</z-m>
+        </offsets>
+        <alignment>center-center</alignment>
+        <axis-alignment>xz-plane</axis-alignment>
+        <type type="string">number-value</type>
+        <property>controls/APU/rpm</property>
+        <scale>710.0</scale>
+        <format>%3.0f</format>
+        <font>led.txf</font>
+        <character-size>0.009</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
+        </font-resolution>
+    </text>
+
+    <text>
+        <name>pilotAPUegtTest</name>
+        <offsets>
+            <x-m>-0.876</x-m>
+            <y-m>-0.695</y-m>
+            <z-m> 0.494</z-m>
+        </offsets>
+        <alignment>center-center</alignment>
+        <axis-alignment>xz-plane</axis-alignment>
+        <type type="string">number-value</type>
+        <property>controls/APU/rpm-test</property>
+        <scale>10</scale>
+        <format>%3.0f</format>
+        <font>led.txf</font>
+        <character-size>0.009</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
+        </font-resolution>
+    </text>
+
+    <text>
+        <name>pilotAPUvolts</name>
+        <offsets>
+            <x-m>-0.876</x-m>
+            <y-m>-0.695</y-m>
+            <z-m> 0.471</z-m>
+        </offsets>
+        <alignment>center-center</alignment>
+        <axis-alignment>xz-plane</axis-alignment>
+        <type type="string">number-value</type>
+        <property>controls/APU/battery</property>
+        <format>%2.1f</format>
+        <font>led.txf</font>
+        <character-size>0.009</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
+        </font-resolution>
+    </text>
+
+    <text>
+        <name>pilotAPUready</name>
+        <offsets>
+            <x-m>-0.875</x-m>
+            <y-m>-0.695</y-m>
+            <z-m> 0.562</z-m>
+        </offsets>
+        <alignment>center-center</alignment>
+        <axis-alignment>xz-plane</axis-alignment>
+        <type type="string">literal</type>
+				<text type="string">READY TO LOAD</text>
+        <format>%s</format>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.0034</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
+        </font-resolution>
+				<kerning>none</kerning>
+    </text>
+
+    <text>
+        <name>pilotAPUbleed</name>
+        <offsets>
+            <x-m>-0.875</x-m>
+            <y-m>-0.695</y-m>
+            <z-m> 0.571</z-m>
+        </offsets>
+        <alignment>center-center</alignment>
+        <axis-alignment>xz-plane</axis-alignment>
+        <type type="string">literal</type>
+				<text type="string">BLEED VALVE OPEN</text>
+        <format>%s</format>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.0031</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
+        </font-resolution>
+				<kerning>none</kerning>
+    </text>
+
+<!-- Pilot Flight Meter -->
+
+    <text>
+        <name>pilotFLmeter</name>
+        <offsets>
+            <x-m>-0.892</x-m>
+            <y-m>-0.695</y-m>
+            <z-m> 0.627</z-m>
+        </offsets>
+        <alignment>right-center</alignment>
+        <axis-alignment>xz-plane</axis-alignment>
+        <type type="string">number-value</type>
+        <property>instrumentation/clock/flight-meter-tot</property>
+        <format>%4.1f</format>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.009</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
+        </font-resolution>
+    </text>
+
+<!-- PILOT APU -->
+
+<!-- Pilot Flight Meter -->
+
+    <text>
+        <name>pilotFLmeter</name>
+        <offsets>
+            <x-m>-0.842</x-m>
+            <y-m>-0.700</y-m>
+            <z-m> 0.627</z-m>
+        </offsets>
+        <alignment>right-center</alignment>
+        <axis-alignment>xz-plane</axis-alignment>
+        <type type="string">number-value</type>
+        <property>instrumentation/clock/flight-meter-tot</property>
+        <format>%4.1f</format>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.009</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
+        </font-resolution>
+    </text>
+
+<!-- -->
+    <animation>
+        <type>select</type>
+        <object-name>pilotAPUrpm</object-name>
+        <object-name>pilotAPUegt</object-name>
+        <condition>
+					<and>
+            <property>controls/APU/master</property>
+							<not>
+            		<property>controls/APU/test</property>
+							</not>
+					</and>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>pilotAPUrpmTest</object-name>
+        <object-name>pilotAPUegtTest</object-name>
+        <condition>
+            <property>controls/APU/test</property>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>pilotAPUvolts</object-name>
+        	<condition>
+						<or>
+            	<property>controls/APU/master</property>
+            	<property>controls/APU/test</property>
+						</or>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>pilotAPUready</object-name>
+        	<condition>
+						<and>
+							<not>
+								<property>controls/electric/APU-generator</property> 
+							</not>
+							<or>
+							<equals>
+            		<property>controls/APU/rpm</property>
+									<value>1</value>
+							</equals>
+            	<property>controls/APU/test</property>
+						</or>
+					</and>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>pilotAPU.bleed</object-name>
+        	<condition>
+						<or>
+							<and>
+								<greater-than>
+									<property>controls/APU/bleed</property> 
+										<value>0</value>
+								</greater-than>
+								<equals>
+  	          		<property>controls/APU/rpm</property>
+										<value>1</value>
+								</equals>
+							</and>
+            	<property>controls/APU/test</property>
+						</or>
+        </condition>
+    </animation>
+
+<!-- hotspots -->
+
+    <animation>
+        <type>pick</type>
+        <object-name>pilotAPU.master</object-name>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <command>property-toggle</command>
+                <property>controls/APU/master</property>
+            </binding>
+						<binding>
+            	<command>property-toggle</command>
+            	<property>sim/sound/click</property>
+						</binding>
+						<binding>
+							<condition>
+                <property>controls/APU/master</property>
+							</condition>
+								<command>property-assign</command>
+                <property>controls/APU/battery</property>
+                <value>24.7</value>
+            </binding>
+						<binding>
+							<condition>
+									<not>
+	                	<property>controls/APU/master</property>
+									</not>
+						</condition>
+								<command>property-assign</command>
+                	<property>controls/APU/running</property>
+                	<value>0</value>
+						</binding>
+						<binding>
+							<condition>
+								<not>
+                	<property>controls/APU/master</property>
+								</not>
+							</condition>
+								<command>property-assign</command>
+                	<property>controls/APU/battery</property>
+                	<value>0</value>
+            </binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>APU-master-switch</tooltip-id>
+                <label>APU-master: %s</label>
+                <mapping>on-off</mapping>
+            <property>controls/APU/master</property>
+            </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>pilotAPU.master</object-name>
+        <property>controls/APU/master</property>
+        <factor>30</factor>
+        <center>
+           <x-m>-0.830</x-m>
+           <y-m>-0.698</y-m>
+           <z-m> 0.434</z-m>
+        </center>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>pilotAPU.on_off</object-name>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <command>property-assign</command>
+                <property>controls/APU/start-stop</property>
+									<value>1.0</value>
+ 	          </binding>
+						<binding>
+            	<command>property-toggle</command>
+            	<property>sim/sound/click</property>
+						</binding>
+            <binding>
+							<condition>
+								<and>
+									<property>controls/APU/master</property>
+									<property>controls/APU/start-stop</property>
+								</and>
+							</condition>
+              <command>property-assign</command>
+                <property>controls/APU/running</property>
+                <value>1</value>
+            </binding>
+					<mod-up>
+			       <binding>
+         				<command>property-assign</command>
+         					<property>controls/APU/start-stop</property>
+         						<value>0</value>
+       				</binding>
+     			</mod-up>
+       </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>APU-start-stop</tooltip-id>
+                <label>APU-start-stop: %s</label>
+                <mapping>heading</mapping>
+            <property>controls/APU/start-stop</property>
+            </binding>
+        </hovered>
+
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>pilotAPU.on</object-name>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <command>property-assign</command>
+                <property>controls/APU/start-stop</property>
+									<value>1.0</value>
+ 	          </binding>
+						<binding>
+            	<command>property-toggle</command>
+            	<property>sim/sound/click</property>
+						</binding>
+            <binding>
+							<condition>
+								<and>
+									<property>controls/APU/master</property>
+									<property>controls/APU/start-stop</property>
+								</and>
+							</condition>
+              <command>property-assign</command>
+                <property>controls/APU/running</property>
+                <value>1</value>
+            </binding>
+					<mod-up>
+			       <binding>
+         				<command>property-assign</command>
+         					<property>controls/APU/start-stop</property>
+         						<value>0</value>
+       				</binding>
+     			</mod-up>
+       </action>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>pilotAPU.off</object-name>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <command>property-assign</command>
+                <property>controls/APU/start-stop</property>
+									<value>-1</value>
+ 	          </binding>
+						<binding>
+            	<command>property-toggle</command>
+            	<property>sim/sound/click</property>
+						</binding>
+            <binding>
+              <command>property-assign</command>
+                <property>controls/APU/running</property>
+                <value>false</value>
+            </binding> 
+            <binding>
+              <command>property-assign</command>
+                <property>controls/electric/APU-generator</property>
+                <value>false</value>
+            </binding> 
+            <binding>
+              <command>property-assign</command>
+                <property>controls/APU/battery</property>
+                <value>24.7</value>
+            </binding> 
+					<mod-up>
+			       <binding>
+         				<command>property-assign</command>
+         					<property>controls/APU/start-stop</property>
+         						<value>0</value>
+       				</binding>
+     			</mod-up>
+       </action>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>pilotAPU.on_off</object-name>
+        <property>controls/APU/start-stop</property>
+        <factor>30</factor>
+        <center>
+           <x-m>-0.830</x-m>
+           <y-m>-0.698</y-m>
+           <z-m> 0.434</z-m>
+        </center>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>pilotAPU.test</object-name>	
+        <property>controls/APU/test</property>
+				<factor>-0.005</factor>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+		<animation>
+    	<type>pick</type>
+    	<object-name>pilotAPU.test</object-name>
+   		<action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+        </binding>
+        <binding>
+            <command>property-assign</command>
+            <property>controls/APU/test</property>
+							<value>1</value>
+        </binding>
+        <binding>
+            <command>property-assign</command>
+            <property>controls/APU/rpm-test</property>
+							<value>50</value>
+        </binding>
+        <binding>
+					<condition>
+						<not>
+							<property>controls/APU/master</property>
+						</not>
+					</condition>
+            <command>property-assign</command>
+            <property>controls/APU/battery</property>
+							<value>24.7</value>
+       </binding>
+			<mod-up>
+       		<binding>
+         		<command>property-assign</command>
+            <property>controls/APU/test</property>
+							<value>0</value>
+        </binding>
+        <binding>
+            <command>property-assign</command>
+            <property>controls/APU/rpm-test</property>
+							<value>0</value>
+        </binding>
+        <binding>
+					<condition> 
+						<not>
+							<property>controls/APU/master</property>					
+						</not>
+					</condition>
+			      <command>property-assign</command>
+            	<property>controls/APU/battery</property>
+								<value>0</value>
+        </binding>
+			</mod-up>
+    		</action>
+        	<hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>APU.test</tooltip-id>
+                <label>Test APU</label>
+                <mapping>push</mapping>
+            		<property>controls/APU/test</property>
+            </binding>
+        </hovered>
+		</animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>pilotAPU.gen</object-name>
+        <property>controls/electric/APU-generator</property>
+        <factor>30</factor>
+        <center>
+           <x-m>-0.830</x-m>
+           <y-m>-0.698</y-m>
+           <z-m> 0.570</z-m>
+        </center>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>pilotAPU.gen</object-name>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <command>property-toggle</command>
+                <property>controls/electric/APU-generator</property>
+            </binding>
+						<binding>
+            	<command>property-toggle</command>
+            	<property>sim/sound/click</property>
+						</binding>
+						<binding>
+							<condition>
+								<greater-than> 
+               		<property>controls/APU/rpm</property>
+										<value>0.99</value>
+								</greater-than>	
+							</condition>
+							<command>property-assign</command>
+                <property>controls/APU/battery</property>
+                <value>28</value>
+							<command>property-assign</command>
+                <property>systems/electrical/left-emer-bus</property>
+                <value>0</value>
+            </binding>
+						<binding>
+							<condition>
+									<not>
+	                	<property>controls/electric/APU-generator</property>
+									</not>
+						</condition>
+								<command>property-assign</command>
+                	<property>controls/APU/battery</property>
+                	<value>24.7</value>
+						</binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>APU-gen</tooltip-id>
+                <label>APU-generator: %s</label>
+                <mapping>on-off</mapping>
+            <property>controls/electric/APU-generator</property>
+            </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>pilotAPU.bleed</object-name>
+        <property>controls/APU/bleed</property>
+        <factor>30</factor>
+        <center>
+           <x-m>-0.830</x-m>
+           <y-m>-0.696</y-m>
+           <z-m> 0.565</z-m>
+        </center>
+        <axis>
+            <x>-1</x>
+            <y> 0</y>
+            <z> 0</z>
+        </axis>
+    </animation>
+
+    <animation>
+			<type>pick</type>
+			<object-name>pilotAPU.bleed</object-name>
+			<object-name>pilotbleed.max</object-name>
+			<action>
+				<button>0</button>
+				<repeatable>false</repeatable>
+				<binding>
+					<command>property-adjust</command>
+						<property>controls/APU/bleed</property>
+							<step>1</step>
+							<min>0</min>
+							<max>2</max>
+							<wrap>false</wrap>
+				</binding>
+				<binding>
+					<condition>
+						<equals>
+							<property>controls/APU/bleed</property>
+								<value>2</value>
+						</equals>
+					</condition>
+					<command>property-assign</command>
+						<property>controls/APU/bleed-max</property>
+							<value>1</value>					
+				</binding>
+				<binding>
+					<condition>
+						<equals>
+							<property>controls/APU/bleed</property>
+								<value>0</value>
+						</equals>
+					</condition>
+					<command>property-assign</command>
+						<property>controls/APU/bleed-max</property>
+							<value>0</value>					
+				</binding>
+				<binding>
+					<command>property-toggle</command>
+						<property>sim/sound/click</property>
+				</binding>
+			</action>
+			<hovered>
+				<binding>
+					<command>set-tooltip</command>
+						<tooltip-id>APU-bleed air</tooltip-id>
+						<label>APU-bleed air: %s</label>
+						<mapping>heading</mapping>
+						<property>controls/APU/bleed</property>
+				</binding>
+			</hovered>
+    </animation>
+
+    <animation>
+			<type>pick</type>
+			<object-name>pilotbleed.off</object-name>
+			<action>
+				<button>0</button>
+				<repeatable>false</repeatable>
+				<binding>
+					<command>property-adjust</command>
+						<property>controls/APU/bleed</property>
+							<step>-1</step>
+							<min>0</min>
+							<max>2</max>
+							<wrap>false</wrap>
+				</binding>
+				<binding>
+					<condition>
+						<equals>
+							<property>controls/APU/bleed</property>
+								<value>1</value>
+						</equals>
+					</condition>
+					<command>property-assign</command>
+						<property>controls/APU/bleed-max</property>
+							<value>0</value>					
+				</binding>
+				<binding>
+					<condition>
+						<equals>
+							<property>controls/APU/bleed</property>
+								<value>0</value>
+						</equals>
+					</condition>
+					<command>property-assign</command>
+						<property>controls/APU/bleed-max</property>
+							<value>0</value>					
+				</binding>
+				<binding>
+					<command>property-toggle</command>
+						<property>sim/sound/click</property>
+				</binding>
+			</action>
+    </animation>
+
+<!--Map Light knob -->
+
+  <animation>
+    <type>rotate</type>
+    <object-name>pilotMapLight.knob</object-name>
+    <property>controls/lighting/map-light</property>
+		<factor>-270</factor>
+    <center>
+      <x-m>-0.834</x-m>
+      <y-m>-0.687</y-m>
+      <z-m> 0.626</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>pilotMapLight.knob</object-name>
+        <action>
+            <button>3</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.1</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>controls/lighting/map-light</property>
+                <step>0.05</step>
+                <min>0</min>
+                <max>1.0</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>MapLight.knob</tooltip-id>
+                <label>Map Light : %s%%</label>
+                <mapping>percent</mapping>
+           <property>controls/lighting/map-light</property>
+            </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>pilotMapLight.knob</object-name>
+        <action>
+            <button>4</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.1</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>controls/lighting/map-light</property>
+                <step>-0.05</step>
+                <min>0</min>
+                <max>1.0</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+    </animation>
+
+
 
 </PropertyList>
