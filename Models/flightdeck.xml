@@ -456,7 +456,7 @@
         </action>
     </animation>
 
-<!-- text -->
+<!-- CoPilot APU -->
 
     <text>
         <name>APUrpm</name>
@@ -470,7 +470,7 @@
         <type type="string">number-value</type>
         <property>controls/APU/rpm</property>
         <scale>100.0</scale>
-        <format>%3.0f</format>
+        <format>%.0f</format>
         <font>led.txf</font>
         <character-size>0.009</character-size>
         <character-aspect-ratio type="double">1.0</character-aspect-ratio>
@@ -492,7 +492,7 @@
         <type type="string">number-value</type>
         <property>controls/APU/rpm-test</property>
         <scale>1</scale>
-        <format>%3.0f</format>
+        <format>%.0f</format>
         <font>led.txf</font>
         <character-size>0.009</character-size>
         <character-aspect-ratio type="double">1.0</character-aspect-ratio>
@@ -514,7 +514,7 @@
         <type type="string">number-value</type>
         <property>controls/APU/rpm</property>
         <scale>710.0</scale>
-        <format>%3.0f</format>
+        <format>%.0f</format>
         <font>led.txf</font>
         <character-size>0.009</character-size>
         <character-aspect-ratio type="double">1.0</character-aspect-ratio>
@@ -536,7 +536,7 @@
         <type type="string">number-value</type>
         <property>controls/APU/rpm-test</property>
         <scale>10</scale>
-        <format>%3.0f</format>
+        <format>%.0f</format>
         <font>led.txf</font>
         <character-size>0.009</character-size>
         <character-aspect-ratio type="double">1.0</character-aspect-ratio>
@@ -611,8 +611,6 @@
 				<kerning>none</kerning>
     </text>
 
-<!-- Flight Meter -->
-
     <text>
         <name>FLmeter</name>
         <offsets>
@@ -634,7 +632,6 @@
         </font-resolution>
     </text>
 
-<!-- -->
     <animation>
         <type>select</type>
         <object-name>APUrpm</object-name>
@@ -824,7 +821,6 @@
             <property>controls/APU/start-stop</property>
             </binding>
         </hovered>
-
     </animation>
 
     <animation>
@@ -1240,21 +1236,21 @@
         </action>
     </animation>
 
-<!-- text -->
+<!-- Pilot APU -->
 
     <text>
         <name>pilotAPUrpm</name>
         <offsets>
-            <x-m>-0.873</x-m>
-            <y-m>-0.695</y-m>
-            <z-m> 0.571</z-m>
+            <x-m>-0.874</x-m>
+            <y-m>-0.699</y-m>
+            <z-m> 0.517</z-m>
         </offsets>
         <alignment>center-center</alignment>
-        <axis-alignment>xz-plane</axis-alignment>
+        <axis-alignment>reversed-xz-plane</axis-alignment>
         <type type="string">number-value</type>
         <property>controls/APU/rpm</property>
         <scale>100.0</scale>
-        <format>%3.0f</format>
+        <format>%.0f</format>
         <font>led.txf</font>
         <character-size>0.009</character-size>
         <character-aspect-ratio type="double">1.0</character-aspect-ratio>
@@ -1267,12 +1263,12 @@
     <text>
         <name>pilotAPUrpmTest</name>
         <offsets>
-            <x-m>-0.876</x-m>
-            <y-m>-0.695</y-m>
+            <x-m>-0.870</x-m>
+            <y-m>-0.699</y-m>
             <z-m> 0.517</z-m>
         </offsets>
         <alignment>center-center</alignment>
-        <axis-alignment>xz-plane</axis-alignment>
+        <axis-alignment>reversed-xz-plane</axis-alignment>
         <type type="string">number-value</type>
         <property>controls/APU/rpm-test</property>
         <scale>1</scale>
@@ -1289,16 +1285,16 @@
     <text>
         <name>pilotAPUegt</name>
         <offsets>
-            <x-m>-0.876</x-m>
-            <y-m>-0.695</y-m>
-            <z-m> 0.494</z-m>
+            <x-m>-0.874</x-m>
+            <y-m>-0.699</y-m>
+            <z-m> 0.495</z-m>
         </offsets>
         <alignment>center-center</alignment>
-        <axis-alignment>xz-plane</axis-alignment>
+        <axis-alignment>reversed-xz-plane</axis-alignment>
         <type type="string">number-value</type>
         <property>controls/APU/rpm</property>
         <scale>710.0</scale>
-        <format>%3.0f</format>
+        <format>%.0f</format>
         <font>led.txf</font>
         <character-size>0.009</character-size>
         <character-aspect-ratio type="double">1.0</character-aspect-ratio>
@@ -1311,16 +1307,16 @@
     <text>
         <name>pilotAPUegtTest</name>
         <offsets>
-            <x-m>-0.876</x-m>
-            <y-m>-0.695</y-m>
-            <z-m> 0.494</z-m>
+            <x-m>-0.874</x-m>
+            <y-m>-0.699</y-m>
+            <z-m> 0.495</z-m>
         </offsets>
         <alignment>center-center</alignment>
-        <axis-alignment>xz-plane</axis-alignment>
+        <axis-alignment>reversed-xz-plane</axis-alignment>
         <type type="string">number-value</type>
         <property>controls/APU/rpm-test</property>
         <scale>10</scale>
-        <format>%3.0f</format>
+        <format>%.0f</format>
         <font>led.txf</font>
         <character-size>0.009</character-size>
         <character-aspect-ratio type="double">1.0</character-aspect-ratio>
@@ -1333,12 +1329,12 @@
     <text>
         <name>pilotAPUvolts</name>
         <offsets>
-            <x-m>-0.876</x-m>
-            <y-m>-0.695</y-m>
+            <x-m>-0.875</x-m>
+            <y-m>-0.699</y-m>
             <z-m> 0.471</z-m>
         </offsets>
         <alignment>center-center</alignment>
-        <axis-alignment>xz-plane</axis-alignment>
+        <axis-alignment>reversed-xz-plane</axis-alignment>
         <type type="string">number-value</type>
         <property>controls/APU/battery</property>
         <format>%2.1f</format>
@@ -1354,12 +1350,12 @@
     <text>
         <name>pilotAPUready</name>
         <offsets>
-            <x-m>-0.875</x-m>
+            <x-m>-0.874</x-m>
             <y-m>-0.695</y-m>
             <z-m> 0.562</z-m>
         </offsets>
         <alignment>center-center</alignment>
-        <axis-alignment>xz-plane</axis-alignment>
+        <axis-alignment>reversed-xz-plane</axis-alignment>
         <type type="string">literal</type>
 				<text type="string">READY TO LOAD</text>
         <format>%s</format>
@@ -1376,12 +1372,12 @@
     <text>
         <name>pilotAPUbleed</name>
         <offsets>
-            <x-m>-0.875</x-m>
+            <x-m>-0.874</x-m>
             <y-m>-0.695</y-m>
             <z-m> 0.571</z-m>
         </offsets>
         <alignment>center-center</alignment>
-        <axis-alignment>xz-plane</axis-alignment>
+        <axis-alignment>reversed-xz-plane</axis-alignment>
         <type type="string">literal</type>
 				<text type="string">BLEED VALVE OPEN</text>
         <format>%s</format>
@@ -1395,17 +1391,15 @@
 				<kerning>none</kerning>
     </text>
 
-<!-- Pilot Flight Meter -->
-
     <text>
         <name>pilotFLmeter</name>
         <offsets>
-            <x-m>-0.892</x-m>
-            <y-m>-0.695</y-m>
+            <x-m>-0.902</x-m>
+            <y-m>-0.697</y-m>
             <z-m> 0.627</z-m>
         </offsets>
         <alignment>right-center</alignment>
-        <axis-alignment>xz-plane</axis-alignment>
+        <axis-alignment>reversed-xz-plane</axis-alignment>
         <type type="string">number-value</type>
         <property>instrumentation/clock/flight-meter-tot</property>
         <format>%4.1f</format>
@@ -1418,32 +1412,6 @@
         </font-resolution>
     </text>
 
-<!-- PILOT APU -->
-
-<!-- Pilot Flight Meter -->
-
-    <text>
-        <name>pilotFLmeter</name>
-        <offsets>
-            <x-m>-0.842</x-m>
-            <y-m>-0.700</y-m>
-            <z-m> 0.627</z-m>
-        </offsets>
-        <alignment>right-center</alignment>
-        <axis-alignment>xz-plane</axis-alignment>
-        <type type="string">number-value</type>
-        <property>instrumentation/clock/flight-meter-tot</property>
-        <format>%4.1f</format>
-        <font>helvetica_bold.txf</font>
-        <character-size>0.009</character-size>
-        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
-        <font-resolution>
-            <width type="int">64</width>
-            <height type="int">64</height>
-        </font-resolution>
-    </text>
-
-<!-- -->
     <animation>
         <type>select</type>
         <object-name>pilotAPUrpm</object-name>
@@ -1499,7 +1467,7 @@
 
     <animation>
         <type>select</type>
-        <object-name>pilotAPU.bleed</object-name>
+        <object-name>pilotAPUbleed</object-name>
         	<condition>
 						<or>
 							<and>
@@ -1584,7 +1552,7 @@
            <z-m> 0.434</z-m>
         </center>
         <axis>
-            <x>-1</x>
+            <x>1</x>
             <y>0</y>
             <z>0</z>
         </axis>
@@ -1723,7 +1691,7 @@
            <z-m> 0.434</z-m>
         </center>
         <axis>
-            <x>-1</x>
+            <x>1</x>
             <y>0</y>
             <z>0</z>
         </axis>
@@ -1733,7 +1701,7 @@
         <type>translate</type>
         <object-name>pilotAPU.test</object-name>	
         <property>controls/APU/test</property>
-				<factor>-0.005</factor>
+				<factor>-0.003</factor>
         <axis>
             <x>0</x>
             <y>1</y>
@@ -1816,7 +1784,7 @@
            <z-m> 0.570</z-m>
         </center>
         <axis>
-            <x>-1</x>
+            <x>1</x>
             <y>0</y>
             <z>0</z>
         </axis>
@@ -1883,9 +1851,9 @@
            <z-m> 0.565</z-m>
         </center>
         <axis>
-            <x>-1</x>
-            <y> 0</y>
-            <z> 0</z>
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
         </axis>
     </animation>
 
@@ -2048,7 +2016,5 @@
             </binding>
         </action>
     </animation>
-
-
 
 </PropertyList>

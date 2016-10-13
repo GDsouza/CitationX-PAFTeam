@@ -1546,6 +1546,13 @@
         <object-name>APUvolts</object-name>
         <object-name>APUready</object-name> 
         <object-name>APUbleed</object-name> 
+        <object-name>pilotAPUrpm</object-name>
+        <object-name>pilotAPUrpmTest</object-name>
+        <object-name>pilotAPUegt</object-name>
+        <object-name>pilotAPUegtTest</object-name>
+        <object-name>pilotAPUvolts</object-name>
+        <object-name>pilotAPUready</object-name> 
+        <object-name>pilotAPUbleed</object-name> 
        <emission>
             <red>1.0</red>
             <green>0.4</green>
@@ -1575,6 +1582,7 @@
         <object-name>labels</object-name>
          <object-name>lines</object-name>
          <object-name>FLmeter</object-name>
+         <object-name>pilotFLmeter</object-name>
         <emission>
             <red>0.0</red>
             <green>0.0</green>
@@ -1601,6 +1609,7 @@
         <name>Red illum</name>
         <type>material</type>
         <object-name>APU.test</object-name>
+        <object-name>pilotAPU.test</object-name>
 					<condition>
 						<equals>
 							<property>controls/APU/test</property> 
