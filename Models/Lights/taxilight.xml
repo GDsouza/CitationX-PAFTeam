@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<PropertyList>
+
+	<path>landing.ac</path>
+	
+	<animation>
+		<type>select</type>
+		<condition>
+				<and>
+					<property>/controls/lighting/taxi-lights</property>
+					<greater-than>
+						<property>gear/gear/position-norm</property>
+						<value>0.9</value>
+					</greater-than>
+				</and>
+		</condition>
+	</animation>
+
+	<animation>
+		<type>light</type>
+		<light-type>spot</light-type>
+		<object-name>Cone</object-name>
+		<nopreview/>
+		<position>
+			<x>-3</x>
+			<y>-0.045</y>
+			<z>0.8150</z>
+		</position>
+		<direction>
+			<x>-1</x>
+			<y>0</y>
+			<z>0</z>
+		</direction>
+		<ambient>
+			<r>0.8</r>
+			<g>0.8</g>
+			<b>0.8</b>
+			<a>1.0</a>
+		</ambient>
+		<diffuse>
+			<r>0.7</r>
+			<g>0.7</g>
+			<b>0.6</b>
+			<a>1.0</a>
+		</diffuse>
+		<specular>
+			<r>0.7</r>
+			<g>0.7</g>
+			<b>0.7</b>
+			<a>1.0</a>
+		</specular>
+		<attenuation>
+			<c>1.0</c>
+			<l>0.002</l>
+			<q>0.00005</q>
+		</attenuation>
+		<exponent>30.0</exponent>
+		<near-m>15</near-m>
+		<far-m>480</far-m>
+		<cutoff>580</cutoff>
+	</animation>
+	
+	<effect>
+		<name>REMBRANDT transparency</name>
+		<inherits-from>Effects/model-transparent</inherits-from>
+		<object-name>Light</object-name>
+	</effect>
+
+</PropertyList>
