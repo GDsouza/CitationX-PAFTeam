@@ -201,6 +201,17 @@
         </offsets>
     </model>
 
+	<model>
+        <name>RLandingLight</name>
+        <path>Aircraft/CitationX/Models/Lights/Llandinglight.xml</path>
+        <offsets>
+            <x-m>-3.298</x-m>
+            <y-m> 1.185</y-m>
+            <z-m>-0.918</z-m>
+            <pitch-deg>0</pitch-deg>
+        </offsets>
+    </model>
+
     <animation>
         <type>range</type>
         <object-name>cabin</object-name>
