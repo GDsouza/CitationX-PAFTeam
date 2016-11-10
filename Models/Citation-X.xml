@@ -183,9 +183,9 @@
         <name>TaxiLight</name>
         <path>Aircraft/CitationX/Models/Lights/taxilight.xml</path>
         <offsets>
-            <x-m>-8.259</x-m>
+            <x-m>-8.239</x-m>
             <y-m> 0.000</y-m>
-            <z-m>-1.235</z-m>
+            <z-m>-1.325</z-m>
             <pitch-deg>0</pitch-deg>
         </offsets>
     </model>
@@ -604,9 +604,9 @@
         <property>sim/multiplay/generic/float[2]</property>
         <factor>74</factor>
         <center>
-            <x-m>5.368</x-m>
-            <y-m>0.0</y-m>
-            <z-m>0.601</z-m>
+            <x-m> 5.368 </x-m>
+            <y-m> 0.000 </y-m>
+            <z-m> 0.601 </z-m>
         </center>
         <axis>
             <x>0.0</x>
@@ -622,9 +622,9 @@
         <property>sim/multiplay/generic/float[2]</property>
         <factor>-72</factor>
         <center>
-            <x-m>5.368</x-m>
-            <y-m>0.0</y-m>
-            <z-m>0.601</z-m>
+            <x-m> 5.368 </x-m>
+            <y-m> 0.000 </y-m>
+            <z-m> 0.601 </z-m>
         </center>
         <axis>
             <x>0.0</x>
@@ -679,9 +679,9 @@
             </entry>
         </interpolation>
         <center>
-            <x-m>-7.941</x-m>
-            <y-m>0.298</y-m>
-            <z-m>-0.922</z-m>
+            <x-m>-7.941 </x-m>
+            <y-m> 0.298 </y-m>
+            <z-m>-0.922 </z-m>
         </center>
         <axis>
             <x>-0.993</x>
@@ -706,9 +706,9 @@
             </entry>
         </interpolation>
         <center>
-            <x-m>-7.941</x-m>
-            <y-m>-0.298</y-m>
-            <z-m>-0.922</z-m>
+            <x-m>-7.941 </x-m>
+            <y-m>-0.298 </y-m>
+            <z-m>-0.922 </z-m>
         </center>
         <axis>
             <x>-0.993</x>
@@ -724,9 +724,9 @@
         <property>gear/gear[0]/compression-m</property>
         <factor>228.5</factor>
         <center>
-            <x-m>-8.149</x-m>
-            <y-m>0</y-m>
-            <z-m>-1.328</z-m>
+            <x-m>-8.149 </x-m>
+            <y-m> 0.000 </y-m>
+            <z-m>-1.328 </z-m>
         </center>
         <axis>
             <x>0</x>
@@ -741,9 +741,9 @@
         <property>gear/gear[0]/compression-m</property>
         <factor>228.5</factor>
         <center>
-            <x-m>-7.949</x-m>
-            <y-m>0</y-m>
-            <z-m>-1.619</z-m>
+            <x-m>-7.949 </x-m>
+            <y-m> 0.000 </y-m>
+            <z-m>-1.619 </z-m>
         </center>
         <axis>
             <x>0</x>
@@ -807,9 +807,9 @@
         <property>controls/gear/steering</property>
         <factor>60</factor>
         <center>
-            <x-m>-8.149</x-m>
-            <y-m>0</y-m>
-            <z-m>-1.593</z-m>
+            <x-m>-8.149 </x-m>
+            <y-m> 0.000 </y-m>
+            <z-m>-1.593 </z-m>
         </center>
         <axis>
             <x>0</x>
@@ -823,9 +823,9 @@
         <object-name>Nosewheel</object-name>
         <property>gear/gear/tire-rpm</property>
         <center>
-            <x-m>-8.098</x-m>
-            <y-m>0</y-m>
-            <z-m>-2.003</z-m>
+            <x-m>-8.098 </x-m>
+            <y-m> 0.000 </y-m>
+            <z-m>-2.003 </z-m>
         </center>
         <axis>
             <x>0</x>
@@ -843,9 +843,9 @@
         <property>gear/gear[1]/compression-m</property>
         <factor>175</factor>
         <center>
-            <x-m>-0.108</x-m>
-            <y-m>0</y-m>
-            <z-m>-1.845</z-m>
+            <x-m>-0.119</x-m>
+            <y-m>-1.587</y-m>
+            <z-m>-2.080</z-m>
         </center>
         <axis>
             <x>0</x>
@@ -861,9 +861,9 @@
         <property>gear/gear[1]/compression-m</property>
         <factor>-55</factor>
         <center>
-            <x-m>0.122</x-m>
-            <y-m>0</y-m>
-            <z-m>-1.129</z-m>
+            <x-m> 0.122 </x-m>
+            <y-m> 0.000 </y-m>
+            <z-m>-1.129 </z-m>
         </center>
         <axis>
             <x>0</x>
@@ -889,9 +889,9 @@
             </entry>
         </interpolation>
         <center>
-            <x-m>0.122</x-m>
-            <y-m>-1.587</y-m>
-            <z-m>-1.129</z-m>
+            <x-m> 0.122 </x-m>
+            <y-m>-1.587 </y-m>
+            <z-m>-1.129 </z-m>
         </center>
         <axis>
             <x>1</x>
@@ -925,9 +925,9 @@
             </entry>
         </interpolation>
         <center>
-            <x-m>0.122</x-m>
-            <y-m>-1.549</y-m>
-            <z-m>-1.141</z-m>
+            <x-m> 0.122 </x-m>
+            <y-m>-1.549 </y-m>
+            <z-m>-1.141 </z-m>
         </center>
         <axis>
             <x>1</x>
@@ -949,7 +949,7 @@
             </entry>
         </interpolation>
         <axis>
-            <x1-m>0.233</x1-m>
+            <x1-m> 0.233</x1-m>
             <y1-m>-1.690</y1-m>
             <z1-m>-1.213</z1-m>
             <x2-m>-0.142</x2-m>
@@ -963,9 +963,9 @@
         <object-name>LHwheel</object-name>
         <property>gear/gear[1]/tire-rpm</property>
         <center>
-            <x-m>0.122</x-m>
-            <y-m>-1.354</y-m>
-            <z-m>-2.145</z-m>
+            <x-m> 0.121 </x-m>
+            <y-m>-1.586 </y-m>
+            <z-m>-2.083 </z-m>
         </center>
         <axis>
             <x>0</x>
@@ -983,9 +983,9 @@
         <property>gear/gear[2]/compression-m</property>
         <factor>175</factor>
         <center>
-            <x-m>-0.108</x-m>
-            <y-m>0</y-m>
-            <z-m>-1.845</z-m>
+            <x-m> -0.108 </x-m>
+            <y-m>  0.000 </y-m>
+            <z-m> -1.845 </z-m>
         </center>
         <axis>
             <x>0</x>
@@ -1001,9 +1001,9 @@
         <property>gear/gear[2]/compression-m</property>
         <factor>-55</factor>
         <center>
-            <x-m>0.122</x-m>
-            <y-m>0</y-m>
-            <z-m>-1.129</z-m>
+            <x-m> 0.122 </x-m>
+            <y-m> 0.000 </y-m>
+            <z-m>-1.129 </z-m>
         </center>
         <axis>
             <x>0</x>
@@ -1029,9 +1029,9 @@
             </entry>
         </interpolation>
         <center>
-            <x-m>0.122</x-m>
-            <y-m>1.587</y-m>
-            <z-m>-1.129</z-m>
+            <x-m> 0.122 </x-m>
+            <y-m> 1.587 </y-m>
+            <z-m>-1.129 </z-m>
         </center>
         <axis>
             <x>1</x>
@@ -1103,9 +1103,9 @@
         <object-name>RHwheel</object-name>
         <property>gear/gear[2]/tire-rpm</property>
         <center>
-            <x-m>0.122</x-m>
-            <y-m>1.354</y-m>
-            <z-m>-2.145</z-m>
+            <x-m> 0.121 </x-m>
+            <y-m> 1.587 </y-m>
+            <z-m>-2.083 </z-m>
         </center>
         <axis>
             <x>0</x>
@@ -1222,9 +1222,9 @@
         <object-name>Strb1</object-name>
         <offset-m>11</offset-m>
         <axis>
-            <x>0.431</x>
-            <y>0.9</y>
-            <z>-0.059</z>
+            <x> 0.431 </x>
+            <y> 0.900 </y>
+            <z>-0.059 </z>
         </axis>
     </animation>
 
@@ -1259,9 +1259,9 @@
         <object-name>Strb2</object-name>
         <offset-m>11</offset-m>
         <axis>
-            <x>0.431</x>
-            <y>-0.9</y>
-            <z>-0.059</z>
+            <x> 0.431 </x>
+            <y>-0.900 </y>
+            <z>-0.059 </z>
         </axis>
     </animation>
 
@@ -1297,9 +1297,9 @@
         <object-name>Bcn1</object-name>
         <offset-m>1.704</offset-m>
         <axis>
-            <x>0.470</x>
-            <y>0</y>
-            <z>-0.883</z>
+            <x> 0.470 </x>
+            <y> 0.000 </y>
+            <z>-0.883 </z>
         </axis>
     </animation>
 
@@ -1334,9 +1334,9 @@
         <object-name>Bcn2</object-name>
         <offset-m>9.486</offset-m>
         <axis>
-            <x>0.918</x>
-            <y>0</y>
-            <z>0.396</z>
+            <x> 0.918 </x>
+            <y> 0.000 </y>
+            <z> 0.396 </z>
         </axis>
     </animation>
 
@@ -1375,9 +1375,9 @@
         <type>flash</type>
         <object-name>Taxi</object-name>
         <center>
-            <x-m>-8.26</x-m>
-            <y-m>0</y-m>
-            <z-m>-1.236</z-m>
+            <x-m>-8.239 </x-m>
+            <y-m> 0.000 </y-m>
+            <z-m>-1.327 </z-m>
         </center>
         <axis>
             <x>-1</x>
@@ -1407,9 +1407,9 @@
         <type>flash</type>
         <object-name>Land1</object-name>
         <center>
-            <x-m>-3.299</x-m>
-            <y-m>-1.185</y-m>
-            <z-m>-0.918</z-m>
+            <x-m>-3.299 </x-m>
+            <y-m>-1.185 </y-m>
+            <z-m>-0.918 </z-m>
         </center>
         <axis>
             <x>-1</x>
@@ -1439,9 +1439,9 @@
         <type>flash</type>
         <object-name>Land2</object-name>
         <center>
-            <x-m>-3.299</x-m>
-            <y-m>1.185</y-m>
-            <z-m>-0.918</z-m>
+            <x-m>-3.299 </x-m>
+            <y-m> 1.185 </y-m>
+            <z-m>-0.918 </z-m>
         </center>
         <axis>
             <x>-1</x>
