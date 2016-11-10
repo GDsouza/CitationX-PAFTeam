@@ -377,13 +377,30 @@
 
     <animation>
         <type>rotate</type>
-        <object-name>Rudder</object-name>
+        <object-name>Rudder_1</object-name>
         <property>controls/flight/rudder</property>
         <factor>15</factor>
         <center>
-            <x-m>6.626</x-m>
-            <y-m>0</y-m>
-            <z-m>0.686</z-m>
+            <x-m> 7.889 </x-m>
+            <y-m> 0.000 </y-m>
+            <z-m> 1.897 </z-m>
+        </center>
+        <axis>
+            <x>0.715</x>
+            <y>0</y>
+            <z>0.699</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>Rudder_0</object-name>
+        <property>controls/flight/rudder</property>
+        <factor>15</factor>
+        <center>
+            <x-m> 7.889 </x-m>
+            <y-m> 0.000 </y-m>
+            <z-m> 1.897 </z-m>
         </center>
         <axis>
             <x>0.715</x>
