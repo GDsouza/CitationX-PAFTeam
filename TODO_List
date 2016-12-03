@@ -20,8 +20,13 @@ PFD :# Coder le bouton "MINIMUMS" - Fait 11/01/2016
 		 # Ajouter la référence vitesse d'atterrissage (REF) - Fait 01-02-2016
 		 # Ajouter les références VE, VR, V2, V1 avion au sol - Fait 01-02-2016
 
-MFD : Coder les boutons du bas
+MFD : # Coder les boutons du bas - Fait oct/2016
 		 # Créer les checklists - Fait 22/04/2016
+		 # Transformer en Canvas - Fait Nov/2016
+		  séparer les deux MFD
+
+RMU : #Transformer en Canvas - Fait déc/2016
+			Séparer les deux RMU
 
 APU :# Coder le bouton MAP LIGHT - Fait 24/02/2016
 		 # Coder l'enregistreur horaire - Fait 23/01/2016

@@ -4,7 +4,6 @@
 
 <fx>
 
-
 <!-- AMBIANCE -->
 
     <ambiance>
@@ -29,6 +28,9 @@
         <name>welcome</name>
         <path>Aircraft/CitationX/Sounds/welcome.wav</path>
         <mode>once</mode>
+		    <property>sim/signals/fdm-initialized</property>
+				<delay-sec>15</delay-sec>
+
 <!--
       <condition>
 				<and>
@@ -41,9 +43,7 @@
 				</and>
       </condition>
 -->
-      <property>sim/signals/fdm-initialized</property>
-			<delay-sec>15</delay-sec>
-      <position>
+     <position>
         <x>-7.00 </x>
         <y> 0.00 </y>
         <z> 0.00 </z>

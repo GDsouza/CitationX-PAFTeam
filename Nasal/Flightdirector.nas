@@ -16,8 +16,6 @@ var count=0;
 var Coord = 0;
 var TOD = 0;
 var minimums=getprop("autopilot/settings/minimums");
-var wx_range=[10,25,50,100,200,300];
-var wx_index=3;
 var rd_speed = props.globals.initNode("instrumentation/airspeed-indicator/round-speed-kt",0,"DOUBLE");
 var alt = "instrumentation/altimeter/indicated-altitude-ft";
 var v_speed = "autopilot/internal/vert-speed-fpm";
@@ -26,10 +24,9 @@ var ind_mc = "instrumentation/airspeed-indicator/indicated-mach";
 var tg_spd_kt = "autopilot/settings/target-speed-kt";
 var ind_kt = "instrumentation/airspeed-indicator/indicated-speed-kt";
 
-#####################################
+####################################
 
 setlistener("/sim/signals/fdm-initialized", func {
-    setprop("instrumentation/nd/range",wx_range[wx_index]);
     print("Flight Director ...Checked");
     settimer(update_fd, 30);
 });
@@ -315,13 +312,6 @@ var update_nav=func{
         setprop("autopilot/internal/to-flag",getprop("instrumentation/gps/wp/wp[1]/to-flag"));
         setprop("autopilot/internal/from-flag",getprop("instrumentation/gps/wp/wp[1]/from-flag"));
     }
-}
-
-var set_range = func(dir){
-    wx_index+=dir;
-    if(wx_index>5)wx_index=5;
-    if(wx_index<0)wx_index=0;
-    setprop("instrumentation/nd/range",wx_range[wx_index]);
 }
 
 var course_offset = func(src){

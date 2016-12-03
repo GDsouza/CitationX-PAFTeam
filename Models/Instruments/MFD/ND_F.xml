@@ -1,0 +1,17 @@
+<!--
+Citation X - Navigation display
+-->
+
+<PropertyList>
+
+<path>ND_F.ac</path>
+
+    <animation>
+        <type>select</type>
+        <object-name>ND.screen</object-name>
+        <condition>
+          <property>controls/electric/avionics-power</property>
+				</condition>
+    </animation>
+
+</PropertyList>

@@ -773,10 +773,9 @@
         <type>material</type>
         <object-name>CDU-lamp</object-name>
         <emission>
-            <red-prop>sim/color-set/green/r</red-prop>
-            <green-prop>sim/color-set/green/g</green-prop>
-            <blue-prop>sim/color-set/green/b</blue-prop>
-            <alpha-prop>sim/color-set/green/a</alpha-prop>
+            <red>0</red>
+            <green>1</green>
+            <blue>0</blue>
         </emission>
     </animation>
 

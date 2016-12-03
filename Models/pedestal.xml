@@ -47,7 +47,7 @@
     </model>
 
     <model>
-        <path>Models/Instruments/RMU/RMU-sup1.xml</path>
+        <path>Models/Instruments/RMU/screenL.xml</path>
         <offsets>
             <x-m>0.250</x-m>
             <y-m>-0.103</y-m>
@@ -57,7 +57,7 @@
     </model>
 
     <model>
-        <path>Models/Instruments/RMU/RMU-sup2.xml</path>
+        <path>Models/Instruments/RMU/screenL.xml</path>
         <offsets>
             <x-m>0.250</x-m>
             <y-m>0.111</y-m>

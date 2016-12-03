@@ -8,6 +8,7 @@ var Rbus = props.globals.initNode("/systems/electrical/right-bus",0,"DOUBLE");
 var Amps = props.globals.initNode("/systems/electrical/amps",0,"DOUBLE");
 #var EXT  = props.globals.initNode("/controls/electric/external-power",1,"DOUBLE");
 var XTie  = props.globals.initNode("/systems/electrical/xtie",0,"BOOL");
+var AvPwr = props.globals.initNode("controls/electric/avionics-power",0,"BOOL");
 props.globals.initNode("controls/lighting/anti-coll",0,"INT");
 var lbus_volts = 0.0;
 var rbus_volts = 0.0;
@@ -168,6 +169,8 @@ var init_switches = func{
     setprop("controls/lighting/cdu1",0.6);
 #    setprop("controls/lighting/panel-norm",0.8);
     setprop("controls/lighting/nav-lights",0);
+    setprop("controls/lighting/rmu",0.3);
+    setprop("controls/lighting/rmu[1]",0.3);
 
     append(lights_input,props.globals.initNode("controls/lighting/landing-light[0]",0,"BOOL"));
     append(lights_output,props.globals.initNode("systems/electrical/outputs/landing-light[0]",0,"DOUBLE"));
@@ -378,6 +381,7 @@ var batt_switch=func{
 	var ext_pwr = getprop("controls/electric/external-power");
 	var l_gen = getprop("engines/engine[0]/amp-v");
 	var r_gen = getprop("engines/engine[1]/amp-v");
+	var avionics = getprop("controls/electric/avionics-switch");
 
 	if (bat1_sw) {
 		if (ext_pwr or apu_gen or l_gen >24 or r_gen >24) {
@@ -403,6 +407,8 @@ var batt_switch=func{
 			setprop(r_norm,0);
 			setprop(r_emer,0);
 	}			
+	if(avionics == 2 and getprop(r_norm)) {AvPwr.setValue(1)}
+	else {AvPwr.setValue(0)}
 }
 
 var anticoll_switch = func {

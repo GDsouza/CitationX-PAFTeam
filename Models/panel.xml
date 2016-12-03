@@ -80,11 +80,52 @@
     </model>
 
     <model>
-        <name>MFD2</name>
-        <path>Aircraft/CitationX/Models/Instruments/MFD/MFD3d.xml</path>
+        <name>ND_L</name>
+        <path>Aircraft/CitationX/Models/Instruments/MFD/ND_F.xml</path>
+        <offsets>
+            <x-m>0.0011</x-m>
+            <y-m>-0.1865</y-m>
+            <z-m>0.136</z-m>
+        </offsets>
+    </model>
+
+    <model>
+        <name>Layers_L</name>
+        <path>Aircraft/CitationX/Models/Instruments/MFD/ND_B.xml</path>
+        <offsets>
+            <x-m>0.0010</x-m>
+            <y-m>-0.1865</y-m>
+            <z-m>0.136</z-m>
+        </offsets>
+    </model>
+
+    <model>
+        <name>ND_R</name>
+        <path>Aircraft/CitationX/Models/Instruments/MFD/ND_F.xml</path>
+        <offsets>
+            <x-m>0.0011</x-m>
+            <y-m>0.195</y-m>
+            <z-m>0.136</z-m>
+        </offsets>
+    </model>
+
+    <model>
+        <name>Layers_R</name>
+        <path>Aircraft/CitationX/Models/Instruments/MFD/ND_B.xml</path>
+        <offsets>
+            <x-m>0.0010</x-m>
+            <y-m>0.195</y-m>
+            <z-m>0.136</z-m>
+        </offsets>
+    </model>
+
+
+    <model>
+        <name>PFD1</name>
+        <path>Aircraft/CitationX/Models/Instruments/PFD/PFD3d.xml</path>
         <offsets>
             <x-m>0.002</x-m>
-            <y-m>0.195</y-m>
+            <y-m>-0.375</y-m>
             <z-m>0.138</z-m>
         </offsets>
     </model>
@@ -127,13 +168,7 @@
         <object-name>FD.vs-annun</object-name>
         <object-name>FD.bank-annun</object-name>
         <condition>
-          <and>
-         		<property>systems/electrical/right-bus-norm</property>
-						<equals>
-              <property>controls/electric/avionics-switch</property>
-								<value>2</value>
-						</equals>
-					</and>
+          <property>controls/electric/avionics-power</property>
 				</condition>
     </animation>
 
@@ -228,51 +263,8 @@
         <object-name>PFD1</object-name>
         <object-name>PFD2</object-name>
         <condition>
-					<and>
-           <property>systems/electrical/right-bus-norm</property>
-						<equals>
-                <property>controls/electric/avionics-switch</property>
-									<value>2</value>
-						</equals>
-					</and>
-        </condition>
-    </animation>
-
-    <animation>
-        <type>select</type>
-        <object-name>MFD1</object-name>
-        <condition>
-					<and>
-           <property>systems/electrical/right-bus-norm</property>
-						<equals>
-                <property>controls/electric/avionics-switch</property>
-									<value>2</value>
-						</equals>
-<!--						<not>
-                <property>instrumentation/checklists/norm</property>
-						</not>
--->						<not>
-                <property>instrumentation/checklists/chklst-pilot</property>
-						</not>
-				</and>
-        </condition>
-    </animation>
-
-    <animation>
-        <type>select</type>
-        <object-name>MFD2</object-name>
-        <condition>
-					<and>
-           <property>systems/electrical/right-bus-norm</property>
-						<equals>
-                <property>controls/electric/avionics-switch</property>
-									<value>2</value>
-						</equals>
-						<not>
-                <property>instrumentation/checklists/norm</property>
-						</not>
-					</and>
-        </condition>
+          <property>controls/electric/avionics-power</property>
+				</condition>
     </animation>
 
     <animation>
@@ -2342,16 +2334,6 @@
 
 <!-- PFD -->
 
-    <model>
-        <name>PFD1</name>
-        <path>Aircraft/CitationX/Models/Instruments/PFD/PFD3d.xml</path>
-        <offsets>
-            <x-m>0.002</x-m>
-            <y-m>-0.375</y-m>
-            <z-m>0.138</z-m>
-        </offsets>
-    </model>
-
     <animation>
         <type>translate</type>
         <object-name>PFD.std</object-name>
@@ -2587,16 +2569,6 @@
 <!-- MFD -->
 
     <model>
-        <name>MFD1</name>
-        <path>Aircraft/CitationX/Models/Instruments/MFD/MFD3d.xml</path>
-        <offsets>
-            <x-m>0.002</x-m>
-            <y-m>-0.187</y-m>
-            <z-m>0.138</z-m>
-        </offsets>
-    </model>
-
-    <model>
         <name>chklst1</name>
         <path>Aircraft/CitationX/Models/Instruments/MFD/checklist.xml</path>
         <offsets>
@@ -2630,8 +2602,8 @@
     <animation>
         <type>rotate</type>
         <object-name>MFD_L.knob</object-name>
-        <property>instrumentation/nd/range</property>
-        <factor>10</factor>
+        <property>instrumentation/efis/inputs/range-nm</property>
+        <factor>5</factor>
         <axis>
             <x>-1.0</x>
             <y>0.0</y>
@@ -2644,11 +2616,12 @@
         </center>
     </animation>
 
+
     <animation>
         <type>rotate</type>
         <object-name>MFD_R.knob</object-name>
-        <property>instrumentation/nd/range</property>
-        <factor>10</factor>
+        <property>instrumentation/efis/inputs/range-nm</property>
+        <factor>5</factor>
         <axis>
             <x>-1.0</x>
             <y>0.0</y>
@@ -2667,26 +2640,11 @@
         <object-name>MFD_R.knob</object-name>
         <action>
             <button>0</button>
-            <repeatable>false</repeatable>
-            <binding>
-                <command>nasal</command>
-                <script>citation.set_range(1);</script>
-            </binding>
-        </action>
-        <action>
-            <button>1</button>
-            <repeatable>false</repeatable>
-            <binding>
-                <command>nasal</command>
-                <script>citation.set_range(-1);</script>
-            </binding>
-        </action>
-        <action>
             <button>3</button>
             <repeatable>false</repeatable>
             <binding>
                 <command>nasal</command>
-                <script>citation.set_range(1);</script>
+                <script>mfd.set_range(1);</script>
             </binding>
         </action>
         <action>
@@ -2694,8 +2652,236 @@
             <repeatable>false</repeatable>
             <binding>
                 <command>nasal</command>
-                <script>citation.set_range(-1);</script>
+                <script>mfd.set_range(-1);</script>
             </binding>
+        </action>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>MFD.btn0</object-name>	
+        <property>instrumentation/primus2000/mfd/btn0</property>
+				<factor>0.0032</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+				</axis>
+    </animation>
+    <animation>
+        <type>pick</type>
+        <object-name>MFD.btn0</object-name>
+        <visible>true</visible>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+				    <binding>
+				        <command>property-assign</command>
+				        <property>instrumentation/primus2000/mfd/btn0</property>
+									<value>1</value>
+				    </binding>
+            <binding>
+                <command>property-cycle</command>
+                <property>instrumentation/primus2000/mfd/menu-num</property>
+                <value>0</value>
+                <value>1</value>
+            </binding>
+            <binding>
+                <command>nasal</command>
+                <script>mfd.menu();</script>
+            </binding>
+						<mod-up>
+							<binding>
+								<command>property-assign</command>
+									<property>instrumentation/primus2000/mfd/btn0</property>
+									<value>0</value>
+							</binding>
+						</mod-up>
+        </action>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>MFD.btn1</object-name>	
+        <property>instrumentation/primus2000/mfd/btn1</property>
+				<factor>0.0032</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+				</axis>
+    </animation>
+    <animation>
+        <type>pick</type>
+        <object-name>MFD.btn1</object-name>
+        <visible>true</visible>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+				    <binding>
+				        <command>property-assign</command>
+				        <property>instrumentation/primus2000/mfd/btn1</property>
+									<value>1</value>
+				    </binding>
+            <binding>
+                <command>nasal</command>
+                <script>mfd.menu();</script>
+            </binding>
+						<mod-up>
+							<binding>
+								<command>property-assign</command>
+									<property>instrumentation/primus2000/mfd/btn1</property>
+									<value>0</value>
+							</binding>
+						</mod-up>
+        </action>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>MFD.btn2</object-name>	
+        <property>instrumentation/primus2000/mfd/btn2</property>
+				<factor>0.0032</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+				</axis>
+    </animation>
+    <animation>
+        <type>pick</type>
+        <object-name>MFD.btn2</object-name>
+        <visible>true</visible>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+				    <binding>
+				        <command>property-assign</command>
+				        <property>instrumentation/primus2000/mfd/btn2</property>
+									<value>1</value>
+				    </binding>
+            <binding>
+                <command>nasal</command>
+                <script>mfd.menu();</script>
+            </binding>
+						<mod-up>
+							<binding>
+								<command>property-assign</command>
+									<property>instrumentation/primus2000/mfd/btn2</property>
+									<value>0</value>
+							</binding>
+						</mod-up>
+        </action>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>MFD.btn3</object-name>	
+        <property>instrumentation/primus2000/mfd/btn3</property>
+				<factor>0.0032</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+				</axis>
+    </animation>
+    <animation>
+        <type>pick</type>
+        <object-name>MFD.btn3</object-name>
+        <visible>true</visible>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+				    <binding>
+				        <command>property-assign</command>
+				        <property>instrumentation/primus2000/mfd/btn3</property>
+									<value>1</value>
+				    </binding>
+            <binding>
+                <command>nasal</command>
+                <script>mfd.menu();</script>
+            </binding>
+						<mod-up>
+							<binding>
+								<command>property-assign</command>
+									<property>instrumentation/primus2000/mfd/btn3</property>
+									<value>0</value>
+							</binding>
+						</mod-up>
+        </action>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>MFD.btn4</object-name>	
+        <property>instrumentation/primus2000/mfd/btn4</property>
+				<factor>0.0032</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+				</axis>
+    </animation>
+    <animation>
+        <type>pick</type>
+        <object-name>MFD.btn4</object-name>
+        <visible>true</visible>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+				    <binding>
+				        <command>property-assign</command>
+				        <property>instrumentation/primus2000/mfd/btn4</property>
+									<value>1</value>
+				    </binding>
+            <binding>
+                <command>nasal</command>
+                <script>mfd.menu();</script>
+            </binding>
+						<mod-up>
+							<binding>
+								<command>property-assign</command>
+									<property>instrumentation/primus2000/mfd/btn4</property>
+									<value>0</value>
+							</binding>
+						</mod-up>
+        </action>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>MFD.btn5</object-name>	
+        <property>instrumentation/primus2000/mfd/btn5</property>
+				<factor>0.0032</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+				</axis>
+    </animation>
+    <animation>
+        <type>pick</type>
+        <object-name>MFD.btn5</object-name>
+        <visible>true</visible>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+				    <binding>
+				        <command>property-assign</command>
+				        <property>instrumentation/primus2000/mfd/btn5</property>
+									<value>1</value>
+				    </binding>
+            <binding>
+                <command>nasal</command>
+                <script>mfd.menu();</script>
+            </binding>
+						<mod-up>
+							<binding>
+								<command>property-assign</command>
+									<property>instrumentation/primus2000/mfd/btn5</property>
+									<value>0</value>
+							</binding>
+						</mod-up>
         </action>
     </animation>
 
@@ -2716,12 +2902,8 @@
         <type>select</type>
         <object-name>FD.stby-annun</object-name>
         <condition>
-          <and>
-         		<property>systems/electrical/right-bus-norm</property>
-						<equals>
-              <property>controls/electric/avionics-switch</property>
-								<value>2</value>
-						</equals>
+					<and>
+	          <property>controls/electric/avionics-power</property>
 						<equals>
 							<property>autopilot/locks/heading</property>
 								<value>ROLL</value>
@@ -3411,22 +3593,6 @@
         </hovered>
    </animation>
 
-<!-- MFD -->
-
-    <animation>
-        <type>pick</type>
-        <object-name>MFD.btn5</object-name>
-        <visible>true</visible>
-        <action>
-            <button>0</button>
-            <repeatable>false</repeatable>
-            <binding>
-                <command>nasal</command>
-                <script>citation.mfd_vspeed;</script>
-            </binding>
-        </action>
-    </animation>
-
 <!-- DC850 -->
 
     <animation>
@@ -3511,7 +3677,7 @@
     <animation>
         <type>translate</type>
         <object-name>tcas.btn</object-name>	
-        <property>instrumentation/primus2000/dc840/tcas</property>
+        <property>instrumentation/efis/inputs/tfc</property>
 				<factor>0.0027</factor>
         <axis>
             <x>-1</x>
@@ -3527,12 +3693,17 @@
             <repeatable>false</repeatable>
             <binding>
                 <command>property-toggle</command>
-                <property>instrumentation/primus2000/dc840/tcas</property>
+                <property>instrumentation/efis/inputs/tfc</property>
+            </binding>
+            <binding>
+                <command>property-assign</command>
+                <property>sim/traffic-manager/enabled</property>
+                <property>instrumentation/efis/inputs/tfc</property>
             </binding>
             <binding>
                 <condition>
                     <not>
-                        <property>instrumentation/primus2000/dc840/tcas</property>
+                        <property>instrumentation/efis/inputs/tfc</property>
                     </not>
                 </condition>
                 <command>property-assign</command>
@@ -3541,7 +3712,7 @@
             </binding>
             <binding>
                 <condition>
-                    <property>instrumentation/primus2000/dc840/tcas</property>
+                    <property>instrumentation/efis/inputs/tfc</property>
                 </condition>
                 <command>property-assign</command>
                 <property>instrumentation/tcas/inputs/mode</property>
@@ -3592,21 +3763,22 @@
             <button>0</button>
             <repeatable>false</repeatable>
             <binding>
+                <command>property-cycle</command>
+                <property>instrumentation/efis/mfd/display-mode</property>
+								<value type="string">PLAN</value>
+								<value type="string">MAP</value>
+            </binding>
+            <binding>
                 <command>property-toggle</command>
                 <property>instrumentation/primus2000/dc840/mfd-map</property>
             </binding>
-            <binding>
-                <command>property-assign</command>
-                <property>instrumentation/nd/aircraft-heading-up</property>
-                <property>instrumentation/primus2000/dc840/mfd-map</property>
-            </binding>
-        </action>
+       </action>
     </animation>
 
     <animation>
         <type>translate</type>
         <object-name>mfdwx.btn</object-name>	
-        <property>instrumentation/primus2000/dc840/mfd-wx</property>
+        <property>instrumentation/efis/inputs/wxr</property>
 				<factor>0.0027</factor>
         <axis>
             <x>-1</x>
@@ -3623,30 +3795,28 @@
             <repeatable>false</repeatable>
             <binding>
               <command>property-toggle</command>
-	            <property>instrumentation/primus2000/dc840/mfd-wx</property>
+	            <property>instrumentation/efis/inputs/wxr</property>
             </binding>
             <binding>
-              <command>property-cycle</command>
-	            <property>instrumentation/primus2000/dc840/mfd-wx-set</property>
-							<value type="string">APT</value>
-							<value type="string">VOR</value>
-							<value type="string">BOTH</value>
+							<condition>
+		            <property>instrumentation/efis/inputs/wxr</property>
+							</condition>								
+              <command>nasal</command>
+              <script>weather.mfd_wx(1);</script>
             </binding>
-						<binding>
-							<command>nasal</command>
-							<script>citation.mfd_wx();</script>
-						</binding>
+            <binding>
+							<condition>
+								<not>
+			            <property>instrumentation/efis/inputs/wxr</property>
+								</not>
+							</condition>								
+              <command>nasal</command>
+              <script>weather.mfd_wx(0);</script>
+            </binding>
 						<binding>
 						    <command>property-toggle</command>
 						    <property>sim/sound/click</property>
 						</binding>
-						<mod-up>
-		          <binding>
-		            <command>property-assign</command>
-			          <property>instrumentation/primus2000/dc840/mfd-wx</property>
-								<value>0</value>
-		          </binding>					
-						</mod-up>
         </action>
     </animation>
 

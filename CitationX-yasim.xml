@@ -4,7 +4,7 @@
  Max Cruise M=0.92 -37,000 ft @ 30,000lbs
 Airspeed Limits Vmo 600 KIAS Mmo 0.92
 
-Engine Rolls Royce :
+Engine Rolls Royce AE3007C1:
 TO thrust 6,764 lbs
 Bypass ratio 5.1
 Press. Ratio 23:1
@@ -160,8 +160,6 @@ Fuel 12938 lbs jet
     <control-speed control="EXTEND" transition-time="5"/>
     <control-output control="EXTEND" prop="/gear/gear[2]/position-norm"/>
   </gear>
-
-
 
 <!--
 Rolls Royce AE3007C1

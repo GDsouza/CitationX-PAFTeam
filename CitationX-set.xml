@@ -9,8 +9,14 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 <PropertyList>
     <sim>
         <description>Cessna Citation-X</description>
-        <author>Syd Adams, 2015 C. Le Moigne(clm76), C-Thiriot (PATTEN), PAF TEAM</author>
+        <author>Syd Adams, C. Le Moigne(clm76), C-Thiriot (PATTEN), PAF TEAM</author>
         <status>devel</status>
+        <rating>
+            <FDM type="int">3</FDM>
+            <systems type="int">3</systems>
+            <cockpit type="int">3</cockpit>
+            <model type="int">3</model>
+        </rating>
         <flight-model>yasim</flight-model>
         <aero>CitationX-yasim</aero>
         <fuel-fraction>0.65</fuel-fraction>
@@ -538,7 +544,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
             <y-center type="float">0.5</y-center>
             <display>
                 <arpt type="bool">1</arpt>
-                <vor type="bool">1</vor>
+                <vor type="bool">0</vor>
                 <fix type="bool">0</fix>
                 <tcas type="bool">0</tcas>
             </display>
@@ -576,24 +582,23 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
         </alerts>
 
     <rmu>
-    <unit n="0">
-        <serviceable type="bool">1</serviceable>
-        <selected type="int">0</selected>
-        <selected-xoffset type="int">0</selected-xoffset>
-        <selected-yoffset type="int">0</selected-yoffset>
-        <com-num type="int">0</com-num>
-        <nav-num type="int">0</nav-num>
-        <adf-num type="int">0</adf-num>
-    </unit>
-    <unit n="1">
-        <serviceable type="bool">1</serviceable>
-        <selected type="int">0</selected>
-        <selected-xoffset type="int">0</selected-xoffset>
-        <selected-yoffset type="int">0</selected-yoffset>
-        <com-num type="int">1</com-num>
-        <nav-num type="int">1</nav-num>
-        <adf-num type="int">1</adf-num>
-    </unit>
+			<trsp-num type="string">0</trsp-num>
+		  <unit n="0">
+		      <serviceable type="bool">1</serviceable>
+		      <selected type="int">0</selected>
+		      <com-num type="int">1</com-num>
+		      <nav-num type="int">1</nav-num>
+		      <adf-num type="int">1</adf-num>
+		      <mls-num type="int">1</mls-num>
+		  </unit>
+		  <unit n="1">
+		      <serviceable type="bool">1</serviceable>
+		      <selected type="int">0</selected>
+		      <com-num type="int">2</com-num>
+		      <nav-num type="int">2</nav-num>
+		      <adf-num type="int">2</adf-num>
+		      <mls-num type="int">2</mls-num>
+		  </unit>
     </rmu>
 
     <airspeed-indicator>
@@ -810,7 +815,6 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 						<file>Aircraft/CitationX/Models/Instruments/CDU/Procedures/fmsWP.nas</file>
 						<file>Aircraft/CitationX/Models/Instruments/CDU/Procedures/fmsTP.nas</file>
 						<file>Aircraft/CitationX/Models/Instruments/CDU/Procedures/fmsTransition.nas</file>
-
 				</procedures>
 				<displaypages>
 						<file>Aircraft/CitationX/Models/Instruments/CDU/DispPages/CduStart.nas</file>
@@ -825,6 +829,14 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 				<cdu>
 					<file>Aircraft/CitationX/Nasal/CDU.nas</file>
 				</cdu>
+				<mfd>
+					<file>Aircraft/CitationX/Nasal/Mfd.nas</file>
+					<file>Aircraft/CitationX/Models/Instruments/MFD/canvas/NDcanvas.nas</file>
+				</mfd>
+				<rmu>
+					<file>Aircraft/CitationX/Models/Instruments/RMU/RMU1.nas</file>
+<!--					<file>Aircraft/CitationX/Models/Instruments/RMU/RMU2.nas</file>
+-->				</rmu>
 				<tyresmoke>
 					<file>Aircraft/CitationX/Nasal/tyresmoke.nas</file>
 				</tyresmoke>
@@ -834,6 +846,9 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 				<checklist>
 					<file>Aircraft/CitationX/Nasal/Checklist.nas</file>
 				</checklist>
+				<weather>
+					<file>Aircraft/CitationX/Nasal/Weather.nas</file>
+				</weather>
     </nasal>
 
 </PropertyList>
