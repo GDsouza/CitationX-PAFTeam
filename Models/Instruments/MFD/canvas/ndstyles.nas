@@ -30,7 +30,7 @@ var NDStyles = {
 				isMapStructure:1,
 				update_on:['toggle_airports','toggle_display_mode','toggle_range'],
 				predicate: func(nd, layer) {
-					var visible = nd.get_switch('toggle_airports'); #and nd.in_mode('toggle_display_mode', ['MAP']);
+					var visible = nd.get_switch('toggle_airports') and (nd.rangeNm() <= 80); #and nd.in_mode('toggle_display_mode', ['MAP']);
 					layer.group.setVisible( visible );
 					if (visible) {
 						layer.update();

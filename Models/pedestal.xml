@@ -57,7 +57,7 @@
     </model>
 
     <model>
-        <path>Models/Instruments/RMU/screenL.xml</path>
+        <path>Models/Instruments/RMU/screenR.xml</path>
         <offsets>
             <x-m>0.250</x-m>
             <y-m>0.111</y-m>

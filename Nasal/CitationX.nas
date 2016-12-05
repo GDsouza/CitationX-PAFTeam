@@ -670,6 +670,13 @@ var freq_limits = func {
 	if (getprop(com_freq)>137.000) {setprop(com_freq,137.000)}
 	if (getprop(nav_freq)<108.000) {setprop(nav_freq,108.000)}
 	if (getprop(nav_freq)>117.950) {setprop(nav_freq,117.950)}
+
+	var com_freq1 = "instrumentation/comm[1]/frequencies/standby-mhz";
+	var nav_freq1 = "instrumentation/nav[1]/frequencies/standby-mhz";
+	if (getprop(com_freq1)<117.975) {setprop(com_freq1,117.975)}
+	if (getprop(com_freq1)>137.000) {setprop(com_freq1,137.000)}
+	if (getprop(nav_freq1)<108.000) {setprop(nav_freq1,108.000)}
+	if (getprop(nav_freq1)>117.950) {setprop(nav_freq1,117.950)}
 }
 ########## MAIN ##############
 

@@ -29,7 +29,7 @@
             <red>1</red>
             <green>1</green>
             <blue>1</blue>
-            <factor-prop>controls/lighting/rmu</factor-prop>
+            <factor-prop>controls/lighting/rmu[1]</factor-prop>
         </emission>
     </animation>
 

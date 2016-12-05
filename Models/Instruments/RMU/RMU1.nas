@@ -57,55 +57,55 @@ foreach(var i;nav_mem1) {
 
 
 	### RMU ###
-var RMU1_canvas = {
+var RMU1 = {
 	new: func() {
-		var obj = {parents:[RMU1_canvas]};
-		obj.canvas = canvas.new({
+		var m = {parents:[RMU1]};
+		m.canvas = canvas.new({
 			"name": "RMU1", 
 			"size": [1024, 1024],
 			"view": [800, 1024],
 			"mipmapping": 1 
 		});
-		obj.canvas.addPlacement({"node": "RMU.screenL"});
-		obj.mfd1 = obj.canvas.createGroup();
-		canvas.parsesvg(obj.mfd1, "Aircraft/CitationX/Models/Instruments/RMU/RMU.svg");
+		m.canvas.addPlacement({"node": "RMU.screenL"});
+		m.rmu1 = m.canvas.createGroup();
+		canvas.parsesvg(m.rmu1, "Aircraft/CitationX/Models/Instruments/RMU/RMU.svg");
 
-		obj.text = {};
-		obj.text_val = ["comFreq","navFreq","comStby", "navStby",
+		m.text = {};
+		m.text_val = ["comFreq","navFreq","comStby", "navStby",
 										"trspCode","trspMode","trspNum","adfFreq",
 										"memCom","memNav","comNum","navNum","adfNum","mlsNum"];
-		foreach(var i;obj.text_val) {
-			obj.text[i] = obj.mfd1.getElementById(i);
+		foreach(var i;m.text_val) {
+			m.text[i] = m.rmu1.getElementById(i);
 		}
 
-		obj.rect = {};
-		obj.cdr = ["comStbyRect","navStbyRect","trspCodeRect",
+		m.rect = {};
+		m.cdr = ["comStbyRect","navStbyRect","trspCodeRect",
 							"adfRect","trspModeRect"];
-		foreach(var i;obj.cdr) {
-			obj.rect[i] = obj.mfd1.getElementById(i);
+		foreach(var i;m.cdr) {
+			m.rect[i] = m.rmu1.getElementById(i);
 		}
 		
-		foreach(var i;keys (obj.rect))	obj.rect[i].hide();
-		obj.rect.comStbyRect.show();
+		foreach(var i;keys (m.rect))	m.rect[i].hide();
+		m.rect.comStbyRect.show();
 
-		obj.text.comFreq.setText(sprintf("%.3f",com_freq1.getValue()));
-		obj.text.comNum.setText(sprintf("%d",com_num1.getValue()));
-		obj.text.navFreq.setText(sprintf("%.3f",nav_freq1.getValue()));
-		obj.text.navNum.setText(sprintf("%d",nav_num1.getValue()));
-		obj.text.adfNum.setText(sprintf("%d",adf_num1.getValue()));
-		obj.text.adfFreq.setText(sprintf("%d",adf_freq1.getValue()));
-		obj.text.mlsNum.setText(sprintf("%d",mls_num1.getValue()));
-		obj.text.trspNum.setText("1");
-		obj.text.comStby.setText(sprintf("%07.3f",com1.comMem1));
+		m.text.comFreq.setText(sprintf("%.3f",com_freq1.getValue()));
+		m.text.comNum.setText(sprintf("%d",com_num1.getValue()));
+		m.text.navFreq.setText(sprintf("%.3f",nav_freq1.getValue()));
+		m.text.navNum.setText(sprintf("%d",nav_num1.getValue()));
+		m.text.adfNum.setText(sprintf("%d",adf_num1.getValue()));
+		m.text.adfFreq.setText(sprintf("%d",adf_freq1.getValue()));
+		m.text.mlsNum.setText(sprintf("%d",mls_num1.getValue()));
+		m.text.trspNum.setText("1");
+		m.text.comStby.setText(sprintf("%07.3f",com1.comMem1));
 		com_stby1.setValue(com1.comMem1);
-		obj.text.memCom.setText("MEMORY-1");
-		obj.text.navStby.setText(sprintf("%07.3f",nav1.navMem1));
+		m.text.memCom.setText("MEMORY-1");
+		m.text.navStby.setText(sprintf("%07.3f",nav1.navMem1));
 		nav_stby1.setValue(nav1.navMem1);
-		obj.text.memNav.setText("MEMORY-1");
-		obj.text.trspCode.setText(sprintf("%04d",trsp_code1.getValue()));
-		obj.text.trspMode.setText(trsp_mode1.getValue());
+		m.text.memNav.setText("MEMORY-1");
+		m.text.trspCode.setText(sprintf("%04d",trsp_code1.getValue()));
+		m.text.trspMode.setText(trsp_mode1.getValue());
 
-		return obj;
+		return m;
 	},
 
 	listen : func {
@@ -267,20 +267,20 @@ var RMU1_canvas = {
 		});
 
 		setlistener("instrumentation/transponder/inputs/display-mode", func {	
-			if (trsp_num1.getValue() == "2") {
-				me.text.trspMode.setText("STANDBY");
-			} else {
-				me.text.trspMode.setText(trsp_mode1.getValue());
-			}
+			trspMode();			
 		});
 
 		setlistener("instrumentation/rmu/trsp-num", func {	
+			trspMode();
+		});
+
+		var trspMode = func {
 			if (trsp_num1.getValue() == "2") {
 				me.text.trspMode.setText("STANDBY");
 			} else {
 				me.text.trspMode.setText(trsp_mode1.getValue());
 			}			
-		});
+		};
 
 	}, # end of listen
 };
@@ -289,8 +289,8 @@ var RMU1_canvas = {
 ###### Main #####
 var setl = setlistener("/sim/signals/fdm-initialized", func () {	
 #	create_mem1();
-	var rmu1 = RMU1_canvas.new();
-	rmu1.listen();
+	var init = RMU1.new();
+	init.listen();
 removelistener(setl);
 });
 

@@ -57,9 +57,9 @@ foreach(var i;nav_mem2) {
 
 
 	### RMU ###
-var RMU2_canvas = {
-	new: func() {
-		var m = {parents:[RMU2_canvas]};
+var RMU2 = {
+	new:func() {
+		var m = {parents:[RMU2]};
 		m.canvas = canvas.new({
 			"name": "RMU2", 
 			"size": [1024, 1024],
@@ -67,21 +67,21 @@ var RMU2_canvas = {
 			"mipmapping": 1 
 		});
 		m.canvas.addPlacement({"node": "RMU.screenR"});
-		m.mfd2 = m.canvas.createGroup();
-		canvas.parsesvg(m.mfd2, "Aircraft/CitationX/Models/Instruments/RMU/RMU.svg");
+		m.rmu2 = m.canvas.createGroup();
+		canvas.parsesvg(m.rmu2, "Aircraft/CitationX/Models/Instruments/RMU/RMU.svg");
 		m.text = {};
 		m.text_val = ["comFreq","navFreq","comStby", "navStby",
 										"trspCode","trspMode","trspNum","adfFreq",
 										"memCom","memNav","comNum","navNum","adfNum","mlsNum"];
 		foreach(var i;m.text_val) {
-			m.text[i] = m.mfd2.getElementById(i);
+			m.text[i] = m.rmu2.getElementById(i);
 		}
 
 		m.rect = {};
 		m.cdr = ["comStbyRect","navStbyRect","trspCodeRect",
 							"adfRect","trspModeRect"];
 		foreach(var i;m.cdr) {
-			m.rect[i] = m.mfd2.getElementById(i);
+			m.rect[i] = m.rmu2.getElementById(i);
 		}
 		
 		foreach(var i;keys (m.rect))	m.rect[i].hide();
@@ -95,11 +95,11 @@ var RMU2_canvas = {
 		m.text.adfFreq.setText(sprintf("%d",adf_freq2.getValue()));
 		m.text.mlsNum.setText(sprintf("%d",mls_num2.getValue()));
 		m.text.trspNum.setText("1");
-		m.text.comStby.setText(sprintf("%07.3f",com.comMem1));
-		com_stby2.setValue(com.comMem1);
+		m.text.comStby.setText(sprintf("%07.3f",com2.comMem2));
+		com_stby2.setValue(com2.comMem1);
 		m.text.memCom.setText("MEMORY-1");
-		m.text.navStby.setText(sprintf("%07.3f",nav.navMem1));
-		nav_stby2.setValue(nav.navMem1);
+		m.text.navStby.setText(sprintf("%07.3f",nav2.navMem2));
+		nav_stby2.setValue(nav2.navMem1);
 		m.text.memNav.setText("MEMORY-1");
 		m.text.trspCode.setText(sprintf("%04d",trsp_code2.getValue()));
 		m.text.trspMode.setText(trsp_mode2.getValue());
@@ -266,20 +266,20 @@ var RMU2_canvas = {
 		});
 
 		setlistener("instrumentation/transponder/inputs/display-mode", func {	
-			if (trsp_num2.getValue() == "2") {
-				me.text.trspMode.setText("STANDBY");
-			} else {
-				me.text.trspMode.setText(trsp_mode2.getValue());
-			}
+			trspMode();
 		});
 
 		setlistener("instrumentation/rmu/trsp-num", func {	
+			trspMode();
+		});
+
+		var trspMode = func {
 			if (trsp_num2.getValue() == "2") {
 				me.text.trspMode.setText("STANDBY");
 			} else {
 				me.text.trspMode.setText(trsp_mode2.getValue());
 			}			
-		});
+		};
 
 	}, # end of listen
 };
@@ -287,8 +287,8 @@ var RMU2_canvas = {
 
 ###### Main #####
 var setl = setlistener("/sim/signals/fdm-initialized", func () {	
-	var rmu2 = RMU2_canvas.new();
-	rmu2.listen();
+	var init = RMU2.new();
+	init.listen();
 removelistener(setl);
 });
 

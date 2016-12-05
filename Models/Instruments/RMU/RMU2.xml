@@ -20,6 +20,7 @@
         <object-name>RMU.swp2</object-name>
         <object-name>RMU.comm</object-name>
         <object-name>RMU.atc</object-name>
+        <object-name>RMU.mode</object-name>
         <object-name>RMU.btn1</object-name>
         <object-name>RMU.btn2</object-name>
         <object-name>RMU.btn3</object-name>
@@ -666,7 +667,7 @@
           	<step>0.05</step>
 						<min>0</min>
 						<max>1</max>
-						<wrap>true</wrap>
+						<wrap>false</wrap>
 			  </binding>
 			  <binding>
 					<condition>
@@ -813,7 +814,7 @@
           	<step>-0.05</step>
 						<min>0</min>
 						<max>1</max>
-						<wrap>true</wrap>
+						<wrap>false</wrap>
 			  </binding>
 			  <binding>
 					<condition>

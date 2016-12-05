@@ -18,7 +18,7 @@ setlistener("/sim/signals/fdm-initialized", func {
 var set_range = func(dir){
 	if (getprop(s_menu)<5 or (getprop(s_menu)==5 and getprop(path,"cdr-tot")==0)){ 
     wx_index+=dir;
-    if(wx_index>6) {wx_index=6}
+    if(wx_index>5) {wx_index=5}
     if(wx_index<0) {wx_index=0}
     setprop("instrumentation/efis/inputs/range-nm",wx_range[wx_index]);
 	}
