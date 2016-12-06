@@ -168,11 +168,16 @@ props.globals.initNode("instrumentation/primus2000/dc840/etx",0,"INT");
 props.globals.initNode("instrumentation/checklists/norm",0,"BOOL");
 props.globals.initNode("instrumentation/checklists/nr-page",0,"INT");
 props.globals.initNode("instrumentation/checklists/nr-voice",0,"INT");
-props.globals.initNode("instrumentation/transponder/id-code",7777,"DOUBLE");
-props.globals.initNode("instrumentation/transponder/id-code[1]",77,"INT");
-props.globals.initNode("instrumentation/transponder/id-code[2]",77,"INT");
-props.globals.initNode("instrumentation/transponder/inputs/display-mode","STANDBY");
-props.globals.initNode("instrumentation/transponder/inputs/knob-mode",1,"INT");
+props.globals.initNode("instrumentation/transponder/unit[0]/id-code",7777,"INT");
+props.globals.initNode("instrumentation/transponder/unit[0]/id-code[1]",77,"INT");
+props.globals.initNode("instrumentation/transponder/unit[0]/id-code[2]",77,"INT");
+props.globals.initNode("instrumentation/transponder/unit[0]/display-mode","STANDBY");
+props.globals.initNode("instrumentation/transponder/unit[0]/knob-mode",1,"INT");
+props.globals.initNode("instrumentation/transponder/unit[1]/id-code",7777,"INT");
+props.globals.initNode("instrumentation/transponder/unit[1]/id-code[1]",77,"INT");
+props.globals.initNode("instrumentation/transponder/unit[1]/id-code[2]",77,"INT");
+props.globals.initNode("instrumentation/transponder/unit[1]/display-mode","STANDBY");
+props.globals.initNode("instrumentation/transponder/unit[1]/knob-mode",1,"INT");
 props.globals.initNode("instrumentation/rmu/unit/dim",0,"BOOL");
 props.globals.initNode("instrumentation/rmu/unit[1]/dim",0,"BOOL");
 props.globals.initNode("instrumentation/rmu/unit/mem-com",0,"INT");
@@ -641,26 +646,28 @@ setlistener("controls/flight/flaps", func {
 });
 
 var atc_id = func {
-	var diz = getprop("instrumentation/transponder/id-code[1]");
-	var cent = getprop("instrumentation/transponder/id-code[2]");
-	var dwn_1 = getprop("instrumentation/transponder/down-1");
-	var dwn_2 = getprop("instrumentation/transponder/down-2");
-	var dg_1 = diz-int(diz/10)*10;
-	var dg_2 = int(diz/10);
-	var dg_3 = cent-int(cent/10)*10;
-	var dg_4 = int(cent/10);	
-	var dg = [dg_1,dg_2,dg_3,dg_4];
-	for (var i=0;i<4;i+=1) {
-		if (i<2 and !dwn_1 and dg[i] >7) {dg[i]=0;dg[i+1]+=1}
-		if (i<2 and dwn_1 and dg[i] >7) {dg[i]=7}
-		if (i>1 and !dwn_2 and dg[i] >7) {dg[i]=0;dg[i+1]+=1}
-		if (i>1 and dwn_2 and dg[i] >7) {dg[i]=7}
-	}	
-	diz = dg[0]+dg[1]*10;
-	cent = dg[2]+dg[3]*10;
-	setprop("instrumentation/transponder/id-code[1]",diz);
-	setprop("instrumentation/transponder/id-code[2]",cent);
-	setprop("instrumentation/transponder/id-code",diz + (cent*100));
+	for (var n = 0;n<2;n+=1){
+		var diz = getprop("instrumentation/transponder/unit["~n~"]/id-code[1]");
+		var cent = getprop("instrumentation/transponder/unit["~n~"]/id-code[2]");
+		var dwn_1 = getprop("instrumentation/transponder/unit["~n~"]/down-1");
+		var dwn_2 = getprop("instrumentation/transponder/unit["~n~"]/down-2");
+		var dg_1 = diz-int(diz/10)*10;
+		var dg_2 = int(diz/10);
+		var dg_3 = cent-int(cent/10)*10;
+		var dg_4 = int(cent/10);	
+		var dg = [dg_1,dg_2,dg_3,dg_4];
+		for (var i=0;i<4;i+=1) {
+			if (i<2 and !dwn_1 and dg[i] >7) {dg[i]=0;dg[i+1]+=1}
+			if (i<2 and dwn_1 and dg[i] >7) {dg[i]=7}
+			if (i>1 and !dwn_2 and dg[i] >7) {dg[i]=0;dg[i+1]+=1}
+			if (i>1 and dwn_2 and dg[i] >7) {dg[i]=7}
+		}	
+		diz = dg[0]+dg[1]*10;
+		cent = dg[2]+dg[3]*10;
+		setprop("instrumentation/transponder/unit["~n~"]/id-code[1]",diz);
+		setprop("instrumentation/transponder/unit["~n~"]/id-code[2]",cent);
+		setprop("instrumentation/transponder/unit["~n~"]/id-code",diz + (cent*100));
+	}
 }
 
 var freq_limits = func {

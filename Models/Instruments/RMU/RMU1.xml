@@ -613,7 +613,7 @@
 						</and>
 					</condition>
 		      <command>property-adjust</command>
-						<property>instrumentation/transponder/id-code[2]</property>
+						<property>instrumentation/transponder/unit[0]/id-code[2]</property>
 		      	<step>1</step>
 						<min>0</min>
 						<max>78</max>
@@ -632,7 +632,7 @@
 						</and>
 					</condition>
 				  <command>property-assign</command>
-						<property>instrumentation/transponder/down-2</property>
+						<property>instrumentation/transponder/unit[0]/down-2</property>
 						<value>0</value>
 				</binding>
 		    <binding>
@@ -666,7 +666,7 @@
 						</and>
 					</condition>
 		      <command>property-adjust</command>
-						<property>instrumentation/transponder/inputs/knob-mode</property>
+						<property>instrumentation/transponder/unit[0]knob-mode</property>
 		      	<step>1</step>
 						<min>0</min>
 						<max>5</max>
@@ -759,7 +759,7 @@
 						</and>
 					</condition>
 		      <command>property-adjust</command>
-						<property>instrumentation/transponder/id-code[2]</property>
+						<property>instrumentation/transponder/unit[0]/id-code[2]</property>
 		      	<step>-1</step>
 						<min>0</min>
 						<max>78</max>
@@ -778,7 +778,7 @@
 						</and>
 					</condition>
 				  <command>property-assign</command>
-						<property>instrumentation/transponder/down-2</property>
+						<property>instrumentation/transponder/unit[0]/down-2</property>
 						<value>1</value>
 				</binding>
 		    <binding>
@@ -813,7 +813,7 @@
 						</and>
 					</condition>
 		      <command>property-adjust</command>
-						<property>instrumentation/transponder/inputs/knob-mode</property>
+						<property>instrumentation/transponder/unit[0]/knob-mode</property>
 		      	<step>-1</step>
 						<min>0</min>
 						<max>5</max>
@@ -912,7 +912,7 @@
 						</and>
 					</condition>
             <command>property-adjust</command>
-						<property>instrumentation/transponder/id-code[1]</property>
+						<property>instrumentation/transponder/unit[0]/id-code[1]</property>
             <step>1</step>
 						<min>0</min>
 						<max>78</max>
@@ -931,7 +931,7 @@
 						</and>
 					</condition>
           <command>property-assign</command>
-						<property>instrumentation/transponder/down-1</property>
+						<property>instrumentation/transponder/unit[0]/down-1</property>
 						<value>0</value>
         </binding>
         <binding>
@@ -966,7 +966,7 @@
 						</and>
 					</condition>
           <command>property-adjust</command>
-						<property>instrumentation/transponder/inputs/knob-mode</property>
+						<property>instrumentation/transponder/unit[0]/knob-mode</property>
           	<step>1</step>
 						<min>0</min>
 						<max>5</max>
@@ -1063,7 +1063,7 @@
 						</and>
 					</condition>
             <command>property-adjust</command>
-						<property>instrumentation/transponder/id-code[1]</property>
+						<property>instrumentation/transponder/unit[0]/id-code[1]</property>
             <step>-1</step>
 						<min>0</min>
 						<max>78</max>
@@ -1082,7 +1082,7 @@
 						</and>
 					</condition>
           <command>property-assign</command>
-						<property>instrumentation/transponder/down-1</property>
+						<property>instrumentation/transponder/unit[0]/down-1</property>
 						<value>1</value>
         </binding>
         <binding>
@@ -1117,7 +1117,7 @@
 						</and>
 					</condition>
           <command>property-adjust</command>
-						<property>instrumentation/transponder/inputs/knob-mode</property>
+						<property>instrumentation/transponder/unit[0]/knob-mode</property>
           	<step>-1</step>
 						<min>0</min>
 						<max>5</max>

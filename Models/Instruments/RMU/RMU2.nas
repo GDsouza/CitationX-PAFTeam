@@ -11,9 +11,9 @@ var com_mem2 = props.globals.getNode("instrumentation/rmu/unit[1]/mem-com");
 var nav_freq2 = props.globals.getNode("instrumentation/nav[1]/frequencies/selected-mhz");
 var nav_stby2 = props.globals.getNode("instrumentation/nav[1]/frequencies/standby-mhz");
 var nav_mem2 = props.globals.getNode("instrumentation/rmu/unit[1]/mem-nav");
-var trsp_code2 = props.globals.getNode("instrumentation/transponder/id-code");
-var trsp_mode2 = props.globals.getNode("instrumentation/transponder/inputs/display-mode");
-var trsp_num2 = props.globals.getNode("instrumentation/rmu/trsp-num");
+var trsp_code2 = props.globals.getNode("instrumentation/transponder/unit[1]/id-code");
+var trsp_mode2 = props.globals.getNode("instrumentation/transponder/unit[1]/display-mode");
+var trsp_num = props.globals.getNode("instrumentation/rmu/trsp-num");
 var adf_freq2 = props.globals.getNode("instrumentation/adf[1]/frequencies/selected-khz");
 
 	### Create Memories if not exist ###
@@ -117,21 +117,6 @@ var RMU2 = {
 				} else {me.rect[i].hide()}
 				index+=1;
 			}
-		});	
-
-		setlistener("instrumentation/transponder/inputs/knob-mode", func {
-			var mode = getprop("instrumentation/transponder/inputs/knob-mode");
-			var mode_display = "";
-			if (mode == 0) {mode_display = "STANDBY"}
-			if (mode == 1) {mode_display = "ATC ON"}
-			if (mode == 2) {mode_display = "ATC ALT"}
-			if (mode == 3) {mode_display = "TA ONLY"}
-			if (mode == 4) {mode_display = "TA/RA"}
-			setprop("instrumentation/transponder/inputs/display-mode",mode_display);
-		});
-
-		setlistener("instrumentation/rmu/trsp-num", func {
-			me.text.trspNum.setText(trsp_num2.getValue());
 		});	
 
 		setlistener("instrumentation/rmu/unit[1]/swp1", func {
@@ -261,11 +246,26 @@ var RMU2 = {
 		});
 
 	### Transponder ###
-		setlistener("instrumentation/transponder/id-code", func {	
-			me.text.trspCode.setText(sprintf("%04d",trsp_code2.getValue()));
+		setlistener("instrumentation/transponder/unit[1]/knob-mode", func {
+			var mode = getprop("instrumentation/transponder/unit[1]/knob-mode");
+			var mode_display = "";
+			if (mode == 0) {mode_display = "STANDBY"}
+			if (mode == 1) {mode_display = "ATC ON"}
+			if (mode == 2) {mode_display = "ATC ALT"}
+			if (mode == 3) {mode_display = "TA ONLY"}
+			if (mode == 4) {mode_display = "TA/RA"}
+			setprop("instrumentation/transponder/unit[1]/display-mode",mode_display);
 		});
 
-		setlistener("instrumentation/transponder/inputs/display-mode", func {	
+		setlistener("instrumentation/transponder/unit[1]/id-code", func {	
+			me.text.trspCode.setText(sprintf("%04d",trsp_code2.getValue()));
+			if (trsp_num.getValue() == "2") {
+				setprop("instrumentation/transponder/id-code",trsp_code2.getValue());
+				setprop("instrumentation/transponder/transmitted-id",trsp_code2.getValue());
+			}
+		});
+
+		setlistener("instrumentation/transponder/unit[1]/display-mode", func {	
 			trspMode();
 		});
 
@@ -274,7 +274,8 @@ var RMU2 = {
 		});
 
 		var trspMode = func {
-			if (trsp_num2.getValue() == "2") {
+			me.text.trspNum.setText(trsp_num.getValue());
+			if (trsp_num.getValue() == "1") {
 				me.text.trspMode.setText("STANDBY");
 			} else {
 				me.text.trspMode.setText(trsp_mode2.getValue());

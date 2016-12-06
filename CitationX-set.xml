@@ -582,7 +582,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
         </alerts>
 
     <rmu>
-			<trsp-num type="string">0</trsp-num>
+			<trsp-num type="string">1</trsp-num>
 		  <unit n="0">
 		      <serviceable type="bool">1</serviceable>
 		      <selected type="int">0</selected>
