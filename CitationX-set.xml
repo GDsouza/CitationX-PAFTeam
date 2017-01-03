@@ -586,18 +586,10 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 		  <unit n="0">
 		      <serviceable type="bool">1</serviceable>
 		      <selected type="int">0</selected>
-		      <com-num type="int">1</com-num>
-		      <nav-num type="int">1</nav-num>
-		      <adf-num type="int">1</adf-num>
-		      <mls-num type="int">1</mls-num>
 		  </unit>
 		  <unit n="1">
 		      <serviceable type="bool">1</serviceable>
 		      <selected type="int">0</selected>
-		      <com-num type="int">2</com-num>
-		      <nav-num type="int">2</nav-num>
-		      <adf-num type="int">2</adf-num>
-		      <mls-num type="int">2</mls-num>
 		  </unit>
     </rmu>
 

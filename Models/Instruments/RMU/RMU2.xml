@@ -12,23 +12,21 @@
         <object-name>RMU.half</object-name>
         <object-name>RMU.sto</object-name>
         <object-name>RMU.id</object-name>
-        <object-name>RMU.dim</object-name>
         <object-name>RMU.pge</object-name>
         <object-name>RMU.tst</object-name>
         <object-name>RMU.dme</object-name>
-        <object-name>RMU.swp1</object-name>
-        <object-name>RMU.swp2</object-name>
-        <object-name>RMU.comm</object-name>
-        <object-name>RMU.atc</object-name>
-        <object-name>RMU.mode</object-name>
-        <object-name>RMU.btn1</object-name>
-        <object-name>RMU.btn2</object-name>
-        <object-name>RMU.btn3</object-name>
-        <object-name>RMU.btn4</object-name>
-        <object-name>RMU.btn5</object-name>
-        <object-name>RMU.btn6</object-name>
-        <object-name>RMU.nav</object-name>
-        <object-name>RMU.adf</object-name>
+        <object-name>btn.l1</object-name>
+        <object-name>btn.l2</object-name>
+        <object-name>btn.l3</object-name>
+        <object-name>btn.l4</object-name>
+        <object-name>btn.l5</object-name>
+        <object-name>btn.l6</object-name>
+        <object-name>btn.r1</object-name>
+        <object-name>btn.r2</object-name>
+        <object-name>btn.r3</object-name>
+        <object-name>btn.r4</object-name>
+        <object-name>btn.r5</object-name>
+        <object-name>btn.r6</object-name>
         <condition>
 						<or>
 	           	<property>systems/electrical/left-emer-bus</property>
@@ -74,7 +72,7 @@
 
     <animation>
         <type>translate</type>
-        <object-name>RMU.swp1</object-name>	
+        <object-name>btn.l1</object-name>	
         <property>instrumentation/rmu/unit[1]/swp1</property>
 				<factor>0.0016</factor>
         <axis>
@@ -86,15 +84,36 @@
 
     <animation>
         <type>pick</type>
-        <object-name>RMU.swp1</object-name>
+        <object-name>btn.l1</object-name>
         <visible>true</visible>
         <action>
           <button>0</button>
           <repeatable>false</repeatable>
           <binding>
+						<condition>
+							<not>
+								<property>instrumentation/rmu/unit[1]/pge</property>
+							</not>
+						</condition>
 						<command>property-swap</command>
 		        <property>instrumentation/comm[1]/frequencies/standby-mhz</property>
 						<property>instrumentation/comm[1]/frequencies/selected-mhz</property>
+          </binding>
+          <binding>
+						<condition>
+								<property>instrumentation/rmu/unit[1]/pge</property>
+						</condition>
+						<command>property-assign</command>
+			        <property>instrumentation/rmu/unit[1]/mem-dsp</property>
+							<value>0</value>
+          </binding>
+          <binding>
+						<condition>
+								<property>instrumentation/rmu/unit[1]/pge</property>
+						</condition>
+						<command>property-assign</command>
+			        <property>instrumentation/rmu/unit[1]/insert</property>
+							<value>0</value>
           </binding>
           <binding>
               <command>property-toggle</command>
@@ -111,7 +130,329 @@
 
     <animation>
         <type>translate</type>
-        <object-name>RMU.swp2</object-name>	
+        <object-name>btn.l2</object-name>	
+        <property>instrumentation/rmu/unit[1]/comm</property>
+				<factor>0.0016</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>btn.l2</object-name>
+        <visible>true</visible>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+		      <binding>
+						<condition>
+							<and>
+								<equals>
+								  <property>instrumentation/rmu/unit[1]/selected</property>
+									<value>0</value>
+								</equals>
+								<not>
+									<property>instrumentation/rmu/unit[1]/pge</property>
+								</not>
+							</and>
+						</condition>							
+		        <command>property-adjust</command>
+		        <property>instrumentation/rmu/unit[1]/mem-com</property>
+							<step>1</step>
+							<min>0</min>
+							<max>11</max>
+							<wrap>true</wrap>
+		      </binding>
+          <binding>
+						<condition>
+								<property>instrumentation/rmu/unit[1]/pge</property>
+						</condition>
+						<command>property-assign</command>
+			        <property>instrumentation/rmu/unit[1]/mem-dsp</property>
+							<value>1</value>
+          </binding>
+          <binding>
+						<condition>
+								<property>instrumentation/rmu/unit[1]/pge</property>
+						</condition>
+						<command>property-assign</command>
+			        <property>instrumentation/rmu/unit[1]/insert</property>
+							<value>0</value>
+          </binding>
+          <binding>
+						<condition>
+							<not>
+								<property>instrumentation/rmu/unit[1]/pge</property>
+							</not>
+						</condition>
+              <command>property-assign</command>
+              <property>instrumentation/rmu/unit[1]/selected</property>
+							<value>0</value>
+          </binding>
+          <binding>
+              <command>property-toggle</command>
+              <property>instrumentation/rmu/unit[1]/comm</property>
+          </binding>
+					<mod-up>
+	          <binding>
+	              <command>property-toggle</command>
+	              <property>instrumentation/rmu/unit[1]/comm</property>
+	          </binding>
+					</mod-up>
+        </action>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>btn.l3</object-name>	
+        <property>instrumentation/rmu/unit[1]/atc</property>
+				<factor>0.0016</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+		    <type>pick</type>
+		    <object-name>btn.l3</object-name>
+		    <visible>true</visible>
+		    <action>
+		      <button>0</button>
+		      <repeatable>false</repeatable>
+		      <binding>
+						<condition>
+							<not>
+								<property>instrumentation/rmu/unit[1]/pge</property>
+							</not>
+						</condition>
+		        <command>property-assign</command>
+		        <property>instrumentation/rmu/unit[1]/selected</property>
+						<value>2</value>
+		      </binding>
+          <binding>
+						<condition>
+								<property>instrumentation/rmu/unit[1]/pge</property>
+						</condition>
+						<command>property-assign</command>
+			        <property>instrumentation/rmu/unit[1]/mem-dsp</property>
+							<value>2</value>
+          </binding>
+          <binding>
+						<condition>
+								<property>instrumentation/rmu/unit[1]/pge</property>
+						</condition>
+						<command>property-assign</command>
+			        <property>instrumentation/rmu/unit[1]/insert</property>
+							<value>0</value>
+          </binding>
+          <binding>
+              <command>property-toggle</command>
+              <property>instrumentation/rmu/unit[1]/atc</property>
+          </binding>
+					<mod-up>
+	          <binding>
+	              <command>property-toggle</command>
+	              <property>instrumentation/rmu/unit[1]/atc</property>
+	          </binding>
+					</mod-up>
+	      </action>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>btn.l4</object-name>	
+        <property>instrumentation/rmu/unit[1]/mode</property>
+				<factor>0.0016</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+		    <type>pick</type>
+		    <object-name>btn.l4</object-name>
+		    <visible>true</visible>
+		    <action>
+		      <button>0</button>
+		      <repeatable>false</repeatable>
+		      <binding>
+						<condition>
+							<and>
+								<not-equals>
+								  <property>instrumentation/rmu/unit[1]/selected</property>
+									<value>4</value>
+								</not-equals>
+								<not>
+									<property>instrumentation/rmu/unit/pge</property>
+								</not>
+							</and>
+						</condition>
+		        <command>property-assign</command>
+		        <property>instrumentation/rmu/trsp-num</property>
+							<value>1</value>
+		      </binding>
+		      <binding>
+						<condition>
+							<not>
+								<property>instrumentation/rmu/unit[1]/pge</property>
+							</not>
+						</condition>
+		        <command>property-assign</command>
+		        <property>instrumentation/rmu/unit[1]/selected</property>
+						<value>4</value>
+		      </binding>
+		      <binding>
+						<condition>
+							<and>
+								<equals>
+								  <property>instrumentation/rmu/unit[1]/selected</property>
+									<value>4</value>
+								</equals>
+								<not>
+									<property>instrumentation/rmu/unit[1]/pge</property>
+								</not>
+							</and>
+						</condition>
+		        <command>property-cycle</command>
+		        <property>instrumentation/rmu/trsp-num</property>
+							<value>1</value>
+							<value>2</value>
+		      </binding>
+          <binding>
+						<condition>
+								<property>instrumentation/rmu/unit[1]/pge</property>
+						</condition>
+						<command>property-assign</command>
+			        <property>instrumentation/rmu/unit[1]/mem-dsp</property>
+							<value>3</value>
+          </binding>
+          <binding>
+						<condition>
+								<property>instrumentation/rmu/unit[1]/pge</property>
+						</condition>
+						<command>property-assign</command>
+			        <property>instrumentation/rmu/unit[1]/insert</property>
+							<value>0</value>
+          </binding>
+          <binding>
+              <command>property-toggle</command>
+              <property>instrumentation/rmu/unit[1]/mode</property>
+          </binding>
+					<mod-up>
+		        <binding>
+		            <command>property-toggle</command>
+		            <property>instrumentation/rmu/unit[1]/mode</property>
+		        </binding>
+					</mod-up>
+		    </action>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>btn.l5</object-name>	
+        <property>instrumentation/rmu/unit[1]/btn-l5</property>
+				<factor>0.0016</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+		    <type>pick</type>
+		    <object-name>btn.l5</object-name>
+		    <visible>true</visible>
+		    <action>
+		      <button>0</button>
+		      <repeatable>false</repeatable>
+          <binding>
+						<condition>
+								<property>instrumentation/rmu/unit[1]/pge</property>
+						</condition>
+						<command>property-assign</command>
+			        <property>instrumentation/rmu/unit[1]/mem-dsp</property>
+							<value>4</value>
+          </binding>
+          <binding>
+						<condition>
+								<property>instrumentation/rmu/unit[1]/pge</property>
+						</condition>
+						<command>property-assign</command>
+			        <property>instrumentation/rmu/unit[1]/insert</property>
+							<value>0</value>
+          </binding>
+          <binding>
+              <command>property-toggle</command>
+              <property>instrumentation/rmu/unit[1]/btn-l5</property>
+          </binding>
+					<mod-up>
+		        <binding>
+		            <command>property-toggle</command>
+		            <property>instrumentation/rmu/unit[1]/btn-l5</property>
+		        </binding>
+					</mod-up>
+		    </action>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>btn.l6</object-name>	
+        <property>instrumentation/rmu/unit[1]/btn-l6</property>
+				<factor>0.0016</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+		    <type>pick</type>
+		    <object-name>btn.l6</object-name>
+		    <visible>true</visible>
+		    <action>
+		      <button>0</button>
+		      <repeatable>false</repeatable>
+          <binding>
+						<condition>
+								<property>instrumentation/rmu/unit[1]/pge</property>
+						</condition>
+						<command>property-assign</command>
+			        <property>instrumentation/rmu/unit[1]/mem-dsp</property>
+							<value>5</value>
+          </binding>
+          <binding>
+						<condition>
+								<property>instrumentation/rmu/unit[1]/pge</property>
+						</condition>
+						<command>property-assign</command>
+			        <property>instrumentation/rmu/unit[1]/insert</property>
+							<value>0</value>
+          </binding>
+          <binding>
+              <command>property-toggle</command>
+              <property>instrumentation/rmu/unit[1]/btn-l6</property>
+          </binding>
+					<mod-up>
+		        <binding>
+		            <command>property-toggle</command>
+		            <property>instrumentation/rmu/unit[1]/btn-l6</property>
+		        </binding>
+					</mod-up>
+		    </action>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>btn.r1</object-name>	
         <property>instrumentation/rmu/unit[1]/swp2</property>
 				<factor>0.0016</factor>
         <axis>
@@ -123,7 +464,7 @@
 
     <animation>
         <type>pick</type>
-        <object-name>RMU.swp2</object-name>
+        <object-name>btn.r1</object-name>
         <visible>true</visible>
         <action>
           <button>0</button>
@@ -143,64 +484,12 @@
 	              <property>instrumentation/rmu/unit[1]/swp2</property>
 	          </binding>
 					</mod-up>
-
         </action>
     </animation>
 
     <animation>
         <type>translate</type>
-        <object-name>RMU.comm</object-name>	
-        <property>instrumentation/rmu/unit[1]/comm</property>
-				<factor>0.0016</factor>
-        <axis>
-            <x>-1</x>
-            <y>0</y>
-            <z>0</z>
-        </axis>
-    </animation>
-
-    <animation>
-        <type>pick</type>
-        <object-name>RMU.comm</object-name>
-        <visible>true</visible>
-        <action>
-            <button>0</button>
-            <repeatable>false</repeatable>
-		      <binding>
-						<condition>
-							<equals>
-						    <property>instrumentation/rmu/unit[1]/selected</property>
-								<value>0</value>
-							</equals>
-						</condition>							
-		        <command>property-adjust</command>
-		        <property>instrumentation/rmu/unit[1]/mem</property>
-							<step>1</step>
-							<min>0</min>
-							<max>11</max>
-							<wrap>true</wrap>
-		      </binding>
-            <binding>
-                <command>property-assign</command>
-                <property>instrumentation/rmu/unit[1]/selected</property>
-								<value>0</value>
-            </binding>
-            <binding>
-                <command>property-toggle</command>
-                <property>instrumentation/rmu/unit[1]/comm</property>
-            </binding>
-						<mod-up>
-		          <binding>
-		              <command>property-toggle</command>
-		              <property>instrumentation/rmu/unit[1]/comm</property>
-		          </binding>
-						</mod-up>
-        </action>
-    </animation>
-
-    <animation>
-        <type>translate</type>
-        <object-name>RMU.nav</object-name>	
+        <object-name>btn.r2</object-name>	
         <property>instrumentation/rmu/unit[1]/nav</property>
 				<factor>0.0016</factor>
         <axis>
@@ -212,11 +501,25 @@
 
     <animation>
         <type>pick</type>
-        <object-name>RMU.nav</object-name>
+        <object-name>btn.r2</object-name>
         <visible>true</visible>
         <action>
           <button>0</button>
           <repeatable>false</repeatable>
+		      <binding>
+						<condition>
+							<equals>
+						    <property>instrumentation/rmu/unit[1]/selected</property>
+								<value>1</value>
+							</equals>
+						</condition>							
+		        <command>property-adjust</command>
+		        <property>instrumentation/rmu/unit[1]/mem-nav</property>
+							<step>1</step>
+							<min>0</min>
+							<max>11</max>
+							<wrap>true</wrap>
+		      </binding>
           <binding>
               <command>property-assign</command>
               <property>instrumentation/rmu/unit[1]/selected</property>
@@ -237,44 +540,7 @@
 
     <animation>
         <type>translate</type>
-        <object-name>RMU.atc</object-name>	
-        <property>instrumentation/rmu/unit[1]/atc</property>
-				<factor>0.0016</factor>
-        <axis>
-            <x>-1</x>
-            <y>0</y>
-            <z>0</z>
-        </axis>
-    </animation>
-
-    <animation>
-		    <type>pick</type>
-		    <object-name>RMU.atc</object-name>
-		    <visible>true</visible>
-		    <action>
-		      <button>0</button>
-		      <repeatable>false</repeatable>
-		      <binding>
-		        <command>property-assign</command>
-		        <property>instrumentation/rmu/unit[1]/selected</property>
-						<value>2</value>
-		      </binding>
-          <binding>
-              <command>property-toggle</command>
-              <property>instrumentation/rmu/unit[1]/atc</property>
-          </binding>
-					<mod-up>
-	          <binding>
-	              <command>property-toggle</command>
-	              <property>instrumentation/rmu/unit[1]/atc</property>
-	          </binding>
-					</mod-up>
-	      </action>
-    </animation>
-
-    <animation>
-        <type>translate</type>
-        <object-name>RMU.adf</object-name>	
+        <object-name>btn.r3</object-name>	
         <property>instrumentation/rmu/unit[1]/adf</property>
 				<factor>0.0016</factor>
         <axis>
@@ -286,7 +552,7 @@
 
     <animation>
         <type>pick</type>
-        <object-name>RMU.adf</object-name>
+        <object-name>btn.r3</object-name>
         <visible>true</visible>
         <action>
           <button>0</button>
@@ -309,11 +575,10 @@
         </action>
     </animation>
 
-
     <animation>
         <type>translate</type>
-        <object-name>RMU.mode</object-name>	
-        <property>instrumentation/rmu/unit[1]/mode</property>
+        <object-name>btn.r4</object-name>	
+        <property>instrumentation/rmu/unit[1]/btn-r4</property>
 				<factor>0.0016</factor>
         <axis>
             <x>-1</x>
@@ -324,36 +589,57 @@
 
     <animation>
 		    <type>pick</type>
-		    <object-name>RMU.mode</object-name>
+		    <object-name>btn.r4</object-name>
 		    <visible>true</visible>
 		    <action>
 		      <button>0</button>
 		      <repeatable>false</repeatable>
-		      <binding>
-						<condition>
-							<equals>
-						    <property>instrumentation/rmu/unit[1]/selected</property>
-								<value>4</value>
-							</equals>
-						</condition>							
-		        <command>property-cycle</command>
-		        <property>instrumentation/rmu/trsp-num</property>
-							<value>1</value>
-							<value>2</value>
-		      </binding>
-		      <binding>
-		        <command>property-assign</command>
-		        <property>instrumentation/rmu/unit[1]/selected</property>
-						<value>4</value>
-		      </binding>
           <binding>
               <command>property-toggle</command>
-              <property>instrumentation/rmu/unit[1]/mode</property>
+              <property>instrumentation/rmu/unit[1]/btn-r4</property>
           </binding>
+		      <binding>
+						<condition>
+								<not>
+								  <property>instrumentation/rmu/unit[1]/pge</property>
+								</not>
+						</condition>
+            <command>property-assign</command>
+            <property>instrumentation/rmu/unit[1]/selected</property>
+						<value>5</value>
+          </binding>
+		      <binding>
+						<condition>
+							<and>
+								<not>
+								  <property>instrumentation/rmu/unit[1]/pge</property>
+								</not>
+								<equals>
+									<property>instrumentation/rmu/unit[1]/selected</property>
+									<value>5</value>
+								</equals>
+							</and>
+						</condition>							
+		        <command>property-cycle</command>
+		        <property>instrumentation/adf[1]/mode</property>
+							<value>ANT</value>
+							<value>ADF</value>
+							<value>BFO</value>
+							<value>VOICE</value>
+		      </binding>
+		      <binding>
+						<condition>
+						    <property>instrumentation/rmu/unit[1]/pge</property>
+						</condition>							
+		        <command>property-cycle</command>
+		        <property>instrumentation/rmu/unit[1]/more</property>
+							<value>6</value>
+							<value>0</value>
+		      </binding>
 					<mod-up>
 		        <binding>
 		            <command>property-toggle</command>
-		            <property>instrumentation/rmu/unit[1]/mode</property>
+		            <property>instrumentation/rmu/unit[1]/btn-r4</property>
 		        </binding>
 					</mod-up>
 		    </action>
@@ -361,8 +647,88 @@
 
     <animation>
         <type>translate</type>
-        <object-name>RMU.id</object-name>	
-        <property>instrumentation/transponder/inputs/ident-btn</property>
+        <object-name>btn.r5</object-name>	
+        <property>instrumentation/rmu/unit[1]/ins-btn</property>
+				<factor>0.0016</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+		    <type>pick</type>
+		    <object-name>btn.r5</object-name>
+		    <visible>true</visible>
+		    <action>
+		      <button>0</button>
+		      <repeatable>false</repeatable>
+		      <binding>
+		        <command>property-toggle</command>
+				      <property>instrumentation/rmu/unit[1]/ins-btn</property>
+		      </binding>
+		      <binding>
+						<condition>
+							<and>
+							  <property>instrumentation/rmu/unit[1]/pge</property>
+								<not-equals>
+									<property>instrumentation/rmu/unit[1]/mem-dsp</property>
+									<value>-1</value>
+								</not-equals>
+							</and>
+						</condition>							
+		        <command>property-toggle</command>
+				      <property>instrumentation/rmu/unit[1]/insert</property>
+		      </binding>
+					<mod-up>
+		        <binding>
+		            <command>property-toggle</command>
+		            <property>instrumentation/rmu/unit[1]/ins-btn</property>
+		        </binding>
+					</mod-up>
+		    </action>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>btn.r6</object-name>	
+        <property>instrumentation/rmu/unit[1]/delete</property>
+				<factor>0.0016</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+		    <type>pick</type>
+		    <object-name>btn.r6</object-name>
+		    <visible>true</visible>
+		    <action>
+		      <button>0</button>
+		      <repeatable>false</repeatable>
+		      <binding>
+						<condition>
+						    <property>instrumentation/rmu/unit[1]/pge</property>
+						</condition>							
+		        <command>property-toggle</command>
+		        <property>instrumentation/rmu/unit[1]/delete</property>
+		      </binding>
+					<mod-up>
+		        <binding>
+		            <command>property-toggle</command>
+		            <property>instrumentation/rmu/unit[1]/delete</property>
+		        </binding>
+					</mod-up>
+		    </action>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>RMU.sq</object-name>	
+        <property>instrumentation/rmu/unit[1]/squelch</property>
 				<factor>0.0016</factor>
         <axis>
             <x>-1</x>
@@ -373,23 +739,15 @@
 
     <animation>
       <type>pick</type>
-      <object-name>RMU.id</object-name>
+      <object-name>RMU.sq</object-name>
       <visible>true</visible>
       <action>
         <button>0</button>
         <repeatable>false</repeatable>
         <binding>
-          <command>property-assign</command>
-          <property>instrumentation/transponder/inputs/ident-btn</property>
-					<value>1</value>
+          <command>property-toggle</command>
+          <property>instrumentation/rmu/unit[1]/squelch</property>
         </binding>
-				<mod-up>
-					<binding>
-     				<command>property-assign</command>
-   					<property>instrumentation/transponder/inputs/ident-btn</property>
- 						<value>0</value>
-   				</binding>
-   			</mod-up>
       </action>
     </animation>
 
@@ -454,6 +812,112 @@
     </animation>
 
     <animation>
+        <type>translate</type>
+        <object-name>RMU.id</object-name>	
+        <property>instrumentation/transponder/inputs/ident-btn</property>
+				<factor>0.0016</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+      <type>pick</type>
+      <object-name>RMU.id</object-name>
+      <visible>true</visible>
+      <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+          <command>property-assign</command>
+          <property>instrumentation/transponder/inputs/ident-btn</property>
+					<value>1</value>
+        </binding>
+				<mod-up>
+					<binding>
+     				<command>property-assign</command>
+   					<property>instrumentation/transponder/inputs/ident-btn</property>
+ 						<value>0</value>
+   				</binding>
+   			</mod-up>
+      </action>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>RMU.pge</object-name>	
+        <property>instrumentation/rmu/unit[1]/pge</property>
+				<factor>0.0016</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+      <type>pick</type>
+      <object-name>RMU.pge</object-name>
+      <visible>true</visible>
+      <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+					<condition>
+						<not>
+							<property>instrumentation/rmu/unit[1]/test</property>
+						</not>
+					</condition>
+          <command>property-toggle</command>
+          <property>instrumentation/rmu/unit[1]/pge</property>
+        </binding>
+        <binding>
+          <command>property-assign</command>
+          <property>instrumentation/rmu/unit[1]/dim</property>
+						<value>0</value>
+        </binding>
+      </action>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>RMU.tst</object-name>	
+        <property>instrumentation/rmu/unit[1]/test</property>
+				<factor>0.0016</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+      <type>pick</type>
+      <object-name>RMU.tst</object-name>
+      <visible>true</visible>
+      <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+					<condition>
+						<not>
+							<property>instrumentation/rmu/unit[1]/pge</property>
+						</not>
+					</condition>
+          <command>property-toggle</command>
+          <property>instrumentation/rmu/unit[1]/test</property>
+        </binding>
+        <binding>
+          <command>property-assign</command>
+          <property>instrumentation/rmu/unit[1]/dim</property>
+						<value>0</value>
+        </binding>
+      </action>
+    </animation>
+
+    <animation>
         <type>rotate</type>
         <object-name>RMU.knob</object-name>
         <property>controls/lighting/rmu[1]</property>
@@ -476,13 +940,8 @@
     <animation>
         <type>rotate</type>
         <object-name>RMU.knob</object-name>
-        <property>instrumentation/rmu/unit[1]/freq0</property>
+        <property>instrumentation/rmu/unit[1]/knob</property>
         <factor>-270</factor>
-				<condition>
-					<not>
-						<property>instrumentation/rmu/unit[1]/dim</property>
-					</not>
-				</condition>
         <center>
             <x-m>0</x-m>
             <y-m>0.0282</y-m>
@@ -518,7 +977,7 @@
     <animation>
         <type>rotate</type>
         <object-name>RMU.knob1</object-name>
-        <property>instrumentation/rmu/unit[1]/freq1</property>
+        <property>instrumentation/rmu/unit[1]/knob1</property>
         <factor>-270</factor>
 				<condition>
 					<not>
@@ -552,6 +1011,9 @@
 							<not>
 								<property>instrumentation/rmu/unit[1]/dim</property>
 							</not>
+							<not>
+								<property>instrumentation/rmu/unit[1]/pge</property>
+							</not>
 							<equals>
 								<property>instrumentation/rmu/unit[1]/selected</property>
 								<value>0</value>
@@ -567,17 +1029,20 @@
 						<resolution>1</resolution>
 	      </binding>
 	      <binding>
-				<condition>
-					<and>
-						<not>
-							<property>instrumentation/rmu/unit[1]/dim</property>
-						</not>
-						<equals>
-							<property>instrumentation/rmu/unit[1]/selected</property>
-							<value>1</value>
-						</equals>
-					</and>
-				</condition>
+					<condition>
+						<and>
+							<not>
+								<property>instrumentation/rmu/unit[1]/dim</property>
+							</not>
+							<not>
+								<property>instrumentation/rmu/unit[1]/pge</property>
+							</not>
+							<equals>
+								<property>instrumentation/rmu/unit[1]/selected</property>
+								<value>1</value>
+							</equals>
+						</and>
+					</condition>
           <command>property-adjust</command>
 					<property>instrumentation/nav[1]/frequencies/standby-mhz</property>
           <mask>integer</mask>
@@ -596,6 +1061,9 @@
 								<property>instrumentation/rmu/unit[1]/selected</property>
 								<value>2</value>
 							</equals>
+							<not>
+								<property>instrumentation/rmu/unit[1]/pge</property>
+							</not>
 						</and>
 					</condition>
 		      <command>property-adjust</command>
@@ -610,6 +1078,9 @@
 						<and>
 							<not>
 								<property>instrumentation/rmu/unit[1]/dim</property>
+							</not>
+							<not>
+								<property>instrumentation/rmu/unit[1]/pge</property>
 							</not>
 							<equals>
 								<property>instrumentation/rmu/unit[1]/selected</property>
@@ -627,6 +1098,9 @@
 							<not>
 								<property>instrumentation/rmu/unit[1]/dim</property>
 							</not>
+							<not>
+								<property>instrumentation/rmu/unit[1]/pge</property>
+							</not>
 							<equals>
 								<property>instrumentation/rmu/unit[1]/selected</property>
 								<value>3</value>
@@ -634,7 +1108,7 @@
 						</and>
 					</condition>
 		      <command>property-adjust</command>
-					<property>instrumentation/adf/frequencies/selected-khz</property>
+					<property>instrumentation/adf[1]/frequencies/selected-khz</property>
 		    	<step>100</step>
 					<min>180</min>
 					<max>1750</max>
@@ -644,6 +1118,9 @@
 						<and>
 							<not>
 								<property>instrumentation/rmu/unit[1]/dim</property>
+							</not>
+							<not>
+								<property>instrumentation/rmu/unit[1]/pge</property>
 							</not>
 							<equals>
 								<property>instrumentation/rmu/unit[1]/selected</property>
@@ -658,6 +1135,50 @@
 						<max>5</max>
 						<wrap>1</wrap>
 				</binding>
+		    <binding>
+					<condition>
+						<and>
+							<not>
+								<property>instrumentation/rmu/unit[1]/dim</property>
+							</not>
+							<property>instrumentation/rmu/unit[1]/pge</property>
+							<property>instrumentation/rmu/unit[1]/insert</property>
+							<equals>
+								<property>instrumentation/rmu/unit[1]/selected</property>
+								<value>0</value>
+							</equals>
+						</and>
+					</condition>
+	        <command>property-adjust</command>
+						<property>instrumentation/rmu/unit[1]/mem-freq</property>
+	          <mask>integer</mask>
+          	<step>1</step>
+						<min>117</min>
+						<max>137</max>
+						<resolution>1</resolution>
+	      </binding>
+		    <binding>
+					<condition>
+						<and>
+							<not>
+								<property>instrumentation/rmu/unit[1]/dim</property>
+							</not>
+							<property>instrumentation/rmu/unit[1]/pge</property>
+							<property>instrumentation/rmu/unit[1]/insert</property>
+							<equals>
+								<property>instrumentation/rmu/unit[1]/selected</property>
+								<value>1</value>
+							</equals>
+						</and>
+					</condition>
+	        <command>property-adjust</command>
+						<property>instrumentation/rmu/unit[1]/mem-freq</property>
+	          <mask>integer</mask>
+          	<step>1</step>
+						<min>108</min>
+						<max>117</max>
+						<resolution>1</resolution>
+	      </binding>
 			  <binding>
 					<condition>
 						<property>instrumentation/rmu/unit[1]/dim</property>
@@ -670,17 +1191,12 @@
 						<wrap>false</wrap>
 			  </binding>
 			  <binding>
-					<condition>
-						<not>
-							<property>instrumentation/rmu/unit[1]/dim</property>
-						</not>
-					</condition>
           <command>property-adjust</command>
-						<property>instrumentation/rmu/unit[1]/freq0</property>
+						<property>instrumentation/rmu/unit[1]/knob</property>
           	<step>0.05</step>
 						<min>0</min>
 						<max>1</max>
-						<wrap>true</wrap>
+						<wrap>1</wrap>
 			  </binding>
 		</action>
     </animation>
@@ -697,6 +1213,9 @@
 						<and>
 							<not>
 								<property>instrumentation/rmu/unit[1]/dim</property>
+							</not>
+							<not>
+								<property>instrumentation/rmu/unit[1]/pge</property>
 							</not>
 							<equals>
 								<property>instrumentation/rmu/unit[1]/selected</property>
@@ -718,6 +1237,9 @@
 							<not>
 								<property>instrumentation/rmu/unit[1]/dim</property>
 							</not>
+							<not>
+								<property>instrumentation/rmu/unit[1]/pge</property>
+							</not>
 							<equals>
 								<property>instrumentation/rmu/unit[1]/selected</property>
 								<value>1</value>
@@ -738,6 +1260,9 @@
 							<not>
 								<property>instrumentation/rmu/unit[1]/dim</property>
 							</not>
+							<not>
+								<property>instrumentation/rmu/unit[1]/pge</property>
+							</not>
 							<equals>
 								<property>instrumentation/rmu/unit[1]/selected</property>
 								<value>2</value>
@@ -757,6 +1282,9 @@
 							<not>
 								<property>instrumentation/rmu/unit[1]/dim</property>
 							</not>
+							<not>
+								<property>instrumentation/rmu/unit[1]/pge</property>
+							</not>
 							<equals>
 								<property>instrumentation/rmu/unit[1]/selected</property>
 								<value>2</value>
@@ -764,7 +1292,7 @@
 						</and>
 					</condition>
 				  <command>property-assign</command>
-						<property>instrumentation/transponderunit[1]//down-2</property>
+						<property>instrumentation/transponder/unit[1]/down-2</property>
 						<value>1</value>
 				</binding>
 		    <binding>
@@ -773,6 +1301,9 @@
 							<not>
 								<property>instrumentation/rmu/unit[1]/dim</property>
 							</not>
+							<not>
+								<property>instrumentation/rmu/unit[1]/pge</property>
+							</not>
 							<equals>
 								<property>instrumentation/rmu/unit[1]/selected</property>
 								<value>3</value>
@@ -780,7 +1311,7 @@
 						</and>
 					</condition>
 		      <command>property-adjust</command>
-					<property>instrumentation/adf/frequencies/selected-khz</property>
+					<property>instrumentation/adf[1]/frequencies/selected-khz</property>
 		    	<step>-100</step>
 					<min>180</min>
 					<max>1750</max>
@@ -791,6 +1322,9 @@
 						<and>
 							<not>
 								<property>instrumentation/rmu/unit[1]/dim</property>
+							</not>
+							<not>
+								<property>instrumentation/rmu/unit[1]/pge</property>
 							</not>
 							<equals>
 								<property>instrumentation/rmu/unit[1]/selected</property>
@@ -805,6 +1339,50 @@
 						<max>5</max>
 					<wrap>true</wrap>
 				</binding>
+		    <binding>
+					<condition>
+						<and>
+							<not>
+								<property>instrumentation/rmu/unit[1]/dim</property>
+							</not>
+							<property>instrumentation/rmu/unit[1]/pge</property>
+							<property>instrumentation/rmu/unit[1]/insert</property>
+							<equals>
+								<property>instrumentation/rmu/unit[1]/selected</property>
+								<value>0</value>
+							</equals>
+						</and>
+					</condition>
+	        <command>property-adjust</command>
+						<property>instrumentation/rmu/unit[1]/mem-freq</property>
+	          <mask>integer</mask>
+          	<step>-1</step>
+						<min>117</min>
+						<max>137</max>
+						<resolution>1</resolution>
+	      </binding>
+		    <binding>
+					<condition>
+						<and>
+							<not>
+								<property>instrumentation/rmu/unit[1]/dim</property>
+							</not>
+							<property>instrumentation/rmu/unit[1]/pge</property>
+							<property>instrumentation/rmu/unit[1]/insert</property>
+							<equals>
+								<property>instrumentation/rmu/unit[1]/selected</property>
+								<value>1</value>
+							</equals>
+						</and>
+					</condition>
+	        <command>property-adjust</command>
+						<property>instrumentation/rmu/unit[1]/mem-freq</property>
+	          <mask>integer</mask>
+          	<step>-1</step>
+						<min>108</min>
+						<max>117</max>
+						<resolution>1</resolution>
+	      </binding>
 			  <binding>
 					<condition>
 						<property>instrumentation/rmu/unit[1]/dim</property>
@@ -817,13 +1395,8 @@
 						<wrap>false</wrap>
 			  </binding>
 			  <binding>
-					<condition>
-						<not>
-							<property>instrumentation/rmu/unit[1]/dim</property>
-						</not>
-					</condition>
           <command>property-adjust</command>
-						<property>instrumentation/rmu/unit[1]/freq0</property>
+						<property>instrumentation/rmu/unit[1]/knob</property>
           	<step>-0.05</step>
 						<min>0</min>
 						<max>1</max>
@@ -847,6 +1420,9 @@
 							<not>
 								<property>instrumentation/rmu/unit[1]/dim</property>
 							</not>
+							<not>
+								<property>instrumentation/rmu/unit[1]/pge</property>
+							</not>
 							<equals>
 								<property>instrumentation/rmu/unit[1]/selected</property>
 								<value>0</value>
@@ -873,6 +1449,9 @@
 							<not>
 								<property>instrumentation/rmu/unit[1]/dim</property>
 							</not>
+							<not>
+								<property>instrumentation/rmu/unit[1]/pge</property>
+							</not>
 							<equals>
 								<property>instrumentation/rmu/unit[1]/selected</property>
 								<value>1</value>
@@ -890,6 +1469,9 @@
 						<and>
 							<not>
 								<property>instrumentation/rmu/unit[1]/dim</property>
+							</not>
+							<not>
+								<property>instrumentation/rmu/unit[1]/pge</property>
 							</not>
 							<equals>
 								<property>instrumentation/rmu/unit[1]/selected</property>
@@ -910,6 +1492,9 @@
 							<not>
 								<property>instrumentation/rmu/unit[1]/dim</property>
 							</not>
+							<not>
+								<property>instrumentation/rmu/unit[1]/pge</property>
+							</not>
 							<equals>
 								<property>instrumentation/rmu/unit[1]/selected</property>
 								<value>2</value>
@@ -926,6 +1511,9 @@
 							<not>
 								<property>instrumentation/rmu/unit[1]/dim</property>
 							</not>
+							<not>
+								<property>instrumentation/rmu/unit[1]/pge</property>
+							</not>
 							<equals>
 								<property>instrumentation/rmu/unit[1]/selected</property>
 								<value>3</value>
@@ -933,7 +1521,7 @@
 						</and>
 					</condition>
           <command>property-adjust</command>
-					<property>instrumentation/adf/frequencies/selected-khz</property>
+					<property>instrumentation/adf[1]/frequencies/selected-khz</property>
           <step>1</step>
 					<min>180</min>
 					<max>1750</max>
@@ -944,6 +1532,9 @@
 						<and>
 							<not>
 								<property>instrumentation/rmu/unit[1]/dim</property>
+							</not>
+							<not>
+								<property>instrumentation/rmu/unit[1]/pge</property>
 							</not>
 							<equals>
 								<property>instrumentation/rmu/unit[1]/selected</property>
@@ -958,6 +1549,48 @@
 						<max>5</max>
 						<wrap>true</wrap>
 			  </binding>
+		    <binding>
+					<condition>
+						<and>
+							<not>
+								<property>instrumentation/rmu/unit[1]/dim</property>
+							</not>
+							<property>instrumentation/rmu/unit[1]/pge</property>
+							<property>instrumentation/rmu/unit[1]/insert</property>
+							<equals>
+								<property>instrumentation/rmu/unit[1]/selected</property>
+								<value>0</value>
+							</equals>
+						</and>
+					</condition>
+	        <command>property-adjust</command>
+						<property>instrumentation/rmu/unit[1]/mem-freq</property>
+	          <mask>integer</mask>
+          	<step>0.025</step>
+						<min>117.975</min>
+						<max>137.000</max>
+	      </binding>
+		    <binding>
+					<condition>
+						<and>
+							<not>
+								<property>instrumentation/rmu/unit[1]/dim</property>
+							</not>
+							<property>instrumentation/rmu/unit[1]/pge</property>
+							<property>instrumentation/rmu/unit[1]/insert</property>
+							<equals>
+								<property>instrumentation/rmu/unit[1]/selected</property>
+								<value>1</value>
+							</equals>
+						</and>
+					</condition>
+	        <command>property-adjust</command>
+						<property>instrumentation/rmu/unit[1]/mem-freq</property>
+	          <mask>integer</mask>
+          	<step>0.025</step>
+					<min>108.000</min>
+					<max>117.950</max>
+	      </binding>
 			  <binding>
 					<condition>
 						<property>instrumentation/rmu/unit[1]/dim</property>
@@ -970,13 +1603,8 @@
 						<wrap>false</wrap>
 			  </binding>
 			  <binding>
-					<condition>
-						<not>
-							<property>instrumentation/rmu/unit[1]/dim</property>
-						</not>
-					</condition>
           <command>property-adjust</command>
-						<property>instrumentation/rmu/unit[1]/freq1</property>
+						<property>instrumentation/rmu/unit[1]/knob1</property>
           	<step>0.05</step>
 						<min>0</min>
 						<max>1</max>
@@ -996,6 +1624,9 @@
 						<and>
 							<not>
 								<property>instrumentation/rmu/unit[1]/dim</property>
+							</not>
+							<not>
+								<property>instrumentation/rmu/unit[1]/pge</property>
 							</not>
 							<equals>
 								<property>instrumentation/rmu/unit[1]/selected</property>
@@ -1023,6 +1654,9 @@
 							<not>
 								<property>instrumentation/rmu/unit[1]/dim</property>
 							</not>
+							<not>
+								<property>instrumentation/rmu/unit[1]/pge</property>
+							</not>
 							<equals>
 								<property>instrumentation/rmu/unit[1]/selected</property>
 								<value>1</value>
@@ -1031,17 +1665,18 @@
 					</condition>
           <command>property-adjust</command>
 						<property>instrumentation/nav[1]/frequencies/standby-mhz</property>
-					<property>instrumentation/nav[1]/frequencies/standby-mhz</property>
           <step>-0.025</step>
 					<min>108.000</min>
 					<max>117.950</max>
-					<wrap>true</wrap>
         </binding>
         <binding>
 					<condition>
 						<and>
 							<not>
 								<property>instrumentation/rmu/unit[1]/dim</property>
+							</not>
+							<not>
+								<property>instrumentation/rmu/unit[1]/pge</property>
 							</not>
 							<equals>
 								<property>instrumentation/rmu/unit[1]/selected</property>
@@ -1062,6 +1697,9 @@
 							<not>
 								<property>instrumentation/rmu/unit[1]/dim</property>
 							</not>
+							<not>
+								<property>instrumentation/rmu/unit[1]/pge</property>
+							</not>
 							<equals>
 								<property>instrumentation/rmu/unit[1]/selected</property>
 								<value>2</value>
@@ -1078,6 +1716,9 @@
 							<not>
 								<property>instrumentation/rmu/unit[1]/dim</property>
 							</not>
+							<not>
+								<property>instrumentation/rmu/unit[1]/pge</property>
+							</not>
 							<equals>
 								<property>instrumentation/rmu/unit[1]/selected</property>
 								<value>3</value>
@@ -1085,7 +1726,7 @@
 						</and>
 					</condition>
           <command>property-adjust</command>
-					<property>instrumentation/adf/frequencies/selected-khz</property>
+					<property>instrumentation/adf[1]/frequencies/selected-khz</property>
           <step>-1</step>
 					<min>180</min>
 					<max>1750</max>
@@ -1096,6 +1737,9 @@
 						<and>
 							<not>
 								<property>instrumentation/rmu/unit[1]/dim</property>
+							</not>
+							<not>
+								<property>instrumentation/rmu/unit[1]/pge</property>
 							</not>
 							<equals>
 								<property>instrumentation/rmu/unit[1]/selected</property>
@@ -1110,6 +1754,48 @@
 						<max>5</max>
 					<wrap>true</wrap>
 			  </binding>
+		    <binding>
+					<condition>
+						<and>
+							<not>
+								<property>instrumentation/rmu/unit[1]/dim</property>
+							</not>
+							<property>instrumentation/rmu/unit[1]/pge</property>
+							<property>instrumentation/rmu/unit[1]/insert</property>
+							<equals>
+								<property>instrumentation/rmu/unit[1]/selected</property>
+								<value>0</value>
+							</equals>
+						</and>
+					</condition>
+	        <command>property-adjust</command>
+						<property>instrumentation/rmu/unit[1]/mem-freq</property>
+	          <mask>integer</mask>
+          	<step>-0.025</step>
+						<min>117.975</min>
+						<max>137.000</max>
+	      </binding>
+		    <binding>
+					<condition>
+						<and>
+							<not>
+								<property>instrumentation/rmu/unit[1]/dim</property>
+							</not>
+							<property>instrumentation/rmu/unit[1]/pge</property>
+							<property>instrumentation/rmu/unit[1]/insert</property>
+							<equals>
+								<property>instrumentation/rmu/unit[1]/selected</property>
+								<value>1</value>
+							</equals>
+						</and>
+					</condition>
+	        <command>property-adjust</command>
+						<property>instrumentation/rmu/unit[1]/mem-freq</property>
+	          <mask>integer</mask>
+          	<step>-0.025</step>
+					<min>108.000</min>
+					<max>117.950</max>
+	      </binding>
 			  <binding>
 					<condition>
 						<property>instrumentation/rmu/unit[1]/dim</property>
@@ -1122,13 +1808,8 @@
 						<wrap>false</wrap>
 			  </binding>
 			  <binding>
-					<condition>
-						<not>
-							<property>instrumentation/rmu/unit[1]/dim</property>
-						</not>
-					</condition>
           <command>property-adjust</command>
-						<property>instrumentation/rmu/unit[1]/freq1</property>
+						<property>instrumentation/rmu/unit[1]/knob1</property>
           	<step>-0.05</step>
 						<min>0</min>
 						<max>1</max>
