@@ -119,6 +119,10 @@
               <command>property-toggle</command>
               <property>instrumentation/rmu/unit/swp1</property>
           </binding>
+					<binding>
+						  <command>property-toggle</command>
+						  <property>sim/sound/click</property>
+					</binding>
 					<mod-up>
 	          <binding>
 	              <command>property-toggle</command>
@@ -196,6 +200,10 @@
               <command>property-toggle</command>
               <property>instrumentation/rmu/unit/comm</property>
           </binding>
+					<binding>
+						  <command>property-toggle</command>
+						  <property>sim/sound/click</property>
+					</binding>
 					<mod-up>
 	          <binding>
 	              <command>property-toggle</command>
@@ -254,6 +262,10 @@
               <command>property-toggle</command>
               <property>instrumentation/rmu/unit/atc</property>
           </binding>
+					<binding>
+						  <command>property-toggle</command>
+						  <property>sim/sound/click</property>
+					</binding>
 					<mod-up>
 	          <binding>
 	              <command>property-toggle</command>
@@ -345,6 +357,10 @@
               <command>property-toggle</command>
               <property>instrumentation/rmu/unit/mode</property>
           </binding>
+					<binding>
+						  <command>property-toggle</command>
+						  <property>sim/sound/click</property>
+					</binding>
 					<mod-up>
 		        <binding>
 		            <command>property-toggle</command>
@@ -393,6 +409,10 @@
               <command>property-toggle</command>
               <property>instrumentation/rmu/unit/btn-l5</property>
           </binding>
+					<binding>
+						  <command>property-toggle</command>
+						  <property>sim/sound/click</property>
+					</binding>
 					<mod-up>
 		        <binding>
 		            <command>property-toggle</command>
@@ -441,6 +461,10 @@
               <command>property-toggle</command>
               <property>instrumentation/rmu/unit/btn-l6</property>
           </binding>
+					<binding>
+						  <command>property-toggle</command>
+						  <property>sim/sound/click</property>
+					</binding>
 					<mod-up>
 		        <binding>
 		            <command>property-toggle</command>
@@ -478,6 +502,10 @@
               <command>property-toggle</command>
               <property>instrumentation/rmu/unit/swp2</property>
           </binding>
+					<binding>
+						  <command>property-toggle</command>
+						  <property>sim/sound/click</property>
+					</binding>
 					<mod-up>
 	          <binding>
 	              <command>property-toggle</command>
@@ -529,12 +557,16 @@
                 <command>property-toggle</command>
                 <property>instrumentation/rmu/unit/nav</property>
             </binding>
-						<mod-up>
-		          <binding>
-		              <command>property-toggle</command>
-		              <property>instrumentation/rmu/unit/nav</property>
-		          </binding>
-						</mod-up>
+					<binding>
+						  <command>property-toggle</command>
+						  <property>sim/sound/click</property>
+					</binding>
+					<mod-up>
+		        <binding>
+		            <command>property-toggle</command>
+		            <property>instrumentation/rmu/unit/nav</property>
+		        </binding>
+					</mod-up>
       </action>
     </animation>
 
@@ -566,6 +598,10 @@
               <command>property-toggle</command>
               <property>instrumentation/rmu/unit/adf</property>
           </binding>
+					<binding>
+						  <command>property-toggle</command>
+						  <property>sim/sound/click</property>
+					</binding>
 					<mod-up>
 		        <binding>
 	            <command>property-toggle</command>
@@ -636,6 +672,10 @@
 							<value>6</value>
 							<value>0</value>
 		      </binding>
+					<binding>
+						  <command>property-toggle</command>
+						  <property>sim/sound/click</property>
+					</binding>
 					<mod-up>
 		        <binding>
 		            <command>property-toggle</command>
@@ -681,6 +721,10 @@
 		        <command>property-toggle</command>
 				      <property>instrumentation/rmu/unit/insert</property>
 		      </binding>
+					<binding>
+						  <command>property-toggle</command>
+						  <property>sim/sound/click</property>
+					</binding>
 					<mod-up>
 		        <binding>
 		            <command>property-toggle</command>
@@ -716,6 +760,10 @@
 		        <command>property-toggle</command>
 		        <property>instrumentation/rmu/unit/delete</property>
 		      </binding>
+					<binding>
+						  <command>property-toggle</command>
+						  <property>sim/sound/click</property>
+					</binding>
 					<mod-up>
 		        <binding>
 		            <command>property-toggle</command>
@@ -728,7 +776,7 @@
     <animation>
         <type>translate</type>
         <object-name>RMU.sq</object-name>	
-        <property>instrumentation/rmu/unit/squelch</property>
+        <property>instrumentation/rcu/squelch</property>
 				<factor>0.0016</factor>
         <axis>
             <x>-1</x>
@@ -746,9 +794,26 @@
         <repeatable>false</repeatable>
         <binding>
           <command>property-toggle</command>
-          <property>instrumentation/rmu/unit/squelch</property>
+          <property>instrumentation/rcu/squelch</property>
         </binding>
+				<binding>
+					  <command>property-toggle</command>
+					  <property>sim/sound/click</property>
+				</binding>
       </action>
+			<hovered>
+		    <binding>
+	        <command>set-tooltip</command>
+	        <tooltip-id>RmuSq1</tooltip-id>
+	        <label>Squelch : %s</label>
+		      <property>instrumentation/rcu/squelch</property>
+		        <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+		    </binding>
+			</hovered>
     </animation>
 
     <animation>
@@ -774,7 +839,20 @@
           <command>property-toggle</command>
           <property>instrumentation/rmu/unit/dim</property>
         </binding>
+				<binding>
+					  <command>property-toggle</command>
+					  <property>sim/sound/click</property>
+				</binding>
       </action>
+			<hovered>
+		    <binding>
+	        <command>set-tooltip</command>
+	        <tooltip-id>RmuDim1</tooltip-id>
+	        <label>Dim : %s</label>
+		      <property>instrumentation/rmu/unit/dim</property>
+	        <mapping>on-off</mapping>
+		    </binding>
+			</hovered>
     </animation>
 
     <animation>
@@ -801,6 +879,10 @@
           <property>instrumentation/rmu/unit/sto</property>
 					<value>1</value>
         </binding>
+				<binding>
+					  <command>property-toggle</command>
+					  <property>sim/sound/click</property>
+				</binding>
 				<mod-up>
 					<binding>
      				<command>property-assign</command>
@@ -809,6 +891,13 @@
    				</binding>
    			</mod-up>
       </action>
+			<hovered>
+		    <binding>
+	        <command>set-tooltip</command>
+	        <tooltip-id>RmuSto1</tooltip-id>
+	        <label>Store</label>
+		    </binding>
+			</hovered>
     </animation>
 
     <animation>
@@ -835,6 +924,10 @@
           <property>instrumentation/transponder/inputs/ident-btn</property>
 					<value>1</value>
         </binding>
+				<binding>
+					  <command>property-toggle</command>
+					  <property>sim/sound/click</property>
+				</binding>
 				<mod-up>
 					<binding>
      				<command>property-assign</command>
@@ -843,6 +936,13 @@
    				</binding>
    			</mod-up>
       </action>
+			<hovered>
+		    <binding>
+	        <command>set-tooltip</command>
+	        <tooltip-id>RmuId1</tooltip-id>
+	        <label>Ident</label>
+		    </binding>
+			</hovered>
     </animation>
 
     <animation>
@@ -878,7 +978,24 @@
           <property>instrumentation/rmu/unit/dim</property>
 						<value>0</value>
         </binding>
+				<binding>
+					  <command>property-toggle</command>
+					  <property>sim/sound/click</property>
+				</binding>
       </action>
+			<hovered>
+		    <binding>
+	        <command>set-tooltip</command>
+	        <tooltip-id>RmuPge1</tooltip-id>
+	        <label>Page : %s</label>
+		      <property>instrumentation/rmu/unit/pge</property>
+	        <mapping>nasal</mapping>
+					<script>
+						var modes = ['Main','Mem'];
+						return modes[arg[0]];
+					</script>
+		    </binding>
+			</hovered>
     </animation>
 
     <animation>
@@ -914,7 +1031,20 @@
           <property>instrumentation/rmu/unit/dim</property>
 						<value>0</value>
         </binding>
+				<binding>
+					  <command>property-toggle</command>
+					  <property>sim/sound/click</property>
+				</binding>
       </action>
+			<hovered>
+		    <binding>
+	        <command>set-tooltip</command>
+	        <tooltip-id>RmuTest1</tooltip-id>
+	        <label>Tests : %s</label>
+		      <property>instrumentation/rmu/unit/test</property>
+	        <mapping>on-off</mapping>
+		    </binding>
+			</hovered>
     </animation>
 
     <animation>
@@ -1198,7 +1328,14 @@
 						<max>1</max>
 						<wrap>1</wrap>
 			  </binding>
-		</action>
+			</action>
+			<hovered>
+		    <binding>
+	        <command>set-tooltip</command>
+	        <tooltip-id>RmuFreq1</tooltip-id>
+	        <label>Freq/Dim/Code</label>
+		    </binding>
+			</hovered>
     </animation>
 
     <animation>
@@ -1611,6 +1748,13 @@
 						<wrap>true</wrap>
 			  </binding>
 	    </action>
+			<hovered>
+		    <binding>
+	        <command>set-tooltip</command>
+	        <tooltip-id>RmuFreq1</tooltip-id>
+	        <label>Freq/Dim/Code</label>
+		    </binding>
+			</hovered>
 		</animation>
 
     <animation>
@@ -1664,7 +1808,6 @@
 						</and>
 					</condition>
           <command>property-adjust</command>
-						<property>instrumentation/nav/frequencies/standby-mhz</property>
 					<property>instrumentation/nav/frequencies/standby-mhz</property>
           <step>-0.025</step>
 					<min>108.000</min>

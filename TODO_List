@@ -28,6 +28,9 @@ MFD : # Coder les boutons du bas - Fait oct/2016
 RMU : #	Transformer en Canvas - Fait déc/2016
 			# Séparer les deux RMU - fait janv/2017
 
+RCU : # Coder le RCU - fait Janv/2017
+			# Ajouter un bruit de fond pour le squelch - Fait janv/2017
+
 APU :# Coder le bouton MAP LIGHT - Fait 24/02/2016
 		 # Coder l'enregistreur horaire - Fait 23/01/2016
 

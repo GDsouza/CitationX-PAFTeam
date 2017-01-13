@@ -1,4 +1,4 @@
-### Canvas MFD ###
+### Canvas RMU2 ###
 ### C. Le Moigne (clm76) - 2016 ###
 
 var com_freq2 = props.globals.getNode("instrumentation/comm[1]/frequencies/selected-mhz");
@@ -96,6 +96,7 @@ var RMU2 = {
 					.close()
 					.setColor(0.95,0.75,0)
 					.setStrokeLineWidth(10);			
+
 		m.rmu2.setVisible(1);
 
 	### Memories frame & text init ###
@@ -295,6 +296,10 @@ var RMU2 = {
 		});
 
 		### Comm frequencies ###
+		setlistener("instrumentation/comm[1]/frequencies/selected-mhz", func {
+			me.text.comFreq.setText(sprintf("%.3f",com_freq2.getValue()));
+		});
+
 		setlistener("instrumentation/comm[1]/frequencies/standby-mhz", func {
 			me.text.comStby.setText(sprintf("%.3f",com_stby2.getValue()));
 			for (var i=0;i<12;i+=1) {
@@ -317,6 +322,7 @@ var RMU2 = {
 			}
 			if (com2[com_mem2[i]] != 0) {
 				me.text.comStby.setText(sprintf("%07.3f",com2[com_mem2[i]]));
+				com_stby2.setValue(com2[com_mem2[i]]);
 				me.text.memCom.setText("MEMORY-"~sprintf("%d",i+1));
 			}	else {
 				setprop("instrumentation/rmu/unit[1]/mem-com",0);
@@ -326,6 +332,10 @@ var RMU2 = {
 		});
 
 		### Nav frequencies ###
+		setlistener("instrumentation/nav[1]/frequencies/selected-mhz", func {
+			me.text.navFreq.setText(sprintf("%.3f",nav_freq2.getValue()));
+		});
+
 		setlistener("instrumentation/nav[1]/frequencies/standby-mhz", func {
 			me.text.navStby.setText(sprintf("%.3f",nav_stby2.getValue()));
 			for (var i=0;i<12;i+=1) {
@@ -348,6 +358,7 @@ var RMU2 = {
 			}
 			if (nav2[nav_mem2[i]] != 0) {
 				me.text.navStby.setText(sprintf("%07.3f",nav2[nav_mem2[i]]));
+				nav_stby2.setValue(nav2[nav_mem2[i]]);
 				me.text.memNav.setText("MEMORY-"~sprintf("%d",i+1));
 			}	else {
 				setprop("instrumentation/rmu/unit[1]/mem-nav",0);
@@ -551,8 +562,7 @@ var RMU2 = {
 			}
 		});
 
-	}, # end of listen
-	
+	}, # end of listen	
 }; # end of RMU2
 
 	### Refresh memories ###

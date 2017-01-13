@@ -179,7 +179,7 @@
             <name>comm2</name>
             <property>instrumentation/comm[1]/frequencies/standby-mhz</property>
         </input>
-
+<!--
         <dial>
             <row>1</row>
             <col>4</col>
@@ -193,7 +193,7 @@
                 <command>dialog-apply</command>
             </binding>
         </dial>
-
+-->
 <!--         NAV 1          -->
 
         <text>

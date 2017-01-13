@@ -7,7 +7,7 @@
   <!-- Instruments -->
 
     <model>
-        <path>Aircraft/CitationX/Models/Instruments/NAV/nav1.xml</path>
+        <path>Models/Instruments/NAV/nav1.xml</path>
         <offsets>
             <x-m>0.00</x-m>
             <y-m>0.00</y-m>
@@ -16,7 +16,7 @@
     </model>
 
     <model>
-        <path>Aircraft/CitationX/Models/Instruments/NAV/nav2.xml</path>
+        <path>Models/Instruments/NAV/nav2.xml</path>
         <offsets>
             <x-m>0.00</x-m>
             <y-m>0.00</y-m>
@@ -25,7 +25,7 @@
     </model>
 
     <model>
-        <path>Aircraft/CitationX/Models/Instruments/AOA/aoa.xml</path>
+        <path>Models/Instruments/AOA/aoa.xml</path>
         <offsets>
             <x-m>0.002</x-m>
             <y-m>-0.506</y-m>
@@ -34,7 +34,7 @@
     </model>
 
     <model>
-        <path>Aircraft/CitationX/Models/Instruments/AOA/aoa.xml</path>
+        <path>Models/Instruments/AOA/aoa.xml</path>
         <offsets>
             <x-m>0.002</x-m>
             <y-m>0.515</y-m>
@@ -43,7 +43,7 @@
     </model>
 
     <model>
-        <path>Aircraft/CitationX/Models/Instruments/ALT/alt.xml</path>
+        <path>Models/Instruments/ALT/alt.xml</path>
         <offsets>
             <x-m>0.002</x-m>
             <y-m>-0.230</y-m>
@@ -52,7 +52,7 @@
     </model>
 
     <model>
-        <path>Aircraft/CitationX/Models/Instruments/STBYai/STBYai.xml</path>
+        <path>Models/Instruments/STBYai/STBYai.xml</path>
         <offsets>
             <x-m>0.001</x-m>
             <y-m>-0.137</y-m>
@@ -61,7 +61,7 @@
     </model>
 
     <model>
-        <path>Aircraft/CitationX/Models/Instruments/HSI/hsi.xml</path>
+        <path>Models/Instruments/HSI/hsi.xml</path>
         <offsets>
             <x-m>0.002</x-m>
             <y-m>-0.044</y-m>
@@ -71,7 +71,7 @@
 
     <model>
         <name>EICAS1</name>
-        <path>Aircraft/CitationX/Models/Instruments/EICAS/EICAS3d.xml</path>
+        <path>Models/Instruments/EICAS/EICAS3d.xml</path>
         <offsets>
             <x-m>0.002</x-m>
             <y-m>0.005</y-m>
@@ -81,7 +81,7 @@
 
     <model>
         <name>ND_L</name>
-        <path>Aircraft/CitationX/Models/Instruments/MFD/ND_F.xml</path>
+        <path>Models/Instruments/MFD/ND_F.xml</path>
         <offsets>
             <x-m>0.0011</x-m>
             <y-m>-0.1865</y-m>
@@ -91,7 +91,7 @@
 
     <model>
         <name>Layers_L</name>
-        <path>Aircraft/CitationX/Models/Instruments/MFD/ND_B.xml</path>
+        <path>Models/Instruments/MFD/ND_B.xml</path>
         <offsets>
             <x-m>0.0010</x-m>
             <y-m>-0.1865</y-m>
@@ -101,7 +101,7 @@
 
     <model>
         <name>ND_R</name>
-        <path>Aircraft/CitationX/Models/Instruments/MFD/ND_F.xml</path>
+        <path>Models/Instruments/MFD/ND_F.xml</path>
         <offsets>
             <x-m>0.0011</x-m>
             <y-m>0.195</y-m>
@@ -111,7 +111,7 @@
 
     <model>
         <name>Layers_R</name>
-        <path>Aircraft/CitationX/Models/Instruments/MFD/ND_B.xml</path>
+        <path>Models/Instruments/MFD/ND_B.xml</path>
         <offsets>
             <x-m>0.0010</x-m>
             <y-m>0.195</y-m>
@@ -122,7 +122,7 @@
 
     <model>
         <name>PFD1</name>
-        <path>Aircraft/CitationX/Models/Instruments/PFD/PFD3d.xml</path>
+        <path>Models/Instruments/PFD/PFD3d.xml</path>
         <offsets>
             <x-m>0.002</x-m>
             <y-m>-0.375</y-m>
@@ -132,7 +132,7 @@
 
     <model>
         <name>PFD2</name>
-        <path>Aircraft/CitationX/Models/Instruments/PFD/PFD3d.xml</path>
+        <path>Models/Instruments/PFD/PFD3d.xml</path>
         <offsets>
             <x-m>0.002</x-m>
             <y-m>0.384</y-m>
@@ -142,12 +142,31 @@
 
     <model>
         <name>CabPress</name>
-        <path>Aircraft/CitationX/Models/Instruments/Press/CabPress.xml</path>
+        <path>Models/Instruments/Press/CabPress.xml</path>
         <offsets>
           <x-m>0.027</x-m>
           <y-m>0.542</y-m>
           <z-m>-0.029</z-m>
 					<pitch-deg>-45</pitch-deg>
+        </offsets>
+    </model>
+
+    <model>
+        <name>RCU</name>
+        <path>Models/Instruments/RCU/RCU.xml</path>
+        <offsets>
+          <x-m>0.000</x-m>
+          <y-m>0.00</y-m>
+          <z-m>0.000</z-m>
+        </offsets>
+    </model>
+
+    <model>
+        <path>Models/Instruments/RCU/screen.xml</path>
+        <offsets>
+          <x-m>0.003</x-m>
+          <y-m>0</y-m>
+          <z-m>0</z-m>
         </offsets>
     </model>
 
@@ -208,6 +227,8 @@
         <object-name>norm.btn</object-name>
         <object-name>abn.btn</object-name>
         <object-name>emer.btn</object-name>
+        <object-name>Emer.btnG</object-name>
+        <object-name>Emer.btnD</object-name>
         <object-name>skp.btn</object-name>
         <object-name>page.btn</object-name>
         <object-name>rcl.btn</object-name>
@@ -3593,6 +3614,48 @@
         </hovered>
    </animation>
 
+<!-- Audio -->
+
+    <animation>
+        <type>translate</type>
+        <object-name>Emer.btnG</object-name>	
+        <object-name>Emer.btnD</object-name>	
+        <property>instrumentation/rcu/emrg</property>
+				<factor>0.0027</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Emer.btnG</object-name>
+        <object-name>Emer.btnD</object-name>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+              <command>property-toggle</command>
+	            <property>instrumentation/rcu/emrg</property>
+            </binding>
+						<binding>
+						    <command>property-toggle</command>
+						    <property>sim/sound/click</property>
+						</binding>
+		    </action>
+				<hovered>
+				    <binding>
+				        <command>set-tooltip</command>
+				        <tooltip-id>AudEmer</tooltip-id>
+				        <label>RCU emergency : %s</label>
+					      <property>instrumentation/rcu/emrg</property>
+				        <mapping>on-off</mapping>
+				    </binding>
+				</hovered>
+    </animation>
+
 <!-- DC850 -->
 
     <animation>
@@ -3859,6 +3922,7 @@
 				    </binding>
 				</hovered>
     </animation>
+
 
     <animation>
         <type>pick</type>
