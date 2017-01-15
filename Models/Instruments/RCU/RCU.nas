@@ -9,6 +9,8 @@ var selected = props.globals.getNode("instrumentation/rcu/selected");
 var mode = props.globals.getNode("instrumentation/rcu/mode");
 var sq = props.globals.getNode("instrumentation/rcu/squelch");
 var navAud = props.globals.getNode("instrumentation/rcu/nav-audio");
+var tx1 = props.globals.getNode("instrumentation/comm/ptt");
+var tx2 = props.globals.getNode("instrumentation/comm[1]/ptt");
 var emrg = props.globals.getNode("instrumentation/rcu/emrg");
 
 var RCU = {
@@ -25,7 +27,7 @@ var RCU = {
 		m.rcu = m.canvas.createGroup();
 		canvas.parsesvg(m.rcu,"Aircraft/CitationX/Models/Instruments/RCU/RCU.svg");
 		m.text = {};
-		m.text_val = ["comFreq","navFreq","navAudio","sq",
+		m.text_val = ["comFreq","navFreq","navAudio","sq","tx",
 									"comInd","navInd","emrg"];
 		foreach(var i;m.text_val) {
 			m.text[i] = m.rcu.getElementById(i);
@@ -40,6 +42,7 @@ var RCU = {
 		m.text.navInd.hide();
 		m.text.navAudio.hide();
 		m.text.sq.show();
+		m.text.tx.hide();
 		m.text.emrg.hide();
 		return m
 	},
@@ -102,6 +105,22 @@ var RCU = {
 				me.text.navAudio.show();				
 			} else {
 				me.text.navAudio.hide();				
+			}
+		});
+
+		setlistener("instrumentation/comm/ptt", func {
+			if (tx1.getValue()) {
+				me.text.tx.show();				
+			} else {
+				me.text.tx.hide();				
+			}
+		});
+
+		setlistener("instrumentation/comm[1]/ptt", func {
+			if (tx2.getValue()) {
+				me.text.tx.show();				
+			} else {
+				me.text.tx.hide();				
 			}
 		});
 

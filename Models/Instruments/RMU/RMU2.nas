@@ -1,5 +1,5 @@
 ### Canvas RMU2 ###
-### C. Le Moigne (clm76) - 2016 ###
+### C. Le Moigne (clm76) - 2016-2017 ###
 
 var com_freq2 = props.globals.getNode("instrumentation/comm[1]/frequencies/selected-mhz");
 var com_stby2 = props.globals.getNode("instrumentation/comm[1]/frequencies/standby-mhz");
@@ -22,6 +22,7 @@ var data = nil;
 var mem2 = nil;
 var mem_2 = nil;
 var memV2 = nil;
+var full = nil;
 
 	### Create Memories if not exist ###
 var memPath = path~"CitationX-RMUmem2.xml";
@@ -112,15 +113,6 @@ var RMU2 = {
 					.setStrokeLineWidth(10)			
 					.setVisible(0);
 
-		m.cant = m.mem2.createChild("text")
-					.setTranslation(400,930)
-					.setText("CAN'T")
-					.setFont("LiberationFonts/LiberationSans-Bold.ttf")
-					.setFontSize(56)
-					.setColor(0.95,0.75,0)
-					.setAlignment("center-center")
-					.setVisible(0);
-
 		m.mem2.setVisible(0);
 
 	### Test init ###
@@ -132,7 +124,8 @@ var RMU2 = {
 		m.text = {};
 		m.text_val = ["comFreq","navFreq","comStby", "navStby",
 										"trspCode","trspMode","trspNum","adfFreq","adfMode",
-										"memCom","memNav","comNum","navNum","adfNum","mlsNum"];
+										"memCom","memNav","comNum","navNum","adfNum","mlsNum",
+										"full"];
 		foreach(var i;m.text_val) {
 			m.text[i] = m.rmu2.getElementById(i);
 		}
@@ -153,6 +146,7 @@ var RMU2 = {
 		m.text.memNav.setText("MEMORY-1");
 		m.text.trspCode.setText(sprintf("%04d",trsp_code2.getValue()));
 		m.text.trspMode.setText(trsp_mode2.getValue());
+		m.text.full.hide();
 
 	### Memories treatment	###
 		m.freq = {};
@@ -173,6 +167,8 @@ var RMU2 = {
 		### Memories Texts ###
 		m.tit = m.mem2.getElementById("tittle");
 		m.ins = m.mem2.getElementById("ins");
+		m.cant = m.mem2.getElementById("cant");
+		m.cant.hide();
 
 		### RMU Tests ###
 		m.tst = {};
@@ -265,12 +261,12 @@ var RMU2 = {
 				insert.setValue(0);
 				me.rmu2.setVisible(1);
 				me.mem2.setVisible(0);
-				if (selected.getValue()!=1){
-					com_stby2.setValue(memVec2.vector[0]);
-				}
-				if (selected.getValue()==1){
-					nav_stby2.setValue(memVec2.vector[0]);
-				}
+#				if (selected.getValue()!=1){
+#					com_stby2.setValue(memVec2.vector[0]);
+#				}
+#				if (selected.getValue()==1){
+#					nav_stby2.setValue(memVec2.vector[0]);
+#				}
 			}
 		});
 
@@ -319,15 +315,16 @@ var RMU2 = {
 			var i = getprop("instrumentation/rmu/unit[1]/mem-com");
 			if (com2[com_mem2[0]] == 0) {
 					me.text.comStby.setText(sprintf("%.3f",com_stby2.getValue()));
-			}
-			if (com2[com_mem2[i]] != 0) {
-				me.text.comStby.setText(sprintf("%07.3f",com2[com_mem2[i]]));
-				com_stby2.setValue(com2[com_mem2[i]]);
-				me.text.memCom.setText("MEMORY-"~sprintf("%d",i+1));
-			}	else {
-				setprop("instrumentation/rmu/unit[1]/mem-com",0);
-				me.text.comStby.setText(sprintf("%07.3f",com2[com_mem2[0]]));
-				me.text.memCom.setText("MEMORY-"~sprintf("%d",1));
+			} else {
+				if (com2[com_mem2[i]] != 0) {
+					me.text.comStby.setText(sprintf("%07.3f",com2[com_mem2[i]]));
+					com_stby2.setValue(com2[com_mem2[i]]);
+					me.text.memCom.setText("MEMORY-"~sprintf("%d",i+1));
+				}	else {
+					setprop("instrumentation/rmu/unit[1]/mem-com",0);
+					me.text.comStby.setText(sprintf("%07.3f",com2[com_mem2[0]]));
+					me.text.memCom.setText("MEMORY-"~sprintf("%d",1));
+				}
 			}
 		});
 
@@ -355,15 +352,16 @@ var RMU2 = {
 			var i = getprop("instrumentation/rmu/unit[1]/mem-nav");
 			if (nav2[nav_mem2[0]] == 0) {
 					me.text.navStby.setText(sprintf("%.3f",nav_stby2.getValue()));
-			}
-			if (nav2[nav_mem2[i]] != 0) {
-				me.text.navStby.setText(sprintf("%07.3f",nav2[nav_mem2[i]]));
-				nav_stby2.setValue(nav2[nav_mem2[i]]);
-				me.text.memNav.setText("MEMORY-"~sprintf("%d",i+1));
-			}	else {
-				setprop("instrumentation/rmu/unit[1]/mem-nav",0);
-				me.text.navStby.setText(sprintf("%07.3f",nav2[nav_mem2[0]]));
-				me.text.memNav.setText("MEMORY-"~sprintf("%d",1));
+			} else {
+				if (nav2[nav_mem2[i]] != 0) {
+					me.text.navStby.setText(sprintf("%07.3f",nav2[nav_mem2[i]]));
+					nav_stby2.setValue(nav2[nav_mem2[i]]);
+					me.text.memNav.setText("MEMORY-"~sprintf("%d",i+1));
+				}	else {
+					setprop("instrumentation/rmu/unit[1]/mem-nav",0);
+					me.text.navStby.setText(sprintf("%07.3f",nav2[nav_mem2[0]]));
+					me.text.memNav.setText("MEMORY-"~sprintf("%d",1));
+				}
 			}
 		});
 
@@ -378,15 +376,21 @@ var RMU2 = {
 						io.write_properties(memPath,data);
 						me.text.memCom.setText("MEMORY-1");
 					} else if (com2[com_mem2[0]] != com_stby2.getValue()) {
-						for (var i=0;i<12;i+=1) {
-							if (com2[com_mem2[i]] == 0) {
-								com2[com_mem2[i]] = com_stby2.getValue();
-								var name = data.getChild(com_mem2[i]);
-								name.setDoubleValue(com2[com_mem2[i]]);
-								io.write_properties(memPath,data);
-								me.text.memCom.setText("MEMORY-"~sprintf("%d",i+1));
-								memVec2.vector[i] = com2[com_mem2[i]];
-								break;
+						if (com2[com_mem2[11]] != 0) {
+							full = me.text.full;
+							me.memFull();
+						}
+						else {
+							for (var i=0;i<12;i+=1) {
+								if (com2[com_mem2[i]] == 0) {
+									com2[com_mem2[i]] = com_stby2.getValue();
+									var name = data.getChild(com_mem2[i]);
+									name.setDoubleValue(com2[com_mem2[i]]);
+									io.write_properties(memPath,data);
+									me.text.memCom.setText("MEMORY-"~sprintf("%d",i+1));
+									memVec2.vector[i] = com2[com_mem2[i]];
+									break;
+								}
 							}
 						}
 					}
@@ -400,15 +404,20 @@ var RMU2 = {
 						io.write_properties(memPath,data);
 						me.text.memNav.setText("MEMORY-2");
 					} else if (nav2[nav_mem2[0]] != nav_stby2.getValue()) {
-						for (var i=0;i<12;i+=1) {
-							if (nav2[nav_mem2[i]] == 0) {
-								nav2[nav_mem2[i]] = nav_stby2.getValue();
-								var name = data.getChild(nav_mem2[i]);
-								name.setDoubleValue(nav2[nav_mem2[i]]);
-								io.write_properties(memPath,data);
-								me.text.memNav.setText("MEMORY-"~sprintf("%d",i+1));
-								memVec2.vector[i] = nav2[nav_mem2[i]];
-								break;
+						if (nav2[nav_mem2[11]] != 0) {
+							full = me.text.full;
+							me.memFull()}
+						else {
+							for (var i=0;i<12;i+=1) {
+								if (nav2[nav_mem2[i]] == 0) {
+									nav2[nav_mem2[i]] = nav_stby2.getValue();
+									var name = data.getChild(nav_mem2[i]);
+									name.setDoubleValue(nav2[nav_mem2[i]]);
+									io.write_properties(memPath,data);
+									me.text.memNav.setText("MEMORY-"~sprintf("%d",i+1));
+									memVec2.vector[i] = nav2[nav_mem2[i]];
+									break;
+								}
 							}
 						}
 					}
@@ -418,12 +427,16 @@ var RMU2 = {
 
 	### Insert memories ###
 		setlistener("instrumentation/rmu/unit[1]/insert",func {
-			me.cant.hide();
 			if (insert.getValue() and mem_dsp.getValue() != -1) {
 					me.ins.setColor(1,0.35,1);
 					if (memVec2.vector[11] == 0) {
 						memVec2.insert(mem_dsp.getValue()+me.more,selected.getValue() == 0 ? 117.975 : 108.000);
-					} else {me.cant.show()}
+					} else {
+						full = me.cant;
+						me.memFull();
+						insert.setValue(0);
+						me.ins.setColor(1,1,1);
+					}
 			} else {
 				me.ins.setColor(1,1,1);
 					if (selected.getValue() == 0) {
@@ -563,6 +576,18 @@ var RMU2 = {
 		});
 
 	}, # end of listen	
+
+	### Memories bank full ###
+
+	memFull : func {
+		full.show();
+		var fullTimer = maketimer(2,func() {
+			full.hide();
+			fullTimer.stop();
+		});
+		fullTimer.start();
+	}, # end of memFull
+
 }; # end of RMU2
 
 	### Refresh memories ###

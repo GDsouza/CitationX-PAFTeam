@@ -266,8 +266,8 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.89578479"
-     inkscape:cx="258.26067"
-     inkscape:cy="810.11865"
+     inkscape:cx="386.65137"
+     inkscape:cy="118.72201"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -372,6 +372,31 @@
        height="58.04966"
        x="209.87184"
        y="42.787178" />
+    <g
+       id="cant"
+       transform="translate(-1.584287,-3.349038)"
+       style="fill:#000000;fill-opacity:1">
+      <rect
+         y="920.83142"
+         x="292.01559"
+         height="60.282337"
+         width="207.63916"
+         id="cantRect"
+         style="opacity:0.97000002;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <text
+         inkscape:transform-center-y="16.467281"
+         inkscape:transform-center-x="178.14605"
+         sodipodi:linespacing="125%"
+         id="txtCant"
+         y="968.59473"
+         x="392.81357"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:60px;line-height:125%;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono, Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#ffff00;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           y="968.59473"
+           x="392.81357"
+           id="tspan3467"
+           sodipodi:role="line">CAN'T</tspan></text>
+    </g>
   </g>
   <g
      inkscape:groupmode="layer"
