@@ -37,7 +37,7 @@ if (!v.contains("CitationX-RMUmem2.xml")) {
 		navMem6 : 0,navMem7 : 0,navMem8 : 0,navMem9 : 0,navMem10 : 0,
 		navMem11 : 0,navMem12 : 0
 	});		
-	io.write_properties(name,data);
+	io.write_properties(memPath,data);
 } 
 
 var memVec2 = std.Vector.new();
