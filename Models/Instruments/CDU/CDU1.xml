@@ -26,74 +26,61 @@
     </animation>
 
     <animation>
-        <type>pick</type>
-        <object-name>CDU-knob</object-name>
-        <action>
-            <button>1</button>
-            <repeatable>true</repeatable>
-            <interval-sec>0.1</interval-sec>
-            <binding>
-                <command>property-adjust</command>
-                <property>controls/lighting/cdu1</property>
-                <step>0.05</step>
-                <min>0</min>
-                <max>1.0</max>
-                <wrap>false</wrap>
-            </binding>
+      <type>pick</type>
+      <object-name>CDU-knob</object-name>
+      <action>
+        <button>0</button>
+        <button>3</button>
+          <repeatable>true</repeatable>
+          <interval-sec>0.1</interval-sec>
+          <binding>
+              <command>property-adjust</command>
+              <property>controls/lighting/cdu1</property>
+              <step>0.05</step>
+              <min>0</min>
+              <max>1.0</max>
+              <wrap>false</wrap>
+          </binding>
+					<binding>
+						<condition>
+							<greater-than>
+	              <property>controls/lighting/cdu1</property>
+								<value>0.05</value>
+							</greater-than>
+						</condition>
+						<command>property-assign</command>
+							<property>instrumentation/cdu/init</property>
+							<value>0</value>
+					</binding>				
         </action>
     </animation>
 
     <animation>
-        <type>pick</type>
-        <object-name>CDU-knob</object-name>
-        <action>
-            <button>2</button>
-            <repeatable>true</repeatable>
-            <interval-sec>0.1</interval-sec>
-            <binding>
-                <command>property-adjust</command>
-                <property>controls/lighting/cdu1</property>
-                <step>-0.05</step>
-                <min>0</min>
-                <max>1.0</max>
-                <wrap>false</wrap>
-            </binding>
-        </action>
-    </animation>
-
-    <animation>
-        <type>pick</type>
-        <object-name>CDU-knob</object-name>
-        <action>
-            <button>3</button>
-            <repeatable>true</repeatable>
-            <interval-sec>0.1</interval-sec>
-            <binding>
-                <command>property-adjust</command>
-                <property>controls/lighting/cdu1</property>
-                <step>0.05</step>
-                <min>0</min>
-                <max>1.0</max>
-                <wrap>false</wrap>
-            </binding>
-        </action>
-    </animation>
-
-    <animation>
-        <type>pick</type>
-        <object-name>CDU-knob</object-name>
-        <action>
-            <button>4</button>
-            <repeatable>true</repeatable>
-            <interval-sec>0.1</interval-sec>
-            <binding>
-                <command>property-adjust</command>
-                <property>controls/lighting/cdu1</property>
-                <step>-0.05</step>
-                <min>0</min>
-                <max>1.0</max>
-                <wrap>false</wrap>
-            </binding>
+      <type>pick</type>
+      <object-name>CDU-knob</object-name>
+      <action>
+          <button>4</button>
+          <repeatable>true</repeatable>
+          <interval-sec>0.1</interval-sec>
+          <binding>
+              <command>property-adjust</command>
+              <property>controls/lighting/cdu1</property>
+              <step>-0.05</step>
+              <min>0</min>
+              <max>1.0</max>
+              <wrap>false</wrap>
+          </binding>
+					<binding>
+						<condition>
+							<less-than>
+	              <property>controls/lighting/cdu1</property>
+								<value>0.05</value>
+							</less-than>
+						</condition>
+						<command>property-assign</command>
+							<property>instrumentation/cdu/init</property>
+							<value>1</value>
+					</binding>				
         </action>
     </animation>
 

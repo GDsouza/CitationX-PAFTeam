@@ -551,7 +551,7 @@ var speed_Control = func {
 					}	else {
 								### Cruise ###
 						if (cruise_kt != 0) {
-							if (curr_wp_spd >0) {
+							if (curr_wp_spd) {
 								setprop("autopilot/settings/cruise-speed-kt",curr_wp_spd);
 							}	
 							if (alt_ind <= 7800) {vmo = 270}
