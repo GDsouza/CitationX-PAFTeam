@@ -9,6 +9,14 @@ var g_speed = 300;
 var dist = 0;
 var flp_closed = 0;
 
+#### Initialization ####
+var setl = setlistener("/sim/signals/fdm-initialized", func {
+	init();
+	cdu();
+  print("CDU ...Ok");
+	removelistener(setl);
+});
+
 var init = func {
 	setprop("autopilot/route-manager/flight-plan","");
 	setprop("autopilot/route-manager/departure/airport",getprop("/sim/airport/closest-airport-id"));
@@ -16,7 +24,7 @@ var init = func {
 	setprop("autopilot/settings/cruise-speed-kt",330);
 	setprop("autopilot/settings/cruise-speed-mach",0.86);
 	setprop("autopilot/route-manager/cruise/altitude-ft",10000);
-	setprop("autopilot/route-manager/cruise/flight-level",0);
+	setprop("autopilot/route-manager/cruise/flight-level",100);
 	setprop("autopilot/settings/asel",getprop("autopilot/route-manager/cruise/flight-level"));
 	setprop("autopilot/settings/climb-speed-kt",250);
 	setprop("autopilot/settings/climb-speed-mach",0.78);
@@ -30,9 +38,25 @@ var init = func {
 	setprop("autopilot/settings/app5-speed-kt",180);
 	setprop("autopilot/settings/app15-speed-kt",160);
 	setprop("autopilot/settings/app35-speed-kt",140);
-	setprop("autopilot/route-manager/wp[]/altitude-ft",0);
+	setprop("autopilot/route-manager/wp/altitude-ft",0);
 }
 
+#### Reinit CDU ###
+setlistener("instrumentation/cdu/init",func {
+	if (getprop("instrumentation/cdu/init")) {
+		setprop("autopilot/route-manager/input","@CLEAR");
+		setprop("autopilot/route-manager/destination/airport","");
+		setprop("autopilot/route-manager/departure/airport","");
+		setprop("instrumentation/cdu/display","NAVIDENT[0]");
+		setprop("instrumentation/cdu/pos-init",0);
+		setprop("instrumentation/cdu/input","");
+		setprop("autopilot/locks/TOD",0);
+		setprop("autopilot/settings/nav-source", "FMS1");
+		init();		
+	}	
+});
+
+#### Main ####
 var input = func (v) {
 	var n = size(getprop("/instrumentation/cdu/input"));
 		if (left(getprop("/instrumentation/cdu/input"),1) == "*") {
@@ -169,13 +193,15 @@ var key = func(v) {
 					var SidName = getprop("instrumentation/cdu/"~ligne);
 					if (getprop("instrumentation/cdu/"~ligne)=="DEFAULT") {
 						setprop("/autopilot/route-manager/departure/sid","DEFAULT");
-					}
-					else {
+						setprop("/autopilot/route-manager/departure/sid-name","DEFAULT");
+					}	else {
 						flightplan().sid = SidName;
 						setprop("/autopilot/route-manager/departure/sid",SidName);
+						setprop("/autopilot/route-manager/departure/sid-name",SidName);
 					}
 				}
-				cduInput = getprop("autopilot/route-manager/departure/sid") ~ " Loaded";
+				cduInput = getprop("/autopilot/route-manager/departure/sid-name") ~ " Loaded";
+				setprop("instrumentation/cdu/input",cduInput);
 			}
 		}
 
@@ -248,7 +274,8 @@ var key = func(v) {
 					var StarName = getprop("instrumentation/cdu/"~ligne);
 					flightplan().star = StarName;
 					setprop("/autopilot/route-manager/destination/star",StarName);
-					cduInput = getprop("autopilot/route-manager/destination/star") ~ " Loaded";
+					setprop("/autopilot/route-manager/destination/star-name",StarName);
+					cduInput = getprop("autopilot/route-manager/destination/star-name") ~ " Loaded";
 				}			
 			}
 		}
@@ -277,13 +304,15 @@ var key = func(v) {
 					var ApprName = getprop("instrumentation/cdu/"~ligne);
 					if (getprop("instrumentation/cdu/"~ligne)=="DEFAULT") {
 						setprop("autopilot/route-manager/destination/approach","DEFAULT");
+						setprop("autopilot/route-manager/destination/appr-name","DEFAULT");
 					}
 					else {
 						flightplan().approach = ApprName;
 						setprop("autopilot/route-managerdestination/approach",ApprName);
+						setprop("autopilot/route-managerdestination/appr-name",ApprName);
 					}
 				}
-				cduInput = getprop("autopilot/route-manager/destination/approach") ~ " Loaded";
+				cduInput = getprop("autopilot/route-manager/destination/appr-name") ~ " Loaded";
 			}
 		}
 
@@ -366,7 +395,7 @@ var key = func(v) {
 					}
 					else {
 						if (getprop("autopilot/route-manager/route/num") != 16) {
-							setprop("autopilot/route-manager/input", "@INSERT" ~j~ ":" ~cduInput);
+							setprop("autopilot/route-manager/input","@INSERT"~j~":"~cduInput);
 							setprop("autopilot/route-manager/route/wp["~j~"]/speed",0);
 							cduInput = "";						
 						}
@@ -407,7 +436,8 @@ var key = func(v) {
 					if (cduDisplay == "FLT-PLAN[5]") {var ind = 13}
 					insertWayp(ind,cduInput);
 					cduInput = "";
-				}			}
+				}
+			}
 
 			if (v == "B3R") {
 				if (cduDisplay == "FLT-PLAN[0]") {
@@ -809,9 +839,9 @@ var insertWayp = func(ind,cduInput) {
 		if(right(cduInput,1) == "/") {
 			setprop("autopilot/route-manager/route/wp["~ind~"]/speed", left(cduInput,(size(cduInput)-1)));
 		} else {
-#			setprop("autopilot/route-manager/input","@INSERT" ~ind~ ":" ~wpt~ "@" ~cduInput);
-#			setprop("autopilot/route-manager/input","@DELETE"~(ind+1));
-			setprop("autopilot/route-manager/route/wp["~ind~"]/altitude-ft",cduInput);
+			setprop("autopilot/route-manager/input","@INSERT" ~ind~ ":" ~wpt~ "@" ~cduInput);
+			setprop("autopilot/route-manager/input","@DELETE"~(ind+1));
+#			setprop("autopilot/route-manager/route/wp["~ind~"]/altitude-ft",cduInput);
 		}
 		cduInput = "";
 }
@@ -880,9 +910,9 @@ var correctFlp = func(fltPath) {
 var calc_dist = func(navWp,dist) {
 	var apt_dep = airportinfo(left(navWp.vector[0],4));
 	var apt_dest = airportinfo(left(navWp.vector[size(navWp.vector)-1],4));
-	foreach(var item;navWp.vector) {
-		print(item);
-	}
+#	foreach(var item;navWp.vector) {
+#		print(item);
+#	}
 	if (size(navWp.vector) == 2) {
 		var (course,dist) = courseAndDistance(apt_dep,apt_dest);	
 	}else if (size(navWp.vector) == 3){
@@ -1041,18 +1071,7 @@ var cdu = func{
 	### Display ###
 	var display = getprop("/instrumentation/cdu/display");
 
-	### Réinitialisation si extinction CDU ###
-	if (getprop("systems/electrical/outputs/efis") < 15 or getprop("controls/lighting/cdu") <= 0.02) {
-		setprop("autopilot/route-manager/input","@CLEAR");
-		setprop("autopilot/route-manager/destination/airport","");
-		setprop("autopilot/route-manager/departure/airport","");
-		setprop("instrumentation/cdu/display","NAVIDENT[0]");
-		setprop("instrumentation/cdu/pos-init",0);
-		setprop("instrumentation/cdu/input","");
-		init();		
-	}	
 			###
-	else {	
 		if (left(display,8) == "NAVIDENT") {
 			displaypages.navIdent();
 		}
@@ -1127,12 +1146,7 @@ var cdu = func{
 		if (display == "PRG-PAGE[0]") {displaypages.progPage_0(dest_airport,marker)}
 
 		if (display == "CHK-LIST[0]") {displaypages.checkList_0()}
-	}							
+						
 	settimer(cdu,0.2);
 }
 
-setlistener("/sim/signals/fdm-initialized", func {
-	init();
-	cdu();
-  print("CDU ...Ok");
-});

@@ -100,6 +100,15 @@
     </model>
 
     <model>
+        <name>Vsd_L</name>
+        <path>Models/Instruments/MFD/Vsd.xml</path>
+        <offsets>
+            <x-m>0.0010</x-m>
+            <y-m>-0.1890</y-m>
+            <z-m>0.155</z-m>
+        </offsets>
+    </model>
+    <model>
         <name>ND_R</name>
         <path>Models/Instruments/MFD/ND_F.xml</path>
         <offsets>

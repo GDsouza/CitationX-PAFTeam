@@ -1,0 +1,20 @@
+<!--
+Citation X - Vertical Situation Display
+-->
+
+<PropertyList>
+
+<path>Vsd.ac</path>
+
+    <animation>
+        <type>select</type>
+        <object-name>Vsd.screen</object-name>
+        <condition>
+					<and>
+	          <property>controls/electric/avionics-power</property>
+						<property>instrumentation/efis/vsd</property>
+					</and>
+				</condition>
+    </animation>
+
+</PropertyList>

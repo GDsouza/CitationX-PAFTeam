@@ -1,54 +1,21 @@
-# [Airbus] Vertical Situation Display
-# Narendran M (c) 2014
+#### Citation X - Vertical Situation Display ####
+#### Narendran M (c) 2014 - Adapted by C. Le Moigne (clm76) - 2017 ####
 
-# Scroll to the end of the file for object instantiations
+var objName_capt = 'Vsd.screen';
+#var objName_fo = 'vsd.r';
+var svg_path = '/Aircraft/CitationX/Models/Instruments/MFD/canvas/Images/vsd.svg'; 
 
-# If you just want a quick and dirty edit/port to your aircraft, just edit the model object names, svg path, switches and props
-var objName_capt = 'vsd.l';		# Model object name for captain's side VSD
-var objName_fo = 'vsd.r';		# Model object name for first officer's side VSD
-var svg_path = '/Aircraft/A380/Models/Instruments/ND/vsd.svg'; # VSG File Path
-
-# It is very important to note that the below switches and props defines will ONLY work on the A380 by theOmegaHangar (http://theomegahangar.flymerlion.org) and other derived aircraft. If you would like to add this to your aircraft, please change the switches and interface properties to connect it to your aircraft!
-
-# Define custom aircraft cockpit switches to be interfaced
+		# Properties are in "/instrumentation/efis"
 var mySwitches = {
 	'set_range': 			{	path: '/inputs/range-nm'	, value: 10	},
-	'toggle_waypoints':		{	path: '/inputs/wpt'			, value: 0	},
+	'toggle_vsd':		{	path: '/inputs/vsd'			, value: 0	},
 	'toggle_constraints':	{	path: '/inputs/cstr'		, value: 0	}
 };
 
-# Define interface props and functions to use the flightplan management system and aircraft instrumentation
-
-# A380 Flightplan management system properties
-var myProps_A380 = {
-	curWptId:	'/flight-management/flightplan/currentWpt',
-	wpt_data: 	{
-		# Change the return properties to suit your custom route manager system
-		ident: func(n) {
-			return '/flight-management/flightplan/wpt['~n~']/ident';
-		},
-		latitude: func(n) {
-			return '/flight-management/flightplan/wpt['~n~']/latitude';
-		},
-		longitude: func(n) {
-			return '/flight-management/flightplan/wpt['~n~']/longitude';
-		},
-		alt_cstr: func(n) {
-			return '/flight-management/flightplan/wpt['~n~']/altitude';
-		}
-	},
-	num_wpts:			'/flight-management/flightplan/num-wpts',
-	altitude_ind:		'/instrumentation/altimeter/indicated-altitude-ft',
-	heading_ind:		'/instrumentation/heading-indicator/indicated-heading-deg',
-	ap_altitude_set:	'/flight-management/fcu-values/alt',
-	vertSpd_ind:		'/instrumentation/vertical-speed-indicator/indicated-speed-kts'
-};
-
-# FGRouteManager and generic autopilot system properties
+		# FGRouteManager and generic autopilot system properties
 var myProps = {
 	curWptId:	'/autopilot/route-manager/current-wp',
 	wpt_data: 	{
-		# Change the return properties to suit your custom route manager system
 		ident: func(n) {
 			return '/autopilot/route-manager/route/wp['~n~']/id';
 		},
@@ -69,7 +36,7 @@ var myProps = {
 	vertSpd_ind:		'/velocities/vertical-speed-fps'
 };
 
-############################## GET ELEVATION DATA ##############################
+		#### GET ELEVATION DATA ####
 
 var get_elevation = func (lat, lon) {
 	var info = geodinfo(lat, lon);
@@ -78,7 +45,7 @@ var get_elevation = func (lat, lon) {
 	return elevation;
 };
 
-################################### VSD CLASS ##################################
+		#### VSD CLASS ###
 
 var vsd = {
 	terrain_color: 	[0.44, 0.19, 0.09, 0.5], 	# A brownish color
@@ -93,94 +60,115 @@ var vsd = {
 	alt_ceil: 10000,
 	altitude: 0,
 	peak: 0,
-	# Contants dependent on SVG file
-	alt_ceil_px: 181,							# Pixel length of vertical axis
-	max_range_px: 710,							# Pixel length of horizontal axis
-	terr_offset: 22,							# Offset between start of terrain polygon y and bottom_left corner
-	bottom_left: {x:233, y:294},				# {x:x,y:y_max - y} of bottom-left corner of plot area - looks like canvas starts it's y axis from the top going down
-	# sym_names: ["aircraft_marker", "speed_arrow", "text_range1", "text_range2", "text_range3", "text_range4", "text_alt1", "text_alt2", "altitude_set"],
+	# Constants dependent on SVG file
+	alt_ceil_px: 181,		# Pixel length of vertical axis - old 181
+	max_range_px: 810,	# Pixel length of horizontal axis - old 710
+	terr_offset: 22,		# Offset between start of terrain polygon y and bottom_left corner - old 22
+	bottom_left: {x:190, y:294},	# {x:x,y:y_max - y} of bottom-left corner of plot area - looks like canvas starts it's y axis from the top going down - old 233,294
+
 	new: func(efis_id, obj_name, switches, interface_props, svg_path) {
-		var t = {parents:[vsd]};
-		
-		# Initialize VSD Display
-		t.display = canvas.new({
+		var m = {parents:[vsd]};
+		m.display = canvas.new({
 			"name": "vsdScreen",
 			"size": [1024, 320],
 			"view": [1024, 320],
 			"mipmapping": 1
 		});
 		
-		t.efis_id = efis_id;
-		t.switches = switches;
-		t.interface_props = interface_props;
+		m.efis_id = efis_id;
+		m.switches = switches;
+		m.interface_props = interface_props;
 		
 		# Add placement onto 3D model
-		t.display.addPlacement({"node": obj_name});
+		m.display.addPlacement({"node": obj_name});
 		
 		# Create canvas group
-		t.group = t.display.createGroup();			# Group for canvas elements and paths
-		t.text = t.display.createGroup();			# Group for waypoints text
-		t.terrain = t.group.createChild("path");	# Terrain Polygon
-		t.path = t.group.createChild("path");		# Flightplan Path
-		t.cstr = t.group.createChild("path");		# Altitude constraints (?)
+		m.group = m.display.createGroup();			# Group for canvas elements and paths
+		m.text = m.display.createGroup();			# Group for waypoints text
+		m.terrain = m.group.createChild("path");	# Terrain Polygon
+		m.path = m.group.createChild("path");		# Flightplan Path
+		m.cstr = m.group.createChild("path");		# Altitude constraints (?)
 		
 		# Load Vertical Situation Display
-		canvas.parsesvg(t.group, svg_path);
-		
-		setsize(t.elev_profile,t.elev_pts);
-		
-		# Set cockpit switch listeners
-		# Range Numbers
-		setlistener("/instrumentation/efis["~t.efis_id~"]"~t.switches['set_range'].path, func(n) {
+		canvas.parsesvg(m.group, svg_path);	
+		setsize(m.elev_profile,m.elev_pts);
+
+		# Create 2 empty geo.Coord object for waypoint calculations
+		m.wpt_this = geo.Coord.new();
+		m.wpt_next = geo.Coord.new();
+
+		return m;
+	},# end of new
+
+	listen : func{		
+		setlistener("/instrumentation/efis["~me.efis_id~"]"~me.switches['set_range'].path, func(n) {
 			var range = n.getValue();
 			if(range > 10) {
-				t.group.getElementById("text_range1").setText(sprintf("%3.0f",range*0.25));
-				t.group.getElementById("text_range2").setText(sprintf("%3.0f",range*0.5));
-				t.group.getElementById("text_range3").setText(sprintf("%3.0f",range*0.75));
-				t.group.getElementById("text_range4").setText(sprintf("%3.0f",range));
+				me.group.getElementById("text_range1").setText(sprintf("%3.0f",range*0.25));
+				me.group.getElementById("text_range2").setText(sprintf("%3.0f",range*0.5));
+				me.group.getElementById("text_range3").setText(sprintf("%3.0f",range*0.75));
+				me.group.getElementById("text_range4").setText(sprintf("%3.0f",range));
 			} else {
-				t.group.getElementById("text_range1").setText(sprintf("%1.1f",range*0.25));
-				t.group.getElementById("text_range2").setText(sprintf("%1.0f",range*0.5));
-				t.group.getElementById("text_range3").setText(sprintf("%1.1f",range*0.75));
-				t.group.getElementById("text_range4").setText(sprintf("%1.0f",range));
+				me.group.getElementById("text_range1").setText(sprintf("%1.1f",range*0.25));
+				me.group.getElementById("text_range2").setText(sprintf("%1.0f",range*0.5));
+				me.group.getElementById("text_range3").setText(sprintf("%1.1f",range*0.75));
+				me.group.getElementById("text_range4").setText(sprintf("%1.0f",range));
 			}
-			t.range = range;
+			me.range = range;
 		});
-		
+
 		# Autopilot Altitude Setting
-		setlistener(t.interface_props.ap_altitude_set, func(n) {
-			t.alt_set = n.getValue();
-			if((t.alt_set == nil) or (t.alt_set > 2.5*t.alt_ceil)) {
-				t.group.getElementById("altitude_set").hide();
+		setlistener(me.interface_props.ap_altitude_set, func(n) {
+			me.alt_set = n.getValue();
+			if((me.alt_set == nil) or (me.alt_set > 2.5*me.alt_ceil)) {
+				me.group.getElementById("altitude_set").hide();
 			} else {
-				t.group.getElementById("altitude_set").show();
+				me.group.getElementById("altitude_set").show();
 			}
 			# Move Altitude Setting Line
-			t.newSetPos = -t.alt_ceil_px*(t.alt_set/t.alt_ceil);
-			t.group.getElementById("altitude_set").setTranslation(0,t.newSetPos-t.lastaltset);
-			t.lastaltset = t.newSetPos;
-			t.group.getElementById("tgt_altitude").setText(sprintf("%5.0f",t.alt_set));
+			me.newSetPos = -me.alt_ceil_px*(me.alt_set/me.alt_ceil);
+			me.group.getElementById("altitude_set").setTranslation(0,me.newSetPos-me.lastaltset);
+			me.lastaltset = me.newSetPos;
+			me.group.getElementById("tgt_altitude").setText(sprintf("%5.0f",me.alt_set));
 		});
-		
-		# Create 2 empty geo.Coord object for waypoint calculations
-		t.wpt_this = geo.Coord.new();
-		t.wpt_next = geo.Coord.new();
 
-		return t;
-	},
+		var stl = setlistener("autopilot/route-manager/active", func {
+			if (getprop("autopilot/route-manager/active")) {
+				var numWpts = getprop("/autopilot/route-manager/route/num");
+				if (numWpts > 0) {
+					var wptAlt = 0;
+					for (var i=0;i<numWpts;i+=1) {
+						wptAlt = getprop("/autopilot/route-manager/route/wp["~i~"]/altitude-ft");
+						if (i==0) {
+							wptAlt=getprop("/autopilot/route-manager/departure/field-elevation-ft");
+						} else if (i==numWpts-1) {
+							wptAlt=getprop("/autopilot/route-manager/destination/field-elevation-ft");
+						} else if (wptAlt <=0) {
+							wptAlt = getprop("/autopilot/settings/target-altitude-ft");
+						}
+						wptVec.append(wptAlt);
+					}
+				}
+				removelistener(stl);
+			}
+		});
+	
+
+	}, # end of listen
+		
 	init: func {
 		me.UPDATE_INTERVAL = 1;
 		me.loopid = 0;
 		me.reset();
-	},
+	},# end of init
+
 	update: func {
-		# Generate elevation profile
-		
+		# Generate elevation profile		
 		me.altitude = getprop(me.interface_props.altitude_ind);
 		if(me.altitude == nil) {
 			me.altitude = 0;
 		}
-		foreach(var alt; [5000, 10000, 20000, 30000, 40000]) {
+		foreach(var alt; [5000, 10000, 20000, 30000, 40000, 50000]) {
 			if((me.altitude <= alt) and (me.peak <= alt)) {
 				me.alt_ceil = alt;
 				break;
@@ -188,12 +176,11 @@ var vsd = {
 		}
 		
 		me.new_markerPos = -me.alt_ceil_px*(me.altitude/me.alt_ceil);
-		
 		var rangeHdg = [];		# To change the scan course to get vertical profile along the flight path
 		var cstrAlts = [];		# Get Constraint altitudes for plotting
 		
 		# Vertical Flight Path
-		if(getprop("/instrumentation/efis["~me.efis_id~"]"~me.switches.toggle_waypoints.path) == 1) {
+		if(getprop("/instrumentation/efis["~me.efis_id~"]"~me.switches.toggle_vsd.path) == 1) {
 			var numWpts = getprop(me.interface_props.num_wpts);
 			var currWpt = getprop(me.interface_props.curWptId);
 			if((numWpts > 1) and (currWpt >= 0)) {
@@ -207,16 +194,20 @@ var vsd = {
 				me.wpt_this.set_latlon(getprop(me.interface_props.wpt_data.latitude(currWpt)), getprop(me.interface_props.wpt_data.longitude(currWpt)));
 				var rteLen = geo.aircraft_position().distance_to(me.wpt_this)*M2NM;
 				var brk_next = 0;
-				# Calculate distance between waypoints
+
 				for(var id=currWpt; id<numWpts; id=id+1) {
 					var alt = getprop(me.interface_props.wpt_data.alt_cstr(id));
 					if(alt != nil) {
 						if(rteLen > me.range) {
 							brk_next = 1;
 						}
+						if (alt <= 0 and (currWpt > 0 or currWpt == numWpts-1)) {
+							alt=getprop(me.interface_props.ap_altitude_set);
+						}
 						if(alt > 0) {
 							# Plot it if it's in range!
 							me.path.lineTo(me.bottom_left.x + me.max_range_px*(rteLen/me.range), me.bottom_left.y -me.alt_ceil_px*(alt/me.alt_ceil));
+
 							if(getprop("/instrumentation/efis["~me.efis_id~"]"~me.switches.toggle_constraints.path) == 1) {
 								append(cstrAlts, {range: me.bottom_left.x + me.max_range_px*(rteLen/me.range),	cstr: me.bottom_left.y -me.alt_ceil_px*(alt/me.alt_ceil)});
 							}
@@ -228,6 +219,7 @@ var vsd = {
 								   .setFontSize(28,1.2)
 								   .setTranslation(me.bottom_left.x + 12 + me.max_range_px*(rteLen/me.range), me.bottom_left.y - 12 - me.alt_ceil_px*(alt/me.alt_ceil))
 								   .setText(getprop(me.interface_props.wpt_data.ident(id)));
+
 							if(id<(numWpts-1)) {
 								me.wpt_this.set_latlon(getprop(me.interface_props.wpt_data.latitude(id)), getprop(me.interface_props.wpt_data.longitude(id)));
 								me.wpt_next.set_latlon(getprop(me.interface_props.wpt_data.latitude(id+1)), getprop(me.interface_props.wpt_data.longitude(id+1)));
@@ -244,7 +236,8 @@ var vsd = {
 					if(brk_next == 1) {
 						break;
 					}
-				}
+				} # end of for loop
+
 			} else {
 				me.path.hide();
 			}
@@ -324,33 +317,37 @@ var vsd = {
 			me.group.getElementById("speed_arrow").hide();
 		}
 		
-		me.lastalt = me.new_markerPos;
-		
-	},
+		me.lastalt = me.new_markerPos;		
+	},# end of update
+
 	reset: func {
 		me.loopid += 1;
 		me._loop_(me.loopid);
-	},
+	},# end of reset
+
 	_loop_: func(id) {
 		id = me.loopid or return;
 		me.update();
 		settimer(func {me._loop_(id); }, me.UPDATE_INTERVAL);
-	},
+	},# end of _loop_
+
 	showDlg: func {
 		if(getprop("sim/instrument-options/canvas-popup-enable")) {
 		    var dlg = canvas.Window.new([400, 128], "dialog");
 		    dlg.setCanvas(me.display);
 		}
-	}
-};
+	} # end of showDlg
 
-############################### INSTANTIATE VSDs ###############################
+}; # end of VSD
+
+### START ###
 
 var capt_vsd = vsd.new(0, objName_capt, mySwitches, myProps, svg_path);
-var fo_vsd = vsd.new(1, objName_fo, mySwitches, myProps, svg_path);
+#var fo_vsd = vsd.new(1, objName_fo, mySwitches, myProps, svg_path);
 
 setlistener("sim/signals/fdm-initialized", func {
 	capt_vsd.init();
-	fo_vsd.init();
-	print("Vertical Situation Displays Initialized");
+	capt_vsd.listen();
+#	fo_vsd.init();
+	print("VSD Initialized");
 });

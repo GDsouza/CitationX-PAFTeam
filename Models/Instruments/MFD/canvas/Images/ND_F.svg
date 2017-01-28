@@ -14,7 +14,7 @@
    viewBox="0 0 900.00001 1024"
    id="svg4136"
    version="1.1"
-   inkscape:version="0.91 r"
+   inkscape:version="0.91 r13725"
    sodipodi:docname="ND_F.svg">
   <defs
      id="defs4138">
@@ -154,14 +154,14 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.75260994"
-     inkscape:cx="451.36731"
-     inkscape:cy="512.08499"
+     inkscape:cx="476.52397"
+     inkscape:cy="501.45531"
      inkscape:document-units="px"
      inkscape:current-layer="layer7"
      showgrid="false"
      units="px"
      inkscape:window-width="1680"
-     inkscape:window-height="998"
+     inkscape:window-height="999"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
@@ -451,7 +451,7 @@
          y="845.79547">999</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:40px;line-height:125%;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono, Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;opacity:0.98000004;fill:#e600e6;fill-opacity:1;stroke:#e600e6;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:32.5px;line-height:125%;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono, Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;opacity:0.98000004;fill:#e600e6;fill-opacity:1;stroke:#e600e6;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
        x="884.23138"
        y="566.52429"
        id="navDist"
@@ -463,17 +463,17 @@
          y="566.52429">X</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:45px;line-height:125%;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono, Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;opacity:0.98000004;fill:#e600e6;fill-opacity:1;stroke:#e600e6;stroke-width:1.1629039px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:32.5px;line-height:125%;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono, Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;opacity:0.98000004;fill:#e600e6;fill-opacity:1;stroke:#e600e6;stroke-width:1.1629039px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="823.97614"
-       y="649.21368"
+       y="645.42853"
        id="navId"
        sodipodi:linespacing="125%"
        transform="scale(0.94627854,1.0567713)"><tspan
          sodipodi:role="line"
          id="tspan4291"
          x="823.97614"
-         y="649.21368"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:45px;line-height:125%;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono, Bold';text-align:center;writing-mode:lr-tb;text-anchor:middle;stroke-width:1.1629039px">X</tspan></text>
+         y="645.42853"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:32.5px;line-height:125%;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono, Bold';text-align:center;writing-mode:lr-tb;text-anchor:middle;stroke-width:1.1629039px">X</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:32.5px;line-height:125%;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono, Bold';text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;opacity:0.91000001;fill:#e600e6;fill-opacity:1;stroke:#e600e6;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"

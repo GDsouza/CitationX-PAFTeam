@@ -1,7 +1,8 @@
-#############################################################################
+##########################################
 # Flight Director/Autopilot controller.
 # Syd Adams
-# C. Le Moigne (2015)
+# C. Le Moigne - 2015 - rev 2017
+
 ###  Initialization #######
 
 var Lateral = "autopilot/locks/heading";
@@ -23,6 +24,8 @@ var tg_spd_mc = "autopilot/settings/target-speed-mach";
 var ind_mc = "instrumentation/airspeed-indicator/indicated-mach";
 var tg_spd_kt = "autopilot/settings/target-speed-kt";
 var ind_kt = "instrumentation/airspeed-indicator/indicated-speed-kt";
+var target_alt = "autopilot/settings/target-altitude-ft";
+var app_wp = "autopilot/route-manager/route/wp[";
 
 ####################################
 
@@ -30,6 +33,7 @@ setlistener("/sim/signals/fdm-initialized", func {
     print("Flight Director ...Checked");
     settimer(update_fd, 30);
 });
+
 
 ### AP /FD BUTTONS ####
 
@@ -247,8 +251,6 @@ var set_apr = func{
 			if(getprop("instrumentation/nav[1]/nav-loc") and getprop("instrumentation/nav[1]/has-gs")){
 				setprop(Lateral_arm,"LOC");
 				setprop(Vertical_arm,"GS");
-				setprop(Lateral,"");
-				setprop(Vertical,"");
 				setprop(Lateral,"HDG");
 				setprop(Vertical,"GS");
       }
@@ -437,8 +439,6 @@ var speed_Control = func {
 	var alt_ind = getprop(alt);
 	var alt_mc = getprop("autopilot/locks/alt-mach");
 	var cruise_alt = getprop("autopilot/route-manager/cruise/altitude-ft");
-	var tg_spd_kt = "autopilot/settings/target-speed-kt";
-	var tg_spd_mc = "autopilot/settings/target-speed-mach";
 	var dep_spd = getprop("autopilot/settings/dep-speed-kt");
 	var dep_agl = getprop("autopilot/settings/dep-agl-limit-ft");
 	var dep_lim = getprop("autopilot/settings/dep-limit-nm");
@@ -453,7 +453,6 @@ var speed_Control = func {
 	var app5_spd = getprop("autopilot/settings/app5-speed-kt");
 	var app15_spd = getprop("autopilot/settings/app15-speed-kt");
 	var app35_spd = getprop("autopilot/settings/app35-speed-kt");
-	var target_alt = "autopilot/settings/target-altitude-ft";
 	var tg_alt = getprop(target_alt);
 	var dest_alt = getprop("autopilot/route-manager/destination/field-elevation-ft");
 	var n_wp = getprop("autopilot/route-manager/current-wp");
@@ -464,21 +463,19 @@ var speed_Control = func {
 	var curr_wp_gen = getprop("autopilot/route-manager/route/wp["~n_wp~"]/generated");
 	var curr_wp_dist = getprop("autopilot/route-manager/route/wp["~n_wp~"]/distance-nm");
 	var next_wp_gen = getprop("autopilot/route-manager/route/wp["~(n_wp+1)~"]/generated");
-	var app_wp = "autopilot/route-manager/route/wp[";
 	var num = getprop("autopilot/route-manager/route/num");
 	var asel = getprop("autopilot/settings/asel");
 	var fms = getprop("instrumentation/primus2000/sc840/nav1ptr");
-	var fms_st = "autopilot/locks/fms-status";
 	var vmo = 0;
 	var mmo = 0;
 	var alt_tod = alt_ind/100;
-	setprop("autopilot/locks/TOD",TOD);
+	TOD = getprop("autopilot/locks/TOD");
 	setprop(target_alt,asel*100);
 	
 		### Takeoff ###
 	if (left(NAVSRC,3) == "FMS" and lock_alt == "VALT") {
 		if (dist_dep < dep_lim and alt_ind < dep_agl) {setprop(tg_spd_kt,dep_spd)}
-		if (curr_wp_alt > 0) {
+		if (curr_wp_alt != nil and curr_wp_alt > 0) {
 			setprop(target_alt, curr_wp_alt);
 		} 
 	}
@@ -494,7 +491,7 @@ var speed_Control = func {
 					TOD = 1;
 					setprop("autopilot/locks/TOD",TOD);
 				}
-				if (curr_wp_alt > 0) {
+				if (curr_wp_alt != nil and curr_wp_alt > 0) {
 					if (!curr_wp_gen and next_wp_gen) { # maintien alt si next Wp = App #
 						setprop("autopilot/settings/asel",tg_alt/100);
 					} else if (curr_wp_gen and next_wp_gen and curr_wp_alt < last_wp_alt) {
@@ -504,7 +501,7 @@ var speed_Control = func {
 							
 				### After TOD ###
 			} else {				
-				if (curr_wp_alt > 0){
+				if (curr_wp_alt != nil and curr_wp_alt > 0){
 				setprop(target_alt,curr_wp_alt);
 				} else {
 					for (var i=n_wp;i<(num-1);i+=1) {
@@ -516,8 +513,14 @@ var speed_Control = func {
 				}
 			}
 			if (dist_rem <= 7) {
-				if (NAVSRC == "FMS1") {var ind = 1;setprop(fms_st,1);setprop(NAVprop,"NAV2")}
-				if (NAVSRC == "FMS2") {var ind = 0;setprop(fms_st,1);setprop(NAVprop,"NAV1")}
+				if (NAVSRC == "FMS1") {
+					var ind = 1;
+					setprop(NAVprop,"NAV2");
+				}
+				if (NAVSRC == "FMS2") {
+					var ind = 0;
+					setprop(NAVprop,"NAV1");
+				}
 				setprop("instrumentation/nav["~ind~"]/radials/selected-deg",int(getprop("autopilot/route-manager/route/wp["~(num-1)~"]/leg-bearing-true-deg")));
 				set_apr();
 			}
@@ -548,7 +551,7 @@ var speed_Control = func {
 					}	else {
 								### Cruise ###
 						if (cruise_kt != 0) {
-							if (curr_wp_spd) {
+							if (curr_wp_spd >0) {
 								setprop("autopilot/settings/cruise-speed-kt",curr_wp_spd);
 							}	
 							if (alt_ind <= 7800) {vmo = 270}
@@ -583,14 +586,10 @@ var speed_round = func {
 var alt_mach = func {
 	if (getprop(alt) >= 30650) {
 		setprop("autopilot/locks/alt-mach",1);
-#		if (left(NAVSRC,3) != "FMS") {
 			setprop(tg_spd_kt,getprop(ind_kt));
-#		}
 	}	else {
 		setprop("autopilot/locks/alt-mach",0);
-#		if (left(NAVSRC,3) != "FMS") {
 			setprop(tg_spd_mc,getprop(ind_mc));
-#		}
 	}
 }
 

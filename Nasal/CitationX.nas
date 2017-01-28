@@ -207,6 +207,7 @@ props.globals.initNode("instrumentation/primus2000/mfd/cdr-tot",0,"INT");
 props.globals.initNode("instrumentation/clock/chrono-hour",0,"INT");
 props.globals.initNode("instrumentation/clock/chrono-min",0,"INT");
 props.globals.initNode("instrumentation/clock/chrono-sec",0,"INT");
+props.globals.initNode("instrumentation/cdu/init",0,"BOOL");
 
 for (var i=0;i<5;i+=1) {
 	props.globals.initNode("instrumentation/primus2000/mfd/cdr"~i,0,"INT");

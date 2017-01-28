@@ -222,12 +222,13 @@ var NDStyles = {
 					init: func(nd,symbol),
 					predicate: func(nd) nd.in_mode('toggle_display_mode', ['MAP']),
 					is_true: func(nd) {
-						nd.symbols.hdgBug.setCenter(450,516);
-						if(getprop("autopilot/internal/heading-bug-error-deg")!=nil) {
-							var hdg_Bug = int(getprop("autopilot/internal/heading-bug-error-deg"));
-							nd.symbols.hdgBug.setRotation(hdg_Bug*D2R);
+#						if(getprop("autopilot/internal/heading-bug-error-deg")!=nil) {
+						var hdg_bug = getprop("autopilot/internal/heading-bug-error-deg") or 0;
+#							var hdg_Bug = int(getprop("autopilot/internal/heading-bug-error-deg"));
+							nd.symbols.hdgBug.setCenter(450,516);
+							nd.symbols.hdgBug.setRotation(hdg_bug*D2R);
 							nd.symbols.hdgBug.show();
-						}
+#						}
 					},
 					is_false: func(nd) nd.symbols.hdgBug.hide(),
 				},

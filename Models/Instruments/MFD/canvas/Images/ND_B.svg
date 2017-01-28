@@ -14,7 +14,7 @@
    viewBox="0 0 900.00001 1024"
    id="svg4136"
    version="1.1"
-   inkscape:version="0.91 r"
+   inkscape:version="0.91 r13725"
    sodipodi:docname="ND_B.svg">
   <defs
      id="defs4138">
@@ -154,14 +154,14 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.76389145"
-     inkscape:cx="391.34018"
-     inkscape:cy="554.39812"
+     inkscape:cx="106.61386"
+     inkscape:cy="549.16177"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="svg4136"
      showgrid="false"
      units="px"
      inkscape:window-width="1680"
-     inkscape:window-height="998"
+     inkscape:window-height="999"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
@@ -538,7 +538,7 @@
      x="2.8483355"
      y="298.67685" />
   <path
-     style="display:inline;fill:none;fill-rule:evenodd;stroke:#00ffe6;stroke-width:4.10004091;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:32.8003273, 16.40016364999999965;stroke-dashoffset:0;stroke-opacity:1"
+     style="display:inline;fill:none;fill-rule:evenodd;stroke:#00ffe6;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:24,12;stroke-dashoffset:0;stroke-opacity:1"
      d="m 450.60514,98.137523 0,387.531577"
      id="hdgLine"
      inkscape:connector-curvature="0" />

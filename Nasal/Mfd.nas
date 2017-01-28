@@ -149,6 +149,7 @@ var menu = func {
 				}				
 			}
 			if (btn_5){
+				setprop("instrumentation/efis/inputs/vsd",1);
 			}
 		}
 
