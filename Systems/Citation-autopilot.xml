@@ -585,8 +585,6 @@
                     <value>FMS2</value>
                 </equals>
                 <property>autopilot/locks/fms-status</property>
-							</or>
-							<or>
 								<equals>
 										<property>/autopilot/locks/altitude</property>
 											<value>VALT</value>
@@ -600,7 +598,7 @@
 								<property>/autopilot/locks/AP-status</property>
 									<value>AP</value>
 							</equals>
-						<not>
+							<not>
 								<property>autopilot/locks/alt-mach</property>
 							</not>
 						</and>

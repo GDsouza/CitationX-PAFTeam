@@ -242,7 +242,7 @@ setlistener("/sim/signals/fdm-initialized", func {
 #		setprop("sim/sound/startup",int(10*rand()));
 		FH_load();
 		var v_speed = func() {		
-			v_speed_init();
+		v_speed_init();
 		}
 		var timer = maketimer(10,v_speed);
 		timer.singleShot = 1;
@@ -596,21 +596,21 @@ var Shutdown = func{
 }
 
 var v_speed_init = func {
-		var Wtot = getprop("yasim/gross-weight-lbs");
-		var Flaps = getprop("controls/flight/flaps");
-		var v1=0;
-		var vr=0;
-		var v2=0;
-		var vref=0;
+	var Wtot = getprop("yasim/gross-weight-lbs");
+	var Flaps = getprop("controls/flight/flaps");
+	var v1=0;
+	var vr=0;
+	var v2=0;
+	var vref=0;
 
-		if (Wtot <27000) {v1=122;vr=126;v2=139}
-		if (Wtot >=27000 and Wtot <29000) {v1=123;vr=126;v2=139}
-		if (Wtot >=29000 and Wtot <31000) {v1=125;vr=126;v2=138}
-		if (Wtot >=31000 and Wtot <33000) {v1=126;vr=126;v2=138}
-		if (Wtot >=33000 and Wtot <34000) {v1=127;vr=127;v2=138}
-		if (Wtot >=34000 and Wtot <35000) {v1=130;vr=130;v2=140}
-		if (Wtot >=35000 and Wtot <36100) {v1=132;vr=132;v2=143}
-		if (Wtot >=36100) {v1=134;vr=134;v2=144}
+	if (Wtot <27000) {v1=122;vr=126;v2=139}
+	if (Wtot >=27000 and Wtot <29000) {v1=123;vr=126;v2=139}
+	if (Wtot >=29000 and Wtot <31000) {v1=125;vr=126;v2=138}
+	if (Wtot >=31000 and Wtot <33000) {v1=126;vr=126;v2=138}
+	if (Wtot >=33000 and Wtot <34000) {v1=127;vr=127;v2=138}
+	if (Wtot >=34000 and Wtot <35000) {v1=130;vr=130;v2=140}
+	if (Wtot >=35000 and Wtot <36100) {v1=132;vr=132;v2=143}
+	if (Wtot >=36100) {v1=134;vr=134;v2=144}
 
 	setprop("controls/flight/v1",v1);
 	setprop("controls/flight/vr",vr);

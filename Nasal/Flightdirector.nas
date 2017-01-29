@@ -279,7 +279,7 @@ setlistener(NAVprop, func(Nv) {
     NAVSRC=Nv.getValue();
 },0,0);
 
-var update_nav=func{
+var update_nav = func {
     var sgnl = "- - -";
     var gs =0;
 		var ind = 0;
@@ -314,7 +314,7 @@ var update_nav=func{
         setprop("autopilot/internal/to-flag",getprop("instrumentation/gps/wp/wp[1]/to-flag"));
         setprop("autopilot/internal/from-flag",getprop("instrumentation/gps/wp/wp[1]/from-flag"));
     }
-}
+} # end of update_nav
 
 var course_offset = func(src){
     var crs_set=getprop(src);
@@ -331,13 +331,13 @@ var course_offset = func(src){
 
 var monitor_L_armed = func{
     if(getprop(Lateral_arm)!=""){
-        if(getprop("autopilot/internal/in-range")){
-            var cdi=getprop("autopilot/internal/cdi");
-            if(cdi < 40 and cdi > -40){
-                setprop(Lateral,getprop(Lateral_arm));
-                setprop(Lateral_arm,"");
-            }
+      if(getprop("autopilot/internal/in-range")){
+        var cdi=getprop("autopilot/internal/cdi");
+        if(cdi < 40 and cdi > -40){
+          setprop(Lateral,getprop(Lateral_arm));
+          setprop(Lateral_arm,"");
         }
+      }
     }
 }
 
@@ -347,30 +347,30 @@ var monitor_V_armed = func{
     var asel=getprop("autopilot/settings/asel") * 100;
     var alterr=myalt-asel;
     if(Varm=="ASEL"){
-        if(alterr >-250 and alterr <250){
-            setprop(Vertical,"ALT");
-            setprop(Vertical_arm,"");
-        }
+      if(alterr >-250 and alterr <250){
+        setprop(Vertical,"ALT");
+        setprop(Vertical_arm,"");
+      }
     }elsif(Varm=="VASEL"){
-        if(alterr >-250 and alterr <250){
-            setprop(Vertical,"VALT");
-            setprop("instrumentation/gps/wp/wp[1]/altitude-ft",asel);
-            setprop(Vertical_arm,"");
-        }
+      if(alterr >-250 and alterr <250){
+        setprop(Vertical,"VALT");
+        setprop("instrumentation/gps/wp/wp[1]/altitude-ft",asel);
+        setprop(Vertical_arm,"");
+      }
     }elsif(Varm=="GS"){
-        if(getprop(Lateral)=="LOC"){
-            if(getprop("autopilot/internal/gs-in-range")){
-                var gs_err=getprop("autopilot/internal/gs-deflection");
-                var gs_dst=getprop("autopilot/internal/nav-distance");
-                if(gs_dst <= 15.0){ ### old = 7.0 ###
-                    if(gs_err >-0.25 and gs_err < 0.25){
-                        setprop(Vertical,"GS");
-                        setprop(Vertical_arm,"");
-                    }
-                }
-            }
+      if(getprop(Lateral)=="LOC"){
+        if(getprop("autopilot/internal/gs-in-range")){
+          var gs_err=getprop("autopilot/internal/gs-deflection");
+          var gs_dst=getprop("autopilot/internal/nav-distance");
+          if(gs_dst <= 15.0){ ### old = 7.0 ###
+            if(gs_err >-0.25 and gs_err < 0.25){
+              setprop(Vertical,"GS");
+              setprop(Vertical_arm,"");
+          }
         }
+      }
     }
+  }
 }
 
 var monitor_AP_errors= func{
@@ -395,35 +395,35 @@ var get_ETE= func{
     var min =0;
     var hr=0;
     if(NAVSRC == "NAV1"){
-        setprop("instrumentation/dme/frequencies/source","instrumentation/nav/frequencies/selected-mhz");
-        min = int(getprop("instrumentation/dme/indicated-time-min"));
-        if(min>60){
-            var tmphr=(min*0.016666);
-            hr=int(tmphr);
-            var tmpmin=(tmphr-hr)*100;
-            min=int(tmpmin);
-        }
-        ttw=sprintf("ETE %i:%02i",hr,min);
+      setprop("instrumentation/dme/frequencies/source","instrumentation/nav/frequencies/selected-mhz");
+      min = int(getprop("instrumentation/dme/indicated-time-min"));
+      if(min>60){
+        var tmphr=(min*0.016666);
+        hr=int(tmphr);
+        var tmpmin=(tmphr-hr)*100;
+        min=int(tmpmin);
+      }
+      ttw=sprintf("ETE %i:%02i",hr,min);
     }elsif(NAVSRC == "NAV2"){
-        setprop("instrumentation/dme/frequencies/source","instrumentation/nav[1]/frequencies/selected-mhz");
-        min = int(getprop("instrumentation/dme/indicated-time-min"));
-        if(min>60){
-            var tmphr=(min*0.016666);
-            hr=int(tmphr);
-            var tmpmin=(tmphr-hr)*100;
-            min=int(tmpmin);
-        }
-        ttw=sprintf("ETE %s:%02i",hr,min);
+      setprop("instrumentation/dme/frequencies/source","instrumentation/nav[1]/frequencies/selected-mhz");
+      min = int(getprop("instrumentation/dme/indicated-time-min"));
+      if(min>60){
+          var tmphr=(min*0.016666);
+          hr=int(tmphr);
+          var tmpmin=(tmphr-hr)*100;
+          min=int(tmpmin);
+      }
+      ttw=sprintf("ETE %s:%02i",hr,min);
     }elsif(left(NAVSRC,3) == "FMS"){
-        min = getprop("autopilot/route-manager/ete");
-        min=int(min * 0.016666);
-        if(min>60){
-            var tmphr=(min*0.016666);
-            hr=int(tmphr);
-            var tmpmin=(tmphr-hr)*100;
-            min=int(tmpmin);
-        }
-         ttw=sprintf("ETE %s:%02i",hr,min);
+      min = getprop("autopilot/route-manager/ete");
+      min=int(min * 0.016666);
+      if(min>60){
+          var tmphr=(min*0.016666);
+          hr=int(tmphr);
+          var tmpmin=(tmphr-hr)*100;
+          min=int(tmpmin);
+      }
+       ttw=sprintf("ETE %s:%02i",hr,min);
     }
     setprop("autopilot/internal/nav-ttw",ttw);
 }
@@ -534,6 +534,13 @@ var speed_Control = func {
 				if (TOD) {
 					if (alt_mc) {setprop(tg_spd_mc,descent_mc)}
 					if (!alt_mc) {setprop(tg_spd_kt,descent_kt)}
+					if (getprop("controls/flight/flaps")==0.142) {
+						setprop(tg_spd_kt,app5_spd);
+					} else if (getprop("controls/flight/flaps")==0.428) {
+						setprop(tg_spd_kt,app15_spd);
+					} else if (getprop("controls/flight/flaps")==1) {
+						setprop(tg_spd_kt,app35_spd);
+					}	else {setprop(tg_spd_kt,app_spd)}
 				} else {
 							### Climb ###
 					if (tg_alt > (alt_ind+1000)) {
@@ -573,10 +580,10 @@ var speed_Control = func {
 				setprop(tg_spd_kt,app15_spd);
 			} else if (getprop("controls/flight/flaps")==1) {
 				setprop(tg_spd_kt,app35_spd);
-			}	else {setprop(tg_spd_kt,app_spd)}
+			}	else {setprop(tg_spd_kt,app_spd);print("GS")}
 		}			
-	}
-}
+	} # end of AP
+} # end of speedControl
 
 var speed_round = func {
 	var ind_speed = getprop("instrumentation/airspeed-indicator/indicated-speed-kt");
