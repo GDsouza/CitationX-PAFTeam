@@ -824,9 +824,11 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 				<mfd>
 					<file>Aircraft/CitationX/Nasal/Mfd.nas</file>
 					<file>Aircraft/CitationX/Models/Instruments/MFD/canvas/NDcanvas.nas</file>
-<!--					<file>Aircraft/CitationX/Models/Instruments/MFD/canvas/vsd.nas</file> -->
 				</mfd>
-				<rmu1>
+<!--				<vsd>
+					<file>Aircraft/CitationX/Models/Instruments/MFD/canvas/vsd.nas</file> 
+				</vsd>
+-->				<rmu1>
 					<file>Aircraft/CitationX/Models/Instruments/RMU/RMU1.nas</file>
 				</rmu1>
 				<rmu2>

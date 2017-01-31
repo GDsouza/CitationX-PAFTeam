@@ -91,6 +91,7 @@ var menu = func {
 	var fix = "instrumentation/efis/inputs/wpt";
 	var tcas = "instrumentation/primus2000/dc840/tcas";
 	var tcas_mode = "instrumentation/tcas/inputs/mode";
+	var vsd = 
 	var btn_0 = getprop("instrumentation/primus2000/mfd/btn0");
 	var btn_1 = getprop("instrumentation/primus2000/mfd/btn1");
 	var btn_2 = getprop("instrumentation/primus2000/mfd/btn2");

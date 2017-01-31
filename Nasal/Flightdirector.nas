@@ -15,7 +15,6 @@ var AutoCoord="controls/flight/auto-coordination";
 var NAVSRC= getprop(NAVprop);
 var count=0;
 var Coord = 0;
-var TOD = 0;
 var minimums=getprop("autopilot/settings/minimums");
 var rd_speed = props.globals.initNode("instrumentation/airspeed-indicator/round-speed-kt",0,"DOUBLE");
 var alt = "instrumentation/altimeter/indicated-altitude-ft";
@@ -26,6 +25,7 @@ var tg_spd_kt = "autopilot/settings/target-speed-kt";
 var ind_kt = "instrumentation/airspeed-indicator/indicated-speed-kt";
 var target_alt = "autopilot/settings/target-altitude-ft";
 var app_wp = "autopilot/route-manager/route/wp[";
+props.globals.initNode("autopilot/locks/TOD",0,"BOOL");
 
 ####################################
 
@@ -461,7 +461,7 @@ var speed_Control = func {
 	var curr_wp_alt = getprop("autopilot/route-manager/route/wp["~n_wp~"]/altitude-ft");
 	var curr_wp_spd = getprop("autopilot/route-manager/route/wp["~n_wp~"]/speed");
 	var curr_wp_gen = getprop("autopilot/route-manager/route/wp["~n_wp~"]/generated");
-	var curr_wp_dist = getprop("autopilot/route-manager/route/wp["~n_wp~"]/distance-nm");
+	var curr_wp_dist = getprop("autopilot/route-manager/route/wp["~n_wp~"]/distance-along-route-nm");
 	var next_wp_gen = getprop("autopilot/route-manager/route/wp["~(n_wp+1)~"]/generated");
 	var num = getprop("autopilot/route-manager/route/num");
 	var asel = getprop("autopilot/settings/asel");
@@ -469,14 +469,14 @@ var speed_Control = func {
 	var vmo = 0;
 	var mmo = 0;
 	var alt_tod = alt_ind/100;
-	TOD = getprop("autopilot/locks/TOD");
+	var TOD = getprop("autopilot/locks/TOD");
 	setprop(target_alt,asel*100);
 	
 		### Takeoff ###
 	if (left(NAVSRC,3) == "FMS" and lock_alt == "VALT") {
 		if (dist_dep < dep_lim and alt_ind < dep_agl) {setprop(tg_spd_kt,dep_spd)}
 		if (curr_wp_alt != nil and curr_wp_alt > 0) {
-			setprop(target_alt, curr_wp_alt);
+			setprop(target_alt, math.round(curr_wp_alt,100));
 		} 
 	}
 
@@ -492,23 +492,24 @@ var speed_Control = func {
 					setprop("autopilot/locks/TOD",TOD);
 				}
 				if (curr_wp_alt != nil and curr_wp_alt > 0) {
-					if (!curr_wp_gen and next_wp_gen) { # maintien alt si next Wp = App #
-						setprop("autopilot/settings/asel",tg_alt/100);
-					} else if (curr_wp_gen and next_wp_gen and curr_wp_alt < last_wp_alt) {
-							setprop(target_alt, asel*100);
-					} else {setprop(target_alt,curr_wp_alt)}
-				} else {setprop(target_alt, asel*100)}					
-							
+					if (tot_dist-curr_wp_dist > alt_tod/3.0) {
+						setprop(target_alt,math.round(curr_wp_alt,100));
+					} else {setprop(target_alt,asel*100)}
+				}
+				else if (curr_wp_alt != nil and curr_wp_alt <= 0) {
+					setprop(target_alt, asel*100);
+				}
+		
 				### After TOD ###
 			} else {				
 				if (curr_wp_alt != nil and curr_wp_alt > 0){
-				setprop(target_alt,curr_wp_alt);
-				} else {
-					for (var i=n_wp;i<(num-1);i+=1) {
+				setprop(target_alt,math.round(curr_wp_alt,100));
+				} else if(curr_wp_alt != nil and curr_wp_alt <= 0){
+					for (var i=n_wp;i<=(num-1);i+=1) {
 						if (getprop(app_wp~i~"]/altitude-ft") > 0) {
-							setprop(target_alt,math.round(getprop(app_wp~i~"]/altitude-ft")/100)*100);
-							i = num;
-						} else {setprop(target_alt,math.round(dest_alt/100)*100)}
+							setprop(target_alt,math.round(getprop(app_wp~i~"]/altitude-ft"),100));
+							break;
+						} else {setprop(target_alt,math.round(dest_alt,100))}
 					}
 				}
 			}
@@ -580,7 +581,7 @@ var speed_Control = func {
 				setprop(tg_spd_kt,app15_spd);
 			} else if (getprop("controls/flight/flaps")==1) {
 				setprop(tg_spd_kt,app35_spd);
-			}	else {setprop(tg_spd_kt,app_spd);print("GS")}
+			}	else {setprop(tg_spd_kt,app_spd)}
 		}			
 	} # end of AP
 } # end of speedControl

@@ -603,9 +603,9 @@ var refreshMem = func {
 }; # end of Refresh memories
 
 ###### Main #####
-var setl = setlistener("/sim/signals/fdm-initialized", func () {	
+var rmu2_setl = setlistener("/sim/signals/fdm-initialized", func () {	
 	var init = RMU2.new();
 	init.listen();
-removelistener(setl);
+removelistener(rmu2_setl);
 });
 

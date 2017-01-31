@@ -52,6 +52,7 @@ setlistener("instrumentation/cdu/init",func {
 		setprop("instrumentation/cdu/input","");
 		setprop("autopilot/locks/TOD",0);
 		setprop("autopilot/settings/nav-source", "FMS1");
+		setprop("autopilot/internal/gs-valid", 0);
 		init();		
 	}	
 });
@@ -839,9 +840,12 @@ var insertWayp = func(ind,cduInput) {
 		if(right(cduInput,1) == "/") {
 			setprop("autopilot/route-manager/route/wp["~ind~"]/speed", left(cduInput,(size(cduInput)-1)));
 		} else {
-			setprop("autopilot/route-manager/input","@INSERT" ~ind~ ":" ~wpt~ "@" ~cduInput);
-			setprop("autopilot/route-manager/input","@DELETE"~(ind+1));
-#			setprop("autopilot/route-manager/route/wp["~ind~"]/altitude-ft",cduInput);
+			if (getprop("autopilot/route-manager/active")) {
+				setprop("autopilot/route-manager/route/wp["~ind~"]/altitude-ft",cduInput);
+			} else {
+				setprop("autopilot/route-manager/input","@INSERT" ~ind~ ":" ~wpt~ "@" ~cduInput);
+				setprop("autopilot/route-manager/input","@DELETE"~(ind+1));
+			}
 		}
 		cduInput = "";
 }
