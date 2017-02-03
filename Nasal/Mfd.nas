@@ -150,7 +150,9 @@ var menu = func {
 				}				
 			}
 			if (btn_5){
-				setprop("instrumentation/efis/inputs/vsd",1);
+				if (!getprop("instrumentation/efis/inputs/vsd")) {
+					setprop("instrumentation/efis/inputs/vsd",1);
+				} else {setprop("instrumentation/efis/inputs/vsd",0)}
 			}
 		}
 

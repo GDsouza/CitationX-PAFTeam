@@ -601,6 +601,7 @@
 							<not>
 								<property>autopilot/locks/alt-mach</property>
 							</not>
+							<property>autopilot/settings/fms</property>
 						</and>
 					</condition>
 				</enable>
