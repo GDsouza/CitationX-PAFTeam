@@ -15,6 +15,7 @@ var AutoCoord="controls/flight/auto-coordination";
 var NAVSRC= getprop(NAVprop);
 var count=0;
 var Coord = 0;
+var mc = 0; # test for speedTimer
 var minimums=getprop("autopilot/settings/minimums");
 var rd_speed = props.globals.initNode("instrumentation/airspeed-indicator/round-speed-kt",0,"DOUBLE");
 var alt = "instrumentation/altimeter/indicated-altitude-ft";
@@ -25,10 +26,9 @@ var tg_spd_kt = "autopilot/settings/target-speed-kt";
 var ind_kt = "instrumentation/airspeed-indicator/indicated-speed-kt";
 var target_alt = "autopilot/settings/target-altitude-ft";
 var app_wp = "autopilot/route-manager/route/wp[";
-var nav1_ptr = "instrumentation/primus2000/sc840/nav1ptr";
-var nav2_ptr = "instrumentation/primus2000/sc840/nav2ptr";
 props.globals.initNode("autopilot/locks/TOD",0,"BOOL");
 props.globals.initNode("autopilot/settings/fms",0,"BOOL");
+props.globals.initNode("autopilot/locks/alm-tod",0,"BOOL");
 
 ####################################
 
@@ -162,44 +162,16 @@ var FD_set_mode = func(btn){
 var nav_src_set=func(src){
     setprop(Lateral_arm,"");
 		setprop(Vertical_arm,"");
-		if (src == "fms") {
-			if (getprop(nav1_ptr) == 3 and getprop(nav2_ptr)!=3) {
-				setprop(NAVprop,"FMS1");
-				setprop("autopilot/settings/fms",1);
-			} else if (getprop(nav1_ptr) != 3 and getprop(nav2_ptr)==3) {
-					setprop(NAVprop,"FMS2");
-					setprop("autopilot/settings/fms",1);
-			} else if (getprop(nav1_ptr) == 3 and getprop(nav2_ptr)==3) {
-					setprop("autopilot/settings/fms",1);
-					if (NAVSRC=="FMS2") {setprop(NAVprop,"FMS1")}
-					else {setprop(NAVprop,"FMS2")}
+    if(src=="fms"){
+			setprop("autopilot/settings/fms",1);
+			if(getprop("autopilot/route-manager/route/num")>0) {
+        if (NAVSRC!="FMS1")setprop(NAVprop,"FMS1") else setprop(NAVprop,"FMS2");
 			}
-		} else {
+    }else{
 			setprop("autopilot/settings/fms",0);
-			if (getprop(nav1_ptr) == 1 and getprop(nav2_ptr)!=1) {
-				setprop(NAVprop,"NAV1")
-			} else if (getprop(nav1_ptr) != 1 and getprop(nav2_ptr)==1) {
-					setprop(NAVprop,"NAV2");
-			} else if (getprop(nav1_ptr) == 1 and getprop(nav2_ptr)==1) {
-					if (NAVSRC=="NAV2") {setprop(NAVprop,"NAV1")}
-					else {setprop(NAVprop,"NAV2")}
-			}
-		}
+      if (NAVSRC!="NAV1")setprop(NAVprop,"NAV1") else setprop(NAVprop,"NAV2");
+    }
 }
-
-setlistener(nav1_ptr, func {
-	if (getprop(nav1_ptr) == 0 or (getprop(nav1_ptr) < 3 and NAVSRC == "FMS1")) {
-			setprop(NAVprop,"");
-			setprop("autopilot/settings/fms",0);
-	} else if (getprop(nav1_ptr) == 1) {setprop(NAVprop,"NAV1")}
-});
-
-setlistener(nav2_ptr, func {
-	if (getprop(nav2_ptr) == 0 or (getprop(nav2_ptr) < 3 and NAVSRC == "FMS2")) {
-			setprop(NAVprop,"");
-			setprop("autopilot/settings/fms",0);
-	}
-});
 
 ########### ARM VALID NAV MODE ################
 
@@ -314,7 +286,6 @@ setlistener(NAVprop, func(Nv) {
 
 var update_nav = func {
     var sgnl = "- - -";
-    var gs =0;
 		var ind = 0;
 		var nb = "";
     if(NAVSRC == "NAV1" or NAVSRC == "NAV2"){
@@ -329,8 +300,6 @@ var update_nav = func {
         setprop("autopilot/internal/nav-id",getprop("instrumentation/nav["~ind~"]/nav-id"));
         if(getprop("instrumentation/nav["~ind~"]/nav-loc"))sgnl="LOC"~nb;
         if(getprop("instrumentation/nav["~ind~"]/has-gs"))sgnl="ILS"~nb;
-        if(sgnl==("ILS"~nb))gs = 1;
-        setprop("autopilot/internal/gs-valid",gs);
         setprop("autopilot/internal/nav-type",sgnl);
         course_offset("instrumentation/nav["~ind~"]/radials/selected-deg");
         setprop("autopilot/internal/to-flag",getprop("instrumentation/nav["~ind~"]/to-flag"));
@@ -352,6 +321,7 @@ var update_nav = func {
 
 var course_offset = func(src){
     var crs_set=getprop(src);
+		var nav_dst= getprop("autopilot/internal/nav-distance"); # new
     var crs_offset= crs_set - getprop("orientation/heading-magnetic-deg");
     if(crs_offset>180)crs_offset-=360;
     if(crs_offset<-180)crs_offset+=360;
@@ -359,7 +329,9 @@ var course_offset = func(src){
     crs_offset+=getprop("autopilot/internal/cdi");
     if(crs_offset>180)crs_offset-=360;
     if(crs_offset<-180)crs_offset+=360;
-    setprop("autopilot/internal/ap_crs",crs_offset);
+		if (nav_dst<0.5) {setprop("autopilot/internal/ap_crs",0)} # new
+		else {setprop("autopilot/internal/ap_crs",crs_offset)} # new
+#    setprop("autopilot/internal/ap_crs",crs_offset);
     setprop("autopilot/internal/selected-crs",crs_set);
 }
 
@@ -569,45 +541,61 @@ var speed_control = func {
 				if (dist_dep < dep_lim and alt_ind < dep_agl) {
 					setprop(tg_spd_kt,dep_spd);
 				} else {		
-					if (TOD) {
-						if (alt_mc) {setprop(tg_spd_mc,descent_mc)}
-						if (!alt_mc) {setprop(tg_spd_kt,descent_kt)}
-						if (getprop("controls/flight/flaps")==0.142) {
-							setprop(tg_spd_kt,app5_spd);
-						} else if (getprop("controls/flight/flaps")==0.428) {
-							setprop(tg_spd_kt,app15_spd);
-						} else if (getprop("controls/flight/flaps")==1) {
-							setprop(tg_spd_kt,app35_spd);
-						}	else {setprop(tg_spd_kt,app_spd)}
-					} else {
-								### Climb ###
-						if (tg_alt > (alt_ind+1000)) {
-							var my_spd = climb_kt;
-							if (alt_mc) {
-								my_spd = climb_mc;
-								setprop(tg_spd_mc,my_spd);
-							} else {
-									setprop(tg_spd_kt,my_spd);
-							}
-									### Descent ###
-						} else if (tg_alt < (alt_ind-1000)) {
-								if (alt_mc) {setprop(tg_spd_mc,descent_mc)}
-								if (!alt_mc) {setprop(tg_spd_kt,descent_kt)}
-						}	else {
-									### Cruise ###
-							if (cruise_kt != 0) {
-								if (curr_wp_spd) {
-									setprop("autopilot/settings/cruise-speed-kt",curr_wp_spd);
-								}	
-								if (alt_ind <= 7800) {vmo = 270}
-								if (alt_ind > 7800 and alt_ind < 30650) {vmo=350}
-								if (alt_mc) {mmo = 0.92}
-								if (cruise_kt >= vmo) {cruise_kt = vmo-5}
-								if (cruise_mc >= mmo) {cruise_mc = mmo-6}
-								setprop(tg_spd_kt,cruise_kt);			
-								setprop(tg_spd_mc,cruise_mc);	
-							}
-						}	
+					if (dist_rem <= alt_tod/2.8 and !TOD) {
+						if (!getprop("autopilot/locks/alm-tod")) {
+							setprop("autopilot/locks/alm-tod",1);
+						}
+						if (!alt_mc) {
+							if (getprop(ind_kt) > 280) {setprop(tg_spd_kt,280)}
+							else {setprop(tg_spd_kt,220)}				
+						} else {
+							if (mc==0) {speedTimer()}
+							mc=1;
+						}
+					}else {
+						if (TOD) {
+							if (alt_mc) {setprop(tg_spd_mc,descent_mc)}
+							if (!alt_mc) {setprop(tg_spd_kt,descent_kt)}
+							if (getprop("controls/flight/flaps")==0.142) {
+								setprop(tg_spd_kt,app5_spd);
+							} else if (getprop("controls/flight/flaps")==0.428) {
+								setprop(tg_spd_kt,app15_spd);
+							} else if (getprop("controls/flight/flaps")==1) {
+								setprop(tg_spd_kt,app35_spd);
+							}	else {setprop(tg_spd_kt,app_spd)}
+						} else {
+
+									### Climb ###
+							if (tg_alt > (alt_ind+1000)) {
+								var my_spd = climb_kt;
+								if (alt_mc) {
+									my_spd = climb_mc;
+									setprop(tg_spd_mc,my_spd);
+								} else {
+										setprop(tg_spd_kt,my_spd);
+								}
+
+										### Descent ###
+							} else if (tg_alt < (alt_ind-1000)) {
+									if (alt_mc) {setprop(tg_spd_mc,descent_mc)}
+									if (!alt_mc) {setprop(tg_spd_kt,descent_kt)}
+							}	else {
+
+										### Cruise ###
+								if (cruise_kt != 0) {
+									if (curr_wp_spd) {
+										setprop("autopilot/settings/cruise-speed-kt",curr_wp_spd);
+									}	
+									if (alt_ind <= 7800) {vmo = 270}
+									if (alt_ind > 7800 and alt_ind < 30650) {vmo=350}
+									if (alt_mc) {mmo = 0.92}
+									if (cruise_kt >= vmo) {cruise_kt = vmo-5}
+									if (cruise_mc >= mmo) {cruise_mc = mmo-6}
+									setprop(tg_spd_kt,cruise_kt);			
+									setprop(tg_spd_mc,cruise_mc);	
+								}
+							}	
+						}
 					}
 				}
 			}
@@ -637,6 +625,17 @@ var alt_mach = func {
 		setprop("autopilot/locks/alt-mach",0);
 			setprop(tg_spd_mc,getprop(ind_mc));
 	}
+}
+
+var speedTimer = func {
+	var r = 0;
+	setprop(tg_spd_mc,getprop(tg_spd_mc)-0.01);
+	var spd_timer = maketimer(7, func() {
+		setprop(tg_spd_mc,getprop(tg_spd_mc)-0.01);
+		r+=1;
+		if (r == 6) {spd_timer.stop()}
+	});
+	spd_timer.start();
 }
 
 ###  Main loop ###

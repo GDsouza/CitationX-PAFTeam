@@ -52,7 +52,6 @@ setlistener("instrumentation/cdu/init",func {
 		setprop("instrumentation/cdu/input","");
 		setprop("autopilot/locks/TOD",0);
 		setprop("autopilot/settings/nav-source", "FMS1");
-		setprop("autopilot/internal/gs-valid", 0);
 		init();		
 	}	
 });

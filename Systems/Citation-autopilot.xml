@@ -61,8 +61,8 @@
         </config>
     </pi-simple-controller>
 
-    <pid-controller>
-        <name>Nav1</name>
+	  <pi-simple-controller>
+        <name>Nav</name>
         <debug>false</debug>
         <enable>
           <property>autopilot/locks/heading</property>
@@ -78,16 +78,12 @@
             <property>autopilot/internal/roll-filter</property>
         </output>
         <config>
-            <Kp>-20</Kp> <!--old -1.5-->
-            <beta>1.0</beta>
-            <alpha>0.1</alpha>
-            <gamma>0.0</gamma>
-            <Ti>10</Ti> <!-- old 10 -->
-            <Td>0.0</Td>
+            <Kp>-1.5</Kp>
+            <Ki>0.0</Ki>
             <min>-30</min>
             <max>30</max>
         </config>
-    </pid-controller>
+    </pi-simple-controller> 
 
     <pi-simple-controller>
         <name>Loc</name>

@@ -72,60 +72,96 @@ var _list = setlistener("sim/signals/fdm-initialized", func {
 
 	var MFD_canvas = {
 		new: func() {
-			var obj = {parents:[MFD_canvas]};
-			obj.canvas = canvas.new({
+			var m = {parents:[MFD_canvas]};
+			m.canvas = canvas.new({
 				"name": "MFD", 
 				"size": [1024, 1024],
 				"view": [900, 1024],
 				"mipmapping": 1 
 			});
-			obj.canvas.addPlacement({"node": placement_front});
-			obj.canvas.setColorBackground(0,0,0,0);
-			obj.mfd = obj.canvas.createGroup();
-			canvas.parsesvg(obj.mfd, get_local_path("Images/ND_F.svg"));
+			m.canvas.addPlacement({"node": placement_front});
+			m.canvas.setColorBackground(0,0,0,0);
+			m.mfd = m.canvas.createGroup();
+			canvas.parsesvg(m.mfd, get_local_path("Images/ND_F.svg"));
 
 			### Texts init ###
-			obj.text = {};
-			obj.text_val = ["wx","bank","sat","tas","gspd","clock",
+			m.text = {};
+			m.text_val = ["wx","bank","sat","tas","gspd","clock",
 										"chrono","navDist","navId","navTtw","navType",
 										"hdgAnn","main","range"];
-			foreach(var element;obj.text_val) {
-				obj.text[element] = obj.mfd.getElementById(element);
+			foreach(var element;m.text_val) {
+				m.text[element] = m.mfd.getElementById(element);
 			}
 
 			### Menus init ###
-			obj.menu = props.globals.getNode("instrumentation/primus2000/mfd/menu-num");
-			obj.s_menu = props.globals.getNode("instrumentation/primus2000/mfd/s-menu");
+			m.menu = props.globals.getNode("instrumentation/primus2000/mfd/menu-num");
+			m.s_menu = props.globals.getNode("instrumentation/primus2000/mfd/s-menu");
 
-			obj.menus = {};
-			obj.menu_val = ["menu1","menu2","menu3","menu4","menu5","menu1b",
+			m.menus = {};
+			m.menu_val = ["menu1","menu2","menu3","menu4","menu5","menu1b",
 										"menu2b","menu3b","menu4b","menu5b"];
-			foreach(var element;obj.menu_val) {
-				obj.menus[element] = obj.mfd.getElementById(element);
+			foreach(var element;m.menu_val) {
+				m.menus[element] = m.mfd.getElementById(element);
 			}
 
-			obj.rect = {};
-			obj.cdr = ["cdr1","cdr2","cdr3","cdr4","cdr5"];
-			foreach(var element;obj.cdr) {
-				obj.rect[element] = obj.mfd.getElementById(element);
+			m.rect = {};
+			m.cdr = ["cdr1","cdr2","cdr3","cdr4","cdr5"];
+			foreach(var element;m.cdr) {
+				m.rect[element] = m.mfd.getElementById(element);
 			}
 
-			obj.design = {}; 
-			obj.pat = ["trueNorth"];
-			foreach(var element;obj.pat) {
-				obj.design[element] = obj.mfd.getElementById(element);
+			m.design = {}; 
+			m.pat = ["trueNorth"];
+			foreach(var element;m.pat) {
+				m.design[element] = m.mfd.getElementById(element);
 			}
-			obj.design.trueNorth.hide(); # initialisation
+			m.design.trueNorth.hide(); # initialisation
+
+			m.tod = m.mfd.createChild("text","TOD")
+				.setTranslation(450,250)
+				.setAlignment("center-center")
+				.setText("TOD")
+				.setFont("LiberationFonts/LiberationMono-Bold.ttf")
+				.setFontSize(36)
+				.setColor(0,255,0)
+				.setScale(1.5);
+			m.tod.hide();
+
+				return m;	
+		},
+
+		listen : func { 
 			setlistener("instrumentation/efis/mfd/display-mode", func {
-				if (cmdarg().getValue() == "PLAN") {obj.design.trueNorth.show()}
-				else {obj.design.trueNorth.hide()}
+				if (cmdarg().getValue() == "PLAN") {me.design.trueNorth.show()}
+				else {me.design.trueNorth.hide()}
 			});
 
-				return obj;	
-			},
+			setlistener("autopilot/locks/alm-tod", func {
+				if (getprop("autopilot/locks/alm-tod")) {
+					var t = 0;
+					me.tod_timer = maketimer(0.5,func() {
+						if (t==0) {me.tod.hide()}
+						if (t==1) {me.tod.show()}					
+						t+=1;
+						if(t==2) {t=0}
+					});
+					me.tod_timer.start();
+				} else { 
+					if (me.tod_timer.isRunning) {
+					me.tod_timer.stop()}
+					me.tod.hide();
+				}
+			});
 
-			update: func {
+			setlistener("autopilot/locks/TOD", func {
+				if (getprop("autopilot/locks/TOD")) {
+					me.tod_timer.stop();
+					me.tod.hide();
+				}
+			});
+		}, # end of listen
 
+		update: func {
 			### values ###
 			me.text.clock.setText(sprintf("%02d",clk_hour.getValue())~":"~sprintf("%02d",clk_min.getValue())~ ":"~sprintf("%02d",clk_sec.getValue()));
 			me.text.chrono.setText(sprintf("%02d",chr_hour.getValue())~":"~sprintf("%02d",chr_min.getValue())~ ":"~sprintf("%02d",chr_sec.getValue()));
@@ -241,6 +277,7 @@ var _list = setlistener("sim/signals/fdm-initialized", func {
 
 ###### Main #####
 	var mfd = MFD_canvas.new();
+	mfd.listen();
 	mfd.update();
 	print('Loading canvas ND...Ok');
 #################

@@ -839,14 +839,7 @@
               <property>/autopilot/locks/altitude</property>
               <value>VFLC</value>
             </equals>
-					  <equals>
-				      <property>instrumentation/primus2000/sc840/nav1ptr</property>
-				      <value>3</value>
-					  </equals>
-					  <equals>
-				      <property>instrumentation/primus2000/sc840/nav2ptr</property>
-				      <value>3</value>
-					  </equals>
+						<property>/autopilot/settings/fms</property>
           </or>
 					<less-than-equals>
 						<property>instrumentation/altimeter/indicated-altitude-ft</property>								
@@ -870,14 +863,7 @@
               <property>/autopilot/locks/altitude</property>
               <value>VFLC</value>
             </equals>
-					  <equals>
-				      <property>instrumentation/primus2000/sc840/nav1ptr</property>
-				      <value>3</value>
-					  </equals>
-					  <equals>
-				      <property>instrumentation/primus2000/sc840/nav2ptr</property>
-				      <value>3</value>
-					  </equals>
+						<property>/autopilot/settings/fms</property>
           </or>
 					<greater-than>
 						<property>instrumentation/altimeter/indicated-altitude-ft</property>								
