@@ -123,11 +123,11 @@ var _list = setlistener("sim/signals/fdm-initialized", func {
 				.setText("TOD")
 				.setFont("LiberationFonts/LiberationMono-Bold.ttf")
 				.setFontSize(36)
-				.setColor(0,255,0)
+				.setColor(1,1,0)
 				.setScale(1.5);
 			m.tod.hide();
 
-				return m;	
+			return m;	
 		},
 
 		listen : func { 
@@ -174,9 +174,7 @@ var _list = setlistener("sim/signals/fdm-initialized", func {
 			me.text.gspd.setText(sprintf("%3d",gspd.getValue()));
 	#		if (tcas.getValue()) {me.text.tcas.setText("AUTO");
 	#		} else {me.text.tcas.setText("OFF")}
-			if(math.round(nav_dist.getValue())) {
-				me.text.navDist.setText(sprintf("%d",math.round(nav_dist.getValue()))~" NM");
-			} else {me.text.navDist.setText("")}
+			me.text.navDist.setText(sprintf("%3.1f",nav_dist.getValue())~" NM");			
 			me.text.navId.setText(nav_id.getValue());
 			me.text.navType.setText(nav_type.getValue());
 			me.text.hdgAnn.setText(sprintf("%03d",hdg_ann.getValue()));

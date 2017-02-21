@@ -112,6 +112,18 @@ var NDStyles = {
 				'z-index': 2,
 			}, # end of waypoint layer
 
+			{ name: 'ALT-profile',
+				isMapStructure:1,
+				update_on:['toggle_range','toggle_display_mode'],
+				predicate: func(nd, layer) {
+					var visible= nd.in_mode('toggle_display_mode', ['MAP','PLAN']);
+					layer.group.setVisible( visible );
+					if (visible)
+						layer.update();
+				},
+				'z-index': 3,
+			}, # end of altitude profile layer
+
 			{ name:'TFC-citation',
 				isMapStructure:1,
 				always_update:1,
@@ -338,6 +350,28 @@ var NDStyles = {
 					is_false: func(nd) nd.symbols.tfcRangeInt.hide(),
 				},
 			}, # end of tfcRangeInt
+
+			{ id:'altArc',
+				impl: {
+					init: func(nd,symbol),
+					predicate: func(nd) (nd.in_mode('toggle_display_mode', ['MAP'])),
+					is_true: func(nd) {
+						var altDiff = (getprop("autopilot/settings/target-altitude-ft") or 0)-(getprop("instrumentation/altimeter/indicated-altitude-ft") or 0);
+						if (abs(nd.aircraft_source.get_vspd()) > 1 and altDiff/nd.aircraft_source.get_vspd() > 0) {
+							var altRangeNm = altDiff/nd.aircraft_source.get_vspd()*nd.aircraft_source.get_gnd_spd()*KT2MPS*M2NM;
+							if(altRangeNm > 1) {
+								var altRangePx = (350/nd.rangeNm())*altRangeNm;
+								if (altRangePx > 700)
+									altRangePx = 700;
+								nd.symbols.altArc.setTranslation(0,-altRangePx);
+							}
+							nd.symbols.altArc.show();
+						} else
+							nd.symbols.altArc.hide();
+					},
+					is_false: func(nd) nd.symbols.altArc.hide(),
+				},
+			}, # end of altArc
 
 		], # end of vector with features
 

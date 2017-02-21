@@ -340,6 +340,17 @@
         <max-dist>15.0</max-dist>
     </tod>
 
+    <tod>
+        <name>tod</name>
+        <path>Aircraft/CitationX/Sounds/wp.wav</path>
+        <condition>
+       		<property>autopilot/locks/TOD</property>			
+        </condition>
+        <mode>once</mode>
+        <reference-dist>1.0</reference-dist>
+        <max-dist>15.0</max-dist>
+    </tod>
+
 <!-- FUEL -->
 
 		<fuel>

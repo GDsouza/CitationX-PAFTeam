@@ -153,7 +153,7 @@ var NdDisplay = {
 			get_spd: func source.getNode('velocities/true-airspeed-kt').getValue(),
 			get_gnd_spd: func source.getNode('velocities/groundspeed-kt').getValue(),
 		};
-	}, # of connectAI
+	}, # end of connectAI
 
 	setTimerInterval: func(update_time=0.05) me.update_timer.restart(update_time),
 
@@ -264,7 +264,7 @@ var NdDisplay = {
 
 		me.map = me.nd.createChild("map","map")
 #			.set("clip", map_rect)
-			.set("screen-range", 700);
+			.set("screen-range", 750); #old 700
 		var z_idx = map_opts['z-index'];
 		if (z_idx != nil) me.map.set('z-index', z_idx);
 
@@ -334,7 +334,7 @@ var NdDisplay = {
 
 			var the_layer = nil;
 			if(!layer['isMapStructure']) # set up an old INEFFICIENT and SLOW layer
-				the_layer = me.layers[layer.name] = canvas.MAP_LAYERS[layer.name].new( me.map, layer.name, controller );
+				the_layer = me.layers[layer.name] = canvas.MAP_LAYERS[layer.name].new( me.map, layer.name, controller);
 			else {
 				printlog(canvas._MP_dbg_lvl, "Setting up MapStructure-based layer for ND, name:", layer.name);
 				var opt = me.options != nil and me.options[layer.name] != nil ? me.options[layer.name] : nil;
