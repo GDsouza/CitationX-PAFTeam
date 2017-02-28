@@ -4394,7 +4394,7 @@
         <binding>
             <command>set-tooltip</command>
             <tooltip-id>DayNightSwitch</tooltip-id>
-            <label>Anti Ice Lights : %s</label>
+            <label>Day / Night : %s</label>
 	          <property>controls/lighting/day-night</property>
             <mapping>on-off</mapping>
         </binding>

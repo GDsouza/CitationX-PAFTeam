@@ -23,6 +23,7 @@ var etx = props.globals.getNode("instrumentation/primus2000/dc840/etx");
 var nav_dist = props.globals.getNode("autopilot/internal/nav-distance");
 var nav_id = props.globals.getNode("autopilot/internal/nav-id");
 var nav_type = props.globals.getNode("autopilot/internal/nav-type");
+var nav_type = props.globals.getNode("autopilot/internal/nav-type");
 var hdg_ann = props.globals.getNode("autopilot/settings/heading-bug-deg");
 var v1 = props.globals.getNode("controls/flight/v1");
 var vr = props.globals.getNode("controls/flight/vr");
@@ -32,13 +33,14 @@ var va = props.globals.getNode("controls/flight/va");
 var mag_hdg = props.globals.getNode("orientation/heading-magnetic-deg");
 var range = props.globals.getNode("instrumentation/nd/range");
 var map = props.globals.getNode("instrumentation/primus2000/dc840/mfd-map");
+var dist_rem = props.globals.getNode("autopilot/route-manager/distance-remaining-nm");
 
 var nd_display = {};
 
 var myCockpit_switches = {
 'toggle_range':         {path: '/inputs/range-nm', value:40, type:'INT'},
 'toggle_weather':       {path: '/inputs/wxr', value:0, type:'BOOL'},
-'toggle_airports':      {path: '/inputs/arpt', value:1, type:'BOOL'},
+'toggle_airports':      {path: '/inputs/arpt', value:0, type:'BOOL'},
 'toggle_stations':      {path: '/inputs/sta', value:0, type:'BOOL'},
 'toggle_waypoints':     {path: '/inputs/wpt', value:0, type:'BOOL'},
 'toggle_position':      {path: '/inputs/pos', value:0, type:'BOOL'},
@@ -54,11 +56,13 @@ var myCockpit_switches = {
 'toggle_rangearc':      {path: '/mfd/rangearc', value:0, type:'BOOL'},
 'toggle_track_heading': {path: '/hdg-trk-selected', value:0, type:'BOOL'},
 'toggle_hdg_bug_only':  {path: '/hdg-bug-only', value:0, type:'BOOL'},
+'toggle_cruise_alt' : 	{path: '/cruise-alt', value: 100, type: 'DOUBLE'},
 };
 
 var _list = setlistener("sim/signals/fdm-initialized", func {
 	var ND = NdDisplay;
-	var NDcpt_B = ND.new("instrumentation/efis", myCockpit_switches,"Citation");
+	var NDcpt_B = ND.new("instrumentation/efis", myCockpit_switches, "Citation");
+
 	nd_display.cpt_B = canvas.new({
 		  "name": "ND",
 		  "size": [1024,1024],
@@ -88,7 +92,7 @@ var _list = setlistener("sim/signals/fdm-initialized", func {
 			m.text = {};
 			m.text_val = ["wx","bank","sat","tas","gspd","clock",
 										"chrono","navDist","navId","navTtw","navType",
-										"hdgAnn","main","range"];
+										"hdgAnn","main","range","distRem"];
 			foreach(var element;m.text_val) {
 				m.text[element] = m.mfd.getElementById(element);
 			}
@@ -182,6 +186,9 @@ var _list = setlistener("sim/signals/fdm-initialized", func {
 			if (!getprop("instrumentation/primus2000/mfd/menu-num")) {
 				me.text.main.setText("MAIN 1/2");
 			} else {me.text.main.setText("MAIN 2/2")}
+			if (dist_rem.getValue() >0) {
+				me.text.distRem.setText(sprintf("%.0f",dist_rem.getValue())~" NM");
+			} else {me.text.distRem.setText("")}
 
 		### Menus ###
 			if (me.menu.getValue() == 0) {

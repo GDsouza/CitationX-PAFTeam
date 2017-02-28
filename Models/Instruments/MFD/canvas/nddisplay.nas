@@ -70,6 +70,7 @@ var default_switches = {
 	'toggle_xtrk_error': {path: '/mfd/xtrk-error', value: 0, type: 'BOOL'},
 	'toggle_trk_line': {path: '/mfd/trk-line', value: 0, type: 'BOOL'},
 	'toggle_hdg_bug_only': {path: '/mfd/hdg-bug-only', value: 0, type: 'BOOL'},
+	'toggle_cruise_alt' : {path: '/cruise-alt', value: 100, type: 'DOUBLE'},
 };
 
 var NdDisplay = {

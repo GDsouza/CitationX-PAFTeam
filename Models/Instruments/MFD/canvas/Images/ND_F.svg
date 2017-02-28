@@ -154,8 +154,8 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.75260994"
-     inkscape:cx="187.52965"
-     inkscape:cy="496.14047"
+     inkscape:cx="249.39598"
+     inkscape:cy="621.14956"
      inkscape:document-units="px"
      inkscape:current-layer="layer2"
      showgrid="false"
@@ -508,6 +508,17 @@
          id="tspan4217"
          x="78.738533"
          y="92.50631">X</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:40px;line-height:125%;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono, Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;display:inline;opacity:1;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+       x="801.11761"
+       y="105.21484"
+       id="distRem"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4313-6"
+         x="801.11761"
+         y="105.21484">X</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
