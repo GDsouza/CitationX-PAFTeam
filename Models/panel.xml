@@ -5201,6 +5201,17 @@
         </font-resolution>
     </text>
 
+<!-- Hide callsign if nav module present -->
+
+    <animation>
+        <type>select</type>
+        <object-name>Pilot-reg</object-name>
+        <condition>
+          <not><property>sim/model/nav1-visible</property></not>
+        </condition>
+    </animation>
+
+
     <text>
         <name>CoPilot-reg</name>
         <offsets>

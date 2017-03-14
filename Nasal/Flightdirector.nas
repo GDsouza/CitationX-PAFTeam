@@ -24,8 +24,6 @@ var tg_spd_mc = "autopilot/settings/target-speed-mach";
 var ind_mc = "instrumentation/airspeed-indicator/indicated-mach";
 var tg_spd_kt = "autopilot/settings/target-speed-kt";
 var ind_kt = "instrumentation/airspeed-indicator/indicated-speed-kt";
-var target_alt = "autopilot/settings/target-altitude-ft";
-var set_tgAlt = 0;
 var app_wp = "autopilot/route-manager/route/wp[";
 props.globals.initNode("autopilot/locks/TOD",0,"BOOL");
 props.globals.initNode("autopilot/settings/fms",0,"BOOL");
@@ -33,14 +31,6 @@ props.globals.initNode("autopilot/locks/alm-tod",0,"BOOL");
 var NDSymbols = props.globals.getNode("autopilot/route-manager/vnav", 1);
 var int_crs = 0;
 var wp = 0;
-
-####################################
-
-var fd_stl = setlistener("/sim/signals/fdm-initialized", func {
-    print("Flight Director ...Checked");
-    settimer(update_fd, 15);
-		removelistener(fd_stl);
-});
 
 
 ### AP /FD BUTTONS ####
@@ -386,6 +376,7 @@ var monitor_V_armed = func{
 }
 
 var monitor_AP_errors= func{
+		if (getprop(AP)!="AP") {return}
 		var min_mode = getprop("autopilot/settings/minimums-mode");
 		var agl_alt = getprop("position/altitude-agl-ft");
 		var ind_alt = getprop(alt);
@@ -400,6 +391,7 @@ var monitor_AP_errors= func{
 var kill_Ap = func(msg){
     setprop(AP,msg);
     setprop(AutoCoord,Coord);
+		setprop("autopilot/locks/disengage",1);
 }
 
 var get_ETE= func{

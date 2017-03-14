@@ -131,6 +131,8 @@ var _list = setlistener("sim/signals/fdm-initialized", func {
 				.setScale(1.5);
 			m.tod.hide();
 
+			m.tod_timer = nil;
+
 			return m;	
 		},
 
@@ -140,8 +142,8 @@ var _list = setlistener("sim/signals/fdm-initialized", func {
 				else {me.design.trueNorth.hide()}
 			});
 
-			setlistener("autopilot/locks/alm-tod", func {
-				if (getprop("autopilot/locks/alm-tod")) {
+			setlistener("autopilot/locks/alm-tod", func (n) {
+				if (n.getValue()) {
 					var t = 0;
 					me.tod_timer = maketimer(0.5,func() {
 						if (t==0) {me.tod.hide()}
@@ -151,15 +153,17 @@ var _list = setlistener("sim/signals/fdm-initialized", func {
 					});
 					me.tod_timer.start();
 				} else { 
-					if (me.tod_timer.isRunning) {
+					if (me.tod_timer != nil and me.tod_timer.isRunning) {
 					me.tod_timer.stop()}
 					me.tod.hide();
 				}
 			});
 
-			setlistener("autopilot/locks/TOD", func {
-				if (getprop("autopilot/locks/TOD")) {
-					me.tod_timer.stop();
+			setlistener("autopilot/locks/TOD", func (n) {
+				if (n.getValue()) {
+					if (me.tod_timer != nil) {
+						me.tod_timer.stop();
+					}
 					me.tod.hide();
 				}
 			});

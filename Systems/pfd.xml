@@ -13,41 +13,19 @@
     <filter-gain>0.05</filter-gain>
   </predict-simple>
 
-  <filter>
-    <name>ALT preprocessor (alt trend up)</name>
-    <type>gain</type>
-    <update-interval-secs type="double">0.1</update-interval-secs>
-    <input>
-      <property>instrumentation/pfd/alt-lookahead-6s</property>
-    </input>
-    <reference>
-      <property>instrumentation/altimeter/indicated-altitude-ft</property>
-      <offset>500</offset>
-    </reference>
-    <gain>-0.000480</gain>
-    <output>instrumentation/pfd/alt-trend-up</output>
-    <max>0.24</max>
-    <min>0</min>
-  </filter>
-
-  <filter>
-    <name>ALT preprocessor (alt trend down)</name>
-    <type>gain</type>
-    <update-interval-secs type="double">0.1</update-interval-secs>
-    <input>
-      <property>instrumentation/pfd/alt-lookahead-6s</property>
-      <min>0</min>
-    </input>
-    <reference>
-      <property>instrumentation/altimeter/indicated-altitude-ft</property>
-      <offset>-500</offset>
-    </reference>
-    <gain>-0.000480</gain>
-    <output>instrumentation/pfd/alt-trend-down</output>
-    <min>-0.24</min>
-    <max>0</max>
-  </filter>
-
+	<filter>
+		  <name>ALT preprocessor (alt trend)</name>
+		  <type>gain</type>
+		  <update-interval-secs type="double">0.1</update-interval-secs>
+		  <input>
+		    <property>instrumentation/pfd/alt-lookahead-6s</property>
+		  </input>
+		  <reference>
+		    <property>instrumentation/altimeter/indicated-altitude-ft</property>
+			</reference>
+			<gain>1.0</gain>
+		  <output>instrumentation/pfd/alt-trend-ft</output>
+	</filter>
 
 <!-- ALTITUDE CURSOR -->
 
@@ -152,7 +130,7 @@
 <!-- SPEED PREDICTOR -->
 
   <filter>
-    <name>PFD preprocessor (spd trend up)</name>
+    <name>PFD preprocessor (spd trend)</name>
     <type>gain</type>
     <update-interval-secs type="double">0.1</update-interval-secs>
     <input>
@@ -160,30 +138,9 @@
     </input>
     <reference>
       <property>velocities/airspeed-kt</property>
-      <offset>90</offset> 
     </reference>
-    <gain>-0.002667</gain>
-    <output>instrumentation/pfd/speed-trend-up</output>
-    <max>0.24</max>
-    <min>0</min>
-  </filter>
-
-  <filter>
-    <name>PFD preprocessor (spd trend down)</name>
-    <type>gain</type>
-    <update-interval-secs type="double">0.1</update-interval-secs>
-    <input>
-      <property>autopilot/internal/lookahead-10-sec-airspeed-kt</property>
-      <min>0</min>
-    </input>
-    <reference>
-      <property>velocities/airspeed-kt</property>
-     <offset>-90</offset> 
-    </reference>
-    <gain>-0.002667</gain>
-    <output>instrumentation/pfd/speed-trend-down</output>
-    <min>-0.24</min>
-    <max>0</max>
+    <gain>1.0</gain>
+    <output>instrumentation/pfd/speed-trend-kt</output>
   </filter>
 
 <!-- V1 marker -->

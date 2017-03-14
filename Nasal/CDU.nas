@@ -308,8 +308,8 @@ var key = func(v) {
 					}
 					else {
 						flightplan().approach = ApprName;
-						setprop("autopilot/route-managerdestination/approach",ApprName);
-						setprop("autopilot/route-managerdestination/appr-name",ApprName);
+						setprop("autopilot/route-manager/destination/approach",ApprName);
+						setprop("autopilot/route-manager/destination/appr-name",ApprName);
 					}
 				}
 				cduInput = getprop("autopilot/route-manager/destination/appr-name") ~ " Loaded";
@@ -492,7 +492,7 @@ var key = func(v) {
 			}
 			if (v == "B4R") {
 				if (cduDisplay == "FLT-PLAN[0]" or (cduDisplay == "FLT-PLAN[6]" and getprop("autopilot/route-manager/active"))) {
-					cduDisplay = "PRF-INIT[0]";
+					cduDisplay = "PRF-PAGE[0]";
 				}
 				else {cduDisplay = "FLT-ARRV[0]"}
 				v = "";

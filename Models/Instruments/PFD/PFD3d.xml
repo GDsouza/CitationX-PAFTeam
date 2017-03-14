@@ -259,6 +259,60 @@
         </transform>
     </animation>
 
+    <animation>
+        <name>Flight director bars</name>
+        <type>select</type>
+        <object-name>Vbars</object-name>
+	      <condition>
+          <property>autopilot/internal/show-bars</property>
+        </condition>
+    </animation>
+
+    <animation>
+      <name>Flight director pitch bar</name>
+      <type>translate</type>
+      <object-name>Vbars</object-name>
+      <expression>
+        <product>
+          <difference>
+            <property>autopilot/internal/pitch-bars</property>
+            <property>orientation/pitch-deg</property>
+         	</difference>
+
+ <!-- The entire attitude area is from Z=0.0112 to Z=0.0845, and this
+                                    corresponds to 50 degrees pitch. -->
+          <value>0.001466</value>
+        </product>
+      </expression>
+      <axis>
+        <x>0</x>
+        <y>0</y>
+        <z>1</z>
+      </axis>
+    </animation>
+
+    <animation>
+      <name>Flight director roll bar</name>
+      <type>rotate</type>
+      <object-name>Vbars</object-name>
+      <expression>
+        <difference>
+         	<property>autopilot/internal/roll-bars</property>
+          <property>orientation/roll-deg</property>
+        </difference>
+      </expression>
+      <axis>
+      <x>-1</x>
+    	<y>0</y>
+     	<z>0</z>
+      </axis>
+  		<center>
+      	<x-m>0</x-m>
+      	<y-m>-0.002</y-m>
+      	<z-m>0.0476</z-m>
+  		</center>
+    </animation>
+
 <!-- altitude cursor -->
 
     <animation>
@@ -288,7 +342,7 @@
     </animation>
 
 <!-- Altitude Trend -->
-
+<!--
     <animation>
         <object-name>alttrend.up</object-name>
         <property>instrumentation/pfd/alt-trend-up</property>
@@ -332,6 +386,58 @@
             </greater-than>
         </condition>
     </animation>
+-->
+
+    <animation>
+        <object-name>alttrend.up</object-name>
+        <property>instrumentation/pfd/alt-trend-ft</property>
+        <type>textranslate</type>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+        </axis>
+				<interpolation>
+		        <entry><ind>0</ind><dep>0.41</dep></entry>
+		        <entry><ind>600</ind><dep>0</dep></entry>
+       	</interpolation>
+    </animation>
+
+    <animation>
+        <object-name>alttrend.dwn</object-name>
+        <property>instrumentation/pfd/alt-trend-ft</property>
+        <type>textranslate</type>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+        </axis>
+				<interpolation>
+		        <entry><ind>-600</ind><dep>0</dep></entry>
+		        <entry><ind>0</ind><dep>-0.41</dep></entry>
+       	</interpolation>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>alttrend.up</object-name>
+        <condition>
+            <greater-than>
+                <property>instrumentation/pfd/alt-trend-ft</property>
+                <value>50</value>
+            </greater-than>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>alttrend.dwn</object-name>
+        <condition>
+            <less-than>
+                <property>instrumentation/pfd/alt-trend-ft</property>
+                <value>-50</value>
+            </less-than>
+        </condition>
+    </animation>
+
 
 <!-- minimums -->
 
@@ -491,42 +597,51 @@
 
     <animation>
         <object-name>speedtrend.up</object-name>
-        <property>instrumentation/pfd/speed-trend-up</property>
+        <property>instrumentation/pfd/speed-trend-kt</property>
         <type>textranslate</type>
         <axis>
             <x>0</x>
             <y>1</y>
         </axis>
-        <factor>1</factor> 
+        <interpolation>
+          <entry><ind>0</ind><dep>0.43</dep></entry>
+          <entry><ind>40</ind><dep>0</dep></entry>
+        </interpolation>
     </animation>
+
     <animation>
         <object-name>speedtrend.dwn</object-name>
-        <property>instrumentation/pfd/speed-trend-down</property>
+        <property>instrumentation/pfd/speed-trend-kt</property>
         <type>textranslate</type>
         <axis>
             <x>0</x>
             <y>1</y>
         </axis>
-        <factor>1</factor> 
+        <interpolation>
+          <entry><ind>-40</ind><dep>0</dep></entry>
+          <entry><ind>0</ind><dep>-0.43</dep></entry>
+        </interpolation>
     </animation>
+
     <animation>
         <type>select</type>
         <object-name>speedtrend.up</object-name>
         <condition>
-            <less-than>
-                <property>instrumentation/pfd/speed-trend-up</property>
-                <value>0.239</value>
-            </less-than>
+            <greater-than>
+                <property>instrumentation/pfd/speed-trend-kt</property>
+                <value>1</value> <!-- old 5 -->
+            </greater-than>
         </condition>
     </animation>
+
     <animation>
         <type>select</type>
         <object-name>speedtrend.dwn</object-name>
         <condition>
-            <greater-than>
-                <property>instrumentation/pfd/speed-trend-down</property>
-                <value>-0.239</value>
-            </greater-than>
+            <less-than>
+                <property>instrumentation/pfd/speed-trend-kt</property>
+                <value>-1</value> <!-- old -5 -->
+            </less-than>
         </condition>
     </animation>
 

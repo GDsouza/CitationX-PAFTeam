@@ -2,6 +2,44 @@
 
 <PropertyList>
 
+<!-- ====== FD enable ====== -->
+
+		<logic>
+       <name>FD enable</name>
+       <input>
+         <greater-than>
+           <property>position/altitude-agl-ft</property>
+           <value>50</value>
+         </greater-than>
+       </input>
+       <output>autopilot/locks/FD-status</output>
+		</logic>
+
+		<logic>
+       <name>FD bars shown</name>
+       <input>
+         <and>
+           <property>autopilot/locks/FD-status</property>
+           <or>
+             <not>
+               <equals>
+                 <property>/autopilot/locks/heading</property>
+                 <value>ROLL</value>
+               </equals>
+             </not>
+             <not>
+               <equals>
+                 <property>/autopilot/locks/altitude</property>
+                 <value>PTCH</value>
+               </equals>
+             </not>
+           </or>
+         </and>
+       </input>
+		         <output>autopilot/internal/show-bars</output>
+		</logic>
+
+
 <!-- ======  Lateral Modes  ====== -->
 
     <pid-controller>
@@ -313,7 +351,8 @@
             <property>instrumentation/altimeter/indicated-altitude-ft</property>
         </input>
         <reference>
-						<property>autopilot/settings/target-altitude-ft</property>
+					<property>autopilot/settings/tg-alt-ft</property>
+<!--						<property>autopilot/settings/target-altitude-ft</property> -->
         </reference>
         <output>
             <property>/autopilot/internal/target-climb-rate-fps</property>
@@ -562,6 +601,7 @@
             <max>1</max>
         </config>
     </pid-controller>
+
 
 <!-- Speed Control  -->
 
@@ -834,7 +874,50 @@
         <max-rate-of-change>1</max-rate-of-change>
     </filter>
 
-    <filter>
+		<filter>
+        <name>Elevator Control</name>
+        <type>noise-spike</type>
+        <debug>false</debug>
+					<max-rate-of-change>
+           <condition>
+             <equals>
+				       <property>autopilot/locks/AP-status</property>
+                 <value>AP</value>
+             </equals>
+           </condition>
+           <value>0.01</value>
+          </max-rate-of-change>
+         	<max-rate-of-change>100.0</max-rate-of-change>
+	        <input>
+						<condition>
+							<equals>
+								<property>autopilot/locks/AP-status</property>
+                 	<value>AP</value>
+							</equals>
+						</condition>
+           	<value>0</value>
+					</input>
+					<input>controls/flight/elevator</input>
+					<output>autopilot/internal/elevator-cmd-norm</output>
+			</filter>
+
+			<filter>
+					<name>Elevator Output</name>
+					<type>gain</type>
+					<gain>1.0</gain>
+					<enable>
+						<condition>
+							<equals>
+								<property>autopilot/locks/AP-status</property>
+									<value>AP</value>
+							</equals>
+						</condition>
+		      </enable>
+					<input>autopilot/internal/elevator-cmd-norm</input>
+					<output>controls/flight/elevator</output>
+       </filter>
+ 
+   <filter>
         <name>vnav alt</name>
         <debug>false</debug>
         <feedback-if-disabled>true</feedback-if-disabled>
@@ -853,7 +936,8 @@
 							</or>
             </condition>
         </enable>
-				<input>instrumentation/settings/target-altitude-ft</input>
+					<input>autopilot/settings/tg-alt-ft</input>
+<!--				<input>autopilot/settings/target-altitude-ft</input> -->
 <!--
         <input>instrumentation/gps/wp/wp[1]/altitude-ft</input>
 -->

@@ -54,9 +54,29 @@ var WPT_model = {
 #		if (alt != 0)
 #			m.name ~= "\n"~alt;
 
-		if (idx) var n = wp.path()[-1];
-		else var n = fp.getWP(1).path()[0];
-		(m.lat,m.lon) = (n.lat,n.lon);
+#		if (idx) var n = wp.path()[-1]; # supp by accek
+#		else var n = fp.getWP(1).path()[0]; # supp by accek
+#		(m.lat,m.lon) = (n.lat,n.lon); # supp by accek
+
+### add by accek for discontinuities in plans
+     var path = wp.path();
+     if (size(path) > 0) {
+       (m.lat,m.lon) = (path[-1].lat,path[-1].lon);
+       return m;
+   }
+     
+     var wp_next = fp.getWP(idx + 1);
+     if (wp_next != nil) {
+       var path_next = wp.path();
+       if (size(path_next) > 0) {
+               (m.lat,m.lon) = (path_next[0].lat,path_next[0].lon);
+               return m;
+       }
+     }
+
+     (m.lat,m.lon) = (wp.wp_lat,wp.wp_lon);
+###
+
 		return m;
 	},
 	equals: func(other) {

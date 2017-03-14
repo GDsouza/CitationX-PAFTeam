@@ -1011,7 +1011,7 @@
           </less-than>
           <greater-than>
             <property>velocities/airspeed-kt</property>
-              <value>180</value>
+              <property>controls/flight/v2</property>
           </greater-than>
           <greater-than-equals>
             <property>autopilot/internal/vert-speed-fpm</property>

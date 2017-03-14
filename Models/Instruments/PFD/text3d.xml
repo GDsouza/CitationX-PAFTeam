@@ -385,7 +385,7 @@
         <name>v1-text</name>
         <offsets>
             <x-m>0.0</x-m>
-            <y-m>-0.047</y-m>
+            <y-m>-0.044</y-m>
             <z-m>0.0482</z-m>
         </offsets>
         <alignment>left-center</alignment>
@@ -405,7 +405,7 @@
         <name>vr-text</name>
         <offsets>
             <x-m>0.0</x-m>
-            <y-m>-0.047</y-m>
+            <y-m>-0.044</y-m>
             <z-m>0.0482</z-m>
         </offsets>
         <alignment>left-center</alignment>
@@ -425,7 +425,7 @@
         <name>v2-text</name>
         <offsets>
             <x-m>0.0</x-m>
-            <y-m>-0.047</y-m>
+            <y-m>-0.044</y-m>
             <z-m>0.0482</z-m>
         </offsets>
         <alignment>left-center</alignment>
@@ -445,7 +445,7 @@
         <name>ve-text</name>
         <offsets>
             <x-m>0.0</x-m>
-            <y-m>-0.047</y-m>
+            <y-m>-0.044</y-m>
             <z-m>0.0482</z-m>
         </offsets>
         <alignment>left-center</alignment>
@@ -465,7 +465,7 @@
         <name>va-text</name>
         <offsets>
             <x-m>0.0</x-m>
-            <y-m>-0.047</y-m>
+            <y-m>-0.044</y-m>
             <z-m>0.0482</z-m>
         </offsets>
         <alignment>left-center</alignment>
@@ -485,7 +485,7 @@
         <name>vf5-text</name>
         <offsets>
             <x-m>0.0</x-m>
-            <y-m>-0.047</y-m>
+            <y-m>-0.044</y-m>
             <z-m>0.0482</z-m>
         </offsets>
         <alignment>left-center</alignment>
@@ -505,7 +505,7 @@
         <name>vf15-text</name>
         <offsets>
             <x-m>0.0</x-m>
-            <y-m>-0.047</y-m>
+            <y-m>-0.044</y-m>
             <z-m>0.0482</z-m>
         </offsets>
         <alignment>left-center</alignment>
@@ -525,7 +525,7 @@
         <name>vf35-text</name>
         <offsets>
             <x-m>0.0</x-m>
-            <y-m>-0.047</y-m>
+            <y-m>-0.044</y-m>
             <z-m>0.0482</z-m>
         </offsets>
         <alignment>left-center</alignment>
@@ -545,7 +545,7 @@
         <name>vref-text</name>
         <offsets>
             <x-m>0.0</x-m>
-            <y-m>-0.047</y-m>
+            <y-m>-0.044</y-m>
             <z-m>0.0482</z-m>
         </offsets>
         <alignment>left-center</alignment>
@@ -782,9 +782,8 @@
         </font-resolution>
     </text>
 
-
     <text>
-        <name>Ralt</name>
+        <name>Minimums</name>
         <offsets>
             <x-m>0.0</x-m>
             <y-m>0.018</y-m>
@@ -805,7 +804,7 @@
     </text>
 
     <text>
-        <name>Ralt</name>
+        <name>Minimums</name>
         <offsets>
             <x-m>0.0</x-m>
             <y-m>0.030</y-m>
@@ -901,10 +900,10 @@
         <object-name>AP-status</object-name>
         <object-name>AP-lat</object-name>
         <object-name>AP-vert</object-name>
-        <object-name>CRSannun</object-name>
-        <object-name>HDGannun</object-name>
         <object-name>VSI-annun</object-name>
-        <object-name>Ralt</object-name>
+        <object-name>Mach</object-name>
+        <object-name>Kt</object-name>
+        <object-name>Minimums</object-name>
         <emission>
             <red-prop>sim/color-set/green/r</red-prop>
             <green-prop>sim/color-set/green/g</green-prop>
@@ -935,7 +934,6 @@
         <object-name>AP-vert-armed</object-name>
         <object-name>CRSlabel</object-name>
         <object-name>HDGlabel</object-name>
-        <object-name>Mach</object-name>
         <object-name>IE-text</object-name>
         <object-name>IR-text</object-name>
         <object-name>IR-value</object-name>
@@ -969,11 +967,7 @@
     <animation>
         <name>magenta</name>
         <type>material</type>
-        <object-name>ALT-annun</object-name>
-        <object-name>ALT-min</object-name>
-        <object-name>IAS-annun</object-name>
-        <object-name>MACH-annun</object-name>
-        <object-name>HDG-annun</object-name>
+        <object-name>CRSannun</object-name>
         <object-name>Valt-display</object-name>
         <object-name>Nav-src</object-name>
         <object-name>Nav-dst</object-name>
@@ -1004,11 +998,13 @@
     <animation>
         <name>cyan</name>
         <type>material</type>
+        <object-name>ALT-annun</object-name>
+        <object-name>ALT-min</object-name>
         <object-name>SPD-kt</object-name>
         <object-name>SPD-mach</object-name>
         <object-name>VSI-tgt</object-name>
+        <object-name>HDGannun</object-name>
         <object-name>inhg</object-name>
-        <object-name>Kt</object-name>
         <object-name>v1-text</object-name>
         <object-name>vr-text</object-name> 
         <object-name>v2-text</object-name>

@@ -242,7 +242,7 @@ setlistener("/sim/signals/fdm-initialized", func {
 #		setprop("sim/sound/startup",int(10*rand()));
 		FH_load();
 		var v_speed = func() {		
-		v_speed_init();
+			Vspeed_update();
 		}
 		var timer = maketimer(10,v_speed);
 		timer.singleShot = 1;
@@ -595,7 +595,7 @@ var Shutdown = func{
 		setprop("controls/anti-ice/window-heat[1]",0);
 }
 
-var v_speed_init = func {
+var Vspeed_update = func {
 	var Wtot = getprop("yasim/gross-weight-lbs");
 	var Flaps = getprop("controls/flight/flaps");
 	var v1=0;
@@ -611,31 +611,8 @@ var v_speed_init = func {
 	if (Wtot >=34000 and Wtot <35000) {v1=130;vr=130;v2=140}
 	if (Wtot >=35000 and Wtot <36100) {v1=132;vr=132;v2=143}
 	if (Wtot >=36100) {v1=134;vr=134;v2=144}
+	if (Wtot == nil or Flaps == nil) {return}
 
-	setprop("controls/flight/v1",v1);
-	setprop("controls/flight/vr",vr);
-	setprop("controls/flight/v2",v2);
-	setprop("controls/flight/vf5",180);
-	setprop("controls/flight/vf15",160);
-	setprop("controls/flight/vf35",140);
-
-	if (Wtot >=23000 and Wtot <24000) {vref=108}
-	if (Wtot >=24000 and Wtot <25000) {vref=110}
-	if (Wtot >=25000 and Wtot <26000) {vref=113}
-	if (Wtot >=26000 and Wtot <28000) {vref=115}
-	if (Wtot >=28000 and Wtot <30000) {vref=121}
-	if (Wtot >=30000 and Wtot <31000) {vref=125}
-	if (Wtot >=31000 and Wtot <31800) {vref=129}
-	if (Wtot >=31800) {vref=131}
-	setprop("controls/flight/vref",vref);
-}
-
-setlistener("controls/flight/flaps", func {
-		var Wtot = getprop("yasim/gross-weight-lbs");
-		var Flaps = getprop("controls/flight/flaps");
-		var v1=0;
-		var vr=0;
-		var v2=0;
 	if (Flaps > 0.142) {
 		if (Wtot <31000) {v1=115;vr=118;v2=129}
 		if (Wtot >=31000 and Wtot <33000) {v1=116;vr=120;v2=128}
@@ -654,10 +631,24 @@ setlistener("controls/flight/flaps", func {
 		if (Wtot >=35000 and Wtot <36100) {v1=132;vr=132;v2=143}
 		if (Wtot >=36100) {v1=134;vr=134;v2=144}
 	}
+
 		setprop("controls/flight/v1",v1);
 		setprop("controls/flight/vr",vr);
 		setprop("controls/flight/v2",v2);
-});
+		setprop("controls/flight/vf5",180);
+		setprop("controls/flight/vf15",160);
+		setprop("controls/flight/vf35",140);
+
+		if (Wtot >=23000 and Wtot <24000) {vref=108}
+		if (Wtot >=24000 and Wtot <25000) {vref=110}
+		if (Wtot >=25000 and Wtot <26000) {vref=113}
+		if (Wtot >=26000 and Wtot <28000) {vref=115}
+		if (Wtot >=28000 and Wtot <30000) {vref=121}
+		if (Wtot >=30000 and Wtot <31000) {vref=125}
+		if (Wtot >=31000 and Wtot <31800) {vref=129}
+		if (Wtot >=31800) {vref=131}
+		setprop("controls/flight/vref",vref);
+}
 
 var atc_id = func {
 	for (var n = 0;n<2;n+=1){

@@ -163,6 +163,7 @@ var EICAS = {
 			me.nb_caution = 0;
 			me.nb_l1 = 0;
 			me.nb_l0 = 0;
+			var no_takeoff_l3 = 0;
 
 			if (me.enabled and me.test == 0) {		
 
@@ -193,6 +194,7 @@ var EICAS = {
 						or me.total_fuel <= 500)) {
 					append(me.msg_l3,"NO TAKEOFF");
 					me.nb_warning +=1;
+					no_takeoff_l3 = 1;
 				}			
 				if(me.vmo >= -59) {
 					append(me.msg_l3,"OVERSPEED");
@@ -256,7 +258,7 @@ var EICAS = {
 					append(me.msg_l1,"EMERGENCY BRAKE");
 					me.nb_l1 +=1;
 				}
-				if(me.wow and (me.flaps < 0.140	or me.flaps > 0.430)) {
+				if(me.wow and (me.flaps < 0.140	or me.flaps > 0.430)and !no_takeoff_l3) {
 					append(me.msg_l1,"NO TAKEOFF");
 					me.nb_l1 +=1;
 				}			

@@ -191,11 +191,11 @@
     </model>
 
 	<model>
-        <name>RLandingLight</name>
-        <path>Aircraft/CitationX/Models/Lights/Rlandinglight.xml</path>
+        <name>LLandingLight</name>
+        <path>Aircraft/CitationX/Models/Lights/Llandinglight.xml</path>
         <offsets>
             <x-m>-3.298</x-m>
-            <y-m> 1.173</y-m>
+            <y-m>-1.185</y-m>
             <z-m>-0.918</z-m>
             <pitch-deg>0</pitch-deg>
         </offsets>
@@ -805,7 +805,7 @@
         <object-name>frtshock</object-name>
         <object-name>Nosewheel</object-name>
         <property>controls/gear/steering</property>
-        <factor>60</factor>
+        <factor>57.2958</factor> <!-- old 60 -->
         <center>
             <x-m>-8.149</x-m>
             <y-m>0</y-m>
