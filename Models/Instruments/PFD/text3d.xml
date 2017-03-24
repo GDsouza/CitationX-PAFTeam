@@ -112,7 +112,7 @@
         <alignment>right-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
         <type type="string">number-value</type>
-        <property>autopilot/settings/target-altitude-ft</property> -->
+        <property>autopilot/settings/tg-alt-ft</property> -->
         <format>%5.0f</format>
         <font>helvetica_bold.txf</font>
         <character-size>0.007</character-size>

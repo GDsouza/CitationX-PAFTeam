@@ -51,7 +51,8 @@
 						<value>VALT</value>
 					</equals>
 				</condition>
-	      <property>autopilot/settings/target-altitude-ft</property>
+<!--	      <property>autopilot/settings/target-altitude-ft</property> -->
+	      <property>autopilot/settings/tg-alt-ft</property>
       </input>
       <reference>
 				<property>instrumentation/altimeter/indicated-altitude-ft</property>

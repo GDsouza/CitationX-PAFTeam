@@ -24,9 +24,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.7"
-     inkscape:cx="512"
-     inkscape:cy="35"
+     inkscape:zoom="22.4"
+     inkscape:cx="188.45028"
+     inkscape:cy="23.392857"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -37,7 +37,8 @@
      inkscape:window-y="0"
      inkscape:window-maximized="1"
      showguides="true"
-     inkscape:guide-bbox="true" />
+     inkscape:guide-bbox="true"
+     inkscape:snap-center="false" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -138,15 +139,17 @@
     <path
        id="speed_arrow"
        style="fill:none;stroke:#00b400;stroke-width:2.87078977;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 260.48186,1021.4303 9.03273,4.7363 -8.96538,4.6201 m -56.59939,-4.6643 64.31152,0"
+       d="m 250.48186,1022.2303 9.03273,4.7363 -8.96538,4.6201 m -56.59939,-4.6643 64.31152,0"
        inkscape:label="#path3979"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:transform-center-x="-33.100462"
+       inkscape:transform-center-y="6.3960957e-05" />
     <rect
        style="fill:#ff0000;fill-opacity:1;stroke:#ff0000;stroke-width:1.91549385;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect3982"
        width="14.456004"
        height="19.96772"
-       x="177.30649"
+       x="177.00647"
        y="1027.1619" />
     <path
        id="aircraft_marker"

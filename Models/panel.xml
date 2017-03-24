@@ -2526,6 +2526,14 @@
                 <max>1000</max>
                 <wrap>false</wrap>
             </binding>
+            <binding>
+                <command>property-adjust</command>
+                <property>instrumentation/mk-viii/inputs/arinc429/decision-height</property>
+                <step>50</step>
+                <min>0</min>
+                <max>1000</max>
+                <wrap>false</wrap>
+            </binding>
         </action>
         <action>
             <button>4</button>
@@ -2534,6 +2542,14 @@
             <binding>
                 <command>property-adjust</command>
                 <property>autopilot/settings/minimums</property>
+                <step>-50</step>
+                <min>0</min>
+                <max>1000</max>
+                <wrap>false</wrap>
+            </binding>
+            <binding>
+                <command>property-adjust</command>
+                <property>instrumentation/mk-viii/inputs/arinc429/decision-height</property>
                 <step>-50</step>
                 <min>0</min>
                 <max>1000</max>

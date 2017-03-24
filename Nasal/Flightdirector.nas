@@ -5,7 +5,7 @@
 # Ctesc356 - rev function "course_offset" - fev 2017
 ##########################################
 
-###  Initialization #######
+###  Initialization ###
 var Lateral = "autopilot/locks/heading";
 var Lateral_arm = "autopilot/locks/heading-arm";
 var Vertical = "autopilot/locks/altitude";
@@ -32,8 +32,21 @@ var NDSymbols = props.globals.getNode("autopilot/route-manager/vnav", 1);
 var int_crs = 0;
 var wp = 0;
 
+### LISTENERS ###
 
-### AP /FD BUTTONS ####
+setlistener("autopilot/settings/minimums", func(mn) {
+    minimums=mn.getValue();
+		var min_mode = getprop("autopilot/settings/minimums-mode");
+		if (min_mode == "RA") {setprop("instrumentation/pfd/minimums-radio",minimums)}
+		if (min_mode == "BA") {setprop("instrumentation/pfd/minimums-baro",minimums)}
+},1,0);
+
+
+setlistener(NAVprop, func(Nv) {
+    NAVSRC=Nv.getValue();
+},0,0);
+
+### AP /FD BUTTONS ###
 
 var FD_set_mode = func(btn){
     var Lmode=getprop(Lateral);
@@ -153,7 +166,8 @@ var FD_set_mode = func(btn){
     }
 }
 
-########  FMS/NAV BUTTONS  ############
+###  FMS/NAV BUTTONS  ###
+
 var nav_src_set=func(src){
     setprop(Lateral_arm,"");
 		setprop(Vertical_arm,"");
@@ -168,7 +182,7 @@ var nav_src_set=func(src){
     }
 }
 
-########### ARM VALID NAV MODE ################
+### ARM VALID NAV MODE ####
 
 var set_nav_mode=func{
     setprop(Lateral_arm,"");
@@ -198,7 +212,7 @@ var set_nav_mode=func{
 		}
 }
 
-#######  PITCH WHEEL ACTIONS #############
+###  PITCH WHEEL ACTIONS ###
 
 var pitch_wheel=func(dir) {
     var Vmode=getprop(Vertical);
@@ -227,7 +241,7 @@ var pitch_wheel=func(dir) {
     }
 }
 
-########    FD INTERNAL ACTIONS  #############
+### FD INTERNAL ACTIONS  ###
 
 var set_pitch = func{
     setprop(Vertical,"PTCH");
@@ -239,24 +253,6 @@ var set_roll = func{
 		setprop("autopilot/settings/target-roll-deg",0.0);
 }
 
-var set_apr = func{
-    if(NAVSRC == "NAV1" or NAVSRC == "FMS1"){
-			if(getprop("instrumentation/nav/nav-loc") and getprop("instrumentation/nav/has-gs")){
-				setprop(Lateral_arm,"LOC");
-				setprop(Vertical_arm,"GS");
-				setprop(Lateral,"HDG");
-				setprop(Vertical,"GS"); 
-			}
-		}else if(NAVSRC == "NAV2" or NAVSRC == "FMS2"){
-			if(getprop("instrumentation/nav[1]/nav-loc") and getprop("instrumentation/nav[1]/has-gs")){
-				setprop(Lateral_arm,"LOC");
-				setprop(Vertical_arm,"GS");
-				setprop(Lateral,"HDG");
-				setprop(Vertical,"GS");
-      }
-		}
-}
-
 var set_alt = func {
 				var n=(getprop("instrumentation/altimeter/mode-c-alt-ft"))*0.01;
 				var m=int(n/10);
@@ -266,53 +262,6 @@ var set_alt = func {
 				else {p=0}
 				setprop("autopilot/settings/asel",m*10);
 }
-
-setlistener("autopilot/settings/minimums", func(mn) {
-    minimums=mn.getValue();
-		var min_mode = getprop("autopilot/settings/minimums-mode");
-		if (min_mode == "RA") {setprop("instrumentation/pfd/minimums-radio",minimums)}
-		if (min_mode == "BA") {setprop("instrumentation/pfd/minimums-baro",minimums)}
-},1,0);
-
-
-setlistener(NAVprop, func(Nv) {
-    NAVSRC=Nv.getValue();
-},0,0);
-
-var update_nav = func {
-    var sgnl = "- - -";
-		var ind = 0;
-		var nb = "";
-    if(NAVSRC == "NAV1" or NAVSRC == "NAV2"){
-			if (NAVSRC == "NAV1") {ind = 0;nb = "1"}
-			if (NAVSRC == "NAV2") {ind = 1;nb = "2"}
-        if(getprop("instrumentation/nav["~ind~"]/data-is-valid"))sgnl="VOR"~nb;
-        setprop("autopilot/internal/in-range",getprop("instrumentation/nav["~ind~"]/in-range"));
-        setprop("autopilot/internal/gs-in-range",getprop("instrumentation/nav["~ind~"]/gs-in-range"));
-        var dst=getprop("instrumentation/nav["~ind~"]/nav-distance") or 0;
-        dst*=0.000539;
-        setprop("autopilot/internal/nav-distance",dst);
-        setprop("autopilot/internal/nav-id",getprop("instrumentation/nav["~ind~"]/nav-id"));
-        if(getprop("instrumentation/nav["~ind~"]/nav-loc"))sgnl="LOC"~nb;
-        if(getprop("instrumentation/nav["~ind~"]/has-gs"))sgnl="ILS"~nb;
-        setprop("autopilot/internal/nav-type",sgnl);
-        course_offset("instrumentation/nav["~ind~"]/radials/selected-deg");
-        setprop("autopilot/internal/to-flag",getprop("instrumentation/nav["~ind~"]/to-flag"));
-        setprop("autopilot/internal/from-flag",getprop("instrumentation/nav["~ind~"]/from-flag"));
-
-    }else if(NAVSRC == "FMS1" or NAVSRC == "FMS2"){
-				if (NAVSRC == "FMS1") {ind = 1} else {ind = 2}
-        setprop("autopilot/internal/nav-type","FMS"~ind);
-        setprop("autopilot/internal/in-range",1);
-        setprop("autopilot/internal/gs-in-range",0);
-        setprop("autopilot/internal/nav-distance",getprop("instrumentation/gps/wp/wp[1]/distance-nm"));
-        setprop("autopilot/internal/nav-id",getprop("instrumentation/gps/wp/wp[1]/ID"));
-        course_offset("instrumentation/gps/wp/wp[1]/bearing-mag-deg");
-        setprop("autopilot/internal/to-flag",getprop("instrumentation/gps/wp/wp[1]/to-flag"));
-        setprop("autopilot/internal/from-flag",getprop("instrumentation/gps/wp/wp[1]/from-flag"));
-    } else if (NAVSRC == "") {setprop("autopilot/internal/nav-type","")}
-
-} # end of update_nav
 
 var course_offset = func(src){
     var crs_set=getprop(src);
@@ -353,13 +302,13 @@ var monitor_V_armed = func{
         setprop(Vertical,"ALT");
         setprop(Vertical_arm,"");
       }
-    }elsif(Varm=="VASEL"){
+    }else if(Varm=="VASEL"){
       if(alterr >-250 and alterr <250){
         setprop(Vertical,"VALT");
         setprop("instrumentation/gps/wp/wp[1]/altitude-ft",asel);
         setprop(Vertical_arm,"");
       }
-    }elsif(Varm=="GS"){
+    }else if(Varm=="GS"){
       if(getprop(Lateral)=="LOC"){
         if(getprop("autopilot/internal/gs-in-range")){
           var gs_err=getprop("autopilot/internal/gs-deflection");
@@ -368,11 +317,11 @@ var monitor_V_armed = func{
             if(gs_err >-0.25 and gs_err < 0.25){
               setprop(Vertical,"GS");
               setprop(Vertical_arm,"");
+						}
           }
-        }
-      }
+        } 
+			}
     }
-  }
 }
 
 var monitor_AP_errors= func{
@@ -448,10 +397,73 @@ var alt_mach = func {
 	}
 }
 
+### APPROACH ###
+
+var set_apr = func{
+    if(NAVSRC == "NAV1" or NAVSRC == "FMS1"){
+		 if (!getprop("autopilot/internal/gs-in-range")){
+				setprop(Lateral_arm,"");
+				setprop(Vertical_arm,"");
+				setprop(Lateral,"HDG");
+				setprop(Vertical,"PTCH"); 
+				setprop("autopilot/settings/target-pitch-deg",3.0);
+			} else if(getprop("instrumentation/nav/nav-loc") and getprop("instrumentation/nav/has-gs")){
+				setprop(Lateral_arm,"LOC");
+				setprop(Vertical_arm,"GS");
+				setprop(Lateral,"HDG");
+				setprop(Vertical,"GS"); 
+			}		
+		}else if(NAVSRC == "NAV2" or NAVSRC == "FMS2"){
+			if(getprop("instrumentation/nav[1]/nav-loc")and getprop("instrumentation/nav/has-gs")){
+				setprop(Lateral_arm,"LOC");
+				setprop(Vertical_arm,"GS");
+				setprop(Lateral,"HDG");
+				setprop(Vertical,"GS");
+      }
+		}
+}
+
+### UPDATE ###
+
+var update_nav = func {
+    var sgnl = "- - -";
+		var ind = 0;
+		var nb = "";
+    if(NAVSRC == "NAV1" or NAVSRC == "NAV2"){
+			if (NAVSRC == "NAV1") {ind = 0;nb = "1"}
+			if (NAVSRC == "NAV2") {ind = 1;nb = "2"}
+        if(getprop("instrumentation/nav["~ind~"]/data-is-valid"))sgnl="VOR"~nb;
+        setprop("autopilot/internal/in-range",getprop("instrumentation/nav["~ind~"]/in-range"));
+        setprop("autopilot/internal/gs-in-range",getprop("instrumentation/nav["~ind~"]/gs-in-range"));
+        var dst=getprop("instrumentation/nav["~ind~"]/nav-distance") or 0;
+        dst*=0.000539;
+        setprop("autopilot/internal/nav-distance",dst);
+        setprop("autopilot/internal/nav-id",getprop("instrumentation/nav["~ind~"]/nav-id"));
+        if(getprop("instrumentation/nav["~ind~"]/nav-loc"))sgnl="LOC"~nb;
+        if(getprop("instrumentation/nav["~ind~"]/has-gs"))sgnl="ILS"~nb;
+        setprop("autopilot/internal/nav-type",sgnl);
+        course_offset("instrumentation/nav["~ind~"]/radials/selected-deg");
+        setprop("autopilot/internal/to-flag",getprop("instrumentation/nav["~ind~"]/to-flag"));
+        setprop("autopilot/internal/from-flag",getprop("instrumentation/nav["~ind~"]/from-flag"));
+
+    }else if(NAVSRC == "FMS1" or NAVSRC == "FMS2"){
+				if (NAVSRC == "FMS1") {ind = 1} else {ind = 2}
+        setprop("autopilot/internal/nav-type","FMS"~ind);
+        setprop("autopilot/internal/in-range",1);
+        setprop("autopilot/internal/gs-in-range",0);
+        setprop("autopilot/internal/nav-distance",getprop("instrumentation/gps/wp/wp[1]/distance-nm"));
+        setprop("autopilot/internal/nav-id",getprop("instrumentation/gps/wp/wp[1]/ID"));
+        course_offset("instrumentation/gps/wp/wp[1]/bearing-mag-deg");
+        setprop("autopilot/internal/to-flag",getprop("instrumentation/gps/wp/wp[1]/to-flag"));
+        setprop("autopilot/internal/from-flag",getprop("instrumentation/gps/wp/wp[1]/from-flag"));
+    } else if (NAVSRC == "") {setprop("autopilot/internal/nav-type","")}
+
+}
+
 ###  Main loop ###
 
 setlistener("sim/signals/fdm-initialized", func {
-   print("Flight Director ...Checked");
+   print("Flight Director ...Ok");
 	settimer(update_fd,6);
 });
 

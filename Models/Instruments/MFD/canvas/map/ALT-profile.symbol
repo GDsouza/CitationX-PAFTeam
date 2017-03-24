@@ -27,7 +27,7 @@ var init = func {
 			canvas.parsesvg(me.element, path);
 		}
 	} else {
-		var disptext = chr(string.toupper(name[0]))~"/"~chr(string.toupper(name[1]));
+		var disptext = chr(string.toupper(name[0]))~"o"~chr(string.toupper(name[1]));
 		var radius = me.style.radius;
 		me.element.createChild("path")
 		.setStrokeLineWidth(5)
@@ -51,5 +51,6 @@ var init = func {
 
 var draw = func{
 	me.callback('draw');
+#print("55 draw");
 }
 

@@ -7,14 +7,12 @@ var FMS = {
 	new : func {
 		var m = {parents:[FMS]};
 
-#		m.set_tgAlt = 0;
 		m.top_of_descent = 0;
 		m.flag_almTod = 0;
 		m.flag_navaid = 0;
 		m.vmo = 0;
 		m.mmo = 0;
 		m.tod_constant = 3.4;
-#		m.app_wp = "autopilot/route-manager/route/wp[";
 		m.current_wp = 0;
 		m.set_tgAlt = 0;
 
@@ -55,13 +53,12 @@ var FMS = {
 		return m;
 	}, # end of new
 
-	listen : func { # search for the highest and the last Navaid if exist
+	listen : func { # search for the highest navaid
 
 		setlistener("autopilot/route-manager/active", func(n) {
 			if (n.getValue()) {
 				me.fp = flightplan();
 				var first_nvd = 0;
-				me.last_navaid = 0;
 				var highest_alt = 0;
 				for (var i=0;i<me.fp.getPlanSize();i+=1) {
 					if (me.fp.getWP(i).wp_type == "navaid") {
@@ -69,7 +66,6 @@ var FMS = {
 							me.first_navaid = i;
 							first_nvd = 1;
 						}
-						me.last_navaid = i;
 						if (me.fp.getWP(i).alt_cstr > highest_alt){
 							highest_alt = me.fp.getWP(i).alt_cstr;
 						}
@@ -86,7 +82,13 @@ var FMS = {
 				setprop("/instrumentation/efis/cruise-alt",me.asel.getValue());
 			}
 		});
-						
+
+		setlistener("autopilot/settings/tg-alt-ft", func {
+			if (getprop("autopilot/settings/target-altitude-ft") != me.set_tgAlt) {
+				setprop("autopilot/settings/target-altitude-ft",me.set_tgAlt);
+			}
+		});
+
 	}, # end of listen
 
 	update : func {
@@ -169,8 +171,8 @@ var FMS = {
 						if (curr_wp_type == "navaid") { # Fp with navaids
 							if (curr_wp_alt > 0) {
 										# First navaid
-								if (curr_wp_alt == me.first_navaid) {
-									if (curr_wp_alt < asel) {																					
+								if (curr_wp == me.first_navaid) {
+									if (curr_wp_alt < asel) {																		
 										var alt_cstr = me.fp.getWP(curr_wp).alt_cstr;
 										var tod = (asel- alt_cstr)/1000*me.tod_constant;
 										if (me.fp.getWP(curr_wp).leg_distance < tod*2) {
@@ -205,7 +207,9 @@ var FMS = {
 									 # Out of navaids
 						} else {
 							if (curr_wp_alt > 0) {
-								me.set_tgAlt = math.round(curr_wp_alt,100);
+								if (me.fp.getWP(curr_wp).distance_along_route < 12) {
+									me.set_tgAlt = math.round(curr_wp_alt,100);
+								} else {me.set_tgAlt = asel}
 								if (curr_wp_alt < me.set_tgAlt) { # descent
 									me.todNew(curr_wp);
 								}
@@ -216,7 +220,7 @@ var FMS = {
 								}
 							}
 						}
-									# Advertising TOD on
+									# Advertising TOD
 						if (alm_tod) {
 							if (alt_ind < me.tg_alt.getValue() and !me.flag_almTod) {								
 								me.set_tgAlt = math.round(me.tg_alt.getValue(),100);
@@ -228,28 +232,30 @@ var FMS = {
 					} else {				
 						me.flag_almTod = 0;
 						me.alm_tod.setValue(0);
-						if (curr_wp_alt > 0){
-							me.set_tgAlt = math.round(curr_wp_alt,100);
+						if (dist_rem <= 7) {
+							me.set_tgAlt = math.round(dest_alt,100);
+							if (NAVSRC == "FMS1") {
+								var ind = 0;
+								me.NAVprop.setValue("NAV1");
+							}
+							if (NAVSRC == "FMS2") {
+								var ind = 1;
+								me.NAVprop.setValue("NAV2");
+							}
+							setprop("instrumentation/nav["~ind~"]/radials/selected-deg",int(getprop("autopilot/route-manager/route/wp["~(num-1)~"]/leg-bearing-true-deg")));
+							citation.set_apr();
 						} else {
-							for (var i=curr_wp;i<=num-1;i+=1) {
-								if (me.fp.getWP(i).alt_cstr > 0) {
-									me.set_tgAlt = math.round(me.fp.getWP(i).alt_cstr,100);
-									break;
-								} else {me.set_tgAlt = math.round(dest_alt,100)}
+							if (curr_wp_alt > 0){
+								me.set_tgAlt = math.round(curr_wp_alt,100);
+							} else {
+								for (var i=curr_wp;i<num;i+=1) {
+									if (me.fp.getWP(i).alt_cstr > 0) {
+										me.set_tgAlt = math.round(me.fp.getWP(i).alt_cstr,100);
+										break;
+									} else {me.set_tgAlt = math.round(dest_alt,100)}
+								}
 							}
 						}
-					}
-					if (dist_rem <= 7) {
-						if (NAVSRC == "FMS1") {
-							var ind = 0;
-							me.NAVprop.setValue("NAV1");
-						}
-						if (NAVSRC == "FMS2") {
-							var ind = 1;
-							me.NAVprop.setValue("NAV2");
-						}
-						setprop("instrumentation/nav["~ind~"]/radials/selected-deg",int(getprop("autopilot/route-manager/route/wp["~(num-1)~"]/leg-bearing-true-deg")));
-						citation.set_apr();
 					}
 
 					### Speed ###
@@ -340,9 +346,8 @@ var FMS = {
 				}			
 			} # end of AP
 
-			setprop("autopilot/settings/target-altitude-ft",me.set_tgAlt);
-			if (me.tg_alt.getValue() != me.set_tgAlt) {
-				me.tg_alt.setValue(me.set_tgAlt);
+			if (getprop("autopilot/settings/tg-alt-ft") != me.set_tgAlt) {
+				setprop("autopilot/settings/tg-alt-ft",me.set_tgAlt);
 			}
 
 	}, # end of update
@@ -384,9 +389,10 @@ var FMS = {
 
 var fms = FMS.new();
 
-setlistener("sim/signals/fdm-initialized", func {
+var fms_stl = setlistener("sim/signals/fdm-initialized", func {
 	settimer(update_fms,0);
 	fms.listen();
+	removelistener(fms_stl);
 });
 
 var update_fms = func {

@@ -31,14 +31,14 @@ var v2 = props.globals.getNode("controls/flight/v2");
 var vref = props.globals.getNode("controls/flight/vref");
 var va = props.globals.getNode("controls/flight/va");
 var mag_hdg = props.globals.getNode("orientation/heading-magnetic-deg");
-var range = props.globals.getNode("instrumentation/nd/range");
+#var range = props.globals.getNode("instrumentation/nd/range");
 var map = props.globals.getNode("instrumentation/primus2000/dc840/mfd-map");
 var dist_rem = props.globals.getNode("autopilot/route-manager/distance-remaining-nm");
 
 var nd_display = {};
 
 var myCockpit_switches = {
-'toggle_range':         {path: '/inputs/range-nm', value:40, type:'INT'},
+'toggle_range':         {path: '/inputs/range-nm', value:20, type:'INT'},
 'toggle_weather':       {path: '/inputs/wxr', value:0, type:'BOOL'},
 'toggle_airports':      {path: '/inputs/arpt', value:0, type:'BOOL'},
 'toggle_stations':      {path: '/inputs/sta', value:0, type:'BOOL'},
@@ -57,6 +57,7 @@ var myCockpit_switches = {
 'toggle_track_heading': {path: '/hdg-trk-selected', value:0, type:'BOOL'},
 'toggle_hdg_bug_only':  {path: '/hdg-bug-only', value:0, type:'BOOL'},
 'toggle_cruise_alt' : 	{path: '/cruise-alt', value: 100, type: 'DOUBLE'},
+'toggle_fp_active' :		{path: '/fp-active',value:0,type:'BOOL'},
 };
 
 var _list = setlistener("sim/signals/fdm-initialized", func {
@@ -167,6 +168,11 @@ var _list = setlistener("sim/signals/fdm-initialized", func {
 					me.tod.hide();
 				}
 			});
+
+			setlistener("autopilot/route-manager/active", func (n) {
+				setprop("instrumentation/efis/fp-active",n.getValue());
+			});
+
 		}, # end of listen
 
 		update: func {

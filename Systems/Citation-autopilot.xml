@@ -351,8 +351,8 @@
             <property>instrumentation/altimeter/indicated-altitude-ft</property>
         </input>
         <reference>
-					<property>autopilot/settings/tg-alt-ft</property>
-<!--						<property>autopilot/settings/target-altitude-ft</property> -->
+<!--					<property>autopilot/settings/tg-alt-ft</property> -->
+					<property>autopilot/settings/target-altitude-ft</property> 
         </reference>
         <output>
             <property>/autopilot/internal/target-climb-rate-fps</property>
@@ -936,8 +936,8 @@
 							</or>
             </condition>
         </enable>
-					<input>autopilot/settings/tg-alt-ft</input>
-<!--				<input>autopilot/settings/target-altitude-ft</input> -->
+<!--					<input>autopilot/settings/tg-alt-ft</input>-->
+				<input>autopilot/settings/target-altitude-ft</input>
 <!--
         <input>instrumentation/gps/wp/wp[1]/altitude-ft</input>
 -->
