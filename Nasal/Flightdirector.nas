@@ -343,6 +343,8 @@ var kill_Ap = func(msg){
 		setprop("autopilot/locks/disengage",1);
 }
 
+### Elapsed time ###
+
 var get_ETE= func{
     var ttw = "--:--";
     var min =0;
@@ -381,6 +383,7 @@ var get_ETE= func{
     setprop("autopilot/internal/nav-ttw",ttw);
 }
 
+### Speed Round ###
 
 var speed_round = func {
 	var ind_speed = getprop("instrumentation/airspeed-indicator/indicated-speed-kt");
@@ -390,37 +393,31 @@ var speed_round = func {
 var alt_mach = func {
 	if (getprop(alt) >= 30650) {
 		setprop("autopilot/locks/alt-mach",1);
-			setprop(tg_spd_kt,getprop(ind_kt));
+#			setprop(tg_spd_kt,getprop(ind_kt));
 	}	else {
 		setprop("autopilot/locks/alt-mach",0);
-			setprop(tg_spd_mc,getprop(ind_mc));
+#			setprop(tg_spd_mc,getprop(ind_mc));
 	}
 }
 
-### APPROACH ###
+### Approach ###
 
 var set_apr = func{
-    if(NAVSRC == "NAV1" or NAVSRC == "FMS1"){
-		 if (!getprop("autopilot/internal/gs-in-range")){
-				setprop(Lateral_arm,"");
-				setprop(Vertical_arm,"");
-				setprop(Lateral,"HDG");
-				setprop(Vertical,"PTCH"); 
-				setprop("autopilot/settings/target-pitch-deg",3.0);
-			} else if(getprop("instrumentation/nav/nav-loc") and getprop("instrumentation/nav/has-gs")){
-				setprop(Lateral_arm,"LOC");
-				setprop(Vertical_arm,"GS");
-				setprop(Lateral,"HDG");
-				setprop(Vertical,"GS"); 
-			}		
-		}else if(NAVSRC == "NAV2" or NAVSRC == "FMS2"){
-			if(getprop("instrumentation/nav[1]/nav-loc")and getprop("instrumentation/nav/has-gs")){
-				setprop(Lateral_arm,"LOC");
-				setprop(Vertical_arm,"GS");
-				setprop(Lateral,"HDG");
-				setprop(Vertical,"GS");
-      }
-		}
+		var ind = 0;
+    if(NAVSRC == "NAV1" or NAVSRC == "FMS1"){ind = 0}
+		if(NAVSRC == "NAV2" or NAVSRC == "FMS2"){ind = 1}
+		if (!getprop("instrumentation/nav["~ind~"]/gs-in-range")) {
+			setprop(Lateral_arm,"");
+			setprop(Vertical_arm,"");
+			setprop(Lateral,"HDG");
+			setprop(Vertical,"PTCH"); 
+			setprop("autopilot/settings/target-pitch-deg",3.0);
+		} else if(getprop("instrumentation/nav["~ind~"]/nav-loc") and getprop("instrumentation/nav["~ind~"]/has-gs")){
+			setprop(Lateral_arm,"LOC");
+			setprop(Vertical_arm,"GS");
+			setprop(Lateral,"HDG");
+			setprop(Vertical,"GS"); 
+		}		
 }
 
 ### UPDATE ###

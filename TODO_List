@@ -1,5 +1,7 @@
 ### TO DO LIST au 03/01/2017 ###
 
+Flightplan : 	# Ajouter les TOC : # Fait Mars 2017
+							# Ajouter les TOD : # Fait Avril 2017
 
 CDU : Terminer le pavé NAV
 		#	Rajouter une page au plan de vol (FPL) - Fait 07/01/2016
@@ -21,8 +23,9 @@ PFD :# Coder le bouton "MINIMUMS" - Fait 11/01/2016
 		 # Ajouter les références VE, VR, V2, V1 avion au sol - Fait 01-02-2016
 
 MFD : # Coder les boutons du bas - Fait oct/2016
-		 # Créer les checklists - Fait 22/04/2016
-		 # Transformer en Canvas - Fait Nov/2016
+		 	# Créer les checklists - Fait 22/04/2016
+		 	# Transformer en Canvas - Fait Nov/2016
+		 	# coder le VSD - fait Avril 2017
 		  séparer les deux MFD
 
 RMU : #	Transformer en Canvas - Fait déc/2016
@@ -49,9 +52,8 @@ PEDESTAL : 	Animer les boutons de TRIM à gauche des throttles
 						Animer les boutons sous les throttles
 					#	Coder le transpondeur	- Fait 18/06/2016					
 
-Pil auto : Vérifier toutes les fonctions
-					# Mise en conformité fonction FLC - Fait 21/01/2016				
-					# Vérification fonction VNAV - Fait 27/01/2016
+Pil auto : # Mise en conformité fonction FLC - Fait 21/01/2016				
+					 # Vérification fonction VNAV - Fait 27/01/2016
 
 CABINE : 	Eclairage de la cabine
 				#	Mettre une texture de ? derrière les portes du fond

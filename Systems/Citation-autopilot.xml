@@ -351,8 +351,8 @@
             <property>instrumentation/altimeter/indicated-altitude-ft</property>
         </input>
         <reference>
-<!--					<property>autopilot/settings/tg-alt-ft</property> -->
-					<property>autopilot/settings/target-altitude-ft</property> 
+					<property>autopilot/settings/tg-alt-ft</property>
+<!--					<property>autopilot/settings/target-altitude-ft</property> -->
         </reference>
         <output>
             <property>/autopilot/internal/target-climb-rate-fps</property>
@@ -916,7 +916,7 @@
 					<input>autopilot/internal/elevator-cmd-norm</input>
 					<output>controls/flight/elevator</output>
        </filter>
- 
+<!-- 
    <filter>
         <name>vnav alt</name>
         <debug>false</debug>
@@ -936,16 +936,13 @@
 							</or>
             </condition>
         </enable>
-<!--					<input>autopilot/settings/tg-alt-ft</input>-->
+					<input>autopilot/settings/tg-alt-ft</input> 
 				<input>autopilot/settings/target-altitude-ft</input>
-<!--
-        <input>instrumentation/gps/wp/wp[1]/altitude-ft</input>
--->
         <output>autopilot/settings/vnav-alt</output>
         <type>noise-spike</type>
         <max-rate-of-change>500</max-rate-of-change>
     </filter>
-
+-->
     <pi-simple-controller>
         <name>NAV1 bearing </name>
         <debug>false</debug>
