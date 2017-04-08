@@ -56,6 +56,7 @@ var FD_set_mode = func(btn){
 		var min_mode = getprop("autopilot/settings/minimums-mode");
 		var agl_alt = getprop("position/altitude-agl-ft");
 		var ind_alt = getprop(alt);
+		var asel = getprop("autopilot/settings/asel");
 
 		if(btn=="ap"){
 			Coord = getprop(AutoCoord);
@@ -122,12 +123,12 @@ var FD_set_mode = func(btn){
 			setprop("autopilot/settings/low-bank",0);
 
 		}elsif(btn=="vnav"){
-			if(Vmode!="VALT"){
+			if(Vmode!="VALT" and asel > 0){
 				if(left(NAVSRC,3)=="FMS"){
 					setprop(Vertical,"VALT");
 					setprop(Lateral,"LNAV");
-         }
-      }else {set_pitch()}
+				} else {set_pitch()}
+      }else if (Vmode!="ALT"){set_pitch()}
 
     }elsif(btn=="app"){
 			if (Vmode!="GS") {
@@ -178,6 +179,7 @@ var nav_src_set=func(src){
 			}
     }else{
 			setprop("autopilot/settings/fms",0);
+			if (getprop(Vertical) == "VALT") {setprop(Vertical,"PTCH")}
       if (NAVSRC!="NAV1")setprop(NAVprop,"NAV1") else setprop(NAVprop,"NAV2");
     }
 }
@@ -217,6 +219,7 @@ var set_nav_mode=func{
 var pitch_wheel=func(dir) {
     var Vmode=getprop(Vertical);
     var CO = getprop("autopilot/settings/changeover");
+		var SP = getprop("autopilot/locks/speed");
     var amt=0;
     if(Vmode=="VS"){
         amt = int(getprop("autopilot/settings/vertical-speed-fpm")) + (dir* 100);
@@ -234,11 +237,21 @@ var pitch_wheel=func(dir) {
 		          setprop(tg_spd_kt,amt);
 	        }
 				}
-    } else if(Vmode=="PTCH"){
+    } else if(Vmode=="PTCH" and !SP){
         amt=getprop("autopilot/settings/target-pitch-deg") + (dir*0.1);
         amt = (amt < -20 ? -20 : amt > 20 ? 20 : amt);
-        setprop("autopilot/settings/target-pitch-deg",amt)
-    }
+        setprop("autopilot/settings/target-pitch-deg",amt);
+    } else if (SP and left(NAVSRC,3)!="FMS") {
+				if (getprop("autopilot/locks/alt-mach")) {
+          amt=getprop(tg_spd_mc) + (dir*0.01);
+          amt = (amt < 0.40 ? 0.40 : amt > 0.91 ? 0.91 : amt);
+          setprop(tg_spd_mc,amt);
+				}	else {
+		        amt=getprop(tg_spd_kt) + dir*5;
+	          amt = (amt < 80 ? 80 : amt > 340 ? 340 : amt);
+	          setprop(tg_spd_kt,amt);
+        }
+		}								
 }
 
 ### FD INTERNAL ACTIONS  ###
@@ -295,7 +308,7 @@ var monitor_L_armed = func{
 var monitor_V_armed = func{
     var Varm=getprop(Vertical_arm);
     var myalt=getprop(alt);
-    var asel=getprop("autopilot/settings/asel") * 100;
+    var asel=getprop("autopilot/settings/asel")*100;
     var alterr=myalt-asel;
     if(Varm=="ASEL"){
       if(alterr >-250 and alterr <250){
@@ -303,7 +316,7 @@ var monitor_V_armed = func{
         setprop(Vertical_arm,"");
       }
     }else if(Varm=="VASEL"){
-      if(alterr >-250 and alterr <250){
+      if(alterr >-250 and alterr <250 and asel > 0){
         setprop(Vertical,"VALT");
         setprop("instrumentation/gps/wp/wp[1]/altitude-ft",asel);
         setprop(Vertical_arm,"");

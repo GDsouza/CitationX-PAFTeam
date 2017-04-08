@@ -210,7 +210,7 @@ var FMS = {
 									me.set_tgAlt = math.round(curr_wp_alt,100);
 								} else {me.set_tgAlt = asel}
 								if (curr_wp_alt < me.set_tgAlt) { # descent
-									if (curr_wp_type == "basic" and me.fp.getWP(curr_wp).distance_along_route > 20) {
+									if (curr_wp_type == "basic" and me.fp.getWP(curr_wp).distance_along_route < tot_dist/2) {
 										me.set_tgAlt = math.round(curr_wp_alt,100);
 										me.TOD.setValue(1);
 									} else {me.todNew(curr_wp)}

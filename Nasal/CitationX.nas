@@ -198,7 +198,6 @@ props.globals.initNode("instrumentation/rcu/selected","COM","STRING");
 props.globals.initNode("instrumentation/rcu/mode",0,"BOOL");
 props.globals.initNode("instrumentation/rcu/squelch",0,"BOOL");
 props.globals.initNode("autopilot/locks/alt-mach",0,"BOOL");
-props.globals.initNode("autopilot/locks/fms-status",0,"BOOL");
 props.globals.initNode("autopilot/settings/nav-btn",0,"BOOL");
 props.globals.initNode("autopilot/settings/fms-btn",0,"BOOL");
 props.globals.initNode("sim/sound/startup",0,"INT");

@@ -194,6 +194,7 @@
         <object-name>FD.flc-annun</object-name>
         <object-name>FD.co-annun</object-name>
         <object-name>FD.vs-annun</object-name>
+        <object-name>FD.spd-annun</object-name>
         <object-name>FD.bank-annun</object-name>
         <condition>
           <property>controls/electric/avionics-power</property>
@@ -214,6 +215,7 @@
         <object-name>FD.flc</object-name>
         <object-name>FD.co</object-name>
         <object-name>FD.vs</object-name>
+        <object-name>FD.spd</object-name>
         <object-name>FD.AP</object-name>
         <object-name>FD.PFDSEL</object-name>
         <object-name>FD.bank</object-name>
@@ -3039,10 +3041,12 @@
                     <property>autopilot/locks/altitude</property>
                     <value>VFLC</value>
                 </equals>
+<!--
                 <equals>
                     <property>autopilot/locks/altitude</property>
                     <value>VPTH</value>
                 </equals>
+-->
             </or>
         </condition>
     </animation>
@@ -3108,6 +3112,19 @@
                 <property>autopilot/locks/altitude</property>
                 <value>VS</value>
             </equals>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>FD.spd-annun</object-name>
+        <condition>
+					<and>
+		        <property>autopilot/locks/speed</property>
+						<not>
+							<property>autopilot/settings/fms</property>
+						</not>
+					</and>
         </condition>
     </animation>
 
@@ -3246,6 +3263,20 @@
             <binding>
                 <command>nasal</command>
                 <script>citation.FD_set_mode("vs")</script>
+            </binding>
+        </action>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>FD.spd</object-name>
+        <visible>true</visible>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+              <command>property-toggle</command>
+                <property>autopilot/locks/speed</property>
             </binding>
         </action>
     </animation>

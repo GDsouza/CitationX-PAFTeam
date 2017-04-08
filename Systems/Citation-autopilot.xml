@@ -606,61 +606,57 @@
 <!-- Speed Control  -->
 
     <pid-controller>
-        <name>Speed Control kt</name>
-        <debug>false</debug>
-				<enable>
-					<condition>
-						<and>
-							<or>
-                <equals>
-                    <property>autopilot/settings/nav-source</property>
-                    <value>FMS1</value>
-                </equals>
-                <equals>
-                    <property>autopilot/settings/nav-source</property>
-                    <value>FMS2</value>
-                </equals>
-                <property>autopilot/locks/fms-status</property>
-								<equals>
+      <name>Speed Control kt</name>
+      <debug>false</debug>
+			<enable>
+				<condition>
+					<and>
+						<equals>
+							<property>/autopilot/locks/AP-status</property>
+								<value>AP</value>
+						</equals>
+						<not>
+							<property>autopilot/locks/alt-mach</property>
+						</not>
+						<or>
+							<and>
+                <property>autopilot/settings/fms</property>
+								<or>
+									<equals>
 										<property>/autopilot/locks/altitude</property>
-											<value>VALT</value>
-								</equals>
-								<equals>
+										<value>VALT</value>
+									</equals>
+									<equals>
 										<property>/autopilot/locks/altitude</property>
-											<value>GS</value>
-								</equals>
-							</or>
-							<equals>
-								<property>/autopilot/locks/AP-status</property>
-									<value>AP</value>
-							</equals>
-							<not>
-								<property>autopilot/locks/alt-mach</property>
-							</not>
-							<property>autopilot/settings/fms</property>
-						</and>
-					</condition>
-				</enable>
-				<input>
-					<property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
-				</input>
-				<reference>
-					<property>autopilot/settings/target-speed-kt</property>
-				</reference>
-				<output>
-					<property>controls/engines/engine[0]/throttle</property>
-					<property>controls/engines/engine[1]/throttle</property>		
-				</output>
-        <config>
-            <Kp>0.1</Kp> <!-- old 0.1 -->
-            <beta>1.0</beta>
-            <alpha>0.1</alpha>
-            <gamma>0.0</gamma>
-            <Ti>10.0</Ti>	<!-- old 10.0 -->
-            <Td>0.001</Td>
-            <min>0.20</min> <!-- old 0.25 -->
-            <max>0.99</max> <!-- old 0.95 -->
-        </config>
+										<value>GS</value>
+									</equals>
+								</or>
+							</and>
+							<property>/autopilot/locks/speed</property>
+						</or>
+					</and>
+				</condition>
+			</enable>
+			<input>
+				<property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
+			</input>
+			<reference>
+				<property>autopilot/settings/target-speed-kt</property>
+			</reference>
+			<output>
+				<property>controls/engines/engine[0]/throttle</property>
+				<property>controls/engines/engine[1]/throttle</property>		
+			</output>
+      <config>
+          <Kp>0.1</Kp> <!-- old 0.1 -->
+          <beta>1.0</beta>
+          <alpha>0.1</alpha>
+          <gamma>0.0</gamma>
+          <Ti>10.0</Ti>	<!-- old 10.0 -->
+          <Td>0.001</Td>
+          <min>0.20</min> <!-- old 0.25 -->
+          <max>0.99</max> <!-- old 0.95 -->
+      </config>
     </pid-controller>
 
     <pid-controller>
@@ -668,27 +664,29 @@
         <debug>false</debug>
 				<enable>
 					<condition>
-						<and>
-							<or>
-                <equals>
-                    <property>autopilot/settings/nav-source</property>
-                    <value>FMS1</value>
-                </equals>
-                <equals>
-                    <property>autopilot/settings/nav-source</property>
-                    <value>FMS2</value>
-                </equals>
-							</or>
-							<equals>
-									<property>/autopilot/locks/altitude</property>
-										<value>VALT</value>
-							</equals>
-							<equals>
-								<property>/autopilot/locks/AP-status</property>
-									<value>AP</value>
-							</equals>
+					<and>
+						<equals>
+							<property>/autopilot/locks/AP-status</property>
+								<value>AP</value>
+						</equals>
 							<property>autopilot/locks/alt-mach</property>
-						</and>
+						<or>
+							<and>
+                <property>autopilot/settings/fms</property>
+								<or>
+									<equals>
+										<property>/autopilot/locks/altitude</property>
+										<value>VALT</value>
+									</equals>
+									<equals>
+										<property>/autopilot/locks/altitude</property>
+										<value>GS</value>
+									</equals>
+								</or>
+							</and>
+							<property>/autopilot/locks/speed</property>
+						</or>
+					</and>
 					</condition>
 				</enable>
 				<input>

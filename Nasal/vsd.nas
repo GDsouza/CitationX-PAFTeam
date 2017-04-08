@@ -121,7 +121,6 @@ var vsd = {
 			me.rteLenTod = geo.aircraft_position().distance_to(me.wpt_tod)*M2NM;
 			var wp = createWP(me.tod_lat,me.tod_lon,"TOD","pseudo");
 			me.fpc.insertWP(wp,me.currWpt+1);
-#print("125 tod : ",me.fpc.getWP(me.currWpt+1).wp_name,"  ",me.fpc.getWP(me.currWpt+1).wp_type);
 			var td_timer = maketimer(2,func() { # delay to get tod_dist after tg_alt
 				me.fpc.getWP(me.currWpt).setAltitude(getprop(tg_alt),'at');
 			});
@@ -145,15 +144,15 @@ var vsd = {
 		if(me.altitude == nil) {
 			me.altitude = 0;
 		}
-		me.alt_ceil = getprop(asel)*100;
+		me.alt_ceil = (getprop(asel)*100 == 0 ? 1 :getprop(asel)*100); 
 
 		me.new_markerPos = -me.alt_ceil_px*(me.altitude/me.alt_ceil);
 		var rangeHdg = [];
 
 		# Vertical Flight Path
-		if(getprop(toggle_vsd) == 1) {
 			var numWpts = me.fpc.getPlanSize();
 			me.currWpt = getprop(curWpt)+ me.tod_ind;
+		if(getprop(toggle_vsd) == 1) {
 			if (numWpts > 1 and me.currWpt >= 0) {
 				me.path.del();
 				me.text.removeAllChildren();
@@ -169,13 +168,11 @@ var vsd = {
 
 				# Calculate distance between waypoints
 				for(var i=me.currWpt; i<numWpts; i=i+1) {
-#print("171 i = ",i,"  ",me.fpc.getWP(i).wp_name,"  ",me.fpc.getWP(i).wp_type);
 					if (i == 0) {alt = getprop(dep_alt)}
 					else if (i == numWpts-1) {alt = getprop(dest_alt)}
 					else {
 						#### BASIC ###
 						if(me.fpc.getWP(i).wp_type == "basic" and me.fpc.getWP(i).wp_role == nil) {
-#print("178 type : ",me.fpc.getWP(i).wp_type," name : ",me.fpc.getWP(i).wp_name," role : ",me.fpc.getWP(i).wp_role);
 							### SIDS ###
 							if (me.fpc.getWP(i).distance_along_route < getprop(tot_dist)/2) {
 								if (me.fpc.getWP(i).alt_cstr <= 0) {
@@ -185,10 +182,8 @@ var vsd = {
 								}
 							} else {
 							### STARS ###
-#print("189 : ",me.fpc.getWP(i).wp_name," alt_cstr : ",me.fpc.getWP(i).alt_cstr);
 								if (me.fpc.getWP(i).alt_cstr <= 0) {
 									alt = me.fpc.getWP(i+1).alt_cstr;
-#print("191 alt : ",alt," - i = ",me.fpc.getWP(i).wp_name);
 								} else {
 									alt = me.fpc.getWP(i).alt_cstr;
 								}
@@ -197,14 +192,11 @@ var vsd = {
 						### NAVAIDS ###
 							if (i == me.currWpt and me.fpc.getWP(me.currWpt).alt_cstr <= 0) {
 								alt = me.alt_set;
-#print("200 alt : ",alt," - i = ",me.fpc.getWP(i).wp_name);
 							} else {
 								if (me.fpc.getWP(i).alt_cstr <= 0) {
 									alt = getprop(asel)*100;
-#print("204 asel : ",alt," - i = ",me.fpc.getWP(i).wp_name);
 								} else {
 									alt = me.fpc.getWP(i).alt_cstr;
-#print("207 alt_cstr : ",alt," - i = ",me.fpc.getWP(i).wp_name);		
 								}
 							}
 						}

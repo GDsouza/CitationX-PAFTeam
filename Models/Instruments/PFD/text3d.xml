@@ -817,6 +817,7 @@
               <value>VFLC</value>
             </equals>
 						<property>/autopilot/settings/fms</property>
+						<property>/autopilot/locks/speed</property>
           </or>
 					<less-than-equals>
 						<property>instrumentation/altimeter/indicated-altitude-ft</property>								
@@ -841,6 +842,7 @@
               <value>VFLC</value>
             </equals>
 						<property>/autopilot/settings/fms</property>
+						<property>/autopilot/locks/speed</property>
           </or>
 					<greater-than>
 						<property>instrumentation/altimeter/indicated-altitude-ft</property>								
