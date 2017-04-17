@@ -33,7 +33,7 @@ var posInit = func(my_lat,my_long,dep_airport,dep_rwy) {
 		Dsp.line4r = "LOAD";
 		Dsp.line5l = "GPS 1 POS";
 		Dsp.line6r = "LOAD";
-		if (getprop("instrumentation/cdu/pos-init") == 1) {		
+		if (getprop("instrumentation/cdu/pos-init") and getprop("instrumentation/irs/positionned")) {		
 			Dsp.line2l = my_lat~" "~my_long;
 			Dsp.line1r = "(LOADED)";
 			Dsp.line2r = "";

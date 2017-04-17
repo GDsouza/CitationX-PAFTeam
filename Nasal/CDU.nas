@@ -8,6 +8,8 @@ var navRwy = std.Vector.new(["",""]);
 var g_speed = 300;
 var dist = 0;
 var flp_closed = 0;
+var posit = props.globals.initNode("instrumentation/irs/positionned",0,"BOOL");
+var pos_init = props.globals.initNode("instrumentation/cdu/pos-init",0,"BOOL");
 
 #### Initialization ####
 var setl = setlistener("/sim/signals/fdm-initialized", func {
@@ -48,12 +50,19 @@ setlistener("instrumentation/cdu/init",func {
 		setprop("autopilot/route-manager/destination/airport","");
 		setprop("autopilot/route-manager/departure/airport","");
 		setprop("instrumentation/cdu/display","NAVIDENT[0]");
-		setprop("instrumentation/cdu/pos-init",0);
+		pos_init.setValue(0);
 		setprop("instrumentation/cdu/input","");
 		setprop("autopilot/locks/TOD",0);
 		setprop("autopilot/settings/nav-source", "FMS1");
 		init();		
 	}	
+});
+
+### End of Positionning ###
+setlistener(posit, func(n) {
+	if (n.getValue()) {
+		setprop("instrumentation/cdu/input","");
+	}
 });
 
 #### Main ####
@@ -93,27 +102,28 @@ var key = func(v) {
 		#### POS-INIT ####
 		if (cduDisplay == "POS INIT[0]") {
 			if (v == "B1R" or v == "B2R" or v == "B3R") {	
-				setprop("instrumentation/cdu/pos-init",1);
+				pos_init.setValue(1);
+				cduInput = "* POSITIONNING *";
 			}
 			if (v == "B4R" or v == "FPL") {
-				if (getprop("instrumentation/cdu/pos-init") == 1) {
+				if (pos_init.getValue() and posit.getValue()) {
 					v = "";
 					cduDisplay = "FLT-PLAN[0]";
 				}
 			}
-			if (v == "NAV" and getprop("instrumentation/cdu/pos-init") == 1) {
+			if (v == "NAV" and pos_init.getValue()) {
 					v = "";
 					cduDisplay = "NAV-PAGE[0]";
 			}		
-			if (v == "PERF" and getprop("instrumentation/cdu/pos-init") == 1) {
+			if (v == "PERF" and pos_init.getValue()) {
 					v = "";
 					cduDisplay = "PRF-PAGE[0]";
 			}		
-			if (v == "PROG" and getprop("instrumentation/cdu/pos-init") == 1) {
+			if (v == "PROG" and pos_init.getValue()) {
 					v = "";
 					cduDisplay = "PRG-PAGE[0]";
 			}		
-
+			if (posit.getValue()) {cduInput = ""}
 		}
 
 		#### FLT-LIST ####
@@ -635,7 +645,7 @@ var key = func(v) {
 			if (v == "NAV") {v = "";cduDisplay = "NAV-PAGE[0]"}
 			if (v == "PROG") {v = "";cduDisplay = "PRG-PAGE[0]"}			
 			if (v == "FPL" or v == "B4L") {
-				if (getprop("instrumentation/cdu/pos-init") == 0) {
+				if (!pos_init.getValue()) {
 					v = "";
 					cduDisplay = "POS INIT[0]";				
 				} else if (destAirport == ""){
@@ -794,7 +804,7 @@ var key = func(v) {
 #			if (v == "B4R") {v = "";cduDisplay = "CHK-LIST[0]"}
 			if (v == "NAV") {v = "";cduDisplay = "NAV-PAGE[0]"}
 			if (v == "FPL") {
-				if (getprop("instrumentation/cdu/pos-init") == 0) {
+				if (!pos_init.getValue()) {
 					v = "";
 					cduDisplay = "POS INIT[0]";				
 				} else if (destAirport == ""){
@@ -805,12 +815,12 @@ var key = func(v) {
 				else {v = "";cduDisplay = "FLT-PLAN[1]"}
 			}
 		}
-			### en cours de construction ###
+			### Under construction ###
 		if (cduDisplay == "PRG-PAGE[1]") {
 			setprop("instrumentation/cdu/nbpage",2);
 			if (v == "NAV") {v = "";cduDisplay = "NAV-PAGE[0]"}
 			if (v == "FPL") {
-				if (getprop("instrumentation/cdu/pos-init") == 0) {
+				if (!pos_init.getValue()) {
 					v = "";
 					cduDisplay = "POS INIT[0]";				
 				} else if (destAirport == ""){

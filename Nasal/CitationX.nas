@@ -383,7 +383,7 @@ setlistener("instrumentation/primus2000/dc840/et", func(xx){
 	}
 });
 
-setlistener("/gear/gear[1]/wow", func(ww){
+setlistener("/gear/gear[0]/wow", func(ww){
     if(ww.getBoolValue()){
         FHmeter.stop();
         Grd_Idle.setBoolValue(1);			

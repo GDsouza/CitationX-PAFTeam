@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- Inertial Reference System -->
+<!-- C.Le Moigne (clm76) - Avril 2017 -->
+
+<PropertyList>
+
+    <path>IRS_screen.ac</path>
+
+    <animation>
+        <type>select</type>
+        <object-name>IRS.screen</object-name>
+        <condition>
+          <property>controls/electric/avionics-power</property>
+				</condition>
+    </animation>
+
+</PropertyList>

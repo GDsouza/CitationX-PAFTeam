@@ -66,6 +66,50 @@
         </offsets>
     </model>
 
+    <model>
+				<name>IRS_L</name>
+        <path>Models/Instruments/IRS/IRS.xml</path>
+        <offsets>
+            <x-m>0</x-m>
+            <y-m>0</y-m>
+            <z-m>0</z-m>
+            <pitch-deg>0</pitch-deg>
+        </offsets>
+    </model>
+
+    <model>
+				<name>IRS_R</name>
+        <path>Models/Instruments/IRS/IRS.xml</path>
+        <offsets>
+            <x-m>0</x-m>
+            <y-m>0.159</y-m>
+            <z-m>0</z-m>
+            <pitch-deg>0</pitch-deg>
+        </offsets>
+    </model>
+
+    <model>
+				<name>IRSscreenL</name>
+        <path>Models/Instruments/IRS/IRSscreen.xml</path>
+        <offsets>
+            <x-m>0.001</x-m>
+            <y-m>0</y-m>
+            <z-m>0</z-m>
+            <pitch-deg>0</pitch-deg>
+        </offsets>
+    </model>
+
+    <model>
+				<name>IRSscreenR</name>
+        <path>Models/Instruments/IRS/IRSscreen.xml</path>
+        <offsets>
+            <x-m>0.001</x-m>
+            <y-m>0.159</y-m>
+            <z-m>0</z-m>
+            <pitch-deg>0</pitch-deg>
+        </offsets>
+    </model>
+
 <!-- Lights -->
 
     <animation>
@@ -118,7 +162,6 @@
             <factor-prop>controls/lighting/flood-norm</factor-prop>
         </emission>
     </animation>
-
 
 <!--SPEEDBRAKE -->
 

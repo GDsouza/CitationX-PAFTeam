@@ -407,8 +407,11 @@ var batt_switch=func{
 			setprop(r_norm,0);
 			setprop(r_emer,0);
 	}			
-	if(avionics == 2 and getprop(r_norm)) {AvPwr.setValue(1)}
-	else {AvPwr.setValue(0)}
+	if(avionics == 2 and getprop(r_norm)) {
+		if(!AvPwr.getValue()) {AvPwr.setValue(1)}
+	} else {
+		if(AvPwr.getValue()) {AvPwr.setValue(0)}
+	}
 }
 
 var anticoll_switch = func {

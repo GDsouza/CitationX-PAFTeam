@@ -10,8 +10,64 @@ Citation X - Navigation display
         <type>select</type>
         <object-name>Layers.screen</object-name>
         <condition>
-          <property>controls/electric/avionics-power</property>
+					<and>
+	          <property>controls/electric/avionics-power</property>
+					</and>
 				</condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>Positionning</object-name>
+        <condition>
+					<property>instrumentation/irs/align</property>
+				</condition>
+    </animation>
+    <text>
+        <name>Positionning</name>
+        <offsets>
+            <x-m>0.0</x-m>
+            <y-m>-0.030</y-m>
+            <z-m>0.050</z-m>
+        </offsets>
+        <alignment>left-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>literal</type>
+        <text>POSITIONNING</text>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.010</character-size>
+        <character-aspect-ratio type="double">1.2</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
+        </font-resolution>
+    </text>
+
+    <animation>
+        <name>yellow</name>
+        <type>material</type>
+        <object-name>Positionning</object-name>
+        <emission>
+            <red-prop>sim/color-set/yellow/r</red-prop>
+            <green-prop>sim/color-set/yellow/g</green-prop>
+            <blue-prop>sim/color-set/yellow/b</blue-prop>
+            <alpha-prop>sim/color-set/yellow/a</alpha-prop>
+        </emission>
+        <ambient>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </ambient>
+        <diffuse>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </diffuse>
+        <specular>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </specular>
     </animation>
 
 </PropertyList>

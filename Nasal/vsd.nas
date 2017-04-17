@@ -161,7 +161,6 @@ var vsd = {
 						 .moveTo(me.bottom_left.x,me.bottom_left.y-4+me.new_markerPos)
 						 .setStrokeLineWidth(2)
 						 .show();
-
 				me.wpt_this.set_latlon(me.fpc.getWP(me.currWpt).lat, me.fpc.getWP(me.currWpt).lon);
 				me.rteLen = geo.aircraft_position().distance_to(me.wpt_this)*M2NM;
 				var brk_next = 0;

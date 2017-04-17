@@ -62,16 +62,22 @@ var FMS = {
 		setlistener("autopilot/route-manager/active", func(n) {
 			if (n.getValue()) {
 				me.fp = flightplan();
-				var first_nvd = 0;
+				me.first_nvd = 0;
 				var highest_alt = 0;
+				var first_app = 0;
 				for (var i=0;i<me.fp.getPlanSize();i+=1) {
 					if (me.fp.getWP(i).wp_type == "navaid") {
-						if (first_nvd == 0) {
+						if (me.first_nvd == 0) {
 							me.first_navaid = i;
-							first_nvd = 1;
+							me.first_nvd = 1;
 						}
 						if (me.fp.getWP(i).alt_cstr > highest_alt){
 							highest_alt = me.fp.getWP(i).alt_cstr;
+						}
+					} else if (me.fp.getWP(i).wp_type == "basic" and me.fp.getWP(i).distance_along_route > me.tot_dist.getValue()/2) {
+				 		if(first_app == 0) {
+							me.first_app = i;
+							first_app = 1;
 						}
 					}
 				}
@@ -190,8 +196,6 @@ var FMS = {
 										if (me.fp.getWP(curr_wp).leg_distance < tod*2) {
 											me.set_tgAlt = math.round(curr_wp_alt,100);
 										} else {
-#											me.set_tgAlt = me.tg_alt.getValue();
-#											me.tg_alt.setValue(me.set_tgAlt);
 											me.todCalc(curr_wp,tot_dist,me.set_tgAlt);
 										}
 									} else {
@@ -201,23 +205,31 @@ var FMS = {
 
 										# Navaids without altitude constraint
 							}	else { 
-								me.set_tgAlt = asel;
+							 	if (me.fp.getWP(curr_wp+1).alt_cstr > 0) {
+									me.set_tgAlt = asel;
+									me.todNew(curr_wp+1);
+								} else {
+									me.set_tgAlt = asel;
+								}
 							}
 									 # Out of navaids
 						} else {
-							if (curr_wp_alt > 0) {
-								if (me.fp.getWP(curr_wp).distance_along_route < 12) {
+								### Take off ###
+							if (me.fp.getWP(curr_wp).distance_along_route < tot_dist/2) {
+								if (curr_wp_alt > 0) {
 									me.set_tgAlt = math.round(curr_wp_alt,100);
 								} else {me.set_tgAlt = asel}
-								if (curr_wp_alt < me.set_tgAlt) { # descent
-									if (curr_wp_type == "basic" and me.fp.getWP(curr_wp).distance_along_route < tot_dist/2) {
+							} else {
+								### Descent ###
+								if (curr_wp_alt > 0) {
+									if (me.first_app and !me.first_nvd) {
+										me.todNew(curr_wp);
+									} else {
 										me.set_tgAlt = math.round(curr_wp_alt,100);
 										me.TOD.setValue(1);
-									} else {me.todNew(curr_wp)}
-								}
-							}	else {
-								me.set_tgAlt = asel;
-								if (me.fp.getWP(curr_wp).distance_along_route > 12) {
+									}								
+								} else {
+									me.set_tgAlt = asel;
 									me.todNew(curr_wp);
 								}
 							}
