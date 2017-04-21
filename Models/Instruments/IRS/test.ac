@@ -5,7 +5,7 @@ kids 1
 OBJECT poly
 name "IRS.test"
 loc 0.0172582 0.151865 0.0213051
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/interior.png"
+texture "interior.png"
 crease 30.000002
 numvert 54
 -1.90735e-06 4.76837e-07 0.00324601

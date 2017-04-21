@@ -5,7 +5,7 @@ kids 10
 OBJECT poly
 name "IRS.knob"
 loc 0.643202 -0.136529 0.107162
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/interior.png"
+texture "interior.png"
 crease 50.000000
 numvert 70
 0.010906 -0.00291701 -0.002505
@@ -599,7 +599,7 @@ kids 0
 OBJECT poly
 name "IRS.dsp"
 loc -1.72853e-06 0 -0.000101026
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/interior.png"
+texture "interior.png"
 crease 40.000000
 numvert 4
 0.651604 -0.143058 0.023581
@@ -623,7 +623,7 @@ kids 0
 OBJECT poly
 name "IRS.console"
 loc -1.72853e-06 0 -0.000101026
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/interior.png"
+texture "interior.png"
 crease 40.000000
 numvert 8
 0.659364 -0.143746 -0.002747
@@ -688,7 +688,7 @@ OBJECT poly
 name "IRS.labels"
 data 11
 Plane.124_1
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/interior.png"
+texture "interior.png"
 crease 30.000002
 numvert 20
 0.645405 -0.142059 0.120762
@@ -752,7 +752,7 @@ OBJECT poly
 name "Screw.001"
 data 10
 Circle.016
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/interior.png"
+texture "interior.png"
 crease 60.000004
 numvert 13
 0.645967 -0.142282 0.144358
@@ -846,7 +846,7 @@ OBJECT poly
 name "Screw.002"
 data 10
 Circle.016
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/interior.png"
+texture "interior.png"
 crease 60.000004
 numvert 13
 0.639668 -0.141729 0.135106
@@ -940,7 +940,7 @@ OBJECT poly
 name "Screw.003"
 data 10
 Circle.016
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/interior.png"
+texture "interior.png"
 crease 60.000004
 numvert 13
 0.636413 -0.141435 0.011851
@@ -1032,7 +1032,7 @@ refs 3
 kids 0
 OBJECT poly
 name "Screw.004"
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/interior.png"
+texture "interior.png"
 crease 60.000004
 numvert 13
 0.63328 -0.141162 0.002856
@@ -1125,7 +1125,7 @@ kids 0
 OBJECT poly
 name "Test.base"
 loc 0.648543 -0.13948 0.0154251
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/interior.png"
+texture "interior.png"
 crease 30.000002
 numvert 41
 -0.00176233 0.00261529 -0.00210079
@@ -1541,7 +1541,7 @@ kids 0
 OBJECT poly
 name "IRS.test"
 loc 0.648543 -0.13948 0.0154251
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/interior.png"
+texture "interior.png"
 crease 30.000002
 numvert 17
 0.00287068 -0.00144874 0.000165648

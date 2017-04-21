@@ -131,7 +131,7 @@
             <binding>
                 <command>set-tooltip</command>
                 <tooltip-id>IRS.test</tooltip-id>
-                <label>Test APU</label>
+                <label>Test IRS</label>
                 <mapping>push</mapping>
             		<property>instrumentation/irs/test</property>
             </binding>
