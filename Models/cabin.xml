@@ -243,7 +243,7 @@
 	<animation>
 	<type>translate</type>
         <object-name>Cabin.inrdoor</object-name>
-        <property>sim/multiplay/generic/float</property>
+        <property>controls/cabin-door/position-norm</property>
         <interpolation>
             <entry><ind>0.0</ind><dep>0.0</dep></entry>
             <entry><ind>1.0</ind><dep>0.4</dep></entry>
@@ -272,7 +272,7 @@
     <animation>
         <type>rotate</type>
         <object-name>Cabin.inrdoor</object-name>
-        <property>sim/multiplay/generic/float</property>
+        <property>controls/cabin-door/position-norm</property>
         <interpolation>
             <entry><ind>0.0</ind><dep>0.0</dep></entry>
             <entry><ind>1.0</ind><dep>140.0</dep></entry>

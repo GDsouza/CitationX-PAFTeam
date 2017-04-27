@@ -51,6 +51,5 @@ var init = func {
 
 var draw = func{
 	me.callback('draw');
-#print("55 draw");
 }
 

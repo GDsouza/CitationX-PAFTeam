@@ -42,7 +42,7 @@
                 <z>0</z>
             </axis>
         </animation>
-
+<!--
         <animation>
             <type>translate</type>
             <object-name>shadow</object-name>
@@ -53,5 +53,5 @@
                 <z>-1</z>
             </axis>
         </animation>
-
+-->
 </PropertyList>

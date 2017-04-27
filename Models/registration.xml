@@ -14,7 +14,7 @@
     <alignment>center-center</alignment>
     <axis-alignment alias="../../params/alignment"/>
     <type type="string">text-value</type>
-    <property type="string">sim/multiplay/generic/string[0]</property>
+    <property type="string">sim/multiplay/callsign</property>
     <format type="string">%.7s</format>
     <font>arial_black.txf</font>
     <character-size alias="../../params/size"/>

@@ -39,7 +39,6 @@ var new = func(layer) {
 	return m;
 };
 var del = func() {
-	#print(name~"VOR.lcontroller.del()");
 	foreach (var l; me.listeners)
 		removelistener(l);
 };
@@ -49,7 +48,8 @@ var WPT_model = {
 		var m = { parents:[WPT_model], idx:(idx+offset) };
 		var wp = fp.getWP(idx);
 		m.name = wp.wp_name;
-		
+		m.role = wp.wp_role;
+
 #		var alt = wp.alt_cstr;
 #		if (alt != 0)
 #			m.name ~= "\n"~alt;

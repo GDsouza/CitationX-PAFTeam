@@ -25,6 +25,29 @@
         </unload>
     </nasal>
 
+  <!-- Multiplayer events -->
+  <nasal>
+    <load><![CDATA[
+	##############################################################################
+	# The on-load Nasal is not executed when this file is loaded as the user
+	# aircraft.
+	##############################################################################
+	var rplayer = cmdarg();
+
+	# Set up property aliases for animations.
+		rplayer.getNode("/systems/electrical/outputs/strobe", 1).alias(rplayer.getNode("sim/multiplay/generic/int[0]"));
+		rplayer.getNode("/systems/electrical/outputs/beacon", 1).alias(rplayer.getNode("sim/multiplay/generic/int[1]"));
+		rplayer.getNode("/systems/electrical/outputs/taxi-lights", 1).alias(rplayer.getNode("sim/multiplay/generic/int[2]"));
+		rplayer.getNode("/systems/electrical/outputs/landing-light[0]", 1).alias(rplayer.getNode("sim/multiplay/generic/int[3]"));
+		rplayer.getNode("/systems/electrical/outputs/landing-light[1]", 1).alias(rplayer.getNode("sim/multiplay/generic/int[4]"));
+		rplayer.getNode("/systems/electrical/outputs/recog-lights", 1).alias(rplayer.getNode("sim/multiplay/generic/int[5]"));
+		rplayer.getNode("/systems/electrical/outputs/nav-lights", 1).alias(rplayer.getNode("sim/multiplay/generic/int[6]"));
+		rplayer.getNode("/controls/cabin-door/position-norm", 1).alias(rplayer.getNode("sim/multiplay/generic/float[0]"));
+			rplayer.getNode("/surface-positions/speedbrake-pos-norm", 1).alias(rplayer.getNode("sim/multiplay/generic/float[1]"));
+		rplayer.getNode("/surface-positions/reverser-norm", 1).alias(rplayer.getNode("sim/multiplay/generic/float[2]"));
+    ]]></load>
+  </nasal>
+
     <animation>
       <type>material</type>
       <object-name>Engines</object-name>
@@ -267,7 +290,7 @@
     <animation>
         <type>rotate</type>
         <object-name>Cabin.lwrdoor</object-name>
-        <property>sim/multiplay/generic/float</property>
+        <property>controls/cabin-door/position-norm</property>
         <interpolation>
             <entry><ind>0.0</ind><dep>0.0</dep></entry>
             <entry><ind>1.0</ind><dep>155.0</dep></entry>
@@ -287,7 +310,7 @@
     <animation>
     <type>translate</type>
         <object-name>Cabin.door</object-name>
-        <property>sim/multiplay/generic/float</property>
+        <property>controls/cabin-door/position-norm</property>
         <factor>0.4</factor>
         <axis>
             <x>0.0</x>
@@ -299,7 +322,7 @@
     <animation>
         <type>rotate</type>
         <object-name>Cabin.door</object-name>
-        <property>sim/multiplay/generic/float</property>
+        <property>controls/cabin-door/position-norm</property>
         <interpolation>
             <entry><ind>0.0</ind><dep>0.0</dep></entry>
             <entry><ind>1.0</ind><dep>140.0</dep></entry>
@@ -540,7 +563,7 @@
     <animation>
         <type>rotate</type>
         <object-name>LHspeedbrake</object-name>
-        <property>sim/multiplay/generic/float[1]</property>
+        <property>surface-positions/speedbrake-pos-norm</property>
         <factor>-45</factor>
         <axis>
             <x1-m>3.064</x1-m>
@@ -570,7 +593,7 @@
     <animation>
         <type>rotate</type>
         <object-name>RHspeedbrake</object-name>
-        <property>sim/multiplay/generic/float[1]</property>
+        <property>surface-positions/speedbrake-pos-norm</property>
         <factor>-45</factor>
         <axis>
             <x1-m>1.090</x1-m>
@@ -601,7 +624,7 @@
         <type>rotate</type>
         <object-name>UprReverser</object-name>
         <object-name>UprReverser.001</object-name>
-        <property>sim/multiplay/generic/float[2]</property>
+        <property>surface-positions/reverser-norm</property>
         <factor>74</factor>
         <center>
             <x-m>5.368</x-m>
@@ -619,7 +642,7 @@
         <type>rotate</type>
         <object-name>LwrReverser</object-name>
         <object-name>LwrReverser.001</object-name>
-        <property>sim/multiplay/generic/float[2]</property>
+        <property>surface-positions/reverser-norm</property>
         <factor>-72</factor>
         <center>
             <x-m>5.368</x-m>
@@ -1192,7 +1215,7 @@
         <type>select</type>
         <object-name>navlights.on</object-name>
         <condition>
-            <property>sim/multiplay/generic/int[6]</property>
+            <property>systems/electrical/outputs/nav-lights</property>
         </condition>
     </animation>
 
@@ -1201,7 +1224,7 @@
         <object-name>navlights.off</object-name>
         <condition>
             <not>
-                <property>sim/multiplay/generic/int[6]</property>
+                <property>systems/electrical/outputs/nav-lights</property>
             </not>
         </condition>
     </animation>
@@ -1210,10 +1233,7 @@
         <type>select</type>
         <object-name>Strb1</object-name>
         <condition>
-            <greater-than>
-                <property>sim/multiplay/generic/int[0]</property>
-                <value>1</value>
-            </greater-than>
+					<property>systems/electrical/outputs/strobe</property>
         </condition>
     </animation>
 
@@ -1247,10 +1267,7 @@
         <type>select</type>
         <object-name>Strb2</object-name>
         <condition>
-            <greater-than>
-                <property>sim/multiplay/generic/int[0]</property>
-                <value>1</value>
-            </greater-than>
+					<property>systems/electrical/outputs/strobe</property>
         </condition>
     </animation>
 
@@ -1285,10 +1302,7 @@
         <object-name>Bcn1</object-name>
         <object-name>redlamp.on</object-name>
         <condition>
-            <greater-than>
-                <property>sim/multiplay/generic/int[1]</property>
-                <value>1</value>
-            </greater-than>
+					<property>systems/electrical/outputs/beacon</property>
         </condition>
     </animation>
 
@@ -1322,10 +1336,7 @@
         <object-name>Bcn2</object-name>
         <object-name>redlamp.on</object-name>
         <condition>
-            <greater-than>
-                <property>sim/multiplay/generic/int[1]</property>
-                <value>1</value>
-            </greater-than>
+					<property>systems/electrical/outputs/beacon</property>
         </condition>
     </animation>
 
@@ -1359,14 +1370,11 @@
         <object-name>Taxi</object-name>
         <condition>
             <and>
-                <greater-than>
-                    <property>sim/multiplay/generic/int[2]</property>
-                    <value>1</value>
-                </greater-than>
-                <equals>
-                    <property>gear/gear[0]/position-norm</property>
-                    <value>1</value>
-                </equals>
+							<property>systems/electrical/outputs/taxi-lights</property>
+              <equals>
+                  <property>gear/gear[0]/position-norm</property>
+                  <value>1</value>
+              </equals>
             </and>
         </condition>
     </animation>
@@ -1396,10 +1404,7 @@
         <type>select</type>
         <object-name>Land1</object-name>
         <condition>
-            <greater-than>
-                <property>sim/multiplay/generic/int[3]</property>
-                <value>1</value>
-            </greater-than>
+					<property>systems/electrical/outputs/landing-light[0]</property>
         </condition>
     </animation>
 
@@ -1428,10 +1433,7 @@
         <type>select</type>
         <object-name>Land2</object-name>
         <condition>
-            <greater-than>
-                <property>sim/multiplay/generic/int[4]</property>
-                <value>1</value>
-            </greater-than>
+					<property>systems/electrical/outputs/landing-light[1]</property>
         </condition>
     </animation>
 

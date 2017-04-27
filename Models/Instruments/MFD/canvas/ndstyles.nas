@@ -102,7 +102,7 @@ var NDStyles = {
 
 			{ name:'WPT',
 				isMapStructure:1,
-				update_on:['toggle_range','toggle_display_mode'],
+				update_on:['toggle_cruise_alt','toggle_range','toggle_display_mode','toggle_fp_active'],
 				predicate: func(nd, layer) {
 					var visible= nd.in_mode('toggle_display_mode', ['MAP','PLAN']);
 					layer.group.setVisible( visible );

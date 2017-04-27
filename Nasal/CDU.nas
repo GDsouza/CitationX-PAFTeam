@@ -10,6 +10,7 @@ var dist = 0;
 var flp_closed = 0;
 var posit = props.globals.initNode("instrumentation/irs/positionned",0,"BOOL");
 var pos_init = props.globals.initNode("instrumentation/cdu/pos-init",0,"BOOL");
+var fpc = nil;
 
 #### Initialization ####
 var setl = setlistener("/sim/signals/fdm-initialized", func {
@@ -151,6 +152,7 @@ var key = func(v) {
 					fltPath = savePath ~ fltName~".xml";
 					setprop("autopilot/route-manager/file-path",fltPath);
 					setprop("autopilot/route-manager/input","@LOAD");							
+					var fpc = flightplan().clone();
 					setprop("autopilot/route-manager/input","@ACTIVATE");	
 					v = "";	
 				cduInput ="";
@@ -365,6 +367,8 @@ var key = func(v) {
 				}
 
 				if (destAirport == cduInput and cduInput !="") {
+					fpc = flightplan().clone();
+print("370 clone : ",fpc.getWP(3).wp_name);
 					setprop("autopilot/route-manager/input","@ACTIVATE");		
 					setprop("instrumentation/cdu/display-prev",cduDisplay);
 					cduDisplay = "FLT-PLAN[6]";
@@ -493,8 +497,7 @@ var key = func(v) {
 						fltName = depAirport~"-"~destAirport~cduInput;
 						fltPath = savePath~fltName~".xml";
 						setprop("autopilot/route-manager/file-path",fltPath);
-						setprop("autopilot/route-manager/input","@SAVE");				
-						correctFlp(fltPath);  # correction flightplan (bug Fg)#
+						save_flightplan(fpc,fltPath);
 						setprop("autopilot/route-manager/flight-plan",fltName);
 						cduInput = "";
 					}
@@ -631,9 +634,11 @@ var key = func(v) {
 				}
 			if (v == "B3R") {
 				if (size(cduInput) > 2) {cduInput = left(cduInput,2)}		
-				navSel = navSel~cduInput;
+				if (cduInput != "") {
+					navSel = left(navSel,size(navSel)-2)~cduInput;
+				}
 				fltName = savePath~navSel~".xml";
-				saveFlp(fltName,navWp,navRwy);
+				save_navFlp(fltName,navWp,navRwy);
 				cduInput = "*SAVED*";
 			}
 		}
@@ -859,9 +864,54 @@ var insertWayp = func(ind,cduInput) {
 		cduInput = "";
 }
 
-var saveFlp = func(fltName,navWp,navRwy) {
+var save_flightplan = func(fpc,fltPath) {
+	var data = props.Node.new({
+		version : 2,
+		destination : {
+			airport : fpc.destination.id,
+			runway : fpc.destination_runway.id,
+			approach : fpc.approach.id
+		},
+		departure : {
+			airport : fpc.departure.id,
+			runway : fpc.departure_runway.id,
+			sid : fpc.sid.id
+		},
+		route : {
+			wp : {
+				type : "runway",
+				departure : "true",
+				ident : fpc.departure_runway.id,
+				icao : fpc.departure.id
+			}
+		}
+	});
+	for (var i=1;i<fpc.getPlanSize()-1;i+=1) {
+		var fpc_data = {
+			type : fpc.getWP(i).wp_type,
+			generated : "true",
+			'alt-restrict' : fpc.getWP(i).alt_cstr_type,
+			'altitude-ft' : fpc.getWP(i).alt_cstr,
+			ident : fpc.getWP(i).wp_name,
+			lon : fpc.getWP(i).wp_lon,
+			lat : fpc.getWP(i).wp_lat
+		};
+		data.getChild("route").addChild("wp").setValues(fpc_data);
+	}
+	var last_wp = {
+		type : "runway",
+		approach : "true",
+		ident : fpc.destination_runway.id,
+		icao : fpc.destination.id
+	};
+	data.getChild("route").addChild("wp").setValues(last_wp);
+	io.write_properties(fltPath,data);
+}
+
+var save_navFlp = func(fltName,navWp,navRwy) {
 	var dep_info = airportinfo(navWp.vector[0]);
 	var dest_info = airportinfo(navWp.vector[size(navWp.vector)-1]);
+	
 	var data = props.Node.new({
 		version : 2,
 		destination : {
@@ -906,26 +956,9 @@ var saveFlp = func(fltName,navWp,navRwy) {
 	io.write_properties(fltName,data);
 }
 
-var correctFlp = func(fltPath) {
-	var data = io.read_properties(fltPath);
-	var wpt = data.getValues().route.wp;
-	var wps = data.getChild("route").getChildren();
-	for (var n=1;n<size(wpt)-1;n+=1) {
-		foreach(var name;keys(wpt[n])) {
-			if (name == "departure" or name =="approach") {
-				wps[n].setBoolValue(name,0);
-			}
-		}
-	}
-	io.write_properties(fltPath,data);
-}
-
 var calc_dist = func(navWp,dist) {
 	var apt_dep = airportinfo(left(navWp.vector[0],4));
 	var apt_dest = airportinfo(left(navWp.vector[size(navWp.vector)-1],4));
-#	foreach(var item;navWp.vector) {
-#		print(item);
-#	}
 	if (size(navWp.vector) == 2) {
 		var (course,dist) = courseAndDistance(apt_dep,apt_dest);	
 	}else if (size(navWp.vector) == 3){

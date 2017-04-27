@@ -160,15 +160,6 @@ var _list = setlistener("sim/signals/fdm-initialized", func {
 				}
 			});
 
-			setlistener("autopilot/locks/TOD", func (n) {
-				if (n.getValue()) {
-					if (me.tod_timer != nil) {
-						me.tod_timer.stop();
-					}
-					me.tod.hide();
-				}
-			});
-
 			setlistener("autopilot/route-manager/active", func (n) {
 				setprop("instrumentation/efis/fp-active",n.getValue());
 			});

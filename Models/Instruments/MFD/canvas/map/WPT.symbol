@@ -13,6 +13,8 @@ SymbolLayer.get(name).df_style = { # style to use by default
 	font_color: [1,0,1],
 	active_color: [1,0,1],
 	inactive_color: [1,1,1],
+	tod_color:[1,1,0],
+	radius: 8,
 };
 
 var element_type = "group"; # we want a group, becomes "me.element"
@@ -33,25 +35,40 @@ var init = func {
 		.close()
 		.setScale(me.style.scale_factor);
 
-	me.text = me.newText(me.model.name, me.style.font_color)
+	var radius = me.style.radius;
+	me.tod = me.element.createChild("path")
+		.setStrokeLineWidth(5)
+		.moveTo(-radius, 0)
+		.arcLargeCW(radius, radius, 0,  2 * radius, 0)
+		.arcLargeCW(radius, radius, 0,  -2 * radius, 0)
+		.setScale(2);
+
+	me.text = me.newText(me.model.name,me.model.role,me.style.font_color)
 		.setTranslation(25,35)
 		.setScale(me.style.scale_factor);
 
 	me.draw();
 };
+
 var draw = func {
 	var active = (getprop(me.options.current_wp_node) == me.model.idx);
 	if (active != me.active) {
-		me.path.setColor(
-			active ?
-			me.style.active_color :
-			me.style.inactive_color
-		);
-		me.text.setColor(
-			active ?
-			me.style.active_color :
-			me.style.inactive_color
-		);
+		if (me.model.role == 'pseudo') {
+			me.tod.setColor(me.style.tod_color);
+			me.text.setColor(me.style.tod_color);
+			me.path.hide();
+		} else {
+			me.path.setColor(
+				active ?
+				me.style.active_color :
+				me.style.inactive_color
+			);
+			me.text.setColor(
+				active ?
+				me.style.active_color :
+				me.style.inactive_color
+			);
+		}
 		me.active = active;
 	}
 };

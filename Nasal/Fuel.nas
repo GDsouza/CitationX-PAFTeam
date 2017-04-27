@@ -1,7 +1,7 @@
 ## Fuel System  ##
 ## Christian Le Moigne - octobre 2015 ##
 
-### Chaque réacteur est alimenté par le réservoir d'aile correspondant. Le réservoir central, dans le fuselage, est fictivement séparé en 2 compartiments (tank2 & tank3), reliés entre eux. Chaque compartiment alimente le récteur correspondant jusqu'à ce qu'il ne reste plus que 500 lbs dans le réservoir central. Les réservoirs d'ailes prennent ensuite le relais.
+### Chaque réacteur est alimenté par le réservoir d'aile correspondant. Le réservoir central, dans le fuselage, est fictivement séparé en 2 compartiments (tank2 & tank3), reliés entre eux. Chaque compartiment alimente le réacteur correspondant jusqu'à ce qu'il ne reste plus que 500 lbs dans le réservoir central. Les réservoirs d'ailes prennent ensuite le relais.
 ###
 
 props.globals.initNode("controls/fuel/xfer-L",0,"INT");

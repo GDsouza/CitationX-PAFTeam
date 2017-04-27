@@ -16,8 +16,6 @@ var num_wpts = "/autopilot/route-manager/route/num";
 var set_range = "/instrumentation/efis//inputs/range-nm";
 var svg_path = "/Aircraft/CitationX/Models/Instruments/MFD/canvas/Images/vsd.svg"; 
 var tg_alt = "autopilot/settings/tg-alt-ft";
-var tod = "/autopilot/locks/TOD";
-var tod_dist = "/autopilot/locks/TOD-dist";
 var toggle_vsd = "/instrumentation/efis//inputs/vsd";
 var tot_dist = "autopilot/route-manager/total-distance";
 var	vert_spd = "/velocities/vertical-speed-fps";
@@ -75,8 +73,7 @@ var vsd = {
 		m.group.getElementById("text_range4").setText(sprintf("%3.0f",m.h_range));
 		m.group.getElementById("tgt_altitude").setText(sprintf("%5.0f",getprop(tg_alt)));
 
-		m.fpc = flightplan().clone(); # Create a clone of actual Flightplan
-		m.tod_ind =0;
+		m.fp = flightplan();
 		m.alt_set = getprop(tg_alt);
 
 		return m;
@@ -86,7 +83,7 @@ var vsd = {
 	listen : func {		
 		setlistener(fp_active, func(n) {
 			if (n.getValue()) {
-				me.fpc = flightplan().clone();
+				me.fp = flightplan();
 				me.update();
 			}
 		});
@@ -114,27 +111,6 @@ var vsd = {
 			me.lastaltset = me.newSetPos;
 		});
 
-		setlistener(tod_dist, func(n) {
-			me.tod_lat = getprop("autopilot/route-manager/vnav/td/latitude-deg");
-			me.tod_lon = getprop("autopilot/route-manager/vnav/td/longitude-deg");
-			me.wpt_tod.set_latlon(me.tod_lat,me.tod_lon);
-			me.rteLenTod = geo.aircraft_position().distance_to(me.wpt_tod)*M2NM;
-			var wp = createWP(me.tod_lat,me.tod_lon,"TOD","pseudo");
-			me.fpc.insertWP(wp,me.currWpt+1);
-			var td_timer = maketimer(2,func() { # delay to get tod_dist after tg_alt
-				me.fpc.getWP(me.currWpt).setAltitude(getprop(tg_alt),'at');
-			});
-			td_timer.singleShot = 1;
-			td_timer.start();	
-			me.rteLen = me.rteLenTod;
-
-		});			
-
-		setlistener(tod, func(n) {
-#			if (n.getValue() and getprop(dist_rem) >50) {me.tod_ind +=1}
-			if (n.getValue()) {me.tod_ind +=1}
-		});
-
 	}, # end of listen
 
 	update: func {
@@ -150,8 +126,8 @@ var vsd = {
 		var rangeHdg = [];
 
 		# Vertical Flight Path
-			var numWpts = me.fpc.getPlanSize();
-			me.currWpt = getprop(curWpt)+ me.tod_ind;
+			var numWpts = me.fp.getPlanSize();
+			me.currWpt = me.fp.current;
 		if(getprop(toggle_vsd) == 1) {
 			if (numWpts > 1 and me.currWpt >= 0) {
 				me.path.del();
@@ -161,7 +137,7 @@ var vsd = {
 						 .moveTo(me.bottom_left.x,me.bottom_left.y-4+me.new_markerPos)
 						 .setStrokeLineWidth(2)
 						 .show();
-				me.wpt_this.set_latlon(me.fpc.getWP(me.currWpt).lat, me.fpc.getWP(me.currWpt).lon);
+				me.wpt_this.set_latlon(me.fp.getWP(me.currWpt).lat, me.fp.getWP(me.currWpt).lon);
 				me.rteLen = geo.aircraft_position().distance_to(me.wpt_this)*M2NM;
 				var brk_next = 0;
 
@@ -171,31 +147,31 @@ var vsd = {
 					else if (i == numWpts-1) {alt = getprop(dest_alt)}
 					else {
 						#### BASIC ###
-						if(me.fpc.getWP(i).wp_type == "basic" and me.fpc.getWP(i).wp_role == nil) {
+						if(me.fp.getWP(i).wp_type == "basic" and me.fp.getWP(i).wp_role == nil) {
 							### SIDS ###
-							if (me.fpc.getWP(i).distance_along_route < getprop(tot_dist)/2) {
-								if (me.fpc.getWP(i).alt_cstr <= 0) {
+							if (me.fp.getWP(i).distance_along_route < getprop(tot_dist)/2) {
+								if (me.fp.getWP(i).alt_cstr <= 0) {
 									alt = getprop(asel)*100;
 								} else {
-									alt = me.fpc.getWP(i).alt_cstr;
+									alt = me.fp.getWP(i).alt_cstr;
 								}
 							} else {
 							### STARS ###
-								if (me.fpc.getWP(i).alt_cstr <= 0) {
-									alt = me.fpc.getWP(i+1).alt_cstr;
+								if (me.fp.getWP(i).alt_cstr <= 0) {
+									alt = me.fp.getWP(i+1).alt_cstr;
 								} else {
-									alt = me.fpc.getWP(i).alt_cstr;
+									alt = me.fp.getWP(i).alt_cstr;
 								}
 							}
 						} else {
 						### NAVAIDS ###
-							if (i == me.currWpt and me.fpc.getWP(me.currWpt).alt_cstr <= 0) {
+							if (i == me.currWpt and me.fp.getWP(me.currWpt).alt_cstr <= 0) {
 								alt = me.alt_set;
 							} else {
-								if (me.fpc.getWP(i).alt_cstr <= 0) {
+								if (me.fp.getWP(i).alt_cstr <= 0) {
 									alt = getprop(asel)*100;
 								} else {
-									alt = me.fpc.getWP(i).alt_cstr;
+									alt = me.fp.getWP(i).alt_cstr;
 								}
 							}
 						}
@@ -204,12 +180,12 @@ var vsd = {
 					me.path.lineTo(me.bottom_left.x + me.max_range_px*(me.rteLen/me.range), me.bottom_left.y - me.alt_ceil_px*(alt/me.alt_ceil));
 
 					# Add waypoint ident
-					if (me.fpc.getWP(i).wp_name == "TOD") {
+					if (me.fp.getWP(i).wp_name == "TOD") {
 						var color = me.tod_color;
 						var text = "TOD";
 					} else {
 						var color = me.path_color;
-						var text = me.fpc.getWP(i).id;
+						var text = me.fp.getWP(i).id;
 					}
 
 					me.text.createChild("text")
@@ -227,8 +203,8 @@ var vsd = {
 							 .setText("*");
 
 					if(i<numWpts-1) {
-						me.wpt_this.set_latlon(me.fpc.getWP(i).lat, me.fpc.getWP(i).lon);
-						me.wpt_next.set_latlon(me.fpc.getWP(i+1).lat, me.fpc.getWP(i+1).lon);
+						me.wpt_this.set_latlon(me.fp.getWP(i).lat, me.fp.getWP(i).lon);
+						me.wpt_next.set_latlon(me.fp.getWP(i+1).lat, me.fp.getWP(i+1).lon);
 						append(rangeHdg, {range: me.rteLen, course: me.wpt_this.course_to(me.wpt_next)});
 						me.rteLen = me.rteLen + me.wpt_this.distance_to(me.wpt_next)*M2NM;
 					}

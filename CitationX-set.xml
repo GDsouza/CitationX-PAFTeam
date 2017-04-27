@@ -357,11 +357,12 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
             <int n="4" alias="/systems/electrical/outputs/landing-light[1]"/>
             <int n="5" alias="/systems/electrical/outputs/recog-lights"/>
             <int n="6" alias="/systems/electrical/outputs/nav-lights"/>
-            <float  alias="/controls/cabin-door/position-norm"/>
-            <float  n="1" alias="/surface-positions/speedbrake-pos-norm"/>
-						<float  n="2" alias="/surface-positions/reverser-norm"/>
+            <float n="0" alias="/controls/cabin-door/position-norm"/>
+            <float n="1" alias="/surface-positions/speedbrake-pos-norm"/>
+						<float n="2" alias="/surface-positions/reverser-norm"/>
 				<!-- <string  alias="/sim/multiplay/callsign"/> -->
         </generic>
+				<callsign>""</callsign>
     </multiplay>
 
     <flight-recorder include="Systems/flight-recorder.xml"/>
