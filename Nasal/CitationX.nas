@@ -449,7 +449,7 @@ var FH_write = func {
 		fl_tot = getprop("instrumentation/clock/flight-meter-tot");
 		var data = io.read_properties(FH_path);
 		var name = data.getChild("TotalFlight");
-		name.setDoubleValue(fl_tot);
+		name.setValue(fl_tot);
 		io.write_properties(FH_path,data);
 }
 

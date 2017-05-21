@@ -368,7 +368,6 @@ var key = func(v) {
 
 				if (destAirport == cduInput and cduInput !="") {
 					fpc = flightplan().clone();
-print("370 clone : ",fpc.getWP(3).wp_name);
 					setprop("autopilot/route-manager/input","@ACTIVATE");		
 					setprop("instrumentation/cdu/display-prev",cduDisplay);
 					cduDisplay = "FLT-PLAN[6]";

@@ -26,10 +26,9 @@ var active = -1;
 
 ##
 # Callback for drawing a new VOR based on styling
-#
 # NOTE: callbacks that create symbols for caching MUST render them using a 
 # transparent background !!
-#
+##
 var drawVOR = func(group) {
 	group.createChild("path")
 		.moveTo(-15,0)
@@ -51,9 +50,6 @@ var cache = StyleableCacheable.new(
 	relevant_keys: ["line_width", "color"],
 );
 
-##
-# TODO: make this a part of the framework, for use by other layers/symbols etc
-#
 var controller_check = func(layer, controller, arg...) {
 	var ret = call(compile("call(layer.controller."~controller~", arg, layer.controller)", "<test>"), arg, var err=[]);
 	if (size(err))
@@ -82,23 +78,19 @@ var draw = func {
 	var active = controller_check(me.layer, 'isActive', me.model);
 	if (active != me.active) {
 		if (me.icon_vor != nil) me.icon_vor.del();
-		# look up the correct symbol from the cache and render it into the group as a raster image
-		#me.icon_vor = icon_vor_cached[active or 0].render(me.element);
 		me.style.color = active ? me.style.active_color : me.style.inactive_color;
 		me.text_vor.setColor(active ? me.style.active_color : me.style.inactive_color);
 		me.icon_vor = cache.render(me.element, me.style).setScale(me.style.scale_factor);
 		me.active = active; # update me.active flag
 	}
-	# Update (also handles non-cached stuff, such as text labels or animations)
-	# TODO: we can use a func generator to pre-create the callback/data structure for this
+
 	if (active) {
-##########
-			var course =  me.map.controller.get_tuned_course(me.model.frequency/100);
-##########	
+#####
+			var course =  me.map.controller.get_tuned_course(me.model.frequency/100)- me.map.controller.get_course_dev()-2; # -2 to compensate calc approximation
+#####	
 		if (me.range_vor == nil) {
 			# initialize me.range and me.radial_vor
 			var rangeNm = me.map.getRange();
-			# print("VOR is tuned:", me.model.id);
 			var radius = (me.model.range_nm/rangeNm)*275;
 			me.range_vor = me.element.createChild("path")
 				.moveTo(-radius,0)
@@ -115,12 +107,11 @@ var draw = func {
 				.setStrokeLineWidth(me.style.radial_line_width)
 				.setStrokeDashArray(me.style.radial_dash_array)
 				.setColor(me.style.active_color)
-				.setRotation(course*D2R)
 				.set("z-index",-2);
 		}	
-#######
+#####
 		me.radial_vor.setRotation(course*D2R);
-######
+#####
 		me.range_vor.show();
 		me.radial_vor.show();
 	} else { # inactive station (not tuned)

@@ -1,5 +1,6 @@
 #### Citation X - Vertical Situation Display ####
-#### Narendran M (c) 2014 - Adapted by C. Le Moigne (clm76) - 2017 ####
+#### Narendran M (c) 2014
+#### Adapted by C. Le Moigne (clm76) - 2017 ####
 
 props.globals.initNode("instrumentation/efis/inputs/vsd",0,"BOOL");
 
@@ -17,7 +18,7 @@ var set_range = "/instrumentation/efis//inputs/range-nm";
 var svg_path = "/Aircraft/CitationX/Models/Instruments/MFD/canvas/Images/vsd.svg"; 
 var tg_alt = "autopilot/settings/tg-alt-ft";
 var toggle_vsd = "/instrumentation/efis//inputs/vsd";
-var tot_dist = "autopilot/route-manager/total-distance";
+var totDist = "autopilot/route-manager/total-distance";
 var	vert_spd = "/velocities/vertical-speed-fps";
 
 		#### VSD CLASS ###
@@ -73,8 +74,14 @@ var vsd = {
 		m.group.getElementById("text_range4").setText(sprintf("%3.0f",m.h_range));
 		m.group.getElementById("tgt_altitude").setText(sprintf("%5.0f",getprop(tg_alt)));
 
+		### Variables ###
 		m.fp = flightplan();
 		m.alt_set = getprop(tg_alt);
+		m.lastWp = 0;
+		m.lastWp_alt = 0;
+		m.lastWp_dist = 0;
+		m.prevWp_alt = 0;
+		m.prevWp_dist = 0;
 
 		return m;
 	}, # end of new
@@ -84,6 +91,7 @@ var vsd = {
 		setlistener(fp_active, func(n) {
 			if (n.getValue()) {
 				me.fp = flightplan();
+				me.tot_dist = getprop(totDist);
 				me.update();
 			}
 		});
@@ -146,41 +154,33 @@ var vsd = {
 					if (i == 0) {alt = getprop(dep_alt)}
 					else if (i == numWpts-1) {alt = getprop(dest_alt)}
 					else {
+
 						#### BASIC ###
 						if(me.fp.getWP(i).wp_type == "basic" and me.fp.getWP(i).wp_role == nil) {
+
 							### SIDS ###
-							if (me.fp.getWP(i).distance_along_route < getprop(tot_dist)/2) {
+							if (me.fp.getWP(i).distance_along_route < me.tot_dist/2) {
 								if (me.fp.getWP(i).alt_cstr <= 0) {
 									alt = getprop(asel)*100;
 								} else {
 									alt = me.fp.getWP(i).alt_cstr;
 								}
 							} else {
+
 							### STARS ###
-								if (me.fp.getWP(i).alt_cstr <= 0) {
-									alt = me.fp.getWP(i+1).alt_cstr;
-								} else {
-									alt = me.fp.getWP(i).alt_cstr;
-								}
+								alt = me.fp.getWP(i).alt_cstr;								
 							}
 						} else {
+
 						### NAVAIDS ###
-							if (i == me.currWpt and me.fp.getWP(me.currWpt).alt_cstr <= 0) {
-								alt = me.alt_set;
-							} else {
-								if (me.fp.getWP(i).alt_cstr <= 0) {
-									alt = getprop(asel)*100;
-								} else {
-									alt = me.fp.getWP(i).alt_cstr;
-								}
-							}
+								alt = me.fp.getWP(i).alt_cstr;
 						}
 					}
 					if(me.rteLen > me.range) {brk_next = 1}
 					me.path.lineTo(me.bottom_left.x + me.max_range_px*(me.rteLen/me.range), me.bottom_left.y - me.alt_ceil_px*(alt/me.alt_ceil));
 
 					# Add waypoint ident
-					if (me.fp.getWP(i).wp_name == "TOD") {
+					if (me.fp.getWP(i).wp_name == 'TOD') {
 						var color = me.tod_color;
 						var text = "TOD";
 					} else {

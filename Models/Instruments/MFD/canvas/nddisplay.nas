@@ -287,6 +287,11 @@ var NdDisplay = {
 				return getprop("instrumentation/nav[1]/radials/selected-deg");
 		}
 
+#####
+		var get_course_offset = func {
+			return getprop("/orientation/heading-magnetic-deg");
+		}
+#####
 		var get_current_position = func {
 			delete(caller(0)[0], "me"); # remove local me, inherit outer one
 			return [
@@ -301,6 +306,9 @@ var NdDisplay = {
 			_pos: nil, _time: nil,
 			is_tuned:is_tuned,
 			get_tuned_course:get_course_by_freq,
+#####
+			get_course_dev:get_course_offset,
+#####
 			get_position: get_current_position,
 			new: func(map) return { parents:[controller], map:map },
 			del: func() {print("cleaning up nd controller");},
