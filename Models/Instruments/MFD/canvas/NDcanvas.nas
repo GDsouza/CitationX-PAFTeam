@@ -285,7 +285,7 @@ var _list = setlistener("sim/signals/fdm-initialized", func {
 	var mfd = MFD_canvas.new();
 	mfd.listen();
 	mfd.update();
-	print('Loading canvas ND...Ok');
+	print('MFD Canvas ... Ok');
 #################
 
 	removelistener(_list); # run ONCE

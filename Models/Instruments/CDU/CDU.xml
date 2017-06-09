@@ -608,7 +608,6 @@
         </specular>
     </animation>
 
-
     <animation>
         <name>green</name>
         <type>material</type>
@@ -647,7 +646,6 @@
         <name>green</name>
         <type>material</type>
         <object-name>L1</object-name>
-        <object-name>L3</object-name>
         <object-name>R1</object-name>
         <object-name>R3</object-name>
         <object-name>R5</object-name>
@@ -678,19 +676,81 @@
     <animation>
         <name>green</name>
         <type>material</type>
+        <object-name>L3</object-name>
+				<condition>
+						<not-equals>
+							<property>instrumentation/cdu/display</property>
+							<value>FLT-PLAN[10]</value>
+						</not-equals>
+				</condition>
+        <emission>
+            <red-prop>sim/color-set/green/r</red-prop>
+            <green-prop>sim/color-set/green/g</green-prop>
+            <blue-prop>sim/color-set/green/b</blue-prop>
+            <alpha-prop>sim/color-set/green/a</alpha-prop>
+						<factor-prop>controls/lighting/cdu</factor-prop>
+        </emission>
+        <ambient>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </ambient>
+        <diffuse>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </diffuse>
+        <specular>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </specular>
+    </animation>
+
+    <animation>
+        <name>amber</name>
+        <type>material</type>
+        <object-name>L3</object-name>
+				<condition>
+						<equals>
+							<property>instrumentation/cdu/display</property>
+							<value>FLT-PLAN[10]</value>
+						</equals>
+				</condition>					
+        <emission>
+            <red-prop>sim/color-set/amber/r</red-prop>
+            <green-prop>sim/color-set/amber/g</green-prop>
+            <blue-prop>sim/color-set/amber/b</blue-prop>
+            <alpha-prop>sim/color-set/amber/a</alpha-prop>
+						<factor-prop>controls/lighting/cdu</factor-prop>
+        </emission>
+        <ambient>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </ambient>
+        <diffuse>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </diffuse>
+        <specular>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </specular>
+    </animation>
+
+    <animation>
+        <name>green</name>
+        <type>material</type>
         <object-name>L5</object-name>
 				<condition>
-					<and>
 						<not-equals>
 							<property>instrumentation/cdu/display</property>
 							<value>NAV-SELT[1]</value>
 						</not-equals>
-						<not-equals>
-							<property>instrumentation/cdu/display</property>
-							<value>FLT-PLAN[6]</value>
-						</not-equals>
-					</and>
-				</condition>					
+				</condition>
         <emission>
             <red-prop>sim/color-set/green/r</red-prop>
             <green-prop>sim/color-set/green/g</green-prop>
@@ -720,16 +780,10 @@
         <type>material</type>
         <object-name>L5</object-name>
 				<condition>
-					<or>
-						<equals>
-							<property>instrumentation/cdu/display</property>
-							<value>NAV-SELT[1]</value>
-						</equals>
-						<equals>
-							<property>instrumentation/cdu/display</property>
-							<value>FLT-PLAN[6]</value>
-						</equals>
-					</or>
+					<equals>
+						<property>instrumentation/cdu/display</property>
+						<value>NAV-SELT[1]</value>
+					</equals>
 				</condition>					
         <emission>
             <red-prop>sim/color-set/amber/r</red-prop>
@@ -1539,6 +1593,5 @@
 		</binding>
 	</action>
 </animation>
-
 
 </PropertyList>

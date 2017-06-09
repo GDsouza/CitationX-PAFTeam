@@ -581,7 +581,16 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
             <master-warning type="bool">0</master-warning>
             <master-caution type="bool">0</master-caution>
         </alerts>
-
+<!--
+		<gps n="0">
+			<serviceable type="bool">true</serviceable>
+			<config>
+         <turn-anticipation type="bool">true</turn-anticipation>
+         <drive-autopilot type="bool">true</drive-autopilot>
+         <follow-leg-track-to-fix type="bool">true</follow-leg-track-to-fix>
+      </config>
+    </gps>
+-->
     <rmu>
 			<trsp-num type="string">1</trsp-num>
 		  <unit n="0">

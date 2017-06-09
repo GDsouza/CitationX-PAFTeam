@@ -93,6 +93,7 @@ var vsd = {
 				me.fp = flightplan();
 				me.tot_dist = getprop(totDist);
 				me.update();
+				me.v_alt = fms.vsd_alt(); # Call altitudes vector from fms
 			}
 		});
 
@@ -160,20 +161,20 @@ var vsd = {
 
 							### SIDS ###
 							if (me.fp.getWP(i).distance_along_route < me.tot_dist/2) {
-								if (me.fp.getWP(i).alt_cstr <= 0) {
+								if (me.v_alt.vector[i] <= 0) {
 									alt = getprop(asel)*100;
 								} else {
-									alt = me.fp.getWP(i).alt_cstr;
+									alt = me.v_alt.vector[i];
 								}
 							} else {
 
 							### STARS ###
-								alt = me.fp.getWP(i).alt_cstr;								
+								alt = me.v_alt.vector[i];								
 							}
 						} else {
 
 						### NAVAIDS ###
-								alt = me.fp.getWP(i).alt_cstr;
+								alt = me.v_alt.vector[i];
 						}
 					}
 					if(me.rteLen > me.range) {brk_next = 1}

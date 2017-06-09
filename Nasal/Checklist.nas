@@ -19,7 +19,7 @@ for (var ind=0;ind<15;ind+=1) {
 }
 
 setlistener("/sim/signals/fdm-initialized", func {
-    print("Vocal Checklists ...Ok");
+    print("Vocal Checklists ... Ok");
 });
 
 ####################### CHECKLISTS ######################

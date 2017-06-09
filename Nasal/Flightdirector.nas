@@ -473,7 +473,7 @@ var update_nav = func {
 ###  Main loop ###
 
 setlistener("sim/signals/fdm-initialized", func {
-   print("Flight Director ...Ok");
+   print("Flight Director ... Ok");
 	settimer(update_fd,6);
 });
 
