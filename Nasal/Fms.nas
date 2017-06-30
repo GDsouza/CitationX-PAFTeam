@@ -117,6 +117,7 @@ var FMS = {
 		var tod_dist = tot_dist;
 		var tod = 0;
 		var flag_tod = 0;
+		var flag_wp = 0;
 		var topDescent = 0;
 		var wp = nil;
 		var top_of_descent = 0;
@@ -149,8 +150,10 @@ var FMS = {
 			}
 				### Approach ###
 			if (me.fp.getWP(i).wp_type == 'basic' and me.fp.getWP(i).distance_along_route > tot_dist/2) { 
-				wp_alt = me.fp.getWP(i).alt_cstr;
+				if (me.fp.getWP(i).alt_cstr <= 0) {wp_alt = v_alt.vector[i-1]} 
+				else {wp_alt = me.fp.getWP(i).alt_cstr}
 			} 
+
 			 ### Store Altitudes in a vector ###
 			v_alt.append(wp_alt);
 		}
@@ -159,21 +162,28 @@ var FMS = {
 		### TOD Calc ###
 
 		for (var i=1;i<me.fp.getPlanSize()-1;i+=1) {
-			if (asel < me.highest_alt) {break}
+			if (asel < me.highest_alt) {
+				if (v_alt.vector[i] <= 0) {
+					for (var j=i;j<me.fp.getPlanSize()-1;j+=1) {
+						if (v_alt.vector[j] > 0) {
+							v_alt.vector[i] = v_alt.vector[j];					
+							break;
+						}
+					}
+				}
+			}
 			else {
 				altWP_curr = v_alt.vector[i];
 				f_dist = 	me.fp.getWP(i).distance_along_route;			
-
-						### Search for tod ###
-				for (var j=i;j<me.fp.getPlanSize()-1;j+=1) {
-					if (v_alt.vector[j] > altWP_curr) {break}
-					if (v_alt.vector[j] < altWP_curr and v_alt.vector[j] > 0) {
+				### Search for tod ###
+				for (var j=i+1;j<me.fp.getPlanSize()-1;j+=1) {
+					if (v_alt.vector[j] < altWP_curr) {
 						altWP_next = v_alt.vector[j];
 						wp_dist = me.fp.getWP(j).distance_along_route;
 						tod = (altWP_curr-altWP_next)/1000*me.tod_constant;
 						leg_dist = wp_dist - f_dist;
 						### Create tod ###
-						if (leg_dist > tod*1.25) {
+						if (leg_dist > tod*1.15 and leg_dist > 5) {
 							flag_tod = 0;
 							top_of_descent = tot_dist-wp_dist+tod;
 							tod_dist = wp_dist-tod;
@@ -181,14 +191,16 @@ var FMS = {
 							wp = createWP(topdescent.lat,topdescent.lon,"TOD",'pseudo');
 						}
 						break;
-					} 
+					} 					
 				}
-						### Insert tod in the flightplan ###
+				### Insert tod in the flightplan ###
+						# parabolic functions to calculate TOD position versus ASEL #		
 				if (asel <= 420000) {
 					var x = 1.5/100000000*math.pow(asel,2)+0.00163*asel + 9.24;
 				} else { 
 					var x = 6.25/10000000*math.pow(asel,2)+0.039225*asel + 647;
 				}
+
 				if (tod_dist < me.fp.getWP(i+1).distance_along_route and flag_tod == 0 and tod_dist > x) {
 					me.fp.insertWP(wp,i+1);
 					v_alt.insert(i+1,altWP_curr);
@@ -198,10 +210,10 @@ var FMS = {
 				if (me.fp.getWP(i).wp_name == 'TOD') {
 					me.prevWp_dist = tot_dist-me.fp.getWP(i).distance_along_route;
 					me.prevWp_alt = v_alt.vector[i];
-					for (var j=i;j<me.fp.getPlanSize()-1;j+=1) {
-						if (v_alt.vector[j+1]< v_alt.vector[i] and v_alt.vector[j+1] > 0) {
-							me.lastWp_dist = tot_dist-me.fp.getWP(j+1).distance_along_route;
-							me.lastWp_alt = v_alt.vector[j+1];
+					for (var j=i+1;j<me.fp.getPlanSize()-1;j+=1) {
+						if (v_alt.vector[j] < v_alt.vector[i]) {
+							me.lastWp_dist = tot_dist-me.fp.getWP(j).distance_along_route;
+							me.lastWp_alt = v_alt.vector[j];
 							break;
 						}
 					}
@@ -209,7 +221,8 @@ var FMS = {
 					append(v_tod,me.lastWp_dist);
 					append(v_tod,me.lastWp_alt);
 				}
-						### Calculate intermediates altitudes for VSD ###
+				
+				### Calculate intermediates altitudes for VSD ###
 				me.altCalc(tot_dist,i);
 			}
 		}
@@ -325,8 +338,11 @@ var FMS = {
 							if (me.dist_rem.getValue() < me.prevWp_dist and me.dist_rem.getValue() > me.lastWp_dist) {
 								me.set_tgAlt = math.round(me.lastWp_alt,100);
 							} else {me.set_tgAlt = math.round(curr_wp_alt,100)}
-						} else {me.set_tgAlt = math.round(v_tod[v_ind+2],100)}
+						} else {
+							me.set_tgAlt = math.round(v_tod[v_ind+2],100);
+						}
 					}
+
 					### Speed ###
 
 									### Departure ###
@@ -342,17 +358,17 @@ var FMS = {
 						} else {
 									### After tod ###
 							if (size(v_tod) > 0 and dist_rem <= v_tod[v_ind] and dist_rem >= v_tod[v_ind+1]-0.1) {
-								if (int(alt_ind) <= me.tg_alt.getValue()+501 and int(alt_ind) > me.tg_alt.getValue()+498) {
+								if (int(alt_ind) <= me.tg_alt.getValue()+101 and int(alt_ind) > me.tg_alt.getValue()+98) {
 									me.spd_dist = dist_rem-v_tod[v_ind+1];
 								}
-								if (me.spd_dist > 0 and me.spd_dist <= 5) {
+								if (me.spd_dist > 0 and me.spd_dist <= 5 or dist_rem <= 20) {
 									if (alt_mc) {me.tg_spd_mc.setValue(descent_mc)}
 									if (!alt_mc) {me.tg_spd_kt.setValue(descent_kt)}
-								} else if (me.spd_dist > 5) {me.cruise_spd()}
+								} else if (me.spd_dist > 5 and dist_rem > 20) {me.cruise_spd()}
 							} else {
 
 								### Climb ###
-								if (me.tg_alt.getValue() > alt_ind+1000) {
+								if (alt_ind < me.tg_alt.getValue()-100) {
 									var my_spd = climb_kt;
 									if (alt_mc) {
 										my_spd = climb_mc;
@@ -360,17 +376,20 @@ var FMS = {
 									} else {me.tg_spd_kt.setValue(my_spd)}
 
 									### Descent ###
-								} else if (dist_rem <= 15) {
+								} else if (dist_rem <= 20) {
 										me.tg_spd_kt.setValue(200);
-								}	else if (me.tg_alt.getValue() < alt_ind-1000){
+								}	else if (alt_ind > me.tg_alt.getValue()+100){
 										if (alt_mc) {me.tg_spd_mc.setValue(descent_mc)}
 										if (!alt_mc) {me.tg_spd_kt.setValue(descent_kt)}
-								} else if (curr_wp_name != 'TOD' and curr_wp_type == 'basic' and curr_wp_dist > tot_dist/2) {
+#								} else if (curr_wp_name != 'TOD' and curr_wp_type == 'basic' and curr_wp_dist > tot_dist/2 and curr_wp_leg < 8) {
+#										if (alt_mc) {me.tg_spd_mc.setValue(descent_mc)}
+#										if (!alt_mc) {me.tg_spd_kt.setValue(descent_kt)}
+								} else if (curr_wp_name == 'TOD' and curr_wp_leg < 8) {
 										if (alt_mc) {me.tg_spd_mc.setValue(descent_mc)}
-										if (!alt_mc) {me.tg_spd_kt.setValue(descent_kt)}
-								} else if (curr_wp_name == 'TOD' and curr_wp_leg < 10) {
-										if (alt_mc) {me.tg_spd_mc.setValue(descent_mc)}
-										if (!alt_mc) {me.tg_spd_kt.setValue(descent_kt)}
+										if (!alt_mc) {
+											var tg_spd = me.tg_spd_kt.getValue();
+											me.tg_spd_kt.setValue(tg_spd);
+										}
 								}	else {
 
 										### Cruise ###
@@ -417,7 +436,7 @@ var FMS = {
 
 }; # end of FMS
 
-var vsd_alt = func {
+var vsd_alt = func { # for VSD
 	return (v_alt);
 }
 ###  START ###

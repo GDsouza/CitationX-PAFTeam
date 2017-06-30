@@ -107,7 +107,7 @@
           <value>VOR</value>
         </enable>
         <input>
-            <property>autopilot/internal/ap_crs</property>
+            <property>autopilot/internal/ap-crs</property>
         </input>
         <reference>
             <value>0.0</value>
@@ -131,7 +131,7 @@
           <value>LOC</value>
         </enable>
         <input>
-            <property>autopilot/internal/ap_crs</property>
+            <property>autopilot/internal/ap-crs</property>
         </input>
         <reference>
             <value>0.0</value>
@@ -155,7 +155,7 @@
           <value>LNAV</value>
         </enable>
         <input>
-            <property>autopilot/internal/ap_crs</property>
+            <property>autopilot/internal/ap-crs</property>
         </input>
         <reference>
             <value>0.0</value>

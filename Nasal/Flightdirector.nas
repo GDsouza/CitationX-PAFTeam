@@ -25,12 +25,15 @@ var ind_mc = "instrumentation/airspeed-indicator/indicated-mach";
 var tg_spd_kt = "autopilot/settings/target-speed-kt";
 var ind_kt = "instrumentation/airspeed-indicator/indicated-speed-kt";
 var app_wp = "autopilot/route-manager/route/wp[";
-props.globals.initNode("autopilot/locks/TOD",0,"BOOL");
 props.globals.initNode("autopilot/settings/fms",0,"BOOL");
 props.globals.initNode("autopilot/locks/alm-tod",0,"BOOL");
-var NDSymbols = props.globals.getNode("autopilot/route-manager/vnav", 1);
+props.globals.initNode("autopilot/locks/alm-wp",0,"BOOL");
+var alm_wp = props.globals.getNode("autopilot/locks/alm-wp",1);
 var int_crs = 0;
 var wp = 0;
+var wp_curr = 0;
+var flag_wp = 0;
+var dist_wp = 10;
 
 ### LISTENERS ###
 
@@ -277,7 +280,7 @@ var set_alt = func {
 }
 
 var course_offset = func(src){
-    var crs_set=getprop(src);
+	  var crs_set=getprop(src);
 		var nav_dst= getprop("autopilot/internal/nav-distance");
     var crs_offset= crs_set - getprop("orientation/heading-magnetic-deg");
     if(crs_offset>180)crs_offset-=360;
@@ -288,8 +291,8 @@ var course_offset = func(src){
     if(crs_offset<-180)crs_offset+=360;
 		if (nav_dst<0.5) {
 			if (wp == 0) {int_crs = crs_offset;wp=1}			
-			setprop("autopilot/internal/ap_crs",int_crs);
-		} else {setprop("autopilot/internal/ap_crs",crs_offset);wp=0}
+			setprop("autopilot/internal/ap-crs",int_crs);
+		} else {setprop("autopilot/internal/ap-crs",crs_offset);wp=0}
     setprop("autopilot/internal/selected-crs",crs_set);
 }
 
@@ -439,7 +442,7 @@ var update_nav = func {
     var sgnl = "- - -";
 		var ind = 0;
 		var nb = "";
-    if(NAVSRC == "NAV1" or NAVSRC == "NAV2"){
+    if(left(NAVSRC,3) == "NAV"){
 			if (NAVSRC == "NAV1") {ind = 0;nb = "1"}
 			if (NAVSRC == "NAV2") {ind = 1;nb = "2"}
         if(getprop("instrumentation/nav["~ind~"]/data-is-valid"))sgnl="VOR"~nb;
@@ -452,23 +455,81 @@ var update_nav = func {
         if(getprop("instrumentation/nav["~ind~"]/nav-loc"))sgnl="LOC"~nb;
         if(getprop("instrumentation/nav["~ind~"]/has-gs"))sgnl="ILS"~nb;
         setprop("autopilot/internal/nav-type",sgnl);
+				nav_type = "nav";
         course_offset("instrumentation/nav["~ind~"]/radials/selected-deg");
         setprop("autopilot/internal/to-flag",getprop("instrumentation/nav["~ind~"]/to-flag"));
         setprop("autopilot/internal/from-flag",getprop("instrumentation/nav["~ind~"]/from-flag"));
 
-    }else if(NAVSRC == "FMS1" or NAVSRC == "FMS2"){
+    } else if(left(NAVSRC,3) == "FMS"){
 				if (NAVSRC == "FMS1") {ind = 1} else {ind = 2}
         setprop("autopilot/internal/nav-type","FMS"~ind);
         setprop("autopilot/internal/in-range",1);
         setprop("autopilot/internal/gs-in-range",0);
         setprop("autopilot/internal/nav-distance",getprop("instrumentation/gps/wp/wp[1]/distance-nm"));
         setprop("autopilot/internal/nav-id",getprop("instrumentation/gps/wp/wp[1]/ID"));
-        course_offset("instrumentation/gps/wp/wp[1]/bearing-mag-deg");
+				nav_type = "fms";
         setprop("autopilot/internal/to-flag",getprop("instrumentation/gps/wp/wp[1]/to-flag"));
         setprop("autopilot/internal/from-flag",getprop("instrumentation/gps/wp/wp[1]/from-flag"));
-    } else if (NAVSRC == "") {setprop("autopilot/internal/nav-type","")}
 
+			var fp = flightplan();
+			var dist_rem = getprop("autopilot/route-manager/distance-remaining-nm");
+			var tot_dist = getprop("autopilot/route-manager/total-distance");
+			var wp_dist = getprop("instrumentation/gps/wp/wp[1]/distance-nm");
+			var geocoord = geo.aircraft_position();
+			var refCourse = fp.pathGeod(fp.indexOfWP(fp.destination_runway), -dist_rem);
+      var courseCoord = geo.Coord.new().set_latlon(refCourse.lat, refCourse.lon);
+      var CourseError = (geocoord.distance_to(courseCoord) / 1852) + 1;
+			var heading = getprop("orientation/track-magnetic-deg");
+      var change_wp = abs(getprop("instrumentation/gps/wp/leg-mag-course-deg") - heading);
+			var crs_offset = nil;
+      if(change_wp > 180) change_wp = (360 - change_wp);
+      CourseError += (change_wp / 20);
+      var targetCourse = fp.pathGeod(fp.indexOfWP(fp.destination_runway), (-getprop("autopilot/route-manager/distance-remaining-nm") + CourseError));
+      courseCoord = geo.Coord.new().set_latlon(targetCourse.lat, targetCourse.lon);
+      CourseError = (geocoord.course_to(courseCoord) - getprop("orientation/heading-deg"));
+      if(CourseError < -180) CourseError += 360;
+      else if(CourseError > 180) CourseError -= 360;
+			if (fp.current < 1) {
+				var crs_set = getprop("instrumentation/gps/wp/leg-mag-course-deg");
+				crs_offset= crs_set - getprop("orientation/heading-magnetic-deg");
+				if(crs_offset>180)crs_offset-=360;
+				if(crs_offset<-180)crs_offset+=360;
+			} else {
+				crs_offset = CourseError;
+				var gspd = getprop("velocities/groundspeed-kt")/10000;
+				var diff_crs = abs(fp.getWP(fp.current).leg_bearing -fp.getWP(fp.current+1).leg_bearing)*gspd;
+				if (wp_dist <= diff_crs) {
+					setprop("autopilot/route-manager/current-wp",fp.current +1);
+				}
+			}
+      setprop("autopilot/internal/ap-crs", crs_offset);
+  		setprop("autopilot/internal/course-offset",crs_offset);
+	    setprop("autopilot/internal/selected-crs",getprop("orientation/heading-magnetic-deg"));
+			setprop("instrumentation/nav/radials/selected-deg",crs_offset);
+
+			if (fp.current > 0) {
+				if (!flag_wp) {
+					wp_curr = fp.current;
+					flag_wp = 1;
+				}
+
+				var wpCoord = geo.Coord.new().set_latlon(fp.getWP(wp_curr).wp_lat, fp.getWP(wp_curr).wp_lon);
+				var courseDist = geocoord.distance_to(wpCoord)/1852;
+				if (courseDist < dist_wp) {
+					dist_wp = courseDist;
+				} else {
+					alm_wp.setValue(1);
+					if (courseDist > dist_wp +0.2) {
+						alm_wp.setValue(0);
+						dist_wp = courseDist;
+						flag_wp = 0;
+					}
+				}
+			}
+
+    } else if (NAVSRC == "") {setprop("autopilot/internal/nav-type","")}
 }
+
 
 ###  Main loop ###
 

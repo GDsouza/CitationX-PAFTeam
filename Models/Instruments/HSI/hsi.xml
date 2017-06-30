@@ -44,29 +44,11 @@ STBY HSI
             <z-m>0</z-m>
         </center>
     </animation>
-
     <animation>
         <type>rotate</type>
         <object-name>CRSneedle2</object-name>
         <object-name>CRSneedle2.001</object-name>
-        <property>instrumentation/heading-indicator/indicated-heading-deg</property>
-        <axis>
-            <x>1</x>
-            <y>0</y>
-            <z>0</z>
-        </axis>
-        <center>
-            <x-m>0</x-m>
-            <y-m>0</y-m>
-            <z-m>0</z-m>
-        </center>
-    </animation>
-
-    <animation>
-        <type>rotate</type>
-        <object-name>CRSneedle2</object-name>
-        <object-name>CRSneedle2.001</object-name>
-        <property>instrumentation/nav/radials/selected-deg</property>
+	        <property>autopilot/internal/course-offset</property>
         <axis>
             <x>-1</x>
             <y>0</y>

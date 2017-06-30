@@ -82,6 +82,7 @@ var vsd = {
 		m.lastWp_dist = 0;
 		m.prevWp_alt = 0;
 		m.prevWp_dist = 0;
+		m.v_alt = nil;
 
 		return m;
 	}, # end of new
@@ -155,26 +156,27 @@ var vsd = {
 					if (i == 0) {alt = getprop(dep_alt)}
 					else if (i == numWpts-1) {alt = getprop(dest_alt)}
 					else {
-
+						if (me.v_alt != nil) { # plan not activated
 						#### BASIC ###
-						if(me.fp.getWP(i).wp_type == "basic" and me.fp.getWP(i).wp_role == nil) {
+							if(me.fp.getWP(i).wp_type == "basic" and me.fp.getWP(i).wp_role == nil) {
 
-							### SIDS ###
-							if (me.fp.getWP(i).distance_along_route < me.tot_dist/2) {
-								if (me.v_alt.vector[i] <= 0) {
-									alt = getprop(asel)*100;
+								### SIDS ###
+								if (me.fp.getWP(i).distance_along_route < me.tot_dist/2) {
+									if (me.v_alt.vector[i] <= 0) {
+										alt = getprop(asel)*100;
+									} else {
+										alt = me.v_alt.vector[i];
+									}
 								} else {
-									alt = me.v_alt.vector[i];
+
+								### STARS ###
+									alt = me.v_alt.vector[i];								
 								}
 							} else {
 
-							### STARS ###
-								alt = me.v_alt.vector[i];								
+							### NAVAIDS ###
+									alt = me.v_alt.vector[i];
 							}
-						} else {
-
-						### NAVAIDS ###
-								alt = me.v_alt.vector[i];
 						}
 					}
 					if(me.rteLen > me.range) {brk_next = 1}
