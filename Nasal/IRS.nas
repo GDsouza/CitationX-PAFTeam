@@ -9,6 +9,7 @@ var test = props.globals.initNode("instrumentation/irs/test",0,"BOOL");
 var f_align = 0; # flag
 var f_fault = 0; # flag
 var f_navready = 0; # flag
+var t = nil;
 
 var IRS = {
 	new: func() {
@@ -38,7 +39,6 @@ var IRS = {
 		m.irs.setVisible(1);
 		selected.setValue(0);
 
-	### Display init ###
 		return m
 	},
 
@@ -58,15 +58,14 @@ var IRS = {
 				me.text.NavRdy.hide();
 				posit.setValue(0);
 			}
-		});
+		},0,0);
 
 	}, # end of listen
 
 	irsMain : func {
-	
 		setlistener(posit, func(n) {
 			if (n.getValue()) {align.setValue(0)}
-		});
+		},0,0);
 					
 		setlistener(selected, func(n) {
 			if (n.getValue() == -1 or n.getValue() == 1) {
@@ -104,7 +103,7 @@ var IRS = {
 				off_timer.singleShot = 1;
 				off_timer.start();
 			}
-		});
+		},0,0);
 
 		setlistener(align, func(n) {
 			if (n.getValue()) {
@@ -113,8 +112,7 @@ var IRS = {
 				me.navReady();				
 				f_align = 1;
 			} else {f_align = 0}
-
-		});
+		},0,0);
 
 		setlistener(test, func(n) {
 			if (n.getValue()) {
@@ -132,14 +130,14 @@ var IRS = {
 				me.text.OnBatt.hide();
 				me.text.BattFail.hide();
 			}
-		});
+		},0,0);
 
 	}, # end of irsMain
 
 	navReady : func {
 		me.text.Align.show();			
 		f_navready = 0;
-		var align_timer = maketimer(5,func() {
+		me.align_timer = maketimer(5,func() {
 			me.text.Align.hide();
 			me.text.NavRdy.show();
 			f_navready = 1;
@@ -149,12 +147,12 @@ var IRS = {
 				me.fault();
 			} else {f_fault = 0}
 		});
-		align_timer.singleShot = 1;
-		align_timer.start();	
+		me.align_timer.singleShot = 1;
+		me.align_timer.start();	
 	}, # end of display
 
 	fault : func {
-		var t = 0;
+		t = 0;
 		me.fault_timer = maketimer(0.5,func() {
 			if (t==0) {me.text.Fault.show()}
 			if (t==1) {me.text.Fault.hide()}					
@@ -171,9 +169,9 @@ var IRS = {
 }; # end of IRS
 
 #### Main ####
-var setlist = setlistener("/sim/signals/fdm-initialized", func () {	
+var irs_stl = setlistener("/sim/signals/fdm-initialized", func () {	
 	var irs = IRS.new();
 	irs.listen();
-removelistener(setlist);
-});
+	removelistener(irs_stl);
+},0,0);
 

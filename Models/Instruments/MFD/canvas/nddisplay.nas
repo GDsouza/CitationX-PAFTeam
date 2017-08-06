@@ -158,11 +158,11 @@ var NdDisplay = {
 
 	setTimerInterval: func(update_time=0.05) me.update_timer.restart(update_time),
 
-#	new : func(prop1, switches, style) {
-	new : func(prop1, switches=default_switches, style='Citation') {
+	new : func(prop1, switches, style) {
+#	new : func(prop1, switches=default_switches, style='Citation') {
 		NdDisplay.id +=1;
 		var m = { parents : [NdDisplay]};
-		var df_toggles = keys(default_switches);
+		var df_toggles = keys(switches);
 		foreach(var toggle_name; df_toggles){
 			if(!contains(switches, toggle_name)) {
 				switches[toggle_name] = default_switches[toggle_name];
@@ -415,8 +415,7 @@ var NdDisplay = {
 		return 0;
 	},
 
-	update_sub: func()
-	{
+	update_sub: func() {
 		# Variables:
 		var userLat = me.aircraft_source.get_lat();
 		var userLon = me.aircraft_source.get_lon();

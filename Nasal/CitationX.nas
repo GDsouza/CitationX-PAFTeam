@@ -68,7 +68,7 @@ var JetEngine = {
         m.fuel_pph=m.eng.initNode("fuel-flow_pph",0,"DOUBLE");
         m.fuel_gph=m.eng.initNode("fuel-flow-gph");
         m.Lfuel = setlistener(m.fuel_out, func m.shutdown(m.fuel_out.getValue()),0,0);
-        m.CutOff = setlistener(m.cutoff, func (ct){m.engine_off=ct.getValue()},1,0);
+        m.CutOff = setlistener(m.cutoff, func (ct){m.engine_off=ct.getValue()},0,0);
     return m;
     },
 
@@ -246,7 +246,7 @@ setlistener("/sim/signals/fdm-initialized", func {
 		var timer = maketimer(10,v_speed);
 		timer.singleShot = 1;
 		timer.start();
-});
+},0,0);
 
 setlistener("/sim/signals/reinit", func {
     fdm_init();
@@ -255,7 +255,7 @@ setlistener("/sim/signals/reinit", func {
 setlistener("/sim/crashed", func(cr){
     if(cr.getBoolValue()){
     }
-},1,0);
+},0,0);
 
 setlistener("sim/model/autostart", func(strt){
     if(strt.getBoolValue()){
@@ -265,18 +265,23 @@ setlistener("sim/model/autostart", func(strt){
     }
 },0,0);
 
-setlistener("/engines/engine[0]/turbine",func(turb) {
-		if(turb.getValue() >20) {setprop("/controls/engines/engine[0]/starter",0)}
+var turb0_stl = setlistener("/engines/engine[0]/turbine",func(turb) {
+		if(turb.getValue() >20) {
+			setprop("/controls/engines/engine[0]/starter",0);
+			removelistener(turb0_stl);
+		}
 },0,0);
 
-setlistener("/engines/engine[1]/turbine",func(turb) {
-		if(turb.getValue() >20) {setprop("/controls/engines/engine[1]/starter",0)}
+var turb1_stl = setlistener("/engines/engine[1]/turbine",func(turb) {
+		if(turb.getValue() >20) {
+			setprop("/controls/engines/engine[1]/starter",0);
+			removelistener(turb1_stl);
+		}
 },0,0);
 
 setlistener("/controls/gear/antiskid", func(as){
-	print(as);
-    var test=as.getBoolValue();
-    if(!test){
+	#print(as);
+    if(!as.getValue()){
     MstrCaution.setBoolValue(1 * PWR2);
     Annun.getNode("antiskid").setBoolValue(1 * PWR2);
     }else{
@@ -285,12 +290,11 @@ setlistener("/controls/gear/antiskid", func(as){
 },0,0);
 
 setlistener("instrumentation/altimeter/setting-inhg", func(inhg){
-    setprop("instrumentation/altimeter/setting-kpa",inhg.getValue()*3.386389)
-},1,0);
+    setprop("instrumentation/altimeter/setting-kpa",inhg.getValue()*3.386389);
+},0,0);
 
 setlistener("/sim/freeze/fuel", func(ffr){
-    var test=ffr.getBoolValue();
-    if(test){
+    if(ffr.getValue()){
     MstrCaution.setBoolValue(1 * PWR2);
     Annun.getNode("fuel-gauge").setBoolValue(1 * PWR2);
     }else{
@@ -298,20 +302,20 @@ setlistener("/sim/freeze/fuel", func(ffr){
     }
 },0,0);
 
-setlistener("/sim/current-view/internal", func {
+setlistener("/sim/current-view/internal", func(cv) {
 		var mem_yokeL = getprop("sim/model/mem-yoke_L");
 		var mem_yokeR = getprop("sim/model/mem-yoke_R");
-		if (getprop("/sim/current-view/internal") == 0) {
-			setprop("sim/model/show-yoke_L",1);
-			setprop("sim/model/show-yoke_R",1);
-			setprop("sim/model/show-pilot",1);
-			setprop("sim/model/show-copilot",1);
-		} 
-		else {
+		if (cv.getValue()) {
 			setprop("sim/model/show-yoke_L",mem_yokeL);
 			setprop("sim/model/show-pilot",mem_yokeL);
 			setprop("sim/model/show-yoke_R",mem_yokeR);
 			setprop("sim/model/show-copilot",mem_yokeR);
+		} 
+		else {
+			setprop("sim/model/show-yoke_L",1);
+			setprop("sim/model/show-yoke_R",1);
+			setprop("sim/model/show-pilot",1);
+			setprop("sim/model/show-copilot",1);
 		}
 },0,0);
 
@@ -340,7 +344,7 @@ var tables_anim = func(i) {
 				}			
 			}
 		});
-		if (getprop("controls/tables/table"~i~"/extend") and !cc.getBoolValue()) {
+		if (getprop("controls/tables/table"~i~"/extend") and !cc.getValue()) {
 			Cache.open();			
 			timer_open.start();
 		}
@@ -353,7 +357,7 @@ var tables_anim = func(i) {
 					if (getprop("controls/tables/table"~i~"/tab1/position-norm")==0.0) {
 						Table_0.close();
 						if (getprop("controls/tables/table"~i~"/tab0/position-norm")==0.0) {
-							cc.setBoolValue(0);
+							cc.setValue(0);
 							Cache.close();
 							timer_close.stop();
 						}
@@ -361,7 +365,7 @@ var tables_anim = func(i) {
 				}
 			}
 		});
-		if (!getprop("controls/tables/table"~i~"/extend") and cc.getBoolValue()) {
+		if (!getprop("controls/tables/table"~i~"/extend") and cc.getValue()) {
 			Cache.open();
 			timer_close.start();
 		}
@@ -371,7 +375,7 @@ var tables_anim = func(i) {
 
 setlistener("instrumentation/primus2000/dc840/et", func(xx){
 	if(getprop("systems/electrical/right-bus-norm") and getprop("controls/electric/avionics-switch")==2) {
-		if(xx.getBoolValue()){
+		if(xx.getValue()){
 			if(et <= 2){et +=1}
 			else{et = 0}
 			setprop("instrumentation/primus2000/dc840/etx",et);
@@ -381,15 +385,15 @@ setlistener("instrumentation/primus2000/dc840/et", func(xx){
 			chrono_update();
 		}
 	}
-});
+},0,0);
 
 setlistener("/gear/gear[0]/wow", func(ww){
-    if(ww.getBoolValue()){
+    if(ww.getValue()){
         FHmeter.stop();
-        Grd_Idle.setBoolValue(1);			
+        Grd_Idle.setValue(1);			
 				FH_write();
     }else{
-        Grd_Idle.setBoolValue(0);
+        Grd_Idle.setValue(0);
         FHmeter.start();
 				### raz clock to prevent restart on bounce ###
 				setprop("/instrumentation/clock/flight-meter-sec",0);
@@ -544,6 +548,7 @@ var Startup = func{
     setprop("controls/lighting/beacon",1);
     setprop("controls/lighting/strobe",1);
     setprop("controls/lighting/recog-lights",1);
+    setprop("controls/lighting/anti-coll",2);
     setprop("controls/engines/engine[0]/cutoff",1);
     setprop("controls/engines/engine[1]/cutoff",1);
     setprop("controls/engines/engine[0]/ignit",-1);
@@ -558,11 +563,12 @@ var Startup = func{
 		setprop("controls/anti-ice/pitot-heat[1]",1);
 		setprop("controls/anti-ice/window-heat",1);
 		setprop("controls/anti-ice/window-heat[1]",1);
-		setlistener("systems/electrical/right-bus",func {
+ 		var startup_stl = setlistener("systems/electrical/right-bus",func {
 			if (getprop("systems/electrical/right-bus") > 27) {
 				setprop("controls/electric/external-power",0);
+				removelistener(startup_stl);
 			}
-		});
+		},0,0);
 }
 
 var Shutdown = func{
@@ -577,6 +583,7 @@ var Shutdown = func{
     setprop("controls/lighting/beacon",0);
     setprop("controls/lighting/strobe",0);
     setprop("controls/lighting/recog-lights",0);
+    setprop("controls/lighting/anti-coll",0);
     setprop("controls/engines/engine[0]/cutoff",1);
     setprop("controls/engines/engine[1]/cutoff",1);
     setprop("controls/engines/engine[0]/ignit",0);

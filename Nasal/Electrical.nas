@@ -25,8 +25,25 @@ var lights_input=[];
 var lights_output=[];
 var lights_load=[];
 
-
-
+var scnd = nil;
+var bat1_sw = nil;
+var bat2_sw = nil;
+var l_emer = nil;
+var l_norm = nil;
+var r_emer = nil;
+var r_norm = nil;
+var apu_gen = nil;
+var ext_pwr = nil;
+var l_gen = nil;
+var r_gen = nil;
+var avionics = nil;
+var PWR = nil;
+var apu_volts = nil;
+var xtie = nil;
+var load = nil;;
+var power_source = nil;
+var bus_volts = nil;
+var srvc = nil;
 
 var strobe_switch = props.globals.getNode("controls/lighting/strobe", 1);
 aircraft.light.new("controls/lighting/strobe-state", [0.05, 1.30], strobe_switch);
@@ -153,7 +170,7 @@ setlistener("/sim/signals/fdm-initialized", func {
     init_switches();
     settimer(update_electrical,5);
     print("Electrical System ... Ok");
-});
+},0,0);
 
 var init_switches = func{
     var AVswitch=props.globals.initNode("controls/electric/avionics-switch",0,"INT");
@@ -266,12 +283,11 @@ var init_switches = func{
 }
 
 
-update_virtual_bus = func( dt ) {
-    var PWR = getprop("systems/electrical/serviceable");
-		var apu_volts = getprop("controls/APU/battery");
-    var xtie=0;
+update_virtual_bus = func(dt) {
+    PWR = getprop("systems/electrical/serviceable");
+		apu_volts = getprop("controls/APU/battery");
+    xtie=0;
     load = 0.0;
-    power_source = nil;
     if(count==0){
         var battery_volts = battery.get_output_volts();
 				if (apu_volts > battery_volts) {
@@ -330,12 +346,11 @@ return load;
 }
 
 rh_bus = func(bv) {
-    var bus_volts = bv;
-    var load = 0.0;
-    var srvc = 0.0;
+    bus_volts = bv;
+    load = 0.0;
 
     for(var i=0; i<size(rbus_input); i+=1) {
-        var srvc = rbus_input[i].getValue();
+        srvc = rbus_input[i].getValue();
 				if (srvc ==2) {srvc=1} ## switch avionics ##
        load += rbus_load[i] * srvc;
         rbus_output[i].setValue(bus_volts * srvc);
@@ -344,11 +359,10 @@ rh_bus = func(bv) {
 }
 
 lh_bus = func(bv) {
-    var load = 0.0;
-    var srvc = 0.0;
+    load = 0.0;
 
     for(var i=0; i<size(lbus_input); i+=1) {
-        var srvc = lbus_input[i].getValue();
+        srvc = lbus_input[i].getValue();
 				if (srvc ==2) {srvc=1} ## switch avionics ##
         load += lbus_load[i] * srvc;
         lbus_output[i].setValue(bv * srvc);
@@ -359,11 +373,10 @@ lh_bus = func(bv) {
 }
 
 lighting = func(bv) {
-    var load = 0.0;
-    var srvc = 0.0;
+    load = 0.0;
 
     for(var i=0; i<size(lights_input); i+=1) {
-        var srvc = lights_input[i].getValue();
+        srvc = lights_input[i].getValue();
         load += lights_load[i] * srvc;
         lights_output[i].setValue(bv * srvc);
     }
@@ -371,17 +384,17 @@ lighting = func(bv) {
 }
 
 var batt_switch=func{
-  var bat1_sw = getprop("controls/electric/battery-switch[0]");
-  var bat2_sw = getprop("controls/electric/battery-switch[1]");
-	var l_emer = "systems/electrical/left-emer-bus";
-	var l_norm = "systems/electrical/left-bus-norm";
-	var r_emer = "systems/electrical/right-emer-bus";
-	var r_norm = "systems/electrical/right-bus-norm";
-	var apu_gen = getprop("controls/electric/APU-generator");
-	var ext_pwr = getprop("controls/electric/external-power");
-	var l_gen = getprop("engines/engine[0]/amp-v");
-	var r_gen = getprop("engines/engine[1]/amp-v");
-	var avionics = getprop("controls/electric/avionics-switch");
+  bat1_sw = getprop("controls/electric/battery-switch[0]");
+  bat2_sw = getprop("controls/electric/battery-switch[1]");
+	l_emer = "systems/electrical/left-emer-bus";
+	l_norm = "systems/electrical/left-bus-norm";
+	r_emer = "systems/electrical/right-emer-bus";
+	r_norm = "systems/electrical/right-bus-norm";
+	apu_gen = getprop("controls/electric/APU-generator");
+	ext_pwr = getprop("controls/electric/external-power");
+	l_gen = getprop("engines/engine[0]/amp-v");
+	r_gen = getprop("engines/engine[1]/amp-v");
+	avionics = getprop("controls/electric/avionics-switch");
 
 	if (bat1_sw) {
 		if (ext_pwr or apu_gen or l_gen >24 or r_gen >24) {
@@ -428,8 +441,8 @@ var anticoll_switch = func {
 }
 
 update_electrical = func {
-    var scnd = getprop("sim/time/delta-sec");
-    update_virtual_bus( scnd );
+    scnd = getprop("sim/time/delta-sec");
+    update_virtual_bus(scnd);
 		batt_switch();
 		anticoll_switch();
 settimer(update_electrical, 0);

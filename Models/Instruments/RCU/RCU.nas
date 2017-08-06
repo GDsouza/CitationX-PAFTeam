@@ -50,30 +50,30 @@ var RCU = {
 	### Listeners ###
 	listen : func {
 
-		setlistener("instrumentation/comm/frequencies/selected-mhz", func {
+		setlistener(com_freq1, func(n) {
 			if (!mode.getValue()) {
-				me.text.comFreq.setText(sprintf("%.3f",com_freq1.getValue()));
+				me.text.comFreq.setText(sprintf("%.3f",n.getValue()));
 			}
 		});
-		setlistener("instrumentation/comm[1]/frequencies/selected-mhz", func {
+		setlistener(com_freq2, func(n) {
 			if (mode.getValue()) {
-				me.text.comFreq.setText(sprintf("%.3f",com_freq2.getValue()));
+				me.text.comFreq.setText(sprintf("%.3f",n.getValue()));
 			}
 		});
 
-		setlistener("instrumentation/nav/frequencies/selected-mhz", func {
+		setlistener(nav_freq1, func(n) {
 			if (!mode.getValue()) {
-				me.text.navFreq.setText(sprintf("%.3f",nav_freq1.getValue()));
+				me.text.navFreq.setText(sprintf("%.3f",n.getValue()));
 			}
 		});
-		setlistener("instrumentation/nav[1]/frequencies/selected-mhz", func {
+		setlistener(nav_freq2, func(n) {
 			if (mode.getValue()) {
-				me.text.navFreq.setText(sprintf("%.3f",nav_freq2.getValue()));
+				me.text.navFreq.setText(sprintf("%.3f",n.getValue()));
 			}
 		});
 
-		setlistener("instrumentation/rcu/selected", func {
-			if (selected.getValue() == "COM") {
+		setlistener(selected, func(n) {
+			if (n.getValue() == "COM") {
 				me.text.comInd.show();				
 				me.text.navInd.hide();
 			} else {
@@ -82,50 +82,50 @@ var RCU = {
 			}
 		});
 
-		setlistener("instrumentation/rcu/mode", func {
-			if (!mode.getValue()) {
-				me.text.comFreq.setText(sprintf("%.3f",com_freq1.getValue()));
-				me.text.navFreq.setText(sprintf("%.3f",nav_freq1.getValue()));
-			} else {
+		setlistener(mode, func(n) {
+			if (n.getValue()) {
 				me.text.comFreq.setText(sprintf("%.3f",com_freq2.getValue()));
 				me.text.navFreq.setText(sprintf("%.3f",nav_freq2.getValue()));
-			}
-		});
-
-		setlistener("instrumentation/rcu/squelch", func {
-			if (!sq.getValue()) {
-				me.text.sq.show();				
 			} else {
-				me.text.sq.hide();				
+				me.text.comFreq.setText(sprintf("%.3f",com_freq1.getValue()));
+				me.text.navFreq.setText(sprintf("%.3f",nav_freq1.getValue()));
 			}
 		});
 
-		setlistener("instrumentation/rcu/nav-audio", func {
-			if (navAud.getValue()) {
+		setlistener(sq, func(n) {
+			if (n.getValue()) {
+				me.text.sq.hide();				
+			} else {
+				me.text.sq.show();				
+			}
+		});
+
+		setlistener(navAud, func(n) {
+			if (n.getValue()) {
 				me.text.navAudio.show();				
 			} else {
 				me.text.navAudio.hide();				
 			}
 		});
 
-		setlistener("instrumentation/comm/ptt", func {
-			if (tx1.getValue()) {
+		setlistener(tx1, func(n) {
+			if (n.getValue()) {
 				me.text.tx.show();				
 			} else {
 				me.text.tx.hide();				
 			}
 		});
 
-		setlistener("instrumentation/comm[1]/ptt", func {
-			if (tx2.getValue()) {
+		setlistener(tx2, func(n) {
+			if (n.getValue()) {
 				me.text.tx.show();				
 			} else {
 				me.text.tx.hide();				
 			}
 		});
 
-		setlistener("instrumentation/rcu/emrg", func {
-			if (emrg.getValue()) {me.text.emrg.show()}
+		setlistener(emrg, func(n) {
+			if (n.getValue()) {me.text.emrg.show()}
 			else {me.text.emrg.hide()}
 		});
 

@@ -6,9 +6,17 @@
 var v_tod = []; # for tod distances and altitudes
 var v_ind = 0; # index for v_tod vector
 var v_alt = std.Vector.new(); # for wp altitudes
+var dist_b_tod = 4; # alarm distance before TOD
+var alm_tod = 0;
+var ind = 0;
+var cruise_kt = 0;
+var cruise_mc = 0;
+var curr_wp = nil;
+var wp_rem = 99;
+var ils = nil;
 
 var FMS = {
-	new : func {
+	new : func () {
 		var m = {parents:[FMS]};
 
 		m.vmo = 0;
@@ -26,6 +34,7 @@ var FMS = {
 		m.spd_dist = 0;
 		m.flag_alt = 0;
 
+		m.active = props.globals.getNode("autopilot/route-manager/active",1);
 		m.alm_tod = props.globals.getNode("autopilot/locks/alm-tod",1);
 		m.alt_ind = props.globals.getNode("instrumentation/altimeter/indicated-altitude-ft",1);
 		m.alt_mc = props.globals.getNode("autopilot/locks/alt-mach",1);
@@ -47,15 +56,14 @@ var FMS = {
 		m.dep_spd = props.globals.getNode("autopilot/settings/dep-speed-kt",1);
 		m.dest_alt = props.globals.getNode("autopilot/route-manager/destination/field-elevation-ft",1);
 		m.dist_rem = props.globals.getNode("autopilot/route-manager/distance-remaining-nm",1);
-		m.fms1 = props.globals.getNode("instrumentation/primus2000/sc840/nav1ptr",1);
-		m.fms2 = props.globals.getNode("instrumentation/primus2000/sc840/nav1ptr",1);
+		m.fms = props.globals.getNode("autopilot/settings/fms",1);
 		m.ind_spd = props.globals.getNode("instrumentation/airspeed-indicator/indicated-speed-kt",1);
 		m.lock_alt = props.globals.getNode("autopilot/locks/altitude",1);
 		m.nav_dist = props.globals.getNode("autopilot/internal/nav-distance",1);
 		m.NAVprop = props.globals.getNode("autopilot/settings/nav-source",1);
-		m.num = props.globals.getNode("autopilot/route-manager/route/num",1);
 		m.NAVSRC = props.globals.getNode("autopilot/settings/nav-source",1);
 		m.NDSymbols = props.globals.getNode("autopilot/route-manager/vnav", 1);
+		m.num = props.globals.getNode("autopilot/route-manager/route/num",1);
 		m.tg_alt = props.globals.getNode("autopilot/settings/tg-alt-ft",1);
 		m.tg_spd_kt = props.globals.getNode("autopilot/settings/target-speed-kt",1);
 		m.tg_spd_mc = props.globals.getNode("autopilot/settings/target-speed-mach",1);
@@ -66,11 +74,11 @@ var FMS = {
 
 	listen : func { 
 
-		setlistener("autopilot/route-manager/active", func(n) {
+		setlistener(me.active, func(n) {
 			if (n.getValue()) {
 				me.fp = flightplan();
 				me.highest_alt = 0;
-
+				me.update();
 				for (var i=0;i<me.fp.getPlanSize();i+=1) {
 					if (me.fp.getWP(i).alt_cstr > me.highest_alt){
 						me.highest_alt = me.fp.getWP(i).alt_cstr;
@@ -82,14 +90,17 @@ var FMS = {
 				me.fp.clearWPType('pseudo');
 				v_alt.clear();
 				me.fpCalc();
+			}	else {
+				me.fms.setValue(0);
 			}
-		});
+		},0,0);
 
-		setlistener("autopilot/settings/asel", func {
+		setlistener(me.asel, func {
 			if (getprop("/instrumentation/efis/cruise-alt") != me.asel.getValue()) {
 				setprop("/instrumentation/efis/cruise-alt",me.asel.getValue());
 			}
-			if (getprop("autopilot/route-manager/active")){
+			if (me.active.getValue()){
+				curr_wp = me.fp.current;
 				me.fp.clearWPType('pseudo');
 				for (var i=0;i<me.fp.getPlanSize()-1;i+=1) {
 					var alt = me.fp.getWP(i).alt_cstr;
@@ -99,8 +110,9 @@ var FMS = {
 				v_ind = 0;
 				v_alt.clear();
 				me.fpCalc();
+				setprop("autopilot/route-manager/current-wp",curr_wp);
 			}
-		});
+		},0,0);
 
 	}, # end of listen
 
@@ -240,63 +252,30 @@ var FMS = {
 	}, # end of altCalc
 
 	update : func {
-			var alm_tod = 0;
-			var alt_ind = me.alt_ind.getValue();
-			var alt_mc = me.alt_mc.getValue();
-			var ap_stat = me.ap_stat.getValue();
-			var app_spd = me.app_spd.getValue();
-			var app5_spd = me.app5_spd.getValue();
-			var app15_spd = me.app15_spd.getValue(); 
-			var app35_spd = me.app35_spd.getValue();
-			var asel = me.asel.getValue()*100;
-			var climb_kt = me.climb_kt.getValue();
-			var climb_mc = me.climb_mc.getValue();
-			var cruise_kt = me.cruise_kt.getValue();
-			var cruise_mc = me.cruise_mc.getValue();
-			var curr_wp = me.fp.current;
-				if (curr_wp <1) {curr_wp=1}	
-			var curr_wp_alt = v_alt.vector[curr_wp];
-			var curr_wp_dist = me.fp.getWP(curr_wp).distance_along_route;
-			var curr_wp_leg = me.fp.getWP(curr_wp).leg_distance;
-			var curr_wp_name = me.fp.getWP(curr_wp).wp_name;
-			var curr_wp_spd = me.fp.getWP(curr_wp).speed_cstr;
-			var curr_wp_type = me.fp.getWP(curr_wp).wp_type;
-			var dep_agl = me.dep_agl.getValue();
-			var dep_lim = me.dep_lim.getValue();
-			var dep_spd = me.dep_spd.getValue();
-			var descent_kt = me.descent_kt.getValue();
-			var descent_mc = me.descent_mc.getValue();
-			var dest_alt = me.dest_alt.getValue();
-			var dist_rem = me.dist_rem.getValue();
-			var last_wp_name = me.fp.getWP(curr_wp-1).wp_name;
-			var lock_alt = me.lock_alt.getValue();
-			var NAVSRC = me.NAVSRC.getValue();
-			var num = me.num.getValue();
-			var tot_dist = me.tot_dist.getValue();
-			var dist_dep = tot_dist-dist_rem;
-			var ind_spd = me.ind_spd.getValue();
-			var dist_b_tod = 4; # alarm distance before TOD
-
+		if (me.fms.getValue()) {
+			me.dist_dep = me.tot_dist.getValue()-me.dist_rem.getValue();
+			curr_wp = me.fp.current;
+			if (curr_wp <1) {curr_wp=1}
+ 
 				### Takeoff ###
-
-			if (lock_alt == "VALT" and ap_stat != "AP") {
-				if (dist_dep < dep_lim and alt_ind < dep_agl) {
-					me.tg_spd_kt.setValue(dep_spd);
+			if (me.lock_alt.getValue() == "VALT" and me.ap_stat.getValue() != "AP") {
+				if (me.dist_dep < me.dep_lim.getValue() and me.alt_ind.getValue() < me.dep_agl.getValue()) {
+					me.tg_spd_kt.setValue(me.dep_spd.getValue());
 				}				
-				if (curr_wp_alt > 0) {
-					me.set_tgAlt = math.round(curr_wp_alt,100);
+				if (v_alt.vector[curr_wp] > 0) {
+					me.set_tgAlt = math.round(v_alt.vector[curr_wp],100);
 				} 				
 			}
 
 				### En route ###
-			if (ap_stat == "AP") {
-				if (left(NAVSRC,3) == "FMS" and lock_alt == "VALT") {
-					me.cruise_alt.setValue(asel);
+			if (me.ap_stat.getValue() == "AP") {
+				if (left(me.NAVSRC.getValue(),3) == "FMS" and me.lock_alt.getValue() == "VALT") {
+					me.cruise_alt.setValue(me.asel.getValue()*100);
 				
 					### Alarm before TOD ###
-					if (curr_wp_name == 'TOD' and me.nav_dist.getValue() >= 0 and me.nav_dist.getValue() < dist_b_tod) {
+					if (me.fp.getWP(curr_wp).wp_name == 'TOD' and me.nav_dist.getValue() >= 0 and me.nav_dist.getValue() < dist_b_tod) {
 						alm_tod = 1;
-					} else if (size(v_tod) > 0 and dist_rem <= v_tod[v_ind]+dist_b_tod and dist_rem > v_tod[v_ind]){
+					} else if (size(v_tod) > 0 and me.dist_rem.getValue() <= v_tod[v_ind]+dist_b_tod and  me.dist_rem.getValue() > v_tod[v_ind]){
 						alm_tod = 1;
 					} else {alm_tod = 0;me.flag_alt = 0}
 					if (alm_tod != me.alm_tod.getValue()) {
@@ -304,28 +283,29 @@ var FMS = {
 					}
 
 					### Between TOD and last reference Wp ###
-					if (size(v_tod) > 0 and dist_rem <= v_tod[v_ind] and dist_rem >= v_tod[v_ind+1]) {
+					if (size(v_tod) > 0 and me.dist_rem.getValue() <= v_tod[v_ind] and me.dist_rem.getValue() >= v_tod[v_ind+1]) {
 						me.tod = 1;
 					}
 					else {me.tod = 0}
 
 					### Approach
-					if (dist_rem <= 7) {
-						me.set_tgAlt = math.round(dest_alt,100);
-						if (NAVSRC == "FMS1") {
-							var ind = 0;
+					if (me.dist_rem.getValue() <= 7) {
+						me.set_tgAlt = math.round(me.dest_alt.getValue(),100);
+						if (me.NAVSRC.getValue() == "FMS1") {
+							ind = 0;
 							me.NAVprop.setValue("NAV1");
 						}
-						if (NAVSRC == "FMS2") {
-							var ind = 1;
+						if (me.NAVSRC.getValue() == "FMS2") {
+							ind = 1;
 							me.NAVprop.setValue("NAV2");
 						}
-						setprop("instrumentation/nav["~ind~"]/radials/selected-deg",int(getprop("autopilot/route-manager/route/wp["~(num-1)~"]/leg-bearing-true-deg")));
+
+						setprop("instrumentation/nav["~ind~"]/radials/selected-deg",getprop("autopilot/internal/selected-crs"));
 						citation.set_apr();
 					} else {
 
 						### Last Wp reference ###
-						if (size(v_tod) > 0 and int(dist_rem) == int(v_tod[v_ind+1])-1) {
+						if (size(v_tod) > 0 and int(me.dist_rem.getValue()) == int(v_tod[v_ind+1])-1) {
 							me.tod = 0;
 							me.spd_dist = 0;
 							if (v_ind < size(v_tod)-3) {
@@ -336,8 +316,9 @@ var FMS = {
 						### Setting target altitude ###
 						if (!me.tod){
 							if (me.dist_rem.getValue() < me.prevWp_dist and me.dist_rem.getValue() > me.lastWp_dist) {
-								me.set_tgAlt = math.round(me.lastWp_alt,100);
-							} else {me.set_tgAlt = math.round(curr_wp_alt,100)}
+							} else {
+								me.set_tgAlt = math.round(v_alt.vector[curr_wp],100);
+							}
 						} else {
 							me.set_tgAlt = math.round(v_tod[v_ind+2],100);
 						}
@@ -346,55 +327,54 @@ var FMS = {
 					### Speed ###
 
 									### Departure ###
-					if (dist_dep < dep_lim and alt_ind < dep_agl) {
-						me.tg_spd_kt.setValue(dep_spd);
-					} else if (dist_dep < 10) {
-							me.tg_spd_kt.setValue(climb_kt);
+					if (me.dist_dep < me.dep_lim.getValue() and me.alt_ind.getValue() < me.dep_agl.getValue()) {
+						me.tg_spd_kt.setValue(me.dep_spd.getValue());
+					} else if (me.dist_dep < 10) {
+							me.tg_spd_kt.setValue(me.climb_kt.getValue());
 					} else {
 									### Near before TOD ###
 						if (me.alm_tod.getValue()) {
-								if (alt_mc) {me.tg_spd_mc.setValue(descent_mc)}
-								if (!alt_mc) {me.tg_spd_kt.setValue(descent_kt)}
+								if (me.alt_mc.getValue()) {me.tg_spd_mc.setValue(me.descent_mc.getValue())}
+								if (!me.alt_mc.getValue()) {me.tg_spd_kt.setValue(me.descent_kt.getValue())}
 						} else {
 									### After tod ###
-							if (size(v_tod) > 0 and dist_rem <= v_tod[v_ind] and dist_rem >= v_tod[v_ind+1]-0.1) {
-								if (int(alt_ind) <= me.tg_alt.getValue()+101 and int(alt_ind) > me.tg_alt.getValue()+98) {
-									me.spd_dist = dist_rem-v_tod[v_ind+1];
+							if (size(v_tod) > 0 and me.dist_rem.getValue() <= v_tod[v_ind] and me.dist_rem.getValue() >= v_tod[v_ind+1]-0.1) {
+								if (int(me.alt_ind.getValue()) <= me.tg_alt.getValue()+101 and int(me.alt_ind.getValue()) > me.tg_alt.getValue()+98) {
+									me.spd_dist = me.dist_rem.getValue()-v_tod[v_ind+1];
 								}
-								if (me.spd_dist > 0 and me.spd_dist <= 5 or dist_rem <= 20) {
-									if (alt_mc) {me.tg_spd_mc.setValue(descent_mc)}
-									if (!alt_mc) {me.tg_spd_kt.setValue(descent_kt)}
-								} else if (me.spd_dist > 5 and dist_rem > 20) {me.cruise_spd()}
+								if (me.spd_dist > 0 and me.spd_dist <= 5 or me.dist_rem.getValue() <= 20) {
+									if (me.alt_mc.getValue()) {me.tg_spd_mc.setValue(me.descent_mc.getValue())}
+									if (!me.alt_mc.getValue()) {me.tg_spd_kt.setValue(me.descent_kt.getValue())}
+								} else if (me.spd_dist > 5 and me.dist_rem.getValue() > 20) {me.cruise_spd()}
 							} else {
 
 								### Climb ###
-								if (alt_ind < me.tg_alt.getValue()-100) {
-									var my_spd = climb_kt;
-									if (alt_mc) {
-										my_spd = climb_mc;
-										me.tg_spd_mc.setValue(my_spd);
-									} else {me.tg_spd_kt.setValue(my_spd)}
+								if (me.alt_ind.getValue() < me.tg_alt.getValue()-100) {
+									if (me.alt_mc.getValue()) {
+										me.tg_spd_mc.setValue(me.climb_mc.getValue());
+									} else {me.tg_spd_kt.setValue(me.climb_kt.getValue())}
 
 									### Descent ###
-								} else if (dist_rem <= 20) {
+								} else if (me.dist_rem.getValue() <= 20) {
 										me.tg_spd_kt.setValue(200);
-								}	else if (alt_ind > me.tg_alt.getValue()+100){
-										if (alt_mc) {me.tg_spd_mc.setValue(descent_mc)}
-										if (!alt_mc) {me.tg_spd_kt.setValue(descent_kt)}
+								}	else if (me.alt_ind.getValue() > me.tg_alt.getValue()+100){
+										if (me.alt_mc.getValue()) {me.tg_spd_mc.setValue(me.descent_mc.getValue())}
+										if (!me.alt_mc.getValue()) {me.tg_spd_kt.setValue(me.descent_kt.getValue())}
 #								} else if (curr_wp_name != 'TOD' and curr_wp_type == 'basic' and curr_wp_dist > tot_dist/2 and curr_wp_leg < 8) {
-#										if (alt_mc) {me.tg_spd_mc.setValue(descent_mc)}
-#										if (!alt_mc) {me.tg_spd_kt.setValue(descent_kt)}
-								} else if (curr_wp_name == 'TOD' and curr_wp_leg < 8) {
-										if (alt_mc) {me.tg_spd_mc.setValue(descent_mc)}
-										if (!alt_mc) {
-											var tg_spd = me.tg_spd_kt.getValue();
-											me.tg_spd_kt.setValue(tg_spd);
+#										if (me.alt_mc.getValue()) {me.tg_spd_mc.setValue(descent_mc)}
+#										if (!me.alt_mc.getValue()) {me.tg_spd_kt.setValue(descent_kt)}
+								} else if (me.fp.getWP(curr_wp).wp_name == 'TOD' and me.fp.getWP(curr_wp).leg_distance < 8) {
+#										if (me.alt_mc.getValue()) {me.tg_spd_mc.setValue(me.descent_mc.getValue())}
+										if (me.alt_mc.getValue()) {me.tg_spd_mc.setValue(me.tg_spd_mc.getValue())}
+
+										if (!me.alt_mc.getValue()) {
+											me.tg_spd_kt.setValue(me.tg_spd_kt.getValue());
 										}
 								}	else {
 
 										### Cruise ###
-									if (cruise_kt != 0) {
-										if (curr_wp_spd) {me.cruise_kt.setValue(curr_wp_spd)}
+									if (me.cruise_kt.getValue() != 0) {
+										if (me.fp.getWP(curr_wp).speed_cstr) {me.cruise_kt.setValue(me.fp.getWP(curr_wp).speed_cstr)}
 										else {me.cruise_spd()}
 									}
 								}	
@@ -403,11 +383,11 @@ var FMS = {
 					}
 				}
 				if (getprop("controls/flight/flaps")==0.142) {
-					me.tg_spd_kt.setValue(app5_spd);
+					me.tg_spd_kt.setValue(me.app5_spd.getValue());
 				} else if (getprop("controls/flight/flaps")==0.428) {
-					me.tg_spd_kt.setValue(app15_spd);
+					me.tg_spd_kt.setValue(me.app15_spd.getValue());
 				} else if (getprop("controls/flight/flaps")==1) {
-					me.tg_spd_kt.setValue(app35_spd);
+					me.tg_spd_kt.setValue(me.app35_spd.getValue());
 				}
 			} # end of AP
 
@@ -417,12 +397,14 @@ var FMS = {
 			if (getprop("autopilot/settings/target-altitude-ft") != me.tg_alt.getValue()) {
 				setprop("autopilot/settings/target-altitude-ft",me.tg_alt.getValue());
 			}
+		}
+		settimer(func me.update(),0);
 
 	}, # end of update
-	
+
 	cruise_spd : func {
-		var cruise_kt = me.cruise_kt.getValue();
-		var cruise_mc = me.cruise_mc.getValue();
+		cruise_kt = me.cruise_kt.getValue();
+		cruise_mc = me.cruise_mc.getValue();
 		if (me.alt_ind.getValue() <= 7800) {me.vmo = 270}
 		if (me.alt_ind.getValue() > 7800 and me.alt_ind.getValue() < 30650) {me.vmo=350}
 		if (me.cruise_kt.getValue() >= me.vmo) {cruise_kt = me.vmo-10}
@@ -441,17 +423,10 @@ var vsd_alt = func { # for VSD
 }
 ###  START ###
 
-var fms = FMS.new();
-
 var fms_stl = setlistener("sim/signals/fdm-initialized", func {
-	settimer(update_fms,0);
+	var fms = FMS.new();
 	fms.listen();
+	print("FMS ... Ok");
 	removelistener(fms_stl);
-});
+},0,0);
 
-var update_fms = func {
-		if (getprop("autopilot/route-manager/active") and getprop("autopilot/settings/fms")){
-			fms.update();
-		}
-    settimer(update_fms,0);
-}

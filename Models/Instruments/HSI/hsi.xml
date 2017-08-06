@@ -32,7 +32,9 @@ STBY HSI
     <animation>
         <type>rotate</type>
         <object-name>hdgring</object-name>
-        <property>instrumentation/heading-indicator/indicated-heading-deg</property>
+        <object-name>CRSneedle2</object-name>
+        <object-name>CRSneedle2.001</object-name>
+		    <property>autopilot/internal/selected-crs</property>
         <axis>
             <x>1</x>
             <y>0</y>
@@ -44,11 +46,12 @@ STBY HSI
             <z-m>0</z-m>
         </center>
     </animation>
+
     <animation>
         <type>rotate</type>
         <object-name>CRSneedle2</object-name>
         <object-name>CRSneedle2.001</object-name>
-	        <property>autopilot/internal/course-offset</property>
+	        <property>autopilot/internal/selected-crs</property>
         <axis>
             <x>-1</x>
             <y>0</y>
@@ -64,16 +67,16 @@ STBY HSI
     <animation>
         <type>translate</type>
         <object-name>CRSneedle2.001</object-name>
-        <property>instrumentation/nav/heading-needle-deflection</property>
+        <property>autopilot/internal/course-deflection</property>
         <interpolation>
             <entry>
-                <ind>-10.0</ind><dep>-0.013</dep>
+                <ind>-10.0</ind><dep>-0.018</dep>
             </entry>
             <entry>
                 <ind>0.0</ind><dep>0.0</dep>
             </entry>
             <entry>
-                <ind>10.0</ind><dep>0.013</dep>
+                <ind>10.0</ind><dep>0.018</dep>
             </entry>
         </interpolation>
         <axis>

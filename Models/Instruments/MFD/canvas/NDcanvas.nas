@@ -40,6 +40,7 @@ var nd_display = {};
 var myCockpit_switches = {
 'toggle_range':         {path: '/inputs/range-nm', value:20, type:'INT'},
 'toggle_weather':       {path: '/inputs/wxr', value:0, type:'BOOL'},
+'toggle_weather_live':  {path: '/mfd/wxr-live-enabled', value: 0, type: 'BOOL'},
 'toggle_airports':      {path: '/inputs/arpt', value:0, type:'BOOL'},
 'toggle_stations':      {path: '/inputs/sta', value:0, type:'BOOL'},
 'toggle_waypoints':     {path: '/inputs/wpt', value:0, type:'BOOL'},
@@ -50,8 +51,8 @@ var myCockpit_switches = {
 'toggle_centered':      {path: '/inputs/nd-centered',value:0, type:'BOOL'},
 'toggle_lh_vor_adf':    {path: '/inputs/lh-vor-adf',value:0, type:'INT'},
 'toggle_rh_vor_adf':    {path: '/inputs/rh-vor-adf',value:0, type:'INT'},
-'toggle_display_mode':  {path: '/mfd/display-mode', value:'MAP', type:'STRING'},
-'toggle_display_type':  {path: '/mfd/display-type', value:'LCD', type:'STRING'},
+'toggle_display_mode':  {path: '/mfd/display-mode', value:'MAP', type:'STRING'}, # valid values are: APP, MAP, PLAN or VOR
+'toggle_display_type':  {path: '/mfd/display-type', value:'LCD', type:'STRING'}, # valid values are: CRT or LCD
 'toggle_true_north':    {path: '/mfd/true-north', value:0, type:'BOOL'},
 'toggle_rangearc':      {path: '/mfd/rangearc', value:0, type:'BOOL'},
 'toggle_track_heading': {path: '/hdg-trk-selected', value:0, type:'BOOL'},
@@ -141,7 +142,7 @@ var _list = setlistener("sim/signals/fdm-initialized", func {
 			setlistener("instrumentation/efis/mfd/display-mode", func {
 				if (cmdarg().getValue() == "PLAN") {me.design.trueNorth.show()}
 				else {me.design.trueNorth.hide()}
-			});
+			},0,0);
 
 			setlistener("autopilot/locks/alm-tod", func (n) {
 				if (n.getValue()) {
@@ -158,11 +159,11 @@ var _list = setlistener("sim/signals/fdm-initialized", func {
 					me.tod_timer.stop()}
 					me.tod.hide();
 				}
-			});
+			},0,0);
 
 			setlistener("autopilot/route-manager/active", func (n) {
 				setprop("instrumentation/efis/fp-active",n.getValue());
-			});
+			},0,0);
 
 		}, # end of listen
 
@@ -267,7 +268,8 @@ var _list = setlistener("sim/signals/fdm-initialized", func {
 				me.design.trueNorth.hide()}
 
 ##### Update Timer #####			
-			settimer(func me.update(),0.1);
+#			settimer(func me.update(),0.1);
+			settimer(func me.update(),0);
 		},
 
 		show_rect: func() {

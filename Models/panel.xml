@@ -3285,14 +3285,24 @@
         <type>pick</type>
         <object-name>FD.bc</object-name>
         <visible>true</visible>
+				<condition>
+          <equals>
+              <property>autopilot/locks/heading</property>
+              <value>VOR</value>
+          </equals>
+				</condition>
         <action>
             <button>0</button>
             <repeatable>false</repeatable>
-            <binding>
+						<binding>
+              <command>property-toggle</command>
+            		<property>instrumentation/nav/back-course-btn</property>
+						</binding>
+<!--            <binding>
                 <command>nasal</command>
                 <script>citation.FD_set_mode("bc")</script>
             </binding>
-        </action>
+-->        </action>
     </animation>
 
     <animation>

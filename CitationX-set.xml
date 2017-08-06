@@ -797,6 +797,16 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
                     <script>dialogs.Radio.toggle()</script>
                 </binding>
             </key>
+						<key n="60">
+							<name>less-than</name>
+							<desc>Spoken ATC</desc>
+							<binding>
+							 <command>nasal</command>
+							 <script>
+								 atc.speak(15)
+								 </script>
+							</binding>
+						 </key>
         </keyboard>
     </input>
 
@@ -807,9 +817,16 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
           <file>Aircraft/CitationX/Nasal/Fuel.nas</file>
           <file>Aircraft/CitationX/Nasal/Flightdirector.nas</file>
 					<file>Aircraft/CitationX/Nasal/Warnings.nas</file>
+
         </citation>
+				<atc>
+					<file>Aircraft/CitationX/Nasal/spoken_atc/init.nas</file>
+					<file>Aircraft/CitationX/Nasal/spoken_atc/atc_tools.nas</file>
+					<file>Aircraft/CitationX/Nasal/spoken_atc/phraseology.nas</file>
+					<file>Aircraft/CitationX/Nasal/spoken_atc/voice.nas</file>
+				</atc>
         <dialogs>
-          <file>Aircraft/CitationX/Nasal/dialogs.nas</file>
+          <file>Aircraft/CitationX/Nasal/Dialogs.nas</file>
         </dialogs>
 				<procedures>
 					<file>Aircraft/CitationX/Models/Instruments/CDU/Procedures/fmsDB.nas</file>
@@ -838,7 +855,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
           <file>Aircraft/CitationX/Nasal/Fms.nas</file>
 				</fms>
 				<vsd>
-					<file>Aircraft/CitationX/Nasal/vsd.nas</file> 
+					<file>Aircraft/CitationX/Nasal/Vsd.nas</file> 
 				</vsd>
 				<irs>
 					<file>Aircraft/CitationX/Nasal/IRS.nas</file>
@@ -853,10 +870,10 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 					<file>Aircraft/CitationX/Models/Instruments/RCU/RCU.nas</file>
 				</rcu>
 				<tyresmoke>
-					<file>Aircraft/CitationX/Nasal/tyresmoke.nas</file>
+					<file>Aircraft/CitationX/Nasal/Tyresmoke.nas</file>
 				</tyresmoke>
 				<pressurization>
-					<file>Aircraft/CitationX/Nasal/cabin-pressure.nas</file>
+					<file>Aircraft/CitationX/Nasal/Pressurization.nas</file>
 				</pressurization>
 				<checklist>
 					<file>Aircraft/CitationX/Nasal/Checklist.nas</file>

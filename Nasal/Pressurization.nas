@@ -53,8 +53,6 @@ var update_alt = func {
 		var diff = pressure_alt.getValue() - cabin;
 		cabin_alt.setValue(cabin);
 
-	#	print("cabin = "~cabin~"   targ_rate = "~targ_rate);
-
 		if (getprop("controls/pressurization/alt-sel")) {
 			alt_display.setValue(man_rate.getValue());
 		} else {
@@ -125,6 +123,11 @@ var update_alt = func {
 #					cabin_alt.setValue(cabin_target.getValue());
 #				}
 		}
+#    if (pressure_alt.getValue() < 8000) {
+#			cabin_alt.setValue(pressure_alt.getValue());
+#    } else {
+#			cabin_alt.setValue(8000);
+#    }
 
 		targ_rate = abs(targ_rate);
 		if (targ_rate > 500) targ_rate = 500;
@@ -271,22 +274,10 @@ setlistener("controls/pressurization/press-man", func(man) {
 		} else {setprop("controls/pressurization/test",0)}
 },0,0);
 
-setlistener("/sim/signals/fdm-initialized", func {
-	settimer(func {
-#	    max_out.setValue(30000);
-	    if (getprop("gear/gear[0]/wow")) {
-				mode.setValue(0);
-	    } else {
-				mode.setValue(1);
-	    }
-	    if (pressure_alt.getValue() < 8000) {
-				cabin_alt.setValue(pressure_alt.getValue());
-	    } else {
-				cabin_alt.setValue(8000);
-	    }
+var press_stl = setlistener("/sim/signals/fdm-initialized", func {
 	    climb_desc();
 	    fast_update();
 	    slow_update();
-	},2);
+	removelistener(press_stl);
 },0,0);
 

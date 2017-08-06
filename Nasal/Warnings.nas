@@ -16,6 +16,18 @@ var MstrCaution = Annun.getNode("master-caution",1);
 var Warn = Annun.getNode("warning",1);
 var Caution = Annun.getNode("caution",1);
 var CautionAck = Annun.getNode("ack-caution",1);
+var no_takeoff_l3 = nil;
+var msg = nil;
+var msg0 = nil;
+var msg_tmp = nil;
+var alert = nil;
+var kias = nil;
+var wow1 = nil;
+var wow2 = nil;
+var stall_warn = nil;
+var grdn = nil;
+var flap = nil;
+
 aircraft.light.new("instrumentation/annunciators", [0.5, 0.5], MstrCaution);
 aircraft.light.new("instrumentation/annunciators", [0.5, 0.5], MstrWarning);
 
@@ -163,7 +175,7 @@ var EICAS = {
 			me.nb_caution = 0;
 			me.nb_l1 = 0;
 			me.nb_l0 = 0;
-			var no_takeoff_l3 = 0;
+			no_takeoff_l3 = 0;
 
 			if (me.enabled and me.test == 0) {		
 
@@ -380,12 +392,12 @@ var EICAS = {
 			me.EicasOutput();			
 			stall_speed();
 			settimer(func {me.update();},0);
-		},
+		}, # end of update
 
 		EicasOutput : func {	### MSG TO EICAS ###
-				var msg = "";
-				var msg0 = "               \n";
-				var msg_tmp = "";
+				msg = "";
+				msg0 = "               \n";
+				msg_tmp = "";
 				
 					### LEVEL 3 - RED ###
         for(var i=0; i<size(me.msg_l3); i+=1) {
@@ -417,7 +429,7 @@ var EICAS = {
 						msg_tmp = msg_tmp~msg0;	 
        	}
         me.warn_l0.setValue(msg);
-		},
+		}, # end of EicasOutput
 
 		AnnunOutput : func {	### ANNUNCIATORS ###
 
@@ -458,25 +470,25 @@ var EICAS = {
 					}
 				}
 				me.my_caution = me.nb_caution;
-		},
+		}, # end of AnnunOutput
 
 };
 
-var annun_timer = func {
-	settimer(func {
-		setprop("instrumentation/annunciators/ack-warning",1);
-		setprop("instrumentation/annunciators/warning",1);
-	},3);
-}
+#var annun_timer = func {
+#	settimer(func {
+#		setprop("instrumentation/annunciators/ack-warning",1);
+#		setprop("instrumentation/annunciators/warning",1);
+#	},3);
+#}
 
 var	stall_speed = func {
-    var alert=0;
-    var kias=getprop("velocities/airspeed-kt");
-    var wow1=getprop("gear/gear[1]/wow");
-    var wow2=getprop("gear/gear[2]/wow");;
-		var stall_warn=getprop("instrumentation/pfd/stall-warning");
-    var grdn=getprop("controls/gear/gear-down");
-    var flap=getprop("controls/flight/flaps");
+    alert = 0;
+    kias = getprop("velocities/airspeed-kt");
+    wow1 = getprop("gear/gear[1]/wow");
+    wow2 = getprop("gear/gear[2]/wow");;
+		stall_warn = getprop("instrumentation/pfd/stall-warning");
+    grdn = getprop("controls/gear/gear-down");
+    flap = getprop("controls/flight/flaps");
 
 		### Activation Stall System ###
 		if (getprop("position/altitude-agl-ft") > 400) {
@@ -511,11 +523,12 @@ var	stall_speed = func {
 			}
     }
    setprop("sim/sound/stall-horn",alert);
-}
+} # end of stall_speed
 
 ### MAIN ###
 var alarms = EICAS.new();
-	setlistener("/sim/signals/fdm-initialized", func {
+	var warn_stl = setlistener("/sim/signals/fdm-initialized", func {
 		alarms.init();
 		alarms.update();	
-	},0,0);
+		removelistener(warn_stl);
+	});

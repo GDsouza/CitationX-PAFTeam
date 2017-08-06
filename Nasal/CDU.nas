@@ -55,17 +55,19 @@ setlistener("instrumentation/cdu/init",func {
 		pos_init.setValue(0);
 		setprop("instrumentation/cdu/input","");
 		setprop("autopilot/locks/TOD",0);
-		setprop("autopilot/settings/nav-source", "FMS1");
+		setprop("autopilot/settings/nav-source", "NAV1");
+		setprop("autopilot/locks/altitude","PTCH");
+		setprop("autopilot/locks/heading","ROLL");
 		init();		
 	}	
-});
+},0,0);
 
 ### End of Positionning ###
 setlistener(posit, func(n) {
 	if (n.getValue()) {
 		setprop("instrumentation/cdu/input","");
 	}
-});
+},0,0);
 
 #### Main ####
 var input = func (v) {

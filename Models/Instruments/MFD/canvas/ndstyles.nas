@@ -141,32 +141,32 @@ var NDStyles = {
 				'z-index': 2,
 			}, # end of traffic layer
 
-			{	name:'WXR_live',
-				isMapStructure:1,
-				always_update: 1,
-				update_on:[ 'toggle_range','toggle_weather','toggle_display_mode','toggle_weather_live'],
-				predicate: func(nd, layer) {
-					var visible = nd.get_switch('toggle_weather') and
-						nd.get_switch('toggle_weather_live') and
-						nd.get_switch('toggle_display_mode') != "PLAN";
-					layer.group.setVisible(visible);
-					if (visible) {
-						layer.update();
-					}
-				},
-				'z-index': -100,
-			},# end of Weather_live layer
+#			{	name:'WXR_live',
+#				isMapStructure:1,
+#				always_update: 1,
+#				update_on:['toggle_range','toggle_weather','toggle_display_mode','toggle_weather_live'],
+#				predicate: func(nd, layer) {
+#					var visible = nd.get_switch('toggle_weather') and
+#						nd.get_switch('toggle_weather_live') and
+#						nd.get_switch('toggle_display_mode') != "PLAN";
+#					layer.group.setVisible(visible);
+#					if (visible) {
+#						layer.update();
+#					}
+#				},
+#				'z-index': -100,
+#			},# end of Weather_live layer
 
 			{	name:'WXR',
 				isMapStructure:1,
-				update_on:[ {rate_hz: 0.1}, 'toggle_range','toggle_weather','toggle_display_mode', 'toggle_weather_live'],
+				update_on:[ {rate_hz: 0.1},				 'toggle_range','toggle_weather','toggle_display_mode', 'toggle_weather_live'],
 				predicate: func(nd, layer) {
 					var visible=nd.get_switch('toggle_weather') and
 						!nd.get_switch('toggle_weather_live') and
 						nd.get_switch('toggle_display_mode') != "PLAN";
 					layer.group.setVisible(visible);
 					if (visible) {
-#						print("storms update requested! (timer issue when closing the dialog?)");
+						#print("storms update requested! (timer issue when closing the dialog?)");
 						layer.update();
 					}
 				}, 
@@ -375,9 +375,7 @@ var NDStyles = {
 
 		], # end of vector with features
 
-	}, # end of CitationB style
-
-
+	}, # end of Citation style
 
 }; # end of NDStyles
 

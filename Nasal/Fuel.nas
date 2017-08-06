@@ -6,6 +6,13 @@
 
 props.globals.initNode("controls/fuel/xfer-L",0,"INT");
 props.globals.initNode("controls/fuel/xfer-R",0,"INT");
+var diffLevel2_3 = nil;
+var fgph = nil;
+var xflow_switch = nil;
+var level_L = nil;
+var level_R = nil;
+var efis = nil;
+var v = nil;
 
 var fuelsys = {
     new : func {
@@ -44,7 +51,7 @@ var fuelsys = {
 
 	update : func{		
 		me.totalCtrTk.setValue(me.level2.getValue() + me.level3.getValue());
-		var diffLevel2_3 = abs((me.level2.getValue() - me.level3.getValue())/2);		
+		diffLevel2_3 = abs((me.level2.getValue() - me.level3.getValue())/2);		
 
 			### TANK 2-3 BALANCE ###
 		if (me.level2.getValue() > me.level3.getValue()) {
@@ -111,7 +118,7 @@ var fuelsys = {
 					me.oof();
 			}
 		}
-		settimer(func {me.update();},0);
+		settimer(func {me.update();},0.1);
 	},
 
 	xfeed : func { 					### CROSSFEED ###
@@ -141,7 +148,7 @@ var fuelsys = {
 	},
 
 	boostpump : func {			### BOOST PUMPS ###
-		var fgph = [ getprop("engines/engine[0]/fuel-flow-gph"),
+		fgph = [ getprop("engines/engine[0]/fuel-flow-gph"),
 					getprop("engines/engine[1]/fuel-flow-gph") ];				
 
 		if (getprop("controls/fuel/tank[0]/boost_pump") == 2 ){
@@ -157,10 +164,10 @@ var fuelsys = {
 };
 
 var gravity_xflow = func{
-		var xflow_switch = getprop("controls/fuel/gravity-xflow");
-		var level_L = getprop("consumables/fuel/tank[0]/level-lbs");		
-		var level_R = getprop("consumables/fuel/tank[1]/level-lbs");
-		var efis = getprop("systems/electrical/outputs/efis");
+		xflow_switch = getprop("controls/fuel/gravity-xflow");
+		level_L = getprop("consumables/fuel/tank[0]/level-lbs");		
+		level_R = getprop("consumables/fuel/tank[1]/level-lbs");
+		efis = getprop("systems/electrical/outputs/efis");
 
 		var timer = maketimer(0.1,func {	
 			if(level_L > level_R + 1) {
@@ -180,7 +187,7 @@ var gravity_xflow = func{
 };	
 
 var crossfeed = func {
-		var v = getprop("controls/engines/xfeed");
+		v = getprop("controls/engines/xfeed");
     if (v == 0) {
 			setprop("controls/engines/engine[0]/feed-tank",0);
 			setprop("controls/engines/engine[1]/feed-tank",0);

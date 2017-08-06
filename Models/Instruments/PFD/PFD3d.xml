@@ -342,51 +342,6 @@
     </animation>
 
 <!-- Altitude Trend -->
-<!--
-    <animation>
-        <object-name>alttrend.up</object-name>
-        <property>instrumentation/pfd/alt-trend-up</property>
-        <type>textranslate</type>
-        <axis>
-            <x>0</x>
-            <y>1</y>
-        </axis>
-        <factor>1.2</factor> 			
-    </animation>
-
-    <animation>
-        <object-name>alttrend.dwn</object-name>
-        <property>instrumentation/pfd/alt-trend-down</property>
-        <type>textranslate</type>
-        <axis>
-            <x>0</x>
-            <y>1</y>
-        </axis>
-        <factor>1.2</factor>
-    </animation>
-
-    <animation>
-        <type>select</type>
-        <object-name>alttrend.up</object-name>
-        <condition>
-            <less-than>
-                <property>instrumentation/pfd/alt-trend-up</property>
-                <value>0.239</value>
-            </less-than>
-        </condition>
-    </animation>
-
-    <animation>
-        <type>select</type>
-        <object-name>alttrend.dwn</object-name>
-        <condition>
-            <greater-than>
-                <property>instrumentation/pfd/alt-trend-down</property>
-                <value>-0.239</value>
-            </greater-than>
-        </condition>
-    </animation>
--->
 
     <animation>
         <object-name>alttrend.up</object-name>
@@ -1033,6 +988,27 @@
     </animation>
 
     <animation>
+        <type>translate</type>
+        <object-name>crs.deflect</object-name>
+        <property>autopilot/internal/course-deflection</property>
+        <interpolation>
+            <entry><ind>-10.0</ind><dep>-0.016</dep></entry>
+            <entry><ind>0.0</ind><dep>0.0</dep></entry>
+            <entry><ind>10.0</ind><dep>0.016</dep></entry>
+        </interpolation>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+        <center>
+            <x-m>0</x-m>
+            <y-m>-0.002</y-m>
+            <z-m>-0.0397</z-m>
+        </center>
+    </animation>
+
+    <animation>
         <type>select</type>
         <object-name>to-flag</object-name>
         <condition>
@@ -1159,27 +1135,6 @@
         <axis>
             <x>-1</x>
             <y>0</y>
-            <z>0</z>
-        </axis>
-        <center>
-            <x-m>0</x-m>
-            <y-m>-0.002</y-m>
-            <z-m>-0.0397</z-m>
-        </center>
-    </animation>
-
-    <animation>
-        <type>translate</type>
-        <object-name>crs.deflect</object-name>
-        <property>autopilot/internal/cdi</property>
-        <interpolation>
-            <entry><ind>-45.0</ind><dep>-0.01845</dep></entry>
-            <entry><ind>0.0</ind><dep>0.0</dep></entry>
-            <entry><ind>45.0</ind><dep>0.01845</dep></entry>
-        </interpolation>
-        <axis>
-            <x>0</x>
-            <y>1</y>
             <z>0</z>
         </axis>
         <center>
