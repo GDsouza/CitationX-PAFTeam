@@ -60,7 +60,6 @@ var FMS = {
 		m.ind_spd = props.globals.getNode("instrumentation/airspeed-indicator/indicated-speed-kt",1);
 		m.lock_alt = props.globals.getNode("autopilot/locks/altitude",1);
 		m.nav_dist = props.globals.getNode("autopilot/internal/nav-distance",1);
-		m.NAVprop = props.globals.getNode("autopilot/settings/nav-source",1);
 		m.NAVSRC = props.globals.getNode("autopilot/settings/nav-source",1);
 		m.NDSymbols = props.globals.getNode("autopilot/route-manager/vnav", 1);
 		m.num = props.globals.getNode("autopilot/route-manager/route/num",1);
@@ -293,14 +292,14 @@ var FMS = {
 						me.set_tgAlt = math.round(me.dest_alt.getValue(),100);
 						if (me.NAVSRC.getValue() == "FMS1") {
 							ind = 0;
-							me.NAVprop.setValue("NAV1");
+							me.NAVSRC.setValue("NAV1");
 						}
 						if (me.NAVSRC.getValue() == "FMS2") {
 							ind = 1;
-							me.NAVprop.setValue("NAV2");
+							me.NAVSRC.setValue("NAV2");
 						}
 
-						setprop("instrumentation/nav["~ind~"]/radials/selected-deg",getprop("autopilot/internal/selected-crs"));
+						setprop("instrumentation/nav["~ind~"]/radials/selected-deg",getprop("autopilot/internal/selected-crs")+4);
 						citation.set_apr();
 					} else {
 

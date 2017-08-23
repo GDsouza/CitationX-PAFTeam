@@ -100,7 +100,7 @@
                 <command>set-tooltip</command>
                 <tooltip-id>CRS2-selected</tooltip-id>
                 <label>CRS2 sel: %.0f</label>
-            <property>instrumentation/nav[1]/radials/selected-deg</property>
+            <property>instrumentation/nav[1]/radials/sel-deg-corr</property>
             </binding>
         </hovered>
 </animation>

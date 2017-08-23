@@ -1461,6 +1461,21 @@ refs 3
 15 0.306641 0.402344
 kids 0
 OBJECT poly
+name "to-flag"
+crease 30.000000
+numvert 3
+0.001201 -0.029026 0.002059
+0.001201 -0.033127 -0.000471
+0.001201 -0.033127 0.004589
+numsurf 1
+SURF 0x0
+mat 4
+refs 3
+0 0 0
+2 0 0
+1 0 0
+kids 0
+OBJECT poly
 name "crs.deflect"
 crease 30.000000
 numvert 4
@@ -2249,21 +2264,6 @@ refs 3
 19 0.5594 0.735996
 1 0.482327 0.735985
 7 0.5594 0.716427
-kids 0
-OBJECT poly
-name "to-flag"
-crease 30.000000
-numvert 3
-0.001201 -0.029026 0.002059
-0.001201 -0.033127 -0.000471
-0.001201 -0.033127 0.004589
-numsurf 1
-SURF 0x0
-mat 4
-refs 3
-0 0 0
-2 0 0
-1 0 0
 kids 0
 OBJECT poly
 name "vsi.needle"

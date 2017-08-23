@@ -741,7 +741,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
             <m-trim type="bool">0</m-trim>
         </locks>
         <internal>
-            <selected-crs type="int">0</selected-crs>
+            <selected-crs type="double">0</selected-crs>
             <nav-distance type="double">0</nav-distance>
             <nav-type type="string"></nav-type>
             <nav-id type="string"></nav-id>
@@ -802,11 +802,9 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 							<desc>Spoken ATC</desc>
 							<binding>
 							 <command>nasal</command>
-							 <script>
-								 atc.speak(15)
-								 </script>
+							 <script>atc.speak(15);</script>
 							</binding>
-						 </key>
+						</key>
         </keyboard>
     </input>
 

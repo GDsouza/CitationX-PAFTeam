@@ -78,15 +78,21 @@
        return ["redir",  phrase("goapp", arg)];
      }  
 	}
-      
+
+# *** ICAO exceptions ****************************************
+  var ICAOexc = func(arg) {   
+		var station_name = getprop("/instrumentation/comm/station-name"); 
+		if (arg == "LFPB" and left(station_name,9) == "DE GAULLE") icao = "LFPG";
+		return icao;
+	}
+
 # *** Main ****************************************
 
 	# 1) Get properties
 	var cs = getprop("/sim/multiplay/callsign");
 	cs = string.replace(cs,"-","");
 	var icao = getprop("/instrumentation/comm/airport-id");   
-	var station_name = getprop("/instrumentation/comm/station-name"); 
-	if (icao == "LFPB" and left(station_name,9) == "DE GAULLE") icao = "LFPG";
+	ICAOexc(icao);
 	var info = airportinfo(icao);
 	var freqs = getfreqs(info);
 	var prev =(getprop("/instrumentation/comm/atc/prev-apt-name")==info.name)? 
@@ -122,10 +128,16 @@
 		  best = rw;
 		  break;
 		} else {
-		var a = abs(info.runways[rw].heading - getprop("/environment/metar/base-wind-dir-deg"));
-		if(a<ang) {
-		   ang = a;
-		   best = rw;}
+			if (rw == getprop("sim/atc/runway")) {
+				best = rw;
+				break;
+			}	else {
+				var a = abs(info.runways[rw].heading - getprop("/environment/metar/base-wind-dir-deg"));
+				if(a<ang) {
+					 ang = a;
+					 best = rw;
+				}
+			}
 		}
 	}
 
@@ -184,9 +196,9 @@
 		 } 	 
 	} else if(relpos=="onground"){
 		  if(station=="tower" and prev=="land clearance"){
-		         msg = TWRvoice();
-			} else if(station=="ground" or (stationg=="tower" and freqs["GND"]==nil)) {
-		   msg = GNDvoice();
+		     msg = TWRvoice();
+			} else if(station=="ground" or (station=="tower" and freqs["GND"]==nil)) {
+		   		msg = GNDvoice();
 		 } 
 	} else if(relpos=="hold"){
 		 if(station=="tower") {

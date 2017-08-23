@@ -32,9 +32,7 @@ STBY HSI
     <animation>
         <type>rotate</type>
         <object-name>hdgring</object-name>
-        <object-name>CRSneedle2</object-name>
-        <object-name>CRSneedle2.001</object-name>
-		    <property>autopilot/internal/selected-crs</property>
+		    <property>orientation/heading/magnetic-deg</property>
         <axis>
             <x>1</x>
             <y>0</y>
@@ -51,7 +49,7 @@ STBY HSI
         <type>rotate</type>
         <object-name>CRSneedle2</object-name>
         <object-name>CRSneedle2.001</object-name>
-	        <property>autopilot/internal/selected-crs</property>
+	        <property>autopilot/internal/course-offset</property>
         <axis>
             <x>-1</x>
             <y>0</y>
@@ -70,13 +68,13 @@ STBY HSI
         <property>autopilot/internal/course-deflection</property>
         <interpolation>
             <entry>
-                <ind>-10.0</ind><dep>-0.018</dep>
+                <ind>-10.0</ind><dep>-0.017</dep>
             </entry>
             <entry>
                 <ind>0.0</ind><dep>0.0</dep>
             </entry>
             <entry>
-                <ind>10.0</ind><dep>0.018</dep>
+                <ind>10.0</ind><dep>0.017</dep>
             </entry>
         </interpolation>
         <axis>

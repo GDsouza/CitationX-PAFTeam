@@ -51,8 +51,8 @@ var getfreqs = func(apt) { # apt may be an airportinfo() ghost, an ICAO or any o
         var freqs = {};
         foreach (var hash; comms) {
             var typ = hash.ident;
-            if(hash["TWR"]==nil and string.match(hash.ident,"*TWR")) typ ="TWR";
-            if(hash["APP"]==nil and string.match(hash.ident,"A/G")) typ ="APP";
+            if(hash["TWR"]==nil and (string.match(hash.ident,"*TWR") or string.match(hash.ident,"*ower"))) typ ="TWR";
+            if(hash["APP"]==nil and (string.match(hash.ident,"A/G") or string.match(hash.ident,"*pproach"))) typ ="APP";
             freqs[typ] = sprintf("%.2f", hash.frequency);}
     }
 		return freqs;  

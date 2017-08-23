@@ -84,8 +84,8 @@ var phrase = func(key, arg) {
        unknown: "Report your position." ,
        bye: "Good day."
 
-};
-return ph[key];
+		};
+		return ph[key];
 }
 
 var phrase_test = func(str,icao) {

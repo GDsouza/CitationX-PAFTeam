@@ -2,7 +2,6 @@
 # Flight Director/Autopilot controller.
 # Syd Adams
 # C. Le Moigne - 2015 - rev 2017
-# Ctesc356 - rev function "course_offset" - fev 2017
 ##########################################
 
 ###  Initialization ###
@@ -12,8 +11,8 @@ var Vertical = "autopilot/locks/altitude";
 var Vertical_arm = "autopilot/locks/altitude-arm";
 var AP = "autopilot/locks/AP-status";
 var NAVprop="autopilot/settings/nav-source";
-var AutoCoord="controls/flight/auto-coordination";
 var NAVSRC= getprop(NAVprop);
+var AutoCoord="controls/flight/auto-coordination";
 var count=0;
 var Coord = 0;
 var minimums=props.globals.getNode("autopilot/settings/minimums");
@@ -28,6 +27,10 @@ var app_wp = "autopilot/route-manager/route/wp[";
 props.globals.initNode("autopilot/settings/fms",0,"BOOL");
 props.globals.initNode("autopilot/locks/alm-tod",0,"BOOL");
 props.globals.initNode("autopilot/locks/alm-wp",0,"BOOL");
+props.globals.initNode("autopilot/internal/ap-crs",0,"DOUBLE");
+props.globals.initNode("autopilot/internal/cdi",0,"DOUBLE");
+setprop("instrumentation/nav/radials/sel-deg-corr",getprop("instrumentation/nav/radials/selected-deg")-4);
+setprop("instrumentation/nav[1]/radials/sel-deg-corr",getprop("instrumentation/nav[1]/radials/selected-deg")-4);
 var alm_wp = props.globals.getNode("autopilot/locks/alm-wp",1);
 var cdi = getprop("autopilot/internal/course-deflection");
 var wp = 0;
@@ -88,10 +91,19 @@ setlistener(minimums, func(mn) {
 		if (min_mode == "BA") {setprop("instrumentation/pfd/minimums-baro",mn.getValue())}
 },0,0);
 
-
 setlistener(NAVprop, func(Nv) {
     NAVSRC=Nv.getValue();
+		set_nav_mode();
 },0,0);
+
+setlistener("instrumentation/nav/radials/selected-deg",func(Sd) {
+		setprop("instrumentation/nav/radials/sel-deg-corr",Sd.getValue()-4);
+},0,0);
+
+setlistener("instrumentation/nav[1]/radials/selected-deg",func(Sd) {
+		setprop("instrumentation/nav[1]/radials/sel-deg-corr",Sd.getValue()-4);
+},0,0);
+
 
 ### AP /FD BUTTONS ###
 
@@ -256,10 +268,17 @@ var set_nav_mode=func{
         }
     } else if(left(NAVSRC,3)=="FMS"){
         if (getprop("autopilot/route-manager/active")) {
-					setprop(Lateral,"LNAV");
+					var btn = "vnav";
+					FD_set_mode(btn);
 		    }
 		}
 }
+
+###  Course integer ###
+
+#var course_integer = func(n) {
+#	setprop("instrumentation/nav["~n~"]/radials/selected-deg",getprop("orientation/heading-magnetic-deg"));
+#}
 
 ###  PITCH WHEEL ACTIONS ###
 
@@ -383,6 +402,7 @@ var kill_Ap = func(msg){
     setprop(AP,msg);
     setprop(AutoCoord,Coord);
 		setprop("autopilot/locks/disengage",1);
+		setprop("autopilot/locks/speed",0);
 }
 
 ### Elapsed time ###
@@ -465,13 +485,17 @@ var update_nav = func {
         if(getprop("instrumentation/nav["~ind~"]/nav-loc"))sgnl="LOC"~nb;
         if(getprop("instrumentation/nav["~ind~"]/has-gs"))sgnl="ILS"~nb;
         setprop("autopilot/internal/nav-type",sgnl);
-				crs_set = getprop("instrumentation/nav["~ind~"]/radials/selected-deg");
+				crs_set = getprop("instrumentation/nav["~ind~"]/radials/sel-deg-corr");
+#				crs_set = getprop("instrumentation/nav["~ind~"]/radials/selected-deg");
 				crs_offset = crs_set - getprop("orientation/heading-magnetic-deg");
 				if(crs_offset>180)crs_offset-=360;
 				if(crs_offset<-180)crs_offset+=360;
-				setprop("autopilot/internal/course-offset",crs_offset);
-				setprop("autopilot/internal/course-deflection",getprop("instrumentation/nav["~ind~"]/heading-needle-deflection"));
-				setprop("autopilot/internal/selected-crs",crs_set);
+		    setprop("autopilot/internal/course-offset",crs_offset);
+		    crs_offset+=getprop("autopilot/internal/cdi");
+				if(crs_offset>180)crs_offset-=360;
+				if(crs_offset<-180)crs_offset+=360;
+				setprop("autopilot/internal/ap-crs",crs_offset);
+				setprop("autopilot/internal/selected-crs",math.round(crs_set));
         setprop("autopilot/internal/to-flag",getprop("instrumentation/nav["~ind~"]/to-flag"));
         setprop("autopilot/internal/from-flag",getprop("instrumentation/nav["~ind~"]/from-flag"));
 
@@ -495,21 +519,22 @@ var update_nav = func {
       courseCoord = geo.Coord.new().set_latlon(refCourse.lat, refCourse.lon);
       CourseError = (geocoord.distance_to(courseCoord) / 1852) + 1;
 			heading = getprop("orientation/heading-magnetic-deg");
-			crs_set = getprop("instrumentation/gps/wp/leg-mag-course-deg");
+#			crs_set = getprop("instrumentation/gps/wp/leg-mag-course-deg");
+			crs_set = getprop("instrumentation/gps/wp/wp[1]/bearing-mag-deg");
       change_wp = abs(crs_set - heading);
       if(change_wp > 180) change_wp = (360 - change_wp);
       CourseError += (change_wp / 20);
       targetCourse = fp.pathGeod(fp.indexOfWP(fp.destination_runway), (-getprop("autopilot/route-manager/distance-remaining-nm") + CourseError));
       courseCoord = geo.Coord.new().set_latlon(targetCourse.lat, targetCourse.lon);
-      CourseError = (geocoord.course_to(courseCoord) - getprop("orientation/heading-deg"));
+      CourseError = geocoord.course_to(courseCoord) - heading;
       if(CourseError < -180) CourseError += 360;
       else if(CourseError > 180) CourseError -= 360;
-			if (fp.current < 1) {
-				crs_set = getprop("instrumentation/gps/wp/leg-mag-course-deg");
+			crs_set = geocoord.course_to(courseCoord);
+			if (fp.current < 1) { # On ground and takeoff
 				crs_offset= crs_set - getprop("orientation/heading-magnetic-deg");
 				if(crs_offset>180)crs_offset-=360;
 				if(crs_offset<-180)crs_offset+=360;
-			} else {
+			} else { # in flight
 				crs_offset = CourseError;
 				gspd = getprop("velocities/groundspeed-kt")/8000; # old 10000
 				curr_bearing = fp.getWP(fp.current).leg_bearing;
@@ -523,13 +548,11 @@ var update_nav = func {
 				if (wp_dist <= diff_crs) {
 					setprop("autopilot/route-manager/current-wp",fp.current +1);
 				}
-#				setprop("instrumentation/nav["~ind~"]/radials/selected-deg",next_bearing);
 			}
 			setprop("autopilot/internal/course-offset",crs_offset);
-#				setprop("autopilot/internal/course-deflection",getprop("instrumentation/nav["~ind~"]/heading-needle-deflection"));
-		  setprop("autopilot/internal/selected-crs",getprop("orientation/heading-magnetic-deg"));
-#			setprop("autopilot/internal/selected-crs",crs_set);
-			setprop("instrumentation/nav["~ind~"]/radials/selected-deg",crs_offset);
+			setprop("autopilot/internal/selected-crs",int(crs_set));
+			setprop("autopilot/internal/ap-crs",getprop("autopilot/internal/course-offset"));
+			setprop("autopilot/internal/cdi",0);
 
 			if (fp.current > 0) {
 				if (!flag_wp) {
