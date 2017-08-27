@@ -32,7 +32,8 @@ props.globals.initNode("autopilot/internal/cdi",0,"DOUBLE");
 setprop("instrumentation/nav/radials/sel-deg-corr",getprop("instrumentation/nav/radials/selected-deg")-4);
 setprop("instrumentation/nav[1]/radials/sel-deg-corr",getprop("instrumentation/nav[1]/radials/selected-deg")-4);
 var alm_wp = props.globals.getNode("autopilot/locks/alm-wp",1);
-var cdi = getprop("autopilot/internal/course-deflection");
+var active = props.globals.getNode("autopilot/route-manager/active",1);
+var btn = nil;
 var wp = 0;
 var wp_curr = 0;
 var flag_wp = 0;
@@ -93,7 +94,7 @@ setlistener(minimums, func(mn) {
 
 setlistener(NAVprop, func(Nv) {
     NAVSRC=Nv.getValue();
-		set_nav_mode();
+#		if (left(NAVSRC,3) == "FMS") set_nav_mode();
 },0,0);
 
 setlistener("instrumentation/nav/radials/selected-deg",func(Sd) {
@@ -183,7 +184,7 @@ var FD_set_mode = func(btn){
 
 		}elsif(btn=="vnav"){
 			if(Vmode!="VALT" and asel > 0){
-				if(left(NAVSRC,3)=="FMS"){
+				if(left(NAVSRC,3)=="FMS" and active.getValue()){
 					setprop(Vertical,"VALT");
 					setprop(Lateral,"LNAV");
 				} else {set_pitch()}
@@ -233,13 +234,17 @@ var nav_src_set=func(src){
 		setprop(Vertical_arm,"");
     if(src=="fms"){
 			setprop("autopilot/settings/fms",1);
-			if(getprop("autopilot/route-manager/route/num")>0) {
-        if (NAVSRC!="FMS1")setprop(NAVprop,"FMS1") else setprop(NAVprop,"FMS2");
+			if (active.getValue()) {
+#			if(getprop("autopilot/route-manager/route/num")>0) {
+        if (NAVSRC!="FMS1")setprop(NAVprop,"FMS1")else setprop(NAVprop,"FMS2");
+				btn = "nav";
+				FD_set_mode(btn);
 			}
     }else{
 			setprop("autopilot/settings/fms",0);
 			if (getprop(Vertical) == "VALT") {setprop(Vertical,"PTCH")}
       if (NAVSRC!="NAV1")setprop(NAVprop,"NAV1") else setprop(NAVprop,"NAV2");
+			if (getprop(AP)=="AP") {btn = "nav";FD_set_mode(btn)}
     }
 }
 
@@ -267,18 +272,12 @@ var set_nav_mode=func{
 					}
         }
     } else if(left(NAVSRC,3)=="FMS"){
-        if (getprop("autopilot/route-manager/active")) {
-					var btn = "vnav";
+        if (active.getValue()) {
+					btn = "vnav";
 					FD_set_mode(btn);
 		    }
 		}
 }
-
-###  Course integer ###
-
-#var course_integer = func(n) {
-#	setprop("instrumentation/nav["~n~"]/radials/selected-deg",getprop("orientation/heading-magnetic-deg"));
-#}
 
 ###  PITCH WHEEL ACTIONS ###
 
@@ -345,7 +344,8 @@ var set_alt = func {
 var monitor_L_armed = func{
     if(getprop(Lateral_arm)!=""){
       if(getprop("autopilot/internal/in-range")){
-        if(cdi < 40 and cdi > -40){
+				var cd = getprop("autopilot/internal/course-deflection");
+        if(cd < 10 and cd > -10){
           setprop(Lateral,getprop(Lateral_arm));
           setprop(Lateral_arm,"");
         }
@@ -475,29 +475,29 @@ var update_nav = func {
     if(left(NAVSRC,3) == "NAV"){
 			if (NAVSRC == "NAV1") {ind = 0;nb = "1"}
 			if (NAVSRC == "NAV2") {ind = 1;nb = "2"}
-        if(getprop("instrumentation/nav["~ind~"]/data-is-valid"))sgnl="VOR"~nb;
-        setprop("autopilot/internal/in-range",getprop("instrumentation/nav["~ind~"]/in-range"));
-        setprop("autopilot/internal/gs-in-range",getprop("instrumentation/nav["~ind~"]/gs-in-range"));
-        dst = getprop("instrumentation/nav["~ind~"]/nav-distance") or 0;
-        dst*=0.000539;
-        setprop("autopilot/internal/nav-distance",dst);
-        setprop("autopilot/internal/nav-id",getprop("instrumentation/nav["~ind~"]/nav-id"));
-        if(getprop("instrumentation/nav["~ind~"]/nav-loc"))sgnl="LOC"~nb;
-        if(getprop("instrumentation/nav["~ind~"]/has-gs"))sgnl="ILS"~nb;
-        setprop("autopilot/internal/nav-type",sgnl);
-				crs_set = getprop("instrumentation/nav["~ind~"]/radials/sel-deg-corr");
-#				crs_set = getprop("instrumentation/nav["~ind~"]/radials/selected-deg");
-				crs_offset = crs_set - getprop("orientation/heading-magnetic-deg");
-				if(crs_offset>180)crs_offset-=360;
-				if(crs_offset<-180)crs_offset+=360;
-		    setprop("autopilot/internal/course-offset",crs_offset);
-		    crs_offset+=getprop("autopilot/internal/cdi");
-				if(crs_offset>180)crs_offset-=360;
-				if(crs_offset<-180)crs_offset+=360;
-				setprop("autopilot/internal/ap-crs",crs_offset);
-				setprop("autopilot/internal/selected-crs",math.round(crs_set));
-        setprop("autopilot/internal/to-flag",getprop("instrumentation/nav["~ind~"]/to-flag"));
-        setprop("autopilot/internal/from-flag",getprop("instrumentation/nav["~ind~"]/from-flag"));
+      setprop("autopilot/internal/in-range",getprop("instrumentation/nav["~ind~"]/in-range"));
+      setprop("autopilot/internal/gs-in-range",getprop("instrumentation/nav["~ind~"]/gs-in-range"));
+      dst = getprop("instrumentation/nav["~ind~"]/nav-distance") or 0;
+      dst*=0.000539;
+      setprop("autopilot/internal/nav-distance",dst);
+      setprop("autopilot/internal/nav-id",getprop("instrumentation/nav["~ind~"]/nav-id"));
+      if(getprop("instrumentation/nav["~ind~"]/data-is-valid"))sgnl="VOR"~nb;
+      if(getprop("instrumentation/nav["~ind~"]/nav-loc"))sgnl="LOC"~nb;
+      if(getprop("instrumentation/nav["~ind~"]/has-gs"))sgnl="ILS"~nb;
+      setprop("autopilot/internal/nav-type",sgnl);
+			crs_set = getprop("instrumentation/nav["~ind~"]/radials/sel-deg-corr");
+#			crs_set = getprop("instrumentation/nav["~ind~"]/radials/selected-deg");
+			crs_offset = crs_set - getprop("orientation/heading-magnetic-deg");
+			if(crs_offset>180)crs_offset-=360;
+			if(crs_offset<-180)crs_offset+=360;
+	    setprop("autopilot/internal/course-offset",crs_offset);
+	    crs_offset+=getprop("autopilot/internal/cdi");
+			if(crs_offset>180)crs_offset-=360;
+			if(crs_offset<-180)crs_offset+=360;
+			setprop("autopilot/internal/ap-crs",crs_offset);
+			setprop("autopilot/internal/selected-crs",math.round(crs_set));
+      setprop("autopilot/internal/to-flag",getprop("instrumentation/nav["~ind~"]/to-flag"));
+      setprop("autopilot/internal/from-flag",getprop("instrumentation/nav["~ind~"]/from-flag"));
 
     } else if(left(NAVSRC,3) == "FMS"){
 			if (NAVSRC == "FMS1") {ind = 0} else {ind = 1}
