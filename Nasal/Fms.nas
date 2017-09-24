@@ -12,15 +12,16 @@ var ind = 0;
 var cruise_kt = 0;
 var cruise_mc = 0;
 var curr_wp = nil;
-var wp_rem = 99;
-var ils = nil;
+var geoCoord = nil;
+var wpCoord = nil;
+var courseDist = nil;
 
 var FMS = {
 	new : func () {
 		var m = {parents:[FMS]};
 
 		m.vmo = 0;
-		m.mmo = 0;
+		m.mmo = 0.92;
 		m.tod_constant = 3.0;
 		m.set_tgAlt = 0;
 		m.fp = nil; # flightplan
@@ -45,12 +46,12 @@ var FMS = {
 		m.app35_spd = props.globals.getNode("autopilot/settings/app35-speed-kt",1);
 		m.asel = props.globals.getNode("autopilot/settings/asel",1);
 		m.climb_kt = props.globals.getNode("autopilot/settings/climb-speed-kt",1);
-		m.climb_mc = props.globals.getNode("autopilot/settings/climb-speed-mach",1);
+		m.climb_mc = props.globals.getNode("autopilot/settings/climb-speed-mc",1);
 		m.cruise_alt = props.globals.getNode("autopilot/route-manager/cruise/altitude-ft",1);
 		m.cruise_kt = props.globals.getNode("autopilot/settings/cruise-speed-kt",1);
-		m.cruise_mc = props.globals.getNode("autopilot/settings/cruise-speed-mach",1);
+		m.cruise_mc = props.globals.getNode("autopilot/settings/cruise-speed-mc",1);
 		m.descent_kt = props.globals.getNode("autopilot/settings/descent-speed-kt",1);
-		m.descent_mc = props.globals.getNode("autopilot/settings/descent-speed-mach",1);
+		m.descent_mc = props.globals.getNode("autopilot/settings/descent-speed-mc",1);
 		m.dep_agl = props.globals.getNode("autopilot/settings/dep-agl-limit-ft",1);
 		m.dep_lim = props.globals.getNode("autopilot/settings/dep-limit-nm",1);
 		m.dep_spd = props.globals.getNode("autopilot/settings/dep-speed-kt",1);
@@ -65,7 +66,7 @@ var FMS = {
 		m.num = props.globals.getNode("autopilot/route-manager/route/num",1);
 		m.tg_alt = props.globals.getNode("autopilot/settings/tg-alt-ft",1);
 		m.tg_spd_kt = props.globals.getNode("autopilot/settings/target-speed-kt",1);
-		m.tg_spd_mc = props.globals.getNode("autopilot/settings/target-speed-mach",1);
+		m.tg_spd_mc = props.globals.getNode("autopilot/settings/target-speed-mc",1);
 		m.tot_dist = props.globals.getNode("autopilot/route-manager/total-distance",1);
 
 		return m;
@@ -100,19 +101,29 @@ var FMS = {
 			}
 			if (me.active.getValue()){
 				curr_wp = me.fp.current;
-				me.fp.clearWPType('pseudo');
+				me.fp.clearWPType('pseudo'); # reset TOD
 				for (var i=0;i<me.fp.getPlanSize()-1;i+=1) {
 					var alt = me.fp.getWP(i).alt_cstr;
 					me.fp.getWP(i).setAltitude(alt,'at');
-				}
+        }
 				v_tod = [];
 				v_ind = 0;
 				v_alt.clear();
 				me.fpCalc();
+
+        ### Aircraft pos ###
+  			me.dist_dep = me.tot_dist.getValue()-me.dist_rem.getValue();
+        ### Search Current Wp ###
+				for (var i=0;i<me.fp.getPlanSize()-1;i+=1) {
+          if (me.dist_dep < me.fp.getWP(i).distance_along_route) {
+             curr_wp = i;
+             break;
+          }
+        }
+
 				setprop("autopilot/route-manager/current-wp",curr_wp);
 			}
 		},0,0);
-
 	}, # end of listen
 
 	fpCalc : func {
@@ -359,13 +370,8 @@ var FMS = {
 								}	else if (me.alt_ind.getValue() > me.tg_alt.getValue()+100){
 										if (me.alt_mc.getValue()) {me.tg_spd_mc.setValue(me.descent_mc.getValue())}
 										if (!me.alt_mc.getValue()) {me.tg_spd_kt.setValue(me.descent_kt.getValue())}
-#								} else if (curr_wp_name != 'TOD' and curr_wp_type == 'basic' and curr_wp_dist > tot_dist/2 and curr_wp_leg < 8) {
-#										if (me.alt_mc.getValue()) {me.tg_spd_mc.setValue(descent_mc)}
-#										if (!me.alt_mc.getValue()) {me.tg_spd_kt.setValue(descent_kt)}
 								} else if (me.fp.getWP(curr_wp).wp_name == 'TOD' and me.fp.getWP(curr_wp).leg_distance < 8) {
-#										if (me.alt_mc.getValue()) {me.tg_spd_mc.setValue(me.descent_mc.getValue())}
 										if (me.alt_mc.getValue()) {me.tg_spd_mc.setValue(me.tg_spd_mc.getValue())}
-
 										if (!me.alt_mc.getValue()) {
 											me.tg_spd_kt.setValue(me.tg_spd_kt.getValue());
 										}
@@ -407,11 +413,8 @@ var FMS = {
 		if (me.alt_ind.getValue() <= 7800) {me.vmo = 270}
 		if (me.alt_ind.getValue() > 7800 and me.alt_ind.getValue() < 30650) {me.vmo=350}
 		if (me.cruise_kt.getValue() >= me.vmo) {cruise_kt = me.vmo-10}
-		if (me.cruise_mc.getValue() >= me.mmo) {cruise_mc = me.mmo-6}
-		if (me.alt_mc.getValue()) {
-			me.mmo = 0.92;
-			me.tg_spd_mc.setValue(cruise_mc);
-		}
+		if (me.cruise_mc.getValue() > me.mmo) {cruise_mc = me.mmo}
+		if (me.alt_mc.getValue()) {me.tg_spd_mc.setValue(cruise_mc)}
 		if (!me.alt_mc.getValue()) {me.tg_spd_kt.setValue(cruise_kt)}
 	}, # end of cruise_spd
 

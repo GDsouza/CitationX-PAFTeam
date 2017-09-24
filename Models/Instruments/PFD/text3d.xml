@@ -348,7 +348,7 @@
         <alignment>left-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
         <type type="string">number-value</type>
-				<property>autopilot/settings/target-speed-mach</property> 
+				<property>autopilot/settings/target-speed-mc</property> 
         <format>%.2f</format>
         <font>helvetica_bold.txf</font>
         <character-size>0.01</character-size>

@@ -2939,10 +2939,10 @@
         <type>select</type>
         <object-name>FD.AP-annun</object-name>
         <condition>
-            <equals>
+            <not-equals>
                 <property>autopilot/locks/AP-status</property>
-                <value>AP</value>
-            </equals>
+                <value></value>
+            </not-equals>
         </condition>
     </animation>
 

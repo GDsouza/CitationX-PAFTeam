@@ -144,7 +144,7 @@
         <reference>0.0</reference>
         <output>autopilot/internal/roll-filter</output>
         <config>
-            <Kp>-2.0</Kp>
+            <Kp>-1.5</Kp>
             <Ki>0</Ki>
             <min>
               <property>autopilot/settings/bank-limit</property>
@@ -194,199 +194,49 @@
 
 <!-- Course-Deflection -->
 
-    <filter>
-        <name>Vor1 course deflection</name>
+   <filter>
+        <name>NAV1 heading deflection</name>
         <debug>false</debug>
+        <feedback-if-disabled>true</feedback-if-disabled>
+        <initialize-to>output</initialize-to>
         <enable>
-					<condition>
-						<and>
- 							<equals>
-			          <property>autopilot/settings/nav-source</property>
-			          <value>NAV1</value>
-							</equals>
-							<or>
-								<equals>
-						      <property>autopilot/locks/heading</property>
-						      <value>VOR</value>
-								</equals>
-								<equals>
-						      <property>autopilot/locks/heading</property>
-						      <value>ROLL</value>
-								</equals>
-								<equals>
-						      <property>autopilot/locks/heading</property>
-						      <value>HDG</value>
-								</equals>
-							</or>
-						</and>
-					</condition>
-       </enable>
+          <condition>
+            <equals>
+                <property>autopilot/settings/nav-source</property>
+                <value>NAV1</value>
+            </equals>
+          </condition>
+        </enable>
         <input>instrumentation/nav/heading-needle-deflection</input>
         <output>autopilot/internal/course-deflection</output>
         <type>noise-spike</type>
         <max-rate-of-change>10</max-rate-of-change>
     </filter>
 
-    <filter>
-        <name>Vor1 cdi</name>
+   <filter>
+        <name>NAV2 heading deflection</name>
         <debug>false</debug>
+        <feedback-if-disabled>true</feedback-if-disabled>
+        <initialize-to>output</initialize-to>
         <enable>
-					<condition>
-						<and>
- 							<equals>
-			          <property>autopilot/settings/nav-source</property>
-			          <value>NAV1</value>
-							</equals>
-							<equals>
-				        <property>autopilot/locks/heading</property>
-				        <value>VOR</value>
-							</equals>
-						</and>
-					</condition>
-       </enable>
-        <input>
-            <property>autopilot/internal/course-deflection</property>
-            <scale>5</scale>
-        </input>
-        <output>autopilot/internal/cdi</output>
-        <type>noise-spike</type>
-        <max-rate-of-change>10</max-rate-of-change>
-    </filter>
-
-    <filter>
-        <name>Loc1 course deflection</name>
-        <debug>false</debug>
-        <enable>
-					<condition>
-						<and>
- 							<equals>
-			          <property>autopilot/settings/nav-source</property>
-			          <value>NAV1</value>
-							</equals>
-							<equals>
-				        <property>autopilot/locks/heading</property>
-				        <value>LOC</value>
-							</equals>
-						</and>
-					</condition>
+          <condition>
+            <equals>
+                <property>autopilot/settings/nav-source</property>
+                <value>NAV2</value>
+            </equals>
+          </condition>
         </enable>
-        <input>instrumentation/nav/gs-needle-deflection</input>
-        <output>autopilot/internal/course-deflection</output>
-        <type>noise-spike</type>
-        <max-rate-of-change>10</max-rate-of-change>
-    </filter>
-
-    <filter>
-        <name>nav1 gs deflection</name>
-        <debug>false</debug>
-        <enable>
-          <property>autopilot/settings/nav-source</property>
-          <value>NAV1</value>
-        </enable>
-        <input>
-            <property>instrumentation/nav/gs-needle-deflection-norm</property>
-        </input>
-        <output>autopilot/internal/gs-deflection</output>
-        <type>noise-spike</type>
-        <max-rate-of-change>1</max-rate-of-change>
-    </filter>
-
-    <filter>
-        <name>Vor2 course deflection</name>
-        <debug>false</debug>
-        <enable>
-					<condition>
-						<and>
- 							<equals>
-			          <property>autopilot/settings/nav-source</property>
-			          <value>NAV2</value>
-							</equals>
-							<or>
-								<equals>
-						      <property>autopilot/locks/heading</property>
-						      <value>VOR</value>
-								</equals>
-								<equals>
-						      <property>autopilot/locks/heading</property>
-						      <value>ROLL</value>
-								</equals>
-							</or>
-						</and>
-					</condition>
-       </enable>
         <input>instrumentation/nav[1]/heading-needle-deflection</input>
         <output>autopilot/internal/course-deflection</output>
         <type>noise-spike</type>
         <max-rate-of-change>10</max-rate-of-change>
     </filter>
 
-    <filter>
-        <name>Vor2 cdi</name>
-        <debug>false</debug>
-        <enable>
-					<condition>
-						<and>
- 							<equals>
-			          <property>autopilot/settings/nav-source</property>
-			          <value>NAV2</value>
-							</equals>
-							<equals>
-				        <property>autopilot/locks/heading</property>
-				        <value>VOR</value>
-							</equals>
-						</and>
-					</condition>
-       </enable>
-        <input>
-            <property>autopilot/internal/course-deflection</property>
-            <scale>10</scale>
-        </input>
-        <output>autopilot/internal/cdi</output>
-        <type>noise-spike</type>
-        <max-rate-of-change>10</max-rate-of-change>
-    </filter>
-
-    <filter>
-        <name>Loc2 course deflection</name>
-        <debug>false</debug>
-        <enable>
-					<condition>
-						<and>
- 							<equals>
-			          <property>autopilot/settings/nav-source</property>
-			          <value>NAV2</value>
-							</equals>
-							<equals>
-				        <property>autopilot/locks/heading</property>
-				        <value>LOC</value>
-							</equals>
-						</and>
-					</condition>
-        </enable>
-        <input>instrumentation/nav[1]/gs-needle-deflection</input>
-        <output>autopilot/internal/course-deflection</output>
-        <type>noise-spike</type>
-        <max-rate-of-change>10</max-rate-of-change>
-    </filter>
-
-    <filter>
-        <name>nav2 gs deflection</name>
-        <debug>false</debug>
-        <enable>
-          <property>autopilot/settings/nav-source</property>
-          <value>NAV2</value>
-        </enable>
-        <input>
-            <property>instrumentation/nav[1]/gs-needle-deflection-norm</property>
-        </input>
-        <output>autopilot/internal/gs-deflection</output>
-        <type>noise-spike</type>
-        <max-rate-of-change>1</max-rate-of-change>
-    </filter>
-
    <filter>
         <name>Fms heading deflection</name>
         <debug>false</debug>
+        <feedback-if-disabled>true</feedback-if-disabled>
+        <initialize-to>output</initialize-to>
         <enable>
             <condition>
 							<or>
@@ -594,7 +444,7 @@
             </condition>
         </enable>
         <input>instrumentation/airspeed-indicator/indicated-mach</input>
-        <reference>autopilot/settings/target-speed-mach</reference>
+        <reference>autopilot/settings/target-speed-mc</reference>
         <output>
 					<property>controls/engines/engine[0]/throttle</property>
 					<property>controls/engines/engine[1]/throttle</property>		
@@ -871,7 +721,7 @@
 					</condition>
 				</enable>
 				<input>instrumentation/airspeed-indicator/indicated-mach</input>
-				<reference>autopilot/settings/target-speed-mach</reference>
+				<reference>autopilot/settings/target-speed-mc</reference>
 				<output>
 					<property>controls/engines/engine[0]/throttle</property>
 					<property>controls/engines/engine[1]/throttle</property>		
