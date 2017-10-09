@@ -343,7 +343,7 @@
               <table>
                   <property>instrumentation/altimeter/indicated-altitude-ft</property> 
                   <entry><ind>0</ind><dep>270</dep></entry>
-                  <entry><ind>6000</ind><dep>270</dep></entry>
+                  <entry><ind>7750</ind><dep>270</dep></entry>
                   <entry><ind>7800</ind><dep>350</dep></entry>
 									<entry><ind>30650</ind><dep>350</dep></entry>
                   <entry><ind>41000</ind><dep>277</dep></entry>
@@ -359,9 +359,7 @@
       <type>gain</type>
       <update-interval-secs type="double">0.05</update-interval-secs>
 			<gain>-1</gain> 
-     <input>
-          <property>instrumentation/pfd/max-airspeed-kts</property>
-      </input>
+     <input>instrumentation/pfd/max-airspeed-kts</input>
       <reference>
           <property>velocities/airspeed-kt</property>
           <offset>-60</offset>
@@ -378,9 +376,7 @@
       <type>gain</type>
       <update-interval-secs type="double">0.05</update-interval-secs>
 			<gain>1.0</gain> 
-     <input>
-          <property>instrumentation/pfd/stall-speed</property>
-      </input>
+     <input>instrumentation/pfd/stall-speed</input>
       <reference>
           <property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
 					<offset>70</offset>

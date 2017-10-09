@@ -22,7 +22,6 @@ var FMS = {
 
 		m.vmo = 0;
 		m.mmo = 0.92;
-		m.tod_constant = 3.0;
 		m.set_tgAlt = 0;
 		m.fp = nil; # flightplan
 		m.lastWp_alt = 0;
@@ -34,6 +33,8 @@ var FMS = {
 		m.tod = 0;
 		m.spd_dist = 0;
 		m.flag_alt = 0;
+    m.dist = nil; # for fps limit function
+    m.desc_flag = 0;
 
 		m.active = props.globals.getNode("autopilot/route-manager/active",1);
 		m.alm_tod = props.globals.getNode("autopilot/locks/alm-tod",1);
@@ -50,24 +51,29 @@ var FMS = {
 		m.cruise_alt = props.globals.getNode("autopilot/route-manager/cruise/altitude-ft",1);
 		m.cruise_kt = props.globals.getNode("autopilot/settings/cruise-speed-kt",1);
 		m.cruise_mc = props.globals.getNode("autopilot/settings/cruise-speed-mc",1);
-		m.descent_kt = props.globals.getNode("autopilot/settings/descent-speed-kt",1);
-		m.descent_mc = props.globals.getNode("autopilot/settings/descent-speed-mc",1);
 		m.dep_agl = props.globals.getNode("autopilot/settings/dep-agl-limit-ft",1);
 		m.dep_lim = props.globals.getNode("autopilot/settings/dep-limit-nm",1);
 		m.dep_spd = props.globals.getNode("autopilot/settings/dep-speed-kt",1);
+		m.desc_angle = props.globals.getNode("autopilot/settings/descent-angle",1);
+		m.desc_kt = props.globals.getNode("autopilot/settings/descent-speed-kt",1);
+		m.desc_mc = props.globals.getNode("autopilot/settings/descent-speed-mc",1);
 		m.dest_alt = props.globals.getNode("autopilot/route-manager/destination/field-elevation-ft",1);
 		m.dist_rem = props.globals.getNode("autopilot/route-manager/distance-remaining-nm",1);
 		m.fms = props.globals.getNode("autopilot/settings/fms",1);
+    m.gspd = props.globals.getNode("velocities/groundspeed-kt",1);
 		m.ind_spd = props.globals.getNode("instrumentation/airspeed-indicator/indicated-speed-kt",1);
 		m.lock_alt = props.globals.getNode("autopilot/locks/altitude",1);
 		m.nav_dist = props.globals.getNode("autopilot/internal/nav-distance",1);
 		m.NAVSRC = props.globals.getNode("autopilot/settings/nav-source",1);
 		m.NDSymbols = props.globals.getNode("autopilot/route-manager/vnav", 1);
 		m.num = props.globals.getNode("autopilot/route-manager/route/num",1);
+    m.tas = props.globals.getNode("instrumentation/airspeed-indicator/true-speed-kt",1);
 		m.tg_alt = props.globals.getNode("autopilot/settings/tg-alt-ft",1);
 		m.tg_spd_kt = props.globals.getNode("autopilot/settings/target-speed-kt",1);
 		m.tg_spd_mc = props.globals.getNode("autopilot/settings/target-speed-mc",1);
 		m.tot_dist = props.globals.getNode("autopilot/route-manager/total-distance",1);
+
+    props.globals.initNode("autopilot/settings/fps-limit",-5);
 
 		return m;
 	}, # end of new
@@ -99,13 +105,25 @@ var FMS = {
 			if (getprop("/instrumentation/efis/cruise-alt") != me.asel.getValue()) {
 				setprop("/instrumentation/efis/cruise-alt",me.asel.getValue());
 			}
+      me.fpChange();
+		},0,0);
+
+		setlistener(me.desc_angle, func {
+ 			if (me.active.getValue()){
+				me.fpChange();
+      }
+		},0,0);     
+
+	}, # end of listen
+
+  fpChange : func {
 			if (me.active.getValue()){
 				curr_wp = me.fp.current;
 				me.fp.clearWPType('pseudo'); # reset TOD
-				for (var i=0;i<me.fp.getPlanSize()-1;i+=1) {
-					var alt = me.fp.getWP(i).alt_cstr;
-					me.fp.getWP(i).setAltitude(alt,'at');
-        }
+#				for (var i=0;i<me.fp.getPlanSize()-1;i+=1) {
+#					var alt = me.fp.getWP(i).alt_cstr;
+#					me.fp.getWP(i).setAltitude(alt,'at');
+#        }
 				v_tod = [];
 				v_ind = 0;
 				v_alt.clear();
@@ -120,11 +138,9 @@ var FMS = {
              break;
           }
         }
-
 				setprop("autopilot/route-manager/current-wp",curr_wp);
 			}
-		},0,0);
-	}, # end of listen
+  }, # end of fpChange
 
 	fpCalc : func {
 		var asel = me.asel.getValue()*100;
@@ -146,11 +162,6 @@ var FMS = {
 		var desc_spd_kt = getprop("autopilot/settings/descent-speed-kt");
 		var desc_spd_mc = getprop("autopilot/settings/descent-speed-mc");
 		v_alt.append(0);
-
-		if (asel > 30650) {me.tod_constant = 3.6}
-		if (asel <= 30650) {me.tod_constant = 3.0 + desc_spd_kt/1000}
-		if (asel <25000) {me.tod_constant = 2.8 + desc_spd_kt/1000}
-		if (asel <15000) {me.tod_constant = 2.6 + desc_spd_kt/1000}
 
 		### Calculate altitudes and insert in a vector ###
 
@@ -202,8 +213,8 @@ var FMS = {
 					if (v_alt.vector[j] < altWP_curr) {
 						altWP_next = v_alt.vector[j];
 						wp_dist = me.fp.getWP(j).distance_along_route;
-						tod = (altWP_curr-altWP_next)/1000*me.tod_constant;
 						leg_dist = wp_dist - f_dist;
+            tod = (altWP_curr-altWP_next)/(math.sin(me.desc_angle.getValue()*D2R)*6074.56);
 						### Create tod ###
 						if (leg_dist > tod*1.15 and leg_dist > 5) {
 							flag_tod = 0;
@@ -222,7 +233,6 @@ var FMS = {
 				} else { 
 					var x = 6.25/10000000*math.pow(asel,2)+0.039225*asel + 647;
 				}
-
 				if (tod_dist < me.fp.getWP(i+1).distance_along_route and flag_tod == 0 and tod_dist > x) {
 					me.fp.insertWP(wp,i+1);
 					v_alt.insert(i+1,altWP_curr);
@@ -265,7 +275,7 @@ var FMS = {
 		if (me.fms.getValue()) {
 			me.dist_dep = me.tot_dist.getValue()-me.dist_rem.getValue();
 			curr_wp = me.fp.current;
-			if (curr_wp <1) {curr_wp=1}
+			if (curr_wp < 1) {curr_wp=1}
  
 				### Takeoff ###
 			if (me.lock_alt.getValue() == "VALT" and me.ap_stat.getValue() != "AP") {
@@ -281,7 +291,12 @@ var FMS = {
 			if (me.ap_stat.getValue() == "AP") {
 				if (left(me.NAVSRC.getValue(),3) == "FMS" and me.lock_alt.getValue() == "VALT") {
 					me.cruise_alt.setValue(me.asel.getValue()*100);
-				
+
+          ### Descent Flag ###
+          if (v_alt.vector[curr_wp] < v_alt.vector[curr_wp-1] or (v_alt.vector[curr_wp+1] < v_alt.vector[curr_wp] and me.fp.getWP(curr_wp).leg_distance <= 5)) {
+          me.desc_flag = 1;
+          } else {me.desc_flag = 0}
+
 					### Alarm before TOD ###
 					if (me.fp.getWP(curr_wp).wp_name == 'TOD' and me.nav_dist.getValue() >= 0 and me.nav_dist.getValue() < dist_b_tod) {
 						alm_tod = 1;
@@ -326,6 +341,7 @@ var FMS = {
 						### Setting target altitude ###
 						if (!me.tod){
 							if (me.dist_rem.getValue() < me.prevWp_dist and me.dist_rem.getValue() > me.lastWp_dist) {
+								me.set_tgAlt = math.round(me.lastWp_alt,100);
 							} else {
 								me.set_tgAlt = math.round(v_alt.vector[curr_wp],100);
 							}
@@ -344,39 +360,31 @@ var FMS = {
 					} else {
 									### Near before TOD ###
 						if (me.alm_tod.getValue()) {
-								if (me.alt_mc.getValue()) {me.tg_spd_mc.setValue(me.descent_mc.getValue())}
-								if (!me.alt_mc.getValue()) {me.tg_spd_kt.setValue(me.descent_kt.getValue())}
+							me.tg_spd_mc.setValue(me.desc_mc.getValue());
+							me.tg_spd_kt.setValue(me.desc_kt.getValue());
 						} else {
 									### After tod ###
-							if (size(v_tod) > 0 and me.dist_rem.getValue() <= v_tod[v_ind] and me.dist_rem.getValue() >= v_tod[v_ind+1]-0.1) {
-								if (int(me.alt_ind.getValue()) <= me.tg_alt.getValue()+101 and int(me.alt_ind.getValue()) > me.tg_alt.getValue()+98) {
-									me.spd_dist = me.dist_rem.getValue()-v_tod[v_ind+1];
-								}
-								if (me.spd_dist > 0 and me.spd_dist <= 5 or me.dist_rem.getValue() <= 20) {
-									if (me.alt_mc.getValue()) {me.tg_spd_mc.setValue(me.descent_mc.getValue())}
-									if (!me.alt_mc.getValue()) {me.tg_spd_kt.setValue(me.descent_kt.getValue())}
-								} else if (me.spd_dist > 5 and me.dist_rem.getValue() > 20) {me.cruise_spd()}
+              if (me.tod) {
+                me.tg_spd_mc.setValue(me.desc_mc.getValue());
+                me.tg_spd_kt.setValue(me.desc_kt.getValue());
+                me.fps_lim();
 							} else {
-
 								### Climb ###
 								if (me.alt_ind.getValue() < me.tg_alt.getValue()-100) {
-									if (me.alt_mc.getValue()) {
-										me.tg_spd_mc.setValue(me.climb_mc.getValue());
-									} else {me.tg_spd_kt.setValue(me.climb_kt.getValue())}
-
+									me.tg_spd_mc.setValue(me.climb_mc.getValue());
+								  me.tg_spd_kt.setValue(me.climb_kt.getValue());
 									### Descent ###
 								} else if (me.dist_rem.getValue() <= 20) {
 										me.tg_spd_kt.setValue(200);
-								}	else if (me.alt_ind.getValue() > me.tg_alt.getValue()+100){
-										if (me.alt_mc.getValue()) {me.tg_spd_mc.setValue(me.descent_mc.getValue())}
-										if (!me.alt_mc.getValue()) {me.tg_spd_kt.setValue(me.descent_kt.getValue())}
+                    me.fps_lim();
+								}	else if (me.desc_flag){
+										me.tg_spd_mc.setValue(me.desc_mc.getValue());
+										me.tg_spd_kt.setValue(me.desc_kt.getValue());
+                    me.fps_lim();
 								} else if (me.fp.getWP(curr_wp).wp_name == 'TOD' and me.fp.getWP(curr_wp).leg_distance < 8) {
-										if (me.alt_mc.getValue()) {me.tg_spd_mc.setValue(me.tg_spd_mc.getValue())}
-										if (!me.alt_mc.getValue()) {
-											me.tg_spd_kt.setValue(me.tg_spd_kt.getValue());
-										}
+                    me.tg_spd_mc.setValue(me.tg_spd_mc.getValue());
+										me.tg_spd_kt.setValue(me.tg_spd_kt.getValue());
 								}	else {
-
 										### Cruise ###
 									if (me.cruise_kt.getValue() != 0) {
 										if (me.fp.getWP(curr_wp).speed_cstr) {me.cruise_kt.setValue(me.fp.getWP(curr_wp).speed_cstr)}
@@ -404,7 +412,6 @@ var FMS = {
 			}
 		}
 		settimer(func me.update(),0);
-
 	}, # end of update
 
 	cruise_spd : func {
@@ -412,11 +419,19 @@ var FMS = {
 		cruise_mc = me.cruise_mc.getValue();
 		if (me.alt_ind.getValue() <= 7800) {me.vmo = 270}
 		if (me.alt_ind.getValue() > 7800 and me.alt_ind.getValue() < 30650) {me.vmo=350}
-		if (me.cruise_kt.getValue() >= me.vmo) {cruise_kt = me.vmo-10}
+		if (me.cruise_kt.getValue() >= me.vmo) {cruise_kt = me.vmo}
 		if (me.cruise_mc.getValue() > me.mmo) {cruise_mc = me.mmo}
-		if (me.alt_mc.getValue()) {me.tg_spd_mc.setValue(cruise_mc)}
-		if (!me.alt_mc.getValue()) {me.tg_spd_kt.setValue(cruise_kt)}
+    me.tg_spd_mc.setValue(cruise_mc);
+    me.tg_spd_kt.setValue(cruise_kt);
 	}, # end of cruise_spd
+
+  fps_lim : func {  ### Descent fps limit ###
+    if (me.tod) {me.dist = me.dist_rem.getValue()-v_tod[v_ind+1]}
+    else {me.dist = getprop("autopilot/internal/nav-distance")}
+    me.fps_limit = -(me.alt_ind.getValue()-me.tg_alt.getValue())/((me.dist)/me.tas.getValue()*3600);
+    if (me.fps_limit > 0) me.fps_limit = -5;
+    setprop("autopilot/settings/fps-limit",me.fps_limit);
+  },# end of fps_lim
 
 }; # end of FMS
 

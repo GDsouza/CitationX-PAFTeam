@@ -211,8 +211,9 @@ var FD_set_mode = func(btn){
 			setprop(Lateral_arm,"");
 			setprop(Vertical_arm,"");
 			if(Vmode!="VS"){
+				setprop(Vertical,"VS");
 				var tgt_vs = (int(getprop(v_speed) * 0.01)) * 100;
-				setprop(Vertical,"VS");setprop("autopilot/settings/vertical-speed-fpm",tgt_vs);
+        setprop("autopilot/settings/vertical-speed-fpm",tgt_vs);
 			} else {set_pitch()}
 
     }elsif(btn=="stby"){
@@ -506,6 +507,7 @@ var update_nav = func {
 				setprop("autopilot/internal/selected-crs",math.round(crs_set));
         setprop("autopilot/internal/to-flag",getprop("instrumentation/nav["~ind~"]/to-flag"));
         setprop("autopilot/internal/from-flag",getprop("instrumentation/nav["~ind~"]/from-flag"));
+        setprop("autopilot/internal/course-deflection",getprop("instrumentation/nav["~ind~"]/heading-needle-deflection"));
 
     } else if(left(NAVSRC,3) == "FMS"){
 			if (NAVSRC == "FMS1") {ind = 0} else {ind = 1}
@@ -516,6 +518,7 @@ var update_nav = func {
       setprop("autopilot/internal/nav-id",getprop("instrumentation/gps/wp/wp[1]/ID"));
       setprop("autopilot/internal/to-flag",getprop("instrumentation/gps/wp/wp[1]/to-flag"));
       setprop("autopilot/internal/from-flag",getprop("instrumentation/gps/wp/wp[1]/from-flag"));
+      setprop("autopilot/internal/course-deflection",getprop("instrumentation/gps/wp/wp[1]/course-error-nm"));
 
 			#### Turn Anticipation ###
 			fp = flightplan();

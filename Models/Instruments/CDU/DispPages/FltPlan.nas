@@ -730,7 +730,6 @@ var fltPlan_10 = func(dep_airport,dest_airport,dest_rwy,num,marker) {
 }
 
 var set_Speed = func(path,ind,spd) {
-		var search = find("-",getprop(path~ind~"]/id"));
 		if (getprop(path~ind~"]/speed")) {
 			var speed = path~ind~"]/speed";
 			var spd_kt = getprop(speed);
@@ -739,10 +738,5 @@ var set_Speed = func(path,ind,spd) {
 				setprop(speed,spd_kt);
 			}
 			spd = spd_kt~" / "~ sprintf("%.2f",spd_kt*0.0015);
-		} else {
-				if (search != -1) {
-					var spd_kt = getprop("autopilot/settings/climb-speed-kt");
-					spd = spd_kt~" / "~ sprintf("%.2f",spd_kt*0.0015);
-				} else {spd = "  /   "}
-		}
+		} else {spd = "  /   "}
 }

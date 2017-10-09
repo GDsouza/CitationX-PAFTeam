@@ -26,7 +26,7 @@ var init = func {
 	setprop("autopilot/route-manager/departure/airport",getprop("/sim/airport/closest-airport-id"));
 	setprop("autopilot/route-manager/departure/runway",getprop("sim/atc/runway"));
 	setprop("autopilot/settings/cruise-speed-kt",330);
-	setprop("autopilot/settings/cruise-speed-mc",0.86);
+	setprop("autopilot/settings/cruise-speed-mc",0.88);
 	setprop("autopilot/route-manager/cruise/altitude-ft",10000);
 	setprop("autopilot/route-manager/cruise/flight-level",100);
 	setprop("autopilot/settings/asel",getprop("autopilot/route-manager/cruise/flight-level"));
@@ -34,6 +34,7 @@ var init = func {
 	setprop("autopilot/settings/climb-speed-mc",0.65);
 	setprop("autopilot/settings/descent-speed-kt",200);
 	setprop("autopilot/settings/descent-speed-mc",0.60);
+	setprop("autopilot/settings/descent-angle",3.0);
 	setprop("autopilot/settings/dep-speed-kt",200);
 	setprop("autopilot/settings/dep-agl-limit-ft",2500);
 	setprop("autopilot/settings/dep-limit-nm",4);
@@ -710,10 +711,10 @@ var key = func(v) {
 			if (v == "B1L") {
 				v = "";
 				if (cduInput != "") {
-					if (left(cduInput,2) == "0.") {
+					if (left(cduInput,2) < 1) {
             cduInput = (cduInput < 0.40 ? 0.40 : cduInput > 0.92 ? 0.92 : cduInput);
 						setprop("autopilot/settings/climb-speed-mc",cduInput);				
-					} else {
+					} else if (cduInput > 100) {
 							setprop("autopilot/settings/climb-speed-kt",cduInput);
 					}					
 				}
@@ -722,10 +723,10 @@ var key = func(v) {
 			if (v == "B2L") {
 				v = "";
 				if (cduInput != "") {
-					if (left(cduInput,2) == "0.") {
+					if (left(cduInput,2) < 1) {
             cduInput = (cduInput < 0.40 ? 0.40 : cduInput > 0.92 ? 0.92 : cduInput);
 						setprop("autopilot/settings/cruise-speed-mc",cduInput);
-					} else {
+					} else if(cduInput > 100) {
 							setprop("autopilot/settings/cruise-speed-kt",cduInput);
 					}					
 				}
@@ -742,10 +743,12 @@ var key = func(v) {
 			if (v == "B3L") {
 				v = "";
 				if (cduInput != "") {
-					if (left(cduInput,2) == "0.") {
+					if (cduInput < 1) {
             cduInput = (cduInput < 0.40 ? 0.40 : cduInput > 0.92 ? 0.92 : cduInput);
 						setprop("autopilot/settings/descent-speed-mc",cduInput);
-					} else {
+          } else if (cduInput >= 3 and cduInput <= 5) {
+						setprop("autopilot/settings/descent-angle",cduInput);
+					} else if (cduInput > 100) {
 							setprop("autopilot/settings/descent-speed-kt",cduInput);
 					}					
 				}

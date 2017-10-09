@@ -198,11 +198,27 @@
         <object-name>FD.bank-annun</object-name>
         <condition>
           <property>controls/electric/avionics-power</property>
-				</condition>
-    </animation>
+				</condition>        
+    </animation>   
+   
 
     <animation>
         <type>material</type>
+        <object-name>FD.stby-annun</object-name>
+        <object-name>FD.YD-annun</object-name>
+        <object-name>FD.MTRIM-annun</object-name>
+        <object-name>FD.hdg-annun</object-name>
+        <object-name>FD.nav-annun</object-name>
+        <object-name>FD.bc-annun</object-name>
+        <object-name>FD.vnav-annun</object-name>
+        <object-name>FD.app-annun</object-name>
+        <object-name>FD.alt-annun</object-name>
+        <object-name>FD.flc-annun</object-name>
+        <object-name>FD.co-annun</object-name>
+        <object-name>FD.vs-annun</object-name>
+        <object-name>FD.spd-annun</object-name>
+        <object-name>FD.bank-annun</object-name>
+        <object-name>FD.AP-annun</object-name>
         <object-name>FD.stby</object-name>
         <object-name>FD.YD</object-name>
         <object-name>FD.MTRIM</object-name>

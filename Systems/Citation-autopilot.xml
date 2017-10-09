@@ -98,7 +98,7 @@
         <reference>0.0</reference>
         <output>autopilot/internal/roll-filter</output>
         <config>
-            <Kp>-2.0</Kp> 
+            <Kp>-1.5</Kp>
             <Ki>0</Ki>
             <min>
               <property>autopilot/settings/bank-limit</property>
@@ -121,7 +121,7 @@
         <reference>0.0</reference>
         <output>autopilot/internal/roll-filter</output>
         <config>
-            <Kp>-2.0</Kp> 
+            <Kp>-1.5</Kp> 
             <Ki>0</Ki>
             <min>
               <property>autopilot/settings/bank-limit</property>
@@ -192,71 +192,6 @@
         </config>
     </pid-controller>
 
-<!-- Course-Deflection -->
-
-   <filter>
-        <name>NAV1 heading deflection</name>
-        <debug>false</debug>
-        <feedback-if-disabled>true</feedback-if-disabled>
-        <initialize-to>output</initialize-to>
-        <enable>
-          <condition>
-            <equals>
-                <property>autopilot/settings/nav-source</property>
-                <value>NAV1</value>
-            </equals>
-          </condition>
-        </enable>
-        <input>instrumentation/nav/heading-needle-deflection</input>
-        <output>autopilot/internal/course-deflection</output>
-        <type>noise-spike</type>
-        <max-rate-of-change>10</max-rate-of-change>
-    </filter>
-
-   <filter>
-        <name>NAV2 heading deflection</name>
-        <debug>false</debug>
-        <feedback-if-disabled>true</feedback-if-disabled>
-        <initialize-to>output</initialize-to>
-        <enable>
-          <condition>
-            <equals>
-                <property>autopilot/settings/nav-source</property>
-                <value>NAV2</value>
-            </equals>
-          </condition>
-        </enable>
-        <input>instrumentation/nav[1]/heading-needle-deflection</input>
-        <output>autopilot/internal/course-deflection</output>
-        <type>noise-spike</type>
-        <max-rate-of-change>10</max-rate-of-change>
-    </filter>
-
-   <filter>
-        <name>Fms heading deflection</name>
-        <debug>false</debug>
-        <feedback-if-disabled>true</feedback-if-disabled>
-        <initialize-to>output</initialize-to>
-        <enable>
-            <condition>
-							<or>
-                <equals>
-                    <property>autopilot/settings/nav-source</property>
-                    <value>FMS1</value>
-                </equals>
-                <equals>
-                    <property>autopilot/settings/nav-source</property>
-                    <value>FMS2</value>
-                </equals>
-							</or>
-            </condition>
-        </enable>
-        <input>instrumentation/gps/wp/wp[1]/course-error-nm</input>
-        <output>autopilot/internal/course-deflection</output>
-        <type>noise-spike</type>
-        <max-rate-of-change>10</max-rate-of-change>
-    </filter>
-
 <!-- ======= Vertical Modes ======= -->
 
     <filter>
@@ -318,6 +253,56 @@
     </pi-simple-controller>
 
     <pid-controller>
+        <name>Vnav 1</name>
+        <debug>false</debug>
+        <enable>
+          <condition>
+            <equals>
+              <property>/autopilot/locks/altitude</property>
+              <value>VALT</value>
+            </equals>
+          </condition>
+        </enable>
+        <input>instrumentation/altimeter/indicated-altitude-ft</input>
+        <reference>autopilot/settings/tg-alt-ft</reference>
+        <output>autopilot/internal/target-climb-rate-fps</output>
+        <config>
+            <Kp>0.25</Kp> <!--origin = 0.25-->
+            <beta>1.0</beta>
+            <alpha>0.1</alpha>
+            <gamma>0.0</gamma>
+            <Ti>10.0</Ti> <!-- origin 10.0 -->
+            <Td>0.000001</Td>
+            <min>
+              <property>autopilot/settings/fps-limit</property>
+            </min>
+            <max>70</max>
+        </config>
+    </pid-controller>
+
+    <pi-simple-controller>
+        <name>Vnav 2</name>
+        <debug>false</debug>
+        <enable>
+          <condition>
+            <equals>
+              <property>/autopilot/locks/altitude</property>
+              <value>VALT</value>
+            </equals>
+          </condition>
+        </enable>
+        <input>velocities/vertical-speed-fps</input>
+        <reference>autopilot/internal/target-climb-rate-fps</reference>
+        <output>autopilot/internal/pitch-filter</output>
+        <config>
+            <Kp>0.30</Kp> 	<!-- origin 0.15 -->
+            <Ki>0.0</Ki>		<!-- origin 0.0 -->
+            <min>-30</min> 	<!-- origin -20 -->
+            <max>30</max>		<!-- origin 20 -->
+        </config>
+    </pi-simple-controller>
+
+    <pid-controller>
         <name>Vertical Speed Hold</name>
         <debug>false</debug>
         <enable>
@@ -338,46 +323,6 @@
             <max>20</max>
         </config>
     </pid-controller>
-
-    <pid-controller>
-        <name>Vnav Hold 1</name>
-        <debug>false</debug>
-        <enable>
-		          <property>/autopilot/locks/altitude</property>
-		          <value>VALT</value>
-        </enable>
-        <input>instrumentation/altimeter/indicated-altitude-ft</input>
-        <reference>autopilot/settings/tg-alt-ft</reference>
-        <output>autopilot/internal/target-climb-rate-fps</output>
-        <config>
-            <Kp>0.25</Kp> <!--origin = 0.25-->
-            <beta>1.0</beta>
-            <alpha>0.1</alpha>
-            <gamma>0.0</gamma>
-            <Ti>10.0</Ti> <!-- origin 10.0 -->
-            <Td>0.000001</Td>
-            <min>-30</min> <!-- origin -30 -->
-            <max>66</max> <!-- origin = 66-->
-        </config>
-    </pid-controller>
-
-    <pi-simple-controller>
-        <name>Vnav</name>
-        <debug>false</debug>
-        <enable>
-          <property>/autopilot/locks/altitude</property>
-          <value>VALT</value>
-        </enable>
-        <input>velocities/vertical-speed-fps</input>
-        <reference>autopilot/internal/target-climb-rate-fps</reference>
-        <output>autopilot/internal/pitch-filter</output>
-        <config>
-            <Kp>0.30</Kp> 	<!-- origin 0.15 -->
-            <Ki>0.0</Ki>		<!-- origin 0.0 -->
-            <min>-30</min> 	<!-- origin -20 -->
-            <max>30</max>		<!-- origin 20 -->
-        </config>
-    </pi-simple-controller>
 
     <pid-controller>
         <name>flc kt</name>
@@ -631,7 +576,7 @@
         <reference>autopilot/internal/gs-rate-fps</reference>
         <output>autopilot/internal/pitch-filter</output>
         <config>
-            <Kp>2.0</Kp> <!-- old 0.7 -->
+            <Kp>1.5</Kp> <!-- old 0.7 -->
             <Ki>0.0</Ki>
             <min>-30.0</min> <!-- old -30.0 -->
             <max>15.0</max>	<!-- old 15.0 -->
@@ -727,7 +672,7 @@
 					<property>controls/engines/engine[1]/throttle</property>		
 				</output>
         <config>
-            <Kp>10</Kp> <!-- old 0.1 -->
+            <Kp>5</Kp> <!-- old 10 -->
             <beta>1.0</beta>
             <alpha>0.1</alpha>
             <gamma>0.0</gamma>
