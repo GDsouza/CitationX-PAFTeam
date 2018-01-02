@@ -529,8 +529,8 @@ var update_nav = func {
 			refCourse = fp.pathGeod(fp.indexOfWP(fp.destination_runway), -dist_rem);
       courseCoord = geo.Coord.new().set_latlon(refCourse.lat, refCourse.lon);
       CourseError = (geocoord.distance_to(courseCoord) / 1852) + 1;
-			heading = getprop("orientation/heading-magnetic-deg");
-			crs_set = getprop("instrumentation/gps/wp/wp[1]/bearing-mag-deg");
+			heading = getprop("orientation/heading-deg");
+			crs_set = getprop("instrumentation/gps/wp/wp[1]/bearing-true-deg");
       change_wp = abs(crs_set - heading);
       if(change_wp > 180) change_wp = (360 - change_wp);
       CourseError += (change_wp / 20);
@@ -541,7 +541,7 @@ var update_nav = func {
       else if(CourseError > 180) CourseError -= 360;
 			crs_set = geocoord.course_to(courseCoord);
 			if (fp.current < 1) { # On ground and takeoff
-				crs_offset= crs_set - getprop("orientation/heading-magnetic-deg");
+				crs_offset= crs_set - getprop("orientation/heading-deg");
 				if(crs_offset>180)crs_offset-=360;
 				if(crs_offset<-180)crs_offset+=360;
 			} else { # in flight
@@ -568,6 +568,7 @@ var update_nav = func {
 					wp_curr = fp.current;
 					flag_wp = 1;
 				}
+
 				### Maintain alarm wp ###
 				wpCoord = geo.Coord.new().set_latlon(fp.getWP(wp_curr).wp_lat, fp.getWP(wp_curr).wp_lon);
 				courseDist = geocoord.distance_to(wpCoord)/1852;

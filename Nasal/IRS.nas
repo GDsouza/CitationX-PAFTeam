@@ -1,11 +1,11 @@
 ### Canvas IRS (Inertial Reference System) ###
 ### C. Le Moigne (clm76) - 2017 ###
 
-var cdu_init = props.globals.getNode("instrumentation/cdu/pos-init");
-var selected = props.globals.getNode("instrumentation/irs/selected");
-var posit = props.globals.getNode("instrumentation/irs/positionned");
-var align = props.globals.initNode("instrumentation/irs/align",0,"BOOL");
-var test = props.globals.initNode("instrumentation/irs/test",0,"BOOL");
+var cdu_init = props.globals.getNode("instrumentation/cdu/pos-init",1);
+var selected = props.globals.getNode("instrumentation/irs/selected",1);
+var posit = props.globals.getNode("instrumentation/irs/positionned",1);
+var align = props.globals.initNode("instrumentation/irs/align",0,"BOOL",1);
+var test = props.globals.initNode("instrumentation/irs/test",0,"BOOL",1);
 var f_align = 0; # flag
 var f_fault = 0; # flag
 var f_navready = 0; # flag
@@ -15,7 +15,7 @@ var IRS = {
 	new: func() {
 		var m = {parents:[IRS]};
 		m.canvas = canvas.new({
-			"name": "RCU", 
+			"name": "IRS", 
 			"size": [1024, 1024],
 			"view": [620,290],
 			"mipmapping": 1 

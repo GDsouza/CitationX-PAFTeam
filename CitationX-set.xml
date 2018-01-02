@@ -20,7 +20,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
         <flight-model>yasim</flight-model>
         <aero>CitationX-yasim</aero>
         <fuel-fraction>0.65</fuel-fraction>
-
+        <minimum-fg-version>3.2</minimum-fg-version>
         <tags>
             <tag>bizjet</tag>
             <tag>cessna</tag>
@@ -648,7 +648,17 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 				</pfd>
 		</primus2000>
 
-    <cdu>
+    <cdu n="0">
+			<input type="string"/>
+      <serviceable type="bool">1</serviceable>
+<!--
+      <display>NAVIDENT[0]</display>
+-->
+      <ident>
+        <model>Citation X</model>
+      </ident>
+    </cdu>
+    <cdu n="1">
 			<input type="string"/>
       <serviceable type="bool">1</serviceable>
       <display>NAVIDENT[0]</display>
@@ -824,7 +834,6 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
           <file>Aircraft/CitationX/Nasal/Fuel.nas</file>
           <file>Aircraft/CitationX/Nasal/Flightdirector.nas</file>
 					<file>Aircraft/CitationX/Nasal/Warnings.nas</file>
-
         </citation>
 				<atc>
 					<file>Aircraft/CitationX/Nasal/spoken_atc/init.nas</file>
@@ -836,24 +845,22 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
           <file>Aircraft/CitationX/Nasal/Dialogs.nas</file>
         </dialogs>
 				<procedures>
-					<file>Aircraft/CitationX/Models/Instruments/CDU/Procedures/fmsDB.nas</file>
-					<file>Aircraft/CitationX/Models/Instruments/CDU/Procedures/fmsWP.nas</file>
-					<file>Aircraft/CitationX/Models/Instruments/CDU/Procedures/fmsTP.nas</file>
-					<file>Aircraft/CitationX/Models/Instruments/CDU/Procedures/fmsTransition.nas</file>
+					<file>Aircraft/CitationX/Nasal/Procedures/fmsDB.nas</file>
+					<file>Aircraft/CitationX/Nasal/Procedures/fmsWP.nas</file>
+					<file>Aircraft/CitationX/Nasal/Procedures/fmsTP.nas</file>
+					<file>Aircraft/CitationX/Nasal/Procedures/fmsTransition.nas</file>
 				</procedures>
-				<displaypages>
-					<file>Aircraft/CitationX/Models/Instruments/CDU/DispPages/CduStart.nas</file>
-					<file>Aircraft/CitationX/Models/Instruments/CDU/DispPages/FltPlan.nas</file>
-					<file>Aircraft/CitationX/Models/Instruments/CDU/DispPages/FltList.nas</file>
-					<file>Aircraft/CitationX/Models/Instruments/CDU/DispPages/FltDeparture.nas</file>
-					<file>Aircraft/CitationX/Models/Instruments/CDU/DispPages/FltDestination.nas</file>
-					<file>Aircraft/CitationX/Models/Instruments/CDU/DispPages/NavPages.nas</file>
-					<file>Aircraft/CitationX/Models/Instruments/CDU/DispPages/Performance.nas</file>
-					<file>Aircraft/CitationX/Models/Instruments/CDU/DispPages/Progress.nas</file>
-				</displaypages>
 				<cdu>
 					<file>Aircraft/CitationX/Nasal/CDU.nas</file>
+					<file>Aircraft/CitationX/Nasal/CDUpages.nas</file>
 				</cdu>
+				<cdu1>
+					<file>Aircraft/CitationX/Nasal/CDU1.nas</file>
+					<file>Aircraft/CitationX/Nasal/CDUpages1.nas</file>
+				</cdu1>
+				<eng>
+					<file>Aircraft/CitationX/Models/Instruments/Engines/ENG.nas</file>
+				</eng>
 				<mfd>
 					<file>Aircraft/CitationX/Nasal/Mfd.nas</file>
 					<file>Aircraft/CitationX/Models/Instruments/MFD/canvas/NDcanvas.nas</file>

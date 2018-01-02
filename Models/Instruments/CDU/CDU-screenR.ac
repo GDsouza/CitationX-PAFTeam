@@ -1,0 +1,23 @@
+AC3Db
+MATERIAL "CDU" rgb 1 1 1  amb 0.204 0.204 0.204  emis 1 1 1  spec 0.204 0.204 0.204  shi 128  trans 0
+OBJECT world
+kids 1
+OBJECT poly
+name "CDU.screenR"
+loc 0.000929 0 0
+texture "transparent.png"
+crease 30.000002
+numvert 4
+0.002 0.075159 0.056213
+0.002 -0.000622 0.056213
+0.002 -0.000622 -0.056607
+0.002 0.075159 -0.056607
+numsurf 1
+SURF 0x10
+mat 0
+refs 4
+3 0.992515 0.991277
+0 0.00960189 0.991277
+1 0.00960189 0.00390553
+2 0.992515 0.00390553
+kids 0

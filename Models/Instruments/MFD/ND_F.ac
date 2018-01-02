@@ -5,8 +5,6 @@ kids 1
 OBJECT poly
 name "ND.screen"
 loc -0.000291146 0.0244335 0.000242049
-data 9
-ND.screen
 texture "transparent.png"
 crease 30.000002
 numvert 4

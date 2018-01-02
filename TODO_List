@@ -1,13 +1,14 @@
-### TO DO LIST au 03/01/2017 ###
+### TO DO LIST au 15/12/2017 ###
 
 Flightplan : 	# Ajouter les TOC : # Fait Mars 2017
 							# Ajouter les TOD : # Fait Avril 2017
 
-CDU : Terminer le pavé NAV
-		#	Rajouter une page au plan de vol (FPL) - Fait 07/01/2016
-			Terminer le pavé PROG
-			Renseigner le pavé DIR (???)
-			Séparer les deux CDU
+CDU : # Terminer le pavé NAV - Fait 10/12/2017
+		  #	Rajouter une page au plan de vol (FPL) - Fait 07/01/2016
+			# Terminer le pavé PROG - Fait 10/12/2017
+		  #	Renseigner le pavé DIR - Fait 15/12/2017
+		  # Séparer les deux CDU - Fait 15/12/2017
+      # Transformer en Canvas - Fait 15/12/2017
 
 PFD :# Coder le bouton "MINIMUMS" - Fait 11/01/2016
 		 # Coder le bouton "RA/BARO" - Fait 11/01/2016

@@ -178,12 +178,12 @@ var init_switches = func{
     setprop("controls/lighting/engines-norm",0.8);
     props.globals.initNode("controls/electric/ammeter-switch",0,"BOOL");
     props.globals.initNode("controls/electric/seat-belts-switch",0,"INT");
-    props.globals.getNode("systems/electrical/serviceable",0,"BOOL");
-    props.globals.getNode("controls/electric/external-power",0,"BOOL");
-		setprop("controls/electric/std-by-pwr",0);
+    props.globals.initNode("systems/electrical/serviceable",0,"BOOL");
+    props.globals.initNode("controls/electric/external-power",0,"BOOL");
+    props.globals.initNode("controls/electric/std-by-pwr",0,"INT");
     setprop("controls/lighting/efis-norm",0.8);
-    setprop("controls/lighting/cdu",0.6);
-    setprop("controls/lighting/cdu1",0.6);
+    setprop("controls/lighting/cdu",0.8);
+    setprop("controls/lighting/cdu[1]",0.8);
 #    setprop("controls/lighting/panel-norm",0.8);
     setprop("controls/lighting/nav-lights",0);
     setprop("controls/lighting/rmu",0.3);

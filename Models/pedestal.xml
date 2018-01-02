@@ -5,6 +5,28 @@
     <path>pedestal.ac</path>
 
     <model>
+        <name>CDU0-screen</name>
+        <path>Models/Instruments/CDU/CDU-screenL.xml</path>
+        <offsets>
+            <x-m>0.088</x-m>
+            <y-m>-0.082</y-m>
+            <z-m>-0.050</z-m>
+            <pitch-deg>-59.59</pitch-deg>
+        </offsets>
+    </model>
+
+    <model>
+        <name>CDU1-screen</name>
+        <path>Models/Instruments/CDU/CDU-screenR.xml</path>
+        <offsets>
+            <x-m>0.088</x-m>
+            <y-m>0.090</y-m>
+            <z-m>-0.050</z-m>
+            <pitch-deg>-59.59</pitch-deg>
+        </offsets>
+    </model>
+
+    <model>
         <name>CDU0</name>
         <path>Models/Instruments/CDU/CDU.xml</path>
         <offsets>
@@ -90,7 +112,7 @@
 
     <model>
 				<name>IRSscreenL</name>
-        <path>Models/Instruments/IRS/IRSscreen.xml</path>
+        <path>Models/Instruments/IRS/IRS-screen.xml</path>
         <offsets>
             <x-m>0.001</x-m>
             <y-m>0</y-m>
@@ -101,7 +123,7 @@
 
     <model>
 				<name>IRSscreenR</name>
-        <path>Models/Instruments/IRS/IRSscreen.xml</path>
+        <path>Models/Instruments/IRS/IRS-screen.xml</path>
         <offsets>
             <x-m>0.001</x-m>
             <y-m>0.159</y-m>

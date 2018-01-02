@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!--  Citation X - Canvas CDU -->
+<!--   C.Le Moigne (clm76) - 2017 -->
+
+
+<PropertyList>
+
+<path>CDU-screenR.ac</path>
+
+    <animation>
+        <type>select</type>
+        <object-name>CDU.screenR</object-name>
+        <condition>
+          <and>
+            <property>controls/electric/avionics-power</property>
+            <greater-than>
+              <property>controls/lighting/cdu[1]</property>
+              <value>0.05</value>
+            </greater-than>
+          </and>
+				</condition>
+    </animation>
+
+</PropertyList>

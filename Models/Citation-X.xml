@@ -1682,14 +1682,17 @@
         <object-name>light-R</object-name>
 					<condition>
 						<and>
+              <not>
+                <property>controls/electric/external-power</property> 
+              </not>
 							<equals>
 								<property>controls/electric/std-by-pwr</property> 
 								<value>1</value>
 							</equals>
-							<greater-than>
+							<less-than>
 	              <property>systems/electrical/right-bus</property>
 								<value>12</value>
-							</greater-than>
+							</less-than>
 						</and>
 					</condition> 
       	<emission>

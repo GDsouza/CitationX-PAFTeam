@@ -69,6 +69,12 @@ var JetEngine = {
         m.fuel_gph=m.eng.initNode("fuel-flow-gph");
         m.Lfuel = setlistener(m.fuel_out, func m.shutdown(m.fuel_out.getValue()),0,0);
         m.CutOff = setlistener(m.cutoff, func (ct){m.engine_off=ct.getValue()},0,0);
+        m.oilp_norm = "engines/engine/oilp-norm";
+        m.oilp = "engines/engine/oil-pressure-psi";
+        m.oilp1_norm = "engines/engine[1]/oilp-norm";
+        m.oilp1 = "engines/engine[1]/oil-pressure-psi";
+        m.sysoil = "systems/hydraulics/psi-norm"; 
+        m.sysoil1 = "systems/hydraulics/psi-norm[1]"; 
     return m;
     },
 
@@ -98,6 +104,17 @@ var JetEngine = {
             }
         }
         me.fuel_pph.setValue(me.fuel_gph.getValue()*me.fdensity);
+
+        #### For Engines Oil Pressure Display ####
+        if (getprop(me.sysoil) >= 0.1 ) {
+            if (getprop(me.oilp_norm) < 0.1) {setprop(me.oilp,getprop(me.sysoil)/10)}
+            else {setprop(me.oilp,getprop(me.oilp_norm))}
+        } else {setprop(me.oilp,0)}
+        if (getprop(me.sysoil1) >= 0.1 ) {
+            if (getprop(me.oilp1_norm) < 0.1) {setprop(me.oilp1,getprop(me.sysoil1)/10)}
+            else {setprop(me.oilp1,getprop(me.oilp1_norm))}
+        } else {setprop(me.oilp1,0)}
+
     },
 
     spool_up : func(scnds){

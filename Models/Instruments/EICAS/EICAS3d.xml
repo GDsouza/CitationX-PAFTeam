@@ -126,8 +126,8 @@ Primus 2000 EICAS
         <object-name>oiltemp.001</object-name>
         <property>engines/engine[0]/oilt-norm</property>
         <interpolation>
-            <entry><ind>0.0</ind><dep>0.0</dep></entry>
-            <entry><ind>1.0</ind><dep>0.022</dep></entry>
+            <entry><ind>0.0</ind><dep>0.002</dep></entry>
+            <entry><ind>1.0</ind><dep>0.020</dep></entry>
         </interpolation>
         <axis>
             <x>0.0</x>
@@ -141,7 +141,7 @@ Primus 2000 EICAS
         <object-name>oiltemp.001</object-name>
         <property>engines/engine[0]/oilt-norm</property>
         <interpolation>
-            <entry><ind>0.0</ind><dep>0.0</dep></entry>
+            <entry><ind>0.0</ind><dep>0.005</dep></entry>
             <entry><ind>1.0</ind><dep>0.0812</dep></entry>
         </interpolation>
         <axis>
@@ -156,7 +156,7 @@ Primus 2000 EICAS
         <object-name>oiltemp.002</object-name>
         <property>engines/engine[1]/oilt-norm</property>
         <interpolation>
-            <entry><ind>0.0</ind><dep>0.0</dep></entry>
+            <entry><ind>0.0</ind><dep>0.002</dep></entry>
             <entry><ind>1.0</ind><dep>0.020</dep></entry>
         </interpolation>
         <axis>
@@ -171,7 +171,7 @@ Primus 2000 EICAS
         <object-name>oiltemp.002</object-name>
         <property>engines/engine[1]/oilt-norm</property>
         <interpolation>
-            <entry><ind>0.0</ind><dep>0.0</dep></entry>
+            <entry><ind>0.0</ind><dep>0.005</dep></entry>
             <entry><ind>1.0</ind><dep>0.0812</dep></entry>
         </interpolation>
         <axis>
@@ -184,12 +184,12 @@ Primus 2000 EICAS
     <animation>
         <type>translate</type>
         <object-name>oilpsi.001</object-name>
-        <property>engines/engine[0]/oilp-norm</property>
-        <interpolation>
-            <entry><ind>0.0</ind><dep>0.0</dep></entry>
-            <entry><ind>0.083</ind><dep>0.004</dep></entry>
-            <entry><ind>1.0</ind><dep>0.0190</dep></entry>
-        </interpolation>
+        <property>engines/engine[0]/oil-pressure-psi</property>
+          <interpolation>
+            <entry><ind>0.0</ind><dep>0.000</dep></entry>
+            <entry><ind>0.1</ind><dep>0.006</dep></entry>
+            <entry><ind>1.0</ind><dep>0.019</dep></entry>
+          </interpolation>
         <axis>
             <x>0.0</x>
             <y>0.0</y>
@@ -200,10 +200,10 @@ Primus 2000 EICAS
     <animation>
         <type>textranslate</type>
         <object-name>oilpsi.001</object-name>
-        <property>engines/engine[0]/oilp-norm</property>
+        <property>engines/engine[0]/oil-pressure-psi</property>
         <interpolation>
             <entry><ind>0.0</ind><dep>0.0</dep></entry>
-            <entry><ind>0.083</ind><dep>0.016</dep></entry>
+            <entry><ind>0.1</ind><dep>0.020</dep></entry>
             <entry><ind>1.0</ind><dep>0.0781</dep></entry>
         </interpolation>
         <axis>
@@ -216,12 +216,12 @@ Primus 2000 EICAS
     <animation>
         <type>translate</type>
         <object-name>oilpsi.002</object-name>
-        <property>engines/engine[1]/oilp-norm</property>
-        <interpolation>
-            <entry><ind>0.0</ind><dep>0.0</dep></entry>
-            <entry><ind>0.083</ind><dep>0.004</dep></entry>
-            <entry><ind>1.0</ind><dep>0.0190</dep></entry>
-        </interpolation>
+        <property>engines/engine[1]/oil-pressure-psi</property>
+          <interpolation>
+            <entry><ind>0.0</ind><dep>0.000</dep></entry>
+            <entry><ind>0.1</ind><dep>0.006</dep></entry>
+            <entry><ind>1.0</ind><dep>0.019</dep></entry>
+          </interpolation>
         <axis>
             <x>0.0</x>
             <y>0.0</y>
@@ -232,10 +232,10 @@ Primus 2000 EICAS
     <animation>
         <type>textranslate</type>
         <object-name>oilpsi.002</object-name>
-        <property>engines/engine[1]/oilp-norm</property>
+        <property>engines/engine[1]/oil-pressure-psi</property>
         <interpolation>
             <entry><ind>0.0</ind><dep>0.0</dep></entry>
-            <entry><ind>0.083</ind><dep>0.016</dep></entry>
+            <entry><ind>0.1</ind><dep>0.020</dep></entry>
             <entry><ind>1.0</ind><dep>0.0781</dep></entry>
         </interpolation>
         <axis>

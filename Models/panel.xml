@@ -7,6 +7,15 @@
   <!-- Instruments -->
 
     <model>
+        <path>Models/Instruments/Engines/screen.xml</path>
+        <offsets>
+            <x-m>0.00</x-m>
+            <y-m>0.00</y-m>
+            <z-m>0.00</z-m>
+        </offsets>
+    </model>
+
+    <model>
         <path>Models/Instruments/NAV/nav1.xml</path>
         <offsets>
             <x-m>0.00</x-m>
@@ -127,7 +136,6 @@
             <z-m>0.136</z-m>
         </offsets>
     </model>
-
 
     <model>
         <name>PFD1</name>
@@ -5301,149 +5309,6 @@
             <character-size>0.02</character-size>
             <character-aspect-ratio type="double">1.8</character-aspect-ratio>
             <font-resolution>
-            <width type="int">64</width>
-            <height type="int">64</height>
-        </font-resolution>
-    </text>
-
-<!-- Engines Indicator -->
-
-    <animation>
-        <type>select</type>
-        <object-name>LH N1</object-name>
-        <object-name>RH N1</object-name>
-        <object-name>LH ITT</object-name>
-        <object-name>RH ITT</object-name>
-        <object-name>LH N2</object-name>
-        <object-name>RH N2</object-name>
-        <condition>
-                <property>systems/electrical/left-bus-norm</property>
-        </condition>
-    </animation>
-
-<text>
-        <name>LH N1</name>
-        <offsets>
-            <x-m>0.005</x-m>
-            <y-m>0.033</y-m>
-            <z-m>0.337</z-m>
-        </offsets>
-        <alignment>right-center</alignment>
-        <axis-alignment>yz-plane</axis-alignment>
-        <type type="string">number-value</type>
-        <property>engines/engine/fan</property>
-        <format>%3.1f</format>
-        <font>led.txf</font>
-        <character-size>0.009</character-size>
-        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
-        <font-resolution>
-            <width type="int">64</width>
-            <height type="int">64</height>
-        </font-resolution>
-    </text>
-
-<text>
-        <name>RH N1</name>
-        <offsets>
-            <x-m>0.005</x-m>
-            <y-m>0.080</y-m>
-            <z-m>0.337</z-m>
-        </offsets>
-        <alignment>right-center</alignment>
-        <axis-alignment>yz-plane</axis-alignment>
-        <type type="string">number-value</type>
-        <property>engines/engine[1]/fan</property>
-        <format>%3.1f</format>
-        <font>led.txf</font>
-        <character-size>0.009</character-size>
-        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
-        <font-resolution>
-            <width type="int">64</width>
-            <height type="int">64</height>
-        </font-resolution>
-    </text>
-
-<text>
-        <name>LH ITT</name>
-        <offsets>
-            <x-m>0.005</x-m>
-            <y-m>0.033</y-m>
-            <z-m>0.323</z-m>
-        </offsets>
-        <alignment>right-center</alignment>
-        <axis-alignment>yz-plane</axis-alignment>
-        <type type="string">number-value</type>
-        <property>engines/engine/itt-norm</property>
-        <scale>888</scale>
-        <format>%4.0f</format>
-        <font>led.txf</font>
-        <character-size>0.009</character-size>
-        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
-        <font-resolution>
-            <width type="int">64</width>
-            <height type="int">64</height>
-        </font-resolution>
-    </text>
-
-<text>
-        <name>RH ITT</name>
-        <offsets>
-            <x-m>0.005</x-m>
-            <y-m>0.080</y-m>
-            <z-m>0.323</z-m>
-        </offsets>
-        <alignment>right-center</alignment>
-        <axis-alignment>yz-plane</axis-alignment>
-        <type type="string">number-value</type>
-        <property>engines/engine[1]/itt-norm</property>
-        <scale>888</scale>
-        <format>%4.0f</format>
-        <font>led.txf</font>
-        <character-size>0.009</character-size>
-        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
-        <font-resolution>
-            <width type="int">64</width>
-            <height type="int">64</height>
-        </font-resolution>
-    </text>
-
-<text>
-        <name>LH N2</name>
-        <offsets>
-            <x-m>0.005</x-m>
-            <y-m>0.033</y-m>
-            <z-m>0.308</z-m>
-        </offsets>
-        <alignment>right-center</alignment>
-        <axis-alignment>yz-plane</axis-alignment>
-        <type type="string">number-value</type>
-        <property>engines/engine/turbine</property>
-        <format>%3.1f</format>
-        <font>led.txf</font>
-        <character-size>0.009</character-size>
-        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
-        <font-resolution>
-            <width type="int">64</width>
-            <height type="int">64</height>
-        </font-resolution>
-    </text>
-
-    <text>
-        <name>RH N2</name>
-        <offsets>
-            <x-m>0.005</x-m>
-            <y-m>0.080</y-m>
-            <z-m>0.308</z-m>
-        </offsets>
-        <alignment>right-center</alignment>
-        <axis-alignment>yz-plane</axis-alignment>
-        <type type="string">number-value</type>
-        <property>engines/engine[1]/turbine</property>
-        <format>%3.1f</format>
-        <font>led.txf</font>
-        <character-size>0.009</character-size>
-        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
-        <font-resolution>
             <width type="int">64</width>
             <height type="int">64</height>
         </font-resolution>
