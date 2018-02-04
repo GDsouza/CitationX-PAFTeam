@@ -1,0 +1,72 @@
+ Spoken ATC
+  v. 1.22 
+********************
+                      See http://wiki.flightgear.org/Spoken_ATC
+
+This nasal code is not intended to compete with FGComm, Festival or other similar facilities. 
+On the contrary, their use is indicated when they are not available (eg, few hardware resources, no Internet connection, etc.)
+
+1.- How to use it
+-----------------
+Once installed, launch FlighGear (or re-start it) and tune Comm1 to the desired frequency,
+ and press the ">" key to transmit your request.
+You will hear the ATC's answer according the standard VFR phraseology, depending on your current position and previous messages:
+
+    * If you are on ground => The script interprets it's a taxi request (if you are far from the runway or you've just landed),
+       or a take-off request (if you are on the correct Runway or at his holding point).
+    * If you are flying => The script interprets it's an approach request (if you tunned an APP freq.),
+       or a landing request (if you tunned a TWR freq),
+       or a departure request (if you tunned a DEP freq. and you are climbing after a take-off).
+
+Note that only TWR stations can deliver landing or take-off clearances, and only GND or TWR stations can deliver taxiing ones.
+Where there is not a specific GND or APP-DEP freq., TOWER can take their tasks.
+If they do exist, TWR will redirect to the specific freq.
+
+Only at initial contact, the ATC message includes his station name & type, and the current QNH.
+APP stations will give a vector to the rwy in use (if you are far from there) or order to contact TWR (if you are inside CTR).
+TWR stations will give instructions to join pattern or make direct final (depending on your position).
+
+2.- How to install it
+---------------------
+2.1 - Into the zip you will find the "spoken_atc" directory with 5 files (plus this Readme). 
+      Extract that directory (not only the files!)  into the $FGFS_ROOT/Nasal directory.
+2.2 - Edit the $FGFS_ROOT/keyboard.xml file and include the following lines to bind the "<" key:
+    <key n="60">
+        <name>less-than</name>
+        <desc>Spoken ATC</desc>
+        <binding>
+        <command>nasal</command>
+        <script>spoken_atc.speak(15)</script>
+        </binding>
+    </key>
+
+3.- Tips
+---------------------
+If the gui.popupTip() messages bother you, you can call the function as "spoken_atc.speak(<secs>)"  with the seconds you want.
+If you prefer, you can bind an unused joystick button too.
+
+To achieve a realistic behavior, follow a logical sequence of communications, viz.:
+ - Contact GND (or TWR) prior to taxiing.
+ - Contact TWR prior to take-off or land.
+ - Contact DEP (if available) after take-off to leave the CTR.
+ - Contact APP (if available) prior to enter the CTR.
+  etc, etc.
+  
+You can easyly customize the phraseology by editing the "phraseology.nas" file (only lines 44 to 82, please!).
+Again, refer to http://wiki.flightgear.org/Spoken_ATC for details.
+
+And remember this is VFR: heed the instructions of the ATC but keep your eyes wide open !
+  
+4.- Known issues
+---------------------
+Well, if I knew any, I'd already be working on it. :)
+Seriously, I depend on your feddback !
+
+Awaiting for your comments,
+Enjoy it !
+
+Regards,
+Rodolfo - rleibner@gmail.com
+
+
+   

@@ -474,13 +474,6 @@ var EICAS = {
 
 };
 
-#var annun_timer = func {
-#	settimer(func {
-#		setprop("instrumentation/annunciators/ack-warning",1);
-#		setprop("instrumentation/annunciators/warning",1);
-#	},3);
-#}
-
 var	stall_speed = func {
     alert = 0;
     kias = getprop("velocities/airspeed-kt");

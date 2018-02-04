@@ -673,65 +673,22 @@ var Vspeed_update = func {
 		setprop("controls/flight/vref",vref);
 }
 
-var atc_id = func {
-	for (var n = 0;n<2;n+=1){
-		var diz = getprop("instrumentation/transponder/unit["~n~"]/id-code[1]");
-		var cent = getprop("instrumentation/transponder/unit["~n~"]/id-code[2]");
-		var dwn_1 = getprop("instrumentation/transponder/unit["~n~"]/down-1");
-		var dwn_2 = getprop("instrumentation/transponder/unit["~n~"]/down-2");
-		var dg_1 = diz-int(diz/10)*10;
-		var dg_2 = int(diz/10);
-		var dg_3 = cent-int(cent/10)*10;
-		var dg_4 = int(cent/10);	
-		var dg = [dg_1,dg_2,dg_3,dg_4];
-		for (var i=0;i<4;i+=1) {
-			if (i<2 and !dwn_1 and dg[i] >7) {dg[i]=0;dg[i+1]+=1}
-			if (i<2 and dwn_1 and dg[i] >7) {dg[i]=7}
-			if (i>1 and !dwn_2 and dg[i] >7) {dg[i]=0;dg[i+1]+=1}
-			if (i>1 and dwn_2 and dg[i] >7) {dg[i]=7}
-		}	
-		diz = dg[0]+dg[1]*10;
-		cent = dg[2]+dg[3]*10;
-		setprop("instrumentation/transponder/unit["~n~"]/id-code[1]",diz);
-		setprop("instrumentation/transponder/unit["~n~"]/id-code[2]",cent);
-		setprop("instrumentation/transponder/unit["~n~"]/id-code",diz + (cent*100));
-	}
-}
-
-var freq_limits = func {
-	var com_freq = "instrumentation/comm/frequencies/standby-mhz";
-	var nav_freq = "instrumentation/nav/frequencies/standby-mhz";
-	if (getprop(com_freq)<117.975) {setprop(com_freq,117.975)}
-	if (getprop(com_freq)>137.000) {setprop(com_freq,137.000)}
-	if (getprop(nav_freq)<108.000) {setprop(nav_freq,108.000)}
-	if (getprop(nav_freq)>117.950) {setprop(nav_freq,117.950)}
-
-	var com_freq1 = "instrumentation/comm[1]/frequencies/standby-mhz";
-	var nav_freq1 = "instrumentation/nav[1]/frequencies/standby-mhz";
-	if (getprop(com_freq1)<117.975) {setprop(com_freq1,117.975)}
-	if (getprop(com_freq1)>137.000) {setprop(com_freq1,137.000)}
-	if (getprop(nav_freq1)<108.000) {setprop(nav_freq1,108.000)}
-	if (getprop(nav_freq1)>117.950) {setprop(nav_freq1,117.950)}
-}
 ########## MAIN ##############
-
+var grspd = nil;
+var wspd = nil;
+var rudder_pos = nil;
 var update_systems = func{
     LHeng.update();
     RHeng.update();
 		chrono_update();
-#		mfd_setup();
-#		mfd_wx();
-		atc_id();
-		freq_limits();
     FHupdate(0);
     tire.get_rotation("yasim");
     if(getprop("velocities/airspeed-kt")>40)setprop("controls/cabin-door/open",0);
-    var grspd =getprop("velocities/groundspeed-kt");
-    var wspd = (45-grspd) * 0.022222;
-    if(wspd>1.0)wspd=1.0;
-    if(wspd<0.001)wspd=0.001;
-    var rudder_pos=getprop("controls/flight/rudder") or 0;
-    var str=-(rudder_pos*wspd);
-    setprop("/controls/gear/steering",str);
-settimer(update_systems,0);
+    grspd = getprop("velocities/groundspeed-kt");
+    wspd = (45-grspd) * 0.022222;
+    if(wspd>1.0) wspd = 1.0;
+    if(wspd<0.001) wspd = 0.001;
+    rudder_pos = getprop("controls/flight/rudder") or 0;
+    setprop("/controls/gear/steering",-rudder_pos*wspd);
+    settimer(update_systems,0);
 }

@@ -1,27 +1,16 @@
 ### Canvas CDU ###
 ### C. Le Moigne (clm76) - 2017 ###
 
-var altDestApt = "autopilot/route-manager/alternate/airport";
-var altDestRwy = "autopilot/route-manager/alternate/runway";
-var altFlag = "autopilot/route-manager/alternate/set-flag";
-var altClosed = "autopilot/route-manager/alternate/closed";
-var cduInput = "instrumentation/cdu/input";
 var currWp = "autopilot/route-manager/current-wp";
 var dep_apt = "autopilot/route-manager/departure/airport";
 var dep_rwy = "autopilot/route-manager/departure/runway";
 var dest_apt = "autopilot/route-manager/destination/airport";
 var dest_rwy = "autopilot/route-manager/destination/runway";	
-var direct = "instrumentation/cdu/direct";
-var direct_to = "instrumentation/cdu/direct-to";
-var display = "instrumentation/cdu/display";
 var fp_active = "autopilot/route-manager/active";
 var fp_saved = "autopilot/route-manager/flight-plan";
-var lighting = "controls/lighting/cdu";
 var num = "autopilot/route-manager/route/num";
-var nbPage = "instrumentation/cdu/nbpage";
 var pos_init = "instrumentation/cdu/pos-init";
 var posit = "instrumentation/irs/positionned";
-var spd = "instrumentation/cdu/speed";
 
 var destApt = nil;
 var dist = nil;
@@ -47,17 +36,29 @@ var p = nil;
 var xfile = nil;
 
 var cduDsp = {
-	new: func () {
+	new: func (x) {
 		var m = {parents:[cduDsp]};
-		m.canvas = canvas.new({
-			"name": "CDU-L", 
-			"size": [1024, 1024],
-			"view": [1024, 750],
-			"mipmapping": 1 
-		});
-		m.canvas.addPlacement({"node": "CDU.screenL"});
-		m.group = m.canvas.createGroup();   
-		canvas.parsesvg(m.group, "Aircraft/CitationX/Models/Instruments/CDU/CDU.svg");
+    if (!x) {
+		  m.cdu = canvas.new({
+			  "name": "CDU-L", 
+			  "size": [1024, 1024],
+			  "view": [1024, 750],
+			  "mipmapping": 1 
+		  });
+		  m.cdu.addPlacement({"node": "CDU.screenL"});
+		  m.group = m.cdu.createGroup();   
+  		canvas.parsesvg(m.group, "Aircraft/CitationX/Models/Instruments/CDU/CDU.svg");
+    } else {
+		  m.cdu = canvas.new({
+			  "name": "CDU-R", 
+			  "size": [1024, 1024],
+			  "view": [1024, 750],
+			  "mipmapping": 1 
+		  });
+		  m.cdu.addPlacement({"node": "CDU.screenR"});
+		  m.group = m.cdu.createGroup();   
+		  canvas.parsesvg(m.group, "Aircraft/CitationX/Models/Instruments/CDU/CDU.svg");
+    }
 		m.line = {};
 		m.line_val = ["title","l1","l2","l2r","l3","l4","l4r","l5","l6","l7",
                   "r1","r2l","r2r","r3","r4l","r4r",
@@ -77,30 +78,29 @@ var cduDsp = {
       .setStrokeLineJoin("round");
    
     m.curr_wp = nil;
-
     return m;
 
   }, # end of new
 
-  Listen : func {
-		setlistener(display, func(n) {
+  Listen : func(x) {
+		setlistener("instrumentation/cdu["~x~"]/display", func(n) {
       if (n.getValue() == "PRG-PAGE[1]") {
         if (!me.timer.isRunning) {me.timer.start()}
       }else {me.timer.stop()}
-      me.Display();
+      me.Display(x);
 		},0,1);
 
-    setlistener(cduInput, func(n) {  ### Scratchpad
+    setlistener("instrumentation/cdu["~x~"]/input", func(n) {  ### Scratchpad
       me.line.scrpad.setText(n.getValue());
     },0,1);
 
-    setlistener(lighting,func { ### Luminosity
-      me.Base_colors();
-      me.Display()
+    setlistener("controls/lighting/cdu["~x~"]",func { ### Luminosity
+      me.Base_colors(x);
+      me.Display(x)
       },0,0);
 
 		setlistener(pos_init,func(n) {
-      if (n.getValue()) {me.line.scrpad.setText("* POSITIONNING *")}
+      if (n.getValue()) {me.line.scrpad.setText("POSITIONNING")}
     },0,0);
 
 		setlistener(posit, func(n) {
@@ -111,40 +111,40 @@ var cduDsp = {
     },0,0);
 
     setlistener(num, func(n) {
-      if (n.getValue() > 1 and left(getprop(display),8) == "FLT-PLAN") {
-        me.Flp1();
+      if (n.getValue() > 1 and left(getprop("instrumentation/cdu["~x~"]/display"),8) == "FLT-PLAN") {
+        me.Flp1(x);
       }
     },0,0);
 
     setlistener(dep_apt, func {
-      me.Flp0();
+      me.Flp0(x);
     },0,0);
 
     setlistener(fp_saved, func {
-      me.Flp1();
+      me.Flp1(x);
     },0,0);
 
     setlistener(fp_active, func {
-      me.Flp1();
+      me.Flp1(x);
     },0,0);
 
-    setlistener(spd, func(n) {
-      setprop("instrumentation/cdu/speed",n.getValue());
-      me.Flp1();
+    setlistener("instrumentation/cdu["~x~"]/speed", func(n) {
+      setprop("instrumentation/cdu["~x~"]/speed",n.getValue());
+      me.Flp1(x);
     },0,1);
 
     setlistener(currWp, func(n) {
-      if (left(getprop(display),3) == "POS" or left(getprop(display),3) == "FLT") {
+      if (left(getprop("instrumentation/cdu["~x~"]/display"),3) == "POS" or left(getprop("instrumentation/cdu["~x~"]/display"),3) == "FLT") {
 				me.curr_wp = n.getValue();
           ### automatic page change during flight ###
         var page = int(me.curr_wp/3)+1;
-        setprop(display,"FLT-PLAN["~page~"]");
-        me.Flp1();
+        setprop("instrumentation/cdu["~x~"]/display","FLT-PLAN["~page~"]");
+        me.Flp1(x);
       }
     },0,1);
 
-    setlistener(direct,func(n) {
-      if (n.getValue() and left(getprop(display),8) == "FLT-PLAN" or left(getprop(display),8) == "ALT-PAGE") {
+    setlistener("instrumentation/cdu["~x~"]/direct",func(n) {
+      if (n.getValue() and left(getprop("instrumentation/cdu["~x~"]/display"),8) == "FLT-PLAN" or left(getprop("instrumentation/cdu["~x~"]/display"),8) == "ALT-PAGE") {
         me.line.l1.setText("---- DIRECT").setColor(me.amber);
       }
       else{
@@ -154,30 +154,30 @@ var cduDsp = {
 
   }, # end of listen
 
-  Display : func {
-	  if (left(getprop(display),8) == "NAVIDENT") {me.Nav_ident()}
-		if (left(getprop(display),8) == "POS-INIT") {
-      getprop(posit) ? me.Pos_init2() : me.Pos_init1()}
-		if (left(getprop(display),8) == "FLT-LIST") {me.Flp_list()}
-		if (getprop(display) == "FLT-PLAN[0]") {me.Flp0()}
-    else if(left(getprop(display),8) == "FLT-PLAN") {me.Flp1()}
-		if (left(getprop(display),8) == "FLT-ARRV") {me.Arrv()}
-		if (left(getprop(display),8) == "FLT-ARWY") {me.Arwy()}
-		if (left(getprop(display),8) == "FLT-DEPT") {me.Dept()}
-		if (left(getprop(display),8) == "FLT-SIDS") {me.Sid()}
-		if (left(getprop(display),8) == "FLT-STAR") {me.Star()}
-  	if (left(getprop(display),8) == "FLT-APPR") {me.Appr()}
-    if (left(getprop(display),8) == "ALT-PAGE") {me.Alternate()}
-  	if (left(getprop(display),8) == "PRF-PAGE") {me.Prf()}
-  	if (left(getprop(display),8) == "NAV-PAGE") {me.Nav()}
-  	if (left(getprop(display),8) == "NAV-LIST") {me.Nav_list()}
-  	if (left(getprop(display),8) == "NAV-SELT") {me.Nav_sel()}
-    if (left(getprop(display),8) == "NAV-ACTV") {me.Nav_activ()}
-    if (left(getprop(display),8) == "PRG-PAGE") {me.Progress()}
+  Display : func(x) {
+	  if (left(getprop("instrumentation/cdu["~x~"]/display"),8) == "NAVIDENT") {me.Nav_ident(x)}
+		if (left(getprop("instrumentation/cdu["~x~"]/display"),8) == "POS-INIT") {
+      getprop(posit) ? me.Pos_init2() : me.Pos_init1(x)}
+		if (left(getprop("instrumentation/cdu["~x~"]/display"),8) == "FLT-LIST") {me.Flp_list(x)}
+		if (getprop("instrumentation/cdu["~x~"]/display") == "FLT-PLAN[0]") {me.Flp0(x)}
+    else if(left(getprop("instrumentation/cdu["~x~"]/display"),8) == "FLT-PLAN") {me.Flp1(x)}
+		if (left(getprop("instrumentation/cdu["~x~"]/display"),8) == "FLT-ARRV") {me.Arrv(x)}
+		if (left(getprop("instrumentation/cdu["~x~"]/display"),8) == "FLT-ARWY") {me.Arwy(x)}
+		if (left(getprop("instrumentation/cdu["~x~"]/display"),8) == "FLT-DEPT") {me.Dept(x)}
+		if (left(getprop("instrumentation/cdu["~x~"]/display"),8) == "FLT-SIDS") {me.Sid(x)}
+		if (left(getprop("instrumentation/cdu["~x~"]/display"),8) == "FLT-STAR") {me.Star(x)}
+  	if (left(getprop("instrumentation/cdu["~x~"]/display"),8) == "FLT-APPR") {me.Appr(x)}
+    if (left(getprop("instrumentation/cdu["~x~"]/display"),8) == "ALT-PAGE") {me.Alternate(x)}
+  	if (left(getprop("instrumentation/cdu["~x~"]/display"),8) == "PRF-PAGE") {me.Prf(x)}
+  	if (left(getprop("instrumentation/cdu["~x~"]/display"),8) == "NAV-PAGE") {me.Nav(x)}
+  	if (left(getprop("instrumentation/cdu["~x~"]/display"),8) == "NAV-LIST") {me.Nav_list(x)}
+  	if (left(getprop("instrumentation/cdu["~x~"]/display"),8) == "NAV-SELT") {me.Nav_sel(x)}
+    if (left(getprop("instrumentation/cdu["~x~"]/display"),8) == "NAV-ACTV") {me.Nav_activ(x)}
+    if (left(getprop("instrumentation/cdu["~x~"]/display"),8) == "PRG-PAGE") {me.Progress(x)}
 
   },
     
-  Nav_ident : func {
+  Nav_ident : func(x) {
 	  var my_day = getprop("sim/time/real/day");
 	  var my_month = getprop("sim/time/real/month");
 	  var my_year = getprop("sim/time/real/year");
@@ -185,7 +185,7 @@ var cduDsp = {
 	  var my_hour = getprop("sim/time/real/hour");
 	  var my_minute = getprop("sim/time/real/minute");
     var time = sprintf("%.2i:%.2i", my_hour, my_minute);
-    me.Raz_lines();
+    me.Raz_lines(x);
     me.line.title.setText("NAV IDENT  1/1");
     me.line.l1.setText("DATE");
     me.line.l2.setText(date);
@@ -203,8 +203,8 @@ var cduDsp = {
     me.line.r7.setText("POS INIT >");
   }, # end of Nav_ident
 
-  Pos_init1 : func {
-    me.Raz_lines();
+  Pos_init1 : func(x) {
+    me.Raz_lines(x);
     me.line.title.setText("POSITION INIT    1/2");
     me.line.l1.setText("LAST POS");
     me.line.l3.setText("REF WPT");
@@ -243,8 +243,8 @@ var cduDsp = {
     me.line.r7.setText("FLT PLAN >");
   }, # end of Pos_init2
 
-  Flp0 : func {
-    me.Raz_lines();
+  Flp0 : func(x) {
+    me.Raz_lines(x);
     me.line.title.setText("ACTIVE FLT PLAN 1/1");
     me.line.l1.setText("ORIGIN / ETD");
     me.apt = getprop(dep_apt) != "" ? getprop(dep_apt) : "----";
@@ -257,7 +257,7 @@ var cduDsp = {
     me.line.r7.setText("PERF INIT >");
   }, # end of Flp0
    
-  Flp_list : func {
+  Flp_list : func(x) {
 	  var path = getprop("/sim/fg-home")~"/aircraft-data/FlightPlans/";
     var airport = getprop("autopilot/route-manager/departure/airport");
 	  var files = subvec(directory(path),2);
@@ -268,22 +268,22 @@ var cduDsp = {
         append(xfile,(left(files[ind],size(files[ind])-4)));
       }
     }
-	  cdu.cduMain.nb_pages(size(xfile),6);				
-    me.nrPage = size(getprop(display))<12 ? substr(getprop(display),9,1) : substr(getprop(display),9,2); 
+	  cdu.cduMain.nb_pages(size(xfile),6,0);				
+    me.nrPage = size(getprop("instrumentation/cdu["~x~"]/display"))<12 ? substr(getprop("instrumentation/cdu["~x~"]/display"),9,1) : substr(getprop("instrumentation/cdu["~x~"]/display"),9,2); 
 	  if (size(xfile) == 0) {
-		  setprop("instrumentation/cdu/input","*NO FILE*");		
+		  setprop("instrumentation/cdu["~x~"]/input","NO FILE");		
 		  displayPage = 0;
 	  }
-    me.Raz_lines();
-	  me.line.title.setText("FLIGHT PLAN LIST  "~me.nrPage~" / "~getprop(nbPage));			
+    me.Raz_lines(x);
+	  me.line.title.setText("FLIGHT PLAN LIST  "~me.nrPage~" / "~getprop("instrumentation/cdu["~x~"]/nbpage"));			
     me.line.l7.setText("< FLT PLAN");
-    me.Dsp_files(xfile);
+    me.Dsp_files(xfile,x);
 
   }, # end of Flp_list
   
-  Flp_main : func {
-    me.nrPage = size(getprop(display)) < 12 ? substr(getprop(display),9,1) : substr(getprop(display),9,2);
-    if (me.nrPage > getprop(nbPage)) {me.nrPage = getprop(nbPage)}
+  Flp_main : func(x) {
+    me.nrPage = size(getprop("instrumentation/cdu["~x~"]/display")) < 12 ? substr(getprop("instrumentation/cdu["~x~"]/display"),9,1) : substr(getprop("instrumentation/cdu["~x~"]/display"),9,2);
+    if (me.nrPage > getprop("instrumentation/cdu["~x~"]/nbpage")) {me.nrPage = getprop("instrumentation/cdu["~x~"]/nbpage")}
 #    me.fp = flightplan();
     fp_size = me.fp.getPlanSize();
     p = 0;
@@ -292,7 +292,10 @@ var cduDsp = {
 			  if(n==0) {
           me.line.l1.setText(sprintf(" %3i    %.1f",me.fp.getWP(i).leg_bearing,me.fp.getWP(i).leg_distance));
           if (left(me.fp.getWP(i).wp_name,4) != me.dest_apt or me.fp_closed) {
-            me.line.l2.setText(me.fp.getWP(i).wp_name);
+            if (me.fp.getWP(i).wp_type == "offset-navaid"
+                or size(me.fp.getWP(i).wp_name) == 8) {
+              me.line.l2.setText("*"~me.fp.getWP(i).wp_name);
+            } else {me.line.l2.setText(me.fp.getWP(i).wp_name)}
           }   
           me.line.r2l.setText(me.fp.getWP(i).speed_cstr ? sprintf("%i",me.fp.getWP(i).speed_cstr)~" /" : "--- /");
           if (me.fp.getWP(i).alt_cstr > 0 and me.fp.getWP(i).alt_cstr < 10000) {
@@ -304,13 +307,16 @@ var cduDsp = {
              me.line.r4l.setText("");me.line.r4r.setText("");
              me.line.r6l.setText("");me.line.r6r.setText("");
           } else {me.line.r2r.setText("-----")}
-          me.Arrow(n,i);
+          me.Arrow(n,i,x);
         }
 
 			  if(n==1) {
           me.line.l3.setText(sprintf(" %3i    %.1f",me.fp.getWP(i).leg_bearing,me.fp.getWP(i).leg_distance));
           if (left(me.fp.getWP(i).wp_name,4) != me.dest_apt or me.fp_closed) {
-            me.line.l4.setText(me.fp.getWP(i).wp_name);
+            if (me.fp.getWP(i).wp_type == "offset-navaid"
+                or size(me.fp.getWP(i).wp_name) == 8) {
+              me.line.l4.setText("*"~me.fp.getWP(i).wp_name);
+            } else {me.line.l4.setText(me.fp.getWP(i).wp_name)}
           }   
           me.line.r4l.setText(me.fp.getWP(i).speed_cstr ? sprintf("%i",me.fp.getWP(i).speed_cstr)~" /" : "--- /");
           if (me.fp.getWP(i).alt_cstr > 0 and me.fp.getWP(i).alt_cstr < 10000) {
@@ -321,14 +327,16 @@ var cduDsp = {
              me.line.r4l.setText("");me.line.r4r.setText("");
              me.line.r6l.setText("");me.line.r6r.setText("");
           } else {me.line.r4r.setText("-----")}
-          me.Arrow(n,i);
+          me.Arrow(n,i,x);
        }
 
 			  if(n==2) {
           me.line.l5.setText(sprintf(" %3i    %.1f",me.fp.getWP(i).leg_bearing,me.fp.getWP(i).leg_distance));
           if (left(me.fp.getWP(i).wp_name,4) != me.dest_apt or me.fp_closed) {
-            me.line.l6.setText(me.fp.getWP(i).wp_name);
-            setprop("instrumentation/cdu/l6",me.fp.getWP(i).wp_name);
+            if (me.fp.getWP(i).wp_type == "offset-navaid"
+                or size(me.fp.getWP(i).wp_name) == 8) {
+              me.line.l6.setText("*"~me.fp.getWP(i).wp_name);
+            } else {me.line.l6.setText(me.fp.getWP(i).wp_name)}
           }
           me.line.r5.setText("");
           me.line.r6l.setText(me.fp.getWP(i).speed_cstr ? sprintf("%i",me.fp.getWP(i).speed_cstr)~" /" : "--- /");
@@ -340,18 +348,18 @@ var cduDsp = {
           } else if (i == fp_size-1 and me.fp_closed) {
              me.line.r6l.setText("");me.line.r6r.setText("");
           } else {me.line.r6r.setText("-----")}
-          me.Arrow(n,i);
+          me.Arrow(n,i,x);
         }
 			  p+=1;
 	  }
  
   }, ### end of Flp_main
 
-  Flp1 : func {
+  Flp1 : func(x) {
     me.fp = flightplan();
     me.dest_apt = getprop(dest_apt);
     me.fp_closed = getprop(fp_active);
-    me.Raz_lines();
+    me.Raz_lines(x);
 		me.line.l1.setText("VIA TO");
 		me.line.l2.setText("----");
 		me.line.l3.setText("VIA TO");
@@ -367,30 +375,30 @@ var cduDsp = {
     me.line.r6r.setText("-----");
 		me.line.r7.setText("ARRIVAL >");
 
-    me.Flp_main();
-    me.line.title.setText("ACTIVE FLT PLAN  "~me.nrPage~" / "~getprop(nbPage));
+    me.Flp_main(x);
+    me.line.title.setText("ACTIVE FLT PLAN  "~me.nrPage~" / "~getprop("instrumentation/cdu["~x~"]/nbpage"));
 
     if (me.nrPage == 1) {
       me.line.l1.setText("ORIGIN / ETD");
       me.line.r1.setText("SPD  /  CMD ");me.line.r1.setColor(me.white);
       me.line.r2l.setText("");me.line.r2r.setText("");
     }
-    if (me.nrPage <= getprop(nbPage)) {
+    if (me.nrPage <= getprop("instrumentation/cdu["~x~"]/nbpage")) {
        if (n != nil and n < 3 ) {
         me.line.r5.setText("DEST");me.line.r5.setColor(me.white);
         me.line.r6l.setText("");
         me.line.r6r.setText(getprop(dest_apt)~" "~getprop(dest_rwy))
                    .setColor(me.green);
-        setprop("instrumentation/cdu/r5","DEST");
-        setprop("instrumentation/cdu/r6",getprop(dest_apt));
+        setprop("instrumentation/cdu["~x~"]/r5","DEST");
+        setprop("instrumentation/cdu["~x~"]/r6",getprop(dest_apt));
       }
     }
-    if (me.nrPage == getprop(nbPage) and getprop(fp_active)) {
-      me.Raz_lines();
-      me.line.title.setText("ACTIVE FLT PLAN  "~me.nrPage~" / "~getprop(nbPage));
+    if (me.nrPage == getprop("instrumentation/cdu["~x~"]/nbpage") and getprop(fp_active)) {
+      me.Raz_lines(x);
+      me.line.title.setText("ACTIVE FLT PLAN  "~me.nrPage~" / "~getprop("instrumentation/cdu["~x~"]/nbpage"));
       me.line.l4.setText("      SAVE FLP TO").setColor(me.amber);
       me.line.l7.setText("< PERF INIT");
-      if (getprop(fp_saved)) {
+      if (size(getprop(fp_saved)) > 9) {
 		    me.line.l4.setText("        SAVED").setColor(me.amber);
         me.line.r4r.setText(getprop(fp_saved)~"  ");
       } else {me.line.r4r.setText(getprop(dep_apt)~"-"~getprop(dest_apt)~"--")}
@@ -401,20 +409,20 @@ var cduDsp = {
     }
   }, # end of Flp1
 
-  Dept : func {
+  Dept : func(x) {
 		var dep_rwy = airportinfo(getprop(dep_apt)).runways;
-	  cdu.cduMain.nb_pages(size(dep_rwy),6);				
-    me.nrPage = size(getprop(display))<12 ? substr(getprop(display),9,1) : substr(getprop(display),9,2); 
-	  if (size(dep_rwy) == 0) {setprop("instrumentation/cdu/input","*NO FILE*")}
-    me.Raz_lines();
-	  me.line.title.setText(getprop(dep_apt)~" RUNWAYS "~me.nrPage~" / "~getprop(nbPage));			
+	  cdu.cduMain.nb_pages(size(dep_rwy),6,0);				
+    me.nrPage = size(getprop("instrumentation/cdu["~x~"]/display"))<12 ? substr(getprop("instrumentation/cdu["~x~"]/display"),9,1) : substr(getprop("instrumentation/cdu["~x~"]/display"),9,2); 
+	  if (size(dep_rwy) == 0) {setprop("instrumentation/cdu["~x~"]/input","NO FILE")}
+    me.Raz_lines(x);
+	  me.line.title.setText(getprop(dep_apt)~" RUNWAYS "~me.nrPage~" / "~getprop("instrumentation/cdu["~x~"]/nbpage"));			
     me.line.l7.setText("< SIDs");
     xfile = [];
 	  foreach(var ind;keys(dep_rwy)) {append(xfile,ind)} # transfer hash->vector
-    me.Dsp_files(xfile);
+    me.Dsp_files(xfile,x);
   }, # end of Dept
 
-  Sid : func {
+  Sid : func(x) {
 		var depArpt = procedures.fmsDB.new(getprop(dep_apt));
 		xfile = [];
 		append(xfile,"DEFAULT");
@@ -426,17 +434,17 @@ var cduDsp = {
 		  }		
   		foreach(var sid; Sidlist) {append(xfile, sid.wp_name)}
     }
-	  if (size(xfile) == 0) {setprop("instrumentation/cdu/input","*NO FILE*")}
-    me.Raz_lines();
-	  cdu.cduMain.nb_pages(size(xfile),6);				
-    me.nrPage = size(getprop(display))<12 ? substr(getprop(display),9,1) : substr(getprop(display),9,2); 
-    me.line.title.setText(getprop(dep_apt)~" SID "~(me.nrPage)~" / "~getprop(nbPage));
+	  if (size(xfile) == 0) {setprop("instrumentation/cdu["~x~"]/input","NO FILE")}
+    me.Raz_lines(x);
+	  cdu.cduMain.nb_pages(size(xfile),6,0);				
+    me.nrPage = size(getprop("instrumentation/cdu["~x~"]/display"))<12 ? substr(getprop("instrumentation/cdu["~x~"]/display"),9,1) : substr(getprop("instrumentation/cdu["~x~"]/display"),9,2); 
+    me.line.title.setText(getprop(dep_apt)~" SID "~(me.nrPage)~" / "~getprop("instrumentation/cdu["~x~"]/nbpage"));
     me.line.l7.setText("< FLT PLAN");
-    me.Dsp_files(xfile);
+    me.Dsp_files(xfile,x);
   }, # end of Sid
 
-  Arrv : func {
-    me.Raz_lines();
+  Arrv : func(x) {
+    me.Raz_lines(x);
     me.line.title.setText("ARRIVAL     1 / 1");
 	  me.line.l1.setText("< RUNWAY");
 	  me.line.l3.setText("< STAR");
@@ -446,27 +454,27 @@ var cduDsp = {
 	  me.line.r2r.setText(getprop(dest_apt));me.line.r2r.setColor(me.green);
   }, # end of Arrv
 
-  Arwy : func {
-    me.Raz_lines();
-    if (getprop(altFlag)) {
-		  var apt_rwy = airportinfo(getprop(altDestApt)).runways;
+  Arwy : func(x) {
+    me.Raz_lines(x);
+    if (getprop("autopilot/route-manager/alternate["~x~"]/set-flag")) {
+		  var apt_rwy = airportinfo(getprop("autopilot/route-manager/alternate["~x~"]/airport")).runways;
       me.line.l7.setText("< ALTERNATE FPL");
-      destApt = getprop(altDestApt);      
+      destApt = getprop("autopilot/route-manager/alternate["~x~"]/airport");      
     } else {
       var apt_rwy = airportinfo(getprop(dest_apt)).runways;
       destApt = getprop(dest_apt);      
       me.line.l7.setText("< ARRIVAL");
     }
-	  cdu.cduMain.nb_pages(size(apt_rwy),6);				
-    me.nrPage = size(getprop(display))<12 ? substr(getprop(display),9,1) : substr(getprop(display),9,2); 
-	  if (size(apt_rwy) == 0) {setprop("instrumentation/cdu/input","*NO FILE*")}
-	  me.line.title.setText(destApt~" RUNWAYS "~me.nrPage~" / "~getprop(nbPage));			
+	  cdu.cduMain.nb_pages(size(apt_rwy),6,0);				
+    me.nrPage = size(getprop("instrumentation/cdu["~x~"]/display"))<12 ? substr(getprop("instrumentation/cdu["~x~"]/display"),9,1) : substr(getprop("instrumentation/cdu["~x~"]/display"),9,2); 
+	  if (size(apt_rwy) == 0) {setprop("instrumentation/cdu["~x~"]/input","NO FILE")}
+	  me.line.title.setText(destApt~" RUNWAYS "~me.nrPage~" / "~getprop("instrumentation/cdu["~x~"]/nbpage"));			
     xfile = [];
 	  foreach(var ind;keys(apt_rwy)) {append(xfile,ind)} # transfer hash->vector
-    me.Dsp_files(xfile);
+    me.Dsp_files(xfile,x);
   }, # end of Arwy
 
-  Star : func {
+  Star : func(x) {
 		xfile = [];
 		var DestARPT = procedures.fmsDB.new(getprop(dest_apt));
 		if (DestARPT !=nil) {
@@ -477,17 +485,17 @@ var cduDsp = {
 			}		
 			foreach(var star; Starlist) {append(xfile, star.wp_name)}
 		}
-	  if (size(xfile) == 0) {setprop("instrumentation/cdu/input","*NO FILE*")}
-    me.Raz_lines();
-	  cdu.cduMain.nb_pages(size(xfile),6);				
-    me.nrPage = size(getprop(display))<12 ? substr(getprop(display),9,1) : substr(getprop(display),9,2); 
-    me.line.title.setText(getprop(dest_apt)~" STAR "~(me.nrPage)~" / "~getprop(nbPage));
+	  if (size(xfile) == 0) {setprop("instrumentation/cdu["~x~"]/input","NO FILE")}
+    me.Raz_lines(x);
+	  cdu.cduMain.nb_pages(size(xfile),6,0);				
+    me.nrPage = size(getprop("instrumentation/cdu["~x~"]/display"))<12 ? substr(getprop("instrumentation/cdu["~x~"]/display"),9,1) : substr(getprop("instrumentation/cdu["~x~"]/display"),9,2); 
+    me.line.title.setText(getprop(dest_apt)~" STAR "~(me.nrPage)~" / "~getprop("instrumentation/cdu["~x~"]/nbpage"));
     me.line.l7.setText("< ARRIVAL");
     me.line.r7.setText("RUNWAY >");
-    me.Dsp_files(xfile);
+    me.Dsp_files(xfile,x);
   }, # end of Star
 
-  Appr : func {
+  Appr : func(x) {
 		var DestARPT = procedures.fmsDB.new(getprop(dest_apt));
 		xfile = [];
     append(xfile,"DEFAULT");
@@ -499,47 +507,47 @@ var cduDsp = {
 			}		
 			foreach(var appr; Apprlist) {append(xfile, appr.wp_name)}
 		}
-	  if (size(xfile) == 0) {setprop("instrumentation/cdu/input","*NO FILE*")}
-    me.Raz_lines();
-	  cdu.cduMain.nb_pages(size(xfile),6);				
-    me.nrPage = size(getprop(display))<12 ? substr(getprop(display),9,1) : substr(getprop(display),9,2); 
-    me.line.title.setText(getprop(dest_apt)~" APPROACH "~me.nrPage~" / "~getprop(nbPage));
+	  if (size(xfile) == 0) {setprop("instrumentation/cdu["~x~"]/input","NO FILE")}
+    me.Raz_lines(x);
+	  cdu.cduMain.nb_pages(size(xfile),6,0);				
+    me.nrPage = size(getprop("instrumentation/cdu["~x~"]/display"))<12 ? substr(getprop("instrumentation/cdu["~x~"]/display"),9,1) : substr(getprop("instrumentation/cdu["~x~"]/display"),9,2); 
+    me.line.title.setText(getprop(dest_apt)~" APPROACH "~me.nrPage~" / "~getprop("instrumentation/cdu["~x~"]/nbpage"));
     me.line.l7.setText("< ARRIVAL");
     me.line.r7.setText("RUNWAY >");
-    me.Dsp_files(xfile);
+    me.Dsp_files(xfile,x);
   }, # end of Appr
 
   ### Alternate Flightplan ###
-  Alternate : func {
-    me.nrPage = size(getprop(display)) < 12 ? substr(getprop(display),9,1) : substr(getprop(display),9,2);
+  Alternate : func(x) {
+    me.nrPage = size(getprop("instrumentation/cdu["~x~"]/display")) < 12 ? substr(getprop("instrumentation/cdu["~x~"]/display"),9,1) : substr(getprop("instrumentation/cdu["~x~"]/display"),9,2);
 
-    if (me.nrPage > getprop(nbPage)) {me.nrPage = getprop(nbPage)}
-    me.dest_apt = getprop(altDestApt);
-    me.fp_closed = getprop(altClosed);
+    if (me.nrPage > getprop("instrumentation/cdu["~x~"]/nbpage")) {me.nrPage = getprop("instrumentation/cdu["~x~"]/nbpage")}
+    me.dest_apt = getprop("autopilot/route-manager/alternate["~x~"]/airport");
+    me.fp_closed = getprop("autopilot/route-manager/alternate["~x~"]/closed");
 
     if (me.nrPage == 0) {
-      me.Raz_lines();
+      me.Raz_lines(x);
       me.line.title.setText("ALTERNATE FPL 1 / 1");
       me.line.l1.setText("ORIGIN");
       me.line.l2.setText(getprop(dep_apt)~"-"~getprop(dep_rwy));
 		  me.line.r3.setText("ALTN ").setColor(me.white);
-      if (getprop(altDestApt)) {
-    	  me.line.r4r.setText(getprop(altDestApt))
+      if (getprop("autopilot/route-manager/alternate["~x~"]/airport")) {
+    	  me.line.r4r.setText(getprop("autopilot/route-manager/alternate["~x~"]/airport"))
                .setColor(me.green);    
         me.line.r7.setText("RUNWAY >");
       } else {me.line.r4r.setText("----").setColor(me.green)}
-      if (getprop(altDestRwy)) {
+      if (getprop("autopilot/route-manager/alternate["~x~"]/runway")) {
         me.line.l3.setText("VIA TO");
     		me.line.l4.setText("----");
     		me.line.r3.setText("");
     		me.line.r4r.setText("");
   		  me.line.r5.setText("ALTN ").setColor(me.white);
-    	  me.line.r6r.setText(getprop(altDestApt)~"-"~getprop(altDestRwy))
+    	  me.line.r6r.setText(getprop("autopilot/route-manager/alternate["~x~"]/airport")~"-"~getprop("autopilot/route-manager/alternate["~x~"]/runway"))
                .setColor(me.green);    
         me.line.r7.setText("");
       }
     } else {
-        me.Raz_lines();
+        me.Raz_lines(x);
 		    me.line.l1.setText("VIA TO");
 		    me.line.l2.setText("----");
         me.line.l3.setText("VIA TO");
@@ -553,20 +561,20 @@ var cduDsp = {
         me.line.r6l.setText("--- /");
         me.line.r6r.setText("-----");
 
-        me.fp = cdu.cduMain.alt_flp();
-        me.Flp_main();
-        me.line.title.setText("ALTERNATE FPL "~me.nrPage~" / "~getprop(nbPage));
+        me.fp = cdu.cduMain.alt_flp(x);
+        me.Flp_main(x);
+        me.line.title.setText("ALTERNATE FPL "~me.nrPage~" / "~getprop("instrumentation/cdu["~x~"]/nbpage"));
       if (me.nrPage == 1) {
         me.line.l1.setText("ORIGIN / ETD");
         me.line.l2.setText(getprop(dep_apt)~"-"~getprop(dep_rwy));
         me.line.r1.setText("SPD  /  CMD ");me.line.r1.setColor(me.white);
         me.line.r2l.setText("");me.line.r2r.setText("");
       }
-      if (me.nrPage <= getprop(nbPage)) {
+      if (me.nrPage <= getprop("instrumentation/cdu["~x~"]/nbpage")) {
          if (n != nil and n < 3 ) {
           me.line.r5.setText("ALTN");me.line.r5.setColor(me.white);
           me.line.r6l.setText("");
-          me.line.r6r.setText(getprop(altDestApt)~"-"~getprop(altDestRwy))
+          me.line.r6r.setText(getprop("autopilot/route-manager/alternate["~x~"]/airport")~"-"~getprop("autopilot/route-manager/alternate["~x~"]/runway"))
                      .setColor(me.green);
         }
         if (n == 3) {me.line.r7.setText("NEXT PAGE >")}
@@ -576,12 +584,12 @@ var cduDsp = {
   },
 
   ### Performances Pages ###
-  Prf : func {
-    me.nrPage = substr(getprop(display),9,1);
-    if (me.nrPage > getprop(nbPage)) {me.nrPage = getprop(nbPage)}
+  Prf : func(x) {
+    me.nrPage = substr(getprop("instrumentation/cdu["~x~"]/display"),9,1);
+    if (me.nrPage > getprop("instrumentation/cdu["~x~"]/nbpage")) {me.nrPage = getprop("instrumentation/cdu["~x~"]/nbpage")}
     if (me.nrPage == 1) {
-      me.Raz_lines();
-      me.line.title.setText("PERFORMANCE INIT "~me.nrPage~" / "~getprop(nbPage));
+      me.Raz_lines(x);
+      me.line.title.setText("PERFORMANCE INIT "~me.nrPage~" / "~getprop("instrumentation/cdu["~x~"]/nbpage"));
 		  me.line.l3.setText("  ACFT TYPE");
 		  me.line.l4.setText(string.uc(getprop("sim/description")));
 		  me.line.l7.setText("< FLT PLAN");
@@ -599,8 +607,8 @@ var cduDsp = {
 		  var CruiseSpeed_kt = getprop("autopilot/settings/cruise-speed-kt");
 		  var CruiseSpeed_mc = sprintf("%.2f",getprop("autopilot/settings/cruise-speed-mc"));
 		  var Cruise_alt = getprop("autopilot/settings/asel");
-      me.Raz_lines();
-      me.line.title.setText("PERFORMANCE INIT "~me.nrPage~" / "~getprop(nbPage));
+      me.Raz_lines(x);
+      me.line.title.setText("PERFORMANCE INIT "~me.nrPage~" / "~getprop("instrumentation/cdu["~x~"]/nbpage"));
       me.line.l1.setText(" CLIMB");
       me.line.l2.setText(ClimbSpeed_kt~" / "~ClimbSpeed_mc);
       me.line.l3.setText(" CRUISE");
@@ -615,7 +623,7 @@ var cduDsp = {
 		  var dep_spd = sprintf("%i",getprop("autopilot/settings/dep-speed-kt"));
 		  var Agl = sprintf("%i",getprop("autopilot/settings/dep-agl-limit-ft"));
 		  var Nm = sprintf("%.1f",getprop("autopilot/settings/dep-limit-nm"));
-      me.Raz_lines();
+      me.Raz_lines(x);
       me.line.title.setText("DEPARTURE SPEED 1 / 1");
       me.line.l1.setText(" SPEED LIMIT");
       me.line.l2.setText(dep_spd);
@@ -629,7 +637,7 @@ var cduDsp = {
 		  var AppSpeed5 = sprintf("%i",getprop("autopilot/settings/app5-speed-kt"));
 		  var AppSpeed15 = sprintf("%i",getprop("autopilot/settings/app15-speed-kt"));
 		  var AppSpeed35 = sprintf("%i",getprop("autopilot/settings/app35-speed-kt"));
-      me.Raz_lines();
+      me.Raz_lines(x);
       me.line.title.setText("APPROACH SPEED 1 / 1");
       me.line.l1.setText(" FLAPS 5");
       me.line.l2.setText(AppSpeed5);
@@ -645,8 +653,8 @@ var cduDsp = {
 		  var Wcrew = getprop("sim/weight[0]/weight-lb");
 		  var Wpass = getprop("sim/weight[1]/weight-lb");
 		  var Wcarg = getprop("sim/weight[2]/weight-lb");
-      me.Raz_lines();
-      me.line.title.setText("PERFORMANCE INIT "~me.nrPage~" / "~getprop(nbPage));
+      me.Raz_lines(x);
+      me.line.title.setText("PERFORMANCE INIT "~me.nrPage~" / "~getprop("instrumentation/cdu["~x~"]/nbpage"));
       me.line.l1.setText(" BOW");
       me.line.l2.setText("21700");
       me.line.l3.setText(" FUEL");
@@ -666,29 +674,29 @@ var cduDsp = {
   }, # end of Prf
 
   ##### Nav Pages #####
-  Nav : func {
-    me.nrPage = substr(getprop(display),9,1);
-    if (me.nrPage > getprop(nbPage)) {me.nrPage = getprop(nbPage)}
+  Nav : func(x) {
+    me.nrPage = substr(getprop("instrumentation/cdu["~x~"]/display"),9,1);
+    if (me.nrPage > getprop("instrumentation/cdu["~x~"]/nbpage")) {me.nrPage = getprop("instrumentation/cdu["~x~"]/nbpage")}
     if (me.nrPage == 1) {
-      me.Raz_lines();
-      me.line.title.setText("NAV INDEX "~me.nrPage~" / "~getprop(nbPage));
+      me.Raz_lines(x);
+      me.line.title.setText("NAV INDEX "~me.nrPage~" / "~getprop("instrumentation/cdu["~x~"]/nbpage"));
 		  me.line.l1.setText("< FPL LIST");
     }
   }, #end of Nav
 
-  Nav_list : func {
-    me.Flp_list();
+  Nav_list : func(x) {
+    me.Flp_list(x);
     me.line.l7.setText("");
 	  me.line.r7.setText("FPL SEL >");
   }, # end of Nav_list
 
-  Nav_sel : func {
-    me.nrPage = substr(getprop(display),9,1);
+  Nav_sel : func(x) {
+    me.nrPage = substr(getprop("instrumentation/cdu["~x~"]/display"),9,1);
     cdu_ret = cdu.cduMain.nav_var();
     navSel = cdu_ret[0];
     if (me.nrPage == 1 ) {
-      me.Raz_lines();
-	    var flp_sel = getprop("instrumentation/cdu/input");
+      me.Raz_lines(x);
+	    var flp_sel = getprop("instrumentation/cdu["~x~"]/input");
       me.line.title.setText("FLT PLAN LIST 1 / 1");
 		  me.line.l1.setText("< SHOW FPL");
 		  me.line.l2.setText(navSel);
@@ -704,7 +712,7 @@ var cduDsp = {
       navRwy = cdu_ret[2];
       dist = cdu_ret[3];
       g_speed = cdu_ret[4];
-      me.Raz_lines();
+      me.Raz_lines(x);
 	    var ete_h = int(dist/g_speed);
 	    var ete_mn = int((dist/g_speed-ete_h)*60);
       var line4 = line5 = line6 = "";
@@ -728,7 +736,7 @@ var cduDsp = {
       me.line.r7.setText("FPL SEL >");
     }
     if (me.nrPage == 3 ) {
-      me.Raz_lines();
+      me.Raz_lines(x);
       me.line.title.setText("FLT PLAN SELECT 1 / 1");
 		  me.line.l1.setText(" FLT PLAN");
 		  me.line.l2.setText(navSel);
@@ -739,8 +747,8 @@ var cduDsp = {
     }
   }, # end of Nav_sel
 
-  Nav_activ : func {
-    me.Raz_lines();
+  Nav_activ : func(x) {
+    me.Raz_lines(x);
     me.line.title.setText("FLT PLAN SELECT 1 / 1");
     me.line.l4.setText("     CONFIRM  REPLACING").setColor(me.amber);
     me.line.l5.setText("     ACTIVE FLIGHT PLAN").setColor(me.amber);
@@ -749,9 +757,9 @@ var cduDsp = {
   },
 
   ##### Prog Pages #####
-  Progress : func {
-    me.nrPage = substr(getprop(display),9,1);
-    me.Raz_lines();
+  Progress : func(x) {
+    me.nrPage = substr(getprop("instrumentation/cdu["~x~"]/display"),9,1);
+    me.Raz_lines(x);
     if (me.nrPage == 1 ) {
       me.line.title.setText("PROGRESS     1 / 1");
       me.line.l1.setText(" TO     DIST");
@@ -793,7 +801,7 @@ var cduDsp = {
               me.line.r6r.setText(ind.id~" "~sprintf("%.2f",ind.frequency/100)~" >")
                          .setColor(me.green);
             }
-            setprop("instrumentation/cdu/l"~(p+1),sprintf("%.2f",ind.frequency/100));
+            setprop("instrumentation/cdu["~x~"]/l"~(p+1),sprintf("%.2f",ind.frequency/100));
 		        p+=1;
           }
 	      }
@@ -851,9 +859,9 @@ var cduDsp = {
 
   ###### Common Functions ######
 
-  Dsp_files : func(xfile) {
+  Dsp_files : func(xfile,x) {
     p = 0;
-    for (i=1;i<7;i+=1) {setprop("instrumentation/cdu/l"~i,"")} # raz
+    for (i=1;i<7;i+=1) {setprop("instrumentation/cdu["~x~"]/l"~i,"")} # raz
 		foreach(var file;xfile) {
 			n = p-(6*(me.nrPage-1));		
 	    if(n==0) {me.line.l2.setText(file)}
@@ -864,26 +872,26 @@ var cduDsp = {
 	    if(n==5) {me.line.r6r.setText(file).setColor(me.green)}
 	    p+=1;
       if (n >= 0 and n < 6) {
-        setprop("instrumentation/cdu/l"~(n+1),file)
+        setprop("instrumentation/cdu["~x~"]/l"~(n+1),file)
       }
 	  }
   }, # end of Dsp_files
 
-  Raz_lines : func {
+  Raz_lines : func(x) {
     foreach(var element;me.line_val) {
       me.line[element].setText("");
     }
     me.arrow.hide();
-    me.Base_colors();
+    me.Base_colors(x);
   }, # end of Raz_lines
 
-  Base_colors : func {
-    me.white = [1,1,1,getprop(lighting)];
-    me.yellow = [1,1,0,getprop(lighting)];
-    me.amber = [0.9,0.5,0,getprop(lighting)];
-    me.green = [0,1,0,getprop(lighting)];
-    me.blue = [0,0.8,1,getprop(lighting)];
-    me.magenta = [0.9,0,0.9,getprop(lighting)];
+  Base_colors : func(x) {
+    me.white = [1,1,1,getprop("controls/lighting/cdu["~x~"]")];
+    me.yellow = [1,1,0,getprop("controls/lighting/cdu["~x~"]")];
+    me.amber = [0.9,0.5,0,getprop("controls/lighting/cdu["~x~"]")];
+    me.green = [0,1,0,getprop("controls/lighting/cdu["~x~"]")];
+    me.blue = [0,0.8,1,getprop("controls/lighting/cdu["~x~"]")];
+    me.magenta = [0.9,0,0.9,getprop("controls/lighting/cdu["~x~"]")];
 
     me.l_color = [me.white,me.white,me.green,me.green,    # title,l1,l2,l2r
                   me.white,me.green,me.green,me.white,    # l3,l4,l4r,l5
@@ -900,12 +908,12 @@ var cduDsp = {
     me.arrow.setColorFill(me.green);
   }, # end of Base_colors
 
-  Arrow : func(n,i) {
-    if (left(getprop(display),8) == "FLT-PLAN") {
+  Arrow : func(n,i,x) {
+    if (left(getprop("instrumentation/cdu["~x~"]/display"),8) == "FLT-PLAN") {
       if (i == me.curr_wp) {
         me.arrow.show();
         me.arrow.setTranslation(0,145*n);
-        if (i == getprop(direct_to)) {
+        if (i == getprop("instrumentation/cdu["~x~"]/direct-to")) {
           if (n == 0) {me.line.l2.setColor(me.amber)}
           if (n == 1) {me.line.l4.setColor(me.amber)}
           if (n == 2) {me.line.l6.setColor(me.amber)}
@@ -923,14 +931,18 @@ var cduDsp = {
 }; # end of cduDsp
   
 ##### Main #####
-var cdu_Dsp = cduDsp.new();
+var cdu_DspL = cduDsp.new(0);
+var cdu_DspR = cduDsp.new(1);
 var cdu_setl = setlistener("sim/signals/fdm-initialized", func {
   settimer(run_cdu_Dsp,2);
   removelistener(cdu_setl);
 });
 
 var run_cdu_Dsp = func {
-  cdu_Dsp.Listen();
-  cdu_Dsp.Nav_ident();
-  cdu_Dsp.Prog_timer();
+  cdu_DspL.Listen(0);
+  cdu_DspR.Listen(1);
+  cdu_DspL.Nav_ident(0);
+  cdu_DspR.Nav_ident(1);
+  cdu_DspL.Prog_timer();
+  cdu_DspR.Prog_timer();
 }

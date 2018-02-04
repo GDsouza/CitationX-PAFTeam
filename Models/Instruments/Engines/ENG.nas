@@ -23,78 +23,57 @@ var ENG = {
     m.turb_r = "engines/engine[1]/turbine";
     m.elec = "systems/electrical/left-bus-norm";
     m.tmp_ext = "environment/temperature-degc";
-    m.val = nil;
+    m.l_fan = nil;
+    m.r_fan = nil;
+    m.l_itt = nil;
+    m.r_itt = nil;
+    m.l_turb = nil;
+    m.r_turb = nil;
 
 		m.text = {};
 		m.text_val = ["N1l","N1r","ITTl","ITTr","N2l","N2r"];
 		foreach(var i;m.text_val) {
 			m.text[i] = m.eng.getElementById(i);
+      m.text[i].setFont("led.txf");
+      m.text[i].setColor(0.9,0.5,0); # amber
       m.text[i].setVisible(0);
 		}
-    m.amber = [0.9,0.5,0];
 		return m
 	},
 
-
   listen : func {
 		setlistener(me.elec,func(n) {
-      if (n.getValue()) {me.visibility(1)}
-      else {me.visibility(0)}
+      if (n.getValue()) {me.update();me.textVisible(1)}
+      else {me.textVisible(0)}
 		},0,0);
-
-		setlistener(me.fan_l,func(n) {
-      me.val = n.getValue() < 0 ? 0 : n.getValue();
-			me.text.N1l.setText(sprintf("%.1f",me.val))
-                 .setFont("led.txf")
-                 .setColor(me.amber);
-		},1,0);
-
-		setlistener(me.fan_r,func(n) {
-      me.val = n.getValue() < 0 ? 0 : n.getValue();
-			me.text.N1r.setText(sprintf("%.1f",me.val))
-                 .setFont("led.txf")
-                 .setColor(me.amber);
-		},1,0);
-
-		setlistener(me.itt_l,func(n) {
-      if (n.getValue()) {
-        me.val = n.getValue()*888 < getprop(me.tmp_ext) ? getprop(me.tmp_ext) : n.getValue()*888;
-			  me.text.ITTl.setText(sprintf("%.0f",me.val))
-                   .setFont("led.txf")
-                   .setColor(me.amber);
-      }
-		},0,1);
-
-		setlistener(me.itt_r,func(n) {
-      if (n.getValue()) {
-        me.val = n.getValue()*888 < getprop(me.tmp_ext) ? getprop(me.tmp_ext) : n.getValue()*888;
-  			me.text.ITTr.setText(sprintf("%.0f",me.val))
-                 .setFont("led.txf")
-                 .setColor(me.amber);
-      }
-		},0,1);
-
-		setlistener(me.turb_l,func(n) {
-      me.val = n.getValue() < 0 ? 0 : getprop(me.turb_l);
-			me.text.N2l.setText(sprintf("%.1f",me.val))
-                 .setFont("led.txf")
-                 .setColor(me.amber);
-		},1,0);
-
-		setlistener(me.turb_r,func(n) {
-      me.val = n.getValue() < 0 ? 0 : getprop(me.turb_r);
-			me.text.N2r.setText(sprintf("%.1f",me.val))
-                 .setFont("led.txf")
-                 .setColor(me.amber);
-		},1,0);
 
   }, # end of Listen
 
-  visibility : func(v) {
+  update : func {
+    me.l_fan = getprop(me.fan_l) < 0 ? 0 : getprop(me.fan_l);
+		me.text.N1l.setText(sprintf("%.1f",me.l_fan));
+    me.r_fan = getprop(me.fan_r) < 0 ? 0 : getprop(me.fan_r);
+		me.text.N1r.setText(sprintf("%.1f",me.r_fan));
+
+    me.l_itt = getprop(me.itt_l)*888 < getprop(me.tmp_ext) ? getprop(me.tmp_ext) : getprop(me.itt_l)*888;
+	  me.text.ITTl.setText(sprintf("%.0f",me.l_itt));
+    me.r_itt = getprop(me.itt_r)*888 < getprop(me.tmp_ext) ? getprop(me.tmp_ext) : getprop(me.itt_r)*888;
+	  me.text.ITTr.setText(sprintf("%.0f",me.r_itt));
+
+    me.l_turb = getprop(me.turb_l) < 0 ? 0 : getprop(me.turb_l);
+		me.text.N2l.setText(sprintf("%.1f",me.l_turb));
+    me.r_turb = getprop(me.turb_r) < 0 ? 0 : getprop(me.turb_r);
+		me.text.N2r.setText(sprintf("%.1f",me.r_turb));
+
+		settimer(func me.update(),0);
+
+  }, # end of update
+
+  textVisible : func(v) {
 		foreach(var i;me.text_val) {
       me.text[i].setVisible(v);
 		}
-  }, # end of visibility
+  }, # end of textVisible
 
 }; # end of RCU
 

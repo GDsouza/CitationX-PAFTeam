@@ -12,10 +12,10 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
         <author>Syd Adams, C. Le Moigne(clm76), C-Thiriot (PATTEN), PAF TEAM, Szymon Acedanski (accek)</author>
         <status>devel</status>
         <rating>
-            <FDM type="int">3</FDM>
-            <systems type="int">3</systems>
-            <cockpit type="int">3</cockpit>
-            <model type="int">3</model>
+            <FDM type="int">4</FDM>
+            <systems type="int">4</systems>
+            <cockpit type="int">4</cockpit>
+            <model type="int">4</model>
         </rating>
         <flight-model>yasim</flight-model>
         <aero>CitationX-yasim</aero>
@@ -592,7 +592,6 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
     </gps>
 -->
     <rmu>
-			<trsp-num type="string">1</trsp-num>
 		  <unit n="0">
 		      <serviceable type="bool">1</serviceable>
 		      <selected type="int">0</selected>
@@ -606,7 +605,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
     <airspeed-indicator>
         <index n="0" type="double">100</index>
         <index n="1" type="double">120</index>
-        <ias-limit>560</ias-limit>	<!--old = 350 -->
+        <ias-limit>560</ias-limit>
         <mach-limit>0.85</mach-limit>
         <alt-threshold>8000.0</alt-threshold>
     </airspeed-indicator>
@@ -814,7 +813,6 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 							 <script>atc.speak(15);</script>
 							</binding>
 						</key>
-<!--
             <key n="62">
                 <name>greater-than</name>
                 <desc>Spoken GCA</desc>
@@ -823,7 +821,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
                   <script><![CDATA[gca.Control();]]></script>
                 </binding>
             </key>
--->
+
         </keyboard>
     </input>
 
@@ -836,11 +834,11 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 					<file>Aircraft/CitationX/Nasal/Warnings.nas</file>
         </citation>
 				<atc>
-					<file>Aircraft/CitationX/Nasal/spoken_atc/init.nas</file>
-					<file>Aircraft/CitationX/Nasal/spoken_atc/atc_tools.nas</file>
-					<file>Aircraft/CitationX/Nasal/spoken_atc/phraseology.nas</file>
-					<file>Aircraft/CitationX/Nasal/spoken_atc/voice.nas</file>
-				</atc>
+					<file>Aircraft/CitationX/Nasal/Spoken_ATC/init.nas</file>
+  			</atc>
+        <gca>
+					<file>Aircraft/CitationX/Nasal/Spoken_GCA/main.nas</file>
+        </gca>
         <dialogs>
           <file>Aircraft/CitationX/Nasal/Dialogs.nas</file>
         </dialogs>
@@ -854,10 +852,6 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 					<file>Aircraft/CitationX/Nasal/CDU.nas</file>
 					<file>Aircraft/CitationX/Nasal/CDUpages.nas</file>
 				</cdu>
-				<cdu1>
-					<file>Aircraft/CitationX/Nasal/CDU1.nas</file>
-					<file>Aircraft/CitationX/Nasal/CDUpages1.nas</file>
-				</cdu1>
 				<eng>
 					<file>Aircraft/CitationX/Models/Instruments/Engines/ENG.nas</file>
 				</eng>
@@ -874,12 +868,9 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 				<irs>
 					<file>Aircraft/CitationX/Nasal/IRS.nas</file>
 				</irs>
-				<rmu1>
-					<file>Aircraft/CitationX/Models/Instruments/RMU/RMU1.nas</file>
-				</rmu1>
-				<rmu2>
-					<file>Aircraft/CitationX/Models/Instruments/RMU/RMU2.nas</file>
-				</rmu2>
+				<rmu>
+					<file>Aircraft/CitationX/Models/Instruments/RMU/RMU.nas</file>
+				</rmu>
 				<rcu>
 					<file>Aircraft/CitationX/Models/Instruments/RCU/RCU.nas</file>
 				</rcu>

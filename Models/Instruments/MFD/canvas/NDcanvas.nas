@@ -149,16 +149,17 @@ var _list = setlistener("sim/signals/fdm-initialized", func {
 				if (n.getValue()) {
 					var t = 0;
 					me.tod_timer = maketimer(0.5,func() {
-						if (t==0) {me.tod.hide()}
-						if (t==1) {me.tod.show()}					
+						if (t==0) {me.tod.show()}
+						if (t==1) {me.tod.hide()}					
 						t+=1;
 						if(t==2) {t=0}
 					});
 					me.tod_timer.start();
 				} else { 
 					if (me.tod_timer != nil and me.tod_timer.isRunning) {
-					me.tod_timer.stop()}
-					me.tod.hide();
+					  me.tod_timer.stop();
+					  me.tod.hide();
+          }
 				}
 			},0,0);
 
@@ -279,7 +280,6 @@ var _list = setlistener("sim/signals/fdm-initialized", func {
 				me.design.trueNorth.hide()}
 
 ##### Update Timer #####			
-#			settimer(func me.update(),0.1);
 			settimer(func me.update(),0);
 		},
 

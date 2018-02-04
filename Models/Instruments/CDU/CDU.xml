@@ -188,7 +188,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.next_key();</script>
+			<script>cdu.cduMain.next_key(0);</script>
 		</binding>
 	</action>
 </animation>
@@ -201,7 +201,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.previous();</script>
+			<script>cdu.cduMain.previous(0);</script>
 		</binding>
 	</action>
 </animation>
@@ -214,7 +214,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.key('FPL');</script>
+			<script>cdu.cduMain.key('FPL',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -227,7 +227,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.key('NAV');</script>
+			<script>cdu.cduMain.key('NAV',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -240,7 +240,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.key('PERF');</script>
+			<script>cdu.cduMain.key('PERF',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -253,7 +253,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.key('PROG');</script>
+			<script>cdu.cduMain.key('PROG',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -285,7 +285,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.key('B1L');</script>
+			<script>cdu.cduMain.key('B1L',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -298,7 +298,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.key('B2L');</script>
+			<script>cdu.cduMain.key('B2L',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -311,7 +311,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.key('B3L');</script>
+			<script>cdu.cduMain.key('B3L',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -324,7 +324,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.key('B4L');</script>
+			<script>cdu.cduMain.key('B4L',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -337,7 +337,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.key('B1R');</script>
+			<script>cdu.cduMain.key('B1R',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -350,7 +350,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.key('B2R');</script>
+			<script>cdu.cduMain.key('B2R',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -363,7 +363,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.key('B3R');</script>
+			<script>cdu.cduMain.key('B3R',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -376,7 +376,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.key('B4R');</script>
+			<script>cdu.cduMain.key('B4R',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -389,7 +389,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.btn('0');</script>
+			<script>cdu.cduMain.btn('0',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -402,7 +402,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.btn('1');</script>
+			<script>cdu.cduMain.btn('1',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -415,7 +415,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.btn('2');</script>
+			<script>cdu.cduMain.btn('2',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -428,7 +428,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.btn('3');</script>
+			<script>cdu.cduMain.btn('3',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -441,7 +441,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.btn('4');</script>
+			<script>cdu.cduMain.btn('4',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -454,7 +454,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.btn('5');</script>
+			<script>cdu.cduMain.btn('5',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -467,7 +467,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.btn('6');</script>
+			<script>cdu.cduMain.btn('6',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -480,7 +480,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.btn('7');</script>
+			<script>cdu.cduMain.btn('7',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -493,7 +493,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.btn('8');</script>
+			<script>cdu.cduMain.btn('8',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -506,7 +506,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.btn('9');</script>
+			<script>cdu.cduMain.btn('9',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -519,7 +519,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.btn('A');</script>
+			<script>cdu.cduMain.btn('A',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -532,7 +532,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.btn('B');</script>
+			<script>cdu.cduMain.btn('B',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -545,7 +545,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.btn('C');</script>
+			<script>cdu.cduMain.btn('C',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -558,7 +558,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.btn('D');</script>
+			<script>cdu.cduMain.btn('D',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -571,7 +571,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.btn('E');</script>
+			<script>cdu.cduMain.btn('E',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -584,7 +584,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.btn('F');</script>
+			<script>cdu.cduMain.btn('F',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -597,7 +597,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.btn('G');</script>
+			<script>cdu.cduMain.btn('G',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -610,7 +610,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.btn('H');</script>
+			<script>cdu.cduMain.btn('H',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -623,7 +623,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.btn('I');</script>
+			<script>cdu.cduMain.btn('I',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -636,7 +636,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.btn('J');</script>
+			<script>cdu.cduMain.btn('J',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -649,7 +649,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.btn('K');</script>
+			<script>cdu.cduMain.btn('K',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -662,7 +662,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.btn('L');</script>
+			<script>cdu.cduMain.btn('L',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -675,7 +675,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.btn('M');</script>
+			<script>cdu.cduMain.btn('M',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -688,7 +688,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.btn('N');</script>
+			<script>cdu.cduMain.btn('N',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -701,7 +701,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.btn('O');</script>
+			<script>cdu.cduMain.btn('O',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -714,7 +714,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.btn('P');</script>
+			<script>cdu.cduMain.btn('P',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -727,7 +727,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.btn('Q');</script>
+			<script>cdu.cduMain.btn('Q',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -740,7 +740,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.btn('R');</script>
+			<script>cdu.cduMain.btn('R',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -753,7 +753,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.btn('S');</script>
+			<script>cdu.cduMain.btn('S',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -766,7 +766,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.btn('T');</script>
+			<script>cdu.cduMain.btn('T',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -779,7 +779,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.btn('U');</script>
+			<script>cdu.cduMain.btn('U',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -792,7 +792,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.btn('V');</script>
+			<script>cdu.cduMain.btn('V',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -805,7 +805,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.btn('W');</script>
+			<script>cdu.cduMain.btn('W',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -818,7 +818,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.btn('X');</script>
+			<script>cdu.cduMain.btn('X',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -831,7 +831,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.btn('Y');</script>
+			<script>cdu.cduMain.btn('Y',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -844,7 +844,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.btn('Z');</script>
+			<script>cdu.cduMain.btn('Z',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -857,7 +857,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.btn('-');</script>
+			<script>cdu.cduMain.btn('-',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -870,7 +870,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.btn('.');</script>
+			<script>cdu.cduMain.btn('.',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -883,7 +883,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.btn('/');</script>
+			<script>cdu.cduMain.btn('/',0);</script>
 		</binding>
 	</action>
 </animation>
@@ -896,7 +896,7 @@
 		<repeatable>false</repeatable>
 		<binding>
 			<command>nasal</command>
-			<script>cdu.cduMain.delete();</script>
+			<script>cdu.cduMain.delete(0);</script>
 		</binding>
 	</action>
 </animation>

@@ -1,0 +1,47 @@
+ Spoken GCA
+  v. 0.3 
+********************
+                      See http://wiki.flightgear.org/Howto:Implementing_a_simple_GCA_system
+                      See http://wiki.flightgear.org/Spoken_GCA
+
+This nasal code is not intended to compete with FGComm, Festival or other similar facilities. 
+On the contrary, their use is indicated when they are not available (eg, few hardware resources, no Internet connection, etc.)
+
+- How to install (See http://wiki.flightgear.org/Spoken_GCA)
+-----------------
+  * Like any addon, download all the files in the folder of your preference (say "/fg-addons/SpokenGCA/").
+  * Launch FlightGear including --addon argument, eg.:
+                fgfs <usual args> --addon=/fg-addons/SpokenGCA
+                
+And that's all !
+If you prefer (as I do), you can bind an unused joystick button too.
+
+- How to use it (See http://wiki.flightgear.org/Spoken_GCA)
+-----------------
+Once installed, launch FlighGear (or re-start it), tune Comm1 to the desired frequency,
+ and press the ">" key to request the GCA service.
+You will hear the GCA's answer:
+"<callsign>, this will be a P A R approach to  <airport> Runway <rwy>."
+
+As an extra aid, a new "PAR screen" window will be opened. Keep it or close it, as you like.
+
+Controller's voice will instruct you to steer your plane towards the approach course.
+Follow his instructions and have a safe landing !
+
+- TODO list
+---------------------
+* In gca_class.nas: add validation of all setters arguments.
+* Move join() function and phraseology.xml to be accesible for gca_class.nas.
+* Add a version control.
+* and a lot of optimizations and improvements ( I mean A LOT !)
+
+
+Awaiting for your comments,
+all feedback is wellcome.
+Enjoy it !
+
+Regards,
+Rodolfo - rleibner@gmail.com
+
+
+   
