@@ -5,16 +5,16 @@
     <keyboard>
       <key n="62">
         <name>greater-than</name>
-        <desc>Gnd Controlled App</desc>
+        <desc>Precision Approach Radar</desc>
         <binding>
         <command>nasal</command>
-        <script><![CDATA[gca.Control();]]></script>
+        <script><![CDATA[par.instrument();]]></script> 
         </binding>
       </key>
     </keyboard>
   </input>
   <gca>
-   <config-version type="double">0.2</config-version>
+   <config-version type="double">0.1</config-version>
    <tick type="double">1</tick>
    <near type="bool">0</near>
    <controlled type="bool">0</controlled>

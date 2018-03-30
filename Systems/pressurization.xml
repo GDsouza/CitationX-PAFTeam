@@ -19,7 +19,7 @@
 						<value>0.1</value>
 						<dif>
 						  <property>instrumentation/altimeter/pressure-alt-ft</property>
-						  <property>systems/pressurization/cabin-altitude-ft</property>
+						  <property>systems/pressurization/cabin-alt-ft</property>
 						</dif>
 				  </product>
 					  <property>systems/pressurization/internal/atten-m</property>
@@ -70,7 +70,7 @@
 		<name>4 Target Rate</name>
 		<debug>false</debug>
 		<input>
-			  <prop>systems/pressurization/cabin-altitude-ft</prop>
+			  <prop>systems/pressurization/cabin-alt-ft</prop>
 		</input>
 		<reference>
 			  <prop>systems/pressurization/target-cabin-alt-ft</prop>

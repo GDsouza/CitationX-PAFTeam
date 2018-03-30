@@ -104,13 +104,13 @@ var say = func(key) {
 # **** getVertProfile func. returns h[ <terrain elevation(feet)> ...] (each <resolution> nm).
 var getVertProfile = func(geoObj,direction,resolution,dist=32) {
 #  direction in deg, resolution in nm, optional dist in nm.
-var x0 = geo.Coord.new().set_latlon(geoObj.lat(), geoObj.lon()).latlon();
-var x1 = geo.Coord.new().set_latlon(geoObj.lat(), geoObj.lon())
-  .apply_course_distance(direction, dist*NM2M).latlon();
-var dlat = (x1[0]-x0[0])/(32/resolution);
-var dlon = (x1[1]-x0[1])/(32/resolution);
+var x0 = geoObj.latlon();
+var x1 = geo.Coord.new(geoObj).apply_course_distance(direction, dist*NM2M).latlon();
+var steps = dist/resolution ;
+var dlat = (x1[0]-x0[0])/steps;
+var dlon = (x1[1]-x0[1])/steps;
 var h = [];
-for(var i=0; i<=(32/resolution); i+=1) append(h, geo.elevation(x0[0]+i*dlat, x0[1]+i*dlon));
+for(var i=0; i<=steps; i+=1) append(h, geo.elevation(x0[0]+i*dlat, x0[1]+i*dlon));
 # got h with elevations (m)
 var from = 999;
 var to=999;
@@ -119,32 +119,37 @@ if(h[i]==nil and from==999) from=i;
 if(h[i]==nil and from!=999) to=i;
 }
 if(from !=999){
- printf("Warning: found nils between %.2fnm and %.2fnm from rwy.",from*0.1,to*0.1);
+ printf("Warning: found nils between %.2fnm and %.2fnm from rwy.",from*resolution,to*resolution);
 }
-for(var i=0; i<=(32/resolution); i+=1) if(h[i]!=nil) h[i]=(h[i]-geoObj.alt())*M2FT;
-return h;
+#for(var i=-1; i>=-steps-1; i-=1) if(h[i]!=nil) h[i]=int((h[i]-h[0])*M2FT);
+for(var i=-1; i>=-steps-1; i-=1) if(h[i]!=nil) h[i]=int((h[i]-geoObj.alt())*M2FT);
+return h; #  elevations (ft) over geoObj
 }
 
 # **** chooseRwy func. 
 #  (rwys: airportinfo().runways object.) ************
 var chooseRwy = func(rwys) {
-  var best = "";
-  var ang = 180.0;
-  if (getprop("/autopilot/route-manager/active") and left(getprop("autopilot/settings/nav-source"),3) =="FMS") {
-    best = getprop("/autopilot/route-manager/destination/runway");
-  } else {
-  # Choose best rwy
-    foreach(var rw; keys(rwys)){
-#      if (rw == getprop("sim/atc/runway") or (dest_rwy != nil and dest_rwy == rw)) {
-#	      best = rw;
-#  	    break;
-#      } else {
-        var a = abs(rwys[rw].heading - getprop("/environment/wind-from-heading-deg"));
-        if(a<ang) {ang = a;best = rw;}
-#      }
-    }
+var best = "";
+var ang = 180.0;
+var dest_rwy = nil;
+var rm = 0;
+if (getprop("/autopilot/route-manager/active")) {
+  dest_rwy = getprop("/autopilot/route-manager/destination/runway");
+      rm = 1;  }
+# Choise best rwy
+foreach(var rw; keys(rwys)){
+  if (rw == getprop("sim/atc/runway") or (dest_rwy != nil and dest_rwy == rw)) {
+  #~ if (0) {
+	best = rw;
+	break;
+    } else {
+  var a = abs(rwys[rw].heading - getprop("/environment/wind-from-heading-deg"));
+  if(a<ang) {
+	 ang = a;
+	 best = rw;}
   }
-  return best;
+  }
+return best;
 }
 # **** maxVect func. 
 var maxVect = func(vector) {

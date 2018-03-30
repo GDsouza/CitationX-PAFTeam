@@ -1,21 +1,20 @@
 ### Citation X ###
-### Christian Le Moigne - 2015 ###
-###														 ###
-###        MESSAGES            ###
-### level 0 = white 					 ###
-### level 1 = cyan 						 ###
-### level 2 = caution = amber  ###
-### level 3 = alert = red 		 ###
+### Christian Le Moigne (clm76) - 2015 rev. 2018  ###
+###														                    ###
+###        MESSAGES                               ###
+### level 0 = white 					                    ###
+### level 1 = cyan 						                    ###
+### level 2 = caution = amber                     ###
+### level 3 = alert = red 		                    ###
 
 ### ANNUNCIATORS ###
 var Test_annun = props.globals.initNode("instrumentation/annunciators/test-select",0,"INT");
-var Annun = props.globals.getNode("instrumentation/annunciators",1);
-var MstrWarning = Annun.getNode("master-warning",1);
-var WarningAck = Annun.getNode("ack-warning",1);
-var MstrCaution = Annun.getNode("master-caution",1);
-var Warn = Annun.getNode("warning",1);
-var Caution = Annun.getNode("caution",1);
-var CautionAck = Annun.getNode("ack-caution",1);
+var MstrWarning = "instrumentation/annunciators/master-warning";
+var WarningAck = "instrumentation/annunciators/ack-warning";
+var MstrCaution = "instrumentation/annunciators/master-caution";
+var Warn = "instrumentation/annunciators/warning";
+var Caution = "instrumentation/annunciators/caution";
+var CautionAck = "instrumentation/annunciators/ack-caution";
 var no_takeoff_l3 = nil;
 var msg = nil;
 var msg0 = nil;
@@ -27,22 +26,24 @@ var wow2 = nil;
 var stall_warn = nil;
 var grdn = nil;
 var flap = nil;
+var x = 0;
 
 aircraft.light.new("instrumentation/annunciators", [0.5, 0.5], MstrCaution);
 aircraft.light.new("instrumentation/annunciators", [0.5, 0.5], MstrWarning);
 
 var annun_init = func {
-	  MstrWarning.setBoolValue(0);
-    MstrCaution.setBoolValue(0);
-		WarningAck.setBoolValue(0);
-		CautionAck.setBoolValue(0);
-		Caution.setBoolValue(0);
-		Warn.setBoolValue(0);
+	  setprop(MstrWarning,0);
+    setprop(MstrCaution,0);
+		setprop(WarningAck,0);
+		setprop(CautionAck,0);
+		setprop(Caution,0);
+		setprop(Warn,0);
 };
 	
-setlistener("/sim/signals/fdm-initialized", func {
+var ann_stl = setlistener("/sim/signals/fdm-initialized", func {
     annun_init();
-});
+    removelistener(ann_stl);
+},0,0);
 
 setlistener("/sim/signals/reinit", func {
     annun_init();
@@ -53,7 +54,6 @@ var EICAS = {
          m = { parents : [EICAS]};
  
 			m.eicas = props.globals.initNode("instrumentation/eicas/");
-			m.serviceable = m.eicas.initNode("serviceable", 1,"BOOL");
 			m.warn_l0 = m.eicas.initNode("level-0"," ","STRING");
 			m.warn_l1 = m.eicas.initNode("level-1"," ","STRING");
 			m.warn_l2 = m.eicas.initNode("level-2"," ","STRING");			
@@ -63,110 +63,56 @@ var EICAS = {
 		},
 
 		init : func {	
-			### SET LISTENERS ###
-			setlistener("controls/engines/engine[0]/cutoff", func {
-					EICAS.update_listeners()},1,0);
-			setlistener("controls/engines/engine[1]/cutoff", func {
-				EICAS.update_listeners()},1,0);
-			setlistener("controls/gear/brake-parking", func {
-				EICAS.update_listeners()},1,0);
-			setlistener("controls/gear/emer-brake", func {
-				EICAS.update_listeners()},1,0);
-			setlistener("controls/electric/APU-generator", func {
-				EICAS.update_listeners()},1,0);
-			setlistener("controls/electric/external-power", func {
-				EICAS.update_listeners()},1,0);
-			setlistener("controls/cabin-door/open", func {
-				EICAS.update_listeners()},1,0);
-			setlistener("systems/pressurization/cabin-altitude-ft", func {
-				EICAS.update_listeners()},1,0);
-			setlistener("controls/fuel/tank[0]/boost_pump", func {
-				EICAS.update_listeners()},1,0);
-			setlistener("controls/fuel/tank[1]/boost_pump", func {
-				EICAS.update_listeners()},1,0);
-			setlistener("consumables/fuel/tank[0]/level-lbs", func {
-				EICAS.update_listeners()},1,0);
-			setlistener("consumables/fuel/tank[1]/level-lbs", func {
-				EICAS.update_listeners()},1,0);
-			setlistener("consumables/fuel/total-ctrtk-lbs", func {
-				EICAS.update_listeners()},1,0);
-			setlistener("controls/fuel/gravity-xflow", func {
-				EICAS.update_listeners()},1,0);
-			setlistener("controls/engines/engine[0]/feed-tank", func {
-				EICAS.update_listeners()},1,0);
-			setlistener("controls/engines/engine[1]/feed-tank", func {
-				EICAS.update_listeners()},1,0);
-			setlistener("controls/fuel/xfer-L", func {
-				EICAS.update_listeners()},1,0);
-			setlistener("controls/fuel/xfer-R", func {
-				EICAS.update_listeners()},1,0);
-			setlistener("controls/electric/engine[0]/generator", func {
-				EICAS.update_listeners()},1,0);
-			setlistener("controls/electric/engine[1]/generator", func {
-				EICAS.update_listeners()},1,0);
-			setlistener("systems/hydraulics/psi-norm[0]", func {
-				EICAS.update_listeners()},1,0);
-			setlistener("systems/hydraulics/psi-norm[1]", func {
-				EICAS.update_listeners()},1,0);
-			setlistener("controls/flight/speedbrake", func {
-				EICAS.update_listeners()},1,0);
-			setlistener("controls/electric/APU-generator", func {
-				EICAS.update_listeners()},1,0);
-			setlistener("controls/flight/flaps", func {
-				EICAS.update_listeners()},1,0);
-			setlistener("controls/engines/engine[0]/throttle", func {
-				EICAS.update_listeners()},1,0);
-			setlistener("controls/engines/engine[1]/throttle", func {
-				EICAS.update_listeners()},1,0);
-			setlistener("gear/gear[0]/wow", func {
-				EICAS.update_listeners()},1,0);
-			setlistener("instrumentation/annunciators/test-select", func {
-				EICAS.update_listeners()},1,0);
-			setlistener("instrumentation/pfd/vmo-diff", func {
-				EICAS.update_listeners()},1,0);
-
 			me.my_caution = 0;
 			me.my_warning = 0;
 		},
 
-		update_listeners : func {
-				me.eng0_shutdown = getprop("controls/engines/engine[0]/cutoff");
-				me.eng1_shutdown = getprop("controls/engines/engine[1]/cutoff");
-				me.parkbrake = getprop("controls/gear/brake-parking");
-				me.emerbrake = getprop("controls/gear/emer-brake");
-				me.apu_running = getprop("controls/electric/APU-generator");
-				me.ext_pwr = getprop("controls/electric/external-power");
-				me.cabin_door = getprop("controls/cabin-door/open");
-				me.altitude = getprop("systems/pressurization/cabin-altitude-ft");
-				me.boost_pump_L = getprop("controls/fuel/tank[0]/boost_pump");
-				me.boost_pump_R = getprop("controls/fuel/tank[1]/boost_pump");
-				me.level_tank_L = getprop("consumables/fuel/tank[0]/level-lbs");
-				me.level_tank_R = getprop("consumables/fuel/tank[1]/level-lbs");
-				me.total_fuel = getprop("consumables/fuel/total-ctrtk-lbs");
-				me.grav_xflow = getprop("controls/fuel/gravity-xflow");
-				me.xfeed_L = getprop("controls/engines/engine[0]/feed-tank");
-				me.xfeed_R = getprop("controls/engines/engine[1]/feed-tank");
-				me.xfer_L = getprop("controls/fuel/xfer-L");
-				me.xfer_R = getprop("controls/fuel/xfer-R");
-				me.gen_L = getprop("controls/electric/engine[0]/generator");
-				me.gen_R = getprop("controls/electric/engine[1]/generator");
-				me.oil_L = getprop("systems/hydraulics/psi-norm[0]");
-				me.oil_R = getprop("systems/hydraulics/psi-norm[1]");
-				me.speedbrake = getprop("controls/flight/speedbrake");
-				me.flaps = getprop("controls/flight/flaps");
-				me.throttle_L = getprop("controls/engines/engine[0]/throttle");
-				me.throttle_R = getprop("controls/engines/engine[1]/throttle");
-				me.wow = getprop("gear/gear[0]/wow");
-				me.test = getprop("instrumentation/annunciators/test-select");
-				me.vmo = getprop("instrumentation/pfd/vmo-diff");
-				me.stall = getprop("sim/sound/stall-horn");
-		},
+    listen : func {
+      setlistener("instrumentation/annunciators/test-select", func(n) {
+        me.test_timer = maketimer(0,func() {
+          me.Tests(n.getValue());
+        });
+        if (n.getValue() > 0 and !me.test_timer.isRunning) {
+          me.test_timer.start();
+        } else {me.test_timer.stop()}
+      },0,0);
+    }, # end of listen
 
 		update : func {
-	    me.enabled = getprop("systems/electrical/outputs/efis") and
-                            (getprop("sim/freeze/replay-state")!=1) and
-                            me.serviceable.getValue();
+			me.eng0_shutdown = getprop("controls/engines/engine[0]/cutoff");
+			me.eng1_shutdown = getprop("controls/engines/engine[1]/cutoff");
+			me.parkbrake = getprop("controls/gear/brake-parking");
+			me.emerbrake = getprop("controls/gear/emer-brake");
+			me.apu_running = getprop("controls/electric/APU-generator");
+			me.ext_pwr = getprop("controls/electric/external-power");
+			me.cabin_door = getprop("controls/cabin-door/open");
+			me.cabin_alt = getprop("systems/pressurization/cabin-alt-ft");
+			me.boost_pump_L = getprop("controls/fuel/tank[0]/boost_pump");
+			me.boost_pump_R = getprop("controls/fuel/tank[1]/boost_pump");
+			me.level_tank_L = getprop("consumables/fuel/tank[0]/level-lbs");
+			me.level_tank_R = getprop("consumables/fuel/tank[1]/level-lbs");
+			me.total_fuel = getprop("consumables/fuel/total-ctrtk-lbs");
+			me.grav_xflow = getprop("controls/fuel/gravity-xflow");
+			me.xfeed_L = getprop("controls/engines/engine[0]/feed-tank");
+			me.xfeed_R = getprop("controls/engines/engine[1]/feed-tank");
+			me.xfer_L = getprop("controls/fuel/xfer-L");
+			me.xfer_R = getprop("controls/fuel/xfer-R");
+			me.gen_L = getprop("controls/electric/engine[0]/generator");
+			me.gen_R = getprop("controls/electric/engine[1]/generator");
+			me.oil_L = getprop("systems/hydraulics/psi-norm[0]");
+			me.oil_R = getprop("systems/hydraulics/psi-norm[1]");
+			me.speedbrake = getprop("controls/flight/speedbrake");
+			me.flaps = getprop("controls/flight/flaps");
+			me.throttle_L = getprop("controls/engines/engine[0]/throttle");
+			me.throttle_R = getprop("controls/engines/engine[1]/throttle");
+			me.wow = getprop("gear/gear[0]/wow");
+			me.test = getprop("instrumentation/annunciators/test-select");
+			me.vmo = getprop("instrumentation/pfd/vmo-diff");
+			me.stall = getprop("sim/sound/stall-horn");
 			me.state = getprop("instrumentation/annunciators/state");
+      if (getprop("systems/electrical/outputs/efis") > 12) me.enabled = 1;
+      else {me.enabled = 0}
+
       me.msg_l0 = [];
 			me.msg_l1 = [];
 			me.msg_l2 = [];
@@ -180,7 +126,7 @@ var EICAS = {
 			if (me.enabled and me.test == 0) {		
 
 					### lEVEL 3 ###
-				if (me.altitude > 10000) {
+				if (me.cabin_alt > 10000) {
           append(me.msg_l3,"CABIN ALTITUDE");
 					me.nb_warning +=1;
 				}
@@ -215,7 +161,7 @@ var EICAS = {
 				} else {
 					setprop("sim/alarms/overspeed-alarm",0);
 				}
-				if(me.stall and me.altitude > 35000) {
+				if(me.stall and me.cabin_alt > 35000) {
 					append(me.msg_l3,"MINIMUM SPEED");
 					me.nb_warning +=1;
 				}
@@ -232,7 +178,7 @@ var EICAS = {
           append(me.msg_l2,"CABIN DOOR OPEN");
 					me.nb_caution +=1;
 				}
-				if (me.altitude > 8500) {
+				if (me.cabin_alt > 8500) {
           append(me.msg_l2,"CABIN ALTITUDE");
 					me.nb_caution +=1;
 				}
@@ -246,7 +192,7 @@ var EICAS = {
           append(me.msg_l2,"FUEL LEVEL R");
 					me.nb_caution +=1;
 				}
-				if (me.speedbrake and me.altitude < 500) {
+				if (me.speedbrake and me.cabin_alt < 500) {
           append(me.msg_l2,"SPEEDBRAKES");
 					me.nb_caution +=1;
 				}
@@ -312,87 +258,88 @@ var EICAS = {
 						append(me.msg_l0,"EXT POWER ON");
 						me.nb_l0 +=1;
 				}
+			  nb_msg = me.nb_warning + me.nb_caution + me.nb_l1 + me.nb_l0;
+			  setprop("instrumentation/annunciators/nb-warning",nb_msg);
+			  me.AnnunOutput();
+			  me.EicasOutput();			
+			} 
+			stall_speed();
+			settimer(func {me.update();},0);
+		}, # end of update
 
-			nb_msg = me.nb_warning + me.nb_caution + me.nb_l1 + me.nb_l0;
-			setprop("instrumentation/annunciators/nb-warning",nb_msg);
-			me.AnnunOutput();
-
-			### TESTS ###
-
-			} else if (me.enabled and me.test > 0) {		
+    Tests : func (test_nb) {
       	me.msg_l0 = [];
 				me.msg_l1 = [];
 				me.msg_l2 = [];
 				me.msg_l3 = [];
-				WarningAck.setBoolValue(0);
-				CautionAck.setBoolValue(0);
+				setprop(WarningAck,0);
+				setprop(CautionAck,0);
 				me.warn_l3.setValue("");
 				me.warn_l2.setValue("");
 				me.warn_l1.setValue("");
 				me.warn_l0.setValue("");
 				append(me.msg_l3,"   ### TESTS ###");
 				append(me.msg_l3," ");
-				if (me.test == 1) {
+				if (test_nb == 1) {
 					append(me.msg_l3,"BAGGAGE SMOKE");
-					MstrWarning.setBoolValue(1);
-					Warn.setBoolValue(me.state);
-					MstrCaution.setBoolValue(0);
-					Caution.setBoolValue(0);
+					setprop(MstrWarning,1);
+					setprop(Warn,me.state);
+					setprop(MstrCaution,0);
+					setprop(Caution,0);
 				}
-				if (me.test == 2) {
+				if (test_nb == 2) {
 					append(me.msg_l0,"LANDING GEARS");
-					MstrWarning.setBoolValue(0);					
-					Warn.setBoolValue(0);
+					setprop(MstrWarning,0);
+					setprop(Warn,0);
 				}
-				if (me.test == 3) {
+				if (test_nb == 3) {
 					append(me.msg_l3,"ENGINE FIRE L-R");
-					MstrWarning.setBoolValue(1);					
-					Warn.setBoolValue(me.state);
+					setprop(MstrWarning,1);
+					setprop(Warn,me.state);
 				}
-				if (me.test == 4) {
+				if (test_nb == 4) {
 					append(me.msg_l3,"THRUST REVERSER");
-					MstrWarning.setBoolValue(1);					
-					Warn.setBoolValue(me.state);
+					setprop(MstrWarning,1);
+					setprop(Warn,me.state);
 				}
-				if (me.test == 5) {
+				if (test_nb == 5) {
 					append(me.msg_l2,"FLAPS FAIL");
-					MstrWarning.setBoolValue(0);
-					MstrCaution.setBoolValue(1);								
-					Warn.setBoolValue(0);
-					Caution.setBoolValue(me.state);
+					setprop(MstrWarning,0);
+					setprop(MstrCaution,1);								
+					setprop(Warn,0);
+					setprop(Caution,me.state);
 				}
-				if (me.test == 6) {
+				if (test_nb == 6) {
 					append(me.msg_l2,"WSHLD HEAT L");
 					append(me.msg_l2,"WSHLD HEAT R");
 					append(me.msg_l2,"WSHLD TEMP L-R");
-					MstrCaution.setBoolValue(1);
-					Caution.setBoolValue(me.state);
+					setprop(MstrCaution,1);
+					setprop(Caution,me.state);
 				}
-				if (me.test == 7) {
+				if (test_nb == 7) {
 					append(me.msg_l0,"OVERSPEED");
-					MstrCaution.setBoolValue(0);
-					Caution.setBoolValue(0);
+					setprop(MstrCaution,0);
+					setprop(Caution,0);
 				}
-				if (me.test == 8) {
+				if (test_nb == 8) {
 					append(me.msg_l1,"AOA PROBE FAIL");
 					append(me.msg_l1,"AUTO SLATS FAIL");
 					append(me.msg_l1,"STALL WARN L-R");
-					MstrCaution.setBoolValue(0);
+					setprop(MstrCaution,0);
 				}
-				if (me.test == 9) {
+				if (test_nb == 9) {
 					append(me.msg_l1,"OIL PRESS L-R");
 					append(me.msg_l1,"FUEL PRESS L-R");
 					append(me.msg_l1,"HYD PUMPS FAIL");
-					MstrWarning.setBoolValue(1);					
-					Warn.setBoolValue(me.state);
-					MstrCaution.setBoolValue(1);
-					Caution.setBoolValue(me.state);
+					setprop(MstrWarning,1);
+					setprop(Warn,me.state);
+					setprop(MstrCaution,1);
+					setprop(Caution,me.state);
 				}
-			}
-			me.EicasOutput();			
-			stall_speed();
-			settimer(func {me.update();},0);
-		}, # end of update
+			  nb_msg = me.nb_warning + me.nb_caution + me.nb_l1 + me.nb_l0;
+			  setprop("instrumentation/annunciators/nb-warning",nb_msg);
+			  me.EicasOutput();			
+    }, # end of Tests
 
 		EicasOutput : func {	### MSG TO EICAS ###
 				msg = "";
@@ -435,39 +382,35 @@ var EICAS = {
 
 					### WARNING ###
 				if (me.nb_warning == 0) {
-					MstrWarning.setBoolValue(0);										
-					Warn.setBoolValue(0);
-					WarningAck.setBoolValue(0);
+					setprop(MstrWarning,0);
+					setprop(Warn,0);
+					setprop(WarningAck,0);
 				} 
 				else if (me.nb_warning > me.my_warning) {
-					MstrWarning.setBoolValue(1);
-					Warn.setBoolValue(me.state);
-					WarningAck.setBoolValue(0);
+					setprop(MstrWarning,1);
+					setprop(Warn,me.state);
+					setprop(WarningAck,0);
 				} else {
-					MstrWarning.setBoolValue(1);														
-					Warn.setBoolValue(me.state);
-					if (WarningAck.getBoolValue() == 1) {
-					Warn.setBoolValue(1);
-					}
+					setprop(MstrWarning,1);
+					setprop(Warn,me.state);
+					if (getprop(WarningAck)) setprop(Warn,1);
 				}
 				me.my_warning = me.nb_warning;		
 
 					### CAUTION ###
 				if (me.nb_caution == 0) {
-					MstrCaution.setBoolValue(0);
-					Caution.setBoolValue(0);										
-					CautionAck.setBoolValue(0);
+					setprop(MstrCaution,0);
+					setprop(Caution,0);										
+					setprop(CautionAck,0);
 				} 
 				else if (me.nb_caution > me.my_caution) {
-					MstrCaution.setBoolValue(1);
-					Caution.setBoolValue(me.state);
-					CautionAck.setBoolValue(0);
+					setprop(MstrCaution,1);
+					setprop(Caution,me.state);
+					setprop(CautionAck,0);
 				} else {
-					MstrCaution.setBoolValue(1);;
-					Caution.setBoolValue(me.state);														
-					if (CautionAck.getBoolValue() == 1) {
-						Caution.setBoolValue(1);
-					}
+					setprop(MstrCaution,1);
+					setprop(Caution,me.state);														
+					if (getprop(CautionAck)) setprop(Caution,1);
 				}
 				me.my_caution = me.nb_caution;
 		}, # end of AnnunOutput
@@ -522,6 +465,7 @@ var	stall_speed = func {
 var alarms = EICAS.new();
 	var warn_stl = setlistener("/sim/signals/fdm-initialized", func {
 		alarms.init();
+    alarms.listen();
 		alarms.update();	
 		removelistener(warn_stl);
 	});

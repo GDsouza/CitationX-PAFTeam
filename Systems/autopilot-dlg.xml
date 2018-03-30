@@ -80,7 +80,7 @@
             <width>14</width>
             <height>14</height>
             <label>B/C active</label>
-            <property>instrumentation/nav/back-course-btn</property>
+            <property>autopilot/locks/back-course</property>
             <live>true</live>
             <binding>
                 <command>dialog-update</command>

@@ -36,7 +36,7 @@ AOA
 	           	<property>systems/electrical/right-bus-norm</property>
 						</or>
         </condition>
-				<property>controls/pressurization/alt-display</property>
+				<property>systems/pressurization/cabin-alt-ft</property>
 				<interpolation>
           <entry><ind>-1000</ind><dep>0</dep></entry>
           <entry><ind>0.0</ind><dep>16</dep></entry>

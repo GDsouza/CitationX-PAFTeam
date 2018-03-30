@@ -15,7 +15,6 @@ line: func(group, from, to, color="#0") {
 # 	from		as [x,y] in pixels.
 #	to			as [x,y] in pixels.
 # 	color		optional as [r,g,b] or "#rrggbb", Black by default.
-#~ printf('from=[%i, %i] to=[%i, %i] color= %s', from[0], from[1], to[0], to[1], color  );
  var line = group.createChild("path", id).moveTo(from).lineTo(to); 
  me._set(line,nil,color);
  return line;
@@ -69,7 +68,7 @@ rectangle: func(group,size,origin=nil,color="#0",fill=nil, rounded=nil) {
 # 	color		optional border color as [r,g,b] or "#rrggbb" or nil (for no border). Black  by default.
 #	fill		optional fill color as [r,g,b] or "#rrggbb", No filled by default.
 #	rounded		optional corner radius in pixels, Not rounded by default.
- var rect = group.createChild("path", id);
+ var rect = group.createChild("path");
  rect.rect(0,0, size[0], size[1], {"border-radius": rounded});
  if(fill != nil) rect.setColorFill(fill).set('fill',0);
  me._set(rect,origin,color);
@@ -85,7 +84,8 @@ grid: func(group,size,dx,dy, origin=nil, color="#0", border=1) {
 # 	color		optional grid color as [r,g,b] or "#rrggbb". Black  by default.
 # 	origin		optional as [x,y] in pixels, [0,0] by default.
 #	border		optional as boolean, True by default.
- var grid = group.createChild("path", id); 
+#~ printf('size: %i, %i   dx: %i    dy: %i', size[0],size[1],dx,dy);
+ var grid = group.createChild("path"); 
  var (x0,y0) = border? [0,0] : [dx,dy];
  for(var x=x0; x<=size[0]; x+=dx) grid.moveTo(x, 0).vertTo(size[1]);
  for(var y=y0; y<=size[1]; y+=dy) grid.moveTo(0, y).horizTo(size[0]);
@@ -113,7 +113,7 @@ polyline: func(group, xSet, ySet, color="#0", symmetrical='') {
  if(size(symmetrical)==2 and symmetrical[0]==121)  _appn(ySet,xSet);
  if(size(symmetrical)==2 and symmetrical[0]==120)  _appn(xSet,ySet);
 
- var poly = group.createChild("path", id);
+ var poly = group.createChild("path");
  poly.moveTo(xSet[0], ySet[0]);
  for(var i=1; i<size(xSet); i+=1) poly.lineTo(xSet[i],ySet[i]); 
  me._set(poly,nil,color);
@@ -145,12 +145,11 @@ text: func(group,text, origin=nil, size=nil, color="#0",align="left-baseline") {
 # 	color		optional font color as [r,g,b] or "#rrggbb". (Black  by default).
 # 	align		optional origin reference. ("left-baseline" by default).
  if(size==nil) size = [11,1];
- var Text = group.createChild("text", id);
- Text.setFontSize(size[0],size[1]).setAlignment(align);
- Text.setText(text);
- Text.setColor(color);
- Text.setTranslation(origin);
- #~ me._set(Text,origin,color);
+  var Text = group.createChild("text", id);
+  Text.setFontSize(size[0],size[1]).setAlignment(align);
+  Text.setText(text);
+  Text.setColor(color);
+  Text.setTranslation(origin);
  return Text;
 }, # text
 
@@ -199,19 +198,19 @@ polarText: func(group,text, center, radius,angle, size=nil, color="#0",align="ce
 # 	align		optional origin reference. ("left-baseline" by default).
  var origin = [center[0]+radius*math.cos(angle*D2R), center[1]-radius*math.sin(angle*D2R)];
  return me.text(group,text, origin, size, color,align).setRotation((90-angle)*D2R);
-},
+ },
 
 move: func(elem, dx,dy){
 # Moves the element <dx,dy> pixels from his position.
  var (Tx,Ty) =  elem.getTranslation();
  elem.setTranslation(Tx+dx, Ty+dy);
-},
+ },
 
 rotate: func(elem, deg,center){
 # rotates the element <deg> degrees around <center>.
  var C = me.xy(elem,center);
  elem.setCenter(C).setRotation(-deg*D2R);
-},
+ },
 
 flipX: func(elem, Xaxis=0) {
 # Flips (horizontal) the element,
@@ -227,7 +226,7 @@ flipX: func(elem, Xaxis=0) {
  elem.setScale(-sx,sy);
  elem.setTranslation(2*Xaxis-tx, ty);
  return elem;
-},
+ },
  
 flipY: func(elem, Yaxis=0) {
 # Flips (vertical) the element,
@@ -241,7 +240,7 @@ flipY: func(elem, Yaxis=0) {
  elem.setScale(sx,-sy);
  elem.setTranslation(tx, 2*Yaxis-ty);
  return elem;
-},
+ },
  
 alignX: func(elem, ref, alignment) {
 # Aligns the element, moving it horizontaly to ref.
@@ -267,7 +266,7 @@ alignX: func(elem, ref, alignment) {
  }
  elem.setTranslation(uRef-x*sx, ty);
  return elem;
-},
+ },
 
 alignY: func(elem, ref, alignment) {
 # Aligns the element, moving it vertically to ref.
@@ -294,7 +293,7 @@ alignY: func(elem, ref, alignment) {
 	}
  elem.setTranslation(tx, vRef-y*sy);
  return elem;
-}, 
+ }, 
 
 rotate180: func(elem, center=nil) {
 # Rotates the element 180 deg around <center>.
@@ -309,7 +308,7 @@ rotate180: func(elem, center=nil) {
 	me.flipY(elem, center[1]);
  }
  return elem;
-}, 
+ }, 
 
 stretchX: func(elem,factor,ref='left') {
 # Stretchs horizontally the element .
@@ -325,7 +324,7 @@ stretchX: func(elem,factor,ref='left') {
  elem.setScale(sx*factor,sy);
  elem.setTranslation(u-x*sx*factor, ty);
  return elem;
-},
+ },
 
 stretchY: func(elem,factor,ref='top') {
  # Strechs vertically the element .
@@ -341,7 +340,7 @@ var (sx,sy) = elem.getScale();
  elem.setScale(sx, sy*factor);
  elem.setTranslation(tx, v-y*sy*factor);
  return elem;
-},
+ },
 
 resize: func(elem,factors,ref='left-top') {
  # Redimentions the element .
@@ -355,7 +354,7 @@ resize: func(elem,factors,ref='left-top') {
  me.stretchX(elem,factors[0],split('-',ref)[0]);
  me.stretchY(elem,factors[1],split('-',ref)[1]);
  return elem;
-},
+ },
 
 # internal:
 _set: func(object, origin, color) {
@@ -366,11 +365,10 @@ _set: func(object, origin, color) {
  
 xy: func(elem,uv){
 # returns [x,y]: intrinsec coords of the absolute(u,v)
-
-var (Tx,Ty)=elem.getTranslation();
-var (Sx,Sy)=elem.getScale();
-return [(uv[0]-Tx)/Sx, (uv[1]-Ty)/Sy];
-},
+ var (Tx,Ty)=elem.getTranslation();
+ var (Sx,Sy)=elem.getScale();
+ return [(uv[0]-Tx)/Sx, (uv[1]-Ty)/Sy];
+ },
 
 };  
 

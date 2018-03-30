@@ -31,18 +31,6 @@
 		    <property>sim/signals/fdm-initialized</property>
 				<delay-sec>15</delay-sec>
 
-<!--
-      <condition>
-				<and>
-					<equals>
-	          <property>controls/electric/avionics-switch</property>
-						<value>2</value>
-					</equals>
-	          <property>controls/electric/battery-switch</property>
-	          <property>controls/electric/battery-switch[1]</property>
-				</and>
-      </condition>
--->
      <position>
         <x>-7.00 </x>
         <y> 0.00 </y>

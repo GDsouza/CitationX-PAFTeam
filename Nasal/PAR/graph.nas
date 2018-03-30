@@ -13,7 +13,6 @@ new: func(group, view=nil) {
  if(view==nil) view = [0,0,1,-1];
  m.view = view;
  m.origin = [view[0],view[1]];
- #~ m.plotted = nil;
  m.elements = []; # other than axis ones.
 return m;
  }, # new()
@@ -26,24 +25,16 @@ del: func() {
 # All coordinates and lengths must be in local units (according view),
 # exept for setArcDial and font sizes (which works in absolute units) !!!!.
 
-setDigital: func(origin, frame=1, color="#0",fontSize=nil, title=nil){
+setDigital: func(origin, propNode='', frame=1, color="#0",fontSize=nil, title=nil,samplingTime=1){
 # origin as [x,y] in local units (according view).
 # fontSize as [size, aspect].
  if(fontSize==nil) fontSize = [13,0.7];
- var d = digital.new(me.group,me.view,origin,frame,color,fontSize,title);
+ var d = digital.new(me.group,me.view,origin,propNode,frame,color,fontSize,title,samplingTime);
  return d;
 },
 
-
- 
-setPlotProperty: func(propNode, maxTime, maxValue, dt, color="#0"){
-# propNode as valid string.
-# maxTime plot time in secs.
-# maxValue plot top bound in local units.
-# dt sampling resolution time in secs.
- var plot = plotProperty.new(me.group,me.view,propNode,maxTime,maxValue,dt,color);
-
-
+setPlotProperty: func(timeDivs, valueDivs, timePerDiv, source='', color="#0", resolution=5){
+ var plot = plotProperty.new(me.group,me.view,source,timeDivs,valueDivs,timePerDiv,color,resolution);
 },
 
 setArcDial: func(center, radius, from=nil, to=nil, color="#0", tics=nil, labels=nil ,title=nil){
@@ -53,6 +44,7 @@ setArcDial: func(center, radius, from=nil, to=nil, color="#0", tics=nil, labels=
 # to as angle.
 # tics as [start=nil, end=nil, each=15, length=5].
 # labels  <each-n-tics> as integer
+# title as string.
  var arc = arc.new(me.group,center,radius,from,to,color,title);
  if(tics!=nil) arc.setTics(tics[0],tics[1],tics[2],tics[3]);
  return arc;
@@ -80,6 +72,12 @@ line: func(from, to, color="#0") {
  return l;
 },
 
+text: func(text='', origin=nil, size=nil, color="#0",align="left-baseline") { 
+ var t = plot2D.text(me.group, text, me.xy(origin),size,color,align);
+ append(me.elements, t );
+ return t;
+},
+
 rectangle: func(size, origin, color="#0", fill=nil, rounded=nil) { 
  var l = plot2D.rectangle(me.group, [me.view[2]*size[0],me.view[3]*size[1]],me.xy(origin),color,fill,rounded);
  append(me.elements, l );
@@ -88,14 +86,16 @@ rectangle: func(size, origin, color="#0", fill=nil, rounded=nil) {
 
 graph2D:  func(function, from,to,resolution,color="#0"){
  var vals = [];
- #~ for(var i=from;i<=to;i+=resolution) append(vals, me.origin[1]+me.view[3]*function(i));
  for(var i=from;i<=to;i+=resolution) append(vals, me.y(function(i)));
- #~ var orig = me.xy([0, function(0)]);
  var orig = [me.x(from), 0];
  append(me.elements, plot2D.graphic(me.group, vals,me.view[2]*resolution,orig,color));
 },
 
-
+appendPath: func(path,cords){
+# TODO avoid append duplicated pixels.
+ path.lineTo(me.xy(cords));
+ },
+ 
 rotateAll: func(deg) {
  var center = me.origin;
  var elems = [];
@@ -116,23 +116,10 @@ polyline: func(xSet, ySet, color="#0", symmetrical='') {
 var (U,V) = [[],[]];
  foreach(x; xSet) append(U,me.x(x));
  foreach(y; ySet) append(V,me.y(y));
- var poly = plot2D.polyline(me.group, U,V,color,symmetrical);
+ var poly = call(plot2D.polyline,[me.group, U,V,color,symmetrical],plot2D);
  append(me.elements, poly); 
  return poly;
 },
-
-#~ TODO: 
-#~ setView: func(view) {
-   #~ me.view = view;
-   #~ if(me.Xaxis !=nil) {
-   #~ var old = {start:me.Xaxis.start, length:me.Xaxis.length, title:me.Xaxis.title,  tics:me.Xaxis.tics,  labels:me.Xaxis.labels,  vertical:me.Xaxis.vertical,  };
-   #~ me.setXaxis(old.start, old.length, old.title, old.tics, old.labels);
- #~ }
-   #~ if(me.Yaxis !=nil) {
-   #~ var old = {start:me.Yaxis.start, length:me.Yaxis.length, title:me.Yaxis.title,  tics:me.Yaxis.tics,  labels:me.Yaxis.labels,  vertical:me.Yaxis.vertical,  };
-   #~ me.setYaxis(old.start, old.length, old.title, old.tics, old.labels);
- #~ }
-#~ }, 
 
 # Getting absolute coords:
 x: func(local){ return me.view[0]+me.view[2]*local;},
@@ -144,6 +131,7 @@ v: func(absolute){ return (absolute-me.view[1])/me.view[3];},
 uv: func(absolutes){ return [me.u(absolutes[0]), me.v(absolutes[1])];},
 # Empty elements from vector:
 void: func(v){ foreach(e; v) e.del(); 	v = []; },
+removeAll: func(){ foreach(e; me.elements) e.del(); me.elements = []; },
 
 }; # graph class
 
@@ -151,50 +139,96 @@ void: func(v){ foreach(e; v) e.del(); 	v = []; },
  ###   PlotProperty class  ###
  #########################
 var plotProperty = {
-# constructor
-# propNode as valid string.
-# max plot time in secs.
-# dt sampling resolution time in secs.
-new: func(group,view,propNode, maxT, maxV,dt, color) {
+# constructor: plots a property vs. time
+# 			also accepts callback functions:
+# source as valid string or as callback function.
+# timeDivs horizontal divisions.
+# valueDivs vertical divisions.
+# timePerDiv  in secs.
+# resolution  : times per div. as integer.
+new: func(group,view,source, timeDivs, valueDivs,timePerDiv, color,resolution) {
  var m = {parents:[plotProperty,graph,plot2D] };
  m.group = group;
  m.view = view;
- m.propNode = propNode;
- m.dt = dt;
+ m.source = source;
+ m.timeDivs = timeDivs;
+ m.valueDivs = valueDivs;
+ m.timePerDiv = timePerDiv;
+ m.resolution = resolution;
+ m.samplingTime = timePerDiv/resolution; # <resolution> samples per hz div.
+ m.Xaxis = nil;
+ m.path = nil;
  m.color = color;
- m.init(view,propNode,maxT,maxV,dt, color);
+ m.gain = 1;
+ m.offset = 0;
+ m.value = 0;
+ m.oneShot = 0;
+ m.init(timeDivs,valueDivs,m.samplingTime, color);
  return m;
  }, # new()
 
-init: func(view,propNode,maxT,maxV,dt, color){
- me.Xaxis = axis.new(me.group,view,[-maxT,0],maxT,'#0','secs');
- me.Xaxis.setTics(length:50, first:-maxT, each:1).setLabels(first:-maxT, each:5);
- me.Yaxis = axis.new(me.group,view,[-maxT,0],maxV-1,'#0','y',1);
- me.Yaxis.setTics(length:.2, first:0, each:maxV/10).setLabels(first:maxV/5,each:maxV/5);
-
- me.path =  me.group.createChild("path", id);
- me.path.moveTo(me.x(0), me.y(getprop(propNode))).setColor(color);
- me.frame = plot2D.rectangle(me.group, [view[2]*maxT,view[3]*maxV], me.xy([-maxT,0]) );
+init: func(timeDivs,valueDivs,samplingTime, color){
+ me.Xaxis = axis.new(me.group,me.view,[-timeDivs,0],timeDivs);
+ me.Yaxis = axis.new(me.group,me.view,[-timeDivs,0],valueDivs-1,,,1);
+ me.frame = plot2D.rectangle(me.group, [me.view[2]*timeDivs,me.view[3]*valueDivs], me.xy([-timeDivs,0]) );
  me.t = 0;
- var timer = maketimer(dt,func {me.update(maxT,maxV);});
- timer.stop();
- timer.simulatedTime=1;
- timer.start();
+ me.timer = maketimer(samplingTime,func {me.update(me.source);});
+ me.timer.stop();
+ me.timer.simulatedTime=1;
+ me.setPath(me.source,color);
  return me;
 },
 
-update: func(maxT,maxV){
-	me.t += me.dt;
-	var v = math.clamp(getprop(me.propNode), 0, maxV);
-	plot2D.move(me.path,-me.dt*me.view[2],0);
-	me.path.lineTo(me.x(me.t),me.y(v));
-	if(me.t> maxT){
-		 me.path.pop_front();
-		me.path._node.getChildren('cmd')[0].setValue(2);
+setPath: func(source,color) {
+ if(me.path !=nil) me.path.del();
+ me.source = source;
+ if(source=='') {
+	me.timer.stop();
+	return;
 	}
- return me;
+ me.value = getValue(me,source);
+ me.t = 0;
+ me.path =  me.group.createChild("path", id);
+ me.path.setColor(me.color);
+ me.path.moveTo(me.xy([0, me.value/me.gain]));
+ me.timer.start();
+ },
+ 
+setTics: func(axis,length, first, each,color=nil) {
+ axis.setTics(length, first, each, , color);
+ },
+
+setGain: func(gain) {
+ me.gain = gain;
+ },
+
+setOffset: func(dy) {
+ plot2D.move(me.path,0,dy);
+ me.offset -= dy;
+ },
+
+setTimePerDiv: func(tb) {
+ me.timePerDiv = tb;
+ me.samplingTime = tb/me.resolution;
+ me.timer.restart(tb/me.resolution);
+ me.t = 0;
+ me.setPath(me.source,me.color);
+ },
+
+update: func(source){
+	if(me.oneShot and me.path.getNumSegments()== me.resolution* me.timeDivs) return;
+	me.t += me.samplingTime;
+	me.value = getValue(me,source);
+	plot2D.move(me.path,me.view[2]/me.resolution,0);
+	me.path.lineTo(me.x(-me.t/me.timePerDiv),me.y(me.value/me.gain));
+	while(me.path.getNumSegments() > me.resolution* me.timeDivs){
+		me.path.pop_front();
+		me.path._node.getChildren('cmd')[0].setValue(2);
+		}
+	return me;
 },
 }; # plotProperty class
+
 ############################################################
  ###   AXIS class  ###
  #########################
@@ -204,7 +238,7 @@ var axis = {
 # length as [length,color] in local units (according view).
 # title  optional as string.
 # vertical  optional as boolean.
-new: func(group,view,start,length, color, title=nil, vertical=0 ) {
+new: func(group,view,start,length, color='#0', title=nil, vertical=0 ) {
  var m = {parents:[axis,graph,plot2D] };
  m.group = group;
  m.view = view;
@@ -284,46 +318,6 @@ setLabels: func(first, each, last=nil, color=nil ) {
 return me;
 },
 
-
-
-
-#~ TODO:
-#~ customizeLabel: func(idx, text=nil, font=nil, color=nil ) {
-#~ # idx as as integer .
-	 #~ if(text!=nil) me.label_e[idx].setText(sprintf(text));
-	 #~ if(font!=nil) me.label_e[idx].setFontSize(font[0],font[1]);
-	 #~ if(color!=nil) me.label_e[idx].setColor(color);
-#~ },
-
-#~ setTitle: func(text=nil, fontSize=nil, color=nil ) {
- #~ if(me.Y){
-   #~ if(me.title==nil)	me.title = plot2D.text(me.group, '', [me.end[0]-14,me.end[1]],,'#0','right-top');
- #~ } else {
- 	#~ if(me.title==nil)	me.title = plot2D.text(me.group, me.title, [me.end[0],me.end[1]+14],,'#0','right-top');
-#~ }
- #~ if(text!=nil) me.title.setText(sprintf(text));
- #~ if(fontSize!=nil) me.title.setFontSize(fontSize[0],fontSize[1]);
- #~ if(color!=nil) me.title.setColor(color);
- #~ return me;
-#~ },
-
-
- 
-#~ customizeLabels: func(idx=nil, texts=nil, font=nil, color=nil ) {
-#~ # idx as vector. All labels by default.
-#~ # texts as vector of strings.
- #~ if(idx==nil) {
-  #~ idx = [];
-  #~ for(var i=1;i<size(me.label_e);i+=1) append(idx,i);
-  #~ }
- #~ if(texts==nil) {
-  #~ texts = [nil];
-  #~ for(var i=1;i<size(me.label_e);i+=1) append(texts,nil);
-  #~ }
- #~ foreach(i; idx) me.setLabel(i,texts[i],font,color);,me.xy([start[0]+length,start[1]])
-#~ },
- 
- 
 }; # axis
 
 ############################################################
@@ -334,31 +328,46 @@ var digital = {
 # origin as [x,y] in local units (according view).
 # fontSize as [size, aspect].
 # title as string.
-new: func(group, view, origin, frame, color, fontSize,title ) {
+new: func(group, view, origin,source, frame, color, fontSize,title,samplingTime ) {
  var m = {parents:[digital,graph,plot2D] };
  m.group = group;
+ m.source = source;
  m.view = view;
  m.origin = origin;
  m.color = color;
  m.frame = frame;
  m.fontSize = fontSize;
  m.title = title;
- m.init(title);
+ me.samplingTime = samplingTime;
+ m.init();
 return m;
  }, # new()
  
-init: func(title) {
-   me.text = plot2D.text(me.group,'000',me.xy(me.origin),me.fontSize,me.color,'center-center');
+init: func() {
+ me.text = plot2D.text(me.group,'',me.xy(me.origin),me.fontSize,me.color,'center-center');
  if(me.frame) {
  var size = [me.fontSize[0]/me.fontSize[1]*7/me.view[2], me.fontSize[0]*2/me.view[3]];
  var origin = [me.x(me.origin[0])-size[0]/2, me.y(me.origin[1])-size[1]/2.2 ];
 	me.frame = plot2D.rectangle(me.group, size, origin,me.color);
  }
- if(me.title!=nil) me.setTitle(title, [13,0.7], me.color);
+ if(me.title!=nil) me.setTitle(me.title, [13,0.7], me.color);
+ me.timer = maketimer(me.samplingTime,func {me.update(me.source);});
+ me.timer.stop();
+ me.timer.simulatedTime=1;
 }, # init()
  
 del: func() {
 }, # del()
+
+setSource: func(source) {
+ if(source==''){
+ me.timer.stop();
+ me.text.setText('');
+ return;
+ }
+ me.source = source;
+ me.timer.start();
+},
 
 setTitle: func(text=nil, fontSize=nil, color=nil, align=nil) {
   if(typeof(me.title) == 'hash')   me.title.del();
@@ -383,10 +392,14 @@ setTitle: func(text=nil, fontSize=nil, color=nil, align=nil) {
  return me;
   },
  
-update: func(propNode, factor=1, offset=0){
-# propNode as valid string.
-var value = getprop(propNode)* factor+ offset;
- me.text.setText(sprintf('%i',value)).setAlignment('center-center');
+update: func(source, factor=1, offset=0){
+# source as valid string or a callback func.
+if(source=='' or source==nil) {
+	me.timer.stop();
+	return;
+	}
+ me.value = getValue(me,source) * factor+ offset;
+ me.text.setText(sprintf('%i',me.value)).setAlignment('center-center');
 },
 
 }; # digital
@@ -431,7 +444,6 @@ setTitle: func(text=nil, fontSize=nil, color=nil, align=nil) {
     if(color==nil)  color = me.color;
     if(fontSize==nil) fontSize = [13,0.7];
  var xy = [me.center[0], me.center[1]+me.radius/2]; # by def.
-
  me.title =  plot2D.text(me.group, text, xy	,fontSize, color, 'center-center');
 return me;
 },
@@ -466,10 +478,10 @@ setLabels: func(from=nil, to=nil, each=30, factor=1, offset=0, span=4){
  return me;
 },
 
-setNeedle: func(length=nil, color=nil, lineWidth=3, response=nil){
+setNeedle: func(length=nil, color=nil, lineWisamplingTimeh=3, response=nil){
  if(length==nil) length = me.radius - 5;
  if(color==nil) color = me.line.getColor();
- me.needle = plot2D.polarLine(me.group, me.center, 90-me.from, length, color).setStrokeLineWidth(lineWidth);
+ me.needle = plot2D.polarLine(me.group, me.center, 90-me.from, length, color).setStrokeLineWisamplingTimeh(lineWisamplingTimeh);
  me.needle.setCenter(me.center);
 return me;
 },
@@ -480,4 +492,34 @@ var value = math.clamp(getprop(propNode),me.offset, (me.to-me.from)*me.factor+me
  me.needle.setRotation(value*D2R);
 },
 
-} # Arc class
+}; # Arc class
+
+var isnode = func(str){
+if(typeof(str)!='scalar') return 0;
+foreach(c;split('',str)) if(!string.isalnum(c[0]) and c!='/'and c!='-') return(0) ;
+return(1) ;
+};
+
+var getValue = func(object,source){
+ var val = func(object,source){
+ if(typeof(source)=='func') return source();  # source is a func
+ if(isnode(source) and getprop(source)!=nil) return getprop(source); # source is propNode address
+ if(find(';', source)>0){ # source is Nasal code
+	var f = call(compile(source), [], nil, nil, var errors=[]);
+	if (size(errors)) critical(object,"Compilation error", "Problems compiling Source code !");
+	return f;
+    }
+ critical(object,"Source error", "Error getting source value. !"); 
+ return;
+ } # val
+ var ret = val(object,source);
+ if(num(ret)!=nil) return ret;
+ critical(object,"Validation error", "Source function returns a non numeric value !");
+};
+
+var critical = func(object,title,text){
+ object.timer.stop();
+ fgcommand("pause");
+ canvas.MessageBox.critical(
+  title, text,  cb = nil,  buttons = canvas.MessageBox.Ok); 
+};

@@ -71,7 +71,7 @@ at the bottom of this file.
   <tolbase type="string">%/gca/value[0]</tolbase>
   <tolbase type="string"> heading </tolbase>
   <tolbase type="string">%/gca/value[1]</tolbase>
-  <tolbase type="string"> . </tolbase>
+  <tolbase type="string">. </tolbase>
 
 <!-- # downwind To right base ok -->  
   <torbaseok type="string">Maintain heading </torbaseok>
@@ -106,10 +106,10 @@ at the bottom of this file.
 <!-- # Others: -->  
   <dont type="string">. Do not acknowledge further transmissions. </dont>	
   
-  <bye type="string">Over landing threshold. </bye> 
+  <bye type="string">Over landing threshold. Your plane. </bye> 
   
   <abort type="string">%/gca/callsign-fmt</abort> 
-  <abort type="string">, abort immediately and try again. </abort> 
+  <abort type="string">, abort immediately and try again. Your plane. </abort> 
   
   <none type="string">I do not understand. </none> 
   <none type="string">Fasten your parachute and open the door.</none> 

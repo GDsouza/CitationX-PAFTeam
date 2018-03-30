@@ -158,6 +158,26 @@
     </model>
 
     <model>
+        <name>Slipball1</name>
+        <path>Models/Instruments/Slipball/slipball.xml</path>
+        <offsets>
+            <x-m>0.007</x-m>
+            <y-m>-0.375</y-m>
+            <z-m>0.036</z-m>
+        </offsets>
+    </model>
+
+    <model>
+        <name>Slipball2</name>
+        <path>Models/Instruments/Slipball/slipball.xml</path>
+        <offsets>
+            <x-m>0.007</x-m>
+            <y-m>0.385</y-m>
+            <z-m>0.036</z-m>
+        </offsets>
+    </model>
+
+    <model>
         <name>CabPress</name>
         <path>Models/Instruments/Press/CabPress.xml</path>
         <offsets>
@@ -732,10 +752,6 @@
                <command>property-toggle</command>
                <property>controls/electric/battery-switch[0]</property>
             </binding>
-						<binding>
-							<command>nasal</command>
-							<script>citation.batt_switch();</script>
-						</binding>
         		<binding>
             	<command>property-toggle</command>
             	<property>sim/sound/click</property>
@@ -778,10 +794,6 @@
               <command>property-toggle</command>
                 <property>controls/electric/battery-switch[1]</property>
             </binding>
-						<binding>
-							<command>nasal</command>
-							<script>citation.batt_switch();</script>
-						</binding>
         <binding>
             <command>property-toggle</command>
             <property>sim/sound/click</property>
@@ -2347,7 +2359,7 @@
 	</animation>
 
 <!-- SLIPBALL -->
-
+<!--
 		<animation>
         <type>rotate</type>
         <object-name>Slipball1</object-name>
@@ -2387,7 +2399,7 @@
             <z-m>0.166</z-m>
         </center>
     </animation>
-
+-->
 <!-- PFD -->
 
     <animation>
@@ -3048,7 +3060,7 @@
         <type>select</type>
         <object-name>FD.bc-annun</object-name>
         <condition>
-            <property>instrumentation/nav/back-course-btn</property>
+            <property>autopilot/locks/back-course</property>
         </condition>
     </animation>
 
@@ -3320,13 +3332,8 @@
             <repeatable>false</repeatable>
 						<binding>
               <command>property-toggle</command>
-            		<property>instrumentation/nav/back-course-btn</property>
+            		<property>autopilot/locks/back-course</property>
 						</binding>
-<!--            <binding>
-                <command>nasal</command>
-                <script>citation.FD_set_mode("bc")</script>
-            </binding>
--->        </action>
     </animation>
 
     <animation>

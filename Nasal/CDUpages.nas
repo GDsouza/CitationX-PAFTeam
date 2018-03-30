@@ -21,6 +21,7 @@ var Est_time = nil;
 var ETA = nil;
 var ETE = nil;
 var fp_size = nil;
+var flpLine = nil;
 var my_lat = nil;
 var my_lon = nil;
 var n = nil;
@@ -284,19 +285,14 @@ var cduDsp = {
   Flp_main : func(x) {
     me.nrPage = size(getprop("instrumentation/cdu["~x~"]/display")) < 12 ? substr(getprop("instrumentation/cdu["~x~"]/display"),9,1) : substr(getprop("instrumentation/cdu["~x~"]/display"),9,2);
     if (me.nrPage > getprop("instrumentation/cdu["~x~"]/nbpage")) {me.nrPage = getprop("instrumentation/cdu["~x~"]/nbpage")}
-#    me.fp = flightplan();
     fp_size = me.fp.getPlanSize();
     p = 0;
 	  for(var i=0;i<fp_size;i+=1) {		
 			  n = p-(3*(me.nrPage-1));	
 			  if(n==0) {
           me.line.l1.setText(sprintf(" %3i    %.1f",me.fp.getWP(i).leg_bearing,me.fp.getWP(i).leg_distance));
-          if (left(me.fp.getWP(i).wp_name,4) != me.dest_apt or me.fp_closed) {
-            if (me.fp.getWP(i).wp_type == "offset-navaid"
-                or size(me.fp.getWP(i).wp_name) == 8) {
-              me.line.l2.setText("*"~me.fp.getWP(i).wp_name);
-            } else {me.line.l2.setText(me.fp.getWP(i).wp_name)}
-          }   
+          flpLine = me.line.l2;
+          me.Flp_offset(flpLine,i);
           me.line.r2l.setText(me.fp.getWP(i).speed_cstr ? sprintf("%i",me.fp.getWP(i).speed_cstr)~" /" : "--- /");
           if (me.fp.getWP(i).alt_cstr > 0 and me.fp.getWP(i).alt_cstr < 10000) {
             me.line.r2r.setText(sprintf("%i",me.fp.getWP(i).alt_cstr));
@@ -312,12 +308,8 @@ var cduDsp = {
 
 			  if(n==1) {
           me.line.l3.setText(sprintf(" %3i    %.1f",me.fp.getWP(i).leg_bearing,me.fp.getWP(i).leg_distance));
-          if (left(me.fp.getWP(i).wp_name,4) != me.dest_apt or me.fp_closed) {
-            if (me.fp.getWP(i).wp_type == "offset-navaid"
-                or size(me.fp.getWP(i).wp_name) == 8) {
-              me.line.l4.setText("*"~me.fp.getWP(i).wp_name);
-            } else {me.line.l4.setText(me.fp.getWP(i).wp_name)}
-          }   
+          flpLine = me.line.l4;
+          me.Flp_offset(flpLine,i);
           me.line.r4l.setText(me.fp.getWP(i).speed_cstr ? sprintf("%i",me.fp.getWP(i).speed_cstr)~" /" : "--- /");
           if (me.fp.getWP(i).alt_cstr > 0 and me.fp.getWP(i).alt_cstr < 10000) {
             me.line.r4r.setText(sprintf("%i",me.fp.getWP(i).alt_cstr));
@@ -332,12 +324,8 @@ var cduDsp = {
 
 			  if(n==2) {
           me.line.l5.setText(sprintf(" %3i    %.1f",me.fp.getWP(i).leg_bearing,me.fp.getWP(i).leg_distance));
-          if (left(me.fp.getWP(i).wp_name,4) != me.dest_apt or me.fp_closed) {
-            if (me.fp.getWP(i).wp_type == "offset-navaid"
-                or size(me.fp.getWP(i).wp_name) == 8) {
-              me.line.l6.setText("*"~me.fp.getWP(i).wp_name);
-            } else {me.line.l6.setText(me.fp.getWP(i).wp_name)}
-          }
+          flpLine = me.line.l6;
+          me.Flp_offset(flpLine,i);
           me.line.r5.setText("");
           me.line.r6l.setText(me.fp.getWP(i).speed_cstr ? sprintf("%i",me.fp.getWP(i).speed_cstr)~" /" : "--- /");
           me.line.r6r.setColor(me.blue);
@@ -354,6 +342,17 @@ var cduDsp = {
 	  }
  
   }, ### end of Flp_main
+
+  Flp_offset : func(flpLine,i) {
+    if (left(me.fp.getWP(i).wp_name,4) != me.dest_apt or me.fp_closed) {
+      if (me.fp.getWP(i).wp_type == "offset-navaid"
+          or (size(me.fp.getWP(i).wp_name) == 8 
+            and left(me.fp.getWP(i).wp_name,4) != getprop(dep_apt)
+              and left(me.fp.getWP(i).wp_name,4) != me.dest_apt)) {
+        flpLine.setText("*"~me.fp.getWP(i).wp_name);
+      } else {flpLine.setText(me.fp.getWP(i).wp_name)}
+    } 
+  }, ### end of Flp_offset
 
   Flp1 : func(x) {
     me.fp = flightplan();

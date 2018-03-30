@@ -108,21 +108,24 @@ var RMU = {
       var fcom = nil;
       if (size(info.comms()) > 0) {
         foreach (var freq;info.comms()) {
-          if (find("TWR",freq.ident)!=-1) {fcom = freq.frequency;break}
+          if (find("TWR",freq.ident)!=-1 or find("ower",freq.ident)!=-1) {
+            fcom = freq.frequency;
+            break;
+          }
           else if (find("MULT",freq.ident)!=-1) {
             if (find("LIGHTS",freq.ident)!=-1) continue;
             fcom = freq.frequency;
             break;
           }
         }
-        setprop("instrumentation/comm/frequencies/selected-mhz",fcom);
+#        if (fcom != nil) {
+          setprop("instrumentation/comm/frequencies/selected-mhz",fcom);
+#        }
       }
     }
 
 		return m;
 	}, # end of new
-
-
 
   init : func(x) {
   	### Create Memories if not exist ###

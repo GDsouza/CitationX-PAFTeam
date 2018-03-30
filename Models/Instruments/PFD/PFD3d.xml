@@ -975,7 +975,7 @@
         <object-name>to-flag</object-name>
         <object-name>from-flag</object-name>
         <property>autopilot/internal/course-offset</property>
-<!--        <property>autopilot/internal/selected-crs</property>-->
+<!--        <property>autopilot/internal/selected-crs</property> -->
         <axis>
             <x>-1</x>
             <y>0</y>

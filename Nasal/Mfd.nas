@@ -91,7 +91,8 @@ var menu = func {
 	var fix = "instrumentation/efis/inputs/wpt";
 	var tcas = "instrumentation/primus2000/dc840/tcas";
 	var tcas_mode = "instrumentation/tcas/inputs/mode";
-	var vsd = 
+  var baro = "instrumentation/efis/inputs/baro-hpa";
+  var alt_m = "instrumentation/efis/inputs/alt-meters";
 	var btn_0 = getprop("instrumentation/primus2000/mfd/btn0");
 	var btn_1 = getprop("instrumentation/primus2000/mfd/btn1");
 	var btn_2 = getprop("instrumentation/primus2000/mfd/btn2");
@@ -104,6 +105,12 @@ var menu = func {
 
 	if (!getprop(menu_num)) {
 		if (btn_0) {setprop(s_menu,0);raz_c()}
+    if (btn_1 and getprop(s_menu)==0) {
+ 			setprop(s_menu,1);
+			btn_1=0;
+			n=0;
+		}
+    
 		if (btn_2 and getprop(s_menu)==0) {
 			setprop(s_menu,2);
 			btn_2=0;
@@ -114,6 +121,22 @@ var menu = func {
 			btn_5 = 0;
 			n=0;
 		}
+
+    if (getprop(s_menu)==1) {
+			if (getprop(baro)) {setprop(path,cdr[0],1)}	
+			else {setprop(path,cdr[0],0)}
+			if (getprop(alt_m)) {setprop(path,cdr[1],1)}	
+			else {setprop(path,cdr[1],0)}
+
+			if (btn_1) {
+					if (getprop(baro)) {setprop(baro,0);setprop(path,cdr[0],0)}
+					else {setprop(baro,1);setprop(path,cdr[0],1)}				
+			}
+			if (btn_2){
+					if (getprop(alt_m)) {setprop(alt_m,0);setprop(path,cdr[1],0)}
+					else {setprop(alt_m,1);setprop(path,cdr[1],1)}				
+			}
+    }
 
 		if (getprop(s_menu)==2) {
 			if (getprop(vor)) {setprop(path,cdr[0],1)}	

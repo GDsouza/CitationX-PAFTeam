@@ -6,6 +6,8 @@
 
 props.globals.initNode("controls/fuel/xfer-L",0,"INT");
 props.globals.initNode("controls/fuel/xfer-R",0,"INT");
+props.globals.initNode("controls/engines/engine/feed-tank",0,"INT");
+props.globals.initNode("controls/engines/engine[1]/feed-tank",0,"INT");
 var diffLevel2_3 = nil;
 var fgph = nil;
 var xflow_switch = nil;
@@ -18,98 +20,116 @@ var fuelsys = {
     new : func {
         m = { parents : [fuelsys] };
 
-		m.engine = props.globals.getNode("controls/engines",1);
-		m.fuel = props.globals.getNode("consumables/fuel",1);
-		m.Xfuel = props.globals.getNode("controls/fuel",1); 
+		m.engine = "controls/engines";
+		m.fuel = "consumables/fuel";
+		m.Xfuel = "controls/fuel"; 
 
-		m.sel = [ m.engine.getNode("engine[0]/feed-tank",1),
-			m.engine.getNode("engine[1]/feed-tank",1) ];
-		m.cutoff = [ m.engine.getNode("engine[0]/cutoff",1),
-			m.engine.getNode("engine[1]/cutoff",1) ];	
-		m.tank = [ m.fuel.getNode("tank[0]/selected",1),
-			m.fuel.getNode("tank[1]/selected",1),
-			m.fuel.getNode("tank[2]/selected",1),		
-			m.fuel.getNode("tank[3]/selected",1) ];		
-		m.xfer = [m.Xfuel.getNode("xfer-L"),m.Xfuel.getNode("xfer-R")];
-		m.level0 = m.fuel.getNode("tank[0]/level-lbs");
-		m.level1 = m.fuel.getNode("tank[1]/level-lbs");
-		m.level2 = m.fuel.getNode("tank[2]/level-lbs");
-		m.level3 = m.fuel.getNode("tank[3]/level-lbs");
-		m.totalCtrTk = m.fuel.getNode("total-ctrtk-lbs");
-
+		m.sel = [m.engine~"/engine[0]/feed-tank",	m.engine~"/engine[1]/feed-tank"];
+		m.cutoff = [m.engine~"/engine[0]/cutoff",	m.engine~"/engine[1]/cutoff"];
+		m.tank = [ m.fuel~"/tank[0]/selected",m.fuel~"/tank[1]/selected",
+               m.fuel~"/tank[2]/selected",m.fuel~"/tank[3]/selected"];
+		m.xfer = [m.Xfuel~"/xfer-L",m.Xfuel~"/xfer-R"];
+		m.level0 = m.fuel~"/tank[0]/level-lbs";
+		m.level1 = m.fuel~"/tank[1]/level-lbs";
+		m.level2 = m.fuel~"/tank[2]/level-lbs";
+		m.level3 = m.fuel~"/tank[3]/level-lbs";
+		m.totalCtrTk = m.fuel~"/total-ctrtk-lbs";
+    m.bp0 = 0;
+    m.bp1 = 0;
+    m.bpTimer = maketimer(1, func() {
+  		fgph = [getprop("engines/engine[0]/fuel-flow-gph"),
+  					  getprop("engines/engine[1]/fuel-flow-gph")];				
+		  if (m.bp0) {setprop("engines/engine[0]/fuel-flow-gph",fgph[0] * 1.1)}
+      if (m.bp1) {setprop("engines/engine[1]/fuel-flow-gph",fgph[1] * 1.1)}
+    });
 		return m
     },
 
 	init_fuel : func{
-		me.tank[0].setBoolValue(0); 	
-		me.tank[1].setBoolValue(0);		
-		me.tank[2].setBoolValue(1);		
-		me.tank[3].setBoolValue(1);
-		me.sel[0].setIntValue(0);
-		me.sel[1].setIntValue(0);
+		setprop(me.tank[0],0); 	
+		setprop(me.tank[1],0);		
+		setprop(me.tank[2],1);		
+		setprop(me.tank[3],1);
 	},
 
+  listen : func {
+    setlistener("controls/fuel/tank[0]/boost_pump",func(n) { 
+		  if (n.getValue() == 2 ) {
+        me.bp0 = 1;
+        if (!me.bpTimer.isRunning) me.bpTimer.start();
+      } else {me.bp0 = 0; if (!me.bp1) me.bpTimer.stop()}
+    },0,0);
+
+    setlistener("controls/fuel/tank[1]/boost_pump",func(n) { 
+		  if (n.getValue() == 2 ) {
+        me.bp1 = 1;
+        if (!me.bpTimer.isRunning) me.bpTimer.start();
+      } else {me.bp1 = 0;if (!me.bp0) me.bpTimer.stop()}
+    },0,0);
+
+  },
+
 	update : func{		
-		me.totalCtrTk.setValue(me.level2.getValue() + me.level3.getValue());
-		diffLevel2_3 = abs((me.level2.getValue() - me.level3.getValue())/2);		
+		setprop(me.totalCtrTk,getprop(me.level2) + getprop(me.level3));
+		diffLevel2_3 = abs((getprop(me.level2) - getprop(me.level3))/2);		
 
 			### TANK 2-3 BALANCE ###
-		if (me.level2.getValue() > me.level3.getValue()) {
-				me.level2.setValue(me.level2.getValue() - diffLevel2_3);
-				me.level3.setValue(me.level3.getValue() + diffLevel2_3);
+		if (getprop(me.level2) > getprop(me.level3)) {
+				setprop(me.level2,getprop(me.level2) - diffLevel2_3);
+				setprop(me.level3,getprop(me.level3) + diffLevel2_3);
 		}
-		if (me.level2.getValue() < me.level3.getValue()) {
-				me.level2.setValue(me.level2.getValue() + diffLevel2_3);
-				me.level3.setValue(me.level3.getValue() - diffLevel2_3);
+		if (getprop(me.level2) < getprop(me.level3)) {
+				setprop(me.level2,getprop(me.level2) + diffLevel2_3);
+				setprop(me.level3,getprop(me.level3) - diffLevel2_3);
 		}
 
 			### XFER ###	
 
-		if (me.totalCtrTk.getValue() > 500) {
-			if (me.xfer[0].getValue() == 2) {
-				me.tank[0].setBoolValue(1);		
-				me.tank[2].setBoolValue(0);			
+		if (getprop(me.totalCtrTk) > 500) {
+			if (getprop(me.xfer[0]) == 2) {
+				setprop(me.tank[0],1);		
+				setprop(me.tank[2],0);			
 				me.oof();
 			} else {
-				me.tank[0].setBoolValue(0);		
-				me.tank[2].setBoolValue(1);							
+				setprop(me.tank[0],0);		
+				setprop(me.tank[2],1);							
 			}
-			if (me.xfer[1].getValue() == 2) {
-				me.tank[1].setBoolValue(1);		
-				me.tank[3].setBoolValue(0);			
+			if (getprop(me.xfer[1]) == 2) {
+				setprop(me.tank[1],1);		
+				setprop(me.tank[3],0);			
 				me.oof();
 			} else {
-				me.tank[1].setBoolValue(0);		
-				me.tank[3].setBoolValue(1);			
+				setprop(me.tank[1],0);		
+				setprop(me.tank[3],1);			
 			}
 		}
-		if (me.totalCtrTk.getValue() <= 500) {
-			if (me.totalCtrTk.getValue() > 0.5) {
-				if (me.xfer[0].getValue() == 1) {
-					me.tank[0].setBoolValue(0);		
-					me.tank[2].setBoolValue(1);			
+		if (getprop(me.totalCtrTk) <= 500) {
+			if (getprop(me.totalCtrTk) > 0.5) {
+				if (getprop(me.xfer[0]) == 1) {
+					setprop(me.tank[0],0);		
+					setprop(me.tank[2],1);			
 				} else {
-					if (me.sel[0].getValue() == 0 and !me.cutoff[0].getValue()){
-						me.tank[0].setBoolValue(1);		
-						me.tank[2].setBoolValue(0);					
+					if (getprop(me.sel[0]) == 0 and !getprop(me.cutoff[0])){
+						setprop(me.tank[0],1);		
+						setprop(me.tank[2],0);					
 					} else {
 							me.xfeed();										
 							me.oof();
 					}
 				}
-				if (me.xfer[1].getValue() == 1) {
-					me.tank[1].setBoolValue(0);		
-					me.tank[3].setBoolValue(1);			
+				if (getprop(me.xfer[1]) == 1) {
+					setprop(me.tank[1],0);		
+					setprop(me.tank[3],1);			
 				}	else {
-					if (me.sel[1].getValue() == 0 and !me.cutoff[1].getValue()){
-						me.tank[1].setBoolValue(1);		
-						me.tank[3].setBoolValue(0);					
+					if (getprop(me.sel[1]) == 0 and !getprop(me.cutoff[1])){
+						setprop(me.tank[1],1);		
+						setprop(me.tank[3],0);					
 					} else {
 							me.xfeed();										
 							me.oof();
 					}
 				}
-				if (me.xfer[0].getValue() == 0 and me.xfer[1].getValue() == 0) {
+				if (getprop(me.xfer[0]) == 0 and getprop(me.xfer[1]) == 0) {
 					me.xfeed();
 					me.oof();
 				}					 
@@ -122,45 +142,31 @@ var fuelsys = {
 	},
 
 	xfeed : func { 					### CROSSFEED ###
-		me.tank[2].setBoolValue(0);			
-		me.tank[3].setBoolValue(0);			
-		if (me.sel[0].getValue() == 1) {
-			me.tank[0].setBoolValue(0);		
-			me.tank[1].setBoolValue(1);		
-		} else if (me.sel[1].getValue() == 1) {
-				me.tank[0].setBoolValue(1);		
-				me.tank[1].setBoolValue(0);				
+		setprop(me.tank[2],0);			
+		setprop(me.tank[3],0);			
+		if (getprop(me.sel[0]) == 1) {
+			setprop(me.tank[0],0);		
+			setprop(me.tank[1],1);		
+		} else if (getprop(me.sel[1]) == 1) {
+				setprop(me.tank[0],1);		
+				setprop(me.tank[1],0);				
 		} else {
-				if (me.cutoff[0].getValue() == 1) {me.tank[0].setBoolValue(0)}
-					else {me.tank[0].setBoolValue(1)}		
-				if (me.cutoff[1].getValue() == 1) {me.tank[1].setBoolValue(0)}	
-					else {me.tank[1].setBoolValue(1)}		
+				if (getprop(me.cutoff[0]) == 1) {setprop(me.tank[0],0)}
+					else {setprop(me.tank[0],1)}		
+				if (getprop(me.cutoff[1]) == 1) {setprop(me.tank[1],0)}	
+					else {setprop(me.tank[1],1)}		
 		}
 	},		
 
 	oof : func {						### OUT OF FUEL ###
-		if (me.level0.getValue() <= 0.5 and (me.sel[0].getValue() == 0 or me.sel[1].getValue() == 1)) {
+		if (getprop(me.level0) <= 0.5 and (getprop(me.sel[0]) == 0 or getprop(me.sel[1]) == 1)) {
 			setprop("engines/engine[0]/out-of-fuel",1);
 		}
-		if (me.level1.getValue() <= 0.5 and (me.sel[1].getValue() == 0 or me.sel[0].getValue() == 1) ) {
+		if (getprop(me.level1) <= 0.5 and (getprop(me.sel[1]) == 0 or getprop(me.sel[0]) == 1) ) {
 			setprop("engines/engine[1]/out-of-fuel",1);
 		}
 	},
 
-	boostpump : func {			### BOOST PUMPS ###
-		fgph = [ getprop("engines/engine[0]/fuel-flow-gph"),
-					getprop("engines/engine[1]/fuel-flow-gph") ];				
-
-		if (getprop("controls/fuel/tank[0]/boost_pump") == 2 ){
-			setprop("engines/engine[0]/fuel-flow-gph",fgph[0] * 1.1);
-		}
-
-		if (getprop("controls/fuel/tank[1]/boost_pump") == 2) {
-			setprop("engines/engine[1]/fuel-flow-gph",fgph[1] * 1.1);
-		}
-
-		settimer(func {me.boostpump();},1);
-	},
 };
 
 var gravity_xflow = func{
@@ -205,6 +211,6 @@ var crossfeed = func {
 var fuel = fuelsys.new();
 	setlistener("/sim/signals/fdm-initialized", func {
 	fuel.init_fuel();
+	fuel.listen();
 	fuel.update();
-	fuel.boostpump();
 },0,0);

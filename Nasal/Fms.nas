@@ -33,9 +33,13 @@ var wp = nil;
 var wp_alt = nil;
 var wp_dist = nil;
 var wpCoord = nil;
+var diff = nil;
 
 var active = "autopilot/route-manager/active";
 props.globals.initNode("autopilot/locks/alm-tod",0,"BOOL");
+props.globals.initNode("autopilot/locks/fms-gs",0,"BOOL");
+props.globals.initNode("autopilot/internal/fms-climb-rate-fps",0,"DOUBLE");
+setprop("autopilot/settings/fps-limit",-70);
 
 var FMS = {
 	new : func () {
@@ -45,6 +49,8 @@ var FMS = {
 		m.mmo = 0.92;
 		m.set_tgAlt = 0;
 		m.fp = nil; # flightplan
+    m.gs_calc = nil;
+    m.gs_climb = nil;
 		m.lastWp_alt = 0;
 		m.lastWp_dist = 0;
 		m.lastWp_ind = 0;
@@ -78,14 +84,20 @@ var FMS = {
 		m.dest_alt = "autopilot/route-manager/destination/field-elevation-ft";
 		m.dist_rem = "autopilot/route-manager/distance-remaining-nm";
 		m.fms = "autopilot/settings/fms";
+    m.fms_climb = "autopilot/internal/fms-climb-rate-fps";
+    m.gs_rate = "autopilot/internal/gs-rate-fps";
 		m.lock_alt = "autopilot/locks/altitude";
+    m.lock_gs = "autopilot/locks/fms-gs";
 		m.nav_dist = "autopilot/internal/nav-distance";
 		m.NAVSRC = "autopilot/settings/nav-source";
     m.tas = "instrumentation/airspeed-indicator/true-speed-kt";
 		m.tg_alt = "autopilot/settings/tg-alt-ft";
+    m.tg_climb = "autopilot/internal/target-climb-rate-fps";
 		m.tg_spd_kt = "autopilot/settings/target-speed-kt";
 		m.tg_spd_mc = "autopilot/settings/target-speed-mc";
 		m.tot_dist = "autopilot/route-manager/total-distance";
+    setprop("instrumentation/nav/gs-rate-of-climb-fpm",0);
+    setprop("instrumentation/nav[1]/gs-rate-of-climb-fpm",0);
 
 		return m;
 	}, # end of new
@@ -125,23 +137,12 @@ var FMS = {
 				me.fpChange();
       }
 		},0,0);     
-
-#		setlistener(me.direct_to, func(n) { ### Jump To ###
-#      if (n.getValue() > 0 and getprop(me.direct) and getprop(active)) {
-#        setprop("autopilot/route-manager/input","@JUMP"~n.getValue());
-#      } 
-#    },0,0);
-
 	}, # end of listen
 
   fpChange : func {
 			if (getprop(active)){
 				curr_wp = me.fp.current;
 				me.fp.clearWPType('pseudo'); # reset TOD
-#				for (var i=0;i<me.fp.getPlanSize()-1;i+=1) {
-#					var alt = me.fp.getWP(i).alt_cstr;
-#					me.fp.getWP(i).setAltitude(alt,'at');
-#        }
 				v_tod = [];
 				v_ind = 0;
 				v_alt.clear();
@@ -177,12 +178,11 @@ var FMS = {
 		topDescent = 0;
 		wp = nil;
 		top_of_descent = 0;
-		desc_spd_kt = getprop("autopilot/settings/descent-speed-kt");
-		desc_spd_mc = getprop("autopilot/settings/descent-speed-mc");
+		desc_spd_kt = getprop(me.desc_kt);
+		desc_spd_mc = getprop(me.desc_mc);
 		v_alt.append(0);
 
 		### Calculate altitudes and insert in a vector ###
-
 		for (var i=1;i<me.fp.getPlanSize()-1;i+=1) {
 				### Departure ###
 			if (me.fp.getWP(i).wp_type == 'basic' and me.fp.getWP(i).distance_along_route < tot_dist/2) {
@@ -332,20 +332,28 @@ var FMS = {
 					else {me.tod = 0}
 
 					### Approach
-					if (getprop(me.dist_rem) <= 7) {
-						me.set_tgAlt = math.round(getprop(me.dest_alt),100);
-						if (getprop(me.NAVSRC) == "FMS1") {
-							ind = 0;
-							setprop(me.NAVSRC,"NAV1");
-						}
-						if (getprop(me.NAVSRC) == "FMS2") {
-							ind = 1;
-							setprop(me.NAVSRC,"NAV2");
-						}
-
-						setprop("instrumentation/nav["~ind~"]/radials/selected-deg",getprop("autopilot/internal/selected-crs")+4);
+					if (getprop(me.NAVSRC) == "FMS1") ind=0;
+					if (getprop(me.NAVSRC) == "FMS2") ind=1;
+            
+                ### Switch FMS --> GS
+					if (getprop(me.dist_rem) <= 8) {
 						citation.set_apr();
 					} else {
+            me.gs_climb = "instrumentation/nav["~ind~"]/gs-rate-of-climb-fpm";
+                ### GS anticipation
+            if (getprop(me.dist_rem) <=10) {
+              if (getprop(me.gs_climb)/60 <= getprop(me.tg_climb)) setprop(me.lock_gs,1);
+              if (getprop(me.lock_gs)) {
+                if (getprop(me.gs_climb)/60 <= getprop(me.tg_climb)) {
+                  me.gs_calc = getprop(me.tg_climb);
+                  setprop("autopilot/settings/pitch-limit",-2)
+                } else me.gs_calc = getprop(me.gs_climb)/60;
+                if (getprop(me.dist_rem) <=9) {
+                  setprop("autopilot/settings/pitch-limit",-15);
+                }
+              } else me.gs_calc = getprop(me.tg_climb);
+              setprop(me.fms_climb,me.gs_calc);
+            } else setprop(me.fms_climb,getprop(me.tg_climb));
 
 						### Last Wp reference ###
 						if (size(v_tod) > 0 and int(getprop(me.dist_rem)) == int(v_tod[v_ind+1])-1) {
@@ -431,6 +439,9 @@ var FMS = {
 				setprop("autopilot/settings/target-altitude-ft",getprop(me.tg_alt));
 			}
 		}
+    if (getprop("autopilot/locks/fms-gs") and getprop(me.lock_alt) == "GS") {
+      setprop(me.fms_climb,getprop("instrumentation/nav["~ind~"]/gs-rate-of-climb-fpm")/60);
+    }
 		settimer(func me.update(),0);
 	}, # end of update
 

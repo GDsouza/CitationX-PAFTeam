@@ -51,7 +51,7 @@ var NDStyles = {
 				isMapStructure:1,			
 				update_on:['toggle_stations','toggle_display_mode','toggle_range'],
 				predicate: func(nd, layer) {
-					var visible = nd.get_switch('toggle_stations') and nd.in_mode('toggle_display_mode', ['MAP']) and (nd.rangeNm() <= 80);
+					var visible = nd.get_switch('toggle_stations') and nd.in_mode('toggle_display_mode', ['MAP','PLAN']) and (nd.rangeNm() <= 80);
 					layer.group.setVisible(visible);
 					if (visible) {
 						layer.update();
@@ -73,7 +73,7 @@ var NDStyles = {
 				isMapStructure:1,
 				update_on:['toggle_display_mode','toggle_waypoints','toggle_range'],
 				predicate: func(nd, layer) {
-					var visible = nd.get_switch('toggle_waypoints') and nd.in_mode('toggle_display_mode', ['MAP']) and nd.rangeNm() < 40;
+					var visible = nd.get_switch('toggle_waypoints') and nd.in_mode('toggle_display_mode', ['MAP','PLAN']) and nd.rangeNm() < 40;
 					layer.group.setVisible( visible );
 					if (visible) {
 						layer.update();

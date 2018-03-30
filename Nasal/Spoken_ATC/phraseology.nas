@@ -88,11 +88,3 @@ var phrase = func(key, arg) {
 		return ph[key];
 }
 
-var phrase_test = func(str,icao) {
-    var h = {ac:"Alpha Bravo Delta", apt:airportinfo(icao), qnh:"1013", q:"29 point 92", deppalt:"3500",
-           torwy:182, headg:108, station:"tower", rwy:"1 0 R "
-            };
-    var test = phrase(str,h);
-    setprop("/sim/sound/voices/atc", test);
-    print("phrase_test(",str,",",icao,"): ", test);
-}

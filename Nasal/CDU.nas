@@ -44,7 +44,8 @@ var navRwy = nil;
 var nrPage = nil;
 var sid_id = nil;
 var select = nil;
-
+var virtual_point = nil;
+var wpt_name = nil;
 var fp = nil; # Active Flight Plan
 var altFp = nil; # Alternate Flight Plan
 
@@ -383,19 +384,19 @@ var cduMain = {
 						cduDisplay = "FLT-PLAN[0]";
 					}
 
-          var wpt_name = fp.getWP(ind).wp_name;
-          var test_ok = 0;
+          wpt_name = fp.getWP(ind).wp_name;
+          virtual_point = 0;
           if (size(wpt_name) == 8 and (left(wpt_name,1) == "E"
               or left(wpt_name,1) == "W")
               and (substr(wpt_name,4,1) == "N"
               or substr(wpt_name,4,1) == "S")) {
-              var test_ok = 1;
+              virtual_point = 1;
           }
           if (ind == getprop(num)-1) {
 					  setprop(fp_active,0);
 					  cduInput = "";
     			}	else if (getprop(fp_active)) {
-              if (fp.getWP(ind).wp_type == "offset-navaid" or test_ok) {
+              if (fp.getWP(ind).wp_type == "offset-navaid" or virtual_point) {
 					      setprop("autopilot/route-manager/input","@DELETE"~ind);
 					      cduInput = "";
     					  setprop(fp_active,1); # to recreate TOD
@@ -421,6 +422,7 @@ var cduMain = {
 				else if (!getprop(fp_active) or find("/",cduInput) != -1) {
           var spl = split("//",cduInput);
           if (size(spl) == 2) {
+            if (spl[0] >= -180 and spl[0] <= 180 and spl[1] >= -90 and spl[1] <= 90)
             cduInput = spl[0]~","~spl[1];
           }
 					setprop("autopilot/route-manager/input","@INSERT"~ind~":"~cduInput);
@@ -984,12 +986,7 @@ var cduMain = {
         if (getprop("autopilot/route-manager/alternate["~x~"]/set-flag")) {
           call(func {fp.getWP(ind).setAltitude(cduInput,'at')},nil,var err = []);
         } else {
-          if (getprop(fp_active)) {
             call(func {fp.getWP(ind).setAltitude(cduInput,'at')},nil,var err = []);
-        	} else { # for showing altitude on the route manager
-		        setprop("autopilot/route-manager/input","@INSERT"~ind~":"~wpt~"@"~cduInput);
-		        setprop("autopilot/route-manager/input","@DELETE"~(ind+1));
-          }
           if (fp.getWP(ind).alt_cstr > getprop("autopilot/settings/asel")/100 and getprop(fp_active)) {
             setprop("autopilot/settings/asel",fp.getWP(ind).alt_cstr/100);
           }

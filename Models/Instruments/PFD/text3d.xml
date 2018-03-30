@@ -123,6 +123,17 @@
         </font-resolution>
     </text>
 
+    <animation>
+        <type>select</type>
+        <object-name>Valt-display</object-name>
+        <condition>
+            <equals>
+                <property>autopilot/locks/altitude</property>
+                <value>VALT</value>
+            </equals>
+        </condition>
+    </animation>
+
     <text>
         <name>CRSlabel</name>
         <offsets>
@@ -274,6 +285,45 @@
         </font-resolution>
     </text>
 
+    <animation>
+      <type>select</type>
+      <object-name>inhg</object-name>
+      <condition>
+        <not>
+          <property>instrumentation/efis/inputs/baro-hpa</property>
+        </not>
+      </condition>
+    </animation>
+
+    <text>
+        <name>hpa</name>
+        <offsets>
+            <x-m>0.0</x-m>
+            <y-m>0.057</y-m>
+            <z-m>0.003</z-m>
+        </offsets>
+        <alignment>center-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type type="string">number-value</type>
+        <property>instrumentation/altimeter/setting-hpa</property>
+        <format>%.0f</format>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.008</character-size>
+        <character-aspect-ratio type="double">1.3</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
+        </font-resolution>
+    </text>
+
+    <animation>
+      <type>select</type>
+      <object-name>hpa</object-name>
+      <condition>
+        <property>instrumentation/efis/inputs/baro-hpa</property>
+      </condition>
+    </animation>
+
     <text>
         <name>ALT-annun</name>
         <offsets>
@@ -317,6 +367,36 @@
     </text>
 
     <text>
+        <name>Metric-alt</name>
+        <offsets>
+            <x-m>-0.002</x-m>
+            <y-m>0.064</y-m>
+            <z-m>0.035</z-m>
+        </offsets>
+        <alignment>center-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type type="string">number-value</type>
+        <property>instrumentation/altimeter/indicated-altitude-ft</property>
+        <factor>0.3048</factor>
+        <format>%.0f</format>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.008</character-size>
+        <character-aspect-ratio type="double">1.3</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
+        </font-resolution>
+    </text>
+
+    <animation>
+      <type>select</type>
+      <object-name>Metric-alt</object-name>
+      <condition>
+        <property>instrumentation/efis/inputs/alt-meters</property>
+      </condition>
+    </animation>
+
+    <text>
         <name>SPD-kt</name>
         <offsets>
             <x-m>0.0</x-m>
@@ -338,6 +418,31 @@
         </font-resolution>
     </text>
 
+    <animation>
+      <type>select</type>
+      <object-name>SPD-kt</object-name>
+      <condition>
+				<and>
+          <or>
+            <equals>
+              <property>/autopilot/locks/altitude</property>
+              <value>FLC</value>
+            </equals>
+            <equals>
+              <property>/autopilot/locks/altitude</property>
+              <value>VFLC</value>
+            </equals>
+						<property>/autopilot/settings/fms</property>
+						<property>/autopilot/locks/speed</property>
+          </or>
+					<less-than-equals>
+						<property>instrumentation/altimeter/indicated-altitude-ft</property>								
+						<value>30650</value>
+					</less-than-equals>
+				</and>
+      </condition>
+    </animation>
+
     <text>
         <name>SPD-mach</name>
         <offsets>
@@ -358,6 +463,31 @@
             <height type="int">64</height>
         </font-resolution>
     </text>
+
+    <animation>
+      <type>select</type>
+      <object-name>SPD-mach</object-name>
+      <condition>
+				<and>
+          <or>
+            <equals>
+              <property>/autopilot/locks/altitude</property>
+              <value>FLC</value>
+            </equals>
+            <equals>
+              <property>/autopilot/locks/altitude</property>
+              <value>VFLC</value>
+            </equals>
+						<property>/autopilot/settings/fms</property>
+						<property>/autopilot/locks/speed</property>
+          </or>
+					<greater-than>
+						<property>instrumentation/altimeter/indicated-altitude-ft</property>								
+						<value>30650</value>
+					</greater-than>
+				</and>
+       </condition>
+    </animation>
 
     <text>
         <name>v1-text</name>
@@ -676,6 +806,17 @@
         </font-resolution>
     </text>
 
+    <animation>
+        <type>select</type>
+        <object-name>VSI-tgt</object-name>
+        <condition>
+            <equals>
+                <property>autopilot/locks/altitude</property>
+                <value>VS</value>
+            </equals>
+        </condition>
+    </animation>
+
     <text>
         <name>VSI-tgt</name>
         <offsets>
@@ -801,79 +942,6 @@
         </font-resolution>
     </text>
 
-
-    <animation>
-      <type>select</type>
-      <object-name>SPD-kt</object-name>
-      <condition>
-				<and>
-          <or>
-            <equals>
-              <property>/autopilot/locks/altitude</property>
-              <value>FLC</value>
-            </equals>
-            <equals>
-              <property>/autopilot/locks/altitude</property>
-              <value>VFLC</value>
-            </equals>
-						<property>/autopilot/settings/fms</property>
-						<property>/autopilot/locks/speed</property>
-          </or>
-					<less-than-equals>
-						<property>instrumentation/altimeter/indicated-altitude-ft</property>								
-						<value>30650</value>
-					</less-than-equals>
-				</and>
-      </condition>
-    </animation>
-
-    <animation>
-      <type>select</type>
-      <object-name>SPD-mach</object-name>
-      <condition>
-				<and>
-          <or>
-            <equals>
-              <property>/autopilot/locks/altitude</property>
-              <value>FLC</value>
-            </equals>
-            <equals>
-              <property>/autopilot/locks/altitude</property>
-              <value>VFLC</value>
-            </equals>
-						<property>/autopilot/settings/fms</property>
-						<property>/autopilot/locks/speed</property>
-          </or>
-					<greater-than>
-						<property>instrumentation/altimeter/indicated-altitude-ft</property>								
-						<value>30650</value>
-					</greater-than>
-				</and>
-       </condition>
-    </animation>
-
-    <animation>
-        <type>select</type>
-        <object-name>VSI-tgt</object-name>
-        <condition>
-            <equals>
-                <property>autopilot/locks/altitude</property>
-                <value>VS</value>
-            </equals>
-        </condition>
-    </animation>
-
-    <animation>
-        <type>select</type>
-        <object-name>Valt-display</object-name>
-        <condition>
-            <equals>
-                <property>autopilot/locks/altitude</property>
-                <value>VALT</value>
-            </equals>
-        </condition>
-    </animation>
-
     <animation>
         <name>green</name>
         <type>material</type>
@@ -884,6 +952,7 @@
         <object-name>Mach</object-name>
         <object-name>Kt</object-name>
         <object-name>Minimums</object-name>
+        <object-name>Metric-alt</object-name>
         <emission>
             <red-prop>sim/color-set/green/r</red-prop>
             <green-prop>sim/color-set/green/g</green-prop>
@@ -985,6 +1054,7 @@
         <object-name>VSI-tgt</object-name>
         <object-name>HDGannun</object-name>
         <object-name>inhg</object-name>
+        <object-name>hpa</object-name>
         <object-name>v1-text</object-name>
         <object-name>vr-text</object-name> 
         <object-name>v2-text</object-name>

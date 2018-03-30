@@ -25,16 +25,21 @@ var nav_id = props.globals.getNode("autopilot/internal/nav-id");
 var nav_type = props.globals.getNode("autopilot/internal/nav-type");
 var nav_type = props.globals.getNode("autopilot/internal/nav-type");
 var hdg_ann = props.globals.getNode("autopilot/settings/heading-bug-deg");
-var v1 = props.globals.getNode("controls/flight/v1");
-var vr = props.globals.getNode("controls/flight/vr");
-var v2 = props.globals.getNode("controls/flight/v2");
-var vref = props.globals.getNode("controls/flight/vref");
-var va = props.globals.getNode("controls/flight/va");
 var mag_hdg = props.globals.getNode("orientation/heading-magnetic-deg");
 #var range = props.globals.getNode("instrumentation/nd/range");
 var map = props.globals.getNode("instrumentation/primus2000/dc840/mfd-map");
 var dist_rem = props.globals.getNode("autopilot/route-manager/distance-remaining-nm");
-
+var Wtot = nil;
+var Flaps = nil;
+var v1 = nil;
+var vr = nil;
+var v2 = nil;
+var vref = nil;
+var v1_m = "controls/flight/v1";
+var vr_m = "controls/flight/vr";
+var v2_m = "controls/flight/v2";
+var vref_m = "controls/flight/vref";
+var va = "controls/flight/va";
 var nd_display = {};
 
 var myCockpit_switches = {
@@ -59,6 +64,8 @@ var myCockpit_switches = {
 'toggle_hdg_bug_only':  {path: '/hdg-bug-only', value:0, type:'BOOL'},
 'toggle_cruise_alt' : 	{path: '/cruise-alt', value: 100, type: 'DOUBLE'},
 'toggle_fp_active' :		{path: '/fp-active',value:0,type:'BOOL'},
+'toggle_alt_meters' :   {path: '/inputs/alt-meters',value:0,type:'BOOL'},
+'toggle_baro_hpa' :     {path: '/inputs/baro-hpa',value:0,type:'BOOL'},
 };
 
 var _list = setlistener("sim/signals/fdm-initialized", func {
@@ -100,8 +107,8 @@ var _list = setlistener("sim/signals/fdm-initialized", func {
 			}
 
 			### Menus init ###
-			m.menu = props.globals.getNode("instrumentation/primus2000/mfd/menu-num");
-			m.s_menu = props.globals.getNode("instrumentation/primus2000/mfd/s-menu");
+			m.menu = "instrumentation/primus2000/mfd/menu-num";
+			m.s_menu = "instrumentation/primus2000/mfd/s-menu";
 
 			m.menus = {};
 			m.menu_val = ["menu1","menu2","menu3","menu4","menu5","menu1b",
@@ -135,14 +142,16 @@ var _list = setlistener("sim/signals/fdm-initialized", func {
 
 			m.tod_timer = nil;
       m.ete = nil;
+      m.white = [1,1,1];
+      m.blue = [0,1,0.9];
 
 			return m;	
-		},
+		}, # end of new
 
 		listen : func { 
-			setlistener("instrumentation/efis/mfd/display-mode", func {
-				if (cmdarg().getValue() == "PLAN") {me.design.trueNorth.show()}
-				else {me.design.trueNorth.hide()}
+			setlistener("instrumentation/efis/mfd/display-mode", func(n) {
+				if (n.getValue() == "PLAN") me.design.trueNorth.show();
+				else me.design.trueNorth.hide();
 			},0,0);
 
 			setlistener("autopilot/locks/alm-tod", func (n) {
@@ -166,6 +175,47 @@ var _list = setlistener("sim/signals/fdm-initialized", func {
 			setlistener("autopilot/route-manager/active", func (n) {
 				setprop("instrumentation/efis/fp-active",n.getValue());
 			},0,0);
+
+      setlistener(me.menu, func {
+        me.razMenu();
+        me.selectMenu();
+        me.VspeedMenu();
+      },0,0);
+
+      setlistener(me.s_menu, func {
+        me.razMenu();
+        me.selectMenu();
+        me.VspeedMenu();
+      },0,0);
+
+      setlistener("instrumentation/primus2000/mfd/cdr-tot", func {
+        me.showRect();
+      },0,0);
+
+      setlistener("/controls/flight/flaps", func {
+        me.VspeedUpdate();
+        me.VspeedMenu();
+      },0,0);
+
+      setlistener("/controls/flight/v1", func {
+        me.VspeedMenu();
+      },0,0);
+
+      setlistener("/controls/flight/v2", func {
+        me.VspeedMenu();
+      },0,0);
+
+      setlistener("/controls/flight/vr", func {
+        me.VspeedMenu();
+      },0,0);
+
+      setlistener("/controls/flight/vref", func {
+        me.VspeedMenu();
+      },0,0);
+
+      setlistener("/controls/flight/va", func {
+        me.VspeedMenu();
+      },0,0);
 
 		}, # end of listen
 
@@ -197,93 +247,109 @@ var _list = setlistener("sim/signals/fdm-initialized", func {
         me.ete = "ETE "~me.h_ete~":"~sprintf("%02i",me.mn_ete);
       }
 			me.text.navTtw.setText(me.ete);
-			if (!getprop("instrumentation/primus2000/mfd/menu-num")) {
-				me.text.main.setText("MAIN 1/2");
-			} else {me.text.main.setText("MAIN 2/2")}
-			if (dist_rem.getValue() >0) {
+			if (dist_rem.getValue() > 0) {
 				me.text.distRem.setText(sprintf("%.0f",dist_rem.getValue())~" NM");
 			} else {me.text.distRem.setText("")}
 
-		### Menus ###
-			if (me.menu.getValue() == 0) {
-				if (me.s_menu.getValue() == 0) {
+          ##### Update Timer #####			
+			settimer(func me.update(),0);
+
+		}, # end of update
+
+    selectMenu : func {
+      me.setColor(me.white);
+			if (getprop(me.menu) == 0) {
+				me.text.main.setText("MAIN 1/2");
+				if (getprop(me.s_menu) == 0) {
 					me.menus.menu1.setText("PFD");
 					me.menus.menu1b.setText("SETUP");
-					me.menus.menu1b.setColor(1,1,1);
 					me.menus.menu2.setText("MFD");
 					me.menus.menu2b.setText("SETUP");
-					me.menus.menu2b.setColor(1,1,1);
 					me.menus.menu3.setText("ET/FT");
 					me.menus.menu3b.setText("TIMER");
-					me.menus.menu3b.setColor(1,1,1);
 					me.menus.menu4.setText("EICAS");
 					me.menus.menu4b.setText("SYS");
-					me.menus.menu4b.setColor(1,1,1);
 					me.menus.menu5.setText("V");
 					me.menus.menu5b.setText("SPEED");
-					me.menus.menu5b.setColor(1,1,1);
-					me.show_rect();
 				}
-				if (me.s_menu.getValue() == 2) {
+				if (getprop(me.s_menu) == 1) {
+					me.menus.menu1.setText("BARO");
+					me.menus.menu2.setText("M-ALT");
+				}
+				if (getprop(me.s_menu) == 2) {
 					me.menus.menu1.setText("VOR");
-					me.menus.menu1b.setText("");
 					me.menus.menu2.setText("APT");
-					me.menus.menu2b.setText("");
 					me.menus.menu3.setText("FIX");
-					me.menus.menu3b.setText("");
 					me.menus.menu4.setText("TRAFF");
-					me.menus.menu4b.setText("");
 					me.menus.menu5.setText("V");
 					me.menus.menu5b.setText("PROF");
-					me.menus.menu5b.setColor(1,1,1);
-					me.show_rect();
 				}
-				if (me.s_menu.getValue() == 5) {
-					me.menus.menu1.setText("V1");
-					me.menus.menu1b.setText(sprintf("%03d",v1.getValue()));
-					me.menus.menu1b.setColor(0,1,0.9);
-					me.menus.menu2.setText("Vr");
-					me.menus.menu2b.setText(sprintf("%03d",vr.getValue()));
-					me.menus.menu2b.setColor(0,1,0.9);
-					me.menus.menu3.setText("V2");
-					me.menus.menu3b.setText(sprintf("%03d",v2.getValue()));
-					me.menus.menu3b.setColor(0,1,0.9);
-					me.menus.menu4.setText("Vref");
-					me.menus.menu4b.setText(sprintf("%03d",vref.getValue()));
-					me.menus.menu4b.setColor(0,1,0.9);
-					me.menus.menu5.setText("Vapp");
-					me.menus.menu5b.setText(sprintf("%03d",va.getValue()));
-					me.menus.menu5b.setColor(0,1,0.9);
-					me.show_rect();
-				}
-
-			} else if (me.menu.getValue() == 1){
+			} else {
+        me.text.main.setText("MAIN 2/2");
 				me.menus.menu1.setText("SRC");
 				me.menus.menu1b.setText("1 FMS 2");
-				me.menus.menu1b.setColor(1,1,1);
-				me.menus.menu2.setText("");
-				me.menus.menu2b.setText("");
 				me.menus.menu3.setText("LRU");
 				me.menus.menu3b.setText("TEST");
-				me.menus.menu3b.setColor(1,1,1);
-				me.menus.menu4.setText("");
-				me.menus.menu4b.setText("");
 				me.menus.menu5.setText("MAINT");
-				me.menus.menu5b.setText("");
-				me.show_rect();
 			}
+    }, # end of selectMenu
 
-##### Design #####
-			if (getprop("instrumentation/efis/mfd/display-mode")=="PLAN") {
-				me.design.trueNorth.show();
-			}else{
-				me.design.trueNorth.hide()}
+    VspeedUpdate : func {
+	    Wtot = getprop("yasim/gross-weight-lbs");
+	    Flaps = getprop("controls/flight/flaps");
+	    if (Flaps > 0.142) {
+		    if (Wtot <31000) {v1=115;vr=118;v2=129}
+		    if (Wtot >=31000 and Wtot <33000) {v1=116;vr=120;v2=128}
+		    if (Wtot >=33000 and Wtot <34000) {v1=121;vr=126;v2=131}
+		    if (Wtot >=34000 and Wtot <35000) {v1=124;vr=128;v2=133}
+		    if (Wtot >=35000 and Wtot <36100) {v1=126;vr=131;v2=135}
+		    if (Wtot >=36100) {v1=129;vr=133;v2=137}
+	    }
+	    else {
+		    if (Wtot <27000) {v1=122;vr=126;v2=139}
+		    if (Wtot >=27000 and Wtot <29000) {v1=123;vr=126;v2=139}
+		    if (Wtot >=29000 and Wtot <31000) {v1=125;vr=126;v2=138}
+		    if (Wtot >=31000 and Wtot <33000) {v1=126;vr=126;v2=138}
+		    if (Wtot >=33000 and Wtot <34000) {v1=127;vr=127;v2=138}
+		    if (Wtot >=34000 and Wtot <35000) {v1=130;vr=130;v2=140}
+		    if (Wtot >=35000 and Wtot <36100) {v1=132;vr=132;v2=143}
+		    if (Wtot >=36100) {v1=134;vr=134;v2=144}
+	    }
+	    setprop("controls/flight/v1",v1);
+	    setprop("controls/flight/vr",vr);
+	    setprop("controls/flight/v2",v2);
+	    setprop("controls/flight/vf5",180);
+	    setprop("controls/flight/vf15",160);
+	    setprop("controls/flight/vf35",140);
+    }, # end of VspeedUpdate
 
-##### Update Timer #####			
-			settimer(func me.update(),0);
-		},
+    VspeedMenu : func {      
+			if (getprop(me.menu) == 0 and getprop(me.s_menu) == 5) {
+				me.menus.menu1.setText("V1");
+				me.menus.menu1b.setText(sprintf("%03d",getprop(v1_m)));
+				me.menus.menu2.setText("Vr");
+				me.menus.menu2b.setText(sprintf("%03d",getprop(vr_m)));
+				me.menus.menu3.setText("V2");
+				me.menus.menu3b.setText(sprintf("%03d",getprop(v2_m)));
+				me.menus.menu4.setText("Vref");
+				me.menus.menu4b.setText(sprintf("%03d",getprop(vref_m)));
+				me.menus.menu5.setText("Vapp");
+				me.menus.menu5b.setText(sprintf("%03d",getprop(va)));
+        me.setColor(me.blue);
+			}
+    }, # end of VspeedMenu
 
-		show_rect: func() {
+    setColor : func(color) {
+      for (var n=5;n<10;n+=1) {
+        me.menus[me.menu_val[n]].setColor(color);
+      }
+    }, # end of setColor
+
+    razMenu : func {
+      for (var n=1;n<10;n+=1) me.menus[me.menu_val[n]].setText("");
+    }, # end of razMenu
+
+		showRect: func() {
 			var n = 0;
 			foreach(var element;me.cdr) {
 				if (getprop("instrumentation/primus2000/mfd/cdr"~n)) {
@@ -291,16 +357,30 @@ var _list = setlistener("sim/signals/fdm-initialized", func {
 				} else {me.rect[element].hide()}
 				n+=1;
 			}
-		}
-	};
+		}, # end of showRect
+
+	}; # end of MFD_canvas
 
 ###### Main #####
 	var mfd = MFD_canvas.new();
 	mfd.listen();
+
+	var v_speed = func() {		
+		mfd.VspeedUpdate();
+    mfd.VspeedMenu();
+	}
+	var timer = maketimer(10,v_speed);
+	timer.singleShot = 1;
+	timer.start();
+
+  mfd.selectMenu();
+#  mfd.VspeedUpdate();
+#  mfd.VspeedMenu();
+  mfd.showRect();
 	mfd.update();
 	print('MFD Canvas ... Ok');
 #################
 
 	removelistener(_list); # run ONCE
-});
+}); # end of list
 

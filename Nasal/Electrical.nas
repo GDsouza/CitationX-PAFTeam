@@ -1,17 +1,20 @@
 ####    jet engine electrical system    ####
 ####    Syd Adams    ####
 
-var count=0;
-var ammeter_ave = 0.0;
-var Lbus = props.globals.initNode("/systems/electrical/left-bus",0,"DOUBLE");
-var Rbus = props.globals.initNode("/systems/electrical/right-bus",0,"DOUBLE");
-var Amps = props.globals.initNode("/systems/electrical/amps",0,"DOUBLE");
-#var EXT  = props.globals.initNode("/controls/electric/external-power",1,"DOUBLE");
-var XTie  = props.globals.initNode("/systems/electrical/xtie",0,"BOOL");
-var AvPwr = props.globals.initNode("controls/electric/avionics-power",0,"BOOL");
+props.globals.initNode("/systems/electrical/left-bus",0,"DOUBLE");
+props.globals.initNode("/systems/electrical/right-bus",0,"DOUBLE");
+props.globals.initNode("/systems/electrical/amps",0,"DOUBLE");
+props.globals.initNode("/systems/electrical/xtie",0,"BOOL");
+props.globals.initNode("controls/electric/avionics-power",0,"BOOL");
 props.globals.initNode("controls/lighting/anti-coll",0,"INT");
+var Lbus = "systems/electrical/left-bus";
+var Rbus= "systems/electrical/right-bus";
+var XTie  = "systems/electrical/xtie";
+var AvPwr = "controls/electric/avionics-power";
 var lbus_volts = 0.0;
 var rbus_volts = 0.0;
+var ammeter_ave = 0.0;
+var count=0;
 
 var lbus_input=[];
 var lbus_output=[];
@@ -55,7 +58,6 @@ setprop("/systems/electrical/left-bus-norm",0);
 setprop("/systems/electrical/right-emer-bus",0);
 setprop("/systems/electrical/right-bus-norm",0);
 
-#var battery = Battery.new(switch-prop,volts,amps,amp_hours,charge_percent,charge_amps);
 var Battery = {
     new : func(swtch,vlt,amp,hr,chp,cha){
     m = { parents : [Battery] };
@@ -103,9 +105,8 @@ var Battery = {
         return output;
         }else return 0;
     }
-};
+}; # end of Battery
 
-# var alternator = Alternator.new(num,switch,rpm_source,rpm_threshold,volts,amps);
 var Alternator = {
     new : func (num,switch,src,thr,vlt,amp){
         m = { parents : [Alternator] };
@@ -158,20 +159,14 @@ var Alternator = {
         }
         return ampout;
     }
-};
+}; # end of Alternator
 
 var battery = Battery.new("/controls/electric/battery-switch",24,30,34,1.0,7.0);
 var battery1 = Battery.new("/controls/electric/battery-switch[1]",24,30,34,1.0,7.0);
 var alternator1 = Alternator.new(0,"controls/electric/engine[0]/generator","/engines/engine[0]/fan",20.0,28.0,60.0);
 var alternator2 = Alternator.new(1,"controls/electric/engine[1]/generator","/engines/engine[1]/fan",20.0,28.0,60.0);
 
-#####################################
-setlistener("/sim/signals/fdm-initialized", func {
-    init_switches();
-    settimer(update_electrical,5);
-    print("Electrical System ... Ok");
-},0,0);
-
+#############
 var init_switches = func{
     var AVswitch=props.globals.initNode("controls/electric/avionics-switch",0,"INT");
     setprop("controls/lighting/instruments-norm",0.0);
@@ -300,7 +295,7 @@ update_virtual_bus = func(dt) {
             power_source = "alternator1";
         }
         lbus_volts *=PWR;
-        Lbus.setValue(lbus_volts);
+        setprop(Lbus,lbus_volts);
         load += lh_bus(lbus_volts);
     }else{
         var battery1_volts = battery1.get_output_volts();
@@ -314,12 +309,12 @@ update_virtual_bus = func(dt) {
             power_source = "alternator2";
         }
         rbus_volts *=PWR;
-        Rbus.setValue(rbus_volts);
+        setprop(Rbus,rbus_volts);
         load += rh_bus(rbus_volts);
     }
     count=1-count;
     if(rbus_volts > 5 and  lbus_volts>5) xtie=1;
-    XTie.setValue(xtie);
+    setprop(XTie,xtie);
     if(rbus_volts > 5 or  lbus_volts>5) load += lighting(24);
 
     ammeter = 0.0;
@@ -383,21 +378,20 @@ lighting = func(bv) {
 		return load;
 }
 
-var batt_switch=func{
-  bat1_sw = getprop("controls/electric/battery-switch[0]");
-  bat2_sw = getprop("controls/electric/battery-switch[1]");
-	l_emer = "systems/electrical/left-emer-bus";
-	l_norm = "systems/electrical/left-bus-norm";
-	r_emer = "systems/electrical/right-emer-bus";
-	r_norm = "systems/electrical/right-bus-norm";
-	apu_gen = getprop("controls/electric/APU-generator");
-	ext_pwr = getprop("controls/electric/external-power");
-	l_gen = getprop("engines/engine[0]/amp-v");
-	r_gen = getprop("engines/engine[1]/amp-v");
-	avionics = getprop("controls/electric/avionics-switch");
+########## Switches ###########
+var l_emer = "systems/electrical/left-emer-bus";
+var	l_norm = "systems/electrical/left-bus-norm";
+var	r_emer = "systems/electrical/right-emer-bus";
+var	r_norm = "systems/electrical/right-bus-norm";
+var	apu_gen = "controls/electric/APU-generator";
+var	ext_pwr = "controls/electric/external-power";
+var	l_gen = "engines/engine[0]/amp-v";
+var	r_gen = "engines/engine[1]/amp-v";
 
-	if (bat1_sw) {
-		if (ext_pwr or apu_gen or l_gen >24 or r_gen >24) {
+
+setlistener("controls/electric/battery-switch[0]",func(n) {
+  if (n.getValue()) {
+		if (getprop(ext_pwr) or getprop(apu_gen) or getprop(l_gen) >24 or getprop(r_gen) >24) {
 			setprop(l_norm,1);
 			setprop(l_emer,0);
 		} else {
@@ -408,8 +402,11 @@ var batt_switch=func{
 			setprop(l_norm,0);
 			setprop(l_emer,0);
 	}			
-	if (bat2_sw) {
-		if (ext_pwr or apu_gen or l_gen >24 or r_gen >24) {
+},0,0);
+
+setlistener("controls/electric/battery-switch[1]",func(n) {
+  if (n.getValue()) {
+		if (getprop(ext_pwr) or getprop(apu_gen) or getprop(l_gen) >24 or getprop(r_gen) >24) {
 			setprop(r_norm,1);
 			setprop(r_emer,0);
 		} else {
@@ -420,30 +417,39 @@ var batt_switch=func{
 			setprop(r_norm,0);
 			setprop(r_emer,0);
 	}			
-	if(avionics == 2 and getprop(r_norm)) {
-		if(!AvPwr.getValue()) {AvPwr.setValue(1)}
-	} else {
-		if(AvPwr.getValue()) {AvPwr.setValue(0)}
-	}
-}
+},0,0);
 
-var anticoll_switch = func {
-	if (getprop("controls/lighting/anti-coll")==1) {
+setlistener("controls/electric/avionics-switch",func(n) {
+  if (n.getValue() == 2 and getprop(r_norm)) {
+		if(!getprop(AvPwr)) setprop(AvPwr,1);
+	} else {
+		if(getprop(AvPwr)) setprop(AvPwr,0);
+	}
+},1,1);
+
+setlistener("controls/lighting/anti-coll",func(n) {
+	if (n.getValue()==1) {
 		setprop("controls/lighting/beacon",1);
 		setprop("controls/lighting/strobe",0);
-	} else if (getprop("controls/lighting/anti-coll")==2) {
+	} else if (n.getValue()==2) {
 		setprop("controls/lighting/beacon",0);
 		setprop("controls/lighting/strobe",1);
 	} else {
 		setprop("controls/lighting/beacon",0);
 		setprop("controls/lighting/strobe",0);
 	}
-}
+},0,0);
+
+ ######## Main ##########
+var elec_stl = setlistener("/sim/signals/fdm-initialized", func {
+    init_switches();
+    settimer(update_electrical,5);
+    print("Electrical System ... Ok");
+    removelistener(elec_stl);
+},0,0);
 
 update_electrical = func {
     scnd = getprop("sim/time/delta-sec");
     update_virtual_bus(scnd);
-		batt_switch();
-		anticoll_switch();
 settimer(update_electrical, 0);
 }

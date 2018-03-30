@@ -128,7 +128,7 @@
         <offsets>
             <x-m>0.001</x-m>
             <y-m>-0.074</y-m>
-            <z-m>0.088</z-m>
+            <z-m>0.078</z-m>
         </offsets>
         <alignment>left-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -147,7 +147,7 @@
         <offsets>
             <x-m>0.001</x-m>
             <y-m>0.077</y-m>
-            <z-m>0.088</z-m>
+            <z-m>0.078</z-m>
         </offsets>
         <alignment>right-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -167,7 +167,7 @@
         <offsets>
             <x-m>0.001</x-m>
             <y-m>-0.074</y-m>
-            <z-m>0.078</z-m>
+            <z-m>0.068</z-m>
         </offsets>
         <alignment>left-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -186,7 +186,7 @@
         <offsets>
             <x-m>0.001</x-m>
             <y-m>0.077</y-m>
-            <z-m>0.078</z-m>
+            <z-m>0.068</z-m>
         </offsets>
         <alignment>right-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -206,7 +206,7 @@
         <offsets>
             <x-m>0.001</x-m>
             <y-m>-0.074</y-m>
-            <z-m>0.068</z-m>
+            <z-m>0.058</z-m>
         </offsets>
         <alignment>left-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -225,7 +225,7 @@
         <offsets>
             <x-m>0.001</x-m>
             <y-m>0.077</y-m>
-            <z-m>0.068</z-m>
+            <z-m>0.058</z-m>
         </offsets>
         <alignment>right-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -245,7 +245,7 @@
         <offsets>
             <x-m>0.001</x-m>
             <y-m>-0.074</y-m>
-            <z-m>0.058</z-m>
+            <z-m>0.048</z-m>
         </offsets>
         <alignment>left-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -264,7 +264,7 @@
         <offsets>
             <x-m>0.001</x-m>
             <y-m>0.077</y-m>
-            <z-m>0.058</z-m>
+            <z-m>0.048</z-m>
         </offsets>
         <alignment>right-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -284,7 +284,7 @@
         <offsets>
             <x-m>0.001</x-m>
             <y-m>-0.074</y-m>
-            <z-m>0.048</z-m>
+            <z-m>0.038</z-m>
         </offsets>
         <alignment>left-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -303,7 +303,7 @@
         <offsets>
             <x-m>0.001</x-m>
             <y-m>0.077</y-m>
-            <z-m>0.048</z-m>
+            <z-m>0.038</z-m>
         </offsets>
         <alignment>right-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -323,7 +323,7 @@
         <offsets>
             <x-m>0.001</x-m>
             <y-m>-0.074</y-m>
-            <z-m>0.038</z-m>
+            <z-m>0.028</z-m>
         </offsets>
         <alignment>left-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -342,7 +342,7 @@
         <offsets>
             <x-m>0.001</x-m>
             <y-m>0.077</y-m>
-            <z-m>0.038</z-m>
+            <z-m>0.028</z-m>
         </offsets>
         <alignment>right-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -362,7 +362,7 @@
         <offsets>
             <x-m>0.001</x-m>
             <y-m>-0.074</y-m>
-            <z-m>0.028</z-m>
+            <z-m>0.018</z-m>
         </offsets>
         <alignment>left-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -381,7 +381,7 @@
         <offsets>
             <x-m>0.001</x-m>
             <y-m>0.077</y-m>
-            <z-m>0.028</z-m>
+            <z-m>0.018</z-m>
         </offsets>
         <alignment>right-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -401,7 +401,7 @@
         <offsets>
             <x-m>0.001</x-m>
             <y-m>-0.074</y-m>
-            <z-m>0.018</z-m>
+            <z-m>0.008</z-m>
         </offsets>
         <alignment>left-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -420,7 +420,7 @@
         <offsets>
             <x-m>0.001</x-m>
             <y-m>0.077</y-m>
-            <z-m>0.018</z-m>
+            <z-m>0.008</z-m>
         </offsets>
         <alignment>right-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -440,7 +440,7 @@
         <offsets>
             <x-m>0.001</x-m>
             <y-m>-0.074</y-m>
-            <z-m>0.008</z-m>
+            <z-m>-0.002</z-m>
         </offsets>
         <alignment>left-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -459,7 +459,7 @@
         <offsets>
             <x-m>0.001</x-m>
             <y-m>0.077</y-m>
-            <z-m>0.008</z-m>
+            <z-m>-0.002</z-m>
         </offsets>
         <alignment>right-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -479,7 +479,7 @@
         <offsets>
             <x-m>0.001</x-m>
             <y-m>-0.074</y-m>
-            <z-m>-0.002</z-m>
+            <z-m>-0.012</z-m>
         </offsets>
         <alignment>left-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -498,7 +498,7 @@
         <offsets>
             <x-m>0.001</x-m>
             <y-m>0.077</y-m>
-            <z-m>-0.002</z-m>
+            <z-m>-0.012</z-m>
         </offsets>
         <alignment>right-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -518,7 +518,7 @@
         <offsets>
             <x-m>0.001</x-m>
             <y-m>-0.074</y-m>
-            <z-m>-0.012</z-m>
+            <z-m>-0.022</z-m>
         </offsets>
         <alignment>left-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -537,7 +537,7 @@
         <offsets>
             <x-m>0.001</x-m>
             <y-m>0.077</y-m>
-            <z-m>-0.012</z-m>
+            <z-m>-0.022</z-m>
         </offsets>
         <alignment>right-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -557,7 +557,7 @@
         <offsets>
             <x-m>0.001</x-m>
             <y-m>-0.074</y-m>
-            <z-m>-0.022</z-m>
+            <z-m>-0.032</z-m>
         </offsets>
         <alignment>left-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -576,7 +576,7 @@
         <offsets>
             <x-m>0.001</x-m>
             <y-m>0.077</y-m>
-            <z-m>-0.022</z-m>
+            <z-m>-0.032</z-m>
         </offsets>
         <alignment>right-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -596,7 +596,7 @@
         <offsets>
             <x-m>0.001</x-m>
             <y-m>-0.074</y-m>
-            <z-m>-0.032</z-m>
+            <z-m>-0.042</z-m>
         </offsets>
         <alignment>left-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -615,7 +615,7 @@
         <offsets>
             <x-m>0.001</x-m>
             <y-m>0.077</y-m>
-            <z-m>-0.032</z-m>
+            <z-m>-0.042</z-m>
         </offsets>
         <alignment>right-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -635,7 +635,7 @@
         <offsets>
             <x-m>0.001</x-m>
             <y-m>-0.074</y-m>
-            <z-m>-0.042</z-m>
+            <z-m>-0.052</z-m>
         </offsets>
         <alignment>left-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -654,7 +654,7 @@
         <offsets>
             <x-m>0.001</x-m>
             <y-m>0.077</y-m>
-            <z-m>-0.042</z-m>
+            <z-m>-0.052</z-m>
         </offsets>
         <alignment>right-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -674,7 +674,7 @@
         <offsets>
             <x-m>0.001</x-m>
             <y-m>-0.074</y-m>
-            <z-m>-0.052</z-m>
+            <z-m>-0.062</z-m>
         </offsets>
         <alignment>left-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -693,7 +693,7 @@
         <offsets>
             <x-m>0.001</x-m>
             <y-m>0.077</y-m>
-            <z-m>-0.052</z-m>
+            <z-m>-0.062</z-m>
         </offsets>
         <alignment>right-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -713,7 +713,7 @@
         <offsets>
             <x-m>0.001</x-m>
             <y-m>-0.074</y-m>
-            <z-m>-0.062</z-m>
+            <z-m>-0.072</z-m>
         </offsets>
         <alignment>left-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -732,7 +732,7 @@
         <offsets>
             <x-m>0.001</x-m>
             <y-m>0.077</y-m>
-            <z-m>-0.062</z-m>
+            <z-m>-0.072</z-m>
         </offsets>
         <alignment>right-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>

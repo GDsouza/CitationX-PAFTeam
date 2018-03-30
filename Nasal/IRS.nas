@@ -1,11 +1,14 @@
 ### Canvas IRS (Inertial Reference System) ###
 ### C. Le Moigne (clm76) - 2017 ###
 
-var cdu_init = props.globals.getNode("instrumentation/cdu/pos-init",1);
-var selected = props.globals.getNode("instrumentation/irs/selected",1);
-var posit = props.globals.getNode("instrumentation/irs/positionned",1);
-var align = props.globals.initNode("instrumentation/irs/align",0,"BOOL",1);
-var test = props.globals.initNode("instrumentation/irs/test",0,"BOOL",1);
+props.globals.initNode("instrumentation/irs/positionned",0,"BOOL",1);
+props.globals.initNode("instrumentation/irs/align",0,"BOOL",1);
+props.globals.initNode("instrumentation/irs/test",0,"BOOL",1);
+var align = "instrumentation/irs/align";
+var cdu_init = "instrumentation/cdu/pos-init";
+var selected = "instrumentation/irs/selected";
+var posit = "instrumentation/irs/positionned";
+var test = "instrumentation/irs/test";
 var f_align = 0; # flag
 var f_fault = 0; # flag
 var f_navready = 0; # flag
@@ -37,18 +40,17 @@ var IRS = {
 		m.text.BattFail.hide();
 
 		m.irs.setVisible(1);
-		selected.setValue(0);
+		setprop(selected,0);
 
 		return m
 	},
 
 	### Listeners ###
 	listen : func {
-
 		setlistener(cdu_init, func(n) {
 			if (n.getValue()) {
 				me.text.NavRdy.hide();
-				align.setValue(1);
+				setprop(align,1);
 				me.navReady();
 				me.irsMain();
 				f_align = 1;
@@ -56,7 +58,7 @@ var IRS = {
 			} else {
 				me.text.Align.hide();
 				me.text.NavRdy.hide();
-				posit.setValue(0);
+				setprop(posit,0);
 			}
 		},0,0);
 
@@ -64,7 +66,7 @@ var IRS = {
 
 	irsMain : func {
 		setlistener(posit, func(n) {
-			if (n.getValue()) {align.setValue(0)}
+			if (n.getValue()) {setprop(align,0)}
 		},0,0);
 					
 		setlistener(selected, func(n) {
@@ -73,19 +75,19 @@ var IRS = {
 				f_fault = 0;
 				var delay_timer = maketimer(2,func() {
 					if (n.getValue() == -1 or n.getValue() == 1) {
-						align.setValue(1);
+						setprop(align,1);
 						f_align = 1;
 					}
 					else {
 						delay_timer.stop();
-						align.setValue(0);
+						setprop(align,0);
 						
 					}
 				});
 				delay_timer.singleShot = 1;
 				delay_timer.start();
 			} else if (n.getValue() == 0) {
-				if (!posit.getValue()) {me.text.Fault.show();f_fault = 1}
+				if (!getprop(posit)) {me.text.Fault.show();f_fault = 1}
 				else {me.text.Fault.hide();f_fault = 0}
 			} else if (n.getValue() == -2) {
 				var off_timer = maketimer(3,func() {
@@ -94,7 +96,7 @@ var IRS = {
 						me.text.Align.hide();
 						me.text.NavRdy.hide();
 						me.text.Fault.hide();			
-						posit.setValue(0);
+						setprop(posit,0);
 						f_align = 0;
 						f_fault = 0;
 						f_navready = 0;
@@ -107,7 +109,7 @@ var IRS = {
 
 		setlistener(align, func(n) {
 			if (n.getValue()) {
-				posit.setValue(0);
+				setprop(posit,0);
 				me.text.NavRdy.hide();
 				me.navReady();				
 				f_align = 1;
@@ -141,8 +143,8 @@ var IRS = {
 			me.text.Align.hide();
 			me.text.NavRdy.show();
 			f_navready = 1;
-			posit.setValue(1);
-			if (selected.getValue() != 0) {
+			setprop(posit,1);
+			if (getprop(selected) != 0) {
 				f_fault = 1;
 				me.fault();
 			} else {f_fault = 0}
@@ -158,7 +160,7 @@ var IRS = {
 			if (t==1) {me.text.Fault.hide()}					
 			t+=1;
 			if(t==2) {t=0}
-			if (selected.getValue()== 0 or selected.getValue() == -2 or !cdu_init.getValue()) {
+			if (getprop(selected)== 0 or getprop(selected) == -2 or !getprop(cdu_init)) {
 				me.fault_timer.stop();
 				me.text.Fault.hide();
 			}

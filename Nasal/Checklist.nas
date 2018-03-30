@@ -1,6 +1,11 @@
 ## Checklists System ##
 ## Christian Le Moigne (clm76) - Avril 2016 ##
 
+props.globals.initNode("instrumentation/checklists/skip",0,"BOOL");
+props.globals.initNode("instrumentation/checklists/chklst-pilot",0,"BOOL");
+var norm_p = "instrumentation/checklists/norm";
+var abn_p = "instrumentation/checklists/abn";
+var nr_page = "instrumentation/checklists/nr-page";
 var page = 0;
 var tittle = "";
 var lines_L = "";
@@ -9,11 +14,6 @@ var chklst = 0;
 var nr_voice = 1;
 var upd = 0;
 var nb = 0;
-var norm_p = props.globals.getNode("instrumentation/checklists/norm",1);
-var abn_p = props.globals.getNode("instrumentation/checklists/abn",1);
-var nr_page = props.globals.getNode("instrumentation/checklists/nr-page",1);
-props.globals.initNode("instrumentation/checklists/skip",0,"BOOL");
-props.globals.initNode("instrumentation/checklists/chklst-pilot",0,"BOOL");
 
 for (var ind=0;ind<15;ind+=1) {
 	props.globals.initNode("instrumentation/checklists/chk["~ind~"]",0,"BOOL");
@@ -32,67 +32,67 @@ var R0 = ['COMPLETE','ON BOARD','BOARD / BRIEF', 'SET','CUTOFF','GEN','NORM','NO
 
 ### APU START ###
 var T1 = "APU START";
-var L1 = ['','APU MasterSwitch','APU Test Button','APU Start','APU Ready To Load','APU Generator Switch','APU DC Volts','APU Bleed Air','Bleed Valve Open'];
-var R1 = ['','ON','PUSH / VERIFY','ON','ILLUMINATED','ON','CHECK 22v min','ON', 'ILLUMINATED'];
+var L1 = ['APU MasterSwitch','APU Test Button','APU Start','APU Ready To Load','APU Generator Switch','APU DC Volts','APU Bleed Air','Bleed Valve Open'];
+var R1 = ['ON','PUSH / VERIFY','ON','ILLUMINATED','ON','CHECK 22v min','ON', 'ILLUMINATED'];
 
 ### STARTUP ###
 var T2 = "STARTUP";
-var L2 = ['','Avionics Switch','Radio','Autopilot','Fuel','Warning Test','Altimeter','Hydraulics','Seat Belt Lts'];
-var R2 = ['','ON','CHECK','DISENGAGED','CHECK QTY LBS','COMPLETE','SET','CHECK','PASS SAFETY'];
+var L2 = ['Avionics Switch','Radio','Autopilot','Fuel','Warning Test','Altimeter','Hydraulics','Seat Belt Lts'];
+var R2 = ['ON','CHECK','DISENGAGED','CHECK QTY LBS','COMPLETE','SET','CHECK','PASS SAFETY'];
 
 ### CABIN PRESSURIZATION ###
 var T3 = "CABIN PRESSURIZATION";
-var L3 = ['','Pressurization Switches','            or','Pressurization Control','Rate Control','ALT Select'];
-var R3 = ['','NORM','','ALT SELECT','SET 500 fpm','SET 1000 ab Cruise Alt'];
+var L3 = ['Pressurization Switches','            or','Pressurization Control','Rate Control','ALT Select'];
+var R3 = ['NORM','','ALT SELECT','SET 500 fpm','SET 1000 ab Cruise Alt'];
 
 ###  START ENGINES ###
 var T4 = "LEFT ENGINE START";
-var L4 = ['','Throttle','Starter','Left Engine','N2 at 56%','N1 Rotation','Oil Pressure','ITT Stable','Volts / Amp / Oil'];
-var R4 = ['','CUTOFF','ON','START','VERIFY','CONFIRM','CHECK','VERIFY','CHECK'];
+var L4 = ['Throttle','Starter','Left Engine','N2 at 56%','N1 Rotation','Oil Pressure','ITT Stable','Volts / Amp / Oil'];
+var R4 = ['CUTOFF','ON','START','VERIFY','CONFIRM','CHECK','VERIFY','CHECK'];
 
 var T5 = "RIGHT ENGINE START";
-var L5 = ['','Throttle','Starter','Right Engine','N2 at 56%','N1 Rotation','Oil Pressure','ITT Stable','Volts / Amp / Oil'];
-var R5 = ['','CUTOFF','ON','START','VERIFY','CONFIRM','CHECK','VERIFY','CHECK'];
+var L5 = ['Throttle','Starter','Right Engine','N2 at 56%','N1 Rotation','Oil Pressure','ITT Stable','Volts / Amp / Oil'];
+var R5 = ['CUTOFF','ON','START','VERIFY','CONFIRM','CHECK','VERIFY','CHECK'];
 
 ###  BEFORE TAXI ###
 var T6 = "BEFORE TAXI";
-var L6 = ['','Flight Controls','L / R Pitot Heat','Taxi Lights','Transponder','(AP) Initial Altitude','(AP) Initial HDG','(AP) Initial CRS','Flight Plan Clearance','Taxi Instructions','Anti Coll Lights'];
-var R6 = ['','FREE & CORRECT','ON','ON','CODE SET / STBY','SET','SET','SET','COPIED','RECEIVED','ON'];
+var L6 = ['Flight Controls','L / R Pitot Heat','Taxi Lights','Transponder','(AP) Initial Altitude','(AP) Initial HDG','(AP) Initial CRS','Flight Plan Clearance','Taxi Instructions','Anti Coll Lights'];
+var R6 = ['FREE & CORRECT','ON','ON','CODE SET / STBY','SET','SET','SET','COPIED','RECEIVED','ON'];
 
 ### TAXIING ###
 var T7 = "TAXIING";
-var L7 = ['','Parking Brake','Taxi Area','Throttles','Brakes','Flight Instruments',''];
-var R7 = ['','OFF','CLEAR','ADVANCE SLOWLY','CHECK','CHECK','','TAXI TO RUNWAY : Max 20 kts   '];
+var L7 = ['Parking Brake','Taxi Area','Throttles','Brakes','Flight Instruments',''];
+var R7 = ['OFF','CLEAR','ADVANCE SLOWLY','CHECK','CHECK','','TAXI TO RUNWAY : Max 20 kts   '];
 
 ### BEFORE TAKEOFF ###
 var T8 = "BEFORE TAKEOFF";
-var L8 = ['','Flight Timer','Flaps Slats','Speed Brakes','Taxi Lights','Landing Lights','Navigation Lights','Annunciator Panel','Transponder'];
-var R8 = ['','SET','15 deg','RETRACTED','OFF','ON','ON','CLEAR','SET ALT'];
+var L8 = ['Flight Timer','Flaps Slats','Speed Brakes','Taxi Lights','Landing Lights','Navigation Lights','Annunciator Panel','Transponder'];
+var R8 = ['SET','15 deg','RETRACTED','OFF','ON','ON','CLEAR','SET ALT'];
 
 ### TAKEOFF ###
 var T9 = "TAKEOFF";
-var L9 = ['','Brakes','Throttles','Brakes','Landing Gear','','','Flaps / Slats','EICAS','Annunciator','Instruments','Throttles','EICAS:Both Engines'];
-var R9 = ['','HOLD','TAKEOFF THRUST','RELEASE','RETRACT','','Above 170 KIAS         ','RETRACT','CHECK NORMAL','CHECK','CHECK','SET CLIMB POWER','N1 max 98%'];
+var L9 = ['Brakes','Throttles','Brakes','Landing Gear','','','Flaps / Slats','EICAS','Annunciator','Instruments','Throttles','EICAS:Both Engines'];
+var R9 = ['HOLD','TAKEOFF THRUST','RELEASE','RETRACT','','Above 170 KIAS         ','RETRACT','CHECK NORMAL','CHECK','CHECK','SET CLIMB POWER','N1 max 98%'];
 
 ### APU SHUTDOWN ###
 var T10 = "APU SHUTDOWN";
-var L10 = ['','APU Start Switch','APU Bleed Air','READY TO LOAD','APU Generator','APU Master'];
-var R10 = ['','STOP','OFF','EXTINGUISHED','OFF','OFF'];  
+var L10 = ['APU Start Switch','APU Bleed Air','READY TO LOAD','APU Generator','APU Master'];
+var R10 = ['STOP','OFF','EXTINGUISHED','OFF','OFF'];  
 
 ### CRUISE CLIMB ###
 var T11 = "CRUISE CLIMB";
-var L11 = ['','','','Autopilot','Fuel Quantity','Seat Belts Switch','Landing Lights','Pressurization System'];
-var R11 = ['','Trim Initial Climb 250 KIAS/2500 fpm','','CHECK','CHECK','OFF','OFF','CHECK','','Max Speed below 8,000 is 270 KIAS','','Above FL180 set altimeters to 29.92'];
+var L11 = ['','','Autopilot','Fuel Quantity','Seat Belts Switch','Landing Lights','Pressurization System'];
+var R11 = ['Trim Initial Climb 250 KIAS/2500 fpm','','CHECK','CHECK','OFF','OFF','CHECK','','Max Speed below 8,000 is 270 KIAS','','Above FL180 set altimeters to 29.92'];
 
 ### CRUISE ###
 var T12 = "CRUISE";
-var L12 = ['','Engines Instruments','Fuel Quantity'];
-var R12 = ['','CHECK','CHECK'];
+var L12 = ['Engines Instruments','Fuel Quantity'];
+var R12 = ['CHECK','CHECK'];
 
 ### DESCENT ###
 var T13 = "DESCENT";
-var L13 = ['','LH / RH Windshield Anti-Ice','APU','Seat Belt Switch','','','','','','',''];
-var R13 = ['','ON','AS DESIRED below FL310','ON','','Desc Airspeed to FL310  0.65 mach','','','Max Speed above 8,000 is 280 KIAS','Max Speed below 8,000 is 250 KIAS'];
+var L13 = ['LH / RH Windshield Anti-Ice','APU','Seat Belt Switch','','','','','','',''];
+var R13 = ['ON','AS DESIRED below FL310','ON','','Desc Airspeed to FL310  0.65 mach','','','Max Speed above 8,000 is 280 KIAS','Max Speed below 8,000 is 250 KIAS'];
 
 ### APPROACH ###
 var T14 = "APPROACH";
@@ -101,23 +101,23 @@ var R14 = ['SET TO LOCAL','PASS SAFETY','ON','200 KIAS','DEPLOY','At approximate
 
 ### BEFORE LANDING ###
 var T15 = "BEFORE LANDING";
-var L15 = ['','Landing Gear','Autopilot','Landing Speed'];
-var R15 = ['','3 GREEN LIGHTS','DISENGAGE','120 KIAS'];
+var L15 = ['Landing Gear','Autopilot','Landing Speed'];
+var R15 = ['3 GREEN LIGHTS','DISENGAGE','120 KIAS'];
 
 ### LANDING ###
 var T16 = "LANDING";
-var L16 = ['','Throttles','','','','Brakes','Reverse Thrust',''];
-var R16 = ['','IDLE','','After Nose Wheel Touchdown   ','','AS REQUIRED','AS REQUIRED','','At 65 kts Disengage Reverse Thrust '];
+var L16 = ['Throttles','','','','Brakes','Reverse Thrust',''];
+var R16 = ['IDLE','','After Nose Wheel Touchdown   ','','AS REQUIRED','AS REQUIRED','','At 65 kts Disengage Reverse Thrust '];
 
 ### AFTER LANDING ###
 var T17 = "AFTER LANDING";
-var L17 = ['','Flaps','Landing Lights','Taxi Lights','Flight Timer','Transponder'];
-var R17 = ['','RETRACT','OFF','ON','STOP','STANDBY'];
+var L17 = ['Flaps','Landing Lights','Taxi Lights','Flight Timer','Transponder'];
+var R17 = ['RETRACT','OFF','ON','STOP','STANDBY'];
 
 ### SHUTDOWN ###
 var T18 = "SHUTDOWN";
-var L18 = ['','Ice Equipment','Throttles','Parking Brake','Seat Belt Lts','L / R Ignition Switches','L / R Generator Switches','Standby Power','Nav lights','Taxi lights','Anti Coll Lights','APU','Avionics Switch','Battery 1 / 2'];
-var R18 = ['','OFF','CUTOFF','SET','OFF','OFF','OFF','OFF','OFF','OFF','OFF','SHUTDOWN','OFF','OFF'];
+var L18 = ['Ice Equipment','Throttles','Parking Brake','Seat Belt Lts','L / R Ignition Switches','L / R Generator Switches','Standby Power','Nav lights','Taxi lights','Anti Coll Lights','APU','Avionics Switch','Battery 1 / 2'];
+var R18 = ['OFF','CUTOFF','SET','OFF','OFF','OFF','OFF','OFF','OFF','OFF','SHUTDOWN','OFF','OFF'];
 
 var L = [L0,L1,L2,L3,L4,L5,L6,L7,L8,L9,L10,L11,L12,L13,L14,L15,L16,L17,L18];
 var n = 0;
@@ -125,7 +125,7 @@ var n = 0;
 ### Listener Norm Button ###
 var norm_l = setlistener(norm_p, func(n) {
 	if (n.getValue()) {
-		page = nr_page.getValue();		
+		page = getprop(nr_page);		
 		display(page);
 	} else {
 		if (timer.isRunning) {timer.stop()}
@@ -138,7 +138,7 @@ var norm_l = setlistener(norm_p, func(n) {
 
 ### Listener Page Button ###
 var pg = setlistener(nr_page, func(n) {
-	if (norm_p.getValue()) {
+	if (getprop(norm_p)) {
 		if (timer.isRunning) {timer.stop()}	
 			page = n.getValue();
 			setprop("instrumentation/checklists/nr-voice",0);
@@ -150,7 +150,7 @@ var pg = setlistener(nr_page, func(n) {
 
 ### Listener abn Button ###
 var abn	= setlistener(abn_p, func(n) {
-	if (n.getValue() and !timer.isRunning and norm_p.getValue()) {	
+	if (n.getValue() and !timer.isRunning and getprop(norm_p)) {	
 			clear_voice();
 			upd = 1;
 			nb = 1;
@@ -168,10 +168,10 @@ var clear_voice = func {
 ### Timer ###
 var timer = maketimer(1.8,func {	
 	 	var np = size(L[page])*2;
-		if (nb < np-1) {
+		if (nb <= np) {
 			nr_voice = nb;
-			setprop("instrumentation/checklists/nr-voice",nr_voice);
-			test_prop(nb,timer);
+		  setprop("instrumentation/checklists/nr-voice",nr_voice);
+		  test_prop(nb,timer);
 			nb += 1;		
 		}	else {upd = 0;timer.stop()}
 });
@@ -185,11 +185,11 @@ var clear_display = func {
 	var tittle = "";
 	var lines_L = var lines_R = init;
 	setprop("instrumentation/checklists/Tittle", tittle);
-	forindex (var index; lines_L) {
-		setprop("instrumentation/checklists/L["~index~"]",lines_L[index]);
+	forindex (var ind; lines_L) {
+		setprop("instrumentation/checklists/L["~ind~"]",lines_L[ind]);
 	}
-	forindex (var index; lines_R) {
-		setprop("instrumentation/checklists/R["~index~"]",lines_R[index]);
+	forindex (var ind; lines_R) {
+		setprop("instrumentation/checklists/R["~ind~"]",lines_R[ind]);
 	}
 }
 
@@ -199,39 +199,39 @@ var display = func(page) {
 	var R = [R0,R1,R2,R3,R4,R5,R6,R7,R8,R9,R10,R11,R12,R13,R14,R15,R16,R17,R18];
 	clear_display();
 	setprop("instrumentation/checklists/Tittle", T[page]);
-	forindex (var index; L[page]) {
-		setprop("instrumentation/checklists/L["~index~"]",L[page][index]);
+	forindex (var ind; L[page]) {
+		setprop("instrumentation/checklists/L["~ind~"]",L[page][ind]);
 	}
-	forindex (var index; R[page]) {
-		setprop("instrumentation/checklists/R["~index~"]",R[page][index]);
+	forindex (var ind; R[page]) {
+		setprop("instrumentation/checklists/R["~ind~"]",R[page][ind]);
 	}
 }
 
 ### Next page ###
 var next = func {
-	page = nr_page.getValue();
+	page = getprop(nr_page);
 	upd = 0;
 	if (page < 18) {
 		page += 1;
-		nr_page.setValue(page);
+		setprop(nr_page,page);
 	}
 }
 
 ### Previous page ###
 var previous = func {
-	page = nr_page.getValue();
+	page = getprop(nr_page);
 	upd = 0;
 	if (page >= 1) {
 		page -= 1;		
-		nr_page.setValue(page);
+		setprop(nr_page,page);
 	}
 }
 
 ### Page Button ###
 var page_btn = func() {
 	var chk_pil = "instrumentation/checklists/chklst-pilot";
-	if (!getprop(chk_pil) and norm_p.getValue()) {setprop(chk_pil,1)}
-	else if (getprop(chk_pil) or !norm_p.getValue()) {setprop(chk_pil,0)}
+	if (!getprop(chk_pil) and getprop(norm_p)) {setprop(chk_pil,1)}
+	else if (getprop(chk_pil) or !getprop(norm_p)) {setprop(chk_pil,0)}
 }
 
 ### Properties Checks ###
@@ -376,6 +376,7 @@ var voices_prop = func {
 			setprop("instrumentation/checklists/chk[2]",1);
 			if (getprop("controls/gear/brake-left") and getprop("controls/gear/brake-right")) {setprop("instrumentation/checklists/chk[3]",1)}
 			setprop("instrumentation/checklists/chk[4]",1);
+			setprop("instrumentation/checklists/chk[5]",1);
 		}
 
 		if (page == 8) {   ### Before Takeoff ###
@@ -394,12 +395,14 @@ var voices_prop = func {
 			if (getprop("controls/engines/engine[0]/throttle")>0.75 and getprop("controls/engines/engine[1]/throttle")>0.75) {setprop("instrumentation/checklists/chk[1]",1)}
 			if (!getprop("controls/gear/brake-left") and !getprop("controls/gear/brake-right")) {setprop("instrumentation/checklists/chk[2]",1)}
 			if (!getprop("controls/gear/gear-down")) {setprop("instrumentation/checklists/chk[3]",1)}
-			if (getprop("controls/flight/flaps-select")==0) {setprop("instrumentation/checklists/chk[4]",1)}	
+			setprop("instrumentation/checklists/chk[4]",1);
 			setprop("instrumentation/checklists/chk[5]",1);
-			setprop("instrumentation/checklists/chk[6]",1);
+			if (getprop("controls/flight/flaps-select")==0) {setprop("instrumentation/checklists/chk[6]",1)}	
 			setprop("instrumentation/checklists/chk[7]",1);
 			setprop("instrumentation/checklists/chk[8]",1);
-			if (getprop("engines/engine[0]/n1")<98 and getprop("engines/engine[1]/n1")<98) {setprop("instrumentation/checklists/chk[9]",1)}
+			setprop("instrumentation/checklists/chk[9]",1);
+			setprop("instrumentation/checklists/chk[10]",1);
+			if (getprop("engines/engine[0]/n1")<98 and getprop("engines/engine[1]/n1")<98) {setprop("instrumentation/checklists/chk[11]",1)}
 		}
 
 		if (page == 10) {   ### APU Shutdown ###
@@ -413,9 +416,11 @@ var voices_prop = func {
 		if (page == 11) {   ### Cruise Climb ###
 			setprop("instrumentation/checklists/chk[0]",1);
 			setprop("instrumentation/checklists/chk[1]",1);
-			if (getprop("controls/electric/seat-belts-switch")== 0) {setprop("instrumentation/checklists/chk[2]",1)}
-			if (!getprop("controls/lighting/landing-light") and !getprop("controls/lighting/landing-light[1]")) {setprop("instrumentation/checklists/chk[3]",1)}
-			setprop("instrumentation/checklists/chk[4]",1);
+			setprop("instrumentation/checklists/chk[2]",1);
+      if (getprop("consumables/fuel/total-fuel-lbs") > 1200) {setprop("instrumentation/checklists/chk[3]",1)}
+			if (getprop("controls/electric/seat-belts-switch")== 0) {setprop("instrumentation/checklists/chk[4]",1)}
+			if (!getprop("controls/lighting/landing-light") and !getprop("controls/lighting/landing-light[1]")) {setprop("instrumentation/checklists/chk[5]",1)}
+			setprop("instrumentation/checklists/chk[6]",1);
 		}
 
 		if (page == 12) {   ### Cruise ###
@@ -427,6 +432,14 @@ var voices_prop = func {
 			if (getprop("controls/anti-ice/window-heat") and getprop("controls/anti-ice/window-heat[1]")) {setprop("instrumentation/checklists/chk[0]",1)}
 			setprop("instrumentation/checklists/chk[1]",1);
 			if (getprop("controls/electric/seat-belts-switch")==1) {setprop("instrumentation/checklists/chk[2]",1)}
+			setprop("instrumentation/checklists/chk[3]",1);
+			setprop("instrumentation/checklists/chk[4]",1);
+			setprop("instrumentation/checklists/chk[5]",1);
+			setprop("instrumentation/checklists/chk[6]",1);
+			setprop("instrumentation/checklists/chk[7]",1);
+			setprop("instrumentation/checklists/chk[8]",1);
+			setprop("instrumentation/checklists/chk[9]",1);
+			setprop("instrumentation/checklists/chk[10]",1);
 		}
 
 		if (page == 14) {   ### Approach ###
@@ -441,14 +454,16 @@ var voices_prop = func {
 			if (getprop("controls/lighting/landing-light") and getprop("controls/lighting/landing-light[1]")) {setprop("instrumentation/checklists/chk[2]",1)}
 			setprop("instrumentation/checklists/chk[3]",1);
 			if (getprop("controls/flight/flaps-select")==1) {setprop("instrumentation/checklists/chk[4]",1)}	
-			if (getprop("controls/flight/flaps-select")==2 and getprop("autopilot/route-manager/distance-remaining-nm") < 8) {setprop("instrumentation/checklists/chk[5]",1)}	
+			setprop("instrumentation/checklists/chk[5]",1);
+			if (getprop("controls/flight/flaps-select")==2 and getprop("autopilot/route-manager/distance-remaining-nm") < 8) {setprop("instrumentation/checklists/chk[6]",1)}	
 			setprop("instrumentation/checklists/chk[6]",1);
-			if (getprop("controls/flight/flaps-select")==3) {setprop("instrumentation/checklists/chk[7]",1)}	
-			setprop("instrumentation/checklists/chk[8]",1);
-			if (getprop("controls/gear/gear-down")) {setprop("instrumentation/checklists/chk[9]",1)}
-			if (getprop("controls/flight/flaps-select")==4 and getprop("autopilot/route-manager/distance-remaining-nm") < 3) {setprop("instrumentation/checklists/chk[10]",1)}	
+			if (getprop("controls/flight/flaps-select")==3) {setprop("instrumentation/checklists/chk[8]",1)}	
+			setprop("instrumentation/checklists/chk[9]",1);
+			if (getprop("controls/gear/gear-down")) {setprop("instrumentation/checklists/chk[10]",1)}
 			setprop("instrumentation/checklists/chk[11]",1);
-			if (!getprop("controls/gear/brake-parking")) {setprop("instrumentation/checklists/chk[12]",1)}
+			if (getprop("controls/flight/flaps-select")==4 and getprop("autopilot/route-manager/distance-remaining-nm") < 3) {setprop("instrumentation/checklists/chk[12]",1)}	
+			setprop("instrumentation/checklists/chk[13]",1);
+			if (!getprop("controls/gear/brake-parking")) {setprop("instrumentation/checklists/chk[14]",1)}
 		}
 
 		if (page == 15) {   ### Before Landing ###

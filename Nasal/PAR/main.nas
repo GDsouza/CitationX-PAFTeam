@@ -1,4 +1,4 @@
-# **                    Spoken GCA.                      **
+# **       Precision Approach Radar                      **
 # *********************************************************
 #         This file is part of FlightGear.
 # 
@@ -18,15 +18,13 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 var main = func {
-  var root = getprop("/sim/fg-aircraft")~"/CitationX/Nasal/Spoken_GCA"; 
-  foreach(var f; ['control.nas','tools.nas', 'par_class.nas', 'gca_class.nas', 'gca_gui.nas'] ) {
-    io.load_nasal( root ~ "/" ~ f, "gca" );
+  var root = getprop("/sim/fg-aircraft")~"/CitationX/Nasal/PAR"; 
+  foreach(var f; ['par.nas','tools.nas', 'controller.nas'] ) {
+    io.load_nasal( root ~ "/" ~ f, "par" );
   };
-  io.load_nasal( root ~ '/plot2D.nas', "canvas" );
-  io.load_nasal( root ~ '/graph.nas', "canvas" );
   io.read_properties(root ~ "/" ~"config.xml", "/");
   io.read_properties(root ~ "/" ~"phraseology.xml", "/gca/phrases");
-  print("Spoken GCA ... Ok");
+  print("PAR ... Ok");
 }
 
 var setl = setlistener("/sim/signals/fdm-initialized", func () {

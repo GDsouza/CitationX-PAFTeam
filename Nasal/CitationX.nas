@@ -78,8 +78,6 @@ var JetEngine = {
     return m;
     },
 
-
-#### update ####
     update : func{
         var thr = me.throttle.getValue();
         if(!me.engine_off){
@@ -145,7 +143,7 @@ var JetEngine = {
         }
     }
 
-};
+}; # end of JetEngine
 
 var fl_tot = 0;
 var FDM="";
@@ -250,21 +248,6 @@ var fdm_init = func(){
 
 ### Listeners ###
 
-setlistener("/sim/signals/fdm-initialized", func {
-    fdm_init();
-    settimer(update_systems,2);
-		setprop("instrumentation/altimeter/setting-inhg",29.92001);
-		setprop("instrumentation/clock/flight-meter-sec",0);
-#		setprop("sim/sound/startup",int(10*rand()));
-		FH_load();
-		var v_speed = func() {		
-			Vspeed_update();
-		}
-		var timer = maketimer(10,v_speed);
-		timer.singleShot = 1;
-		timer.start();
-},0,0);
-
 setlistener("/sim/signals/reinit", func {
     fdm_init();
 },0,0);
@@ -297,7 +280,6 @@ var turb1_stl = setlistener("/engines/engine[1]/turbine",func(turb) {
 },0,0);
 
 setlistener("/controls/gear/antiskid", func(as){
-	#print(as);
     if(!as.getValue()){
     MstrCaution.setBoolValue(1 * PWR2);
     Annun.getNode("antiskid").setBoolValue(1 * PWR2);
@@ -409,6 +391,7 @@ setlistener("/gear/gear[0]/wow", func(ww){
         FHmeter.stop();
         Grd_Idle.setValue(1);			
 				FH_write();
+        setprop("autopilot/locks/fms-gs",0);
     }else{
         Grd_Idle.setValue(0);
         FHmeter.start();
@@ -556,11 +539,11 @@ var Startup = func{
     setprop("controls/electric/external-power",1);
     setprop("controls/electric/engine[0]/generator",1);
     setprop("controls/electric/engine[1]/generator",1);
-    setprop("controls/electric/avionics-switch",2);
     setprop("controls/electric/battery-switch",1);
     setprop("controls/electric/battery-switch[1]",1);
     setprop("controls/electric/inverter-switch",1);
     setprop("controls/electric/std-by-pwr",1);
+    setprop("controls/electric/avionics-switch",2);
     setprop("controls/lighting/nav-lights",1);
     setprop("controls/lighting/beacon",1);
     setprop("controls/lighting/strobe",1);
@@ -618,65 +601,41 @@ var Shutdown = func{
 		setprop("controls/anti-ice/window-heat[1]",0);
 }
 
-var Vspeed_update = func {
+var Vref_update = func {
 	var Wtot = getprop("yasim/gross-weight-lbs");
-	var Flaps = getprop("controls/flight/flaps");
-	var v1=0;
-	var vr=0;
-	var v2=0;
-	var vref=0;
-
-	if (Wtot <27000) {v1=122;vr=126;v2=139}
-	if (Wtot >=27000 and Wtot <29000) {v1=123;vr=126;v2=139}
-	if (Wtot >=29000 and Wtot <31000) {v1=125;vr=126;v2=138}
-	if (Wtot >=31000 and Wtot <33000) {v1=126;vr=126;v2=138}
-	if (Wtot >=33000 and Wtot <34000) {v1=127;vr=127;v2=138}
-	if (Wtot >=34000 and Wtot <35000) {v1=130;vr=130;v2=140}
-	if (Wtot >=35000 and Wtot <36100) {v1=132;vr=132;v2=143}
-	if (Wtot >=36100) {v1=134;vr=134;v2=144}
-	if (Wtot == nil or Flaps == nil) {return}
-
-	if (Flaps > 0.142) {
-		if (Wtot <31000) {v1=115;vr=118;v2=129}
-		if (Wtot >=31000 and Wtot <33000) {v1=116;vr=120;v2=128}
-		if (Wtot >=33000 and Wtot <34000) {v1=121;vr=126;v2=131}
-		if (Wtot >=34000 and Wtot <35000) {v1=124;vr=128;v2=133}
-		if (Wtot >=35000 and Wtot <36100) {v1=126;vr=131;v2=135}
-		if (Wtot >=36100) {v1=129;vr=133;v2=137}
-	}
-	else {
-		if (Wtot <27000) {v1=122;vr=126;v2=139}
-		if (Wtot >=27000 and Wtot <29000) {v1=123;vr=126;v2=139}
-		if (Wtot >=29000 and Wtot <31000) {v1=125;vr=126;v2=138}
-		if (Wtot >=31000 and Wtot <33000) {v1=126;vr=126;v2=138}
-		if (Wtot >=33000 and Wtot <34000) {v1=127;vr=127;v2=138}
-		if (Wtot >=34000 and Wtot <35000) {v1=130;vr=130;v2=140}
-		if (Wtot >=35000 and Wtot <36100) {v1=132;vr=132;v2=143}
-		if (Wtot >=36100) {v1=134;vr=134;v2=144}
-	}
-
-		setprop("controls/flight/v1",v1);
-		setprop("controls/flight/vr",vr);
-		setprop("controls/flight/v2",v2);
-		setprop("controls/flight/vf5",180);
-		setprop("controls/flight/vf15",160);
-		setprop("controls/flight/vf35",140);
-
-		if (Wtot >=23000 and Wtot <24000) {vref=108}
-		if (Wtot >=24000 and Wtot <25000) {vref=110}
-		if (Wtot >=25000 and Wtot <26000) {vref=113}
-		if (Wtot >=26000 and Wtot <28000) {vref=115}
-		if (Wtot >=28000 and Wtot <30000) {vref=121}
-		if (Wtot >=30000 and Wtot <31000) {vref=125}
-		if (Wtot >=31000 and Wtot <31800) {vref=129}
-		if (Wtot >=31800) {vref=131}
-		setprop("controls/flight/vref",vref);
+	if (Wtot >=23000 and Wtot <24000) {vref=108}
+	if (Wtot >=24000 and Wtot <25000) {vref=110}
+	if (Wtot >=25000 and Wtot <26000) {vref=113}
+	if (Wtot >=26000 and Wtot <28000) {vref=115}
+	if (Wtot >=28000 and Wtot <30000) {vref=121}
+	if (Wtot >=30000 and Wtot <31000) {vref=125}
+	if (Wtot >=31000 and Wtot <31800) {vref=129}
+	if (Wtot >=31800) {vref=131}
+	setprop("controls/flight/vref",vref);
+  settimer(Vref_update,60);
 }
 
 ########## MAIN ##############
 var grspd = nil;
 var wspd = nil;
 var rudder_pos = nil;
+
+var citation_stl = setlistener("/sim/signals/fdm-initialized", func {
+    fdm_init();
+    settimer(update_systems,2);
+		setprop("instrumentation/altimeter/setting-inhg",29.92001);
+		setprop("instrumentation/clock/flight-meter-sec",0);
+#		setprop("sim/sound/startup",int(10*rand()));
+		FH_load();
+		var v_ref = func() {		
+			Vref_update();
+		}
+		var timer = maketimer(10,v_ref);
+		timer.singleShot = 1;
+		timer.start();
+    removelistener(citation_stl);
+},0,0);
+
 var update_systems = func{
     LHeng.update();
     RHeng.update();

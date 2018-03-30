@@ -16,6 +16,24 @@
 # TODO: this predates aircraftpos.controller (MapStructure) should probably be unified to some degree ...
 
 var wxr_live_tree = "/instrumentation/wxr";
+var userLat = nil;
+var userLon = nil;
+var userAlt = nil;
+var userGndSpd = nil;
+var userVSpd = nil;
+var userHdg = nil;
+var userTrk = nil;
+var userHdgMag = nil;
+var userHdgTru = nil;
+var userTrkMag = nil;
+var userTrkTru = nil;
+var oldRange = nil;
+var pos = nil;
+var _time = nil;
+var wxr_live_enabled =nil;
+var update_layers = nil;
+var translation_callback = nil;
+var trsl = nil;
 
 var NDSourceDriver = {};
 NDSourceDriver.new = func {
@@ -23,15 +41,13 @@ NDSourceDriver.new = func {
 	m.get_hdg_mag= func getprop("/orientation/heading-magnetic-deg");
 	m.get_hdg_tru= func getprop("/orientation/heading-deg");
 	m.get_hgg = func getprop("instrumentation/afds/settings/heading");
-	m.get_trk_mag= func
-	{
+	m.get_trk_mag= func	{
 		if(getprop("/velocities/groundspeed-kt") > 80)
 			getprop("/orientation/track-magnetic-deg");
 		else
 			getprop("/orientation/heading-magnetic-deg");
-	};
-	m.get_trk_tru = func
-	{
+ 	};
+	m.get_trk_tru = func {
 		if(getprop("/velocities/groundspeed-kt") > 80)
 			getprop("/orientation/track-deg");
 		else
@@ -46,32 +62,7 @@ NDSourceDriver.new = func {
 	m.get_gnd_spd= func getprop("/velocities/groundspeed-kt");
 	m.get_vspd= func getprop("/velocities/vertical-speed-fps");
 	return m;
-}
-var default_switches = {
-	'toggle_range':        {path: '/inputs/range-nm', value:40, type:'INT'},
-	'toggle_weather':      {path: '/inputs/wxr', value:0, type:'BOOL'},
-	'toggle_airports':     {path: '/inputs/arpt', value:0, type:'BOOL'},
-	'toggle_stations':     {path: '/inputs/sta', value:0, type:'BOOL'},
-	'toggle_waypoints':    {path: '/inputs/wpt', value:0, type:'BOOL'},
-	'toggle_position':     {path: '/inputs/pos', value:0, type:'BOOL'},
-	'toggle_data':         {path: '/inputs/data',value:0, type:'BOOL'},
-	'toggle_terrain':      {path: '/inputs/terr',value:0, type:'BOOL'},
-	'toggle_traffic':      {path: '/inputs/tfc',value:0, type:'BOOL'},
-	'toggle_centered':     {path: '/inputs/nd-centered',value:0, type:'BOOL'},
-	'toggle_lh_vor_adf':   {path: '/inputs/lh-vor-adf',value:0, type:'INT'},
-	'toggle_rh_vor_adf':   {path: '/inputs/rh-vor-adf',value:0, type:'INT'},
-	'toggle_display_mode': {path: '/mfd/display-mode', value:'MAP', type:'STRING'}, # valid values are: APP, MAP, PLAN or VOR
-	'toggle_display_type': {path: '/mfd/display-type', value:'CRT', type:'STRING'}, # valid values are: CRT or LCD
-	'toggle_true_north':   {path: '/mfd/true-north', value:0, type:'BOOL'},
-	'toggle_rangearc':     {path: '/mfd/rangearc', value:0, type:'BOOL'},
-	'toggle_track_heading':{path: '/trk-selected', value:0, type:'BOOL'},
-	'toggle_weather_live': {path: '/mfd/wxr-live-enabled', value: 0, type: 'BOOL'},
-	'toggle_chrono': {path: '/inputs/CHRONO', value: 0, type: 'INT'},
-	'toggle_xtrk_error': {path: '/mfd/xtrk-error', value: 0, type: 'BOOL'},
-	'toggle_trk_line': {path: '/mfd/trk-line', value: 0, type: 'BOOL'},
-	'toggle_hdg_bug_only': {path: '/mfd/hdg-bug-only', value: 0, type: 'BOOL'},
-	'toggle_cruise_alt' : {path: '/cruise-alt', value: 100, type: 'DOUBLE'},
-};
+} # end of NDSourceDriver.new
 
 var NdDisplay = {
 	id:0,
@@ -118,7 +109,7 @@ var NdDisplay = {
 
 	# get the full property path for a given switch
 	get_full_switch_path: func (s) {
-		# debug.dump( me.efis_switches[s] );
+		 #debug.dump( me.efis_switches[s] );
 		return me.efis_path ~ me.efis_switches[s].path; # FIXME: should be using props.nas instead of ~
 	},
 
@@ -159,15 +150,9 @@ var NdDisplay = {
 	setTimerInterval: func(update_time=0.05) me.update_timer.restart(update_time),
 
 	new : func(prop1, switches, style) {
-#	new : func(prop1, switches=default_switches, style='Citation') {
 		NdDisplay.id +=1;
 		var m = { parents : [NdDisplay]};
 		var df_toggles = keys(switches);
-		foreach(var toggle_name; df_toggles){
-			if(!contains(switches, toggle_name)) {
-				switches[toggle_name] = default_switches[toggle_name];
-			}
-		}
 		
 		m.inited = 0;
 		m.timers=[]; 
@@ -187,27 +172,8 @@ var NdDisplay = {
 		m.rangeNm = func m.get_switch('toggle_range');
 		m.efis = props.globals.initNode(prop1);
 		m.mfd = m.efis.initNode("mfd");
-
-		# TODO: unify this with switch handling
-		m.mfd_mode_num     = m.mfd .initNode("mode-num",2,"INT");
-		m.std_mode         = m.efis.initNode("inputs/setting-std",0,"BOOL");
-		m.previous_set     = m.efis.initNode("inhg-previous",29.92);
-		m.kpa_mode         = m.efis.initNode("inputs/kpa-mode",0,"BOOL");
-		m.kpa_output       = m.efis.initNode("inhg-kpa",29.92);
-		m.kpa_prevoutput   = m.efis.initNode("inhg-kpa-previous",29.92);
-		m.temp             = m.efis.initNode("fixed-temp",0);
-		m.alt_meters       = m.efis.initNode("inputs/alt-meters",0,"BOOL");
-		m.fpv              = m.efis.initNode("inputs/fpv",0,"BOOL");
-
-		m.mins_mode     = m.efis.initNode("inputs/minimums-mode",0,"BOOL");
-		m.mins_mode_txt = m.efis.initNode("minimums-mode-text","RADIO","STRING");
-		m.minimums      = m.efis.initNode("minimums",250,"INT");
-		m.mk_minimums   = props.globals.getNode("instrumentation/mk-viii/inputs/arinc429/decision-height");
-
-		# TODO: these are switches, can be unified with switch handling hash above (eventually):
-		m.nd_plan_wpt = m.efis.initNode("inputs/plan-wpt-index", -1, "INT"); # not yet in switches hash
-
-		# initialize all switches based on the defaults specified in the switch hash
+#		m.nd_plan_wpt = m.efis.initNode("inputs/plan-wpt-index", -1, "INT"); # 
+		# initialize all switches specified in the switch hash
 		foreach(var switch; keys( m.efis_switches ) )
 			props.globals.initNode
 				(	m.get_full_switch_path (switch),
@@ -251,7 +217,7 @@ var NdDisplay = {
 		me.symbols = {}; 
 
 		foreach(var feature; me.nd_style.features ) {
-			me.symbols[feature.id] = me.nd.getElementById(feature.id).updateCenter();
+			me.symbols[feature.id] = me.nd.getElementById(feature.id).updateCenter(   );
 			if(contains(feature.impl,'init')) feature.impl.init(me.nd, feature); 
 		}
 
@@ -345,7 +311,7 @@ var NdDisplay = {
 			if(!layer['isMapStructure']) # set up an old INEFFICIENT and SLOW layer
 				the_layer = me.layers[layer.name] = canvas.MAP_LAYERS[layer.name].new( me.map, layer.name, controller);
 			else {
-				printlog(canvas._MP_dbg_lvl, "Setting up MapStructure-based layer for ND, name:", layer.name);
+				# printlog(canvas._MP_dbg_lvl, "Setting up MapStructure-based layer for ND, name:", layer.name);
 				var opt = me.options != nil and me.options[layer.name] != nil ? me.options[layer.name] : nil;
 				if (opt == nil and contains(layer, 'options'))
 					opt = layer.options;
@@ -385,7 +351,7 @@ var NdDisplay = {
 					l.predicate = func {
 						var t = systime();
 						call(_predicate, arg, me);
-						printlog(canvas._MP_dbg_lvl, "Took "~((systime()-t)*1000)~"ms to update layer "~l.name);
+					# printlog(canvas._MP_dbg_lvl, "Took "~((systime()-t)*1000)~"ms to update layer "~l.name);
 					}
 				})();
 			}
@@ -406,7 +372,7 @@ var NdDisplay = {
 
 		# TODO: move this to RTE.lcontroller ?
 		me.listen("/autopilot/route-manager/current-wp", func(activeWp) {
-			canvas.updatewp( activeWp.getValue() );
+			canvas.updatewp(activeWp.getValue());
 		});
 	},
 
@@ -417,30 +383,30 @@ var NdDisplay = {
 
 	update_sub: func() {
 		# Variables:
-		var userLat = me.aircraft_source.get_lat();
-		var userLon = me.aircraft_source.get_lon();
+		userLat = me.aircraft_source.get_lat();
+		userLon = me.aircraft_source.get_lon();
 #####
-		var userAlt = me.aircraft_source.get_alt();
+		userAlt = me.aircraft_source.get_alt();
 #####
-		var userGndSpd = me.aircraft_source.get_gnd_spd();
-		var userVSpd = me.aircraft_source.get_vspd();
-#		var dispLCD = me.get_switch('toggle_display_type') == "LCD";
+		userGndSpd = me.aircraft_source.get_gnd_spd();
+		userVSpd = me.aircraft_source.get_vspd();
+#		dispLCD = me.get_switch('toggle_display_type') == "LCD";
 		# Heading update
-		var userHdgMag = me.aircraft_source.get_hdg_mag();
-		var userHdgTru = me.aircraft_source.get_hdg_tru();
-		var userTrkMag = me.aircraft_source.get_trk_mag();
-		var userTrkTru = me.aircraft_source.get_trk_tru();
+		userHdgMag = me.aircraft_source.get_hdg_mag();
+		userHdgTru = me.aircraft_source.get_hdg_tru();
+		userTrkMag = me.aircraft_source.get_trk_mag();
+		userTrkTru = me.aircraft_source.get_trk_tru();
 		
 		if(me.get_switch('toggle_true_north')) {
 			var userHdg=userHdgTru;
-			me.userHdg=userHdgTru;
-			var userTrk=userTrkTru;
-			me.userTrk=userTrkTru;
+#			me.userHdg=userHdgTru;
+			userTrk=userTrkTru;
+#			me.userTrk=userTrkTru;
 		} else {
 			var userHdg=userHdgMag;
-			me.userHdg=userHdgMag;
-			var userTrk=userTrkMag;
-			me.userTrk=userTrkMag;
+#			me.userHdg=userHdgMag;
+			userTrk=userTrkMag;
+#			me.userTrk=userTrkMag;
 		}
 		# this should only ever happen when testing the experimental AI/MP ND driver hash (not critical) or when an error occurs (critical)
 		if (!userHdg or !userTrk or !userLat or !userLon) {
@@ -449,19 +415,19 @@ var NdDisplay = {
 		}
 		if (me.aircraft_source.get_gnd_spd() < 80) {
 			userTrk = userHdg;
-			me.userTrk=userHdg;
+#			me.userTrk=userHdg;
 		}
 		
 		if((me.in_mode('toggle_display_mode', ['MAP']) and me.get_switch('toggle_display_type') == "CRT")
 		    or (me.get_switch('toggle_track_heading') and me.get_switch('toggle_display_type') == "LCD"))
 		{
 			userHdgTrk = userTrk;
-			me.userHdgTrk = userTrk;
+#			me.userHdgTrk = userTrk;
 			userHdgTrkTru = userTrkTru;
 #			me.symbols.hdgTrk.setText("TRK");
 		} else {
 			userHdgTrk = userHdg;
-			me.userHdgTrk = userHdg;
+#			me.userHdgTrk = userHdg;
 			userHdgTrkTru = userHdgTru;
 #			me.symbols.hdgTrk.setText("HDG");
 		}
@@ -474,28 +440,30 @@ var NdDisplay = {
 			range: nil,
 		};
 		# reposition the map, change heading & range:
-		var pln_wpt_idx = getprop(me.efis_path ~ "/inputs/plan-wpt-index");
-		if(me.in_mode('toggle_display_mode', ['PLAN'])  and pln_wpt_idx >= 0) {
-			if(me.route_driver != nil){
-				var wp = me.route_driver.getPlanModeWP(pln_wpt_idx);
-				if(wp != nil){
-					pos.lat = wp.wp_lat;
-					pos.lon = wp.wp_lon;
-				} else {
-					pos.lat = getprop("/autopilot/route-manager/route/wp["~pln_wpt_idx~"]/latitude-deg");
-					pos.lon = getprop("/autopilot/route-manager/route/wp["~pln_wpt_idx~"]/longitude-deg");
-				}
-			} else {
-				pos.lat = getprop("/autopilot/route-manager/route/wp["~pln_wpt_idx~"]/latitude-deg");
-				pos.lon = getprop("/autopilot/route-manager/route/wp["~pln_wpt_idx~"]/longitude-deg");
-			}
-		} else {
+#		var pln_wpt_idx = getprop(me.efis_path ~ "/inputs/plan-wpt-index");
+#		if(me.in_mode('toggle_display_mode', ['PLAN'])  and pln_wpt_idx >= 0) {
+#		if(me.in_mode('toggle_display_mode', ['PLAN'])) {
+#			if(me.route_driver != nil){
+#				var wp = me.route_driver.getPlanModeWP(pln_wpt_idx);
+#				if(wp != nil){
+#					pos.lat = wp.wp_lat;
+#					pos.lon = wp.wp_lon;
+#				} else {
+#					pos.lat = getprop("/autopilot/route-manager/route/wp["~pln_wpt_idx~"]/latitude-deg");
+#					pos.lon = getprop("/autopilot/route-manager/route/wp["~pln_wpt_idx~"]/longitude-deg");
+#				}
+#			} else {
+#				pos.lat = getprop("/autopilot/route-manager/route/wp["~pln_wpt_idx~"]/latitude-deg");
+#				pos.lon = getprop("/autopilot/route-manager/route/wp["~pln_wpt_idx~"]/longitude-deg");
+#			}
+
+#		} else {
 			pos.lat = userLat;
 			pos.lon = userLon;
 ####
 			pos.alt = userAlt;
 ####
-		}
+#		}
 
 		if(me.in_mode('toggle_display_mode', ['PLAN'])) {
 			pos.hdg = 0;
@@ -522,9 +490,9 @@ var NdDisplay = {
 #######
 	},
 	update: func()	{
-		var _time = systime();
+		_time = systime();
 		# Disables WXR Live if it's not enabled. The toggle_weather_live should be common to all ND instances.
-		var wxr_live_enabled = getprop(wxr_live_tree~'/enabled');
+		wxr_live_enabled = getprop(wxr_live_tree~'/enabled');
 		if(wxr_live_enabled == nil or wxr_live_enabled == '') 
 			wxr_live_enabled = 0;
 		me.set_switch('toggle_weather_live', wxr_live_enabled);
@@ -535,15 +503,14 @@ var NdDisplay = {
 		if (me.map.controller.should_update_all()) {
 			me.map.update();
 		} else {
-			var update_layers = me.always_update_layers;
+			update_layers = me.always_update_layers;
 			me.map.update(func(layer) contains(update_layers, layer.type));
 		}
 		# Other symbol update
-		var translation_callback = nil;
 		if(me.options != nil)
 			translation_callback = me.options['translation_callback'];
 		if(typeof(translation_callback) == 'func'){
-			var trsl = translation_callback(me);
+			trsl = translation_callback(me);
 			me.map.setTranslation(trsl.x, trsl.y);
 		} else {
 			if(me.in_mode('toggle_display_mode', ['PLAN'])) {
@@ -573,7 +540,8 @@ var NdDisplay = {
 #		me.symbols['status.arpt'].setVisible( me.get_switch('toggle_airports') and me.in_mode('toggle_display_mode', ['MAP']));
 #		me.symbols['status.sta'].setVisible( me.get_switch('toggle_stations') and  me.in_mode('toggle_display_mode', ['MAP']));
 		# Okay, _how_ do we hook this up with FGPlot?
-		printlog(canvas._MP_dbg_lvl, "Total ND update took "~((systime()-_time)*100)~"ms");
+		# printlog(canvas._MP_dbg_lvl, "Total ND update took "~((systime()-_time)*100)~"ms");
 		setprop("/instrumentation/navdisplay["~ NdDisplay.id ~"]/update-ms", systime() - _time);
 	} # end of update()
-};
+}; # end of NDdisplay
+
