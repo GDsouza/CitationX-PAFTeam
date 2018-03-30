@@ -3334,6 +3334,7 @@
               <command>property-toggle</command>
             		<property>autopilot/locks/back-course</property>
 						</binding>
+         </action>
     </animation>
 
     <animation>
