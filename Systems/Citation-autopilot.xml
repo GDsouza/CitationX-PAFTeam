@@ -711,13 +711,16 @@
         <initialize-to>output</initialize-to>
         <enable>
           <condition>
-            <or>
-              <equals>
-                <property>autopilot/settings/nav-source</property>
-                <value>NAV1</value>
-              </equals>
-              <property>autopilot/locks/fms-gs</property>
-            </or>
+              <or>
+                <equals>
+                  <property>autopilot/settings/nav-source</property>
+                  <value>NAV1</value>
+                </equals>
+                <equals>
+                  <property>autopilot/settings/nav-source</property>
+                  <value>FMS1</value>
+                </equals>
+              </or>
           </condition>
         </enable>
         <input>instrumentation/nav/gs-needle-deflection-norm</input>
@@ -757,13 +760,16 @@
         <initialize-to>output</initialize-to>
         <enable>
           <condition>
-            <or>
-              <equals>
-                <property>autopilot/settings/nav-source</property>
-                <value>NAV2</value>
-              </equals>
-              <property>autopilot/locks/fms-gs</property>
-            </or>
+              <or>
+                <equals>
+                  <property>autopilot/settings/nav-source</property>
+                  <value>NAV2</value>
+                </equals>
+                <equals>
+                  <property>autopilot/settings/nav-source</property>
+                  <value>FMS2</value>
+                </equals>
+              </or>
           </condition>
         </enable>
         <input>instrumentation/nav[1]/gs-needle-deflection-norm</input>

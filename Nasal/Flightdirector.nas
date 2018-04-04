@@ -377,7 +377,7 @@ var monitor_V_armed = func{
       if(getprop(Lateral)=="LOC"){
         if(getprop(gs_in_range)){
           gs_err=getprop("autopilot/internal/gs-deflection");
-          if(gs_err >-0.25 and gs_err < 0.25){
+          if(gs_err >-0.50 and gs_err < 0.50){
             setprop(Vertical,"GS");
             setprop(Vertical_arm,"");
 					}
@@ -489,6 +489,7 @@ var update_nav = func {
 
     } else if(left(NAVSRC,3) == "FMS"){
       ind = (NAVSRC == "FMS1" ? 0 : 1);
+      in_range = getprop("instrumentation/nav["~ind~"]/in-range");
       setprop("autopilot/internal/nav-type","FMS"~(ind+1));
       setprop(gs_in_range,getprop("instrumentation/nav["~ind~"]/gs-in-range"));
       setprop("autopilot/internal/nav-distance",getprop("instrumentation/gps/wp/wp[1]/distance-nm"));
