@@ -281,12 +281,12 @@ Primus 2000 EICAS
 
     <animation>
         <type>textranslate</type>
-        <object-name>RH-ITT</object-name>
-        <property>engines/engine[1]/itt-norm</property>
+        <object-name>LH-ITT</object-name>
+        <property>engines/engine[0]/itt-norm</property>
         <interpolation>
             <entry><ind>0.0</ind><dep>0.0</dep></entry>
-            <entry><ind>0.788288</ind><dep>0.1504</dep></entry>
-            <entry><ind>1.069819</ind><dep>0.2555</dep></entry>
+            <entry><ind>0.945611</ind><dep>0.150</dep></entry> -->
+            <entry><ind>1.14900</ind><dep>0.215</dep></entry>
         </interpolation>
         <axis>
             <x>0.0</x>
@@ -297,12 +297,12 @@ Primus 2000 EICAS
 
     <animation>
         <type>textranslate</type>
-        <object-name>LH-ITT</object-name>
-        <property>engines/engine[0]/itt-norm</property>
+        <object-name>RH-ITT</object-name>
+        <property>engines/engine[1]/itt-norm</property>
         <interpolation>
             <entry><ind>0.0</ind><dep>0.0</dep></entry>
-            <entry><ind>0.788288</ind><dep>0.1504</dep></entry>
-            <entry><ind>1.069819</ind><dep>0.2555</dep></entry>
+            <entry><ind>0.945611</ind><dep>0.150</dep></entry>
+            <entry><ind>1.14900</ind><dep>0.215</dep></entry>
         </interpolation>
         <axis>
             <x>0.0</x>
@@ -310,8 +310,5 @@ Primus 2000 EICAS
             <z>0.0</z>
         </axis>
     </animation>
-
-
-
 
 </PropertyList>

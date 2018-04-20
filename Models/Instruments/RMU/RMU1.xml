@@ -90,20 +90,16 @@
           <button>0</button>
           <repeatable>false</repeatable>
           <binding>
-            <command>property-toggle</command>
-            <property>instrumentation/rmu/unit/swp1</property>
-          </binding>
-          <binding>
 						<condition>
-						  <not>
-							  <property>instrumentation/rmu/unit/pge</property>
-						  </not>
+							<not>
+								<property>instrumentation/rmu/unit/pge</property>
+							</not>
 						</condition>
 						<command>property-swap</command>
 		        <property>instrumentation/comm/frequencies/standby-mhz</property>
 						<property>instrumentation/comm/frequencies/selected-mhz</property>
-           </binding>
-           <binding>
+          </binding>
+          <binding>
 						<condition>
 								<property>instrumentation/rmu/unit/pge</property>
 						</condition>
@@ -119,14 +115,18 @@
 			        <property>instrumentation/rmu/unit/insert</property>
 							<value>0</value>
           </binding>
+          <binding>
+              <command>property-toggle</command>
+              <property>instrumentation/rmu/unit/swp1</property>
+          </binding>
 					<binding>
 						  <command>property-toggle</command>
 						  <property>sim/sound/click</property>
 					</binding>
 					<mod-up>
 	          <binding>
-	              <command>property-toggle</command>
-	              <property>instrumentation/rmu/unit/swp1</property>
+              <command>property-toggle</command>
+              <property>instrumentation/rmu/unit/swp1</property>
 	          </binding>
 					</mod-up>
         </action>
@@ -471,11 +471,6 @@
 						<property>instrumentation/nav/frequencies/selected-mhz</property>
           </binding>
           <binding>
-						<condition>
-							<not>
-							  <property>instrumentation/rmu/unit/pge</property>
-							</not>
-						</condition>
             <command>property-toggle</command>
             <property>instrumentation/rmu/unit/swp2</property>
           </binding>
@@ -485,9 +480,8 @@
 					</binding>
 					<mod-up>
 	          <binding>
-              <command>property-assign</command>
+              <command>property-toggle</command>
               <property>instrumentation/rmu/unit/swp2</property>
-              <value>0</value>
 	          </binding>
 					</mod-up>
         </action>
@@ -528,7 +522,7 @@
 		        <property>instrumentation/rmu/unit/mem-nav</property>
 							<step>1</step>
 							<min>0</min>
-							<max>11</max>
+							<max>12</max>
 							<wrap>true</wrap>
 		      </binding>
           <binding>
@@ -542,11 +536,6 @@
 							<value>1</value>
           </binding>
           <binding>
-						<condition>
-								<not>
-								  <property>instrumentation/rmu/unit/pge</property>
-								</not>
-						</condition>
             <command>property-toggle</command>
             <property>instrumentation/rmu/unit/nav</property>
           </binding>
@@ -593,13 +582,8 @@
 					<value>3</value>
           </binding>
           <binding>
-						<condition>
-								<not>
-								  <property>instrumentation/rmu/unit/pge</property>
-								</not>
-						</condition>
-              <command>property-toggle</command>
-              <property>instrumentation/rmu/unit/adf</property>
+            <command>property-toggle</command>
+            <property>instrumentation/rmu/unit/adf</property>
           </binding>
 					<binding>
 						  <command>property-toggle</command>
@@ -607,9 +591,8 @@
 					</binding>
 					<mod-up>
 		        <binding>
-	            <command>property-assign</command>
+	            <command>property-toggle</command>
 	            <property>instrumentation/rmu/unit/adf</property>
-              <value>0</value>
 		        </binding>
 					</mod-up>
         </action>

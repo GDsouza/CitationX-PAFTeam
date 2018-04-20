@@ -730,27 +730,20 @@
     </filter>
 
     <filter>
-        <name>nav1 gs rate</name>
-        <debug>false</debug>
-        <feedback-if-disabled>true</feedback-if-disabled>
-        <initialize-to>output</initialize-to>
-        <enable>
-          <condition>
-            <and>
-              <equals>
-                <property>autopilot/settings/nav-source</property>
-                <value>NAV1</value>
-              </equals>
-              <not>
-                <property>autopilot/locks/fms-gs</property>
-              </not>
-            </and>
-          </condition>
-        </enable>
-        <input>instrumentation/nav/gs-rate-of-climb</input>
-        <output>autopilot/internal/gs-rate-fps</output>
-        <type>noise-spike</type>
-        <max-rate-of-change>10</max-rate-of-change>
+      <name>nav1 gs rate</name>
+      <debug>false</debug>
+      <type>gain</type>
+      <gain>1.0</gain>
+      <enable>
+        <condition>
+          <equals>
+            <property>autopilot/settings/nav-source</property>
+            <value>NAV1</value>
+          </equals>
+        </condition>
+      </enable>
+      <input>instrumentation/nav/gs-rate-of-climb</input>
+      <output>autopilot/internal/gs-rate-fps</output>
     </filter>
 
     <filter>
@@ -785,15 +778,10 @@
         <initialize-to>output</initialize-to>
         <enable>
           <condition>
-            <and>
-              <equals>
-                <property>autopilot/settings/nav-source</property>
-                <value>NAV2</value>
-              </equals>
-              <not>
-                <property>autopilot/locks/fms-gs</property>
-              </not>
-            </and>
+            <equals>
+              <property>autopilot/settings/nav-source</property>
+              <value>NAV2</value>
+            </equals>
           </condition>
         </enable>
         <input>instrumentation/nav[1]/gs-rate-of-climb</input>
@@ -802,12 +790,15 @@
         <max-rate-of-change>10</max-rate-of-change>
     </filter>
 
-    <pid-controller>
+    <pi-simple-controller>
         <name>FMS-GS</name>
         <debug>false</debug>
         <enable>
           <condition>
-            <property>autopilot/locks/fms-gs</property>
+            <equals>
+              <property>autopilot/settings/nav-source</property>
+              <value>FMS1</value>
+            </equals>
           </condition>
         </enable>
         <input>velocities/vertical-speed-fps</input>
@@ -815,17 +806,12 @@
         <output>autopilot/internal/pitch-filter</output>
         <config>
             <Kp>1.5</Kp>
-            <beta>1.0</beta>
-            <alpha>0.1</alpha>
-            <gamma>0.0</gamma>
-            <Ti>10.0</Ti> 
+            <Ki>0.0</Ki> 
             <Td>0.000001</Td>
-            <min>
-              <property>autopilot/settings/pitch-limit</property>
-            </min>
+            <min>-15</min>
             <max>15</max>
         </config>
-    </pid-controller>
+    </pi-simple-controller>
 
     <pi-simple-controller>
         <name>GS</name>

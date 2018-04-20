@@ -368,7 +368,7 @@
         <name>RAT</name>
         <offsets>
             <x-m>0.0</x-m>
-            <y-m>-0.005</y-m>
+            <y-m>-0.002</y-m>
             <z-m>0.018</z-m>
         </offsets>
         <alignment>center-center</alignment>

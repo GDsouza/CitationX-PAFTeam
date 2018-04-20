@@ -93,7 +93,7 @@ graph2D:  func(function, from,to,resolution,color="#0"){
 
 appendPath: func(path,cords){
 # TODO avoid append duplicated pixels.
- path.lineTo(me.xy(cords));
+    path.lineTo(me.xy(cords));
  },
  
 rotateAll: func(deg) {

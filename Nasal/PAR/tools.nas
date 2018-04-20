@@ -122,7 +122,11 @@ if(from !=999){
  printf("Warning: found nils between %.2fnm and %.2fnm from rwy.",from*resolution,to*resolution);
 }
 #for(var i=-1; i>=-steps-1; i-=1) if(h[i]!=nil) h[i]=int((h[i]-h[0])*M2FT);
-for(var i=-1; i>=-steps-1; i-=1) if(h[i]!=nil) h[i]=int((h[i]-geoObj.alt())*M2FT);
+
+    ### Change ###
+    for(var i=-1; i>=-steps-1; i-=1) if(h[i]!=nil and geoObj.alt() != nil) h[i]=int((h[i]-geoObj.alt())*M2FT);
+    ##############
+
 return h; #  elevations (ft) over geoObj
 }
 

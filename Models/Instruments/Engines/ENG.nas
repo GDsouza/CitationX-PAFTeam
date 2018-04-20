@@ -55,9 +55,9 @@ var ENG = {
     me.r_fan = getprop(me.fan_r) < 0 ? 0 : getprop(me.fan_r);
 		me.text.N1r.setText(sprintf("%.1f",me.r_fan));
 
-    me.l_itt = getprop(me.itt_l)*888 < getprop(me.tmp_ext) ? getprop(me.tmp_ext) : getprop(me.itt_l)*888;
+    me.l_itt = getprop(me.itt_l)*740 < getprop(me.tmp_ext) ? getprop(me.tmp_ext) : getprop(me.itt_l)*740;
 	  me.text.ITTl.setText(sprintf("%.0f",me.l_itt));
-    me.r_itt = getprop(me.itt_r)*888 < getprop(me.tmp_ext) ? getprop(me.tmp_ext) : getprop(me.itt_r)*888;
+    me.r_itt = getprop(me.itt_r)*740 < getprop(me.tmp_ext) ? getprop(me.tmp_ext) : getprop(me.itt_r)*740;
 	  me.text.ITTr.setText(sprintf("%.0f",me.r_itt));
 
     me.l_turb = getprop(me.turb_l) < 0 ? 0 : getprop(me.turb_l);

@@ -376,8 +376,8 @@ var monitor_V_armed = func{
     }else if(Varm=="GS"){
       if(getprop(Lateral)=="LOC"){
         if(getprop(gs_in_range)){
-          gs_err=getprop("autopilot/internal/gs-deflection");
-          if(gs_err >-0.50 and gs_err < 0.50){
+          gs_err = getprop("autopilot/internal/gs-deflection");
+          if(gs_err >-1 and gs_err < 1){
             setprop(Vertical,"GS");
             setprop(Vertical_arm,"");
 					}
@@ -460,8 +460,8 @@ var set_apr = func{
 		} else if(getprop("instrumentation/nav["~ind_apr~"]/nav-loc") and getprop("instrumentation/nav["~ind_apr~"]/has-gs")){
 			setprop(Lateral_arm,"LOC");
 			setprop(Vertical_arm,"GS");
-			setprop(Lateral,"HDG");
 			setprop(Vertical,"GS"); 
+      setprop(Lateral,"HDG");
 		}		
 }
 

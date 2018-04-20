@@ -8,6 +8,10 @@ var (white,grey,dark,red,green,blue,yellow,mauve,brown,sky) =
 var gcaCtrl = nil;
 var err = [];
 
+### New ###
+var dt = nil;
+###########
+
 var instrument = func(){ # Shows hidden screens (if any) or instanciate a new one.
  var instanced = props.globals.getNode('/instrumentation').getChildren('par');
    var hidden = 0;
@@ -38,7 +42,6 @@ var show =  {
     m.basePts = nil;
 		var sk = canvas.skinnable.new([540,376]);
     sk.canvas.set("background", '#224422');
-#    var myGroup =  sk.root.createChild("group").set("font", "LiberationFonts/LiberationMono-Regular.ttf"); 
     var myGroup =  sk.root.createChild("group");
     var marksGroup =  sk.root.createChild("group");
     m.xzGraph = canvas.graph.new(myGroup, [61,138,25.625,-.025]);
@@ -48,7 +51,6 @@ var show =  {
     m.Hmarks = canvas.graph.new(marksGroup, [61,229,25.625,-25.625]);
     m.Vmarks = canvas.graph.new(marksGroup, [61,138,25.625,-.0222]);
     m.frontGroup =  sk.root.createChild("group").set("font","LiberationFonts/LiberationMono-Regular.ttf");
-#		m.frontGroup =  sk.root.createChild("group"); 
     m.sk = sk;
     m.positionNode = props.getNode('/position');
     m.init(n);
@@ -355,6 +357,14 @@ var show =  {
   }, # end of DrawScreen
 
   update: func() { # called by me.timer
+
+    ### New ###
+    if (me.touchObj.alt() == nil) {me.touch();dt = 0}
+    else { 
+      if (!dt) {me.drawTerrain();me.drawCones();dt = 1}
+    }
+    ###########
+
     var nodes = me.validNodes(range:me.maxX);
     me.Hmarks.group.removeAllChildren();
     me.Vmarks.group.removeAllChildren();
@@ -372,21 +382,23 @@ var show =  {
   appendTrack: func(node) { 
     var (x,y,z) =  me.xyz(node);
     var absH =  me.xyGraph.xy([x,y]);
+    if (absH[1] < 150) absH[1] = 150; # To avoid vertical line
     var absV =  me.xzGraph.xy([x,z]);
     if(me.HTrack.getNumSegments()==0) {
-	    me.HTrack.moveTo(absH[0],absH[1]);
+	    me.HTrack.moveTo(absH);
 	    me.VTrack.moveTo(absV);
-	  }
+    }
     if(y>me.maxX*.1875){ # if y > maxY
       y = me.maxX*.1875;
       me.Hmark.hide();
     } else {
       me.Hmark.show();
-    }
+    }   
 	  me.xyGraph.appendPath(me.HTrack,[x,y]);
 	  me.xzGraph.appendPath(me.VTrack,[x,z]);
 	  me.Hmark.setTranslation(absH[0]-4,absH[1]-5);
 	  me.Vmark.setTranslation(absV[0]-4,absV[1]-6);
+
   }, # end of appendTrack
 
   validNodes: func(range=100) { # for me and AI traffic (if flying, dist < range)
@@ -441,7 +453,13 @@ var show =  {
     var (dist,delta,altitude) = me.rhoDeltaAlt(node);
     var x = dist*math.cos(delta*D2R);
     var y = dist*math.sin(delta*D2R);
-    var z = altitude - me.touchObj.alt()*M2FT;
+
+    ### Change ###
+    if (me.touchObj.alt() != nil) {
+      var z = altitude - me.touchObj.alt()*M2FT;
+    } else {var z = altitude}
+    ###########
+
     return [x,y,z]; # as nm,nm,ft
   }, # end of xyz
 

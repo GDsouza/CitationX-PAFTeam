@@ -190,6 +190,10 @@
 			<command>nasal</command>
 			<script>cdu.cduMain.next_key(1);</script>
 		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
+		</binding>
 	</action>
 </animation>
 
@@ -202,6 +206,10 @@
 		<binding>
 			<command>nasal</command>
 			<script>cdu.cduMain.previous(1);</script>
+		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
 		</binding>
 	</action>
 </animation>
@@ -216,6 +224,10 @@
 			<command>nasal</command>
 			<script>cdu.cduMain.key('FPL',1);</script>
 		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
+		</binding>
 	</action>
 </animation>
 
@@ -228,6 +240,10 @@
 		<binding>
 			<command>nasal</command>
 			<script>cdu.cduMain.key('NAV',1);</script>
+		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
 		</binding>
 	</action>
 </animation>
@@ -242,6 +258,10 @@
 			<command>nasal</command>
 			<script>cdu.cduMain.key('PERF',1);</script>
 		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
+		</binding>
 	</action>
 </animation>
 
@@ -254,6 +274,10 @@
 		<binding>
 			<command>nasal</command>
 			<script>cdu.cduMain.key('PROG',1);</script>
+		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
 		</binding>
 	</action>
 </animation>
@@ -268,11 +292,15 @@
       <condition>
         <equals>
           <property>autopilot/settings/nav-source</property>
-          <value>FMS1</value>
+          <value>FMS2</value>
         </equals>
       </condition>
 	    <command>property-toggle</command>
 	    <property>instrumentation/cdu[1]/direct</property>
+		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
 		</binding>
 	</action>
 </animation>
@@ -287,6 +315,10 @@
 			<command>nasal</command>
 			<script>cdu.cduMain.key('B1L',1);</script>
 		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
+		</binding>
 	</action>
 </animation>
 
@@ -299,6 +331,10 @@
 		<binding>
 			<command>nasal</command>
 			<script>cdu.cduMain.key('B2L',1);</script>
+		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
 		</binding>
 	</action>
 </animation>
@@ -313,6 +349,10 @@
 			<command>nasal</command>
 			<script>cdu.cduMain.key('B3L',1);</script>
 		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
+		</binding>
 	</action>
 </animation>
 
@@ -325,6 +365,10 @@
 		<binding>
 			<command>nasal</command>
 			<script>cdu.cduMain.key('B4L',1);</script>
+		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
 		</binding>
 	</action>
 </animation>
@@ -339,6 +383,10 @@
 			<command>nasal</command>
 			<script>cdu.cduMain.key('B1R',1);</script>
 		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
+		</binding>
 	</action>
 </animation>
 
@@ -351,6 +399,10 @@
 		<binding>
 			<command>nasal</command>
 			<script>cdu.cduMain.key('B2R',1);</script>
+		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
 		</binding>
 	</action>
 </animation>
@@ -365,6 +417,10 @@
 			<command>nasal</command>
 			<script>cdu.cduMain.key('B3R',1);</script>
 		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
+		</binding>
 	</action>
 </animation>
 
@@ -377,6 +433,10 @@
 		<binding>
 			<command>nasal</command>
 			<script>cdu.cduMain.key('B4R',1);</script>
+		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
 		</binding>
 	</action>
 </animation>
@@ -391,6 +451,10 @@
 			<command>nasal</command>
 			<script>cdu.cduMain.btn('0',1);</script>
 		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
+		</binding>
 	</action>
 </animation>
 
@@ -403,6 +467,10 @@
 		<binding>
 			<command>nasal</command>
 			<script>cdu.cduMain.btn('1',1);</script>
+		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
 		</binding>
 	</action>
 </animation>
@@ -417,6 +485,10 @@
 			<command>nasal</command>
 			<script>cdu.cduMain.btn('2',1);</script>
 		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
+		</binding>
 	</action>
 </animation>
 
@@ -429,6 +501,10 @@
 		<binding>
 			<command>nasal</command>
 			<script>cdu.cduMain.btn('3',1);</script>
+		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
 		</binding>
 	</action>
 </animation>
@@ -443,6 +519,10 @@
 			<command>nasal</command>
 			<script>cdu.cduMain.btn('4',1);</script>
 		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
+		</binding>
 	</action>
 </animation>
 
@@ -455,6 +535,10 @@
 		<binding>
 			<command>nasal</command>
 			<script>cdu.cduMain.btn('5',1);</script>
+		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
 		</binding>
 	</action>
 </animation>
@@ -469,6 +553,10 @@
 			<command>nasal</command>
 			<script>cdu.cduMain.btn('6',1);</script>
 		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
+		</binding>
 	</action>
 </animation>
 
@@ -481,6 +569,10 @@
 		<binding>
 			<command>nasal</command>
 			<script>cdu.cduMain.btn('7',1);</script>
+		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
 		</binding>
 	</action>
 </animation>
@@ -495,6 +587,10 @@
 			<command>nasal</command>
 			<script>cdu.cduMain.btn('8',1);</script>
 		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
+		</binding>
 	</action>
 </animation>
 
@@ -507,6 +603,10 @@
 		<binding>
 			<command>nasal</command>
 			<script>cdu.cduMain.btn('9',1);</script>
+		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
 		</binding>
 	</action>
 </animation>
@@ -521,6 +621,10 @@
 			<command>nasal</command>
 			<script>cdu.cduMain.btn('A',1);</script>
 		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
+		</binding>
 	</action>
 </animation>
 
@@ -533,6 +637,10 @@
 		<binding>
 			<command>nasal</command>
 			<script>cdu.cduMain.btn('B',1);</script>
+		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
 		</binding>
 	</action>
 </animation>
@@ -547,6 +655,10 @@
 			<command>nasal</command>
 			<script>cdu.cduMain.btn('C',1);</script>
 		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
+		</binding>
 	</action>
 </animation>
 
@@ -559,6 +671,10 @@
 		<binding>
 			<command>nasal</command>
 			<script>cdu.cduMain.btn('D',1);</script>
+		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
 		</binding>
 	</action>
 </animation>
@@ -573,6 +689,10 @@
 			<command>nasal</command>
 			<script>cdu.cduMain.btn('E',1);</script>
 		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
+		</binding>
 	</action>
 </animation>
 
@@ -585,6 +705,10 @@
 		<binding>
 			<command>nasal</command>
 			<script>cdu.cduMain.btn('F',1);</script>
+		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
 		</binding>
 	</action>
 </animation>
@@ -599,6 +723,10 @@
 			<command>nasal</command>
 			<script>cdu.cduMain.btn('G',1);</script>
 		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
+		</binding>
 	</action>
 </animation>
 
@@ -611,6 +739,10 @@
 		<binding>
 			<command>nasal</command>
 			<script>cdu.cduMain.btn('H',1);</script>
+		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
 		</binding>
 	</action>
 </animation>
@@ -625,6 +757,10 @@
 			<command>nasal</command>
 			<script>cdu.cduMain.btn('I',1);</script>
 		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
+		</binding>
 	</action>
 </animation>
 
@@ -637,6 +773,10 @@
 		<binding>
 			<command>nasal</command>
 			<script>cdu.cduMain.btn('J',1);</script>
+		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
 		</binding>
 	</action>
 </animation>
@@ -651,6 +791,10 @@
 			<command>nasal</command>
 			<script>cdu.cduMain.btn('K',1);</script>
 		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
+		</binding>
 	</action>
 </animation>
 
@@ -663,6 +807,10 @@
 		<binding>
 			<command>nasal</command>
 			<script>cdu.cduMain.btn('L',1);</script>
+		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
 		</binding>
 	</action>
 </animation>
@@ -677,6 +825,10 @@
 			<command>nasal</command>
 			<script>cdu.cduMain.btn('M',1);</script>
 		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
+		</binding>
 	</action>
 </animation>
 
@@ -689,6 +841,10 @@
 		<binding>
 			<command>nasal</command>
 			<script>cdu.cduMain.btn('N',1);</script>
+		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
 		</binding>
 	</action>
 </animation>
@@ -703,6 +859,10 @@
 			<command>nasal</command>
 			<script>cdu.cduMain.btn('O',1);</script>
 		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
+		</binding>
 	</action>
 </animation>
 
@@ -715,6 +875,10 @@
 		<binding>
 			<command>nasal</command>
 			<script>cdu.cduMain.btn('P',1);</script>
+		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
 		</binding>
 	</action>
 </animation>
@@ -729,6 +893,10 @@
 			<command>nasal</command>
 			<script>cdu.cduMain.btn('Q',1);</script>
 		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
+		</binding>
 	</action>
 </animation>
 
@@ -741,6 +909,10 @@
 		<binding>
 			<command>nasal</command>
 			<script>cdu.cduMain.btn('R',1);</script>
+		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
 		</binding>
 	</action>
 </animation>
@@ -755,6 +927,10 @@
 			<command>nasal</command>
 			<script>cdu.cduMain.btn('S',1);</script>
 		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
+		</binding>
 	</action>
 </animation>
 
@@ -767,6 +943,10 @@
 		<binding>
 			<command>nasal</command>
 			<script>cdu.cduMain.btn('T',1);</script>
+		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
 		</binding>
 	</action>
 </animation>
@@ -781,6 +961,10 @@
 			<command>nasal</command>
 			<script>cdu.cduMain.btn('U',1);</script>
 		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
+		</binding>
 	</action>
 </animation>
 
@@ -793,6 +977,10 @@
 		<binding>
 			<command>nasal</command>
 			<script>cdu.cduMain.btn('V',1);</script>
+		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
 		</binding>
 	</action>
 </animation>
@@ -807,6 +995,10 @@
 			<command>nasal</command>
 			<script>cdu.cduMain.btn('W',1);</script>
 		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
+		</binding>
 	</action>
 </animation>
 
@@ -819,6 +1011,10 @@
 		<binding>
 			<command>nasal</command>
 			<script>cdu.cduMain.btn('X',1);</script>
+		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
 		</binding>
 	</action>
 </animation>
@@ -833,6 +1029,10 @@
 			<command>nasal</command>
 			<script>cdu.cduMain.btn('Y',1);</script>
 		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
+		</binding>
 	</action>
 </animation>
 
@@ -845,6 +1045,10 @@
 		<binding>
 			<command>nasal</command>
 			<script>cdu.cduMain.btn('Z',1);</script>
+		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
 		</binding>
 	</action>
 </animation>
@@ -859,6 +1063,10 @@
 			<command>nasal</command>
 			<script>cdu.cduMain.btn('-',1);</script>
 		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
+		</binding>
 	</action>
 </animation>
 
@@ -871,6 +1079,10 @@
 		<binding>
 			<command>nasal</command>
 			<script>cdu.cduMain.btn('.',1);</script>
+		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
 		</binding>
 	</action>
 </animation>
@@ -885,6 +1097,10 @@
 			<command>nasal</command>
 			<script>cdu.cduMain.btn('/',1);</script>
 		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
+		</binding>
 	</action>
 </animation>
 
@@ -898,6 +1114,10 @@
 			<command>nasal</command>
 			<script>cdu.cduMain.delete(1);</script>
 		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
+		</binding>
 	</action>
 </animation>
 
@@ -910,6 +1130,10 @@
 		<binding>
 			<command>nasal</command>
 			<script>setprop("/instrumentation/cdu[1]/input","");</script>
+		</binding>
+		<binding>
+		  <command>property-toggle</command>
+		  <property>sim/sound/click</property>
 		</binding>
 	</action>
 </animation>

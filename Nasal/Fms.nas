@@ -85,7 +85,6 @@ var FMS = {
 		m.dist_rem = "autopilot/route-manager/distance-remaining-nm";
 		m.fms = "autopilot/settings/fms";
     m.fms_climb = "autopilot/internal/fms-climb-rate-fps";
-    m.gs_rate = "autopilot/internal/gs-rate-fps";
 		m.lock_alt = "autopilot/locks/altitude";
     m.lock_gs = "autopilot/locks/fms-gs";
 		m.nav_dist = "autopilot/internal/nav-distance";
@@ -96,8 +95,8 @@ var FMS = {
 		m.tg_spd_kt = "autopilot/settings/target-speed-kt";
 		m.tg_spd_mc = "autopilot/settings/target-speed-mc";
 		m.tot_dist = "autopilot/route-manager/total-distance";
-    setprop("instrumentation/nav/gs-rate-of-climb-fpm",0);
-    setprop("instrumentation/nav[1]/gs-rate-of-climb-fpm",0);
+    setprop("instrumentation/nav/gs-rate-of-climb",0);
+    setprop("instrumentation/nav[1]/gs-rate-of-climb",0);
 
 		return m;
 	}, # end of new
@@ -339,19 +338,18 @@ var FMS = {
 					if (getprop(me.dist_rem) <= 8) {
 						citation.set_apr();
 					} else {
-            me.gs_climb = "instrumentation/nav["~ind~"]/gs-rate-of-climb-fpm";
-                ### GS anticipation
-            if (getprop(me.dist_rem) <=10) {
-              if (getprop(me.gs_climb)/60 <= getprop(me.tg_climb)) setprop(me.lock_gs,1);
-              if (getprop(me.lock_gs)) {
-                if (getprop(me.gs_climb)/60 <= getprop(me.tg_climb)) {
-                  me.gs_calc = getprop(me.tg_climb);
-                  setprop("autopilot/settings/pitch-limit",-2)
-                } else me.gs_calc = getprop(me.gs_climb)/60;
-                if (getprop(me.dist_rem) <=9) {
-                  setprop("autopilot/settings/pitch-limit",-15);
-                }
-              } else me.gs_calc = getprop(me.tg_climb);
+            me.gs_climb = getprop("instrumentation/nav["~ind~"]/gs-rate-of-climb");
+
+               ### GS anticipation
+            if (getprop("autopilot/internal/gs-in-range")) {
+              if (left(getprop("sim/version/flightgear"),4) < 2018) {
+                if (getprop("autopilot/internal/gs-deflection") > -0.25 and me.gs_climb < -10) setprop(me.lock_gs,1);
+              } else {
+                if (me.gs_climb <= getprop(me.fms_climb)) setprop(me.lock_gs,1);
+              }
+              if (getprop(me.lock_gs)) me.gs_calc = me.gs_climb;
+              else if (getprop(me.tg_climb) < -30) me.gs_calc = -30;
+              else me.gs_calc = getprop(me.tg_climb);
               setprop(me.fms_climb,me.gs_calc);
             } else setprop(me.fms_climb,getprop(me.tg_climb));
 
@@ -423,6 +421,10 @@ var FMS = {
 						}
 					}
 				}
+        if (getprop(me.lock_alt) == "GS") {
+          me.gs_climb = getprop("instrumentation/nav["~ind~"]/gs-rate-of-climb");
+          setprop(me.fms_climb,me.gs_climb);
+        }
 				if (getprop("controls/flight/flaps")==0.142) {
 					setprop(me.tg_spd_kt,getprop(me.app5_spd));
 				} else if (getprop("controls/flight/flaps")==0.428) {
@@ -439,9 +441,6 @@ var FMS = {
 				setprop("autopilot/settings/target-altitude-ft",getprop(me.tg_alt));
 			}
 		}
-    if (getprop("autopilot/locks/fms-gs") and getprop(me.lock_alt) == "GS") {
-      setprop(me.fms_climb,getprop("instrumentation/nav["~ind~"]/gs-rate-of-climb-fpm")/60);
-    }
 		settimer(func me.update(),0);
 	}, # end of update
 
@@ -461,6 +460,7 @@ var FMS = {
     else {me.dist = getprop("autopilot/internal/nav-distance")}
     me.fps_limit = -(getprop(me.alt_ind)-getprop(me.tg_alt))/((me.dist)/getprop(me.tas)*3600);
     if (me.fps_limit > 0) me.fps_limit = -5;
+#    if (getprop("autopilot/internal/gs-in-range")) me.fps_limit = -12; 
     setprop("autopilot/settings/fps-limit",me.fps_limit);
   },# end of fps_lim
 
