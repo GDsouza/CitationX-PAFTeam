@@ -1173,7 +1173,10 @@
         <object-name>gs.scale</object-name>
         <object-name>gs.needle</object-name>
         <condition>
+          <and>
+            <property>autopilot/internal/in-range</property>
             <property>autopilot/internal/gs-in-range</property>
+          </and>
         </condition>
     </animation>
 

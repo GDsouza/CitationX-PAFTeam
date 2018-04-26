@@ -892,11 +892,12 @@ var cduMain = {
 			if (v == "B2L"){
 				v = "";					
 				if (cduInput) {
-					if (cduInput > 13000) { cduInput = "FUEL MAX = 13000"}
+					if (cduInput > 13000) {cduInput = "FUEL MAX = 13000"}
 					else {
 						setprop("consumables/fuel/tank[0]/level-lbs",cduInput*0.27);
 						setprop("consumables/fuel/tank[1]/level-lbs",cduInput*0.27);
-						setprop("consumables/fuel/tank[2]/level-lbs",cduInput*0.46);
+						setprop("consumables/fuel/tank[2]/level-lbs",cduInput*0.23);
+						setprop("consumables/fuel/tank[3]/level-lbs",cduInput*0.23);
 					}
 				}
 				cduInput = "";

@@ -48,8 +48,12 @@ var fuelsys = {
 	init_fuel : func{
 		setprop(me.tank[0],0); 	
 		setprop(me.tank[1],0);		
-		setprop(me.tank[2],1);		
-		setprop(me.tank[3],1);
+		setprop(me.tank[2],0);		
+		setprop(me.tank[3],0);
+    setprop(me.level0,2000);
+    setprop(me.level1,2000);
+    setprop(me.level2,2000);
+    setprop(me.level3,2000);
 	},
 
   listen : func {

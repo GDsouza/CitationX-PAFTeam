@@ -101,8 +101,9 @@ var show =  {
 		me.sk.listen_mouse_events(caller:me, Hots:wheelHots);
     me.aptText = canvas.plot2D.text(me.frontGroup,'',[20,315],nil,white);
 		me.rwyText = canvas.plot2D.text(me.frontGroup,'',[109,326],nil,yellow,'center-baseline');
-		me.hdgText = canvas.plot2D.text(me.frontGroup,'',[52,278],[9,1],white,'left-baseline');
-		me.dataText = canvas.plot2D.text(me.frontGroup,'',[52,265],[9,1],white,'left-baseline');
+		me.hdgText = canvas.plot2D.text(me.frontGroup,'',[52,278],[10,1],white,'left-baseline');
+    me.altText = canvas.plot2D.text(me.frontGroup,'',[52,291],[10,1],white,'left-baseline');
+		me.dataText = canvas.plot2D.text(me.frontGroup,'',[52,265],[10,1],white,'left-baseline');
     me.finalText = canvas.plot2D.text(me.frontGroup,sprintf('%i nm',me.destination.final),[163,326],nil,yellow,'center-baseline');
     me.callsignText = canvas.plot2D.text(me.frontGroup,me.callsign,[224,326],nil,sky,'center-baseline');
     me.gsText  = canvas.plot2D.text(me.frontGroup,'',[500,100],nil,white,'center-center');
@@ -237,7 +238,8 @@ var show =  {
 
     'changeZoom': func(delta) {
 			fgcommand("play-audio-sample", props.Node.new(me.sound));
-			var f = delta==1? 0.5 : 2 ;
+#			var f = delta==1? 0.5 : 2 ;
+			var f = delta==1? 2 : 0.5 ;
 	    foreach(graph;[me.xyGraph,me.xzGraph,me.Hmarks,me.Vmarks]) {
 		    graph.view[2] /= f;
 		    graph.view[3] /= f;
@@ -264,23 +266,30 @@ var show =  {
       gui.popupTip(me.icao~' is Not a valid Icao.');
       return;
     }  
-    me.sk.window.set("title",sprintf("PAR %i: %s",me.n+1, string.uc(me.icao) )).clearFocus();
+ 		me.winTitle();
     var best = chooseRwy(me.airport.runways);
     me.rwyObj = me.airport.runways[best];
     me.touch();
-    foreach(obj;[me.HTrack,me.VTrack]) obj.reset();
     me.rwyText.setText("Rwy "~ me.rwyObj.id);
 		me.hdgText.setText(sprintf("hdg: %i deg", me.rwyObj.heading));
 		me.dataText.setText(sprintf("%i x %i m", me.rwyObj.length, me.rwyObj.width));
+    me.altText.setText(sprintf("alt: %i ft",me.airport.elevation*3.28084));
     me.aptText.setText(me.airport.name);
 #  	me.newRwy = 1;
 		me.DrawScreen(); 
- }, # end of setIcao
+    foreach(obj;[me.HTrack,me.VTrack]) obj.reset();
+	}, # end of setIcao
+
+	winTitle: func(warn=''){
+	 me.sk.window.set("title",sprintf("PAR %i: %s %s",me.n+1, string.uc(me.icao), warn )).clearFocus();
+	},
 
   touch: func(){
     me.touchObj = geo.Coord.new().set_latlon(me.rwyObj.lat, me.rwyObj.lon)
       .apply_course_distance(me.rwyObj.heading, 250);
-    me.touchObj.set_alt(geo.elevation(me.rwyObj.lat, me.rwyObj.lon));
+		var elev = geo.elevation(me.rwyObj.lat, me.rwyObj.lon);
+		var e = elev==nil? me.airport.elevation : elev ;
+		me.touchObj.set_alt(1+e);
   }, # end of touch
 
   drawTerrain: func(){
@@ -357,24 +366,36 @@ var show =  {
   }, # end of DrawScreen
 
   update: func() { # called by me.timer
-
-    ### New ###
-    if (me.touchObj.alt() == nil) {me.touch();dt = 0}
-    else { 
-      if (!dt) {me.drawTerrain();me.drawCones();dt = 1}
-    }
-    ###########
-
+		if (geo.elevation(me.rwyObj.lat, me.rwyObj.lon) == nil) {
+		me.touch();
+		dt = 0; 
+		me.winTitle('Terrain profile is not available yet.');
+		}
+			else {
+				if (!dt) {
+			me.drawTerrain();
+			me.drawCones();
+			dt = 1; 
+			me.winTitle(); 
+			fgcommand("play-audio-sample", props.Node.new(me.sound));
+			}
+		}     
     var nodes = me.validNodes(range:me.maxX);
     me.Hmarks.group.removeAllChildren();
     me.Vmarks.group.removeAllChildren();
     if(size(nodes)){
       for(var i=1; i<size(nodes); i+=1) call(me.updateMark,[nodes[i]],me,err = []);
       if (size(err)) {
-      print("Closing instrument");
+		    print("Closing instrument");
+		    var instance = props.globals.getNode(sprintf('/instrumentation/par[%i]',me.n));
+		    if(instance !=nil) instance.remove();
+				if(me.bttn.getVisible()){
+					me.bttn.hide();
+					gcaCtrl =nil;
+      	}
       me.timer.stop();
-      }
-    }
+	    }
+		}
     me.appendTrack(me.positionNode);
     if(me.bttn.getVisible()) me.service();
   }, # end of update 
@@ -453,13 +474,7 @@ var show =  {
     var (dist,delta,altitude) = me.rhoDeltaAlt(node);
     var x = dist*math.cos(delta*D2R);
     var y = dist*math.sin(delta*D2R);
-
-    ### Change ###
-    if (me.touchObj.alt() != nil) {
-      var z = altitude - me.touchObj.alt()*M2FT;
-    } else {var z = altitude}
-    ###########
-
+		var z = altitude - me.touchObj.alt()*M2FT;
     return [x,y,z]; # as nm,nm,ft
   }, # end of xyz
 

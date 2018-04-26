@@ -127,10 +127,10 @@
         <type>select</type>
         <object-name>Valt-display</object-name>
         <condition>
-            <equals>
-                <property>autopilot/locks/altitude</property>
-                <value>VALT</value>
-            </equals>
+          <equals>
+            <property>autopilot/locks/altitude</property>
+            <value>VALT</value>
+          </equals>
         </condition>
     </animation>
 

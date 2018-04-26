@@ -136,6 +136,7 @@ var FMS = {
 				me.fpChange();
       }
 		},0,0);     
+
 	}, # end of listen
 
   fpChange : func {
@@ -335,89 +336,89 @@ var FMS = {
 					if (getprop(me.NAVSRC) == "FMS2") ind=1;
             
                 ### Switch FMS --> GS
-					if (getprop(me.dist_rem) <= 8) {
-						citation.set_apr();
-					} else {
-            me.gs_climb = getprop("instrumentation/nav["~ind~"]/gs-rate-of-climb");
-
-               ### GS anticipation
-            if (getprop("autopilot/internal/gs-in-range")) {
-              if (left(getprop("sim/version/flightgear"),4) < 2018) {
-                if (getprop("autopilot/internal/gs-deflection") > -0.25 and me.gs_climb < -10) setprop(me.lock_gs,1);
-              } else {
-                if (me.gs_climb <= getprop(me.fms_climb)) setprop(me.lock_gs,1);
-              }
+          me.gs_climb = getprop("instrumentation/nav["~ind~"]/gs-rate-of-climb");
+          if (getprop("autopilot/internal/gs-in-range") and getprop(me.dist_rem) <= 20) {
+            setprop("autopilot/internal/in-range",1);
+            me.set_tgAlt = getprop("autopilot/route-manager/destination/field-elevation-ft");
+            if (getprop(me.dist_rem) <= 8) citation.set_apr();
+            else {
+              if (getprop("autopilot/internal/gs-deflection") > -0.25 and me.gs_climb < 0) setprop(me.lock_gs,1);
               if (getprop(me.lock_gs)) me.gs_calc = me.gs_climb;
               else if (getprop(me.tg_climb) < -30) me.gs_calc = -30;
               else me.gs_calc = getprop(me.tg_climb);
               setprop(me.fms_climb,me.gs_calc);
-            } else setprop(me.fms_climb,getprop(me.tg_climb));
+            }
+          } else if (getprop(me.dist_rem) <= 8) {
+              me.min = getprop("autopilot/settings/minimums");
+              me.set_tgAlt = me.min;
+              me.fps_lim(1);
+          } else {
+            if (getprop("autopilot/internal/in-range")) {
+              setprop("autopilot/internal/in-range",0);
+            }
+            setprop(me.fms_climb,getprop(me.tg_climb));
 
 						### Last Wp reference ###
 						if (size(v_tod) > 0 and int(getprop(me.dist_rem)) == int(v_tod[v_ind+1])-1) {
 							me.tod = 0;
 							me.spd_dist = 0;
-							if (v_ind < size(v_tod)-3) {
-								v_ind+=3;
-							}
+							if (v_ind < size(v_tod)-3) v_ind+=3;
 						}
 
 						### Setting target altitude ###
 						if (!me.tod){
-							if (getprop(me.dist_rem) < me.prevWp_dist and getprop(me.dist_rem) > me.lastWp_dist) {
-								me.set_tgAlt = math.round(me.lastWp_alt,100);
-							} else {
-								me.set_tgAlt = math.round(v_alt.vector[curr_wp],100);
-							}
-						} else {
-							me.set_tgAlt = math.round(v_tod[v_ind+2],100);
-						}
-					}
+              if (getprop(me.dist_rem) < me.prevWp_dist and getprop(me.dist_rem) > me.lastWp_dist) {
+                me.set_tgAlt = math.round(me.lastWp_alt,100);
+              } else {
+						    me.set_tgAlt = math.round(v_alt.vector[curr_wp],100);
+              }
+						} else me.set_tgAlt = math.round(v_tod[v_ind+2],100);
 
-					### Speed ###
+					  ### Speed ###
 
-									### Departure ###
-					if (me.dist_dep < getprop(me.dep_lim) and getprop(me.alt_ind) < getprop(me.dep_agl)) {
-						setprop(me.tg_spd_kt,getprop(me.dep_spd));
-					} else if (me.dist_dep < 10) {
-							setprop(me.tg_spd_kt,getprop(me.climb_kt));
-					} else {
-									### Near before TOD ###
-						if (getprop(me.alm_tod)) {
-							setprop(me.tg_spd_mc,getprop(me.desc_mc));
-							setprop(me.tg_spd_kt,getprop(me.desc_kt));
-						} else {
-									### After tod ###
-              if (me.tod) {
-                setprop(me.tg_spd_mc,getprop(me.desc_mc));
-                setprop(me.tg_spd_kt,getprop(me.desc_kt));
-                me.fps_lim();
-							} else {
-								### Climb ###
-								if (getprop(me.alt_ind) < getprop(me.tg_alt)-100) {
-									setprop(me.tg_spd_mc,getprop(me.climb_mc));
-								  setprop(me.tg_spd_kt,getprop(me.climb_kt));
-									### Descent ###
-								} else if (getprop(me.dist_rem) <= 20) {
-										setprop(me.tg_spd_kt,200);
-                    me.fps_lim();
-								}	else if (me.desc_flag){
-										setprop(me.tg_spd_mc,getprop(me.desc_mc));
-										setprop(me.tg_spd_kt,getprop(me.desc_kt));
-                    me.fps_lim();
-								} else if (me.fp.getWP(curr_wp).wp_name == 'TOD' and me.fp.getWP(curr_wp).leg_distance < 8) {
-                    setprop(me.tg_spd_mc,getprop(me.tg_spd_mc));
-										setprop(me.tg_spd_kt,getprop(me.tg_spd_kt));
-								}	else {
-										### Cruise ###
-									if (getprop(me.cruise_kt)) {
-										if (me.fp.getWP(curr_wp).speed_cstr) {
-                      setprop(me.cruise_kt,me.fp.getWP(curr_wp).speed_cstr);
-                    }
-                    me.cruise_spd();
-									}
-								}	
-							}
+									  ### Departure ###
+					  if (me.dist_dep < getprop(me.dep_lim) and getprop(me.alt_ind) < getprop(me.dep_agl)) {
+						  setprop(me.tg_spd_kt,getprop(me.dep_spd));
+					  } else if (me.dist_dep < 10) {
+							  setprop(me.tg_spd_kt,getprop(me.climb_kt));
+					  } else {
+									  ### Near before TOD ###
+						  if (getprop(me.alm_tod)) {
+							  setprop(me.tg_spd_mc,getprop(me.desc_mc));
+							  setprop(me.tg_spd_kt,getprop(me.desc_kt));
+						  } else {
+									  ### After tod ###
+                if (me.tod) {
+                  setprop(me.tg_spd_mc,getprop(me.desc_mc));
+                  setprop(me.tg_spd_kt,getprop(me.desc_kt));
+                  me.fps_lim(0);
+							  } else {
+								  ### Climb ###
+								  if (getprop(me.alt_ind) < getprop(me.tg_alt)-100) {
+									  setprop(me.tg_spd_mc,getprop(me.climb_mc));
+								    setprop(me.tg_spd_kt,getprop(me.climb_kt));
+									  ### Descent ###
+								  } else if (getprop(me.dist_rem) <= 20) {
+										  setprop(me.tg_spd_kt,200);
+                      me.fps_lim(0);
+								  }	else if (me.desc_flag){
+										  setprop(me.tg_spd_mc,getprop(me.desc_mc));
+										  setprop(me.tg_spd_kt,getprop(me.desc_kt));
+                      me.fps_lim(0);
+								  } else if (me.fp.getWP(curr_wp).wp_name == 'TOD' and me.fp.getWP(curr_wp).leg_distance < 8) {
+                      setprop(me.tg_spd_mc,getprop(me.tg_spd_mc));
+										  setprop(me.tg_spd_kt,getprop(me.tg_spd_kt));
+								  }	else {
+										  ### Cruise ###
+									  if (getprop(me.cruise_kt)) {
+										  if (me.fp.getWP(curr_wp).speed_cstr) {
+                        setprop(me.cruise_kt,me.fp.getWP(curr_wp).speed_cstr);
+                      }
+                      me.cruise_spd();
+									  }
+								  }	
+							  }
+              }
 						}
 					}
 				}
@@ -455,12 +456,14 @@ var FMS = {
     setprop(me.tg_spd_kt,cruise_kt);
 	}, # end of cruise_spd
 
-  fps_lim : func {  ### Descent fps limit ###
+  fps_lim : func(x) {  ### Descent fps limit ###
     if (me.tod) {me.dist = getprop(me.dist_rem)-v_tod[v_ind+1]}
-    else {me.dist = getprop("autopilot/internal/nav-distance")}
+    else {
+      if (x == 0) me.dist = getprop("autopilot/internal/nav-distance");
+      if (x == 1) me.dist = getprop("autopilot/route-manager/distance-remaining-nm");
+    }
     me.fps_limit = -(getprop(me.alt_ind)-getprop(me.tg_alt))/((me.dist)/getprop(me.tas)*3600);
     if (me.fps_limit > 0) me.fps_limit = -5;
-#    if (getprop("autopilot/internal/gs-in-range")) me.fps_limit = -12; 
     setprop("autopilot/settings/fps-limit",me.fps_limit);
   },# end of fps_lim
 

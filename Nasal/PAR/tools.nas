@@ -118,9 +118,9 @@ for(var i=0;i<size(h);i+=1){
 if(h[i]==nil and from==999) from=i;
 if(h[i]==nil and from!=999) to=i;
 }
-if(from !=999){
- printf("Warning: found nils between %.2fnm and %.2fnm from rwy.",from*resolution,to*resolution);
-}
+#if(from !=999){
+# printf("Warning: found nils between %.2fnm and %.2fnm from rwy.",from*resolution,to*resolution);
+#}
 #for(var i=-1; i>=-steps-1; i-=1) if(h[i]!=nil) h[i]=int((h[i]-h[0])*M2FT);
 
     ### Change ###

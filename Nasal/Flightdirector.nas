@@ -462,6 +462,7 @@ var set_apr = func{
 			setprop(Vertical_arm,"GS");
 			setprop(Vertical,"GS"); 
       setprop(Lateral,"HDG");
+      setprop("autopilot/internal/in-range",1);
 		}		
 }
 
@@ -482,6 +483,9 @@ var update_nav = func {
         if(getprop("instrumentation/nav["~ind~"]/nav-loc"))sgnl="LOC"~(ind+1);
         if(getprop("instrumentation/nav["~ind~"]/has-gs"))sgnl="ILS"~(ind+1);
         setprop("autopilot/internal/nav-type",sgnl);
+        if (getprop("autopilot/internal/gs-in-range") and dst <= 20) {
+          setprop("autopilot/internal/in-range",1)
+        }
 				crs_set = getprop("instrumentation/nav["~ind~"]/radials/sel-deg-corr");
 				setprop("autopilot/internal/selected-crs",math.round(crs_set));
         setprop("autopilot/internal/to-flag",getprop("instrumentation/nav["~ind~"]/to-flag"));
@@ -531,8 +535,9 @@ var update_nav = func {
 				}
 			}
         ### GS anticipation ###
-      if (dist_rem <= 10) {
+      if (dist_rem <= 10 and getprop("autopilot/internal/gs-in-range")) {
         setprop("autopilot/internal/course-offset",getprop("autopilot/internal/nav-heading-error-deg"));
+        setprop("autopilot/settings/tg-alt-ft",getprop("autopilot/route-manager/destination/field-elevation-ft"));
       } else {
 			  setprop("autopilot/internal/course-offset",crs_offset);
 			  setprop("autopilot/internal/selected-crs",int(crs_set));
@@ -559,10 +564,8 @@ var update_nav = func {
 					}
 				}
 			}
-
     } else if (NAVSRC == "") {setprop("autopilot/internal/nav-type","")}
-
-}
+} # end of update
 
 
 ###  Main loop ###
