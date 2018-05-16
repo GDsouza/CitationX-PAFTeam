@@ -7,10 +7,7 @@ var (white,grey,dark,red,green,blue,yellow,mauve,brown,sky) =
 #print("Precision Approach Radar (v:" ~ addon.version.str() ~ ") loaded. Press '>' key to instantiate it.");
 var gcaCtrl = nil;
 var err = [];
-
-### New ###
 var dt = nil;
-###########
 
 var instrument = func(){ # Shows hidden screens (if any) or instanciate a new one.
  var instanced = props.globals.getNode('/instrumentation').getChildren('par');
@@ -60,8 +57,7 @@ var show =  {
   init: func(n) {
   	me.sound = {path : root ~ "/sounds",file : "click.wav", volume : 1.0};
   	props.globals.getNode("/sim/sound/chatter/enabled").setValue(1);
-	#	fgcommand("play-audio-sample", props.Node.new(me.sound) );
-  
+	#	fgcommand("play-audio-sample", props.Node.new(me.sound) );  
   	me.n = n;
     me.node = props.globals.getNode(sprintf('/instrumentation/par[%i]',n),1);
     me.node.addChild('visible').setIntValue(1);
@@ -101,23 +97,33 @@ var show =  {
 		me.sk.listen_mouse_events(caller:me, Hots:wheelHots);
     me.aptText = canvas.plot2D.text(me.frontGroup,'',[20,315],nil,white);
 		me.rwyText = canvas.plot2D.text(me.frontGroup,'',[109,326],nil,yellow,'center-baseline');
+###
 		me.hdgText = canvas.plot2D.text(me.frontGroup,'',[52,278],[10,1],white,'left-baseline');
     me.altText = canvas.plot2D.text(me.frontGroup,'',[52,291],[10,1],white,'left-baseline');
 		me.dataText = canvas.plot2D.text(me.frontGroup,'',[52,265],[10,1],white,'left-baseline');
+###
     me.finalText = canvas.plot2D.text(me.frontGroup,sprintf('%i nm',me.destination.final),[163,326],nil,yellow,'center-baseline');
     me.callsignText = canvas.plot2D.text(me.frontGroup,me.callsign,[224,326],nil,sky,'center-baseline');
     me.gsText  = canvas.plot2D.text(me.frontGroup,'',[500,100],nil,white,'center-center');
 		me.zoomText  = canvas.plot2D.text(me.frontGroup,sprintf('%i',me.maxX),[500,314],nil,white,'center-center');
-    # Choose destination from comm freq
-    me.setIcao(getprop("/instrumentation/comm/airport-id"));
-    if(getprop("/instrumentation/comm/volume")<0.1) {
-      gui.popupTip("Turn Comm1 on. Set volume",3);
-      return ;
-    } else if(me.airport.name==nil or getprop("/instrumentation/comm/signal-quality-norm")<0.01) { # if invalid freq or out of range
-      gui.popupTip("Check comm freq.!",3);
-      return ;
-    }
-    me.timer = maketimer(2,func {me.update();});
+
+				# Choose destination from route-manager
+    if(getprop("/autopilot/route-manager/active")){
+				me.setIcao(getprop("/autopilot/route-manager/destination/airport"));
+		} else {
+		    # Choose destination from comm freq
+   		if(getprop("/instrumentation/comm/airport-id")!=''){
+		    me.setIcao(getprop("/instrumentation/comm/airport-id"));
+		    if(getprop("/instrumentation/comm/volume")<0.1) {
+		      gui.popupTip("Turn Comm1 on. Set volume",3);
+		      return ;
+		    } else if(me.airport.name==nil or getprop("/instrumentation/comm/signal-quality-norm")<0.01) { # if invalid freq or out of range
+		      gui.popupTip("Check comm freq.!",3);
+		      return ;
+		    }
+      }
+		} 
+   	me.timer = maketimer(2,func {me.update();});
     me.timer.stop();
     me.timer.simulatedTime=1;
     me.timer.start();
@@ -238,7 +244,6 @@ var show =  {
 
     'changeZoom': func(delta) {
 			fgcommand("play-audio-sample", props.Node.new(me.sound));
-#			var f = delta==1? 0.5 : 2 ;
 			var f = delta==1? 2 : 0.5 ;
 	    foreach(graph;[me.xyGraph,me.xzGraph,me.Hmarks,me.Vmarks]) {
 		    graph.view[2] /= f;
@@ -273,7 +278,7 @@ var show =  {
     me.rwyText.setText("Rwy "~ me.rwyObj.id);
 		me.hdgText.setText(sprintf("hdg: %i deg", me.rwyObj.heading));
 		me.dataText.setText(sprintf("%i x %i m", me.rwyObj.length, me.rwyObj.width));
-    me.altText.setText(sprintf("alt: %i ft",me.airport.elevation*3.28084));
+    me.altText.setText(sprintf("alt: %i ft",me.airport.elevation*M2FT));
     me.aptText.setText(me.airport.name);
 #  	me.newRwy = 1;
 		me.DrawScreen(); 

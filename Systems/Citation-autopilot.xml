@@ -311,7 +311,7 @@
         <output>autopilot/internal/roll-filter</output>
         <config>
             <Kp>-1.5</Kp> <!-- old -1.5 -->
-            <Ki>-0.0</Ki> <!-- old 0 -->
+            <Ki>0.0</Ki> <!-- old 0 -->
             <min>
               <property>autopilot/settings/bank-limit</property>
               <scale>-1</scale>
@@ -370,7 +370,7 @@
         <reference>autopilot/internal/roll-bars</reference>
         <output>controls/flight/aileron</output>
         <config>
-            <Kp>0.15</Kp>
+            <Kp>0.50</Kp>
             <beta>1.0</beta>
             <alpha>0.1</alpha>
             <gamma>0.0</gamma>
@@ -487,6 +487,9 @@
               <not>
                 <property>autopilot/locks/fms-gs</property>
               </not>
+              <not>
+                <property>autopilot/locks/fms-app</property>
+              </not>
             </and>
           </condition>
         </enable>
@@ -494,10 +497,38 @@
         <reference>autopilot/internal/target-climb-rate-fps</reference>
         <output>autopilot/internal/pitch-filter</output>
         <config>
-            <Kp>0.30</Kp> 	<!-- origin 0.30 -->
+            <Kp>0.5</Kp> 	<!-- origin 0.30 -->
             <Ki>0.0</Ki>		<!-- origin 0.0 -->
             <min>-30</min> 	<!-- origin -20 -->
             <max>30</max>		<!-- origin 20 -->
+        </config>
+    </pi-simple-controller>
+
+    <pi-simple-controller>
+        <name>Fms App</name>
+        <debug>false</debug>
+        <enable>
+          <condition>
+            <and>
+              <equals>
+                <property>/autopilot/locks/altitude</property>
+                <value>VALT</value>
+              </equals>
+              <not>
+                <property>autopilot/locks/fms-gs</property>
+              </not>
+              <property>autopilot/locks/fms-app</property>
+            </and>
+          </condition>
+        </enable>
+        <input>velocities/vertical-speed-fps</input>
+        <reference>autopilot/internal/target-climb-rate-fps</reference>
+        <output>autopilot/internal/pitch-filter</output>
+        <config>
+            <Kp>1.0</Kp> 
+            <Ki>0.0</Ki>
+            <min>-30</min>
+            <max>30</max>
         </config>
     </pi-simple-controller>
 

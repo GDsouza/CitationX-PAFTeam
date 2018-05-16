@@ -182,7 +182,8 @@ var NDStyles = {
 					init: func(nd,symbol),
 					predicate: func(nd) nd.in_mode('toggle_display_mode', ['MAP']),
 					is_true: func(nd) {
-						var hdg = getprop("/orientation/heading-magnetic-deg");
+#						var hdg = getprop("/orientation/heading-magnetic-deg");
+						var hdg = getprop("/orientation/heading-deg");
 						nd.symbols.compass.setRotation(-hdg*D2R);
 						nd.symbols.compass.show();
 					},
@@ -195,7 +196,8 @@ var NDStyles = {
 					init: func(nd, symbol), 
 					predicate: func(nd) nd.in_mode('toggle_display_mode', ['MAP']), 
 					is_true: func(nd) {
-						var hsi = getprop("orientation/heading-magnetic-deg");
+#						var hsi = getprop("orientation/heading-magnetic-deg");
+						var hsi = getprop("orientation/heading-deg");
 						nd.symbols.hsi.setText(sprintf("%03d",hsi));
 						nd.symbols.hsi.show();
 					},

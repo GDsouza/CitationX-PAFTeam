@@ -14,7 +14,7 @@
    viewBox="0 0 900.00001 1024"
    id="svg4136"
    version="1.1"
-   inkscape:version="0.92.2 (unknown)"
+   inkscape:version="0.92.3 (unknown)"
    sodipodi:docname="ND_B.svg">
   <defs
      id="defs4138">
@@ -153,8 +153,8 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.1606113"
-     inkscape:cx="366.23612"
+     inkscape:zoom="0.54015283"
+     inkscape:cx="286.3976"
      inkscape:cy="500.98207"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -242,7 +242,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>

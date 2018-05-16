@@ -38,6 +38,7 @@ var diff = nil;
 var active = "autopilot/route-manager/active";
 props.globals.initNode("autopilot/locks/alm-tod",0,"BOOL");
 props.globals.initNode("autopilot/locks/fms-gs",0,"BOOL");
+props.globals.initNode("autopilot/locks/fms-app",0,"BOOL");
 props.globals.initNode("autopilot/internal/fms-climb-rate-fps",0,"DOUBLE");
 setprop("autopilot/settings/fps-limit",-70);
 
@@ -84,6 +85,7 @@ var FMS = {
 		m.dest_alt = "autopilot/route-manager/destination/field-elevation-ft";
 		m.dist_rem = "autopilot/route-manager/distance-remaining-nm";
 		m.fms = "autopilot/settings/fms";
+    m.fms_app = "autopilot/locks/fms-app";
     m.fms_climb = "autopilot/internal/fms-climb-rate-fps";
 		m.lock_alt = "autopilot/locks/altitude";
     m.lock_gs = "autopilot/locks/fms-gs";
@@ -106,6 +108,7 @@ var FMS = {
 		setlistener(active, func(n) {
 			if (n.getValue()) {
 				me.fp = flightplan();
+        me.rwy_length = me.fp.destination_runway.length*0.00054;
 				me.highest_alt = 0;
 				me.update();
 				for (var i=0;i<me.fp.getPlanSize();i+=1) {
@@ -252,10 +255,12 @@ var FMS = {
 					var x = 6.25/10000000*math.pow(asel,2)+0.039225*asel + 647;
 				}
 				if (tod_dist < me.fp.getWP(i+1).distance_along_route and flag_tod == 0 and tod_dist > x) {
-					me.fp.insertWP(wp,i+1);
-					v_alt.insert(i+1,altWP_curr);
-					flag_tod = 1;
-				}														
+          if (wp != nil) {
+					  me.fp.insertWP(wp,i+1);
+					  v_alt.insert(i+1,altWP_curr);
+					  flag_tod = 1;
+          }
+				}	else wp = nil;
 
 				if (me.fp.getWP(i).wp_name == 'TOD') {
 					me.prevWp_dist = tot_dist-me.fp.getWP(i).distance_along_route;
@@ -335,12 +340,12 @@ var FMS = {
 					if (getprop(me.NAVSRC) == "FMS1") ind=0;
 					if (getprop(me.NAVSRC) == "FMS2") ind=1;
             
-                ### Switch FMS --> GS
+                ### Switch FMS --> GS ###
           me.gs_climb = getprop("instrumentation/nav["~ind~"]/gs-rate-of-climb");
           if (getprop("autopilot/internal/gs-in-range") and getprop(me.dist_rem) <= 20) {
             setprop("autopilot/internal/in-range",1);
-            me.set_tgAlt = getprop("autopilot/route-manager/destination/field-elevation-ft");
-            if (getprop(me.dist_rem) <= 8) citation.set_apr();
+            me.set_tgAlt = getprop(me.dest_alt);
+            if (getprop(me.dist_rem) <= 9) citation.set_apr();
             else {
               if (getprop("autopilot/internal/gs-deflection") > -0.25 and me.gs_climb < 0) setprop(me.lock_gs,1);
               if (getprop(me.lock_gs)) me.gs_calc = me.gs_climb;
@@ -348,9 +353,10 @@ var FMS = {
               else me.gs_calc = getprop(me.tg_climb);
               setprop(me.fms_climb,me.gs_calc);
             }
-          } else if (getprop(me.dist_rem) <= 8) {
-              me.min = getprop("autopilot/settings/minimums");
-              me.set_tgAlt = me.min;
+                ### Without GS ###
+          } else if (getprop(me.dist_rem) <= 10 and !me.tod) {
+              if (!getprop(me.fms_app)) setprop(me.fms_app,1);
+              me.set_tgAlt = getprop(me.dest_alt);              
               me.fps_lim(1);
           } else {
             if (getprop("autopilot/internal/in-range")) {
@@ -457,12 +463,12 @@ var FMS = {
 	}, # end of cruise_spd
 
   fps_lim : func(x) {  ### Descent fps limit ###
-    if (me.tod) {me.dist = getprop(me.dist_rem)-v_tod[v_ind+1]}
+    if (me.tod) me.dist = getprop(me.dist_rem)-v_tod[v_ind+1];
     else {
       if (x == 0) me.dist = getprop("autopilot/internal/nav-distance");
-      if (x == 1) me.dist = getprop("autopilot/route-manager/distance-remaining-nm");
+      if (x == 1) me.dist = getprop("autopilot/route-manager/distance-remaining-nm") + 0.2;
     }
-    me.fps_limit = -(getprop(me.alt_ind)-getprop(me.tg_alt))/((me.dist)/getprop(me.tas)*3600);
+    me.fps_limit = -(getprop(me.alt_ind)-getprop(me.tg_alt))/(me.dist/getprop(me.tas)*3600);
     if (me.fps_limit > 0) me.fps_limit = -5;
     setprop("autopilot/settings/fps-limit",me.fps_limit);
   },# end of fps_lim

@@ -45,6 +45,7 @@ var diff_crs = nil;
 var dist_rem = nil;
 var dist_wp = 10;
 var dst = nil;
+var dstCoeff = 1;
 var flag_wp = 0;
 var fp = nil;
 var geocoord = nil;
@@ -506,43 +507,48 @@ var update_nav = func {
 			fp = flightplan();
 			dist_rem = getprop("autopilot/route-manager/distance-remaining-nm");
 			wp_dist = getprop("instrumentation/gps/wp/wp[1]/distance-nm");
-			geocoord = geo.aircraft_position();
-			refCourse = fp.pathGeod(fp.indexOfWP(fp.destination_runway), -dist_rem);
-      courseCoord = geo.Coord.new().set_latlon(refCourse.lat, refCourse.lon);
-      CourseError = (geocoord.distance_to(courseCoord) / 1852) + 1;
 			heading = getprop("orientation/heading-deg");
-      targetCourse = fp.pathGeod(fp.indexOfWP(fp.destination_runway), (-dist_rem + CourseError));
-      courseCoord = geo.Coord.new().set_latlon(targetCourse.lat, targetCourse.lon);
-      CourseError = geocoord.course_to(courseCoord) - heading;
-      if(CourseError < -180) CourseError += 360;
-      else if(CourseError > 180) CourseError -= 360;
-			crs_set = geocoord.course_to(courseCoord);
-			if (fp.current < 1) { # On ground and takeoff
-				crs_offset= crs_set - getprop("orientation/heading-deg");
-				if(crs_offset>180)crs_offset-=180;
-				if(crs_offset<-180)crs_offset+=180;
-			} else { # in flight
-				crs_offset = CourseError;
-				gspd = getprop("velocities/groundspeed-kt")/8000; # old 10000
-				curr_bearing = fp.getWP(fp.current).leg_bearing;
-				if (fp.current < fp.getPlanSize()-1) {
-					next_bearing = fp.getWP(fp.current+1).leg_bearing;
-				} else {next_bearing = curr_bearing}
-				if (abs(curr_bearing - next_bearing) > 150) {diff_crs = 0}
-				else {diff_crs = abs(curr_bearing - next_bearing)*gspd}
-				if (wp_dist <= diff_crs) {
-					setprop("autopilot/route-manager/current-wp",fp.current +1);
-				}
-			}
-        ### GS anticipation ###
-      if (dist_rem <= 10 and getprop("autopilot/internal/gs-in-range")) {
-        setprop("autopilot/internal/course-offset",getprop("autopilot/internal/nav-heading-error-deg"));
-        setprop("autopilot/settings/tg-alt-ft",getprop("autopilot/route-manager/destination/field-elevation-ft"));
+			geocoord = geo.aircraft_position();
+      if (dist_rem <= 10) {
+        if (getprop("autopilot/internal/gs-in-range")) {
+          setprop("autopilot/internal/course-offset",getprop("autopilot/internal/nav-heading-error-deg"));
+          setprop("autopilot/settings/tg-alt-ft",getprop("autopilot/route-manager/destination/field-elevation-ft"));
+        } else {
+          dstCoeff -= 0.001;
+          if (dstCoeff <= 0.20) dstCoeff = 0.20;
+          targetCourse = fp.pathGeod(-1, -dist_rem + dstCoeff);
+          courseCoord = geo.Coord.new().set_latlon(targetCourse.lat, targetCourse.lon);
+          crs_offset = geocoord.course_to(courseCoord) - heading;
+			    crs_set = geocoord.course_to(courseCoord);
+        }
       } else {
-			  setprop("autopilot/internal/course-offset",crs_offset);
-			  setprop("autopilot/internal/selected-crs",int(crs_set));
+			  refCourse = fp.pathGeod(-1, -dist_rem);
+        courseCoord = geo.Coord.new().set_latlon(refCourse.lat, refCourse.lon);
+        CourseError = (geocoord.distance_to(courseCoord) / 1852) + 1;
+        targetCourse = fp.pathGeod(-1, -dist_rem + CourseError);
+        courseCoord = geo.Coord.new().set_latlon(targetCourse.lat, targetCourse.lon);
+        CourseError = geocoord.course_to(courseCoord) - heading;
+        CourseError = geo.normdeg180(CourseError);
+			  crs_set = geocoord.course_to(courseCoord);
+			  if (fp.current < 1) { # On ground and takeoff
+				  crs_offset= crs_set - heading;
+          crs_offset = geo.normdeg180(crs_offset);
+			  } else { # in flight
+				  crs_offset = CourseError;
+				  gspd = getprop("velocities/groundspeed-kt")/8000; # old 10000
+				  curr_bearing = fp.getWP(fp.current).leg_bearing;
+				  if (fp.current < fp.getPlanSize()-1) {
+					  next_bearing = fp.getWP(fp.current+1).leg_bearing;
+				  } else {next_bearing = curr_bearing}
+				  if (abs(curr_bearing - next_bearing) > 150) {diff_crs = 0}
+				  else {diff_crs = abs(curr_bearing - next_bearing)*gspd}
+				  if (wp_dist <= diff_crs) {
+					  setprop("autopilot/route-manager/current-wp",fp.current +1);
+				  }
+			  }
       }
-        #############
+		  setprop("autopilot/internal/course-offset",crs_offset);
+		  setprop("autopilot/internal/selected-crs",int(crs_set));
 
 			if (fp.current > 0) {
 				if (!flag_wp) {

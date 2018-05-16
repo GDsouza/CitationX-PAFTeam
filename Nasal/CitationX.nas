@@ -318,6 +318,32 @@ setlistener("/sim/current-view/internal", func(cv) {
 		}
 },0,0);
 
+### Automatic Trim ###
+controls.elevatorTrim = func(speed) {
+    if(!getprop("autopilot/locks/AP-status")) {
+      if(((getprop("controls/flight/elevator-trim") < 1)
+          and (speed > 0))
+          or ((getprop("controls/flight/elevator-trim") > -1)
+          and (speed < 0)))
+      {
+          controls.slewProp("controls/flight/trim-ref-speed", speed * 0.045);
+      }
+    }
+}
+
+#var auto_trim = func {
+#  var elev = "controls/flight/elevator";
+#  var trim = "controls/flight/elevator-trim";
+#  if (getprop("controls/flight/elevator") < 0) {
+#    controls.elevatorTrim(-1);
+#  }
+#  if (getprop("controls/flight/elevator") > 0) {
+#    controls.elevatorTrim(1);
+#  }
+#  if (getprop(elev) < 0 and getprop(elev) < getprop(trim)) setprop(trim,getprop(elev));
+#  setprop(trim, getprop(trim)+(getprop(elev)-0)
+#}
+
 ### Tables animation ###
 
 var tables_anim = func(i) {
@@ -649,5 +675,14 @@ var update_systems = func{
     if(wspd<0.001) wspd = 0.001;
     rudder_pos = getprop("controls/flight/rudder") or 0;
     setprop("/controls/gear/steering",-rudder_pos*wspd);
+    var trim_speed = getprop("/controls/flight/trim-ref-speed");
+    if(getprop("position/gear-agl-ft") > 50 and abs(getprop("orientation/roll-deg")) < 5) {
+      if(trim_speed > 0.0002) {
+        setprop("/controls/flight/trim-ref-speed", trim_speed - 0.0001);
+      }
+      else if(trim_speed < -0.0002) {
+        setprop("/controls/flight/trim-ref-speed", trim_speed + 0.0001);
+      }
+    }
     settimer(update_systems,0);
 }

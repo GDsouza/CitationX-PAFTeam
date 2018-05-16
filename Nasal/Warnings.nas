@@ -103,6 +103,7 @@ var EICAS = {
 			me.oil_R = getprop("systems/hydraulics/psi-norm[1]");
 			me.speedbrake = getprop("controls/flight/speedbrake");
 			me.flaps = getprop("controls/flight/flaps");
+      me.flaps_sel = getprop("controls/flight/flaps-select");
 			me.throttle_L = getprop("controls/engines/engine[0]/throttle");
 			me.throttle_R = getprop("controls/engines/engine[1]/throttle");
 			me.wow = getprop("gear/gear[0]/wow");
@@ -110,6 +111,10 @@ var EICAS = {
 			me.vmo = getprop("instrumentation/pfd/vmo-diff");
 			me.stall = getprop("sim/sound/stall-horn");
 			me.state = getprop("instrumentation/annunciators/state");
+      me.agl = getprop("position/altitude-agl-ft");
+      me.gear0 = getprop("gear/gear[0]/position-norm");
+      me.gear1 = getprop("gear/gear[1]/position-norm");
+      me.gear2 = getprop("gear/gear[2]/position-norm");
       if (getprop("systems/electrical/outputs/efis") > 12) me.enabled = 1;
       else {me.enabled = 0}
 
@@ -263,7 +268,17 @@ var EICAS = {
 			  me.AnnunOutput();
 			  me.EicasOutput();			
 			} 
+
+      ### Stall ###
 			stall_speed();
+
+      ### Gear oversight ###
+      if ((me.flaps_sel == 4 or me.agl < 500) and !me.gear0 and !me.gear1 and !me.gear2) {
+        setprop("instrumentation/alerts/gear-horn",1);
+      } else setprop("instrumentation/alerts/gear-horn",0);
+      
+      #######
+
 			settimer(func {me.update();},0);
 		}, # end of update
 

@@ -559,7 +559,7 @@
         <path>Sounds/gear-hrn.wav</path>
         <condition>
 					<or>
-            <property>instrumentation/alerts/gear-hrn</property>
+            <property>instrumentation/alerts/gear-horn</property>
 						<equals>
             	<property>instrumentation/annunciators/test-select</property>
 								<value>2</value>
@@ -567,11 +567,7 @@
 					</or>
         </condition>
         <mode>looped</mode>
-<!--        <volume>
-            <property>instrumentation/alerts/gear-horn</property>
-            <factor>0.7</factor>
-        </volume>
--->        <position>
+        <position>
             <x> 2.5 </x>
             <y> 0.0 </y>
             <z> 0.0 </z>
