@@ -375,7 +375,7 @@
         <axis-alignment>yz-plane</axis-alignment>
         <type type="string">number-value</type>
         <property>environment/temperature-degc</property>
-        <format>%3.0f  C*</format>
+        <format>%3.0f *C</format>
         <font>helvetica_bold.txf</font>
         <character-size>0.006</character-size>
         <character-aspect-ratio type="double">1.2</character-aspect-ratio>

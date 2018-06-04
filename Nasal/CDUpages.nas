@@ -1,5 +1,7 @@
-### Canvas CDU ###
-### C. Le Moigne (clm76) - 2017 ###
+###############################################
+# Canvas CDU
+# C. Le Moigne (clm76) - 2017 - Rev1 2018
+###############################################
 
 var currWp = "autopilot/route-manager/current-wp";
 var dep_apt = "autopilot/route-manager/departure/airport";
@@ -132,7 +134,7 @@ var cduDsp = {
     setlistener("instrumentation/cdu["~x~"]/speed", func(n) {
       setprop("instrumentation/cdu["~x~"]/speed",n.getValue());
       me.Flp1(x);
-    },0,1);
+    },0,0);
 
     setlistener(currWp, func(n) {
       if (left(getprop("instrumentation/cdu["~x~"]/display"),3) == "POS" or left(getprop("instrumentation/cdu["~x~"]/display"),3) == "FLT") {
@@ -142,7 +144,7 @@ var cduDsp = {
         setprop("instrumentation/cdu["~x~"]/display","FLT-PLAN["~page~"]");
         me.Flp1(x);
       }
-    },0,1);
+    },0,0);
 
     setlistener("instrumentation/cdu["~x~"]/direct",func(n) {
       if (n.getValue() and left(getprop("instrumentation/cdu["~x~"]/display"),8) == "FLT-PLAN" or left(getprop("instrumentation/cdu["~x~"]/display"),8) == "ALT-PAGE") {
@@ -279,7 +281,6 @@ var cduDsp = {
 	  me.line.title.setText("FLIGHT PLAN LIST  "~me.nrPage~" / "~getprop("instrumentation/cdu["~x~"]/nbpage"));			
     me.line.l7.setText("< FLT PLAN");
     me.Dsp_files(xfile,x);
-
   }, # end of Flp_list
   
   Flp_main : func(x) {
@@ -351,7 +352,9 @@ var cduDsp = {
               and left(me.fp.getWP(i).wp_name,4) != me.dest_apt)) {
         flpLine.setText("*"~me.fp.getWP(i).wp_name);
       } else {flpLine.setText(me.fp.getWP(i).wp_name)}
-    } 
+    } else if (i == 0 and left(me.fp.getWP(i).wp_name,4) == me.dest_apt) {
+      flpLine.setText(me.fp.getWP(i).wp_name);      
+    }
   }, ### end of Flp_offset
 
   Flp1 : func(x) {
@@ -373,7 +376,6 @@ var cduDsp = {
     me.line.r6l.setText("--- /");
     me.line.r6r.setText("-----");
 		me.line.r7.setText("ARRIVAL >");
-
     me.Flp_main(x);
     me.line.title.setText("ACTIVE FLT PLAN  "~me.nrPage~" / "~getprop("instrumentation/cdu["~x~"]/nbpage"));
 
@@ -388,8 +390,6 @@ var cduDsp = {
         me.line.r6l.setText("");
         me.line.r6r.setText(getprop(dest_apt)~" "~getprop(dest_rwy))
                    .setColor(me.green);
-        setprop("instrumentation/cdu["~x~"]/r5","DEST");
-        setprop("instrumentation/cdu["~x~"]/r6",getprop(dest_apt));
       }
     }
     if (me.nrPage == getprop("instrumentation/cdu["~x~"]/nbpage") and getprop(fp_active)) {

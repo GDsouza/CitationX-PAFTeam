@@ -421,9 +421,15 @@ setlistener("controls/electric/battery-switch[1]",func(n) {
 
 setlistener("controls/electric/avionics-switch",func(n) {
   if (n.getValue() == 2 and getprop(r_norm)) {
-		if(!getprop(AvPwr)) setprop(AvPwr,1);
+		if(!getprop(AvPwr)) {
+      setprop(AvPwr,1);
+      setprop("instrumentation/cdu/init",0);
+    }
 	} else {
-		if(getprop(AvPwr)) setprop(AvPwr,0);
+		if(getprop(AvPwr)) {
+      setprop(AvPwr,0);
+      setprop("instrumentation/cdu/init",1);
+    }
 	}
 },1,1);
 

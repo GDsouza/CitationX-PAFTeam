@@ -1,7 +1,7 @@
 ##########################################
 # Flight Director/Autopilot controller.
 # Syd Adams
-# C. Le Moigne - 2015 - rev 2017
+# C. Le Moigne - 2015 - rev1 2017 - rev2 2018
 ##########################################
 
 ###  Initialization ###
@@ -81,8 +81,7 @@ var mem_fms_l = getprop(Lateral);
 var mem_fms_v = getprop(Vertical);
 var NAVSRC = getprop(NAVprop);
 
-### LISTENERS ###
-
+### Listeners ###
 setlistener(minimums, func(mn) {
 		min_mode = getprop("autopilot/settings/minimums-mode");
 		if (min_mode == "RA") {setprop("instrumentation/pfd/minimums-radio",mn.getValue())}
@@ -105,8 +104,7 @@ setlistener("autopilot/locks/heading",func(hd) {
     if (hd.getValue() != "VOR") setprop("autopilot/locks/back-course",0);
 },0,0);
 
-### AP /FD BUTTONS ###
-
+### AP /FD Buttons ###
 var FD_set_mode = func(btn){
     Lmode=getprop(Lateral);
     Vmode=getprop(Vertical);
@@ -228,8 +226,7 @@ var FD_set_mode = func(btn){
     }
 }
 
-###  FMS/NAV BUTTONS  ###
-
+###  FMS/NAV Buttons  ###
 var nav_src_set=func(src){
 		setprop(Vertical_arm,"");
     if(src=="fms"){
@@ -261,8 +258,6 @@ var nav_src_set=func(src){
     }
 }
 
-### ARM VALID NAV MODE ####
-
 var set_nav_mode=func {
     setprop(Lateral_arm,"");
 		setprop(Vertical_arm,"");
@@ -286,8 +281,7 @@ var set_nav_mode=func {
 		}
 }
 
-###  PITCH WHEEL ACTIONS ###
-
+### Pitch Actions ###
 var pitch_wheel=func(dir) {
     var Vmode=getprop(Vertical);
     var CO = getprop("autopilot/settings/changeover");
@@ -326,18 +320,18 @@ var pitch_wheel=func(dir) {
 		}								
 }
 
-### FD INTERNAL ACTIONS  ###
-
 var set_pitch = func{
     setprop(Vertical,"PTCH");
 		setprop("autopilot/settings/target-pitch-deg",getprop("orientation/pitch-deg"));
 }
 
+### Roll Action ###
 var set_roll = func{
     setprop(Lateral,"ROLL");
 		setprop("autopilot/settings/target-roll-deg",0.0);
 }
 
+### Alt Action ###
 var set_alt = func {
 		var n=(getprop("instrumentation/altimeter/mode-c-alt-ft"))*0.01;
 		var m=int(n/10);
@@ -348,6 +342,7 @@ var set_alt = func {
 		setprop("autopilot/settings/asel",m*10);
 }
 
+### Lateral Armed ###
 var monitor_L_armed = func{
     if(getprop(Lateral_arm)!=""){
       if(in_range){
@@ -359,6 +354,7 @@ var monitor_L_armed = func{
     }
 }
 
+### Vertical Armed ###
 var monitor_V_armed = func{
     Varm = getprop(Vertical_arm);
     asel = getprop("autopilot/settings/asel")*100;
@@ -387,6 +383,7 @@ var monitor_V_armed = func{
     }
 }
 
+### Kill AP ###
 var monitor_AP_errors= func{
 		if (getprop(AP)!="AP") {return}
 		min_mode = getprop("autopilot/settings/minimums-mode");
@@ -408,7 +405,6 @@ var kill_Ap = func(msg){
 }
 
 ### Elapsed time ###
-
 var get_ETE = func{
     ttw = "--:--";
     min_et = 0;
@@ -432,7 +428,6 @@ var get_ETE = func{
 }
 
 ### Speed Round ###
-
 var speed_round = func {
 	ind_speed = getprop("instrumentation/airspeed-indicator/indicated-speed-kt");
 	setprop(rd_speed,math.round(ind_speed));
@@ -447,7 +442,6 @@ var alt_mach = func {
 }
 
 ### Approach ###
-
 var set_apr = func{
 		var ind_apr = 0;
     if(NAVSRC == "NAV1" or NAVSRC == "FMS1"){ind_apr = 0}
@@ -467,8 +461,7 @@ var set_apr = func{
 		}		
 }
 
-### UPDATE ###
-
+### Update ###
 var update_nav = func {
     sgnl = "- - -";
 		ind = 0;
@@ -540,6 +533,8 @@ var update_nav = func {
 				  if (fp.current < fp.getPlanSize()-1) {
 					  next_bearing = fp.getWP(fp.current+1).leg_bearing;
 				  } else {next_bearing = curr_bearing}
+          curr_bearing = geo.normdeg180(curr_bearing);
+          next_bearing = geo.normdeg180(next_bearing);
 				  if (abs(curr_bearing - next_bearing) > 150) {diff_crs = 0}
 				  else {diff_crs = abs(curr_bearing - next_bearing)*gspd}
 				  if (wp_dist <= diff_crs) {
@@ -573,9 +568,7 @@ var update_nav = func {
     } else if (NAVSRC == "") {setprop("autopilot/internal/nav-type","")}
 } # end of update
 
-
 ###  Main loop ###
-
 var fd_stl = setlistener("sim/signals/fdm-initialized", func {
   print("Flight Director ... Ok");
 	settimer(update_fd,6);

@@ -34,6 +34,7 @@ var wp_alt = nil;
 var wp_dist = nil;
 var wpCoord = nil;
 var diff = nil;
+var test = 0;
 
 var active = "autopilot/route-manager/active";
 props.globals.initNode("autopilot/locks/alm-tod",0,"BOOL");
@@ -214,7 +215,7 @@ var FMS = {
 		v_alt.append(0); # last for destination
 
 		### TOD Calc ###
-
+    if (!test) {
 		for (var i=1;i<me.fp.getPlanSize()-1;i+=1) {
 			if (asel < me.highest_alt) {
 				if (v_alt.vector[i] <= 0) {
@@ -237,11 +238,12 @@ var FMS = {
 						leg_dist = wp_dist - f_dist;
             tod = (altWP_curr-altWP_next)/(math.sin(getprop(me.desc_angle)*D2R)*6074.56);
 						### Create tod ###
-						if (leg_dist > tod*1.15 and leg_dist > 5) {
+						if (leg_dist > tod*1.20 and leg_dist > 10) {
+#						if (leg_dist > tod*1.15 and leg_dist > 5) {
 							flag_tod = 0;
 							top_of_descent = tot_dist-wp_dist+tod;
 							tod_dist = wp_dist-tod;
-							topdescent = me.fp.pathGeod(me.fp.indexOfWP(me.fp.destination_runway), - top_of_descent);
+							topdescent = me.fp.pathGeod(-1, - top_of_descent);
 							wp = createWP(topdescent.lat,topdescent.lon,"TOD",'pseudo');
 						}
 						break;
@@ -281,6 +283,7 @@ var FMS = {
 				me.altCalc(tot_dist,i);
 			}
 		}
+    }
 	}, # end of fpCalc
 
 	altCalc : func (tot_dist,i) {

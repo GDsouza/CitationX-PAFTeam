@@ -670,7 +670,8 @@ var update_systems = func{
     tire.get_rotation("yasim");
     if(getprop("velocities/airspeed-kt")>40)setprop("controls/cabin-door/open",0);
     grspd = getprop("velocities/groundspeed-kt");
-    wspd = (45-grspd) * 0.022222;
+    wspd = (120-grspd) * 0.002;
+#    wspd = (45-grspd) * 0.022222;
     if(wspd>1.0) wspd = 1.0;
     if(wspd<0.001) wspd = 0.001;
     rudder_pos = getprop("controls/flight/rudder") or 0;

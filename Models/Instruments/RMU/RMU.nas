@@ -118,9 +118,9 @@ var RMU = {
             break;
           }
         }
-#        if (fcom != nil) {
+        if (fcom != nil) {
           setprop("instrumentation/comm/frequencies/selected-mhz",fcom);
-#        }
+        }
       }
     }
 

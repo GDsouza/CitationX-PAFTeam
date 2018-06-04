@@ -56,6 +56,7 @@ var show =  {
 
   init: func(n) {
   	me.sound = {path : root ~ "/sounds",file : "click.wav", volume : 1.0};
+    me.alert = {path : root ~ "/sounds",file: "cabinalert.wav", volume: 1.0};
   	props.globals.getNode("/sim/sound/chatter/enabled").setValue(1);
 	#	fgcommand("play-audio-sample", props.Node.new(me.sound) );  
   	me.n = n;
@@ -97,11 +98,12 @@ var show =  {
 		me.sk.listen_mouse_events(caller:me, Hots:wheelHots);
     me.aptText = canvas.plot2D.text(me.frontGroup,'',[20,315],nil,white);
 		me.rwyText = canvas.plot2D.text(me.frontGroup,'',[109,326],nil,yellow,'center-baseline');
-###
-		me.hdgText = canvas.plot2D.text(me.frontGroup,'',[52,278],[10,1],white,'left-baseline');
-    me.altText = canvas.plot2D.text(me.frontGroup,'',[52,291],[10,1],white,'left-baseline');
-		me.dataText = canvas.plot2D.text(me.frontGroup,'',[52,265],[10,1],white,'left-baseline');
-###
+		me.hdgText = canvas.plot2D.text(me.frontGroup,'',[52,278],[10,1],yellow,'left-baseline');
+    me.altText = canvas.plot2D.text(me.frontGroup,'',[52,291],[10,1],yellow,'left-baseline');
+		me.dataText = canvas.plot2D.text(me.frontGroup,'',[52,265],[10,1],yellow,'left-baseline');
+		me.noTerrain = canvas.plot2D.text(me.frontGroup,'Too Far : Terrain data is not available yet.',[246,148],[12,0.8],brown,'center-baseline');
+		me.noTerrain.hide();
+
     me.finalText = canvas.plot2D.text(me.frontGroup,sprintf('%i nm',me.destination.final),[163,326],nil,yellow,'center-baseline');
     me.callsignText = canvas.plot2D.text(me.frontGroup,me.callsign,[224,326],nil,sky,'center-baseline');
     me.gsText  = canvas.plot2D.text(me.frontGroup,'',[500,100],nil,white,'center-center');
@@ -121,7 +123,7 @@ var show =  {
 		      gui.popupTip("Check comm freq.!",3);
 		      return ;
 		    }
-      }
+      } else me.setIcao(airportinfo().id); # Choose nearest destination
 		} 
    	me.timer = maketimer(2,func {me.update();});
     me.timer.stop();
@@ -374,15 +376,20 @@ var show =  {
 		if (geo.elevation(me.rwyObj.lat, me.rwyObj.lon) == nil) {
 		me.touch();
 		dt = 0; 
-		me.winTitle('Terrain profile is not available yet.');
+#		me.winTitle('Terrain profile is not available yet.');
+		me.terrain.hide();
+		me.noTerrain.show();
+
 		}
 			else {
 				if (!dt) {
 			me.drawTerrain();
 			me.drawCones();
 			dt = 1; 
-			me.winTitle(); 
-			fgcommand("play-audio-sample", props.Node.new(me.sound));
+#			me.winTitle(); 
+			me.noTerrain.hide();
+			me.terrain.show();
+			fgcommand("play-audio-sample", props.Node.new(me.alert));
 			}
 		}     
     var nodes = me.validNodes(range:me.maxX);

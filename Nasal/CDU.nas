@@ -1,5 +1,7 @@
-### Fmz2000 - CDU System ####
-### C. Le Moigne (clm76) - 2015 -> Canvas : 2017  ###
+#####################################################
+# Fmz2000 - CDU System
+# C. Le Moigne (clm76) - 2015 -> Canvas : 2017
+######################################################
 
 props.globals.initNode("instrumentation/cdu/direct",0,"BOOL");
 props.globals.initNode("instrumentation/cdu/direct-to",-1,"INT");
@@ -360,7 +362,6 @@ var cduMain = {
 			      cduInput = "";
 			      cduDisplay = "FLT-PLAN[1]";
             setprop("instrumentation/cdu["~x~"]/display",cduDisplay);
-#            setprop("instrumentation/cdu[1]/display",cduDisplay);
           } else {cduInput = "NOT AN AIRPORT"}
         }
       }
@@ -369,6 +370,7 @@ var cduMain = {
       nrPage = size(cduDisplay)<12 ? substr(cduDisplay,9,1) : substr(cduDisplay,9,2); 
 			if (v == "B1L" or v == "B2L" or v == "B3L") {
         ind = nrPage*3-(3-substr(v,1,1))-1;
+        if (ind == 0 and cduInput != getprop(depAirport)) cduInput = "";
 				if (cduInput == getprop(destAirport) and cduInput) {
 					setprop("autopilot/route-manager/input","@ACTIVATE");		
           setprop("autopilot/route-manager/flight-plan",getprop(depAirport)~"-"~getprop(destAirport));
@@ -383,7 +385,6 @@ var cduMain = {
 						cduInput = "";
 						cduDisplay = "FLT-PLAN[0]";
 					}
-
           wpt_name = fp.getWP(ind).wp_name;
           virtual_point = 0;
           if (size(wpt_name) == 8 and (left(wpt_name,1) == "E"
@@ -480,7 +481,7 @@ var cduMain = {
             setprop(fp_active,1); # to recreate tod after saving fp (Fms listen)
 					  setprop("autopilot/route-manager/flight-plan",fltName);
 					  cduInput = "";
-          } else if (left(flightplan().getWP(ind).wp_name,4) != getprop(destAirport)) {
+          } else if (left(fp.getWP(ind).wp_name,4) != getprop(destAirport)) {
               me.insertWayp(ind,cduInput,fp,x);
           }
         } else if (left(fp.getWP(ind).wp_name,4) != getprop(destAirport)) {
@@ -491,8 +492,7 @@ var cduMain = {
 
 			if (v == "B3R") {
         ind = nrPage*3-(3-substr(v,1,1))-1;
-				if (nrPage > 0 and nrPage <= getprop("instrumentation/cdu["~x~"]/nbpage")) {
-					if (ind == getprop(num)-1 and cduInput == "DELETE") {
+				if (nrPage > 0 and nrPage <= getprop("instrumentation/cdu["~x~"]/nbpage")) {					if (ind == getprop(num)-1 and cduInput == "DELETE") {
 							setprop(destAirport,"");
 							cduInput = "";
 							cduDisplay = "FLT-PLAN[0]";
@@ -665,7 +665,7 @@ var cduMain = {
           cduDisplay = "ALT-PAGE["~(nrPage+1)~"]";
         }
       }
-    }
+    } # end of alternate FP
 
 		#### NAV PAGES ####
 		if (cduDisplay == "NAV-PAGE[1]") {		
@@ -976,7 +976,7 @@ var cduMain = {
 
   insertWayp : func(ind,cduInput,fp,x) {
     cduInput = left(cduInput,2) == "FL" ? substr(cduInput,2,3)*100 : cduInput;
-    var wpt = fp.getWP(ind).wp_name;
+#    var wpt = fp.getWP(ind).wp_name;
     var wp_spd = fp.getWP(ind).speed_cstr;
 
 	  if (cduInput and cduInput <= 400) { ### Speed
