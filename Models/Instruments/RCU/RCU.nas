@@ -44,7 +44,7 @@ var RCU = {
 		m.text.sq.show();
 		m.text.tx.hide();
 		m.text.emrg.hide();
-		return m
+		return m;
 	},
 
 	### Listeners ###

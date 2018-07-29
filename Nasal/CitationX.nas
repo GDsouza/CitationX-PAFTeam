@@ -105,12 +105,12 @@ var JetEngine = {
 
         #### For Engines Oil Pressure Display ####
         if (getprop(me.sysoil) >= 0.1 ) {
-            if (getprop(me.oilp_norm) < 0.1) {setprop(me.oilp,getprop(me.sysoil)/10)}
-            else {setprop(me.oilp,getprop(me.oilp_norm))}
+            if (getprop(me.oilp_norm) < 0.1) {setprop(me.oilp,getprop(me.sysoil)*50)}
+            else {setprop(me.oilp,getprop(me.oilp_norm)*44.4 +45.6)}
         } else {setprop(me.oilp,0)}
         if (getprop(me.sysoil1) >= 0.1 ) {
-            if (getprop(me.oilp1_norm) < 0.1) {setprop(me.oilp1,getprop(me.sysoil1)/10)}
-            else {setprop(me.oilp1,getprop(me.oilp1_norm))}
+            if (getprop(me.oilp1_norm) < 0.1) {setprop(me.oilp1,getprop(me.sysoil1)*50)}
+            else {setprop(me.oilp1,getprop(me.oilp1_norm)*44.4 +45.6)}
         } else {setprop(me.oilp1,0)}
 
     },
@@ -180,9 +180,6 @@ props.globals.initNode("sim/alarms/overspeed-alarm",0,"BOOL");
 props.globals.initNode("sim/alarms/stall-warning",0,"BOOL");
 props.globals.initNode("instrumentation/clock/flight-meter-hour",0,"DOUBLE");
 props.globals.initNode("instrumentation/primus2000/dc840/etx",0,"INT");
-props.globals.initNode("instrumentation/checklists/norm",0,"BOOL");
-props.globals.initNode("instrumentation/checklists/nr-page",0,"INT");
-props.globals.initNode("instrumentation/checklists/nr-voice",0,"INT");
 props.globals.initNode("instrumentation/transponder/unit/id-code",7777,"INT");
 props.globals.initNode("instrumentation/transponder/unit/id-code[1]",77,"INT");
 props.globals.initNode("instrumentation/transponder/unit/id-code[2]",77,"INT");
@@ -318,31 +315,9 @@ setlistener("/sim/current-view/internal", func(cv) {
 		}
 },0,0);
 
-### Automatic Trim ###
-controls.elevatorTrim = func(speed) {
-    if(!getprop("autopilot/locks/AP-status")) {
-      if(((getprop("controls/flight/elevator-trim") < 1)
-          and (speed > 0))
-          or ((getprop("controls/flight/elevator-trim") > -1)
-          and (speed < 0)))
-      {
-          controls.slewProp("controls/flight/trim-ref-speed", speed * 0.045);
-      }
-    }
-}
-
-#var auto_trim = func {
-#  var elev = "controls/flight/elevator";
-#  var trim = "controls/flight/elevator-trim";
-#  if (getprop("controls/flight/elevator") < 0) {
-#    controls.elevatorTrim(-1);
-#  }
-#  if (getprop("controls/flight/elevator") > 0) {
-#    controls.elevatorTrim(1);
-#  }
-#  if (getprop(elev) < 0 and getprop(elev) < getprop(trim)) setprop(trim,getprop(elev));
-#  setprop(trim, getprop(trim)+(getprop(elev)-0)
-#}
+setlistener("controls/flight/elevator-trim",func (n) {
+    setprop("controls/flight/elevator-trim-calc",n.getValue()*6.6 - 5.4);
+},1,0);
 
 ### Tables animation ###
 
@@ -676,14 +651,5 @@ var update_systems = func{
     if(wspd<0.001) wspd = 0.001;
     rudder_pos = getprop("controls/flight/rudder") or 0;
     setprop("/controls/gear/steering",-rudder_pos*wspd);
-    var trim_speed = getprop("/controls/flight/trim-ref-speed");
-    if(getprop("position/gear-agl-ft") > 50 and abs(getprop("orientation/roll-deg")) < 5) {
-      if(trim_speed > 0.0002) {
-        setprop("/controls/flight/trim-ref-speed", trim_speed - 0.0001);
-      }
-      else if(trim_speed < -0.0002) {
-        setprop("/controls/flight/trim-ref-speed", trim_speed + 0.0001);
-      }
-    }
     settimer(update_systems,0);
 }

@@ -34,7 +34,6 @@ var wp_alt = nil;
 var wp_dist = nil;
 var wpCoord = nil;
 var diff = nil;
-var test = 0;
 
 var active = "autopilot/route-manager/active";
 props.globals.initNode("autopilot/locks/alm-tod",0,"BOOL");
@@ -215,7 +214,6 @@ var FMS = {
 		v_alt.append(0); # last for destination
 
 		### TOD Calc ###
-    if (!test) {
 		for (var i=1;i<me.fp.getPlanSize()-1;i+=1) {
 			if (asel < me.highest_alt) {
 				if (v_alt.vector[i] <= 0) {
@@ -283,7 +281,6 @@ var FMS = {
 				me.altCalc(tot_dist,i);
 			}
 		}
-    }
 	}, # end of fpCalc
 
 	altCalc : func (tot_dist,i) {
@@ -350,9 +347,15 @@ var FMS = {
             me.set_tgAlt = getprop(me.dest_alt);
             if (getprop(me.dist_rem) <= 9) citation.set_apr();
             else {
-              if (getprop("autopilot/internal/gs-deflection") > -0.25 and me.gs_climb < 0) setprop(me.lock_gs,1);
-              if (getprop(me.lock_gs)) me.gs_calc = me.gs_climb;
-              else if (getprop(me.tg_climb) < -30) me.gs_calc = -30;
+#              if (getprop("autopilot/internal/gs-deflection") > -0.50 and me.gs_climb < 0) setprop(me.lock_gs,1);
+              if (me.gs_climb < 0) {
+#              if (me.gs_climb <= getprop(me.tg_climb)) {
+                if (!getprop(me.lock_gs)) setprop(me.lock_gs,1);
+              }
+              if (getprop(me.lock_gs)) {
+                me.gs_calc = me.gs_climb;
+                if (me.gs_calc < -30) me.gs_calc = -30;
+              }
               else me.gs_calc = getprop(me.tg_climb);
               setprop(me.fms_climb,me.gs_calc);
             }

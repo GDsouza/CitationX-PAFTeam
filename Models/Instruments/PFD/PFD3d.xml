@@ -952,7 +952,7 @@
         </center>
     </animation>
 
-<animation>
+    <animation>
         <type>rotate</type>
         <object-name>hdg.bug</object-name>
         <property>autopilot/internal/heading-bug-error-deg</property>
@@ -968,7 +968,7 @@
         </center>
     </animation>
 
-<animation>
+    <animation>
         <type>rotate</type>
         <object-name>crs.needle</object-name>
         <object-name>crs.deflect</object-name>
@@ -1243,6 +1243,5 @@
             <property>instrumentation/marker-beacon/inner</property>
          </condition>
     </animation>
-
 
 </PropertyList>

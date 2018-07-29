@@ -345,7 +345,21 @@
 
     <animation>
         <type>select</type>
-        <object-name>heater-screen</object-name>
+        <object-name>heater-screen1</object-name>
+        <condition>
+					<and>
+						<property>systems/electrical/left-bus-norm</property>
+            <less-than>
+							<property>controls/electric/avionics-switch</property>
+								<value>1</value>								
+						</less-than>
+           </and>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>heater-screen2</object-name>
         <condition>
 					<and>
 						<property>systems/electrical/left-bus-norm</property>
@@ -353,6 +367,38 @@
 							<property>controls/electric/avionics-switch</property>
 								<value>2</value>								
 						</less-than>
+           </and>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>Layers_L</object-name>
+        <object-name>ND_L</object-name>
+        <object-name>Vsd_L</object-name>
+        <condition>
+					<and>
+						<property>systems/electrical/left-bus-norm</property>
+            <greater-than>
+							<property>controls/electric/avionics-switch</property>
+								<value>0</value>								
+						</greater-than>
+           </and>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>Layers_R</object-name>
+        <object-name>ND_R</object-name>
+        <object-name>Vsd_R</object-name>
+        <condition>
+					<and>
+						<property>systems/electrical/left-bus-norm</property>
+            <greater-than>
+							<property>controls/electric/avionics-switch</property>
+								<value>1</value>								
+						</greater-than>
            </and>
         </condition>
     </animation>
@@ -471,7 +517,38 @@
 				<object-name>gearUnlocked</object-name>
         <condition>
 					<or>
-            <property>gear/unlocked</property>
+            <and>
+              <and>
+                <greater-than>
+                  <property>gear/gear/position-norm</property>
+                  <value>0</value>
+                </greater-than>
+                <less-than>
+                  <property>gear/gear/position-norm</property>
+                  <value>1</value>
+                </less-than>
+              </and>
+              <and>
+                <greater-than>
+                  <property>gear/gear[1]/position-norm</property>
+                  <value>0</value>
+                </greater-than>
+                <less-than>
+                  <property>gear/gear[1]/position-norm</property>
+                  <value>1</value>
+                </less-than>
+              </and>
+              <and>
+                <greater-than>
+                  <property>gear/gear[2]/position-norm</property>
+                  <value>0</value>
+                </greater-than>
+                <less-than>
+                  <property>gear/gear[2]/position-norm</property>
+                  <value>1</value>
+                </less-than>
+              </and>
+            </and>
 						<equals>
             	<property>instrumentation/annunciators/test-select</property>
 								<value>2</value>
@@ -1116,22 +1193,22 @@
     </action>
 	</animation>
 
-    <animation>
-        <type>rotate</type>
-        <object-name>Ign2.switch</object-name>
-        <property>controls/engines/engine[1]/ignit</property>
-        <factor>15</factor>
-        <center>
-            <x-m> 0.043 </x-m>
-            <y-m> 0.000 </y-m>
-            <z-m>-0.041 </z-m>
-        </center>
-        <axis>
-            <x>0</x>
-            <y>-1</y>
-            <z>0</z>
-        </axis>
-    </animation>
+  <animation>
+      <type>rotate</type>
+      <object-name>Ign2.switch</object-name>
+      <property>controls/engines/engine[1]/ignit</property>
+      <factor>15</factor>
+      <center>
+          <x-m> 0.043 </x-m>
+          <y-m> 0.000 </y-m>
+          <z-m>-0.041 </z-m>
+      </center>
+      <axis>
+          <x>0</x>
+          <y>-1</y>
+          <z>0</z>
+      </axis>
+  </animation>
 
 	<animation>
     <type>pick</type>
@@ -2366,48 +2443,6 @@
         </hovered>
 	</animation>
 
-<!-- SLIPBALL -->
-<!--
-		<animation>
-        <type>rotate</type>
-        <object-name>Slipball1</object-name>
-        <property>instrumentation/slip-skid-ball/indicated-slip-skid</property>
-        <interpolation>
-            <entry><ind>-2.0</ind><dep>-3.65</dep></entry>
-            <entry><ind>2.0</ind><dep>3.65</dep></entry>
-        </interpolation>
-        <axis>
-            <x>-1</x>
-            <y>0</y>
-            <z>0</z>
-        </axis>
-        <center>
-            <x-m>0</x-m>
-            <y-m>-0.375</y-m>
-            <z-m>0.166</z-m>
-        </center>
-    </animation>
-
-		<animation>
-        <type>rotate</type>
-        <object-name>Slipball2</object-name>
-        <property>instrumentation/slip-skid-ball/indicated-slip-skid</property>
-                <interpolation>
-            <entry><ind>-2.0</ind><dep>-3.65</dep></entry>
-            <entry><ind>2.0</ind><dep>3.65</dep></entry>
-        </interpolation>
-        <axis>
-            <x>-1</x>
-            <y>0</y>
-            <z>0</z>
-        </axis>
-        <center>
-            <x-m>0</x-m>
-            <y-m>0.384</y-m>
-            <z-m>0.166</z-m>
-        </center>
-    </animation>
--->
 <!-- PFD -->
 
     <animation>
@@ -2450,7 +2485,6 @@
 						</mod-up>
         </action>
     </animation>
-
 
     <animation>
         <type>rotate</type>
@@ -2667,37 +2701,6 @@
     </animation>
 
 <!-- MFD -->
-
-    <model>
-        <name>chklst1</name>
-        <path>Aircraft/CitationX/Models/Instruments/MFD/checklist.xml</path>
-        <offsets>
-            <x-m>0.002</x-m>
-            <y-m>-0.187</y-m>
-            <z-m>0.138</z-m>
-        </offsets>
-    </model>
-
-		<animation>
-			<object-name>chklst1</object-name>
-			<type>select</type>
-			<condition>
-				<and>
-					<property>instrumentation/checklists/chklst-pilot</property>
-					<property>instrumentation/checklists/norm</property>
-				</and>
-			</condition>
-		</animation>
-
-    <model>
-        <name>chklst2</name>
-        <path>Aircraft/CitationX/Models/Instruments/MFD/checklist.xml</path>
-        <offsets>
-            <x-m>0.002</x-m>
-            <y-m>0.194</y-m>
-            <z-m>0.138</z-m>
-        </offsets>
-    </model>
 
     <animation>
         <type>rotate</type>
@@ -4103,10 +4106,52 @@
 
 <!-- Checklists -->
 
+    <model>
+        <name>chklst-pilot</name>
+        <path>Aircraft/CitationX/Models/Instruments/MFD/checklist.xml</path>
+        <offsets>
+            <x-m>0.002</x-m>
+            <y-m>-0.187</y-m>
+            <z-m>0.138</z-m>
+        </offsets>
+    </model>
+
+		<animation>
+			<object-name>chklst-pilot</object-name>
+			<type>select</type>
+			<condition>
+				<property>instrumentation/checklists/chklst-pilot</property>
+			</condition>
+		</animation>
+
+    <model>
+        <name>chklst-copilot</name>
+        <path>Aircraft/CitationX/Models/Instruments/MFD/checklist.xml</path>
+        <offsets>
+            <x-m>0.002</x-m>
+            <y-m>0.194</y-m>
+            <z-m>0.138</z-m>
+        </offsets>
+    </model>
+
+		<animation>
+			<object-name>chklst-copilot</object-name>
+			<type>select</type>
+			<condition>
+        <and>
+				  <property>instrumentation/checklists/chklst-copilot</property>
+					<equals>
+            <property>controls/electric/avionics-switch</property>
+						<value>2</value>
+					</equals>
+        </and>
+			</condition>
+		</animation>
+
     <animation>
         <type>translate</type>
-        <object-name>norm.btn</object-name>	
-        <property>instrumentation/checklists/norm</property>
+        <object-name>norm.pilot</object-name>	
+        <property>instrumentation/checklists/chklst-pilot</property>
 				<factor>0.0027</factor>
         <axis>
             <x>-1</x>
@@ -4117,13 +4162,13 @@
 
     <animation>
         <type>pick</type>
-        <object-name>norm.btn</object-name>
+        <object-name>norm.pilot</object-name>
         <action>
             <button>0</button>
             <repeatable>false</repeatable>
             <binding>
               <command>property-toggle</command>
-	            <property>instrumentation/checklists/norm</property>
+	            <property>instrumentation/checklists/chklst-pilot</property>
             </binding>
 						<binding>
 						    <command>property-toggle</command>
@@ -4135,12 +4180,49 @@
 				        <command>set-tooltip</command>
 				        <tooltip-id>NormBtn</tooltip-id>
 				        <label>Checklist Pilot : %s</label>
-					      <property>instrumentation/checklists/norm</property>
+					      <property>instrumentation/checklists/chklst-pilot</property>
 				        <mapping>on-off</mapping>
 				    </binding>
 				</hovered>
     </animation>
 
+    <animation>
+        <type>translate</type>
+        <object-name>norm.copilot</object-name>	
+        <property>instrumentation/checklists/chklst-copilot</property>
+				<factor>0.0027</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>norm.copilot</object-name>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+              <command>property-toggle</command>
+	            <property>instrumentation/checklists/chklst-copilot</property>
+            </binding>
+						<binding>
+						    <command>property-toggle</command>
+						    <property>sim/sound/click</property>
+						</binding>
+		    </action>
+				<hovered>
+				    <binding>
+				        <command>set-tooltip</command>
+				        <tooltip-id>NormBtn</tooltip-id>
+				        <label>Checklist Pilot : %s</label>
+					      <property>instrumentation/checklists/chklst-copilot</property>
+				        <mapping>on-off</mapping>
+				    </binding>
+				</hovered>
+    </animation>
 
     <animation>
         <type>pick</type>
@@ -4150,7 +4232,7 @@
           <repeatable>false</repeatable>
           <binding>
             <command>nasal</command>
-          	<script>checklist.next();</script>
+          	<script>checklist.CHKLIST.next_page();</script>
           </binding>
           <binding>
             <command>property-toggle</command>
@@ -4176,7 +4258,7 @@
           <repeatable>false</repeatable>
           <binding>
             <command>nasal</command>
-          	<script>checklist.previous();</script>
+          	<script>checklist.CHKLIST.prev_page();</script>
           </binding>
           <binding>
             <command>property-toggle</command>
@@ -4202,7 +4284,7 @@
           <repeatable>false</repeatable>
           <binding>
             <command>nasal</command>
-          	<script>checklist.next();</script>
+          	<script>checklist.CHKLIST.next_page();</script>
           </binding>
           <binding>
             <command>property-toggle</command>
@@ -4228,7 +4310,7 @@
           <repeatable>false</repeatable>
           <binding>
             <command>nasal</command>
-          	<script>checklist.previous();</script>
+          	<script>checklist.CHKLIST.prev_page();</script>
           </binding>
           <binding>
             <command>property-toggle</command>
@@ -4339,54 +4421,6 @@
 				      <property>instrumentation/checklists/skip</property>
 			        <mapping>on-off</mapping>
 			    </binding>
-				</hovered>
-    </animation>
-
-    <animation>
-        <type>translate</type>
-        <object-name>page.btn</object-name>	
-        <property>instrumentation/checklists/page-btn</property>
-				<factor>0.0027</factor>
-        <axis>
-            <x>-1</x>
-            <y>0</y>
-            <z>0</z>
-        </axis>
-    </animation>
-
-    <animation>
-        <type>pick</type>
-        <object-name>page.btn</object-name>
-	      <action>
-          <button>0</button>
-          <repeatable>false</repeatable>
-          <binding>
-            <command>property-toggle</command>
-	            <property>instrumentation/checklists/page-btn</property>
-          </binding>
-          <binding>
-            <command>nasal</command>
-	            <script>checklist.page_btn()</script>
-          </binding>
-					<binding>
-					    <command>property-toggle</command>
-					    <property>sim/sound/click</property>
-					</binding>
-					<mod-up>
-		        <binding>
-		          <command>property-toggle</command>
-			          <property>instrumentation/checklists/page-btn</property>
-		        </binding>
-					</mod-up>
-		    </action>
-				<hovered>
-				    <binding>
-				        <command>set-tooltip</command>
-				        <tooltip-id>skpBtn</tooltip-id>
-				        <label>Page : %s</label>
-					      <property>instrumentation/checklists/chklst-pilot</property>
-				        <mapping>on-off</mapping>
-				    </binding>
 				</hovered>
     </animation>
 

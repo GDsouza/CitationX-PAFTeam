@@ -1,0 +1,23 @@
+AC3Db
+MATERIAL "panel" rgb 1 1 1  amb 0.204 0.204 0.204  emis 1 1 1  spec 0.204 0.204 0.204  shi 50  trans 0
+OBJECT world
+kids 1
+OBJECT poly
+name "Selcal.screen"
+loc 0.136147 -0.0143384 -0.00160292
+texture "transparent.png"
+crease 30.000002
+numvert 4
+0.14745 -0.0981219 -0.0269933
+0.166112 -0.0997486 -0.0269933
+0.166112 -0.0997486 0.0219139
+0.14745 -0.0981219 0.0219139
+numsurf 1
+SURF 0x10
+mat 0
+refs 4
+0 0.978758 0.818856
+3 0.0761328 0.818856
+2 0.0761328 0.286309
+1 0.978758 0.286309
+kids 0

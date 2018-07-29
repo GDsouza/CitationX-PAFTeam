@@ -1,17 +1,17 @@
 AC3Db
-MATERIAL "ac3dmat0" rgb 0 0 0  amb 0.2 0.2 0.2  emis 0 0 0  spec 0.2 0.2 0.2  shi 128  trans 0
+MATERIAL "ac3dmat14" rgb 0.8 0.8 0.8  amb 0.2 0.2 0.2  emis 1 1 1  spec 0.2 0.2 0.2  shi 128  trans 0
 OBJECT world
 kids 1
 OBJECT poly
-name "chklist.background"
-loc 0 0.0141039 -0.000122774
-texture "checklist.png"
+name "chklist.screen"
+loc -7.862e-16 0.0141039 -0.000122768
+texture "transparent.png"
 crease 45.000000
 numvert 4
-0 -0.0966788 -0.0821865
-0 -0.0966788 0.0821865
-0 0.0966788 0.0821865
-0 0.0966788 -0.0821865
+-2.15549e-08 -0.0966788 0.0821865
+2.15549e-08 -0.0966788 -0.0821865
+2.15549e-08 0.0966788 -0.0821865
+-2.15549e-08 0.0966788 0.0821865
 numsurf 1
 SURF 0x30
 mat 0

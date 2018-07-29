@@ -2,7 +2,139 @@
 
 <PropertyList>
 
-<text>
+    <animation>
+        <type>select</type>
+        <object-name>Oil_t1</object-name>
+        <condition>
+          <greater-than>
+            <property>engines/engine/fan</property>
+            <value>0.1</value>
+          </greater-than>
+        </condition>
+    </animation>
+
+    <text>
+        <name>Oil_t1</name>
+        <offsets>
+            <x-m>0.0</x-m>
+            <y-m>0.018</y-m>
+            <z-m>0.062</z-m>
+        </offsets>
+        <alignment>center-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type type="string">number-value</type>
+        <property>engines/engine/oilt-norm</property>
+        <scale>100</scale>
+        <offset>21</offset>
+        <format>%.0f</format>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.006</character-size>
+        <character-aspect-ratio type="double">1.2</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
+        </font-resolution>
+    </text>
+
+    <animation>
+        <type>select</type>
+        <object-name>Oil_t2</object-name>
+        <condition>
+          <greater-than>
+            <property>engines/engine[1]/fan</property>
+            <value>0.1</value>
+          </greater-than>
+        </condition>
+    </animation>
+
+    <text>
+        <name>Oil_t2</name>
+        <offsets>
+            <x-m>0.0</x-m>
+            <y-m>0.036</y-m>
+            <z-m>0.062</z-m>
+        </offsets>
+        <alignment>center-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type type="string">number-value</type>
+        <property>engines/engine[1]/oilt-norm</property>
+        <scale>100</scale>
+        <offset>21</offset>
+        <format>%.0f</format>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.006</character-size>
+        <character-aspect-ratio type="double">1.2</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
+        </font-resolution>
+    </text>
+
+    <animation>
+        <type>select</type>
+        <object-name>Oil_p1</object-name>
+        <condition>
+          <greater-than>
+            <property>engines/engine/fan</property>
+            <value>0.1</value>
+          </greater-than>
+        </condition>
+    </animation>
+
+    <text>
+        <name>Oil_p1</name>
+        <offsets>
+            <x-m>0.0</x-m>
+            <y-m>0.050</y-m>
+            <z-m>0.062</z-m>
+        </offsets>
+        <alignment>center-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type type="string">number-value</type>
+        <property>engines/engine/oil-pressure-psi</property>
+        <format>%.0f</format>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.006</character-size>
+        <character-aspect-ratio type="double">1.2</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
+        </font-resolution>
+    </text>
+
+    <animation>
+        <type>select</type>
+        <object-name>Oil_p2</object-name>
+        <condition>
+          <greater-than>
+            <property>engines/engine[1]/fan</property>
+            <value>0.1</value>
+          </greater-than>
+        </condition>
+    </animation>
+
+    <text>
+        <name>Oil_p2</name>
+        <offsets>
+            <x-m>0.0</x-m>
+            <y-m>0.069</y-m>
+            <z-m>0.062</z-m>
+        </offsets>
+        <alignment>center-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type type="string">number-value</type>
+        <property>engines/engine[1]/oil-pressure-psi</property>
+        <format>%.0f</format>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.006</character-size>
+        <character-aspect-ratio type="double">1.2</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
+        </font-resolution>
+    </text>
+
+    <text>
         <name>LFuelFlow</name>
         <offsets>
             <x-m>0.0</x-m>
@@ -385,6 +517,26 @@
         </font-resolution>
     </text>
 
+    <text>
+        <name>Stab</name>
+        <offsets>
+            <x-m>0.0</x-m>
+            <y-m>-0.064</y-m>
+            <z-m>0.006</z-m>
+        </offsets>
+        <alignment>center-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type type="string">number-value</type>
+        <property>controls/flight/elevator-trim-calc</property>
+        <format>%.1f</format>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.006</character-size>
+        <character-aspect-ratio type="double">1.2</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
+        </font-resolution>
+    </text>
 
     <text>
         <name>Msg_l0</name>
@@ -471,6 +623,8 @@
     <animation>
         <name>green</name>
         <type>material</type>
+        <object-name>Oil_t1</object-name>
+        <object-name>Oil_t2</object-name>
         <object-name>LFuelFlow</object-name>
         <object-name>RFuelFlow</object-name>
         <object-name>TTLfuel</object-name>
@@ -570,6 +724,7 @@
         <name>amber</name>
         <type>material</type>
         <object-name>Msg_l2</object-name>
+        <object-name>Stab</object-name>
         <emission>
             <red-prop>sim/color-set/amber/r</red-prop>
             <green-prop>sim/color-set/amber/g</green-prop>
@@ -619,5 +774,216 @@
             <blue>0</blue>
         </specular>
     </animation>
+
+    <animation>
+        <name>green</name>
+        <type>material</type>
+        <object-name>Oil_p1</object-name>
+        <condition>
+          <greater-than>
+            <property>engines/engine/oil-pressure-psi</property>
+            <value>49</value>
+          </greater-than>
+        </condition>
+        <emission>
+            <red-prop>sim/color-set/green/r</red-prop>
+            <green-prop>sim/color-set/green/g</green-prop>
+            <blue-prop>sim/color-set/green/b</blue-prop>
+            <alpha-prop>sim/color-set/green/a</alpha-prop>
+        </emission>
+        <ambient>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </ambient>
+        <diffuse>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </diffuse>
+        <specular>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </specular>
+    </animation>
+
+    <animation>
+        <name>amber</name>
+        <type>material</type>
+        <object-name>Oil_p1</object-name>
+        <condition>
+          <and>
+            <less-than>
+              <property>engines/engine/oil-pressure-psi</property>
+              <value>50</value>
+            </less-than>
+            <greater-than>
+              <property>engines/engine/oil-pressure-psi</property>
+              <value>33</value>
+            </greater-than>
+          </and>
+        </condition>
+        <emission>
+            <red-prop>sim/color-set/amber/r</red-prop>
+            <green-prop>sim/color-set/amber/g</green-prop>
+            <blue-prop>sim/color-set/amber/b</blue-prop>
+            <alpha-prop>sim/color-set/amber/a</alpha-prop>
+        </emission>
+        <ambient>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </ambient>
+        <diffuse>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </diffuse>
+        <specular>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </specular>
+    </animation>
+
+    <animation>
+        <name>red</name>
+        <type>material</type>
+        <object-name>Oil_p1</object-name>
+        <condition>
+          <less-than>
+            <property>engines/engine/oil-pressure-psi</property>
+            <value>34</value>
+          </less-than>
+        </condition>
+        <emission>
+            <red-prop>sim/color-set/red/r</red-prop>
+            <green-prop>sim/color-set/red/g</green-prop>
+            <blue-prop>sim/color-set/red/b</blue-prop>
+            <alpha-prop>sim/color-set/red/a</alpha-prop>
+        </emission>
+        <ambient>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </ambient>
+        <diffuse>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </diffuse>
+        <specular>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </specular>
+    </animation>
+
+    <animation>
+        <name>green</name>
+        <type>material</type>
+        <object-name>Oil_p2</object-name>
+        <condition>
+          <greater-than>
+            <property>engines/engine[1]/oil-pressure-psi</property>
+            <value>49</value>
+          </greater-than>
+        </condition>
+        <emission>
+            <red-prop>sim/color-set/green/r</red-prop>
+            <green-prop>sim/color-set/green/g</green-prop>
+            <blue-prop>sim/color-set/green/b</blue-prop>
+            <alpha-prop>sim/color-set/green/a</alpha-prop>
+        </emission>
+        <ambient>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </ambient>
+        <diffuse>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </diffuse>
+        <specular>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </specular>
+    </animation>
+
+    <animation>
+        <name>amber</name>
+        <type>material</type>
+        <object-name>Oil_p2</object-name>
+        <condition>
+          <and>
+            <less-than>
+              <property>engines/engine[1]/oil-pressure-psi</property>
+              <value>50</value>
+            </less-than>
+            <greater-than>
+              <property>engines/engine[1]/oil-pressure-psi</property>
+              <value>33</value>
+            </greater-than>
+          </and>
+        </condition>
+        <emission>
+            <red-prop>sim/color-set/amber/r</red-prop>
+            <green-prop>sim/color-set/amber/g</green-prop>
+            <blue-prop>sim/color-set/amber/b</blue-prop>
+            <alpha-prop>sim/color-set/amber/a</alpha-prop>
+        </emission>
+        <ambient>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </ambient>
+        <diffuse>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </diffuse>
+        <specular>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </specular>
+    </animation>
+
+    <animation>
+        <name>red</name>
+        <type>material</type>
+        <object-name>Oil_p2</object-name>
+        <condition>
+          <less-than>
+            <property>engines/engine[1]/oil-pressure-psi</property>
+            <value>34</value>
+          </less-than>
+        </condition>
+        <emission>
+            <red-prop>sim/color-set/red/r</red-prop>
+            <green-prop>sim/color-set/red/g</green-prop>
+            <blue-prop>sim/color-set/red/b</blue-prop>
+            <alpha-prop>sim/color-set/red/a</alpha-prop>
+        </emission>
+        <ambient>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </ambient>
+        <diffuse>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </diffuse>
+        <specular>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </specular>
+    </animation>
+
 
 </PropertyList>

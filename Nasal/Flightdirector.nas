@@ -521,7 +521,8 @@ var update_nav = func {
         targetCourse = fp.pathGeod(-1, -dist_rem + CourseError);
         courseCoord = geo.Coord.new().set_latlon(targetCourse.lat, targetCourse.lon);
         CourseError = geocoord.course_to(courseCoord) - heading;
-        CourseError = geo.normdeg180(CourseError);
+        if(CourseError < -180) CourseError += 360;
+        else if(CourseError > 180) CourseError -= 360;
 			  crs_set = geocoord.course_to(courseCoord);
 			  if (fp.current < 1) { # On ground and takeoff
 				  crs_offset= crs_set - heading;
@@ -533,8 +534,6 @@ var update_nav = func {
 				  if (fp.current < fp.getPlanSize()-1) {
 					  next_bearing = fp.getWP(fp.current+1).leg_bearing;
 				  } else {next_bearing = curr_bearing}
-          curr_bearing = geo.normdeg180(curr_bearing);
-          next_bearing = geo.normdeg180(next_bearing);
 				  if (abs(curr_bearing - next_bearing) > 150) {diff_crs = 0}
 				  else {diff_crs = abs(curr_bearing - next_bearing)*gspd}
 				  if (wp_dist <= diff_crs) {
@@ -544,7 +543,6 @@ var update_nav = func {
       }
 		  setprop("autopilot/internal/course-offset",crs_offset);
 		  setprop("autopilot/internal/selected-crs",int(crs_set));
-
 			if (fp.current > 0) {
 				if (!flag_wp) {
 					wp_curr = fp.current;
@@ -564,7 +562,7 @@ var update_nav = func {
 						flag_wp = 0;
 					}
 				}
-			}
+			} else flag_wp = 0;
     } else if (NAVSRC == "") {setprop("autopilot/internal/nav-type","")}
 } # end of update
 

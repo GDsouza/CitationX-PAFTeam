@@ -132,19 +132,403 @@
         </offsets>
     </model>
 
+    <model>
+				<name>HFscreen</name>
+        <path>Models/Instruments/HF/HFscreen.xml</path>
+        <offsets>
+            <x-m>0.001</x-m>
+            <y-m>0</y-m>
+            <z-m>0</z-m>
+            <pitch-deg>0</pitch-deg>
+        </offsets>
+    </model>
+
+    <model>
+				<name>Selcal.screen</name>
+        <path>Models/Instruments/HF/Selcal.xml</path>
+        <offsets>
+            <x-m>0.0001</x-m>
+            <y-m>0</y-m>
+            <z-m>0</z-m>
+            <pitch-deg>0</pitch-deg>
+        </offsets>
+    </model>
+
+    <model>
+        <path>Models/Instruments/HF/Xfer.xml</path>
+        <offsets>
+            <x-m>0</x-m>
+            <y-m>0</y-m>
+            <z-m>0</z-m>
+            <pitch-deg>0</pitch-deg>
+        </offsets>
+    </model>
+
+<!-- Hf comm -->
+
+    <animation>
+      <type>translate</type>
+      <object-name>Freq-chan.button</object-name>
+      <property>instrumentation/kfs-594/freq-chan-btn</property>
+      <factor>-0.001</factor>
+       <axis>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>1.0</z>
+      </axis>
+    </animation>
+
+    <animation>
+      <type>pick</type>
+      <object-name>Freq-chan.button</object-name>
+      <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+          <command>property-cycle</command>
+          <property>instrumentation/kfs-594/freq-chan</property>
+          <value>FREQ</value>
+          <value>CHAN</value>
+        </binding>
+        <binding>
+          <command>property-toggle</command>
+          <property>instrumentation/kfs-594/freq-chan-btn</property>
+        </binding>
+        <binding>
+          <command>property-toggle</command>
+          <property>sim/sound/click</property>
+        </binding>
+      </action>
+      <hovered>
+        <binding>
+          <command>set-tooltip</command>
+          <tooltip-id>Channel</tooltip-id>
+          <label>%s</label>
+          <property>instrumentation/kfs-594/freq-chan</property>
+        </binding>
+      </hovered>
+    </animation>
+
+    <animation>
+      <type>translate</type>
+      <object-name>Sto.button</object-name>
+      <property>instrumentation/kfs-594/store</property>
+      <factor>-0.001</factor>
+       <axis>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>1.0</z>
+      </axis>
+    </animation>
+
+    <animation>
+      <type>pick</type>
+      <object-name>Sto.button</object-name>
+      <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+          <command>property-toggle</command>
+          <property>instrumentation/kfs-594/store</property>
+        </binding>
+        <binding>
+          <command>property-toggle</command>
+          <property>sim/sound/click</property>
+        </binding>
+        <mod-up>
+			    <binding>
+            <command>property-toggle</command>
+            <property>instrumentation/kfs-594/store</property>
+          </binding>
+        </mod-up>
+      </action>
+      <hovered>
+        <binding>
+          <command>set-tooltip</command>
+          <tooltip-id>Store</tooltip-id>
+          <label>Store : %s</label>
+          <mapping>on-off</mapping>
+          <property>instrumentation/kfs-594/store</property>
+        </binding>
+      </hovered>
+    </animation>
+
+    <animation>
+      <type>rotate</type>
+      <object-name>Mode.knob</object-name>
+      <property>instrumentation/kfs-594/mode</property>
+      <factor>35</factor>
+      <center>
+          <x-m>0.2506</x-m>
+          <y-m>0.0172</y-m>
+          <z-m>0</z-m>
+      </center>
+      <axis>
+          <x>-0.050</x>
+          <y>0</y>
+          <z>-1</z>
+      </axis>
+    </animation>
+
+	  <animation>
+      <type>pick</type>
+      <object-name>Mode.knob</object-name>
+      <action>
+        <button>0</button>
+        <button>3</button>
+        <repeatable>false</repeatable>
+        <binding>
+            <command>property-adjust</command>
+            <property>instrumentation/kfs-594/mode</property>
+            <step>1</step>
+            <min>-1</min>
+            <max>3</max>
+            <wrap>false</wrap>
+        </binding>
+        <binding>
+          <command>property-toggle</command>
+          <property>sim/sound/click</property>
+          </binding>
+      </action>
+      <action>
+        <button>4</button>
+        <repeatable>false</repeatable>
+        <binding>
+            <command>property-adjust</command>
+            <property>instrumentation/kfs-594/mode</property>
+            <step>-1</step>
+            <min>-1</min>
+            <max>3</max>
+            <wrap>false</wrap>
+        </binding>
+        <binding>
+          <command>property-toggle</command>
+          <property>sim/sound/click</property>
+          </binding>
+      </action>
+      <hovered>
+        <binding>
+          <command>set-tooltip</command>
+          <tooltip-id>Mode</tooltip-id>
+          <label>Mode: %s</label>
+            <property>instrumentation/kfs-594/mode</property>
+					  <mapping>nasal</mapping>
+					  <script>
+						  var modes = ['USB','AM','A3J','A3A','LSB'];
+						  return modes[arg[0]];
+					  </script>
+        </binding>
+      </hovered>
+	  </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Freq.knob</object-name>
+        <property>instrumentation/kfs-594/prog</property>
+        <factor>-0.001</factor>
+         <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>1</z>
+        </axis>
+    </animation>
+
+	  <animation>
+      <type>pick</type>
+      <object-name>Freq.knob</object-name>
+      <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+			  <binding>
+          <command>property-toggle</command>
+          <property>instrumentation/kfs-594/prog</property>
+        </binding>
+        <mod-up>
+			    <binding>
+            <command>property-toggle</command>
+            <property>instrumentation/kfs-594/prog</property>
+          </binding>
+        </mod-up>
+      </action>
+    </animation>
+
+    <animation>
+      <type>rotate</type>
+      <object-name>Freq.knob</object-name>
+      <property>instrumentation/kfs-594/freq-nb</property>
+      <factor>18</factor>
+      <center>
+          <x-m>0.2506</x-m>
+          <y-m>0.0172</y-m>
+          <z-m>0</z-m>
+      </center>
+      <axis>
+          <x>-0.050</x>
+          <y>0</y>
+          <z>-1</z>
+      </axis>
+    </animation>
+
+	  <animation>
+      <type>pick</type>
+      <object-name>Freq.knob</object-name>
+      <action>
+        <button>3</button>
+        <repeatable>false</repeatable>
+        <binding>
+            <command>property-adjust</command>
+            <property>instrumentation/kfs-594/freq-nb</property>
+            <step>1</step>
+            <min>0</min>
+            <max>19</max>
+            <wrap>true</wrap>
+        </binding>
+      </action>
+      <action>
+        <button>4</button>
+        <repeatable>false</repeatable>
+        <binding>
+            <command>property-adjust</command>
+            <property>instrumentation/kfs-594/freq-nb</property>
+            <step>-1</step>
+            <min>0</min>
+            <max>19</max>
+            <wrap>true</wrap>
+        </binding>
+      </action>
+      <hovered>
+			  <binding>
+				  <command>set-tooltip</command>
+				  <tooltip-id>Freq</tooltip-id>
+      	  <label>Freq : %.0f</label>
+      	  <property>instrumentation/kfs-594/freq-nb</property>
+     	   </binding>
+	    </hovered>
+	  </animation>
+
+    <animation>
+      <type>rotate</type>
+      <object-name>Vol.knob</object-name>
+      <property>instrumentation/kfs-594/volume</property>
+      <factor>270</factor>
+      <center>
+          <x-m>0.2464</x-m>
+          <y-m>-0.0101</y-m>
+          <z-m>0</z-m>
+      </center>
+      <axis>
+          <x>-0.050</x>
+          <y>0</y>
+          <z>-1</z>
+      </axis>
+    </animation>
+
+	  <animation>
+      <type>pick</type>
+      <object-name>Vol.knob</object-name>
+      <action>
+        <button>0</button>
+        <button>3</button>
+        <repeatable>false</repeatable>
+        <binding>
+         <command>property-adjust</command>
+          <property>instrumentation/kfs-594/volume</property>
+          <step>0.05</step>
+          <min>0</min>
+          <max>1</max>
+          <wrap>false</wrap>
+        </binding>
+      </action>
+      <action>
+        <button>4</button>
+        <repeatable>false</repeatable>
+        <binding>
+            <command>property-adjust</command>
+            <property>instrumentation/kfs-594/volume</property>
+            <step>-0.05</step>
+            <min>0</min>
+            <max>1</max>
+            <wrap>false</wrap>
+        </binding>
+      </action>
+      <hovered>
+			  <binding>
+				  <command>set-tooltip</command>
+				  <tooltip-id>Vol</tooltip-id>
+      	  <label>Vol : %.1f</label>
+      	  <property>instrumentation/kfs-594/volume</property>
+     	   </binding>
+	    </hovered>
+	  </animation>
+
+    <animation>
+      <type>rotate</type>
+      <object-name>Sq.knob</object-name>
+      <property>instrumentation/kfs-594/squelch</property>
+      <factor>270</factor>
+      <center>
+          <x-m>0.2464</x-m>
+          <y-m>-0.0101</y-m>
+          <z-m>0</z-m>
+      </center>
+      <axis>
+          <x>-0.050</x>
+          <y>0</y>
+          <z>-1</z>
+      </axis>
+    </animation>
+
+	  <animation>
+      <type>pick</type>
+      <object-name>Sq.knob</object-name>
+      <action>
+        <button>0</button>
+        <button>3</button>
+        <repeatable>false</repeatable>
+        <binding>
+         <command>property-adjust</command>
+          <property>instrumentation/kfs-594/squelch</property>
+          <step>0.05</step>
+          <min>0</min>
+          <max>1</max>
+          <wrap>false</wrap>
+        </binding>
+      </action>
+      <action>
+        <button>4</button>
+        <repeatable>false</repeatable>
+        <binding>
+            <command>property-adjust</command>
+            <property>instrumentation/kfs-594/squelch</property>
+            <step>-0.05</step>
+            <min>0</min>
+            <max>1</max>
+            <wrap>false</wrap>
+        </binding>
+      </action>
+      <hovered>
+			  <binding>
+				  <command>set-tooltip</command>
+				  <tooltip-id>Vol</tooltip-id>
+      	  <label>Sq : %.1f</label>
+      	  <property>instrumentation/kfs-594/squelch</property>
+     	   </binding>
+	    </hovered>
+	  </animation>
+
 <!-- Lights -->
 
     <animation>
-        <type>material</type>
-        <object-name>Flap.reset</object-name>
-    <object-name>RIC1.hdg</object-name>
-    <object-name>RIC2.hdg</object-name>
-    <object-name>RIC1.crs</object-name>
-    <object-name>RIC2.crs</object-name>
-    <object-name>RDR.trb</object-name>
-    <object-name>RDR.stab</object-name>
-    <object-name>RDR.tgt</object-name>
-    <object-name>RDR.sect</object-name>
+      <type>material</type>
+      <object-name>Flap.reset</object-name>
+      <object-name>RIC1.hdg</object-name>
+      <object-name>RIC2.hdg</object-name>
+      <object-name>RIC1.crs</object-name>
+      <object-name>RIC2.crs</object-name>
+      <object-name>RDR.trb</object-name>
+      <object-name>RDR.stab</object-name>
+      <object-name>RDR.tgt</object-name>
+      <object-name>RDR.sect</object-name>
         <condition>
 						<or>
 	           	<property>systems/electrical/left-emer-bus</property>
@@ -1085,6 +1469,7 @@
 	</animation>
 
 <!-- AILERON TRIM -->
+
 	<animation>
     <type>pick</type>
     <object-name>LH.trim</object-name>
@@ -1147,7 +1532,6 @@
         </axis>
 	</animation>
 
-
 <!-- RUDDER TRIM -->
 
 	<animation>
@@ -1206,6 +1590,110 @@
             <y>0</y>
             <z>0</z>
         </axis>
+    </animation>
+
+<!-- VCR -->
+
+    <animation>
+        <type>select</type>
+        <object-name>Vcr.LightOn</object-name>
+        <condition>
+          <and>
+            <greater-than>
+             <property>systems/electrical/outputs/comm</property>
+             <value>5</value>
+            </greater-than>
+            <property>instrumentation/vcr/light</property>
+          </and>
+        </condition>
+    </animation>
+
+    <animation>
+      <type>translate</type>
+      <object-name>Vcr.TestButton</object-name>
+      <property>instrumentation/vcr/test</property>
+      <factor>-0.003</factor>
+       <axis>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>1.0</z>
+      </axis>
+    </animation>
+
+    <animation>
+      <type>pick</type>
+      <object-name>Vcr.TestButton</object-name>
+      <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+          <command>property-toggle</command>
+          <property>instrumentation/vcr/test</property>
+        </binding>
+        <binding>
+          <command>property-toggle</command>
+          <property>sim/sound/click</property>
+        </binding>
+        <mod-up>
+			    <binding>
+            <command>property-toggle</command>
+            <property>instrumentation/vcr/test</property>
+          </binding>
+        </mod-up>
+      </action>
+      <hovered>
+        <binding>
+          <command>set-tooltip</command>
+          <tooltip-id>Test</tooltip-id>
+          <label>Test : %s</label>
+          <mapping>on-off</mapping>
+          <property>instrumentation/vcr/test</property>
+        </binding>
+      </hovered>
+    </animation>
+
+    <animation>
+      <type>translate</type>
+      <object-name>Vcr.EraseButton</object-name>
+      <property>instrumentation/vcr/erase</property>
+      <factor>-0.003</factor>
+       <axis>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>1.0</z>
+      </axis>
+    </animation>
+
+    <animation>
+      <type>pick</type>
+      <object-name>Vcr.EraseButton</object-name>
+      <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+          <command>property-toggle</command>
+          <property>instrumentation/vcr/erase</property>
+        </binding>
+        <binding>
+          <command>property-toggle</command>
+          <property>sim/sound/click</property>
+        </binding>
+        <mod-up>
+			    <binding>
+            <command>property-toggle</command>
+            <property>instrumentation/vcr/erase</property>
+          </binding>
+        </mod-up>
+      </action>
+      <hovered>
+        <binding>
+          <command>set-tooltip</command>
+          <tooltip-id>Erase</tooltip-id>
+          <label>Erase : %s</label>
+          <mapping>on-off</mapping>
+          <property>instrumentation/vcr/erase</property>
+        </binding>
+      </hovered>
     </animation>
 
 </PropertyList>
