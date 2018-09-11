@@ -1592,26 +1592,26 @@
         </axis>
     </animation>
 
-<!-- VCR -->
+<!-- Cockpit Voice Recorder -->
 
     <animation>
         <type>select</type>
-        <object-name>Vcr.LightOn</object-name>
+        <object-name>Cvr.LightOn</object-name>
         <condition>
           <and>
             <greater-than>
              <property>systems/electrical/outputs/comm</property>
              <value>5</value>
             </greater-than>
-            <property>instrumentation/vcr/light</property>
+            <property>instrumentation/cvr/light</property>
           </and>
         </condition>
     </animation>
 
     <animation>
       <type>translate</type>
-      <object-name>Vcr.TestButton</object-name>
-      <property>instrumentation/vcr/test</property>
+      <object-name>Cvr.TestButton</object-name>
+      <property>instrumentation/cvr/test</property>
       <factor>-0.003</factor>
        <axis>
           <x>0.0</x>
@@ -1622,13 +1622,13 @@
 
     <animation>
       <type>pick</type>
-      <object-name>Vcr.TestButton</object-name>
+      <object-name>Cvr.TestButton</object-name>
       <action>
         <button>0</button>
         <repeatable>false</repeatable>
         <binding>
           <command>property-toggle</command>
-          <property>instrumentation/vcr/test</property>
+          <property>instrumentation/cvr/test</property>
         </binding>
         <binding>
           <command>property-toggle</command>
@@ -1637,7 +1637,7 @@
         <mod-up>
 			    <binding>
             <command>property-toggle</command>
-            <property>instrumentation/vcr/test</property>
+            <property>instrumentation/cvr/test</property>
           </binding>
         </mod-up>
       </action>
@@ -1647,15 +1647,15 @@
           <tooltip-id>Test</tooltip-id>
           <label>Test : %s</label>
           <mapping>on-off</mapping>
-          <property>instrumentation/vcr/test</property>
+          <property>instrumentation/cvr/test</property>
         </binding>
       </hovered>
     </animation>
 
     <animation>
       <type>translate</type>
-      <object-name>Vcr.EraseButton</object-name>
-      <property>instrumentation/vcr/erase</property>
+      <object-name>Cvr.EraseButton</object-name>
+      <property>instrumentation/cvr/erase</property>
       <factor>-0.003</factor>
        <axis>
           <x>0.0</x>
@@ -1666,13 +1666,13 @@
 
     <animation>
       <type>pick</type>
-      <object-name>Vcr.EraseButton</object-name>
+      <object-name>Cvr.EraseButton</object-name>
       <action>
         <button>0</button>
         <repeatable>false</repeatable>
         <binding>
           <command>property-toggle</command>
-          <property>instrumentation/vcr/erase</property>
+          <property>instrumentation/cvr/erase</property>
         </binding>
         <binding>
           <command>property-toggle</command>
@@ -1681,7 +1681,7 @@
         <mod-up>
 			    <binding>
             <command>property-toggle</command>
-            <property>instrumentation/vcr/erase</property>
+            <property>instrumentation/cvr/erase</property>
           </binding>
         </mod-up>
       </action>
@@ -1691,7 +1691,7 @@
           <tooltip-id>Erase</tooltip-id>
           <label>Erase : %s</label>
           <mapping>on-off</mapping>
-          <property>instrumentation/vcr/erase</property>
+          <property>instrumentation/cvr/erase</property>
         </binding>
       </hovered>
     </animation>

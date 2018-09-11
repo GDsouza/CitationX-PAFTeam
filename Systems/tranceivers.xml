@@ -62,6 +62,9 @@
             <label>Idt  </label>
         </text>
 
+        <text>
+            <label>Radial </label>
+        </text>
 
     </group>
 
@@ -115,6 +118,7 @@
             <row>0</row>
             <col>3</col>
             <name>comm1</name>
+            <live>true</live>
             <property>instrumentation/comm/frequencies/standby-mhz</property>
             <binding>
                 <command>dialog-apply</command>
@@ -177,9 +181,10 @@
             <row>1</row>
             <col>3</col>
             <name>comm2</name>
+            <live>true</live>
             <property>instrumentation/comm[1]/frequencies/standby-mhz</property>
         </input>
-<!--
+
         <dial>
             <row>1</row>
             <col>4</col>
@@ -193,7 +198,7 @@
                 <command>dialog-apply</command>
             </binding>
         </dial>
--->
+
 <!--         NAV 1          -->
 
         <text>
@@ -259,6 +264,15 @@
             <property>instrumentation/nav/ident</property>
         </checkbox>
 
+        <input>
+            <row>2</row>
+            <col>6</col>
+            <property>instrumentation/nav[0]/radials/selected-deg</property>
+            <live>true</live>
+            <binding>
+                <command>dialog-apply</command>
+            </binding>
+        </input>
 
 <!--         NAV 2          -->
 
@@ -325,6 +339,16 @@
             <property>instrumentation/nav[1]/ident</property>
         </checkbox>
 
+        <input>
+            <row>3</row>
+            <col>6</col>
+            <property>instrumentation/nav[1]/radials/selected-deg</property>
+            <live>true</live>
+            <binding>
+                <command>dialog-apply</command>
+            </binding>
+        </input>
+
 <!--         ADF 1          -->
 
         <text>
@@ -366,7 +390,11 @@
             <row>4</row>
             <col>3</col>
             <name>adf1</name>
+            <live>true</live>
             <property>instrumentation/adf/frequencies/standby-khz</property>
+            <binding>
+                <command>dialog-apply</command>
+            </binding>
         </input>
 
         <dial>
@@ -433,7 +461,11 @@
             <row>5</row>
             <col>3</col>
             <name>adf2</name>
+            <live>true</live>
             <property>instrumentation/adf[1]/frequencies/standby-khz</property>
+            <binding>
+                <command>dialog-apply</command>
+            </binding>
         </input>
 
         <dial>
@@ -501,6 +533,9 @@
             <col>3</col>
             <name>transponder</name>
             <property>instrumentation/transponder/standby-id-code</property>
+            <binding>
+                <command>dialog-apply</command>
+            </binding>
         </input>
 
     </group>

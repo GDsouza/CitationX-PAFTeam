@@ -424,6 +424,8 @@ setlistener("controls/electric/avionics-switch",func(n) {
 		if(!getprop(AvPwr)) {
       setprop(AvPwr,1);
       setprop("instrumentation/cdu/init",0);
+      setprop("instrumentation/dme/frequencies/selected-mhz",getprop("instrumentation/nav/frequencies/selected-mhz")); # for dme display
+      setprop("instrumentation/dme[1]/frequencies/selected-mhz",getprop("instrumentation/nav[1]/frequencies/selected-mhz")); # for dme display
     }
 	} else {
 		if(getprop(AvPwr)) {

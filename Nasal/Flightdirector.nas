@@ -414,8 +414,7 @@ var get_ETE = func{
     if(left(NAVSRC,3) == "FMS"){
 			min_et = getprop("autopilot/route-manager/ete");
 		}	else {
-      setprop("instrumentation/dme/frequencies/source","instrumentation/nav["~et_ind~"]/frequencies/selected-mhz");
-      min_et = int(getprop("instrumentation/dme/indicated-time-min"));
+      min_et = int(getprop("instrumentation/dme["~et_ind~"]/indicated-time-min"));
 		}
     if(min_et>60){
       tmphr = (min_et*0.016666);

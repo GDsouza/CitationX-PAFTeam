@@ -239,13 +239,13 @@ var _list = setlistener("sim/signals/fdm-initialized", func {
 
       me.ete = getprop("autopilot/internal/nav-ttw");
 		  if (!me.ete or size(me.ete) > 10) {me.ete = "ETE 0:00"}
-		  else {
-        me.vec_ete = split(":",me.ete);
-        me.vec_ete = split("ETE ",me.vec_ete[0]);
-        me.h_ete = int(me.vec_ete[1]/60);
-        me.mn_ete = me.vec_ete[1]-me.h_ete*60;
-        me.ete = "ETE "~me.h_ete~":"~sprintf("%02i",me.mn_ete);
-      }
+#		  else {
+#        me.vec_ete = split(":",me.ete);
+#        me.vec_ete = split("ETE ",me.vec_ete[0]);
+#        me.h_ete = int(me.vec_ete[1]/60);
+#        me.mn_ete = me.vec_ete[1]-me.h_ete*60;
+#        me.ete = "ETE "~me.h_ete~":"~sprintf("%02i",me.mn_ete);
+#      }
 			me.text.navTtw.setText(me.ete);
 			if (dist_rem.getValue() > 0) {
 				me.text.distRem.setText(sprintf("%.0f",dist_rem.getValue())~" NM");

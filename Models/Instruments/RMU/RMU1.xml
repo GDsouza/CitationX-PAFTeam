@@ -1098,6 +1098,61 @@
     </animation>
 
     <animation>
+        <type>translate</type>
+        <object-name>RMU.dme</object-name>	
+        <property>instrumentation/rmu/unit/dme</property>
+				<factor>0.0016</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+      <type>pick</type>
+      <object-name>RMU.dme</object-name>
+      <visible>true</visible>
+      <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+					<condition>
+						<not>
+							<property>instrumentation/rmu/unit/pge</property>
+						</not>
+					</condition>
+          <command>property-toggle</command>
+          <property>instrumentation/rmu/unit/dme</property>
+        </binding>
+        <binding>
+          <command>property-assign</command>
+          <property>instrumentation/rmu/unit/dim</property>
+						<value>0</value>
+        </binding>
+				<binding>
+					  <command>property-toggle</command>
+					  <property>sim/sound/click</property>
+				</binding>
+				<mod-up>
+          <binding>
+            <command>property-toggle</command>
+            <property>instrumentation/rmu/unit/dme</property>
+          </binding>
+				</mod-up>
+      </action>
+			<hovered>
+		    <binding>
+	        <command>set-tooltip</command>
+	        <tooltip-id>RmuDme1</tooltip-id>
+	        <label>Dme : %s</label>
+		      <property>instrumentation/rmu/unit/dme</property>
+	        <mapping>on-off</mapping>
+		    </binding>
+			</hovered>
+    </animation>
+
+    <animation>
         <type>rotate</type>
         <object-name>RMU.knob</object-name>
         <property>controls/lighting/rmu</property>
@@ -1218,6 +1273,10 @@
 								<property>instrumentation/rmu/unit/pge</property>
 							</not>
 							<equals>
+								<property>instrumentation/rmu/unit/dme-selected</property>
+								<value>0</value>
+							</equals>
+							<equals>
 								<property>instrumentation/rmu/unit/selected</property>
 								<value>1</value>
 							</equals>
@@ -1230,6 +1289,55 @@
 					<min>108</min>
 					<max>117</max>
           <resolution>1</resolution>
+		    </binding>
+	      <binding>
+					<condition>
+						<and>
+							<not>
+								<property>instrumentation/rmu/unit/dim</property>
+							</not>
+							<not>
+								<property>instrumentation/rmu/unit/pge</property>
+							</not>
+							<equals>
+								<property>instrumentation/rmu/unit/dme-selected</property>
+								<value>1</value>
+							</equals>
+							<equals>
+								<property>instrumentation/rmu/unit/selected</property>
+								<value>1</value>
+							</equals>
+						</and>
+					</condition>
+          <command>property-adjust</command>
+					<property>instrumentation/dme/frequencies/selected-mhz</property>
+          <mask>integer</mask>
+        	<step>1</step>
+					<min>108</min>
+					<max>117</max>
+          <resolution>1</resolution>
+		    </binding>
+	      <binding>
+					<condition>
+						<and>
+							<not>
+								<property>instrumentation/rmu/unit/dim</property>
+							</not>
+							<not>
+								<property>instrumentation/rmu/unit/pge</property>
+							</not>
+							<equals>
+								<property>instrumentation/rmu/unit/dme-selected</property>
+								<value>2</value>
+							</equals>
+							<equals>
+								<property>instrumentation/rmu/unit/selected</property>
+								<value>1</value>
+							</equals>
+						</and>
+					</condition>
+          <command>nasal</command>
+					<script>rmu.RMU.tacChannel(0,1,0)</script>
 		    </binding>
 		    <binding>
 					<condition>
@@ -1432,6 +1540,10 @@
 								<property>instrumentation/rmu/unit/pge</property>
 							</not>
 							<equals>
+								<property>instrumentation/rmu/unit/dme-selected</property>
+								<value>0</value>
+							</equals>
+							<equals>
 								<property>instrumentation/rmu/unit/selected</property>
 								<value>1</value>
 							</equals>
@@ -1444,6 +1556,55 @@
 					<min>108</min>
 					<max>117</max>
           <resolution>1</resolution>
+		    </binding>
+	      <binding>
+					<condition>
+						<and>
+							<not>
+								<property>instrumentation/rmu/unit/dim</property>
+							</not>
+							<not>
+								<property>instrumentation/rmu/unit/pge</property>
+							</not>
+							<equals>
+								<property>instrumentation/rmu/unit/dme-selected</property>
+								<value>1</value>
+							</equals>
+							<equals>
+								<property>instrumentation/rmu/unit/selected</property>
+								<value>1</value>
+							</equals>
+						</and>
+					</condition>
+          <command>property-adjust</command>
+					<property>instrumentation/dme/frequencies/selected-mhz</property>
+          <mask>integer</mask>
+        	<step>-1</step>
+					<min>108</min>
+					<max>117</max>
+          <resolution>1</resolution>
+		    </binding>
+	      <binding>
+					<condition>
+						<and>
+							<not>
+								<property>instrumentation/rmu/unit/dim</property>
+							</not>
+							<not>
+								<property>instrumentation/rmu/unit/pge</property>
+							</not>
+							<equals>
+								<property>instrumentation/rmu/unit/dme-selected</property>
+								<value>2</value>
+							</equals>
+							<equals>
+								<property>instrumentation/rmu/unit/selected</property>
+								<value>1</value>
+							</equals>
+						</and>
+					</condition>
+          <command>nasal</command>
+					<script>rmu.RMU.tacChannel(0,-1,0)</script>
 		    </binding>
 		    <binding>
 					<condition>
@@ -1640,6 +1801,10 @@
 								<property>instrumentation/rmu/unit/pge</property>
 							</not>
 							<equals>
+								<property>instrumentation/rmu/unit/dme-selected</property>
+								<value>0</value>
+							</equals>
+							<equals>
 								<property>instrumentation/rmu/unit/selected</property>
 								<value>1</value>
 							</equals>
@@ -1651,6 +1816,55 @@
 					<min>108.000</min>
 					<max>117.950</max>
         </binding>
+	      <binding>
+					<condition>
+						<and>
+							<not>
+								<property>instrumentation/rmu/unit/dim</property>
+							</not>
+							<not>
+								<property>instrumentation/rmu/unit/pge</property>
+							</not>
+							<equals>
+								<property>instrumentation/rmu/unit/dme-selected</property>
+								<value>1</value>
+							</equals>
+							<equals>
+								<property>instrumentation/rmu/unit/selected</property>
+								<value>1</value>
+							</equals>
+						</and>
+					</condition>
+          <command>property-adjust</command>
+					<property>instrumentation/dme/frequencies/selected-mhz</property>
+          <mask>integer</mask>
+        	<step>0.050</step>
+					<min>108.000</min>
+					<max>117.950</max>
+          <resolution>1</resolution>
+		    </binding>
+	      <binding>
+					<condition>
+						<and>
+							<not>
+								<property>instrumentation/rmu/unit/dim</property>
+							</not>
+							<not>
+								<property>instrumentation/rmu/unit/pge</property>
+							</not>
+							<equals>
+								<property>instrumentation/rmu/unit/dme-selected</property>
+								<value>2</value>
+							</equals>
+							<equals>
+								<property>instrumentation/rmu/unit/selected</property>
+								<value>1</value>
+							</equals>
+						</and>
+					</condition>
+          <command>nasal</command>
+					<script>rmu.RMU.tacChannel(0,0,1)</script>
+		    </binding>
         <binding>
 					<condition>
 						<and>
@@ -1848,6 +2062,10 @@
 								<property>instrumentation/rmu/unit/pge</property>
 							</not>
 							<equals>
+								<property>instrumentation/rmu/unit/dme-selected</property>
+								<value>0</value>
+							</equals>
+							<equals>
 								<property>instrumentation/rmu/unit/selected</property>
 								<value>1</value>
 							</equals>
@@ -1859,6 +2077,53 @@
 					<min>108.000</min>
 					<max>117.950</max>
         </binding>
+        <binding>
+					<condition>
+						<and>
+							<not>
+								<property>instrumentation/rmu/unit/dim</property>
+							</not>
+							<not>
+								<property>instrumentation/rmu/unit/pge</property>
+							</not>
+							<equals>
+								<property>instrumentation/rmu/unit/dme-selected</property>
+								<value>1</value>
+							</equals>
+							<equals>
+								<property>instrumentation/rmu/unit/selected</property>
+								<value>1</value>
+							</equals>
+						</and>
+					</condition>
+          <command>property-adjust</command>
+					<property>instrumentation/dme/frequencies/selected-mhz</property>
+          <step>-0.050</step>
+					<min>108.000</min>
+					<max>117.950</max>
+        </binding>
+	      <binding>
+					<condition>
+						<and>
+							<not>
+								<property>instrumentation/rmu/unit/dim</property>
+							</not>
+							<not>
+								<property>instrumentation/rmu/unit/pge</property>
+							</not>
+							<equals>
+								<property>instrumentation/rmu/unit/dme-selected</property>
+								<value>2</value>
+							</equals>
+							<equals>
+								<property>instrumentation/rmu/unit/selected</property>
+								<value>1</value>
+							</equals>
+						</and>
+					</condition>
+          <command>nasal</command>
+					<script>rmu.RMU.tacChannel(0,0,-1)</script>
+		    </binding>
         <binding>
 					<condition>
 						<and>

@@ -13612,7 +13612,7 @@ refs 3
 2 0.637543 0.250268
 kids 0
 OBJECT poly
-name "Vcr.TestButton"
+name "Cvr.TestButton"
 loc 0.671937 -0.142684 -0.050208
 texture "interior.png"
 crease 30.000002
@@ -13801,7 +13801,7 @@ refs 4
 23 0.633555 0.855255
 kids 0
 OBJECT poly
-name "Vcr.Light"
+name "Cvr.Light"
 loc 0.671934 -0.142691 -0.068615
 texture "interior.png"
 crease 30.000002
@@ -13990,7 +13990,7 @@ refs 4
 23 0.622738 0.866782
 kids 0
 OBJECT poly
-name "Vcr.LightOn"
+name "Cvr.LightOn"
 loc 0.671934 -0.142862 -0.068615
 texture "interior.png"
 crease 30.000002
@@ -14083,7 +14083,7 @@ refs 3
 12 0.615381 0.858712
 kids 0
 OBJECT poly
-name "Vcr.EraseButton"
+name "Cvr.EraseButton"
 loc 0.671937 -0.142684 -0.117625
 texture "interior.png"
 crease 30.000002

@@ -11,7 +11,8 @@ var sq = props.globals.getNode("instrumentation/rcu/squelch");
 var navAud = props.globals.getNode("instrumentation/rcu/nav-audio");
 var tx1 = props.globals.getNode("instrumentation/comm/ptt");
 var tx2 = props.globals.getNode("instrumentation/comm[1]/ptt");
-var emrg = props.globals.getNode("instrumentation/rcu/emrg");
+var emrg1 = "instrumentation/rcu/emrg1";
+var emrg2 = "instrumentation/rcu/emrg2";
 
 var RCU = {
 	new: func() {
@@ -124,9 +125,14 @@ var RCU = {
 			}
 		});
 
-		setlistener(emrg, func(n) {
-			if (n.getValue()) {me.text.emrg.show()}
-			else {me.text.emrg.hide()}
+		setlistener(emrg1, func(n) {
+			if (n.getValue()) me.text.emrg.show();
+			else if (!getprop(emrg2)) me.text.emrg.hide();
+		});
+
+		setlistener(emrg2, func(n) {
+			if (n.getValue()) me.text.emrg.show();
+			else if (!getprop(emrg1)) me.text.emrg.hide();
 		});
 
 	}, # end of listen

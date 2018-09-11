@@ -7,14 +7,14 @@
         <offsets>
             <x-m>0.0</x-m>
             <y-m>-0.035</y-m>
-            <z-m>0.086</z-m>
+            <z-m>0.095</z-m>
         </offsets>
         <alignment>center-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
         <type type="string">text-value</type>
         <property>autopilot/locks/AP-status</property>
         <font>helvetica_bold.txf</font>
-        <character-size>0.009</character-size>
+        <character-size>0.008</character-size>
         <character-aspect-ratio type="double">1.4</character-aspect-ratio>
         <font-resolution>
             <width type="int">64</width>
@@ -135,6 +135,277 @@
     </animation>
 
     <text>
+        <name>Dme-lbl</name>
+        <offsets>
+            <x-m>0.0</x-m>
+            <y-m>-0.032</y-m>
+            <z-m>0.088</z-m>
+        </offsets>
+        <alignment>right-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>literal</type>
+        <text>DME</text>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.006</character-size>
+        <character-aspect-ratio type="double">1.2</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
+        </font-resolution>
+    </text>
+
+    <text>
+        <name>Dme-id</name>
+        <offsets>
+            <x-m>0.0</x-m>
+            <y-m>-0.017</y-m>
+            <z-m>0.088</z-m>
+        </offsets>
+        <alignment>right-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type type="string">text-value</type>
+        <property>instrumentation/dme/dme-id</property>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.006</character-size>
+        <character-aspect-ratio type="double">1.2</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
+        </font-resolution>
+    </text>
+
+    <text>
+        <name>Dme1-id</name>
+        <offsets>
+            <x-m>0.0</x-m>
+            <y-m>-0.017</y-m>
+            <z-m>0.088</z-m>
+        </offsets>
+        <alignment>right-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type type="string">text-value</type>
+        <property>instrumentation/dme[1]/dme-id</property>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.006</character-size>
+        <character-aspect-ratio type="double">1.2</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
+        </font-resolution>
+    </text>
+
+    <text>
+        <name>Dme-nir</name>
+        <offsets>
+            <x-m>0.0</x-m>
+            <y-m>0.028</y-m>
+            <z-m>0.088</z-m>
+        </offsets>
+        <alignment>right-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>literal</type>
+        <text>---</text>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.006</character-size>
+        <character-aspect-ratio type="double">1.2</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
+        </font-resolution>
+    </text>
+
+    <text>
+        <name>Dme-range</name>
+        <offsets>
+            <x-m>0.0</x-m>
+            <y-m>0.028</y-m>
+            <z-m>0.088</z-m>
+        </offsets>
+        <alignment>right-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type type="string">number-value</type>
+        <property>instrumentation/dme/indicated-distance-nm</property>
+        <format>%.1f</format>
+        <truncate>false</truncate>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.006</character-size>
+        <character-aspect-ratio type="double">1.2</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
+        </font-resolution>
+    </text>
+
+    <text>
+        <name>Dme1-range</name>
+        <offsets>
+            <x-m>0.0</x-m>
+            <y-m>0.030</y-m>
+            <z-m>0.088</z-m>
+        </offsets>
+        <alignment>right-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type type="string">number-value</type>
+        <property>instrumentation/dme[1]/indicated-distance-nm</property>
+        <format>%.1f</format>
+        <truncate>false</truncate>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.006</character-size>
+        <character-aspect-ratio type="double">1.2</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
+        </font-resolution>
+    </text>
+
+    <text>
+        <name>Dme-nm</name>
+        <offsets>
+            <x-m>0.0</x-m>
+            <y-m>0.038</y-m>
+            <z-m>0.088</z-m>
+        </offsets>
+        <alignment>right-center</alignment>
+        <axis-alignment>yz-plane</axis-alignment>
+        <type>literal</type>
+        <text>NM</text>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.006</character-size>
+        <character-aspect-ratio type="double">1.2</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
+        </font-resolution>
+    </text>
+
+    <animation>
+      <type>select</type>
+      <object-name>Dme-lbl</object-name>
+      <object-name>Dme-nm</object-name>
+      <condition>
+        <or>
+          <and>
+            <not-equals>
+              <property>instrumentation/dme/dme-id</property>
+              <value></value>
+            </not-equals>
+            <equals>
+              <property>autopilot/settings/nav-source</property>
+              <value>NAV1</value>
+            </equals>
+          </and>
+          <and>
+            <not-equals>
+              <property>instrumentation/dme[1]/dme-id</property>
+              <value></value>
+            </not-equals>
+            <equals>
+              <property>autopilot/settings/nav-source</property>
+              <value>NAV2</value>
+            </equals>
+          </and>
+        </or>
+      </condition>
+    </animation>
+
+    <animation>
+      <type>select</type>
+      <object-name>Dme-nir</object-name>
+      <condition>
+        <or>
+          <and>
+            <not-equals>
+              <property>instrumentation/dme/dme-id</property>
+              <value></value>
+            </not-equals>
+            <not>
+              <property>instrumentation/dme/in-range</property>
+            </not>
+            <equals>
+              <property>autopilot/settings/nav-source</property>
+              <value>NAV1</value>
+            </equals>
+          </and>
+          <and>
+            <not-equals>
+              <property>instrumentation/dme[1]/dme-id</property>
+              <value></value>
+            </not-equals>
+            <not>
+              <property>instrumentation/dme[1]/in-range</property>
+            </not>
+            <equals>
+              <property>autopilot/settings/nav-source</property>
+              <value>NAV2</value>
+            </equals>
+          </and>
+        </or>
+      </condition>
+    </animation>
+
+    <animation>
+      <type>select</type>
+      <object-name>Dme-id</object-name>
+      <condition>
+        <and>
+          <not-equals>
+            <property>instrumentation/dme/dme-id</property>
+            <value></value>
+          </not-equals>
+          <equals>
+            <property>autopilot/settings/nav-source</property>
+            <value>NAV1</value>
+          </equals>
+        </and>
+      </condition>
+    </animation>
+
+    <animation>
+      <type>select</type>
+      <object-name>Dme-range</object-name>
+      <condition>
+        <and>
+          <property>instrumentation/dme/in-range</property>
+          <equals>
+            <property>autopilot/settings/nav-source</property>
+            <value>NAV1</value>
+          </equals>
+        </and>
+      </condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>Dme1-id</object-name>
+        <condition>
+          <and>
+            <not-equals>
+              <property>instrumentation/dme[1]/dme-id</property>
+              <value></value>
+            </not-equals>
+            <equals>
+              <property>autopilot/settings/nav-source</property>
+              <value>NAV2</value>
+            </equals>
+          </and>
+      </condition>
+    </animation>
+
+    <animation>
+      <type>select</type>
+      <object-name>Dme1-range</object-name>
+      <condition>
+        <and>
+          <property>instrumentation/dme[1]/in-range</property>
+          <equals>
+            <property>autopilot/settings/nav-source</property>
+            <value>NAV2</value>
+          </equals>
+        </and>
+      </condition>
+    </animation>
+
+    <text>
         <name>CRSlabel</name>
         <offsets>
             <x-m>0.00</x-m>
@@ -144,7 +415,7 @@
         <alignment>center-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
         <type>literal</type>
-        <text>CRS</text>
+        <text>DTK</text> <!-- Desired Track -->
         <font>helvetica_bold.txf</font>
         <character-size>0.007</character-size>
         <character-aspect-ratio type="double">1.3</character-aspect-ratio>
@@ -1021,6 +1292,13 @@
         <object-name>Nav-src</object-name>
         <object-name>Nav-dst</object-name>
         <object-name>Nav-id</object-name>
+        <object-name>Dme-lbl</object-name>
+        <object-name>Dme-id</object-name>
+        <object-name>Dme-range</object-name>
+        <object-name>Dme-nm</object-name>
+        <object-name>Dme-nir</object-name>
+        <object-name>Dme1-id</object-name>
+        <object-name>Dme1-range</object-name>
         <emission>
             <red-prop>sim/color-set/magenta/r</red-prop>
             <green-prop>sim/color-set/magenta/g</green-prop>

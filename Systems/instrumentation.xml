@@ -79,6 +79,11 @@ This file selects the instrumentation modules that should be available.
         <number>0</number>
     </dme>
 
+    <dme>
+        <name>dme</name>
+        <number>1</number>
+    </dme>
+
     <slip-skid-ball>
         <name>slip-skid-ball</name>
         <number>0</number>

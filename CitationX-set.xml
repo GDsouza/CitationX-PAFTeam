@@ -239,7 +239,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
             <start-offset-m>20</start-offset-m>
         </runways>
     </airport>
-<!--
+
     <instrumentation>
         <path>Aircraft/CitationX/Systems/instrumentation.xml</path>
 				<mk-viii>
@@ -247,7 +247,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 					<number>0</number>
 				</mk-viii>
     </instrumentation>
--->
+
     <systems>
         <path>Aircraft/CitationX/Systems/systems.xml</path>
         <autopilot>
@@ -476,6 +476,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
   </consumables>
 -->
   <instrumentation>
+
 		<pfd>
 			<minimums-baro type="int">200</minimums-baro>
 			<minimums-radio type="int">200</minimums-radio>
@@ -818,6 +819,9 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 			<atc>
 				<file>Aircraft/CitationX/Nasal/Spoken_ATC/init.nas</file>
 			</atc>
+			<audio>
+				<file>Aircraft/CitationX/Models/Instruments/Audio/Audio.nas</file>
+			</audio>
       <par>
 				<file>Aircraft/CitationX/Nasal/PAR/main.nas</file>
       </par>
@@ -860,9 +864,9 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 				<file>Aircraft/CitationX/Models/Instruments/HF/HF.nas</file>
 				<file>Aircraft/CitationX/Models/Instruments/HF/Selcal.nas</file>
 			</hf>
-			<vcr>
-				<file>Aircraft/CitationX/Nasal/Vcr.nas</file>
-			</vcr>
+			<cvr>
+				<file>Aircraft/CitationX/Nasal/Cvr.nas</file>
+			</cvr>
 			<tyresmoke>
 				<file>Aircraft/CitationX/Nasal/Tyresmoke.nas</file>
 			</tyresmoke>

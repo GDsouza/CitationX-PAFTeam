@@ -5,29 +5,51 @@ props.globals.initNode("instrumentation/rmu/trsp-num",1,"INT");
 props.globals.initNode("instrumentation/rmu/unit/delete",0,"BOOL");
 props.globals.initNode("instrumentation/rmu/unit/insert",0,"BOOL");
 props.globals.initNode("instrumentation/rmu/unit/mem-dsp",-1,"INT");
-props.globals.initNode("instrumentation/rmu/unit/mem-freq");
-props.globals.getNode("instrumentation/rmu/unit/mem-nav",0,"INT");
+props.globals.initNode("instrumentation/rmu/unit/mem-freq",0,"DOUBLE");
+props.globals.initNode("instrumentation/rmu/unit/mem-nav",0,"INT");
 props.globals.initNode("instrumentation/rmu/unit/pge",0,"INT");
 props.globals.initNode("instrumentation/rmu/unit/selected",0,"INT");
 props.globals.initNode("instrumentation/rmu/unit/sto",0,"BOOL");
 props.globals.initNode("instrumentation/rmu/unit/swp1",0,"BOOL");
-props.globals.getNode("instrumentation/rmu/unit/swp2",0,"BOOL");
+props.globals.initNode("instrumentation/rmu/unit/swp2",0,"BOOL");
 props.globals.initNode("instrumentation/rmu/unit/test",0,"BOOL");
+props.globals.initNode("instrumentation/rmu/unit/dme-selected",0,"INT");
+props.globals.initNode("instrumentation/dme/dme-id","","STRING");
+props.globals.initNode("instrumentation/tacan/frequencies/selected-channel","","STRING");
+props.globals.initNode("instrumentation/tacan/frequencies/selected-mhz",0,"DOUBLE");
+props.globals.initNode("instrumentation/tacan/id","","STRING");
 props.globals.initNode("instrumentation/transponder/unit/ident",0,"BOOL");
 props.globals.initNode("instrumentation/rmu/unit[1]/delete",0,"BOOL");
 props.globals.initNode("instrumentation/rmu/unit[1]/insert",0,"BOOL");
 props.globals.initNode("instrumentation/rmu/unit[1]/mem-dsp",-1,"INT");
-props.globals.initNode("instrumentation/rmu/unit[1]/mem-freq");
-props.globals.getNode("instrumentation/rmu/unit[1]/mem-nav",0,"INT");
+props.globals.initNode("instrumentation/rmu/unit[1]/mem-freq",0,"DOUBLE");
+props.globals.initNode("instrumentation/rmu/unit[1]/mem-nav",0,"INT");
 props.globals.initNode("instrumentation/rmu/unit[1]/pge",0,"INT");
 props.globals.initNode("instrumentation/rmu/unit[1]/selected",0,"INT");
 props.globals.initNode("instrumentation/rmu/unit[1]/sto",0,"BOOL");
 props.globals.initNode("instrumentation/rmu/unit[1]/swp1",0,"BOOL");
-props.globals.getNode("instrumentation/rmu/unit[1]/swp2",0,"BOOL");
+props.globals.initNode("instrumentation/rmu/unit[1]/swp2",0,"BOOL");
 props.globals.initNode("instrumentation/rmu/unit[1]/test",0,"BOOL");
+props.globals.initNode("instrumentation/rmu/unit[1]/dme-selected",0,"INT");
 props.globals.initNode("instrumentation/transponder/unit[1]/ident",0,"BOOL");
+props.globals.initNode("instrumentation/dme[1]/dme-id","","STRING");
+props.globals.initNode("instrumentation/tacan[1]/frequencies/selected-channel","","STRING");
+props.globals.initNode("instrumentation/tacan[1]/frequencies/selected-mhz",0,"DOUBLE");
+props.globals.initNode("instrumentation/tacan[1]/id","","STRING");
 
+setprop("instrumentation/dme/frequencies/source","instrumentation/dme/frequencies/selected-mhz");
+setprop("instrumentation/dme[1]/frequencies/source","instrumentation/dme[1]/frequencies/selected-mhz");
+
+var nav_freq = ["instrumentation/nav/frequencies/selected-mhz","instrumentation/nav[1]/frequencies/selected-mhz"];
+var nav_id = ["instrumentation/nav/nav-id","instrumentation/nav[1]/nav-id"];
+var dme_freq = ["instrumentation/dme/frequencies/selected-mhz","instrumentation/dme[1]/frequencies/selected-mhz"];
+var dme_id = ["instrumentation/dme/dme-id","instrumentation/dme[1]/dme-id"];
+var dme_sel = ["instrumentation/rmu/unit/dme-selected","instrumentation/rmu/unit[1]/dme-selected"];
+var tac_freq = ["instrumentation/tacan/frequencies/selected-mhz","instrumentation/tacan[1]/frequencies/selected-mhz"];
+var tac_id = ["instrumentation/tacan/id","instrumentation/tacan[1]/id"];
+var rmu_sel = ["instrumentation/rmu/unit/selected","instrumentation/rmu/unit[1]/selected"];
 var path = getprop("/sim/fg-home")~"/aircraft-data/";
+var nav_src = "autopilot/settings/nav-source";
 var full = nil;
 var memo = nil;
 var mem_1 = nil;
@@ -39,7 +61,11 @@ var comVec = [nil,nil];
 var navVec = [nil,nil];
 var data = [nil,nil];
 var memPath = [nil,nil];
-
+var dme = [0,0];
+var tacan = [nil,nil,nil,nil,nil];
+var navaid = nil;
+var nav_dme = nil;
+var freq = nil;
 
 var RMU = {
 	new: func(x) {
@@ -98,12 +124,12 @@ var RMU = {
 		m.text_val = ["comFreq","navFreq","comStby", "navStby",
 										"trspCode","trspMode","trspNum","adfFreq","adfMode",
 										"memCom","memNav","comNum","navNum","adfNum","mlsNum",
-										"full","ident"];
+										"full","ident","dmeFreq","dmeId","dmeHold","tacChan"];
 		foreach(var i;m.text_val) {
 			m.text[i] = m.group.getElementById(i);
 		}
 
-    if (getprop("/sim/version/flightgear") != "2017.4.0") { # bug with 2017.4.0
+#    if (getprop("/sim/version/flightgear") != "2017.4.0") { # bug with 2017.4.0
       var info = airportinfo(getprop("/autopilot/route-manager/departure/airport"));
       var fcom = nil;
       if (size(info.comms()) > 0) {
@@ -122,7 +148,7 @@ var RMU = {
           setprop("instrumentation/comm/frequencies/selected-mhz",fcom);
         }
       }
-    }
+#    }
 
 		return m;
 	}, # end of new
@@ -170,6 +196,31 @@ var RMU = {
 	    navVec[x][i] = data[x].getValue(i);
     }
     
+    ### Dme Init ###
+    me.text.dmeFreq.hide();
+    me.text.dmeId.hide();
+    me.text.dmeHold.hide();
+    me.text.tacChan.hide();
+
+    ### Creating Tacan[1] ###
+    var src = props.globals.getNode("/instrumentation/tacan");
+    var dst = props.globals.getNode("/instrumentation/tacan[1]");
+    props.copy(src,dst);
+    
+    ### Init Tacan[0] ###   
+    var path = "instrumentation/tacan/frequencies/selected-channel[";
+    setprop(path~1~"]","0");
+    setprop(path~2~"]","9");
+    setprop(path~3~"]","9");
+    setprop(path~4~"]","X");
+
+    ### Init Tacan[1] ###   
+    path = "instrumentation/tacan[1]/frequencies/selected-channel[";
+    setprop(path~1~"]","0");
+    setprop(path~2~"]","7");
+    setprop(path~3~"]","1");
+    setprop(path~4~"]","X");
+
   }, # end of init
 
 	listen : func(x) {
@@ -178,14 +229,14 @@ var RMU = {
 			if (n.getValue()) {
 				me.group.setVisible(0);
 				me.mem.setVisible(1);
-				if (getprop("instrumentation/rmu/unit["~x~"]/selected")==0){
+				if (getprop(rmu_sel[x])==0){
           var n = 0;
 					foreach(var i;com_mem) {
 						memVec[x].vector[n] = comVec[x][i];	
             n+=1;
   				}
         }
-				if (getprop("instrumentation/rmu/unit["~x~"]/selected")==1){
+				if (getprop(rmu_sel[x])==1){
           var n = 0;
 					foreach(var i;nav_mem) {
 						memVec[x].vector[n] = navVec[x][i];
@@ -204,18 +255,21 @@ var RMU = {
 			}
 		},0,1);
 
-		setlistener("instrumentation/rmu/unit["~x~"]/selected",func(n) {
-			if (n.getValue() == 0) {me.cdr.setTranslation(0,0)}
-			if (n.getValue() == 1) {me.cdr.setTranslation(325,0)}
-			if (n.getValue() == 2) {me.cdr.setTranslation(0,230)}
-			if (n.getValue() == 3) {me.cdr.setTranslation(325,230)}
-			if (n.getValue() == 4) {me.cdr.setTranslation(0,335)}
-			if (n.getValue() == 5) {me.cdr.setTranslation(325,335)}
-		},0,0);	
+		setlistener(rmu_sel[x],func(n) {
+			if (n.getValue() == 0) me.cdr.setTranslation(0,0);
+			if (n.getValue() == 1) {
+        if (dme[x] == 0) me.cdr.setTranslation(325,0);
+        else me.cdr.setTranslation(325,80);
+      }
+			if (n.getValue() == 2) me.cdr.setTranslation(0,230);
+			if (n.getValue() == 3) me.cdr.setTranslation(325,230);
+			if (n.getValue() == 4) me.cdr.setTranslation(0,335);
+			if (n.getValue() == 5) me.cdr.setTranslation(325,335);
+		},0,1);	
 
 		setlistener("instrumentation/comm["~x~"]/frequencies/selected-mhz", func(n) {
 			me.text.comFreq.setText(sprintf("%.3f",n.getValue()));
-		},0,1);
+		},0,0);
 
 		setlistener("instrumentation/comm["~x~"]/frequencies/standby-mhz", func(n) {
       me.freqLimits(x);
@@ -231,7 +285,7 @@ var RMU = {
 					}					
   			}
 			}
-		},0,1);
+		},0,0);
 
 		setlistener("instrumentation/rmu/unit["~x~"]/mem-com", func(n) {
 			var i = n.getValue();
@@ -248,11 +302,13 @@ var RMU = {
 					me.text.memCom.setText("MEMORY-"~sprintf("%d",1));
 				}
 			}
-		},0,1);
+		},0,0);
 
-		setlistener("instrumentation/nav["~x~"]/frequencies/selected-mhz", func(n) {
+		setlistener(nav_freq[x], func(n) {
 			me.text.navFreq.setText(sprintf("%.3f",n.getValue()));
-		},0,1);
+      if (dme[x] == 0) setprop(dme_freq[x],getprop(nav_freq[x]));     
+      else me.dmeDisplay(x,0);
+		},0,0);
 
 		setlistener("instrumentation/nav["~x~"]/frequencies/standby-mhz", func(n) {
       me.freqLimits(x);
@@ -268,7 +324,7 @@ var RMU = {
 					}					
 				}
 			}
-		},0,1);
+		},0,0);
 
 		setlistener("instrumentation/rmu/unit["~x~"]/mem-nav", func(n) {
 			var i = n.getValue();
@@ -285,11 +341,11 @@ var RMU = {
 					me.text.memNav.setText("MEMORY-"~sprintf("%d",1));
 				}
 			}
-		},0,1);
+		},0,0);
 
 		setlistener("instrumentation/rmu/unit["~x~"]/sto", func(n) {	
 			if (n.getValue()) {
-				if (getprop("instrumentation/rmu/unit["~x~"]/selected") == 0) {
+				if (getprop(rmu_sel[x]) == 0) {
 					if (comVec[x][com_mem[0]] == 0) {
 						comVec[x][com_mem[0]] = getprop("instrumentation/comm["~x~"]/frequencies/standby-mhz");
 						var name = data[x].getChild(com_mem[0]);
@@ -317,7 +373,7 @@ var RMU = {
 					}
 				}
 
-				if (getprop("instrumentation/rmu/unit["~x~"]/selected") == 1) {
+				if (getprop(rmu_sel[x]) == 1) {
 					if (navVec[x][nav_mem[0]] == 0) {
 						navVec[x][nav_mem[0]] = getprop("instrumentation/nav["~x~"]/frequencies/standby-mhz");
 						var name = data[x].getChild(nav_mem[0]);
@@ -352,7 +408,7 @@ var RMU = {
 					if (memVec[x].vector[11] == 0) {
             var mem_dsp = getprop("instrumentation/rmu/unit["~x~"]/mem-dsp");
             more = getprop("instrumentation/rmu/unit["~x~"]/more");
-						memVec[x].insert(mem_dsp+1+more,getprop("instrumentation/rmu/unit["~x~"]/selected") == 0 ? 117.975 : 108.000);
+						memVec[x].insert(mem_dsp+1+more,getprop(rmu_sel[x]) == 0 ? 117.975 : 108.000);
             if (mem_dsp == 5) {
               setprop("instrumentation/rmu/unit["~x~"]/more",6);
               mem_dsp = -1;
@@ -366,7 +422,7 @@ var RMU = {
 					}
 			} else {
 				me.ins.setColor(1,1,1);
-					if (getprop("instrumentation/rmu/unit["~x~"]/selected") == 0) {
+					if (getprop(rmu_sel[x]) == 0) {
 						for (var i=0;i<12;i+=1) {
 							comVec[x][com_mem[i]] = memVec[x].vector[i];
 							var name = data[x].getChild(com_mem[i]);
@@ -374,7 +430,7 @@ var RMU = {
 							io.write_properties(memPath[x],data[x]);
 						}										
 					}
-				if (getprop("instrumentation/rmu/unit["~x~"]/selected") == 1) {
+				if (getprop(rmu_sel[x]) == 1) {
 					for (var i=0;i<12;i+=1) {
 						navVec[x][nav_mem[i]]=memVec[x].vector[i];
 						var name = data[x].getChild(nav_mem[i]);
@@ -392,7 +448,7 @@ var RMU = {
 				memVec[x].vector[getprop("instrumentation/rmu/unit["~x~"]/mem-dsp")+more] = n.getValue();
 			}
 			
-		},0,1);
+		},0,0);
 
 		setlistener("instrumentation/rmu/unit["~x~"]/delete", func(n) {	
 			if (n.getValue()) {
@@ -400,7 +456,7 @@ var RMU = {
 					me.sel = getprop("instrumentation/rmu/unit["~x~"]/mem-dsp");
 					more = getprop("instrumentation/rmu/unit["~x~"]/more");
 					if (more == 6) {me.sel = me.sel+more}
-					if (getprop("instrumentation/rmu/unit["~x~"]/selected") == 0) {					
+					if (getprop(rmu_sel[x]) == 0) {					
 						memVec[x].remove(comVec[x][com_mem[me.sel]]);
 						memVec[x].insert(11,0);
 						for (var i=0;i<12;i+=1) {
@@ -410,7 +466,7 @@ var RMU = {
 							io.write_properties(memPath[x],data[x]);
 						}										
 					}
-					if (getprop("instrumentation/rmu/unit["~x~"]/selected") == 1) {					
+					if (getprop(rmu_sel[x]) == 1) {					
 						memVec[x].remove(navVec[x][nav_mem[me.sel]]);
 						memVec[x].insert(11,0);
 						for (var i=0;i<12;i+=1) {
@@ -424,15 +480,15 @@ var RMU = {
 					if (memVec[x].vector[0] == 0) {me.fra.hide()}
 				}
 			}
-		},0,1);
+		},0,0);
 
 		setlistener("instrumentation/adf["~x~"]/frequencies/selected-khz", func(n) {	
 			me.text.adfFreq.setText(sprintf("%d",n.getValue()));
-		},0,1);
+		},0,0);
 
 		setlistener("instrumentation/adf["~x~"]/mode", func(n) {	
 			me.text.adfMode.setText(n.getValue());
-		},0,1);
+		},0,0);
 
 		setlistener("instrumentation/transponder/unit["~x~"]/knob-mode", func(n) {
 			var mode = n.getValue();
@@ -449,11 +505,11 @@ var RMU = {
 			me.text.trspCode.setText(sprintf("%04d",n.getValue()));
 			setprop("instrumentation/transponder/id-code",n.getValue());
 			setprop("instrumentation/transponder/transmitted-id",n.getValue());
-		},0,1);
+		},0,0);
 
 		setlistener("instrumentation/transponder/unit["~x~"]/display-mode", func {	
 			me.trsp_mode(x);			
-		},0,1);
+		},0,0);
 
 		setlistener("instrumentation/transponder/ident", func() {	
       if (getprop("instrumentation/rmu/unit["~x~"]/btn-id")) {
@@ -485,7 +541,7 @@ var RMU = {
 
 		setlistener("instrumentation/rmu/trsp-num", func {	
 			me.trsp_mode(x);
-		},0,1);
+		},0,0);
 
 		setlistener("instrumentation/rmu/unit["~x~"]/test", func(n) {	
 			var p = 1;
@@ -515,6 +571,71 @@ var RMU = {
 				if (timerTst.isRunning) {timerTst.stop()}
 			}
 		},0,0);
+
+    ### Dme ###
+		setlistener("instrumentation/rmu/unit["~x~"]/dme", func(n) {	
+      if (n.getValue()) dme[x] +=1;
+      if (dme[x] == 3) dme[x] = 0;
+      setprop(dme_sel[x],dme[x]);
+    },0,0);
+
+		setlistener(dme_sel[x], func(n) {	
+      if (n.getValue() == 0) {
+        me.text.dmeFreq.hide();
+        me.text.dmeId.hide();
+        me.text.dmeHold.hide();
+        me.text.tacChan.hide();
+        me.text.navStby.show();
+        me.text.memNav.show();
+        setprop(rmu_sel[x],getprop(rmu_sel[x])); # To position the cdr
+        setprop(dme_freq[x],getprop(nav_freq[x]));
+        me.dmeDisplay(x,0);
+      }
+      if (n.getValue() == 1) {        
+        me.text.dmeFreq.show();
+        me.text.dmeId.show();
+        me.text.tacChan.hide();
+        me.text.navStby.hide();
+        me.text.memNav.hide();
+        setprop(rmu_sel[x],getprop(rmu_sel[x])); # to position the cdr
+        setprop(dme_freq[x],getprop(nav_freq[x]));
+        me.dmeDisplay(x,0);
+      }
+        ### Tacan
+      if (n.getValue() == 2) {        
+        me.text.dmeFreq.hide();
+        me.text.dmeId.show();
+        me.text.tacChan.show();
+        me.text.memNav.hide();
+        tacan[0] = "";
+        for (var i=0;i<2;i+=1) {
+          for (var j=1;j<5;j+=1) {
+            tacan[0] = tacan[0]~getprop("instrumentation/tacan["~i~"]/frequencies/selected-channel["~j~"]");
+          }
+          setprop("instrumentation/tacan["~i~"]/frequencies/selected-channel",tacan[0]);
+          tacan[0] = "";
+        }
+        me.tacFreq(x);
+        me.dmeDisplay(x,1);
+        setprop(dme_freq[x],getprop(tac_freq[x]));
+      }
+		},0,0);
+
+		setlistener(dme_freq[x], func(n) {	
+      if (dme_sel[x] == 2) me.dmeDisplay(x,1); # tacan
+      else me.dmeDisplay(x,0); # dme
+    },0,0);
+
+    setlistener("instrumentation/tacan["~x~"]/frequencies/selected-channel", func(n){
+      me.text.tacChan.setText(n.getValue());
+      me.tacFreq(x);
+      setprop(dme_freq[x],getprop(tac_freq[x]));
+    },0,0);
+
+		setlistener(nav_src, func(n) {	
+      if (dme_sel[x] == 2) me.dmeColor(x,1); # tacan
+      else me.dmeColor(x,0); # dme
+    },0,0);
 
 	}, # end of listen	
 
@@ -570,8 +691,8 @@ var RMU = {
 
 	update : func(x) { ### Memories runtime update ###
 		me.timer = maketimer(0.1,func() {
-			if (getprop("instrumentation/rmu/unit["~x~"]/selected")!=1) {me.tit.setText("Com 1")}
-			if (getprop("instrumentation/rmu/unit["~x~"]/selected")==1) {me.tit.setText("Nav 1")}
+			if (getprop(rmu_sel[x])!=1) {me.tit.setText("Com 1")}
+			if (getprop(rmu_sel[x])==1) {me.tit.setText("Nav 1")}
 			if (memVec[x].vector[6]==0) {
 				setprop("instrumentation/rmu/unit["~x~"]/more",0);
 			}
@@ -652,12 +773,12 @@ var RMU = {
 
   refreshMem : func(x) {	### Refresh memories ###
 	  var n = 0;
-	  if (getprop("instrumentation/rmu/unit["~x~"]/selected") != 1) {
+	  if (getprop(rmu_sel[x]) != 1) {
       memo = comVec[x];
       mem_1 = com_mem;
       var ref = "comm";
     }
-	  if (getprop("instrumentation/rmu/unit["~x~"]/selected") == 1) {
+	  if (getprop(rmu_sel[x]) == 1) {
       memo = navVec[x];
       mem_1 = nav_mem;
       var ref = "nav";
@@ -674,11 +795,11 @@ var RMU = {
 
   freqLimits : func(x) {
 	  var com_freq = "instrumentation/comm["~x~"]/frequencies/standby-mhz";
-	  var nav_freq = "instrumentation/nav["~x~"]/frequencies/standby-mhz";
+	  var nav_stby = "instrumentation/nav["~x~"]/frequencies/standby-mhz";
 	  if (getprop(com_freq)<117.975) {setprop(com_freq,117.975)}
 	  if (getprop(com_freq)>137.000) {setprop(com_freq,137.000)}
-	  if (getprop(nav_freq)<108.000) {setprop(nav_freq,108.000)}
-	  if (getprop(nav_freq)>117.950) {setprop(nav_freq,117.950)}
+	  if (getprop(nav_stby)<108.000) {setprop(nav_stby,108.000)}
+	  if (getprop(nav_stby)>117.950) {setprop(nav_stby,117.950)}
   },# end of freqLimits
 
   idCode : func(x) {
@@ -702,21 +823,109 @@ var RMU = {
 		setprop("instrumentation/transponder/unit["~x~"]/id-code[1]",diz);
 		setprop("instrumentation/transponder/unit["~x~"]/id-code[2]",cent);
 		setprop("instrumentation/transponder/unit["~x~"]/id-code",diz + (cent*100));
-	},
+	}, # end of idCode
+
+  dmeDisplay : func(x,dt) {
+    freq = dt ? getprop(tac_freq[x]) : getprop(dme_freq[x]);
+    if (left(getprop("/sim/version/flightgear"),4) < 2018) {
+      navaid = findNavaidByFrequency(freq/10);
+    } else navaid = findNavaidByFrequencyMHz(freq);
+    if (navaid != nil) {
+      nav_dme = navinfo('dme',navaid.id);
+      if (size(nav_dme) > 0) {
+        for (var i=0;i<size(nav_dme);i+=1) {
+          if (nav_dme[i].frequency == navaid.frequency) { 
+            if (dt) setprop(tac_id[x],navaid.id);
+            else setprop(dme_id[x],navaid.id);
+            break;
+          } 
+        }
+      } else if (dt) setprop(tac_id[x],"");
+        else setprop(dme_id[x],"");
+    } else if (dt) setprop(tac_id[x],"");
+      else setprop(dme_id[x],"");
+    if (dt) me.text.dmeId.setText(getprop(tac_id[x]));
+    else {
+      me.text.dmeFreq.setText(sprintf("%.3f",getprop(dme_freq[x])));
+      me.text.dmeId.setText(getprop(dme_id[x]));
+    }
+    if (sprintf("%.2f",freq) == sprintf("%.2f",getprop(nav_freq[x]))) {
+      me.text.dmeHold.hide();
+    } else if (getprop(dme_sel[x]) != 0) me.text.dmeHold.show();
+    me.dmeColor(x,dt);
+  }, # end of dmeDisplay
+
+  dmeColor : func (x,dt) {
+    var frq0 = dt ? getprop(tac_freq[0]) : getprop(dme_freq[0]);
+    var frq1 = dt ? getprop(tac_freq[1]) : getprop(dme_freq[1]);
+    frq0 = sprintf("%.3f",frq0);
+    frq1 = sprintf("%.3f",frq1);
+    me.text.dmeFreq.setColor(1,1,1);
+    me.text.tacChan.setColor(1,1,1);
+    if ((x and getprop(nav_src) == "NAV1") or (!x and getprop(nav_src) == "NAV2")) {
+      if (frq0 == frq1) {
+        me.text.dmeFreq.setColor(1,0.5,0.16);
+        me.text.tacChan.setColor(1,0.5,0.16);
+      }
+    }
+  }, # end of dmeColor
+
+  tacChannel : func(x,c,u) {
+    tacan[1] = getprop("instrumentation/tacan["~x~"]/frequencies/selected-channel[1]");
+    tacan[2] = getprop("instrumentation/tacan["~x~"]/frequencies/selected-channel[2]");
+    tacan[0] = tacan[1]~tacan[2];
+    tacan[0] = tacan[0] + c;
+    if (tacan[0] > 12) tacan[0] = 0;
+    if (tacan[0] < 0) tacan[0] = 12;
+    tacan[0] = sprintf("%02.0f",tacan[0]);
+    setprop("instrumentation/tacan["~x~"]/frequencies/selected-channel[1]",left(tacan[0],1));
+    setprop("instrumentation/tacan["~x~"]/frequencies/selected-channel[2]",right(tacan[0],1));
+    tacan[3] = getprop("instrumentation/tacan["~x~"]/frequencies/selected-channel[3]");
+    tacan[4] = getprop("instrumentation/tacan["~x~"]/frequencies/selected-channel[4]");
+    if (u == 1 and tacan[4] == "X") tacan[4] = "Y";
+    else if (u == 1 and tacan[4] == "Y") {tacan[3] = tacan[3] + 1;tacan[4] = "X"}
+    if (u == -1 and tacan[4] == "X") {tacan[3] = tacan[3] - 1;tacan[4] = "Y"}
+    else if (u == -1 and tacan[4] == "Y") tacan[4] = "X";
+    if (tacan[3] > 9) {tacan[3] = 0;tacan[4] = "X"}
+    if (tacan[3] < 0) {tacan[3] = 9;tacan[4] = "Y"}
+    if (tacan[0] == 0 and tacan[3] == 0) tacan[3] = 1;
+    setprop("instrumentation/tacan["~x~"]/frequencies/selected-channel[3]",sprintf("%.0f",tacan[3]));
+    setprop("instrumentation/tacan["~x~"]/frequencies/selected-channel[4]",tacan[4]);
+    setprop("instrumentation/tacan["~x~"]/frequencies/selected-channel",tacan[0]~tacan[3]~tacan[4]);
+  }, # end of tacChan
+
+  tacFreq : func(x) {
+      ### Convert channels in frequencies ###
+    tacan[0] = left(getprop("instrumentation/tacan["~x~"]/frequencies/selected-channel"),3);
+    tacan[4] = right(getprop("instrumentation/tacan["~x~"]/frequencies/selected-channel"),1);
+    if (tacan[4] == "X") {
+      tacan[0] = left(getprop("instrumentation/tacan["~x~"]/frequencies/selected-channel"),3);
+      if (tacan[0] < 17) tacan[0] = tacan[0]/10 + 134.3;
+      else if (tacan[0] < 60) tacan[0] =tacan[0]/10 + 106.3;
+      else if (tacan[0] < 70) tacan[0] = tacan[0]/10 + 127.3;
+      else if (tacan[0] < 126) tacan[0] = tacan[0]/10 + 105.3;
+    }
+    if (tacan[4] == "Y") {
+      if (tacan[0] < 17) tacan[0] = tacan[0]/10 + 134.35;
+      else if (tacan[0] < 60) tacan[0] = tacan[0]/10 + 106.35;
+      else if (tacan[0] < 70) tacan[0] = tacan[0]/10 + 127.35;
+      else if (tacan[0] < 126) tacan[0] = tacan[0]/10 + 105.35;
+    }
+    setprop(tac_freq[x],sprintf("%.3f",tacan[0]));
+  }, # end of tacFreq
 
 
 }; # end of RMU
 
+
 ###### Main #####
 var rmu_setl = setlistener("/sim/signals/fdm-initialized", func () {	
-	var rmu_L = RMU.new(0);
-  var rmu_R = RMU.new(1);
-  rmu_L.init(0);
-  rmu_R.init(1);
-	rmu_L.listen(0);
-	rmu_R.listen(1);
-  rmu_L.display(0);
-  rmu_R.display(1);
+  for (var x=0;x<2;x+=1) {
+    var rmu = RMU.new(x);
+    rmu.init(x);
+    rmu.listen(x);
+    rmu.display(x);
+  }
 removelistener(rmu_setl);
 },0,0);
 

@@ -207,6 +207,26 @@
         </offsets>
     </model>
 
+    <model>
+        <name>Audio1</name>
+        <path>Models/Instruments/Audio/Audio.xml</path>
+        <offsets>
+          <x-m>0.000</x-m>
+          <y-m>0.00</y-m>
+          <z-m>0.000</z-m>
+        </offsets>
+    </model>
+
+    <model>
+        <name>Audio2</name>
+        <path>Models/Instruments/Audio/Audio.xml</path>
+        <offsets>
+          <x-m>0.000</x-m>
+          <y-m>1.113</y-m>
+          <z-m>0.000</z-m>
+        </offsets>
+    </model>
+
 <!-- Annunciators -->
     <animation>
         <type>select</type>
@@ -281,9 +301,6 @@
         <object-name>mfdwx.btn</object-name>
         <object-name>norm.btn</object-name>
         <object-name>abn.btn</object-name>
-        <object-name>emer.btn</object-name>
-        <object-name>Emer.btnG</object-name>
-        <object-name>Emer.btnD</object-name>
         <object-name>skp.btn</object-name>
         <object-name>page.btn</object-name>
         <object-name>rcl.btn</object-name>
@@ -3810,48 +3827,6 @@
             </binding>
         </hovered>
    </animation>
-
-<!-- Audio -->
-
-    <animation>
-        <type>translate</type>
-        <object-name>Emer.btnG</object-name>	
-        <object-name>Emer.btnD</object-name>	
-        <property>instrumentation/rcu/emrg</property>
-				<factor>0.0027</factor>
-        <axis>
-            <x>-1</x>
-            <y>0</y>
-            <z>0</z>
-        </axis>
-    </animation>
-
-    <animation>
-        <type>pick</type>
-        <object-name>Emer.btnG</object-name>
-        <object-name>Emer.btnD</object-name>
-        <action>
-            <button>0</button>
-            <repeatable>false</repeatable>
-            <binding>
-              <command>property-toggle</command>
-	            <property>instrumentation/rcu/emrg</property>
-            </binding>
-						<binding>
-						    <command>property-toggle</command>
-						    <property>sim/sound/click</property>
-						</binding>
-		    </action>
-				<hovered>
-				    <binding>
-				        <command>set-tooltip</command>
-				        <tooltip-id>AudEmer</tooltip-id>
-				        <label>RCU emergency : %s</label>
-					      <property>instrumentation/rcu/emrg</property>
-				        <mapping>on-off</mapping>
-				    </binding>
-				</hovered>
-    </animation>
 
 <!-- DC850 -->
 
