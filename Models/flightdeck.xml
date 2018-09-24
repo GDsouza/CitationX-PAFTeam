@@ -108,6 +108,17 @@
         </offsets>
     </model>
 
+    <model>
+        <name>Yokes</name>
+        <path>Aircraft/CitationX/Models/Yokes.xml</path>
+        <offsets>
+            <x-m> 0.00 </x-m>
+            <y-m> 0.00 </y-m>
+            <z-m> 0.00</z-m>
+            <pitch-deg>0</pitch-deg>
+        </offsets>
+    </model>
+
     <animation>
         <type>select</type>
         <object-name>panel1</object-name>
@@ -121,7 +132,7 @@
 
     <animation>
         <type>rotate</type>
-        <object-name>L-yoke</object-name>
+        <object-name>L-Yoke</object-name>
         <property>controls/flight/aileron</property>
         <factor>-30</factor>
         <center>
@@ -138,8 +149,8 @@
 
     <animation>
         <type>rotate</type>
-        <object-name>L-manche-yoke</object-name>
-		    <object-name>L-yoke</object-name>
+        <object-name>L-LegYoke</object-name>
+		    <object-name>L-Yoke</object-name>
         <property>controls/flight/elevator</property>
         <factor>-4</factor>
         <center>
@@ -156,7 +167,7 @@
 
     <animation>
         <type>rotate</type>
-        <object-name>R-yoke</object-name>
+        <object-name>R-Yoke</object-name>
         <property>controls/flight/aileron</property>
         <factor>-30</factor>
         <center>
@@ -173,8 +184,8 @@
 
     <animation>
         <type>rotate</type>
-        <object-name>R-manche-yoke</object-name>
-		    <object-name>R-yoke</object-name>
+        <object-name>R-LegYoke</object-name>
+		    <object-name>R-Yoke</object-name>
         <property>controls/flight/elevator</property>
         <factor>-4</factor>
         <center>
@@ -191,8 +202,8 @@
 
 	<animation>
 		<type>select</type>
-				<object-name>L-manche-yoke</object-name>
-				<object-name>L-yoke</object-name>
+				<object-name>L-LegYoke</object-name>
+				<object-name>L-Yoke</object-name>
 		<condition>
 				<property>sim/model/show-yoke_L</property>
 		</condition>
@@ -200,8 +211,8 @@
 
 	<animation>
    <type>select</type>
-        <object-name>R-manche-yoke</object-name>
-		    <object-name>R-yoke</object-name>
+        <object-name>R-LegYoke</object-name>
+		    <object-name>R-Yoke</object-name>
    <condition>
        <property>sim/model/show-yoke_R</property>
    </condition>
@@ -209,8 +220,8 @@
 
  <animation>
    <type>pick</type>
-        <object-name>L-manche-yoke</object-name>
-		    <object-name>L-yoke</object-name>
+        <object-name>L-LegYoke</object-name>
+		    <object-name>L-Yoke</object-name>
    <visible>true</visible>
    <action>
      <button>0</button>
@@ -236,8 +247,8 @@
 
  <animation>
    <type>pick</type>
-        <object-name>R-manche-yoke</object-name>
-		    <object-name>R-yoke</object-name>
+        <object-name>R-LegYoke</object-name>
+		    <object-name>R-Yoke</object-name>
    <visible>true</visible>
    <action>
      <button>0</button>
@@ -263,7 +274,8 @@
 
  <animation>
    <type>pick</type>
-   <object-name>base-pied-yoke</object-name>
+   <object-name>L-BaseYoke</object-name>
+   <object-name>R-BaseYoke</object-name>
    <visible>true</visible>
    <action>
      <button>0</button>
@@ -368,7 +380,7 @@
 		</overlay>
 		<offsets>
 	    <x-m>-0.57713 </x-m>
-	    <y-m>-0.35988</y-m>
+	    <y-m>-0.37000</y-m>
 	    <z-m> 0.50333 </z-m>
 		</offsets>
   </model>
@@ -386,7 +398,7 @@
 			</overlay>
 			<offsets>
 	    	<x-m>-0.57713 </x-m>
-	    	<y-m> 0.38295</y-m>
+	    	<y-m> 0.38000</y-m>
 	    	<z-m> 0.50333 </z-m>
 			</offsets>
   </model>

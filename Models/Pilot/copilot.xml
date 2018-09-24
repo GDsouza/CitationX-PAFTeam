@@ -4,107 +4,22 @@
 
 	<path>pilot.ac</path>
 
-	<params>
-		<texture type="string">default.png</texture>
-		<head>
-			<roll-animation>
-				<property type="string">controls/flight/aileron</property>
-				<factor type="float">-10</factor>
-				<offset-deg type="float">0</offset-deg>
-				<min type="float">-10</min>
-				<max type="float">10</max>
-			</roll-animation>
-			<pitch-animation>
-				<property type="string">controls/flight/elevator</property>
-				<factor type="float">-15</factor>
-				<offset-deg type="float">0</offset-deg>
-				<min type="float">-15</min>
-				<max type="float">15</max>
-			</pitch-animation>
-			<yaw-animation>
-				<property type="string">controls/flight/rudder</property>
-				<factor type="float">-25</factor>
-				<offset-deg type="float">0</offset-deg>
-				<min type="float">-25</min>
-				<max type="float">25</max>
-			</yaw-animation>
-		</head>
-		<arms>
-			<roll-animation>
-				<property type="string">controls/flight/aileron</property>
-				<factor type="float">-7</factor>
-				<offset-deg type="float">0</offset-deg>
-				<min type="float">-15</min>
-				<max type="float">15</max>
-			</roll-animation>
-			<upper-animation>
-				<property type="string">controls/flight/elevator</property>
-				<factor type="float">10</factor>
-				<offset-deg type="float">-4</offset-deg>
-				<min type="float">-20</min>
-				<max type="float">20</max>
-			</upper-animation>
-			<lower-animation>
-				<property type="string">controls/flight/elevator</property>
-				<factor type="float">-20</factor>
-				<offset-deg type="float">8</offset-deg>
-				<min type="float">-15</min>
-				<max type="float">15</max>
-			</lower-animation>
-		</arms>
-		<legs>
-			<upper-animation>
-				<property type="string"></property>
-				<factor type="float">0</factor>
-				<offset-deg type="float">0</offset-deg>
-				<min type="float">0</min>
-				<max type="float">80</max>
-			</upper-animation>
-			<lower-animation>
-				<property type="string">controls/flight/rudder</property>
-				<factor type="float">0.05</factor>
-				<offset-deg type="float">0</offset-deg>
-				<min type="float">0</min>
-				<max type="float">10</max>
-			</lower-animation>
-		</legs>
-		<feet>
-			<leftfoot>
-				<property type="string">controls/gear/brake-left</property>
-				<factor type="float">1</factor>
-				<offset-deg type="float">0</offset-deg>
-				<min type="float">0</min>
-				<max type="float">1</max>
-			</leftfoot>
-			<rightfoot>
-				<property type="string">controls/gear/brake-right</property>
-				<factor type="float">1</factor>
-				<offset-deg type="float">0</offset-deg>
-				<min type="float">0</min>
-				<max type="float">1</max>
-			</rightfoot>
-		</feet>
-	</params>
-
 	<animation>
 		<type>range</type>
-		<min-m>0.90</min-m>
+		<min-m>0.80</min-m>
 		<max-m>500</max-m>
 	</animation>
 	<animation>
 		<type>material</type>
-		<texture alias="../../params/texture" />
+		<texture>default.png</texture>
 	</animation>
 
 	<!-- Head -->
 	<animation>
 		<type>rotate</type>
 		<object-name>Head</object-name>
-		<property alias="../../params/head/roll-animation/property" />
-		<factor alias="../../params/head/roll-animation/factor" />
-		<offset-deg alias="../../params/head/roll-animation/offset-deg" />
-		<min alias="../../params/head/roll-animation/min" />
-		<max alias="../../params/head/roll-animation/max" />
+		<property>controls/flight/aileron</property>
+		<factor>-10</factor>
 		<center>
 			<x-m>0.245</x-m>
 			<y-m>-0.01</y-m>
@@ -119,11 +34,8 @@
 	<animation>
 		<type>rotate</type>
 		<object-name>Head</object-name>
-		<property alias="../../params/head/pitch-animation/property" />
-		<factor alias="../../params/head/pitch-animation/factor" />
-		<offset-deg alias="../../params/head/pitch-animation/offset-deg" />
-		<min alias="../../params/head/pitch-animation/min" />
-		<max alias="../../params/head/pitch-animation/max" />
+		<property>controls/flight/elevator</property>
+		<factor>-15</factor>
 		<center>
 			<x-m>0.245</x-m>
 			<y-m>-0.01</y-m>
@@ -138,11 +50,8 @@
 	<animation>
 		<type>rotate</type>
 		<object-name>Head</object-name>
-		<property alias="../../params/head/yaw-animation/property" />
-		<factor alias="../../params/head/yaw-animation/factor" />
-		<offset-deg alias="../../params/head/yaw-animation/offset-deg" />
-		<min alias="../../params/head/yaw-animation/min" />
-		<max alias="../../params/head/yaw-animation/max" />
+		<property>controls/flight/rudder</property>
+		<factor>-25</factor>
 		<center>
 			<x-m>0.245</x-m>
 			<y-m>-0.01</y-m>
@@ -164,11 +73,9 @@
 		<object-name>RightUpperArm</object-name>
 		<object-name>RightLowerArm</object-name>
 		<object-name>RightHand</object-name>
-		<property alias="../../params/arms/upper-animation/property" />
-		<factor alias="../../params/arms/upper-animation/factor" />
-		<offset-deg alias="../../params/arms/upper-animation/offset-deg" />
-		<min alias="../../params/arms/upper-animation/min" />
-		<max alias="../../params/arms/upper-animation/max" />
+		<property>controls/flight/elevator</property>
+		<factor>10</factor>
+		<offset-deg>-4</offset-deg>
 		<axis>
 			<x>0</x>
 			<y>1</y>
@@ -180,17 +87,16 @@
 			<z-m>0.305</z-m>
 		</center>
 	</animation>
+
 	<animation>
 		<type>rotate</type>
 		<object-name>LeftLowerArm</object-name>
 		<object-name>LeftHand</object-name>
 		<object-name>RightLowerArm</object-name>
 		<object-name>RightHand</object-name>
-		<property alias="../../params/arms/lower-animation/property" />
-		<factor alias="../../params/arms/lower-animation/factor" />
-		<offset-deg alias="../../params/arms/lower-animation/offset-deg" />
-		<min alias="../../params/arms/lower-animation/min" />
-		<max alias="../../params/arms/lower-animation/max" />
+		<property>controls/flight/elevator</property>
+		<factor>-20</factor>
+		<offset-deg>8</offset-deg>
 		<axis>
 			<x>0</x>
 			<y>1</y>
@@ -205,26 +111,67 @@
 
 	<animation>
 		<type>rotate</type>
-		<object-name>LeftLowerArm</object-name>
 		<object-name>LeftHand</object-name>
-		<object-name>RightLowerArm</object-name>
+		<object-name>LeftLowerArm</object-name>
+		<property>controls/flight/aileron</property>
+		<factor>35</factor>
+		<axis>
+			<x1-m>0.10</x1-m>
+			<y1-m>-0.2282</y1-m>
+			<z1-m>0.1015</z1-m>
+			<x2-m>-1</x2-m>
+			<y2-m>0.38</y2-m>
+			<z2-m>-0.07</z2-m>
+		</axis>
+	</animation> 
+
+	<animation>
+    <condition>
+      <greater-than>
+        <property>controls/flight/aileron</property>
+        <value>0</value>
+      </greater-than>
+    </condition>
+		<type>translate</type>
+		<object-name>LeftHand</object-name>
+		<object-name>LeftLowerArm</object-name>
+		<property>controls/flight/aileron</property>
+		<factor>0.035</factor>
+		<axis>
+			<x>-1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
 		<object-name>RightHand</object-name>
-		<property alias="../../params/arms/roll-animation/property" />
-		<factor alias="../../params/arms/roll-animation/factor" />
-		<offset-deg alias="../../params/arms/roll-animation/offset-deg" />
-		<min alias="../../params/arms/roll-animation/min" />
-		<max alias="../../params/arms/roll-animation/max" />
-		<center>
-			<x-m>0.06</x-m>
-			<y-m>0</y-m>
-			<z-m>0</z-m>
-		</center>
+		<object-name>RightLowerArm</object-name>
+		<property>controls/flight/aileron</property>
+		<factor>35</factor>
+		<axis>
+			<x1-m>0.10</x1-m>
+			<y1-m>0.2282</y1-m>
+			<z1-m>0.1015</z1-m>
+			<x2-m>-1</x2-m>
+			<y2-m>-0.38</y2-m>
+			<z2-m>-0.07</z2-m>
+		</axis>
+	</animation> 
+
+	<animation>
+		<type>translate</type>
+		<object-name>RightHand</object-name>
+		<object-name>RightLowerArm</object-name>
+		<property>controls/flight/aileron</property>
+		<factor>0.022</factor>
 		<axis>
 			<x>1</x>
 			<y>0</y>
-			<z>1</z>
+			<z>0</z>
 		</axis>
-	</animation> 
+	</animation>
 
 	<!-- Legs -->
 
@@ -232,11 +179,8 @@
 		<type>translate</type>
 		<object-name>LeftLowerLeg</object-name>
 		<object-name>LeftFoot</object-name>
-		<property alias="../../params/legs/lower-animation/property" />
-		<factor alias="../../params/legs/lower-animation/factor" />
-		<offset-deg alias="../../params/legs/lower-animation/offset-deg" />
-		<min alias="../../params/legs/lower-animation/min" />
-		<max alias="../../params/legs/lower-animation/max" />
+		<property>controls/flight/rudder</property>
+		<factor>0.05</factor>
 		<axis>
 			<x>1</x>
 			<y>0</y>
@@ -248,11 +192,8 @@
 		<type>translate</type>
 		<object-name>RightLowerLeg</object-name>
 		<object-name>RightFoot</object-name>
-		<property alias="../../params/legs/lower-animation/property" />
-		<factor alias="../../params/legs/lower-animation/factor" />
-		<offset-deg alias="../../params/legs/lower-animation/offset-deg" />
-		<min alias="../../params/legs/lower-animation/min" />
-		<max alias="../../params/legs/lower-animation/max" />
+		<property>controls/flight/rudder</property>
+		<factor>0.05</factor>
 		<axis>
 			<x>-1</x>
 			<y>0</y>
@@ -264,11 +205,8 @@
 	<animation>
 		<type>rotate</type>
 		<object-name>LeftFoot</object-name>
-		<property alias="../../params/feet/leftfoot/property" />
-		<factor alias="../../params/feet/leftfoot/factor" />
-		<offset-deg alias="../../params/feet/leftfoot/offset-deg" />
-		<min alias="../../params/feet/leftfoot/min" />
-		<max alias="../../params/feet/leftfoot/max" />
+		<property>controls/gear/brake-left</property>
+		<factor>1</factor>
 		<center>
 			<x-m>0.28</x-m>
 			<y-m>0</y-m>
@@ -284,11 +222,7 @@
 	<animation>
 		<type>rotate</type>
 		<object-name>RightFoot</object-name>
-		<property alias="../../params/feet/rightfoot/property" />
-		<factor alias="../../params/feet/rightfoot/factor" />
-		<offset-deg alias="../../params/feet/rightfoot/offset-deg" />
-		<min alias="../../params/feet/rightfoot/min" />
-		<max alias="../../params/feet/rightfoot/max" />
+		<property>controls/gear/brake-right</property>
 		<center>
 			<x-m>0.28</x-m>
 			<y-m>0</y-m>

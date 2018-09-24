@@ -25,29 +25,6 @@
         </unload>
     </nasal>
 
-  <!-- Multiplayer events -->
-  <nasal>
-    <load><![CDATA[
-	##############################################################################
-	# The on-load Nasal is not executed when this file is loaded as the user
-	# aircraft.
-	##############################################################################
-	var rplayer = cmdarg();
-
-	# Set up property aliases for animations.
-		rplayer.getNode("/systems/electrical/outputs/strobe", 1).alias(rplayer.getNode("sim/multiplay/generic/int[0]"));
-		rplayer.getNode("/systems/electrical/outputs/beacon", 1).alias(rplayer.getNode("sim/multiplay/generic/int[1]"));
-		rplayer.getNode("/systems/electrical/outputs/taxi-lights", 1).alias(rplayer.getNode("sim/multiplay/generic/int[2]"));
-		rplayer.getNode("/systems/electrical/outputs/landing-light[0]", 1).alias(rplayer.getNode("sim/multiplay/generic/int[3]"));
-		rplayer.getNode("/systems/electrical/outputs/landing-light[1]", 1).alias(rplayer.getNode("sim/multiplay/generic/int[4]"));
-		rplayer.getNode("/systems/electrical/outputs/recog-lights", 1).alias(rplayer.getNode("sim/multiplay/generic/int[5]"));
-		rplayer.getNode("/systems/electrical/outputs/nav-lights", 1).alias(rplayer.getNode("sim/multiplay/generic/int[6]"));
-		rplayer.getNode("/controls/cabin-door/position-norm", 1).alias(rplayer.getNode("sim/multiplay/generic/float[0]"));
-			rplayer.getNode("/surface-positions/speedbrake-pos-norm", 1).alias(rplayer.getNode("sim/multiplay/generic/float[1]"));
-		rplayer.getNode("/surface-positions/reverser-norm", 1).alias(rplayer.getNode("sim/multiplay/generic/float[2]"));
-    ]]></load>
-  </nasal>
-
     <animation>
       <type>material</type>
       <object-name>Engines</object-name>
@@ -106,7 +83,6 @@
       <object-name>UprReverser</object-name>
       <object-name>LwrReverser</object-name>
     </effect-->
-
 
     <model><!-- LH tail reg-->
         <path>Aircraft/CitationX/Models/registration.xml</path>
@@ -789,6 +765,96 @@
 
     <animation>
         <type>rotate</type>
+        <object-name>FrtStrut-2</object-name>
+        <property>gear/gear[0]/position-norm</property>
+        <interpolation>
+            <entry>
+                <ind>0.0</ind><dep>30.0</dep>
+            </entry>
+            <entry>
+                <ind>0.3</ind><dep>30.0</dep>
+            </entry>
+            <entry>
+                <ind>0.7</ind><dep>0.0</dep>
+            </entry>
+            <entry>
+                <ind>1.0</ind><dep>0.0</dep>
+            </entry>
+        </interpolation>
+        <center>
+            <x-m>-7.157</x-m>
+            <y-m> 0.000</y-m>
+            <z-m>-0.975</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>frtshock-2</object-name>
+        <property>gear/gear[0]/position-norm</property>
+        <interpolation>
+            <entry>
+                <ind>0.0</ind><dep>25.0</dep>
+            </entry>
+            <entry>
+                <ind>0.3</ind><dep>25.0</dep>
+            </entry>
+            <entry>
+                <ind>0.7</ind><dep>0.0</dep>
+            </entry>
+            <entry>
+                <ind>1.0</ind><dep>0.0</dep>
+            </entry>
+        </interpolation>
+        <center>
+            <x-m>-7.157</x-m>
+            <y-m> 0.000</y-m>
+            <z-m>-0.975</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>frtshock-2</object-name>
+        <property>gear/gear[0]/position-norm</property>
+        <interpolation>
+            <entry>
+                <ind>0.0</ind><dep>0.30</dep>
+            </entry>
+            <entry>
+                <ind>0.3</ind><dep>0.30</dep>
+            </entry>
+            <entry>
+                <ind>0.7</ind><dep>0.0</dep>
+            </entry>
+            <entry>
+                <ind>1.0</ind><dep>0.0</dep>
+            </entry>
+        </interpolation>
+        <center>
+            <x-m>-7.777</x-m>
+            <y-m> 0.000</y-m>
+            <z-m>-1.115</z-m>
+        </center>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
         <object-name>FrtStrut</object-name>
         <object-name>Nosewheel</object-name>
         <object-name>frtshock</object-name>
@@ -828,7 +894,7 @@
         <object-name>frtshock</object-name>
         <object-name>Nosewheel</object-name>
         <property>controls/gear/steering</property>
-        <factor>57.2958</factor> <!-- old 60 -->
+        <factor>100</factor> <!-- old 60 -->
         <center>
             <x-m>-8.149</x-m>
             <y-m>0</y-m>
@@ -988,7 +1054,7 @@
         <center>
             <x-m>0.122</x-m>
             <y-m>-1.354</y-m>
-            <z-m>-2.145</z-m>
+            <z-m>-2.134</z-m>
         </center>
         <axis>
             <x>0</x>
@@ -1128,7 +1194,7 @@
         <center>
             <x-m>0.122</x-m>
             <y-m>1.354</y-m>
-            <z-m>-2.145</z-m>
+            <z-m>-2.134</z-m>
         </center>
         <axis>
             <x>0</x>

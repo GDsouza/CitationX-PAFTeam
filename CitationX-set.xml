@@ -33,6 +33,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
     
     <startup>
         <splash-texture>Aircraft/CitationX/Splash.png</splash-texture>
+        <splash-texture>Aircraft/CitationX/Splash1.png</splash-texture>
     </startup>
 
     <tutorials>
@@ -44,7 +45,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 		<checklists include="Tutorials/checklists.xml"/>
 
     <model>
-        <path>Aircraft/CitationX/Models/Citation-X.xml</path>
+        <path>Aircraft/CitationX/Models/CitationX.xml</path>
         <livery>
             <file type="string">Blackstripes</file>
         </livery>
