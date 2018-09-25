@@ -5,7 +5,7 @@ kids 33
 OBJECT poly
 name "inph.knob"
 loc 0.006018 0.0720172 0.445512
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/interior.png"
+texture "interior.png"
 crease 50.000000
 numvert 29
 0.003175 0.0517313 0.052676
@@ -235,7 +235,7 @@ kids 0
 OBJECT poly
 name "nav2.knob"
 loc 0.006018 0.0720172 0.463631
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/interior.png"
+texture "interior.png"
 crease 50.000000
 numvert 29
 -0.003908 0.0497945 0.0559011
@@ -465,7 +465,7 @@ kids 0
 OBJECT poly
 name "nav1.knob"
 loc 0.006018 0.0720172 0.481427
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/interior.png"
+texture "interior.png"
 crease 50.000000
 numvert 29
 0.003175 0.0517313 0.052676
@@ -695,7 +695,7 @@ kids 0
 OBJECT poly
 name "hf1.knob"
 loc 0.006018 0.124819 0.571661
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/interior.png"
+texture "interior.png"
 crease 50.000000
 numvert 29
 0.003175 -0.00107057 -0.000125885
@@ -925,7 +925,7 @@ kids 0
 OBJECT poly
 name "hdph1.knob"
 loc 0.006018 0.124819 0.609021
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/interior.png"
+texture "interior.png"
 crease 50.000000
 numvert 29
 0.003175 -0.00107057 -0.000125885
@@ -1155,7 +1155,7 @@ kids 0
 OBJECT poly
 name "hdph2.knob"
 loc 0.006018 0.124819 0.589908
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/interior.png"
+texture "interior.png"
 crease 50.000000
 numvert 29
 -0.003908 -0.0030073 0.00309926
@@ -1384,7 +1384,7 @@ refs 3
 kids 0
 OBJECT poly
 name "Emer.btn"
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/interior.png"
+texture "interior.png"
 crease 30.000002
 numvert 40
 0.002282 0.144406 0.492258
@@ -1603,7 +1603,7 @@ kids 0
 OBJECT poly
 name "Emer.btn-On"
 loc 3.03388e-05 0 0
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/interior.png"
+texture "interior.png"
 crease 30.000002
 numvert 4
 0.00499473 0.142791 0.499887
@@ -1622,7 +1622,7 @@ kids 0
 OBJECT poly
 name "cabin.btn"
 loc 0 0 0.0185845
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/interior.png"
+texture "interior.png"
 crease 30.000002
 numvert 40
 0.00499473 0.142791 0.499887
@@ -1841,7 +1841,7 @@ kids 0
 OBJECT poly
 name "cabin.btn-On"
 loc 3.03388e-05 0 0.0185845
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/interior.png"
+texture "interior.png"
 crease 30.000002
 numvert 4
 0.00499473 0.142791 0.493572
@@ -1860,7 +1860,7 @@ kids 0
 OBJECT poly
 name "com1.btn"
 loc 0 0 0.112202
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/interior.png"
+texture "interior.png"
 crease 30.000002
 numvert 40
 0.002282 0.144406 0.492258
@@ -2079,7 +2079,7 @@ kids 0
 OBJECT poly
 name "com1.btn-On"
 loc 3.03388e-05 0 0.112202
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/interior.png"
+texture "interior.png"
 crease 30.000002
 numvert 4
 0.00499473 0.142791 0.499887
@@ -2098,7 +2098,7 @@ kids 0
 OBJECT poly
 name "com2.btn"
 loc 0 0 0.092969
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/interior.png"
+texture "interior.png"
 crease 30.000002
 numvert 40
 0.00499473 0.142791 0.499887
@@ -2317,7 +2317,7 @@ kids 0
 OBJECT poly
 name "com2.btn-On"
 loc 3.03388e-05 0 0.092969
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/interior.png"
+texture "interior.png"
 crease 30.000002
 numvert 4
 0.00499473 0.142791 0.493572
@@ -2338,7 +2338,7 @@ name "hdph.knob"
 loc 0.009051 0.0867447 0.507418
 data 9
 hdph.knob
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/interior.png"
+texture "interior.png"
 crease 50.000000
 numvert 31
 0.006023 -0.000859119 -8.69632e-05
@@ -2578,7 +2578,7 @@ kids 0
 OBJECT poly
 name "hf1.btn"
 loc 0 0 0.0745829
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/interior.png"
+texture "interior.png"
 crease 30.000002
 numvert 40
 0.002282 0.144406 0.492258
@@ -2797,7 +2797,7 @@ kids 0
 OBJECT poly
 name "hf1.btn-On"
 loc 3.03388e-05 0 0.0745829
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/interior.png"
+texture "interior.png"
 crease 30.000002
 numvert 4
 0.00499473 0.142791 0.499887
@@ -2818,7 +2818,7 @@ name "spkr.knob"
 loc 0.009051 0.086844 0.600361
 data 9
 spkr.knob
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/interior.png"
+texture "interior.png"
 crease 50.000000
 numvert 31
 0.006023 -0.000863001 2.80142e-05
@@ -3058,7 +3058,7 @@ kids 0
 OBJECT poly
 name "both.knob"
 loc 0.006018 0.0277301 0.420172
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/interior.png"
+texture "interior.png"
 crease 50.000000
 numvert 29
 -0.003908 0.0752164 0.0813229
@@ -3288,7 +3288,7 @@ kids 0
 OBJECT poly
 name "dme2.knob"
 loc 0.006018 0.040295 0.450859
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/interior.png"
+texture "interior.png"
 crease 50.000000
 numvert 29
 -0.003908 0.0625054 0.0686119
@@ -3518,7 +3518,7 @@ kids 0
 OBJECT poly
 name "dme1.knob"
 loc 0.006018 0.0530053 0.481546
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/interior.png"
+texture "interior.png"
 crease 50.000000
 numvert 29
 -0.003908 0.0497945 0.0559011
@@ -3748,7 +3748,7 @@ kids 0
 OBJECT poly
 name "adf2.knob"
 loc 0.006018 0.0665534 0.514254
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/interior.png"
+texture "interior.png"
 crease 50.000000
 numvert 29
 -0.003908 0.0362463 0.0423529
@@ -3978,7 +3978,7 @@ kids 0
 OBJECT poly
 name "adf1.knob"
 loc 0.006018 0.0795486 0.545626
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/interior.png"
+texture "interior.png"
 crease 50.000000
 numvert 29
 -0.003908 0.0232518 0.0293583
@@ -4208,7 +4208,7 @@ kids 0
 OBJECT poly
 name "com2.knob"
 loc 0.006018 0.0922483 0.576285
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/interior.png"
+texture "interior.png"
 crease 50.000000
 numvert 29
 -0.003908 0.0104256 0.0165307
@@ -4438,7 +4438,7 @@ kids 0
 OBJECT poly
 name "com1.knob"
 loc 0.006018 0.105807 0.609021
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/interior.png"
+texture "interior.png"
 crease 50.000000
 numvert 29
 -0.003908 -0.0030073 0.00309926
@@ -4668,7 +4668,7 @@ kids 0
 OBJECT poly
 name "mkr.knob"
 loc 0.006018 0.015188 0.479954
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/interior.png"
+texture "interior.png"
 crease 50.000000
 numvert 29
 -0.003908 0.0690497 0.0488575
@@ -4898,7 +4898,7 @@ kids 0
 OBJECT poly
 name "mute.btn"
 loc 0.006018 0.106515 0.608729
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/interior.png"
+texture "interior.png"
 crease 50.000000
 numvert 40
 0.003175 -0.014278 -0.065108
@@ -5206,7 +5206,7 @@ kids 0
 OBJECT poly
 name "mls2.knob"
 loc 0.006018 0.0414291 0.543307
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/interior.png"
+texture "interior.png"
 crease 50.000000
 numvert 29
 -0.003908 0.0428089 0.0226167
@@ -5436,7 +5436,7 @@ kids 0
 OBJECT poly
 name "mls1.knob"
 loc 0.006018 0.0544469 0.574734
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/interior.png"
+texture "interior.png"
 crease 50.000000
 numvert 29
 -0.003908 0.0297911 0.00959897
@@ -5666,7 +5666,7 @@ kids 0
 OBJECT poly
 name "audiopanel"
 loc 0.000667 0.152842 0.185404
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/interior.png"
+texture "interior.png"
 crease 45.000000
 numvert 4
 0.001217 -0.080216 0.443002
@@ -5691,7 +5691,7 @@ name "labels"
 loc 0 -0.00173295 0
 data 6
 labels
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/labels.png"
+texture "labels.png"
 crease 30.000002
 numvert 136
 0.002374 0.148891 0.613854
@@ -6075,7 +6075,7 @@ name "labels"
 loc 0 -0.00173295 0
 data 6
 labels
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/labels.png"
+texture "labels.png"
 crease 30.000002
 numvert 4
 0.002374 0.113283 0.503035
@@ -6096,7 +6096,7 @@ name "labels"
 loc 0 -0.00173295 0
 data 6
 labels
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/labels.png"
+texture "labels.png"
 crease 30.000002
 numvert 4
 0.002374 0.111074 0.505459
@@ -6117,7 +6117,7 @@ name "labels"
 loc 0 -0.00173295 0
 data 6
 labels
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/labels.png"
+texture "labels.png"
 crease 30.000002
 numvert 4
 0.002374 0.111074 0.49199
@@ -6138,7 +6138,7 @@ name "labels"
 loc 0 -0.00173295 0
 data 6
 labels
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/labels.png"
+texture "labels.png"
 crease 30.000002
 numvert 4
 0.002374 0.103961 0.509033
@@ -6159,7 +6159,7 @@ name "labels"
 loc 0 -0.00173295 0
 data 6
 labels
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/labels.png"
+texture "labels.png"
 crease 30.000002
 numvert 4
 0.002374 0.112025 0.491101
@@ -6180,7 +6180,7 @@ name "labels"
 loc 0 -0.00173295 0
 data 6
 labels
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/labels.png"
+texture "labels.png"
 crease 30.000002
 numvert 4
 0.002374 0.126615 0.595489
@@ -6201,7 +6201,7 @@ name "labels"
 loc 0 -0.00173295 0
 data 6
 labels
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/labels.png"
+texture "labels.png"
 crease 30.000002
 numvert 4
 0.002374 0.109533 0.60244
@@ -6222,7 +6222,7 @@ name "labels"
 loc 0 0.0173295 0
 data 6
 labels
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/labels.png"
+texture "labels.png"
 crease 30.000002
 numvert 4
 0.002374 0.10059 0.491101
@@ -6243,7 +6243,7 @@ name "labels"
 loc 0 -0.00173295 0
 data 6
 labels
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/labels.png"
+texture "labels.png"
 crease 30.000002
 numvert 4
 0.002374 0.08088 0.611976
@@ -6264,7 +6264,7 @@ name "labels"
 loc 0 -0.00173295 0
 data 6
 labels
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/labels.png"
+texture "labels.png"
 crease 30.000002
 numvert 4
 0.002374 0.0926306 0.4967
@@ -6282,7 +6282,7 @@ refs 4
 kids 0
 OBJECT poly
 name "audiolines"
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/interior.png"
+texture "interior.png"
 crease 30.000002
 numvert 52
 0.002374 0.094241 0.53729
@@ -6460,7 +6460,7 @@ refs 4
 kids 0
 OBJECT poly
 name "audiopanel.screws"
-texture "/home/chris/fg/My_Aircraft/CitationX/Models/interior.png"
+texture "interior.png"
 crease 30.000002
 numvert 80
 0.002142 0.089467 0.476913
