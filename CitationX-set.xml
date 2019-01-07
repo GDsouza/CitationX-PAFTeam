@@ -9,7 +9,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 <PropertyList>
   <sim>
     <description>Cessna Citation-X</description>
-    <author>Syd Adams, C. Le Moigne(clm76), C-Thiriot (PATTEN), PAF TEAM, Szymon Acedanski (accek)</author>
+    <author>Syd Adams, C. Le Moigne(clm76), C-Thiriot (PATTEN), Szymon Acedanski (accek) - F-ORKI</author>
     <status>devel</status>
     <rating>
         <FDM type="int">4</FDM>
@@ -20,7 +20,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
     <flight-model>yasim</flight-model>
     <aero>CitationX-yasim</aero>
 <!--    <fuel-fraction>0.65</fuel-fraction> -->
-    <minimum-fg-version>3.2</minimum-fg-version>
+    <minimum-fg-version>2018.3.0</minimum-fg-version>
     <tags>
         <tag>bizjet</tag>
         <tag>cessna</tag>
@@ -293,33 +293,49 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
         </weight>
 
     <menubar>
-        <default>
-            <menu n="10">
-                <label>Citation-X</label>
-                <enabled type="bool">true</enabled>
-                <item>
-                    <label>Autostart</label>
-                    <binding>
-                        <command>property-toggle</command>
-                        <property>sim/model/autostart</property>
-                    </binding>
-                </item>
-                <item>
-                    <label>Options</label>
-                    <binding>
-                        <command>nasal</command>
-                        <script>dialogs.options.open()</script>
-                    </binding>
-                </item>
-                <item>
-                    <label>Select Livery</label>
-                    <binding>
-                        <command>nasal</command>
-                        <script>aircraft.livery.dialog.toggle()</script>
-                    </binding>
-                </item>
-            </menu>
-        </default>
+      <default>
+        <menu n="10">
+          <label>Citation-X</label>
+          <enabled type="bool">true</enabled>
+          <item>
+            <label>Autostart</label>
+            <binding>
+              <command>property-toggle</command>
+              <property>sim/model/autostart</property>
+            </binding>
+          </item>
+          <item>
+            <label>Options</label>
+            <binding>
+              <command>nasal</command>
+              <script>dialogs.options.open()</script>
+            </binding>
+          </item>
+          <item>
+            <label>Select Livery</label>
+            <binding>
+                <command>nasal</command>
+                <script>aircraft.livery.dialog.toggle()</script>
+            </binding>
+          </item>
+          <item>
+  					<label>Ground Services Controls</label>
+		        <binding>
+      			  <command>nasal</command>
+      			  <script>var ground_services = gui.Dialog.new("sim/gui/dialogs/ground_services/dialog", "Aircraft/CitationX/Systems/ground_services-dlg.xml");
+			   ground_services.open();</script>
+      		  </binding>
+      	  </item>
+          <item>
+        	  <label>Fuel Truck Controls</label>
+	          <binding>
+	            <command>nasal</command>
+	            <script>var fuel_truck = gui.Dialog.new("sim/gui/dialogs/fuel_truck/dialog", "Aircraft/CitationX/Systems/fuel_truck.xml");
+					           fuel_truck.open();</script>
+	          </binding>
+          </item>
+        </menu>
+     </default>
     </menubar>
 
     <help>
@@ -609,7 +625,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 	      <et type="bool">0</et>
 	      <tcas type="bool">0</tcas>
 	      <acft-sys type="bool">0</acft-sys>
-	      <mfd-map type="bool">1</mfd-map>
+	      <mfd-map type="bool">0</mfd-map>
 	      <mfd-wx type="bool">0</mfd-wx>
 	      <norm type="bool">0</norm>
 	      <abn type="bool">0</abn>
@@ -738,7 +754,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
           <nav-type type="string"></nav-type>
           <nav-id type="string"></nav-id>
           <course-deflection type="double">0.0</course-deflection>
-          <gs-deflection type="double"></gs-deflection>
+          <gs-deflection type="double">0</gs-deflection>
           <in-range type="bool">0</in-range>
           <gs-in-range type="bool">0</gs-in-range>
           <stab-target type="double">0</stab-target>
@@ -795,7 +811,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 					<desc>Spoken ATC</desc>
 					<binding>
 					 <command>nasal</command>
-					 <script>atc.speak(15);</script>
+					 <script><![CDATA[spoken_atc.speak(15);]]></script>
 					</binding>
 				</key>
         <key n="62">
@@ -816,6 +832,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
         <file>Aircraft/CitationX/Nasal/Fuel.nas</file>
         <file>Aircraft/CitationX/Nasal/Flightdirector.nas</file>
 				<file>Aircraft/CitationX/Nasal/Warnings.nas</file>
+		    <file>Aircraft/CitationX/Nasal/GroundServices.nas</file>
       </citation>
 			<atc>
 				<file>Aircraft/CitationX/Nasal/Spoken_ATC/init.nas</file>

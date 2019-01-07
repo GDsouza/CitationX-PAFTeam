@@ -1,7 +1,6 @@
-##
 # See: http://wiki.flightgear.org/MapStructure
 # Class things:
-var name = 'APT-citation';
+var name = 'APT_cit';
 var parents = [DotSym];
 var __self__ = caller(0)[0];
 DotSym.makeinstance( name, __self__ );
@@ -23,9 +22,8 @@ var init = func {
 		.arcSmallCW(17,17,0,34,0)
 		.arcSmallCW(17,17,0,-34,0)
 		.close()
-		.setColor(style.icon_color)
-		.setStrokeLineWidth(style.line_width)
-		.setScale(style.scale_icon);
+		.setColor(style.color_default)
+		.setStrokeLineWidth(style.line_width);
 	}
 	var text = me.getLabelFromModel();
 	if(text == nil){
@@ -35,10 +33,12 @@ var init = func {
 		.setDrawMode( canvas.Text.TEXT )
 		.setTranslation(style.text_offset)
 		.setText(text)
-		.setFont("LiberationFonts/LiberationSans-Regular.ttf")
-		.setColor(style.font_color)
-		.setFontSize(style.label_font_size)
-		.setScale(style.scale_text);
+		.setFont("LiberationFonts/LiberationSans-Bold.ttf")
+		.setColor(style.label_font_color)
+		.setFontSize(style.label_font_size);
+
+	# FIXME: this applies scale to the whole group, better do this separately for each element?
+	me.element.setScale(style.scale_factor);
 };
 var draw = func;
 

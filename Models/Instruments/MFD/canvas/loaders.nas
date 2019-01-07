@@ -69,4 +69,47 @@ setlistener("/nasal/canvas/loaded", func() {
       }
   }
 
+  var RouteDriver = {
+      new: func(){
+          var m = {
+              parents: [RouteDriver],
+          };
+          m.init();
+          return m;
+      },
+      init: func(){
+          me.update();
+      },
+      update: func(){
+          me.flightplan = flightplan();
+      },
+      getNumberOfFlightPlans: func(){1},
+      getFlightPlanType: func(fpNum){'current'},
+      getFlightPlan: func(fpNum){me.flightplan},
+      getPlanSize: func(fpNum){me.flightplan.getPlanSize()},
+      getWP: func(fpNum, idx){me.flightplan.getWP(idx)},
+      getPlanModeWP: func(plan_wp_idx){me.flightplan.getWP(plan_wp_idx)},
+      hasDiscontinuity: func(fpNum, wptID){0},
+      getListeners: func(){[]},
+      shouldUpdate: func 1
+  };
+
+  # -----------------------------------------
+  # From FGDATA/Nasal/canvas/MapStructure.nas
+  # -----------------------------------------
+
+  var opt_member = func(h,k) {
+      if (contains(h, k)) return h[k];
+      if (contains(h, "parents")) {
+          var _=h.parents;
+          for (var i=0;i<size(_);i+=1){
+              var v = opt_member(_[i], k);
+              if (v != nil) return v;
+          }
+      }
+      return nil;
+  };
+
 },1);
+
+

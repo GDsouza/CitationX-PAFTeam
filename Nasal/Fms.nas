@@ -4,6 +4,7 @@
 ##########################################
 
 var almTod = nil;
+var altInd = nil;
 var altWP_curr = nil;
 var altWP_dist = nil;
 var altWP_next = nil;
@@ -21,6 +22,7 @@ var flag_wp = nil;
 var geoCoord = nil;
 var ind = nil;
 var leg_dist = nil;
+var tgAlt = nil;
 var tod_dist = nil;
 var tod = nil;
 var tot_dist = nil;
@@ -92,7 +94,7 @@ var FMS = {
 		m.nav_dist = "autopilot/internal/nav-distance";
 		m.NAVSRC = "autopilot/settings/nav-source";
     m.tas = "instrumentation/airspeed-indicator/true-speed-kt";
-		m.tg_alt = "autopilot/settings/tg-alt-ft";
+		m.tg_alt = "autopilot/settings/target-altitude-ft";
     m.tg_climb = "autopilot/internal/target-climb-rate-fps";
 		m.tg_spd_kt = "autopilot/settings/target-speed-kt";
 		m.tg_spd_mc = "autopilot/settings/target-speed-mc";
@@ -348,8 +350,10 @@ var FMS = {
             if (getprop(me.dist_rem) <= 9) citation.set_apr();
             else {
 #              if (getprop("autopilot/internal/gs-deflection") > -0.50 and me.gs_climb < 0) setprop(me.lock_gs,1);
-              if (me.gs_climb < 0) {
-#              if (me.gs_climb <= getprop(me.tg_climb)) {
+#              if (me.gs_climb < 0) {
+#print("352 gs_climb : ",me.gs_climb," - tg_climb : ",getprop(me.tg_climb));
+#print("353 lock_gs : ",getprop(me.lock_gs));
+              if (me.gs_climb <= getprop(me.tg_climb)) {
                 if (!getprop(me.lock_gs)) setprop(me.lock_gs,1);
               }
               if (getprop(me.lock_gs)) {
@@ -469,12 +473,23 @@ var FMS = {
 	}, # end of cruise_spd
 
   fps_lim : func(x) {  ### Descent fps limit ###
-    if (me.tod) me.dist = getprop(me.dist_rem)-v_tod[v_ind+1];
-    else {
-      if (x == 0) me.dist = getprop("autopilot/internal/nav-distance");
-      if (x == 1) me.dist = getprop("autopilot/route-manager/distance-remaining-nm") + 0.2;
+    if (me.tod) {
+      me.dist = getprop(me.dist_rem)-v_tod[v_ind+1];
+      altInd = getprop(me.alt_ind);
+      tgAlt = getprop(me.tg_alt);
+    } else {
+      if (x == 0) {
+        me.dist = getprop("autopilot/internal/nav-distance");
+        altInd = getprop(me.alt_ind);
+        tgAlt = getprop(me.tg_alt);
+      } else {
+        me.dist = getprop("autopilot/route-manager/distance-remaining-nm")+ 1;
+#        altInd = getprop("instrumentation/gps/indicated-altitude-ft");
+        altInd = getprop(me.alt_ind);
+        tgAlt = getprop(me.tg_alt);
+      }
     }
-    me.fps_limit = -(getprop(me.alt_ind)-getprop(me.tg_alt))/(me.dist/getprop(me.tas)*3600);
+    me.fps_limit = -(altInd-tgAlt)/(me.dist/getprop(me.tas)*3600);
     if (me.fps_limit > 0) me.fps_limit = -5;
     setprop("autopilot/settings/fps-limit",me.fps_limit);
   },# end of fps_lim

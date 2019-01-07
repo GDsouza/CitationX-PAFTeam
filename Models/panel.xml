@@ -283,8 +283,13 @@
         <object-name>FD.AP</object-name>
         <object-name>FD.PFDSEL</object-name>
         <object-name>FD.bank</object-name>
+        <object-name>FD.nose</object-name>
         <object-name>FMC.nav</object-name>
         <object-name>FMC.fms</object-name>
+        <object-name>FMC.knob1</object-name>
+        <object-name>FMC.knob2</object-name>
+        <object-name>FMC1.knob1</object-name>
+        <object-name>FMC1.knob2</object-name>
         <object-name>FMC1.nav</object-name>
         <object-name>FMC1.fms</object-name>
         <object-name>dau1.rev</object-name>
@@ -299,26 +304,50 @@
         <object-name>acftsys.btn</object-name>
         <object-name>mfdmap.btn</object-name>
         <object-name>mfdwx.btn</object-name>
-        <object-name>norm.btn</object-name>
+        <object-name>emer.btn</object-name>
+        <object-name>norm.pilot</object-name>
+        <object-name>norm.copilot</object-name>
         <object-name>abn.btn</object-name>
         <object-name>skp.btn</object-name>
         <object-name>page.btn</object-name>
+        <object-name>choose.L</object-name>
+        <object-name>choose.R</object-name>
         <object-name>rcl.btn</object-name>
         <object-name>ent.btn</object-name>
         <object-name>prev.btn</object-name>
-        <object-name>prev.btn.001</object-name>
+        <object-name>prev.btn1</object-name>
         <object-name>MFD.btn0</object-name>
         <object-name>MFD.btn1</object-name>
         <object-name>MFD.btn2</object-name>
         <object-name>MFD.btn3</object-name>
         <object-name>MFD.btn4</object-name>
         <object-name>MFD.btn5</object-name>
+        <object-name>MFD_L.knob</object-name>
+        <object-name>MFD_R.knob</object-name>
         <object-name>EICAS.btn0</object-name>
         <object-name>EICAS.btn1</object-name>
         <object-name>EICAS.btn2</object-name>
         <object-name>EICAS.btn3</object-name>
         <object-name>EICAS.btn4</object-name>
         <object-name>EICAS.btn5</object-name>
+        <object-name>EICAS.knob</object-name>
+        <object-name>eicas.display</object-name>
+        <object-name>sgrev.knob</object-name>
+        <object-name>LHstarter</object-name>
+        <object-name>RHstarter</object-name>
+        <object-name>Starter.diseng</object-name>
+        <object-name>PFD.ra-baro</object-name>
+        <object-name>PFD.std</object-name>
+        <object-name>PFD_L.minimums</object-name>
+        <object-name>PFD_L.baro</object-name>
+        <object-name>PFD_R.minimums</object-name>
+        <object-name>PFD_R.baro</object-name>
+        <object-name>brg0.knob</object-name>
+        <object-name>brg1.knob</object-name>
+        <object-name>brg2.knob</object-name>
+        <object-name>brg3.knob</object-name>
+        <object-name>Eng.fire</object-name>
+        <object-name>Bottle.armed</object-name>
         <condition>
 						<or>
 	           	<property>systems/electrical/left-emer-bus</property>
@@ -1112,6 +1141,60 @@
             <property>controls/engines/engine[1]/starter</property>
             </binding>
         </hovered>
+	</animation>
+
+	<animation>
+    <type>translate</type>
+    <object-name>Starter.diseng</object-name>
+    <property>controls/engines/disengage</property>
+		<factor>0.003</factor>
+    <axis>
+      <x>-1</x>
+      <y>0</y>
+      <z>-1</z>
+    </axis>
+  </animation>
+
+	<animation>
+    <type>pick</type>
+    <object-name>Starter.diseng</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+			<binding>
+     		<command>property-toggle</command>
+   			<property>controls/engines/disengage</property>
+			</binding>
+			<binding>
+     		<command>property-assign</command>
+     			<property>controls/engines/engine[0]/starter</property>
+     				<value>0</value>
+			</binding>
+			<binding>
+     		<command>property-assign</command>
+     			<property>controls/engines/engine[1]/starter</property>
+     				<value>0</value>
+			</binding>
+      <binding>
+          <command>property-toggle</command>
+          <property>sim/sound/click</property>
+      </binding>
+			<mod-up>
+				<binding>
+					<command>property-toggle</command>
+						<property>controls/engines/disengage</property>
+				</binding>
+			</mod-up>			
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>Engine-disengage</tooltip-id>
+        <label>Push to Disengage</label>
+        <mapping>on-off</mapping>
+        <property>controls/engines/disengage</property>
+      </binding>
+    </hovered>
 	</animation>
 
 <!-- IGNITION -->
@@ -3855,6 +3938,15 @@
           <property>sim/sound/click</property>
         </binding>
       </action>
+      <hovered>
+        <binding>
+          <command>set-tooltip</command>
+          <tooltip-id>pfdhsi.btn</tooltip-id>
+          <label>PFD HSI : %s</label>
+          <property>instrumentation/primus2000/dc840/pfd-hsi</property>
+          <mapping>on-off</mapping>
+        </binding>
+      </hovered>
     </animation>
 
     <animation>
@@ -3882,6 +3974,15 @@
           <property>sim/sound/click</property>
         </binding>
       </action>
+      <hovered>
+        <binding>
+          <command>set-tooltip</command>
+          <tooltip-id>pfdwx.btn</tooltip-id>
+          <label>PFD WEATHER : %s</label>
+          <property>instrumentation/primus2000/dc840/pfd-wx</property>
+          <mapping>on-off</mapping>
+        </binding>
+      </hovered>
     </animation>
 
     <animation>
@@ -3919,6 +4020,19 @@
 							</binding>
 						</mod-up>
         </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>et.btn</tooltip-id>
+                <label>ET : %s</label>
+	              <property>instrumentation/primus2000/dc840/etx</property>
+                <mapping>nasal</mapping>
+                <script>
+                  var modes = ['OFF','ON','STOP','RESET'];
+                  return modes[arg[0]];
+                </script>            
+            </binding>
+        </hovered>
     </animation>
 
     <animation>
@@ -3970,6 +4084,15 @@
             <property>sim/sound/click</property>
           </binding>
         </action>
+        <hovered>
+          <binding>
+            <command>set-tooltip</command>
+            <tooltip-id>tcas.btn</tooltip-id>
+            <label>TRAFIC : %s</label>
+            <property>instrumentation/efis/inputs/tfc</property>
+            <mapping>on-off</mapping>
+          </binding>
+        </hovered>
     </animation>
 
     <animation>
@@ -3998,6 +4121,15 @@
             <property>sim/sound/click</property>
           </binding>
         </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>acftsys.btn</tooltip-id>
+                <label>ACFT SYS : %s</label>
+	              <property>instrumentation/primus2000/dc840/acft</property>
+                <mapping>on-off</mapping>
+            </binding>
+        </hovered>
     </animation>
 
     <animation>
@@ -4018,12 +4150,6 @@
           <button>0</button>
           <repeatable>false</repeatable>
           <binding>
-              <command>property-cycle</command>
-              <property>instrumentation/efis/mfd/display-mode</property>
-							<value type="string">PLAN</value>
-							<value type="string">MAP</value>
-          </binding>
-          <binding>
               <command>property-toggle</command>
               <property>instrumentation/primus2000/dc840/mfd-map</property>
           </binding>
@@ -4032,6 +4158,19 @@
             <property>sim/sound/click</property>
           </binding>
        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>mfdmap.btn</tooltip-id>
+                <label>MFD : %s</label>
+	              <property>instrumentation/primus2000/dc840/mfd-map</property>
+                <mapping>nasal</mapping>
+                <script>
+                  var modes = ['PLAN', 'MAP'];
+                  return modes[arg[0]];
+                </script>            
+            </binding>
+        </hovered>
     </animation>
 
     <animation>
@@ -4077,6 +4216,15 @@
 						    <property>sim/sound/click</property>
 						</binding>
         </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>mfdwx.btn</tooltip-id>
+                <label>WEATHER RADAR: %s</label>
+	              <property>instrumentation/efis/inputs/wxr</property>
+                <mapping>on-off</mapping>
+            </binding>
+        </hovered>
     </animation>
 
 <!-- Checklists -->

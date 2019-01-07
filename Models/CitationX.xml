@@ -1821,4 +1821,116 @@
         </specular>
     </animation>
 
+    <!-- Fuel Truck -->
+
+    <model>
+      <name>fuel-truck</name>
+      <path>Aircraft/CitationX/Models/Services/Fuel-Truck/Fuel_Truck_Short_VolvoFM.ac</path>
+      <condition>
+        <and>
+          <property>/services/fuel-truck/enable</property>
+          <property>/gear/gear/wow</property>
+        </and>
+      </condition>
+      <offsets>
+        <x-m>0</x-m>
+        <y-m>0</y-m>
+        <z-m>0.3</z-m>
+      </offsets>
+    </model>
+    
+    <animation>
+      <type>select</type>
+      <object-name>fuel_pipe</object-name>
+      <condition>
+        <and>
+          <property>/services/fuel-truck/enable</property>
+          <property>/services/fuel-truck/connect</property>
+          <property>/gear/gear/wow</property>
+        </and>
+      </condition>
+    </animation>
+    
+    <animation>
+      <type>select</type>
+      <object-name>fuel_pipe_disconnected</object-name>
+      <condition>
+        <and>
+          <not>
+            <property>/services/fuel-truck/connect</property>
+          </not>
+          <not>
+            <property>/services/fuel-truck/enable</property>
+          </not>
+        </and>
+      </condition>
+    </animation>
+   
+    <!-- External Power -->
+    
+    <model>
+      <name>ext-pwr</name>
+      <path>Aircraft/CitationX/Models/Services/External-Power/ext-pwr-box.ac</path>
+      <condition>
+        <and>
+          <property>/services/ext-pwr/enable</property>
+          <property>/gear/gear/wow</property>
+        </and>
+      </condition>
+      <offsets>
+        <x-m>0</x-m>
+        <z-m>0.3</z-m>
+      </offsets>
+    </model>
+    
+    <!-- Chokes -->
+    
+    <model>
+      <name>choke_nose</name>
+      <path>Aircraft/CitationX/Models/Services/Chokes/choke.ac</path>
+      <condition>
+        <and>
+          <property>/services/chokes</property>
+          <property>/gear/gear/wow</property>
+        </and>
+      </condition>
+      <offsets>
+        <x-m>-8.1</x-m>
+        <y-m>0</y-m>
+        <z-m>-2.2</z-m>
+      </offsets>
+    </model>
+    
+    <model>
+      <name>choke_left</name>
+      <path>Aircraft/CitationX/Models/Services/Chokes/choke.ac</path>
+      <condition>
+        <and>
+          <property>/services/chokes</property>
+          <property>/gear/gear/wow</property>
+        </and>
+      </condition>
+      <offsets>
+        <x-m>0.27</x-m>
+        <y-m>-1.5</y-m>
+        <z-m>-2.2</z-m>
+      </offsets>
+    </model>
+    
+    <model>
+      <name>choke_right</name>
+      <path>Aircraft/CitationX/Models/Services/Chokes/choke.ac</path>
+      <condition>
+        <and>
+          <property>/services/chokes</property>
+          <property>/gear/gear/wow</property>
+        </and>
+      </condition>
+      <offsets>
+        <x-m>0.27</x-m>
+        <y-m>1.5</y-m>
+        <z-m>-2.2</z-m>
+      </offsets>
+    </model>
+
 </PropertyList>

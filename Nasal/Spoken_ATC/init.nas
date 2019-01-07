@@ -4,15 +4,18 @@
 # ** Copyright Rodolfo Leibner (rleibner@gmail.com) 2017 **
 # ** under GPL licence, see <http://www.gnu.org/licenses/>
 #
-# ** Adapted by Christian Le Moigne (clm76) - janv 2018    **
+# ** Adapted by Christian Le Moigne (clm76) - janv 2018, janv 2019  **
 
 
 var init = func {
   var root = getprop("/sim/fg-aircraft")~"/CitationX/Nasal/Spoken_ATC"; 
-  foreach(var f; ['atc_tools.nas','phraseology.nas', 'voice.nas']) {
-    io.load_nasal( root ~ "/" ~ f, "atc" );
+  foreach(var f; ['atc_tools.nas', 'voice.nas']) {
+    io.load_nasal( root ~ "/" ~ f, "spoken_atc" );
   };
-  io.read_properties(root ~ "/" ~"props.xml", "/instrumentation/comm/atc");
+
+  io.read_properties(root ~ "/" ~"addon-config.xml","");
+  io.read_properties(root ~ "/" ~"phraseology.xml", "/satc/phrases");
+  io.read_properties(root ~ "/" ~"except.apt.xml", "/satc/exceptions");
   print("Spoken ATC ... Ok");
 }
 

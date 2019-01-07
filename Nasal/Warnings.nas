@@ -273,7 +273,7 @@ var EICAS = {
 			stall_speed();
 
       ### Gear oversight ###
-      if ((me.flaps_sel == 4 or me.agl < 500) and !me.gear0 and !me.gear1 and !me.gear2) {
+      if ((me.flaps_sel == 4 or me.agl < 500) and !me.gear0 and !me.gear1 and !me.gear2 and getprop("velocities/vertical-speed-fps") <= 0) {
         setprop("instrumentation/alerts/gear-horn",1);
       } else setprop("instrumentation/alerts/gear-horn",0);
       

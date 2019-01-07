@@ -1,27 +1,37 @@
 ##
 ### Mfd-Wx radar for Citation X ###
-### C. Le Moigne (clm76) - 2016 ###
+### C. Le Moigne (clm76) - 2016, modified 2018 ###
 
-var old_scenario = getprop("/environment/weather-scenario");
+var range_nm = nil;
+var wx_listen = nil;
+var scenarioName = "/environment/weather-scenario";
+var mess_flag = nil;
 
 var mfd_wx = func(wx) {
-    # Clear any local weather that might be running
-    if (getprop("/nasal/local_weather/loaded")) local_weather.clear_all();
-
-    # Re-initialize local weather.
-    setprop("/nasal/local_weather/enabled", "true");
-		settimer( func {local_weather.set_tile();}, 0.2);
-
-	if (wx) {
-		var scenarioName = "Thunderstorm";
-    # General weather settings based on scenario
-		setprop( "/environment/params/metar-updates-environment", 1 );
-		setprop( "/environment/realwx/enabled", 0 );
-		setprop( "/environment/config/enabled", 1 );
-	}
-	else {
-		var scenarioName = old_scenario;
-	}
-	setprop("/environment/weather-scenario", scenarioName);
+    if (wx) {
+      mess_flag = 1;
+      wx_listen = setlistener(scenarioName,func {
+        if (getprop(scenarioName) != "Thunderstorm" 
+            and getprop(scenarioName) != "Stormy Monday"
+            and mess_flag) {
+              canvas.MessageBox.warning(
+                "Warning",
+                "Weather Engine must be on Detailed Weather and Weather Conditions must be Thunderstorm or Stormy Monday to emulate the Weather Radar",
+                func(sel) {
+                  if (sel == canvas.MessageBox.Ok) emul_range();
+                },
+              );
+        } else {mess_flag = 0;emul_range()}
+      },1,1);
+    } else {emul_range();mess_flag = 0;removelistener(wx_listen)}
 };
 
+var emul_range = func {
+  # To display storms, we must simulate a change of range
+  range_nm = getprop("instrumentation/efis/inputs/range-nm");
+  settimer(func {
+    setprop("instrumentation/efis/inputs/range-nm",range_nm*2);
+    range_nm = getprop("instrumentation/efis/inputs/range-nm");
+  },0.5);
+  settimer(func {setprop("instrumentation/efis/inputs/range-nm",range_nm/2);},1);
+};

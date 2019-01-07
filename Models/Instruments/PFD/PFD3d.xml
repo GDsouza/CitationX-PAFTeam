@@ -101,6 +101,8 @@
             <subtype>textranslate</subtype>
             <property>instrumentation/altimeter/indicated-altitude-ft</property>
             <interpolation>
+                <entry><ind>-5000.001</ind><dep>0.0</dep></entry>
+                <entry><ind>-5000.000</ind><dep>-0.750</dep></entry>
                 <entry><ind>0.0</ind><dep>0.0</dep></entry>
                 <entry><ind>5000.000</ind><dep>0.7570</dep></entry>
                 <entry><ind>5000.001</ind><dep>0.0</dep></entry>
@@ -137,6 +139,8 @@
             <subtype>textranslate</subtype>
             <property>instrumentation/altimeter/indicated-altitude-ft</property>
             <interpolation>
+                <entry><ind>-5000.001</ind><dep>-0.075</dep></entry>
+                <entry><ind>-5000.000</ind><dep>0.000</dep></entry>
                 <entry><ind>0.0</ind><dep>0.000</dep></entry>
                 <entry><ind>5000.000</ind><dep>0.000</dep></entry>
                 <entry><ind>5000.001</ind><dep>0.075</dep></entry>

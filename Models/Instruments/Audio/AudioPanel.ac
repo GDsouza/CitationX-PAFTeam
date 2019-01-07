@@ -1383,7 +1383,7 @@ refs 3
 27 0.524233 0.90319
 kids 0
 OBJECT poly
-name "Emer.btn"
+name "emer.btn"
 texture "interior.png"
 crease 30.000002
 numvert 40
@@ -1601,7 +1601,7 @@ refs 4
 37 0.688872 0.911419
 kids 0
 OBJECT poly
-name "Emer.btn-On"
+name "emer.btn-On"
 loc 3.03388e-05 0 0
 texture "interior.png"
 crease 30.000002

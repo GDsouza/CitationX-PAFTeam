@@ -1,6 +1,6 @@
 # See: http://wiki.flightgear.org/MapStructure
 # Class things:
-var name = 'WPT';
+var name = 'WPT_cit';
 var parents = [Symbol.Controller];
 var __self__ = caller(0)[0];
 Symbol.Controller.add(name, __self__);

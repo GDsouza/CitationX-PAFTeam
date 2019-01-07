@@ -9,11 +9,38 @@
 
   <animation>
     <type>material</type>
+    <object-name>com1.btn</object-name>
     <object-name>com1.btn-On</object-name>
+    <object-name>com2.btn</object-name>
     <object-name>com2.btn-On</object-name>
+    <object-name>hf1.btn</object-name>
     <object-name>hf1.btn-On</object-name>
+    <object-name>com1.btn</object-name>
+    <object-name>com2.btn</object-name>
+    <object-name>hf1.btn</object-name>
+    <object-name>cabin.btn</object-name>
     <object-name>cabin.btn-On</object-name>
+    <object-name>emer.btn</object-name>
     <object-name>emer.btn-On</object-name>
+    <object-name>hdph1.knob</object-name>
+    <object-name>hdph2.knob</object-name>
+    <object-name>hf1.knob</object-name>
+    <object-name>nav1.knob</object-name>
+    <object-name>nav2.knob</object-name>
+    <object-name>inph.knob</object-name>
+    <object-name>com1.knob</object-name>
+    <object-name>com2.knob</object-name>
+    <object-name>adf1.knob</object-name>
+    <object-name>adf2.knob</object-name>
+    <object-name>dme1.knob</object-name>
+    <object-name>dme2.knob</object-name>
+    <object-name>both.knob</object-name>
+    <object-name>spkr.knob</object-name>
+    <object-name>mls1.knob</object-name>
+    <object-name>mls2.knob</object-name>
+    <object-name>mute.btn</object-name>
+    <object-name>mkr.knob</object-name>
+    <object-name>hdph.knob</object-name>
     <condition>
 			<or>
        	<property>systems/electrical/left-emer-bus</property>
@@ -1190,7 +1217,7 @@
 
     <animation>
       <type>select</type>
-      <object-name>Emer.btn-On</object-name>	
+      <object-name>emer.btn-On</object-name>	
       <condition>
         <and>
           <greater-than>
@@ -1204,8 +1231,8 @@
 
     <animation>
         <type>translate</type>
-        <object-name>Emer.btn</object-name>	
-        <object-name>Emer.btn-On</object-name>	
+        <object-name>emer.btn</object-name>	
+        <object-name>emer.btn-On</object-name>	
         <property>instrumentation/audio/emrg1</property>
 				<factor>0.0027</factor>
         <axis>
@@ -1217,8 +1244,8 @@
 
     <animation>
         <type>pick</type>
-        <object-name>Emer.btn</object-name>
-        <object-name>Emer.btn_On</object-name>	
+        <object-name>emer.btn</object-name>
+        <object-name>emer.btn-On</object-name>	
         <action>
             <button>0</button>
             <repeatable>false</repeatable>

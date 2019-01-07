@@ -2,6 +2,7 @@
 ### C. Le Moigne (clm76) - 2016  ###
 
 
+var baro = props.globals.initNode("instrumentation/efis/inputs/baro-hpa",0,"BOOL");
 var menu_num = "instrumentation/primus2000/mfd/menu_num";
 var path = "instrumentation/primus2000/mfd/";
 var s_menu = "instrumentation/primus2000/mfd/s-menu";
@@ -91,7 +92,7 @@ var menu = func {
 	var fix = "instrumentation/efis/inputs/wpt";
 	var tcas = "instrumentation/primus2000/dc840/tcas";
 	var tcas_mode = "instrumentation/tcas/inputs/mode";
-  var baro = "instrumentation/efis/inputs/baro-hpa";
+#  var baro = "instrumentation/efis/inputs/baro-hpa";
   var alt_m = "instrumentation/efis/inputs/alt-meters";
 	var btn_0 = getprop("instrumentation/primus2000/mfd/btn0");
 	var btn_1 = getprop("instrumentation/primus2000/mfd/btn1");
@@ -123,14 +124,14 @@ var menu = func {
 		}
 
     if (getprop(s_menu)==1) {
-			if (getprop(baro)) {setprop(path,cdr[0],1)}	
+			if (baro.getValue()) {setprop(path,cdr[0],1)}	
 			else {setprop(path,cdr[0],0)}
 			if (getprop(alt_m)) {setprop(path,cdr[1],1)}	
 			else {setprop(path,cdr[1],0)}
 
 			if (btn_1) {
-					if (getprop(baro)) {setprop(baro,0);setprop(path,cdr[0],0)}
-					else {setprop(baro,1);setprop(path,cdr[0],1)}				
+					if (baro.getValue()) {baro.setValue(0);setprop(path,cdr[0],0)}
+					else {baro.setValue(1);setprop(path,cdr[0],1)}				
 			}
 			if (btn_2){
 					if (getprop(alt_m)) {setprop(alt_m,0);setprop(path,cdr[1],0)}

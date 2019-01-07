@@ -10,6 +10,8 @@ var SymbolLayer = canvas.SymbolLayer;
 var SingleSymbolLayer = canvas.SingleSymbolLayer;
 var MultiSymbolLayer = canvas.MultiSymbolLayer;
 var NavaidSymbolLayer = canvas.NavaidSymbolLayer;
+var OverlayLayer = canvas.OverlayLayer;
+var TileLayer = canvas.TileLayer;
 var Symbol = canvas.Symbol;
 var Group = canvas.Group;
 var Path = canvas.Path;
@@ -19,11 +21,9 @@ var SVGSymbol = canvas.SVGSymbol;
 var LineSymbol = canvas.LineSymbol;
 var StyleableCacheable = canvas.StyleableCacheable;
 var SymbolCache32x32 = canvas.SymbolCache32x32;
+var SymbolCache256x256 = canvas.SymbolCache256x256;
 var SymbolCache = canvas.SymbolCache;
 var Text = canvas.Text;
 
-io.include('nddisplay.nas');
-io.include('ndstyles.nas');
 io.include('loaders.nas');
-io.include('framework/canvas.nas');
-io.include('framework/MapDrivers.nas');
+

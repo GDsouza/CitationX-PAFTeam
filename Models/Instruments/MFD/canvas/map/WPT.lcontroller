@@ -1,7 +1,7 @@
 ##
 # See: http://wiki.flightgear.org/MapStructure
 # Class things:
-var name = 'WPT'; # for waypoints
+var name = 'WPT_cit'; # for waypoints
 var parents = [SymbolLayer.Controller];
 var __self__ = caller(0)[0];
 SymbolLayer.Controller.add(name, __self__);

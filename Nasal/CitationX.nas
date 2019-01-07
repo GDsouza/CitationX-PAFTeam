@@ -1,9 +1,23 @@
 ### Citation X ####
-### Révision C. Le Moigne (clm76) - 2015-2016  ###
+### Révision C. Le Moigne (clm76) - 2015,2016,2019  ###
 
+### Check FG version ###
+var checkVersion = func {
+  var version = split(".",getprop("sim/version/flightgear"));
+  if (version[0] < 2018) {
+    var window = screen.window.new(nil, -200, 5, 10);
+    var alert = ["Citation X is only supported in Flightgear version 2018 and upwards.", "Sorry !...",""];
+    window.bg = [1,1,0,1];
+    window.fg = [1,0,0,1];
+    window.font = "HELVETICA_18";
+    window.write("WRONG FLIGHTGEAR VERSION");
+    window.write(alert[0]);
+    window.write(alert[1]);
+    window.write(alert[2]);
+  }
+};
 
 ### tire rotation per minute by circumference ####
-#var tire=TireSpeed.new(# of gear,diam[0],diam[1],diam[2], ...);
 var TireSpeed = {
     new : func(number){
         m = { parents : [TireSpeed] };
@@ -52,11 +66,11 @@ var JetEngine = {
         m = { parents : [JetEngine]};
         m.fdensity = getprop("consumables/fuel/tank/density-ppg") or 6.72;
         m.eng = props.globals.getNode("engines/engine["~eng_num~"]",1);
+        m.cycle_up = props.globals.initNode("engines/engine["~eng_num~"]/cycle_up",0,"BOOL");
         m.running = m.eng.initNode("running",0,"BOOL");
         m.n1 = m.eng.getNode("n1",1);
         m.n2 = m.eng.getNode("n2",1);
         m.fan = m.eng.initNode("fan",0,"DOUBLE");
-        m.cycle_up = 0;
         m.engine_off=1;
         m.turbine = m.eng.initNode("turbine",0,"DOUBLE");
         m.throttle_lever = props.globals.initNode("controls/engines/engine["~eng_num~"]/throttle-lever",0,"DOUBLE");
@@ -88,11 +102,10 @@ var JetEngine = {
         }else{
             me.throttle_lever.setValue(0);
             if(me.starter.getBoolValue()){
-                if(me.cycle_up == 0)me.cycle_up=1;
+              if(!me.cycle_up.getValue()) me.cycle_up.setValue(1);
             }
-            if(me.cycle_up>0){
-                me.spool_up(15);
-            }else{
+            if(me.cycle_up.getValue()) me.spool_up(15);
+            else{
                 var tmprpm = me.fan.getValue();
                 if(tmprpm > 0.0){
                     tmprpm -= getprop("sim/time/delta-sec") * 2;
@@ -132,7 +145,7 @@ var JetEngine = {
 								var ign = 1+me.ignition.getValue();
 							} else {var ign=1-me.ignition.getValue()}
               me.cutoff.setBoolValue(ign);
-              me.cycle_up=0;
+              me.cycle_up.setValue(0);
             }
         }
     },
@@ -174,6 +187,7 @@ props.globals.initNode("controls/tables/table1/extend",0,"BOOL");
 props.globals.initNode("controls/tables/table2/extend",0,"BOOL");
 props.globals.initNode("controls/tables/table3/extend",0,"BOOL");
 props.globals.initNode("controls/tables/table4/extend",0,"BOOL");
+props.globals.initNode("controls/engines/disengage",0,"BOOL");
 props.globals.initNode("sim/model/pilot-seat",0,"DOUBLE");
 props.globals.initNode("sim/model/copilot-seat",0,"DOUBLE");
 props.globals.initNode("sim/alarms/overspeed-alarm",0,"BOOL");
@@ -318,6 +332,19 @@ setlistener("/sim/current-view/internal", func(cv) {
 setlistener("controls/flight/elevator-trim",func (n) {
     setprop("controls/flight/elevator-trim-calc",n.getValue()*6.6 - 5.4);
 },1,0);
+
+setlistener("controls/engines/disengage", func(n){
+	if(n.getBoolValue()){
+		if(LHeng.cycle_up.getBoolValue())	{
+			LHeng.cycle_up.setBoolValue(0);
+			LHeng.cutoff.setBoolValue(1);
+		}
+		if(RHeng.cycle_up.getBoolValue())	{
+			RHeng.cycle_up.setBoolValue(0);
+			RHeng.cutoff.setBoolValue(1);
+		}
+  }
+},0,0);
 
 ### Tables animation ###
 
@@ -622,6 +649,7 @@ var wspd = nil;
 var rudder_pos = nil;
 
 var citation_stl = setlistener("/sim/signals/fdm-initialized", func {
+    checkVersion();
     fdm_init();
     settimer(update_systems,2);
 		setprop("instrumentation/altimeter/setting-inhg",29.92001);

@@ -389,7 +389,7 @@ var show =  {
 #			me.winTitle(); 
 			me.noTerrain.hide();
 			me.terrain.show();
-			fgcommand("play-audio-sample", props.Node.new(me.alert));
+#			fgcommand("play-audio-sample", props.Node.new(me.alert));
 			}
 		}     
     var nodes = me.validNodes(range:me.maxX);

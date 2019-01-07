@@ -265,14 +265,14 @@ var set_nav_mode=func {
     if(left(NAVSRC,3)=="NAV"){
       if(NAVSRC=="NAV1") ind_nav = 0;
       if(NAVSRC=="NAV2") ind_nav = 1;
-			  if(getprop("instrumentation/nav["~ind_nav~"]/data-is-valid")){
-				  if(getprop("instrumentation/nav["~ind_nav~"]/nav-loc")) {
-					  setprop(Lateral_arm,"LOC");
-				  } else {
-					  setprop(Lateral_arm,"VOR");
-            setprop(Lateral,"HDG");
-          }
-			  }
+		  if(getprop("instrumentation/nav["~ind_nav~"]/data-is-valid")){
+			  if(getprop("instrumentation/nav["~ind_nav~"]/nav-loc")) {
+				  setprop(Lateral_arm,"LOC");
+			  } else {
+				  setprop(Lateral_arm,"VOR");
+          setprop(Lateral,"HDG");
+        }
+		  }
     } 
     if(left(NAVSRC,3)=="FMS"){
       if (getprop("autopilot/route-manager/active")) {
@@ -333,7 +333,7 @@ var set_roll = func{
 
 ### Alt Action ###
 var set_alt = func {
-		var n=(getprop("instrumentation/altimeter/mode-c-alt-ft"))*0.01;
+		var n=getprop("instrumentation/altimeter/mode-c-alt-ft")*0.01;
 		var m=int(n/10);
 		var p=(n/10)-m;
 		if (p>0 and p<0.5) {p=0.5;m=m+p}
@@ -502,10 +502,10 @@ var update_nav = func {
 			heading = getprop("orientation/heading-deg");
 			geocoord = geo.aircraft_position();
       if (dist_rem <= 10) {
-        if (getprop("autopilot/internal/gs-in-range")) {
-          setprop("autopilot/internal/course-offset",getprop("autopilot/internal/nav-heading-error-deg"));
-          setprop("autopilot/settings/tg-alt-ft",getprop("autopilot/route-manager/destination/field-elevation-ft"));
-        } else {
+#        if (getprop("autopilot/internal/gs-in-range")) {
+#          setprop("autopilot/settings/target-altitude-ft",getprop("autopilot/route-manager/destination/field-elevation-ft"));
+#        } else {
+        if (!getprop("autopilot/internal/gs-in-range")) {
           dstCoeff -= 0.001;
           if (dstCoeff <= 0.20) dstCoeff = 0.20;
           targetCourse = fp.pathGeod(-1, -dist_rem + dstCoeff);
@@ -520,8 +520,7 @@ var update_nav = func {
         targetCourse = fp.pathGeod(-1, -dist_rem + CourseError);
         courseCoord = geo.Coord.new().set_latlon(targetCourse.lat, targetCourse.lon);
         CourseError = geocoord.course_to(courseCoord) - heading;
-        if(CourseError < -180) CourseError += 360;
-        else if(CourseError > 180) CourseError -= 360;
+        CourseError = geo.normdeg180(CourseError);
 			  crs_set = geocoord.course_to(courseCoord);
 			  if (fp.current < 1) { # On ground and takeoff
 				  crs_offset= crs_set - heading;

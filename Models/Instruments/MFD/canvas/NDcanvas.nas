@@ -1,7 +1,9 @@
 ##
 ##### Citation X - Canvas NdDisplay #####
-##### Christian Le Moigne (clm76) - oct 2016 ###
+##### Christian Le Moigne (clm76) - oct 2016 - Nov 2018 ###
 
+var nasal_dir = getprop("/sim/aircraft-dir") ~ "/Models/Instruments/MFD/canvas";
+io.load_nasal(nasal_dir ~ '/NavMap.nas', "fgMap");
 io.include('init.nas');
 
 var placement_front = "ND.screen";
@@ -27,7 +29,6 @@ var nav_type = props.globals.getNode("autopilot/internal/nav-type");
 var hdg_ann = props.globals.getNode("autopilot/settings/heading-bug-deg");
 var mag_hdg = props.globals.getNode("orientation/heading-magnetic-deg");
 #var range = props.globals.getNode("instrumentation/nd/range");
-var map = props.globals.getNode("instrumentation/primus2000/dc840/mfd-map");
 var dist_rem = props.globals.getNode("autopilot/route-manager/distance-remaining-nm");
 var Wtot = nil;
 var Flaps = nil;
@@ -40,52 +41,13 @@ var vr_m = "controls/flight/vr";
 var v2_m = "controls/flight/v2";
 var vref_m = "controls/flight/vref";
 var va = "controls/flight/va";
-var nd_display = {};
-
-var myCockpit_switches = {
-'toggle_range':         {path: '/inputs/range-nm', value:20, type:'INT'},
-'toggle_weather':       {path: '/inputs/wxr', value:0, type:'BOOL'},
-'toggle_weather_live':  {path: '/mfd/wxr-live-enabled', value: 0, type: 'BOOL'},
-'toggle_airports':      {path: '/inputs/arpt', value:0, type:'BOOL'},
-'toggle_stations':      {path: '/inputs/sta', value:0, type:'BOOL'},
-'toggle_waypoints':     {path: '/inputs/wpt', value:0, type:'BOOL'},
-'toggle_position':      {path: '/inputs/pos', value:0, type:'BOOL'},
-'toggle_data':          {path: '/inputs/data',value:0, type:'BOOL'},
-'toggle_terrain':       {path: '/inputs/terr',value:0, type:'BOOL'},
-'toggle_traffic':       {path: '/inputs/tfc',value:0, type:'BOOL'},
-'toggle_centered':      {path: '/inputs/nd-centered',value:0, type:'BOOL'},
-'toggle_lh_vor_adf':    {path: '/inputs/lh-vor-adf',value:0, type:'INT'},
-'toggle_rh_vor_adf':    {path: '/inputs/rh-vor-adf',value:0, type:'INT'},
-'toggle_display_mode':  {path: '/mfd/display-mode', value:'MAP', type:'STRING'}, # valid values are: APP, MAP, PLAN or VOR
-'toggle_display_type':  {path: '/mfd/display-type', value:'LCD', type:'STRING'}, # valid values are: CRT or LCD
-'toggle_true_north':    {path: '/mfd/true-north', value:0, type:'BOOL'},
-'toggle_rangearc':      {path: '/mfd/rangearc', value:0, type:'BOOL'},
-'toggle_track_heading': {path: '/hdg-trk-selected', value:0, type:'BOOL'},
-'toggle_hdg_bug_only':  {path: '/hdg-bug-only', value:0, type:'BOOL'},
-'toggle_cruise_alt' : 	{path: '/cruise-alt', value: 100, type: 'DOUBLE'},
-'toggle_fp_active' :		{path: '/fp-active',value:0,type:'BOOL'},
-'toggle_alt_meters' :   {path: '/inputs/alt-meters',value:0,type:'BOOL'},
-'toggle_baro_hpa' :     {path: '/inputs/baro-hpa',value:0,type:'BOOL'},
-};
 
 var _list = setlistener("sim/signals/fdm-initialized", func {
-	var ND = NdDisplay;
-	var NDcpt_B = ND.new("instrumentation/efis", myCockpit_switches, "Citation");
+  fgMap.NavMap.new(); # To navMap.nas for background
 
-	nd_display.cpt_B = canvas.new({
-		  "name": "ND",
-		  "size": [1024,1024],
-		  "view": [900,1024],
-		  "mipmapping": 1
-	});
-	nd_display.cpt_B.addPlacement({"node": placement_back});
-	var group = nd_display.cpt_B.createGroup();
-	NDcpt_B.newMFD(group, nd_display.cpt_B);
-	NDcpt_B.update();
-
-	var MFD_canvas = {
+	var MFDDisplay = {
 		new: func() {
-			var m = {parents:[MFD_canvas]};
+			var m = {parents:[MFDDisplay]};
 			m.canvas = canvas.new({
 				"name": "MFD", 
 				"size": [1024, 1024],
@@ -149,8 +111,8 @@ var _list = setlistener("sim/signals/fdm-initialized", func {
 		}, # end of new
 
 		listen : func { 
-			setlistener("instrumentation/efis/mfd/display-mode", func(n) {
-				if (n.getValue() == "PLAN") me.design.trueNorth.show();
+			setlistener("instrumentation/primus2000/dc840/mfd-map", func(n) {
+				if (n.getValue()) me.design.trueNorth.show();
 				else me.design.trueNorth.hide();
 			},0,0);
 
@@ -359,10 +321,10 @@ var _list = setlistener("sim/signals/fdm-initialized", func {
 			}
 		}, # end of showRect
 
-	}; # end of MFD_canvas
+	}; # end of MFDDisplay
 
 ###### Main #####
-	var mfd = MFD_canvas.new();
+	var mfd = MFDDisplay.new();
 	mfd.listen();
 
 	var v_speed = func() {		

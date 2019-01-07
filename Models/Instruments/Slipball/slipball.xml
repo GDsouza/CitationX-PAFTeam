@@ -10,6 +10,13 @@ Author : C. Le Moigne (clm76) Feb 2018
     <animation>
         <type>material</type>
         <object-name>slip-ball</object-name>
+        <object-name>slip-glass</object-name>
+        <condition>
+					<or>
+           	<property>systems/electrical/left-emer-bus</property>
+           	<property>systems/electrical/left-bus-norm</property>
+					</or>
+        </condition>
         <emission>
             <red>1</red>
             <green>1</green>

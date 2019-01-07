@@ -45,6 +45,8 @@
       <type>material</type>
         <object-name>RIC2.crs</object-name>
         <object-name>RIC2.hdg</object-name>
+        <object-name>RIC2.alt</object-name>
+        <object-name>Contours-molettes</object-name>
         <condition>
 						<or>
 	           	<property>systems/electrical/left-emer-bus</property>

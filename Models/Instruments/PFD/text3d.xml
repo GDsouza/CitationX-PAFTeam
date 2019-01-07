@@ -112,7 +112,7 @@
         <alignment>right-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
         <type type="string">number-value</type>
-        <property>autopilot/settings/tg-alt-ft</property> -->
+        <property>autopilot/settings/target-altitude-ft</property> -->
         <format>%5.0f</format>
         <font>helvetica_bold.txf</font>
         <character-size>0.007</character-size>
@@ -127,10 +127,16 @@
         <type>select</type>
         <object-name>Valt-display</object-name>
         <condition>
-          <equals>
-            <property>autopilot/locks/altitude</property>
-            <value>VALT</value>
-          </equals>
+          <or>
+            <equals>
+              <property>autopilot/settings/nav-source</property>
+              <value>FMS1</value>
+            </equals>
+            <equals>
+              <property>autopilot/settings/nav-source</property>
+              <value>FMS2</value>
+            </equals>
+          </or>
         </condition>
     </animation>
 
@@ -560,6 +566,14 @@
       <type>select</type>
       <object-name>inhg</object-name>
       <condition>
+        <property>instrumentation/efis/inputs/baro-hpa</property>
+      </condition>
+    </animation>
+
+    <animation>
+      <type>select</type>
+      <object-name>hpa</object-name>
+      <condition>
         <not>
           <property>instrumentation/efis/inputs/baro-hpa</property>
         </not>
@@ -586,14 +600,6 @@
             <height type="int">64</height>
         </font-resolution>
     </text>
-
-    <animation>
-      <type>select</type>
-      <object-name>hpa</object-name>
-      <condition>
-        <property>instrumentation/efis/inputs/baro-hpa</property>
-      </condition>
-    </animation>
 
     <text>
         <name>ALT-annun</name>

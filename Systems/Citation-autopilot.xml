@@ -77,9 +77,7 @@
         </condition>
         <property>instrumentation/nav[1]/radials/target-auto-hdg-deg</property>
       </input>
-      <reference>
-          <property>orientation/heading-deg</property>
-      </reference>
+      <reference>orientation/heading-deg</reference>
       <output>autopilot/internal/nav-heading-error-deg</output>
       <period>
         <min>-180</min>
@@ -301,12 +299,12 @@
         <enable>
           <condition>
             <equals>
-		          <property>autopilot/locks/heading</property>
-		          <value>LOC</value>
+	            <property>autopilot/locks/heading</property>
+	            <value>LOC</value>
             </equals>
           </condition>
         </enable>
-				<input>autopilot/internal/nav-heading-error-deg</input> 
+        <input>autopilot/internal/nav-heading-error-deg</input>
         <reference>0.0</reference>
         <output>autopilot/internal/roll-filter</output>
         <config>
@@ -454,11 +452,49 @@
               <not>
                 <property>autopilot/locks/fms-gs</property>
               </not>
+              <not>
+                <property>autopilot/locks/fms-app</property>
+              </not>
             </and>
           </condition>
         </enable>
         <input>instrumentation/altimeter/indicated-altitude-ft</input>
-        <reference>autopilot/settings/tg-alt-ft</reference>
+        <reference>autopilot/settings/target-altitude-ft</reference>
+        <output>autopilot/internal/target-climb-rate-fps</output>
+        <config>
+            <Kp>0.25</Kp> <!--origin = 0.25-->
+            <beta>1.0</beta>
+            <alpha>0.1</alpha>
+            <gamma>0.0</gamma>
+            <Ti>10.0</Ti> <!-- origin 10.0 -->
+            <Td>0.000001</Td>
+            <min>
+              <property>autopilot/settings/fps-limit</property>
+            </min>
+            <max>70</max>
+        </config>
+    </pid-controller>
+
+    <pid-controller>
+        <name>Vapp</name>
+        <debug>false</debug>
+        <enable>
+          <condition>
+            <and>
+              <equals>
+                <property>autopilot/locks/altitude</property>
+                <value>VALT</value>
+              </equals>
+              <not>
+                <property>autopilot/locks/fms-gs</property>
+              </not>
+              <property>autopilot/locks/fms-app</property>
+            </and>
+          </condition>
+        </enable>
+        <input>instrumentation/altimeter/indicated-altitude-ft</input>
+<!--        <input>instrumentation/gps/indicated-altitude-ft</input>-->
+        <reference>autopilot/settings/target-altitude-ft</reference>
         <output>autopilot/internal/target-climb-rate-fps</output>
         <config>
             <Kp>0.25</Kp> <!--origin = 0.25-->
@@ -487,10 +523,10 @@
               <not>
                 <property>autopilot/locks/fms-gs</property>
               </not>
-              <not>
+<!--              <not>
                 <property>autopilot/locks/fms-app</property>
               </not>
-            </and>
+-->            </and>
           </condition>
         </enable>
         <input>velocities/vertical-speed-fps</input>
@@ -503,7 +539,7 @@
             <max>30</max>		<!-- origin 20 -->
         </config>
     </pi-simple-controller>
-
+<!--
     <pi-simple-controller>
         <name>Fms App</name>
         <debug>false</debug>
@@ -522,7 +558,10 @@
           </condition>
         </enable>
         <input>velocities/vertical-speed-fps</input>
-        <reference>autopilot/internal/target-climb-rate-fps</reference>
+        <reference>
+          <property>autopilot/internal/target-climb-rate-fps</property>
+          <scale>0.9</scale>
+        </reference>
         <output>autopilot/internal/pitch-filter</output>
         <config>
             <Kp>1.0</Kp> 
@@ -531,7 +570,7 @@
             <max>30</max>
         </config>
     </pi-simple-controller>
-
+-->
     <pid-controller>
         <name>Vertical Speed Hold</name>
         <debug>false</debug>
@@ -555,85 +594,85 @@
     </pid-controller>
 
     <pid-controller>
-        <name>flc kt</name>
-        <debug>false</debug>
-        <enable>
-            <condition>
-							<and>
-                <or>
-                    <equals>
-                        <property>/autopilot/locks/altitude</property>
-                        <value>FLC</value>
-                    </equals>
-                    <equals>
-                        <property>/autopilot/locks/altitude</property>
-                        <value>VFLC</value>
-                    </equals>
-                </or>
-								<less-than>
-									<property>instrumentation/altimeter/indicated-altitude-ft</property>								
-									<value>30650</value>
-								</less-than>
-							</and>
-            </condition>
-        </enable>
-        <input>instrumentation/airspeed-indicator/indicated-speed-kt</input>
-        <reference>autopilot/settings/target-speed-kt</reference>
-        <output>
-					<property>controls/engines/engine[0]/throttle</property>
-					<property>controls/engines/engine[1]/throttle</property>		
-        </output>
-        <config>
-            <Kp>0.05</Kp>
-            <beta>1.0</beta>
-            <alpha>0.1</alpha>
-            <gamma>0.0</gamma>
-            <Ti>10</Ti>
-            <Td>0.001</Td>
-            <min>0.20</min>
-            <max>0.99</max>
-        </config>
+      <name>flc kt</name>
+      <debug>false</debug>
+      <enable>
+        <condition>
+					<and>
+            <or>
+              <equals>
+                  <property>/autopilot/locks/altitude</property>
+                  <value>FLC</value>
+              </equals>
+              <equals>
+                  <property>/autopilot/locks/altitude</property>
+                  <value>VFLC</value>
+              </equals>
+            </or>
+						<less-than>
+							<property>instrumentation/altimeter/indicated-altitude-ft</property>								
+							<value>30650</value>
+						</less-than>
+					</and>
+        </condition>
+      </enable>
+      <input>instrumentation/airspeed-indicator/indicated-speed-kt</input>
+      <reference>autopilot/settings/target-speed-kt</reference>
+      <output>
+				<property>controls/engines/engine[0]/throttle</property>
+				<property>controls/engines/engine[1]/throttle</property>		
+      </output>
+      <config>
+        <Kp>0.05</Kp>
+        <beta>1.0</beta>
+        <alpha>0.1</alpha>
+        <gamma>0.0</gamma>
+        <Ti>10</Ti>
+        <Td>0.001</Td>
+        <min>0.20</min>
+        <max>0.99</max>
+      </config>
     </pid-controller>
 
     <pid-controller>
-        <name>flc mach</name>
-        <debug>false</debug>
-        <enable>
-            <condition>
-							<and>
-                <or>
-                    <equals>
-                        <property>/autopilot/locks/altitude</property>
-                        <value>FLC</value>
-                    </equals>
-                    <equals>
-                        <property>/autopilot/locks/altitude</property>
-                        <value>VFLC</value>
-                    </equals>
-                </or>
-								<greater-than-equals>
-									<property>instrumentation/altimeter/indicated-altitude-ft</property>								
-									<value>30650</value>
-								</greater-than-equals>
-							</and>
-            </condition>
-        </enable>
-        <input>instrumentation/airspeed-indicator/indicated-mach</input>
-        <reference>autopilot/settings/target-speed-mc</reference>
-        <output>
-					<property>controls/engines/engine[0]/throttle</property>
-					<property>controls/engines/engine[1]/throttle</property>		
-        </output>
-        <config>
-            <Kp>10</Kp> <!-- old 0.05 -->
-            <beta>1.0</beta>
-            <alpha>0.1</alpha>
-            <gamma>0.0</gamma>
-            <Ti>10</Ti>   <!-- old 10 -->
-            <Td>0.001</Td> <!-- old 0.001 -->
-            <min>0.20</min>
-            <max>0.99</max>
-        </config>
+      <name>flc mach</name>
+      <debug>false</debug>
+      <enable>
+        <condition>
+					<and>
+            <or>
+                <equals>
+                    <property>/autopilot/locks/altitude</property>
+                    <value>FLC</value>
+                </equals>
+                <equals>
+                    <property>/autopilot/locks/altitude</property>
+                    <value>VFLC</value>
+                </equals>
+            </or>
+						<greater-than-equals>
+							<property>instrumentation/altimeter/indicated-altitude-ft</property>								
+							<value>30650</value>
+						</greater-than-equals>
+					</and>
+        </condition>
+      </enable>
+      <input>instrumentation/airspeed-indicator/indicated-mach</input>
+      <reference>autopilot/settings/target-speed-mc</reference>
+      <output>
+				<property>controls/engines/engine[0]/throttle</property>
+				<property>controls/engines/engine[1]/throttle</property>		
+      </output>
+      <config>
+        <Kp>10</Kp> <!-- old 0.05 -->
+        <beta>1.0</beta>
+        <alpha>0.1</alpha>
+        <gamma>0.0</gamma>
+        <Ti>10</Ti>   <!-- old 10 -->
+        <Td>0.001</Td> <!-- old 0.001 -->
+        <min>0.20</min>
+        <max>0.99</max>
+      </config>
     </pid-controller>
 
     <pid-controller>
