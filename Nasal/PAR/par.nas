@@ -398,7 +398,7 @@ var show =  {
     if(size(nodes)){
       for(var i=1; i<size(nodes); i+=1) call(me.updateMark,[nodes[i]],me,err = []);
       if (size(err)) {
-		    print("Closing instrument");
+#		    print("Closing instrument");
 		    var instance = props.globals.getNode(sprintf('/instrumentation/par[%i]',me.n));
 		    if(instance !=nil) instance.remove();
 				if(me.bttn.getVisible()){

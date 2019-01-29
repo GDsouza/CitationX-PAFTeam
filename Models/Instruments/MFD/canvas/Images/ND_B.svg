@@ -13,7 +13,7 @@
    height="1024"
    width="900"
    sodipodi:docname="ND_B.svg"
-   inkscape:version="0.92.3 (unknown)">
+   inkscape:version="0.92.4 (unknown)">
   <sodipodi:namedview
      pagecolor="#000000"
      bordercolor="#666666"
@@ -28,8 +28,8 @@
      id="namedview75"
      showgrid="false"
      inkscape:zoom="0.46093749"
-     inkscape:cx="-347.79666"
-     inkscape:cy="576.20338"
+     inkscape:cx="-127.88578"
+     inkscape:cy="558.84744"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
@@ -445,4 +445,14 @@
        x="1.7595314"
        y="0.44008026" />
   </g>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:32px;line-height:125%;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;opacity:1;fill:#ff0000;fill-opacity:1;fill-rule:evenodd;stroke:#ff0000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     x="773.28815"
+     y="397.01694"
+     id="traffic"><tspan
+       sodipodi:role="line"
+       id="tspan78"
+       x="773.28815"
+       y="397.01694">TRAFFIC</tspan></text>
 </svg>

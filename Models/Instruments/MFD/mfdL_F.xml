@@ -1,0 +1,20 @@
+<!--
+Citation X - Navigation display
+-->
+
+<PropertyList>
+
+<path>screenL_F.ac</path>
+
+    <animation>
+        <type>select</type>
+        <object-name>screenL_F</object-name>
+        <condition>
+          <greater-than>
+	          <property>controls/electric/avionics-switch</property>
+            <value>0</value>
+          </greater-than>
+				</condition>
+    </animation>
+
+</PropertyList>

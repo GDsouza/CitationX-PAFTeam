@@ -426,7 +426,7 @@ var voices_prop = func {
 	  }
 
 	  if (page == 8) {   ### Before Takeoff ###
-		  if (getprop("instrumentation/primus2000/dc840/etx")==1) check.chk0 = 1;
+		  if (getprop("instrumentation/mfd/etx")==1) check.chk0 = 1;
 		  if (getprop("controls/flight/flaps-select")>1) check.chk1 = 1;
 		  if (!getprop("controls/flight/speedbrake")) check.chk2 = 1;
 		  if (!getprop("controls/lighting/taxi-lights")) check.chk3 = 1;
@@ -522,7 +522,7 @@ var voices_prop = func {
 		  if (getprop("controls/flight/flaps-select")==0) check.chk0 = 1;
 		  if (!getprop("controls/lighting/landing-light") or !getprop("controls/lighting/landing-light[1]")) check.chk1 = 1;
 		  if (getprop("controls/lighting/taxi-lights")) check.chk2 = 1;
-		  if (getprop("instrumentation/primus2000/dc840/etx")==2) check.chk3 = 1;
+		  if (getprop("instrumentation/mfd/etx")==2) check.chk3 = 1;
 		  check.chk4 = 1;
 	  }
 

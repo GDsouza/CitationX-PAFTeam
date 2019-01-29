@@ -59,10 +59,6 @@
 			</signal>
 		  <signal>
 		    <type>bool</type>
-				<property type="string">systems/electrical/outputs/avionics</property>
-		  </signal>
-		  <signal>
-		    <type>bool</type>
 				<property type="string">controls/electric/battery-switch</property>
 		  </signal>
 		  <signal>

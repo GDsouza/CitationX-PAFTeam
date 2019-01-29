@@ -14,15 +14,16 @@
 # You should have received a copy of the GNU General Public License
 # along with FlightGear.  If not, see <http://www.gnu.org/licenses/>.
 #
-#     Navigation map functions 
-#     Adapted to the Citation X by C. Le Moigne (clm76) on Déc 2018
+#   Navigation Map Functions 
+#   Adapted to the Citation X by C. Le Moigne (clm76) on Dec 2018 - jan 2019
 
 var nasal_dir = getprop("/sim/aircraft-dir") ~ "/Models/Instruments/MFD/canvas";
 io.load_nasal(nasal_dir ~ '/NavMapStyles.nas', "fgMap");
 io.include('init.nas');
 
 var hdg = "/orientation/heading-deg";
-var rangeNm = "instrumentation/efis/inputs/range-nm";
+var rangeNm = ["instrumentation/mfd/range-nm",
+               "instrumentation/mfd[1]/range-nm"];
 var Hdg = nil;
 var HdgBug = nil;
 var HdgVis = nil;
@@ -33,6 +34,8 @@ var AltRange = nil;
 var AltRangePx = nil;
 var Vspd = nil;
 var GndSpd = nil;
+var source = [nil,nil];
+var Tfc = [0,0];
 
 var NavMap = {
   # Lazy-loading - only create the map element when the page becomes visible,
@@ -65,10 +68,9 @@ var NavMap = {
     STAMEN  : { enabled: 1, declutter: 3, range: 500, max_range: 2000, static : 1, factory : canvas.OverlayLayer, priority : 1, vis :0},
   },
 
-  new : func() {
+  new : func(x) {
     var m = {parents : [NavMap],
       _center : [450,475], #old 450,475
-      _zindex : 0,
       _zoom : 20,
       _declutter : 0,
       _airways : 0,
@@ -76,21 +78,36 @@ var NavMap = {
       _plan : nil,
       _layerRanges : {},
       _static : 0,
-      _cdr0 : 0,
-      _cdr1 : 0,
-      _cdr2 : 0,
+      _cdr0 : [0,0],
+      _cdr1 : [0,0],
+      _cdr2 : [0,0],
       _source : 1,
-      _wxr : 0,
+      _wxr : [0,0],
+      _ndb : [0,0],
     };
-		m.canvas = canvas.new({
-			"name": "ND", 
-			"size": [1024, 1024],
-			"view": [900, 1024],
-			"mipmapping": 1 
-		});
-		m.canvas.addPlacement({"node": "Layers.screen"});
-  	m.nd = m.canvas.createGroup();
-		canvas.parsesvg(m.nd, get_local_path("Images/ND_B.svg"));
+
+    if (!x) {
+		  m.canvas = canvas.new({
+			  "name": "ND_L", 
+			  "size": [1024, 1024],
+			  "view": [900, 1024],
+			  "mipmapping": 1 
+		  });
+		  m.canvas.addPlacement({"node": "screenL_B"});
+    	m.nd = m.canvas.createGroup();
+		  canvas.parsesvg(m.nd, get_local_path("Images/ND_B.svg"));
+    } else {
+		  m.canvas = canvas.new({
+			  "name": "ND_R", 
+			  "size": [1024, 1024],
+			  "view": [900, 1024],
+			  "mipmapping": 1 
+		  });
+		  m.canvas.addPlacement({"node": "screenR_B"});
+    	m.nd = m.canvas.createGroup();
+		  canvas.parsesvg(m.nd, get_local_path("Images/ND_B.svg"));
+    }
+
     m.layer = {};
     m.layer_val = ["layerMap","layerPlan"];
 		foreach(var element;m.layer_val) {
@@ -100,8 +117,9 @@ var NavMap = {
     m.symbols = {};
 		foreach(var element;["hsi","compass","hdgIndex","hdgBug",
 				                "arrowL","arrowR","rangeL","rangeLtxt",
-									      "rangeR","rangeRtxt","hdgLine","tcas",
-										    "tcasLabel","tcasValue","tfcRangeInt","altArc"]) 
+									      "rangeR","rangeRtxt","hdgLine",
+										    "tcasLabel","tcasValue","tfcRangeInt",
+                        "altArc","traffic"]) 
 			m.symbols[element] = m.nd.getElementById(element);
 
     m.layer.layerMap.setTranslation(m._center[0], m._center[1]);
@@ -112,58 +130,36 @@ var NavMap = {
     }
 
     if (NavMap.LAZY_LOADING == 1) {
-      m.createMapElement();
-      m.animateSymbols();
+      m.createMapElement(x);
+      m.animateSymbols(x);
     }
-  
-    return m;
-  },
 
-  createMapElement : func() {
+    return m;
+  }, # end of new
+
+  createMapElement : func(x) {
     if (me._map != nil) return;
     me._map = me.layer.layerMap.createChild("map");
-    me._map.setScreenRange(277); # old 277
+    me._map.setScreenRange(277);
     me._plan = me.layer.layerPlan.createChild("map");
-    me._plan.setScreenRange(360); # old 360
-    # Initialize the controllers:
-#    if (me._static) {
-#      me._map.setController("Static position", "main");
-#    } else {
-      var ctrl_ns = canvas.Map.Controller.get("Aircraft position");
-      var source = ctrl_ns.SOURCES["current-pos"];
-      if (source == nil) {
-        var source = ctrl_ns.SOURCES["current-pos"] = {
-          getPosition: func subvec(geo.aircraft_position().latlon(), 0, 2),
-          getAltitude: func getprop('/position/altitude-ft'),
-          getHeading: func {
-            if (me.aircraft_heading) getprop(hdg) or 0
-            else 0
-          },
-          aircraft_heading: 1,
-        };
-        setlistener("instrumentation/primus2000/dc840/mfd-map", func(n) {
-          if (n.getValue()) {
-            source.aircraft_heading = 0;
-            me.layer.layerPlan.hide();
-            me.layer.layerMap.show();
-          } else {
-            source.aircraft_heading = 1;
-            me.layer.layerPlan.show();
-            me.layer.layerMap.hide();
-          }
-        },1,0);  
-#      }
+    me._plan.setScreenRange(360);
 
+    # Initialize the controllers:
+    var ctrl_ns = canvas.Map.Controller.get("Aircraft position");
+    source[x] = ctrl_ns.SOURCES["current-pos"] = {
+      getPosition: func subvec(geo.aircraft_position().latlon(), 0, 2),
+      getAltitude: func getprop('/position/altitude-ft'),
+      getHeading: func {
+        if (me.aircraft_heading) getprop(hdg) or 0
+        else 0 
+      },
+      aircraft_heading: 1
+    };
       # Make it move with our aircraft:
       me._map.setController("Aircraft position", "current-pos"); # from aircraftpos.controller
       me._plan.setController("Aircraft position", "current-pos");
-    }
 
-    if (me._zindex != 0) {
-      me._element.setInt("z-index", me._zindex);
-    }
-
-    var r = func(name,on_static=1, vis=1,zindex=nil) return caller(0)[0];
+#    var r = func(name,on_static=1, vis=1,zindex=nil) return caller(0)[0];
     foreach (var layer_name; me.getLayerNames()) {
       var layer = me.getLayer(layer_name);
       if (layer.static == 1) {
@@ -185,57 +181,69 @@ var NavMap = {
       }
     }
 
-    setlistener(rangeNm, func(n) {
-      me.setZoom(n.getValue() or 20);
+    setlistener("instrumentation/mfd["~x~"]/map", func(n) {
+      if (n.getValue()) {
+        source[x].aircraft_heading = 0;
+        me.layer.layerPlan.hide();
+        me.layer.layerMap.show();
+      } else {
+        source[x].aircraft_heading = 1;
+        me.layer.layerPlan.show();
+        me.layer.layerMap.hide();
+      }
+    },1,0);  
+
+    setlistener(rangeNm[x], func(n) {
+      me.setZoom(x,n.getValue(x) or 20);
    },1,0);
 
-    setlistener("instrumentation/primus2000/mfd/cdr0", func(n) {
-      me._cdr0 = n.getValue();
-      me.updateVisibility();
+    setlistener("instrumentation/mfd["~x~"]/cdr0", func(n) {
+      me._cdr0[x] = n.getValue();
+      me.updateVisibility(x);
     },0,0);
 
-    setlistener("instrumentation/primus2000/mfd/cdr1", func(n) {
-      me._cdr1 = n.getValue();
-      me.updateVisibility();
+    setlistener("instrumentation/mfd["~x~"]/cdr1", func(n) {
+      me._cdr1[x] = n.getValue(x);
+      me.updateVisibility(x);
     },0,0);
 
-    setlistener("instrumentation/primus2000/mfd/cdr2", func(n) {
-      me._cdr2 = n.getValue();
-      me.updateVisibility();
+    setlistener("instrumentation/mfd["~x~"]/cdr2", func(n) {
+      me._cdr2[x] = n.getValue();
+      me.updateVisibility(x);
     },0,0);
 
-    setlistener("autopilot/settings/nav-source", func(n) {
-      me._source = left(n.getValue(),3) == 'FMS' ? 0 : 1;
-      me.updateVisibility();
+    setlistener("instrumentation/efis/wxr["~x~"]", func(n) {
+      me._wxr[x] = n.getValue();
+      me.updateVisibility(x);
     },0,0);
 
-    setlistener("instrumentation/efis/inputs/wxr", func(n) {
-      me._wxr = n.getValue();
-      me.updateVisibility();
+    setlistener("instrumentation/tcas/tfc["~x~"]", func(n) {
+      Tfc[x] = n.getValue();
+      if (n.getValue()) setprop("/sim/traffic-manager/enabled",1);
+      else if (!Tfc[0] and !Tfc[1]) setprop("/sim/traffic-manager/enabled",0);
+      me.updateVisibility(x);
     },0,0);
 
-#    setlistener("environment/weather-scenario", func {
-#      me.updateVisibility();
-#    },0,0);
+    setlistener("instrumentation/primus2000/sc840/nav"~(x+1)~"ptr", func(n) {
+      if (n.getValue() == 2) me._ndb[x] = 1;
+      else me._ndb[x] = 0;
+      me.updateVisibility(x);
+    },0,0);
+
+    setlistener("instrumentation/tcas/outputs/traffic-alert", func (n) {
+      if (n.getValue()) me.symbols.traffic.show();
+      else  me.symbols.traffic.hide();
+    },1,0);
 
   }, # end of createMapElement
 
-  setController : func(type, controller ) {
-    if (NavMap.LAZY_LOADING) me.createMapElement();
-    me._map.setController(type, controller);
-    me._plan.setController(type, controller);
+  setZoom : func(x,zoom) {
+    me._map.setRange(zoom);
+    me._plan.setRange(zoom);
+    me.updateVisibility(x);
   },
 
-  setZoom : func(zoom) {
-    if (NavMap.LAZY_LOADING) me.createMapElement();
-    me._zoom = zoom;
-    me._map.setRange(me._zoom);
-    me._plan.setRange(me._zoom);
-    me.updateVisibility();
-  },
-
-  updateVisibility : func() {
-    if (NavMap.LAZY_LOADING) me.createMapElement();
+  updateVisibility : func(x) {
     # Determine which layers should be visible.
     foreach (var layer_name; me.getLayerNames()) {
       var layer = me.getLayer(layer_name);
@@ -249,24 +257,26 @@ var NavMap = {
             me._map.getLayer(layer_name).setVisible(1);
         if (layer.vis){
           me._plan.getLayer(layer_name).setVisible(1);
-          me._map.getLayer('FIX').setVisible(me._cdr2);
-          me._plan.getLayer('FIX').setVisible(me._cdr2);
-          me._map.getLayer('VOR_cit').setVisible(me._cdr0);
-          me._plan.getLayer('VOR_cit').setVisible(me._cdr0);
-          me._map.getLayer('APT_cit').setVisible(me._cdr1);
-          me._plan.getLayer('APT_cit').setVisible(me._cdr1);
-          me._plan.getLayer('DME').setVisible(me._zoom > 80 ? 0 : me._cdr0);
-          me._map.getLayer('NDB_cit').setVisible(me._zoom > 80 ? 0 : me._source);
-          me._plan.getLayer('NDB_cit').setVisible(me._zoom > 80 ? 0 : me._source);
-          me._map.getLayer('WXR').setVisible(me._wxr);
-          me._plan.getLayer('WXR').setVisible(me._wxr);
+          me._map.getLayer('FIX').setVisible(me._cdr2[x]);
+          me._plan.getLayer('FIX').setVisible(me._cdr2[x]);
+          me._map.getLayer('VOR_cit').setVisible(me._cdr0[x]);
+          me._plan.getLayer('VOR_cit').setVisible(me._cdr0[x]);
+          me._map.getLayer('APT_cit').setVisible(me._cdr1[x]);
+          me._plan.getLayer('APT_cit').setVisible(me._cdr1[x]);
+          me._plan.getLayer('DME').setVisible(me._zoom > 80 ? 0 : me._cdr0[x]);
+          me._map.getLayer('NDB_cit').setVisible(me._ndb[x]);
+          me._plan.getLayer('NDB_cit').setVisible(me._ndb[x]);
+          me._map.getLayer('TFC').setVisible(Tfc[x]);
+          me._plan.getLayer('TFC').setVisible(Tfc[x]);
+          me._map.getLayer('WXR').setVisible(me._wxr[x]);
+          me._plan.getLayer('WXR').setVisible(me._wxr[x]);
         } else me._map.getLayer(layer_name).setVisible(1);
       } else {
         me._map.getLayer(layer_name).setVisible(0);
         me._plan.getLayer(layer_name).setVisible(0);
       }
     }
-  },
+  }, # end of updateVisibility
 
   getLayerNames : func() {
     return keys(me._layerRanges);
@@ -278,7 +288,6 @@ var NavMap = {
 
   setVisible : func(visible) {
     if (visible) {
-      if (NavMap.LAZY_LOADING) me.createMapElement();
       me._map.setVisible(visible);
       me._plan.setVisible(visible);
     } else {
@@ -289,25 +298,25 @@ var NavMap = {
     }
   },
   
-  animateSymbols : func {
+  animateSymbols : func (x) {
     Hdg = getprop(hdg) or 0;
     HdgBug = getprop("/autopilot/internal/heading-bug-error-deg") or 0;
-    Range = getprop(rangeNm) or 20;
-    Tcas = getprop("instrumentation/primus2000/dc840/tcas");
+    Range = getprop(rangeNm[x]) or 20;
+    Tcas = getprop("instrumentation/tcas/tfc["~x~"]");
     Vspd = getprop("/velocities/vertical-speed-fps");
     GndSpd = getprop("/velocities/groundspeed-kt");
     hdgVis = (getprop("autopilot/locks/heading")== "ROLL" |
               getprop("autopilot/locks/heading")== "HDG") ? 1 : 0;
 
     me.symbols.compass.setRotation(-Hdg*D2R);
-    me.symbols.hdgBug.setCenter(450,516);    
+    me.symbols.hdgBug.setCenter(450,490);    
     me.symbols.hdgBug.setRotation(HdgBug*D2R);
     me.symbols.hsi.setText(sprintf("%03d",Hdg));
     me.symbols.rangeLtxt.setText(sprintf("%d",Range/2));
     me.symbols.rangeRtxt.setText(sprintf("%d",Range/2));
     me.symbols.arrowL.setVisible(HdgBug < -53);
     me.symbols.arrowR.setVisible(HdgBug > 53);
-    me.symbols.hdgLine.setCenter(450,512).setVisible(hdgVis);
+    me.symbols.hdgLine.setCenter(450,490).setVisible(hdgVis);
     me.symbols.hdgLine.setRotation(HdgBug*D2R);
     me.symbols.tcasValue.setText(Tcas ? "AUTO" : "OFF");
     me.symbols.tfcRangeInt.setVisible(Tcas);
@@ -323,6 +332,6 @@ var NavMap = {
 			me.symbols.altArc.show();
 		} else me.symbols.altArc.hide();
 
-   settimer(func me.animateSymbols(),0.05);
-  },
-};
+   settimer(func me.animateSymbols(x),0.05);
+  }, # end of animateSymbols
+}; # end of NavMap

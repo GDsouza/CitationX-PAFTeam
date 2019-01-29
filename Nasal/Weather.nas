@@ -23,15 +23,15 @@ var mfd_wx = func(wx) {
               );
         } else {mess_flag = 0;emul_range()}
       },1,1);
-    } else {emul_range();mess_flag = 0;removelistener(wx_listen)}
+    } else {emul_range();mess_flag = 0}
 };
 
 var emul_range = func {
   # To display storms, we must simulate a change of range
-  range_nm = getprop("instrumentation/efis/inputs/range-nm");
+  range_nm = getprop("instrumentation/mfd/range-nm");
   settimer(func {
-    setprop("instrumentation/efis/inputs/range-nm",range_nm*2);
-    range_nm = getprop("instrumentation/efis/inputs/range-nm");
+    setprop("instrumentation/mfd/range-nm",range_nm*2);
+    range_nm = getprop("instrumentation/mfd/range-nm");
   },0.5);
-  settimer(func {setprop("instrumentation/efis/inputs/range-nm",range_nm/2);},1);
+  settimer(func {setprop("instrumentation/mfd/range-nm",range_nm/2);},1);
 };

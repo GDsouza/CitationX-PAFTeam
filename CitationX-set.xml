@@ -242,11 +242,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
     </airport>
 
     <instrumentation>
-        <path>Aircraft/CitationX/Systems/instrumentation.xml</path>
-				<mk-viii>
-					<name>mk-viii</name>
-					<number>0</number>
-				</mk-viii>
+      <path>Aircraft/CitationX/Systems/instrumentation.xml</path>
     </instrumentation>
 
     <systems>
@@ -461,11 +457,6 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
     </color-set>
   </sim>
 
-  <systems>
-      <electrical>
-          <ac-volts>0</ac-volts>
-      </electrical>
-  </systems>
 <!--
   <consumables>
       <fuel>
@@ -493,7 +484,6 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
   </consumables>
 -->
   <instrumentation>
-
 		<pfd>
 			<minimums-baro type="int">200</minimums-baro>
 			<minimums-radio type="int">200</minimums-radio>
@@ -502,97 +492,31 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
     <mk-viii>
        <serviceable>true</serviceable>
        <configuration-module>
-          <category-1> 1 </category-1>  <!-- AIRCRAFT_MODE_TYPE_SELECT -->
+          <category-1> 255 </category-1>  <!-- AIRCRAFT_MODE_TYPE_SELECT -->
 					<category-4> 13 </category-4> <!-- ALTITUDE CALLOUTS -->
           <category-8> 3 </category-8> <!-- RADIO ALTITUDE YASIM-->
        </configuration-module>
-       <inputs> 
-        <arinc429>
-           <decision-height-ncd> false </decision-height-ncd>
-           <decision-height> 200 </decision-height>
-        </arinc429>
-       </inputs>
+			<inputs>
+			<arinc429>
+				<decision-height-ncd type="bool">0</decision-height-ncd>
+				<decision-height type="double">250</decision-height>
+			</arinc429>
+			</inputs>
        <speaker>
 			    <max-dist> 2 </max-dist>   <!-- Max. distance where speaker is heard -->
 			    <reference-dist> 1 </reference-dist> <!-- Distance to pilot -->
-          <volume>0.4</volume>
+          <volume>0.8</volume>
        </speaker>
 			 <voice>
 				   <file-prefix type="string">Sounds/mk-viii/</file-prefix>
 			 </voice>
       </mk-viii>
 
-    <tcas>
-      <serviceable type="bool">true</serviceable>
-      <inputs>
-          <mode type="int">0</mode> <!-- 0=off, 1=standby, 2=TA-only, 3=auto(TA/RA) -->
-      </inputs>
-      <speaker>         <!-- Speaker Configuration -->
-        <max-dist type="double">7</max-dist> <!-- Max. dist where speaker is heard -->
-        <reference-dist type="double">5</reference-dist> <!-- Distance to pilot -->
-        <volume type="double"> 1 </volume>  <!-- Volume at reference distance -->
-      </speaker>
-      <range type="int">6</range>
-    </tcas>
-
-    <nd>
-      <radar-texture-path type="string">Aircraft/CitationX/Models/Instruments/MFD/radar.png</radar-texture-path>
-      <symbol-texture-path type="string">Aircraft/CitationX/Models/Instruments/MFD/symbols.png</symbol-texture-path>
-      <font>
-        <color>
-          <red type="float">0.7</red>
-          <green type="float">0.7</green>
-          <blue type="float">0.7</blue>
-          <alpha type="float">1</alpha>
-        </color>
-        <name type="string">helvetica_bold.txf</name>
-        <size type="float">14</size>
-        <line-spacing type="float">0.01</line-spacing>
-      </font>
-      <serviceable type="bool">true</serviceable>
-      <range type="int" archive="y">100</range>
-      <aircraft-heading-up type="bool">true</aircraft-heading-up>
-      <heading-up-deg type="float">0.01</heading-up-deg>
-      <x-center type="float">0.5</x-center>
-      <y-center type="float">0.5</y-center>
-      <display>
-          <arpt type="bool">1</arpt>
-          <vor type="bool">0</vor>
-          <fix type="bool">0</fix>
-          <tcas type="bool">0</tcas>
-      </display>
-      <line-width type="double">3</line-width>
-    </nd>
-
-    <tcas-display>
-      <radar-texture-path type="string">Aircraft/CitationX/Models/Instruments/MFD/tcas-display.png</radar-texture-path>
-      <symbol-texture-path type="string">Aircraft/CitationX/Models/Instruments/MFD/symbols.png</symbol-texture-path>
-      <font>
-        <color>
-            <red type="float">0.7</red>
-            <green type="float">0.7</green>
-            <blue type="float">0.7</blue>
-            <alpha type="float">1</alpha>
-        </color>
-        <name type="string">helvetica_bold.txf</name>
-        <size type="float">14</size>
-        <line-spacing type="float">0.01</line-spacing>
-      </font>
-      <serviceable type="bool">true</serviceable>
-      <range type="int" archive="y">6</range>
-      <aircraft-heading-up type="bool">true</aircraft-heading-up>
-      <heading-up-deg type="float">0.01</heading-up-deg>
-      <x-center type="float">0.5</x-center>
-      <y-center type="float">0.5</y-center>
-      <display>
-      </display>
-      <line-width type="double">3</line-width>
-    </tcas-display>
-
     <alerts>
       <master-warning type="bool">0</master-warning>
       <master-caution type="bool">0</master-caution>
     </alerts>
+
     <rmu>
 	    <unit n="0">
         <serviceable type="bool">1</serviceable>
@@ -612,20 +536,12 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
       <alt-threshold>8000.0</alt-threshold>
     </airspeed-indicator>
 
-    <kr-87>
-      <inputs>
-        <audio-btn>0</audio-btn>
-      </inputs>
-    </kr-87>
-
 	  <primus2000>
 		  <dc840>
 	      <hsi type="bool">0</hsi>
 	      <wx type="bool">0</wx>
 	      <et type="bool">0</et>
-	      <tcas type="bool">0</tcas>
 	      <acft-sys type="bool">0</acft-sys>
-	      <mfd-map type="bool">0</mfd-map>
 	      <mfd-wx type="bool">0</mfd-wx>
 	      <norm type="bool">0</norm>
 	      <abn type="bool">0</abn>
@@ -636,17 +552,12 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 	      <ent type="bool">0</ent>
 		  </dc840>
 		  <sc840>
-	      <nav1ptr type="double">0</nav1ptr>
-	      <nav2ptr type="double">0</nav2ptr>
+	      <nav1ptr type="int">0</nav1ptr>
+	      <nav2ptr type="int">0</nav2ptr>
 		  </sc840>
 		  <eicas>
 	      <serviceable type="bool">1</serviceable>
 		  </eicas>
-		  <mfd>
-	      <menu-num type="int">0</menu-num>
-		  </mfd>
-		  <pfd>
-		  </pfd>
 	  </primus2000>
 
     <cdu n="0">
@@ -664,6 +575,24 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
         <model>Citation X</model>
       </ident>
     </cdu>
+
+    <tcas>
+      <serviceable type="bool">true</serviceable>
+      <inputs>
+        <mode type="int">1</mode> <!--0=off,1=standby,2=TA-only,3=auto(TA/RA)-->
+      </inputs>
+			<voice>
+				<file-prefix type="string">Aircraft/CitationX/Sounds/tcas/female/</file-prefix>
+			</voice>
+      <tfc n="0" type="bool">0</tfc>
+      <tfc n="1" type="bool">0</tfc>
+      <speaker> 
+        <max-dist type="double">10</max-dist>
+        <reference-dist type="double">2</reference-dist> 
+        <volume type="double"> 1 </volume>
+      </speaker>
+      <range type="int">6</range>
+    </tcas>
   </instrumentation>
 
   <controls>

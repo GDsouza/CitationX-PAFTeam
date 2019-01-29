@@ -12,7 +12,7 @@ Citation X - Vertical Situation Display
         <condition>
 					<and>
 	          <property>controls/electric/avionics-power</property>
-						<property>instrumentation/efis/inputs/vsd</property>
+						<property>instrumentation/efis/vsd</property>
 					</and>
 				</condition>
     </animation>

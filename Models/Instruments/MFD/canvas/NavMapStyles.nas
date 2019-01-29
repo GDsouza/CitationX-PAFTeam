@@ -43,7 +43,7 @@ var NavMapStyles = {
     me.Styles.APT_cit.text_offset=[20,20];
 
     me.Styles.TFC = {};
-    me.Styles.TFC.scale_factor = 0.7;
+    me.Styles.TFC.scale_factor = 1.2;
 
     me.Styles.WPT_cit = {};
     me.Styles.WPT_cit.scale_path = 0.7;

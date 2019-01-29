@@ -2,7 +2,7 @@
 #### Narendran M (c) 2014
 #### Adapted by C. Le Moigne (clm76) - 2017 ####
 
-props.globals.initNode("instrumentation/efis/inputs/vsd",0,"BOOL");
+props.globals.initNode("instrumentation/efis/vsd",0,"BOOL");
 
 var alt = 0;
 var	alt_ind = "/instrumentation/altimeter/indicated-altitude-ft";
@@ -14,10 +14,10 @@ var dist_rem = "autopilot/route-manager/distance-remaining-nm";
 var fp_active = "/autopilot/route-manager/active";
 var	heading_ind =	"/instrumentation/heading-indicator/indicated-heading-deg";
 var num_wpts = "/autopilot/route-manager/route/num";
-var set_range = "/instrumentation/efis/inputs/range-nm";
+var set_range = "/instrumentation/mfd/range-nm";
 var svg_path = "/Aircraft/CitationX/Models/Instruments/MFD/canvas/Images/vsd.svg"; 
 var tg_alt = "autopilot/settings/target-altitude-ft";
-var toggle_vsd = "/instrumentation/efis/inputs/vsd";
+var toggle_vsd = "/instrumentation/efis/vsd";
 var totDist = "autopilot/route-manager/total-distance";
 var	vert_spd = "/velocities/vertical-speed-fps";
 var rangeHdg = [];

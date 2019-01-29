@@ -4,11 +4,11 @@ Citation X - Navigation display
 
 <PropertyList>
 
-<path>ND_F.ac</path>
+<path>screenL_B.ac</path>
 
     <animation>
         <type>select</type>
-        <object-name>ND.screen</object-name>
+        <object-name>screenL_B</object-name>
         <condition>
           <greater-than>
 	          <property>controls/electric/avionics-switch</property>

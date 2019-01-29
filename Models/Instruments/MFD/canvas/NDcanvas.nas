@@ -6,58 +6,64 @@ var nasal_dir = getprop("/sim/aircraft-dir") ~ "/Models/Instruments/MFD/canvas";
 io.load_nasal(nasal_dir ~ '/NavMap.nas', "fgMap");
 io.include('init.nas');
 
-var placement_front = "ND.screen";
-var placement_back = "Layers.screen";
-
-var clk_hour = props.globals.getNode("sim/time/real/hour");
-var clk_min = props.globals.getNode("sim/time/real/minute");
-var clk_sec = props.globals.getNode("sim/time/real/second");
-var chr_hour = props.globals.getNode("instrumentation/clock/chrono-hour");
-var chr_min = props.globals.getNode("instrumentation/clock/chrono-min");
-var chr_sec = props.globals.getNode("instrumentation/clock/chrono-sec");
-var wx = props.globals.getNode("instrumentation/efis/inputs/range-nm");
-var bank = props.globals.getNode("autopilot/settings/bank-limit");
-var tcas = props.globals.getNode("instrumentation/primus2000/dc840/tcas");
-var sat = props.globals.getNode("environment/temperature-degc");
-var tas = props.globals.getNode("instrumentation/airspeed-indicator/true-speed-kt");
-var gspd = props.globals.getNode("velocities/groundspeed-kt");
-var etx = props.globals.getNode("instrumentation/primus2000/dc840/etx");
-var nav_dist = props.globals.getNode("autopilot/internal/nav-distance");
-var nav_id = props.globals.getNode("autopilot/internal/nav-id");
-var nav_type = props.globals.getNode("autopilot/internal/nav-type");
-var nav_type = props.globals.getNode("autopilot/internal/nav-type");
-var hdg_ann = props.globals.getNode("autopilot/settings/heading-bug-deg");
-var mag_hdg = props.globals.getNode("orientation/heading-magnetic-deg");
-#var range = props.globals.getNode("instrumentation/nd/range");
-var dist_rem = props.globals.getNode("autopilot/route-manager/distance-remaining-nm");
+var clk_hour = "sim/time/real/hour";
+var clk_min = "sim/time/real/minute";
+var clk_sec = "sim/time/real/second";
+var chrono = ["instrumentation/mfd/chrono",
+                "instrumentation/mfd[1]/chrono"];
+var wx = ["instrumentation/mfd/range-nm","instrumentation/mfd[1]/range-nm"];
+var bank = "autopilot/settings/bank-limit";
+var sat = "environment/temperature-degc";
+var tas = "instrumentation/airspeed-indicator/true-speed-kt";
+var gspd = "velocities/groundspeed-kt";
+var etx = ["instrumentation/mfd/etx","instrumentation/mfd[1]/etx"];
+var nav_dist = "autopilot/internal/nav-distance";
+var nav_id = "autopilot/internal/nav-id";
+var nav_type = "autopilot/internal/nav-type";
+var nav_type = "autopilot/internal/nav-type";
+var hdg_ann = "autopilot/settings/heading-bug-deg";
+var dist_rem = "autopilot/route-manager/distance-remaining-nm";
 var Wtot = nil;
 var Flaps = nil;
 var v1 = nil;
 var vr = nil;
 var v2 = nil;
 var vref = nil;
+var chronH = nil;
+var chronM = nil;
+var chronS = nil;
 var v1_m = "controls/flight/v1";
 var vr_m = "controls/flight/vr";
 var v2_m = "controls/flight/v2";
 var vref_m = "controls/flight/vref";
 var va = "controls/flight/va";
 
-var _list = setlistener("sim/signals/fdm-initialized", func {
-  fgMap.NavMap.new(); # To navMap.nas for background
-
 	var MFDDisplay = {
-		new: func() {
+		new: func(x) {
 			var m = {parents:[MFDDisplay]};
-			m.canvas = canvas.new({
-				"name": "MFD", 
-				"size": [1024, 1024],
-				"view": [900, 1024],
-				"mipmapping": 1 
-			});
-			m.canvas.addPlacement({"node": placement_front});
-			m.canvas.setColorBackground(0,0,0,0);
-			m.mfd = m.canvas.createGroup();
-			canvas.parsesvg(m.mfd, get_local_path("Images/ND_F.svg"));
+      if (!x) {
+			  m.canvas = canvas.new({
+				  "name": "MFD_L", 
+				  "size": [1024, 1024],
+				  "view": [900, 1024],
+				  "mipmapping": 1 
+			  });
+			  m.canvas.addPlacement({"node": "screenL_F"});
+			  m.canvas.setColorBackground(0,0,0,0);
+			  m.mfd = m.canvas.createGroup();
+			  canvas.parsesvg(m.mfd, get_local_path("Images/ND_F.svg"));
+      } else {
+			  m.canvas = canvas.new({
+				  "name": "MFD_R", 
+				  "size": [1024, 1024],
+				  "view": [900, 1024],
+				  "mipmapping": 1 
+			  });
+			  m.canvas.addPlacement({"node": "screenR_F"});
+			  m.canvas.setColorBackground(0,0,0,0);
+			  m.mfd = m.canvas.createGroup();
+			  canvas.parsesvg(m.mfd, get_local_path("Images/ND_F.svg"));
+      }
 
 			### Texts init ###
 			m.text = {};
@@ -69,8 +75,10 @@ var _list = setlistener("sim/signals/fdm-initialized", func {
 			}
 
 			### Menus init ###
-			m.menu = "instrumentation/primus2000/mfd/menu-num";
-			m.s_menu = "instrumentation/primus2000/mfd/s-menu";
+			m.menu = ["instrumentation/mfd/menu-num",
+                "instrumentation/mfd[1]/menu-num"];
+			m.s_menu = ["instrumentation/mfd/s-menu",
+                  "instrumentation/mfd[1]/s-menu"];
 
 			m.menus = {};
 			m.menu_val = ["menu1","menu2","menu3","menu4","menu5","menu1b",
@@ -110,7 +118,7 @@ var _list = setlistener("sim/signals/fdm-initialized", func {
 			return m;	
 		}, # end of new
 
-		listen : func { 
+		listen : func(x) { 
 			setlistener("instrumentation/primus2000/dc840/mfd-map", func(n) {
 				if (n.getValue()) me.design.trueNorth.show();
 				else me.design.trueNorth.hide();
@@ -138,41 +146,41 @@ var _list = setlistener("sim/signals/fdm-initialized", func {
 				setprop("instrumentation/efis/fp-active",n.getValue());
 			},0,0);
 
-      setlistener(me.menu, func {
+      setlistener(me.menu[x], func {
         me.razMenu();
-        me.selectMenu();
-        me.VspeedMenu();
+        me.selectMenu(x);
+        me.VspeedMenu(x);
       },0,0);
 
-      setlistener(me.s_menu, func {
+      setlistener(me.s_menu[x], func {
         me.razMenu();
-        me.selectMenu();
-        me.VspeedMenu();
+        me.selectMenu(x);
+        me.VspeedMenu(x);
       },0,0);
 
-      setlistener("instrumentation/primus2000/mfd/cdr-tot", func {
-        me.showRect();
+      setlistener("instrumentation/mfd["~x~"]/cdr-tot", func {
+        me.showRect(x);
       },0,0);
 
       setlistener("/controls/flight/flaps", func {
         me.VspeedUpdate();
-        me.VspeedMenu();
+        me.VspeedMenu(x);
       },0,0);
 
       setlistener("/controls/flight/v1", func {
-        me.VspeedMenu();
+        me.VspeedMenu(x);
       },0,0);
 
       setlistener("/controls/flight/v2", func {
-        me.VspeedMenu();
+        me.VspeedMenu(x);
       },0,0);
 
       setlistener("/controls/flight/vr", func {
-        me.VspeedMenu();
+        me.VspeedMenu(x);
       },0,0);
 
       setlistener("/controls/flight/vref", func {
-        me.VspeedMenu();
+        me.VspeedMenu(x);
       },0,0);
 
       setlistener("/controls/flight/va", func {
@@ -181,48 +189,42 @@ var _list = setlistener("sim/signals/fdm-initialized", func {
 
 		}, # end of listen
 
-		update: func {
-			### values ###
-			me.text.clock.setText(sprintf("%02d",clk_hour.getValue())~":"~sprintf("%02d",clk_min.getValue())~ ":"~sprintf("%02d",clk_sec.getValue()));
-			me.text.chrono.setText(sprintf("%02d",chr_hour.getValue())~":"~sprintf("%02d",chr_min.getValue())~ ":"~sprintf("%02d",chr_sec.getValue()));
-			if (etx.getValue()!=0) {me.text.chrono.show()}
-			else {me.text.chrono.hide()}
-			me.text.wx.setText(sprintf("%2d",wx.getValue()));
-			me.text.bank.setText(sprintf("%2d",bank.getValue()));
-			me.text.sat.setText(sprintf("%2d",sat.getValue()));
-			me.text.tas.setText(sprintf("%3d",tas.getValue()));
-			me.text.gspd.setText(sprintf("%3d",gspd.getValue()));
-	#		if (tcas.getValue()) {me.text.tcas.setText("AUTO");
-	#		} else {me.text.tcas.setText("OFF")}
-			me.text.navDist.setText(sprintf("%3.1f",nav_dist.getValue())~" NM");			
-			me.text.navId.setText(nav_id.getValue());
-			me.text.navType.setText(nav_type.getValue());
-			me.text.hdgAnn.setText(sprintf("%03d",hdg_ann.getValue()));
+		update: func(x) {
+			me.text.clock.setText(sprintf("%02d",getprop(clk_hour))~":"~sprintf("%02d",getprop(clk_min))~ ":"~sprintf("%02d",getprop(clk_sec)));
+			if (getprop(etx[x])!=0) {
+        chron = int(getprop(chrono[x]));
+        chronS = math.fmod(chron,60);
+        chronH = chron/3600;
+        chronM = (chronH-int(chronH))*60;
+        me.text.chrono.show();
+      } else me.text.chrono.hide();
+			me.text.chrono.setText(sprintf("%02d",chronH)~":"~sprintf("%02d",chronM)~ ":"~sprintf("%02d",chronS));
+			me.text.wx.setText(sprintf("%2d",getprop(wx[x])));
+			me.text.bank.setText(sprintf("%2d",getprop(bank)));
+			me.text.sat.setText(sprintf("%2d",getprop(sat)));
+			me.text.tas.setText(sprintf("%3d",getprop(tas)));
+			me.text.gspd.setText(sprintf("%3d",getprop(gspd)));
+			me.text.navDist.setText(sprintf("%3.1f",getprop(nav_dist))~" NM");			
+			me.text.navId.setText(getprop(nav_id));
+			me.text.navType.setText(getprop(nav_type));
+			me.text.hdgAnn.setText(sprintf("%03d",getprop(hdg_ann)));
 
       me.ete = getprop("autopilot/internal/nav-ttw");
 		  if (!me.ete or size(me.ete) > 10) {me.ete = "ETE 0:00"}
-#		  else {
-#        me.vec_ete = split(":",me.ete);
-#        me.vec_ete = split("ETE ",me.vec_ete[0]);
-#        me.h_ete = int(me.vec_ete[1]/60);
-#        me.mn_ete = me.vec_ete[1]-me.h_ete*60;
-#        me.ete = "ETE "~me.h_ete~":"~sprintf("%02i",me.mn_ete);
-#      }
 			me.text.navTtw.setText(me.ete);
-			if (dist_rem.getValue() > 0) {
-				me.text.distRem.setText(sprintf("%.0f",dist_rem.getValue())~" NM");
+			if (getprop(dist_rem) > 0) {
+				me.text.distRem.setText(sprintf("%.0f",getprop(dist_rem))~" NM");
 			} else {me.text.distRem.setText("")}
 
-          ##### Update Timer #####			
-			settimer(func me.update(),0);
+			settimer(func me.update(x),0.1);
 
 		}, # end of update
 
-    selectMenu : func {
+    selectMenu : func (x) {
       me.setColor(me.white);
-			if (getprop(me.menu) == 0) {
+			if (getprop(me.menu[x]) == 0) {
 				me.text.main.setText("MAIN 1/2");
-				if (getprop(me.s_menu) == 0) {
+				if (getprop(me.s_menu[x]) == 0) {
 					me.menus.menu1.setText("PFD");
 					me.menus.menu1b.setText("SETUP");
 					me.menus.menu2.setText("MFD");
@@ -234,11 +236,11 @@ var _list = setlistener("sim/signals/fdm-initialized", func {
 					me.menus.menu5.setText("V");
 					me.menus.menu5b.setText("SPEED");
 				}
-				if (getprop(me.s_menu) == 1) {
+				if (getprop(me.s_menu[x]) == 1) {
 					me.menus.menu1.setText("BARO");
 					me.menus.menu2.setText("M-ALT");
 				}
-				if (getprop(me.s_menu) == 2) {
+				if (getprop(me.s_menu[x]) == 2) {
 					me.menus.menu1.setText("VOR");
 					me.menus.menu2.setText("APT");
 					me.menus.menu3.setText("FIX");
@@ -285,8 +287,8 @@ var _list = setlistener("sim/signals/fdm-initialized", func {
 	    setprop("controls/flight/vf35",140);
     }, # end of VspeedUpdate
 
-    VspeedMenu : func {      
-			if (getprop(me.menu) == 0 and getprop(me.s_menu) == 5) {
+    VspeedMenu : func(x) {      
+			if (getprop(me.menu[x]) == 0 and getprop(me.s_menu[x]) == 5) {
 				me.menus.menu1.setText("V1");
 				me.menus.menu1b.setText(sprintf("%03d",getprop(v1_m)));
 				me.menus.menu2.setText("Vr");
@@ -311,10 +313,10 @@ var _list = setlistener("sim/signals/fdm-initialized", func {
       for (var n=1;n<10;n+=1) me.menus[me.menu_val[n]].setText("");
     }, # end of razMenu
 
-		showRect: func() {
+		showRect: func(x) {
 			var n = 0;
 			foreach(var element;me.cdr) {
-				if (getprop("instrumentation/primus2000/mfd/cdr"~n)) {
+				if (getprop("instrumentation/mfd["~x~"]/cdr"~n)) {
 					me.rect[element].show();
 				} else {me.rect[element].hide()}
 				n+=1;
@@ -324,25 +326,24 @@ var _list = setlistener("sim/signals/fdm-initialized", func {
 	}; # end of MFDDisplay
 
 ###### Main #####
-	var mfd = MFDDisplay.new();
-	mfd.listen();
-
-	var v_speed = func() {		
+var mfd_setl = setlistener("sim/signals/fdm-initialized", func() {
+  for (var x=0;x<2;x+=1) {
+    fgMap.NavMap.new(x); # To navMap.nas for background
+	  var mfd = MFDDisplay.new(x);
+	  mfd.listen(x);
+    mfd.selectMenu(x);
+    mfd.showRect(x);
+	  mfd.update(x);
+  }
+	var v_speed = func {		
 		mfd.VspeedUpdate();
-    mfd.VspeedMenu();
+    mfd.VspeedMenu(0);
+    mfd.VspeedMenu(1);
 	}
 	var timer = maketimer(10,v_speed);
 	timer.singleShot = 1;
 	timer.start();
-
-  mfd.selectMenu();
-#  mfd.VspeedUpdate();
-#  mfd.VspeedMenu();
-  mfd.showRect();
-	mfd.update();
 	print('MFD Canvas ... Ok');
-#################
-
-	removelistener(_list); # run ONCE
-}); # end of list
+	removelistener(mfd_setl); 
+},0,0);
 

@@ -53,6 +53,16 @@ This file selects the instrumentation modules that should be available.
         <number>1</number>
     </comm-radio>
 
+    <dme>
+        <name>dme</name>
+        <number>0</number>
+    </dme>
+
+    <dme>
+        <name>dme</name>
+        <number>1</number>
+    </dme>
+
     <heading-indicator>
         <name>heading-indicator</name>
         <number>0</number>
@@ -74,16 +84,6 @@ This file selects the instrumentation modules that should be available.
         <number>1</number>
     </nav-radio>
 
-    <dme>
-        <name>dme</name>
-        <number>0</number>
-    </dme>
-
-    <dme>
-        <name>dme</name>
-        <number>1</number>
-    </dme>
-
     <slip-skid-ball>
         <name>slip-skid-ball</name>
         <number>0</number>
@@ -94,6 +94,11 @@ This file selects the instrumentation modules that should be available.
         <number>0</number>
     </turn-indicator>
 
+    <tcas>
+        <name>tcas</name>
+        <number>0</number>
+    </tcas>
+
 		<transponder>
 				<name type="string">transponder</name>
 				<number type="int">0</number>
@@ -102,11 +107,6 @@ This file selects the instrumentation modules that should be available.
 				<encoder-path type="string">/instrumentation/altimeter</encoder-path>
 				<kt70-compatibility type="bool">0</kt70-compatibility>
 		</transponder>
-
-    <KR-87>
-        <name>kr-87</name>
-        <number>0</number>
-    </KR-87>
 
     <marker-beacon>
         <name>marker-beacon</name>
@@ -122,15 +122,5 @@ This file selects the instrumentation modules that should be available.
         <name>radar</name>
         <number>0</number>
     </radar>
-
-    <tcas>
-        <name>tcas</name>
-        <number>0</number>
-    </tcas>
-   <navigation-display>
-        <name>tcas-display</name>
-        <number>0</number>
-        <symbols include="tcas-display.xml"/>
-    </navigation-display>
 
 </PropertyList>

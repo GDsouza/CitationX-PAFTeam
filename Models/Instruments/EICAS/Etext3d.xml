@@ -17,8 +17,8 @@
         <name>Oil_t1</name>
         <offsets>
             <x-m>0.0</x-m>
-            <y-m>0.018</y-m>
-            <z-m>0.062</z-m>
+            <y-m>0.022</y-m>
+            <z-m>0.063</z-m>
         </offsets>
         <alignment>center-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -52,7 +52,7 @@
         <offsets>
             <x-m>0.0</x-m>
             <y-m>0.036</y-m>
-            <z-m>0.062</z-m>
+            <z-m>0.063</z-m>
         </offsets>
         <alignment>center-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -85,8 +85,8 @@
         <name>Oil_p1</name>
         <offsets>
             <x-m>0.0</x-m>
-            <y-m>0.050</y-m>
-            <z-m>0.062</z-m>
+            <y-m>0.054</y-m>
+            <z-m>0.063</z-m>
         </offsets>
         <alignment>center-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -118,7 +118,7 @@
         <offsets>
             <x-m>0.0</x-m>
             <y-m>0.069</y-m>
-            <z-m>0.062</z-m>
+            <z-m>0.063</z-m>
         </offsets>
         <alignment>center-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -138,8 +138,8 @@
         <name>LFuelFlow</name>
         <offsets>
             <x-m>0.0</x-m>
-            <y-m>0.022</y-m>
-            <z-m>0.0445</z-m>
+            <y-m>0.023</y-m>
+            <z-m>0.046</z-m>
         </offsets>
         <alignment>center-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -159,8 +159,8 @@
         <name>RFuelFlow</name>
         <offsets>
             <x-m>0.0</x-m>
-            <y-m>0.063</y-m>
-            <z-m>0.0445</z-m>
+            <y-m>0.065</y-m>
+            <z-m>0.046</z-m>
         </offsets>
         <alignment>center-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -180,8 +180,8 @@
         <name>TTLfuel</name>
         <offsets>
             <x-m>0.0</x-m>
-            <y-m>0.043</y-m>
-            <z-m>0.036</z-m>
+            <y-m>0.044</y-m>
+            <z-m>0.037</z-m>
         </offsets>
         <alignment>center-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -202,7 +202,7 @@
         <name>Ltank</name>
         <offsets>
             <x-m>0.0</x-m>
-            <y-m>0.023</y-m>
+            <y-m>0.024</y-m>
             <z-m>0.020</z-m>
         </offsets>
         <alignment>center-center</alignment>
@@ -223,7 +223,7 @@
         <name>Rtank</name>
         <offsets>
             <x-m>0.0</x-m>
-            <y-m>0.064</y-m>
+            <y-m>0.066</y-m>
             <z-m>0.020</z-m>
         </offsets>
         <alignment>center-center</alignment>
@@ -244,8 +244,8 @@
         <name>Ctank</name>
         <offsets>
             <x-m>0.0</x-m>
-            <y-m>0.043</y-m>
-            <z-m>0.024</z-m>
+            <y-m>0.044</y-m>
+            <z-m>0.025</z-m>
         </offsets>
         <alignment>center-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -266,7 +266,7 @@
         <offsets>
             <x-m>0.0</x-m>
             <y-m>0.023</y-m>
-            <z-m>-0.0</z-m>
+            <z-m>-0.001</z-m>
         </offsets>
         <alignment>center-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -286,8 +286,8 @@
         <name>Rbus volts</name>
         <offsets>
             <x-m>0.0</x-m>
-            <y-m>0.062</y-m>
-            <z-m>-0.0</z-m>
+            <y-m>0.065</y-m>
+            <z-m>-0.001</z-m>
         </offsets>
         <alignment>center-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -308,7 +308,7 @@
         <offsets>
             <x-m>0.0</x-m>
             <y-m>0.023</y-m>
-            <z-m>-0.008</z-m>
+            <z-m>-0.009</z-m>
         </offsets>
         <alignment>center-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -329,8 +329,8 @@
         <name>Rbus amps</name>
         <offsets>
             <x-m>0.0</x-m>
-            <y-m>0.060</y-m>
-            <z-m>-0.008</z-m>
+            <y-m>0.065</y-m>
+            <z-m>-0.009</z-m>
         </offsets>
         <alignment>center-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -352,7 +352,7 @@
         <offsets>
             <x-m>0.0</x-m>
             <y-m>0.040</y-m>
-            <z-m>-0.037</z-m>
+            <z-m>-0.0395</z-m>
         </offsets>
         <alignment>center-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -373,8 +373,8 @@
         <name>RHydr</name>
         <offsets>
             <x-m>0.0</x-m>
-           <y-m>0.067</y-m>
-            <z-m>-0.037</z-m>
+           <y-m>0.068</y-m>
+            <z-m>-0.0395</z-m>
         </offsets>
         <alignment>center-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -395,8 +395,8 @@
         <name>Lfan</name>
         <offsets>
             <x-m>0.0</x-m>
-            <y-m>-0.059</y-m>
-            <z-m>0.027</z-m>
+            <y-m>-0.061</y-m>
+            <z-m>0.0275</z-m>
         </offsets>
         <alignment>center-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -416,8 +416,8 @@
         <name>Rfan</name>
         <offsets>
             <x-m>0.0</x-m>
-            <y-m>-0.039</y-m>
-            <z-m>0.027</z-m>
+            <y-m>-0.040</y-m>
+            <z-m>0.0275</z-m>
         </offsets>
         <alignment>center-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -437,8 +437,8 @@
         <name>LTurbine</name>
         <offsets>
             <x-m>0.0</x-m>
-            <y-m>-0.064</y-m>
-            <z-m>0.018</z-m>
+            <y-m>-0.066</y-m>
+            <z-m>0.0185</z-m>
         </offsets>
         <alignment>center-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -458,8 +458,8 @@
         <name>RTurbine</name>
         <offsets>
             <x-m>0.0</x-m>
-            <y-m>-0.034</y-m>
-            <z-m>0.018</z-m>
+            <y-m>-0.036</y-m>
+            <z-m>0.0185</z-m>
         </offsets>
         <alignment>center-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -479,8 +479,8 @@
         <name>Governor</name>
         <offsets>
             <x-m>0.0</x-m>
-            <y-m>-0.049</y-m>
-            <z-m>0.086</z-m>
+            <y-m>-0.052</y-m>
+            <z-m>0.0885</z-m>
         </offsets>
         <alignment>center-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -501,7 +501,7 @@
         <offsets>
             <x-m>0.0</x-m>
             <y-m>-0.002</y-m>
-            <z-m>0.018</z-m>
+            <z-m>0.0185</z-m>
         </offsets>
         <alignment>center-center</alignment>
         <axis-alignment>yz-plane</axis-alignment>
@@ -521,7 +521,7 @@
         <name>Stab</name>
         <offsets>
             <x-m>0.0</x-m>
-            <y-m>-0.064</y-m>
+            <y-m>-0.066</y-m>
             <z-m>0.006</z-m>
         </offsets>
         <alignment>center-center</alignment>

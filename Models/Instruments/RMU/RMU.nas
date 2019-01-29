@@ -50,6 +50,7 @@ var tac_id = ["instrumentation/tacan/id","instrumentation/tacan[1]/id"];
 var rmu_sel = ["instrumentation/rmu/unit/selected","instrumentation/rmu/unit[1]/selected"];
 var path = getprop("/sim/fg-home")~"/aircraft-data/";
 var nav_src = "autopilot/settings/nav-source";
+var tcas_mode = "instrumentation/tcas/inputs/mode";
 var full = nil;
 var memo = nil;
 var mem_1 = nil;
@@ -493,11 +494,11 @@ var RMU = {
 		setlistener("instrumentation/transponder/unit["~x~"]/knob-mode", func(n) {
 			var mode = n.getValue();
 			var mode_dsp = "";
-			if (mode == 0) {mode_dsp = "STANDBY"}
-			if (mode == 1) {mode_dsp = "ATC ON"}
-			if (mode == 2) {mode_dsp = "ATC ALT"}
-			if (mode == 3) {mode_dsp = "TA ONLY"}
-			if (mode == 4) {mode_dsp = "TA/RA"}
+			if (mode == 0) {mode_dsp = "STANDBY";setprop(tcas_mode,1)}
+			if (mode == 1) {mode_dsp = "ATC ON";setprop(tcas_mode,2)}
+			if (mode == 2) {mode_dsp = "ATC ALT";setprop(tcas_mode,2)}
+			if (mode == 3) {mode_dsp = "TA ONLY";setprop(tcas_mode,2)}
+			if (mode == 4) {mode_dsp = "TA/RA";setprop(tcas_mode,3)}
 			setprop("instrumentation/transponder/unit["~x~"]/display-mode",mode_dsp);
 		},0,1);
 

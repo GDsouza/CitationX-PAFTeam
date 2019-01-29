@@ -566,7 +566,7 @@
       <type>select</type>
       <object-name>inhg</object-name>
       <condition>
-        <property>instrumentation/efis/inputs/baro-hpa</property>
+        <property>instrumentation/efis/baro-hpa</property>
       </condition>
     </animation>
 
@@ -575,7 +575,7 @@
       <object-name>hpa</object-name>
       <condition>
         <not>
-          <property>instrumentation/efis/inputs/baro-hpa</property>
+          <property>instrumentation/efis/baro-hpa</property>
         </not>
       </condition>
     </animation>
@@ -669,7 +669,7 @@
       <type>select</type>
       <object-name>Metric-alt</object-name>
       <condition>
-        <property>instrumentation/efis/inputs/alt-meters</property>
+        <property>instrumentation/efis/alt-meters</property>
       </condition>
     </animation>
 

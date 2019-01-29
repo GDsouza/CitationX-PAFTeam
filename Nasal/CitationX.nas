@@ -19,149 +19,160 @@ var checkVersion = func {
 
 ### tire rotation per minute by circumference ####
 var TireSpeed = {
-    new : func(number){
-        m = { parents : [TireSpeed] };
-            m.num=number;
-            m.circumference=[];
-            m.tire=[];
-            m.rpm=[];
-            for(var i=0; i<m.num; i+=1) {
-                var diam =arg[i];
-                var circ=diam * math.pi;
-                append(m.circumference,circ);
-                append(m.tire,props.globals.initNode("gear/gear["~i~"]/tire-rpm",0,"DOUBLE"));
-                append(m.rpm,0);
-            }
-        m.count = 0;
-        return m;
-    },
-    #### calculate and write rpm ###########
-    get_rotation: func (fdm1){
-        var speed=0;
-        if(fdm1=="yasim"){
-            speed =getprop("gear/gear["~me.count~"]/rollspeed-ms") or 0;
-            speed=speed*60;
-            }elsif(fdm1=="jsb"){
-                speed =getprop("fdm/jsbsim/gear/unit["~me.count~"]/wheel-speed-fps") or 0;
-                speed=speed*18.288;
-            }
-        var wow = getprop("gear/gear["~me.count~"]/wow");
-        if(wow){
-            me.rpm[me.count] = speed / me.circumference[me.count];
-        }else{
-            if(me.rpm[me.count] > 0) me.rpm[me.count]=me.rpm[me.count]*0.95;
-        }
-        me.tire[me.count].setValue(me.rpm[me.count]);
-        me.count+=1;
-        if(me.count>=me.num)me.count=0;
-    },
-};
-
+  new : func(number){
+    m = { parents : [TireSpeed] };
+    m.num = number;
+    m.circumference = [];
+    m.tire = [];
+    m.rpm = [];
+    m.speed = nil;
+    m.wow = nil;
+    for(var i=0; i<m.num; i+=1) {
+      props.globals.initNode("gear/gear["~i~"]/tire-rpm",0,"DOUBLE");
+      m.diam = arg[i];
+      m.circ = m.diam * math.pi;
+      append(m.circumference,m.circ);
+      append(m.tire,"gear/gear["~i~"]/tire-rpm");
+      append(m.rpm,0);
+    }
+    m.count = 0;
+    return m;
+  },
+  #### calculate and write rpm ###########
+  get_rotation: func (fdm1){
+    me.speed = 0;
+    if(fdm1 == "yasim"){
+      me.speed = getprop("gear/gear["~me.count~"]/rollspeed-ms") or 0;
+      me.speed = me.speed*60;
+    }else if(fdm1=="jsb"){
+      me.speed = getprop("fdm/jsbsim/gear/unit["~me.count~"]/wheel-speed-fps") or 0;
+      me.speed = me.speed*18.288;
+    }
+    me.wow = getprop("gear/gear["~me.count~"]/wow");
+    if(me.wow){
+        me.rpm[me.count] = me.speed / me.circumference[me.count];
+    }else{
+        if(me.rpm[me.count] > 0) me.rpm[me.count] = me.rpm[me.count]*0.95;
+    }
+    setprop(me.tire[me.count],me.rpm[me.count]);
+    me.count += 1;
+    if(me.count >= me.num) me.count=0;
+  },
+}; # end of TireSpeed
 
 #Jet Engine Helper class 
-# ie: var Eng = JetEngine.new(engine number);
-
 var JetEngine = {
-    new : func(eng_num){
-        m = { parents : [JetEngine]};
-        m.fdensity = getprop("consumables/fuel/tank/density-ppg") or 6.72;
-        m.eng = props.globals.getNode("engines/engine["~eng_num~"]",1);
-        m.cycle_up = props.globals.initNode("engines/engine["~eng_num~"]/cycle_up",0,"BOOL");
-        m.running = m.eng.initNode("running",0,"BOOL");
-        m.n1 = m.eng.getNode("n1",1);
-        m.n2 = m.eng.getNode("n2",1);
-        m.fan = m.eng.initNode("fan",0,"DOUBLE");
-        m.engine_off=1;
-        m.turbine = m.eng.initNode("turbine",0,"DOUBLE");
-        m.throttle_lever = props.globals.initNode("controls/engines/engine["~eng_num~"]/throttle-lever",0,"DOUBLE");
-        m.throttle = props.globals.initNode("controls/engines/engine["~eng_num~"]/throttle",0,"DOUBLE");
-        m.ignition = props.globals.initNode("controls/engines/engine["~eng_num~"]/ignit",0,"INT");
-        m.cutoff = props.globals.initNode("controls/engines/engine["~eng_num~"]/cutoff",1,"BOOL");
-        m.fuel_out = props.globals.initNode("engines/engine["~eng_num~"]/out-of-fuel",0,"BOOL");
-        m.starter = props.globals.initNode("controls/engines/engine["~eng_num~"]/starter",0,"BOOL");
-        m.fuel_pph=m.eng.initNode("fuel-flow_pph",0,"DOUBLE");
-        m.fuel_gph=m.eng.initNode("fuel-flow-gph");
-        m.Lfuel = setlistener(m.fuel_out, func m.shutdown(m.fuel_out.getValue()),0,0);
-        m.CutOff = setlistener(m.cutoff, func (ct){m.engine_off=ct.getValue()},0,0);
-        m.oilp_norm = "engines/engine/oilp-norm";
-        m.oilp = "engines/engine/oil-pressure-psi";
-        m.oilp1_norm = "engines/engine[1]/oilp-norm";
-        m.oilp1 = "engines/engine[1]/oil-pressure-psi";
-        m.sysoil = "systems/hydraulics/psi-norm"; 
-        m.sysoil1 = "systems/hydraulics/psi-norm[1]"; 
+  new : func(eng_num){
+    m = { parents : [JetEngine]};
+    props.globals.initNode("engines/engine["~eng_num~"]/cycle_up",0,"BOOL");
+    props.globals.initNode("engines/engine["~eng_num~"]/running",0,"BOOL");
+    props.globals.initNode("engines/engine["~eng_num~"]/fan",0,"DOUBLE");
+    props.globals.initNode("engines/engine["~eng_num~"]/turbine",0,"DOUBLE");
+    props.globals.initNode("engines/engine["~eng_num~"]/fuel-flow_pph",0,"DOUBLE");
+    props.globals.initNode("engines/engine["~eng_num~"]/fuel-flow_gph",0,"DOUBLE");
+    props.globals.initNode("engines/engine["~eng_num~"]/out-of-fuel",0,"BOOL");
+    props.globals.initNode("controls/engines/engine["~eng_num~"]/throttle-lever",0,"DOUBLE");
+    props.globals.initNode("controls/engines/engine["~eng_num~"]/throttle",0,"DOUBLE");
+    props.globals.initNode("controls/engines/engine["~eng_num~"]/ignit",0,"INT");
+    props.globals.initNode("controls/engines/engine["~eng_num~"]/cutoff",1,"BOOL");
+    props.globals.initNode("controls/engines/engine["~eng_num~"]/starter",0,"BOOL");
+    props.globals.initNode("controls/engines/N1-limit",95.0,"DOUBLE");
+    m.fdensity = getprop("consumables/fuel/tank/density-ppg") or 6.72;
+    m.cycle_up = "engines/engine["~eng_num~"]/cycle_up";
+    m.running = "engines/engine["~eng_num~"]/running";
+    m.n1 = "engines/engine["~eng_num~"]/n1";
+    m.n2 = "engines/engine["~eng_num~"]/n2";
+    m.fan = "engines/engine["~eng_num~"]/fan";
+    m.turbine = "engines/engine["~eng_num~"]/turbine";
+    m.throttle_lever = "controls/engines/engine["~eng_num~"]/throttle-lever";
+    m.throttle = "controls/engines/engine["~eng_num~"]/throttle";
+    m.ignition = "controls/engines/engine["~eng_num~"]/ignit";
+    m.cutoff = "controls/engines/engine["~eng_num~"]/cutoff";
+    m.fuel_out = "engines/engine["~eng_num~"]/out-of-fuel";
+    m.starter = "controls/engines/engine["~eng_num~"]/starter";
+    m.fuel_pph = "engines/engine["~eng_num~"]/fuel-flow_pph";
+    m.fuel_gph = "engines/engine["~eng_num~"]/fuel-flow_gph";
+    m.Lfuel = setlistener(m.fuel_out, func m.shutdown(getprop(m.fuel_out)),0,0);
+    m.CutOff = setlistener(m.cutoff, func (ct){m.engine_off=ct.getValue()},0,0);
+    m.engine_off = 1;
+    m.oilp_norm = "engines/engine/oilp-norm";
+    m.oilp = "engines/engine/oil-pressure-psi";
+    m.oilp1_norm = "engines/engine[1]/oilp-norm";
+    m.oilp1 = "engines/engine[1]/oil-pressure-psi";
+    m.sysoil = "systems/hydraulics/psi-norm"; 
+    m.sysoil1 = "systems/hydraulics/psi-norm[1]"; 
+    m.ign = nil;
+    m.thr = nil;
+    m.tmprpm1 = nil;
+    m.tmprpm2 = nil;
+    m.n1factor = nil;
+    m.n2factor = nil;
     return m;
-    },
+  },
 
-    update : func{
-        var thr = me.throttle.getValue();
-        if(!me.engine_off){
-            me.fan.setValue(me.n1.getValue());
-            me.turbine.setValue(me.n2.getValue());
-            if(getprop("controls/engines/grnd_idle"))thr *=0.92;
-            me.throttle_lever.setValue(thr);
-        }else{
-            me.throttle_lever.setValue(0);
-            if(me.starter.getBoolValue()){
-              if(!me.cycle_up.getValue()) me.cycle_up.setValue(1);
-            }
-            if(me.cycle_up.getValue()) me.spool_up(15);
-            else{
-                var tmprpm = me.fan.getValue();
-                if(tmprpm > 0.0){
-                    tmprpm -= getprop("sim/time/delta-sec") * 2;
-                    me.fan.setValue(tmprpm);
-                    me.turbine.setValue(tmprpm);
-                }
-            }
+  update : func{
+    me.thr = getprop(me.throttle);
+    if(!me.engine_off){
+      setprop(me.fan,getprop(me.n1));
+      setprop(me.turbine,getprop(me.n2));
+      if(getprop("controls/engines/grnd_idle")) me.thr *= 0.92;
+      setprop(me.throttle_lever,me.thr);
+    } else {
+      setprop(me.throttle_lever,0);
+      if(getprop(me.starter)){
+        if(!getprop(me.cycle_up)) setprop(me.cycle_up,1);
+      }
+      if(getprop(me.cycle_up)) me.spool_up(15);
+      else {
+        me.tmprpm = getprop(me.fan);
+        if(me.tmprpm > 0.0){
+            me.tmprpm -= getprop("sim/time/delta-sec") * 2;
+            setprop(me.fan,me.tmprpm);
+            setprop(me.turbine,me.tmprpm);
         }
-        me.fuel_pph.setValue(me.fuel_gph.getValue()*me.fdensity);
-
-        #### For Engines Oil Pressure Display ####
-        if (getprop(me.sysoil) >= 0.1 ) {
-            if (getprop(me.oilp_norm) < 0.1) {setprop(me.oilp,getprop(me.sysoil)*50)}
-            else {setprop(me.oilp,getprop(me.oilp_norm)*44.4 +45.6)}
-        } else {setprop(me.oilp,0)}
-        if (getprop(me.sysoil1) >= 0.1 ) {
-            if (getprop(me.oilp1_norm) < 0.1) {setprop(me.oilp1,getprop(me.sysoil1)*50)}
-            else {setprop(me.oilp1,getprop(me.oilp1_norm)*44.4 +45.6)}
-        } else {setprop(me.oilp1,0)}
-
-    },
-
-    spool_up : func(scnds){
-        if(me.engine_off){
-        var n1=me.n1.getValue() ;
-        var n1factor = n1/scnds;
-        var n2=me.n2.getValue() ;
-        var n2factor = n2/scnds;
-        var tmprpm = me.fan.getValue();
-            tmprpm += getprop("sim/time/delta-sec") * n1factor;
-            var tmprpm2 = me.turbine.getValue();
-            tmprpm2 += getprop("sim/time/delta-sec") * n2factor;
-            me.fan.setValue(tmprpm);
-            me.turbine.setValue(tmprpm2);
-            if(tmprpm >= me.n1.getValue()){
-							if (me.ignition.getValue()==-1) {
-								var ign = 1+me.ignition.getValue();
-							} else {var ign=1-me.ignition.getValue()}
-              me.cutoff.setBoolValue(ign);
-              me.cycle_up.setValue(0);
-            }
-        }
-    },
-
-    shutdown : func(b){
-        if(b!=0){
-            me.cutoff.setBoolValue(1);
-        }
+      }
     }
+    setprop(me.fuel_pph,getprop(me.fuel_gph) * me.fdensity);
 
+    #### For Engines Oil Pressure Display ####
+    if (getprop(me.sysoil) >= 0.1 ) {
+        if (getprop(me.oilp_norm) < 0.1) setprop(me.oilp,getprop(me.sysoil)*50);
+        else setprop(me.oilp,getprop(me.oilp_norm)*44.4 +45.6);
+    } else setprop(me.oilp,0);
+    if (getprop(me.sysoil1) >= 0.1 ) {
+        if (getprop(me.oilp1_norm) < 0.1) setprop(me.oilp1,getprop(me.sysoil1)*50);
+        else setprop(me.oilp1,getprop(me.oilp1_norm)*44.4 +45.6);
+    } else setprop(me.oilp1,0);
+  },
+
+  spool_up : func(scnds){
+    if(me.engine_off){
+      me.n1factor = getprop(me.n1)/scnds;
+      me.n2factor = getprop(me.n2)/scnds;
+      me.tmprpm1 = getprop(me.fan);
+      me.tmprpm1 += getprop("sim/time/delta-sec") * me.n1factor;
+      me.tmprpm2 = getprop(me.turbine);
+      me.tmprpm2 += getprop("sim/time/delta-sec") * me.n2factor;
+      setprop(me.fan,me.tmprpm1);
+      setprop(me.turbine,me.tmprpm2);
+      if(me.tmprpm1 >= getprop(me.n1)){
+				if (getprop(me.ignition) == -1) {
+					me.ign = 1 + getprop(me.ignition);
+				} else me.ign = 1 - getprop(me.ignition);
+        setprop(me.cutoff,me.ign);
+        setprop(me.cycle_up,0);
+      }
+    }
+  },
+
+  shutdown : func(b){
+      if(b) setprop(me.cutoff,1);
+  }
 }; # end of JetEngine
 
 var fl_tot = 0;
 var FDM="";
-var Grd_Idle=props.globals.initNode("controls/engines/grnd-idle",1,"BOOL");
-var Annun = props.globals.getNode("instrumentation/annunciators",1);
+props.globals.initNode("controls/engines/grnd-idle",1,"BOOL");
 props.globals.initNode("controls/flight/flaps-select",0,"INT");
 props.globals.initNode("controls/fuel/tank[0]/boost_pump",0,"INT");
 props.globals.initNode("controls/fuel/tank[1]/boost_pump",0,"INT");
@@ -193,7 +204,8 @@ props.globals.initNode("sim/model/copilot-seat",0,"DOUBLE");
 props.globals.initNode("sim/alarms/overspeed-alarm",0,"BOOL");
 props.globals.initNode("sim/alarms/stall-warning",0,"BOOL");
 props.globals.initNode("instrumentation/clock/flight-meter-hour",0,"DOUBLE");
-props.globals.initNode("instrumentation/primus2000/dc840/etx",0,"INT");
+props.globals.initNode("instrumentation/mfd/etx",0,"INT");
+props.globals.initNode("instrumentation/mfd[1]/etx",0,"INT");
 props.globals.initNode("instrumentation/transponder/unit/id-code",7777,"INT");
 props.globals.initNode("instrumentation/transponder/unit/id-code[1]",77,"INT");
 props.globals.initNode("instrumentation/transponder/unit/id-code[2]",77,"INT");
@@ -227,99 +239,56 @@ props.globals.initNode("autopilot/locks/alt-mach",0,"BOOL");
 props.globals.initNode("autopilot/settings/nav-btn",0,"BOOL");
 props.globals.initNode("autopilot/settings/fms-btn",0,"BOOL");
 props.globals.initNode("sim/sound/startup",0,"INT");
-props.globals.initNode("instrumentation/primus2000/mfd/s-menu",0,"INT");
-props.globals.initNode("instrumentation/primus2000/mfd/cdr-tot",0,"INT");
-props.globals.initNode("instrumentation/clock/chrono-hour",0,"INT");
-props.globals.initNode("instrumentation/clock/chrono-min",0,"INT");
-props.globals.initNode("instrumentation/clock/chrono-sec",0,"INT");
 props.globals.initNode("instrumentation/cdu/init",0,"BOOL");
 
-for (var i=0;i<5;i+=1) {
-	props.globals.initNode("instrumentation/primus2000/mfd/cdr"~i,0,"INT");
-}
-for (var i=0;i<6;i+=1) {
-	props.globals.initNode("instrumentation/primus2000/mfd/btn"~i,0,"INT");
-}
-
-var PWR2 =0;
 aircraft.livery.init("Aircraft/CitationX/Models/Liveries");
 var FHmeter = aircraft.timer.new("/instrumentation/clock/flight-meter-sec", 1,1); 
-var Chrono = aircraft.timer.new("/instrumentation/clock/chrono", 1,1);
-var LHeng= JetEngine.new(0);
-var RHeng= JetEngine.new(1);
+var Chrono = [aircraft.timer.new("/instrumentation/mfd/chrono", 1,1),
+             aircraft.timer.new("/instrumentation/mfd[1]/chrono", 1,1)];
+var LHeng = JetEngine.new(0);
+var RHeng = JetEngine.new(1);
 var tire=TireSpeed.new(3,0.430,0.615,0.615);
-var et = 0;
-
-### Initialisation FDM ###
-
-var fdm_init = func(){
-    FDM=getprop("/sim/flight-model");
-    setprop("controls/engines/N1-limit",95.0);
-}
+var elt = [0,0];
 
 ### Listeners ###
 
-setlistener("/sim/signals/reinit", func {
-    fdm_init();
-},0,0);
-
-setlistener("/sim/crashed", func(cr){
-    if(cr.getBoolValue()){
+setlistener("/sim/crashed", func(n){
+    if(n.getValue()){
     }
 },0,0);
 
-setlistener("sim/model/autostart", func(strt){
-    if(strt.getBoolValue()){
+setlistener("sim/model/autostart", func(n){
+    if(n.getValue()){
         Startup();
     }else{
         Shutdown();
     }
 },0,0);
 
-var turb0_stl = setlistener("/engines/engine[0]/turbine",func(turb) {
-		if(turb.getValue() >20) {
+var turb0_stl = setlistener("/engines/engine[0]/turbine",func(n) {
+		if(n.getValue() >20) {
 			setprop("/controls/engines/engine[0]/starter",0);
 			removelistener(turb0_stl);
 		}
 },0,0);
 
-var turb1_stl = setlistener("/engines/engine[1]/turbine",func(turb) {
-		if(turb.getValue() >20) {
+var turb1_stl = setlistener("/engines/engine[1]/turbine",func(n) {
+		if(n.getValue() >20) {
 			setprop("/controls/engines/engine[1]/starter",0);
 			removelistener(turb1_stl);
 		}
 },0,0);
 
-setlistener("/controls/gear/antiskid", func(as){
-    if(!as.getValue()){
-    MstrCaution.setBoolValue(1 * PWR2);
-    Annun.getNode("antiskid").setBoolValue(1 * PWR2);
-    }else{
-    Annun.getNode("antiskid").setBoolValue(0);
-    }
+setlistener("instrumentation/altimeter/setting-inhg", func(n){
+    setprop("instrumentation/altimeter/setting-kpa",n.getValue()*3.386389);
 },0,0);
 
-setlistener("instrumentation/altimeter/setting-inhg", func(inhg){
-    setprop("instrumentation/altimeter/setting-kpa",inhg.getValue()*3.386389);
-},0,0);
-
-setlistener("/sim/freeze/fuel", func(ffr){
-    if(ffr.getValue()){
-    MstrCaution.setBoolValue(1 * PWR2);
-    Annun.getNode("fuel-gauge").setBoolValue(1 * PWR2);
-    }else{
-    Annun.getNode("fuel-gauge").setBoolValue(0);
-    }
-},0,0);
-
-setlistener("/sim/current-view/internal", func(cv) {
-		var mem_yokeL = getprop("sim/model/mem-yoke_L");
-		var mem_yokeR = getprop("sim/model/mem-yoke_R");
-		if (cv.getValue()) {
-			setprop("sim/model/show-yoke_L",mem_yokeL);
-			setprop("sim/model/show-pilot",mem_yokeL);
-			setprop("sim/model/show-yoke_R",mem_yokeR);
-			setprop("sim/model/show-copilot",mem_yokeR);
+setlistener("/sim/current-view/internal", func(n) {
+		if (n.getValue()) {
+			setprop("sim/model/show-yoke_L",getprop("sim/model/mem-yoke_L"));
+			setprop("sim/model/show-pilot",getprop("sim/model/mem-yoke_L"));
+			setprop("sim/model/show-yoke_R",getprop("sim/model/mem-yoke_R"));
+			setprop("sim/model/show-copilot",getprop("sim/model/mem-yoke_R"));
 		} 
 		else {
 			setprop("sim/model/show-yoke_L",1);
@@ -346,105 +315,96 @@ setlistener("controls/engines/disengage", func(n){
   }
 },0,0);
 
-### Tables animation ###
-
-var tables_anim = func(i) {
-		var cc = props.globals.initNode("controls/tables/table"~i~"/cache/open",0,"BOOL");
-		var Table_0 = aircraft.door.new("controls/tables/table"~i~"/tab0",2);
-		var Table_1 = aircraft.door.new("controls/tables/table"~i~"/tab1",2);
-		var Table_2 = aircraft.door.new("controls/tables/table"~i~"/tab2",2);
-		var Cache = aircraft.door.new("controls/tables/table"~i~"/cache",1);
-
-		var timer_open = maketimer(0.1,func {
-			if (getprop("controls/tables/table"~i~"/cache/position-norm")==1.0) {
-				Table_0.open();
-				if (getprop("controls/tables/table"~i~"/tab0/position-norm")==1.0) {
-					Table_1.open();
-					if (getprop("controls/tables/table"~i~"/tab1/position-norm")==1.0) {
-						Table_2.open();
-						if (getprop("controls/tables/table"~i~"/tab2/position-norm")==1.0) {
-							cc.setBoolValue(1);
-							Cache.close();
-							timer_open.stop();
-						}
-					}				
-				}			
-			}
-		});
-		if (getprop("controls/tables/table"~i~"/extend") and !cc.getValue()) {
-			Cache.open();			
-			timer_open.start();
-		}
-
-		var timer_close = maketimer(0.1,func {
-			if (getprop("controls/tables/table"~i~"/cache/position-norm")==1.0) {
-				Table_2.close();
-				if (getprop("controls/tables/table"~i~"/tab2/position-norm")==0.0) {
-					Table_1.close();
-					if (getprop("controls/tables/table"~i~"/tab1/position-norm")==0.0) {
-						Table_0.close();
-						if (getprop("controls/tables/table"~i~"/tab0/position-norm")==0.0) {
-							cc.setValue(0);
-							Cache.close();
-							timer_close.stop();
-						}
-					}
-				}
-			}
-		});
-		if (!getprop("controls/tables/table"~i~"/extend") and cc.getValue()) {
-			Cache.open();
-			timer_close.start();
-		}
-}
-
-### Flight Meter and ET ###
-
-setlistener("instrumentation/primus2000/dc840/et", func(xx){
-	if(getprop("systems/electrical/right-bus-norm") and getprop("controls/electric/avionics-switch")==2) {
-		if(xx.getValue()){
-			if(et <= 2){et +=1}
-			else{et = 0}
-			setprop("instrumentation/primus2000/dc840/etx",et);
-			if(et == 1){Chrono.start()}
-			if(et == 2){Chrono.stop()}
-			if(et == 3){Chrono.reset()}			
-			chrono_update();
-		}
-	}
-},0,0);
-
 setlistener("/gear/gear[0]/wow", func(ww){
     if(ww.getValue()){
         FHmeter.stop();
-        Grd_Idle.setValue(1);			
+        setprop("controls/engines/grnd-idle",1);			
 				FH_write();
         setprop("autopilot/locks/fms-gs",0);
     }else{
-        Grd_Idle.setValue(0);
+        setprop("controls/engines/grnd-idle",0);			
         FHmeter.start();
 				### raz clock to prevent restart on bounce ###
 				setprop("/instrumentation/clock/flight-meter-sec",0);
     }
 },0,0);
 
-var chrono_update = func {
-	if(!getprop("systems/electrical/right-bus-norm") or getprop("controls/electric/avionics-switch")< 2) {
-		Chrono.stop();
-		Chrono.reset();
-		et=0;
-		setprop("instrumentation/primus2000/dc840/etx",0)
-		}
-		var chrono_hour = 0;
-		var chrono_min = 0;
-		var chrono = int(getprop("instrumentation/clock/chrono"));
-		var chrono_sec = math.fmod(chrono,60);
-		chrono_hour = chrono/3600;
-		chrono_min = (chrono_hour - int(chrono_hour))*60;
-		setprop("instrumentation/clock/chrono-sec",chrono_sec);
-		setprop("instrumentation/clock/chrono-min",int(chrono_min)); 
-		setprop("instrumentation/clock/chrono-hour",int(chrono_hour));
+### Chrono ###
+setlistener("instrumentation/mfd/et", func(n){
+  el_time(0,n.getValue());
+},0,0);
+
+setlistener("instrumentation/mfd[1]/et", func(n){
+  el_time(1,n.getValue());
+},0,0);
+
+var el_time = func(x,n) {
+  if(getprop("systems/electrical/right-bus-norm") and getprop("controls/electric/avionics-switch")==2) {
+	  if(n){
+	    if(elt[x] <= 2) elt[x] += 1;
+	    else elt[x] = 0 ;
+	    setprop("instrumentation/mfd["~x~"]/etx",elt[x]);
+	    if(elt[x] == 1) Chrono[x].start();
+	    if(elt[x] == 2) Chrono[x].stop();
+	    if(elt[x] == 3) Chrono[x].reset();		
+	  }
+  }
 }
+
+
+### Tables animation ###
+
+var tables_anim = func(i) {
+	props.globals.initNode("controls/tables/table"~i~"/cache/open",0,"BOOL");
+	var Table_0 = aircraft.door.new("controls/tables/table"~i~"/tab0",2);
+	var Table_1 = aircraft.door.new("controls/tables/table"~i~"/tab1",2);
+	var Table_2 = aircraft.door.new("controls/tables/table"~i~"/tab2",2);
+	var Cache = aircraft.door.new("controls/tables/table"~i~"/cache",1);
+	var cc = "controls/tables/table"~i~"/cache/open";
+
+	var timer_open = maketimer(0.1,func {
+		if (getprop("controls/tables/table"~i~"/cache/position-norm")==1.0) {
+			Table_0.open();
+			if (getprop("controls/tables/table"~i~"/tab0/position-norm")==1.0) {
+				Table_1.open();
+				if (getprop("controls/tables/table"~i~"/tab1/position-norm")==1.0) {
+					Table_2.open();
+					if (getprop("controls/tables/table"~i~"/tab2/position-norm")==1.0) {
+						setprop(cc,1);
+						Cache.close();
+						timer_open.stop();
+					}
+				}				
+			}			
+		}
+	});
+	if (getprop("controls/tables/table"~i~"/extend") and !getprop(cc)) {
+		Cache.open();			
+		timer_open.start();
+	}
+
+	var timer_close = maketimer(0.1,func {
+		if (getprop("controls/tables/table"~i~"/cache/position-norm")==1.0) {
+			Table_2.close();
+			if (getprop("controls/tables/table"~i~"/tab2/position-norm")==0.0) {
+				Table_1.close();
+				if (getprop("controls/tables/table"~i~"/tab1/position-norm")==0.0) {
+					Table_0.close();
+					if (getprop("controls/tables/table"~i~"/tab0/position-norm")==0.0) {
+						setprop(cc,0);
+						Cache.close();
+						timer_close.stop();
+					}
+				}
+			}
+		}
+	});
+	if (!getprop("controls/tables/table"~i~"/extend") and getprop(cc)) {
+		Cache.open();
+		timer_close.start();
+	}
+}
+### Flight Meter ###
 
 var FHupdate = func(tenths){
     var fmeter = getprop("/instrumentation/clock/flight-meter-sec");
@@ -650,7 +610,6 @@ var rudder_pos = nil;
 
 var citation_stl = setlistener("/sim/signals/fdm-initialized", func {
     checkVersion();
-    fdm_init();
     settimer(update_systems,2);
 		setprop("instrumentation/altimeter/setting-inhg",29.92001);
 		setprop("instrumentation/clock/flight-meter-sec",0);
@@ -668,7 +627,6 @@ var citation_stl = setlistener("/sim/signals/fdm-initialized", func {
 var update_systems = func{
     LHeng.update();
     RHeng.update();
-		chrono_update();
     FHupdate(0);
     tire.get_rotation("yasim");
     if(getprop("velocities/airspeed-kt")>40)setprop("controls/cabin-door/open",0);

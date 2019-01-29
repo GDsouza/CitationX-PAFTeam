@@ -89,8 +89,8 @@
     </model>
 
     <model>
-        <name>ND_L</name>
-        <path>Models/Instruments/MFD/ND_F.xml</path>
+        <name>MFD_L</name>
+        <path>Models/Instruments/MFD/mfdL_F.xml</path>
         <offsets>
             <x-m>0.0011</x-m>
             <y-m>-0.1865</y-m>
@@ -100,10 +100,30 @@
 
     <model>
         <name>Layers_L</name>
-        <path>Models/Instruments/MFD/ND_B.xml</path>
+        <path>Models/Instruments/MFD/mfdL_B.xml</path>
         <offsets>
             <x-m>0.0010</x-m>
             <y-m>-0.1865</y-m>
+            <z-m>0.136</z-m>
+        </offsets>
+    </model>
+
+    <model>
+        <name>MFD_R</name>
+        <path>Models/Instruments/MFD/mfdR_F.xml</path>
+        <offsets>
+            <x-m>0.0011</x-m>
+            <y-m>0.195</y-m>
+            <z-m>0.136</z-m>
+        </offsets>
+    </model>
+
+    <model>
+        <name>Layers_R</name>
+        <path>Models/Instruments/MFD/mfdR_B.xml</path>
+        <offsets>
+            <x-m>0.0010</x-m>
+            <y-m>0.195</y-m>
             <z-m>0.136</z-m>
         </offsets>
     </model>
@@ -115,25 +135,6 @@
             <x-m>0.0010</x-m>
             <y-m>-0.1890</y-m>
             <z-m>0.155</z-m>
-        </offsets>
-    </model>
-    <model>
-        <name>ND_R</name>
-        <path>Models/Instruments/MFD/ND_F.xml</path>
-        <offsets>
-            <x-m>0.0011</x-m>
-            <y-m>0.195</y-m>
-            <z-m>0.136</z-m>
-        </offsets>
-    </model>
-
-    <model>
-        <name>Layers_R</name>
-        <path>Models/Instruments/MFD/ND_B.xml</path>
-        <offsets>
-            <x-m>0.0010</x-m>
-            <y-m>0.195</y-m>
-            <z-m>0.136</z-m>
         </offsets>
     </model>
 
@@ -316,13 +317,19 @@
         <object-name>ent.btn</object-name>
         <object-name>prev.btn</object-name>
         <object-name>prev.btn1</object-name>
-        <object-name>MFD.btn0</object-name>
-        <object-name>MFD.btn1</object-name>
-        <object-name>MFD.btn2</object-name>
-        <object-name>MFD.btn3</object-name>
-        <object-name>MFD.btn4</object-name>
-        <object-name>MFD.btn5</object-name>
+        <object-name>MFD_L.btn0</object-name>
+        <object-name>MFD_L.btn1</object-name>
+        <object-name>MFD_L.btn2</object-name>
+        <object-name>MFD_L.btn3</object-name>
+        <object-name>MFD_L.btn4</object-name>
+        <object-name>MFD_L.btn5</object-name>
         <object-name>MFD_L.knob</object-name>
+        <object-name>MFD_R.btn0</object-name>
+        <object-name>MFD_R.btn1</object-name>
+        <object-name>MFD_R.btn2</object-name>
+        <object-name>MFD_R.btn3</object-name>
+        <object-name>MFD_R.btn4</object-name>
+        <object-name>MFD_R.btn5</object-name>
         <object-name>MFD_R.knob</object-name>
         <object-name>EICAS.btn0</object-name>
         <object-name>EICAS.btn1</object-name>
@@ -419,8 +426,18 @@
 
     <animation>
         <type>select</type>
+        <object-name>MFD_R</object-name>
+        <object-name>Layers_R</object-name>
+        <object-name>Vsd_R</object-name>
+        <condition>
+          <property>controls/electric/avionics-power</property>
+				</condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>MFD_L</object-name>
         <object-name>Layers_L</object-name>
-        <object-name>ND_L</object-name>
         <object-name>Vsd_L</object-name>
         <condition>
 					<and>
@@ -428,22 +445,6 @@
             <greater-than>
 							<property>controls/electric/avionics-switch</property>
 								<value>0</value>								
-						</greater-than>
-           </and>
-        </condition>
-    </animation>
-
-    <animation>
-        <type>select</type>
-        <object-name>Layers_R</object-name>
-        <object-name>ND_R</object-name>
-        <object-name>Vsd_R</object-name>
-        <condition>
-					<and>
-						<property>systems/electrical/left-bus-norm</property>
-            <greater-than>
-							<property>controls/electric/avionics-switch</property>
-								<value>1</value>								
 						</greater-than>
            </and>
         </condition>
@@ -2710,14 +2711,6 @@
                 <max>1000</max>
                 <wrap>false</wrap>
             </binding>
-            <binding>
-                <command>property-adjust</command>
-                <property>instrumentation/mk-viii/inputs/arinc429/decision-height</property>
-                <step>50</step>
-                <min>0</min>
-                <max>1000</max>
-                <wrap>false</wrap>
-            </binding>
         </action>
         <action>
             <button>4</button>
@@ -2726,14 +2719,6 @@
             <binding>
                 <command>property-adjust</command>
                 <property>autopilot/settings/minimums</property>
-                <step>-50</step>
-                <min>0</min>
-                <max>1000</max>
-                <wrap>false</wrap>
-            </binding>
-            <binding>
-                <command>property-adjust</command>
-                <property>instrumentation/mk-viii/inputs/arinc429/decision-height</property>
                 <step>-50</step>
                 <min>0</min>
                 <max>1000</max>
@@ -2800,12 +2785,12 @@
         </hovered>
     </animation>
 
-<!-- MFD -->
+<!-- MFD LEFT -->
 
     <animation>
         <type>rotate</type>
         <object-name>MFD_L.knob</object-name>
-        <property>instrumentation/efis/inputs/range-nm</property>
+        <property>instrumentation/mfd/range-nm</property>
         <factor>5</factor>
         <axis>
             <x>-1.0</x>
@@ -2819,11 +2804,286 @@
         </center>
     </animation>
 
+    <animation>
+        <type>pick</type>
+        <object-name>MFD_L.knob</object-name>
+        <action>
+            <button>0</button>
+            <button>3</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <command>nasal</command>
+                <script>mfd.set_range(1,0);</script>
+            </binding>
+        </action>
+        <action>
+            <button>4</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <command>nasal</command>
+                <script>mfd.set_range(-1,0);</script>
+            </binding>
+        </action>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>MFD_L.btn0</object-name>	
+        <property>instrumentation/mfd/btn0</property>
+				<factor>0.0032</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+				</axis>
+    </animation>
+    <animation>
+        <type>pick</type>
+        <object-name>MFD_L.btn0</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+			        <command>property-assign</command>
+			        <property>instrumentation/mfd/btn0</property>
+								<value>1</value>
+			    </binding>
+          <binding>
+              <command>property-cycle</command>
+              <property>instrumentation/mfd/menu-num</property>
+              <value>0</value>
+              <value>1</value>
+          </binding>
+          <binding>
+              <command>nasal</command>
+              <script>mfd.menu(0);</script>
+          </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+						<mod-up>
+							<binding>
+								<command>property-assign</command>
+									<property>instrumentation/mfd/btn0</property>
+									<value>0</value>
+							</binding>
+						</mod-up>
+        </action>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>MFD_L.btn1</object-name>	
+        <property>instrumentation/mfd/btn1</property>
+				<factor>0.0032</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+				</axis>
+    </animation>
+    <animation>
+        <type>pick</type>
+        <object-name>MFD_L.btn1</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+			        <command>property-assign</command>
+			        <property>instrumentation/mfd/btn1</property>
+								<value>1</value>
+			    </binding>
+          <binding>
+              <command>nasal</command>
+              <script>mfd.menu(0);</script>
+          </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+						<mod-up>
+							<binding>
+								<command>property-assign</command>
+									<property>instrumentation/mfd/btn1</property>
+									<value>0</value>
+							</binding>
+						</mod-up>
+        </action>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>MFD_L.btn2</object-name>	
+        <property>instrumentation/mfd/btn2</property>
+				<factor>0.0032</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+				</axis>
+    </animation>
+    <animation>
+        <type>pick</type>
+        <object-name>MFD_L.btn2</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+			        <command>property-assign</command>
+			        <property>instrumentation/mfd/btn2</property>
+								<value>1</value>
+			    </binding>
+          <binding>
+              <command>nasal</command>
+              <script>mfd.menu(0);</script>
+          </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+						<mod-up>
+							<binding>
+								<command>property-assign</command>
+									<property>instrumentation/mfd/btn2</property>
+									<value>0</value>
+							</binding>
+						</mod-up>
+        </action>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>MFD_L.btn3</object-name>	
+        <property>instrumentation/mfd/btn3</property>
+				<factor>0.0032</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+				</axis>
+    </animation>
+    <animation>
+        <type>pick</type>
+        <object-name>MFD_L.btn3</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+			        <command>property-assign</command>
+			        <property>instrumentation/mfd/btn3</property>
+								<value>1</value>
+			    </binding>
+          <binding>
+              <command>nasal</command>
+              <script>mfd.menu(0);</script>
+          </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+					<mod-up>
+						<binding>
+							<command>property-assign</command>
+								<property>instrumentation/mfd/btn3</property>
+								<value>0</value>
+						</binding>
+					</mod-up>
+        </action>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>MFD_L.btn4</object-name>	
+        <property>instrumentation/mfd/btn4</property>
+				<factor>0.0032</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+				</axis>
+    </animation>
+    <animation>
+        <type>pick</type>
+        <object-name>MFD_L.btn4</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+			        <command>property-assign</command>
+			        <property>instrumentation/mfd/btn4</property>
+								<value>1</value>
+			    </binding>
+          <binding>
+              <command>nasal</command>
+              <script>mfd.menu(0);</script>
+          </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+						<mod-up>
+							<binding>
+								<command>property-assign</command>
+									<property>instrumentation/mfd/btn4</property>
+									<value>0</value>
+							</binding>
+						</mod-up>
+        </action>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>MFD_L.btn5</object-name>	
+        <property>instrumentation/mfd/btn5</property>
+				<factor>0.0032</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+				</axis>
+    </animation>
+    <animation>
+        <type>pick</type>
+        <object-name>MFD_L.btn5</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+			        <command>property-assign</command>
+			        <property>instrumentation/mfd/btn5</property>
+								<value>1</value>
+			    </binding>
+          <binding>
+              <command>nasal</command>
+              <script>mfd.menu(0);</script>
+          </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+					<mod-up>
+						<binding>
+							<command>property-assign</command>
+								<property>instrumentation/mfd/btn5</property>
+								<value>0</value>
+						</binding>
+					</mod-up>
+        </action>
+    </animation>
+
+<!-- MFD RIGHT -->
 
     <animation>
         <type>rotate</type>
         <object-name>MFD_R.knob</object-name>
-        <property>instrumentation/efis/inputs/range-nm</property>
+        <property>instrumentation/mfd[1]/range-nm</property>
         <factor>5</factor>
         <axis>
             <x>-1.0</x>
@@ -2839,7 +3099,6 @@
 
     <animation>
         <type>pick</type>
-        <object-name>MFD_L.knob</object-name>
         <object-name>MFD_R.knob</object-name>
         <action>
             <button>0</button>
@@ -2847,7 +3106,7 @@
             <repeatable>false</repeatable>
             <binding>
                 <command>nasal</command>
-                <script>mfd.set_range(1);</script>
+                <script>mfd.set_range(1,1);</script>
             </binding>
         </action>
         <action>
@@ -2855,15 +3114,15 @@
             <repeatable>false</repeatable>
             <binding>
                 <command>nasal</command>
-                <script>mfd.set_range(-1);</script>
+                <script>mfd.set_range(-1,1);</script>
             </binding>
         </action>
     </animation>
 
     <animation>
         <type>translate</type>
-        <object-name>MFD.btn0</object-name>	
-        <property>instrumentation/primus2000/mfd/btn0</property>
+        <object-name>MFD_R.btn0</object-name>	
+        <property>instrumentation/mfd[1]/btn0</property>
 				<factor>0.0032</factor>
         <axis>
             <x>-1</x>
@@ -2873,25 +3132,25 @@
     </animation>
     <animation>
         <type>pick</type>
-        <object-name>MFD.btn0</object-name>
+        <object-name>MFD_R.btn0</object-name>
         <visible>true</visible>
         <action>
           <button>0</button>
           <repeatable>false</repeatable>
 			    <binding>
 			        <command>property-assign</command>
-			        <property>instrumentation/primus2000/mfd/btn0</property>
+			        <property>instrumentation/mfd[1]/btn0</property>
 								<value>1</value>
 			    </binding>
           <binding>
               <command>property-cycle</command>
-              <property>instrumentation/primus2000/mfd/menu-num</property>
+              <property>instrumentation/mfd[1]/menu-num</property>
               <value>0</value>
               <value>1</value>
           </binding>
           <binding>
               <command>nasal</command>
-              <script>mfd.menu();</script>
+              <script>mfd.menu(1);</script>
           </binding>
           <binding>
             <command>property-toggle</command>
@@ -2900,7 +3159,7 @@
 						<mod-up>
 							<binding>
 								<command>property-assign</command>
-									<property>instrumentation/primus2000/mfd/btn0</property>
+									<property>instrumentation/mfd[1]/btn0</property>
 									<value>0</value>
 							</binding>
 						</mod-up>
@@ -2909,8 +3168,8 @@
 
     <animation>
         <type>translate</type>
-        <object-name>MFD.btn1</object-name>	
-        <property>instrumentation/primus2000/mfd/btn1</property>
+        <object-name>MFD_R.btn1</object-name>	
+        <property>instrumentation/mfd[1]/btn1</property>
 				<factor>0.0032</factor>
         <axis>
             <x>-1</x>
@@ -2920,19 +3179,19 @@
     </animation>
     <animation>
         <type>pick</type>
-        <object-name>MFD.btn1</object-name>
+        <object-name>MFD_R.btn1</object-name>
         <visible>true</visible>
         <action>
           <button>0</button>
           <repeatable>false</repeatable>
 			    <binding>
 			        <command>property-assign</command>
-			        <property>instrumentation/primus2000/mfd/btn1</property>
+			        <property>instrumentation/mfd[1]/btn1</property>
 								<value>1</value>
 			    </binding>
           <binding>
               <command>nasal</command>
-              <script>mfd.menu();</script>
+              <script>mfd.menu(1);</script>
           </binding>
           <binding>
             <command>property-toggle</command>
@@ -2941,7 +3200,7 @@
 						<mod-up>
 							<binding>
 								<command>property-assign</command>
-									<property>instrumentation/primus2000/mfd/btn1</property>
+									<property>instrumentation/mfd[1]/btn1</property>
 									<value>0</value>
 							</binding>
 						</mod-up>
@@ -2950,8 +3209,8 @@
 
     <animation>
         <type>translate</type>
-        <object-name>MFD.btn2</object-name>	
-        <property>instrumentation/primus2000/mfd/btn2</property>
+        <object-name>MFD_R.btn2</object-name>	
+        <property>instrumentation/mfd[1]/btn2</property>
 				<factor>0.0032</factor>
         <axis>
             <x>-1</x>
@@ -2961,19 +3220,19 @@
     </animation>
     <animation>
         <type>pick</type>
-        <object-name>MFD.btn2</object-name>
+        <object-name>MFD_R.btn2</object-name>
         <visible>true</visible>
         <action>
           <button>0</button>
           <repeatable>false</repeatable>
 			    <binding>
 			        <command>property-assign</command>
-			        <property>instrumentation/primus2000/mfd/btn2</property>
+			        <property>instrumentation/mfd[1]/btn2</property>
 								<value>1</value>
 			    </binding>
           <binding>
               <command>nasal</command>
-              <script>mfd.menu();</script>
+              <script>mfd.menu(1);</script>
           </binding>
           <binding>
             <command>property-toggle</command>
@@ -2982,7 +3241,7 @@
 						<mod-up>
 							<binding>
 								<command>property-assign</command>
-									<property>instrumentation/primus2000/mfd/btn2</property>
+									<property>instrumentation/mfd[1]/btn2</property>
 									<value>0</value>
 							</binding>
 						</mod-up>
@@ -2991,8 +3250,8 @@
 
     <animation>
         <type>translate</type>
-        <object-name>MFD.btn3</object-name>	
-        <property>instrumentation/primus2000/mfd/btn3</property>
+        <object-name>MFD_R.btn3</object-name>	
+        <property>instrumentation/mfd[1]/btn3</property>
 				<factor>0.0032</factor>
         <axis>
             <x>-1</x>
@@ -3002,19 +3261,19 @@
     </animation>
     <animation>
         <type>pick</type>
-        <object-name>MFD.btn3</object-name>
+        <object-name>MFD_R.btn3</object-name>
         <visible>true</visible>
         <action>
           <button>0</button>
           <repeatable>false</repeatable>
 			    <binding>
 			        <command>property-assign</command>
-			        <property>instrumentation/primus2000/mfd/btn3</property>
+			        <property>instrumentation/mfd[1]/btn3</property>
 								<value>1</value>
 			    </binding>
           <binding>
               <command>nasal</command>
-              <script>mfd.menu();</script>
+              <script>mfd.menu(1);</script>
           </binding>
           <binding>
             <command>property-toggle</command>
@@ -3023,7 +3282,7 @@
 					<mod-up>
 						<binding>
 							<command>property-assign</command>
-								<property>instrumentation/primus2000/mfd/btn3</property>
+								<property>instrumentation/mfd[1]/btn3</property>
 								<value>0</value>
 						</binding>
 					</mod-up>
@@ -3032,8 +3291,8 @@
 
     <animation>
         <type>translate</type>
-        <object-name>MFD.btn4</object-name>	
-        <property>instrumentation/primus2000/mfd/btn4</property>
+        <object-name>MFD_R.btn4</object-name>	
+        <property>instrumentation/mfd[1]/btn4</property>
 				<factor>0.0032</factor>
         <axis>
             <x>-1</x>
@@ -3043,19 +3302,19 @@
     </animation>
     <animation>
         <type>pick</type>
-        <object-name>MFD.btn4</object-name>
+        <object-name>MFD_R.btn4</object-name>
         <visible>true</visible>
         <action>
           <button>0</button>
           <repeatable>false</repeatable>
 			    <binding>
 			        <command>property-assign</command>
-			        <property>instrumentation/primus2000/mfd/btn4</property>
+			        <property>instrumentation/mfd[1]/btn4</property>
 								<value>1</value>
 			    </binding>
           <binding>
               <command>nasal</command>
-              <script>mfd.menu();</script>
+              <script>mfd.menu(1);</script>
           </binding>
           <binding>
             <command>property-toggle</command>
@@ -3064,7 +3323,7 @@
 						<mod-up>
 							<binding>
 								<command>property-assign</command>
-									<property>instrumentation/primus2000/mfd/btn4</property>
+									<property>instrumentation/mfd[1]/btn4</property>
 									<value>0</value>
 							</binding>
 						</mod-up>
@@ -3073,8 +3332,8 @@
 
     <animation>
         <type>translate</type>
-        <object-name>MFD.btn5</object-name>	
-        <property>instrumentation/primus2000/mfd/btn5</property>
+        <object-name>MFD_R.btn5</object-name>	
+        <property>instrumentation/mfd[1]/btn5</property>
 				<factor>0.0032</factor>
         <axis>
             <x>-1</x>
@@ -3084,19 +3343,19 @@
     </animation>
     <animation>
         <type>pick</type>
-        <object-name>MFD.btn5</object-name>
+        <object-name>MFD_R.btn5</object-name>
         <visible>true</visible>
         <action>
           <button>0</button>
           <repeatable>false</repeatable>
 			    <binding>
 			        <command>property-assign</command>
-			        <property>instrumentation/primus2000/mfd/btn5</property>
+			        <property>instrumentation/mfd[1]/btn5</property>
 								<value>1</value>
 			    </binding>
           <binding>
               <command>nasal</command>
-              <script>mfd.menu();</script>
+              <script>mfd.menu(1);</script>
           </binding>
           <binding>
             <command>property-toggle</command>
@@ -3105,7 +3364,7 @@
 					<mod-up>
 						<binding>
 							<command>property-assign</command>
-								<property>instrumentation/primus2000/mfd/btn5</property>
+								<property>instrumentation/mfd[1]/btn5</property>
 								<value>0</value>
 						</binding>
 					</mod-up>
@@ -3915,7 +4174,7 @@
 
     <animation>
         <type>translate</type>
-        <object-name>pfdhsi.btn</object-name>	
+        <object-name>pfdhsiL.btn</object-name>	
         <property>instrumentation/primus2000/dc840/pfd-hsi</property>
 				<factor>0.0027</factor>
         <axis>
@@ -3924,9 +4183,10 @@
             <z>0</z>
 				</axis>
     </animation>
+
     <animation>
       <type>pick</type>
-      <object-name>pfdhsi.btn</object-name>
+      <object-name>pfdhsiL.btn</object-name>
       <action>
         <button>0</button>
         <binding>
@@ -3941,7 +4201,7 @@
       <hovered>
         <binding>
           <command>set-tooltip</command>
-          <tooltip-id>pfdhsi.btn</tooltip-id>
+          <tooltip-id>pfdhsiL.btn</tooltip-id>
           <label>PFD HSI : %s</label>
           <property>instrumentation/primus2000/dc840/pfd-hsi</property>
           <mapping>on-off</mapping>
@@ -3951,8 +4211,8 @@
 
     <animation>
         <type>translate</type>
-        <object-name>pfdwx.btn</object-name>	
-        <property>instrumentation/primus2000/dc840/pfd-wx</property>
+        <object-name>pfdhsiR.btn</object-name>	
+        <property>instrumentation/primus2000/dc840/pfd-hsi[1]</property>
 				<factor>0.0027</factor>
         <axis>
             <x>-1</x>
@@ -3962,7 +4222,44 @@
     </animation>
     <animation>
       <type>pick</type>
-      <object-name>pfdwx.btn</object-name>
+      <object-name>pfdhsiR.btn</object-name>
+      <action>
+        <button>0</button>
+        <binding>
+          <command>property-toggle</command>
+          <property>instrumentation/primus2000/dc840/pfd-hsi[1]</property>
+        </binding>
+        <binding>
+          <command>property-toggle</command>
+          <property>sim/sound/click</property>
+        </binding>
+      </action>
+      <hovered>
+        <binding>
+          <command>set-tooltip</command>
+          <tooltip-id>pfdhsiR.btn</tooltip-id>
+          <label>PFD HSI : %s</label>
+          <property>instrumentation/primus2000/dc840/pfd-hsi[1]</property>
+          <mapping>on-off</mapping>
+        </binding>
+      </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>pfdwxL.btn</object-name>	
+        <property>instrumentation/primus2000/dc840/pfd-wx</property>
+				<factor>0.0027</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+				</axis>
+    </animation>
+ 
+   <animation>
+      <type>pick</type>
+      <object-name>pfdwxL.btn</object-name>
       <action>
         <button>0</button>
         <binding>
@@ -3977,7 +4274,7 @@
       <hovered>
         <binding>
           <command>set-tooltip</command>
-          <tooltip-id>pfdwx.btn</tooltip-id>
+          <tooltip-id>pfdwxL.btn</tooltip-id>
           <label>PFD WEATHER : %s</label>
           <property>instrumentation/primus2000/dc840/pfd-wx</property>
           <mapping>on-off</mapping>
@@ -3987,8 +4284,45 @@
 
     <animation>
         <type>translate</type>
-        <object-name>et.btn</object-name>	
-        <property>instrumentation/primus2000/dc840/et</property>
+        <object-name>pfdwxR.btn</object-name>	
+        <property>instrumentation/primus2000/dc840/pfd-wx[1]</property>
+				<factor>0.0027</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+				</axis>
+    </animation>
+ 
+   <animation>
+      <type>pick</type>
+      <object-name>pfdwxR.btn</object-name>
+      <action>
+        <button>0</button>
+        <binding>
+          <command>property-toggle</command>
+          <property>instrumentation/primus2000/dc840/pfd-wx[1]</property>
+        </binding>
+        <binding>
+          <command>property-toggle</command>
+          <property>sim/sound/click</property>
+        </binding>
+      </action>
+      <hovered>
+        <binding>
+          <command>set-tooltip</command>
+          <tooltip-id>pfdwxR.btn</tooltip-id>
+          <label>PFD WEATHER : %s</label>
+          <property>instrumentation/primus2000/dc840/pfd-wx[1]</property>
+          <mapping>on-off</mapping>
+        </binding>
+      </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>et_L.btn</object-name>	
+        <property>instrumentation/mfd/et</property>
 				<factor>0.0027</factor>
         <axis>
             <x>-1</x>
@@ -3999,13 +4333,13 @@
 
     <animation>
         <type>pick</type>
-        <object-name>et.btn</object-name>
+        <object-name>et_L.btn</object-name>
         <action>
           <button>0</button>
           <repeatable>false</repeatable>
           <binding>
             <command>property-assign</command>
-        		<property>instrumentation/primus2000/dc840/et</property>
+        		<property>instrumentation/mfd/et</property>
 						<value>1</value>
           </binding>
           <binding>
@@ -4015,7 +4349,7 @@
 						<mod-up>
 							<binding>
 								<command>property-assign</command>
-									<property>instrumentation/primus2000/dc840/et</property>
+									<property>instrumentation/mfd/et</property>
 									<value>0</value>
 							</binding>
 						</mod-up>
@@ -4025,7 +4359,7 @@
                 <command>set-tooltip</command>
                 <tooltip-id>et.btn</tooltip-id>
                 <label>ET : %s</label>
-	              <property>instrumentation/primus2000/dc840/etx</property>
+	              <property>instrumentation/mfd/etx</property>
                 <mapping>nasal</mapping>
                 <script>
                   var modes = ['OFF','ON','STOP','RESET'];
@@ -4037,8 +4371,8 @@
 
     <animation>
         <type>translate</type>
-        <object-name>tcas.btn</object-name>	
-        <property>instrumentation/efis/inputs/tfc</property>
+        <object-name>et_R.btn</object-name>	
+        <property>instrumentation/mfd[1]/et</property>
 				<factor>0.0027</factor>
         <axis>
             <x>-1</x>
@@ -4046,38 +4380,66 @@
             <z>0</z>
 				</axis>
     </animation>
+
     <animation>
         <type>pick</type>
-        <object-name>tcas.btn</object-name>
+        <object-name>et_R.btn</object-name>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+          <binding>
+            <command>property-assign</command>
+        		<property>instrumentation/mfd[1]/et</property>
+						<value>1</value>
+          </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+						<mod-up>
+							<binding>
+								<command>property-assign</command>
+									<property>instrumentation/mfd[1]/et</property>
+									<value>0</value>
+							</binding>
+						</mod-up>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>et.btn</tooltip-id>
+                <label>ET : %s</label>
+	              <property>instrumentation/mfd[1]/etx</property>
+                <mapping>nasal</mapping>
+                <script>
+                  var modes = ['OFF','ON','STOP','RESET'];
+                  return modes[arg[0]];
+                </script>            
+            </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>tcasL.btn</object-name>	
+        <property>instrumentation/tcas/tfc</property>
+				<factor>0.0027</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>tcasL.btn</object-name>
         <action>
           <button>0</button>
           <repeatable>false</repeatable>
           <binding>
               <command>property-toggle</command>
-              <property>instrumentation/efis/inputs/tfc</property>
-          </binding>
-          <binding>
-              <command>property-assign</command>
-              <property>sim/traffic-manager/enabled</property>
-              <property>instrumentation/efis/inputs/tfc</property>
-          </binding>
-          <binding>
-              <condition>
-                  <not>
-                      <property>instrumentation/efis/inputs/tfc</property>
-                  </not>
-              </condition>
-              <command>property-assign</command>
-              <property>instrumentation/tcas/inputs/mode</property>
-              <value>0</value>
-          </binding>
-          <binding>
-              <condition>
-                  <property>instrumentation/efis/inputs/tfc</property>
-              </condition>
-              <command>property-assign</command>
-              <property>instrumentation/tcas/inputs/mode</property>
-              <value>3</value>
+              <property>instrumentation/tcas/tfc</property>
           </binding>
           <binding>
             <command>property-toggle</command>
@@ -4087,9 +4449,9 @@
         <hovered>
           <binding>
             <command>set-tooltip</command>
-            <tooltip-id>tcas.btn</tooltip-id>
+            <tooltip-id>tcasL.btn</tooltip-id>
             <label>TRAFIC : %s</label>
-            <property>instrumentation/efis/inputs/tfc</property>
+            <property>instrumentation/tcas/tfc</property>
             <mapping>on-off</mapping>
           </binding>
         </hovered>
@@ -4097,7 +4459,45 @@
 
     <animation>
         <type>translate</type>
-        <object-name>acftsys.btn</object-name>	
+        <object-name>tcasR.btn</object-name>	
+        <property>instrumentation/tcas/tfc[1]</property>
+				<factor>0.0027</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>tcasR.btn</object-name>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+          <binding>
+              <command>property-toggle</command>
+              <property>instrumentation/tcas/tfc[1]</property>
+          </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+            <command>set-tooltip</command>
+            <tooltip-id>tcasR.btn</tooltip-id>
+            <label>TRAFIC : %s</label>
+            <property>instrumentation/tcas/tfc[1]</property>
+            <mapping>on-off</mapping>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>acftsysL.btn</object-name>	
         <property>instrumentation/primus2000/dc840/acft</property>
 				<factor>0.0027</factor>
         <axis>
@@ -4106,77 +4506,37 @@
             <z>0</z>
 				</axis>
     </animation>
+
     <animation>
-        <type>pick</type>
-        <object-name>acftsys.btn</object-name>
-        <action>
-          <button>0</button>
-          <repeatable>false</repeatable>
-          <binding>
-              <command>property-toggle</command>
+      <type>pick</type>
+      <object-name>acftsysL.btn</object-name>
+      <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+          <command>property-toggle</command>
+        <property>instrumentation/primus2000/dc840/acft</property>
+        </binding>
+        <binding>
+          <command>property-toggle</command>
+          <property>sim/sound/click</property>
+        </binding>
+      </action>
+      <hovered>
+        <binding>
+          <command>set-tooltip</command>
+          <tooltip-id>acftsysL.btn</tooltip-id>
+          <label>ACFT SYS : %s</label>
           <property>instrumentation/primus2000/dc840/acft</property>
-          </binding>
-          <binding>
-            <command>property-toggle</command>
-            <property>sim/sound/click</property>
-          </binding>
-        </action>
-        <hovered>
-            <binding>
-                <command>set-tooltip</command>
-                <tooltip-id>acftsys.btn</tooltip-id>
-                <label>ACFT SYS : %s</label>
-	              <property>instrumentation/primus2000/dc840/acft</property>
-                <mapping>on-off</mapping>
-            </binding>
-        </hovered>
+          <mapping>on-off</mapping>
+        </binding>
+      </hovered>
     </animation>
 
     <animation>
         <type>translate</type>
-        <object-name>mfdmap.btn</object-name>	
-        <property>instrumentation/primus2000/dc840/mfd-map</property>
-				<factor>0.0027</factor>
-        <axis>
-            <x>-1</x>
-            <y>0</y>
-            <z>0</z>
-				</axis>
-    </animation>
-    <animation>
-        <type>pick</type>
-        <object-name>mfdmap.btn</object-name>
-        <action>
-          <button>0</button>
-          <repeatable>false</repeatable>
-          <binding>
-              <command>property-toggle</command>
-              <property>instrumentation/primus2000/dc840/mfd-map</property>
-          </binding>
-          <binding>
-            <command>property-toggle</command>
-            <property>sim/sound/click</property>
-          </binding>
-       </action>
-        <hovered>
-            <binding>
-                <command>set-tooltip</command>
-                <tooltip-id>mfdmap.btn</tooltip-id>
-                <label>MFD : %s</label>
-	              <property>instrumentation/primus2000/dc840/mfd-map</property>
-                <mapping>nasal</mapping>
-                <script>
-                  var modes = ['PLAN', 'MAP'];
-                  return modes[arg[0]];
-                </script>            
-            </binding>
-        </hovered>
-    </animation>
-
-    <animation>
-        <type>translate</type>
-        <object-name>mfdwx.btn</object-name>	
-        <property>instrumentation/efis/inputs/wxr</property>
+        <object-name>acftsysR.btn</object-name>	
+        <property>instrumentation/primus2000/dc840/acft[1]</property>
 				<factor>0.0027</factor>
         <axis>
             <x>-1</x>
@@ -4186,18 +4546,140 @@
     </animation>
 
     <animation>
+      <type>pick</type>
+      <object-name>acftsysR.btn</object-name>
+      <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+          <command>property-toggle</command>
+        <property>instrumentation/primus2000/dc840/acft[1]</property>
+        </binding>
+        <binding>
+          <command>property-toggle</command>
+          <property>sim/sound/click</property>
+        </binding>
+      </action>
+      <hovered>
+        <binding>
+          <command>set-tooltip</command>
+          <tooltip-id>acftsysR.btn</tooltip-id>
+          <label>ACFT SYS : %s</label>
+          <property>instrumentation/primus2000/dc840/acft[1]</property>
+          <mapping>on-off</mapping>
+        </binding>
+      </hovered>
+    </animation>
+
+    <animation>
+      <type>translate</type>
+      <object-name>mfdmapL.btn</object-name>	
+      <property>instrumentation/mfd/map</property>
+			<factor>0.0027</factor>
+      <axis>
+        <x>-1</x>
+        <y>0</y>
+        <z>0</z>
+			</axis>
+    </animation>
+
+    <animation>
+      <type>pick</type>
+      <object-name>mfdmapL.btn</object-name>
+      <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+          <command>property-toggle</command>
+          <property>instrumentation/mfd/map</property>
+        </binding>
+        <binding>
+          <command>property-toggle</command>
+          <property>sim/sound/click</property>
+        </binding>
+     </action>
+      <hovered>
+        <binding>
+          <command>set-tooltip</command>
+          <tooltip-id>mfdmapL.btn</tooltip-id>
+          <label>MFD : %s</label>
+          <property>instrumentation/mfd/map</property>
+          <mapping>nasal</mapping>
+          <script>
+            var modes = ['PLAN', 'MAP'];
+            return modes[arg[0]];
+          </script>            
+        </binding>
+      </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>mfdmapR.btn</object-name>	
+        <property>instrumentation/mfd[1]/map</property>
+				<factor>0.0027</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+      <type>pick</type>
+      <object-name>mfdmapR.btn</object-name>
+      <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+          <command>property-toggle</command>
+          <property>instrumentation/mfd[1]/map</property>
+        </binding>
+        <binding>
+          <command>property-toggle</command>
+          <property>sim/sound/click</property>
+        </binding>
+     </action>
+      <hovered>
+        <binding>
+          <command>set-tooltip</command>
+          <tooltip-id>mfdmapR.btn</tooltip-id>
+          <label>MFD : %s</label>
+          <property>instrumentation/mfd[1]/map</property>
+          <mapping>nasal</mapping>
+          <script>
+            var modes = ['PLAN', 'MAP'];
+            return modes[arg[0]];
+          </script>            
+        </binding>
+      </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>mfdwxL.btn</object-name>	
+        <property>instrumentation/efis/wxr</property>
+				<factor>0.0027</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
         <type>pick</type>
-        <object-name>mfdwx.btn</object-name>
+        <object-name>mfdwxL.btn</object-name>
         <action>
             <button>0</button>
             <repeatable>false</repeatable>
             <binding>
               <command>property-toggle</command>
-	            <property>instrumentation/efis/inputs/wxr</property>
+	            <property>instrumentation/efis/wxr</property>
             </binding>
             <binding>
 							<condition>
-		            <property>instrumentation/efis/inputs/wxr</property>
+		            <property>instrumentation/efis/wxr</property>
 							</condition>								
               <command>nasal</command>
               <script>weather.mfd_wx(1);</script>
@@ -4205,7 +4687,7 @@
             <binding>
 							<condition>
 								<not>
-			            <property>instrumentation/efis/inputs/wxr</property>
+			            <property>instrumentation/efis/wxr</property>
 								</not>
 							</condition>								
               <command>nasal</command>
@@ -4219,9 +4701,63 @@
         <hovered>
             <binding>
                 <command>set-tooltip</command>
-                <tooltip-id>mfdwx.btn</tooltip-id>
+                <tooltip-id>mfdwxL.btn</tooltip-id>
                 <label>WEATHER RADAR: %s</label>
-	              <property>instrumentation/efis/inputs/wxr</property>
+	              <property>instrumentation/efis/wxr</property>
+                <mapping>on-off</mapping>
+            </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>mfdwxR.btn</object-name>	
+        <property>instrumentation/efis/wxr[1]</property>
+				<factor>0.0027</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>mfdwxR.btn</object-name>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+              <command>property-toggle</command>
+	            <property>instrumentation/efis/wxr[1]</property>
+            </binding>
+            <binding>
+							<condition>
+		            <property>instrumentation/efis/wxr[1]</property>
+							</condition>								
+              <command>nasal</command>
+              <script>weather.mfd_wx(1);</script>
+            </binding>
+            <binding>
+							<condition>
+								<not>
+			            <property>instrumentation/efis/wxr[1]</property>
+								</not>
+							</condition>								
+              <command>nasal</command>
+              <script>weather.mfd_wx(0);</script>
+            </binding>
+						<binding>
+						    <command>property-toggle</command>
+						    <property>sim/sound/click</property>
+						</binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>mfdwxR.btn</tooltip-id>
+                <label>WEATHER RADAR: %s</label>
+	              <property>instrumentation/efis/wxr[1]</property>
                 <mapping>on-off</mapping>
             </binding>
         </hovered>
