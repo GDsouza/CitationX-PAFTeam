@@ -810,8 +810,8 @@ var cduDsp = {
 
   Prog_timer : func {
 		me.timer = maketimer(0.1,func() {
-		  FuelEstWp = int((getprop("/autopilot/internal/nav-distance")/getprop("/velocities/groundspeed-kt"))*(getprop("/engines/engine[0]/fuel-flow_pph")+getprop("/engines/engine[1]/fuel-flow_pph")));
-		  FuelEstDest = int((getprop("/autopilot/route-manager/distance-remaining-nm")/getprop("/velocities/groundspeed-kt"))*(getprop("/engines/engine[0]/fuel-flow_pph")+getprop("/engines/engine[1]/fuel-flow_pph")));
+		  FuelEstWp = int((getprop("/autopilot/internal/nav-distance")/getprop("/velocities/groundspeed-kt"))*(getprop("/engines/engine[0]/fuel-flow-pph")+getprop("/engines/engine[1]/fuel-flow-pph")));
+		  FuelEstDest = int((getprop("/autopilot/route-manager/distance-remaining-nm")/getprop("/velocities/groundspeed-kt"))*(getprop("/engines/engine[0]/fuel-flow-pph")+getprop("/engines/engine[1]/fuel-flow-pph")));
       nav_id = getprop("autopilot/internal/nav-id");
 		  ETA = getprop("autopilot/route-manager/wp/eta");
 		  if (!ETA) {ETA = "0+00"}

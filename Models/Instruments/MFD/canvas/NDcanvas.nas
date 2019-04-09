@@ -50,8 +50,6 @@ var va = "controls/flight/va";
 			  });
 			  m.canvas.addPlacement({"node": "screenL_F"});
 			  m.canvas.setColorBackground(0,0,0,0);
-			  m.mfd = m.canvas.createGroup();
-			  canvas.parsesvg(m.mfd, get_local_path("Images/ND_F.svg"));
       } else {
 			  m.canvas = canvas.new({
 				  "name": "MFD_R", 
@@ -61,9 +59,9 @@ var va = "controls/flight/va";
 			  });
 			  m.canvas.addPlacement({"node": "screenR_F"});
 			  m.canvas.setColorBackground(0,0,0,0);
+      }
 			  m.mfd = m.canvas.createGroup();
 			  canvas.parsesvg(m.mfd, get_local_path("Images/ND_F.svg"));
-      }
 
 			### Texts init ###
 			m.text = {};

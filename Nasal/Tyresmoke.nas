@@ -64,7 +64,7 @@ var TyreSmoke = {
 aircraft.rain.init();
 var rain = func {
 	aircraft.rain.update();
-	settimer(rain, 0);
+	settimer(rain, 0.3);
 }
 
 ### Main ###

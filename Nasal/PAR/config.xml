@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 
 <PropertyList>
+<!--
   <input>
     <keyboard>
       <key n="62">
@@ -13,6 +14,7 @@
       </key>
     </keyboard>
   </input>
+-->
   <gca>
    <config-version type="double">0.1</config-version>
    <tick type="double">1</tick>

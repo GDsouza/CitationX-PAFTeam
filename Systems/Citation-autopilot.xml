@@ -86,6 +86,49 @@
     </filter>
 
     <filter>
+      <name>heading deflection</name>
+      <debug>false</debug>
+      <type>gain</type>
+      <gain>1.0</gain>
+      <input>
+        <condition>
+          <or>
+            <equals>
+              <property>autopilot/settings/nav-source</property>
+              <value>NAV1</value>
+            </equals>
+            <equals>
+              <property>autopilot/settings/nav-source</property>
+              <value>FMS1</value>
+            </equals>
+          </or>
+        </condition>
+        <property>instrumentation/nav/heading-needle-deflection</property>
+      </input>
+      <input>
+        <condition>
+          <or>
+            <equals>
+              <property>autopilot/settings/nav-source</property>
+              <value>NAV2</value>
+            </equals>
+            <equals>
+              <property>autopilot/settings/nav-source</property>
+              <value>FMS2</value>
+            </equals>
+          </or>
+        </condition>
+        <property>instrumentation/nav[1]/heading-needle-deflection</property>
+      </input>
+      <reference>0</reference>
+      <output>autopilot/internal/heading-deflection-deg</output>
+      <period>
+        <min>-180</min>
+        <max>180</max>
+      </period>
+    </filter>
+
+    <filter>
       <name>Course offset</name>
       <debug>false</debug>
       <type>gain</type>
@@ -761,12 +804,12 @@
         <reference>autopilot/internal/pitch-bars</reference>
         <output>controls/flight/elevator-trim</output>
         <config>
-            <Kp>-0.015</Kp> <!-- old -0.015 -->
+            <Kp>-0.015</Kp> 
             <beta>1.0</beta>
             <alpha>0.1</alpha>
             <gamma>0.0</gamma>
-            <Ti>10.0</Ti>	<!-- old 10.0 -->
-            <Td>0.01</Td> <!-- old 0.01 -->
+            <Ti>10.0</Ti>	
+            <Td>0.01</Td> 
             <min>-1</min>
             <max>1</max>
         </config>
@@ -1116,31 +1159,31 @@
 
 <!-- Elevator Controls -->
 
-		<filter>
-        <name>Elevator Control</name>
-        <type>noise-spike</type>
-        <debug>false</debug>
-					<max-rate-of-change>
-           <condition>
-             <equals>
-				       <property>autopilot/locks/AP-status</property>
-                 <value>AP</value>
-             </equals>
-           </condition>
-           <value>0.01</value>
-          </max-rate-of-change>
-         	<max-rate-of-change>100.0</max-rate-of-change>
-	        <input>
-						<condition>
-							<equals>
-								<property>autopilot/locks/AP-status</property>
-                 	<value>AP</value>
-							</equals>
-						</condition>
-           	<value>0</value>
-					</input>
-					<input>controls/flight/elevator</input>
-					<output>autopilot/internal/elevator-cmd-norm</output>
+    <filter>
+      <name>Elevator Control</name>
+      <type>noise-spike</type>
+      <debug>false</debug>
+      <max-rate-of-change>
+        <condition>
+          <equals>
+            <property>autopilot/locks/AP-status</property>
+            <value>AP</value>
+          </equals>
+        </condition>
+        <value>0.01</value>
+        </max-rate-of-change>
+        <max-rate-of-change>100.0</max-rate-of-change>
+        <input>
+          <condition>
+            <equals>
+              <property>autopilot/locks/AP-status</property>
+               	<value>AP</value>
+            </equals>
+          </condition>
+          <value>0</value>
+        </input>
+        <input>controls/flight/elevator</input>
+        <output>autopilot/internal/elevator-cmd-norm</output>
 			</filter>
 
 			<filter>
@@ -1149,10 +1192,10 @@
 					<gain>1.0</gain>
 					<enable>
 						<condition>
-							<equals>
-								<property>autopilot/locks/AP-status</property>
-									<value>AP</value>
-							</equals>
+              <equals>
+                <property>autopilot/locks/AP-status</property>
+                <value>AP</value>
+              </equals>
 						</condition>
 		      </enable>
 					<input>autopilot/internal/elevator-cmd-norm</input>

@@ -7,6 +7,11 @@ props.globals.initNode("/systems/electrical/xtie",0,"BOOL");
 props.globals.initNode("controls/electric/avionics-switch",0,"INT");
 props.globals.initNode("controls/electric/avionics-power",0,"BOOL");
 props.globals.initNode("controls/lighting/anti-coll",0,"INT");
+props.globals.initNode("controls/lighting/pfd-norm",0.8,"DOUBLE");
+props.globals.initNode("controls/lighting/pfd-norm[1]",0.8,"DOUBLE");
+props.globals.initNode("controls/lighting/mfd-norm",0.8,"DOUBLE");
+props.globals.initNode("controls/lighting/mfd-norm[1]",0.8,"DOUBLE");
+props.globals.initNode("controls/lighting/eicas-norm",0.8,"DOUBLE");
 
 var AVswitch = "controls/electric/avionics-switch";
 var Lbus = "systems/electrical/left-bus";
@@ -389,5 +394,5 @@ var elec_stl = setlistener("/sim/signals/fdm-initialized", func {
 update_electrical = func {
     scnd = getprop("sim/time/delta-sec");
     update_virtual_bus(scnd);
-settimer(update_electrical, 0);
+settimer(update_electrical, 0.1);
 }

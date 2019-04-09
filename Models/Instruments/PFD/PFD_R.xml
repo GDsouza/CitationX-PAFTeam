@@ -1,14 +1,13 @@
-<!--
-Citation X - Navigation display
--->
+<!-- Canvas - Primary Flight Display -->
+<!-- C. Le Moigne (clm76) - Feb 2019 -->
 
 <PropertyList>
 
-<path>screenR_B.ac</path>
+<path>PFD-ScreenR.ac</path>
 
     <animation>
         <type>select</type>
-        <object-name>screenR_B</object-name>
+        <object-name>screenR</object-name>
         <condition>
           <greater-than>
 	          <property>controls/electric/avionics-switch</property>
@@ -19,7 +18,7 @@ Citation X - Navigation display
 
     <animation>
         <type>material</type>
-        <object-name>screenR_B</object-name>
+        <object-name>screenR</object-name>
         <condition>
 						<or>
 	           	<property>systems/electrical/left-emer-bus</property>
@@ -30,7 +29,7 @@ Citation X - Navigation display
             <red>1</red>
             <green>1</green>
             <blue>1</blue>
-            <factor-prop>controls/lighting/mfd-norm[1]</factor-prop>
+            <factor-prop>controls/lighting/pfd-norm[1]</factor-prop>
         </emission>
     </animation>
 

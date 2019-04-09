@@ -23,6 +23,7 @@ along with FlightGear.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <PropertyList>
+<!--
   <input>
     <keyboard>
       <key n="60">
@@ -35,6 +36,7 @@ along with FlightGear.  If not, see <http://www.gnu.org/licenses/>.
       </key>
     </keyboard>
   </input>
+-->
   <satc>
    <version type="double">2.2</version>
   <freq type="double">0</freq>

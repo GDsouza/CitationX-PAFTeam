@@ -1,25 +1,25 @@
 <!--
-Citation X - Navigation display
+Citation X - Vertical Situation Display
 -->
 
 <PropertyList>
 
-<path>screenR_B.ac</path>
+<path>VsdL.ac</path>
 
     <animation>
         <type>select</type>
-        <object-name>screenR_B</object-name>
+        <object-name>VsdL.screen</object-name>
         <condition>
-          <greater-than>
-	          <property>controls/electric/avionics-switch</property>
-            <value>0</value>
-          </greater-than>
+					<and>
+	          <property>controls/electric/avionics-power</property>
+						<property>instrumentation/efis/vsd</property>
+					</and>
 				</condition>
     </animation>
 
     <animation>
         <type>material</type>
-        <object-name>screenR_B</object-name>
+        <object-name>VsdL.screen</object-name>
         <condition>
 						<or>
 	           	<property>systems/electrical/left-emer-bus</property>
@@ -30,7 +30,7 @@ Citation X - Navigation display
             <red>1</red>
             <green>1</green>
             <blue>1</blue>
-            <factor-prop>controls/lighting/mfd-norm[1]</factor-prop>
+            <factor-prop>controls/lighting/mfd-norm</factor-prop>
         </emission>
     </animation>
 

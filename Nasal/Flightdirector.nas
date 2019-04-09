@@ -9,6 +9,7 @@ props.globals.initNode("instrumentation/airspeed-indicator/round-speed-kt",0,"DO
 props.globals.initNode("autopilot/settings/fms",0,"BOOL");
 props.globals.initNode("autopilot/locks/alm-tod",0,"BOOL");
 props.globals.initNode("autopilot/locks/alm-wp",0,"BOOL");
+props.globals.initNode("autopilot/locks/from-flag",0,"BOOL");
 var alt = "instrumentation/altimeter/indicated-altitude-ft";
 var AP = "autopilot/locks/AP-status";
 var AutoCoord = "controls/flight/auto-coordination";
@@ -476,13 +477,13 @@ var update_nav = func {
         if(getprop("instrumentation/nav["~ind~"]/nav-loc"))sgnl="LOC"~(ind+1);
         if(getprop("instrumentation/nav["~ind~"]/has-gs"))sgnl="ILS"~(ind+1);
         setprop("autopilot/internal/nav-type",sgnl);
-        if (getprop("autopilot/internal/gs-in-range") and dst <= 20) {
+        if (getprop(gs_in_range) and dst <= 20) {
           setprop("autopilot/internal/in-range",1)
         }
 				crs_set = getprop("instrumentation/nav["~ind~"]/radials/sel-deg-corr");
-				setprop("autopilot/internal/selected-crs",math.round(crs_set));
-        setprop("autopilot/internal/to-flag",getprop("instrumentation/nav["~ind~"]/to-flag"));
-        setprop("autopilot/internal/from-flag",getprop("instrumentation/nav["~ind~"]/from-flag"));
+				setprop("autopilot/settings/selected-crs",math.round(crs_set));
+#        setprop("autopilot/internal/to-flag",getprop("instrumentation/nav["~ind~"]/to-flag"));
+        setprop("autopilot/locks/from-flag",getprop("instrumentation/nav["~ind~"]/from-flag"));
 
     } else if(left(NAVSRC,3) == "FMS"){
       ind = (NAVSRC == "FMS1" ? 0 : 1);
@@ -491,8 +492,8 @@ var update_nav = func {
       setprop(gs_in_range,getprop("instrumentation/nav["~ind~"]/gs-in-range"));
       setprop("autopilot/internal/nav-distance",getprop("instrumentation/gps/wp/wp[1]/distance-nm"));
       setprop("autopilot/internal/nav-id",getprop("instrumentation/gps/wp/wp[1]/ID"));
-      setprop("autopilot/internal/to-flag",getprop("instrumentation/gps/wp/wp[1]/to-flag"));
-      setprop("autopilot/internal/from-flag",getprop("instrumentation/gps/wp/wp[1]/from-flag"));
+#      setprop("autopilot/internal/to-flag",getprop("instrumentation/gps/wp/wp[1]/to-flag"));
+      setprop("autopilot/locks/from-flag",getprop("instrumentation/gps/wp/wp[1]/from-flag"));
       setprop("autopilot/internal/course-deflection",getprop("instrumentation/gps/cdi-deflection"));
 
 			#### Turn Anticipation ###
@@ -505,7 +506,7 @@ var update_nav = func {
 #        if (getprop("autopilot/internal/gs-in-range")) {
 #          setprop("autopilot/settings/target-altitude-ft",getprop("autopilot/route-manager/destination/field-elevation-ft"));
 #        } else {
-        if (!getprop("autopilot/internal/gs-in-range")) {
+        if (!getprop(gs_in_range)) {
           dstCoeff -= 0.001;
           if (dstCoeff <= 0.20) dstCoeff = 0.20;
           targetCourse = fp.pathGeod(-1, -dist_rem + dstCoeff);
@@ -540,7 +541,7 @@ var update_nav = func {
 			  }
       }
 		  setprop("autopilot/internal/course-offset",crs_offset);
-		  setprop("autopilot/internal/selected-crs",int(crs_set));
+		  setprop("autopilot/settings/selected-crs",int(crs_set));
 			if (fp.current > 0) {
 				if (!flag_wp) {
 					wp_curr = fp.current;

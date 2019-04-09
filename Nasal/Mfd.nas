@@ -25,15 +25,24 @@ for (var i=0;i<6;i+=1) {
 	props.globals.initNode("instrumentation/mfd/btn"~i,0,"BOOL");
 	props.globals.initNode("instrumentation/mfd[1]/btn"~i,0,"BOOL");
 }
-var menu_num = ["instrumentation/mfd/menu-num","instrumentation/mfd[1]/menu-num"];
-var path = ["instrumentation/mfd/","instrumentation/mfd[1]/"];
-var s_menu = ["instrumentation/mfd/s-menu","instrumentation/mfd[1]/s-menu"];
+var menu_num = ["instrumentation/mfd/menu-num",
+                "instrumentation/mfd[1]/menu-num"];
+var path = ["instrumentation/mfd/",
+            "instrumentation/mfd[1]/"];
+var s_menu = ["instrumentation/mfd/s-menu",
+              "instrumentation/mfd[1]/s-menu"];
 var alt_m = "instrumentation/efis/alt-meters";
 var baro = "instrumentation/efis/baro-hpa";
-var apt = ["instrumentation/mfd/outputs/apt","instrumentation/mfd[1]/outputs/apt"];
-var vor = ["instrumentation/mfd/outputs/vor","instrumentation/mfd[1]/outputs/vor"];
-var fix = ["instrumentation/mfd/outputs/fix","instrumentation/mfd[1]/outputs/fix"];
-var traf = ["instrumentation/tcas/tfc","instrumentation/tcas/tfc[1]"];
+var apt = ["instrumentation/mfd/outputs/apt",
+           "instrumentation/mfd[1]/outputs/apt"];
+var vor = ["instrumentation/mfd/outputs/vor",
+           "instrumentation/mfd[1]/outputs/vor"];
+var fix = ["instrumentation/mfd/outputs/fix",
+           "instrumentation/mfd[1]/outputs/fix"];
+var traf = ["instrumentation/tcas/tfc",
+            "instrumentation/tcas/tfc[1]"];
+var vsd = ["instrumentation/efis/vsd",
+           "instrumentation/efis/vsd[1]"];
 var cdr = ["cdr0","cdr1","cdr2","cdr3","cdr4"];
 var wx_range = [10,20,40,80,160,320];
 var wx_index = 1;
@@ -194,9 +203,9 @@ var menu = func(x) {
 			}				
 		}
 		if (btn_5){
-			if (!getprop("instrumentation/efis/vsd")) {
-				setprop("instrumentation/efis/vsd",1);
-			} else setprop("instrumentation/efis/vsd",0);
+			if (!getprop(vsd[x])) {
+				setprop(vsd[x],1);
+			} else setprop(vsd[x],0);
 		}
 	}
 

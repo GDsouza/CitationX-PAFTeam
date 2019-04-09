@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
-
 <PropertyList>
-
-<path>screen.ac</path>
-
+  <path>screen.ac</path>
 <!--
     <animation>
         <type>select</type>
@@ -16,11 +13,10 @@
               </greater-than>
         </condition>
     </animation>
--->
-<!--
+
     <animation>
         <type>material</type>
-        <object-name>RCU.screen</object-name>
+        <object-name>ENG.screen</object-name>
         <condition>
 						<or>
 	           	<property>systems/electrical/left-emer-bus</property>

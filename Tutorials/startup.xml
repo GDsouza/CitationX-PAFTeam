@@ -436,14 +436,18 @@
 				<message>Switch on LEFT IGNITION{|.}
 				</message>
 				<condition>
-					<not>
+					<equals>
 						<property>controls/engines/engine[0]/ignition</property>
-					</not>
+            <value>1</value>
+					</equals>
 				</condition>
 			</error>
 			<exit>
 				<condition>
-					<property>controls/engines/engine[0]/ignition</property>
+					<equals>
+						<property>controls/engines/engine[0]/ignition</property>
+            <value>0</value>
+					</equals>
 				</condition>
 			</exit>
 		</step>
@@ -500,14 +504,18 @@
 				<message>Switch on RIGHT IGNITION{|.}
 				</message>
 				<condition>
-					<not>
+					<equals>
 						<property>controls/engines/engine[1]/ignition</property>
-					</not>
+            <value>1</value>
+					</equals>
 				</condition>
 			</error>
 			<exit>
 				<condition>
-					<property>controls/engines/engine[1]/ignition</property>
+					<equals>
+						<property>controls/engines/engine[1]/ignition</property>
+            <value>0</value>
+					</equals>
 				</condition>
 			</exit>
 		</step>

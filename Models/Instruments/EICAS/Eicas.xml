@@ -1,14 +1,17 @@
-<!--
-Citation X - Navigation display
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- 
+  Primus 2000 EICAS - Canvas
+  C. Le Moigne (clm76) - March 2019
 -->
 
 <PropertyList>
 
-<path>screenR_B.ac</path>
+<path>Eicas.ac</path>
 
     <animation>
         <type>select</type>
-        <object-name>screenR_B</object-name>
+        <object-name>Eicas.screen</object-name>
         <condition>
           <greater-than>
 	          <property>controls/electric/avionics-switch</property>
@@ -19,7 +22,7 @@ Citation X - Navigation display
 
     <animation>
         <type>material</type>
-        <object-name>screenR_B</object-name>
+        <object-name>Eicas.screen</object-name>
         <condition>
 						<or>
 	           	<property>systems/electrical/left-emer-bus</property>
@@ -30,7 +33,7 @@ Citation X - Navigation display
             <red>1</red>
             <green>1</green>
             <blue>1</blue>
-            <factor-prop>controls/lighting/mfd-norm[1]</factor-prop>
+            <factor-prop>controls/lighting/eicas-norm</factor-prop>
         </emission>
     </animation>
 

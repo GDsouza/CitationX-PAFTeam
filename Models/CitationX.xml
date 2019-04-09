@@ -598,8 +598,8 @@
 
     <animation>
         <type>rotate</type>
-        <object-name>UprReverser</object-name>
-        <object-name>UprReverser.001</object-name>
+        <object-name>LupReverser</object-name>
+        <object-name>LupReverser1</object-name>
         <property>surface-positions/reverser-norm</property>
         <factor>74</factor>
         <center>
@@ -616,9 +616,45 @@
 
     <animation>
         <type>rotate</type>
-        <object-name>LwrReverser</object-name>
-        <object-name>LwrReverser.001</object-name>
+        <object-name>LlwReverser</object-name>
+        <object-name>LlwReverser1</object-name>
         <property>surface-positions/reverser-norm</property>
+        <factor>-72</factor>
+        <center>
+            <x-m>5.368</x-m>
+            <y-m>0.0</y-m>
+            <z-m>0.601</z-m>
+        </center>
+        <axis>
+            <x>0.0</x>
+            <y>1.0</y>
+            <z>0.0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>RupReverser</object-name>
+        <object-name>RupReverser1</object-name>
+        <property>surface-positions/reverser-norm[1]</property>
+        <factor>74</factor>
+        <center>
+            <x-m>5.368</x-m>
+            <y-m>0.0</y-m>
+            <z-m>0.601</z-m>
+        </center>
+        <axis>
+            <x>0.0</x>
+            <y>1.0</y>
+            <z>0.0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>RlwReverser</object-name>
+        <object-name>RlwReverser1</object-name>
+        <property>surface-positions/reverser-norm[1]</property>
         <factor>-72</factor>
         <center>
             <x-m>5.368</x-m>

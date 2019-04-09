@@ -767,14 +767,180 @@
 </animation>
 
 <!--THROTTLES -->
-		<!-- LH -->
+		<!-- Left -->
+
+  <animation>
+      <type>rotate</type>
+      <object-name>Lthrottle</object-name>
+      <object-name>Lreverser</object-name>
+      <property>controls/engines/engine/throttle</property>
+      <factor>55</factor>
+      <center>
+          <x-m>0.425</x-m>
+          <y-m>0.0</y-m>
+          <z-m>-0.201</z-m>
+      </center>
+      <axis>
+          <x>0.0</x>
+          <y>-1.0</y>
+          <z>0.0</z>
+      </axis>
+  </animation>
+
+  <animation>
+      <type>rotate</type>
+      <object-name>Lthrottle</object-name>
+      <object-name>Lreverser</object-name>
+      <property>controls/engines/engine/cutoff</property>
+      <factor>-15</factor>
+      <center>
+          <x-m>0.425</x-m>
+          <y-m>0.0</y-m>
+          <z-m>-0.201</z-m>
+      </center>
+      <axis>
+          <x>0.0</x>
+          <y>-1.0</y>
+          <z>0.0</z>
+      </axis>
+  </animation>
+
+	<animation>
+    <type>pick</type>
+    <object-name>Lthrottle</object-name>
+    <object-name>Lreverser</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <condition>
+          <and>
+				    <not>
+					    <property>devices/status/keyboard/ctrl</property>
+			      </not>
+				    <less-than>
+					    <property>controls/engines/engine/throttle</property>
+              <value>0.01</value>
+            </less-than>
+          </and>
+        </condition>
+        <command>property-toggle</command>
+        <property>controls/engines/engine/cutoff</property>
+      </binding>
+      <binding>
+        <condition>
+          <and>
+				    <property>devices/status/keyboard/ctrl</property>
+				    <less-than>
+					    <property>controls/engines/engine/throttle</property>
+              <value>0.01</value>
+            </less-than>
+				    <less-than>
+					    <property>controls/engines/engine[1]/throttle</property>
+              <value>0.01</value>
+            </less-than>
+          </and>
+        </condition>
+        <command>property-toggle</command>
+        <property>controls/engines/engine/cutoff</property>
+      </binding>
+       <binding>
+        <condition>
+          <and>
+				    <property>devices/status/keyboard/ctrl</property>
+				    <less-than>
+					    <property>controls/engines/engine/throttle</property>
+              <value>0.01</value>
+            </less-than>
+				    <less-than>
+					    <property>controls/engines/engine[1]/throttle</property>
+              <value>0.01</value>
+            </less-than>
+          </and>
+        </condition>
+        <command>property-toggle</command>
+        <property>controls/engines/engine[1]/cutoff</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <condition>
+          <less-than-equals>
+  			    <property>controls/engines/engine/throttle</property>
+            <value>0</value>
+          </less-than-equals>
+        </condition>
+        <command>set-tooltip</command>
+        <tooltip-id>Cutoff</tooltip-id>
+        <label>Click to Cutoff</label>
+      </binding>
+    </hovered>
+	</animation>
+
+	<animation>
+		<type>slider</type>
+		<object-name>Lthrottle</object-name>
+		<object-name>Lreverser</object-name>
+		<drag-direction>vertical</drag-direction>
+    <action>
+			<binding>
+				<condition>
+				  <not>
+					  <property>controls/engines/engine/cutoff</property>
+			    </not>
+				</condition> 
+				<command>property-adjust</command>
+					<property>/controls/engines/engine/throttle</property>
+					<factor>-0.05</factor>
+					<min>0</min>
+					<max>1</max>
+					<wrap>0</wrap>
+			</binding>
+			<binding>
+				<condition>
+          <and>
+					  <property>devices/status/keyboard/ctrl</property>
+					  <not>
+						  <property>controls/engines/engine/cutoff</property>
+				    </not>
+          </and>
+				</condition> 
+				<command>property-adjust</command>
+					<property>/controls/engines/engine[1]/throttle</property>
+					<factor>-0.05</factor>
+					<min>0</min>
+					<max>1</max>
+					<wrap>0</wrap>
+			</binding>
+		</action>
+  </animation>
+
+		<!-- Right -->
+
+  <animation>
+      <type>rotate</type>
+      <object-name>Rthrottle</object-name>
+      <object-name>Rreverser</object-name>
+      <property>controls/engines/engine[1]/throttle</property>
+      <factor>55</factor>
+      <center>
+          <x-m>0.425</x-m>
+          <y-m>0.0</y-m>
+          <z-m>-0.201</z-m>
+      </center>
+      <axis>
+          <x>0.0</x>
+          <y>-1.0</y>
+          <z>0.0</z>
+      </axis>
+  </animation>
+
     <animation>
         <type>rotate</type>
-        <object-name>LHthrottle</object-name>
-        <object-name>LHthrottle_up</object-name>
-        <object-name>LHthrottle_dwn</object-name>
-        <property>controls/engines/engine/throttle</property>
-        <factor>65</factor>
+        <object-name>Rthrottle</object-name>
+        <object-name>Rreverser</object-name>
+        <property>controls/engines/engine[1]/cutoff</property>
+        <factor>-15</factor>
         <center>
             <x-m>0.425</x-m>
             <y-m>0.0</y-m>
@@ -787,276 +953,235 @@
         </axis>
     </animation>
 
-  <animation>
+	<animation>
     <type>pick</type>
-    <visible>true</visible>
-    <object-name>LHthrottle</object-name>
+    <object-name>Rthrottle</object-name>
+    <object-name>Rreverser</object-name>
     <action>
       <button>0</button>
-      <repeatable>true</repeatable>
+      <repeatable>false</repeatable>
       <binding>
-				<condition>
-					<not>
-						<property>devices/status/keyboard/ctrl</property>
-					</not>
-				</condition> 
-        <command>property-adjust</command>
-        <property>/controls/engines/engine[0]/throttle</property>
-        <step type="double">0.05</step>
+        <condition>
+          <and>
+				    <not>
+					    <property>devices/status/keyboard/ctrl</property>
+			      </not>
+				    <less-than>
+					    <property>controls/engines/engine[1]/throttle</property>
+              <value>0.01</value>
+            </less-than>
+          </and>
+        </condition>
+        <command>property-toggle</command>
+        <property>controls/engines/engine[1]/cutoff</property>
       </binding>
       <binding>
-				<condition>
-						<property>devices/status/keyboard/ctrl</property>
-				</condition>
-        <command>property-adjust</command>
-        <property>/controls/engines/engine[0]/throttle</property>
-        <step type="double">0.05</step>
+        <condition>
+          <and>
+				    <property>devices/status/keyboard/ctrl</property>
+				    <less-than>
+					    <property>controls/engines/engine/throttle</property>
+              <value>0.01</value>
+            </less-than>
+				    <less-than>
+					    <property>controls/engines/engine[1]/throttle</property>
+              <value>0.01</value>
+            </less-than>
+          </and>
+        </condition>
+        <command>property-toggle</command>
+        <property>controls/engines/engine[1]/cutoff</property>
       </binding>
-      <binding>
-				<condition>
-						<property>devices/status/keyboard/ctrl</property>
-				</condition>
-        <command>property-adjust</command>
-        <property>/controls/engines/engine[1]/throttle</property>
-        <step type="double">0.05</step>
-      </binding>  
+       <binding>
+        <condition>
+          <and>
+				    <property>devices/status/keyboard/ctrl</property>
+				    <less-than>
+					    <property>controls/engines/engine/throttle</property>
+              <value>0.01</value>
+            </less-than>
+				    <less-than>
+					    <property>controls/engines/engine[1]/throttle</property>
+              <value>0.01</value>
+            </less-than>
+          </and>
+        </condition>
+        <command>property-toggle</command>
+        <property>controls/engines/engine/cutoff</property>
+      </binding>
     </action>
     <hovered>
       <binding>
+        <condition>
+          <less-than-equals>
+  			    <property>controls/engines/engine[1]/throttle</property>
+            <value>0</value>
+          </less-than-equals>
+        </condition>
         <command>set-tooltip</command>
-        <label>L Throttle: %3d%%</label>
-        <measure-text>L Throttle: 100%</measure-text>
-        <tooltip-id>l-throttle</tooltip-id>
-        <mapping>percent</mapping>
-        <property>controls/engines/engine[0]/throttle</property>
+        <tooltip-id>Cutoff</tooltip-id>
+        <label>Click to Cutoff</label>
       </binding>
     </hovered>
-  </animation>
-
-  <animation>
-    <type>pick</type>
-    <visible>true</visible>
-    <object-name>LHthrottle</object-name>
-    <action>
-      <button>1</button>
-      <repeatable>true</repeatable>
-      <binding>
-				<condition>
-					<not>
-						<property>devices/status/keyboard/ctrl</property>
-					</not>
-				</condition> 
-        <command>property-adjust</command>
-        <property>/controls/engines/engine[0]/throttle</property>
-        <step type="double">-0.05</step>
-      </binding>
-      <binding>
-				<condition>
-						<property>devices/status/keyboard/ctrl</property>
-				</condition>
-        <command>property-adjust</command>
-        <property>/controls/engines/engine[0]/throttle</property>
-        <step type="double">-0.05</step>
-      </binding>
-      <binding>
-				<condition>
-						<property>devices/status/keyboard/ctrl</property>
-				</condition>
-        <command>property-adjust</command>
-        <property>/controls/engines/engine[1]/throttle</property>
-        <step type="double">-0.05</step>
-      </binding>  
-    </action>
-  </animation>
+	</animation>
 
 	<animation>
 		<type>slider</type>
-		<object-name>LHthrottle</object-name>
+		<object-name>Rthrottle</object-name>
+		<object-name>Rreverser</object-name>
 		<drag-direction>vertical</drag-direction>
     <action>
 			<binding>
 				<condition>
-					<not>
-						<property>devices/status/keyboard/ctrl</property>
-				</not>
+				  <not>
+					  <property>controls/engines/engine[1]/cutoff</property>
+			    </not>
 				</condition> 
 				<command>property-adjust</command>
-					<property>/controls/engines/engine[0]/throttle</property>
+					<property>/controls/engines/engine[1]/throttle</property>
 					<factor>-0.05</factor>
-					<min>-1</min>
+					<min>0</min>
 					<max>1</max>
 					<wrap>0</wrap>
 			</binding>
 			<binding>
 				<condition>
-					<property>devices/status/keyboard/ctrl</property>
-				</condition>
-				<command>property-adjust</command>
-				<property>/controls/engines/engine[0]/throttle</property>
-					<factor>-0.05</factor>
-					<min>-1</min>
-					<max>1</max>
-					<wrap>0</wrap>
-			</binding>
-			<binding>
-				<condition>
-					<property>devices/status/keyboard/ctrl</property>
-				</condition>
+          <and>
+					  <property>devices/status/keyboard/ctrl</property>
+            <not>
+              <property>controls/engines/engine[1]/cutoff</property>
+            </not>
+          </and>
+				</condition> 
 				<command>property-adjust</command>
 					<property>/controls/engines/engine[1]/throttle</property>
-						<factor>-0.05</factor>
-						<min>-1</min>
-						<max>1</max>
-						<wrap>0</wrap>
-			</binding>  
+					<factor>-0.05</factor>
+					<min>0</min>
+					<max>1</max>
+					<wrap>0</wrap>
+			</binding>
 		</action>
   </animation>
 
-		<!-- RH -->
+<!-- REVERSERS -->
+
     <animation>
-        <type>rotate</type>
-        <object-name>RHthrottle</object-name>
-        <object-name>RHthrottle_up</object-name>
-        <object-name>RHthrottle_dwn</object-name>
-        <property>controls/engines/engine[1]/throttle</property>
-        <factor>65</factor>
-        <center>
-            <x-m>0.425</x-m>
-            <y-m>0.0</y-m>
-            <z-m>-0.201</z-m>
-        </center>
-        <axis>
-            <x>0.0</x>
-            <y>-1.0</y>
-            <z>0.0</z>
-        </axis>
+      <type>rotate</type>
+      <object-name>Lreverser</object-name>
+      <property>controls/engines/engine/reverser</property>
+      <factor>40</factor>
+      <center>
+          <x-m>0.475</x-m>
+          <y-m>0.0</y-m>
+          <z-m>-0.085</z-m>
+      </center>
+      <axis>
+          <x>0.0</x>
+          <y>1.0</y>
+          <z>0.0</z>
+      </axis>
     </animation>
 
-  <animation>
+    <animation>
+      <type>rotate</type>
+      <object-name>Rreverser</object-name>
+      <property>controls/engines/engine[1]/reverser</property>
+      <factor>40</factor>
+      <center>
+          <x-m>0.475</x-m>
+          <y-m>0.0</y-m>
+          <z-m>-0.085</z-m>
+      </center>
+      <axis>
+          <x>0.0</x>
+          <y>1.0</y>
+          <z>0.0</z>
+      </axis>
+    </animation>
+
+<!-- SYNCHRO ENGINES -->
+
+    <animation>
+      <type>rotate</type>
+      <object-name>Sync.knob</object-name>
+      <property>controls/engines/synchro</property>
+      <factor>60</factor>
+      <center>
+          <x-m>0.551</x-m>
+          <y-m>-0.005</y-m>
+          <z-m>0.0</z-m>
+      </center>
+      <axis>
+          <x>-0.1</x>
+          <y>0</y>
+          <z>-0.9</z>
+      </axis>
+    </animation>
+
+	<animation>
     <type>pick</type>
-    <visible>true</visible>
-    <object-name>RHthrottle</object-name>
+    <object-name>Sync.knob</object-name>
     <action>
       <button>0</button>
-      <repeatable>true</repeatable>
+      <repeatable>false</repeatable>
       <binding>
-				<condition>
-					<not>
-						<property>devices/status/keyboard/ctrl</property>
-					</not>
-				</condition> 
+        <command>nasal</command>
+          <script>controls.synchro()</script>
+      </binding>         
+    </action>
+  </animation>
+
+<!--
+	<animation>
+    <type>pick</type>
+    <object-name>Sync.knob</object-name>
+    <action>
+      <button>3</button>
+      <repeatable>false</repeatable>
+      <binding>
         <command>property-adjust</command>
-        <property>/controls/engines/engine[1]/throttle</property>
-        <step type="double">0.05</step>
+        <property>controls/engines/synchro</property>
+        <step>1</step>
+        <min>-1</min>
+        <max>1</max>
+        <wrap>false</wrap>           
       </binding>
       <binding>
-				<condition>
-						<property>devices/status/keyboard/ctrl</property>
-				</condition>
+        <command>property-toggle</command>
+        <property>sim/sound/click</property>
+      </binding>
+    </action>
+    <action>
+      <button>4</button>
+      <repeatable>false</repeatable>
+      <binding>
         <command>property-adjust</command>
-        <property>/controls/engines/engine[0]/throttle</property>
-        <step type="double">0.05</step>
+        <property>controls/engines/synchro</property>
+        <step>-1</step>
+        <min>-1</min>
+        <max>1</max>
+        <wrap>false</wrap>           
       </binding>
       <binding>
-				<condition>
-						<property>devices/status/keyboard/ctrl</property>
-				</condition>
-        <command>property-adjust</command>
-        <property>/controls/engines/engine[1]/throttle</property>
-        <step type="double">0.05</step>
-      </binding>  
+        <command>property-toggle</command>
+        <property>sim/sound/click</property>
+      </binding>
     </action>
     <hovered>
       <binding>
         <command>set-tooltip</command>
-        <label>R Throttle: %3d%%</label>
-        <measure-text>R Throttle: 100%</measure-text>
-        <tooltip-id>r-throttle</tooltip-id>
-        <mapping>percent</mapping>
-        <property>controls/engines/engine[1]/throttle</property>
-      </binding>
+        <tooltip-id>Engines Synchro</tooltip-id>
+        <label>Synchro: %s</label>
+        <mapping>nasal</mapping>
+        <property>controls/engines/synchro</property>
+				<script>
+					var modes = ['OFF','TURBINE','FAN'];
+					return modes[arg[0]];
+				</script>
+        </binding>
     </hovered>
-  </animation>
-
-  <animation>
-    <type>pick</type>
-    <visible>true</visible>
-    <object-name>RHthrottle</object-name>
-    <action>
-      <button>1</button>
-      <repeatable>true</repeatable>
-      <binding>
-				<condition>
-					<not>
-						<property>devices/status/keyboard/ctrl</property>
-					</not>
-				</condition> 
-        <command>property-adjust</command>
-        <property>/controls/engines/engine[1]/throttle</property>
-        <step type="double">-0.05</step>
-      </binding>
-      <binding>
-				<condition>
-						<property>devices/status/keyboard/ctrl</property>
-				</condition>
-        <command>property-adjust</command>
-        <property>/controls/engines/engine[0]/throttle</property>
-        <step type="double">-0.05</step>
-      </binding>
-      <binding>
-				<condition>
-						<property>devices/status/keyboard/ctrl</property>
-				</condition>
-        <command>property-adjust</command>
-        <property>/controls/engines/engine[1]/throttle</property>
-        <step type="double">-0.05</step>
-      </binding>  
-    </action>
-  </animation>
-
-	<animation>
-		<type>slider</type>
-		<object-name>RHthrottle</object-name>
-		<drag-direction>vertical</drag-direction>
-    <action>
-			<binding>
-				<condition>
-					<not>
-						<property>devices/status/keyboard/ctrl</property>
-				</not>
-				</condition> 
-				<command>property-adjust</command>
-					<property>/controls/engines/engine[1]/throttle</property>
-					<factor>-0.05</factor>
-					<min>-1</min>
-					<max>1</max>
-					<wrap>0</wrap>
-			</binding>
-			<binding>
-				<condition>
-					<property>devices/status/keyboard/ctrl</property>
-				</condition>
-				<command>property-adjust</command>
-				<property>/controls/engines/engine[0]/throttle</property>
-					<factor>-0.05</factor>
-					<min>-1</min>
-					<max>1</max>
-					<wrap>0</wrap>
-			</binding>
-			<binding>
-				<condition>
-					<property>devices/status/keyboard/ctrl</property>
-				</condition>
-				<command>property-adjust</command>
-					<property>/controls/engines/engine[1]/throttle</property>
-						<factor>-0.05</factor>
-						<min>-1</min>
-						<max>1</max>
-						<wrap>0</wrap>
-			</binding>  
-		</action>
-  </animation>
-
+	</animation>
+-->
 <!-- TAXI LIGHTS -->
 
     <animation>

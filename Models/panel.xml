@@ -79,8 +79,8 @@
     </model>
 
     <model>
-        <name>EICAS1</name>
-        <path>Models/Instruments/EICAS/EICAS3d.xml</path>
+        <name>EICAS</name>
+        <path>Models/Instruments/EICAS/Eicas.xml</path>
         <offsets>
             <x-m>0.002</x-m>
             <y-m>0.005</y-m>
@@ -130,7 +130,7 @@
 
     <model>
         <name>Vsd_L</name>
-        <path>Models/Instruments/MFD/Vsd.xml</path>
+        <path>Models/Instruments/MFD/VsdL.xml</path>
         <offsets>
             <x-m>0.0010</x-m>
             <y-m>-0.1890</y-m>
@@ -139,8 +139,18 @@
     </model>
 
     <model>
+        <name>Vsd_R</name>
+        <path>Models/Instruments/MFD/VsdR.xml</path>
+        <offsets>
+            <x-m>0.0010</x-m>
+            <y-m>0.192</y-m>
+            <z-m>0.155</z-m>
+        </offsets>
+    </model>
+
+    <model>
         <name>PFD1</name>
-        <path>Models/Instruments/PFD/PFD3d.xml</path>
+        <path>Models/Instruments/PFD/PFD_L.xml</path>
         <offsets>
             <x-m>0.002</x-m>
             <y-m>-0.375</y-m>
@@ -150,7 +160,7 @@
 
     <model>
         <name>PFD2</name>
-        <path>Models/Instruments/PFD/PFD3d.xml</path>
+        <path>Models/Instruments/PFD/PFD_R.xml</path>
         <offsets>
             <x-m>0.002</x-m>
             <y-m>0.384</y-m>
@@ -372,7 +382,7 @@
 <!-- ***********  -->
     <animation>
         <type>select</type>
-        <object-name>EICAS1</object-name>
+        <object-name>EICAS</object-name>
         <condition>
 					<and>
 						<or>
@@ -742,10 +752,8 @@
 			<object-name>reverser.arm</object-name>
 				<condition>
 					<or>
-            <greater-than>
-            	<property>surface-positions/reverser-norm</property>
-            		<value>0.2</value>
-            </greater-than>
+          	<property>controls/engines/engine/reverser</property>
+          	<property>controls/engines/engine[1]/reverser</property>
 						<equals>
             	<property>instrumentation/annunciators/test-select</property>
 								<value>4</value>
@@ -761,7 +769,7 @@
 					<or>
             <greater-than>
             	<property>surface-positions/reverser-norm</property>
-            		<value>0.4</value>
+            		<value>0.10</value>
             </greater-than>
 						<equals>
             	<property>instrumentation/annunciators/test-select</property>
@@ -778,7 +786,7 @@
 					<or>
             <greater-than>
             	<property>surface-positions/reverser-norm</property>
-            		<value>0.9</value>
+            		<value>0.15</value>
             </greater-than>
 						<equals>
             	<property>instrumentation/annunciators/test-select</property>
@@ -1031,6 +1039,33 @@
 <!-- STARTERS -->
 
     <animation>
+        <type>select</type>
+        <object-name>LHstarterOn</object-name>
+        <condition>
+          <property>engines/engine/cycle-up</property>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>RHstarterOn</object-name>
+        <condition>
+          <property>engines/engine[1]/cycle-up</property>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
+       <object-name>Starter.disengOn</object-name>
+        <condition>
+          <or>
+            <property>engines/engine/cycle-up</property>
+            <property>engines/engine[1]/cycle-up</property>
+          </or>
+        </condition>
+    </animation>
+
+    <animation>
         <type>translate</type>
         <object-name>LHstarter</object-name>
         <property>controls/engines/engine[0]/starter</property>
@@ -1051,13 +1086,17 @@
 				<binding>
 					<condition>
 						<and>
+       				<property>systems/electrical/left-bus-norm</property>
 							<not>
 								<equals>
-		       				<property>controls/engines/engine[0]/ignit</property>
-									<value>0</value>
+		       				<property>controls/engines/engine[0]/ignition</property>
+									<value>1</value>
 								</equals>
 							</not>
-       				<property>systems/electrical/left-bus-norm</property>							
+              <greater-than-equals>
+                <property>controls/engines/engine[0]/throttle</property>
+                <value>0</value>
+              </greater-than-equals>
 						</and>
 					</condition>
        		<command>property-assign</command>
@@ -1112,13 +1151,17 @@
 				<binding>
 					<condition>
 						<and>
+       				<property>systems/electrical/left-bus-norm</property>
 							<not>
 								<equals>
-		       				<property>controls/engines/engine[1]/ignit</property>
-									<value>0</value>
+		       				<property>controls/engines/engine[1]/ignition</property>
+									<value>1</value>
 								</equals>
 							</not>
-       				<property>systems/electrical/left-bus-norm</property>							
+              <greater-than-equals>
+                <property>controls/engines/engine[1]/throttle</property>
+                <value>0</value>
+              </greater-than-equals>
 						</and>
 					</condition>
        		<command>property-assign</command>
@@ -1166,16 +1209,6 @@
      		<command>property-toggle</command>
    			<property>controls/engines/disengage</property>
 			</binding>
-			<binding>
-     		<command>property-assign</command>
-     			<property>controls/engines/engine[0]/starter</property>
-     				<value>0</value>
-			</binding>
-			<binding>
-     		<command>property-assign</command>
-     			<property>controls/engines/engine[1]/starter</property>
-     				<value>0</value>
-			</binding>
       <binding>
           <command>property-toggle</command>
           <property>sim/sound/click</property>
@@ -1203,7 +1236,7 @@
     <animation>
         <type>rotate</type>
         <object-name>Ign1.switch</object-name>
-        <property>controls/engines/engine[0]/ignit</property>
+        <property>controls/engines/engine[0]/ignition</property>
         <factor>15</factor>
         <center>
             <x-m> 0.043 </x-m>
@@ -1225,22 +1258,11 @@
         <repeatable>false</repeatable>
         <binding>
 	          <command>property-adjust</command>
-            <property>controls/engines/engine[0]/ignit</property>
+            <property>controls/engines/engine[0]/ignition</property>
 						<step>1</step>
-						<min>-1</min>
-						<max>1</max>
+						<min>0</min>
+						<max>2</max>
 						<wrap>false</wrap>
-        </binding>
-        <binding>
-		      <condition>
-	          <equals>
-              <property>controls/engines/engine[0]/ignit</property>
-							<value>0</value>
-	          </equals>
-		      </condition>
-          <command>property-assign</command>
-          <property>controls/engines/engine[0]/cutoff</property>
-		      <value>1</value>
         </binding>
         <binding>
             <command>property-toggle</command>
@@ -1252,10 +1274,10 @@
         <command>set-tooltip</command>
         <tooltip-id>Ign1-switch</tooltip-id>
         <label>LH Ignition: %s</label>
-	     <property>controls/engines/engine[0]/ignit</property>
+	     <property>controls/engines/engine[0]/ignition</property>
         <mapping>nasal</mapping>
 				<script>
-					var modes = ['OFF','ON','NORM'];
+					var modes = ['NORM','OFF','ON'];
 					return modes[arg[0]];
 				</script>
       </binding>
@@ -1270,22 +1292,11 @@
         <repeatable>false</repeatable>
         <binding>
 	          <command>property-adjust</command>
-            <property>controls/engines/engine[0]/ignit</property>
+            <property>controls/engines/engine[0]/ignition</property>
 						<step>-1</step>
-						<min>-1</min>
-						<max>1</max>
+						<min>0</min>
+						<max>2</max>
 						<wrap>false</wrap>
-        </binding>
-        <binding>
-		      <condition>
-	          <equals>
-              <property>controls/engines/engine[0]/ignit</property>
-							<value>0</value>
-	          </equals>
-		      </condition>
-          <command>property-assign</command>
-          <property>controls/engines/engine[0]/cutoff</property>
-		      <value>1</value>
         </binding>
         <binding>
             <command>property-toggle</command>
@@ -1297,7 +1308,7 @@
   <animation>
       <type>rotate</type>
       <object-name>Ign2.switch</object-name>
-      <property>controls/engines/engine[1]/ignit</property>
+      <property>controls/engines/engine[1]/ignition</property>
       <factor>15</factor>
       <center>
           <x-m> 0.043 </x-m>
@@ -1319,24 +1330,11 @@
         <repeatable>false</repeatable>
         <binding>
 	          <command>property-adjust</command>
-            <property>controls/engines/engine[1]/ignit</property>
+            <property>controls/engines/engine[1]/ignition</property>
 						<step>1</step>
-						<min>-1</min>
-						<max>1</max>
+						<min>0</min>
+						<max>2</max>
 						<wrap>false</wrap>
-        </binding>
-        <binding>
-        <condition>
-		      <condition>
-	          <equals>
-              <property>controls/engines/engine[0]/ignit</property>
-							<value>0</value>
-	          </equals>
-		      </condition>
-        </condition>
-            <command>property-assign</command>
-            <property>controls/engines/engine[1]/cutoff</property>
-        <value>1</value>
         </binding>
         <binding>
             <command>property-toggle</command>
@@ -1348,10 +1346,10 @@
         <command>set-tooltip</command>
         <tooltip-id>Ign2-switch</tooltip-id>
         <label>RH Ignition: %s</label>
-		    <property>controls/engines/engine[1]/ignit</property>
+		    <property>controls/engines/engine[1]/ignition</property>
 		    <mapping>nasal</mapping>
 				<script>
-					var modes = ['OFF','ON','NORM'];
+					var modes = ['NORM','OFF','ON'];
 					return modes[arg[0]];
 				</script>
       </binding>
@@ -1366,22 +1364,11 @@
         <repeatable>false</repeatable>
         <binding>
 	          <command>property-adjust</command>
-            <property>controls/engines/engine[1]/ignit</property>
+            <property>controls/engines/engine[1]/ignition</property>
 						<step>-1</step>
-						<min>-1</min>
-						<max>1</max>
+						<min>0</min>
+						<max>2</max>
 						<wrap>false</wrap>
-        </binding>
-        <binding>
-		      <condition>
-	          <equals>
-              <property>controls/engines/engine[1]/ignit</property>
-							<value>0</value>
-	          </equals>
-		      </condition>
-          <command>property-assign</command>
-          <property>controls/engines/engine[1]/cutoff</property>
-		      <value>1</value>
         </binding>
         <binding>
             <command>property-toggle</command>
@@ -2730,7 +2717,7 @@
                 <command>set-tooltip</command>
                 <tooltip-id>Minimums</tooltip-id>
                 <label>Minimums: %s </label> 
-                <property>autopilot/settings/minimums</property> 								
+                <property>autopilot/settings/minimums</property>
             </binding>
         </hovered>
     </animation>
@@ -2782,6 +2769,119 @@
             <label>RADIO-BARO: %s </label> 
             <property>autopilot/settings/minimums-mode</property>
           </binding>
+        </hovered>
+    </animation>
+
+        <!-- lighting -->
+    <animation>
+        <type>rotate</type>
+        <object-name>brg1.knob</object-name>
+        <property>controls/lighting/pfd-norm</property>
+        <factor>270</factor>
+        <axis>
+            <x>-1.0</x>
+            <y>0.0</y>
+            <z>0.0</z>
+        </axis>
+        <center>
+            <x-m>0.0</x-m>
+            <y-m>-0.584</y-m>
+            <z-m>0.1715</z-m>
+        </center>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>brg3.knob</object-name>
+        <property>controls/lighting/pfd-norm[1]</property>
+        <factor>270</factor>
+        <axis>
+            <x>-1.0</x>
+            <y>0.0</y>
+            <z>0.0</z>
+        </axis>
+        <center>
+            <x-m>0.0</x-m>
+            <y-m>0.5125</y-m>
+            <z-m>0.1715</z-m>
+        </center>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>brg1.knob</object-name>
+        <action>
+            <button>3</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.2</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>controls/lighting/pfd-norm</property>
+                <step>0.1</step>
+                <min>0</min>
+                <max>1</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+        <action>
+            <button>4</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.2</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>controls/lighting/pfd-norm</property>
+                <step>-0.1</step>
+                <min>0</min>
+                <max>1</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>Pfd0Lighting</tooltip-id>
+                <label>Pfd Lighting : %s </label> 
+                <property>controls/lighting/pfd-norm</property>
+            </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>brg3.knob</object-name>
+        <action>
+            <button>3</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.2</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>controls/lighting/pfd-norm[1]</property>
+                <step>0.1</step>
+                <min>0</min>
+                <max>1</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+        <action>
+            <button>4</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.2</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>controls/lighting/pfd-norm[1]</property>
+                <step>-0.1</step>
+                <min>0</min>
+                <max>1</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>Pfd1Lighting</tooltip-id>
+                <label>Pfd Lighting : %s </label> 
+                <property>controls/lighting/pfd-norm[1]</property>
+            </binding>
         </hovered>
     </animation>
 
@@ -3078,6 +3178,119 @@
         </action>
     </animation>
 
+        <!-- lighting -->
+    <animation>
+        <type>rotate</type>
+        <object-name>brg0.knob</object-name>
+        <property>controls/lighting/mfd-norm</property>
+        <factor>270</factor>
+        <axis>
+            <x>-1.0</x>
+            <y>0.0</y>
+            <z>0.0</z>
+        </axis>
+        <center>
+            <x-m>0.0</x-m>
+            <y-m>-0.584</y-m>
+            <z-m>0.1715</z-m>
+        </center>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>brg2.knob</object-name>
+        <property>controls/lighting/mfd-norm[1]</property>
+        <factor>270</factor>
+        <axis>
+            <x>-1.0</x>
+            <y>0.0</y>
+            <z>0.0</z>
+        </axis>
+        <center>
+            <x-m>0.0</x-m>
+            <y-m>0.5125</y-m>
+            <z-m>0.1715</z-m>
+        </center>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>brg0.knob</object-name>
+        <action>
+            <button>3</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.2</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>controls/lighting/mfd-norm</property>
+                <step>0.1</step>
+                <min>0</min>
+                <max>1</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+        <action>
+            <button>4</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.2</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>controls/lighting/mfd-norm</property>
+                <step>-0.1</step>
+                <min>0</min>
+                <max>1</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>Mfd0Lighting</tooltip-id>
+                <label>Mfd Lighting : %s </label> 
+                <property>controls/lighting/mfd-norm</property>
+            </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>brg2.knob</object-name>
+        <action>
+            <button>3</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.2</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>controls/lighting/mfd-norm[1]</property>
+                <step>0.1</step>
+                <min>0</min>
+                <max>1</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+        <action>
+            <button>4</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.2</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>controls/lighting/mfd-norm[1]</property>
+                <step>-0.1</step>
+                <min>0</min>
+                <max>1</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>Mfd1Lighting</tooltip-id>
+                <label>Mfd Lighting : %s </label> 
+                <property>controls/lighting/mfd-norm[1]</property>
+            </binding>
+        </hovered>
+    </animation>
+
 <!-- MFD RIGHT -->
 
     <animation>
@@ -3369,6 +3582,63 @@
 						</binding>
 					</mod-up>
         </action>
+    </animation>
+
+<!-- EICAS -->
+    <animation>
+        <type>rotate</type>
+        <object-name>EICAS.knob</object-name>
+        <property>controls/lighting/eicas-norm</property>
+        <factor>270</factor>
+        <axis>
+            <x>-1.0</x>
+            <y>0.0</y>
+            <z>0.0</z>
+        </axis>
+        <center>
+            <x-m>0.0</x-m>
+            <y-m>0.0740</y-m>
+            <z-m>0.0350</z-m>
+        </center>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>EICAS.knob</object-name>
+        <action>
+            <button>3</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.2</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>controls/lighting/eicas-norm</property>
+                <step>0.1</step>
+                <min>0</min>
+                <max>1</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+        <action>
+            <button>4</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.2</interval-sec>
+            <binding>
+                <command>property-adjust</command>
+                <property>controls/lighting/eicas-norm</property>
+                <step>-0.1</step>
+                <min>0</min>
+                <max>1</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>EicasLighting</tooltip-id>
+                <label>EICAS Lighting : %s </label> 
+                <property>controls/lighting/eicas-norm</property>
+            </binding>
+        </hovered>
     </animation>
 
 <!-- FD/AP -->
@@ -4212,7 +4482,7 @@
     <animation>
         <type>translate</type>
         <object-name>pfdhsiR.btn</object-name>	
-        <property>instrumentation/primus2000/dc840/pfd-hsi[1]</property>
+        <property>instrumentation/primus2000/dc840/pfd-hsi</property>
 				<factor>0.0027</factor>
         <axis>
             <x>-1</x>
@@ -4227,7 +4497,7 @@
         <button>0</button>
         <binding>
           <command>property-toggle</command>
-          <property>instrumentation/primus2000/dc840/pfd-hsi[1]</property>
+          <property>instrumentation/primus2000/dc840/pfd-hsi</property>
         </binding>
         <binding>
           <command>property-toggle</command>
@@ -4239,7 +4509,7 @@
           <command>set-tooltip</command>
           <tooltip-id>pfdhsiR.btn</tooltip-id>
           <label>PFD HSI : %s</label>
-          <property>instrumentation/primus2000/dc840/pfd-hsi[1]</property>
+          <property>instrumentation/primus2000/dc840/pfd-hsi</property>
           <mapping>on-off</mapping>
         </binding>
       </hovered>

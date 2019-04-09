@@ -34,9 +34,7 @@ var ENG = {
 		m.text_val = ["N1l","N1r","ITTl","ITTr","N2l","N2r"];
 		foreach(var i;m.text_val) {
 			m.text[i] = m.eng.getElementById(i);
-      m.text[i].setFont("led.txf");
-      m.text[i].setColor(0.9,0.5,0); # amber
-      m.text[i].setVisible(0);
+      m.text[i].setFont("led.txf").setVisible(0);
 		}
 		return m
 	},
@@ -65,7 +63,7 @@ var ENG = {
     me.r_turb = getprop(me.turb_r) < 0 ? 0 : getprop(me.turb_r);
 		me.text.N2r.setText(sprintf("%.1f",me.r_turb));
 
-		settimer(func me.update(),0);
+		settimer(func me.update(),0.1);
 
   }, # end of update
 

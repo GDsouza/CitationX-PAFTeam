@@ -379,7 +379,6 @@
      <input>instrumentation/pfd/stall-speed</input>
       <reference>
           <property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
-					<offset>70</offset>
       </reference>
       <output>instrumentation/pfd/stall-diff</output>
       <min>-205</min>

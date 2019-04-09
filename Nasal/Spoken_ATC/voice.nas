@@ -145,7 +145,6 @@ var speak = func(secs=0) {
   for(var i=4;i<4+size(choose);i=i+1) { 
     if(props.condition(sprintf("/satc/logic/condition[%i]",i)))   break;
   }
-#  print(i);
   var choosed = choose[i-4];
   var p0 = join("short");
   if(getprop("/satc/freq")!=tunned) p0 ~= join("thisis");

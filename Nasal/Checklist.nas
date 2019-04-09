@@ -11,6 +11,8 @@ var norm_p = "instrumentation/checklists/chklst-pilot";
 var norm_c = "instrumentation/checklists/chklst-copilot";
 var abn_p = "instrumentation/checklists/abn";
 var nr_page = "instrumentation/checklists/nr-page";
+var throttle = ["controls/engines/engine/throttle",
+                "controls/engines/engine[1]/throttle"];
 var page = 0;
 var tittle = "";
 var lines_L = "";
@@ -324,10 +326,10 @@ var voices_prop = func {
 		  check.chk1 = 1;
 		  check.chk2 = 1;
 		  if (getprop("controls/gear/brake-parking")) check.chk3 = 1;
-		  if (getprop("controls/engines/engine[0]/throttle") == 0 and getprop("controls/engines/engine[1]/throttle") == 0) check.chk4 = 1;
+		  if (getprop(throttle[0]) < 0.1 and getprop(throttle[1]) < 0.1) check.chk4 = 1;
 		  if (getprop("controls/electric/engine[0]/generator") and getprop("controls/electric/engine[1]/generator")) check.chk5 = 1;
 		  if (getprop("controls/fuel/tank[0]/boost_pump")== 0 and getprop("controls/fuel/tank[1]/boost_pump")== 0) check.chk6 = 1;
-		  if (getprop("controls/engines/engine[0]/ignit")== -1 and getprop("controls/engines/engine[1]/ignit")== -1) check.chk7 = 1;
+		  if (getprop("controls/engines/engine[0]/ignition")== 0 and getprop("controls/engines/engine[1]/ignition")== 0) check.chk7 = 1;
 		  if (getprop("controls/fuel/xfer-L")== 0 and getprop("controls/fuel/xfer-R")== 0) check.chk8 = 1;
 		  if (getprop("controls/electric/std-by-pwr")) check.chk9 = 1;
 		  check.chk10 = 1;
@@ -365,7 +367,7 @@ var voices_prop = func {
 	  }
 
 	  if (page == 4) {   ### Left Engine Start ###
-		  if (getprop("controls/engines/engine[0]/throttle") == 0) check.chk0 = 1;
+		  if (getprop(throttle[0]) > 0.2) check.chk0 = 1;
 		  if (getprop("controls/engines/engine[0]/starter")) check.chk1 = 1;
 		  if (!getprop("controls/engines/engine[0]/cutoff")) check.chk2 = 1;
 		  if (getprop("engines/engine[0]/n2") >= 56) check.chk3 = 1;
@@ -376,7 +378,7 @@ var voices_prop = func {
 	  }
 
 	  if (page == 5) {   ### Right Engine Start ###
-		  if (getprop("controls/engines/engine[1]/throttle") == 0) check.chk0 = 1;
+		  if (getprop(throttle[1]) > 0.2) check.chk0 = 1;
 		  if (getprop("controls/engines/engine[1]/starter")) check.chk1 = 1;
 		  if (!getprop("controls/engines/engine[1]/cutoff")) check.chk2 = 1;
 		  if (getprop("engines/engine[1]/n2") >= 56) check.chk3 = 1;
@@ -402,8 +404,8 @@ var voices_prop = func {
 			  },0,0);
 
 		  if (getprop("autopilot/settings/nav-source")=="NAV1" or getprop("autopilot/settings/nav-source")=="NAV2") {
-			  var old_crs = getprop("autopilot/internal/selected-crs");
-			  var crs = setlistener("autopilot/internal/selected-crs", func (n) {
+			  var old_crs = getprop("autopilot/settings/selected-crs");
+			  var crs = setlistener("autopilot/settings/selected-crs", func (n) {
 				  if (n.getValue() != old_crs) {
 					  check.chk6 = 1;
 					  removelistener(crs);
@@ -438,7 +440,7 @@ var voices_prop = func {
 
 	  if (page == 9) {   ### Takeoff ###
 		  if (getprop("controls/gear/brake-left") and getprop("controls/gear/brake-right")) check.chk0 = 1;
-		  if (getprop("controls/engines/engine[0]/throttle")>0.75 and getprop("controls/engines/engine[1]/throttle")>0.75) check.chk1 = 1;
+		  if (getprop(throttle[0])>0.75 and getprop(throttle[1])>0.75) check.chk1 = 1;
 		  if (!getprop("controls/gear/brake-left") and !getprop("controls/gear/brake-right")) check.chk2 = 1;
 		  if (!getprop("controls/gear/gear-down")) check.chk3 = 1;
 		  check.chk4 = 1;
@@ -528,10 +530,10 @@ var voices_prop = func {
 
 	  if (page == 18) {   ### Shutdown ###
 		  if (!getprop("controls/anti-ice/window-heat") and !getprop("controls/anti-ice/window-heat[1]") and !getprop("controls/anti-ice/pitot-heat") and !getprop("controls/anti-ice/window-heat[1]")) check.chk0 = 1;
-		  if (getprop("controls/engines/engine[0]/throttle") == 0 and getprop("controls/engines/engine[1]/throttle") == 0) check.chk1 = 1;
+		  if (getprop(throttle[0]) < 0.1 and getprop(throttle[1]) < 0.1) check.chk1 = 1;
 		  if (getprop("controls/gear/brake-parking")) check.chk2 = 1;
 		  if (getprop("controls/electric/seat-belts-switch")==0) check.chk3 = 1;
-		  if (getprop("controls/engines/engine[0]/ignit")== 0 and getprop("controls/engines/engine[1]/ignit")== 0) check.chk4 = 1;
+		  if (getprop("controls/engines/engine[0]/ignition")== 1 and getprop("controls/engines/engine[1]/ignition")== 1) check.chk4 = 1;
 		  if (!getprop("controls/electric/engine[0]/generator") and !getprop("controls/electric/engine[1]/generator")) check.chk5 = 1;
 		  if (!getprop("controls/electric/std-by-pwr")) check.chk6 = 1;
 		  if (!getprop("controls/lighting/nav-lights")) check.chk7 = 1;

@@ -339,7 +339,11 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
         <line></line>
         <key>
             <name>Keypad Delete</name>
-            <desc>Toggle thrust reversers</desc>
+            <desc>Toggle Thrust Reversers</desc>
+        </key>
+        <key> 
+            <name>Keypad End</name>
+            <desc>Toggle Cutoff</desc>
         </key>
         <key>
             <name>Control B</name>
@@ -614,7 +618,6 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 		    <vr type="double">128</vr>
 		    <v2 type="double">133</v2>
 		    <ve type="double">190</ve>
-        <elevator-trim-calc type="double">0</elevator-trim-calc>
     </flight>
     <cabin-door>
         <open type="bool">0</open>
@@ -666,6 +669,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
           <changeover type="bool">0</changeover>
           <heading-bug-deg type="int">0</heading-bug-deg>
           <vertical-speed-fpm type="int">0</vertical-speed-fpm>
+          <selected-crs type="int">0</selected-crs>
       </settings>
       <locks>
           <heading>ROLL</heading>
@@ -678,7 +682,6 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
           <m-trim type="bool">0</m-trim>
       </locks>
       <internal>
-          <selected-crs type="double">0</selected-crs>
           <nav-distance type="double">0</nav-distance>
           <nav-type type="string"></nav-type>
           <nav-id type="string"></nav-id>
@@ -703,6 +706,25 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
                 <command>property-assign</command>
                 <property>controls/engines/engine[1]/reverser</property>
                 <property>controls/engines/engine[0]/reverser</property>
+            </binding>
+        </key>
+        <key n="363">
+            <name>End</name>
+            <desc>Cutoff</desc>
+            <binding>
+              <condition>
+                <less-than>
+                  <property>controls/engines/engine/throttle</property>
+                  <value>0.05</value>
+                </less-than>
+              </condition>
+              <command>property-toggle</command>
+              <property>controls/engines/engine[0]/cutoff</property>
+            </binding>
+            <binding>
+                <command>property-assign</command>
+                <property>controls/engines/engine[1]/cutoff</property>
+                <property>controls/engines/engine[0]/cutoff</property>
             </binding>
         </key>
         <key n="4">
@@ -735,6 +757,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
                 <script>dialogs.Radio.toggle()</script>
             </binding>
         </key>
+
 				<key n="60">
 					<name>less-than</name>
 					<desc>Spoken ATC</desc>
@@ -745,12 +768,22 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 				</key>
         <key n="62">
             <name>greater-than</name>
-            <desc>Spoken GCA</desc>
+            <desc>Precision Approach Radar</desc>
             <binding>
               <command>nasal</command>
-              <script><![CDATA[gca.Control();]]></script>
+              <script><![CDATA[par.instrument();]]></script>
             </binding>
         </key>
+
+        <key n="119">
+            <name>w</name>
+            <desc>Charts Display</desc>
+            <binding>
+              <command>nasal</command>
+              <script><![CDATA[charts.Charts_key();]]></script>
+            </binding>
+        </key>
+
     </keyboard>
   </input>
 
@@ -792,6 +825,12 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 				<file>Aircraft/CitationX/Nasal/Mfd.nas</file>
 				<file>Aircraft/CitationX/Models/Instruments/MFD/canvas/NDcanvas.nas</file>
 			</mfd>
+      <pfd>
+				<file>Aircraft/CitationX/Models/Instruments/PFD/PFD.nas</file>
+      </pfd>
+      <eicas>
+				<file>Aircraft/CitationX/Models/Instruments/EICAS/Eicas.nas</file>
+      </eicas>
 			<fms>
         <file>Aircraft/CitationX/Nasal/Fms.nas</file>
 			</fms>
@@ -814,6 +853,9 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 			<cvr>
 				<file>Aircraft/CitationX/Nasal/Cvr.nas</file>
 			</cvr>
+      <charts>
+        <file>Aircraft/CitationX/Nasal/Charts/Charts.nas</file>
+      </charts>
 			<tyresmoke>
 				<file>Aircraft/CitationX/Nasal/Tyresmoke.nas</file>
 			</tyresmoke>

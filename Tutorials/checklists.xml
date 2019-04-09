@@ -139,26 +139,26 @@
 				</marker>
 				<condition>
 					<and>
-						<greater-than>
+						<greater-than-equals>
 							<property>controls/engines/engine[0]/throttle</property>
-								<value>0.199</value>
-						</greater-than>
-						<greater-than>
+								<value>0</value>
+						</greater-than-equals>
+						<greater-than-equals>
 							<property>controls/engines/engine[1]/throttle</property>
-								<value>0.199</value>
-						</greater-than>
+								<value>0</value>
+						</greater-than-equals>
 					</and>
 				</condition>
 				<binding>
 					<command>property-interpolate</command>
 					<property>controls/engines/engine[0]/throttle</property>
-						<value>0.25</value>
+						<value>0</value>
 						<time>2.0</time>
 				</binding>
 				<binding>
 					<command>property-interpolate</command>
 					<property>controls/engines/engine[1]/throttle</property>
-					<value>0.25</value>
+					<value>0</value>
 					<time>2.0</time>
 				</binding>
 			</item>
@@ -294,9 +294,9 @@
 						<property>controls/engines/engine[0]/ignition</property>
 				</condition>
 				<binding>
-					<command>property-toggle</command>
+					<command>property-assign</command>
 					<property>controls/engines/engine[0]/ignition</property>
-						<value>1</value>
+						<value>0</value>
 				</binding>
 			</item>
 
@@ -334,9 +334,9 @@
 						<property>controls/engines/engine[1]/ignition</property>
 				</condition>
 				<binding>
-					<command>property-toggle</command>
+					<command>property-assign</command>
 					<property>controls/engines/engine[1]/ignition</property>
-						<value>1</value>
+						<value>0</value>
 				</binding>
 			</item>
 

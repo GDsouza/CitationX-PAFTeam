@@ -15,7 +15,7 @@
    viewBox="0 0 620 365"
    id="svg4136"
    version="1.1"
-   inkscape:version="0.92.3 (unknown)"
+   inkscape:version="0.92.4 (unknown)"
    sodipodi:docname="ENG.svg">
   <defs
      id="defs4138">
@@ -266,8 +266,8 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.266831"
-     inkscape:cx="105.54136"
-     inkscape:cy="183.72718"
+     inkscape:cx="231.0608"
+     inkscape:cy="180.56969"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -368,7 +368,7 @@
        y="42.787178" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:0%;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono, Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#c8c8c8;fill-opacity:1;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:0%;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono, Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#b3b3b3;fill-opacity:1;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
        x="-45.213898"
        y="809.16827"
        id="N1txt"><tspan
@@ -376,10 +376,10 @@
          id="tspan4587"
          x="-45.213898"
          y="809.16827"
-         style="font-size:45px;line-height:1.25">N1 %</tspan></text>
+         style="font-size:45px;line-height:1.25;fill:#b3b3b3;">N1 %</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:0%;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono, Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.97300923px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:0%;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono, Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#e67f00;fill-opacity:1;stroke:#000000;stroke-width:0.97300923px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
        x="-233.76602"
        y="795.41437"
        id="N1l"
@@ -388,10 +388,10 @@
          id="tspan3384"
          x="-233.76602"
          y="795.41437"
-         style="font-size:70px;line-height:1.25">X</tspan></text>
+         style="font-size:70px;line-height:1.25;fill:#e67f00;fill-opacity:1;">X</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:0%;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono, Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.97300923px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:0%;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono, Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#e67f00;fill-opacity:1;stroke:#000000;stroke-width:0.97300923px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
        x="144.52464"
        y="795.41437"
        id="N1r"
@@ -400,10 +400,10 @@
          id="tspan3384-6"
          x="144.52464"
          y="795.41437"
-         style="font-size:70px;line-height:1.25">X</tspan></text>
+         style="font-size:70px;line-height:1.25;fill:#e67f00;fill-opacity:1;">X</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:0%;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono, Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#c8c8c8;fill-opacity:1;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:0%;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono, Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#b3b3b3;fill-opacity:1;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
        x="-44.071007"
        y="907.70337"
        id="ITTtxt"><tspan
@@ -411,10 +411,10 @@
          id="tspan4356"
          x="-44.071007"
          y="907.70337"
-         style="font-size:45px;line-height:1.25">ITT °C</tspan></text>
+         style="font-size:45px;line-height:1.25;fill:#b3b3b3;">ITT °C</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:0%;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono, Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.97300923px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:0%;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono, Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#e67f00;fill-opacity:1;stroke:#000000;stroke-width:0.97300923px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
        x="-233.76602"
        y="891.2113"
        id="ITTl"
@@ -423,10 +423,10 @@
          id="tspan3384-4"
          x="-233.76602"
          y="891.2113"
-         style="font-size:70px;line-height:1.25">X</tspan></text>
+         style="font-size:70px;line-height:1.25;fill:#e67f00;fill-opacity:1;">X</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:0%;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono, Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.97300923px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:0%;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono, Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#e67f00;fill-opacity:1;stroke:#000000;stroke-width:0.97300923px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
        x="144.52464"
        y="891.2113"
        id="ITTr"
@@ -435,10 +435,10 @@
          id="tspan3384-5"
          x="144.52464"
          y="891.2113"
-         style="font-size:70px;line-height:1.25">X</tspan></text>
+         style="font-size:70px;line-height:1.25;fill:#e67f00;fill-opacity:1;">X</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:0%;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono, Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#c8c8c8;fill-opacity:1;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:0%;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono, Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#b3b3b3;fill-opacity:1;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
        x="-43.281635"
        y="1010.9902"
        id="N2txt"><tspan
@@ -446,10 +446,10 @@
          id="tspan4318"
          x="-43.281635"
          y="1010.9902"
-         style="font-size:45px;line-height:1.25">N2 %</tspan></text>
+         style="font-size:45px;line-height:1.25;fill:#b3b3b3;">N2 %</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:0%;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono, Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.97300923px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:0%;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono, Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#e67f00;fill-opacity:1;stroke:#000000;stroke-width:0.97300923px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
        x="-233.76602"
        y="991.55371"
        id="N2l"
@@ -458,10 +458,10 @@
          id="tspan3384-4-2"
          x="-233.76602"
          y="991.55371"
-         style="font-size:70px;line-height:1.25">X</tspan></text>
+         style="font-size:70px;line-height:1.25;fill:#e67f00;fill-opacity:1;">X</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:0%;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono, Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.97300923px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:0%;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono, Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#e67f00;fill-opacity:1;stroke:#000000;stroke-width:0.97300923px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
        x="144.52464"
        y="991.55371"
        id="N2r"
@@ -470,6 +470,6 @@
          id="tspan3384-4-2-4"
          x="144.52464"
          y="991.55371"
-         style="font-size:70px;line-height:1.25">X</tspan></text>
+         style="font-size:70px;line-height:1.25;fill:#e67f00;fill-opacity:1;">X</tspan></text>
   </g>
 </svg>

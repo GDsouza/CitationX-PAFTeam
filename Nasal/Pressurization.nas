@@ -203,7 +203,7 @@ var Pressur = {
 		if (getprop(mode) == 2 and getprop(alt_ft) < 2000) {
 		  setprop(cabin_target,getprop(pressure_alt)-getprop(alt_ft) - 100);
 		}
-    settimer(func me.update_alt(),0);
+    settimer(func me.update_alt(),1);
 
   }, # end of update_alt
 

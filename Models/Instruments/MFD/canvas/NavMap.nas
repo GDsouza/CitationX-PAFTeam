@@ -332,6 +332,6 @@ var NavMap = {
 			me.symbols.altArc.show();
 		} else me.symbols.altArc.hide();
 
-   settimer(func me.animateSymbols(x),0.05);
+   settimer(func me.animateSymbols(x),0.1);
   }, # end of animateSymbols
 }; # end of NavMap

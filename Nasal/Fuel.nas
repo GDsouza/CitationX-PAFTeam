@@ -142,7 +142,7 @@ var fuelsys = {
 					me.oof();
 			}
 		}
-		settimer(func {me.update();},0.1);
+		settimer(func {me.update();},0.3);
 	},
 
 	xfeed : func { 					### CROSSFEED ###
