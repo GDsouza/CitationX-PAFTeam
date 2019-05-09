@@ -17,7 +17,7 @@ var freq_chan = "instrumentation/kfs-594/freq-chan";
 var mode = "instrumentation/kfs-594/mode";
 var prog = 0;
 var t = 0;
-var path = getprop("/sim/fg-home")~"/aircraft-data/";
+var path = getprop("/sim/fg-home")~"/Export/CitationX/";
 var memPath = [nil];
 var memVec = [];
 var hf_mem = nil;
@@ -58,11 +58,16 @@ var HF = {
     me.text.err.hide();
     setprop("instrumentation/kfs-594/freq-chan","CHAN");
 
+		var HFpath = os.path.new(getprop("/sim/fg-home")~"/Export/CitationX/create.txt");
+    if (!HFpath.exists()) {
+      HFpath.create_dir();
+    }
+
   	### Create Memories if missing ###
-    memPath = path~"CitationX-HFmem.xml";
+    memPath = path~"HFmem.xml";
     var xfile = subvec(directory(path),2);
     var v = std.Vector.new(xfile);
-    if (!v.contains("CitationX-HFmem.xml")) {
+    if (!v.contains("HFmem.xml")) {
 	    var base = props.Node.new({
 		    chan1 : "020000",chan2 : "020000",chan3 : "020000",chan4 : "020000",
         chan5 : "020000",chan6 : "020000",chan7 : "020000",chan8 : "020000",

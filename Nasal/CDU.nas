@@ -27,7 +27,7 @@ var fp_active = "autopilot/route-manager/active";
 var navSrc = "autopilot/settings/nav-source";
 
 var num = "autopilot/route-manager/route/num";
-var path = getprop("/sim/fg-home")~"/aircraft-data/FlightPlans/";
+var path = getprop("/sim/fg-home")~"/Export/FlightPlans/";
 var pos_init = "instrumentation/cdu/pos-init";
 var posit = "instrumentation/irs/positionned";
 
@@ -84,19 +84,13 @@ var cduMain = {
 	  setprop("autopilot/route-manager/wp/altitude-ft",0);
     setprop("instrumentation/cdu/display","NAVIDENT[1]");
     setprop("instrumentation/cdu[1]/display","NAVIDENT[1]");
-        ### Create flightplans path if not exist ###
-    var home = getprop("/sim/fg-home")~"/aircraft-data";
-    fltPath = home~"/FlightPlans/Zzzz Ne pas enlever";
-    var xfile = subvec(directory(home),2);
-    var v = std.Vector.new(xfile);
-    if (!v.contains("FlightPlans")) {
-      var data = props.Node.new({
-		  version : 2,
-		  destination : {airport : "",runway : ""},
-		  departure : {airport : "",runway : ""}
-      });
-	    io.write_properties(fltPath,data);
+
+        ### Create FlightPlans path if not exists ###
+    var flt_dir = os.path.new(getprop("/sim/fg-home")~"/Export/FlightPlans/create.txt");
+    if (!flt_dir.exists()) {
+      flt_dir.create_dir();
     }
+
   }, # end of init
 
   listen : func (x) {
@@ -208,7 +202,7 @@ var cduMain = {
         setprop("instrumentation/cdu/input",cduInput);
         setprop("instrumentation/cdu[1]/input",cduInput);
 			}
-			if (getprop(posit)) {cduInput = ""}
+			if (getprop(posit)) cduInput = "";
 			if (v == "B4R") {
 				if (getprop(pos_init) and getprop(posit)) {
 					v = "";

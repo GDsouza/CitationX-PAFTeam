@@ -103,7 +103,7 @@ var cduDsp = {
       },0,0);
 
 		setlistener(pos_init,func(n) {
-      if (n.getValue()) {me.line.scrpad.setText("POSITIONNING")}
+      if (n.getValue()) me.line.scrpad.setText("POSITIONNING");
     },0,0);
 
 		setlistener(posit, func(n) {
@@ -119,17 +119,11 @@ var cduDsp = {
       }
     },0,0);
 
-    setlistener(dep_apt, func {
-      me.Flp0(x);
-    },0,0);
+    setlistener(dep_apt, func {me.Flp0(x);},0,0);
 
-    setlistener(fp_saved, func {
-      me.Flp1(x);
-    },0,0);
+    setlistener(fp_saved, func {me.Flp1(x);},0,0);
 
-    setlistener(fp_active, func {
-      me.Flp1(x);
-    },0,0);
+    setlistener(fp_active, func {me.Flp1(x);},0,0);
 
     setlistener("instrumentation/cdu["~x~"]/speed", func(n) {
       setprop("instrumentation/cdu["~x~"]/speed",n.getValue());

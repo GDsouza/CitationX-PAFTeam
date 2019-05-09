@@ -48,7 +48,7 @@ var dme_sel = ["instrumentation/rmu/unit/dme-selected","instrumentation/rmu/unit
 var tac_freq = ["instrumentation/tacan/frequencies/selected-mhz","instrumentation/tacan[1]/frequencies/selected-mhz"];
 var tac_id = ["instrumentation/tacan/id","instrumentation/tacan[1]/id"];
 var rmu_sel = ["instrumentation/rmu/unit/selected","instrumentation/rmu/unit[1]/selected"];
-var path = getprop("/sim/fg-home")~"/aircraft-data/";
+var path = getprop("/sim/fg-home")~"/Export/CitationX/";
 var nav_src = "autopilot/settings/nav-source";
 var tcas_mode = "instrumentation/tcas/inputs/mode";
 var full = nil;
@@ -155,11 +155,17 @@ var RMU = {
 	}, # end of new
 
   init : func(x) {
+        ### Create CitationX Path if not exists ### 
+    var RMU_path = os.path.new(getprop("/sim/fg-home")~"/Export/CitationX/create.txt");
+    if (!RMU_path.exists()) {
+      RMU_path.create_dir();
+    }
+
   	### Create Memories if not exist ###
-    memPath[x] = path~"CitationX-RMUmem"~x~".xml";
+    memPath[x] = path~"RMUmem"~x~".xml";
     var xfile = subvec(directory(path),2);
     var v = std.Vector.new(xfile);
-    if (!v.contains("CitationX-RMUmem"~x~".xml")) {
+    if (!v.contains("RMUmem"~x~".xml")) {
 	    var base = props.Node.new({
 		    comMem1 : 0,comMem2 : 0,comMem3 : 0,comMem4 : 0,comMem5 : 0,
 		    comMem6 : 0,comMem7 : 0,comMem8 : 0,comMem9 : 0,comMem10 : 0,

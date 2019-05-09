@@ -341,8 +341,14 @@ var FHupdate = func(tenths){
 }
 
 var FH_load = func{
-		var FH_path = getprop("/sim/fg-home")~"/aircraft-data/";
-		var name = FH_path~"CitationX-FHmeter.xml";
+        ### Create CitationX Path if not exists ### 
+		var path = os.path.new(getprop("/sim/fg-home")~"/Export/CitationX/create.txt");
+    if (!path.exists()) {
+      path.create_dir();
+    }
+
+    var FH_path  = getprop("/sim/fg-home")~"/Export/CitationX/";
+		var name = FH_path~"FHmeter.xml";
 		var xfile = subvec(directory(FH_path),2);
 		var v = std.Vector.new(xfile);
 		if (!v.contains("CitationX-FHmeter.xml")) {
@@ -357,7 +363,7 @@ var FH_load = func{
 }
 
 var FH_write = func {
-		var FH_path = getprop("/sim/fg-home")~"/aircraft-data/CitationX-FHmeter.xml";
+		var FH_path = getprop("/sim/fg-home")~"/Export/CitationX/FHmeter.xml";
 		fl_tot = getprop("instrumentation/clock/flight-meter-tot");
 		var data = io.read_properties(FH_path);
 		var name = data.getChild("TotalFlight");
@@ -366,6 +372,11 @@ var FH_write = func {
 }
 
 ######################
+controls.stepSpoilers = func(v) {
+    if (v < 0) {setprop("/controls/flight/speedbrake", 0)}
+		else if (v > 0) {setprop("/controls/flight/speedbrake", 1)}
+}
+
 controls.synchro = func {
   var synchro = "controls/engines/synchro";
     if (getprop(synchro) == -1) ud = 1;

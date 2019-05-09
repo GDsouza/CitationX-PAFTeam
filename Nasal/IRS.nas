@@ -66,7 +66,7 @@ var IRS = {
 
 	irsMain : func {
 		setlistener(posit, func(n) {
-			if (n.getValue()) {setprop(align,0)}
+			if (n.getValue()) setprop(align,0);
 		},0,0);
 					
 		setlistener(selected, func(n) {
@@ -125,9 +125,9 @@ var IRS = {
 				me.text.OnBatt.show();
 				me.text.BattFail.show();
 			} else {
-				if (!f_align) {me.text.Align.hide()}
-				if (!f_fault) {me.text.Fault.hide()}
-				if (!f_navready) {me.text.NavRdy.hide()}
+				if (!f_align) me.text.Align.hide();
+				if (!f_fault) me.text.Fault.hide();
+				if (!f_navready) me.text.NavRdy.hide();
 				me.text.NoAir.hide();
 				me.text.OnBatt.hide();
 				me.text.BattFail.hide();
@@ -139,7 +139,7 @@ var IRS = {
 	navReady : func {
 		me.text.Align.show();			
 		f_navready = 0;
-		me.align_timer = maketimer(5,func() {
+		var align_timer = maketimer(5,func() {
 			me.text.Align.hide();
 			me.text.NavRdy.show();
 			f_navready = 1;
@@ -147,25 +147,25 @@ var IRS = {
 			if (getprop(selected) != 0) {
 				f_fault = 1;
 				me.fault();
-			} else {f_fault = 0}
+			} else f_fault = 0;
 		});
-		me.align_timer.singleShot = 1;
-		me.align_timer.start();	
+		align_timer.singleShot = 1;
+		align_timer.start();	
 	}, # end of display
 
 	fault : func {
 		t = 0;
-		me.fault_timer = maketimer(0.5,func() {
+		var fault_timer = maketimer(0.5,func() {
 			if (t==0) {me.text.Fault.show()}
 			if (t==1) {me.text.Fault.hide()}					
 			t+=1;
 			if(t==2) {t=0}
 			if (getprop(selected)== 0 or getprop(selected) == -2 or !getprop(cdu_init)) {
-				me.fault_timer.stop();
+				fault_timer.stop();
 				me.text.Fault.hide();
 			}
 		});
-		me.fault_timer.start();
+		fault_timer.start();
 	}, # end of fault
 
 }; # end of IRS

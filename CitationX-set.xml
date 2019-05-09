@@ -799,12 +799,12 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 			<atc>
 				<file>Aircraft/CitationX/Nasal/Spoken_ATC/init.nas</file>
 			</atc>
-			<audio>
-				<file>Aircraft/CitationX/Models/Instruments/Audio/Audio.nas</file>
-			</audio>
       <par>
 				<file>Aircraft/CitationX/Nasal/PAR/main.nas</file>
       </par>
+			<audio>
+				<file>Aircraft/CitationX/Models/Instruments/Audio/Audio.nas</file>
+			</audio>
       <dialogs>
         <file>Aircraft/CitationX/Nasal/Dialogs.nas</file>
       </dialogs>

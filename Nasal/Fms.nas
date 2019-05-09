@@ -350,8 +350,6 @@ var FMS = {
             if (getprop(me.dist_rem) <= 9) citation.set_apr();
             else {
 #              if (getprop("autopilot/internal/gs-deflection") > -0.50 and me.gs_climb < 0) setprop(me.lock_gs,1);
-print("352 gs_climb : ",me.gs_climb," - tg_climb : ",getprop(me.tg_climb));
-print("353 lock_gs : ",getprop(me.lock_gs));
               if (me.gs_climb < 0) {
 #              if (me.gs_climb <= getprop(me.tg_climb)) {
                 if (!getprop(me.lock_gs)) setprop(me.lock_gs,1);

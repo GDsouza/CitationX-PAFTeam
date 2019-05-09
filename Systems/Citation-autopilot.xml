@@ -672,8 +672,8 @@
         <gamma>0.0</gamma>
         <Ti>10</Ti>
         <Td>0.001</Td>
-        <min>0.20</min>
-        <max>0.99</max>
+        <min>0.0</min>
+        <max>0.95</max>
       </config>
     </pid-controller>
 
@@ -713,8 +713,8 @@
         <gamma>0.0</gamma>
         <Ti>10</Ti>   <!-- old 10 -->
         <Td>0.001</Td> <!-- old 0.001 -->
-        <min>0.20</min>
-        <max>0.99</max>
+        <min>0.0</min>
+        <max>0.95</max>
       </config>
     </pid-controller>
 
@@ -994,14 +994,14 @@
 				<property>controls/engines/engine[1]/throttle</property>		
 			</output>
       <config>
-          <Kp>0.1</Kp> <!-- old 0.1 -->
-          <beta>1.0</beta>
-          <alpha>0.1</alpha>
-          <gamma>0.0</gamma>
-          <Ti>10.0</Ti>	<!-- old 10.0 -->
-          <Td>0.001</Td>
-          <min>0.20</min> <!-- old 0.25 -->
-          <max>0.99</max> <!-- old 0.95 -->
+        <Kp>0.1</Kp> <!-- old 0.1 -->
+        <beta>1.0</beta>
+        <alpha>0.1</alpha>
+        <gamma>0.0</gamma>
+        <Ti>10.0</Ti>	<!-- old 10.0 -->
+        <Td>0.001</Td>
+        <min>0.0</min>
+        <max>0.95</max>
       </config>
     </pid-controller>
 
@@ -1042,14 +1042,14 @@
 					<property>controls/engines/engine[1]/throttle</property>		
 				</output>
         <config>
-            <Kp>5</Kp> <!-- old 10 -->
-            <beta>1.0</beta>
-            <alpha>0.1</alpha>
-            <gamma>0.0</gamma>
-            <Ti>10.0</Ti>	<!-- old 10.0 -->
-            <Td>0.001</Td>
-            <min>0.20</min> <!-- old 0.25 -->
-            <max>0.99</max> <!-- old 0.95 -->
+          <Kp>5</Kp> <!-- old 10 -->
+          <beta>1.0</beta>
+          <alpha>0.1</alpha>
+          <gamma>0.0</gamma>
+          <Ti>10.0</Ti>	<!-- old 10.0 -->
+          <Td>0.001</Td>
+          <min>0.0</min>
+          <max>0.95</max>
         </config>
     </pid-controller>
 

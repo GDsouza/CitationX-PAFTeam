@@ -273,7 +273,7 @@ var EICASdsp = {
           } else {
             me.color = me.COLORS.green;
             if (getprop(Rev[i-16])) me.txt = "REV";
-            else if (getprop(Throt[i-16]) > 0.50 
+            else if (getprop(Throt[i-16]) > 0.30 
                 and getprop(Throt[i-16]) < 0.70) me.txt = "CRU";
             else if (getprop(Throt[i-16]) >= 0.70 
                 and getprop(Throt[i-16]) < 0.80) me.txt = "CLB";
