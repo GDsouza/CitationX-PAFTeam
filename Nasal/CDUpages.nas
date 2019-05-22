@@ -255,7 +255,7 @@ var cduDsp = {
   }, # end of Flp0
    
   Flp_list : func(x) {
-	  var path = getprop("/sim/fg-home")~"/aircraft-data/FlightPlans/";
+	  var path = getprop("/sim/fg-home")~"/Export/FlightPlans/";
     var airport = getprop("autopilot/route-manager/departure/airport");
 	  var files = subvec(directory(path),2);
     xfile  = [];      
@@ -265,7 +265,7 @@ var cduDsp = {
         append(xfile,(left(files[ind],size(files[ind])-4)));
       }
     }
-	  cdu.cduMain.nb_pages(size(xfile),6,0);				
+	  cdu.cduMain.nb_pages(size(xfile),6,x);				
     me.nrPage = size(getprop("instrumentation/cdu["~x~"]/display"))<12 ? substr(getprop("instrumentation/cdu["~x~"]/display"),9,1) : substr(getprop("instrumentation/cdu["~x~"]/display"),9,2); 
 	  if (size(xfile) == 0) {
 		  setprop("instrumentation/cdu["~x~"]/input","NO FILE");		

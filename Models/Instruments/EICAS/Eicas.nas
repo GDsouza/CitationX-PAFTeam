@@ -6,6 +6,7 @@
 var Bus = ["systems/electrical/left-bus",
            "systems/electrical/right-bus"];
 var Cycle_up = ["engines/engine/cycle-up","engines/engine[1]/cycle-up"];
+var Dau = ["instrumentation/eicas/dau1","instrumentation/eicas/dau2"];
 var Fan = ["engines/engine/fan","engines/engine[1]/fan"];
 var Flaps = "controls/flight/flaps";
 var FuelF = ["engines/engine/fuel-flow-pph",
@@ -26,6 +27,8 @@ var OilT = ["engines/engine/oilt-norm",
 var Rat = "environment/temperature-degc";
 var Rev = ["controls/engines/engine/reverser",
             "controls/engines/engine[1]/reverser"];
+var Sg = "instrumentation/eicas/sg-rev";
+var SpdBrakes = "controls/flight/speedbrake";
 var Stab = "controls/flight/elevator-trim";
 var Sync = "controls/engines/synchro";
 var Throt = ["controls/engines/engine/throttle",
@@ -118,6 +121,11 @@ var EICASdsp = {
     m.rat = m.eicas.getElementById("rat");
     m.gear = m.eicas.getElementById("Gear");
     m.sync = m.eicas.getElementById("sync");
+    m.dau1 = m.eicas.getElementById("dau1").hide();
+    m.dau2 = m.eicas.getElementById("dau2").hide();
+    m.speedBrakes = m.eicas.getElementById("SpeedBrakes");
+    m.sgTxt = m.eicas.getElementById("sgTxt");
+    m.sgCdr = m.eicas.getElementById("sgCdr");
 
     ##### Values #####œ
     m.keys = [
@@ -185,6 +193,34 @@ var EICASdsp = {
     setlistener(Sync, func(n) {
       if (n.getValue() != 0) me.sync.show();
       else me.sync.hide();
+    },1,0);
+
+    setlistener(SpdBrakes, func(n) {
+      if (n.getValue() != 0) me.speedBrakes.show();
+      else me.speedBrakes.hide();
+    },1,0);
+
+    setlistener(Sg, func(n) {
+      if (n.getValue() == 0) {me.sgTxt.hide();me.sgCdr.hide()}
+      else {
+        if (n.getValue() == -1) me.sgTxt.setText("SG1").show();
+        if (n.getValue() == 1) me.sgTxt.setText("SG2").show();
+        me.sgCdr.show();
+      }
+    },1,0);
+
+    setlistener(Dau[0], func(n) {
+      if (n.getValue()) {
+        if (!me.dau1.getVisible()) me.dau1.setVisible(1);
+        else me.dau1.setVisible(0);
+      }
+    },1,0);
+
+    setlistener(Dau[1], func(n) {
+      if (n.getValue()) {
+        if (!me.dau2.getVisible()) me.dau2.setVisible(1);
+        else me.dau2.setVisible(0);
+      }
     },1,0);
 
   }, # end of listen

@@ -119,7 +119,7 @@ var NavMap = {
 				                "arrowL","arrowR","rangeL","rangeLtxt",
 									      "rangeR","rangeRtxt","hdgLine",
 										    "tcasLabel","tcasValue","tfcRangeInt",
-                        "altArc","traffic"]) 
+                        "altArc","traffic","sgTxt","sgCdr"]) 
 			m.symbols[element] = m.nd.getElementById(element);
 
     m.layer.layerMap.setTranslation(m._center[0], m._center[1]);
@@ -233,6 +233,15 @@ var NavMap = {
     setlistener("instrumentation/tcas/outputs/traffic-alert", func (n) {
       if (n.getValue()) me.symbols.traffic.show();
       else  me.symbols.traffic.hide();
+    },1,0);
+
+    setlistener("instrumentation/eicas/sg-rev", func(n) {
+      if (n.getValue() == 0) {me.symbols.sgTxt.hide();me.symbols.sgCdr.hide()}
+      else {
+        if (n.getValue() == -1) me.symbols.sgTxt.setText("SG1").show();
+        if (n.getValue() == 1) me.symbols.sgTxt.setText("SG2").show();
+        me.symbols.sgCdr.show();
+      }
     },1,0);
 
   }, # end of createMapElement

@@ -27,9 +27,9 @@
      inkscape:window-height="997"
      id="namedview75"
      showgrid="false"
-     inkscape:zoom="0.46093749"
-     inkscape:cx="-127.88578"
-     inkscape:cy="558.84744"
+     inkscape:zoom="0.92187498"
+     inkscape:cx="112.98828"
+     inkscape:cy="761.26554"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
@@ -434,6 +434,26 @@
        d="m 364.45106,505.24944 c 0,0 38.3169,-20.968 85.58379,-20.968 47.26689,0 85.58379,20.968 85.58379,20.968 v 0"
        id="altArc"
        inkscape:connector-curvature="0" />
+  </g>
+  <g
+     id="sg">
+    <rect
+       y="30.373304"
+       x="517.46997"
+       height="33.873695"
+       width="62.077084"
+       id="sgCdr"
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#e67f00;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <text
+       id="sgTxt"
+       y="58.067776"
+       x="548.94916"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:condensed;font-size:32px;line-height:125%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow, Bold Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;opacity:1;fill:#e67f00;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       xml:space="preserve"><tspan
+         y="58.067776"
+         x="548.94916"
+         id="tspan935"
+         sodipodi:role="line">SG1</tspan></text>
   </g>
   <g
      id="layerMap">

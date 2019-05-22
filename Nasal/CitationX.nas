@@ -58,6 +58,10 @@ props.globals.initNode("autopilot/settings/nav-btn",0,"BOOL");
 props.globals.initNode("autopilot/settings/fms-btn",0,"BOOL");
 props.globals.initNode("sim/sound/startup",0,"INT");
 props.globals.initNode("instrumentation/cdu/init",0,"BOOL");
+props.globals.initNode("instrumentation/eicas/xfr",0,"INT");
+props.globals.initNode("instrumentation/eicas/sg-rev",0,"INT");
+props.globals.initNode("instrumentation/eicas/dau1",0,"BOOL");
+props.globals.initNode("instrumentation/eicas/dau2",0,"BOOL");
 
 for(n=0;n<2;n+=1) {
   props.globals.initNode("instrumentation/rmu/unit["~n~"]/dim",0,"BOOL");
@@ -82,7 +86,11 @@ var FHmeter = aircraft.timer.new("/instrumentation/clock/flight-meter-sec", 1,1)
 var Chrono = [aircraft.timer.new("/instrumentation/mfd/chrono", 1,1),
              aircraft.timer.new("/instrumentation/mfd[1]/chrono", 1,1)];
 var elt = [0,0];
-var fl_tot = 0;
+var fl_tot = nil;
+var fl_calc = nil;
+var fcalc = nil;
+var fhour = nil;
+var fmeter = nil;
 
 ### tire rotation per minute by circumference ####
 var TireSpeed = {
@@ -173,7 +181,9 @@ var JetEngine = {
     m.n2factor = nil;
     m.engine_on = 0;
     m.revers = 0;
-
+    ##### Reinit Chrono #####
+    setprop("instrumentation/mfd/chrono",0);
+    setprop("instrumentation/mfd[1]/chrono",0);
     return m;
   },
 
@@ -326,18 +336,14 @@ var el_time = func(x,n) {
 }
 
 ### Flight Meter ###
-var FHupdate = func(tenths){
-    var fmeter = getprop("/instrumentation/clock/flight-meter-sec");
-    var fhour = fmeter/3600;
-    setprop("instrumentation/clock/flight-meter-hour",fhour);
-    var fmin = fhour - int(fhour);
-    if(tenths !=0){
-        fmin *=100;
-    }else{
-        fmin *=60;
-    }
-    setprop("instrumentation/clock/flight-meter-min",int(fmin));
-		setprop("instrumentation/clock/flight-meter-tot",fl_tot+fhour);
+var FHupdate = func {
+    fmeter = getprop("/instrumentation/clock/flight-meter-sec");
+    fhour = fmeter/3600;
+    fl_calc = fl_tot + fhour;
+		setprop("instrumentation/clock/flight-meter-tot",fl_calc);
+    fcalc = int((fl_calc-int(fl_calc))*10);
+    fdsp = int(fl_calc)+fcalc/10;
+    setprop("instrumentation/clock/flight-meter-dsp",fdsp);
 }
 
 var FH_load = func{
@@ -351,7 +357,7 @@ var FH_load = func{
 		var name = FH_path~"FHmeter.xml";
 		var xfile = subvec(directory(FH_path),2);
 		var v = std.Vector.new(xfile);
-		if (!v.contains("CitationX-FHmeter.xml")) {
+		if (!v.contains("FHmeter.xml")) {
 			var data = props.Node.new({
 					TotalFlight : 0
 			});		
@@ -363,12 +369,14 @@ var FH_load = func{
 }
 
 var FH_write = func {
-		var FH_path = getprop("/sim/fg-home")~"/Export/CitationX/FHmeter.xml";
-		fl_tot = getprop("instrumentation/clock/flight-meter-tot");
-		var data = io.read_properties(FH_path);
-		var name = data.getChild("TotalFlight");
-		name.setValue(fl_tot);
-		io.write_properties(FH_path,data);
+    if (fl_calc != nil) {
+		  var FH_path = getprop("/sim/fg-home")~"/Export/CitationX/FHmeter.xml";
+  		fl_tot = getprop("instrumentation/clock/flight-meter-tot");
+		  var data = io.read_properties(FH_path);
+		  var name = data.getChild("TotalFlight");
+  		name.setValue(fl_tot);
+		  io.write_properties(FH_path,data);
+    }
 }
 
 ######################
@@ -600,9 +608,7 @@ var citation_stl = setlistener("/sim/signals/fdm-initialized", func {
     setprop("controls/engines/engine/ignition",1);
     setprop("controls/engines/engine[1]/ignition",1);
 		FH_load();
-		var v_ref = func() {		
-			Vref_update();
-		}
+		var v_ref = func() {Vref_update();}
 		var timer = maketimer(10,v_ref);
 		timer.singleShot = 1;
 		timer.start();
@@ -612,10 +618,10 @@ var citation_stl = setlistener("/sim/signals/fdm-initialized", func {
 var update_systems = func{
     Leng.update();
     Reng.update();
-    FHupdate(0);
+    FHupdate();
     tire.get_rotation("yasim");
-    if(getprop("velocities/airspeed-kt")>40)setprop("controls/cabin-door/open",0);
     grspd = getprop("velocities/groundspeed-kt");
+    if (grspd > 40) setprop("controls/cabin-door/open",0);
     wspd = (120-grspd) * 0.01;
     if(wspd>1.0) wspd = 1.0;
     if(wspd<0.001) wspd = 0.001;
@@ -623,3 +629,4 @@ var update_systems = func{
     setprop("/controls/gear/steering",-rudder_pos*wspd);
     settimer(update_systems,0);
 }
+

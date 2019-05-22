@@ -17,29 +17,31 @@
             <property>controls/flight/flaps</property>
             <value>0.0</value>
         </set>
+<!--
         <set>
             <property>controls/electric/external-power</property>
-            <value>0</value>
+            <value>1</value>
         </set>
+-->
         <set>
             <property>controls/electric/battery-switch</property>
-            <value>0</value>
+            <value>1</value>
         </set>
         <set>
             <property>controls/electric/battery-switch[1]</property>
-            <value>0</value>
+            <value>1</value>
         </set>
         <set>
             <property>controls/electric/engine[0]/generator</property>
-            <value>0</value>
+            <value>1</value>
         </set>
         <set>
             <property>controls/electric/engine[1]/generator</property>
-            <value>0</value>
+            <value>1</value>
         </set>
         <set>
             <property>controls/electric/avionics-switch</property>
-            <value>0</value>
+            <value>2</value>
         </set> 
        <set>
             <property>controls/engines/engine[0]/cutoff</property>
@@ -49,6 +51,7 @@
             <property>controls/engines/engine[1]/cutoff</property>
             <value>1</value>
         </set>
+<!--
         <set>
             <property>controls/engines/engine[0]/throttle</property>
             <value>0.0</value>
@@ -57,14 +60,7 @@
             <property>controls/engines/engine[1]/throttle</property>
             <value>0.0</value>
         </set>
-        <set>
-            <property>engines/engine[0]/running</property>
-            <value>0</value>
-        </set>
-        <set>
-            <property>engines/engine[1]/running</property>
-            <value>0</value>
-        </set>
+-->
     </init>
 
     <step>
@@ -135,9 +131,7 @@
 
 		<step>
 			<message>
-				Set THROTTLESs to "IDLE" position (20%){|.}
-				"OFF" position will shut down engines{|.}
-				with park brake set{|.}
+				Set THROTTLES to "IDLE" position {|.}
 			</message>
 			<view>
 				<heading-offset-deg>315</heading-offset-deg>
@@ -152,34 +146,40 @@
 			</marker>
 			<error>
 				<message>
-					Set THROTTLES to "IDLE" position 20%){|.}
-					"OFF" position will shut down engines{|.}
-					with park brake set{|.}
+					Set THROTTLES to "IDLE" position {|.}
 				</message>
 				<condition>
 					<or>
-						<less-than>
+						<greater-than>
 							<property>controls/engines/engine[0]/throttle</property>
-							<value>0.2</value>
-							</less-than>
-							<less-than>
+							<value>0</value>
+							</greater-than>
+							<greater-than>
 								<property>controls/engines/engine[1]/throttle</property>
-								<value>0.2</value>
-							</less-than>
+								<value>0</value>
+							</greater-than>
+            <property>controls/engines/engine[0]/cutoff</property>
+            <property>controls/engines/engine[1]/cutoff</property>
 					</or>
 				</condition>
 			</error>
 			<exit>
 				<condition>
 					<and>
-						<greater-than>
+						<equals>
 							<property>controls/engines/engine[0]/throttle</property>
-							<value>0.199</value>
-						</greater-than>
-						<greater-than>
+							<value>0</value>
+						</equals>
+						<equals>
 							<property>controls/engines/engine[1]/throttle</property>
-							<value>0.199</value>
-						</greater-than>
+							<value>0</value>
+						</equals>
+            <not>
+              <property>controls/engines/engine[0]/cutoff</property>
+            </not>
+            <not>
+              <property>controls/engines/engine[1]/cutoff</property>
+            </not>
 					</and>
 				</condition>
 			</exit>
@@ -444,10 +444,10 @@
 			</error>
 			<exit>
 				<condition>
-					<equals>
+					<not-equals>
 						<property>controls/engines/engine[0]/ignition</property>
-            <value>0</value>
-					</equals>
+            <value>1</value>
+					</not-equals>
 				</condition>
 			</exit>
 		</step>
@@ -473,14 +473,18 @@
 					Engine progress can be viewed on the EICAS{|.}
 				</message>
 				<condition>
-					<property>controls/engines/engine[0]/cutoff</property>
+          <less-than>
+					  <property>engines/engine[0]/turbine</property>
+            <value>56</value>
+          </less-than>
 				</condition>
 			</error>
 			<exit>
 				<condition>
-					<not>
-						<property>controls/engines/engine[0]/cutoff</property>
-					</not>
+          <greater-than>
+					  <property>engines/engine[0]/turbine</property>
+            <value>56</value>
+          </greater-than>
 				</condition>
 			</exit>
     </step>
@@ -512,10 +516,10 @@
 			</error>
 			<exit>
 				<condition>
-					<equals>
+					<not-equals>
 						<property>controls/engines/engine[1]/ignition</property>
-            <value>0</value>
-					</equals>
+            <value>1</value>
+					</not-equals>
 				</condition>
 			</exit>
 		</step>
@@ -541,14 +545,18 @@
 					Engine progress can be viewed on the EICAS{|.}
 				</message>
 				<condition>
-					<property>controls/engines/engine[1]/cutoff</property>
+          <less-than>
+					  <property>engines/engine[1]/turbine</property>
+            <value>56</value>
+          </less-than>
 				</condition>
 			</error>
 			<exit>
 				<condition>
-					<not>
-						<property>controls/engines/engine[1]/cutoff</property>
-					</not>
+          <greater-than>
+					  <property>engines/engine[01]/turbine</property>
+            <value>56</value>
+          </greater-than>
 				</condition>
 			</exit>
 		</step>
@@ -760,7 +768,7 @@
 				and you are ready  to roll ! {|.}
 			</message>
 		</step>
--->
+
     <end>
        <view>
             <heading-offset-deg>0</heading-offset-deg>

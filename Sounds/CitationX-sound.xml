@@ -1909,7 +1909,7 @@
 <!-- Page 1 - Prestart -->
 
   <prestart>
-		<name>copilot1</name>
+		<name>copil_p0-1</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/external-preflight.wav</path>
 		<mode>once</mode>
     <condition>
@@ -1931,7 +1931,7 @@
 	</prestart>
 
   <prestart>
-		<name>pilot1</name>
+		<name>pil_p0-1</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/complete.wav</path>
 		<mode>once</mode>
     <condition>
@@ -1953,7 +1953,7 @@
 	</prestart>
 
   <prestart>
-		<name>copilot2</name>
+		<name>copil_p0-2</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/documents.wav</path>
 		<mode>once</mode>
     <condition>
@@ -1975,7 +1975,7 @@
 	</prestart>
 
   <prestart>
-		<name>pilot2</name>
+		<name>pil_p0-2</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/on-board.wav</path>
 		<mode>once</mode>
     <condition>
@@ -1997,7 +1997,7 @@
 	</prestart>
 
   <prestart>
-		<name>copilot3</name>
+		<name>copil_p0-3</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/passengers.wav</path>
 		<mode>once</mode>
     <condition>
@@ -2019,7 +2019,7 @@
 	</prestart>
 
   <prestart>
-		<name>pilot3</name>
+		<name>pil_p0-3</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/boarded-and-briefed.wav</path>
 		<mode>once</mode>
     <condition>
@@ -2041,7 +2041,7 @@
 	</prestart>
 
   <prestart>
-		<name>copilot4</name>
+		<name>copil_p0-4</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/parking-brake.wav</path>
 		<mode>once</mode>
     <condition>
@@ -2063,7 +2063,7 @@
 	</prestart>
 
   <prestart>
-		<name>pilot4</name>
+		<name>pil_p0-4</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/set.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -2085,7 +2085,7 @@
 	</prestart>
 
   <prestart>
-		<name>copilot5</name>
+		<name>copil_p0-5</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/throttles.wav</path>
 		<mode>once</mode>
     <condition>
@@ -2107,7 +2107,7 @@
 	</prestart>
 
   <prestart>
-		<name>pilot5</name>
+		<name>pil_p0-5</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/cutoff.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -2129,7 +2129,7 @@
 	</prestart>
 
   <prestart>
-		<name>copilot6</name>
+		<name>copil_p0-6</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/lr-generator.wav</path>
 		<mode>once</mode>
     <condition>
@@ -2151,7 +2151,7 @@
 	</prestart>
 
   <prestart>
-		<name>pilot6</name>
+		<name>pil_p0-6</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/gen.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -2174,7 +2174,7 @@
 	</prestart>
 
   <prestart>
-		<name>copilot7</name>
+		<name>copil_p0-7</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/lr-fuelboost.wav</path>
 		<mode>once</mode>
     <condition>
@@ -2196,7 +2196,7 @@
 	</prestart>
 
   <prestart>
-		<name>pilot7</name>
+		<name>pil_p0-7</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/normal.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -2219,7 +2219,7 @@
 	</prestart>
 
   <prestart>
-		<name>copilot8</name>
+		<name>copil_p0-8</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/lr-ignition.wav</path>
 		<mode>once</mode>
     <condition>
@@ -2241,7 +2241,7 @@
 	</prestart>
 
   <prestart>
-		<name>pilot8</name>
+		<name>pil_p0-8</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/normal.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -2264,7 +2264,7 @@
 	</prestart>
 
   <prestart>
-		<name>copilot9</name>
+		<name>copil_p0-9</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/lr-center-wing.wav</path>
 		<mode>once</mode>
     <condition>
@@ -2286,7 +2286,7 @@
 	</prestart>
 
   <prestart>
-		<name>pilot9</name>
+		<name>pil_p0-9</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/normal.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -2309,7 +2309,7 @@
 	</prestart>
 
   <prestart>
-		<name>copilot10</name>
+		<name>copil_p0-10</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/stdby-power.wav</path>
 		<mode>once</mode>
     <condition>
@@ -2331,7 +2331,7 @@
 	</prestart>
 
   <prestart>
-		<name>pilot10</name>
+		<name>pil_p0-10</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/on.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -2353,7 +2353,7 @@
 	</prestart>
 
   <prestart>
-		<name>copilot11</name>
+		<name>copil_p0-11</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/engine-area.wav</path>
 		<mode>once</mode>
     <condition>
@@ -2375,7 +2375,7 @@
 	</prestart>
 
   <prestart>
-		<name>pilot11</name>
+		<name>pil_p0-11</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/clear.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -2397,7 +2397,7 @@
 	</prestart>
 
   <prestart>
-		<name>copilot12</name>
+		<name>copil_p0-12</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/cabin-doors.wav</path>
 		<mode>once</mode>
     <condition>
@@ -2419,7 +2419,7 @@
 	</prestart>
 
   <prestart>
-		<name>pilot12</name>
+		<name>pil_p0-12</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/closed-latched.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -2441,7 +2441,7 @@
 	</prestart>
 
   <prestart>
-		<name>copilot13</name>
+		<name>copil_p0-13</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/seat-belts.wav</path>
 		<mode>once</mode>
     <condition>
@@ -2463,7 +2463,7 @@
 	</prestart>
 
   <prestart>
-		<name>pilot13</name>
+		<name>pil_p0-13</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/fastened.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -2485,7 +2485,7 @@
 	</prestart>
 
   <prestart>
-		<name>copilot14</name>
+		<name>copil_p0-14</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/battery-1-2.wav</path>
 		<mode>once</mode>
     <condition>
@@ -2507,7 +2507,7 @@
 	</prestart>
 
   <prestart>
-		<name>pilot14</name>
+		<name>pil_p0-14</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/on.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -2529,7 +2529,7 @@
 	</prestart>
 
   <prestart>
-		<name>copilot15</name>
+		<name>copil_p0-15</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/ground-recog.wav</path>
 		<mode>once</mode>
     <condition>
@@ -2551,7 +2551,7 @@
 	</prestart>
 
   <prestart>
-		<name>pilot15</name>
+		<name>pil_p0-15</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/on.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -2575,7 +2575,7 @@
 <!-- APU -->
 
   <apu>
-		<name>copilot20</name>
+		<name>copil_p1-1</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/apu-master.wav</path>
 		<mode>once</mode>
     <condition>
@@ -2597,7 +2597,7 @@
 	</apu>
 
   <apu>
-		<name>pilot20</name>
+		<name>pil_p1-1</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/on.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -2619,7 +2619,7 @@
 	</apu>
 
   <apu>
-		<name>copilot21</name>
+		<name>copil_p1-2</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/apu-test.wav</path>
 		<mode>once</mode>
     <condition>
@@ -2641,7 +2641,7 @@
 	</apu>
 
   <apu>
-		<name>pilot21</name>
+		<name>pil_p1-2</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/pushed-verified.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -2663,7 +2663,7 @@
 	</apu>
 
   <apu>
-		<name>copilot22</name>
+		<name>copil_p1-3</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/apu-start.wav</path>
 		<mode>once</mode>
     <condition>
@@ -2685,7 +2685,7 @@
 	</apu>
 
   <apu>
-		<name>pilot22</name>
+		<name>pil_p1-3</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/on.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -2707,7 +2707,7 @@
 	</apu>
 
   <apu>
-		<name>copilot23</name>
+		<name>copil_p1-4</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/apu-readytoload.wav</path>
 		<mode>once</mode>
     <condition>
@@ -2729,7 +2729,7 @@
 	</apu>
 
   <apu>
-		<name>pilot23</name>
+		<name>pil_p1-4</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/illuminated.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -2751,7 +2751,7 @@
 	</apu>
 
   <apu>
-		<name>copilot24</name>
+		<name>copil_p1-5</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/apu-generator.wav</path>
 		<mode>once</mode>
     <condition>
@@ -2773,7 +2773,7 @@
 	</apu>
 
   <apu>
-		<name>pilot24</name>
+		<name>pil_p1-5</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/on.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -2795,7 +2795,7 @@
 	</apu>
 
   <apu>
-		<name>copilot25</name>
+		<name>copil_p1-6</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/apu-dc-volts.wav</path>
 		<mode>once</mode>
     <condition>
@@ -2817,7 +2817,7 @@
 	</apu>
 
   <apu>
-		<name>pilot25</name>
+		<name>pil_p1-6</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/checked-28v.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -2839,7 +2839,7 @@
 	</apu>
 
   <apu>
-		<name>copilot26</name>
+		<name>copil_p1-7</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/apu-bleed-air.wav</path>
 		<mode>once</mode>
     <condition>
@@ -2861,7 +2861,7 @@
 	</apu>
 
   <apu>
-		<name>pilot26</name>
+		<name>pil_p1-7</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/on.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -2883,7 +2883,7 @@
 	</apu>
 
   <apu>
-		<name>copilot27</name>
+		<name>copil_p1-8</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/bleed-valve-open.wav</path>
 		<mode>once</mode>
     <condition>
@@ -2905,7 +2905,7 @@
 	</apu>
 
   <apu>
-		<name>pilot27</name>
+		<name>pil_p1-8</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/illuminated.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -2929,7 +2929,7 @@
 <!-- page 2 - Startup -->
 
   <startup>
-		<name>copilot30</name>
+		<name>copil_p2-1</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/avionics-switch.wav</path>
 		<mode>once</mode>
     <condition>
@@ -2951,7 +2951,7 @@
   </startup>
 
   <startup>
-		<name>pilot30</name>
+		<name>pil_p2-1</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/on.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -2973,7 +2973,7 @@
 	</startup>
 
   <startup>
-		<name>copilot31</name>
+		<name>copil_p2-2</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/radio.wav</path>
 		<mode>once</mode>
     <condition>
@@ -2995,7 +2995,7 @@
 	</startup>
 
   <startup>
-		<name>pilot31</name>
+		<name>pil_p2-2</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/checked.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -3017,7 +3017,7 @@
 	</startup>
 
   <startup>
-		<name>copilot32</name>
+		<name>copil_p2-3</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/autopilot.wav</path>
 		<mode>once</mode>
     <condition>
@@ -3039,7 +3039,7 @@
 	</startup>
 
   <startup>
-		<name>pilot32</name>
+		<name>pil_p2-3</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/disengaged.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -3061,7 +3061,7 @@
 	</startup>
 
   <startup>
-		<name>copilot33</name>
+		<name>copil_p2-4</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/fuel.wav</path>
 		<mode>once</mode>
     <condition>
@@ -3083,7 +3083,7 @@
 	</startup>
 
   <startup>
-		<name>pilot33</name>
+		<name>pil_p2-4</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/quantity-checked.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -3105,7 +3105,7 @@
 	</startup>
 
   <startup>
-		<name>copilot34</name>
+		<name>copil_p2-5</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/warning-test.wav</path>
 		<mode>once</mode>
     <condition>
@@ -3127,7 +3127,7 @@
 	</startup>
 
   <startup>
-		<name>pilot34</name>
+		<name>pil_p2-5</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/complete.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -3149,7 +3149,7 @@
 	</startup>
 
   <startup>
-		<name>copilot35</name>
+		<name>copil_p2-6</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/altimeter.wav</path>
 		<mode>once</mode>
     <condition>
@@ -3171,7 +3171,7 @@
 	</startup>
 
   <startup>
-		<name>pilot35</name>
+		<name>pil_p2-6</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/set.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -3193,7 +3193,7 @@
 	</startup>
 
   <startup>
-		<name>copilot36</name>
+		<name>copil_p2-7</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/hydraulics.wav</path>
 		<mode>once</mode>
     <condition>
@@ -3215,7 +3215,7 @@
 	</startup>
 
   <startup>
-		<name>pilot36</name>
+		<name>pil_p2-7</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/checked.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -3237,7 +3237,7 @@
 	</startup>
 
   <startup>
-		<name>copilot37</name>
+		<name>copil_p2-8</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/seat-belts-lights.wav</path>
 		<mode>once</mode>
     <condition>
@@ -3260,7 +3260,7 @@
 	</startup>
 
   <startup>
-		<name>pilot37</name>
+		<name>pil_p2-8</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/pass-safety.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -3284,7 +3284,7 @@
 <!-- page 3 - Pressurization -->
 
   <pressur>
-		<name>copilot40</name>
+		<name>copil_p3-1</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/pressur-switches.wav</path>
 		<mode>once</mode>
     <condition>
@@ -3306,7 +3306,7 @@
 	</pressur>
 
   <pressur>
-		<name>pilot40</name>
+		<name>pil_p3-1</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/normal.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -3330,7 +3330,7 @@
 <!-- Page 4 - Left Engine Start -->
 
   <lstart>
-		<name>copilot50</name>
+		<name>copil_p4-1</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/throttle.wav</path>
 		<mode>once</mode>
     <condition>
@@ -3352,8 +3352,8 @@
 	</lstart>
 
   <lstart>
-		<name>pilot50</name>
-    <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/cutoff.wav</path>
+		<name>pil_p4-1</name>
+    <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/idle.wav</path>
 		<mode>once</mode>
 		<condition>
 			<and>
@@ -3374,8 +3374,8 @@
 	</lstart>
 
   <lstart>
-		<name>copilot51</name>
-    <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/starter.wav</path>
+		<name>copil_p4-2</name>
+    <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/l-ignition.wav</path>
 		<mode>once</mode>
     <condition>
 			<and>
@@ -3396,8 +3396,8 @@
 	</lstart>
 
   <lstart>
-		<name>pilot51</name>
-    <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/on.wav</path>
+		<name>pil_p4-2</name>
+    <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/normal.wav</path>
 		<mode>once</mode>
 		<condition>
 			<and>
@@ -3418,8 +3418,8 @@
 	</lstart>
 
   <lstart>
-		<name>copilot52</name>
-    <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/left-engine.wav</path>
+		<name>copil_p4-3</name>
+    <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/starter.wav</path>
 		<mode>once</mode>
     <condition>
 			<and>
@@ -3440,8 +3440,8 @@
 	</lstart>
 
   <lstart>
-		<name>pilot52</name>
-    <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/started.wav</path>
+		<name>pil_p4-3</name>
+    <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/on.wav</path>
 		<mode>once</mode>
 		<condition>
 			<and>
@@ -3462,8 +3462,8 @@
 	</lstart>
 
   <lstart>
-		<name>copilot53</name>
-    <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/n2-at-56.wav</path>
+		<name>copil_p4-4</name>
+    <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/left-engine.wav</path>
 		<mode>once</mode>
     <condition>
 			<and>
@@ -3484,8 +3484,8 @@
 	</lstart>
 
   <lstart>
-		<name>pilot53</name>
-    <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/verified.wav</path>
+		<name>pil_p4-4</name>
+    <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/started.wav</path>
 		<mode>once</mode>
 		<condition>
 			<and>
@@ -3499,17 +3499,15 @@
 				</equals>
 			</and>
 		</condition>
-				<volume>
+		<volume>
 			<internal>1</internal>
 			<factor>0.5</factor>
 		</volume>
-
-		<delay-sec>1</delay-sec>
 	</lstart>
 
   <lstart>
-		<name>copilot54</name>
-    <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/n1-rotation.wav</path>
+		<name>copil_p4-5</name>
+    <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/n2-at-56.wav</path>
 		<mode>once</mode>
     <condition>
 			<and>
@@ -3530,8 +3528,8 @@
 	</lstart>
 
   <lstart>
-		<name>pilot54</name>
-    <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/confirmed.wav</path>
+		<name>pil_p4-5</name>
+    <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/verified.wav</path>
 		<mode>once</mode>
 		<condition>
 			<and>
@@ -3545,15 +3543,16 @@
 				</equals>
 			</and>
 		</condition>
-		<volume>
+				<volume>
 			<internal>1</internal>
 			<factor>0.5</factor>
 		</volume>
+		<delay-sec>1</delay-sec>
 	</lstart>
 
   <lstart>
-		<name>copilot55</name>
-    <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/oil-pressure.wav</path>
+		<name>copil_p4-6</name>
+    <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/n1-rotation.wav</path>
 		<mode>once</mode>
     <condition>
 			<and>
@@ -3574,8 +3573,8 @@
 	</lstart>
 
   <lstart>
-		<name>pilot55</name>
-    <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/checked.wav</path>
+		<name>pil_p4-6</name>
+    <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/confirmed.wav</path>
 		<mode>once</mode>
 		<condition>
 			<and>
@@ -3596,8 +3595,8 @@
 	</lstart>
 
   <lstart>
-		<name>copilot56</name>
-    <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/itt-stable.wav</path>
+		<name>copil_p4-7</name>
+    <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/oil-pressure.wav</path>
 		<mode>once</mode>
     <condition>
 			<and>
@@ -3618,8 +3617,8 @@
 	</lstart>
 
   <lstart>
-		<name>pilot56</name>
-    <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/verified.wav</path>
+		<name>pil_p4-7</name>
+    <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/checked.wav</path>
 		<mode>once</mode>
 		<condition>
 			<and>
@@ -3640,8 +3639,8 @@
 	</lstart>
 
   <lstart>
-		<name>copilot57</name>
-    <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/volts-amp-oil.wav</path>
+		<name>copil_p4-8</name>
+    <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/itt-stable.wav</path>
 		<mode>once</mode>
     <condition>
 			<and>
@@ -3662,8 +3661,8 @@
 	</lstart>
 
   <lstart>
-		<name>pilot57</name>
-    <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/checked.wav</path>
+		<name>pil_p4-8</name>
+    <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/verified.wav</path>
 		<mode>once</mode>
 		<condition>
 			<and>
@@ -3683,10 +3682,54 @@
 		</volume>
 	</lstart>
 
+  <lstart>
+		<name>copil_p4-9</name>
+    <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/volts-amp-oil.wav</path>
+		<mode>once</mode>
+    <condition>
+			<and>
+				<equals>
+					<property>instrumentation/checklists/nr-voice</property>
+					<value>17</value>
+				</equals>
+				<equals>
+					<property>instrumentation/checklists/nr-page</property>
+					<value>4</value>
+				</equals>
+			</and>
+    </condition>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
+	</lstart>
+
+  <lstart>
+		<name>pil_p4-9</name>
+    <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/checked.wav</path>
+		<mode>once</mode>
+		<condition>
+			<and>
+				<equals>
+					<property>instrumentation/checklists/nr-voice</property>
+					<value>18</value>
+				</equals>
+				<equals>
+					<property>instrumentation/checklists/nr-page</property>
+					<value>4</value>
+				</equals>
+			</and>
+		</condition>
+		<volume>
+			<internal>1</internal>
+			<factor>0.5</factor>
+		</volume>
+	</lstart>
+
 <!-- Page 5 - Right engine Start -->
 
   <rstart>
-		<name>copilot60</name>
+		<name>copil_p5-1</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/throttle.wav</path>
 		<mode>once</mode>
     <condition>
@@ -3708,8 +3751,8 @@
 	</rstart>
 
   <rstart>
-		<name>pilot60</name>
-    <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/cutoff.wav</path>
+		<name>pil_p5-1</name>
+    <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/idle.wav</path>
 		<mode>once</mode>
 		<condition>
 			<and>
@@ -3730,7 +3773,7 @@
 	</rstart>
 
   <rstart>
-		<name>copilot61</name>
+		<name>copil_p5-2</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/starter.wav</path>
 		<mode>once</mode>
     <condition>
@@ -3752,7 +3795,7 @@
 	</rstart>
 
   <rstart>
-		<name>pilot61</name>
+		<name>pil_p5-2</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/on.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -3774,7 +3817,7 @@
 	</rstart>
 
   <rstart>
-		<name>copilot62</name>
+		<name>copil_p5-3</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/right-engine.wav</path>
 		<mode>once</mode>
     <condition>
@@ -3796,7 +3839,7 @@
 	</rstart>
 
   <rstart>
-		<name>pilot62</name>
+		<name>pil_p5-3</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/started.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -3818,7 +3861,7 @@
 	</rstart>
 
   <rstart>
-		<name>copilot63</name>
+		<name>copil_p5-4</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/n2-at-56.wav</path>
 		<mode>once</mode>
     <condition>
@@ -3840,7 +3883,7 @@
 	</rstart>
 
   <rstart>
-		<name>pilot63</name>
+		<name>pil_p5-4</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/verified.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -3863,7 +3906,7 @@
 	</rstart>
 
   <rstart>
-		<name>copilot64</name>
+		<name>copil_p5-5</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/n1-rotation.wav</path>
 		<mode>once</mode>
     <condition>
@@ -3885,7 +3928,7 @@
 	</rstart>
 
   <rstart>
-		<name>pilot64</name>
+		<name>pil_p5-5</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/confirmed.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -3907,7 +3950,7 @@
 	</rstart>
 
   <rstart>
-		<name>copilot65</name>
+		<name>copil_p5-6</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/oil-pressure.wav</path>
 		<mode>once</mode>
     <condition>
@@ -3929,7 +3972,7 @@
 	</rstart>
 
   <rstart>
-		<name>pilot65</name>
+		<name>pil_p5-6</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/checked.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -3951,7 +3994,7 @@
 	</rstart>
 
   <rstart>
-		<name>copilot66</name>
+		<name>copil_p5-7</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/itt-stable.wav</path>
 		<mode>once</mode>
     <condition>
@@ -3973,7 +4016,7 @@
 	</rstart>
 
   <rstart>
-		<name>pilot66</name>
+		<name>pil_p5-7</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/verified.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -3995,7 +4038,7 @@
 	</rstart>
 
   <rstart>
-		<name>copilot67</name>
+		<name>copil_p5-8</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/volts-amp-oil.wav</path>
 		<mode>once</mode>
     <condition>
@@ -4017,7 +4060,7 @@
 	</rstart>
 
   <rstart>
-		<name>pilot67</name>
+		<name>pil_p5-8</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/checked.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -4038,10 +4081,10 @@
 		</volume>
 	</rstart>
 
-<!-- Page 5 - Before Taxi -->
+<!-- Page 6 - Before Taxi -->
 
   <btaxi>
-		<name>copilot70</name>
+		<name>copil_p6-1</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/flight-controls.wav</path>
 		<mode>once</mode>
     <condition>
@@ -4063,7 +4106,7 @@
 	</btaxi>
 
   <btaxi>
-		<name>pilot70</name>
+		<name>pil_p6-1</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/free-and-correct.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -4085,7 +4128,7 @@
 	</btaxi>
 
   <btaxi>
-		<name>copilot71</name>
+		<name>copil_p6-2</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/pitot-heat.wav</path>
 		<mode>once</mode>
     <condition>
@@ -4107,7 +4150,7 @@
 	</btaxi>
 
   <btaxi>
-		<name>pilot71</name>
+		<name>pil_p6-2</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/on.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -4129,7 +4172,7 @@
 	</btaxi>
 
   <btaxi>
-		<name>copilot72</name>
+		<name>copil_p6-3</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/taxi-lights.wav</path>
 		<mode>once</mode>
     <condition>
@@ -4152,7 +4195,7 @@
 	</btaxi>
 
   <btaxi>
-		<name>pilot72</name>
+		<name>pil_p6-3</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/on.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -4174,7 +4217,7 @@
 	</btaxi>
 
   <btaxi>
-		<name>copilot73</name>
+		<name>copil_p6-4</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/transponder.wav</path>
 		<mode>once</mode>
     <condition>
@@ -4196,7 +4239,7 @@
 	</btaxi>
 
   <btaxi>
-		<name>pilot73</name>
+		<name>pil_p6-4</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/code-set-standby.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -4218,7 +4261,7 @@
 	</btaxi>
 
   <btaxi>
-		<name>copilot74</name>
+		<name>copil_p6-5</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/ap-altitude.wav</path>
 		<mode>once</mode>
     <condition>
@@ -4240,7 +4283,7 @@
 	</btaxi>
 
   <btaxi>
-		<name>pilot74</name>
+		<name>pil_p6-5</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/set.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -4262,7 +4305,7 @@
 	</btaxi>
 
   <btaxi>
-		<name>copilot75</name>
+		<name>copil_p6-6</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/ap-hdg.wav</path>
 		<mode>once</mode>
     <condition>
@@ -4284,7 +4327,7 @@
 	</btaxi>
 
   <btaxi>
-		<name>pilot75</name>
+		<name>pil_p6-6</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/set.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -4307,7 +4350,7 @@
 	</btaxi>
 
   <btaxi>
-		<name>copilot76</name>
+		<name>copil_p6-7</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/ap-crs.wav</path>
 		<mode>once</mode>
     <condition>
@@ -4329,7 +4372,7 @@
 	</btaxi>
 
   <btaxi>
-		<name>pilot76</name>
+		<name>pil_p6-7</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/set.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -4352,7 +4395,7 @@
 	</btaxi>
 
   <btaxi>
-		<name>copilot77</name>
+		<name>copil_p6-8</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/flightplan-clearance.wav</path>
 		<mode>once</mode>
     <condition>
@@ -4374,7 +4417,7 @@
 	</btaxi>
 
   <btaxi>
-		<name>pilot77</name>
+		<name>pil_p6-8</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/copied.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -4396,7 +4439,7 @@
 	</btaxi>
 
   <btaxi>
-		<name>copilot78</name>
+		<name>copil_p6-9</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/taxi-instructions.wav</path>
 		<mode>once</mode>
     <condition>
@@ -4418,7 +4461,7 @@
 	</btaxi>
 
   <btaxi>
-		<name>pilot78</name>
+		<name>pil_p6-9</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/received.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -4440,7 +4483,7 @@
 	</btaxi>
 
   <btaxi>
-		<name>copilot79</name>
+		<name>copil_p6-10</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/anti-coll-lights.wav</path>
 		<mode>once</mode>
     <condition>
@@ -4462,7 +4505,7 @@
 	</btaxi>
 
   <btaxi>
-		<name>pilot79</name>
+		<name>pil_p6-10</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/on.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -4486,7 +4529,7 @@
 <!-- Page 7 - Taxiing -->
 
   <taxi>
-		<name>copilot80</name>
+		<name>copil_p7-1</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/parking-brake.wav</path>
 		<mode>once</mode>
     <condition>
@@ -4508,7 +4551,7 @@
 	</taxi>
 
   <taxi>
-		<name>pilot80</name>
+		<name>pil_p7-1</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/off.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -4530,7 +4573,7 @@
 	</taxi>
 
   <taxi>
-		<name>copilot81</name>
+		<name>copil_p7-2</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/taxi-area.wav</path>
 		<mode>once</mode>
     <condition>
@@ -4552,7 +4595,7 @@
 	</taxi>
 
   <taxi>
-		<name>pilot81</name>
+		<name>pil_p7-2</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/clear.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -4574,7 +4617,7 @@
 	</taxi>
 
   <taxi>
-		<name>copilot82</name>
+		<name>copil_p7-3</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/throttles.wav</path>
 		<mode>once</mode>
     <condition>
@@ -4596,7 +4639,7 @@
 	</taxi>
 
   <taxi>
-		<name>copilot83</name>
+		<name>pil_p7-3</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/advance-slowly.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -4618,7 +4661,7 @@
 	</taxi>
 
   <taxi>
-		<name>copilot84</name>
+		<name>copil_p7-4</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/brakes.wav</path>
 		<mode>once</mode>
     <condition>
@@ -4640,7 +4683,7 @@
 	</taxi>
 
   <taxi>
-		<name>pilot84</name>
+		<name>pil_p7-4</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/checked.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -4663,7 +4706,7 @@
 	</taxi>
 
   <taxi>
-		<name>copilot85</name>
+		<name>copil_p7-5</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/flight-instruments.wav</path>
 		<mode>once</mode>
     <condition>
@@ -4685,7 +4728,7 @@
 	</taxi>
 
   <taxi>
-		<name>pilot85</name>
+		<name>pil_p7-5</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/checked.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -4709,7 +4752,7 @@
 <!-- Page 8 - Before Takeoff -->
 
   <btakeoff>
-		<name>copilot90</name>
+		<name>copil_p8-1</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/flight-timer.wav</path>
 		<mode>once</mode>
     <condition>
@@ -4731,7 +4774,7 @@
 	</btakeoff>
 
   <btakeoff>
-		<name>pilot90</name>
+		<name>pil_p8-1</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/set.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -4753,7 +4796,7 @@
 	</btakeoff>
 
   <btakeoff>
-		<name>copilot91</name>
+		<name>copil_p8-2</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/flaps-slats.wav</path>
 		<mode>once</mode>
     <condition>
@@ -4775,7 +4818,7 @@
 	</btakeoff>
 
   <btakeoff>
-		<name>pilot91</name>
+		<name>pil_p8-2-5</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/5deg.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -4801,7 +4844,7 @@
 	</btakeoff>
 
   <btakeoff>
-		<name>pilot92</name>
+		<name>pil_p8-2-15</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/15deg.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -4827,7 +4870,7 @@
 	</btakeoff>
 
   <btakeoff>
-		<name>pilot93</name>
+		<name>pil_p8-2-35</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/full.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -4853,7 +4896,7 @@
 	</btakeoff>
 
   <btakeoff>
-		<name>copilot94</name>
+		<name>copil_p8-3</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/speedbrake.wav</path>
 		<mode>once</mode>
     <condition>
@@ -4875,7 +4918,7 @@
 	</btakeoff>
 
   <btakeoff>
-		<name>pilot94</name>
+		<name>pil_p8-3</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/retracted.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -4897,7 +4940,7 @@
 	</btakeoff>
 
   <btakeoff>
-		<name>copilot95</name>
+		<name>copil_p8-4</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/taxi-lights.wav</path>
 		<mode>once</mode>
     <condition>
@@ -4919,7 +4962,7 @@
 	</btakeoff>
 
   <btakeoff>
-		<name>pilot95</name>
+		<name>pil_p8-4</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/off.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -4941,7 +4984,7 @@
 	</btakeoff>
 
   <btakeoff>
-		<name>copilot96</name>
+		<name>copil_p8-5</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/landing-lights.wav</path>
 		<mode>once</mode>
     <condition>
@@ -4963,7 +5006,7 @@
 	</btakeoff>
 
   <btakeoff>
-		<name>pilot96</name>
+		<name>pil_p8-5</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/on.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -4985,7 +5028,7 @@
 	</btakeoff>
 
   <btakeoff>
-		<name>copilot97</name>
+		<name>copil_p8-6</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/navigation-lights.wav</path>
 		<mode>once</mode>
     <condition>
@@ -5007,7 +5050,7 @@
 	</btakeoff>
 
   <btakeoff>
-		<name>pilot97</name>
+		<name>pil_p8-6</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/on.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -5029,7 +5072,7 @@
 	</btakeoff>
 
   <btakeoff>
-		<name>copilot98</name>
+		<name>copil_p8-7</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/annunciator-panel.wav</path>
 		<mode>once</mode>
     <condition>
@@ -5051,7 +5094,7 @@
 	</btakeoff>
 
   <btakeoff>
-		<name>pilot98</name>
+		<name>pil_p8-7</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/clear.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -5073,7 +5116,7 @@
 	</btakeoff>
 
   <btakeoff>
-		<name>copilot99</name>
+		<name>copil_p8-8</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/transponder.wav</path>
 		<mode>once</mode>
     <condition>
@@ -5095,7 +5138,7 @@
 	</btakeoff>
 
   <btakeoff>
-		<name>pilot99</name>
+		<name>pil_p8-8</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/set-alt.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -5119,7 +5162,7 @@
 <!-- Page 9 - Takeoff -->
 
   <takeoff>
-		<name>copilot110</name>
+		<name>copil_p9-1</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/brakes.wav</path>
 		<mode>once</mode>
     <condition>
@@ -5141,7 +5184,7 @@
 	</takeoff>
 
   <takeoff>
-		<name>pilot110</name>
+		<name>pil_p9-1</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/held.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -5163,7 +5206,7 @@
 	</takeoff>
 
   <takeoff>
-		<name>copilot111</name>
+		<name>copil_p9-2</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/throttles.wav</path>
 		<mode>once</mode>
     <condition>
@@ -5185,7 +5228,7 @@
 	</takeoff>
 
   <takeoff>
-		<name>pilot111</name>
+		<name>pil_p9-2</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/takeoff-thrust.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -5207,7 +5250,7 @@
 	</takeoff>
 
   <takeoff>
-		<name>copilot112</name>
+		<name>copil_p9-3</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/brakes.wav</path>
 		<mode>once</mode>
     <condition>
@@ -5229,7 +5272,7 @@
 	</takeoff>
 
   <takeoff>
-		<name>pilot112</name>
+		<name>pil_p9-3</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/released.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -5251,7 +5294,7 @@
 	</takeoff>
 
   <takeoff>
-		<name>copilot113</name>
+		<name>copil_p9-4</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/landing-gear.wav</path>
 		<mode>once</mode>
     <condition>
@@ -5276,7 +5319,7 @@
 	</takeoff>
 
   <takeoff>
-		<name>pilot114</name>
+		<name>pil_p9-4</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/retracted.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -5298,7 +5341,7 @@
 	</takeoff>
 
   <takeoff>
-		<name>copilot115</name>
+		<name>copil_p9-5</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/flaps-slats.wav</path>
 		<mode>once</mode>
     <condition>
@@ -5324,7 +5367,7 @@
 	</takeoff>
 
   <takeoff>
-		<name>pilot115</name>
+		<name>pil_p9-5</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/retracted.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -5346,7 +5389,7 @@
 	</takeoff>
 
   <takeoff>
-		<name>copilot116</name>
+		<name>copil_p9-6</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/eicas.wav</path>
 		<mode>once</mode>
     <condition>
@@ -5368,7 +5411,7 @@
 	</takeoff>
 
   <takeoff>
-		<name>pilot116</name>
+		<name>pil_p9-6</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/checked-normal.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -5390,7 +5433,7 @@
 	</takeoff>
 
   <takeoff>
-		<name>copilot117</name>
+		<name>copil_p9-7</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/annunciator.wav</path>
 		<mode>once</mode>
     <condition>
@@ -5412,7 +5455,7 @@
 	</takeoff>
 
   <takeoff>
-		<name>pilot117</name>
+		<name>pil_p9-7</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/checked.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -5434,7 +5477,7 @@
 	</takeoff>
 
   <takeoff>
-		<name>copilot118</name>
+		<name>copil_p9-8</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/instruments.wav</path>
 		<mode>once</mode>
     <condition>
@@ -5456,7 +5499,7 @@
 	</takeoff>
 
   <takeoff>
-		<name>pilot118</name>
+		<name>pil_p9-8</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/checked.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -5478,7 +5521,7 @@
 	</takeoff>
 
   <takeoff>
-		<name>copilot119</name>
+		<name>copil_p9-9</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/throttles.wav</path>
 		<mode>once</mode>
     <condition>
@@ -5500,7 +5543,7 @@
 	</takeoff>
 
   <takeoff>
-		<name>pilot119</name>
+		<name>pil_p9-9</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/climb-power-set.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -5522,7 +5565,7 @@
 	</takeoff>
 
   <takeoff>
-		<name>copilot120</name>
+		<name>copil_p9-10</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/both-engines.wav</path>
 		<mode>once</mode>
     <condition>
@@ -5544,7 +5587,7 @@
 	</takeoff>
 
   <takeoff>
-		<name>pilot120</name>
+		<name>pil_p9-10</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/n1-normal.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -5568,7 +5611,7 @@
 <!-- Page 10 - APU Shutdown -->
 
   <apusd>
-		<name>copilot130</name>
+		<name>copil_p10-1</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/apu-start-switch.wav</path>
 		<mode>once</mode>
     <condition>
@@ -5590,7 +5633,7 @@
 	</apusd>
 
   <apusd>
-		<name>pilot130</name>
+		<name>pil_p10-1</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/stopped.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -5612,7 +5655,7 @@
 	</apusd>
 
   <apusd>
-		<name>copilot131</name>
+		<name>copil_p10-2</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/apu-bleed-air.wav</path>
 		<mode>once</mode>
     <condition>
@@ -5634,7 +5677,7 @@
 	</apusd>
 
   <apusd>
-		<name>pilot131</name>
+		<name>pil_p10-2</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/off.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -5656,7 +5699,7 @@
 	</apusd>
 
   <apusd>
-		<name>copilot132</name>
+		<name>copil_p10-3</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/ready-to-load.wav</path>
 		<mode>once</mode>
     <condition>
@@ -5678,7 +5721,7 @@
 	</apusd>
 
   <apusd>
-		<name>pilot132</name>
+		<name>pil_p10-3</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/extinguished.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -5700,7 +5743,7 @@
 	</apusd>
 
   <apusd>
-		<name>copilot133</name>
+		<name>copil_p10-4</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/apu-generator.wav</path>
 		<mode>once</mode>
     <condition>
@@ -5722,7 +5765,7 @@
 	</apusd>
 
   <apusd>
-		<name>pilot133</name>
+		<name>pil_p10-4</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/off.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -5744,7 +5787,7 @@
 	</apusd>
 
   <apusd>
-		<name>copilot134</name>
+		<name>copil_p10-5</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/apu-master.wav</path>
 		<mode>once</mode>
     <condition>
@@ -5766,7 +5809,7 @@
 	</apusd>
 
   <apusd>
-		<name>pilot134</name>
+		<name>pil_p10-5</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/off.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -5790,7 +5833,7 @@
 <!-- Page 11 - Cruise Climb -->
 
   <crcl>
-		<name>copilot140</name>
+		<name>copil_p11-1</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/autopilot.wav</path>
 		<mode>once</mode>
     <condition>
@@ -5812,7 +5855,7 @@
 	</crcl>
 
   <crcl>
-		<name>pilot140</name>
+		<name>pil_p11-1</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/checked.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -5834,7 +5877,7 @@
 	</crcl>
 
   <crcl>
-		<name>copilot141</name>
+		<name>copil_p11-2</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/fuel-quantity.wav</path>
 		<mode>once</mode>
     <condition>
@@ -5856,7 +5899,7 @@
 	</crcl>
 
   <crcl>
-		<name>pilot141</name>
+		<name>pil_p11-2</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/checked.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -5878,7 +5921,7 @@
 	</crcl>
 
   <crcl>
-		<name>copilot142</name>
+		<name>copil_p11-3</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/seat-belts-switch.wav</path>
 		<mode>once</mode>
     <condition>
@@ -5900,7 +5943,7 @@
 	</crcl>
 
   <crcl>
-		<name>pilot142</name>
+		<name>pil_p11-3</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/off.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -5922,7 +5965,7 @@
 	</crcl>
 
   <crcl>
-		<name>copilot143</name>
+		<name>copil_p11-4</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/landing-lights.wav</path>
 		<mode>once</mode>
     <condition>
@@ -5944,7 +5987,7 @@
 	</crcl>
 
   <crcl>
-		<name>pilot143</name>
+		<name>pil_p11-4</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/off.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -5966,7 +6009,7 @@
 	</crcl>
 
   <crcl>
-		<name>copilot144</name>
+		<name>copil_p11-5</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/pressur-system.wav</path>
 		<mode>once</mode>
     <condition>
@@ -5988,7 +6031,7 @@
 	</crcl>
 
   <crcl>
-		<name>pilot144</name>
+		<name>pil_p11-5</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/checked.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -6012,7 +6055,7 @@
 <!-- Page 12 - Cruise -->
 
   <cruise>
-		<name>copilot150</name>
+		<name>copil_p12-1</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/engines-instruments.wav</path>
 		<mode>once</mode>
     <condition>
@@ -6034,7 +6077,7 @@
 	</cruise>
 
   <cruise>
-		<name>pilot150</name>
+		<name>pil_p12-1</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/checked.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -6056,7 +6099,7 @@
 	</cruise>
 
   <cruise>
-		<name>copilot9151</name>
+		<name>copil_p12-2</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/fuel-quantity.wav</path>
 		<mode>once</mode>
     <condition>
@@ -6078,7 +6121,7 @@
 	</cruise>
 
   <cruise>
-		<name>pilot151</name>
+		<name>pil_p12-2</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/checked.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -6102,7 +6145,7 @@
 <!-- Page 13 - Descent -->
 
   <descent>
-		<name>copilot160</name>
+		<name>copil_p13-1</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/windshield-anti-ice.wav</path>
 		<mode>once</mode>
     <condition>
@@ -6124,7 +6167,7 @@
 	</descent>
 
   <descent>
-		<name>pilot160</name>
+		<name>pil_p13-1</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/on.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -6146,7 +6189,7 @@
 	</descent>
 
   <descent>
-		<name>copilot161</name>
+		<name>copil_p13-2</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/apu.wav</path>
 		<mode>once</mode>
     <condition>
@@ -6168,7 +6211,7 @@
 	</descent>
 
   <descent>
-		<name>pilot161</name>
+		<name>pil_p13-2-on</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/on.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -6191,7 +6234,7 @@
 	</descent>
 
   <descent>
-		<name>pilot162</name>
+		<name>pil_p13-2-off</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/off.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -6216,7 +6259,7 @@
 	</descent>
 
   <descent>
-		<name>copilot163</name>
+		<name>copil_p13-3</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/seat-belts-switch.wav</path>
 		<mode>once</mode>
     <condition>
@@ -6238,7 +6281,7 @@
 	</descent>
 
   <descent>
-		<name>pilot163</name>
+		<name>pil_p13-3</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/on.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -6262,7 +6305,7 @@
 <!-- Page 14 - Approach -->
 
   <approach>
-		<name>copilot170</name>
+		<name>copil_p14-1</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/altimeter.wav</path>
 		<mode>once</mode>
     <condition>
@@ -6284,7 +6327,7 @@
 	</approach>
 
   <approach>
-		<name>pilot170</name>
+		<name>pil_p14-1</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/set.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -6306,7 +6349,7 @@
 	</approach>
 
   <approach>
-		<name>copilot171</name>
+		<name>copil_p14-2</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/seat-belts-lights.wav</path>
 		<mode>once</mode>
     <condition>
@@ -6328,7 +6371,7 @@
 	</approach>
 
   <approach>
-		<name>pilot171</name>
+		<name>pil_p14-2</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/pass-safety.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -6350,7 +6393,7 @@
 	</approach>
 
   <approach>
-		<name>copilot172</name>
+		<name>copil_p14-3</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/landing-lights.wav</path>
 		<mode>once</mode>
     <condition>
@@ -6372,7 +6415,7 @@
 	</approach>
 
   <approach>
-		<name>pilot172</name>
+		<name>pil_p14-3</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/on.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -6394,7 +6437,7 @@
 	</approach>
 
   <approach>
-		<name>copilot173</name>
+		<name>copil_p14-4</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/airspeed.wav</path>
 		<mode>once</mode>
     <condition>
@@ -6416,7 +6459,7 @@
 	</approach>
 
   <approach>
-		<name>pilot173</name>
+		<name>pil_p14-4</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/200.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -6438,7 +6481,7 @@
 	</approach>
 
   <approach>
-		<name>copilot174</name>
+		<name>copil_p14-5</name>
 		<path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/slats.wav</path>
 		<mode>once</mode>
     <condition>
@@ -6460,7 +6503,7 @@
 	</approach>
 
   <approach>
-		<name>pilot174</name>
+		<name>pil_p14-5</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/deployed.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -6482,7 +6525,7 @@
 	</approach>
 
   <approach>
-		<name>copilot175</name>
+		<name>copil_p14-6</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/flaps.wav</path>
 		<mode>once</mode>
     <condition>
@@ -6508,7 +6551,7 @@
 	</approach>
 
   <approach>
-		<name>pilot175</name>
+		<name>pil_p14-6</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/5deg.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -6530,7 +6573,7 @@
 	</approach>
 
   <approach>
-		<name>copilot176</name>
+		<name>copil_p14-7</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/airspeed.wav</path>
 		<mode>once</mode>
     <condition>
@@ -6552,7 +6595,7 @@
 	</approach>
 
   <approach>
-		<name>pilot176</name>
+		<name>pil_p14-7</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/180.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -6574,7 +6617,7 @@
 	</approach>
 
   <approach>
-		<name>copilot177</name>
+		<name>copil_p14-8</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/flaps.wav</path>
 		<mode>once</mode>
     <condition>
@@ -6596,7 +6639,7 @@
 	</approach>
 
   <approach>
-		<name>pilot177</name>
+		<name>pil_p14-8</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/15deg.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -6618,7 +6661,7 @@
 	</approach>
 
   <approach>
-		<name>copilot178</name>
+		<name>copil_p14-9</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/airspeed.wav</path>
 		<mode>once</mode>
     <condition>
@@ -6640,7 +6683,7 @@
 	</approach>
 
   <approach>
-		<name>pilot178</name>
+		<name>pil_p14-9</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/160.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -6662,7 +6705,7 @@
 	</approach>
 
   <approach>
-		<name>copilot179</name>
+		<name>copil_p14-10</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/landing-gear.wav</path>
 		<mode>once</mode>
     <condition>
@@ -6684,7 +6727,7 @@
 	</approach>
 
   <approach>
-		<name>pilot179</name>
+		<name>pil_p14-10</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/down.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -6706,7 +6749,7 @@
 	</approach>
 
   <approach>
-		<name>copilot180</name>
+		<name>copil_p14-11</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/flaps.wav</path>
 		<mode>once</mode>
     <condition>
@@ -6732,7 +6775,7 @@
 	</approach>
 
   <approach>
-		<name>pilot180</name>
+		<name>pil_p14-11</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/full.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -6754,7 +6797,7 @@
 	</approach>
 
   <approach>
-		<name>copilot181</name>
+		<name>copil_p14-12</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/airspeed.wav</path>
 		<mode>once</mode>
     <condition>
@@ -6776,7 +6819,7 @@
 	</approach>
 
   <approach>
-		<name>pilot181</name>
+		<name>pil_p14-12</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/140.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -6798,7 +6841,7 @@
 	</approach>
 
   <approach>
-		<name>copilot182</name>
+		<name>copil_p14-13</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/parking-brake.wav</path>
 		<mode>once</mode>
     <condition>
@@ -6820,7 +6863,7 @@
 	</approach>
 
   <approach>
-		<name>pilot182</name>
+		<name>pil_p14-13</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/off.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -6844,7 +6887,7 @@
 <!-- Page 15 - Before Landing -->
 
   <blanding>
-		<name>copilot190</name>
+		<name>copil_p15-190</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/landing-gear.wav</path>
 		<mode>once</mode>
     <condition>
@@ -6866,7 +6909,7 @@
 	</blanding>
 
   <blanding>
-		<name>pilot190</name>
+		<name>pil_p15-190</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/green-lights-ok.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -6888,7 +6931,7 @@
 	</blanding>
 
   <blanding>
-		<name>copilot191</name>
+		<name>copil_p15-191</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/autopilot.wav</path>
 		<mode>once</mode>
     <condition>
@@ -6910,7 +6953,7 @@
 	</blanding>
 
   <blanding>
-		<name>pilot191</name>
+		<name>pil_p15-191</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/disengaged.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -6932,7 +6975,7 @@
 	</blanding>
 
   <blanding>
-		<name>copilot192</name>
+		<name>copil_p15-192</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/landing-speed.wav</path>
 		<mode>once</mode>
     <condition>
@@ -6954,7 +6997,7 @@
 	</blanding>
 
   <blanding>
-		<name>pilot1192</name>
+		<name>pil_p15-1192</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/120.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -6978,7 +7021,7 @@
 <!-- Page 17 - After Landing -->
 
   <alanding>
-		<name>copilot200</name>
+		<name>copil_p17-1</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/flaps.wav</path>
 		<mode>once</mode>
     <condition>
@@ -7000,7 +7043,7 @@
 	</alanding>
 
   <alanding>
-		<name>pilot200</name>
+		<name>pil_p17-1</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/retracted.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -7022,7 +7065,7 @@
 	</alanding>
 
   <alanding>
-		<name>copilot201</name>
+		<name>copil_p17-2</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/landing-lights.wav</path>
 		<mode>once</mode>
     <condition>
@@ -7044,7 +7087,7 @@
 	</alanding>
 
   <alanding>
-		<name>pilot201</name>
+		<name>pil_p17-2</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/off.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -7066,7 +7109,7 @@
 	</alanding>
 
   <alanding>
-		<name>copilot202</name>
+		<name>copil_p17-3</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/taxi-lights.wav</path>
 		<mode>once</mode>
     <condition>
@@ -7088,7 +7131,7 @@
 	</alanding>
 
   <alanding>
-		<name>pilot202</name>
+		<name>pil_p17-3</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/on.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -7110,7 +7153,7 @@
 	</alanding>
 
   <alanding>
-		<name>copilot203</name>
+		<name>copil_p17-4</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/flight-timer.wav</path>
 		<mode>once</mode>
     <condition>
@@ -7132,7 +7175,7 @@
 	</alanding>
 
   <alanding>
-		<name>pilot203</name>
+		<name>pil_p17-4</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/stopped.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -7154,7 +7197,7 @@
 	</alanding>
 
   <alanding>
-		<name>copilot204</name>
+		<name>copil_p17-5</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/transponder.wav</path>
 		<mode>once</mode>
     <condition>
@@ -7176,7 +7219,7 @@
 	</alanding>
 
   <alanding>
-		<name>pilot204</name>
+		<name>pil_p17-5</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/standby.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -7200,7 +7243,7 @@
 <!-- Page 18 - Shutdown -->
 
   <shutdown>
-		<name>copilot210</name>
+		<name>copil_p18-1</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/ice-equipment.wav</path>
 		<mode>once</mode>
     <condition>
@@ -7222,7 +7265,7 @@
 	</shutdown>
 
   <shutdown>
-		<name>pilot210</name>
+		<name>pil_p18-1</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/off.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -7244,7 +7287,7 @@
 	</shutdown>
 
   <shutdown>
-		<name>copilot211</name>
+		<name>copil_p18-2</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/throttles.wav</path>
 		<mode>once</mode>
     <condition>
@@ -7266,7 +7309,7 @@
 	</shutdown>
 
   <shutdown>
-		<name>pilot211</name>
+		<name>pil_p18-2</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/cutoff.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -7288,7 +7331,7 @@
 	</shutdown>
 
   <shutdown>
-		<name>copilot212</name>
+		<name>copil_p18-3</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/parking-brake.wav</path>
 		<mode>once</mode>
     <condition>
@@ -7310,7 +7353,7 @@
 	</shutdown>
 
   <shutdown>
-		<name>pilot212</name>
+		<name>pil_p18-3</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/set.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -7332,7 +7375,7 @@
 	</shutdown>
 
   <shutdown>
-		<name>copilot213</name>
+		<name>copil_p18-4</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/seat-belts-lights.wav</path>
 		<mode>once</mode>
     <condition>
@@ -7354,7 +7397,7 @@
 	</shutdown>
 
   <shutdown>
-		<name>pilot213</name>
+		<name>pil_p18-4</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/off.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -7376,7 +7419,7 @@
 	</shutdown>
 
   <shutdown>
-		<name>copilot214</name>
+		<name>copil_p18-5</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/lr-ignition.wav</path>
 		<mode>once</mode>
     <condition>
@@ -7398,7 +7441,7 @@
 	</shutdown>
 
   <shutdown>
-		<name>pilot214</name>
+		<name>pil_p18-5</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/off.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -7421,7 +7464,7 @@
 	</shutdown>
 
   <shutdown>
-		<name>copilot215</name>
+		<name>copil_p18-6</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/lr-generator.wav</path>
 		<mode>once</mode>
     <condition>
@@ -7443,7 +7486,7 @@
 	</shutdown>
 
   <shutdown>
-		<name>pilot215</name>
+		<name>pil_p18-6</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/off.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -7467,7 +7510,7 @@
 
 
   <shutdown>
-		<name>copilot216</name>
+		<name>copil_p18-7</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/stdby-power.wav</path>
 		<mode>once</mode>
     <condition>
@@ -7489,7 +7532,7 @@
 	</shutdown>
 
   <shutdown>
-		<name>pilot216</name>
+		<name>pil_p18-7</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/off.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -7511,7 +7554,7 @@
 	</shutdown>
 
   <shutdown>
-		<name>copilot217</name>
+		<name>copil_p18-8</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/navigation-lights.wav</path>
 		<mode>once</mode>
     <condition>
@@ -7533,7 +7576,7 @@
 	</shutdown>
 
   <shutdown>
-		<name>pilot217</name>
+		<name>pil_p18-8</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/off.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -7555,7 +7598,7 @@
 	</shutdown>
 
   <shutdown>
-		<name>copilot218</name>
+		<name>copil_p18-9</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/taxi-lights.wav</path>
 		<mode>once</mode>
     <condition>
@@ -7577,7 +7620,7 @@
 	</shutdown>
 
   <shutdown>
-		<name>pilot218</name>
+		<name>pil_p18-9</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/off.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -7599,7 +7642,7 @@
 	</shutdown>
 
   <shutdown>
-		<name>copilot219</name>
+		<name>copil_p18-10</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/anti-coll-lights.wav</path>
 		<mode>once</mode>
     <condition>
@@ -7621,7 +7664,7 @@
 	</shutdown>
 
   <shutdown>
-		<name>pilot219</name>
+		<name>pil_p18-10</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/off.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -7643,7 +7686,7 @@
 	</shutdown>
 
   <shutdown>
-		<name>copilot220</name>
+		<name>copil_p18-11</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/apu.wav</path>
 		<mode>once</mode>
     <condition>
@@ -7665,7 +7708,7 @@
 	</shutdown>
 
   <shutdown>
-		<name>pilot220</name>
+		<name>pil_p18-11</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/shutdown.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -7687,7 +7730,7 @@
 	</shutdown>
 
   <shutdown>
-		<name>copilot221</name>
+		<name>copil_p18-12</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/avionics-switch.wav</path>
 		<mode>once</mode>
     <condition>
@@ -7709,7 +7752,7 @@
 	</shutdown>
 
   <shutdown>
-		<name>pilot221</name>
+		<name>pil_p18-12</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/off.wav</path>
 		<mode>once</mode>
 		<condition>
@@ -7732,7 +7775,7 @@
 
 
   <shutdown>
-		<name>copilot222</name>
+		<name>copil_p18-13</name>
     <path>Aircraft/CitationX/Sounds/Checklists/copilot-voice/battery-1-2.wav</path>
 		<mode>once</mode>
     <condition>
@@ -7754,7 +7797,7 @@
 	</shutdown>
 
   <shutdown>
-		<name>pilot222</name>
+		<name>pil_p18-13</name>
     <path>Aircraft/CitationX/Sounds/Checklists/pilot-voice/off.wav</path>
 		<mode>once</mode>
 		<condition>

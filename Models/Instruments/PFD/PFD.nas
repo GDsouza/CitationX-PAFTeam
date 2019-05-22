@@ -34,9 +34,9 @@ var InRange = "/autopilot/internal/in-range";
 var InRange = "/autopilot/internal/in-range";
 var LocDefl = "/autopilot/internal/heading-deflection-deg";
 var Mach = "/velocities/mach";
-var MarkerI = "/instrumentation/marker-beacon/inner";
-var MarkerM = "/instrumentation/marker-beacon/middle";
-var MarkerO = "/instrumentation/marker-beacon/outer";
+var Marker_i = "/instrumentation/marker-beacon/inner";
+var Marker_m = "/instrumentation/marker-beacon/middle";
+var Marker_o = "/instrumentation/marker-beacon/outer";
 var MinDiff = "/instrumentation/pfd/minimum-diff";
 var MinimumsMode = "/autopilot/settings/minimums-mode";
 var MinimumsValue = "/autopilot/settings/minimums";
@@ -59,6 +59,7 @@ var RollDeg = "/orientation/roll-deg";
 var SelAlt = "/autopilot/settings/altitude-setting-ft";
 var SelCrs = "/autopilot/settings/selected-crs";
 var SelHdg = "/autopilot/settings/heading-bug-deg";
+var Sg = "/instrumentation/eicas/sg-rev";
 var SpdTgKt = "/autopilot/settings/target-speed-kt";
 var SpdTrd = "/instrumentation/pfd/speed-trend-kt";
 var StallDiff = "/instrumentation/pfd/stall-diff";
@@ -176,7 +177,7 @@ var PFDDisplay = {
     m.Txt_keys = ["NavType","NavId","NavDst","Ptr1Ind","Ptr1Txt",
                   "Ptr2Ind","Ptr2Txt","HdgVal","DtkVal","McVal",
                   "AltMet","ApStat","ApVert","ApLat","ApVarm",
-                  "ApLarm","Marker","MarkerTxt","Dme","DmeId",
+                  "ApLarm","MarkerI","MarkerM","MarkerO","Dme","DmeId",
                   "DmeDist","FmsAlt"];
     foreach(var i;m.Txt_keys) m.Txt[i] = m.pfd.getElementById(i);
 
@@ -196,6 +197,9 @@ var PFDDisplay = {
       append(m.SpdInks,m.pfd.getElementById("vf"));
       append(m.SpdInks,m.pfd.getElementById("vfTxt"));
 
+    m.sgTxt = m.pfd.getElementById("sgTxt");
+    m.sgCdr = m.pfd.getElementById("sgCdr");
+
     m.Nav1Ptr = ["","VOR1","ADF1","FMS1"];
     m.Nav2Ptr = ["","VOR2","ADF2","FMS2"];
 
@@ -204,7 +208,7 @@ var PFDDisplay = {
 		m.h_rot = m.Hor.Horizon.createTransform();
 
     ### Clips : top, right, bottom, left ###
-    m.Alt.AltTape.set("clip", "rect(113,825,564,710)");
+    m.Alt.AltTape.set("clip", "rect(113,850,564,710)");
     m.Alt.AltLadder.set("clip", "rect(297,845,382,800)");
 		m.Hor.Horizon.set("clip", "rect(150, 610, 525, 270)");
     m.Spd.SpdTape.set("clip", "rect(113, 200, 560, 10)");
@@ -319,27 +323,6 @@ var PFDDisplay = {
       me.Txt.ApVarm.setText(n.getValue());
     },1,0);
 
-		setlistener(MarkerI, func(n) {
-      if (n.getValue()) {
-        me.Txt.Marker.show();
-        me.Txt.MarkerTxt.setText("I");
-      } else me.Txt.Marker.hide();
-    },1,0);
-
-		setlistener(MarkerM, func(n) {
-      if (n.getValue()) {
-        me.Txt.Marker.show();
-        me.Txt.MarkerTxt.setText("M");
-      } else me.Txt.Marker.hide();
-    },1,0);
-
-		setlistener(MarkerO, func(n) {
-      if (n.getValue()) {
-        me.Txt.Marker.show();
-        me.Txt.MarkerTxt.setText("O");
-      } else me.Txt.Marker.hide();
-    },1,0);
-
 		setlistener(PfdHsi, func(n) {
       me.Hsi.COMPASS.setVisible(!n.getValue());
       me.Hsi1.COMPASS1.setVisible(n.getValue());
@@ -367,6 +350,16 @@ var PFDDisplay = {
         me.Hsi1.From1.setColorFill(me.COLORS.magenta);
       }
     },1,0);
+
+    setlistener(Sg, func(n) {
+      if (n.getValue() == 0) {me.sgTxt.hide();me.sgCdr.hide()}
+      else {
+        if (n.getValue() == -1) me.sgTxt.setText("SG1").show();
+        if (n.getValue() == 1) me.sgTxt.setText("SG2").show();
+        me.sgCdr.show();
+      }
+    },1,0);
+
   }, # end of listen
 
   update_PFD : func(x) {
@@ -376,14 +369,14 @@ var PFDDisplay = {
     me.update_HSI();
     me.update_VSP();
     me.update_DME();
-
+    me.update_Markers();
 		settimer(func {me.update_PFD(x);},0.1);
   }, # end of update_PFD
 
   update_ALT : func {
     alt = getprop(AltFt);
-    alt_corr = roundToNearest(alt/100,0.1);
-    me.Alt.Alt11100.setText(sprintf("%03i",alt_corr));
+    alt_corr = int(roundToNearest(alt/100,0.1));
+    me.Alt.Alt11100.setText(sprintf("%03.0f",alt_corr));
 		me.Alt.AltTape.setTranslation(0,alt*0.284);
     me.Alt.AltLadder.setTranslation(0,math.fmod(alt,100) * 1.24);
 
@@ -402,7 +395,7 @@ var PFDDisplay = {
     min_diff = getprop(MinDiff) or 0;
     me.Alt.MinBug.setColor(min_diff > 0 ? me.COLORS.orange : me.COLORS.green);
     me.Alt.MinBug.setTranslation(0, min_diff * -0.174);
-    if (min_diff <= -300) me.Alt.MinBug.hide();
+    if (min_diff <= -600) me.Alt.MinBug.hide();
     else me.Alt.MinBug.show();
 
     ### Alt Meters ###
@@ -443,7 +436,7 @@ var PFDDisplay = {
       me.Spd.TgSpd.setText(sprintf("%.0i",getprop(SpdTgKt)));
     } else me.Spd.TgSpd.hide();
     ias = getprop(Ias);
-    ias_corr = roundToNearest(ias/10,0.1);
+    ias_corr = int(roundToNearest(ias/10,0.1));
     me.Spd.CurSpd.setText(sprintf("%02i",ias_corr));
     me.Spd.CurSpdTen.setTranslation(0,(math.fmod(ias,10)* 32));
     me.Spd.SpdTape.setTranslation(0,ias * 5.143);
@@ -549,6 +542,12 @@ var PFDDisplay = {
       } else me.Txt.DmeDist.setText("--- NM");
     } else me.Txt.Dme.hide();
   }, # end of update_DME
+
+  update_Markers : func {
+    me.Txt.MarkerO.setVisible(getprop(Marker_o));
+    me.Txt.MarkerM.setVisible(getprop(Marker_m));
+    me.Txt.MarkerI.setVisible(getprop(Marker_i));
+  },
 
 }; # end of PFDDisplay
 

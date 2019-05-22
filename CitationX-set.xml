@@ -39,8 +39,6 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
     <tutorials>
         <tutorial include="Tutorials/APU_start.xml"/>
         <tutorial include="Tutorials/startup.xml"/>
-        <tutorial include="Tutorials/cdu.xml"/>
-        <tutorial include="Tutorials/navigation.xml"/>
     </tutorials>
 		<checklists include="Tutorials/checklists.xml"/>
 

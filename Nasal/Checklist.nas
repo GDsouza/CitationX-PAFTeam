@@ -13,6 +13,8 @@ var abn_p = "instrumentation/checklists/abn";
 var nr_page = "instrumentation/checklists/nr-page";
 var throttle = ["controls/engines/engine/throttle",
                 "controls/engines/engine[1]/throttle"];
+var cutOff = ["controls/engines/engine/cutoff",
+                "controls/engines/engine[1]/cutoff"];
 var page = 0;
 var tittle = "";
 var lines_L = "";
@@ -46,12 +48,12 @@ var R3 = ['NORM','','ALT SELECT','SET 500 fpm','SET 1000 ab Cruise Alt'];
 
 ###  START ENGINES ###
 var T4 = "LEFT ENGINE START";
-var L4 = ['Throttle','Starter','Left Engine','N2 at 56%','N1 Rotation','Oil Pressure','ITT Stable','Volts / Amp / Oil'];
-var R4 = ['CUTOFF','ON','START','VERIFY','CONFIRM','CHECK','VERIFY','CHECK'];
+var L4 = ['Throttle','Ignition','Starter','Left Engine','N2 at 56%','N1 Rotation','Oil Pressure','ITT Stable','Volts / Amp / Oil'];
+var R4 = ['IDLE','NORM','ON','START','VERIFY','CONFIRM','CHECK','VERIFY','CHECK'];
 
 var T5 = "RIGHT ENGINE START";
-var L5 = ['Throttle','Starter','Right Engine','N2 at 56%','N1 Rotation','Oil Pressure','ITT Stable','Volts / Amp / Oil'];
-var R5 = ['CUTOFF','ON','START','VERIFY','CONFIRM','CHECK','VERIFY','CHECK'];
+var L5 = ['Throttle','Ignition','Starter','Right Engine','N2 at 56%','N1 Rotation','Oil Pressure','ITT Stable','Volts / Amp / Oil'];
+var R5 = ['IDLE','NORM','ON','START','VERIFY','CONFIRM','CHECK','VERIFY','CHECK'];
 
 ###  BEFORE TAXI ###
 var T6 = "BEFORE TAXI";
@@ -367,25 +369,27 @@ var voices_prop = func {
 	  }
 
 	  if (page == 4) {   ### Left Engine Start ###
-		  if (getprop(throttle[0]) > 0.2) check.chk0 = 1;
-		  if (getprop("controls/engines/engine[0]/starter")) check.chk1 = 1;
-		  if (!getprop("controls/engines/engine[0]/cutoff")) check.chk2 = 1;
-		  if (getprop("engines/engine[0]/n2") >= 56) check.chk3 = 1;
-		  if (getprop("engines/engine[0]/n1") >= 40) check.chk4 = 1;
-		  if (getprop("systems/hydraulics/psi-norm")) check.chk5 = 1;
-		  check.chk6 = 1;
+		  if (getprop(throttle[0]) == 0 and !getprop(cutOff[0])) check.chk0 = 1;
+      if (getprop("controls/engines/engine[0]/ignition")== 0) check.chk1 = 1;
+		  if (getprop("controls/engines/engine[0]/starter")) check.chk2 = 1;
+		  if (!getprop(cutOff[0])) check.chk3 = 1;
+		  if (getprop("engines/engine[0]/turbine") >= 56) check.chk4 = 1;
+		  if (getprop("engines/engine[0]/fan") >= 40) check.chk5 = 1;
+		  if (getprop("systems/hydraulics/psi-norm")) check.chk6 = 1;
 		  check.chk7 = 1;
+		  check.chk8 = 1;
 	  }
 
 	  if (page == 5) {   ### Right Engine Start ###
-		  if (getprop(throttle[1]) > 0.2) check.chk0 = 1;
-		  if (getprop("controls/engines/engine[1]/starter")) check.chk1 = 1;
-		  if (!getprop("controls/engines/engine[1]/cutoff")) check.chk2 = 1;
-		  if (getprop("engines/engine[1]/n2") >= 56) check.chk3 = 1;
-		  if (getprop("engines/engine[1]/n1") >= 40) check.chk4 = 1;
-		  if (getprop("systems/hydraulics/psi-norm")) check.chk5 = 1;
-		  check.chk6 = 1;
+		  if (getprop(throttle[1]) == 0 and !getprop(cutOff[0])) check.chk0 = 1;
+      if (getprop("controls/engines/engine[1]/ignition")== 0) check.chk1 = 1;
+		  if (getprop("controls/engines/engine[1]/starter")) check.chk2 = 1;
+		  if (!getprop(cutOff[1])) check.chk3 = 1;
+		  if (getprop("engines/engine[1]/n2") >= 56) check.chk4 = 1;
+		  if (getprop("engines/engine[1]/n1") >= 40) check.chk5 = 1;
+		  if (getprop("systems/hydraulics/psi-norm")) check.chk6 = 1;
 		  check.chk7 = 1;
+		  check.chk8 = 1;
 	  }
 
 	  if (page == 6) {   ### Before Taxi ###
@@ -530,7 +534,7 @@ var voices_prop = func {
 
 	  if (page == 18) {   ### Shutdown ###
 		  if (!getprop("controls/anti-ice/window-heat") and !getprop("controls/anti-ice/window-heat[1]") and !getprop("controls/anti-ice/pitot-heat") and !getprop("controls/anti-ice/window-heat[1]")) check.chk0 = 1;
-		  if (getprop(throttle[0]) < 0.1 and getprop(throttle[1]) < 0.1) check.chk1 = 1;
+		  if (getprop(cutOff[0]) and getprop(cutOff[1])) check.chk1 = 1;
 		  if (getprop("controls/gear/brake-parking")) check.chk2 = 1;
 		  if (getprop("controls/electric/seat-belts-switch")==0) check.chk3 = 1;
 		  if (getprop("controls/engines/engine[0]/ignition")== 1 and getprop("controls/engines/engine[1]/ignition")== 1) check.chk4 = 1;

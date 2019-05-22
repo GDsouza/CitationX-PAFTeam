@@ -57,8 +57,8 @@ var Warnings = {
 	},
 
 	init : func {	
-		me.my_caution = 0;
-		me.my_warning = 0;
+		me.old_caution = 0;
+		me.old_warning = 0;
 	},
 
   listen : func {
@@ -117,16 +117,21 @@ var Warnings = {
 				  ### lEVEL 3 ###
 			  if (me.cabin_alt > 10000) {
           append(me.msg_l3,"CABIN ALTITUDE");
+					me.nb_warning +=1;
 			  }
 			  if (!me.gen_L and !me.gen_R) {			
          	append(me.msg_l3,"GEN OFF L-R");
+					me.nb_warning +=1;
 			  }
-			  if (me.oil_L < 0.080 and me.oil_R < 0.080) {
+			  if (me.oil_L < 0.4 and me.oil_R < 0.4) {
           append(me.msg_l3,"OIL PRESS LOW L-R");
+          me.nb_warning += 1;
 			  }	else if(me.oil_L < 0.4) {
           append(me.msg_l3,"OIL PRESS LOW L");
+					me.nb_warning +=1;
 			  }	else if(me.oil_R < 0.4) {
           append(me.msg_l3,"OIL PRESS LOW R");
+					me.nb_warning +=1;
 			  }
 			  if(me.wow and !me.eng0_shutdown and !me.eng1_shutdown and (
 					  me.ext_pwr
@@ -135,26 +140,32 @@ var Warnings = {
 					  or me.speedbrake
 					  or me.total_fuel <= 500)) {
 				  append(me.msg_l3,"NO TAKEOFF");
+					me.nb_warning +=1;
 				  no_takeoff_l3 = 1;
 			  }			
 			  if(me.vmo >= -59) {
 				  append(me.msg_l3,"OVERSPEED");
 				  setprop("sim/alarms/overspeed-alarm",1);
+					me.nb_warning +=1;
 			  } else {
 				  setprop("sim/alarms/overspeed-alarm",0);
 			  }
 			  if(me.stall and me.cabin_alt > 35000) {
 				  append(me.msg_l3,"MINIMUM SPEED");
+					me.nb_warning +=1;
 			  }
 
 				  ### LEVEL 2 ###
 			  if(!me.gen_L and me.gen_R) {
          	append(me.msg_l2,"GEN OFF L");
+					me.nb_caution +=1;
 			  }	else if(!me.gen_R and me.gen_L) {
           append(me.msg_l2,"GEN OFF R");;
+					me.nb_caution +=1;
 			  }
 			  if (me.cabin_door) {
           append(me.msg_l2,"CABIN DOOR OPEN");
+					me.nb_caution +=1;
 			  }
 			  if (me.cabin_alt > 8500) {
           append(me.msg_l2,"CABIN ALTITUDE");
@@ -162,13 +173,17 @@ var Warnings = {
 			  }
 			  if (me.level_tank_L < 100 and me.level_tank_R < 100) {
           append(me.msg_l2,"FUEL LEVEL L-R");
+					me.nb_caution +=1;
 			  }	else if( me.level_tank_L < 100) {
           append(me.msg_l2,"FUEL LEVEL L");
+					me.nb_caution +=1;
 			  }	else if( me.level_tank_R < 100) {
           append(me.msg_l2,"FUEL LEVEL R");
+					me.nb_caution +=1;
 			  }
 			  if (me.speedbrake and me.cabin_alt < 500) {
           append(me.msg_l2,"SPEEDBRAKES");
+					me.nb_caution +=1;
 			  }
 
 				  ### LEVEL 1 ###
@@ -238,7 +253,7 @@ var Warnings = {
     } else setprop("instrumentation/alerts/gear-horn",0);
     
     #######
-		settimer(func {me.update();},0.5);
+		settimer(func {me.update();},0.1);
 
 	}, # end of update
 
@@ -319,14 +334,12 @@ var Warnings = {
   }, # end of EicasOutput
 
 	AnnunOutput : func {	### ANNUNCIATORS ###
-
 				### WARNING ###
 			if (me.nb_warning == 0) {
 				setprop(MstrWarning,0);
 				setprop(Warn,0);
 				setprop(WarningAck,0);
-			} 
-			else if (me.nb_warning > me.my_warning) {
+			} else if (me.nb_warning > me.old_warning) {
 				setprop(MstrWarning,1);
 				setprop(Warn,me.state);
 				setprop(WarningAck,0);
@@ -335,7 +348,7 @@ var Warnings = {
 				setprop(Warn,me.state);
 				if (getprop(WarningAck)) setprop(Warn,1);
 			}
-			me.my_warning = me.nb_warning;		
+			me.old_warning = me.nb_warning;		
 
 				### CAUTION ###
 			if (me.nb_caution == 0) {
@@ -343,7 +356,7 @@ var Warnings = {
 				setprop(Caution,0);										
 				setprop(CautionAck,0);
 			} 
-			else if (me.nb_caution > me.my_caution) {
+			else if (me.nb_caution > me.old_caution) {
 				setprop(MstrCaution,1);
 				setprop(Caution,me.state);
 				setprop(CautionAck,0);
@@ -352,7 +365,7 @@ var Warnings = {
 				setprop(Caution,me.state);														
 				if (getprop(CautionAck)) setprop(Caution,1);
 			}
-			me.my_caution = me.nb_caution;
+			me.old_caution = me.nb_caution;
 
 	}, # end of AnnunOutput
 }; # end of Warnings

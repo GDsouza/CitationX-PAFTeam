@@ -651,8 +651,8 @@
         <alignment>right-center</alignment>
         <axis-alignment>xz-plane</axis-alignment>
         <type type="string">number-value</type>
-        <property>instrumentation/clock/flight-meter-tot</property>
-        <format>%4.1f</format>
+        <property>instrumentation/clock/flight-meter-dsp</property>
+        <format>%.1f</format>
         <font>helvetica_bold.txf</font>
         <character-size>0.009</character-size>
         <character-aspect-ratio type="double">1.0</character-aspect-ratio>
@@ -1431,8 +1431,8 @@
         <alignment>right-center</alignment>
         <axis-alignment>reversed-xz-plane</axis-alignment>
         <type type="string">number-value</type>
-        <property>instrumentation/clock/flight-meter-tot</property>
-        <format>%4.1f</format>
+        <property>instrumentation/clock/flight-meter-dsp</property>
+        <format>%.1f</format>
         <font>helvetica_bold.txf</font>
         <character-size>0.009</character-size>
         <character-aspect-ratio type="double">1.0</character-aspect-ratio>

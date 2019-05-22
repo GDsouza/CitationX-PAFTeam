@@ -81,55 +81,289 @@
     <model>
         <name>EICAS</name>
         <path>Models/Instruments/EICAS/Eicas.xml</path>
+        <condition>
+          <equals>
+            <property>instrumentation/eicas/xfr</property>
+            <value>0</value>
+          </equals>
+        </condition>
         <offsets>
-            <x-m>0.002</x-m>
-            <y-m>0.005</y-m>
-            <z-m>0.138</z-m>
+          <x-m>0.002</x-m>
+          <y-m>0.005</y-m>
+          <z-m>0.138</z-m>
+        </offsets>
+    </model>
+    <model>
+        <name>EICAS</name>
+        <path>Models/Instruments/EICAS/Eicas.xml</path>
+        <condition>
+          <equals>
+            <property>instrumentation/eicas/xfr</property>
+            <value>-1</value>
+          </equals>
+        </condition>
+        <offsets>
+          <x-m>0.0011</x-m>
+          <y-m>-0.1865</y-m>
+          <z-m>0.136</z-m>
+        </offsets>
+    </model>
+    <model>
+        <name>EICAS</name>
+        <path>Models/Instruments/EICAS/Eicas.xml</path>
+        <condition>
+          <equals>
+            <property>instrumentation/eicas/xfr</property>
+            <value>1</value>
+          </equals>
+        </condition>
+        <offsets>
+          <x-m>0.0011</x-m>
+          <y-m>0.195</y-m>
+          <z-m>0.136</z-m>
+        </offsets>
+    </model>
+
+    <model>
+        <name>EICAS_Buttons</name>
+        <path>Models/Instruments/EICAS/Eicas_Buttons.xml</path>
+        <condition>
+          <equals>
+            <property>instrumentation/eicas/xfr</property>
+            <value>0</value>
+          </equals>
+        </condition>
+        <offsets>
+          <x-m>0.0</x-m>
+          <y-m>0.0</y-m>
+          <z-m>0.0</z-m>
+        </offsets>
+    </model>
+    <model>
+        <name>EICAS_Buttons</name>
+        <path>Models/Instruments/EICAS/Eicas_Buttons.xml</path>
+        <condition>
+          <equals>
+            <property>instrumentation/eicas/xfr</property>
+            <value>-1</value>
+          </equals>
+        </condition>
+        <offsets>
+          <x-m>0.0</x-m>
+          <y-m>-0.190</y-m>
+          <z-m>0.0</z-m>
+        </offsets>
+    </model>
+    <model>
+        <name>EICAS_Buttons</name>
+        <path>Models/Instruments/EICAS/Eicas_Buttons.xml</path>
+        <condition>
+          <equals>
+            <property>instrumentation/eicas/xfr</property>
+            <value>1</value>
+          </equals>
+        </condition>
+        <offsets>
+          <x-m>0.0</x-m>
+          <y-m>0.190</y-m>
+          <z-m>0.0</z-m>
         </offsets>
     </model>
 
     <model>
         <name>MFD_L</name>
         <path>Models/Instruments/MFD/mfdL_F.xml</path>
+        <condition>
+          <not-equals>
+            <property>instrumentation/eicas/xfr</property>
+            <value>-1</value>
+          </not-equals>
+        </condition>
         <offsets>
-            <x-m>0.0011</x-m>
-            <y-m>-0.1865</y-m>
-            <z-m>0.136</z-m>
+          <x-m>0.0011</x-m>
+          <y-m>-0.1865</y-m>
+          <z-m>0.136</z-m>
+        </offsets>
+    </model>
+    <model>
+        <name>MFD_L</name>
+        <path>Models/Instruments/MFD/mfdL_F.xml</path>
+        <condition>
+          <equals>
+            <property>instrumentation/eicas/xfr</property>
+            <value>-1</value>
+          </equals>
+        </condition>
+        <offsets>
+          <x-m>0.0021</x-m>
+          <y-m>0.005</y-m>
+          <z-m>0.138</z-m>
         </offsets>
     </model>
 
     <model>
         <name>Layers_L</name>
         <path>Models/Instruments/MFD/mfdL_B.xml</path>
+        <condition>
+          <not-equals>
+            <property>instrumentation/eicas/xfr</property>
+            <value>-1</value>
+          </not-equals>
+        </condition>
         <offsets>
             <x-m>0.0010</x-m>
             <y-m>-0.1865</y-m>
             <z-m>0.136</z-m>
         </offsets>
     </model>
+    <model>
+        <name>Layers_L</name>
+        <path>Models/Instruments/MFD/mfdL_B.xml</path>
+        <condition>
+          <equals>
+            <property>instrumentation/eicas/xfr</property>
+            <value>-1</value>
+          </equals>
+        </condition>
+        <offsets>
+          <x-m>0.0020</x-m>
+          <y-m>0.005</y-m>
+          <z-m>0.138</z-m>
+        </offsets>
+    </model>
+
+    <model>
+        <name>MfdL_Buttons</name>
+        <path>Models/Instruments/MFD/mfdL_Buttons.xml</path>
+        <condition>
+          <not-equals>
+            <property>instrumentation/eicas/xfr</property>
+            <value>-1</value>
+          </not-equals>
+        </condition>
+        <offsets>
+          <x-m>0.0</x-m>
+          <y-m>-0.190</y-m>
+          <z-m>0.0</z-m>
+        </offsets>
+    </model>
+    <model>
+        <name>MfdL_Buttons</name>
+        <path>Models/Instruments/MFD/mfdL_Buttons.xml</path>
+        <condition>
+          <equals>
+            <property>instrumentation/eicas/xfr</property>
+            <value>-1</value>
+          </equals>
+        </condition>
+        <offsets>
+          <x-m>0.0</x-m>
+          <y-m>0.0</y-m>
+          <z-m>0.0</z-m>
+        </offsets>
+    </model>
 
     <model>
         <name>MFD_R</name>
         <path>Models/Instruments/MFD/mfdR_F.xml</path>
+        <condition>
+          <not-equals>
+            <property>instrumentation/eicas/xfr</property>
+            <value>1</value>
+          </not-equals>
+        </condition>
         <offsets>
-            <x-m>0.0011</x-m>
-            <y-m>0.195</y-m>
-            <z-m>0.136</z-m>
+          <x-m>0.0011</x-m>
+          <y-m>0.195</y-m>
+          <z-m>0.136</z-m>
+        </offsets>
+    </model>
+    <model>
+        <name>MFD_R</name>
+        <path>Models/Instruments/MFD/mfdR_F.xml</path>
+        <condition>
+          <equals>
+            <property>instrumentation/eicas/xfr</property>
+            <value>1</value>
+          </equals>
+        </condition>
+        <offsets>
+          <x-m>0.0021</x-m>
+          <y-m>0.005</y-m>
+          <z-m>0.138</z-m>
         </offsets>
     </model>
 
     <model>
         <name>Layers_R</name>
         <path>Models/Instruments/MFD/mfdR_B.xml</path>
+        <condition>
+          <not-equals>
+            <property>instrumentation/eicas/xfr</property>
+            <value>1</value>
+          </not-equals>
+        </condition>
         <offsets>
-            <x-m>0.0010</x-m>
-            <y-m>0.195</y-m>
-            <z-m>0.136</z-m>
+          <x-m>0.0010</x-m>
+          <y-m>0.195</y-m>
+          <z-m>0.136</z-m>
+        </offsets>
+     </model>
+    <model>
+        <name>Layers_R</name>
+        <path>Models/Instruments/MFD/mfdR_B.xml</path>
+        <condition>
+          <equals>
+            <property>instrumentation/eicas/xfr</property>
+            <value>1</value>
+          </equals>
+        </condition>
+        <offsets>
+          <x-m>0.0020</x-m>
+          <y-m>0.005</y-m>
+          <z-m>0.138</z-m>
+        </offsets>
+     </model>
+
+    <model>
+        <name>MfdR_Buttons</name>
+        <path>Models/Instruments/MFD/mfdR_Buttons.xml</path>
+        <condition>
+          <not-equals>
+            <property>instrumentation/eicas/xfr</property>
+            <value>1</value>
+          </not-equals>
+        </condition>
+        <offsets>
+          <x-m>0.0</x-m>
+          <y-m>0.190</y-m>
+          <z-m>0.0</z-m>
+        </offsets>
+    </model>
+    <model>
+        <name>MfdR_Buttons</name>
+        <path>Models/Instruments/MFD/mfdR_Buttons.xml</path>
+        <condition>
+          <equals>
+            <property>instrumentation/eicas/xfr</property>
+            <value>1</value>
+          </equals>
+        </condition>
+        <offsets>
+          <x-m>0.0</x-m>
+          <y-m>0.0</y-m>
+          <z-m>0.0</z-m>
         </offsets>
     </model>
 
     <model>
         <name>Vsd_L</name>
+        <condition>
+          <not-equals>
+            <property>instrumentation/eicas/xfr</property>
+            <value>-1</value>
+          </not-equals>
+        </condition>
         <path>Models/Instruments/MFD/VsdL.xml</path>
         <offsets>
             <x-m>0.0010</x-m>
@@ -137,14 +371,50 @@
             <z-m>0.155</z-m>
         </offsets>
     </model>
+    <model>
+        <name>Vsd_L</name>
+        <path>Models/Instruments/MFD/VsdL.xml</path>
+        <condition>
+          <equals>
+            <property>instrumentation/eicas/xfr</property>
+            <value>-1</value>
+          </equals>
+        </condition>
+        <offsets>
+          <x-m>0.002</x-m>
+          <y-m>0.002</y-m>
+          <z-m>0.157</z-m>
+        </offsets>
+    </model>
 
     <model>
         <name>Vsd_R</name>
         <path>Models/Instruments/MFD/VsdR.xml</path>
+        <condition>
+          <not-equals>
+            <property>instrumentation/eicas/xfr</property>
+            <value>1</value>
+          </not-equals>
+        </condition>
         <offsets>
             <x-m>0.0010</x-m>
             <y-m>0.192</y-m>
             <z-m>0.155</z-m>
+        </offsets>
+    </model>
+    <model>
+        <name>Vsd_R</name>
+        <path>Models/Instruments/MFD/VsdR.xml</path>
+        <condition>
+          <equals>
+            <property>instrumentation/eicas/xfr</property>
+            <value>1</value>
+          </equals>
+        </condition>
+        <offsets>
+          <x-m>0.002</x-m>
+          <y-m>0.002</y-m>
+          <z-m>0.157</z-m>
         </offsets>
     </model>
 
@@ -327,7 +597,7 @@
         <object-name>ent.btn</object-name>
         <object-name>prev.btn</object-name>
         <object-name>prev.btn1</object-name>
-        <object-name>MFD_L.btn0</object-name>
+<!--        <object-name>MFD_L.btn0</object-name>
         <object-name>MFD_L.btn1</object-name>
         <object-name>MFD_L.btn2</object-name>
         <object-name>MFD_L.btn3</object-name>
@@ -348,7 +618,10 @@
         <object-name>EICAS.btn4</object-name>
         <object-name>EICAS.btn5</object-name>
         <object-name>EICAS.knob</object-name>
+-->        
         <object-name>eicas.display</object-name>
+        <object-name>eicas.dim</object-name>
+        <object-name>eicas.xfr</object-name>
         <object-name>sgrev.knob</object-name>
         <object-name>LHstarter</object-name>
         <object-name>RHstarter</object-name>
@@ -2899,8 +3172,8 @@
         </axis>
         <center>
             <x-m>0.00</x-m>
-            <y-m>-0.117</y-m>
-            <z-m>0.0350</z-m>
+            <y-m>0.0724</y-m>
+            <z-m>0.035</z-m>
         </center>
     </animation>
 
@@ -3305,8 +3578,8 @@
         </axis>
         <center>
             <x-m>0.00</x-m>
-            <y-m>0.264</y-m>
-            <z-m>0.0350</z-m>
+            <y-m>0.0724</y-m> 
+            <z-m>0.035</z-m>
         </center>
     </animation>
 
@@ -3585,11 +3858,12 @@
     </animation>
 
 <!-- EICAS -->
+
     <animation>
         <type>rotate</type>
         <object-name>EICAS.knob</object-name>
-        <property>controls/lighting/eicas-norm</property>
-        <factor>270</factor>
+        <property>instrumentation/eicas/knob</property>
+        <factor>5</factor>
         <axis>
             <x>-1.0</x>
             <y>0.0</y>
@@ -3603,43 +3877,271 @@
     </animation>
 
     <animation>
-        <type>pick</type>
-        <object-name>EICAS.knob</object-name>
-        <action>
-            <button>3</button>
-            <repeatable>true</repeatable>
-            <interval-sec>0.2</interval-sec>
-            <binding>
-                <command>property-adjust</command>
-                <property>controls/lighting/eicas-norm</property>
-                <step>0.1</step>
-                <min>0</min>
-                <max>1</max>
-                <wrap>false</wrap>
-            </binding>
-        </action>
-        <action>
-            <button>4</button>
-            <repeatable>true</repeatable>
-            <interval-sec>0.2</interval-sec>
-            <binding>
-                <command>property-adjust</command>
-                <property>controls/lighting/eicas-norm</property>
-                <step>-0.1</step>
-                <min>0</min>
-                <max>1</max>
-                <wrap>false</wrap>
-            </binding>
-        </action>
-        <hovered>
-            <binding>
-                <command>set-tooltip</command>
-                <tooltip-id>EicasLighting</tooltip-id>
-                <label>EICAS Lighting : %s </label> 
-                <property>controls/lighting/eicas-norm</property>
-            </binding>
-        </hovered>
+      <type>rotate</type>
+      <object-name>eicas.dim</object-name>
+      <property>controls/lighting/eicas-norm</property>
+      <factor>270</factor>
+      <axis>
+        <x>-1.0</x>
+        <y>0.0</y>
+        <z>0.0</z>
+      </axis>
+      <center>
+        <x-m>0.0</x-m>
+        <y-m>0.130</y-m>
+        <z-m>0.285</z-m>
+      </center>
     </animation>
+
+    <animation>
+      <type>pick</type>
+      <object-name>eicas.dim</object-name>
+      <action>
+        <button>3</button>
+        <repeatable>true</repeatable>
+        <interval-sec>0.2</interval-sec>
+        <binding>
+          <command>property-adjust</command>
+          <property>controls/lighting/eicas-norm</property>
+          <step>0.1</step>
+          <min>0</min>
+          <max>1</max>
+          <wrap>false</wrap>
+        </binding>
+      </action>
+      <action>
+        <button>4</button>
+        <repeatable>true</repeatable>
+        <interval-sec>0.2</interval-sec>
+        <binding>
+          <command>property-adjust</command>
+          <property>controls/lighting/eicas-norm</property>
+          <step>-0.1</step>
+          <min>0</min>
+          <max>1</max>
+          <wrap>false</wrap>
+        </binding>
+      </action>
+      <hovered>
+        <binding>
+          <command>set-tooltip</command>
+          <tooltip-id>EicasLighting</tooltip-id>
+          <label>EICAS Lighting : %i%%</label> 
+          <mapping>percent</mapping>
+          <property>controls/lighting/eicas-norm</property>
+        </binding>
+      </hovered>
+    </animation>
+
+    <animation>
+      <type>rotate</type>
+      <object-name>eicas.xfr</object-name>
+      <property>instrumentation/eicas/xfr</property>
+      <factor>45</factor>
+      <axis>
+        <x>-1.0</x>
+        <y>0.0</y>
+        <z>0.0</z>
+      </axis>
+      <center>
+        <x-m>0.0</x-m>
+        <y-m>0.130</y-m>
+        <z-m>0.285</z-m>
+      </center>
+    </animation>
+
+    <animation>
+      <type>pick</type>
+      <object-name>eicas.xfr</object-name>
+      <action>
+        <button>3</button>
+        <repeatable>true</repeatable>
+        <interval-sec>0.2</interval-sec>
+        <binding>
+            <command>property-adjust</command>
+            <property>instrumentation/eicas/xfr</property>
+            <step>1</step>
+            <min>-1</min>
+            <max>1</max>
+            <wrap>false</wrap>
+        </binding>
+      </action>
+      <action>
+        <button>4</button>
+        <repeatable>true</repeatable>
+        <interval-sec>0.2</interval-sec>
+        <binding>
+            <command>property-adjust</command>
+            <property>instrumentation/eicas/xfr</property>
+            <step>-1</step>
+            <min>-1</min>
+            <max>1</max>
+            <wrap>false</wrap>
+        </binding>
+      </action>
+      <hovered>
+        <binding>
+          <command>set-tooltip</command>
+          <tooltip-id>EicasXfr</tooltip-id>
+          <label>EICAS Select : %s </label> 
+          <property>instrumentation/eicas/xfr</property>
+          <mapping>nasal</mapping>
+			    <script>
+				    var modes = ['NORM','RIGHT','LEFT'];
+				    return modes[arg[0]];
+			    </script>
+        </binding>
+      </hovered>
+    </animation>
+
+    <animation>
+      <type>rotate</type>
+      <object-name>eicas.sgrev</object-name>
+      <property>instrumentation/eicas/sg-rev</property>
+      <factor>45</factor>
+      <axis>
+        <x>-1.0</x>
+        <y>0.0</y>
+        <z>0.0</z>
+      </axis>
+      <center>
+        <x-m>0.0</x-m>
+        <y-m>0.1625</y-m>
+        <z-m>0.285</z-m>
+      </center>
+    </animation>
+
+    <animation>
+      <type>pick</type>
+      <object-name>eicas.sgrev</object-name>
+      <action>
+        <button>3</button>
+        <repeatable>true</repeatable>
+        <interval-sec>0.2</interval-sec>
+        <binding>
+          <command>property-adjust</command>
+          <property>instrumentation/eicas/sg-rev</property>
+          <step>1</step>
+          <min>-1</min>
+          <max>1</max>
+          <wrap>false</wrap>
+        </binding>
+      </action>
+      <action>
+        <button>4</button>
+        <repeatable>true</repeatable>
+        <interval-sec>0.2</interval-sec>
+        <binding>
+          <command>property-adjust</command>
+          <property>instrumentation/eicas/sg-rev</property>
+          <step>-1</step>
+          <min>-1</min>
+          <max>1</max>
+          <wrap>false</wrap>
+        </binding>
+      </action>
+      <hovered>
+        <binding>
+          <command>set-tooltip</command>
+          <tooltip-id>EicasSgrev</tooltip-id>
+          <label>SG REV Select : %s </label> 
+          <property>instrumentation/eicas/sg-rev</property>
+          <mapping>nasal</mapping>
+			    <script>
+				    var modes = ['NORM','SG2','SG1'];
+				    return modes[arg[0]];
+			    </script>
+        </binding>
+      </hovered>
+    </animation>
+
+    <animation>
+      <type>translate</type>
+      <object-name>dau1.rev</object-name>
+      <property>instrumentation/eicas/dau1</property>
+			<factor>0.0022</factor>
+      <axis>
+        <x>-1</x>
+        <y>0</y>
+        <z>0</z>
+      </axis>
+    </animation>
+
+	<animation>
+    <type>pick</type>
+    <object-name>dau1.rev</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+			<binding>
+     		<command>property-toggle</command>
+     			<property>instrumentation/eicas/dau1</property>
+			</binding>
+      <binding>
+          <command>property-toggle</command>
+          <property>sim/sound/click</property>
+      </binding>
+			<mod-up>
+				<binding>
+					<command>property-toggle</command>
+						<property>instrumentation/eicas/dau1</property>
+				</binding>
+			</mod-up>
+		</action>
+    <hovered>
+      <binding>
+          <command>set-tooltip</command>
+          <tooltip-id>dau1</tooltip-id>
+          <label>Data Unit1</label>
+          <mapping>push</mapping>
+      <property>instrumentation/eicas/dau1</property>
+      </binding>
+    </hovered>
+	</animation>
+
+    <animation>
+      <type>translate</type>
+      <object-name>dau2.rev</object-name>
+      <property>instrumentation/eicas/dau2</property>
+			<factor>0.0022</factor>
+      <axis>
+        <x>-1</x>
+        <y>0</y>
+        <z>0</z>
+      </axis>
+    </animation>
+
+	<animation>
+    <type>pick</type>
+    <object-name>dau2.rev</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+			<binding>
+     		<command>property-toggle</command>
+     			<property>instrumentation/eicas/dau2</property>
+			</binding>
+      <binding>
+          <command>property-toggle</command>
+          <property>sim/sound/click</property>
+      </binding>
+			<mod-up>
+				<binding>
+					<command>property-toggle</command>
+						<property>instrumentation/eicas/dau2</property>
+				</binding>
+			</mod-up>
+		</action>
+    <hovered>
+      <binding>
+          <command>set-tooltip</command>
+          <tooltip-id>dau2</tooltip-id>
+          <label>Data Unit2</label>
+          <mapping>push</mapping>
+      <property>instrumentation/eicas/dau2</property>
+      </binding>
+    </hovered>
+	</animation>
 
 <!-- FD/AP -->
 
