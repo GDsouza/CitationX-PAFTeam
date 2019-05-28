@@ -322,11 +322,11 @@ var EICASdsp = {
         }
         ### ITT - Turbines ###
         else if (i>17 and i<20) {
-          me.trans = (getprop(Itt[i-18]) or 0)*100;
+          me.trans = (getprop(Itt[i-18]) or 0)*80;
           me.color = me.trans > 90 ? me.COLORS.red : me.trans > 85 ? me.COLORS.amber : me.COLORS.white;  
-          me.color1 = me.trans > 90 ? me.COLORS.red : me.trans > 85 ? me.COLORS.amber : me.COLORS.green;  
-          if (me.trans > 70) me.trans = (me.trans*2.85)+(me.trans-70)*2.85;
-          else me.trans = me.trans*2.85;
+          me.color1 = upd_val >= 102 ? me.COLORS.red : me.COLORS.green;  
+          if (me.trans > 70) me.trans = (me.trans*2.90)+(me.trans-70)*2.90;
+          else me.trans = me.trans*2.90;
           me.rect = i==18 ? "rect(85,347,425,320)" : "rect(85,480,425,450)";
           me.itt[i-18].setTranslation(0,-me.trans)
                       .set("clip",me.rect)

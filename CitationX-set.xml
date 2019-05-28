@@ -497,6 +497,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
           <category-1> 255 </category-1>  <!-- AIRCRAFT_MODE_TYPE_SELECT -->
 					<category-4> 13 </category-4> <!-- ALTITUDE CALLOUTS -->
           <category-8> 3 </category-8> <!-- RADIO ALTITUDE YASIM-->
+          <category-14> 2 </category-14> <!-- AUDIO OUTPUT LEVEL -->
        </configuration-module>
 			<inputs>
 			<arinc429>

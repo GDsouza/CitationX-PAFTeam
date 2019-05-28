@@ -340,19 +340,18 @@ var FHupdate = func {
     fmeter = getprop("/instrumentation/clock/flight-meter-sec");
     fhour = fmeter/3600;
     fl_calc = fl_tot + fhour;
-		setprop("instrumentation/clock/flight-meter-tot",fl_calc);
     fcalc = int((fl_calc-int(fl_calc))*10);
     fdsp = int(fl_calc)+fcalc/10;
     setprop("instrumentation/clock/flight-meter-dsp",fdsp);
 }
 
 var FH_load = func{
-        ### Create CitationX Path if not exists ### 
+    ### Create CitationX Path if not exists ### 
 		var path = os.path.new(getprop("/sim/fg-home")~"/Export/CitationX/create.txt");
     if (!path.exists()) {
       path.create_dir();
     }
-
+    ######
     var FH_path  = getprop("/sim/fg-home")~"/Export/CitationX/";
 		var name = FH_path~"FHmeter.xml";
 		var xfile = subvec(directory(FH_path),2);
@@ -365,17 +364,17 @@ var FH_load = func{
 		} 
 		var data = io.read_properties(name);
 		fl_tot = data.getValue("TotalFlight");
-		setprop("/instrumentation/clock/flight-meter-tot",fl_tot);
 }
 
 var FH_write = func {
     if (fl_calc != nil) {
 		  var FH_path = getprop("/sim/fg-home")~"/Export/CitationX/FHmeter.xml";
-  		fl_tot = getprop("instrumentation/clock/flight-meter-tot");
 		  var data = io.read_properties(FH_path);
 		  var name = data.getChild("TotalFlight");
-  		name.setValue(fl_tot);
+      fl_tot = fl_calc;
+      name.setValue(fl_calc);
 		  io.write_properties(FH_path,data);
+      setprop("/instrumentation/clock/flight-meter-sec",0);
     }
 }
 

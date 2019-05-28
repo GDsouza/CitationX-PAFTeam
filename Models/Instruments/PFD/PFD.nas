@@ -61,6 +61,7 @@ var SelCrs = "/autopilot/settings/selected-crs";
 var SelHdg = "/autopilot/settings/heading-bug-deg";
 var Sg = "/instrumentation/eicas/sg-rev";
 var SpdTgKt = "/autopilot/settings/target-speed-kt";
+var SpdTgMc = "/autopilot/settings/target-speed-mc";
 var SpdTrd = "/instrumentation/pfd/speed-trend-kt";
 var StallDiff = "/instrumentation/pfd/stall-diff";
 var V1 = "/controls/flight/v1";
@@ -431,14 +432,17 @@ var PFDDisplay = {
   }, # end of update_HOR
 
   update_SPD : func {
-    if ((getprop("/autopilot/locks/altitude") == "FLC" or getprop("/autopilot/locks/altitude") == "VFLC" or getprop("/autopilot/settings/fms") or getprop("/autopilot/locks/speed")) and getprop("instrumentation/altimeter/indicated-altitude-ft") <= 30650) {
+    if ((getprop("/autopilot/locks/altitude") == "FLC" or getprop("/autopilot/locks/altitude") == "VFLC" or getprop("/autopilot/settings/fms") or getprop("/autopilot/locks/speed"))) {
       me.Spd.TgSpd.show();
-      me.Spd.TgSpd.setText(sprintf("%.0i",getprop(SpdTgKt)));
+      if (getprop(AltFt)  <= 30650) {
+        me.Spd.TgSpd.setText(sprintf("%.0f",getprop(SpdTgKt)));
+      } else me.Spd.TgSpd.setText(sprintf("%.2f",getprop(SpdTgMc)));
     } else me.Spd.TgSpd.hide();
     ias = getprop(Ias);
     ias_corr = int(roundToNearest(ias/10,0.1));
     me.Spd.CurSpd.setText(sprintf("%02i",ias_corr));
-    me.Spd.CurSpdTen.setTranslation(0,(math.fmod(ias,10)* 32));
+#    me.Spd.CurSpdTen.setTranslation(0,(math.fmod(ias,10)* 32));
+    me.Spd.CurSpdTen.setTranslation(0,(roundToNearest(math.fmod(ias,10),0.1)* 32));
     me.Spd.SpdTape.setTranslation(0,ias * 5.143);
     me.Spd.Vmo.setTranslation(0,(ias-(getprop(Vne) or 0)) * 5.143);
     if (!wow) {

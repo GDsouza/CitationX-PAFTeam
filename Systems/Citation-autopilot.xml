@@ -998,7 +998,7 @@
         <beta>1.0</beta>
         <alpha>0.1</alpha>
         <gamma>0.0</gamma>
-        <Ti>10.0</Ti>	<!-- old 10.0 -->
+        <Ti>5.0</Ti>	<!-- old 10.0 -->
         <Td>0.001</Td>
         <min>0.0</min>
         <max>0.95</max>
