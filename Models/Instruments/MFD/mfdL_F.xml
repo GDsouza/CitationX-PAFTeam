@@ -7,17 +7,6 @@ Citation X - Navigation display
 <path>screenL_F.ac</path>
 
     <animation>
-        <type>select</type>
-        <object-name>screenL_F</object-name>
-        <condition>
-          <greater-than>
-	          <property>controls/electric/avionics-switch</property>
-            <value>0</value>
-          </greater-than>
-				</condition>
-    </animation>
-
-    <animation>
         <type>material</type>
         <object-name>screenL_F</object-name>
         <condition>

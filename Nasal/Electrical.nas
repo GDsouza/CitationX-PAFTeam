@@ -17,6 +17,8 @@ var AVswitch = "controls/electric/avionics-switch";
 var Lbus = "systems/electrical/left-bus";
 var Rbus= "systems/electrical/right-bus";
 var XTie  = "systems/electrical/xtie";
+var Batt0Sw = "controls/electric/battery-switch";
+var Batt1Sw = "controls/electric/battery-switch[1]";
 var AvPwr = "controls/electric/avionics-power";
 var l_emer = "systems/electrical/left-emer-bus";
 var	l_norm = "systems/electrical/left-bus-norm";
@@ -249,7 +251,7 @@ var init_switches = func{
 }
 
 
-update_virtual_bus = func(dt) {
+update_virtual_bus = func {
   PWR = getprop("systems/electrical/serviceable");
 	apu_volts = getprop("controls/APU/battery");
   xtie = 0;
@@ -322,9 +324,9 @@ rh_bus = func(bv) {
 
 ########## Switches ###########
 
-setlistener("controls/electric/battery-switch[0]",func(n) {
-  if (n.getValue()) {
-		if (getprop(ext_pwr) or getprop(apu_gen) or getprop(l_gen) >24 or getprop(r_gen) >24) {
+update_master_switches = func {
+  if (getprop(Batt0Sw)) {
+		if (getprop(ext_pwr) or getprop(apu_gen) or getprop(l_gen) > 24 or getprop(r_gen) > 24) {
 			setprop(l_norm,1);
 			setprop(l_emer,0);
 		} else {
@@ -332,15 +334,15 @@ setlistener("controls/electric/battery-switch[0]",func(n) {
 			setprop(l_emer,1);
 		}
     if (getprop(AVswitch)== 2) setprop(AvPwr,1);
+    else setprop(AvPwr,0);
 	} else {
 			setprop(l_norm,0);
 			setprop(l_emer,0);
       setprop(AvPwr,0);
 	}			
-},0,0);
 
-setlistener("controls/electric/battery-switch[1]",func(n) {
-  if (n.getValue()) {
+
+  if (getprop(Batt1Sw)) {
 		if (getprop(ext_pwr) or getprop(apu_gen) or getprop(l_gen) > 24 or getprop(r_gen) > 24) {
 			setprop(r_norm,1);
 			setprop(r_emer,0);
@@ -352,23 +354,15 @@ setlistener("controls/electric/battery-switch[1]",func(n) {
 			setprop(r_norm,0);
 			setprop(r_emer,0);
 	}			
-},0,0);
+}
 
-setlistener("controls/electric/avionics-switch",func(n) {
-  if (n.getValue() == 2 and getprop(l_norm)) {
-		if(!getprop(AvPwr)) {
-      setprop(AvPwr,1);
-      setprop("instrumentation/cdu/init",0);
-      setprop("instrumentation/dme/frequencies/selected-mhz",getprop("instrumentation/nav/frequencies/selected-mhz")); # for dme display
-      setprop("instrumentation/dme[1]/frequencies/selected-mhz",getprop("instrumentation/nav[1]/frequencies/selected-mhz")); # for dme display
-    }
-	} else {
-		if(getprop(AvPwr)) {
-      setprop(AvPwr,0);
-      setprop("instrumentation/cdu/init",1);
-    }
-	}
-},1,1);
+setlistener(AvPwr,func(n) {
+  if (n.getValue()) {
+    setprop("instrumentation/cdu/init",0);
+    setprop("instrumentation/dme/frequencies/selected-mhz",getprop("instrumentation/nav/frequencies/selected-mhz")); # for dme display
+    setprop("instrumentation/dme[1]/frequencies/selected-mhz",getprop("instrumentation/nav[1]/frequencies/selected-mhz")); # for dme display
+  } else setprop("instrumentation/cdu/init",1);
+},0,0);
 
 setlistener("controls/lighting/anti-coll",func(n) {
 	if (n.getValue()==1) {
@@ -392,7 +386,8 @@ var elec_stl = setlistener("/sim/signals/fdm-initialized", func {
 },0,0);
 
 update_electrical = func {
-    scnd = getprop("sim/time/delta-sec");
-    update_virtual_bus(scnd);
-settimer(update_electrical, 0.1);
+#    scnd = getprop("sim/time/delta-sec");
+    update_virtual_bus();
+    update_master_switches();
+settimer(update_electrical, 0.5);
 }

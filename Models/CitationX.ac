@@ -14,7 +14,7 @@ OBJECT poly
 name "FLdamper"
 data 8
 FLdamper
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 30.000002
 numvert 22
 -8.09011 -1.64232 -0.033531
@@ -187,7 +187,7 @@ OBJECT poly
 name "FUdamper"
 data 8
 FUdamper
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 30.000002
 numvert 36
 -7.89766 -1.5288 -0.013675
@@ -503,7 +503,7 @@ name "FrtStrut"
 loc -8.23953 -1.32767 0
 data 8
 FrtStrut
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 30.000002
 numvert 547
 0.0267305 -0.037755 0.094425
@@ -4822,7 +4822,7 @@ name "FrtStrut-2"
 loc -7.1578 -0.934636 0
 data 10
 FrtStrut-2
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 30.000002
 numvert 24
 -0.639837 -0.188971 -0.026988
@@ -4968,7 +4968,7 @@ name "frtshock"
 loc 0 -0.213619 -3.18059
 data 8
 frtshock
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 30.000002
 numvert 16
 -8.12667 -1.17669 3.1588
@@ -5050,7 +5050,7 @@ name "frtshock-2"
 loc 0 -0.213619 -3.18059
 data 10
 frtshock-2
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 30.000002
 numvert 16
 -7.42005 -0.790698 3.1681
@@ -5129,7 +5129,7 @@ refs 4
 kids 0
 OBJECT poly
 name "Bcn1"
-texture "lights.png"
+texture "Liveries/F-GCLM.png"
 crease 30.000000
 numvert 4
 0.2 0.2 0
@@ -5147,7 +5147,7 @@ refs 4
 kids 0
 OBJECT poly
 name "Bcn2"
-texture "lights.png"
+texture "Liveries/F-GCLM.png"
 crease 30.000000
 numvert 4
 0.2 0.2 0
@@ -5165,7 +5165,7 @@ refs 4
 kids 0
 OBJECT poly
 name "Cabin.door"
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 45.000000
 numvert 16
 -5.24177 0.150729 0.918444
@@ -5237,7 +5237,7 @@ refs 4
 kids 0
 OBJECT poly
 name "Cabin.lwrdoor"
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 45.000000
 numvert 20
 -5.25664 -0.721871 0.829144
@@ -5390,11 +5390,12 @@ refs 4
 kids 0
 OBJECT poly
 name "Circle.023"
+texture "Liveries/F-GCLM.png"
 crease 30.000000
 kids 0
 OBJECT poly
 name "Engines"
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 40.000000
 numvert 212
 4.60331 1.0636 1.51133
@@ -5893,10 +5894,10 @@ refs 4
 SURF 0x10
 mat 1
 refs 4
-57 0.440109 0.692842
-56 0.440109 0.676211
-72 0.365124 0.678594
-73 0.365124 0.693774
+57 0.441574 0.686572
+56 0.441574 0.671328
+72 0.366589 0.673512
+73 0.366589 0.687426
 SURF 0x10
 mat 1
 refs 4
@@ -5907,17 +5908,17 @@ refs 4
 SURF 0x10
 mat 1
 refs 4
-59 0.440109 0.716908
-58 0.440109 0.704875
-74 0.365124 0.704757
-75 0.365124 0.71574
+59 0.441086 0.73214
+58 0.441086 0.721947
+74 0.366101 0.721847
+75 0.366101 0.73115
 SURF 0x10
 mat 1
 refs 4
-60 0.440109 0.727109
-59 0.440109 0.716908
-75 0.365124 0.71574
-76 0.365124 0.725051
+60 0.441086 0.740781
+59 0.441086 0.73214
+75 0.366101 0.73115
+76 0.366101 0.739038
 SURF 0x10
 mat 1
 refs 4
@@ -6005,17 +6006,17 @@ refs 4
 SURF 0x10
 mat 1
 refs 4
-75 0.365124 0.71574
-74 0.365124 0.704757
-90 0.313283 0.707467
-91 0.313283 0.713072
+75 0.366101 0.73115
+74 0.366101 0.721847
+90 0.31426 0.724142
+91 0.31426 0.72889
 SURF 0x10
 mat 1
 refs 4
-76 0.365124 0.725051
-75 0.365124 0.71574
-91 0.313283 0.713072
-92 0.313283 0.720348
+76 0.366101 0.739038
+75 0.366101 0.73115
+91 0.31426 0.72889
+92 0.31426 0.735054
 SURF 0x10
 mat 1
 refs 4
@@ -6355,17 +6356,17 @@ refs 4
 SURF 0x10
 mat 1
 refs 4
-141 0.639728 0.943662
-142 0.639728 0.954645
-15 0.691569 0.951977
-13 0.691569 0.946372
+141 0.640216 0.957334
+142 0.640216 0.967597
+15 0.692057 0.965104
+13 0.692057 0.959866
 SURF 0x10
 mat 1
 refs 4
-142 0.639728 0.954645
-143 0.639728 0.963956
-14 0.691569 0.959253
-15 0.691569 0.951977
+142 0.640216 0.967597
+143 0.640216 0.976298
+14 0.692057 0.971903
+15 0.692057 0.965104
 SURF 0x10
 mat 1
 refs 4
@@ -6453,10 +6454,10 @@ refs 4
 SURF 0x10
 mat 1
 refs 4
-155 0.564743 0.915116
-156 0.564743 0.931747
-140 0.639728 0.932679
-139 0.639728 0.917499
+155 0.565231 0.910233
+156 0.565231 0.92409
+140 0.640216 0.924866
+139 0.640216 0.912219
 SURF 0x10
 mat 1
 refs 4
@@ -6467,17 +6468,17 @@ refs 4
 SURF 0x10
 mat 1
 refs 4
-157 0.564743 0.94378
-158 0.564743 0.955813
-142 0.639728 0.954645
-141 0.639728 0.943662
+157 0.565231 0.957444
+158 0.565231 0.968689
+142 0.640216 0.967597
+141 0.640216 0.957334
 SURF 0x10
 mat 1
 refs 4
-158 0.564743 0.955813
-159 0.564743 0.966014
-143 0.639728 0.963956
-142 0.639728 0.954645
+158 0.565231 0.968689
+159 0.565231 0.978221
+143 0.640216 0.976298
+142 0.640216 0.967597
 SURF 0x10
 mat 1
 refs 4
@@ -6765,9 +6766,9 @@ refs 3
 SURF 0x10
 mat 1
 refs 3
-13 0.691569 0.946372
-201 0.691569 0.939183
-141 0.639728 0.943662
+13 0.691081 0.941977
+201 0.691081 0.934788
+141 0.63924 0.939267
 SURF 0x10
 mat 1
 refs 3
@@ -6833,7 +6834,7 @@ refs 4
 kids 0
 OBJECT poly
 name "Engines.001"
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 40.000000
 numvert 211
 7.62803 0.468914 -0.020399
@@ -8191,6 +8192,7 @@ refs 3
 kids 0
 OBJECT poly
 name "Engines.chrome"
+texture "Liveries/F-GCLM.png"
 crease 50.000000
 numvert 160
 4.60331 0.780098 1.29336
@@ -9029,7 +9031,7 @@ refs 4
 kids 0
 OBJECT poly
 name "Fuselage"
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 45.000000
 numvert 854
 -5.25664 -0.721871 0.829144
@@ -15849,7 +15851,7 @@ refs 4
 kids 0
 OBJECT poly
 name "Fuselage.005"
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 40.000000
 numvert 40
 -7.38289 -0.679309 -0.171989
@@ -16095,6 +16097,7 @@ refs 4
 kids 0
 OBJECT poly
 name "Glass"
+texture "Liveries/F-GCLM.png"
 crease 30.000000
 numvert 42
 -6.84791 0.532232 -0.682011
@@ -16263,7 +16266,7 @@ refs 3
 kids 0
 OBJECT poly
 name "HStab"
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 40.000000
 numvert 50
 11.1646 3.03962 3.8687
@@ -16654,7 +16657,7 @@ refs 3
 kids 0
 OBJECT poly
 name "LGeardoor"
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 40.000000
 numvert 24
 -0.43514 -1.67773 1.76676
@@ -16871,7 +16874,7 @@ OBJECT poly
 name "LHwing"
 data 6
 LHwing
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 30.000002
 numvert 298
 0.209979 -1.35842 0.870411
@@ -19088,7 +19091,7 @@ refs 3
 kids 0
 OBJECT poly
 name "LGeardoor.001"
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 40.000000
 numvert 8
 0.228215 -1.24338 1.52064
@@ -19145,7 +19148,7 @@ refs 4
 kids 0
 OBJECT poly
 name "LHAileron"
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 30.000000
 numvert 12
 3.27505 -0.705224 7.07596
@@ -19244,7 +19247,7 @@ refs 3
 kids 0
 OBJECT poly
 name "LHFlap0"
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 30.000000
 numvert 14
 0.779674 -1.18368 0.867266
@@ -19379,7 +19382,7 @@ refs 3
 kids 0
 OBJECT poly
 name "LHFlap1"
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 30.000000
 numvert 36
 2.27234 -0.776472 5.13335
@@ -19587,7 +19590,7 @@ kids 5
 OBJECT poly
 name "LHTarmL"
 loc 0 0.142413 0
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 40.000000
 numvert 16
 -0.080521 -1.82934 1.5556
@@ -19667,7 +19670,7 @@ kids 0
 OBJECT poly
 name "LHTarmU"
 loc 0 -0.213619 0
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 40.000000
 numvert 34
 -0.107756 -0.945528 1.55285
@@ -19917,7 +19920,7 @@ kids 0
 OBJECT poly
 name "LHshock"
 loc 0 -0.213619 0
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 30.000000
 numvert 32
 0.139961 -1.20195 1.5686
@@ -20125,7 +20128,7 @@ kids 0
 OBJECT poly
 name "LHshock.001"
 loc 0 0.142413 0
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 45.000000
 numvert 40
 0.153259 -2.15023 1.5553
@@ -20397,7 +20400,7 @@ kids 0
 OBJECT poly
 name "LHwheel"
 loc 0 0.142413 0
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 45.000000
 numvert 546
 0.12171 -2.22628 1.35405
@@ -24283,7 +24286,7 @@ kids 5
 OBJECT poly
 name "RHTarmL"
 loc 0 0.142413 0
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 40.000000
 numvert 16
 -0.080521 -1.82934 -1.5556
@@ -24363,7 +24366,7 @@ kids 0
 OBJECT poly
 name "RHTarmU"
 loc 0 -0.213619 0
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 40.000000
 numvert 34
 -0.107756 -0.945528 -1.55285
@@ -24613,7 +24616,7 @@ kids 0
 OBJECT poly
 name "RHshock"
 loc 0 -0.213619 0
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 30.000000
 numvert 32
 0.139961 -1.20195 -1.5686
@@ -24821,7 +24824,7 @@ kids 0
 OBJECT poly
 name "RHshock.001"
 loc 0 0.142413 0
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 45.000000
 numvert 40
 0.153259 -2.15023 -1.5553
@@ -25093,7 +25096,7 @@ kids 0
 OBJECT poly
 name "RHwheel"
 loc 0 0.142413 0
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 45.000000
 numvert 546
 0.12171 -2.22628 -1.8198
@@ -28974,7 +28977,7 @@ refs 4
 kids 0
 OBJECT poly
 name "LHelevator"
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 45.000000
 numvert 10
 11.4649 3.01204 3.8687
@@ -29062,7 +29065,7 @@ refs 3
 kids 0
 OBJECT poly
 name "LHfan"
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 40.000000
 numvert 32
 1.26418 0.793471 1.55538
@@ -29213,7 +29216,7 @@ refs 4
 kids 0
 OBJECT poly
 name "LHfrt.geardoor"
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 40.000000
 numvert 36
 -7.93793 -0.982418 -0.001411
@@ -29396,6 +29399,7 @@ refs 4
 kids 0
 OBJECT poly
 name "LHslat"
+texture "Liveries/F-GCLM.png"
 crease 45.000000
 numvert 24
 -1.22244 -0.745427 3.20161
@@ -29531,7 +29535,7 @@ refs 4
 kids 0
 OBJECT poly
 name "LHspeedbrake"
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 30.000000
 numvert 24
 1.34265 -0.82484 3.49707
@@ -29604,7 +29608,7 @@ refs 4
 kids 0
 OBJECT poly
 name "LHspoiler"
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 30.000000
 numvert 16
 2.7833 -0.750015 6.03265
@@ -29655,7 +29659,7 @@ refs 4
 kids 0
 OBJECT poly
 name "LLamps"
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 45.000000
 numvert 40
 -3.13791 -1.00711 1.11427
@@ -29898,7 +29902,7 @@ refs 4
 kids 0
 OBJECT poly
 name "Land1"
-texture "lights.png"
+texture "Liveries/F-GCLM.png"
 crease 30.000000
 numvert 4
 -2.96536 -0.318311 1.68419
@@ -29916,7 +29920,7 @@ refs 4
 kids 0
 OBJECT poly
 name "Land2"
-texture "lights.png"
+texture "Liveries/F-GCLM.png"
 crease 30.000000
 numvert 4
 -3.63289 -0.318311 -0.674918
@@ -29934,7 +29938,7 @@ refs 4
 kids 0
 OBJECT poly
 name "LupReverser"
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 40.000000
 numvert 27
 5.28304 0.953835 1.54186
@@ -30080,6 +30084,7 @@ refs 4
 kids 0
 OBJECT poly
 name "LUpReverser1"
+texture "Liveries/F-GCLM.png"
 crease 40.000000
 numvert 18
 4.60331 1.0577 1.51392
@@ -30160,7 +30165,7 @@ refs 4
 kids 0
 OBJECT poly
 name "LlwReverser"
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 40.000000
 numvert 30
 5.28304 0.286758 1.93717
@@ -30309,6 +30314,7 @@ refs 4
 kids 0
 OBJECT poly
 name "LlwReverser1"
+texture "Liveries/F-GCLM.png"
 crease 40.000000
 numvert 20
 4.60331 0.436868 2.12821
@@ -30391,7 +30397,7 @@ refs 4
 kids 0
 OBJECT poly
 name "RupReverser"
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 40.000000
 numvert 27
 5.3828 0.944563 -1.81693
@@ -30537,6 +30543,7 @@ refs 4
 kids 0
 OBJECT poly
 name "RUpReverser1"
+texture "Liveries/F-GCLM.png"
 crease 40.000000
 numvert 18
 5.3828 0.93866 -1.81535
@@ -30617,7 +30624,7 @@ refs 4
 kids 0
 OBJECT poly
 name "RlwReverser"
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 40.000000
 numvert 30
 5.3828 0.536268 -1.34775
@@ -30766,6 +30773,7 @@ refs 4
 kids 0
 OBJECT poly
 name "RlwReverser1"
+texture "Liveries/F-GCLM.png"
 crease 40.000000
 numvert 20
 5.3828 0.55501 -1.35356
@@ -30848,7 +30856,7 @@ refs 4
 kids 0
 OBJECT poly
 name "Nosewheel"
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 45.000000
 numvert 546
 -8.09753 -2.0031 -0.162851
@@ -34729,7 +34737,7 @@ refs 4
 kids 0
 OBJECT poly
 name "RGeardoor"
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 40.000000
 numvert 24
 -0.43514 -1.67773 -1.76676
@@ -34944,7 +34952,7 @@ refs 3
 kids 0
 OBJECT poly
 name "RGeardoor.001"
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 40.000000
 numvert 8
 0.228215 -1.24338 -1.52064
@@ -35001,7 +35009,7 @@ refs 4
 kids 0
 OBJECT poly
 name "RHAileron"
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 30.000000
 numvert 12
 3.27505 -0.705224 -7.07596
@@ -35100,7 +35108,7 @@ refs 3
 kids 0
 OBJECT poly
 name "RHFlap0"
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 30.000000
 numvert 14
 0.779674 -1.18368 -0.867266
@@ -35235,7 +35243,7 @@ refs 3
 kids 0
 OBJECT poly
 name "RHFlap1"
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 30.000000
 numvert 36
 2.27234 -0.776472 -5.13335
@@ -35438,7 +35446,7 @@ refs 3
 kids 0
 OBJECT poly
 name "RHelevator"
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 45.000000
 numvert 10
 11.446 3.0464 -3.91442
@@ -35526,7 +35534,7 @@ refs 4
 kids 0
 OBJECT poly
 name "RHfan"
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 40.000000
 numvert 32
 1.26391 0.876552 -1.75623
@@ -35677,7 +35685,7 @@ refs 4
 kids 0
 OBJECT poly
 name "RHfrt.geardoor"
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 40.000000
 numvert 36
 -7.93793 -0.982418 -0.001411
@@ -35860,6 +35868,7 @@ refs 4
 kids 0
 OBJECT poly
 name "RHslat"
+texture "Liveries/F-GCLM.png"
 crease 45.000000
 numvert 24
 -1.22244 -0.745427 -3.20161
@@ -35995,7 +36004,7 @@ refs 4
 kids 0
 OBJECT poly
 name "RHspeedbrake"
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 30.000000
 numvert 24
 1.34265 -0.82484 -3.49707
@@ -36068,7 +36077,7 @@ refs 4
 kids 0
 OBJECT poly
 name "RHspoiler"
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 30.000000
 numvert 16
 2.7833 -0.750015 -6.03265
@@ -36121,7 +36130,7 @@ OBJECT poly
 name "RHwing"
 data 6
 RHwing
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 30.000002
 numvert 298
 0.209979 -1.35842 -0.870411
@@ -38338,7 +38347,7 @@ refs 3
 kids 0
 OBJECT poly
 name "RRfrt.geardoor"
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 40.000000
 numvert 21
 -7.38154 -0.993733 -0.171989
@@ -38503,6 +38512,7 @@ name "Rudder"
 kids 2
 OBJECT poly
 name "Rudder_0"
+texture "Liveries/F-GCLM.png"
 crease 50.000000
 numvert 6
 8.24178 2.174 -0.107846
@@ -38527,7 +38537,7 @@ refs 3
 kids 0
 OBJECT poly
 name "Rudder_1"
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 50.000000
 numvert 20
 8.17241 2.174 -0.03682
@@ -38660,7 +38670,7 @@ refs 4
 kids 0
 OBJECT poly
 name "Strb1"
-texture "lights.png"
+texture "Liveries/F-GCLM.png"
 crease 30.000000
 numvert 4
 0.6 0.6 0
@@ -38678,7 +38688,7 @@ refs 4
 kids 0
 OBJECT poly
 name "Strb2"
-texture "lights.png"
+texture "Liveries/F-GCLM.png"
 crease 30.000000
 numvert 4
 0.6 0.6 0
@@ -38696,7 +38706,7 @@ refs 4
 kids 0
 OBJECT poly
 name "Taxi"
-texture "lights.png"
+texture "Liveries/F-GCLM.png"
 crease 30.000000
 numvert 4
 -8.26045 -0.877149 0.358771
@@ -38714,7 +38724,7 @@ refs 4
 kids 0
 OBJECT poly
 name "Wlwell"
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 30.000000
 numvert 76
 -0.288933 -1.21276 0.845493
@@ -39183,7 +39193,7 @@ refs 3
 kids 0
 OBJECT poly
 name "navlights.off"
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 30.000000
 numvert 46
 4.34201 -0.632806 9.77375
@@ -39464,7 +39474,7 @@ refs 3
 kids 0
 OBJECT poly
 name "navlights.on"
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 30.000000
 numvert 46
 4.34201 -0.632806 9.77375
@@ -39745,7 +39755,7 @@ refs 3
 kids 0
 OBJECT poly
 name "redlamp.off"
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 30.000000
 numvert 122
 8.65437 3.70821 -3e-05
@@ -40694,7 +40704,7 @@ refs 4
 kids 0
 OBJECT poly
 name "redlamp.on"
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 30.000000
 numvert 61
 8.64643 3.70502 -3e-05
@@ -41172,7 +41182,7 @@ refs 4
 kids 0
 OBJECT poly
 name "recoglight.on"
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 30.000000
 numvert 61
 0.837304 -1.43844 0.03028
@@ -41650,7 +41660,7 @@ refs 3
 kids 0
 OBJECT poly
 name "recoglight.off"
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 30.000000
 numvert 61
 0.848411 -1.45306 -3e-05
@@ -42128,7 +42138,7 @@ refs 4
 kids 0
 OBJECT poly
 name "step"
-texture "livery1.png"
+texture "Liveries/F-GCLM.png"
 crease 45.000000
 numvert 21
 -5.24156 -0.563693 0.748114
@@ -42246,6 +42256,7 @@ refs 4
 kids 0
 OBJECT poly
 name "wing.heater"
+texture "Liveries/F-GCLM.png"
 crease 45.000000
 numvert 48
 -3.1466 -1.11908 0.840707

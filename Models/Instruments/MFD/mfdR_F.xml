@@ -7,14 +7,6 @@ Citation X - Navigation display
 <path>screenR_F.ac</path>
 
     <animation>
-        <type>select</type>
-        <object-name>screenR_F</object-name>
-        <condition>
-          <property>controls/electric/avionics-power</property>
-				</condition>
-    </animation>
-
-    <animation>
         <type>material</type>
         <object-name>screenR_F</object-name>
         <condition>

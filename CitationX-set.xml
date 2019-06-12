@@ -30,12 +30,30 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
         <tag>twin-engine</tag>
         <tag>glass-cockpit</tag>
     </tags>
-    
-    <startup>
-        <splash-texture>Aircraft/CitationX/Splash.png</splash-texture>
-        <splash-texture>Aircraft/CitationX/Splash1.png</splash-texture>
-    </startup>
-
+ 
+		<previews>
+			<preview>
+				<type>exterior</type>
+				<splash type="bool">true</splash>
+				<path>Splash.png</path>
+			</preview>
+			<preview>
+				<type>exterior</type>
+				<splash type="bool">true</splash>
+				<path>Splash1.png</path>
+			</preview>
+			<preview>
+				<type>exterior</type>
+				<splash type="bool">true</splash>
+				<path>Splash2.png</path>
+			</preview>
+			<preview>
+				<type>exterior</type>
+				<splash type="bool">true</splash>
+				<path>Splash3.png</path>
+			</preview>
+		</previews>
+  
     <tutorials>
         <tutorial include="Tutorials/APU_start.xml"/>
         <tutorial include="Tutorials/startup.xml"/>
@@ -606,9 +624,11 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
     <engines>
         <engine n="0">
         <magnetos>3</magnetos>
+        <running type="bool">0</running>
         </engine>
         <engine n="1">
         <magnetos>3</magnetos>
+        <running type="bool">0</running>
         </engine>
     </engines>
     <flight>

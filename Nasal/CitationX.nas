@@ -28,6 +28,7 @@ props.globals.initNode("sim/model/show-yoke_L",1,"BOOL");
 props.globals.initNode("sim/model/show-yoke_R",1,"BOOL");
 props.globals.initNode("sim/model/mem-yoke_L",1,"BOOL");
 props.globals.initNode("sim/model/mem-yoke_R",1,"BOOL");
+props.globals.initNode("controls/APU/bleed-air",0,"BOOL");
 props.globals.initNode("controls/flight/vref",131,"DOUBLE");
 props.globals.initNode("controls/flight/va",200,"DOUBLE");
 props.globals.initNode("controls/separation-door/open",1,"DOUBLE");
@@ -85,6 +86,9 @@ aircraft.livery.init("Aircraft/CitationX/Models/Liveries");
 var FHmeter = aircraft.timer.new("/instrumentation/clock/flight-meter-sec", 1,1); 
 var Chrono = [aircraft.timer.new("/instrumentation/mfd/chrono", 1,1),
              aircraft.timer.new("/instrumentation/mfd[1]/chrono", 1,1)];
+var ApuRunning = "controls/APU/running";
+var Bleed = "controls/APU/bleed";
+var BleedAir = "controls/APU/bleed-air";
 var elt = [0,0];
 var fl_tot = nil;
 var fl_calc = nil;
@@ -150,13 +154,15 @@ var JetEngine = {
     props.globals.initNode("controls/engines/engine["~eng_num~"]/starter",0,"BOOL");
     props.globals.initNode("controls/engines/synchro",0,"DOUBLE");
     props.globals.initNode("surface-positions/reverser-norm["~eng_num~"]",0,"DOUBLE");
-    props.globals.initNode("controls/engines/N1-limit",95.0,"DOUBLE");
 
     m.cycle_up = "engines/engine["~eng_num~"]/cycle-up";
     m.n1 = "engines/engine["~eng_num~"]/n1";
     m.n2 = "engines/engine["~eng_num~"]/n2";
+    m.extPwr = "controls/electric/external-power";
     m.fan = "engines/engine["~eng_num~"]/fan";
     m.turbine = "engines/engine["~eng_num~"]/turbine";
+    m.fadec = "controls/engines/engine["~eng_num~"]/fadec";
+    m.fadec_btn = "controls/engines/engine["~eng_num~"]/fadec-btn";
     m.throttle_lever = "controls/engines/engine["~eng_num~"]/throttle-lever";
     m.throttle = "controls/engines/engine["~eng_num~"]/throttle";
     m.ignition = "controls/engines/engine["~eng_num~"]/ignition";
@@ -169,9 +175,12 @@ var JetEngine = {
     m.fuel_gph = "engines/engine["~eng_num~"]/fuel-flow-gph";
     m.oilp = "engines/engine["~eng_num~"]/oil-pressure-psi";
     m.oilp_norm = "engines/engine["~eng_num~"]/oilp-norm";
+    m.running = "controls/engines/engine["~eng_num~"]/running";
     m.sysoil = "systems/hydraulics/psi-norm["~eng_num~"]"; 
     m.diseng = "controls/engines/disengage";
     m.synchro = "controls/engines/synchro";
+
+    m.eng_nb = eng_num == 0 ? 1 : 0;
     m.fdensity = getprop("consumables/fuel/tank/density-ppg") or 6.72;
     m.ign = nil;
     m.thr = nil;
@@ -184,6 +193,9 @@ var JetEngine = {
     ##### Reinit Chrono #####
     setprop("instrumentation/mfd/chrono",0);
     setprop("instrumentation/mfd[1]/chrono",0);
+    ##### Init Fadecs #####
+    setprop(m.fadec,rand() < 0.5 ? "A" : "B");
+
     return m;
   },
 
@@ -194,7 +206,10 @@ var JetEngine = {
     },0,0);
 
     setlistener(me.starter, func(n) {
-      if (n.getValue() and !getprop(me.cutoff)) setprop(me.cycle_up,1);     
+      if (n.getValue() and !getprop(me.cutoff) and (getprop(me.extPwr) 
+          or getprop(BleedAir) 
+          or getprop("controls/engines/engine["~me.eng_nb~"]/running"))) 
+        setprop(me.cycle_up,1);     
     },0,0);
 
     setlistener(me.cutoff, func(n) {
@@ -210,12 +225,21 @@ var JetEngine = {
     },0,0);
 
     setlistener(me.fuel_out, func me.shutdown(getprop(me.fuel_out)),0,0);
+
+    setlistener(me.fadec_btn, func(n){
+	    if(n.getValue() == -1) {
+        if (getprop(me.fadec) == "A") setprop(me.fadec,"B");
+        else setprop(me.fadec,"A");
+      }
+    },0,0);
+
   },
 
   update : func {
     me.thr = getprop(me.throttle);
     if(me.engine_on){
-      setprop(me.fan,getprop(me.n1));
+      if (getprop(me.fan) < getprop(me.n1)) me.spool_up(10);
+      if (getprop(me.fan) > getprop(me.n1)) me.spool_dwn(10);
       setprop(me.turbine,getprop(me.n2));
       if(getprop("controls/engines/grnd_idle")) me.thr *= 0.92;
       setprop(me.throttle_lever,me.thr);
@@ -231,6 +255,7 @@ var JetEngine = {
         }
       }
     }
+    setprop(me.running,me.engine_on);
     if(me.revers) setprop(me.surf_pos,getprop(me.throttle));
 
     ### Fuel ###
@@ -257,6 +282,17 @@ var JetEngine = {
         me.engine_on = 1;
       }
   }, # end of spool_up
+
+  spool_dwn : func(scnds){
+      me.n1factor = getprop(me.n1)/scnds;
+      me.n2factor = getprop(me.n2)/scnds;
+      me.tmprpm1 = getprop(me.fan);
+      me.tmprpm1 -= getprop("sim/time/delta-sec") * me.n1factor;
+      me.tmprpm2 = getprop(me.turbine);
+      me.tmprpm2 -= getprop("sim/time/delta-sec") * me.n2factor;
+      setprop(me.fan,me.tmprpm1);
+      setprop(me.turbine,me.tmprpm2);
+  }, # end of spool_dwn
 
   shutdown : func(b){
       if(b) setprop(me.cutoff,1);
@@ -312,6 +348,17 @@ setlistener("/gear/gear[0]/wow", func(ww){
 				setprop("/instrumentation/clock/flight-meter-sec",0);
     }
 },0,0);
+
+setlistener(ApuRunning, func(n) {
+  if (getprop(Bleed)>0) setprop(BleedAir,n.getValue());
+  else setprop(BleedAir,0);
+},0,0);
+
+setlistener(Bleed, func(n) {
+  if (getprop(ApuRunning)) setprop(BleedAir,n.getValue());
+  else setprop(BleedAir,0);
+},0,0);
+
 
 ### Chrono ###
 setlistener("instrumentation/mfd/et", func(n){
@@ -476,6 +523,8 @@ var Startup = func{
 		setprop("controls/engines/engine[1]/starter",1);
 		setprop("controls/engines/engine[0]/starter",0);
 		setprop("controls/engines/engine[1]/starter",0);
+		setprop("controls/engines/engine[0]/running",1);
+		setprop("controls/engines/engine[1]/running",1);
 		setprop("controls/flight/flaps",0.428);
 		setprop("controls/flight/flaps-select",3);
 		setprop("controls/anti-ice/pitot-heat",1);
@@ -507,6 +556,8 @@ var Shutdown = func{
     setprop("controls/engines/engine[1]/cutoff",1);
     setprop("controls/engines/engine[0]/ignition",1);
     setprop("controls/engines/engine[1]/ignition",1);
+		setprop("controls/engines/engine[0]/running",0);
+		setprop("controls/engines/engine[1]/running",0);
 		setprop("instrumentation/annunciators/ack-caution",1);
 		setprop("instrumentation/annunciators/ack-warning",1);
 		setprop("controls/electric/external-power",0);

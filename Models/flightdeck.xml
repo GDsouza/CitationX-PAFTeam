@@ -761,10 +761,10 @@
             </binding>
 						<binding>
 							<condition>
-									<not>
-	                	<property>controls/APU/master</property>
-									</not>
-						</condition>
+								<not>
+                	<property>controls/APU/master</property>
+								</not>
+						  </condition>
 								<command>property-assign</command>
                 	<property>controls/APU/running</property>
                 	<value>0</value>
@@ -1122,28 +1122,6 @@
 							<wrap>false</wrap>
 				</binding>
 				<binding>
-					<condition>
-						<equals>
-							<property>controls/APU/bleed</property>
-								<value>2</value>
-						</equals>
-					</condition>
-					<command>property-assign</command>
-						<property>controls/APU/bleed-max</property>
-							<value>1</value>					
-				</binding>
-				<binding>
-					<condition>
-						<equals>
-							<property>controls/APU/bleed</property>
-								<value>0</value>
-						</equals>
-					</condition>
-					<command>property-assign</command>
-						<property>controls/APU/bleed-max</property>
-							<value>0</value>					
-				</binding>
-				<binding>
 					<command>property-toggle</command>
 						<property>sim/sound/click</property>
 				</binding>
@@ -1172,28 +1150,6 @@
 							<min>0</min>
 							<max>2</max>
 							<wrap>false</wrap>
-				</binding>
-				<binding>
-					<condition>
-						<equals>
-							<property>controls/APU/bleed</property>
-								<value>1</value>
-						</equals>
-					</condition>
-					<command>property-assign</command>
-						<property>controls/APU/bleed-max</property>
-							<value>0</value>					
-				</binding>
-				<binding>
-					<condition>
-						<equals>
-							<property>controls/APU/bleed</property>
-								<value>0</value>
-						</equals>
-					</condition>
-					<command>property-assign</command>
-						<property>controls/APU/bleed-max</property>
-							<value>0</value>					
 				</binding>
 				<binding>
 					<command>property-toggle</command>
@@ -1524,8 +1480,8 @@
             <button>0</button>
             <repeatable>false</repeatable>
             <binding>
-                <command>property-toggle</command>
-                <property>controls/APU/master</property>
+              <command>property-toggle</command>
+              <property>controls/APU/master</property>
             </binding>
 						<binding>
             	<command>property-toggle</command>
@@ -1535,19 +1491,19 @@
 							<condition>
                 <property>controls/APU/master</property>
 							</condition>
-								<command>property-assign</command>
-                <property>controls/APU/battery</property>
-                <value>24.7</value>
+							<command>property-assign</command>
+              <property>controls/APU/battery</property>
+              <value>24.7</value>
             </binding>
 						<binding>
 							<condition>
 									<not>
 	                	<property>controls/APU/master</property>
 									</not>
-						</condition>
-								<command>property-assign</command>
-                	<property>controls/APU/running</property>
-                	<value>0</value>
+						  </condition>
+						  <command>property-assign</command>
+              	<property>controls/APU/running</property>
+              	<value>0</value>
 						</binding>
 						<binding>
 							<condition>
@@ -1555,9 +1511,9 @@
                 	<property>controls/APU/master</property>
 								</not>
 							</condition>
-								<command>property-assign</command>
-                	<property>controls/APU/battery</property>
-                	<value>0</value>
+							<command>property-assign</command>
+              	<property>controls/APU/battery</property>
+              	<value>0</value>
             </binding>
         </action>
         <hovered>
@@ -1903,28 +1859,6 @@
 							<wrap>false</wrap>
 				</binding>
 				<binding>
-					<condition>
-						<equals>
-							<property>controls/APU/bleed</property>
-								<value>2</value>
-						</equals>
-					</condition>
-					<command>property-assign</command>
-						<property>controls/APU/bleed-max</property>
-							<value>1</value>					
-				</binding>
-				<binding>
-					<condition>
-						<equals>
-							<property>controls/APU/bleed</property>
-								<value>0</value>
-						</equals>
-					</condition>
-					<command>property-assign</command>
-						<property>controls/APU/bleed-max</property>
-							<value>0</value>					
-				</binding>
-				<binding>
 					<command>property-toggle</command>
 						<property>sim/sound/click</property>
 				</binding>
@@ -1953,28 +1887,6 @@
 							<min>0</min>
 							<max>2</max>
 							<wrap>false</wrap>
-				</binding>
-				<binding>
-					<condition>
-						<equals>
-							<property>controls/APU/bleed</property>
-								<value>1</value>
-						</equals>
-					</condition>
-					<command>property-assign</command>
-						<property>controls/APU/bleed-max</property>
-							<value>0</value>					
-				</binding>
-				<binding>
-					<condition>
-						<equals>
-							<property>controls/APU/bleed</property>
-								<value>0</value>
-						</equals>
-					</condition>
-					<command>property-assign</command>
-						<property>controls/APU/bleed-max</property>
-							<value>0</value>					
 				</binding>
 				<binding>
 					<command>property-toggle</command>

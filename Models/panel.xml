@@ -684,11 +684,14 @@
         <object-name>heater-screen1</object-name>
         <condition>
 					<and>
-						<property>systems/electrical/left-bus-norm</property>
-            <less-than>
+            <or>
+						  <property>systems/electrical/left-bus-norm</property>
+						  <property>systems/electrical/left-emer-bus</property>
+            </or>
+            <equals>
 							<property>controls/electric/avionics-switch</property>
-								<value>1</value>								
-						</less-than>
+								<value>0</value>								
+						</equals>
            </and>
         </condition>
     </animation>
@@ -698,7 +701,10 @@
         <object-name>heater-screen2</object-name>
         <condition>
 					<and>
-						<property>systems/electrical/left-bus-norm</property>
+            <or>
+						  <property>systems/electrical/left-bus-norm</property>
+						  <property>systems/electrical/left-emer-bus</property>
+            </or>
             <less-than>
 							<property>controls/electric/avionics-switch</property>
 								<value>2</value>								
@@ -709,28 +715,31 @@
 
     <animation>
         <type>select</type>
+        <object-name>MFD_L</object-name>
+        <object-name>Layers_L</object-name>
+        <object-name>Vsd_L</object-name>
+        <condition>
+					<and>
+            <or>
+						  <property>systems/electrical/left-bus-norm</property>
+						  <property>systems/electrical/left-emer-bus</property>
+            </or>
+            <greater-than>
+              <property>controls/electric/avionics-switch</property>
+              <value>0</value>
+            </greater-than>
+          </and>
+				</condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
         <object-name>MFD_R</object-name>
         <object-name>Layers_R</object-name>
         <object-name>Vsd_R</object-name>
         <condition>
           <property>controls/electric/avionics-power</property>
 				</condition>
-    </animation>
-
-    <animation>
-        <type>select</type>
-        <object-name>MFD_L</object-name>
-        <object-name>Layers_L</object-name>
-        <object-name>Vsd_L</object-name>
-        <condition>
-					<and>
-						<property>systems/electrical/left-bus-norm</property>
-            <greater-than>
-							<property>controls/electric/avionics-switch</property>
-								<value>0</value>								
-						</greater-than>
-           </and>
-        </condition>
     </animation>
 
 <!-- ALARMS-->
@@ -2311,7 +2320,7 @@
     <animation>
         <type>rotate</type>
         <object-name>Fadec.Lh</object-name>
-        <property>controls/engines/engine[0]/fadec</property>
+        <property>controls/engines/engine[0]/fadec-btn</property>
         <factor>15</factor>
         <center>
             <x-m>0.066</x-m>
@@ -2332,8 +2341,8 @@
             <button>0</button>
             <binding>
                <command>property-assign</command>
-               <property>controls/engines/engine[0]/fadec</property>
-         					<value>1</value>
+               <property>controls/engines/engine[0]/fadec-btn</property>
+         					<value>-1</value>
 							<wrap>false</wrap>
             </binding>
         		<binding>
@@ -2343,7 +2352,7 @@
 					<mod-up>
 			       <binding>
          				<command>property-assign</command>
-         					<property>controls/engines/engine[0]/fadec</property>
+         					<property>controls/engines/engine[0]/fadec-btn</property>
          						<value>0</value>
        				</binding>
      			</mod-up>
@@ -2353,7 +2362,7 @@
                 <command>set-tooltip</command>
                 <tooltip-id>Fadec LH</tooltip-id>
                 <label>Fadec LH : %s</label>
-           			<property>controls/engines/engine[0]/fadec</property>
+           			<property>controls/engines/engine[0]/fadec-btn</property>
                 <mapping>nasal</mapping>
 								<script>
 									var modes = ['NORM','RESET','SELECT'];
@@ -2365,19 +2374,19 @@
 
     <animation>
         <type>pick</type>
-        <object-name>FadecLh.select</object-name> 
+        <object-name>FadecLh.reset</object-name> 
        <action>
             <button>0</button>
             <binding>
                <command>property-assign</command>
-               <property>controls/engines/engine[0]/fadec</property>
-								<value>-1</value>
+               <property>controls/engines/engine[0]/fadec-btn</property>
+								<value>1</value>
 							<wrap>false</wrap>
             </binding>
 					<mod-up>
 			       <binding>
          				<command>property-assign</command>
-         					<property>controls/engines/engine[0]/fadec</property>
+         					<property>controls/engines/engine[0]/fadec-btn</property>
          						<value>0</value>
        				</binding>
      			</mod-up>
@@ -2391,7 +2400,7 @@
                 <command>set-tooltip</command>
                 <tooltip-id>Fadec Lh</tooltip-id>
                 <label>Fadec LH : %s</label>
-           			<property>controls/engines/engine[0]/fadec</property>
+           			<property>controls/engines/engine[0]/fadec-btn</property>
                 <mapping>nasal</mapping>
 								<script>
 									var modes = ['NORM','RESET','SELECT'];
@@ -2406,7 +2415,7 @@
     <animation>
         <type>rotate</type>
         <object-name>Fadec.Rh</object-name>
-        <property>controls/engines/engine[1]/fadec</property>
+        <property>controls/engines/engine[1]/fadec-btn</property>
         <factor>15</factor>
         <center>
             <x-m>0.066</x-m>
@@ -2427,8 +2436,8 @@
             <button>0</button>
             <binding>
                <command>property-assign</command>
-               <property>controls/engines/engine[1]/fadec</property>
-         					<value>1</value>
+               <property>controls/engines/engine[1]/fadec-btn</property>
+         					<value>-1</value>
 							<wrap>false</wrap>
             </binding>
         		<binding>
@@ -2438,7 +2447,7 @@
 					<mod-up>
 			       <binding>
          				<command>property-assign</command>
-         					<property>controls/engines/engine[1]/fadec</property>
+         					<property>controls/engines/engine[1]/fadec-btn</property>
          						<value>0</value>
        				</binding>
      			</mod-up>
@@ -2448,7 +2457,7 @@
                 <command>set-tooltip</command>
                 <tooltip-id>Fadec RH</tooltip-id>
                 <label>Fadec RH : %s</label>
-           			<property>controls/engines/engine[1]/fadec</property>
+           			<property>controls/engines/engine[1]/fadec-btn</property>
                 <mapping>nasal</mapping>
 								<script>
 									var modes = ['NORM','RESET','SELECT'];
@@ -2460,19 +2469,19 @@
 
     <animation>
         <type>pick</type>
-        <object-name>FadecRh.select</object-name> 
+        <object-name>FadecRh.reset</object-name> 
        <action>
             <button>0</button>
             <binding>
                <command>property-assign</command>
-               <property>controls/engines/engine[1]/fadec</property>
-								<value>-1</value>
+               <property>controls/engines/engine[1]/fadec-btn</property>
+								<value>1</value>
 							<wrap>false</wrap>
             </binding>
 					<mod-up>
 			       <binding>
          				<command>property-assign</command>
-         					<property>controls/engines/engine[1]/fadec</property>
+         					<property>controls/engines/engine[1]/fadec-btn</property>
          						<value>0</value>
        				</binding>
      			</mod-up>
@@ -2486,7 +2495,7 @@
                 <command>set-tooltip</command>
                 <tooltip-id>Fadec Rh</tooltip-id>
                 <label>Fadec RH : %s</label>
-           			<property>controls/engines/engine[1]/fadec</property>
+           			<property>controls/engines/engine[1]/fadec-btn</property>
                 <mapping>nasal</mapping>
 								<script>
 									var modes = ['NORM','RESET','SELECT'];
@@ -3874,6 +3883,292 @@
             <y-m>0.0740</y-m>
             <z-m>0.0350</z-m>
         </center>
+    </animation>
+    <animation>
+        <type>pick</type>
+        <object-name>EICAS.knob</object-name>
+        <property>instrumentation/eicas/knob</property>
+      <action>
+        <button>3</button>
+        <repeatable>true</repeatable>
+        <interval-sec>0.2</interval-sec>
+        <binding>
+          <command>property-adjust</command>
+          <property>instrumentation/eicas/knob</property>
+          <step>1</step>
+          <min>0</min>
+          <max>10</max>
+          <wrap>false</wrap>
+        </binding>
+      </action>
+      <action>
+        <button>4</button>
+        <repeatable>true</repeatable>
+        <interval-sec>0.2</interval-sec>
+        <binding>
+          <command>property-adjust</command>
+          <property>instrumentation/eicas/knob</property>
+          <step>-1</step>
+          <min>0</min>
+          <max>10</max>
+          <wrap>false</wrap>
+        </binding>
+      </action>
+      <hovered>
+        <binding>
+          <command>set-tooltip</command>
+          <tooltip-id>EicasPage</tooltip-id>
+          <label>EICAS Page : %s</label> 
+          <mapping>heading</mapping>
+          <property>instrumentation/eicas/knob</property>
+        </binding>
+      </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>EICAS.btn0</object-name>	
+        <property>instrumentation/eicas/btn0</property>
+				<factor>0.0032</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+				</axis>
+    </animation>
+    <animation>
+        <type>pick</type>
+        <object-name>EICAS.btn0</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+			        <command>property-assign</command>
+			        <property>instrumentation/eicas/btn0</property>
+								<value>1</value>
+			    </binding>
+          <binding>
+              <command>nasal</command>
+              <script>eicas.EICASdsp.menu(0);</script>
+          </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+						<mod-up>
+							<binding>
+								<command>property-assign</command>
+									<property>instrumentation/eicas/btn0</property>
+									<value>0</value>
+							</binding>
+						</mod-up>
+        </action>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>EICAS.btn1</object-name>	
+        <property>instrumentation/eicas/btn1</property>
+				<factor>0.0032</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+				</axis>
+    </animation>
+    <animation>
+        <type>pick</type>
+        <object-name>EICAS.btn1</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+			        <command>property-assign</command>
+			        <property>instrumentation/eicas/btn1</property>
+								<value>1</value>
+			    </binding>
+          <binding>
+              <command>nasal</command>
+              <script>eicas.EICASdsp.menu(1);</script>
+          </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+						<mod-up>
+							<binding>
+								<command>property-assign</command>
+									<property>instrumentation/eicas/btn1</property>
+									<value>0</value>
+							</binding>
+						</mod-up>
+        </action>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>EICAS.btn2</object-name>	
+        <property>instrumentation/eicas/btn2</property>
+				<factor>0.0032</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+				</axis>
+    </animation>
+    <animation>
+        <type>pick</type>
+        <object-name>EICAS.btn2</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+			        <command>property-assign</command>
+			        <property>instrumentation/eicas/btn2</property>
+								<value>1</value>
+			    </binding>
+          <binding>
+              <command>nasal</command>
+              <script>eicas.EICASdsp.menu(2);</script>
+          </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+						<mod-up>
+							<binding>
+								<command>property-assign</command>
+									<property>instrumentation/eicas/btn2</property>
+									<value>0</value>
+							</binding>
+						</mod-up>
+        </action>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>EICAS.btn3</object-name>	
+        <property>instrumentation/eicas/btn3</property>
+				<factor>0.0032</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+				</axis>
+    </animation>
+    <animation>
+        <type>pick</type>
+        <object-name>EICAS.btn3</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+			        <command>property-assign</command>
+			        <property>instrumentation/eicas/btn3</property>
+								<value>1</value>
+			    </binding>
+          <binding>
+              <command>nasal</command>
+              <script>eicas.EICASdsp.menu(3);</script>
+          </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+						<mod-up>
+							<binding>
+								<command>property-assign</command>
+									<property>instrumentation/eicas/btn3</property>
+									<value>0</value>
+							</binding>
+						</mod-up>
+        </action>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>EICAS.btn4</object-name>	
+        <property>instrumentation/eicas/btn4</property>
+				<factor>0.0032</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+				</axis>
+    </animation>
+    <animation>
+        <type>pick</type>
+        <object-name>EICAS.btn4</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+			        <command>property-assign</command>
+			        <property>instrumentation/eicas/btn4</property>
+								<value>1</value>
+			    </binding>
+          <binding>
+              <command>nasal</command>
+              <script>eicas.EICASdsp.menu(4);</script>
+          </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+						<mod-up>
+							<binding>
+								<command>property-assign</command>
+									<property>instrumentation/eicas/btn4</property>
+									<value>0</value>
+							</binding>
+						</mod-up>
+        </action>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>EICAS.btn5</object-name>	
+        <property>instrumentation/eicas/btn5</property>
+				<factor>0.0032</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+				</axis>
+    </animation>
+    <animation>
+        <type>pick</type>
+        <object-name>EICAS.btn5</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+			        <command>property-assign</command>
+			        <property>instrumentation/eicas/btn5</property>
+								<value>1</value>
+			    </binding>
+          <binding>
+              <command>nasal</command>
+              <script>eicas.EICASdsp.menu(5);</script>
+          </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+						<mod-up>
+							<binding>
+								<command>property-assign</command>
+									<property>instrumentation/eicas/btn5</property>
+									<value>0</value>
+							</binding>
+						</mod-up>
+        </action>
     </animation>
 
     <animation>

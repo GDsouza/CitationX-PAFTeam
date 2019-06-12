@@ -164,12 +164,12 @@ Fuel 12938 lbs jet
 <!--
 Rolls Royce AE3007C1
 40000 ft - thrust=1532 tsfc=0.650
-Thrust Fuel flow(TSFC) 0.3222 kg/s, 0.3187 kg/s with winglets (2018)
+Thrust Fuel flow(TSFC) 0.3222 kg/s, 0.3187 kg/s with winglets
 -->
   <jet x="-2.5" y="1.5" z="0.72" mass="1700" thrust="7000"
   tsfc="0.3187" epr="23" rotate="0.0" egt="840" spool-time="2"
   n1-idle="40" n1-max="105" n2-idle="56" n2-max="105.6">
-    <control-input axis="/controls/engines/engine[0]/throttle-lever" control="THROTTLE" src0="0.0" dst0="0" src1="1" dst1="1"/>
+    <control-input axis="/controls/engines/engine[0]/throttle-lever" control="THROTTLE" src0="0.0" dst0="0.045" src1="1" dst1="1"/>
     <control-input axis="/controls/engines/engine[0]/reverser" control="REVERSE_THRUST"/> 
 <!--    <control-output control="REVERSE_THRUST" prop="surface-positions/reverser-norm"/> -->
     <control-speed control="REVERSE_THRUST" transition-time="1.5"/>
@@ -179,8 +179,7 @@ Thrust Fuel flow(TSFC) 0.3222 kg/s, 0.3187 kg/s with winglets (2018)
   <jet x="-2.5" y="-1.5" z="0.72" mass="1700" thrust="7000"
   tsfc="0.3187" epr="23" rotate="0.0" egt="840" spool-time="2"
   n1-idle="40" n1-max="105" n2-idle="56" n2-max="105.6">
-    <control-input axis="/controls/engines/engine[1]/throttle-lever" control="THROTTLE" src0="0.0" dst0="0" src1="1" dst1="1"/>
-
+    <control-input axis="/controls/engines/engine[1]/throttle-lever" control="THROTTLE" src0="0.0" dst0="0.045" src1="1" dst1="1"/>
     <control-input axis="/controls/engines/engine[1]/reverser" control="REVERSE_THRUST"/>
 <!--    <control-output control="REVERSE_THRUST" prop="surface-positions/reverser-norm[1]"/> -->
     <control-speed control="REVERSE_THRUST" transition-time="1.5"/>
