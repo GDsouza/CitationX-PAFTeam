@@ -73,7 +73,7 @@ var ENG = {
 		}
   }, # end of textVisible
 
-}; # end of RCU
+}; # end of ENG
 
 #### Main ####
 var setl = setlistener("/sim/signals/fdm-initialized", func () {	

@@ -389,5 +389,5 @@ update_electrical = func {
 #    scnd = getprop("sim/time/delta-sec");
     update_virtual_bus();
     update_master_switches();
-settimer(update_electrical, 0.5);
+settimer(update_electrical, 0);
 }

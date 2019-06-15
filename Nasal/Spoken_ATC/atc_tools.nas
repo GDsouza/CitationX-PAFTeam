@@ -118,28 +118,29 @@ var capit = func(str) { # Rtrim 'TWR', 'APP',etc. and Capitalize words.
  
 # **** join func. Joins /satc/phrases/key[] props ************
 var join = func(key="none", p="") {
-if(string.match(key,"*[][]?[][]")) {
+  if(string.match(key,"*[][]?[][]")) {
    var j = num(substr(key,-2,1));
    key = left(key,size(key)-3);
-   } else {
-     var j = 0;}
-	var fs = props.globals.getNode("/satc/phrases").getChildren(key);
-	var str = "";
-	var i = 0;
-    foreach (var f; fs) {
+  } else var j = 0;
+  var fs = props.globals.getNode("/satc/phrases").getChildren(key);
+  var str = "";
+  var i = 0;
+  foreach (var f; fs) {
     if(i>=j){
-       str = f.getValue();
-       if(str==nil or str=="") continue;
+      str = f.getValue();
+      if(str==nil or str=="") continue;
       if(left(str,1)=="%") {
-           str=getprop(string.trim(str, 0, func(c) c == `%` or c == ` `));
-	  }
-   if(left(str,1)=="~"){
-	 str= " " ~join(right(str,size(str)-1));}
-       p ~= str;}
+        str=getprop(string.trim(str, 0, func(c) c == `%` or c == ` `));
+        str = sprintf(str);
+      }
+      if(left(str,1)=="~") str= " " ~join(right(str,size(str)-1));
+      p ~= str;
+    }
     i +=1;
-       }
-	return p;    
+  }
+  return p;    
 }    
+
 # **** say func. to test TTS phrases.
 #  (key may be a /satc/phrases/xxx prop or any literal string. ************
 var say = func(key) {

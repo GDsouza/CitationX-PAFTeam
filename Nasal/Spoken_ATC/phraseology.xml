@@ -36,6 +36,9 @@ at the bottom of this file.
   <thisis type="string"> </thisis>	
   <thisis type="string">% /instrumentation/comm/station-type</thisis>	
   <thisis type="string">. </thisis>	
+  
+  <noils type="string"> There is no I L S available. </noils>	
+  
 <!-- # redirect to other freq: -->  
   <gognd type="string">Contact ground at </gognd>
   <gognd type="string">% /satc/freqs/gnd-fmt</gognd>
@@ -50,16 +53,13 @@ at the bottom of this file.
   <goapp type="string">. </goapp>
 
 <!-- # Cleared to approach: -->  
-  <app type="string">Turn </app>
-  <app type="string">% /satc/hand-to-rwy</app>
-  <app type="string">% /satc/course-to-rwy</app>
-  <app type="string"> degrees. Cleared to approach. Report on CTR. </app>
-
-  <apptwr type="string">Turn </apptwr>
-  <apptwr type="string">% /satc/hand-to-rwy</apptwr>
-  <apptwr type="string">% /satc/course-to-rwy</apptwr>
-  <apptwr type="string"> degrees. Arriving CTR contact tower at </apptwr>
-  <apptwr type="string">~gotwr[1]</apptwr>
+  <app type="string">Cleared to approach. Turn to </app>
+  <app type="string">%/satc/course-to-final</app>
+  <app type="string">, to reach final </app>
+  <app type="string">%/satc/rwy-in-use</app>
+  <app type="string"> with </app>
+  <app type="string">%/satc/final-altitude</app>
+  <app type="string"> feet. Report on CTR. </app>
 
 <!-- # QNH: -->  
   <qnh type="string">QNH </qnh>
@@ -80,7 +80,7 @@ at the bottom of this file.
 <!-- # After landing: -->  
   <exitrwy type="string">Exit Runwaide at first taxiway and taxi to plattform. </exitrwy>
   
-  <exrwygnd type="string">Exit Runwaide at first taxiway and taxi to plattform.Welcome to </exrwygnd>
+  <exrwygnd type="string">Exit Runwaide at first taxiway and taxi to plattform. Wellcome to </exrwygnd>
   <exrwygnd type="string">%/satc/station-name</exrwygnd>
 
 <!-- # Departure: -->  

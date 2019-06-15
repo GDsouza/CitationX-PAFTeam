@@ -84,52 +84,6 @@
       <object-name>LwrReverser</object-name>
     </effect-->
 
-    <model><!-- LH tail reg-->
-        <path>Aircraft/CitationX/Models/registration.xml</path>
-        <offsets>
-            <x-m>7.0</x-m>
-            <y-m>-0.14</y-m>
-            <z-m>1.910</z-m>
-            <roll-deg>0</roll-deg>
-            <pitch-deg>0</pitch-deg>
-            <heading-deg>2</heading-deg>
-        </offsets>
-        <overlay>
-            <params>
-                <size>0.5</size>
-                <alignment>xz-plane</alignment>
-                <color>
-                    <red>0.02</red>
-                    <green>0.02</green>
-                    <blue>0.02</blue>
-                </color>
-            </params>
-        </overlay>
-    </model>
-
-    <model><!-- RH tail reg-->
-        <path>Aircraft/CitationX/Models/registration.xml</path>
-        <offsets>
-            <x-m>7.0</x-m>
-            <y-m>0.14</y-m>
-            <z-m>1.910</z-m>
-            <roll-deg>0</roll-deg>
-            <pitch-deg>0</pitch-deg>
-            <heading-deg>-2</heading-deg>
-        </offsets>
-        <overlay>
-            <params>
-                <size>0.5</size>
-                <alignment>reversed-xz-plane</alignment>
-                <color>
-                    <red>0.02</red>
-                    <green>0.02</green>
-                    <blue>0.02</blue>
-                </color>
-            </params>
-        </overlay>
-    </model>
-
     <model>
         <name>shadow</name>
         <path>Aircraft/CitationX/Models/shadow.xml</path>
@@ -140,7 +94,6 @@
             <pitch-deg>0</pitch-deg>
         </offsets>
     </model>
-
 
     <model>
     <name>cabin</name>

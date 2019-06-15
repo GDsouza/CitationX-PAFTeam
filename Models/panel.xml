@@ -4,6 +4,26 @@
 
     <path>panel.ac</path>
 
+  <!-- Callsign -->
+
+    <model>
+        <path>Models/Callsign/screenC.xml</path>
+        <offsets>
+            <x-m>0.002</x-m>
+            <y-m>0.360</y-m>
+            <z-m>0.005</z-m>
+        </offsets>
+    </model>
+
+    <model>
+        <path>Models/Callsign/screenP.xml</path>
+        <offsets>
+            <x-m>-0.0020</x-m>
+            <y-m>-0.560</y-m>
+            <z-m>-0.0340</z-m>
+        </offsets>
+    </model>
+
   <!-- Instruments -->
 
     <model>
@@ -7170,59 +7190,5 @@
         </specular>
     </animation>
 
-<!-- 3D TEXT  -->
-
-    <text>
-        <name>Pilot-reg</name>
-        <offsets>
-            <x-m>0.002</x-m>
-            <y-m>-0.412</y-m>
-            <z-m>0.329</z-m>
-        </offsets>
-            <alignment>center-center</alignment>
-            <axis-alignment>yz-plane</axis-alignment>
-            <type type="string">text-value</type>
-            <property type="string">sim/multiplay/callsign</property>
-            <format type="string">%.7s</format>
-            <font>arial_black.txf</font>
-            <character-size>0.02</character-size>
-            <character-aspect-ratio type="double">1.8</character-aspect-ratio>
-            <font-resolution>
-            <width type="int">64</width>
-            <height type="int">64</height>
-        </font-resolution>
-    </text>
-
-<!-- Hide callsign if nav module present -->
-
-    <animation>
-        <type>select</type>
-        <object-name>Pilot-reg</object-name>
-        <condition>
-          <not><property>sim/model/nav1-visible</property></not>
-        </condition>
-    </animation>
-
-
-    <text>
-        <name>CoPilot-reg</name>
-        <offsets>
-            <x-m>0.002</x-m>
-            <y-m>0.422</y-m>
-            <z-m>0.329</z-m>
-        </offsets>
-            <alignment>center-center</alignment>
-            <axis-alignment>yz-plane</axis-alignment>
-            <type type="string">text-value</type>
-            <property type="string">sim/multiplay/callsign</property>
-            <format type="string">%.7s</format>
-            <font>arial_black.txf</font>
-            <character-size>0.02</character-size>
-            <character-aspect-ratio type="double">1.8</character-aspect-ratio>
-            <font-resolution>
-            <width type="int">64</width>
-            <height type="int">64</height>
-        </font-resolution>
-    </text>
 
 </PropertyList>

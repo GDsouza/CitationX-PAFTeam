@@ -5129,7 +5129,7 @@ refs 4
 kids 0
 OBJECT poly
 name "Bcn1"
-texture "Liveries/F-GCLM.png"
+texture "lights.png"
 crease 30.000000
 numvert 4
 0.2 0.2 0
@@ -5147,7 +5147,7 @@ refs 4
 kids 0
 OBJECT poly
 name "Bcn2"
-texture "Liveries/F-GCLM.png"
+texture "lights.png"
 crease 30.000000
 numvert 4
 0.2 0.2 0
@@ -29902,7 +29902,7 @@ refs 4
 kids 0
 OBJECT poly
 name "Land1"
-texture "Liveries/F-GCLM.png"
+texture "lights.png"
 crease 30.000000
 numvert 4
 -2.96536 -0.318311 1.68419
@@ -29920,7 +29920,7 @@ refs 4
 kids 0
 OBJECT poly
 name "Land2"
-texture "Liveries/F-GCLM.png"
+texture "lights.png"
 crease 30.000000
 numvert 4
 -3.63289 -0.318311 -0.674918
@@ -38670,7 +38670,7 @@ refs 4
 kids 0
 OBJECT poly
 name "Strb1"
-texture "Liveries/F-GCLM.png"
+texture "lights.png"
 crease 30.000000
 numvert 4
 0.6 0.6 0
@@ -38688,7 +38688,7 @@ refs 4
 kids 0
 OBJECT poly
 name "Strb2"
-texture "Liveries/F-GCLM.png"
+texture "lights.png"
 crease 30.000000
 numvert 4
 0.6 0.6 0
@@ -38706,7 +38706,7 @@ refs 4
 kids 0
 OBJECT poly
 name "Taxi"
-texture "Liveries/F-GCLM.png"
+texture "lights.png"
 crease 30.000000
 numvert 4
 -8.26045 -0.877149 0.358771

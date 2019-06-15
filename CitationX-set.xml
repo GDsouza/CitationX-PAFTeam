@@ -815,6 +815,9 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 				<file>Aircraft/CitationX/Nasal/Warnings.nas</file>
 		    <file>Aircraft/CitationX/Nasal/GroundServices.nas</file>
       </citation>
+      <callsign>
+        <file>Aircraft/CitationX/Models/Callsign/callsign.nas</file>
+      </callsign>
 			<atc>
 				<file>Aircraft/CitationX/Nasal/Spoken_ATC/init.nas</file>
 			</atc>

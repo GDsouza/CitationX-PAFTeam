@@ -157,10 +157,10 @@ along with FlightGear.  If not, see <http://www.gnu.org/licenses/>.
         <property>/satc/dist-to-rwy</property>
         <value>2</value>
       </less-than>
-      <equals>
-        <property>/instrumentation/comm/frequencies/selected-mhz</property>
-        <property>/satc/freqs/gnd</property>
-      </equals>
+      <not-equals>
+         <property>/instrumentation/comm/station-type</property>
+        <value>tower</value>
+      </not-equals>
     </condition>
     <condition><!-- 9 Taxi to rwy ? -->
       <equals>
@@ -171,10 +171,6 @@ along with FlightGear.  If not, see <http://www.gnu.org/licenses/>.
         <property>/satc/dist-to-rwy</property>
         <value>2</value>
       </less-than>
-      <equals>
-        <property>//instrumentation/comm/frequencies/selected-mhz</property>
-        <property>/satc/freqs/gnd</property>
-      </equals>
     </condition>
     <condition><!-- 10. Contact ground ? -->
       <equals>
@@ -195,15 +191,19 @@ along with FlightGear.  If not, see <http://www.gnu.org/licenses/>.
         <property>/satc/relpos</property>
         <value>onground</value>
       </equals>
-    </condition>
+      <not-equals>
+         <property>/instrumentation/comm/station-type</property>
+        <value>tower</value>
+      </not-equals>
+   </condition>
     <condition><!-- 12. Takeoff clearance ? -->
       <equals>
         <property>/satc/relpos</property>
         <value>hold</value>
       </equals>
       <equals>
-        <property>/instrumentation/comm/frequencies/selected-mhz</property>
-        <property>/satc/freqs/twr</property>
+         <property>/instrumentation/comm/station-type</property>
+        <value>tower</value>
       </equals>
     </condition>
     <condition><!-- 13. Contact tower ? -->
@@ -262,8 +262,8 @@ along with FlightGear.  If not, see <http://www.gnu.org/licenses/>.
         <value>onCTR</value>
       </equals>
       <equals>
-        <property>/instrumentation/comm/frequencies/selected-mhz</property>
-        <property>/satc/freqs/twr</property>
+         <property>/instrumentation/comm/station-type</property>
+        <value>tower</value>
       </equals>
       <or><less-than>
         <property>/satc/delta-hdg-deg</property>
@@ -284,8 +284,8 @@ along with FlightGear.  If not, see <http://www.gnu.org/licenses/>.
         <value>onCTR</value>
       </equals>
       <equals>
-        <property>/instrumentation/comm/frequencies/selected-mhz</property>
-        <property>/satc/freqs/twr</property>
+         <property>/instrumentation/comm/station-type</property>
+        <value>tower</value>
       </equals>
       <greater-than>
         <property>/satc/dist-to-rwy</property>
@@ -298,8 +298,8 @@ along with FlightGear.  If not, see <http://www.gnu.org/licenses/>.
         <value>onCTR</value>
       </equals>
       <equals>
-        <property>/instrumentation/comm/frequencies/selected-mhz</property>
-        <property>/satc/freqs/twr</property>
+         <property>/instrumentation/comm/station-type</property>
+        <value>tower</value>
       </equals>
     </condition>
     <condition><!-- 19. Contact tower  ? -->
