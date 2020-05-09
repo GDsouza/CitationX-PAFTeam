@@ -8,7 +8,7 @@ name "slip-ball"
 loc -2.45316 -0.538102 -0.327175
 data 9
 slip-ball
-texture "Slipball.png"
+texture "slipball.png"
 crease 30.000002
 numvert 33
 2.45447 0.540121 0.327249
@@ -242,7 +242,7 @@ OBJECT poly
 name "slip-base"
 data 9
 slip-base
-texture "Slipball.png"
+texture "slipball.png"
 crease 50.000000
 numvert 17
 0.00319 -0.005721 -0.026657
@@ -347,7 +347,7 @@ OBJECT poly
 name "slip-glass"
 data 10
 slip-glass
-texture "Slipball.png"
+texture "slipball.png"
 crease 50.000000
 numvert 4
 0.00215 6.7e-05 -0.017441

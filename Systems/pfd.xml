@@ -315,13 +315,13 @@
       <input>
           <condition>
               <greater-than>
-                  <property>controls/flight/flaps</property>
+                  <property>surface-positions/flap-pos-norm</property>
                   <value>0.0</value>
               </greater-than>
           </condition>
           <expression>
               <table>
-                  <property>controls/flight/flaps</property> 
+                  <property>surface-positions/flap-pos-norm</property> 
                   <entry><ind>0.0428</ind><dep>250</dep></entry>
                   <entry><ind>0.142</ind><dep>250</dep></entry>
                   <entry><ind>0.428</ind><dep>210</dep></entry>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- 
+  Primus 2000 EICAS - Canvas
+  C. Le Moigne (clm76) - March 2019
+-->
+
+<PropertyList>
+
+<path>eicas-buttons.ac</path>
+
+    <animation>
+        <type>material</type>
+        <object-name>EICAS.group</object-name>
+        <condition>
+           	<property>systems/electrical/outputs/eicas</property>
+        </condition>
+        <emission>
+            <red>1</red>
+            <green>1</green>
+            <blue>1</blue>
+            <factor-prop>controls/lighting/ctr-norm</factor-prop>
+        </emission>
+    </animation>
+
+</PropertyList>

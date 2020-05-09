@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- 
+  Primus 2000 EICAS - Canvas
+  C. Le Moigne (clm76) - March 2019
+-->
+
+<PropertyList>
+
+<path>mfdR-buttons.ac</path>
+
+    <animation>
+    <type>material</type>
+    <object-name>MFD_R.group</object-name>
+    <emission>
+        <red>1</red>
+        <green>1</green>
+        <blue>1</blue>
+        <factor-prop>controls/lighting/rh-norm</factor-prop>
+    </emission>
+    </animation>
+
+</PropertyList>

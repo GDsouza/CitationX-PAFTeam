@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- APU Ampere Meter -->
+<!-- C.Le Moigne (clm76) - dec 2019 -->
+
+<PropertyList>
+
+  <path>ammeter.ac</path>
+
+  <animation>
+    <type>material</type>
+    <object-name>needle</object-name>
+    <object-name>dial</object-name>
+    <emission>
+        <red>1</red>
+        <green>0.7</green>
+        <blue>0</blue>
+        <factor-prop>controls/lighting/rh-norm</factor-prop>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>needle</object-name>
+    <property>systems/electrical/apu-gen-amps</property>
+    <interpolation>
+        <entry><ind>0</ind><dep>0</dep></entry>
+        <entry><ind>300</ind><dep>185</dep></entry>
+    </interpolation>
+    <axis>
+        <x>-1</x>
+        <y>0</y>
+        <z>0</z>
+    </axis>
+    <center>
+        <x-m>0</x-m>
+        <y-m>0.5142</y-m>
+        <z-m>0.2510</z-m>
+    </center>
+  </animation>
+
+</PropertyList>

@@ -1,0 +1,23 @@
+<!--
+Citation X - Navigation display
+-->
+
+<PropertyList>
+
+<path>screenR-front.ac</path>
+
+  <animation>
+    <type>material</type>
+    <object-name>screenR_F</object-name>
+    <condition>
+      <property>systems/electrical/outputs/mfd2</property>
+    </condition>
+    <emission>
+      <red>1</red>
+      <green>1</green>
+      <blue>1</blue>
+      <factor-prop>controls/lighting/mfd[1]</factor-prop>
+    </emission>
+  </animation>
+
+</PropertyList>

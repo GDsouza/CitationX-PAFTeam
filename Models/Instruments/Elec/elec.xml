@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+
+<PropertyList>
+
+    <path>elec.ac</path>
+
+  <animation>
+    <type>material</type>
+    <object-name>base</object-name>
+    <object-name>screens.base</object-name>
+    <emission>
+        <red>1</red>
+        <green>1</green>
+        <blue>1</blue>
+        <factor-prop>controls/lighting/flood-norm</factor-prop>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>labels</object-name>
+    <emission>
+        <red>1</red>
+        <green>1</green>
+        <blue>1</blue>
+        <factor-prop>controls/lighting/el-norm</factor-prop>
+    </emission>
+  </animation>
+
+    <model>
+        <name>elec.screen</name>
+        <path>Models/Instruments/Elec/screen.xml</path>
+        <offsets>
+            <x-m>0.00</x-m>
+            <y-m>0.00</y-m>
+            <z-m>0.00</z-m>
+        </offsets>
+    </model>
+
+  <animation>
+      <type>rotate</type>
+      <object-name>volts.switch</object-name>
+      <property>controls/electric/dc-volts-sel</property>
+      <factor>35</factor>
+      <center>
+        <x-m>-0.870</x-m>
+        <y-m>-0.700</y-m>
+        <z-m>0</z-m>
+      </center>
+      <axis>
+          <x>0</x>
+          <y>0</y>
+          <z>1</z>
+      </axis>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>volts.switch</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+          <command>property-toggle</command>
+          <property>controls/electric/dc-volts-sel</property>
+      </binding>
+			<binding>
+      	<command>property-toggle</command>
+      	<property>sim/sound/click</property>
+			</binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>master.switch</tooltip-id>
+        <label>Batt Select : %s</label>
+        <property>controls/electric/dc-volts-sel</property>
+        <mapping>nasal</mapping>
+        <script>return arg[0] ? "RH" : "LH";</script>
+        </binding>
+    </hovered>
+  </animation>
+
+<!--Map Light knob -->
+
+  <animation>
+    <type>rotate</type>
+    <object-name>mapLight.knob</object-name>
+    <property>controls/lighting/lh-map</property>
+	  <factor>-270</factor>
+    <center>
+      <x-m>-0.911</x-m>
+      <y-m>0</y-m>
+      <z-m>0.613</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+      <type>pick</type>
+      <object-name>mapLight.knob</object-name>
+      <action>
+          <button>3</button>
+          <repeatable>true</repeatable>
+          <interval-sec>0.1</interval-sec>
+          <binding>
+              <command>property-adjust</command>
+              <property>controls/lighting/lh-map</property>
+              <step>0.05</step>
+              <min>0</min>
+              <max>1.0</max>
+              <wrap>false</wrap>
+          </binding>
+      </action>
+      <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>MapLight.knob</tooltip-id>
+              <label>Map Light : %s%%</label>
+              <mapping>percent</mapping>
+         <property>controls/lighting/lh-map</property>
+          </binding>
+      </hovered>
+  </animation>
+
+  <animation>
+      <type>pick</type>
+      <object-name>mapLight.knob</object-name>
+      <action>
+          <button>4</button>
+          <repeatable>true</repeatable>
+          <interval-sec>0.1</interval-sec>
+          <binding>
+              <command>property-adjust</command>
+              <property>controls/lighting/lh-map</property>
+              <step>-0.05</step>
+              <min>0</min>
+              <max>1.0</max>
+              <wrap>false</wrap>
+          </binding>
+      </action>
+  </animation>
+
+<!--Aux Panel knob -->
+
+  <animation>
+    <type>rotate</type>
+    <object-name>auxLight.knob</object-name>
+    <property>controls/lighting/aux-panel</property>
+	  <factor>-270</factor>
+    <center>
+      <x-m>-0.839</x-m>
+      <y-m>0</y-m>
+      <z-m>0.613</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+      <type>pick</type>
+      <object-name>auxLight.knob</object-name>
+      <action>
+          <button>3</button>
+          <repeatable>true</repeatable>
+          <interval-sec>0.1</interval-sec>
+          <binding>
+              <command>property-adjust</command>
+              <property>controls/lighting/aux-panel</property>
+              <step>0.05</step>
+              <min>0</min>
+              <max>1.0</max>
+              <wrap>false</wrap>
+          </binding>
+      </action>
+      <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>auxLight.knob</tooltip-id>
+              <label>Aux Panel Light : %s%%</label>
+              <mapping>percent</mapping>
+         <property>controls/lighting/aux-panel</property>
+          </binding>
+      </hovered>
+  </animation>
+
+  <animation>
+      <type>pick</type>
+      <object-name>auxLight.knob</object-name>
+      <action>
+          <button>4</button>
+          <repeatable>true</repeatable>
+          <interval-sec>0.1</interval-sec>
+          <binding>
+              <command>property-adjust</command>
+              <property>controls/lighting/aux-panel</property>
+              <step>-0.05</step>
+              <min>0</min>
+              <max>1.0</max>
+              <wrap>false</wrap>
+          </binding>
+      </action>
+  </animation>
+
+</PropertyList>

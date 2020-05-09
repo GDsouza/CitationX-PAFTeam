@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<PropertyList>
+
+
+    <logic>
+      <name>Cabin</name>
+      <input>
+        <or>
+          <and> 
+    	      <property>controls/APU/bleed-air</property>
+    	      <property>controls/air-conditioning/isol-valve</property>
+            <not>
+       	      <property>controls/air-conditioning/cabin/remote</property>
+            </not>
+          </and>
+          <and>
+       	    <property>controls/engines/engine[1]/running</property>
+             <greater-than>
+       	      <property>controls/air-conditioning/cabin/pac</property>
+              <value>-1</value>
+            </greater-than>
+            <greater-than>
+              <property>controls/air-conditioning/bleed-air/right-engine</property>
+              <value>0</value>
+            </greater-than>
+            <not>
+       	      <property>controls/air-conditioning/cabin/remote</property>
+            </not>
+          </and>
+          <and> 
+    	      <property>controls/engines/engine/running</property>
+    	      <property>controls/air-conditioning/isol-valve</property>
+            <greater-than>
+              <property>controls/air-conditioning/cabin/pac</property>
+              <value>-1</value>
+            </greater-than>
+            <greater-than>
+              <property>controls/air-conditioning/bleed-air/left-engine</property>
+              <value>0</value>
+            </greater-than>
+            <not>
+       	      <property>controls/air-conditioning/cabin/remote</property>
+            </not>
+          </and>
+        </or>             
+      </input>
+      <output>controls/air-conditioning/cabin/inflow</output>
+    </logic>
+
+    <logic>
+      <name>Cockpit</name>
+      <input>
+        <or>
+          <and> 
+    	      <property>controls/APU/bleed-air</property>
+    	      <property>controls/air-conditioning/isol-valve</property>
+          </and>
+          <and>
+       	    <property>controls/engines/engine/running</property>
+             <greater-than>
+       	      <property>controls/air-conditioning/cockpit/pac</property>
+              <value>-1</value>
+            </greater-than>
+            <greater-than>
+              <property>controls/air-conditioning/bleed-air/left-engine</property>
+              <value>0</value>
+            </greater-than>
+          </and>
+          <and> 
+    	      <property>controls/engines/engine[1]/running</property>
+    	      <property>controls/air-conditioning/isol-valve</property>
+            <greater-than>
+              <property>controls/air-conditioning/cockpit/pac</property>
+              <value>-1</value>
+            </greater-than>
+             <greater-than>
+              <property>controls/air-conditioning/bleed-air/right-engine</property>
+              <value>0</value>
+            </greater-than>
+          </and>
+        </or>             
+      </input>
+      <output>controls/air-conditioning/cockpit/inflow</output>
+    </logic>
+
+
+</PropertyList>

@@ -55,23 +55,83 @@
 
 		  <signal>
 		    <type>bool</type>
-				<property type="string">controls/electric/APU-generator</property>
+				<property type="string">controls/APU/master</property>
 			</signal>
 		  <signal>
 		    <type>bool</type>
-				<property type="string">controls/electric/battery-switch</property>
+				<property type="string">controls/APU/running</property>
+			</signal>
+		  <signal>
+		    <type>double</type>
+				<property type="string">controls/APU/rpm</property>
+			</signal>
+		  <signal>
+		    <type>bool</type>
+				<property type="string">controls/APU/bleed</property>
+			</signal>
+		  <signal>
+		    <type>int</type>
+				<property type="string">controls/APU/generator</property>
+			</signal>
+		  <signal>
+		    <type>bool</type>
+				<property type="string">controls/electric/batt1-switch</property>
 		  </signal>
 		  <signal>
 		    <type>bool</type>
-				<property type="string">controls/electric/battery-switch[1]</property>
+				<property type="string">controls/electric/batt2-switch</property>
+		  </signal>
+		  <signal>
+		    <type>bool</type>
+				<property type="string">controls/electric/xtie-open</property>
+		  </signal>
+		  <signal>
+		    <type>bool</type>
+				<property type="string">controls/electric/lh-emer</property>
+		  </signal>
+		  <signal>
+		    <type>bool</type>
+				<property type="string">controls/electric/rh-emer</property>
+		  </signal>
+		  <signal>
+		    <type>double</type>
+				<property type="string">systems/electrical/batt1-charge-norm</property>
+		  </signal>
+		  <signal>
+		    <type>double</type>
+				<property type="string">systems/electrical/batt2-charge-norm</property>
+		  </signal>
+		  <signal>
+		    <type>double</type>
+				<property type="string">systems/electrical/batt-stby-charge-norm</property>
 		  </signal>
 		  <signal>
 		    <type>int</type>
 				<property type="string">controls/electric/avionics-switch</property>
 		  </signal>
 		  <signal>
+		    <type>bool</type>
+				<property type="string">controls/electric/stby-pwr</property>
+		  </signal>
+		  <signal>
+		    <type>bool</type>
+				<property type="string">controls/electric/external-power</property>
+		  </signal>
+		  <signal>
 		    <type>double</type>
-				<property type="string">controls/lighting/instruments-norm</property>
+				<property type="string">controls/lighting/el-norm</property>
+		  </signal>
+		  <signal>
+		    <type>double</type>
+				<property type="string">controls/lighting/lh-norm</property>
+		  </signal>
+		  <signal>
+		    <type>double</type>
+				<property type="string">controls/lighting/rh-norm</property>
+		  </signal>
+		  <signal>
+		    <type>double</type>
+				<property type="string">controls/lighting/flood-norm</property>
 		  </signal>
 		 <signal>
 		    <type>bool</type>
@@ -91,7 +151,11 @@
 		  </signal>
 		  <signal>
 		    <type>bool</type>
-				<property type="string">controls/lighting/taxi-lights</property>
+				<property type="string">controls/lighting/recog-lights</property>
+		  </signal>
+		  <signal>
+		    <type>bool</type>
+				<property type="string">controls/lighting/taxi-light</property>
 		  </signal>
 		  <signal>
 		    <type>bool</type>
@@ -111,7 +175,11 @@
 		  </signal>
 		  <signal>
 		    <type>bool</type>
-				<property type="string">controls/lighting/landing-light[2]</property>
+				<property type="string">controls/fuel/tank[0]/boost-pump</property>
+		  </signal>
+		  <signal>
+		    <type>bool</type>
+				<property type="string">controls/fuel/tank[1]/boost-pump</property>
 		  </signal>
 		  <signal>
 		    <type>bool</type>

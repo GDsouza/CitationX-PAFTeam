@@ -1,0 +1,36 @@
+<!-- Canvas - Primary Flight Display -->
+<!-- C. Le Moigne (clm76) - Feb 2019 -->
+
+<PropertyList>
+
+<path>pfd-screenR.ac</path>
+
+    <animation>
+      <type>select</type>
+      <object-name>screenR</object-name>
+      <condition>
+        <and>
+          <property>systems/electrical/outputs/pfd2</property>
+          <or>
+            <property>systems/electrical/outputs/iac1</property>
+            <property>systems/electrical/outputs/iac2</property>
+          </or>
+        </and>
+			</condition>
+    </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>screenR</object-name>
+		<condition>
+      <property>systems/electrical/outputs/pfd2</property>
+		</condition>
+    <emission>
+        <red>1</red>
+        <green>1</green>
+        <blue>1</blue>
+        <factor-prop>controls/lighting/pfd[1]</factor-prop>
+    </emission>
+  </animation>
+
+</PropertyList>

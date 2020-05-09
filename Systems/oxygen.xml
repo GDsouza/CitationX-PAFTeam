@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<PropertyList>
+
+  <filter>
+      <name>oxygen</name>
+      <type>gain</type>
+      <gain>1.0</gain>
+      <input>
+        <condition>
+          <and>
+            <property>systems/electrical/outputs/oxygen</property>
+            <equals>
+              <property>controls/electric/avionics-switch</property>
+              <value>2</value>
+            </equals>
+          </and>
+        </condition>
+        <value>18.5</value>
+      </input>
+      <output>controls/oxygen/oxygen-psi</output>
+	</filter>
+
+</PropertyList>
+

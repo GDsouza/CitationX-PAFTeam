@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<PropertyList>
+    <name>1b-Cold start with APU </name>
+    <description>Cold start with APU</description>
+		<step-time>3</step-time>
+    <init>
+      <set>
+        <property>sim/current-view/view-number</property>
+        <value>0</value>
+      </set>
+      <set>
+        <property>controls/gear/brake-parking</property>
+        <value>1</value>
+      </set>
+      <set>
+        <property>controls/flight/flaps-select</property>
+        <value>0</value>
+      </set>
+      <set>
+        <property>controls/engines/engine[0]/cutoff</property>
+        <value>1</value>
+      </set>
+      <set>
+        <property>controls/engines/engine[1]/cutoff</property>
+        <value>1</value>
+      </set>
+    </init>
+
+    <step>
+      <message>
+          Hide Yoke Left(click on yoke){|.}
+      </message>
+      <view>
+  			<heading-offset-deg>0.0</heading-offset-deg>
+  			<pitch-offset-deg>-11.8</pitch-offset-deg>
+  			<roll-offset-deg>0.0</roll-offset-deg>
+  			<field-of-view>96.2</field-of-view>
+      </view>
+			<marker>
+		    <x-m>-7.4612</x-m>
+		    <y-m>-0.3769</y-m>
+		    <z-m>0.0661</z-m>
+		    <scale>4.0</scale>
+			</marker>
+      <error>
+				<message>
+          Hide Yoke (click on yoke){|.}
+        </message>
+        <condition>
+					<property>sim/model/show-yoke-L</property>
+        </condition>
+      </error>
+      <exit>
+				<condition>
+					<not>
+						<property>sim/model/show-yoke-L</property>
+          </not>
+				</condition>
+      </exit>
+    </step>
+
+    <step>
+      <message>
+          Hide Yoke Right (click on yoke){|.}
+      </message>
+      <view>
+  			<heading-offset-deg>294.2</heading-offset-deg>
+  			<pitch-offset-deg>-10.6</pitch-offset-deg>
+  			<roll-offset-deg>0.0</roll-offset-deg>
+  			<field-of-view>100.4</field-of-view>
+      </view>
+			<marker>
+		    <x-m>-7.3455</x-m>
+		    <y-m>0.1488</y-m>
+		    <z-m>0.1488</z-m>
+		    <scale>4.0</scale>
+			</marker>
+      <error>
+				<message>
+          Hide Yoke (click on yoke){|.}
+        </message>
+        <condition>
+					<property>sim/model/show-yoke-R</property>
+        </condition>
+      </error>
+      <exit>
+				<condition>
+					<not>
+						<property>sim/model/show-yoke-R</property>
+          </not>
+				</condition>
+      </exit>
+    </step>
+
+		<step>
+			<message>
+				Switch on Standby Power{|.}
+			</message>
+			<view>
+				<heading-offset-deg>344.953</heading-offset-deg>
+				<pitch-offset-deg>-40.56</pitch-offset-deg>
+				<field-of-view>18</field-of-view>
+			</view>
+			<marker>
+		    <x-m>-7.6595</x-m>
+		    <y-m>-0.1975</y-m>
+		    <z-m>-0.1793</z-m>
+		    <scale>2.0</scale>
+			</marker>
+			<error>
+				<message>
+					Switch on Standby Power{|.}
+				</message>
+				<condition>
+          <not>
+						<property>controls/electric/stby-pwr</property>
+          </not>
+				</condition>
+			</error>
+			<exit>
+			  <condition>
+				  <property>controls/electric/stby-pwr</property>
+			  </condition>
+			</exit>
+    </step>
+
+		<step>
+			<message>
+				Switch on BATT 2{|.}
+			</message>
+			<view>
+				<heading-offset-deg>350.578</heading-offset-deg>
+				<pitch-offset-deg>-39.3</pitch-offset-deg>
+				<field-of-view>18</field-of-view>
+			</view>
+				<marker>
+			    <x-m>-7.7066</x-m>
+			    <y-m>-0.2116</y-m>
+			    <z-m>-0.1380</z-m>
+			    <scale>1.40</scale>
+				</marker>
+			<error>
+				<message>
+					Switch on BATT 2{|.}
+				</message>
+				<condition>
+					<not>
+						<property>controls/electric/batt2-switch</property>
+					</not>
+				</condition>
+			</error>
+			<exit>
+				<condition>
+					<property>controls/electric/batt2-switch</property>
+				</condition>
+			</exit>
+		</step>
+
+		<step>
+			<message>
+				Set APU Master to ON{|.}
+			</message>
+			<view>
+				<heading-offset-deg>289.42</heading-offset-deg>
+				<pitch-offset-deg>-21.4</pitch-offset-deg>
+				<field-of-view>23.1</field-of-view>
+			</view>
+			<marker>
+				<x-m>-7.4438</x-m>
+				<y-m>0.7000</y-m>
+				<z-m>-0.1331</z-m>
+				<scale>2.0</scale>
+			</marker>
+			<error>
+				<message>
+					Set APU Master to ON{|.}
+				</message>
+				<condition>
+					<not>
+						<property>controls/APU/master</property>
+					</not>
+				</condition>
+			</error>
+			<exit>
+				<condition>
+					<property>controls/APU/master</property>
+				</condition>
+			</exit>
+		</step>
+
+		<step>
+			<message>
+				Set APU Start to ON{|.}
+			</message>
+			<view>
+				<heading-offset-deg>289.42</heading-offset-deg>
+				<pitch-offset-deg>-21.4</pitch-offset-deg>
+				<field-of-view>23.1</field-of-view>
+			</view>
+			<marker>
+				<x-m>-7.5057</x-m>
+				<y-m>0.7000</y-m>
+				<z-m>-0.1331</z-m>
+				<scale>2.45</scale>
+			</marker>
+			<error>
+				<message>
+					Set APU Start to ON{|.}
+				</message>
+				<condition>
+					<not>
+						<property>controls/APU/running</property>
+					</not>
+				</condition>
+			</error>
+			<exit>
+				<condition>
+					<property>controls/APU/running</property>
+				</condition>
+			</exit>
+		</step>
+
+		<step>
+			<message>
+				Wait for "READY TO LOAD"{|.}
+			</message>
+			<view>
+				<heading-offset-deg>289.42</heading-offset-deg>
+				<pitch-offset-deg>-21.4</pitch-offset-deg>
+				<field-of-view>23.1</field-of-view>
+			</view>
+				<marker>
+			    <x-m>-7.4876</x-m>
+			    <y-m>0.7000</y-m>
+			    <z-m>0.0033</z-m>
+			    <scale>2.45</scale>
+				</marker>
+			<error>
+				<message>
+					Wait for "READY TO LOAD"{|.}
+				</message>
+					<condition>
+						<not> 
+           		<property>controls/APU/rpm</property>
+						</not>	
+					</condition>
+			</error>
+			<exit>
+					<condition>
+						<greater-than> 
+           		<property>controls/APU/rpm</property>
+								<value>0.99</value>
+						</greater-than>	
+					</condition>
+			</exit>
+		</step>
+
+		<step>
+			<message>
+				Switch on GENERATOR{|.}
+			</message>
+			<view>
+				<heading-offset-deg>289.42</heading-offset-deg>
+				<pitch-offset-deg>-21.4</pitch-offset-deg>
+				<field-of-view>23.1</field-of-view>
+			</view>
+				<marker>
+			    <x-m>-7.4471</x-m>
+			    <y-m>0.7000</y-m>
+			    <z-m>0.0033</z-m>
+			    <scale>2.45</scale>
+				</marker>
+			<error>
+				<message>
+					Switch on GENERATOR{|.}
+				</message>
+				<condition>
+					<not>
+						<property>controls/APU/generator</property>
+					</not>
+				</condition>
+			</error>
+			<exit>
+				<condition>
+					<property>controls/APU/generator</property>
+				</condition>
+			</exit>
+		</step>
+
+		<step>
+			<message>
+				Switch on BLEED AIR (first step){|.}
+			</message>
+			<view>
+				<heading-offset-deg>289.42</heading-offset-deg>
+				<pitch-offset-deg>-21.4</pitch-offset-deg>
+				<field-of-view>23.1</field-of-view>
+			</view>
+				<marker>
+			    <x-m>-7.5372</x-m>
+			    <y-m>0.7000</y-m>
+			    <z-m>0.0033</z-m>
+			    <scale>2.45</scale>
+				</marker>
+			<error>
+				<message>
+					Incorrect BLEED AIR{|.}
+				</message>
+				<condition>
+					<not-equals>
+						<property>controls/APU/bleed</property>
+						<value>1</value>
+					</not-equals>
+				</condition>
+			</error>
+			<exit>
+				<condition>
+					<equals>
+						<property>controls/APU/bleed</property>
+						<value>1</value>
+					</equals>
+				</condition>
+			</exit>
+		</step>
+
+		<step>
+			<message>
+				Switch on BATT 1{|.}
+			</message>
+			<view>
+				<heading-offset-deg>350.578</heading-offset-deg>
+				<pitch-offset-deg>-39.3</pitch-offset-deg>
+				<field-of-view>18</field-of-view>
+			</view>
+				<marker>
+			    <x-m>-7.7066</x-m>
+			    <y-m>-0.3281</y-m>
+			    <z-m>-0.1380</z-m>
+			    <scale>1.40</scale>
+				</marker>
+			<error>
+				<message>
+					Switch on BATT 1{|.}
+				</message>
+				<condition>
+					<not>
+						<property>controls/electric/batt1-switch</property>
+					</not>
+				</condition>
+			</error>
+			<exit>
+				<condition>
+					<property>controls/electric/batt1-switch</property>
+				</condition>
+			</exit>
+		</step>
+
+		<step>
+			<message>
+				Switch on AVIONICS (2 steps){|.}
+			</message>
+			<view>
+				<heading-offset-deg>350.578</heading-offset-deg>
+				<pitch-offset-deg>-39.3</pitch-offset-deg>
+				<field-of-view>18</field-of-view>
+			</view>
+			<marker>
+				<x-m>-7.6826</x-m>
+					<y-m>-0.2909</y-m>
+			    <z-m>-0.1595</z-m>
+			    <scale>1.40</scale>
+			</marker>
+			<error>
+				<message>Switch on AVIONICS{|.}
+				</message>
+				<condition>
+					<not-equals>
+						<property>controls/electric/avionics-switch</property>
+						<value>2</value>
+					</not-equals>
+				</condition>
+			</error>
+			<exit>
+				<condition>
+					<equals>
+						<property>controls/electric/avionics-switch</property>
+						<value>2</value>
+					</equals>
+				</condition>
+			</exit>
+		</step>
+
+		<step>
+			<message>
+				Push Master Warning Reset to stop alarm{|.}
+			</message>
+			<view>
+				<heading-offset-deg>0.0</heading-offset-deg>
+				<pitch-offset-deg>-12.4</pitch-offset-deg>
+				<field-of-view>62.4</field-of-view>
+			</view>
+			<marker>
+				<x-m>-7.8157</x-m>
+					<y-m>-0.3512</y-m>
+			    <z-m>0.1843</z-m>
+			    <scale>2.45</scale>
+			</marker>
+			<error>
+				<message>
+					Master Warning not resetted{|.}
+				</message>
+				<condition>
+					<not>
+						<property>instrumentation/annunciators/ack-warning</property>
+					</not>
+				</condition>
+			</error>
+			<exit>
+				<condition>
+					<property>instrumentation/annunciators/ack-warning</property>
+				</condition>
+			</exit>
+		</step>
+
+		<step>
+			<message>
+				Push Master Caution Reset to stop alarm{|.}
+			</message>
+			<view>
+				<heading-offset-deg>0.0</heading-offset-deg>
+				<pitch-offset-deg>-12.4</pitch-offset-deg>
+				<field-of-view>62.4</field-of-view>
+			</view>
+			<marker>
+				<x-m>-7.8157</x-m>
+					<y-m>-0.320</y-m>
+			    <z-m>0.1843</z-m>
+			    <scale>2.45</scale>
+			</marker>
+			<error>
+				<message>
+					Master Caution not resetted{|.}
+				</message>
+				<condition>
+					<not>
+						<property>instrumentation/annunciators/ack-caution</property>
+					</not>
+				</condition>
+			</error>
+			<exit>
+				<condition>
+					<property>instrumentation/annunciators/ack-caution</property>
+				</condition>
+			</exit>
+		</step>
+
+		<step>
+			<message>
+				Load : 2 - Engines Startup to start engines {|.}
+			</message>
+		</step>
+
+    <end>
+     <view>
+        <heading-offset-deg>0</heading-offset-deg>
+        <pitch-offset-deg>-11</pitch-offset-deg>
+        <field-of-view>81</field-of-view>
+      </view>
+    </end>
+
+</PropertyList>

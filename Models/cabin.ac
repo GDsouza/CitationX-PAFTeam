@@ -1,5 +1,5 @@
 AC3Db
-MATERIAL "Cabin" rgb 0.8 0.8 0.8 amb 1 1 1 emis 0.1 0.1 0.1 spec 1 1 1 shi 50 trans 0
+MATERIAL "cabin" rgb 0.8 0.8 0.8 amb 1 1 1 emis 0.1 0.1 0.1 spec 1 1 1 shi 50 trans 0
 MATERIAL "Matériau" rgb 0.30998 0.646262 0.8 amb 1 1 1 emis 0.1 0.1 0.1 spec 1 1 1 shi 50 trans 0
 MATERIAL "ac3dmat1.001" rgb 1 1 1 amb 0.2 0.2 0.2 emis 0.1 0.1 0.1 spec 0 0 0 shi 128 trans 0
 MATERIAL "garniture" rgb 0.8 0.8 0.8 amb 1 1 1 emis 0.1 0.1 0.1 spec 1 1 1 shi 50 trans 0
@@ -63614,7 +63614,7 @@ name "seatbelt-L.off"
 loc -2.9245 0.128698 0.836147
 data 14
 seatbelt-L.off
-texture "Cabin-logo.png"
+texture "cabin-logo.png"
 texrep 1 1
 crease 45.000001
 numvert 16
@@ -63669,7 +63669,7 @@ name "seatbelt-L.on"
 loc -2.9245 0.128698 0.833166
 data 13
 seatbelt-L.on
-texture "Cabin-logo.png"
+texture "cabin-logo.png"
 texrep 1 1
 crease 45.000001
 numvert 16
@@ -63724,7 +63724,7 @@ name "seatbelt-R.off"
 loc -2.92215 0.130094 -0.83546
 data 14
 seatbelt-R.off
-texture "Cabin-logo.png"
+texture "cabin-logo.png"
 texrep 1 1
 crease 45.000001
 numvert 16
@@ -63779,7 +63779,7 @@ name "seatbelt-R.on"
 loc -2.92215 0.130094 -0.835337
 data 13
 seatbelt-R.on
-texture "Cabin-logo.png"
+texture "cabin-logo.png"
 texrep 1 1
 crease 45.000001
 numvert 16
@@ -65011,7 +65011,7 @@ name "smoke-L.off"
 loc -2.97723 0.128698 0.836147
 data 11
 smoke-L.off
-texture "Cabin-logo.png"
+texture "cabin-logo.png"
 texrep 1 1
 crease 45.000001
 numvert 16
@@ -65066,7 +65066,7 @@ name "smoke-L.on"
 loc -2.97723 0.128698 0.836107
 data 10
 smoke-L.on
-texture "Cabin-logo.png"
+texture "cabin-logo.png"
 texrep 1 1
 crease 45.000001
 numvert 16
@@ -65121,7 +65121,7 @@ name "smoke-R.off"
 loc -2.97488 0.130094 -0.83546
 data 11
 smoke-R.off
-texture "Cabin-logo.png"
+texture "cabin-logo.png"
 texrep 1 1
 crease 45.000001
 numvert 16
@@ -65176,7 +65176,7 @@ name "smoke-R.on"
 loc -2.97488 0.130094 -0.835284
 data 10
 smoke-R.on
-texture "Cabin-logo.png"
+texture "cabin-logo.png"
 texrep 1 1
 crease 45.000001
 numvert 16

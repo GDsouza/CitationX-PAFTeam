@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- Inertial Reference System -->
+<!-- C.Le Moigne (clm76) - Avril 2017 -->
+
+<PropertyList>
+
+  <path>hf-screen.ac</path>
+
+  <animation>
+      <type>select</type>
+      <object-name>HFscreen</object-name>
+      <condition>
+        <and>
+          <property>systems/electrical/outputs/hf1</property>
+          <greater-than>
+            <property>instrumentation/kfs-594/vol-knob</property>
+            <value>0</value>
+          </greater-than>
+        </and>
+			</condition>
+  </animation>
+
+</PropertyList>

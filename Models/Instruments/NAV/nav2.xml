@@ -6,62 +6,58 @@
 
 <!-- NAV2 Controls -->
 
-    <animation>
-        <type>select</type>
-        <condition>
-            <property>sim/model/nav2-visible</property>
-        </condition>
-        <object-name>Nav2-socle</object-name>
-        <object-name>Contours-molettes</object-name>
-        <object-name>RIC2.crs</object-name>
-        <object-name>RIC2.alt</object-name>
-        <object-name>RIC2.hdg</object-name>
-        <object-name>etiquettes-nav2</object-name>
-        <object-name>vis-nav2</object-name>
-    </animation>
+  <animation>
+      <type>select</type>
+      <condition>
+          <property>sim/model/nav2-visible</property>
+      </condition>
+      <object-name>nav2.base</object-name>
+      <object-name>knobs.circles</object-name>
+      <object-name>RIC2.crs</object-name>
+      <object-name>RIC2.alt</object-name>
+      <object-name>RIC2.hdg</object-name>
+      <object-name>nav2.labels</object-name>
+      <object-name>nav2.screws</object-name>
+  </animation>
 
-    <animation>
-      <type>material</type>
-      <object-name>Nav2-socle</object-name>
-      <object-name>Contours-molettes</object-name>
-      <object-name>etiquettes-nav2</object-name>
-			<condition>
-				<or>
-					<property>systems/electrical/left-emer-bus</property>
-					<property>systems/electrical/right-emer-bus</property>
-					<property>systems/electrical/left-bus-norm</property>
-					<property>systems/electrical/right-bus-norm</property>
-				</or>
-			</condition>
-      <emission>
-          <red>1</red>
-          <green>1</green>
-          <blue>1</blue>
-          <factor-prop>controls/lighting/flood-norm</factor-prop>
-      </emission>
-    </animation>
+  <animation>
+    <type>material</type>
+    <object-name>nav2.base</object-name>
+    <object-name>nav2.screws</object-name>
+    <object-name>RIC2.alt</object-name>
+    <emission>
+        <red>1</red>
+        <green>1</green>
+        <blue>1</blue>
+        <factor-prop>controls/lighting/flood-norm</factor-prop>
+    </emission>
+  </animation>
 
-    <animation>
-      <type>material</type>
-        <object-name>RIC2.crs</object-name>
-        <object-name>RIC2.hdg</object-name>
-        <object-name>RIC2.alt</object-name>
-        <object-name>Contours-molettes</object-name>
-        <condition>
-						<or>
-	           	<property>systems/electrical/left-emer-bus</property>
-	           	<property>systems/electrical/left-bus-norm</property>
-						</or>
-        </condition>
-        <emission>
-            <red>1</red>
-            <green>1</green>
-            <blue>1</blue>
-            <factor-prop>controls/lighting/instruments-norm</factor-prop>
-        </emission>
-    </animation>
+  <animation>
+    <type>material</type>
+    <object-name>RIC2.crs</object-name>
+    <object-name>RIC2.hdg</object-name>
+    <emission>
+        <red>1</red>
+        <green>1</green>
+        <blue>1</blue>
+        <factor-prop>controls/lighting/rh-norm</factor-prop>
+    </emission>
+  </animation>
 
-<animation>
+  <animation>
+    <type>material</type>
+    <object-name>nav2.labels</object-name>
+    <object-name>knob.circles</object-name>
+    <emission>
+        <red>1</red>
+        <green>1</green>
+        <blue>1</blue>
+        <factor-prop>controls/lighting/el-norm</factor-prop>
+    </emission>
+  </animation>
+
+  <animation>
     <type>pick</type>
     <object-name>RIC2.crs</object-name>
     <action>

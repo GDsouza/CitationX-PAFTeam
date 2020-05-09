@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<PropertyList>
+
+  <path>oxygenL.ac</path>
+
+  <animation>
+    <type>material</type>
+    <object-name>oxy.panel</object-name>
+    <object-name>oxy.base</object-name>
+    <object-name>micSel.base</object-name>
+    <object-name>micSel.btn</object-name>
+    <object-name>passOxy</object-name>
+    <emission>
+      <red>1</red>
+      <green>1</green>
+      <blue>1</blue>
+      <factor-prop>controls/lighting/flood-norm</factor-prop>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>labels</object-name>
+    <emission>
+      <red>1</red>
+      <green>1</green>
+      <blue>1</blue>
+      <factor-prop>controls/lighting/el-norm</factor-prop>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>needle</object-name>
+    <object-name>oxy.screen</object-name>
+    <emission>
+      <red>1</red>
+      <green>0.7</green>
+      <blue>0</blue>
+      <factor-prop>controls/lighting/lh-norm</factor-prop>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>needle</object-name>
+		<property>controls/oxygen/oxygen-psi</property>
+		<factor>12</factor>
+    <axis>
+      <x>-1</x>
+      <y>0</y>
+      <z>-1</z>
+    </axis>
+    <center>
+      <x-m>0.020</x-m>
+      <y-m>-0.5960</y-m>
+      <z-m>-0.015</z-m>
+    </center>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>micSel.btn</object-name>
+		<property>controls/oxygen/mic-select-pilot</property>
+		<factor>50</factor>
+    <axis>
+      <x>0</x>
+      <y>-1</y>
+      <z>0</z>
+    </axis>
+    <center>
+      <x-m>0.046</x-m>
+      <y-m>0</y-m>
+      <z-m>-0.045</z-m>
+    </center>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>micSel.btn</object-name>
+    <action>
+      <button>0</button>
+      <binding>
+        <command>property-toggle</command>
+        <property>controls/oxygen/mic-select-pilot</property>
+      </binding>
+      <binding>
+        <command>property-toggle</command>
+        <property>sim/sound/click</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>MIC SEL</tooltip-id>
+        <label>MIC SEL : %s</label>
+   			<property>controls/oxygen/mic-select-pilot</property>
+        <mapping>nasal</mapping>
+	      <script>
+		      var modes = ['HEAD SET','OXY MASK'];
+		      return modes[arg[0]];
+	      </script>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+      <type>rotate</type>
+      <object-name>passOxy</object-name>
+      <property>controls/oxygen/pass-oxy</property>
+      <factor>-45</factor>
+      <axis>
+        <x>1</x>
+        <y>0</y>
+        <z>1</z>
+      </axis>
+      <center>
+        <x-m>0.047 </x-m>
+        <y-m>-0.624</y-m>
+        <z-m>-0.046</z-m>
+      </center>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>passOxy</object-name>
+    <action>
+        <button>3</button>
+        <repeatable>false</repeatable>
+		    <binding>
+		      <command>property-adjust</command>
+		      <property>controls/oxygen/pass-oxy</property>
+						<step>1</step>
+						<min>0</min>
+						<max>2</max>
+						<wrap>false</wrap>
+		    </binding>
+				<binding>
+					<command>nasal</command>
+					<script>citation.crossfeed();</script>
+				</binding>
+			</action>
+      <hovered>
+        <binding>
+          <command>set-tooltip</command>
+          	<tooltip-id>passOxy</tooltip-id>
+            <label>PASS OXY: %s</label>
+       			<property>controls/oxygen/pass-oxy</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['OFF','AUTO','ON'];
+							return modes[arg[0]];
+						</script>
+		      </binding>
+		    </hovered>
+	</animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>passOxy</object-name>
+    <action>
+        <button>4</button>
+        <repeatable>false</repeatable>
+		    <binding>
+		      <command>property-adjust</command>
+		      <property>controls/oxygen/pass-oxy</property>
+						<step>-1</step>
+						<min>0</min>
+						<max>2</max>
+						<wrap>false</wrap>
+		    </binding>
+        <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+        </binding>
+			</action>
+	</animation>
+
+</PropertyList>

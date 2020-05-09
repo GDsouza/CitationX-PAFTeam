@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+Author : C. Le Moigne (clm76) Feb 2018
+-->
+
+<PropertyList>
+
+    <path>slipball.ac</path>
+
+    <animation>
+        <type>material</type>
+        <object-name>slip-ball</object-name>
+        <object-name>slip-glass</object-name>
+        <emission>
+            <red>1</red>
+            <green>0.7</green>
+            <blue>0</blue>
+            <factor-prop>controls/lighting/rh-norm</factor-prop>
+        </emission>
+    </animation>
+
+		<animation>
+        <type>rotate</type>
+        <object-name>slip-ball</object-name>
+        <property>instrumentation/slip-skid-ball/indicated-slip-skid</property>
+        <interpolation>
+            <entry><ind>-2.0</ind><dep>-3.65</dep></entry>
+            <entry><ind>2.0</ind><dep>3.65</dep></entry>
+        </interpolation>
+        <axis>
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+        <center>
+            <x-m>0</x-m>
+            <y-m>0</y-m>
+            <z-m>0.200</z-m>
+        </center>
+    </animation>
+
+</PropertyList>

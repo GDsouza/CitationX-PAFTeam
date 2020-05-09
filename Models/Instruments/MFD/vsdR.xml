@@ -1,0 +1,31 @@
+<!--
+Citation X - Vertical Situation Display
+-->
+
+<PropertyList>
+
+<path>vsdR.ac</path>
+
+    <animation>
+        <type>select</type>
+        <object-name>VsdR.screen</object-name>
+        <condition>
+					<and>
+	          <property>systems/electrical/outputs/mfd2</property>
+						<property>instrumentation/efis/vsd[1]</property>
+					</and>
+				</condition>
+    </animation>
+
+    <animation>
+        <type>material</type>
+        <object-name>VsdR.screen</object-name>
+        <emission>
+            <red>1</red>
+            <green>1</green>
+            <blue>1</blue>
+            <factor-prop>controls/lighting/mfd[1]</factor-prop>
+        </emission>
+    </animation>
+
+</PropertyList>

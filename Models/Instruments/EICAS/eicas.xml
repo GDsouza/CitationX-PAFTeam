@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- 
+  Primus 2000 EICAS - Canvas
+  C. Le Moigne (clm76) - March 2019
+-->
+
+<PropertyList>
+
+<path>eicas.ac</path>
+
+    <animation>
+      <type>select</type>
+      <object-name>Eicas.screen</object-name>
+      <condition>
+        <and>
+          <property>systems/electrical/outputs/eicas</property>
+          <or>
+            <property>systems/electrical/outputs/iac1</property>
+            <property>systems/electrical/outputs/iac2</property>
+          </or>
+        </and>
+			</condition>
+    </animation>
+
+  <animation>
+      <type>material</type>
+      <object-name>Eicas.screen</object-name>
+      <condition>
+        <property>systems/electrical/outputs/eicas</property>
+      </condition>
+      <emission>
+          <red>1</red>
+          <green>1</green>
+          <blue>1</blue>
+          <factor-prop>controls/lighting/eicas</factor-prop>
+      </emission>
+  </animation>
+
+</PropertyList>

@@ -6,7 +6,7 @@
 
     <model>
         <name>CDU0-screen</name>
-        <path>Models/Instruments/CDU/CDU-screenL.xml</path>
+        <path>Models/Instruments/CDU/cdu-screenL.xml</path>
         <offsets>
             <x-m>0.088</x-m>
             <y-m>-0.082</y-m>
@@ -17,7 +17,7 @@
 
     <model>
         <name>CDU1-screen</name>
-        <path>Models/Instruments/CDU/CDU-screenR.xml</path>
+        <path>Models/Instruments/CDU/cdu-screenR.xml</path>
         <offsets>
             <x-m>0.088</x-m>
             <y-m>0.090</y-m>
@@ -28,7 +28,7 @@
 
     <model>
         <name>CDU0</name>
-        <path>Models/Instruments/CDU/CDU.xml</path>
+        <path>Models/Instruments/CDU/cdu.xml</path>
         <offsets>
             <x-m>0.088</x-m>
             <y-m>-0.082</y-m>
@@ -39,7 +39,7 @@
 
     <model>
         <name>CDU1</name>
-        <path>Models/Instruments/CDU/CDU1.xml</path>
+        <path>Models/Instruments/CDU/cdu1.xml</path>
         <offsets>
             <x-m>0.088</x-m>
             <y-m>0.090</y-m>
@@ -49,7 +49,7 @@
     </model>
 
     <model>
-        <path>Models/Instruments/RMU/RMU1.xml</path>
+        <path>Models/Instruments/RMU/rmu1.xml</path>
         <offsets>
             <x-m>0.250</x-m>
             <y-m>-0.103</y-m>
@@ -59,7 +59,7 @@
     </model>
 
     <model>
-        <path>Models/Instruments/RMU/RMU2.xml</path>
+        <path>Models/Instruments/RMU/rmu2.xml</path>
         <offsets>
             <x-m>0.250</x-m>
             <y-m>0.111</y-m>
@@ -90,7 +90,7 @@
 
     <model>
 				<name>IRS_L</name>
-        <path>Models/Instruments/IRS/IRS.xml</path>
+        <path>Models/Instruments/IRS/irs-L.xml</path>
         <offsets>
             <x-m>0</x-m>
             <y-m>0</y-m>
@@ -101,7 +101,7 @@
 
     <model>
 				<name>IRS_R</name>
-        <path>Models/Instruments/IRS/IRS.xml</path>
+        <path>Models/Instruments/IRS/irs-R.xml</path>
         <offsets>
             <x-m>0</x-m>
             <y-m>0.159</y-m>
@@ -112,7 +112,7 @@
 
     <model>
 				<name>IRSscreenL</name>
-        <path>Models/Instruments/IRS/IRS-screen.xml</path>
+        <path>Models/Instruments/IRS/irs-screenL.xml</path>
         <offsets>
             <x-m>0.001</x-m>
             <y-m>0</y-m>
@@ -123,7 +123,7 @@
 
     <model>
 				<name>IRSscreenR</name>
-        <path>Models/Instruments/IRS/IRS-screen.xml</path>
+        <path>Models/Instruments/IRS/irs-screenR.xml</path>
         <offsets>
             <x-m>0.001</x-m>
             <y-m>0.159</y-m>
@@ -134,7 +134,7 @@
 
     <model>
 				<name>HFscreen</name>
-        <path>Models/Instruments/HF/HFscreen.xml</path>
+        <path>Models/Instruments/HF/hf-screen.xml</path>
         <offsets>
             <x-m>0.001</x-m>
             <y-m>0</y-m>
@@ -145,7 +145,7 @@
 
     <model>
 				<name>Selcal.screen</name>
-        <path>Models/Instruments/HF/Selcal.xml</path>
+        <path>Models/Instruments/HF/selcal.xml</path>
         <offsets>
             <x-m>0.0001</x-m>
             <y-m>0</y-m>
@@ -155,7 +155,7 @@
     </model>
 
     <model>
-        <path>Models/Instruments/HF/Xfer.xml</path>
+        <path>Models/Instruments/HF/xfer.xml</path>
         <offsets>
             <x-m>0</x-m>
             <y-m>0</y-m>
@@ -163,6 +163,51 @@
             <pitch-deg>0</pitch-deg>
         </offsets>
     </model>
+
+<!-- Lights -->
+
+    <animation>
+      <type>material</type>
+      <object-name>pedestal.labels</object-name>
+      <object-name>Flap.reset</object-name>
+      <emission>
+          <red>1</red>
+          <green>1</green>
+          <blue>1</blue>
+          <factor-prop>controls/lighting/el-norm</factor-prop>
+      </emission>
+    </animation>
+
+    <animation>
+      <type>material</type>
+      <object-name>RIC1.hdg</object-name>
+      <object-name>RIC2.hdg</object-name>
+      <object-name>RIC1.crs</object-name>
+      <object-name>RIC2.crs</object-name>
+      <object-name>Radar</object-name>
+      <object-name>Flap.lever</object-name>
+      <emission>
+          <red>1</red>
+          <green>1</green>
+          <blue>1</blue>
+          <factor-prop>controls/lighting/ctr-norm</factor-prop>
+      </emission>
+    </animation>
+
+    <animation>
+      <type>material</type>
+      <object-name>Console.001</object-name>
+      <object-name>Console.002</object-name>
+      <object-name>Console.003</object-name>
+      <object-name>Throttle.base</object-name>
+      <object-name>Throttle.base.001</object-name>
+      <emission>
+          <red>1</red>
+          <green>1</green>
+          <blue>1</blue>
+          <factor-prop>controls/lighting/flood-norm</factor-prop>
+      </emission>
+    </animation>
 
 <!-- Hf comm -->
 
@@ -516,58 +561,6 @@
 	    </hovered>
 	  </animation>
 
-<!-- Lights -->
-
-    <animation>
-      <type>material</type>
-      <object-name>Flap.reset</object-name>
-      <object-name>RIC1.hdg</object-name>
-      <object-name>RIC2.hdg</object-name>
-      <object-name>RIC1.crs</object-name>
-      <object-name>RIC2.crs</object-name>
-      <object-name>RDR.trb</object-name>
-      <object-name>RDR.stab</object-name>
-      <object-name>RDR.tgt</object-name>
-      <object-name>RDR.sect</object-name>
-        <condition>
-						<or>
-	           	<property>systems/electrical/left-emer-bus</property>
-	           	<property>systems/electrical/left-bus-norm</property>
-						</or>
-        </condition>
-        <emission>
-            <red>1</red>
-            <green>1</green>
-            <blue>1</blue>
-            <factor-prop>controls/lighting/instruments-norm</factor-prop>
-        </emission>
-    </animation>
-
-    <animation>
-        <type>material</type>
-        <object-name>Console.001</object-name>
-        <object-name>Console.002</object-name>
-        <object-name>Console.003</object-name>
-        <object-name>Throttle.base</object-name>
-        <object-name>Throttle.base.001</object-name>
-        <object-name>Label.0</object-name>
-        <object-name>Label.1</object-name>
-        <object-name>Label.2</object-name>
-				<condition>
-					<or>
-						<property>systems/electrical/left-emer-bus</property>
-						<property>systems/electrical/right-emer-bus</property>
-						<property>systems/electrical/left-bus-norm</property>
-						<property>systems/electrical/right-bus-norm</property>
-					</or>
-				</condition>
-        <emission>
-            <red>1</red>
-            <green>1</green>
-            <blue>1</blue>
-            <factor-prop>controls/lighting/flood-norm</factor-prop>
-        </emission>
-    </animation>
 
 <!--SPEEDBRAKE -->
 
@@ -610,7 +603,20 @@
     </hovered>
 	</animation>
 
-<!-- PARKING BRAKE -->
+<!-- PARK BRAKE -->
+
+    <animation>
+        <type>translate</type>
+        <object-name>ParkBrake</object-name>	
+        <property>controls/gear/brake-parking</property>
+				<factor>0.03</factor>
+        <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>1</z>
+        </axis>
+    </animation>
+
 
     <animation>
       <type>pick</type>
@@ -648,56 +654,27 @@
             <binding>
                 <command>set-tooltip</command>
                 <tooltip-id>ParkBrake</tooltip-id>
-                <label>Parking Brake: %s</label>
+                <label>Park Brake: %s</label>
                 <mapping>on-off</mapping>
                 <property>controls/gear/brake-parking</property>
             </binding>
         </hovered>
     </animation>
 
-    <animation>
-        <type>translate</type>
-        <object-name>ParkBrake</object-name>	
-        <property>controls/gear/brake-parking</property>
-				<factor>-0.03</factor>
-        <axis>
-            <x>-1</x>
-            <y>0</y>
-            <z>0</z>
-        </axis>
-    </animation>
-
-	<animation>
-        <type>rotate</type>
-        <object-name>ParkBrake</object-name>	
-				<property>controls/gear/brake-parking</property>
-        <factor>-90</factor>
-        <center>
-            <x-m>0</x-m>
-            <y-m>0.002</y-m>
-            <z-m>-0.222</z-m>
-        </center>
-        <axis>
-            <x>1</x>
-            <y>0</y>
-            <z>0</z>
-        </axis>
-   </animation>
-
 <!-- FLAPS -->
 
     <animation>
         <type>translate</type>
-        <object-name>FlapLever</object-name>
+        <object-name>Flap.lever</object-name>
 		    <object-name>Flap.dwn</object-name>
 		    <object-name>Flap.up</object-name>
-        <property>controls/flight/flaps</property>
+        <property>controls/flight/flaps-select</property>
         <interpolation>
             <entry><ind>0</ind><dep>0</dep></entry>
-            <entry><ind>0.0428</ind><dep>0.0117</dep></entry>
-            <entry><ind>0.142</ind><dep>0.0275</dep></entry>
-            <entry><ind>0.428</ind><dep>0.0475</dep></entry>
-            <entry><ind>1.0</ind><dep>0.0724</dep></entry>
+            <entry><ind>1</ind><dep>0.0117</dep></entry>
+            <entry><ind>2</ind><dep>0.0275</dep></entry>
+            <entry><ind>3</ind><dep>0.0475</dep></entry>
+            <entry><ind>4</ind><dep>0.0724</dep></entry>
         </interpolation>
         <axis>
             <x>0.996</x>
@@ -714,7 +691,7 @@
         <repeatable>false</repeatable>
         <binding>
             <command>nasal</command>
-            <script>controls.flapsDown(1)</script>
+            <script>controls.flapsChange(1)</script>
         </binding>
     </action>
     <hovered>
@@ -741,7 +718,7 @@
         <repeatable>false</repeatable>
         <binding>
             <command>nasal</command>
-            <script>controls.flapsDown(-1)</script>
+            <script>controls.flapsChange(-1)</script>
         </binding>
     </action>
 </animation>
@@ -754,7 +731,7 @@
     	<repeatable>false</repeatable>
     	<binding>
 				<command>nasal</command>
-				<script>controls.flapsDown(2)</script>
+				<script>controls.flapsChange(2)</script>
 			</binding>
     </action>
     <hovered>
@@ -891,7 +868,7 @@
 				</condition> 
 				<command>property-adjust</command>
 					<property>/controls/engines/engine/throttle</property>
-					<factor>-0.05</factor>
+					<factor>0.05</factor>
 					<min>0</min>
 					<max>1</max>
 					<wrap>0</wrap>
@@ -907,7 +884,7 @@
 				</condition> 
 				<command>property-adjust</command>
 					<property>/controls/engines/engine[1]/throttle</property>
-					<factor>-0.05</factor>
+					<factor>0.05</factor>
 					<min>0</min>
 					<max>1</max>
 					<wrap>0</wrap>
@@ -1039,7 +1016,7 @@
 				</condition> 
 				<command>property-adjust</command>
 					<property>/controls/engines/engine[1]/throttle</property>
-					<factor>-0.05</factor>
+					<factor>0.05</factor>
 					<min>0</min>
 					<max>1</max>
 					<wrap>0</wrap>
@@ -1055,7 +1032,7 @@
 				</condition> 
 				<command>property-adjust</command>
 					<property>/controls/engines/engine[1]/throttle</property>
-					<factor>-0.05</factor>
+					<factor>0.05</factor>
 					<min>0</min>
 					<max>1</max>
 					<wrap>0</wrap>
@@ -1131,63 +1108,12 @@
     </action>
   </animation>
 
-<!--
-	<animation>
-    <type>pick</type>
-    <object-name>Sync.knob</object-name>
-    <action>
-      <button>3</button>
-      <repeatable>false</repeatable>
-      <binding>
-        <command>property-adjust</command>
-        <property>controls/engines/synchro</property>
-        <step>1</step>
-        <min>-1</min>
-        <max>1</max>
-        <wrap>false</wrap>           
-      </binding>
-      <binding>
-        <command>property-toggle</command>
-        <property>sim/sound/click</property>
-      </binding>
-    </action>
-    <action>
-      <button>4</button>
-      <repeatable>false</repeatable>
-      <binding>
-        <command>property-adjust</command>
-        <property>controls/engines/synchro</property>
-        <step>-1</step>
-        <min>-1</min>
-        <max>1</max>
-        <wrap>false</wrap>           
-      </binding>
-      <binding>
-        <command>property-toggle</command>
-        <property>sim/sound/click</property>
-      </binding>
-    </action>
-    <hovered>
-      <binding>
-        <command>set-tooltip</command>
-        <tooltip-id>Engines Synchro</tooltip-id>
-        <label>Synchro: %s</label>
-        <mapping>nasal</mapping>
-        <property>controls/engines/synchro</property>
-				<script>
-					var modes = ['OFF','TURBINE','FAN'];
-					return modes[arg[0]];
-				</script>
-        </binding>
-    </hovered>
-	</animation>
--->
 <!-- TAXI LIGHTS -->
 
     <animation>
         <type>rotate</type>
         <object-name>Taxi.switch</object-name>
-        <property>controls/lighting/taxi-lights</property>
+        <property>controls/lighting/taxi-light</property>
         <factor>30</factor>
         <center>
             <x-m>0.532</x-m>
@@ -1209,7 +1135,7 @@
         <repeatable>false</repeatable>
         <binding>
             <command>property-toggle</command>
-            <property>controls/lighting/taxi-lights</property>
+            <property>controls/lighting/taxi-light</property>
         </binding>
         <binding>
             <command>property-toggle</command>
@@ -1222,44 +1148,44 @@
         <tooltip-id>Taxi Light</tooltip-id>
         <label>Taxi Light: %s</label>
         <mapping>on-off</mapping>
-        <property>controls/lighting/taxi-lights</property>
+        <property>controls/lighting/taxi-light</property>
         </binding>
     </hovered>
 	</animation>
 
 <!-- LANDING LIGHTS -->
 
-    <animation>
-        <type>rotate</type>
-        <object-name>LHLlight.switch</object-name>
-        <property>controls/lighting/landing-light[0]</property>
-        <factor>30</factor>
-        <center>
-            <x-m>0.532</x-m>
-            <y-m>0</y-m>
-            <z-m>-0.133</z-m>
-        </center>
-        <axis>
-            <x>0</x>
-            <y>-1</y>
-            <z>0</z>
-        </axis>
-    </animation>
+  <animation>
+      <type>rotate</type>
+      <object-name>LhLanding-light.switch</object-name>
+      <property>controls/lighting/landing-light[0]</property>
+      <factor>30</factor>
+      <center>
+        <x-m>0.532</x-m>
+        <y-m>0</y-m>
+        <z-m>-0.133</z-m>
+      </center>
+      <axis>
+        <x>0</x>
+        <y>-1</y>
+        <z>0</z>
+      </axis>
+  </animation>
 
 	<animation>
     <type>pick</type>
-    <object-name>LHLlight.switch</object-name>
+    <object-name>LhLanding-light.switch</object-name>
     <action>
-        <button>0</button>
-        <repeatable>false</repeatable>
-        <binding>
-            <command>property-toggle</command>
-            <property>controls/lighting/landing-light[0]</property>
-        </binding>
-        <binding>
-            <command>property-toggle</command>
-            <property>sim/sound/click</property>
-        </binding>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>property-toggle</command>
+        <property>controls/lighting/landing-light[0]</property>
+      </binding>
+      <binding>
+          <command>property-toggle</command>
+          <property>sim/sound/click</property>
+      </binding>
     </action>
     <hovered>
       <binding>
@@ -1272,37 +1198,37 @@
     </hovered>
 	</animation>
 
-    <animation>
-        <type>rotate</type>
-        <object-name>RHLlight.switch</object-name>
-        <property>controls/lighting/landing-light[1]</property>
-        <factor>30</factor>
-        <center>
-            <x-m>0.532</x-m>
-            <y-m>0</y-m>
-            <z-m>-0.133</z-m>
-        </center>
-        <axis>
-            <x>0</x>
-            <y>-1</y>
-            <z>0</z>
-        </axis>
-    </animation>
+  <animation>
+    <type>rotate</type>
+    <object-name>RhLanding-light.switch</object-name>
+    <property>controls/lighting/landing-light[1]</property>
+    <factor>30</factor>
+    <center>
+      <x-m>0.532</x-m>
+      <y-m>0</y-m>
+      <z-m>-0.133</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>-1</y>
+      <z>0</z>
+    </axis>
+  </animation>
 
 	<animation>
     <type>pick</type>
-    <object-name>RHLlight.switch</object-name>
+    <object-name>RhLanding-light.switch</object-name>
     <action>
-        <button>0</button>
-        <repeatable>false</repeatable>
-        <binding>
-            <command>property-toggle</command>
-            <property>controls/lighting/landing-light[1]</property>
-        </binding>
-        <binding>
-            <command>property-toggle</command>
-            <property>sim/sound/click</property>
-        </binding>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>property-toggle</command>
+        <property>controls/lighting/landing-light[1]</property>
+      </binding>
+      <binding>
+        <command>property-toggle</command>
+        <property>sim/sound/click</property>
+      </binding>
     </action>
     <hovered>
       <binding>
@@ -1372,11 +1298,8 @@
 						<not-equals>
 							<property>instrumentation/annunciators/test-select</property>
 								<value>0</value>
-							</not-equals>
-            <greater-than>
-              <property>systems/electrical/outputs/efis</property>
-               	<value>15</value>
-            </greater-than>
+						</not-equals>
+            <property>systems/electrical/outputs/aux-panel</property>
 					</and>
         </condition>
 	      <emission>
@@ -1595,20 +1518,47 @@
 
 <!-- AILERON TRIM -->
 
+  <animation>
+    <type>rotate</type>
+    <object-name>Atrim.switches</object-name>
+    <object-name>Atrim.swL</object-name>
+    <object-name>Atrim.swR</object-name>
+    <property>controls/flight/ailerons-trim-switches</property>
+    <factor>15</factor>
+    <center>
+        <x-m>0.0</x-m>
+        <y-m>0.0</y-m>
+        <z-m>-0.16</z-m>
+    </center>
+    <axis>
+        <x>1</x>
+        <y>0</y>
+        <z>0</z>
+    </axis>
+  </animation>
+
 	<animation>
     <type>pick</type>
-    <object-name>LH.trim</object-name>
+    <object-name>Atrim.swL</object-name>
     <action>
-        <button>0</button>
-        <repeatable>true</repeatable>
-        <binding>
-            <command>property-adjust</command>
-            <property>controls/flight/aileron-trim</property>
-            <step>0.01</step>
-            <min>-1.0</min>
-            <max>1.0</max>
-            <wrap>0</wrap>
+      <button>0</button>
+      <repeatable>true</repeatable>
+      <binding>
+        <command>property-assign</command>
+          <property>controls/flight/ailerons-trim-switches</property>
+          <value>1</value>
+      </binding>
+      <mod-up>
+		    <binding>
+          <command>property-assign</command>
+          <property>controls/flight/ailerons-trim-switches</property>
+          <value>0</value>
         </binding>
+      </mod-up>
+      <binding>
+        <command>nasal</command>
+        <script>controls.aileronTrim(-5);</script>          
+      </binding>
     </action>
     <hovered>
 			<binding>
@@ -1622,18 +1572,26 @@
 
 	<animation>
     <type>pick</type>
-    <object-name>RH.trim</object-name>
+    <object-name>Atrim.swR</object-name>
     <action>
-        <button>0</button>
-        <repeatable>true</repeatable>
-        <binding>
-            <command>property-adjust</command>
-            <property>controls/flight/aileron-trim</property>
-            <step>-0.01</step>
-            <min>-1.0</min>
-            <max>1.0</max>
-            <wrap>0</wrap>
+      <button>0</button>
+      <repeatable>true</repeatable>
+      <binding>
+        <command>property-assign</command>
+          <property>controls/flight/ailerons-trim-switches</property>
+          <value>-1</value>
+      </binding>
+      <mod-up>
+		    <binding>
+          <command>property-assign</command>
+          <property>controls/flight/ailerons-trim-switches</property>
+          <value>0</value>
         </binding>
+      </mod-up>
+      <binding>
+      <command>nasal</command>
+      <script>controls.aileronTrim(5);</script>          
+      </binding>
     </action>
     <hovered>
 			<binding>
@@ -1659,41 +1617,58 @@
 
 <!-- RUDDER TRIM -->
 
+  <animation>
+    <type>rotate</type>
+    <object-name>Rudder.knob</object-name>
+    <property>controls/flight/rudder-trim-btn</property>
+    <factor>45</factor>
+    <center>
+        <x-m>0.933</x-m>
+        <y-m>0.002</y-m>
+        <z-m>0.0</z-m>
+    </center>
+    <axis>
+        <x>0</x>
+        <y>0</y>
+        <z>-1</z>
+    </axis>
+  </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Rudder.knob</object-name>
+        <property>controls/flight/rudder-trim-init</property>
+				<factor>0.010</factor>
+        <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>-1</z>
+        </axis>
+    </animation>
+
 	<animation>
     <type>pick</type>
-    <object-name>RUDDER.knob</object-name>
+    <object-name>Rudder.knob</object-name>
     <action>
         <button>0</button>
-        <repeatable>true</repeatable>
+        <repeatable>false</repeatable>
+        <binding>
+					<command>property-assign</command>
+          <property>controls/flight/rudder-trim-init</property>
+					<value>1</value>
+        </binding>
         <binding>
 					<command>property-assign</command>
           <property>controls/flight/rudder-trim</property>
 					<value>0</value>
         </binding>
-    </action>
-    <action>
-        <button>3</button>
-        <repeatable>true</repeatable>
-        <binding>
-            <command>property-adjust</command>
-            <property>controls/flight/rudder-trim</property>
-            <step>0.01</step>
-            <min>-1.0</min>
-            <max>1.0</max>
-            <wrap>0</wrap>
+      <mod-up>
+	      <binding>
+          <command>property-assign</command>
+          <property>controls/flight/rudder-trim-init</property>
+          <value>0</value>
         </binding>
-    </action>
-    <action>
-        <button>4</button>
-        <repeatable>true</repeatable>
-        <binding>
-            <command>property-adjust</command>
-            <property>controls/flight/rudder-trim</property>
-            <step>-0.01</step>
-            <min>-1.0</min>
-            <max>1.0</max>
-            <wrap>0</wrap>
-        </binding>
+      </mod-up>
     </action>
     <hovered>
 			<binding>
@@ -1703,7 +1678,66 @@
 				<property>controls/flight/rudder-trim</property>
 			</binding>
 		</hovered>
-</animation>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>RudderTrim.right</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>true</repeatable>
+      <binding>
+        <command>property-assign</command>
+          <property>controls/flight/rudder-trim-btn</property>
+          <value>1</value>
+      </binding>
+      <binding>
+        <command>property-adjust</command>
+          <property>controls/flight/rudder-trim</property>
+            <interval-sec>0.2</interval-sec>
+						<step>0.05</step>
+						<min>-1</min>
+						<max>1</max>
+						<wrap>false</wrap>
+      </binding>
+      <mod-up>
+	      <binding>
+          <command>property-assign</command>
+          <property>controls/flight/rudder-trim-btn</property>
+          <value>0</value>
+        </binding>
+      </mod-up>
+    </action>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>RudderTrim.left</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>true</repeatable>
+      <binding>
+        <command>property-assign</command>
+          <property>controls/flight/rudder-trim-btn</property>
+          <value>-1</value>
+      </binding>
+      <binding>
+        <command>property-adjust</command>
+          <property>controls/flight/rudder-trim</property>
+						<step>-0.05</step>
+						<min>-1</min>
+						<max>1</max>
+						<wrap>false</wrap>
+      </binding>
+      <mod-up>
+	      <binding>
+          <command>property-assign</command>
+          <property>controls/flight/rudder-trim-btn</property>
+          <value>0</value>
+        </binding>
+      </mod-up>
+    </action>
+  </animation> 
 
   <animation>
         <type>textranslate</type>
@@ -1717,6 +1751,131 @@
         </axis>
     </animation>
 
+<!-- ELEVATOR TRIM -->
+
+    <animation>
+      <type>select</type>
+      <object-name>Strim.on</object-name>
+      <condition>
+        <and>
+          <property>controls/flight/sec-trim</property>
+          <property>systems/electrical/outputs/lh-panel</property>
+        </and>
+      </condition>
+    </animation>
+
+    <animation>
+      <type>rotate</type>
+      <object-name>Strim.btn</object-name>
+      <object-name>Strim.on</object-name>
+      <property>controls/flight/sec-trim</property>
+      <factor>15</factor>
+      <center>
+          <x-m>0.380</x-m>
+          <y-m>0</y-m>
+          <z-m>-0.12</z-m>
+      </center>
+      <axis>
+          <x>0</x>
+          <y>-1</y>
+          <z>0</z>
+      </axis>
+    </animation>
+
+	  <animation>
+      <type>pick</type>
+      <object-name>Strim.btn</object-name>
+      <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+         <command>property-toggle</command>
+          <property>controls/flight/sec-trim</property>
+        </binding>
+        <binding>
+          <command>property-toggle</command>
+          <property>sim/sound/click</property>
+        </binding>
+      </action>
+    </animation>
+
+    <animation>
+      <type>rotate</type>
+      <object-name>Strim.switches</object-name>
+      <object-name>Strim.up</object-name>
+      <object-name>Strim.dwn</object-name>
+      <property>controls/flight/sec-trim-switches</property>
+      <factor>15</factor>
+      <center>
+          <x-m>0.370</x-m>
+          <y-m>0</y-m>
+          <z-m>-0.12</z-m>
+      </center>
+      <axis>
+          <x>0</x>
+          <y>-1</y>
+          <z>0</z>
+      </axis>
+    </animation>
+
+	  <animation>
+      <type>pick</type>
+      <object-name>Strim.up</object-name>
+      <action>
+        <button>0</button>
+        <repeatable>true</repeatable>
+        <binding>
+          <command>property-assign</command>
+            <property>controls/flight/sec-trim-switches</property>
+            <value>1</value>
+        </binding>
+        <mod-up>
+			    <binding>
+            <command>property-assign</command>
+            <property>controls/flight/sec-trim-switches</property>
+            <value>0</value>
+          </binding>
+        </mod-up>
+      </action>
+      <hovered>
+			  <binding>
+				  <command>set-tooltip</command>
+				  <tooltip-id>Elevator trim up</tooltip-id>
+				  <label>Elevator trim : %.2f</label>
+				  <property>controls/flight/elevator-trim</property>
+			  </binding>
+		  </hovered>
+    </animation>
+
+    <animation>
+      <type>pick</type>
+      <object-name>Strim.dwn</object-name>
+      <action>
+        <button>0</button>
+        <repeatable>true</repeatable>
+        <binding>
+          <command>property-assign</command>
+            <property>controls/flight/sec-trim-switches</property>
+            <value>-1</value>
+        </binding>
+        <mod-up>
+			    <binding>
+            <command>property-assign</command>
+            <property>controls/flight/sec-trim-switches</property>
+            <value>0</value>
+          </binding>
+        </mod-up>
+      </action>
+      <hovered>
+			  <binding>
+				  <command>set-tooltip</command>
+				  <tooltip-id>Elevator trim dwn</tooltip-id>
+				  <label>Elevator trim : %.2f</label>
+				  <property>controls/flight/elevator-trim</property>
+			  </binding>
+		  </hovered>
+    </animation>
+
 <!-- Cockpit Voice Recorder -->
 
     <animation>
@@ -1724,11 +1883,8 @@
         <object-name>Cvr.LightOn</object-name>
         <condition>
           <and>
-            <greater-than>
-             <property>systems/electrical/outputs/comm</property>
-             <value>5</value>
-            </greater-than>
             <property>instrumentation/cvr/light</property>
+            <property>systems/electrical/outputs/cvr</property>
           </and>
         </condition>
     </animation>
@@ -1817,6 +1973,227 @@
           <label>Erase : %s</label>
           <mapping>on-off</mapping>
           <property>instrumentation/cvr/erase</property>
+        </binding>
+      </hovered>
+    </animation>
+
+<!-- Ailerons -->
+
+    <animation>
+        <type>translate</type>
+        <object-name>Aileron.btn</object-name>
+        <object-name>Aileron.shutoff</object-name>
+        <property>controls/flight/aileron-shutoff</property>
+				<factor>0.003</factor>
+        <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>-1</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>Aileron.shutoff</object-name>
+        <condition>
+          <property>controls/flight/aileron-shutoff</property>
+        </condition>
+    </animation>
+
+    <animation>
+      <type>textranslate</type>
+      <object-name>Aileron.btn</object-name>
+      <property>controls/flight/aileron-fail</property>
+			<factor>0.22</factor>
+      <axis>
+        <x>1</x>
+        <y>0</y>
+        <z>0</z>
+      </axis>
+    </animation>
+
+    <animation>
+      <type>pick</type>
+      <object-name>Aileron.btn</object-name>
+      <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+       <binding>
+          <command>property-toggle</command>
+          <property>controls/flight/aileron-shutoff</property>
+        </binding>
+      </action>
+      <hovered>
+        <binding>
+          <command>set-tooltip</command>
+          <tooltip-id>Aileron</tooltip-id>
+          <label>Aileron Shutoff : %s</label>
+          <mapping>on-off</mapping>
+          <property>controls/flight/aileron-shutoff</property>
+        </binding>
+      </hovered>
+    </animation>
+
+<!-- Rudder -->
+
+    <animation>
+      <type>translate</type>
+      <object-name>Rudder.btn</object-name>
+      <object-name>Rudder.shutoff</object-name>
+      <property>controls/flight/rudder-shutoff</property>
+			<factor>0.003</factor>
+      <axis>
+          <x>0</x>
+          <y>0</y>
+          <z>-1</z>
+      </axis>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>Rudder.shutoff</object-name>
+        <condition>
+          <property>controls/flight/rudder-shutoff</property>
+        </condition>
+    </animation>
+
+    <animation>
+      <type>textranslate</type>
+      <object-name>Rudder.btn</object-name>
+      <property>controls/flight/rudder-fail</property>
+			<factor>0.22</factor>
+      <axis>
+        <x>1</x>
+        <y>0</y>
+        <z>0</z>
+      </axis>
+    </animation>
+
+    <animation>
+      <type>pick</type>
+      <object-name>Rudder.btn</object-name>
+      <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+          <command>property-toggle</command>
+          <property>controls/flight/rudder-shutoff</property>
+        </binding>
+      </action>
+      <hovered>
+        <binding>
+          <command>set-tooltip</command>
+          <tooltip-id>Rudder</tooltip-id>
+          <label>Rudder Shutoff : %s</label>
+          <mapping>on-off</mapping>
+          <property>controls/flight/rudder-shutoff</property>
+        </binding>
+      </hovered>
+    </animation>
+
+<!-- Elevators -->
+
+    <animation>
+        <type>translate</type>
+        <object-name>LHelevator.btn</object-name>
+        <object-name>LHelevator.shutoff</object-name>
+        <property>controls/flight/left-elevator-shutoff</property>
+				<factor>0.003</factor>
+        <axis>
+          <x>0</x>
+          <y>0</y>
+          <z>-1</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>LHelevator.shutoff</object-name>
+        <condition>
+          <property>controls/flight/left-elevator-shutoff</property>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>textranslate</type>
+        <object-name>LHelevator.btn</object-name>
+        <property>controls/flight/left-elevator-fail</property>
+        <factor>0.22</factor>
+        <axis>
+          <x>1</x>
+          <y>0</y>
+          <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>LHelevator.btn</object-name>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+          <binding>
+            <command>property-toggle</command>
+            <property>controls/flight/left-elevator-shutoff</property>
+          </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+            <command>set-tooltip</command>
+            <tooltip-id>L-elevator</tooltip-id>
+            <label>Left Elevator Shutoff : %s</label>
+            <mapping>on-off</mapping>
+            <property>controls/flight/left-elevator-shutoff</property>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>RHelevator.shutoff</object-name>
+        <condition>
+          <property>controls/flight/right-elevator-shutoff</property>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>textranslate</type>
+        <object-name>RHelevator.btn</object-name>
+        <property>controls/flight/right-elevator-fail</property>
+        <factor>0.22</factor>
+        <axis>
+          <x>1</x>
+          <y>0</y>
+          <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+      <type>pick</type>
+      <object-name>RHelevator.btn</object-name>
+      <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+          <command>property-toggle</command>
+          <property>controls/flight/right-elevator-shutoff</property>
+        </binding>
+        <binding>
+          <command>property-toggle</command>
+          <property>sim/sound/click</property>
+        </binding>
+      </action>
+      <hovered>
+        <binding>
+          <command>set-tooltip</command>
+          <tooltip-id>R-elevator</tooltip-id>
+          <label>Right Elevator Shutoff : %s</label>
+          <mapping>on-off</mapping>
+          <property>controls/flight/right-elevator-shutoff</property>
         </binding>
       </hovered>
     </animation>

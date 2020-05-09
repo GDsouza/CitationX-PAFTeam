@@ -42,16 +42,5 @@
                 <z>0</z>
             </axis>
         </animation>
-<!--
-        <animation>
-            <type>translate</type>
-            <object-name>shadow</object-name>
-            <property>sim/multiplay/generic/float[2]</property>
-            <axis>
-                <x>0</x>
-                <y>0</y>
-                <z>-1</z>
-            </axis>
-        </animation>
--->
+
 </PropertyList>

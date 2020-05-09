@@ -1,260 +1,250 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
-<!--
-Author : Syd Adams
-STBY HSI
--->
 <PropertyList>
 
-    <path>hsi.ac</path>
-    
-      <animation>
-        <type>material</type>
-        <object-name>HSI.ring</object-name>
-        <object-name>CRS.needle</object-name>
-        <object-name>CRS.deflect</object-name>
-        <object-name>GS.needle</object-name>
-        <object-name>ADF.needle</object-name>
-        <object-name>From-flag</object-name>
-        <object-name>To-flag</object-name>
-        <object-name>HDG-flag</object-name>
-        <object-name>NAV-flag</object-name>
-        <object-name>VERT-flag</object-name>
-        <condition>
-						<or>
-	           	<property>systems/electrical/left-emer-bus</property>
-	           	<property>systems/electrical/left-bus-norm</property>
-						</or>
-        </condition>
-        <emission>
-            <red>1</red>
-            <green>1</green>
-            <blue>1</blue>
-            <factor-prop>controls/lighting/instruments-norm</factor-prop>
-        </emission>
-    </animation>
-
-    <animation>
-        <type>rotate</type>
-        <object-name>HSI.ring</object-name>
-        <object-name>CRS.needle</object-name>
-        <object-name>CRS.deflect</object-name>
-        <object-name>From-flag</object-name>
-        <object-name>To-flag</object-name>
-		    <property>orientation/heading-magnetic-deg</property>
-        <axis>
-            <x>1</x>
-            <y>0</y>
-            <z>0</z>
-        </axis>
-        <center>
-            <x-m>0</x-m>
-            <y-m>0</y-m>
-            <z-m>0</z-m>
-        </center>
-    </animation>
-
-    <animation>
-        <type>rotate</type>
-        <object-name>CRS.needle</object-name>
-        <object-name>CRS.deflect</object-name>
-        <object-name>From-flag</object-name>
-        <object-name>To-flag</object-name>
-	        <property>instrumentation/nav/radials/selected-deg</property>
-        <axis>
-            <x>-1</x>
-            <y>0</y>
-            <z>0</z>
-        </axis>
-        <center>
-            <x-m>0</x-m>
-            <y-m>0</y-m>
-            <z-m>0</z-m>
-        </center>
-    </animation>    
-
-    <animation>
-        <type>translate</type>
-        <object-name>CRS.deflect</object-name>              
-        <property>instrumentation/nav/heading-needle-deflection</property>
-        <interpolation>
-            <entry>
-                <ind>-10.0</ind><dep>-0.017</dep>
-            </entry>
-            <entry>
-                <ind>0.0</ind><dep>0.0</dep>
-            </entry>
-            <entry>
-                <ind>10.0</ind><dep>0.017</dep>
-            </entry>
-        </interpolation>
-        <axis>
-            <x>0</x>
-            <y>1.0</y>
-            <z>0.0</z>
-        </axis>
-        <center>
-            <x-m>0</x-m>
-            <y-m>0</y-m>
-            <z-m>0</z-m>
-        </center>
-    </animation>
-    
-    <animation>
-      <type>select</type>
-      <object-name>To-flag</object-name>
-      <condition>
-        <property>instrumentation/nav/to-flag</property>
-      </condition>      
-    </animation>  
-    
-    <animation>
-      <type>select</type>
-      <object-name>From-flag</object-name>
-      <condition>
-        <property>instrumentation/nav/from-flag</property>
-      </condition>      
-    </animation>  
-
-    <animation>
-        <type>translate</type>
-        <object-name>GS.needle</object-name>        
-        <property>instrumentation/nav/gs-needle-deflection</property>
-        <interpolation>
-            <entry><ind>-3.5.0</ind><dep>-0.0155</dep></entry>
-            <entry><ind>0.0</ind><dep>0.0</dep></entry>
-            <entry><ind>3.5</ind><dep>0.0155</dep></entry>
-        </interpolation>
-        <axis>
-            <x>0</x>
-            <y>0</y>
-            <z>1</z>
-        </axis>        
-    </animation>    
-
-    <animation>
-        <type>rotate</type>
-        <object-name>ADF.needle</object-name>
-        <property>instrumentation/adf/indicated-bearing-deg</property>
-        <axis>
-            <x>-1</x>
-            <y>0</y>
-            <z>0</z>
-        </axis>
-        <center>
-            <x-m>0</x-m>
-            <y-m>0</y-m>
-            <z-m>0</z-m>
-        </center>
-    </animation>
+  <path>hsi.ac</path>
+  
+  <animation>
+    <type>material</type>
+    <object-name>HSI.ring</object-name>
+    <object-name>CRS.needle</object-name>
+    <object-name>CRS.deflect</object-name>
+    <object-name>GS.needle</object-name>
+    <object-name>ADF.needle</object-name>
+    <object-name>From-flag</object-name>
+    <object-name>To-flag</object-name>
+    <object-name>HDG-flag</object-name>
+    <object-name>NAV-flag</object-name>
+    <object-name>VERT-flag</object-name>
+    <emission>
+        <red>1</red>
+        <green>0.7</green>
+        <blue>0</blue>
+        <factor-prop>controls/lighting/lh-norm</factor-prop>
+    </emission>
+  </animation>
 
   <animation>
-    <type>rotate</type>
-    <object-name>CRS.knob</object-name>
-    <property>instrumentation/nav/radials/selected-deg</property>    
-    <factor>5</factor>
-    <center>      
-      <x-m>  0.00913 </x-m>
-      <y-m> -0.03226 </y-m>
-      <z-m> -0.03143 </z-m>
-    </center>
-    <axis>
-      <x>-1</x>
-      <y>0</y>
-      <z>0</z>
-    </axis>
-    </animation>   
+      <type>rotate</type>
+      <object-name>HSI.ring</object-name>
+      <object-name>CRS.needle</object-name>
+      <object-name>CRS.deflect</object-name>
+      <object-name>From-flag</object-name>
+      <object-name>To-flag</object-name>
+	    <property>orientation/heading-magnetic-deg</property>
+      <axis>
+          <x>1</x>
+          <y>0</y>
+          <z>0</z>
+      </axis>
+      <center>
+          <x-m>0</x-m>
+          <y-m>0</y-m>
+          <z-m>0</z-m>
+      </center>
+  </animation>
 
-    <animation>
-        <type>knob</type>
-        <object-name>CRS.knob</object-name>        
-        <action>
-            <button>4</button>
-            <name>increase</name>
-            <repeatable>true</repeatable>
-             <binding>
-             <command>property-adjust</command>
-            <property>instrumentation/nav/radials/selected-deg</property>
-            <factor>1</factor>
-            <min>0</min>
-            <max>360</max>
-            <wrap>1</wrap>
-            </binding>
-        </action>
-        <action>
-            <button>3</button>
-            <name>decrease</name>
-            <repeatable>true</repeatable>
-             <binding>
-             <command>property-adjust</command>
-            <property>instrumentation/nav/radials/selected-deg</property>
-            <step>-1</step>
-            <min>0</min>
-            <max>360</max>
-            <wrap>1</wrap>
-            </binding>
-        </action>
-				<hovered>
-				  <binding>
-				    <command>set-tooltip</command>
-				    <tooltip-id>nav-radials</tooltip-id>
-				    <label>Radials-Sel-Deg: %.0f</label>
-				    <property>instrumentation/nav/radials/selected-deg</property>
-				  </binding>
-				</hovered>   
-    </animation> 
-    
-    <animation>      
-        <type>rotate</type>
-        <object-name>HDG-flag</object-name>
-        <property>controls/electric/avionics-power</property>
-        <factor>53</factor>
-        <center>
-            <x-m> 0.0</x-m>
-            <y-m>-0.00838</y-m>
-            <z-m> 0.03982</z-m>
-        </center>
-        <axis>
-            <x>1</x>
-            <y>0</y>
-            <z>0</z>
-        </axis>
-    </animation>
+  <animation>
+      <type>rotate</type>
+      <object-name>CRS.needle</object-name>
+      <object-name>CRS.deflect</object-name>
+      <object-name>From-flag</object-name>
+      <object-name>To-flag</object-name>
+        <property>instrumentation/nav/radials/selected-deg</property>
+      <axis>
+          <x>-1</x>
+          <y>0</y>
+          <z>0</z>
+      </axis>
+      <center>
+          <x-m>0</x-m>
+          <y-m>0</y-m>
+          <z-m>0</z-m>
+      </center>
+  </animation>    
 
-    <animation>
-        <type>rotate</type>
-        <object-name>NAV-flag</object-name>
-        <!--<property>controls/electric/avionics-power</property>-->
-        <property>instrumentation/nav/in-range</property>
-        <factor>25</factor>
-        <center>
-            <x-m> 0.0</x-m>
-            <y-m>-0.03750</y-m>
-            <z-m>-0.01714</z-m>
-        </center>
-        <axis>
-            <x>1</x>
-            <y>0</y>
-            <z>0</z>
-        </axis>
-    </animation>
-    
-    <animation>
-        <type>rotate</type>
-        <object-name>VERT-flag</object-name>
-        <!--<property>controls/electric/avionics-power</property>-->
-        <property>instrumentation/nav/gs-in-range</property>
-        <factor>25</factor>      
-        <center>
-            <x-m> 0.0</x-m>
-            <y-m> 0.03750</y-m>
-            <z-m> 0.01714</z-m>
-        </center>
-        <axis>
-            <x>1</x>
-            <y>0</y>
-            <z>0</z>
-        </axis>
-    </animation>
+  <animation>
+      <type>translate</type>
+      <object-name>CRS.deflect</object-name>              
+      <property>instrumentation/nav/heading-needle-deflection</property>
+      <interpolation>
+          <entry>
+              <ind>-10.0</ind><dep>-0.017</dep>
+          </entry>
+          <entry>
+              <ind>0.0</ind><dep>0.0</dep>
+          </entry>
+          <entry>
+              <ind>10.0</ind><dep>0.017</dep>
+          </entry>
+      </interpolation>
+      <axis>
+          <x>0</x>
+          <y>1.0</y>
+          <z>0.0</z>
+      </axis>
+      <center>
+          <x-m>0</x-m>
+          <y-m>0</y-m>
+          <z-m>0</z-m>
+      </center>
+  </animation>
+  
+  <animation>
+    <type>select</type>
+    <object-name>To-flag</object-name>
+    <condition>
+      <property>instrumentation/nav/to-flag</property>
+    </condition>      
+  </animation>  
+  
+  <animation>
+    <type>select</type>
+    <object-name>From-flag</object-name>
+    <condition>
+      <property>instrumentation/nav/from-flag</property>
+    </condition>      
+  </animation>  
+
+  <animation>
+      <type>translate</type>
+      <object-name>GS.needle</object-name>        
+      <property>instrumentation/nav/gs-needle-deflection</property>
+      <interpolation>
+          <entry><ind>-3.5.0</ind><dep>-0.0155</dep></entry>
+          <entry><ind>0.0</ind><dep>0.0</dep></entry>
+          <entry><ind>3.5</ind><dep>0.0155</dep></entry>
+      </interpolation>
+      <axis>
+          <x>0</x>
+          <y>0</y>
+          <z>1</z>
+      </axis>        
+  </animation>    
+
+  <animation>
+      <type>rotate</type>
+      <object-name>ADF.needle</object-name>
+      <property>instrumentation/adf/indicated-bearing-deg</property>
+      <axis>
+          <x>-1</x>
+          <y>0</y>
+          <z>0</z>
+      </axis>
+      <center>
+          <x-m>0</x-m>
+          <y-m>0</y-m>
+          <z-m>0</z-m>
+      </center>
+  </animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>CRS.knob</object-name>
+  <property>instrumentation/nav/radials/selected-deg</property>    
+  <factor>5</factor>
+  <center>      
+    <x-m>  0.00913 </x-m>
+    <y-m> -0.03226 </y-m>
+    <z-m> -0.03143 </z-m>
+  </center>
+  <axis>
+    <x>-1</x>
+    <y>0</y>
+    <z>0</z>
+  </axis>
+  </animation>   
+
+  <animation>
+      <type>knob</type>
+      <object-name>CRS.knob</object-name>        
+      <action>
+          <button>4</button>
+          <name>increase</name>
+          <repeatable>true</repeatable>
+           <binding>
+           <command>property-adjust</command>
+          <property>instrumentation/nav/radials/selected-deg</property>
+          <factor>1</factor>
+          <min>0</min>
+          <max>360</max>
+          <wrap>1</wrap>
+          </binding>
+      </action>
+      <action>
+          <button>3</button>
+          <name>decrease</name>
+          <repeatable>true</repeatable>
+           <binding>
+           <command>property-adjust</command>
+          <property>instrumentation/nav/radials/selected-deg</property>
+          <step>-1</step>
+          <min>0</min>
+          <max>360</max>
+          <wrap>1</wrap>
+          </binding>
+      </action>
+			<hovered>
+			  <binding>
+			    <command>set-tooltip</command>
+			    <tooltip-id>nav-radials</tooltip-id>
+			    <label>Radials-Sel-Deg: %.0f</label>
+			    <property>instrumentation/nav/radials/selected-deg</property>
+			  </binding>
+			</hovered>   
+  </animation> 
+  
+  <animation>      
+      <type>rotate</type>
+      <object-name>HDG-flag</object-name>
+      <property>systems/electrical/outputs/stby-hsi</property>
+      <factor>53</factor>
+      <center>
+          <x-m> 0.0</x-m>
+          <y-m>-0.00838</y-m>
+          <z-m> 0.03982</z-m>
+      </center>
+      <axis>
+          <x>1</x>
+          <y>0</y>
+          <z>0</z>
+      </axis>
+  </animation>
+
+  <animation>
+      <type>rotate</type>
+      <object-name>NAV-flag</object-name>
+      <!--<property>controls/electric/avionics-power</property>-->
+      <property>instrumentation/nav/in-range</property>
+      <factor>25</factor>
+      <center>
+          <x-m> 0.0</x-m>
+          <y-m>-0.03750</y-m>
+          <z-m>-0.01714</z-m>
+      </center>
+      <axis>
+          <x>1</x>
+          <y>0</y>
+          <z>0</z>
+      </axis>
+  </animation>
+  
+  <animation>
+      <type>rotate</type>
+      <object-name>VERT-flag</object-name>
+      <!--<property>controls/electric/avionics-power</property>-->
+      <property>instrumentation/nav/gs-in-range</property>
+      <factor>25</factor>      
+      <center>
+          <x-m> 0.0</x-m>
+          <y-m> 0.03750</y-m>
+          <z-m> 0.01714</z-m>
+      </center>
+      <axis>
+          <x>1</x>
+          <y>0</y>
+          <z>0</z>
+      </axis>
+  </animation>
     
 </PropertyList>

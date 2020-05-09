@@ -43,7 +43,9 @@ var show =  {
     var marksGroup =  sk.root.createChild("group");
     m.xzGraph = canvas.graph.new(myGroup, [61,138,25.625,-.025]);
     m.xyGraph = canvas.graph.new(myGroup, [61,229,25.625,-25.625]);
-    m.skin = sk.addSkin(root~"/skin.png");
+#    m.skin = sk.addSkin(root~"/skin.png");
+    m.skin = sk.addSkin(root~"/skin.png").set("size[0]",540)
+                                         .set("size[1]",376);
     m.bttn = sk.addSkin(root~"/skin_b1.png").setTranslation(202,333).hide();
     m.Hmarks = canvas.graph.new(marksGroup, [61,229,25.625,-25.625]);
     m.Vmarks = canvas.graph.new(marksGroup, [61,138,25.625,-.0222]);

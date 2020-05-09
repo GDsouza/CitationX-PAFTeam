@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+
+<PropertyList>
+
+    <path>apu.ac</path>
+
+    <model>
+        <name>apu screen pilot</name>
+        <path>Models/APU/screen.xml</path>
+        <offsets>
+            <x-m>0.00</x-m>
+            <y-m>0.00</y-m>
+            <z-m>0.00</z-m>
+        </offsets>
+    </model>
+
+    <model>
+        <name>apu screen copilot</name>
+        <path>Models/APU/screen.xml</path>
+        <offsets>
+          <x-m>-1.749</x-m>
+          <y-m>0.002</y-m>
+          <z-m>0</z-m>
+          <heading-deg>180</heading-deg>
+        </offsets>
+    </model>
+
+    <text>
+        <name>FLmeter</name>
+        <offsets>
+            <x-m>-0.902</x-m>
+            <y-m>-0.697</y-m>
+            <z-m> 0.627</z-m>
+        </offsets>
+        <alignment>right-center</alignment>
+        <axis-alignment>reversed-xz-plane</axis-alignment>
+        <type type="string">number-value</type>
+        <property>instrumentation/clock/flight-meter-dsp</property>
+        <format>%.1f</format>
+        <font>helvetica_bold.txf</font>
+        <character-size>0.009</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">64</width>
+            <height type="int">64</height>
+        </font-resolution>
+    </text>
+
+    <animation>
+      <type>select</type>
+      <object-name>ready.on</object-name>
+      <condition>
+        <and>
+          <greater-than>
+            <property>controls/APU/rpm</property>
+            <value>0.99</value>
+          </greater-than>
+          <equals>
+            <property>controls/APU/generator</property>
+            <value>0</value>
+          </equals>
+        </and>
+      </condition>
+    </animation>
+
+    <animation>
+      <type>select</type>
+      <object-name>bleed.on</object-name>
+      <condition>
+        <property>controls/APU/bleed-air</property>
+      </condition>
+    </animation>
+
+  <animation>
+      <type>rotate</type>
+      <object-name>master.switch</object-name>
+      <property>controls/APU/master</property>
+      <factor>45</factor>
+      <center>
+        <x-m>0</x-m>
+        <y-m>-0.696</y-m>
+        <z-m>0.436</z-m>
+      </center>
+      <axis>
+          <x>1</x>
+          <y>0</y>
+          <z>0</z>
+      </axis>
+  </animation>
+
+  <animation>
+      <type>pick</type>
+      <object-name>master.switch</object-name>
+      <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+          <binding>
+              <command>property-toggle</command>
+              <property>controls/APU/master</property>
+          </binding>
+					<binding>
+          	<command>property-toggle</command>
+          	<property>sim/sound/click</property>
+					</binding>
+      </action>
+      <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>APU-master-switch</tooltip-id>
+              <label>APU-master: %s</label>
+              <mapping>on-off</mapping>
+          <property>controls/APU/master</property>
+          </binding>
+      </hovered>
+  </animation>
+
+  <animation>
+      <type>rotate</type>
+      <object-name>start.switch</object-name>
+      <property>controls/APU/start-stop</property>
+      <factor>30</factor>
+      <center>
+        <x-m>0</x-m>
+        <y-m>-0.696</y-m>
+        <z-m>0.436</z-m>
+      </center>
+      <axis>
+          <x>1</x>
+          <y>0</y>
+          <z>0</z>
+      </axis>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>start.switch</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>property-toggle</command>
+        <property>controls/APU/start-stop</property>
+      </binding>
+			<binding>
+      	<command>property-toggle</command>
+      	<property>sim/sound/click</property>
+			</binding>
+			<mod-up>
+       <binding>
+   				<command>property-assign</command>
+   					<property>controls/APU/start-stop</property>
+   						<value>0</value>
+ 				</binding>
+ 			</mod-up>
+    </action>
+    <hovered>
+      <binding>
+          <command>set-tooltip</command>
+          <tooltip-id>APU-start-stop</tooltip-id>
+          <label>APU-start-stop: %s</label>
+          <mapping>heading</mapping>
+          <property>controls/APU/start-stop</property>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>stop.switch</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>property-assign</command>
+        <property>controls/APU/start-stop</property>
+		      <value>-1</value>
+      </binding>
+      <binding>
+      	<command>property-toggle</command>
+      	<property>sim/sound/click</property>
+      </binding>
+			<mod-up>
+        <binding>
+          <command>property-assign</command>
+          <property>controls/APU/start-stop</property>
+            <value>0</value>
+        </binding>
+ 			</mod-up>
+     </action>
+  </animation>
+
+  <animation>
+      <type>rotate</type>
+      <object-name>starter.diseng</object-name>
+      <property>controls/APU/starter-disengage</property>
+      <factor>45</factor>
+      <center>
+        <x-m>0</x-m>
+        <y-m>-0.696</y-m>
+        <z-m>0.436</z-m>
+      </center>
+      <axis>
+          <x>1</x>
+          <y>0</y>
+          <z>0</z>
+      </axis>
+  </animation>
+
+  <animation>
+      <type>pick</type>
+      <object-name>starter.diseng</object-name>
+      <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+          <command>property-toggle</command>
+          <property>controls/APU/starter-disengage</property>
+        </binding>
+				<binding>
+        	<command>property-toggle</command>
+        	<property>sim/sound/click</property>
+				</binding>
+      </action>
+      <hovered>
+        <binding>
+            <command>set-tooltip</command>
+            <tooltip-id>starter.diseng</tooltip-id>
+            <label>starter-disengage: %s</label>
+            <mapping>on-off</mapping>
+        <property>controls/APU/starter-disengage</property>
+        </binding>
+      </hovered>
+  </animation>
+
+  <animation>
+      <type>translate</type>
+      <object-name>test.switch</object-name>	
+      <property>controls/APU/test</property>
+			<factor>-0.004</factor>
+      <axis>
+        <x>0</x>
+        <y>1</y>
+        <z>0</z>
+      </axis>
+  </animation>
+
+	<animation>
+  	<type>pick</type>
+  	<object-name>test.switch</object-name>
+ 		<action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>property-toggle</command>
+        <property>controls/APU/test</property>
+      </binding>
+      <binding>
+        <command>property-toggle</command>
+        <property>sim/sound/click</property>
+      </binding>
+      <mod-up>
+     		<binding>
+       		<command>property-toggle</command>
+          <property>controls/APU/test</property>
+        </binding>
+      </mod-up>
+  		</action>
+      	<hovered>
+          <binding>
+            <command>set-tooltip</command>
+            <tooltip-id>APU.test</tooltip-id>
+            <label>Test APU</label>
+            <mapping>push</mapping>
+        		<property>controls/APU/test</property>
+          </binding>
+      </hovered>
+	</animation>
+
+  <animation>
+      <type>rotate</type>
+      <object-name>gen.switch</object-name>
+      <property>controls/APU/gen-switch</property>
+      <factor>30</factor>
+      <center>
+        <x-m>0</x-m>
+        <y-m>-0.696</y-m>
+        <z-m>0.566</z-m>
+      </center>
+      <axis>
+        <x>1</x>
+        <y>0</y>
+        <z>0</z>
+      </axis>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>gen.switch</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <condition>
+          <not-equals>
+            <property>controls/APU/gen-switch</property>
+            <value>-1</value>
+          </not-equals>
+        </condition>
+        <command>property-toggle</command>
+        <property>controls/APU/gen-switch</property>
+      </binding>
+			<binding>
+      	<command>property-toggle</command>
+      	<property>sim/sound/click</property>
+			</binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>APU-gen</tooltip-id>
+        <label>APU-generator: %s</label>
+        <mapping>on-off</mapping>
+        <property>controls/APU/gen-switch</property>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>gen.reset</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>property-assign</command>
+        <property>controls/APU/gen-switch</property>
+        <value>-1</value>
+      </binding>
+      <binding>
+        <command>property-assign</command>
+        <property>controls/APU/generator</property>
+        <value>0</value>
+      </binding>
+			<binding>
+      	<command>property-toggle</command>
+      	<property>sim/sound/click</property>
+			</binding>
+			<mod-up>
+        <binding>
+          <command>property-assign</command>
+          <property>controls/APU/gen-switch</property>
+          <value>0</value>
+        </binding>
+ 			</mod-up>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>gen-reset</tooltip-id>
+        <label>Generator reset</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+      <type>rotate</type>
+      <object-name>bleed.switch</object-name>
+      <property>controls/APU/bleed</property>
+      <factor>30</factor>
+      <center>
+         <x-m>-0</x-m>
+          <y-m>-0.696</y-m>
+          <z-m>0.566</z-m>
+      </center>
+      <axis>
+          <x>1</x>
+          <y>0</y>
+          <z>0</z>
+      </axis>
+  </animation>
+
+  <animation>
+		<type>pick</type>
+		<object-name>bleed.switch</object-name>
+		<object-name>bleed.max</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-adjust</command>
+					<property>controls/APU/bleed</property>
+						<step>1</step>
+						<min>0</min>
+						<max>2</max>
+						<wrap>false</wrap>
+			</binding>
+			<binding>
+				<command>property-toggle</command>
+					<property>sim/sound/click</property>
+			</binding>
+		</action>
+		<hovered>
+			<binding>
+				<command>set-tooltip</command>
+					<tooltip-id>APU-bleed air</tooltip-id>
+					<label>APU-bleed air: %s</label>
+					<mapping>heading</mapping>
+					<property>controls/APU/bleed</property>
+			</binding>
+		</hovered>
+  </animation>
+
+  <animation>
+		<type>pick</type>
+		<object-name>bleed.off</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-adjust</command>
+					<property>controls/APU/bleed</property>
+						<step>-1</step>
+						<min>0</min>
+						<max>2</max>
+						<wrap>false</wrap>
+			</binding>
+			<binding>
+				<command>property-toggle</command>
+					<property>sim/sound/click</property>
+			</binding>
+		</action>
+  </animation>
+
+
+<!--Map Light knob -->
+
+<animation>
+  <type>rotate</type>
+  <object-name>mapLight.knob</object-name>
+  <property>controls/lighting/lh-map</property>
+	<factor>-270</factor>
+  <center>
+    <x-m>-0.835</x-m>
+    <y-m>0</y-m>
+    <z-m>0.626</z-m>
+  </center>
+  <axis>
+    <x>0</x>
+    <y>1</y>
+    <z>0</z>
+  </axis>
+</animation>
+
+  <animation>
+      <type>pick</type>
+      <object-name>mapLight.knob</object-name>
+      <action>
+          <button>3</button>
+          <repeatable>true</repeatable>
+          <interval-sec>0.1</interval-sec>
+          <binding>
+              <command>property-adjust</command>
+              <property>controls/lighting/lh-map</property>
+              <step>0.05</step>
+              <min>0</min>
+              <max>1.0</max>
+              <wrap>false</wrap>
+          </binding>
+      </action>
+      <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>MapLight.knob</tooltip-id>
+              <label>Map Light : %s%%</label>
+              <mapping>percent</mapping>
+         <property>controls/lighting/lh-map</property>
+          </binding>
+      </hovered>
+  </animation>
+
+  <animation>
+      <type>pick</type>
+      <object-name>mapLight.knob</object-name>
+      <action>
+          <button>4</button>
+          <repeatable>true</repeatable>
+          <interval-sec>0.1</interval-sec>
+          <binding>
+              <command>property-adjust</command>
+              <property>controls/lighting/lh-map</property>
+              <step>-0.05</step>
+              <min>0</min>
+              <max>1.0</max>
+              <wrap>false</wrap>
+          </binding>
+      </action>
+  </animation>
+
+  <animation>
+      <name>Red illum</name>
+      <type>material</type>
+      <object-name>test.switch</object-name>
+				<condition>
+          <and>
+						<property>controls/APU/test</property> 
+						<property>controls/APU/master</property> 
+          </and>
+				</condition> 
+      <emission>
+          <red>1.0</red>
+          <green>0.0</green>
+          <blue>0.0</blue>
+      </emission>
+      <ambient>
+          <red>0</red>
+          <green>0</green>
+          <blue>0</blue>
+      </ambient>
+      <diffuse>
+          <red>0</red>
+          <green>0</green>
+          <blue>0</blue>
+      </diffuse>
+      <specular>
+          <red>0</red>
+          <green>0</green>
+          <blue>0</blue>
+      </specular>
+  </animation>
+
+</PropertyList>

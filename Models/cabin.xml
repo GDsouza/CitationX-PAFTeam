@@ -71,62 +71,8 @@
     </emission>
   </animation>
 
-    <effect>
-      <inherits-from>Aircraft/CitationX/Models/Effects/test_reflect</inherits-from>
-    <object-name>Cabin-LightsSup</object-name>
-    <object-name>Sphere</object-name>
-    <object-name>poignees</object-name>
-    <object-name>baguette</object-name>
-    <object-name>seau</object-name>
-    <object-name>bouteille1</object-name>
-    <object-name>R-bar</object-name>
-    <object-name>1-R-bar-door</object-name>
-    <object-name>2-R-bar-door</object-name>
-    <object-name>3-R-bar-door</object-name>
-    <object-name>4-R-bar-door</object-name>
-    <object-name>R-bar-UL</object-name>
-    <object-name>R-bar-UR</object-name>
-    <object-name>R-bar-DL</object-name>
-    <object-name>R-bar-DR</object-name>
-    <object-name>bar-L</object-name>
-    <object-name>H-bar-door</object-name>
-    <object-name>R-H-bar-door</object-name>
-    <object-name>L-H-bar-door</object-name>
-    <object-name>L-Low-bar-door</object-name>
-    <object-name>R-Low-bar-door</object-name>
-    <object-name>meubles</object-name>
-    <object-name>meubles4</object-name>
-    <object-name>L-cabin-door</object-name>
-    <object-name>R-cabin-door</object-name>
-    <object-name>L-toilet-door</object-name>
-    <object-name>R-toilet-door</object-name>
-    <object-name>plinthe</object-name>
-    <object-name>cache-table1</object-name>
-    <object-name>cache-table2</object-name>
-    <object-name>cache-table3</object-name>
-    <object-name>cache-table4</object-name>
-    <object-name>console-tablette</object-name>
-    <object-name>table1-1</object-name>
-    <object-name>table1-2</object-name>
-    <object-name>table2-1</object-name>
-    <object-name>table2-2</object-name>
-    <object-name>table3-1</object-name>
-    <object-name>table3-2</object-name>
-    <object-name>table4-1</object-name>
-    <object-name>table4-2</object-name>
-    <object-name>porte-gobelet</object-name>
-    <object-name>baguette</object-name>
-    <object-name>bouteille1</object-name>
-    <object-name>Bouteille</object-name>
-    <object-name>bouchon-bouteille</object-name>
-    <object-name>étiquette-bouteille</object-name>
-    <object-name>stock-Bouteille</object-name>
-    <object-name>block-annun.R</object-name>
-    <object-name>block-annun.L</object-name>
-    </effect>
-
-    <effect>
-      <inherits-from>Aircraft/CitationX/Models/Effects/skin-reflect</inherits-from>
+  <effect>
+    <inherits-from>Aircraft/CitationX/Models/Effects/skin-reflect</inherits-from>
     <object-name>Cabin-LightsSup</object-name>
     <object-name>Sphere</object-name>
     <object-name>seau</object-name>
@@ -175,15 +121,15 @@
     <object-name>stock-Bouteille</object-name>
     <object-name>block-annun.R</object-name>
     <object-name>block-annun.L</object-name>
-    </effect>
+  </effect>
 
-    <effect>
-      <inherits-from>Effects/model-transparent</inherits-from>
+  <effect>
+    <inherits-from>Effects/model-transparent</inherits-from>
     <object-name>Bouteille</object-name>
-      <condition>
-        <property>sim/rendering/rembrandt/enabled</property>
-      </condition>
-    </effect> 
+    <condition>
+      <property>sim/rendering/rembrandt/enabled</property>
+    </condition>
+  </effect> 
 
 <!-- TELE -->
 
@@ -262,6 +208,9 @@
       <action>
         <button>0</button>
         <repeatable>false</repeatable>
+        <condition>
+          <property>systems/electrical/outputs/cabin-door-monitor</property>
+        </condition>
         <binding>
           <command>property-toggle</command>
           <property>controls/cabin-door/open</property>
@@ -301,10 +250,13 @@
         <repeatable>false</repeatable>
         <binding>
 					<condition>
-						<equals>
-		          <property>controls/separation-door/open</property>						
-							<value>1.0</value>
-						</equals>
+            <and>
+						  <equals>
+		            <property>controls/separation-door/open</property>						
+							  <value>1.0</value>
+						  </equals>
+	            <property>systems/electrical/outputs/cabin-door-monitor</property>
+            </and>              
 					</condition>
 		         <command>property-interpolate</command>
 		          <property>controls/separation-door/open</property>
@@ -371,10 +323,13 @@
         <repeatable>false</repeatable>
         <binding>
 					<condition>
-						<equals>
-		          <property>controls/toilet-door/open</property>						
-							<value>0.0</value>
-						</equals>
+            <and>
+						  <equals>
+		            <property>controls/toilet-door/open</property>						
+							  <value>0.0</value>
+						  </equals>
+              <property>systems/electrical/outputs/cabin-door-monitor</property>
+            </and>
 					</condition>
 		         <command>property-interpolate</command>
 		          <property>controls/toilet-door/open</property>
@@ -1295,7 +1250,7 @@
 
     <model>
         <name>Cabin-seats</name>
-        <path>Aircraft/CitationX/Models/Seats/Cabin-seats.xml</path>
+        <path>Aircraft/CitationX/Models/Seats/cabin-seats.xml</path>
         <offsets>
             <x-m> 0.00 </x-m>
             <y-m> 0.00 </y-m>
@@ -1307,81 +1262,80 @@
 <!-- EXIT -->
 
     <animation>
-        <type>material</type>
-        <object-name>Exit</object-name>
-        <condition>
-					<and>
-						<equals>
-							<property>controls/electric/seat-belts-switch</property>
-							<value>-1</value>
-						</equals>
-						<or>
-		          <greater-than>
-		            <property>systems/electrical/left-bus</property>
-		            <value>15</value>
-		          </greater-than>
-		          <greater-than>
-		            <property>systems/electrical/right-bus</property>
-		            <value>15</value>
-		          </greater-than>
-						</or>
-					</and>
-        </condition>
-				<emission>
-            <red>1</red>
-            <green>1</green>
-            <blue>1</blue>
-				</emission>
+      <type>material</type>
+      <object-name>Exit</object-name>
+      <condition>
+				<and>
+          <property>systems/electrical/outputs/lh-emer</property>
+					<equals>
+						<property>controls/lighting/seat-belts</property>
+						<value>-1</value>
+					</equals>
+				</and>
+      </condition>
+			<emission>
+        <red>1</red>
+        <green>1</green>
+        <blue>1</blue>
+			</emission>
     </animation>
 
 <!-- NO SMOKING - FASTEN SEAT BELTS -->
 
     <animation>
-        <type>select</type>
-        <object-name>seatbelt-R.on</object-name>
-        <object-name>seatbelt-L.on</object-name>
-				<condition>
-					<and>
-						<not-equals>
-							<property>controls/electric/seat-belts-switch</property>					
-							<value>0</value>
-						</not-equals>
-						<or>
-		          <greater-than>
-		            <property>systems/electrical/left-bus</property>
-		            <value>15</value>
-		          </greater-than>
-		          <greater-than>
-		            <property>systems/electrical/right-bus</property>
-		            <value>15</value>
-		          </greater-than>
-						</or>
-					</and>
-				</condition>
+      <type>select</type>
+      <object-name>seatbelt-L.on</object-name>
+			<condition>
+				<and>
+					<not-equals>
+						<property>controls/lighting/seat-belts</property>
+						<value>0</value>
+					</not-equals>
+          <property>systems/electrical/outputs/lh-emer</property>
+				</and>
+			</condition>
     </animation>
 
     <animation>
-        <type>select</type>
-        <object-name>smoke-L.on</object-name>
-        <object-name>smoke-R.on</object-name> 
-				<condition>
-					<and>
-						<equals>
-							<property>controls/electric/seat-belts-switch</property>					
-							<value>-1</value>
-						</equals>
-						<or>
-		          <greater-than>
-		            <property>systems/electrical/left-bus</property>
-		            <value>15</value>
-		          </greater-than>
-		          <greater-than>
-		            <property>systems/electrical/right-bus</property>
-		            <value>15</value>
-		          </greater-than>
-						</or>
-					</and>
-				</condition>
+      <type>select</type>
+      <object-name>smoke-L.on</object-name>
+			<condition>
+				<and>
+					<equals>
+						<property>controls/lighting/seat-belts</property>
+						<value>-1</value>
+					</equals>
+          <property>systems/electrical/outputs/lh-emer</property>
+				</and>
+			</condition>
+    </animation>
+
+    <animation>
+      <type>select</type>
+      <object-name>seatbelt-R.on</object-name>
+			<condition>
+				<and>
+					<not-equals>
+						<property>controls/lighting/seat-belts</property>
+						<value>0</value>
+					</not-equals>
+          <property>systems/electrical/outputs/rh-emer</property>
+				</and>
+			</condition>
+    </animation>
+
+    <animation>
+      <type>select</type>
+      <object-name>smoke-R.on</object-name> 
+			<condition>
+				<and>
+					<equals>
+						<property>controls/lighting/seat-belts</property>
+						<value>-1</value>
+					</equals>
+          <property>systems/electrical/outputs/rh-emer</property>
+				</and>
+			</condition>
     </animation>
 
 </PropertyList>

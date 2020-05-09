@@ -1,6 +1,6 @@
 # **                    Spoken ATC.                      **
 # **          by rleibner (rleibner@gmail.com)           **
-# ** Adapted by Christian Le Moigne (clm76) - janv 2018, janv 2019 #
+# ** Adapted by Christian Le Moigne (clm76) - jan 2018 rev :jan 2019 #
 # *********************************************************
 #         This file is part of FlightGear.
 # 

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<PropertyList>
+
+  <path>cabin-alt-rate.ac</path>
+
+  <animation>
+    <type>material</type>
+    <object-name>Bckgrd.alt</object-name>
+    <object-name>Bckgrd.rate</object-name>
+    <object-name>Needle1</object-name>
+    <object-name>Needle2</object-name>
+    <object-name>Needle3</object-name>
+    <emission>
+      <red>1</red>
+      <green>0.7</green>
+      <blue>0</blue>
+      <factor-prop>controls/lighting/rh-norm</factor-prop>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>Needle1</object-name>
+    <condition>
+     	<property>systems/electrical/outputs/press</property>
+    </condition>
+		<property>systems/pressurization/cabin-alt-ft</property>
+		<interpolation>
+      <entry><ind>0</ind><dep>0</dep></entry>
+      <entry><ind>5000</ind><dep>50</dep></entry>
+      <entry><ind>10000</ind><dep>102</dep></entry>
+      <entry><ind>15000</ind><dep>146</dep></entry>
+      <entry><ind>20000</ind><dep>184</dep></entry>
+      <entry><ind>25000</ind><dep>215</dep></entry>
+      <entry><ind>30000</ind><dep>243</dep></entry>
+      <entry><ind>35000</ind><dep>267</dep></entry>
+      <entry><ind>40000</ind><dep>288</dep></entry>
+      <entry><ind>45000</ind><dep>303</dep></entry>
+      <entry><ind>50000</ind><dep>316</dep></entry>
+    </interpolation>
+    <axis>
+      <x>-1.0</x>
+      <y>0</y>
+      <z>0</z>
+    </axis>
+    <center>
+      <x-m>0</x-m>
+      <y-m>0.012</y-m>
+      <z-m>0.0001</z-m>
+    </center>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>Needle2</object-name>
+    <condition>
+     	<property>systems/electrical/outputs/press</property>
+    </condition>
+		<property>systems/pressurization/internal/diff-p</property>
+		<interpolation>
+      <entry><ind>0</ind><dep>0</dep></entry>
+      <entry><ind>5</ind><dep>160</dep></entry>
+      <entry><ind>9</ind><dep>278</dep></entry>
+      <entry><ind>10</ind><dep>313</dep></entry>
+		</interpolation>
+    <axis>
+      <x>-1.0</x>
+      <y>0</y>
+      <z>0</z>
+    </axis>
+    <center>
+      <x-m>0</x-m>
+      <y-m>0.0119</y-m>
+      <z-m>0.0001</z-m>
+    </center>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>Needle3</object-name>
+    <condition>
+     	<property>systems/electrical/outputs/press</property>
+    </condition>
+		<property>systems/pressurization/cabin-rate-fpm</property>
+		<interpolation>
+      <entry><ind>-6000</ind><dep>-176</dep></entry>
+      <entry><ind>-2000</ind><dep>-79</dep></entry>
+      <entry><ind>-1000</ind><dep>-50</dep></entry>
+      <entry><ind>-500</ind><dep>-23</dep></entry>
+      <entry><ind>0</ind><dep>0</dep></entry>
+      <entry><ind>500</ind><dep>23</dep></entry>
+      <entry><ind>1000</ind><dep>50</dep></entry>
+      <entry><ind>2000</ind><dep>79</dep></entry>
+      <entry><ind>6000</ind><dep>171</dep></entry>
+		</interpolation>
+    <axis>
+      <x>-1.0</x>
+      <y>0</y>
+      <z>0</z>
+    </axis>
+    <center>
+      <x-m>0</x-m>
+      <y-m>0.0334</y-m>
+      <z-m>0.0001</z-m>
+    </center>
+  </animation>
+
+</PropertyList>

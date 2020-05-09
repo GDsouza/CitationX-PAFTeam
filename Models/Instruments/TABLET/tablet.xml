@@ -7,7 +7,7 @@
     <animation>
         <type>textranslate</type>
         <object-name>LED</object-name>
-        <property>systems/electrical/right-bus-norm</property>
+        <property>systems/electrical/enable</property>
         <factor>0.09</factor>
         <step>1</step>
         <axis>
@@ -20,7 +20,7 @@
     <animation>
         <type>material</type>
         <object-name>LED</object-name>
-        <property>systems/electrical/right-bus-norm</property>
+        <property>systems/electrical/enable</property>
         <emission>
             <red>0</red>
             <green>1</green>
@@ -33,7 +33,7 @@
         <object-name>ecran.off</object-name>
         <condition>
             <not>
-              <property>systems/electrical/right-bus-norm</property>
+              <property>systems/electrical/enable</property>
           	</not>
         </condition>
     </animation>
@@ -42,7 +42,7 @@
         <type>select</type>
         <object-name>ecran.w</object-name>
         <condition>			
-              <property>systems/electrical/right-bus-norm</property>
+              <property>systems/electrical/enable</property>
        	</condition>
     </animation>
 
@@ -51,7 +51,7 @@
         <object-name>ecran.c</object-name>
         <condition>
 					<and>				
-            <property>systems/electrical/right-bus-norm</property>
+            <property>systems/electrical/enable</property>
 						<greater-than>
 			        <property>position/altitude-agl-ft</property>
 							<value>200</value>
@@ -59,22 +59,6 @@
 					</and>
         </condition>
     </animation>
-
-    <effect>
-      <inherits-from>Aircraft/CitationX/Models/Effects/test_reflect</inherits-from>
-        <object-name>Bouton1</object-name>
-        <object-name>Bouton2</object-name>
-        <object-name>Bouton3</object-name>
-        <object-name>Bouton4</object-name>
-        <object-name>LED</object-name>
-        <object-name>coque</object-name>
-        <object-name>ecran</object-name>
-        <object-name>ecran1</object-name>
-        <object-name>ecran2</object-name>
-        <object-name>support</object-name>
-        <object-name>support1</object-name>
-        <object-name>support2</object-name>
-    </effect>
 
     <effect>
       <inherits-from>Aircraft/CitationX/Models/Effects/skin-reflect</inherits-from>

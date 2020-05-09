@@ -1,0 +1,632 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<PropertyList>
+
+  <!-- Low Rudder -->
+
+  <!-- The rudder trim is achieved by electrically displacing the trim
+          actuator, moving the whole lower rudder control system and shifting
+          the neutral point of the feel and centering unit.
+          
+          Dual electromechanical rudder travel limiters are installed on the
+          lower rudder to limit the maximum rudder deflection, depending upon
+          the airplane speed. [Limits: see Fig. 2-29]
+  -->
+
+  <filter>
+    <type>noise-spike</type>
+    <max-rate-of-change>
+      <value>0.1</value>
+      <scale>
+        <property>systems/electrical/outputs/rudder-trim</property>
+      </scale>
+      </max-rate-of-change>
+    <input>controls/flight/rudder-trim</input>
+    <output>controls/flight/rudder-trim-pos-norm</output>
+  </filter>
+
+  <filter>
+    <type>gain</type>
+    <gain>30.0</gain>
+    <input>
+      <expression>
+        <sum>
+          <property>controls/flight/rudder</property>
+          <property>controls/flight/rudder-trim-pos-norm</property>
+        </sum>
+      </expression>
+    </input>
+    <min>-30</min>
+    <max>30</max>
+    <output>controls/flight/rudder-dmd-deg</output>
+  </filter>
+
+  <filter>
+    <type>gain</type>
+    <gain>1.0</gain>
+    <input>
+      <expression>
+        <table>
+          <product>
+            <difference>
+              <property>systems/pitot/total-pressure-inhg</property>
+              <property>systems/static/pressure-inhg</property>
+            </difference>
+            <value>70.7262</value>
+          </product>
+          <entry><ind>70</ind><dep>30</dep></entry>
+          <entry><ind>143.5</ind><dep>9</dep></entry>
+          <entry><ind>375</ind><dep>4</dep></entry>
+        </table>
+      </expression>
+    </input>
+    <output>controls/flight/rudder-limit-deg</output>
+  </filter>
+
+  <filter>
+    <type>gain</type>
+    <gain>1.0</gain>
+    <enable>
+      <condition>
+        <or>
+          <property>systems/electrical/outputs/rudder-limit-A</property>
+          <property>systems/electrical/outputs/rudder-limit-B</property>
+        </or>
+      </condition>
+    </enable>
+    <min>
+      <expression>
+        <product>
+          <property>controls/flight/rudder-limit-deg</property>
+          <value>-1</value>
+        </product>
+      </expression>
+    </min>
+    <max>controls/flight/rudder-limit-deg</max>
+    <input>controls/flight/rudder-dmd-deg</input>
+    <output>controls/flight/rudder-cmd-deg</output>
+  </filter>
+
+  <filter>
+    <type>gain</type>
+    <gain>1.0</gain>
+    <enable>
+      <condition>
+        <or>
+          <and>
+            <not>
+              <property>systems/electrical/outputs/rudder-limit-A</property>
+            </not>
+            <not>
+              <property>systems/electrical/outputs/rudder-limit-B</property>
+            </not>
+          </and>
+          <property>controls/flight/rudder-shutoff</property>
+        </or>
+      </condition>
+    </enable>
+    <input>controls/flight/rudder-dmd-deg</input>
+    <output>controls/flight/rudder-cmd-deg</output>
+  </filter>
+
+  <filter>            <!-- for Eicas Rudder Display -->
+    <type>gain</type>
+    <gain>1.0</gain>
+    <input>
+      <expression>
+        <table>
+          <property>controls/flight/rudder-limit-deg</property>
+          <entry><ind>4</ind><dep>0.13</dep></entry>
+          <entry><ind>9</ind><dep>0.3</dep></entry>
+          <entry><ind>30</ind><dep>1</dep></entry>
+        </table>
+      </expression>
+    </input>
+    <output>controls/flight/rudder-limit-norm</output>
+  </filter>
+
+  <filter>
+    <type>noise-spike</type>
+    <max-rate-of-change>
+      <value>20</value>
+    </max-rate-of-change>
+    <input>controls/flight/rudder-cmd-deg</input>
+    <output>surface-positions/rudder-pos-deg</output>
+  </filter>
+
+  <filter>
+    <type>gain</type>
+    <gain>0.03333</gain>
+    <enable>
+      <condition>
+        <not>
+          <property>controls/flight/rudder-shutoff</property>
+        </not>
+      </condition>
+    </enable>
+    <input>surface-positions/rudder-pos-deg</input>
+    <output>surface-positions/rudder-pos-norm</output>
+  </filter>
+
+  <!-- Upper Rudder -->
+
+  <filter>
+    <type>gain</type>
+    <gain>1.0</gain>
+    <min>0</min>
+    <max>
+      <condition>
+        <greater-than>
+          <property>controls/flight/flaps-select</property>
+          <value>0</value>
+        </greater-than>
+      </condition>        
+      <value>18</value>
+    </max>
+    <max>
+      <condition>
+        <equals>
+          <property>controls/flight/flaps-select</property>
+          <value>0</value>
+        </equals>
+      </condition>        
+      <value>15</value>
+    </max>
+    <input>
+      <expression>
+        <table>
+          <product>
+            <difference>
+              <property>systems/pitot/total-pressure-inhg</property>
+              <property>systems/static/pressure-inhg</property>
+            </difference>
+            <value>70.7262</value>
+          </product>
+          <entry><ind>70</ind><dep>18</dep></entry>
+          <entry><ind>143.5</ind><dep>5</dep></entry>
+          <entry><ind>375</ind><dep>0</dep></entry>
+        </table>
+      </expression>
+    </input>
+    <output>controls/flight/upper-rudder-limit-deg</output>
+  </filter>
+
+  <filter>
+    <type>gain</type>
+    <gain>1.0</gain>
+    <min>
+      <expression>
+        <product>
+          <property>controls/flight/upper-rudder-limit-deg</property>
+          <value>-1</value>
+        </product>
+      </expression>
+    </min>
+    <max>controls/flight/upper-rudder-limit-deg</max>
+    <input>controls/flight/rudder-dmd-deg</input>
+    <output>controls/flight/upper-rudder-cmd-deg</output>
+  </filter>
+
+  <filter>
+    <type>noise-spike</type>
+    <max-rate-of-change>
+      <value>20</value>
+    </max-rate-of-change>
+    <input>controls/flight/upper-rudder-cmd-deg</input>
+    <output>surface-positions/upper-rudder-pos-deg</output>
+  </filter>
+
+  <filter>
+    <type>gain</type>
+    <gain>0.03333</gain>
+    <input>surface-positions/upper-rudder-pos-deg</input>
+    <output>surface-positions/upper-rudder-pos-norm</output>
+  </filter>
+
+  <!-- Ailerons -->
+
+  <!-- Full control wheel rotation in either direction results in 15 degrees
+          travel of the ailerons up or down, and 0 to 40 degrees up travel of
+          the roll control spoilers. Movement of the outboard roll spoiler
+          starts after approximately 3 degrees of aileron displacement, and the
+          inboard roll spoiler starts at approximately 6 degrees of aileron
+          deflection; both are at a maximum at 34 degrees of wheel deflection
+         (since SN 0150). 
+  -->
+
+  <filter>
+    <type>gain</type>
+    <gain>1.0</gain>
+    <input>
+      <expression>
+        <sum>
+          <property>controls/flight/aileron</property>
+          <property>controls/flight/aileron-trim</property>
+        </sum>
+      </expression>
+    </input>
+    <!--<factor>
+           # TODO: high/low ratio when
+    </factor>-->
+    <min>-1</min>
+    <max>1</max>
+    <output>controls/flight/aileron-cmd-norm</output>
+  </filter>
+
+  <filter>
+    <type>noise-spike</type>
+    <max-rate-of-change>
+      <value>5</value>
+    </max-rate-of-change>
+    <input>controls/flight/aileron-cmd-norm</input>
+    <output>
+      <property>surface-positions/aileron-pos-norm</property>
+    </output>
+  </filter>
+
+  <filter>
+    <type>gain</type>
+    <gain>1.0</gain>
+    <enable>
+      <condition>
+        <not>
+          <property>controls/flight/aileron-shutoff</property>
+        </not>
+      </condition>
+    </enable>
+    <input>
+      <property>surface-positions/aileron-pos-norm</property>
+    </input>
+    <output>surface-positions/left-aileron-pos-norm</output>
+  </filter>
+
+  <filter>
+    <type>gain</type>
+    <gain>1.0</gain>
+    <input>
+      <expression>
+        <table>
+          <property>surface-positions/aileron-pos-norm</property>
+          <entry><ind>-1.0</ind><dep>1.0</dep></entry>
+          <entry><ind>-0.3</ind><dep>0.0</dep></entry>
+        </table>
+      </expression>
+    </input>
+    <output>surface-positions/left-roll-spoiler</output>
+  </filter>
+
+  <filter>
+    <type>gain</type>
+    <gain>-1.0</gain>
+    <enable>
+      <condition>
+        <not>
+          <property>controls/flight/aileron-shutoff</property>
+        </not>
+      </condition>
+    </enable>
+    <input>surface-positions/aileron-pos-norm</input>
+    <output>surface-positions/right-aileron-pos-norm</output>
+  </filter>
+
+  <filter>
+    <type>gain</type>
+    <gain>1.0</gain>
+    <input>
+      <expression>
+        <table>
+          <property>surface-positions/aileron-pos-norm</property>
+          <entry><ind>0.3</ind><dep>0.0</dep></entry>
+          <entry><ind>1.0</ind><dep>1.0</dep></entry>
+        </table>
+      </expression>
+    </input>
+    <output>surface-positions/right-roll-spoiler</output>
+  </filter>
+
+  <!-- Elevators -->
+
+  <!-- Full elevator travel is through a range of 19 degrees nose up to 15
+          degrees nose down.
+
+          Pitch trim is accomplished by repositioning the entire horizontal
+          stabilizer. Full travel of the stabilizer is from 12 degrees in the
+          airplane nose up direction to 2 degrees in the airplane nose down
+          direction.
+
+          [Ok, so our yasim system does not model moving the entire horizontal
+           stabilizer. So we just add up the degrees and normalize for yasim.
+           
+           Also, we trim to -5 nose down for elevator-trim == 0.]
+  -->
+
+  <filter>
+    <type>gain</type>
+    <gain>19.0</gain>
+    <input>controls/flight/elevator</input>
+    <min>-19</min>
+    <max>15</max>
+    <output>controls/flight/elevator-cmd-deg</output>
+  </filter>
+
+  <filter>
+    <type>gain</type>
+    <gain>1.0</gain>
+    <input>
+      <property>controls/flight/elevator-trim</property>
+      <scale>7.0</scale>
+      <offset>-5.0</offset>
+    </input>
+    <min>-12</min>
+    <max>2</max>
+    <output>controls/flight/elevator-trim-cmd-deg</output>
+  </filter>
+
+  <filter>
+    <type>noise-spike</type>
+    <max-rate-of-change>
+      <value>60</value>
+    </max-rate-of-change>
+    <input>controls/flight/elevator-cmd-deg</input>
+    <output>surface-positions/elevator-pos-deg</output>
+  </filter>
+
+  <filter>
+    <type>noise-spike</type>
+    <max-rate-of-change>
+      <value>1</value>
+      <scale>
+        <property>systems/electrical/outputs/pri-stab-trim-pwr</property>
+      </scale>
+    </max-rate-of-change>
+    <input>controls/flight/elevator-trim-cmd-deg</input>
+    <output>surface-positions/elevator-trim-pos-deg</output>
+  </filter>
+
+  <filter>
+    <type>gain</type>
+    <gain>1.0</gain>
+    <input>
+      <expression>
+        <div>
+          <sum>
+            <property>surface-positions/elevator-trim-pos-deg</property>
+            <value>5.0</value>
+          </sum>
+            <value>7.0</value>
+        </div>
+      </expression>
+    </input>
+    <output>surface-positions/elevator-trim-pos-norm</output>
+  </filter>
+
+  <filter>
+    <!-- Yasim full-scale input is +/- 2 and 0 is at -5 deg trim. -->
+    <type>gain</type>
+    <gain>1.0</gain>
+    <input>
+      <expression>
+        <difference>
+          <div>
+            <sum>
+              <property>surface-positions/elevator-pos-deg</property>
+              <property>surface-positions/elevator-trim-pos-deg</property>
+              <value>5</value>
+            </sum>
+            <value>13.0</value>
+          </div>
+          <property>controls/flight/elevator-trim</property>  <!-- See Citation-yasim.xml, search "Argh" -->
+        </difference>
+      </expression>
+    </input>
+    <output>surface-positions/yasim-elevator-minus-trim</output>
+  </filter>
+
+<!-- Fail Detection -->
+
+  <logic>
+    <input>
+      <or>
+        <greater-than>
+          <property>systems/electrical/left-emer-bus-volts</property>
+          <value>10</value>
+        </greater-than>
+        <greater-than>
+          <property>systems/electrical/right-emer-bus-volts</property>
+          <value>10</value>
+        </greater-than>
+      </or>
+    </input>
+    <output>systems/electrical/enable</output>
+  </logic>
+
+  <logic>
+    <input>
+      <and>
+        <property>systems/electrical/enable</property>
+        <or>
+          <not>
+            <property>systems/electrical/outputs/rudder-limit-A</property>
+          </not>
+          <not>
+            <property>systems/electrical/outputs/rudder-limit-B</property>
+          </not>
+          <not>
+            <property>systems/electrical/outputs/pcu-monitor</property>
+          </not>
+          <and>
+            <less-than>
+              <property>systems/hydraulics/psi-norm</property>
+              <value>0.1</value>
+            </less-than>
+            <less-than>
+              <property>systems/hydraulics/psi-norm[1]</property>
+              <value>0.1</value>
+            </less-than>
+          </and>
+        </or>
+      </and>
+    </input>
+    <output>controls/flight/rudder-fail</output>
+  </logic>
+
+  <logic>
+    <input>
+      <and>
+        <property>systems/electrical/enable</property>
+        <or>
+          <not>
+            <property>systems/electrical/outputs/aileron-pcu-mon</property>
+          </not>
+          <not>
+            <property>systems/electrical/outputs/pcu-monitor</property>
+          </not>
+          <and>
+            <less-than>
+              <property>systems/hydraulics/psi-norm</property>
+              <value>0.1</value>
+            </less-than>
+            <less-than>
+              <property>systems/hydraulics/psi-norm[1]</property>
+              <value>0.1</value>
+            </less-than>
+          </and>
+        </or>
+      </and>
+    </input>
+    <output>controls/flight/aileron-fail</output>
+  </logic>
+
+  <logic>
+    <inverted>false</inverted>
+    <input>
+      <and>
+        <property>systems/electrical/enable</property>
+        <or>
+          <not>
+            <property>systems/electrical/outputs/pcu-monitor</property>
+          </not>
+          <and>
+            <less-than>
+              <property>systems/hydraulics/psi-norm</property>
+              <value>0.1</value>
+            </less-than>
+            <less-than>
+              <property>systems/hydraulics/psi-norm[1]</property>
+              <value>0.1</value>
+            </less-than>
+          </and>
+        </or>
+      </and>
+    </input>
+    <output>controls/flight/left-elevator-fail</output>
+    <output>controls/flight/right-elevator-fail</output>
+  </logic>
+
+  <!-- Flaps and slats -->
+
+  <filter>
+    <type>noise-spike</type>
+    <max-rate-of-change>
+      <value>0.111111</value>
+      <scale>
+        <property>systems/electrical/outputs/flap-control</property>
+      </scale>
+    </max-rate-of-change>
+    <input>controls/flight/flaps</input>
+    <output>surface-positions/flap-pos-norm</output>
+  </filter>
+
+  <filter>
+    <type>gain</type>
+    <gain>23.3645</gain>
+    <min>0</min>
+    <max>1</max>
+    <input>controls/flight/flaps</input>
+    <output>controls/flight/slat-cmd-norm</output>
+  </filter>
+
+  <filter>
+    <type>noise-spike</type>
+    <max-rate-of-change>
+      <value>1</value>
+      <scale>
+        <property>systems/electrical/outputs/slat-A-control</property>
+      </scale>
+    </max-rate-of-change>
+    <input>controls/flight/slat-cmd-norm</input>
+    <output>surface-positions/slat-pos-norm</output>
+  </filter>
+
+  <!-- Speedbrakes -->
+
+  <filter>
+    <type>noise-spike</type>
+    <max-rate-of-change>
+      <value>1.0</value>
+    </max-rate-of-change>
+    <input>controls/flight/speedbrake</input>
+    <output>surface-positions/speedbrake-pos-norm</output>
+  </filter>
+
+
+  <!-- Thrust reversers -->
+
+  <filter>
+    <type>noise-spike</type>
+    <enable>
+      <condition>
+        <property>controls/engines/engine[0]/running</property>
+      </condition>
+    </enable>
+    <max-rate-of-change>
+      <value>0.66667</value>
+    </max-rate-of-change>
+    <input>controls/engines/engine[0]/reverser</input>
+    <output>surface-positions/reverser-norm[0]</output>
+  </filter>
+
+  <filter>
+      <type>noise-spike</type>
+      <enable>
+        <condition>
+          <property>controls/engines/engine[1]/running</property>
+        </condition>
+      </enable>
+      <max-rate-of-change>
+        <value>0.66667</value>
+      </max-rate-of-change>
+      <input>controls/engines/engine[1]/reverser</input>
+      <output>surface-positions/reverser-norm[1]</output>
+  </filter>
+
+  <!-- Gear -->
+
+  <filter>
+    <type>noise-spike</type>
+    <max-rate-of-change>
+      <value>0.2</value>
+      <scale>
+        <property>systems/electrical/outputs/lh-gear</property>
+      </scale>
+    </max-rate-of-change>
+    <input>controls/gear/gear-down</input>
+    <output>gear/gear[0]/position-norm</output>
+  </filter>
+
+  <filter>
+    <type>noise-spike</type>
+    <max-rate-of-change>
+      <value>0.2</value>
+      <scale>
+        <property>systems/electrical/outputs/rh-gear</property>
+      </scale>
+    </max-rate-of-change>
+    <input>controls/gear/gear-down</input>
+    <output>gear/gear[1]/position-norm</output>
+    <output>gear/gear[2]/position-norm</output>
+  </filter>
+
+</PropertyList>
+
+

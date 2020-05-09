@@ -1,0 +1,4394 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<PropertyList>
+
+    <path>cb-panel_L.ac</path>
+
+    <animation>
+        <type>translate</type>
+        <object-name>A-aux-hydr-pump.fuse</object-name>	
+        <property>systems/electrical/cb/a-aux-hydr-pump-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>A-aux-hydr-pump.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/a-aux-hydr-pump-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>A-aux-hydr-pump</tooltip-id>
+               <label>A Aux Hydr Pump : %s</label>
+              <property>systems/electrical/cb/a-aux-hydr-pump-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Aileron-pcu-mon.fuse</object-name>	
+        <property>systems/electrical/cb/aileron-pcu-mon-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Aileron-pcu-mon.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/aileron-pcu-mon-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Aileron Pcu Mon</tooltip-id>
+               <label>Aileron pcu : %s</label>
+              <property>systems/electrical/cb/aileron-pcu-mon-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Aileron-trim.fuse</object-name>	
+        <property>systems/electrical/cb/aileron-trim-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Aileron-trim.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/aileron-trim-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Aileron-trim</tooltip-id>
+               <label>Aileron Trim : %s</label>
+              <property>systems/electrical/cb/aileron-trim-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Anti-coll.fuse</object-name>	
+        <property>systems/electrical/cb/anti-coll-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Anti-coll.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/anti-coll-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Anti-coll</tooltip-id>
+               <label>Anti Coll : %s</label>
+              <property>systems/electrical/cb/anti-coll-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Anti-skid.fuse</object-name>	
+        <property>systems/electrical/cb/anti-skid-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Anti-skid.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/anti-skid-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Anti-skid</tooltip-id>
+               <label>Anti Skid : %s</label>
+              <property>systems/electrical/cb/anti-skid-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>As-alt-vib.fuse</object-name>	
+        <property>systems/electrical/cb/oxygen-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>As-alt-vib.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/as-alt-vib-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>As-alt-vib</tooltip-id>
+               <label>As Alt Vib : %s</label>
+              <property>systems/electrical/cb/as-alt-vib-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Aux-panel.fuse</object-name>	
+        <property>systems/electrical/cb/aux-panel-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Aux-panel.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/aux-panel-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Aux-panel</tooltip-id>
+               <label>Aux Panel : %s</label>
+              <property>systems/electrical/cb/aux-panel-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Bag-smoke-detect.fuse</object-name>	
+        <property>systems/electrical/cb/bag-smoke-detect-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Bag-smoke-detect.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/bag-smoke-detect-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Bag-smoke-detect</tooltip-id>
+               <label>Bag Smoke Detect : %s</label>
+              <property>systems/electrical/cb/bag-smoke-detect-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Cabin-door-monitor.fuse</object-name>	
+        <property>systems/electrical/cb/cabin-door-monitor-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Cabin-door-monitor.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/cabin-door-monitor-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Cabin-door-monitor</tooltip-id>
+               <label>Cabin Door Monitor : %s</label>
+              <property>systems/electrical/cb/cabin-door-monitor-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Cabin-temp.fuse</object-name>	
+        <property>systems/electrical/cb/cabin-temp-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Cabin-temp.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/cabin-temp-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Cabin-temp</tooltip-id>
+               <label>Cabin Temp : %s</label>
+              <property>systems/electrical/cb/cabin-temp-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Cockpit-flood.fuse</object-name>	
+        <property>systems/electrical/cb/cockpit-flood-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Cockpit-flood.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/cockpit-flood-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Cockpit-flood</tooltip-id>
+               <label>Cockpit Flood : %s</label>
+              <property>systems/electrical/cb/cockpit-flood-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Cockpit-temp.fuse</object-name>	
+        <property>systems/electrical/cb/cockpit-temp-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Cockpit-temp.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/cockpit-temp-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Cockpit-temp</tooltip-id>
+               <label>Cockpit Temp : %s</label>
+              <property>systems/electrical/cb/cockpit-temp-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Ctr-fuel-quantity.fuse</object-name>	
+        <property>systems/electrical/cb/ctr-fuel-quantity-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Ctr-fuel-quantity.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/ctr-fuel-quantity-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Ctr-fuel-quantity</tooltip-id>
+               <label>Ctr Fuel Quantity : %s</label>
+              <property>systems/electrical/cb/ctr-fuel-quantity-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Ctr-panel.fuse</object-name>	
+        <property>systems/electrical/cb/ctr-panel-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Ctr-panel.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/ctr-panel-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Ctr-panel</tooltip-id>
+               <label>Ctr Panel : %s</label>
+              <property>systems/electrical/cb/ctr-panel-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>El-panel.fuse</object-name>	
+        <property>systems/electrical/cb/el-panel-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>El-panel.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/el-panel-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>El-panel</tooltip-id>
+               <label>El Panel : %s</label>
+              <property>systems/electrical/cb/el-panel-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Flap-control.fuse</object-name>	
+        <property>systems/electrical/cb/flap-control-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Flap-control.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/flap-control-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Flap-control</tooltip-id>
+               <label>Flap Control : %s</label>
+              <property>systems/electrical/cb/flap-control-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Flt-hr-meter.fuse</object-name>	
+        <property>systems/electrical/cb/flt-hr-meter-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Flt-hr-meter.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/flt-hr-meter-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Flt-hr-meter</tooltip-id>
+               <label>Flt Hr Meter : %s</label>
+              <property>systems/electrical/cb/flt-hr-meter-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Hydr-A-cont.fuse</object-name>	
+        <property>systems/electrical/cb/hydr-A-cont-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Hydr-A-cont.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/hydr-A-cont-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Hydr-A-cont</tooltip-id>
+               <label>Hydr A Cont : %s</label>
+              <property>systems/electrical/cb/hydr-A-cont-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Hydr-B-ptu-cont.fuse</object-name>	
+        <property>systems/electrical/cb/hydr-B-ptu-cont-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Hydr-B-ptu-cont.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/hydr-B-ptu-cont-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Hydr-B-ptu-cont</tooltip-id>
+               <label>Hydr B Ptu Cont : %s</label>
+              <property>systems/electrical/cb/hydr-B-ptu-cont-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Lh-aoa-heater.fuse</object-name>	
+        <property>systems/electrical/cb/lh-aoa-heater-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Lh-aoa-heater.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/lh-aoa-heater-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Lh-aoa-heater</tooltip-id>
+               <label>Lh Aoa Heater : %s</label>
+              <property>systems/electrical/cb/lh-aoa-heater-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Lh-boost-pump.fuse</object-name>	
+        <property>systems/electrical/cb/lh-boost-pump-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Lh-boost-pump.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/lh-boost-pump-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Lh-boost-pump</tooltip-id>
+               <label>Lh Boost Pump : %s</label>
+              <property>systems/electrical/cb/lh-boost-pump-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Lh-emer.fuse</object-name>	
+        <property>systems/electrical/cb/lh-emer-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Lh-emer.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/lh-emer-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Lh-emer</tooltip-id>
+               <label>Lh Emer : %s</label>
+              <property>systems/electrical/cb/lh-emer-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Lh-eng-bld-air.fuse</object-name>	
+        <property>systems/electrical/cb/lh-eng-bld-air-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Lh-eng-bld-air.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/lh-eng-bld-air-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Lh-eng-bld-air</tooltip-id>
+               <label>Lh Eng Bld Air : %s</label>
+              <property>systems/electrical/cb/lh-eng-bld-air-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Lh-eng-wing.fuse</object-name>	
+        <property>systems/electrical/cb/lh-eng-wing-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Lh-eng-wing.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/lh-eng-wing-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Lh-eng-wing</tooltip-id>
+               <label>Lh Eng Wing : %s</label>
+              <property>systems/electrical/cb/lh-eng-wing-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Lh-fadec-A.fuse</object-name>	
+        <property>systems/electrical/cb/lh-fadec-A-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Lh-fadec-A.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/lh-fadec-A-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Lh-fadec-A</tooltip-id>
+               <label>Lh Fadec A : %s</label>
+              <property>systems/electrical/cb/lh-fadec-A-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Lh-fadec-B.fuse</object-name>	
+        <property>systems/electrical/cb/lh-fadec-B-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Lh-fadec-B.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/lh-fadec-B-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Lh-fadec-B</tooltip-id>
+               <label>Lh Fadec B : %s</label>
+              <property>systems/electrical/cb/lh-fadec-B-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Lh-feed1.fuse</object-name>	
+        <property>systems/electrical/cb/lh-gen1-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Lh-feed1.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/lh-gen1-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Lh-feed1</tooltip-id>
+               <label>Lh Feed 1 : %s</label>
+              <property>systems/electrical/cb/lh-gen1-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Lh-feed2.fuse</object-name>	
+        <property>systems/electrical/cb/lh-gen2-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Lh-feed2.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/lh-gen2-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Lh-feed2</tooltip-id>
+               <label>Lh Feed 2 : %s</label>
+              <property>systems/electrical/cb/lh-gen2-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Lh-feed3.fuse</object-name>	
+        <property>systems/electrical/cb/lh-gen3-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Lh-feed3.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/lh-gen3-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Lh-feed3</tooltip-id>
+               <label>Lh Feed 3 : %s</label>
+              <property>systems/electrical/cb/lh-gen3-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Lh-fire-detect.fuse</object-name>	
+        <property>systems/electrical/cb/lh-fire-detect-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Lh-fire-detect.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/lh-fire-detect-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Lh-fire-detect</tooltip-id>
+               <label>Lh Fire Detect : %s</label>
+              <property>systems/electrical/cb/lh-fire-detect-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Lh-fuel-cont.fuse</object-name>	
+        <property>systems/electrical/cb/lh-fuel-cont-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Lh-fuel-cont.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/lh-fuel-cont-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Lh-fuel-cont</tooltip-id>
+               <label>Lh Fuel Cont : %s</label>
+              <property>systems/electrical/cb/lh-fuel-cont-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Lh-fuel-fw-vlv.fuse</object-name>	
+        <property>systems/electrical/cb/lh-fuel-fw-vlv-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Lh-fuel-fw-vlv.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/lh-fuel-fw-vlv-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Lh-fuel-fw-vlv</tooltip-id>
+               <label>Lh Fuel Fw Vlv : %s</label>
+              <property>systems/electrical/cb/lh-fuel-fw-vlv-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Lh-fuel-transfer.fuse</object-name>	
+        <property>systems/electrical/cb/lh-fuel-transfer-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Lh-fuel-transfer.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/lh-fuel-transfer-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Lh-fuel-transfer</tooltip-id>
+               <label>Lh Fuel Transfer : %s</label>
+              <property>systems/electrical/cb/lh-fuel-transfer-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Lh-fuel-quantity.fuse</object-name>	
+        <property>systems/electrical/cb/lh-fuel-quantity-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Lh-fuel-quantity.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/lh-fuel-quantity-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Lh-fuel-quantity</tooltip-id>
+               <label>Lh Fuel Quantity : %s</label>
+              <property>systems/electrical/cb/lh-fuel-quantity-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Lh-gear.fuse</object-name>	
+        <property>systems/electrical/cb/lh-gear-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Lh-gear.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/lh-gear-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Lh-gear</tooltip-id>
+               <label>Lh Gear : %s</label>
+              <property>systems/electrical/cb/lh-gear-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Lh-hydr-fw-shutoff.fuse</object-name>	
+        <property>systems/electrical/cb/lh-hydr-fw-shutoff-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Lh-hydr-fw-shutoff.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/lh-hydr-fw-shutoff-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Lh-hydr-fw-shutoff</tooltip-id>
+               <label>Lh Hydr Fw Shutoff : %s</label>
+              <property>systems/electrical/cb/lh-hydr-fw-shutoff-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Lh-panel.fuse</object-name>	
+        <property>systems/electrical/cb/lh-panel-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Lh-panel.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/lh-panel-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Lh-panel</tooltip-id>
+               <label>Lh Panel : %s</label>
+              <property>systems/electrical/cb/lh-panel-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Lh-ps-heater.fuse</object-name>	
+        <property>systems/electrical/cb/lh-ps-heater-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Lh-ps-heater.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/lh-ps-heater-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Lh-ps-heater</tooltip-id>
+               <label>Lh Ps Heater : %s</label>
+              <property>systems/electrical/cb/lh-ps-heater-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Lh-rat-heater.fuse</object-name>	
+        <property>systems/electrical/cb/lh-rat-heater-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Lh-rat-heater.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/lh-rat-heater-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Lh-rat-heater</tooltip-id>
+               <label>Lh Rat Heater : %s</label>
+              <property>systems/electrical/cb/lh-rat-heater-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Lh-slat-stab.fuse</object-name>	
+        <property>systems/electrical/cb/lh-slat-stab-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Lh-slat-stab.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/lh-slat-stab-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Lh-slat-stab</tooltip-id>
+               <label>Lh Slat Stab : %s</label>
+              <property>systems/electrical/cb/lh-slat-stab-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Lh-start.fuse</object-name>	
+        <property>systems/electrical/cb/lh-start-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Lh-start.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/lh-start-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Lh-start</tooltip-id>
+               <label>Lh Start : %s</label>
+              <property>systems/electrical/cb/lh-start-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Lh-stall-warn.fuse</object-name>	
+        <property>systems/electrical/cb/lh-stall-warn-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Lh-stall-warn.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/lh-stall-warn-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Lh-stall-warn</tooltip-id>
+               <label>Lh Stall Warn : %s</label>
+              <property>systems/electrical/cb/lh-stall-warn-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Lh-tla-discretes.fuse</object-name>	
+        <property>systems/electrical/cb/lh-tla-discretes-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Lh-tla-discretes.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/lh-tla-discretes-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Lh-tla-discretes</tooltip-id>
+               <label>Lh Tla Discretes : %s</label>
+              <property>systems/electrical/cb/lh-tla-discretes-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Lh-tr-deploy.fuse</object-name>	
+        <property>systems/electrical/cb/lh-tr-deploy-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Lh-tr-deploy.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/lh-tr-deploy-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Lh-tr-deploy</tooltip-id>
+               <label>Lh Tr Deploy : %s</label>
+              <property>systems/electrical/cb/lh-tr-deploy-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Lh-tr-stow.fuse</object-name>	
+        <property>systems/electrical/cb/lh-tr-stow-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Lh-tr-stow.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/lh-tr-stow-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Lh-tr-stow</tooltip-id>
+               <label>Lh Tr Stow : %s</label>
+              <property>systems/electrical/cb/lh-tr-stow-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Lh-wow.fuse</object-name>	
+        <property>systems/electrical/cb/lh-wow-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Lh-wow.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/lh-wow-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Lh-wow</tooltip-id>
+               <label>Lh Wow : %s</label>
+              <property>systems/electrical/cb/lh-wow-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Lh-ws.fuse</object-name>	
+        <property>systems/electrical/cb/lh-ws-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Lh-ws.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/lh-ws-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Lh-ws</tooltip-id>
+               <label>Lh Ws : %s</label>
+              <property>systems/electrical/cb/lh-ws-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Manual-cab-temp.fuse</object-name>	
+        <property>systems/electrical/cb/manual-cab-temp-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Manual-cab-temp.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/manual-cab-temp-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Manual-cab-temp</tooltip-id>
+               <label>Manual Cab Temp : %s</label>
+              <property>systems/electrical/cb/manual-cab-temp-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Map.fuse</object-name>	
+        <property>systems/electrical/cb/map-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Map.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/map-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Map</tooltip-id>
+               <label>Map : %s</label>
+              <property>systems/electrical/cb/map-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Nav-lights.fuse</object-name>	
+        <property>systems/electrical/cb/nav-lights-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Nav-lights.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/nav-lights-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Nav-lights</tooltip-id>
+               <label>Nav Lights : %s</label>
+              <property>systems/electrical/cb/nav-lights-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Nose-whl-steering.fuse</object-name>	
+        <property>systems/electrical/cb/nose-whl-steering-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Nose-whl-steering.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/nose-whl-steering-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Nose-whl-steering</tooltip-id>
+               <label>Nose Whl Steering : %s</label>
+              <property>systems/electrical/cb/nose-whl-steering-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Oxygen.fuse</object-name>	
+        <property>systems/electrical/cb/oxygen-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Oxygen.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/oxygen-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Oxygen</tooltip-id>
+               <label>Oxygen : %s</label>
+              <property>systems/electrical/cb/oxygen-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Pcu-monitor.fuse</object-name>	
+        <property>systems/electrical/cb/pcu-monitor-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Pcu-monitor.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/pcu-monitor-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Pcu monitor</tooltip-id>
+               <label>PCU Monitor : %s</label>
+              <property>systems/electrical/cb/pcu-monitor-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Pitch-feel.fuse</object-name>	
+        <property>systems/electrical/cb/pitch-feel-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Pitch-feel.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/pitch-feel-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Pitch-feel</tooltip-id>
+               <label>Pitch Feel : %s</label>
+              <property>systems/electrical/cb/pitch-feel-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Press.fuse</object-name>	
+        <property>systems/electrical/cb/press-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Press.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/press-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Press</tooltip-id>
+               <label>Press : %s</label>
+              <property>systems/electrical/cb/press-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Pri-stab-trim-cont.fuse</object-name>	
+        <property>systems/electrical/cb/pri-stab-trim-cont-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Pri-stab-trim-cont.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/pri-stab-trim-cont-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Pri-stab-trim-cont</tooltip-id>
+               <label>Pri Stab Trim Cont : %s</label>
+              <property>systems/electrical/cb/pri-stab-trim-cont-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Pri-stab-trim-pwr.fuse</object-name>	
+        <property>systems/electrical/cb/pri-stab-trim-pwr-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Pri-stab-trim-pwr.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/pri-stab-trim-pwr-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Pri-stab-trim-pwr</tooltip-id>
+               <label>Pri Stab Trim Pwr : %s</label>
+              <property>systems/electrical/cb/pri-stab-trim-pwr-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Rh-aoa-heater.fuse</object-name>	
+        <property>systems/electrical/cb/rh-aoa-heater-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Rh-aoa-heater.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/rh-aoa-heater-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Rh-aoa-heater</tooltip-id>
+               <label>Rh Aoa Heater : %s</label>
+              <property>systems/electrical/cb/rh-aoa-heater-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Rh-boost-pump.fuse</object-name>	
+        <property>systems/electrical/cb/rh-boost-pump-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Rh-boost-pump.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/rh-boost-pump-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Rh-boost-pump</tooltip-id>
+               <label>Rh Boost Pump : %s</label>
+              <property>systems/electrical/cb/rh-boost-pump-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Rh-emer.fuse</object-name>	
+        <property>systems/electrical/cb/rh-emer-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Rh-emer.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/rh-emer-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Rh-emer</tooltip-id>
+               <label>Rh Emer : %s</label>
+              <property>systems/electrical/cb/rh-emer-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Rh-eng-bld-air.fuse</object-name>	
+        <property>systems/electrical/cb/rh-eng-bld-air-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Rh-eng-bld-air.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/rh-eng-bld-air-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Rh-eng-bld-air</tooltip-id>
+               <label>Rh Eng Bld Air : %s</label>
+              <property>systems/electrical/cb/rh-eng-bld-air-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Rh-eng-wing.fuse</object-name>	
+        <property>systems/electrical/cb/rh-eng-wing-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Rh-eng-wing.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/rh-eng-wing-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Rh-eng-wing</tooltip-id>
+               <label>Rh Eng Wing : %s</label>
+              <property>systems/electrical/cb/rh-eng-wing-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Rh-fadec-A.fuse</object-name>	
+        <property>systems/electrical/cb/rh-fadec-A-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Rh-fadec-A.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/rh-fadec-A-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Rh-fadec-A</tooltip-id>
+               <label>Rh Fadec A : %s</label>
+              <property>systems/electrical/cb/rh-fadec-A-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Rh-fadec-B.fuse</object-name>	
+        <property>systems/electrical/cb/rh-fadec-B-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Rh-fadec-B.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/rh-fadec-B-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Rh-fadec-B</tooltip-id>
+               <label>Rh Fadec B : %s</label>
+              <property>systems/electrical/cb/rh-fadec-B-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Rh-feed1.fuse</object-name>	
+        <property>systems/electrical/cb/rh-gen1-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Rh-feed1.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/rh-gen1-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Rh-feed1</tooltip-id>
+               <label>Rh Feed 1 : %s</label>
+              <property>systems/electrical/cb/rh-gen1-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Rh-feed2.fuse</object-name>	
+        <property>systems/electrical/cb/rh-gen2-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Rh-feed2.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/rh-gen2-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Rh-feed2</tooltip-id>
+               <label>Rh Feed 2 : %s</label>
+              <property>systems/electrical/cb/rh-gen2-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Rh-feed3.fuse</object-name>	
+        <property>systems/electrical/cb/rh-gen3-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Rh-feed3.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/rh-gen3-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Rh-feed3</tooltip-id>
+               <label>Rh Feed 3 : %s</label>
+              <property>systems/electrical/cb/rh-gen3-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Rh-fire-detect.fuse</object-name>	
+        <property>systems/electrical/cb/rh-fire-detect-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Rh-fire-detect.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/rh-fire-detect-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Rh-fire-detect</tooltip-id>
+               <label>Rh Fire Detect : %s</label>
+              <property>systems/electrical/cb/rh-fire-detect-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Rh-fuel-cont.fuse</object-name>	
+        <property>systems/electrical/cb/rh-fuel-cont-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Rh-fuel-cont.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/rh-fuel-cont-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Rh-fuel-cont</tooltip-id>
+               <label>Rh Fuel Cont : %s</label>
+              <property>systems/electrical/cb/rh-fuel-cont-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Rh-fuel-fw-vlv.fuse</object-name>	
+        <property>systems/electrical/cb/rh-fuel-fw-vlv-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Rh-fuel-fw-vlv.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/rh-fuel-fw-vlv-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Rh-fuel-fw-vlv</tooltip-id>
+               <label>Rh Fuel Fw Vlv : %s</label>
+              <property>systems/electrical/cb/rh-fuel-fw-vlv-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Rh-fuel-quantity.fuse</object-name>	
+        <property>systems/electrical/cb/rh-fuel-quantity-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Rh-fuel-quantity.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/rh-fuel-quantity-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Rh-fuel-quantity</tooltip-id>
+               <label>Rh Fuel Quantity : %s</label>
+              <property>systems/electrical/cb/rh-fuel-quantity-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Rh-fuel-transfer.fuse</object-name>	
+        <property>systems/electrical/cb/rh-fuel-transfer-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Rh-fuel-transfer.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/rh-fuel-transfer-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Rh-fuel-transfer</tooltip-id>
+               <label>Rh Fuel Transfer : %s</label>
+              <property>systems/electrical/cb/rh-fuel-transfer-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Rh-gear.fuse</object-name>	
+        <property>systems/electrical/cb/rh-gear-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Rh-gear.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/rh-gear-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Rh-gear</tooltip-id>
+               <label>Rh Gear : %s</label>
+              <property>systems/electrical/cb/rh-gear-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Rh-hydr-fw-shutoff.fuse</object-name>	
+        <property>systems/electrical/cb/rh-hydr-fw-shutoff-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Rh-hydr-fw-shutoff.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/rh-hydr-fw-shutoff-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Rh-hydr-fw-shutoff</tooltip-id>
+               <label>Rh Hydr Fw Shutoff : %s</label>
+              <property>systems/electrical/cb/rh-hydr-fw-shutoff-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Rh-panel.fuse</object-name>	
+        <property>systems/electrical/cb/rh-panel-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Rh-panel.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/rh-panel-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Rh-panel</tooltip-id>
+               <label>Rh Panel : %s</label>
+              <property>systems/electrical/cb/rh-panel-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Rh-ps-heater.fuse</object-name>	
+        <property>systems/electrical/cb/rh-ps-heater-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Rh-ps-heater.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/rh-ps-heater-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Rh-ps-heater</tooltip-id>
+               <label>Rh Ps Heater : %s</label>
+              <property>systems/electrical/cb/rh-ps-heater-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Rh-rat-heater.fuse</object-name>	
+        <property>systems/electrical/cb/rh-rat-heater-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Rh-rat-heater.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/rh-rat-heater-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Rh-rat-heater</tooltip-id>
+               <label>Rh Rat Heater : %s</label>
+              <property>systems/electrical/cb/rh-rat-heater-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Rh-slat-stab.fuse</object-name>	
+        <property>systems/electrical/cb/rh-slat-stab-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Rh-slat-stab.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/rh-slat-stab-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Rh-slat-stab</tooltip-id>
+               <label>Rh Slat Stab : %s</label>
+              <property>systems/electrical/cb/rh-slat-stab-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Rh-stall-warn.fuse</object-name>	
+        <property>systems/electrical/cb/rh-stall-warn-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Rh-stall-warn.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/rh-stall-warn-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Rh-stall-warn</tooltip-id>
+               <label>Rh Stall Warn : %s</label>
+              <property>systems/electrical/cb/rh-stall-warn-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Rh-start.fuse</object-name>	
+        <property>systems/electrical/cb/rh-start-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Rh-start.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/rh-start-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Rh-start</tooltip-id>
+               <label>Rh Start : %s</label>
+              <property>systems/electrical/cb/rh-start-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Rh-tr-deploy.fuse</object-name>	
+        <property>systems/electrical/cb/rh-tr-deploy-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Rh-tr-deploy.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/rh-tr-deploy-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Rh-tr-deploy</tooltip-id>
+               <label>Rh Tr Deploy : %s</label>
+              <property>systems/electrical/cb/rh-tr-deploy-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Rh-tr-stow.fuse</object-name>	
+        <property>systems/electrical/cb/rh-tr-stow-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Rh-tr-stow.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/rh-tr-stow-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Rh-tr-stow</tooltip-id>
+               <label>Rh Tr Stow : %s</label>
+              <property>systems/electrical/cb/rh-tr-stow-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Rh-tla-discretes.fuse</object-name>	
+        <property>systems/electrical/cb/rh-tla-discretes-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Rh-tla-discretes.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/rh-tla-discretes-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Rh-tla-discretes</tooltip-id>
+               <label>Rh Tla Discretes : %s</label>
+              <property>systems/electrical/cb/rh-tla-discretes-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Rh-wow.fuse</object-name>	
+        <property>systems/electrical/cb/rh-wow-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Rh-wow.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/rh-wow-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Rh-wow</tooltip-id>
+               <label>Rh Wow : %s</label>
+              <property>systems/electrical/cb/rh-wow-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Rh-ws.fuse</object-name>	
+        <property>systems/electrical/cb/rh-ws-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Rh-ws.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/rh-ws-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Rh-ws</tooltip-id>
+               <label>Rh Ws : %s</label>
+              <property>systems/electrical/cb/rh-ws-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Rudder-limit-A.fuse</object-name>	
+        <property>systems/electrical/cb/rudder-limit-A-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Rudder-limit-A.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/rudder-limit-A-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Rudder-limit-A</tooltip-id>
+               <label>Rudder limit A : %s</label>
+              <property>systems/electrical/cb/rudder-limit-A-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Rudder-limit-B.fuse</object-name>	
+        <property>systems/electrical/cb/rudder-limit-B-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Rudder-limit-B.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/rudder-limit-B-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Rudder-limit-B</tooltip-id>
+               <label>Rudder limit B : %s</label>
+              <property>systems/electrical/cb/rudder-limit-B-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Rudder-stby.fuse</object-name>	
+        <property>systems/electrical/cb/rudder-stby-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Rudder-stby.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/rudder-stby-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Rudder-stby</tooltip-id>
+               <label>Rudder Stby : %s</label>
+              <property>systems/electrical/cb/rudder-stby-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Rudder-trim.fuse</object-name>	
+        <property>systems/electrical/cb/rudder-trim-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Rudder-trim.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/rudder-trim-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Rudder-trim</tooltip-id>
+               <label>Rudder Trim : %s</label>
+              <property>systems/electrical/cb/rudder-trim-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Slat-A-control.fuse</object-name>	
+        <property>systems/electrical/cb/slat-A-control-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Slat-A-control.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/slat-A-control-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Slat-A-control</tooltip-id>
+               <label>Slat A Control : %s</label>
+              <property>systems/electrical/cb/slat-A-control-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Slat-B-control.fuse</object-name>	
+        <property>systems/electrical/cb/slat-B-control-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Slat-B-control.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/slat-B-control-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Slat-B-control</tooltip-id>
+               <label>Slat B Control : %s</label>
+              <property>systems/electrical/cb/slat-B-control-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Sec-stab-trim-cont.fuse</object-name>	
+        <property>systems/electrical/cb/sec-stab-trim-cont-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Sec-stab-trim-cont.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/sec-stab-trim-cont-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Sec-stab-trim-cont</tooltip-id>
+               <label>Sec Stab Trim Cont : %s</label>
+              <property>systems/electrical/cb/sec-stab-trim-cont-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Spd-brake-mon.fuse</object-name>	
+        <property>systems/electrical/cb/spd-brake-mon-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Spd-brake-mon.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/spd-brake-mon-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Spd-brake-mon</tooltip-id>
+               <label>Spd Brake Mon : %s</label>
+              <property>systems/electrical/cb/spd-brake-mon-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Stby-gyro.fuse</object-name>	
+        <property>systems/electrical/cb/stby-gyro-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Stby-gyro.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/stby-gyro-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Stby-gyro</tooltip-id>
+               <label>Stby Gyro : %s</label>
+              <property>systems/electrical/cb/stby-gyro-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Stby-lh-eng-instr.fuse</object-name>	
+        <property>systems/electrical/cb/stby-lh-eng-instr-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Stby-lh-eng-instr.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/stby-lh-eng-instr-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Stby-lh-eng-instr</tooltip-id>
+               <label>Stby Lh Eng Instr : %s</label>
+              <property>systems/electrical/cb/stby-lh-eng-instr-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Stby-rh-eng-instr.fuse</object-name>	
+        <property>systems/electrical/cb/stby-rh-eng-instr-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Stby-rh-eng-instr.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/stby-rh-eng-instr-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Stby-rh-eng-instr</tooltip-id>
+               <label>Stby Rh Eng Instr : %s</label>
+              <property>systems/electrical/cb/stby-rh-eng-instr-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Stby-ps-heat.fuse</object-name>	
+        <property>systems/electrical/cb/stby-ps-heat-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Stby-ps-heat.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/stby-ps-heat-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Stby-ps-heat</tooltip-id>
+               <label>Stby Ps Heat : %s</label>
+              <property>systems/electrical/cb/stby-ps-heat-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Warning-cont-1.fuse</object-name>	
+        <property>systems/electrical/cb/warning-cont-1-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Warning-cont-1.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/warning-cont-1-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Warning-cont-1</tooltip-id>
+               <label>Warning Cont 1 : %s</label>
+              <property>systems/electrical/cb/warning-cont-1-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Warning-cont-2.fuse</object-name>	
+        <property>systems/electrical/cb/warning-cont-2-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Warning-cont-2.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/warning-cont-2-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Warning-cont-2</tooltip-id>
+               <label>Warning Cont 2 : %s</label>
+              <property>systems/electrical/cb/warning-cont-2-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Wing-inspect.fuse</object-name>	
+        <property>systems/electrical/cb/wing-inspect-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Wing-inspect.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/wing-inspect-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Wing-inspect</tooltip-id>
+               <label>Wing Inspect : %s</label>
+              <property>systems/electrical/cb/wing-inspect-fuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>Ws-air.fuse</object-name>	
+        <property>systems/electrical/cb/ws-air-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Ws-air.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/ws-air-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Ws-air</tooltip-id>
+               <label>Ws Air : %s</label>
+              <property>systems/electrical/cb/ws-airfuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+
+    <animation>
+        <type>translate</type>
+        <object-name>Ws-air.fuse</object-name>	
+        <property>systems/electrical/cb/ws-air-fuse-tripped</property>
+				<factor>0.005</factor>
+        <axis>
+          <x>0</x>
+          <y>1</y>
+          <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Ws-air.fuse</object-name>
+        <visible>true</visible>
+        <action>
+          <button>0</button>
+          <repeatable>false</repeatable>
+			    <binding>
+		        <command>property-toggle</command>
+		        <property>systems/electrical/cb/ws-air-fuse-tripped</property>
+			    </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+          </binding>
+        </action>
+        <hovered>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>Ws-air</tooltip-id>
+               <label>Ws Air : %s</label>
+              <property>systems/electrical/cb/ws-airfuse-tripped</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['ON','OFF'];
+							return modes[arg[0]];
+						</script>
+          </binding>
+        </hovered>
+    </animation>
+
+</PropertyList>

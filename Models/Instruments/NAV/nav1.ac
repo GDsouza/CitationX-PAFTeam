@@ -3,7 +3,7 @@ MATERIAL "ap" rgb 0.8 0.8 0.8  amb 1 1 1  emis 0.1 0.1 0.1  spec 1 1 1  shi 50  
 OBJECT world
 kids 6
 OBJECT poly
-name "Nav1-socle"
+name "nav1.base"
 loc 0.000667 0.152842 0.776506
 texture "nav.png"
 crease 45.000000
@@ -54,7 +54,7 @@ refs 4
 5 0.448619 0.60798
 kids 0
 OBJECT poly
-name "Contours-molettes"
+name "knobs.circles"
 loc 0.000708 0.322585 0.396604
 texture "nav.png"
 crease 30.000002
@@ -732,10 +732,8 @@ refs 4
 23 0.218135 0.979106
 kids 0
 OBJECT poly
-name "etiquettes-nav1"
+name "nav1.labels"
 loc 0.16243 1.00899 0.320693
-data 14
-etiquettes-ap2
 texture "nav.png"
 crease 30.000002
 numvert 8
@@ -764,10 +762,8 @@ refs 4
 5 0.212527 0.0219565
 kids 0
 OBJECT poly
-name "vis-nav1"
+name "nav1.screws"
 loc 0 0 0.591102
-data 7
-vis-ap2
 texture "nav.png"
 crease 30.000002
 numvert 80

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<PropertyList>
+
+  <path>oxygenR.ac</path>
+
+  <animation>
+    <type>material</type>
+    <object-name>rh.knob</object-name>
+    <object-name>micSel.base</object-name>
+    <object-name>oxy.panel</object-name>
+    <emission>
+      <red>1</red>
+      <green>1</green>
+      <blue>1</blue>
+      <factor-prop>controls/lighting/flood-norm</factor-prop>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>labels</object-name>
+    <emission>
+      <red>1</red>
+      <green>1</green>
+      <blue>1</blue>
+      <factor-prop>controls/lighting/el-norm</factor-prop>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>micSel.btn</object-name>
+		<property>controls/oxygen/mic-select-copilot</property>
+		<factor>50</factor>
+    <axis>
+      <x>0</x>
+      <y>-1</y>
+      <z>0</z>
+    </axis>
+    <center>
+      <x-m>0.108</x-m>
+      <y-m>0</y-m>
+      <z-m>-0.106</z-m>
+    </center>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>micSel.btn</object-name>
+    <action>
+      <button>0</button>
+      <binding>
+        <command>property-toggle</command>
+        <property>controls/oxygen/mic-select-copilot</property>
+      </binding>
+      <binding>
+        <command>property-toggle</command>
+        <property>sim/sound/click</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>MIC SEL</tooltip-id>
+        <label>MIC SEL : %s</label>
+   			<property>controls/oxygen/mic-select-copilot</property>
+        <mapping>nasal</mapping>
+	      <script>
+		      var modes = ['HEAD SET','OXY MASK'];
+		      return modes[arg[0]];
+	      </script>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>rh.knob</object-name>
+    <property>controls/lighting/rh</property>
+		<factor>-270</factor>
+    <center>
+      <x-m>0.0115</x-m>
+      <y-m>0.6129</y-m>
+      <z-m>-0.1954</z-m>
+    </center>
+    <axis>
+      <x>1</x>
+      <y>0</y>
+      <z>1</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>rh.knob</object-name>
+    <action>
+      <button>3</button>
+      <repeatable>true</repeatable>
+      <interval-sec>0.1</interval-sec>
+      <binding>
+        <command>property-adjust</command>
+        <property>controls/lighting/rh</property>
+        <step>0.05</step>
+        <min>0</min>
+        <max>1.0</max>
+        <wrap>false</wrap>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>LHknob</tooltip-id>
+        <label>Right Light : %i%%</label>
+        <mapping>percent</mapping>
+        <property>controls/lighting/rh</property>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+      <type>pick</type>
+      <object-name>rh.knob</object-name>
+      <action>
+          <button>4</button>
+          <repeatable>true</repeatable>
+          <interval-sec>0.1</interval-sec>
+          <binding>
+              <command>property-adjust</command>
+              <property>controls/lighting/rh</property>
+              <step>-0.05</step>
+              <min>0</min>
+              <max>1.0</max>
+              <wrap>false</wrap>
+          </binding>
+      </action>
+  </animation>
+
+</PropertyList>

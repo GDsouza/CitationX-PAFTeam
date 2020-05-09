@@ -5,44 +5,38 @@ AOA
 -->
 <PropertyList>
 
-    <path>aoa.ac</path>
+  <path>aoa.ac</path>
 
-    <animation>
-        <type>material</type>
-        <object-name>AOA</object-name>
-        <object-name>AoA.needle</object-name>
-        <condition>
-						<or>
-	           	<property>systems/electrical/left-emer-bus</property>
-	           	<property>systems/electrical/left-bus-norm</property>
-						</or>
-        </condition>
-        <emission>
-            <red>1</red>
-            <green>1</green>
-            <blue>1</blue>
-            <factor-prop>controls/lighting/instruments-norm</factor-prop>
-        </emission>
-    </animation>
+  <animation>
+    <type>material</type>
+    <object-name>AOA</object-name>
+    <object-name>AoA.needle</object-name>
+    <emission>
+        <red>1</red>
+        <green>0.7</green>
+        <blue>0</blue>
+        <factor-prop>controls/lighting/lh-norm</factor-prop>
+    </emission>
+  </animation>
 
-    <animation>
-        <type>rotate</type>
-        <object-name>AoA.needle</object-name>
-        <property>orientation/alpha-deg</property>
-        <interpolation>
-            <entry><ind>0</ind><dep>0</dep></entry>
-            <entry><ind>16.0</ind><dep>350</dep></entry>
-        </interpolation>
-        <axis>
-            <x>1.0</x>
-            <y>0.0</y>
-            <z>0</z>
-        </axis>
-        <center>
-            <x-m>0</x-m>
-            <y-m>0</y-m>
-            <z-m>0</z-m>
-        </center>
-    </animation>
+  <animation>
+    <type>rotate</type>
+    <object-name>AoA.needle</object-name>
+    <property>orientation/alpha-deg</property>
+    <interpolation>
+        <entry><ind>0</ind><dep>0</dep></entry>
+        <entry><ind>16.0</ind><dep>350</dep></entry>
+    </interpolation>
+    <axis>
+        <x>1.0</x>
+        <y>0.0</y>
+        <z>0</z>
+    </axis>
+    <center>
+        <x-m>0</x-m>
+        <y-m>0</y-m>
+        <z-m>0</z-m>
+    </center>
+  </animation>
 
 </PropertyList>

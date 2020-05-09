@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+
+<PropertyList>
+
+    <path>cabin-seats.ac</path>
+  <animation>
+    <type>material</type>
+    <object-name>Seats</object-name>
+    <object-name>Reg-Seats</object-name>
+    <object-name>Reg-Ceintures</object-name>
+    <emission>
+      <red>   0.28 </red>
+      <green> 0.28 </green>
+      <blue>  0.25 </blue>
+    </emission>
+  </animation>
+
+    <effect>
+      <inherits-from>Aircraft/CitationX/Models/Effects/skin-reflect</inherits-from>
+    <object-name>Seats</object-name>
+    <object-name>Reg-Seats</object-name>
+    <object-name>Reg-Ceintures</object-name>
+    </effect>
+
+</PropertyList>

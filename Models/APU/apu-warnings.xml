@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+
+<PropertyList>
+
+    <path>apu-warnings.ac</path>
+
+	  <animation>
+        <type>textranslate</type>
+        <object-name>Apu.fire</object-name>
+        <property>controls/APU/fire</property>
+        <factor>0.31</factor>
+        <axis>
+          <x>1</x>
+          <y>0</y>
+          <z>0</z>
+        </axis>
+	  </animation>
+
+	  <animation>
+        <type>textranslate</type>
+        <object-name>Apu.relay</object-name>
+        <condition>
+        </condition>          
+        <property>controls/APU/relay</property>
+        <factor>0.476</factor>
+        <axis>
+          <x>-1</x>
+          <y>0</y>
+          <z>0</z>
+        </axis>
+	  </animation>
+
+	  <animation>
+        <type>textranslate</type>
+        <object-name>Apu.fail</object-name>
+        <property>controls/APU/fail</property>
+        <factor>0.476</factor>
+        <axis>
+          <x>-1</x>
+          <y>0</y>
+          <z>0</z>
+        </axis>
+	  </animation>
+
+</PropertyList>

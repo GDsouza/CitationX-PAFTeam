@@ -7,7 +7,7 @@ var CLS = {
 		m.canvas = canvas.new({
 			"name": "Callsign", 
 			"size": [1024, 1024],
-			"view": [600,128],
+			"view": [300,100],
 			"mipmapping": 1 
 		});
 
@@ -15,18 +15,17 @@ var CLS = {
     m.canvas.setColorBackground(0.15,0.18,0.20,0.5);
 		m.cls = m.canvas.createGroup();
     m.bord = m.cls.createChild("path")
-                  .rect(4,4,592,120)
+                  .rect(4,4,296,96)
                   .setStrokeLineWidth(4)
                   .setStrokeLineJoin("round")
                   .setColor(1,1,1);
 
 		m.txt = m.cls.createChild("text")
-                 .setTranslation(300,64)
+                 .setTranslation(150,50)
                  .setAlignment("center-center")
                  .setText("F-GCLM")
                  .setFont("LiberationFonts/LiberationSans-Bold.ttf")
-                 .setFontSize(72,0.8)
-                 .setScale(1.4) 
+                 .setFontSize(64,1) 
                  .setColor(1,1,1);
 
     m.callsign = "sim/multiplay/callsign";

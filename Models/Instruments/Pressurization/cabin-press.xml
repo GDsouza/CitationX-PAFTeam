@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<PropertyList>
+
+  <path>cabin-press.ac</path>
+
+<!-- Indicator -->
+
+  <animation>
+    <type>material</type>
+    <object-name>Background</object-name>
+    <object-name>Needle</object-name>
+    <emission>
+      <red>1</red>
+      <green>0.7</green>
+      <blue>0</blue>
+      <factor-prop>controls/lighting/rh-norm</factor-prop>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>Needle</object-name>
+    <condition>
+     	<property>systems/electrical/outputs/press</property>
+    </condition>
+		<property>controls/pressurization/cabin-alt-dsp</property>
+		<interpolation>
+      <entry><ind>-1000</ind><dep>0</dep></entry>
+      <entry><ind>0.0</ind><dep>15</dep></entry>
+      <entry><ind>4000</ind><dep>80</dep></entry>
+      <entry><ind>8000</ind><dep>147</dep></entry>
+      <entry><ind>10000</ind><dep>180</dep></entry>
+      <entry><ind>14000</ind><dep>245</dep></entry>
+    </interpolation>
+    <axis>
+      <x>-1.0</x>
+      <y>0.0</y>
+      <z>0</z>
+    </axis>
+    <center>
+      <x-m>0</x-m>
+      <y-m>0</y-m>
+      <z-m>0</z-m>
+    </center>
+  </animation>
+
+</PropertyList>

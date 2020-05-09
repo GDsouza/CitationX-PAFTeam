@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- Air Conditioning -->
+<!-- C.Le Moigne (clm76) - dec 2019 -->
+
+<PropertyList>
+
+  <path>ac_screen.ac</path>
+
+    <animation>
+        <type>select</type>
+        <object-name>tpre.screen</object-name>
+        <condition>
+          <greater-than>
+            <property>systems/electrical/left-main-bus-volts</property>
+            <value>10</value>
+          </greater-than>
+				</condition>
+    </animation>
+
+</PropertyList>
