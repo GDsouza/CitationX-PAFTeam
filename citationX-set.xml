@@ -547,7 +547,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
         <selected type="int">0</selected>
 	    </unit>
     </rmu>
-
+<!--
     <airspeed-indicator>
       <index n="0" type="double">100</index>
       <index n="1" type="double">120</index>
@@ -555,7 +555,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
       <mach-limit>0.85</mach-limit>
       <alt-threshold>8000.0</alt-threshold>
     </airspeed-indicator>
-
+-->
 	  <dc840 n="0">
       <hsi type="bool">0</hsi>
       <wx type="bool">0</wx>

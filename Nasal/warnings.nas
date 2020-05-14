@@ -11,6 +11,7 @@ var Caution = "instrumentation/annunciators/caution";
 var CautionAck = "instrumentation/annunciators/ack-caution";
 var FlagWarn = "instrumentation/eicas/warn";
 var Test_sel = "instrumentation/annunciators/test-select";
+var flaps_sel = "controls/flight/flaps-select";
 var no_takeoff_l3 = nil;
 var msg = [];
 var msg_str0 = "";
@@ -21,7 +22,6 @@ var wow1 = nil;
 var wow2 = nil;
 var stall_warn = nil;
 var grdn = nil;
-var flap = nil;
 var dau_msg = [];
 var rudder_limit_fail = nil;
 
@@ -545,35 +545,34 @@ var Warnings = {
     grdn = getprop("controls/gear/gear-down");
 
 		### Activation Stall System ###
-		if (getprop("position/altitude-agl-ft") > 400) {
+		if (getprop("position/altitude-agl-ft") > 400)
 			setprop("instrumentation/pfd/stall-warning",1);
-		} else if (wow1 or wow2){
-				setprop("instrumentation/pfd/stall-warning",0);		
-		}
+    else setprop("instrumentation/pfd/stall-warning",0);		
+
 		### Set Stall Speed Alarm / Flaps ###
-    if(stall_warn and (!wow1 or !wow2)){
+    if(stall_warn){
 			if (me.flaps == 0){
 				setprop("instrumentation/pfd/stall-speed",145);			
       	if(kias<=145){
 					alert=1;
-					setprop(flaps,1); ### Extension Slats ###
+					setprop(flaps_sel,1); ### Extension Slats ###
 				}
 			}
 			if (me.flaps == 1){
 				setprop("instrumentation/pfd/stall-speed",135);
-				if (kias<=135){alert=1}
+				if (kias<=135) alert=1;
 			}
 			if (me.flaps == 2){
 				setprop("instrumentation/pfd/stall-speed",130);
-				if (kias<=130){alert=1}
+				if (kias<=130) alert=1;
 			}
 			if (me.flaps == 3){
 				setprop("instrumentation/pfd/stall-speed",125);
-				if (kias<=125){alert=1}
+				if (kias<=125) alert=1;
 			}
 			if (me.flaps == 4){
 				setprop("instrumentation/pfd/stall-speed",115);
-				if (kias<=115){alert=1}
+				if (kias<=115) alert=1;
 			}
     }
     setprop("sim/sound/stall-horn",alert);

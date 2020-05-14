@@ -88,10 +88,10 @@ var draw = func {
 	
   var rangeNm = me.map.getRange();
 	if (active) {
-    var course = get_course_by_freq(me.model.frequency/100)-getprop("/orientation/heading-deg");	
+    var course = get_course_by_freq(me.model.frequency/100)-getprop("/orientation/heading-magnetic-deg");	
 			# initialize me.range and me.radial_vor
 			var rangeNm = me.map.getRange();
-			var radius = (me.model.range_nm/rangeNm)*60; # old 80
+			var radius = (me.model.range_nm/rangeNm)*128; # old 60
 		if (me.range_vor == nil) redraw(me,radius);
     else {me.range_vor.del();me.radial_vor.del();redraw(me,radius)}
 		me.radial_vor.setRotation(course*D2R);

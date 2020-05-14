@@ -77,7 +77,7 @@
         </condition>
         <property>instrumentation/nav[1]/radials/target-auto-hdg-deg</property>
       </input>
-      <reference>orientation/heading-deg</reference>
+      <reference>orientation/heading-magnetic-deg</reference>
       <output>autopilot/internal/nav-heading-error-deg</output>
       <period>
         <min>-180</min>
@@ -165,7 +165,7 @@
         </condition>
         <property>instrumentation/nav[1]/radials/sel-deg-corr</property>
       </input>
-      <reference>orientation/heading-deg</reference>
+      <reference>orientation/heading-magnetic-deg</reference>
       <output>
         <condition>
           <not>
@@ -1000,7 +1000,7 @@
         <prop>/instrumentation/sc840/nav1ptr</prop>
         <value>1</value>
       </enable>
-      <input>orientation/heading-deg</input>
+      <input>orientation/heading-magnetic-deg</input>
 			<reference>instrumentation/nav/heading-deg</reference>
 			<output>autopilot/internal/nav1-pointer</output>
 			<config>
@@ -1018,7 +1018,7 @@
           <prop>/instrumentation/sc840/nav2ptr</prop>
           <value>1</value>
       </enable>
-      <input>orientation/heading-deg</input>
+      <input>orientation/heading-magnetic-deg</input>
 		  <reference>instrumentation/nav[1]/heading-deg</reference>
 		  <output>autopilot/internal/nav2-pointer</output>
 		  <config>

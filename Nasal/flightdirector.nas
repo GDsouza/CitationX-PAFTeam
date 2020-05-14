@@ -103,6 +103,11 @@ setlistener("autopilot/locks/heading",func(hd) {
     if (hd.getValue() != "VOR") setprop("autopilot/locks/back-course",0);
 },0,0);
 
+setlistener("autopilot/locks/alt-mach",func(n) {
+    if (n.getValue() and getprop("autopilot/locks/speed") and left(NAVSRC,3)!="FMS")
+      setprop(tg_spd_mc,0.60);
+},0,0);
+
 ### AP /FD Buttons ###
 var FD_set_mode = func(btn){
     Lmode=getprop(Lateral);
@@ -308,8 +313,8 @@ var pitch_wheel=func(dir) {
         setprop("autopilot/settings/target-pitch-deg",amt);
     } else if (SP and left(NAVSRC,3)!="FMS") {
 				if (getprop("autopilot/locks/alt-mach")) {
-          amt=getprop(tg_spd_mc) + (dir*0.01);
-          amt = (amt < 0.40 ? 0.40 : amt > 0.92 ? 0.92 : amt);
+          amt = getprop(tg_spd_mc) + (dir*0.01);
+          amt = (amt < 0.60 ? 0.60 : amt > 0.92 ? 0.92 : amt);
           setprop(tg_spd_mc,amt);
 				}	else {
 		        amt=getprop(tg_spd_kt) + dir*5;
@@ -432,11 +437,7 @@ var speed_round = func {
 }
 
 var alt_mach = func {
-	if (getprop(alt) >= 30650) {
-		setprop("autopilot/locks/alt-mach",1);
-	}	else {
-		setprop("autopilot/locks/alt-mach",0);
-	}
+		setprop("autopilot/locks/alt-mach", getprop(alt) >= 30650 ? 1 : 0);
 }
 
 ### Approach ###

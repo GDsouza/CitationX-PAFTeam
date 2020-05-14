@@ -451,8 +451,8 @@ var EICASdsp = {
         ### ITT - Turbines ###
         else if (i>19 and i<22) {
           if (getprop(Eng[i-20])) 
-            me.trans = math.clamp(getprop(Itt[i-20])*90,10,100);
-          else me.trans = (getprop(Itt[i-20]) or 0)*90;
+            me.trans = math.clamp(getprop(Itt[i-20])*78.6,10,100);
+          else me.trans = (getprop(Itt[i-20]) or 0)*78.6;
           if (me.trans > 90.7) me.color = me.COLORS.red;
           else if (me.trans > 85.7) me.color = me.COLORS.amber;
           else me.color = me.COLORS.white;

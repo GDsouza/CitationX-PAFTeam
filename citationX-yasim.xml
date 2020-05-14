@@ -129,14 +129,14 @@ Fuel 12938 lbs jet
   <tank x="0.8" y="0.0" z="-1.2" capacity="2990" jet="true"/>
   <tank x="0.8" y="0.0" z="-1.2" capacity="2990" jet="true"/>
 
-  <gear x="8.014" y="0.00" z="-2.2" compression="0.1" spring="0.5"><!--orig:c=0.5-->
+  <gear x="8.014" y="0.00" z="-2.2" compression="0.4" sfric="0.8" dfric="0.7"><!--orig:c=0.5-->
     <control-input axis="/controls/gear/steering" control="STEER" invert="true"/>
     <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
     <control-output control="EXTEND" prop="/gear/gear[0]/position-norm"/>
     <control-speed control="EXTEND" transition-time="5"/>
     </gear>
 
-  <gear x="-1.5" y="1.7" z="-2.55" compression="0.6" spring="0.5"><!--orig:c=0.5-->
+  <gear x="-1.5" y="1.7" z="-2.55" compression="0.4" spring="2" sfric="0.9" dfric="0.9">
     <control-input axis="/controls/gear/brake-left" control="BRAKE"/>
     <control-input axis="/controls/gear/brake-parking" control="BRAKE"/>
     <control-input axis="/controls/gear/emer-brake" control="BRAKE"/>
@@ -145,7 +145,7 @@ Fuel 12938 lbs jet
     <control-output control="EXTEND" prop="/gear/gear[1]/position-norm"/>
   </gear>
 
-  <gear x="-1.5" y="-1.7" z="-2.55" compression="0.6" spring="0.5"><!--orig:c=0.5-->
+  <gear x="-1.5" y="-1.7" z="-2.55" compression="0.4" spring="2" sfric="0.9" dfric="0.9">
     <control-input axis="/controls/gear/brake-right" control="BRAKE"/>
     <control-input axis="/controls/gear/brake-parking" control="BRAKE"/>
     <control-input axis="/controls/gear/emer-brake" control="BRAKE"/>
@@ -161,7 +161,7 @@ Thrust Fuel flow(TSFC) 0.3222 kg/s, 0.3187 kg/s with winglets
 -->
   <jet x="-2.5" y="1.5" z="0.72" mass="1700" thrust="7000"
   tsfc="0.3187" epr="23" rotate="0.0" egt="840" spool-time="2"
-  n1-idle="40" n1-max="105" n2-idle="56" n2-max="105.6">
+  n1-idle="40" n1-max="103.8" n2-idle="56" n2-max="104.3">
     <control-input axis="/controls/engines/engine[0]/throttle-lever" control="THROTTLE" src0="0.0" dst0="0.045" src1="1" dst1="1"/>
     <control-input axis="/controls/engines/engine[0]/reverser" control="REVERSE_THRUST"/> 
 <!--    <control-output control="REVERSE_THRUST" prop="surface-positions/reverser-norm"/> -->
@@ -171,7 +171,7 @@ Thrust Fuel flow(TSFC) 0.3222 kg/s, 0.3187 kg/s with winglets
 
   <jet x="-2.5" y="-1.5" z="0.72" mass="1700" thrust="7000"
   tsfc="0.3187" epr="23" rotate="0.0" egt="840" spool-time="2"
-  n1-idle="40" n1-max="105" n2-idle="56" n2-max="105.6">
+  n1-idle="40" n1-max="103.8" n2-idle="56" n2-max="104.3">
     <control-input axis="/controls/engines/engine[1]/throttle-lever" control="THROTTLE" src0="0.0" dst0="0.045" src1="1" dst1="1"/>
     <control-input axis="/controls/engines/engine[1]/reverser" control="REVERSE_THRUST"/>
 <!--    <control-output control="REVERSE_THRUST" prop="surface-positions/reverser-norm[1]"/> -->

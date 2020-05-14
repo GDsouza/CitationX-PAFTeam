@@ -21,7 +21,7 @@ var nasal_dir = getprop("/sim/aircraft-dir") ~ "/Models/Instruments/MFD/canvas";
 io.load_nasal(nasal_dir ~ '/navmap-styles.nas', "fgMap");
 io.include('init.nas');
 
-var hdg = "/orientation/heading-deg";
+var hdg = "/orientation/heading-magnetic-deg";
 var rangeNm = ["instrumentation/mfd/range-nm",
                "instrumentation/mfd[1]/range-nm"];
 var Iac = ["/systems/electrical/outputs/iac1",

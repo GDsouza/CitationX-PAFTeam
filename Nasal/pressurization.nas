@@ -242,7 +242,7 @@ var Pressur = {
         target = 0.00000425*math.pow(value,2)-0.0775*value+1500;
       if (value > 40000 and value <= 51000)
          # parabolic function y=ax2+bx+c
-        target = -0.00000424*math.pow(value,2) +0.6406*value()-13636;
+        target = -0.00000424*math.pow(value,2) +0.6406*value-13636;
       setprop(cabin_target,target);
   }, # end of cabin_tgt
 

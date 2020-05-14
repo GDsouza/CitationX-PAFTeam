@@ -97,7 +97,6 @@ var NavMapStyles = {
 
     me.Styles.APS = {};
     me.Styles.APS.scale_factor=0.7;
-    me.Styles.APS.svg_path = "/Models/Instruments/MFD/canvas/Images/aps.svg";
   },
 
   clearStyles : func() {

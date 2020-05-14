@@ -29,7 +29,7 @@ var FmsAltDsp = "/autopilot/settings/target-altitude-ft";
 var GsDefl = "/autopilot/internal/gs-deflection";
 var GsInRange = "/autopilot/internal/gs-in-range";
 var Hdg = "/autopilot/settings/heading-bug-deg";
-var Heading = "/orientation/heading-deg";
+var Heading = "/orientation/heading-magnetic-deg";
 var HeadingBug = "/autopilot/internal/heading-bug-error-deg";
 var Iac = ["/systems/electrical/outputs/iac1",
            "/systems/electrical/outputs/iac2"];

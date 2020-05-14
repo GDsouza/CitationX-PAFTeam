@@ -56,7 +56,7 @@ var ENG = {
       me.fan = getprop(me.Fan[n]) < 0 ? 0 : getprop(me.Fan[n]);
 		  me.text[n][0].setText(sprintf("%.1f",me.fan));
       if (getprop(me.Eng[n])) 
-        me.itt = math.clamp(getprop(me.Itt[n])*900,120,1000);
+        me.itt = math.clamp(getprop(me.Itt[n])*788,120,1000);
       else me.itt = getprop(me.tmp_ext);
 	    me.text[n][1].setText(sprintf("%.0f",me.itt));
 
