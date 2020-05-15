@@ -1,0 +1,329 @@
+<?xml version="1.0"?>
+<!--
+ spoken atc by rleibner
+ ref: http://wiki.flightgear.org/Spoken_ATC
+
+ Converted to a FlightGear addon by
+ Torsten Dreyer, 18 July 2017
+
+This file is part of FlightGear.
+
+FlightGear is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 2 of the License, or
+(at your option) any later version.
+
+FlightGear is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with FlightGear.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<PropertyList>
+<!--
+  <input>
+    <keyboard>
+      <key n="60">
+        <name>less-than</name>
+        <desc>Spoken ATC</desc>
+        <binding>
+        <command>nasal</command>
+        <script><![CDATA[spoken_atc.speak(15);]]></script>
+        </binding>
+      </key>
+    </keyboard>
+  </input>
+-->
+  <satc>
+   <version type="double">2.2</version>
+  <freq type="double">0</freq>
+  <tip-secs type="double">15</tip-secs>
+  <prev-apt-name type="string"></prev-apt-name>
+  <prev-msg-type type="string"></prev-msg-type>
+  <logic>
+	<!-- Relative Position: -->  
+<!--  The order of the conditions does matter!! -->
+    <condition><!-- 0.- onCRT -->
+      <greater-than>
+        <property>/position/altitude-agl-ft</property>
+        <value>30</value>
+      </greater-than>
+      <less-than>
+        <property>/satc/dist-to-rwy</property>
+        <value>10</value>
+      </less-than>
+    </condition>
+    <condition><!-- 1. cruising -->
+      <greater-than>
+        <property>/position/altitude-agl-ft</property>
+        <value>30</value>
+      </greater-than>
+      <greater-than-equals>
+        <property>/satc/dist-to-rwy</property>
+        <value>10</value>
+      </greater-than-equals>
+    </condition>
+    <condition><!-- 2. onground -->
+      <less-than-equals>
+        <property>/position/altitude-agl-ft</property>
+        <value>30</value>
+      </less-than-equals>
+      <greater-than>
+        <property>/satc/dist-to-rwy</property>
+        <value>0.054</value>
+      </greater-than>
+    </condition>
+    <condition><!-- 3. hold -->
+      <less-than-equals>
+        <property>/position/altitude-agl-ft</property>
+        <value>30</value>
+      </less-than-equals>
+      <less-than-equals>
+        <property>/satc/dist-to-rwy</property>
+        <value>0.054</value>
+      </less-than-equals>
+    </condition>
+	<!-- Service Voice: -->  
+<!--  The order of the conditions does matter!! -->
+    <condition><!-- 4. Report your Position ? -->
+      <equals>
+        <property>/satc/relpos</property>
+        <value>onground</value>
+      </equals>
+      <greater-than-equals>
+        <property>/satc/dist-to-rwy</property>
+        <value>2</value>
+      </greater-than-equals>
+    </condition>  
+    <condition><!-- 5 Taxi to plattform ? -->
+      <or><equals>
+        <property>/satc/relpos</property>
+        <value>onground</value>
+      </equals>
+      <equals>
+        <property>/satc/relpos</property>
+        <value>hold</value>
+      </equals></or>
+        <equals>
+        <property>/satc/prev-msg-type</property>
+        <value>land</value>
+      </equals>
+        <equals>
+        <property>/instrumentation/comm/station-type</property>
+        <value>ground</value>
+      </equals>
+    </condition>
+    <condition><!-- 6 Exit rwy, taxi 2 plattf. ? -->
+      <or><equals>
+        <property>/satc/relpos</property>
+        <value>onground</value>
+      </equals>
+      <equals>
+        <property>/satc/relpos</property>
+        <value>hold</value>
+      </equals></or>
+        <equals>
+        <property>/satc/prev-msg-type</property>
+        <value>land</value>
+      </equals>
+        <equals>
+        <property>/instrumentation/comm/frequencies/selected-mhz</property>
+        <property>/satc/freqs/gnd</property>
+      </equals>
+    </condition>
+    <condition><!-- 7 Exit rwy, contact gnd  ? -->
+      <or><equals>
+        <property>/satc/relpos</property>
+        <value>onground</value>
+      </equals>
+      <equals>
+        <property>/satc/relpos</property>
+        <value>hold</value>
+      </equals></or>
+        <equals>
+        <property>/satc/prev-msg-type</property>
+        <value>land</value>
+      </equals>
+    </condition>
+    <condition><!-- 8 Taxi to rwy, Contact TWR ? -->
+      <equals>
+        <property>/satc/relpos</property>
+        <value>onground</value>
+      </equals>
+      <less-than>
+        <property>/satc/dist-to-rwy</property>
+        <value>2</value>
+      </less-than>
+      <not-equals>
+         <property>/instrumentation/comm/station-type</property>
+        <value>tower</value>
+      </not-equals>
+    </condition>
+    <condition><!-- 9 Taxi to rwy ? -->
+      <equals>
+        <property>/satc/relpos</property>
+        <value>onground</value>
+      </equals>
+      <less-than>
+        <property>/satc/dist-to-rwy</property>
+        <value>2</value>
+      </less-than>
+    </condition>
+    <condition><!-- 10. Contact ground ? -->
+      <equals>
+        <property>/satc/relpos</property>
+        <value>onground</value>
+      </equals>
+      <less-than>
+        <property>/satc/dist-to-rwy</property>
+        <value>2</value>
+      </less-than>
+      <not-equals>
+        <property>/instrumentation/comm/frequencies/selected-mhz</property>
+        <property>/satc/freqs/gnd</property>
+      </not-equals>
+    </condition>
+    <condition><!-- 11. Contact tower ? -->
+      <equals>
+        <property>/satc/relpos</property>
+        <value>onground</value>
+      </equals>
+      <not-equals>
+         <property>/instrumentation/comm/station-type</property>
+        <value>tower</value>
+      </not-equals>
+   </condition>
+    <condition><!-- 12. Takeoff clearance ? -->
+      <equals>
+        <property>/satc/relpos</property>
+        <value>hold</value>
+      </equals>
+      <equals>
+         <property>/instrumentation/comm/station-type</property>
+        <value>tower</value>
+      </equals>
+    </condition>
+    <condition><!-- 13. Contact tower ? -->
+      <equals>
+        <property>/satc/relpos</property>
+        <value>hold</value>
+      </equals>
+    </condition>
+    <condition><!-- 14. Departure  ? -->
+      <equals>
+        <property>/satc/relpos</property>
+        <value>onCTR</value>
+      </equals>
+      <equals>
+        <property>/instrumentation/comm/frequencies/selected-mhz</property>
+        <property>/satc/freqs/dep</property>
+      </equals>
+      <greater-than>
+        <property>/velocities/vertical-speed-fps</property>
+        <value>10</value>
+      </greater-than>
+<!--      <or>
+      <and>
+        <equals>
+        <property>/satc/prev-msg-type</property>
+        <value>takeoff</value>
+      </equals>
+     </and>
+      </or> -->
+    </condition>
+    <condition><!-- 15. Contact departure  ? -->
+      <equals>
+        <property>/satc/relpos</property>
+        <value>onCTR</value>
+      </equals>
+      <greater-than>
+        <property>/velocities/vertical-speed-fps</property>
+        <value>10</value>
+      </greater-than>
+<!--      <not-equals>
+        <property>/instrumentation/comm/frequencies/selected-mhz</property>
+        <property>/satc/freqs/dep</property>
+      </not-equals>
+        <equals>
+        <property>/satc/prev-msg-type</property>
+        <value>takeoff</value>
+      </equals>
+      <greater-than>
+        <property>/velocities/vertical-speed-fps</property>
+        <value>15</value>
+      </greater-than>-->
+    </condition>
+    <condition><!-- 16. Join final ? -->
+      <equals>
+        <property>/satc/relpos</property>
+        <value>onCTR</value>
+      </equals>
+      <equals>
+         <property>/instrumentation/comm/station-type</property>
+        <value>tower</value>
+      </equals>
+      <or><less-than>
+        <property>/satc/delta-hdg-deg</property>
+        <value>20</value>
+      </less-than>
+      <greater-than>
+        <property>/satc/delta-hdg-deg</property>
+        <value>340</value>
+      </greater-than></or>
+      <greater-than>
+        <property>/satc/dist-to-rwy</property>
+        <value>4</value>
+      </greater-than>
+    </condition>
+    <condition><!-- 17. Join pattern  ? -->
+      <equals>
+        <property>/satc/relpos</property>
+        <value>onCTR</value>
+      </equals>
+      <equals>
+         <property>/instrumentation/comm/station-type</property>
+        <value>tower</value>
+      </equals>
+      <greater-than>
+        <property>/satc/dist-to-rwy</property>
+        <value>4</value>
+      </greater-than>
+    </condition>
+    <condition><!-- 18. Landing clearance  ? -->
+      <equals>
+        <property>/satc/relpos</property>
+        <value>onCTR</value>
+      </equals>
+      <equals>
+         <property>/instrumentation/comm/station-type</property>
+        <value>tower</value>
+      </equals>
+    </condition>
+    <condition><!-- 19. Contact tower  ? -->
+      <equals>
+        <property>/satc/relpos</property>
+        <value>onCTR</value>
+      </equals>
+    </condition>
+    <condition><!-- 20. Approaching clearance  ? -->
+      <equals>
+        <property>/satc/relpos</property>
+        <value>cruising</value>
+      </equals>
+       <equals>
+        <property>/instrumentation/comm/frequencies/selected-mhz</property>
+        <property>/satc/freqs/app</property>
+       </equals>
+    </condition> 
+    <condition><!-- 21. Contact approach  ? -->
+      <equals>
+        <property>/satc/relpos</property>
+        <value>cruising</value>
+      </equals>
+    </condition>
+  </logic>
+  </satc>	
+</PropertyList>
