@@ -64,7 +64,7 @@
     <texture-prop>texture</texture-prop>
     <texture>Liveries/F-GCLM.png</texture>
   </animation>
-
+<!--
   <effect>
     <inherits-from>Aircraft/CitationX/Models/Effects/skin-reflect</inherits-from>
     <object-name>Fuselage</object-name>
@@ -103,7 +103,7 @@
     <object-name>RlwReverser</object-name>
     <object-name>RlwReverser1</object-name>
   </effect>
-
+-->
   <model>
       <name>shadow</name>
       <path>Aircraft/CitationX/Models/shadow.xml</path>
@@ -360,7 +360,7 @@
         </and>
       </condition>
       <property>surface-positions/upper-rudder-pos-norm</property>
-      <factor>-18</factor>
+      <factor>18</factor>
       <center>
           <x-m>6.626</x-m>
           <y-m>0</y-m>
@@ -373,12 +373,23 @@
       </axis>
   </animation>
 
-
   <animation>
       <type>rotate</type>
       <object-name>Lower.Rudder</object-name>
+      <condition>
+        <or>
+          <greater-than>
+            <property>systems/hydraulics/psi-norm</property>
+            <value>0.5</value>
+          </greater-than>
+          <greater-than>
+            <property>systems/hydraulics/psi-norm[1]</property>
+            <value>0.5</value>
+          </greater-than>
+        </or>
+      </condition>
       <property>surface-positions/rudder-pos-norm</property>
-      <factor>-30</factor>
+      <factor>30</factor>
       <center>
           <x-m>6.626</x-m>
           <y-m>0</y-m>

@@ -154,7 +154,7 @@
               <value>NAV1</value>
             </equals>
         </condition>
-        <property>instrumentation/nav/radials/sel-deg-corr</property>
+        <property>instrumentation/nav/radials/selected-deg</property>
       </input>
       <input>
         <condition>
@@ -163,7 +163,7 @@
             <value>NAV2</value>
           </equals>
         </condition>
-        <property>instrumentation/nav[1]/radials/sel-deg-corr</property>
+        <property>instrumentation/nav[1]/radials/selected-deg</property>
       </input>
       <reference>orientation/heading-magnetic-deg</reference>
       <output>

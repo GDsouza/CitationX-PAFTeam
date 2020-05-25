@@ -676,6 +676,8 @@ var RMU = {
 
   initDisplay : func(x) {
     ### Display ###
+		me.text.comNum.setText(sprintf("%i",x+1));
+		me.text.navNum.setText(sprintf("%i",x+1));
 		me.text.adfNum.setText(sprintf("%i",x+1));
 #		me.text.adfFreq.setText(sprintf("%d",getprop("instrumentation/adf["~x~"]/frequencies/selected-khz")));
 		me.text.mlsNum.setText(sprintf("%i",x+1));

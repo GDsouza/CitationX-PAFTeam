@@ -14,14 +14,20 @@ var num = "autopilot/route-manager/route/num";
 var pos_init = ["instrumentation/cdu/pos-init",
                 "instrumentation/cdu[1]/pos-init"];
 var irs_pos = ["instrumentation/irs/positionned",
-             "instrumentation/irs[1]/positionned"];
+               "instrumentation/irs[1]/positionned"];
 var dataLoad = "systems/electrical/outputs/data-loader";
 var gps1 = "systems/electrical/outputs/gps1";
 var gps2 = "systems/electrical/outputs/gps2";
 var dsp = ["instrumentation/cdu/display",
            "instrumentation/cdu[1]/display"];
 var nbpage = ["instrumentation/cdu/nbpage",
-            "instrumentation/cdu[1]/nbpage"];
+              "instrumentation/cdu[1]/nbpage"];
+var nav_dist = "autopilot/internal/nav-distance";
+var dist_rem = "autopilot/route-manager/distance-remaining-nm";
+var velocity = "velocities/groundspeed-kt";
+var fuel_flow = ["engines/engine[0]/fuel-flow-pph",
+                 "engines/engine[1]/fuel-flow-pph"];
+
 var _alm = nil;
 var data_load = nil;
 var destApt = nil;
@@ -29,7 +35,9 @@ var dist = nil;
 var g_speed = nil;
 var FuelEstWp = nil;
 var FuelEstDest = nil;
-var Est_time = nil;
+var fuel_cons = nil;
+var EstWp_time = nil;
+var EstDest_time = nil;
 var ETA = nil;
 var ETE = nil;
 var fp_size = nil;
@@ -108,7 +116,7 @@ var cduDsp = {
         if (!me.timer.isRunning) me.timer.start();
       } else me.timer.stop();
       me.Display(x);
-		},0,0);
+		},0,1); # 1 pour maj depuis cdu.nas
 
     setlistener(pos_init[x], func(n) {
       if (n.getValue()) me.Pos_init(x);
@@ -815,8 +823,11 @@ var cduDsp = {
 
   Prog_timer : func {
 		me.timer = maketimer(0.1,func() {
-		  FuelEstWp = int((getprop("/autopilot/internal/nav-distance")/getprop("/velocities/groundspeed-kt"))*(getprop("/engines/engine[0]/fuel-flow-pph")+getprop("/engines/engine[1]/fuel-flow-pph")));
-		  FuelEstDest = int((getprop("/autopilot/route-manager/distance-remaining-nm")/getprop("/velocities/groundspeed-kt"))*(getprop("/engines/engine[0]/fuel-flow-pph")+getprop("/engines/engine[1]/fuel-flow-pph")));
+      fuel_cons = getprop(fuel_flow[0]) + getprop(fuel_flow[1]);
+      EstWp_time = getprop(velocity) > 1 ? int(getprop(nav_dist))/int(getprop(velocity)) : 0;
+		  FuelEstWp = int(EstWp_time * fuel_cons);
+      EstDest_time = getprop(velocity) > 1 ? int(getprop(dist_rem))/int(getprop(velocity)) : 0;
+		  FuelEstDest = int(EstDest_time * fuel_cons);
       nav_id = getprop("autopilot/internal/nav-id");
 		  ETA = getprop("autopilot/route-manager/wp/eta");
 		  if (!ETA) {ETA = "0+00"}
@@ -826,37 +837,38 @@ var cduDsp = {
         me.mn_eta = me.vec_eta[1];
         ETA = me.h_eta~"+"~sprintf("%02i",me.mn_eta);
       } 
-		  ETE = getprop("/autopilot/internal/nav-ttw");
-		  if (!ETE or size(ETE) > 10) {ETE = "0+00"}
-		  else {
-        me.vec_ete = split(":",ETE);
-        me.vec_ete = split("ETE ",me.vec_ete[0]);
-        me.h_ete = int(me.vec_ete[1]/60);
-        me.mn_ete = me.vec_ete[1]-me.h_ete*60;
-        ETE = me.h_ete~"+"~sprintf("%02i",me.mn_ete);
-      }
+		  ETE = getprop("/autopilot/internal/nav-ete");
+      me.vec_ete = split("ETE ",ETE);
+      ETE = me.vec_ete[1];
 		  Nav_type = getprop("/autopilot/internal/nav-type");
-		  Nav1_id = getprop("/instrumentation/nav/nav-id");
-		  Nav1_freq = getprop("/instrumentation/nav/frequencies/selected-mhz-fmt");
+		  Nav1_id = getprop("/instrumentation/nav/nav-id") or "";
+		  Nav1_freq = sprintf("%.3f",getprop("/instrumentation/nav/frequencies/selected-mhz"));
 		  Nav2_id = getprop("/instrumentation/nav[1]/nav-id");
-		  Nav2_freq = getprop("/instrumentation/nav[1]/frequencies/selected-mhz-fmt");
+		  Nav2_freq = sprintf("%.3f",getprop("/instrumentation/nav[1]/frequencies/selected-mhz"));
 
 		  me.line.l2.setText(nav_id);
       me.line.l2r.setText(sprintf("%3i",getprop("/autopilot/internal/nav-distance")));
-      me.line.l4.setText(getprop(dest_apt));
-      me.line.l4r.setText(sprintf("%3i",getprop("autopilot/route-manager/distance-remaining-nm")));
+      if (left(getprop("autopilot/settings/nav-source"),3) == "FMS") {
+        me.line.l4.setText(getprop(dest_apt));
+        me.line.l4r.setText(sprintf("%3i",getprop("autopilot/route-manager/distance-remaining-nm")));
+        me.line.r4l.setText(ETE~"   ").setColor(me.green);
+      } else {
+        me.line.l4.setText(""); 
+        me.line.l4r.setText(sprintf("%3i",0));
+        me.line.r4l.setText(ETE~"   ").setColor(me.green);
+      }
       me.line.l6.setText("   "~Nav1_id~" "~Nav1_freq);
       me.line.r2l.setText(ETA~"   ").setColor(me.green);
       me.line.r2r.setText(FuelEstWp~" ").setColor(me.green);
-      me.line.r4l.setText(ETE~"   ").setColor(me.green);
       me.line.r4r.setText(FuelEstDest~" ").setColor(me.green);
 
-		  if (Nav_type == "VOR1" or Nav_type == "FMS1") { 
+		  if (Nav_type == "VOR1" or Nav_type == "FMS1" or Nav_type == "ILS1") { 
 			  me.line.l5.setText("     " ~Nav_type~" <---");
         me.line.r5.setText(left(Nav_type,3)~"2    ").setColor(me.white);
 		  }	else {
-			  me.line.l5.setText("     " ~left(Nav_type,3)~"1");
-        me.line.r5.setText("---> "~Nav_type~"    ").setColor(me.white)}
+			  me.line.l5.setText("     " ~Nav_type);
+        me.line.r5.setText("---> "~Nav_type~"    ").setColor(me.white);
+      }
       me.line.r6r.setText(Nav2_id~" "~Nav2_freq~" ").setColor(me.green);
     });
  }, # end of Prog_timer

@@ -21,7 +21,8 @@ var nasal_dir = getprop("/sim/aircraft-dir") ~ "/Models/Instruments/MFD/canvas";
 io.load_nasal(nasal_dir ~ '/navmap-styles.nas', "fgMap");
 io.include('init.nas');
 
-var hdg = "/orientation/heading-magnetic-deg";
+var hdg = "/orientation/heading-deg";
+var hdg_mag = "/orientation/heading-magnetic-deg";
 var rangeNm = ["instrumentation/mfd/range-nm",
                "instrumentation/mfd[1]/range-nm"];
 var Iac = ["/systems/electrical/outputs/iac1",
@@ -31,6 +32,7 @@ var dispCtrl = ["/systems/electrical/outputs/disp-cont1",
 var SgRev = "/instrumentation/eicas/sg-rev";
 var sgTest = ["instrumentation/reversionary/sg-test",
               "instrumentation/reversionary/sg-test[1]"];
+var decl_mag = "environment/magnetic-variation-deg";
 var Hdg = nil;
 var HdgBug = nil;
 var HdgVis = nil;
@@ -44,11 +46,12 @@ var Vspd = nil;
 var GndSpd = nil;
 var source = [nil,nil];
 var Tfc = [0,0];
+var aircraft_heading = 0;
 
 var NavMap = {
-  # Lazy-loading - only create the map element when the page becomes visible,
+  # ENABLE - only create the map element when the page becomes visible,
   # and delete afterwards.
-  LAZY_LOADING : 1,
+  ENABLE : 1,
 
   # Layer display configuration:
   # enabled   - whether this layer has been enabled by the user
@@ -145,14 +148,10 @@ var NavMap = {
       m._layerRanges[i] = NavMap.layerRanges[i];
     }
 
-    if (NavMap.LAZY_LOADING == 1) {
+    if (NavMap.ENABLE == 1) {
       m.createMapElement(x);
       m.animateSymbols(x);
     }
-
-#      m.white = [1,1,1];
-#      m.magenta = [1,0,1];
-
 
     return m;
   }, # end of new
@@ -169,17 +168,14 @@ var NavMap = {
     source[x] = ctrl_ns.SOURCES["current-pos"] = {
       getPosition: func subvec(geo.aircraft_position().latlon(), 0, 2),
       getAltitude: func getprop('/position/altitude-ft'),
-      getHeading: func {
-        if (me.aircraft_heading) getprop(hdg) or 0
-        else 0 
-      },
+      getHeading: func {me.aircraft_heading ? getprop(hdg) : 0},
       aircraft_heading: 1
     };
+
       # Make it move with our aircraft:
       me._map.setController("Aircraft position", "current-pos"); # from aircraftpos.controller
       me._plan.setController("Aircraft position", "current-pos");
 
-#    var r = func(name,on_static=1, vis=1,zindex=nil) return caller(0)[0];
     foreach (var layer_name; me.getLayerNames()) {
       var layer = me.getLayer(layer_name);
       if (layer.static == 1) {
@@ -310,14 +306,14 @@ var NavMap = {
     } else {
       if (me._map != nil) me._map.setVisible(visible);
       if (me._plan != nil) me._plan.setVisible(visible);
-      if (NavMap.LAZY_LOADING) me._map = nil;
-      if (NavMap.LAZY_LOADING) me._plan = nil;
+      if (NavMap.ENABLE) me._map = nil;
+      if (NavMap.ENABLE) me._plan = nil;
     }
   },
   
   animateSymbols : func (x) {
     me.update_Iac(x);
-    Hdg = getprop(hdg) or 0;
+    Hdg = getprop(hdg_mag) or 0;
     HdgBug = getprop("/autopilot/internal/heading-bug-error-deg") or 0;
     Range = getprop(rangeNm[x]) or 20;
     Tcas = getprop("instrumentation/tcas/tfc["~x~"]");

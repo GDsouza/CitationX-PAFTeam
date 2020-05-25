@@ -202,7 +202,15 @@ var va = "controls/flight/va";
 			me.text.hdgAnn.setText(sprintf("%03d",getprop(hdg_ann)));
 
       me.ete = getprop("autopilot/internal/nav-ttw");
-		  if (!me.ete or size(me.ete) > 10) {me.ete = "ETE 0:00"}
+		  if (!me.ete or size(me.ete) > 11) me.ete = "ETE 0+00";
+      else {
+        me.vec_ete = split(":",me.ete);
+        me.vec_ete = split("ETE ",me.vec_ete[0]);
+        me.h_ete = int(me.vec_ete[1]/60);
+        me.mn_ete = me.vec_ete[1]-me.h_ete*60;
+        me.ete = "ETE "~me.h_ete~"+"~sprintf("%02i",me.mn_ete);
+      }
+      setprop("autopilot/internal/nav-ete",me.ete);
 			me.text.navTtw.setText(me.ete);
 			if (getprop(dist_rem) > 0) {
 				me.text.distRem.setText(sprintf("%.0f",getprop(dist_rem))~" NM");

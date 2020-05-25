@@ -57,9 +57,9 @@ var controller_check = func(layer, controller, arg...) {
 
 	var get_course_by_freq = func(freq) {
 		if (freq == getprop("instrumentation/nav[0]/frequencies/selected-mhz"))
-			return getprop("instrumentation/nav[0]/radials/sel-deg-corr");
+			return getprop("instrumentation/nav[0]/radials/selected-deg");
 		else
-			return getprop("instrumentation/nav[1]/radials/sel-deg-corr");
+			return getprop("instrumentation/nav[1]/radials/selected-deg");
 	}
 
 var draw = func {

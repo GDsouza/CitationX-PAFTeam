@@ -415,7 +415,7 @@ controls.pilots = func() {
 	}
 }
 
-controls.flapsChange = func(step) {
+controls.flapsDown = func(step) {
 		flaps_pos = getprop("controls/flight/flaps-select");
 		flaps_sel = "controls/flight/flaps-select";
     if (step == 2) setprop(flaps_sel,0);

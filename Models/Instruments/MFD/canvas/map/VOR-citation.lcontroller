@@ -32,8 +32,7 @@ var new = func(layer) {
 
 	foreach (var navC; m.navNs) {
 		append(m.listeners, setlistener(
-      navC.getNode("radials/sel-deg-corr"),
-#			navC.getNode("radials/selected-deg"),
+			navC.getNode("radials/selected-deg"),
 			func m.changed_freq()
 		),1,0);
 	}

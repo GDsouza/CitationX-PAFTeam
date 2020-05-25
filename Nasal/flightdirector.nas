@@ -21,8 +21,6 @@ var tg_spd_mc = "autopilot/settings/target-speed-mc";
 var Vertical = "autopilot/locks/altitude";
 var Vertical_arm = "autopilot/locks/altitude-arm";
 var v_speed = "autopilot/internal/vert-speed-fpm";
-setprop("instrumentation/nav/radials/sel-deg-corr",getprop("instrumentation/nav/radials/selected-deg")-4);
-setprop("instrumentation/nav[1]/radials/sel-deg-corr",getprop("instrumentation/nav[1]/radials/selected-deg")-4);
 var alm_wp = "autopilot/locks/alm-wp";
 var Fms = "autopilot/settings/fms";
 var cdi = "autopilot/internal/course-deflection";
@@ -89,14 +87,6 @@ setlistener(minimums, func(mn) {
 
 setlistener(NAVprop, func(Nv) {
     NAVSRC = Nv.getValue();
-},0,0);
-
-setlistener("instrumentation/nav/radials/selected-deg",func(Sd) {
-		setprop("instrumentation/nav/radials/sel-deg-corr",Sd.getValue()-4);
-},0,0);
-
-setlistener("instrumentation/nav[1]/radials/selected-deg",func(Sd) {
-		setprop("instrumentation/nav[1]/radials/sel-deg-corr",Sd.getValue()-4);
 },0,0);
 
 setlistener("autopilot/locks/heading",func(hd) {
@@ -469,19 +459,18 @@ var update_nav = func {
         if(getprop("instrumentation/nav["~ind~"]/data-is-valid"))sgnl="VOR"~(ind+1);
         in_range = getprop("instrumentation/nav["~ind~"]/in-range");
         setprop(gs_in_range,getprop("instrumentation/nav["~ind~"]/gs-in-range"));
-        dst = getprop("instrumentation/nav["~ind~"]/nav-distance") or 0;
+        setprop("autopilot/internal/nav-id",getprop("instrumentation/nav["~ind~"]/nav-id") or "");
+        if (getprop("autopilot/internal/nav-id") != "")
+          dst = getprop("instrumentation/nav["~ind~"]/nav-distance") ;
+        else dst = 0;
         dst*=0.000539;
         setprop("autopilot/internal/nav-distance",dst);
-        if (getprop("instrumentation/nav["~ind~"]/nav-id"))
-          setprop("autopilot/internal/nav-id",getprop("instrumentation/nav["~ind~"]/nav-id"));
         if(getprop("instrumentation/nav["~ind~"]/nav-loc"))sgnl="LOC"~(ind+1);
         if(getprop("instrumentation/nav["~ind~"]/has-gs"))sgnl="ILS"~(ind+1);
         setprop("autopilot/internal/nav-type",sgnl);
         if (getprop(gs_in_range) and dst <= 20) {
           setprop("autopilot/internal/in-range",1)
         }
-				crs_set = getprop("instrumentation/nav["~ind~"]/radials/sel-deg-corr");
-				setprop("autopilot/settings/selected-crs",math.round(crs_set));
 #        setprop("autopilot/internal/to-flag",getprop("instrumentation/nav["~ind~"]/to-flag"));
         setprop("autopilot/locks/from-flag",getprop("instrumentation/nav["~ind~"]/from-flag"));
 
@@ -562,7 +551,10 @@ var update_nav = func {
 					}
 				}
 			} else flag_wp = 0;
-    } else if (NAVSRC == "") {setprop("autopilot/internal/nav-type","")}
+    } else if (NAVSRC == "") setprop("autopilot/internal/nav-type","");
+		crs_set = getprop("instrumentation/nav["~ind~"]/radials/selected-deg");
+		setprop("autopilot/settings/selected-crs",math.round(crs_set));
+
 } # end of update
 
 ###  Main ###

@@ -102,6 +102,7 @@ props.globals.initNode("autopilot/locks/from-flag",0,"BOOL");
 props.globals.initNode("autopilot/locks/fms-gs",0,"BOOL");
 props.globals.initNode("autopilot/locks/fms-app",0,"BOOL");
 props.globals.initNode("autopilot/internal/fms-climb-rate-fps",0,"DOUBLE");
+props.globals.initNode("autopilot/internal/nav-ete","ETE 0+00","STRING");
 
 ### Cabin ###
 props.globals.initNode("controls/separation-door/open",1,"DOUBLE");

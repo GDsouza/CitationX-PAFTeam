@@ -691,7 +691,7 @@
         <repeatable>false</repeatable>
         <binding>
             <command>nasal</command>
-            <script>controls.flapsChange(1)</script>
+            <script>controls.flapsDown(1)</script>
         </binding>
     </action>
     <hovered>
@@ -718,7 +718,7 @@
         <repeatable>false</repeatable>
         <binding>
             <command>nasal</command>
-            <script>controls.flapsChange(-1)</script>
+            <script>controls.flapsDown(-1)</script>
         </binding>
     </action>
 </animation>
@@ -731,7 +731,7 @@
     	<repeatable>false</repeatable>
     	<binding>
 				<command>nasal</command>
-				<script>controls.flapsChange(2)</script>
+				<script>controls.flapsDown(2)</script>
 			</binding>
     </action>
     <hovered>
