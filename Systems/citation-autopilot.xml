@@ -803,8 +803,7 @@
                 <property>autopilot/locks/to-ga</property>
                 <greater-than>
                   <property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
-                  <value>100</value>
-<!--                  <property>controls/flight/v1</property> -->
+                  <property>controls/flight/v1</property> -->
                 </greater-than>
               </and>
             </or>

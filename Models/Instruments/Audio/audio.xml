@@ -121,7 +121,7 @@
       <center>
         <x-m>0.00</x-m>
         <y-m>-0.6087</y-m>
-        <z-m>0.106</z-m>
+        <z-m>0.1071</z-m>
       </center>
   </animation>
 
@@ -211,7 +211,7 @@
       <center>
         <x-m>0.00</x-m>
         <y-m>-0.5895</y-m>
-        <z-m>0.106</z-m>
+        <z-m>0.1071</z-m>
       </center>
   </animation>
 
@@ -301,7 +301,7 @@
       <center>
         <x-m>0.00</x-m>
         <y-m>-0.5715</y-m>
-        <z-m>0.125</z-m>
+        <z-m>0.1261</z-m>
       </center>
   </animation>
 
@@ -349,7 +349,7 @@
       <center>
         <x-m>0.00</x-m>
         <y-m>-0.5995</y-m>
-        <z-m>0.0875</z-m>
+        <z-m>0.0886</z-m>
       </center>
   </animation>
 
@@ -474,7 +474,7 @@
       <center>
         <x-m>0.00</x-m>
         <y-m>-0.534</y-m>
-        <z-m>0.125</z-m>
+        <z-m>0.1261</z-m>
       </center>
   </animation>
 
@@ -590,7 +590,7 @@
       <center>
         <x-m>0.00</x-m>
         <y-m>-0.516</y-m>
-        <z-m>0.125</z-m>
+        <z-m>0.1261</z-m>
       </center>
   </animation>
 
@@ -710,7 +710,7 @@
       <center>
         <x-m>0.00</x-m>
         <y-m>-0.5715</y-m>
-        <z-m>0.106</z-m>
+        <z-m>0.1071</z-m>
       </center>
   </animation>
 
@@ -826,7 +826,7 @@
       <center>
         <x-m>0.00</x-m>
         <y-m>-0.5532</y-m>
-        <z-m>0.106</z-m>
+        <z-m>0.1071</z-m>
       </center>
   </animation>
 
@@ -934,7 +934,7 @@
       <center>
         <x-m>0.00</x-m>
         <y-m>-0.534</y-m>
-        <z-m>0.106</z-m>
+        <z-m>0.1071</z-m>
       </center>
   </animation>
 
@@ -1038,7 +1038,7 @@
       <center>
         <x-m>0.00</x-m>
         <y-m>-0.516</y-m>
-        <z-m>0.106</z-m>
+        <z-m>0.1071</z-m>
       </center>
   </animation>
 
@@ -1146,7 +1146,7 @@
       <center>
         <x-m>0.00</x-m>
         <y-m>-0.5255</y-m>
-        <z-m>0.0875</z-m>
+        <z-m>0.0886</z-m>
       </center>
   </animation>
 
@@ -1539,7 +1539,7 @@
       <center>
         <x-m>0.00</x-m>
         <y-m>-0.6087</y-m>
-        <z-m>0.125</z-m>
+        <z-m>0.1261</z-m>
       </center>
   </animation>
 
@@ -1627,7 +1627,7 @@
       <center>
         <x-m>0.00</x-m>
         <y-m>-0.5895</y-m>
-        <z-m>0.125</z-m>
+        <z-m>0.1261</z-m>
       </center>
   </animation>
 
@@ -1717,7 +1717,7 @@
       <center>
         <x-m>0.00</x-m>
         <y-m>-0.498</y-m>
-        <z-m>0.125</z-m>
+        <z-m>0.1261</z-m>
       </center>
   </animation>
 
@@ -1765,7 +1765,7 @@
       <center>
         <x-m>0.00</x-m>
         <y-m>-0.498</y-m>
-        <z-m>0.106</z-m>
+        <z-m>0.1071</z-m>
       </center>
   </animation>
 
@@ -1862,7 +1862,7 @@
       <center>
         <x-m>0.00</x-m>
         <y-m>-0.581</y-m>
-        <z-m>0.0875</z-m>
+        <z-m>0.0886</z-m>
       </center>
   </animation>
 
@@ -1952,7 +1952,7 @@
       <center>
         <x-m>0.00</x-m>
         <y-m>-0.5625</y-m>
-        <z-m>0.0875</z-m>
+        <z-m>0.0886</z-m>
       </center>
   </animation>
 
@@ -2000,8 +2000,8 @@
       </axis>
       <center>
         <x-m>0.00</x-m>
-        <y-m>-0.5065</y-m>
-        <z-m>0.0875</z-m>
+        <y-m>-0.5051</y-m>
+        <z-m>0.0885</z-m>
       </center>
   </animation>
 
