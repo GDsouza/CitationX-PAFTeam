@@ -28,6 +28,8 @@ props.globals.initNode("systems/electrical/right-gen-volts",0,"DOUBLE");
 props.globals.initNode("systems/electrical/apu-gen-volts",0,"DOUBLE");
 props.globals.initNode("systems/electrical/apu-gen-amps",0,"DOUBLE");
 
+var adf = ["systems/electrical/outputs/adf1",
+           "systems/electrical/outputs/adf2"];
 var apu_gen = "controls/APU/generator";
 var apu_rpm = "controls/APU/rpm";
 var avionics  = "controls/electric/avionics-switch";
@@ -111,6 +113,17 @@ var Electrical = {
 
     return m;
   },
+
+  listen : func {
+        ### however ADF doesn't work ###
+    setlistener(adf[0], func(n) {
+      if (n.getValue()) setprop("systems/electrical/outputs/adf",me.main_volts[0]);
+    },0,0);
+
+    setlistener(adf[1], func(n) {
+      if (n.getValue()) setprop("systems/electrical/outputs/adf",me.main_volts[1]);
+    },0,0);
+  }, # end of listen
 
   load_components : func {
     var file = getprop("/sim/fg-aircraft")~'/CitationX/Nasal/System_init/elec_components.nas';
@@ -334,6 +347,7 @@ var Electrical = {
 
 var elec_stl = setlistener("/sim/signals/fdm-initialized", func {
   for (var x=1;x<3;x+=1) var elec = Electrical.new(x);
+  elec.listen();
   elec.load_components();
   elec.update_elec();
   print("Electrical System ... Ok");

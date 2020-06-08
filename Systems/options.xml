@@ -11,10 +11,32 @@
 
     <checkbox>
         <halign>left</halign>
-        <label>Enable 2d shadow</label>
+        <label>Enable shadow</label>
         <property>sim/model/shadow-2d</property>
         <binding>
             <command>dialog-apply</command>
+        </binding>
+    </checkbox>
+
+    <checkbox>
+        <halign>left</halign>
+        <label>Aircraft shaders</label>
+        <property>sim/rendering/shaders/model</property>
+        <binding>
+            <command>dialog-apply</command>
+        </binding>
+    </checkbox>
+
+    <checkbox>
+        <halign>left</halign>
+        <label>Show Nav modules</label>
+        <property>sim/model/nav1-visible</property>
+        <binding>
+          <command>property-toggle</command>
+        	<property>sim/model/nav2-visible</property> 
+       </binding>
+        <binding>
+          <command>dialog-apply</command>
         </binding>
     </checkbox>
 
@@ -27,18 +49,6 @@
         </binding>
     </checkbox>
 
-    <checkbox>
-        <halign>left</halign>
-        <label>Show Nav Modules</label>
-        <property>sim/model/nav1-visible</property>
-        <binding>
-          <command>property-toggle</command>
-        	<property>sim/model/nav2-visible</property> 
-       </binding>
-        <binding>
-          <command>dialog-apply</command>
-        </binding>
-    </checkbox>
 
   <button>
     <legend>Close</legend>

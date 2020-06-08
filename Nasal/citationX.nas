@@ -22,8 +22,6 @@ var FHmeter = aircraft.timer.new("/instrumentation/clock/flight-meter-sec", 1,1)
 var Chrono = [aircraft.timer.new("/instrumentation/mfd/chrono", 1,1),
              aircraft.timer.new("/instrumentation/mfd[1]/chrono", 1,1)];
 var Inhg = "instrumentation/altimeter/setting-inhg";
-var el_fdr = "systems/electrical/outputs/fdr";
-var replay_state = "sim/replay/replay-state";
 var flaps = "controls/flight/flaps";
 var flaps_pos = nil;
 var flaps_sel = nil;
@@ -88,7 +86,6 @@ var JetEngine = {
     m.turbine = "engines/engine["~eng_num~"]/turbine";
     m.fadec = "controls/engines/engine["~eng_num~"]/fadec";
     m.fadec_btn = "controls/engines/engine["~eng_num~"]/fadec-btn";
-    m.throttle_lever = "controls/engines/engine["~eng_num~"]/throttle-lever";
     m.throttle = "controls/engines/engine["~eng_num~"]/throttle";
     m.ignition = "controls/engines/engine["~eng_num~"]/ignition";
     m.cutoff = "controls/engines/engine["~eng_num~"]/cutoff";
@@ -169,9 +166,7 @@ var JetEngine = {
       if (getprop(me.fan) > getprop(me.n1)) me.spool_dwn(10);
       setprop(me.turbine,getprop(me.n2));
       if(getprop("controls/engines/grnd_idle")) me.thr *= 0.92;
-      setprop(me.throttle_lever,me.thr);
     } else {
-      setprop(me.throttle_lever,0);
       if(getprop(me.cycle_up)) me.spool_up(15);
       else {
         me.tmprpm = getprop(me.fan);
@@ -432,7 +427,6 @@ var Startup = func{
     setprop("controls/electric/batt2-switch",1);
     setprop("controls/electric/stby-pwr",1);
     setprop("controls/electric/avionics-switch",2);
-    setprop("controls/electric/external-power",0);
     setprop("controls/lighting/nav-lights",1);
     setprop("controls/lighting/beacon",1);
     setprop("controls/lighting/strobe",1);
@@ -453,6 +447,7 @@ var Startup = func{
 		setprop("engines/engine[1]/cycle-up",1);
     settimer(func() {
 		  setprop("engines/engine[0]/cycle-up",1);
+      setprop("controls/electric/external-power",0);
     },12);
 }
 
@@ -577,6 +572,8 @@ var citation_stl = setlistener("/sim/signals/fdm-initialized", func {
 #		setprop("sim/sound/startup",int(10*rand()));
     setprop("controls/engines/engine/ignition",1);
     setprop("controls/engines/engine[1]/ignition",1);
+    setprop("sim/model/shadow-2d",1);
+    setprop("sim/rendering/shaders/model",1);
 		FH_load();   		
     removelistener(citation_stl);
 },0,0);
@@ -597,7 +594,6 @@ var update_systems = func{
     if (getprop("systems/electrical/outputs/nose-whl-steering")) 
       setprop("/controls/gear/steering",-rudder_pos*wspd);
     else setprop("/controls/gear/steering",0);
-    if(!getprop(el_fdr)) setprop(replay_state,0); # Flight recorder
 
     settimer(update_systems,0);
 }

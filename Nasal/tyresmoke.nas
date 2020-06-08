@@ -12,7 +12,7 @@ var tyresmoke_1 = aircraft.tyresmoke.new(1);
 var tyresmoke_2 = aircraft.tyresmoke.new(2);
 var update_tyresmoke = nil;
 var alt_gear = "position/gear-agl-ft";
-var speed = "instrumentation/airspeed-indicator/indicated-speed-kt";
+var speed = "velocities/airspeed-kt";
 
 var TyreSmoke = {
 	new: func () {

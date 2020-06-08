@@ -33,7 +33,7 @@ var Heading = "/orientation/heading-magnetic-deg";
 var HeadingBug = "/autopilot/internal/heading-bug-error-deg";
 var Iac = ["/systems/electrical/outputs/iac1",
            "/systems/electrical/outputs/iac2"];
-var Ias = "/instrumentation/airspeed-indicator/indicated-speed-kt";
+var Ias = "/velocities/airspeed-kt";
 var InRange = "/autopilot/internal/in-range";
 var InRange = "/autopilot/internal/in-range";
 var LocDefl = "/autopilot/internal/heading-deflection-deg";
@@ -56,7 +56,6 @@ var NavType = "/autopilot/internal/nav-type";
 var PfdHsi = ["/instrumentation/dc840/hsi",
               "/instrumentation/dc840[1]/hsi"];
 var PfdSel = "instrumentation/pfd/madc";
-var pitch = "/orientation/pitch-deg";
 var PitchBars = "/autopilot/internal/pitch-bars";
 var PitchDeg = "/orientation/pitch-deg";
 var roll =  "/orientation/roll-deg";
@@ -471,10 +470,10 @@ var PFDDisplay = {
       me.Fail.AttFail.setVisible(getprop(sgTest[x]));
       me.Fail.HorizScale.show();
       me.Fail.HorizGnd.show();
-		  me.h_trans.setTranslation(0,getprop(pitch)*7.5);
+		  me.h_trans.setTranslation(0,getprop(PitchDeg)*7.5);
 		  me.h_rot.setRotation(-getprop(roll)*D2R,me.Hor.Horizon.getCenter());
       me.Hor.BankPtr.setRotation(-getprop(roll)*D2R);
-      if (getprop("/autopilot/internal/show-bars")) {
+      if (getprop("/autopilot/locks/FD-status")) {
         me.Hor.Vbars.show();
         me.Hor.Vbars.setTranslation(0,(getprop(PitchBars)-getprop(PitchDeg))*-5.711);
         me.Hor.Vbars.setRotation((getprop(RollBars)-getprop(RollDeg))*D2R);
@@ -508,10 +507,11 @@ var PFDDisplay = {
         } else me.Spd.TgSpd.setText(sprintf("%.2f",getprop(SpdTgMc)));
       } else me.Spd.TgSpd.hide();
       ias = getprop(Ias);
+      ias_corr = ias/10;
       ias_corr = int(roundToNearest(ias/10,0.1));
       me.Spd.CurSpd.setText(sprintf("%02i",ias_corr));
-  #    me.Spd.CurSpdTen.setTranslation(0,(math.fmod(ias,10)* 32));
-      me.Spd.CurSpdTen.setTranslation(0,(roundToNearest(math.fmod(ias,10),0.1)* 32));
+      me.Spd.CurSpdTen.setTranslation(0,(sprintf("%.2f",math.fmod(ias,10))* 32));
+#      me.Spd.CurSpdTen.setTranslation(0,(roundToNearest(math.fmod(ias,10),0.01)* 32));
       me.Spd.SpdTape.setTranslation(0,ias * 5.143);
       me.Spd.Vmo.setTranslation(0,(ias-(getprop(Vne) or 0)) * 5.143);
       if (!wow) {

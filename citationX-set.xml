@@ -264,6 +264,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
     </instrumentation>
 
     <systems>
+        <path>Aircraft/CitationX/Systems/systems.xml</path>
         <autopilot>
           <path>Aircraft/CitationX/Systems/citation-autopilot.xml</path>
         </autopilot>
@@ -421,7 +422,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 				<callsign>""</callsign>
     </multiplay>
 
-    <flight-recorder include="Systems/flight-recorder.xml"/>
+    <flight-recorder include="Systems/flight-recorder.xml"></flight-recorder>
 
     <color-set>
         <white>
@@ -692,7 +693,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
           <altitude>PTCH</altitude>
           <altitude-arm type="string"></altitude-arm>
           <AP-status type="string"></AP-status>
-          <FD-status type="bool">1</FD-status>
+          <FD-status type="bool">0</FD-status>
           <yaw-damper type="bool">1</yaw-damper>
           <m-trim type="bool">1</m-trim>
       </locks>

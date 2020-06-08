@@ -744,11 +744,13 @@
 </animation>
 
 <!--THROTTLES -->
-		<!-- Left -->
 
+		<!-- Left -->
   <animation>
       <type>rotate</type>
+      <object-name>Lthrottle.cmd</object-name>
       <object-name>Lthrottle</object-name>
+      <object-name>TOGA.buttonL</object-name>
       <object-name>Lreverser</object-name>
       <property>controls/engines/engine/throttle</property>
       <factor>55</factor>
@@ -766,7 +768,9 @@
 
   <animation>
       <type>rotate</type>
+      <object-name>Lthrottle.cmd</object-name>
       <object-name>Lthrottle</object-name>
+      <object-name>TOGA.buttonL</object-name>
       <object-name>Lreverser</object-name>
       <property>controls/engines/engine/cutoff</property>
       <factor>-15</factor>
@@ -782,9 +786,21 @@
       </axis>
   </animation>
 
+  <animation>
+    <type>translate</type>
+    <object-name>TOGA.buttonL</object-name>
+    <property>controls/engines/engine/to-ga</property>
+		<factor>0.003</factor>
+    <axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
 	<animation>
     <type>pick</type>
-    <object-name>Lthrottle</object-name>
+    <object-name>Lthrottle.cmd</object-name>
     <object-name>Lreverser</object-name>
     <action>
       <button>0</button>
@@ -855,8 +871,39 @@
 	</animation>
 
 	<animation>
+    <type>pick</type>
+    <object-name>TOGA.buttonL</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <condition>
+			    <not>
+				    <property>controls/engines/engine/cutoff</property>
+          </not>
+        </condition>
+        <command>property-toggle</command>
+        <property>controls/engines/engine/to-ga</property>
+      </binding>
+      <mod-up>
+	      <binding>
+          <command>property-toggle</command>
+          <property>controls/engines/engine/to-ga</property>
+        </binding>
+      </mod-up>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>To-Ga</tooltip-id>
+        <label>Click to activate TO-GA</label>
+      </binding>
+    </hovered>
+	</animation>
+
+	<animation>
 		<type>slider</type>
-		<object-name>Lthrottle</object-name>
+		<object-name>Lthrottle.cmd</object-name>
 		<object-name>Lreverser</object-name>
 		<drag-direction>vertical</drag-direction>
     <action>
@@ -896,7 +943,9 @@
 
   <animation>
       <type>rotate</type>
+      <object-name>Rthrottle.cmd</object-name>
       <object-name>Rthrottle</object-name>
+      <object-name>TOGA.buttonR</object-name>
       <object-name>Rreverser</object-name>
       <property>controls/engines/engine[1]/throttle</property>
       <factor>55</factor>
@@ -912,27 +961,41 @@
       </axis>
   </animation>
 
-    <animation>
-        <type>rotate</type>
-        <object-name>Rthrottle</object-name>
-        <object-name>Rreverser</object-name>
-        <property>controls/engines/engine[1]/cutoff</property>
-        <factor>-15</factor>
-        <center>
-            <x-m>0.425</x-m>
-            <y-m>0.0</y-m>
-            <z-m>-0.201</z-m>
-        </center>
-        <axis>
-            <x>0.0</x>
-            <y>-1.0</y>
-            <z>0.0</z>
-        </axis>
-    </animation>
+  <animation>
+    <type>rotate</type>
+    <object-name>Rthrottle.cmd</object-name>
+    <object-name>Rthrottle</object-name>
+    <object-name>TOGA.buttonR</object-name>
+    <object-name>Rreverser</object-name>
+    <property>controls/engines/engine[1]/cutoff</property>
+    <factor>-15</factor>
+    <center>
+        <x-m>0.425</x-m>
+        <y-m>0.0</y-m>
+        <z-m>-0.201</z-m>
+    </center>
+    <axis>
+        <x>0.0</x>
+        <y>-1.0</y>
+        <z>0.0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>translate</type>
+    <object-name>TOGA.buttonR</object-name>
+    <property>controls/engines/engine[1]/to-ga</property>
+		<factor>0.003</factor>
+    <axis>
+      <x>0</x>
+      <y>-1</y>
+      <z>0</z>
+    </axis>
+  </animation>
 
 	<animation>
     <type>pick</type>
-    <object-name>Rthrottle</object-name>
+    <object-name>Rthrottle.cmd</object-name>
     <object-name>Rreverser</object-name>
     <action>
       <button>0</button>
@@ -998,6 +1061,37 @@
         <command>set-tooltip</command>
         <tooltip-id>Cutoff</tooltip-id>
         <label>Click to Cutoff</label>
+      </binding>
+    </hovered>
+	</animation>
+
+	<animation>
+    <type>pick</type>
+    <object-name>TOGA.buttonR</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <condition>
+			    <not>
+				    <property>controls/engines/engine[1]/cutoff</property>
+          </not>
+        </condition>
+        <command>property-toggle</command>
+        <property>controls/engines/engine[1]/to-ga</property>
+      </binding>
+      <mod-up>
+	      <binding>
+          <command>property-toggle</command>
+          <property>controls/engines/engine[1]/to-ga</property>
+        </binding>
+      </mod-up>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>Go Around</tooltip-id>
+        <label>Click to activate TO-GA</label>
       </binding>
     </hovered>
 	</animation>

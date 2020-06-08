@@ -7,7 +7,7 @@
                 <reflection-enabled type="int">1</reflection-enabled>
                 <reflection-dynamic type="int">1</reflection-dynamic>
                 <reflect_map-enabled type="int">0</reflect_map-enabled>
-                <reflection-correction type="float">-0.2</reflection-correction>
+                <reflection-correction type="float">-0.4</reflection-correction>
         <texture n="5">
             <type>cubemap</type>
             <images>

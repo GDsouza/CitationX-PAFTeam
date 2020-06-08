@@ -585,13 +585,13 @@ var CHKLIST = {
         if (nr_ligne == 1
 		      or nr_ligne == 2 and getprop("controls/lighting/seat-belts") == 1
 		      or nr_ligne == 3 and getprop("controls/lighting/landing-light") and getprop("controls/lighting/landing-light[1]")
-		      or nr_ligne == 5 and getprop("instrumentation/airspeed-indicator/round-speed-kt") < 250
+		      or nr_ligne == 5 and getprop("velocities/airspeed-kt") < 250
 		      or nr_ligne == 6 and getprop("controls/flight/flaps-select") == 1
 		      or nr_ligne == 8 and getprop("controls/flight/flaps-select") == 2
-		      or nr_ligne == 9 and getprop("instrumentation/airspeed-indicator/round-speed-kt") < 210
+		      or nr_ligne == 9 and getprop("velocities/airspeed-kt") < 210
           or nr_ligne == 10 and getprop("controls/flight/flaps-select") == 3
           or nr_ligne == 11 and getprop("controls/gear/gear-down")
-		      or nr_ligne == 13 and getprop("instrumentation/airspeed-indicator/round-speed-kt") < 180
+		      or nr_ligne == 13 and getprop("velocities/airspeed-kt") < 180
           or nr_ligne == 14 and getprop("controls/flight/flaps-select") == 4
  		      or nr_ligne == 15 and !getprop("controls/gear/brake-parking"))
        L[page][nr_ligne].check = 1;

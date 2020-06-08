@@ -836,7 +836,7 @@ var cduMain = {
             cduInput = (cduInput < 0.40 ? 0.40 : cduInput > 0.92 ? 0.92 : cduInput);
 					  setprop("autopilot/settings/climb-speed-mc",cduInput);				
 				  } else if (cduInput > 100) {
-						  setprop("autopilot/settings/climb-speed-kt",cduInput > 330 ? 330 : cduInput);
+						  setprop("autopilot/settings/climb-speed-kt",cduInput > 345 ? 345 : cduInput);
 				  }					
 			  }
 			  cduInput = "";
@@ -848,7 +848,7 @@ var cduMain = {
             cduInput = (cduInput < 0.40 ? 0.40 : cduInput > 0.92 ? 0.92 : cduInput);
 					  setprop("autopilot/settings/cruise-speed-mc",cduInput);
 				  } else if(cduInput > 100) {
-						  setprop("autopilot/settings/cruise-speed-kt",cduInput > 330 ? 330 : cduInput);
+						  setprop("autopilot/settings/cruise-speed-kt",cduInput > 345 ? 345 : cduInput);
 				  }					
 			  }
 			  cduInput ="";
@@ -870,7 +870,7 @@ var cduMain = {
           } else if (cduInput >= 3 and cduInput <= 5) {
 					  setprop("autopilot/settings/descent-angle",cduInput);
 				  } else if (cduInput > 100) {
-						  setprop("autopilot/settings/descent-speed-kt",cduInput > 330 ? 330 : cduInput);
+						  setprop("autopilot/settings/descent-speed-kt",cduInput > 345 ? 345 : cduInput);
 				  }					
 			  }
 			  cduInput = "";
@@ -883,7 +883,7 @@ var cduMain = {
 			if (v == "B1L") {
 				v = "";
 				if (cduInput) {
-					setprop("autopilot/settings/dep-speed-kt",cduInput > 330 ? 330 : cduInput);	
+					setprop("autopilot/settings/dep-speed-kt",cduInput > 345 ? 345 : cduInput);	
 				}
 				cduInput = "";
 			}

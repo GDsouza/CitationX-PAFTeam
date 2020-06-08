@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<!-- Citation X flight recorder configuration
-     C. Le Moigne (clm76), december 2015
+<!--
+   Citation X flight recorder configuration
+     C. Le Moigne (clm76), dec 2015 - rev : june 2020
 -->
 
 <PropertyList>
 	<replay-config type="int">0</replay-config>
-
-<!--
-  <config n="0" include="Aircraft/Generic/flightrecorder/generic-jet.xml"/>
- -->
 
   <config n="0">
     <name type="string">Citation X Flight Recorder</name>
@@ -19,18 +15,14 @@
     <signals include="Aircraft/Generic/flightrecorder/components/controls.xml" />
     <signals include="Aircraft/Generic/flightrecorder/components/surfaces.xml"/>
     <signals include="Aircraft/Generic/flightrecorder/components/engine-jet.xml">
-        <count type="int">2</count>
-    </signals>
+        <count type="int">2</count></signals>
     <signals include="Aircraft/Generic/flightrecorder/components/gear-retractable.xml">
-        <count type="int">3</count>
-    </signals>
+        <count type="int">3</count></signals>
     <signals include="Aircraft/Generic/flightrecorder/components/tanks.xml">
-        <count type="int">3</count>
-    </signals>
+        <count type="int">3</count></signals>
 
-    <signals>  <!-- Custom properties -->
-
-	    <signals>
+      <!-- Custom properties -->
+    <signals>
         <!--  Engines -->
         <count type="int">2</count>
         <signal>
@@ -43,16 +35,34 @@
         </signal>
         <signal>
           <type>int8</type>
-					<property type="string">engines/engine[%i]/ignition</property>
+					<property type="string">controls/engines/engine[%i]/ignition</property>
         </signal>
         <signal>
-      		<type>int8</type>
+          <type>double</type>
+					<property type="string">engines/engine[%i]/fan</property>
+        </signal>
+        <signal>
+          <type>float</type>
+					<property type="string">engines/engine[%i]/itt-norm</property>
+        </signal>
+        <signal>
+          <type>float</type>
+					<property type="string">engines/engine[%i]/oilt-norm</property>
+        </signal>
+        <signal>
+          <type>float</type>
+					<property type="string">engines/engine[%i]/turbine</property>
+        </signal>
+        <signal>
+          <type>bool</type>
+					<property type="string">engines/engine[%i]/cycle-up</property>
+        </signal>
+        <signal>
+      		<type>bool</type>
 					<property type="string">controls/engines/engine[%i]/reverser</property>
         </signal>
- 	   </signals>
 
-        <!--  Others -->
-
+        <!--  APU -->
 		  <signal>
 		    <type>bool</type>
 				<property type="string">controls/APU/master</property>
@@ -62,7 +72,7 @@
 				<property type="string">controls/APU/running</property>
 			</signal>
 		  <signal>
-		    <type>double</type>
+		    <type>float</type>
 				<property type="string">controls/APU/rpm</property>
 			</signal>
 		  <signal>
@@ -70,9 +80,11 @@
 				<property type="string">controls/APU/bleed</property>
 			</signal>
 		  <signal>
-		    <type>int</type>
+		    <type>bool</type>
 				<property type="string">controls/APU/generator</property>
 			</signal>
+
+        <!--  Electrical -->
 		  <signal>
 		    <type>bool</type>
 				<property type="string">controls/electric/batt1-switch</property>
@@ -94,19 +106,7 @@
 				<property type="string">controls/electric/rh-emer</property>
 		  </signal>
 		  <signal>
-		    <type>double</type>
-				<property type="string">systems/electrical/batt1-charge-norm</property>
-		  </signal>
-		  <signal>
-		    <type>double</type>
-				<property type="string">systems/electrical/batt2-charge-norm</property>
-		  </signal>
-		  <signal>
-		    <type>double</type>
-				<property type="string">systems/electrical/batt-stby-charge-norm</property>
-		  </signal>
-		  <signal>
-		    <type>int</type>
+		    <type>int8</type>
 				<property type="string">controls/electric/avionics-switch</property>
 		  </signal>
 		  <signal>
@@ -117,53 +117,51 @@
 		    <type>bool</type>
 				<property type="string">controls/electric/external-power</property>
 		  </signal>
+
+        <!--  Lighting -->
 		  <signal>
-		    <type>double</type>
-				<property type="string">controls/lighting/el-norm</property>
-		  </signal>
-		  <signal>
-		    <type>double</type>
-				<property type="string">controls/lighting/lh-norm</property>
-		  </signal>
-		  <signal>
-		    <type>double</type>
-				<property type="string">controls/lighting/rh-norm</property>
-		  </signal>
-		  <signal>
-		    <type>double</type>
-				<property type="string">controls/lighting/flood-norm</property>
-		  </signal>
-		 <signal>
-		    <type>bool</type>
-				<property type="string">controls/lighting/nav-lights</property>
+		    <type>int8</type>
+				<property type="string">controls/lighting/anti-coll</property>
 		  </signal>
 		  <signal>
 		    <type>bool</type>
 				<property type="string">controls/lighting/beacon</property>
 		  </signal>
 		  <signal>
-		    <type>bool</type>
-				<property type="string">controls/lighting/strobe</property>
+		    <type>float</type>
+				<property type="string">controls/lighting/ctr</property>
+		  </signal>
+		  <signal>
+		    <type>float</type>
+				<property type="string">controls/lighting/ctr-norm</property>
 		  </signal>
 		  <signal>
 		    <type>bool</type>
-				<property type="string">controls/lighting/wing-lights</property>
+				<property type="string">controls/lighting/day-night</property>
 		  </signal>
 		  <signal>
-		    <type>bool</type>
-				<property type="string">controls/lighting/recog-lights</property>
+		    <type>float</type>
+				<property type="string">controls/lighting/eicas</property>
 		  </signal>
 		  <signal>
-		    <type>bool</type>
-				<property type="string">controls/lighting/taxi-light</property>
+		    <type>float</type>
+				<property type="string">controls/lighting/el</property>
 		  </signal>
 		  <signal>
-		    <type>bool</type>
-				<property type="string">controls/lighting/logo-lights</property>
+		    <type>float</type>
+				<property type="string">controls/lighting/el-norm</property>
 		  </signal>
 		  <signal>
-		    <type>bool</type>
-				<property type="string">controls/lighting/cabin-lights</property>
+		    <type>int8</type>
+				<property type="string">controls/lighting/emer-lights</property>
+		  </signal>
+		  <signal>
+		    <type>float</type>
+				<property type="string">controls/lighting/flood</property>
+		  </signal>
+		  <signal>
+		    <type>float</type>
+				<property type="string">controls/lighting/flood-norm</property>
 		  </signal>
 		  <signal>
 		    <type>bool</type>
@@ -174,6 +172,66 @@
 				<property type="string">controls/lighting/landing-light[1]</property>
 		  </signal>
 		  <signal>
+		    <type>float</type>
+				<property type="string">controls/lighting/lh</property>
+		  </signal>
+		  <signal>
+		    <type>float</type>
+				<property type="string">controls/lighting/lh-norm</property>
+		  </signal>
+		  <signal>
+		    <type>double</type>
+				<property type="string">controls/lighting/mfd</property>
+		  </signal>
+		  <signal>
+		    <type>float</type>
+				<property type="string">controls/lighting/mfd[1]</property>
+		  </signal>
+		 <signal>
+		    <type>bool</type>
+				<property type="string">controls/lighting/nav-lights</property>
+		  </signal>
+		  <signal>
+		    <type>float</type>
+				<property type="string">controls/lighting/pfd</property>
+		  </signal>
+		  <signal>
+		    <type>float</type>
+				<property type="string">controls/lighting/pfd[1]</property>
+		  </signal>
+		  <signal>
+		    <type>bool</type>
+				<property type="string">controls/lighting/strobe</property>
+		  </signal>
+		  <signal>
+		    <type>bool</type>
+				<property type="string">controls/lighting/wing-lights</property>
+		  </signal>
+		  <signal>
+		    <type>int8</type>
+				<property type="string">controls/lighting/recog-lights</property>
+		  </signal>
+		  <signal>
+		    <type>float</type>
+				<property type="string">controls/lighting/rh</property>
+		  </signal>
+		  <signal>
+		    <type>float</type>
+				<property type="string">controls/lighting/rh-norm</property>
+		  </signal>
+		  <signal>
+		    <type>float</type>
+				<property type="string">controls/lighting/rmu[1]</property>
+		  </signal>
+		  <signal>
+		    <type>int8</type>
+				<property type="string">controls/lighting/seat-belts</property>
+		  </signal>
+		  <signal>
+		    <type>bool</type>
+				<property type="string">controls/lighting/taxi-light</property>
+		  </signal>
+		  <signal>
 		    <type>bool</type>
 				<property type="string">controls/fuel/tank[0]/boost-pump</property>
 		  </signal>
@@ -182,32 +240,30 @@
 				<property type="string">controls/fuel/tank[1]/boost-pump</property>
 		  </signal>
 		  <signal>
-		    <type>bool</type>
-				<property type="string">instrumentation/afds/inputs/AP</property>
-		  </signal>
-		  <signal>
 		  	<type>int16</type>
 				<property type="string">autopilot/settings/target-speed-kt</property>
 		  </signal>
 		  <signal>
-		    <type>int</type>
+		    <type>int16</type>
 				<property type="string">autopilot/settings/target-altitude-ft</property>
 		  </signal>
 		  <signal>
 		    <type>int16</type>
 				<property type="string">autopilot/settings/heading-bug-deg</property>
 		  </signal>
+
+        <!--  Aircraft -->
 		  <signal>
 		      <type>float</type>
 		      <property type="string">gear/gear[0]/compression-m</property>
 		  </signal>
 		  <signal>
-		      <type>float</type>
-		      <property type="string">gear/gear[1]/compression-m</property>
+	      <type>float</type>
+	      <property type="string">gear/gear[1]/compression-m</property>
 		  </signal>
 		  <signal>
-		    <type>float</type>
-		    <property type="string">gear/gear[2]/compression-m</property>
+	      <type>float</type>
+	      <property type="string">gear/gear[2]/compression-m</property>
 		  </signal>
 		  <signal>
 		    <type>float</type>
@@ -229,9 +285,42 @@
         <type>float</type>
         <property type="string">/controls/cabin-door/position-norm</property>
       </signal>
+      <signal>
+        <type>int8</type>
+        <property type="string">/controls/flight/flaps-select</property>
+      </signal>
 
-  </signals>
+        <!--  Anti Ice -->
+      <signal>
+        <type>bool</type>
+        <property type="string">/controls/anti-ice/lh-pitot</property>
+      </signal>
+      <signal>
+        <type>bool</type>
+        <property type="string">/controls/anti-ice/lh-ws</property>
+      </signal>
+      <signal>
+        <type>bool</type>
+        <property type="string">/controls/anti-ice/rh-pitot</property>
+      </signal>
+      <signal>
+        <type>bool</type>
+        <property type="string">/controls/anti-ice/rh-ws</property>
+      </signal>
 
-    </config>
+
+        <!--  Hydraulics -->
+      <signal>
+        <type>float</type>
+        <property type="string">/systems/hydraulics/psi-norm[0]</property>
+      </signal>
+      <signal>
+        <type>float</type>
+        <property type="string">/systems/hydraulics/psi-norm[1]</property>
+      </signal>
+
+    </signals>
+
+  </config>
 
 </PropertyList>

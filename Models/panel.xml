@@ -2943,7 +2943,7 @@
         <type>rotate</type>
         <object-name>recog.switch</object-name>
         <property>controls/lighting/recog-lights</property>
-        <factor>20</factor>
+        <factor>35</factor>
         <center>
            <x-m>0.067</x-m>
             <y-m>0</y-m>
@@ -3514,12 +3514,13 @@
             </binding>
         </action>
         <hovered>
-            <binding>
-                <command>set-tooltip</command>
-                <tooltip-id>Pfd0Lighting</tooltip-id>
-                <label>Pfd Lighting : %i%% </label> 
-                <property>controls/lighting/pfd</property>
-            </binding>
+          <binding>
+              <command>set-tooltip</command>
+              <tooltip-id>PfdLighting</tooltip-id>
+              <label>Pfd Lighting : %i%% </label> 
+              <mapping>percent</mapping>
+              <property>controls/lighting/pfd</property>
+          </binding>
         </hovered>
     </animation>
 
@@ -3557,6 +3558,7 @@
                 <command>set-tooltip</command>
                 <tooltip-id>Pfd1Lighting</tooltip-id>
                 <label>Pfd Lighting : %i%% </label> 
+                <mapping>percent</mapping>
                 <property>controls/lighting/pfd[1]</property>
             </binding>
         </hovered>
@@ -3924,6 +3926,7 @@
                 <command>set-tooltip</command>
                 <tooltip-id>Mfd0Lighting</tooltip-id>
                 <label>Mfd Lighting : %i%% </label> 
+                <mapping>percent</mapping>
                 <property>controls/lighting/mfd</property>
             </binding>
         </hovered>
@@ -3963,6 +3966,7 @@
                 <command>set-tooltip</command>
                 <tooltip-id>Mfd1Lighting</tooltip-id>
                 <label>Mfd Lighting : %i%% </label> 
+                <mapping>percent</mapping>
                 <property>controls/lighting/mfd[1]</property>
             </binding>
         </hovered>

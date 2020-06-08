@@ -20,9 +20,6 @@ props.globals.initNode("/controls/air-conditioning/isol-valve", 0, "BOOL");
 props.globals.initNode("/controls/air-conditioning/bleed-air/left-engine", 1, "INT");	
 props.globals.initNode("/controls/air-conditioning/bleed-air/right-engine", 1, "INT");	
 
-### Airspeed ###
-props.globals.initNode("instrumentation/airspeed-indicator/round-speed-kt",0,"DOUBLE");
-
 ### Alarms ###
 props.globals.initNode("sim/alarms/overspeed-alarm",0,"BOOL");
 props.globals.initNode("sim/alarms/stall-warning",0,"BOOL");
@@ -87,9 +84,9 @@ props.globals.initNode("instrumentation/audio/speaker",0.7,"DOUBLE");
 ### Autopilot ###
 props.globals.initNode("autopilot/route-manager/alternate/set-flag",0,"BOOL");
 props.globals.initNode("autopilot/route-manager/alternate/closed",0,"BOOL");
-props.globals.initNode("/autopilot/route-manager/alternate[1]/airport","");
+props.globals.initNode("/autopilot/route-manager/alternate[1]/airport","","STRING");
 props.globals.initNode("/autopilot/route-manager/alternate[1]/closed",0,"BOOL");
-props.globals.initNode("/autopilot/route-manager/alternate[1]/runway","");
+props.globals.initNode("/autopilot/route-manager/alternate[1]/runway","","STRING");
 props.globals.initNode("/autopilot/route-manager/alternate[1]/set-flag",0,"BOOL");
 props.globals.initNode("autopilot/settings/nav-btn",0,"BOOL");
 props.globals.initNode("autopilot/settings/fms-btn",0,"BOOL");
@@ -101,8 +98,14 @@ props.globals.initNode("autopilot/locks/alm-wp",0,"BOOL");
 props.globals.initNode("autopilot/locks/from-flag",0,"BOOL");
 props.globals.initNode("autopilot/locks/fms-gs",0,"BOOL");
 props.globals.initNode("autopilot/locks/fms-app",0,"BOOL");
+props.globals.initNode("autopilot/locks/altitude","PTCH","STRING");
+props.globals.initNode("autopilot/locks/heading","ROLL","STRING");
+props.globals.initNode("autopilot/locks/speed",0,"BOOL");
+props.globals.initNode("autopilot/locks/back-course",0,"BOOL");
+props.globals.initNode("autopilot/locks/to-ga",0,"BOOL");
 props.globals.initNode("autopilot/internal/fms-climb-rate-fps",0,"DOUBLE");
 props.globals.initNode("autopilot/internal/nav-ete","ETE 0+00","STRING");
+props.globals.initNode("autopilot/internal/pitch-bars","0","DOUBLE");
 
 ### Cabin ###
 props.globals.initNode("controls/separation-door/open",1,"DOUBLE");
@@ -171,6 +174,7 @@ for(var n=0;n<2;n+=1) {
   props.globals.initNode("controls/engines/engine["~n~"]/fuel-pump",0,"BOOL");
   props.globals.initNode("controls/engines/engine["~n~"]/feed-tank",0,"INT");
   props.globals.initNode("controls/engines/engine["~n~"]/running",0,"BOOL");
+  props.globals.initNode("controls/engines/engine["~n~"]/to-ga",0,"BOOL");
   props.globals.initNode("engines/engine["~n~"]/cycle-up",0,"BOOL");
   props.globals.initNode("engines/engine["~n~"]/fan",0,"DOUBLE");
   props.globals.initNode("engines/engine["~n~"]/turbine",0,"DOUBLE");
@@ -273,6 +277,7 @@ props.globals.initNode("controls/lighting/day-night",0,"BOOL");
 props.globals.initNode("controls/lighting/lh-map",0,"DOUBLE");
 props.globals.initNode("controls/lighting/rh-map",0,"DOUBLE");
 props.globals.initNode("controls/lighting/seat-belts",0,"INT");
+props.globals.initNode("controls/lighting/aux-panel",0,"DOUBLE");
 
 ### MFD ###
 for(var n=0;n<2;n+=1) {

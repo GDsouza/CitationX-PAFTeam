@@ -155,7 +155,7 @@
 			<property>controls/flight/v1</property>
 		</input>
 		<reference>
-			<property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
+			<property>velocities/airspeed-kt</property>
 		</reference>
 		<output>instrumentation/pfd/v1-diff</output>
 		<min>0</min>
@@ -173,7 +173,7 @@
 			<property>controls/flight/vr</property>
 		</input>
 		<reference>
-			<property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
+			<property>velocities/airspeed-kt</property>
 		</reference>
 		<output>instrumentation/pfd/vr-diff</output>
 		<min>0</min>
@@ -191,7 +191,7 @@
 			<property>controls/flight/v2</property>
 		</input>
 		<reference>
-			<property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
+			<property>velocities/airspeed-kt</property>
 		</reference>
 		<output>instrumentation/pfd/v2-diff</output>
 		<min>0</min>
@@ -209,7 +209,7 @@
 			<property>controls/flight/ve</property>
 		</input>
 		<reference>
-			<property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
+			<property>velocities/airspeed-kt</property>
 		</reference>
 		<output>instrumentation/pfd/ve-diff</output>
 		<min>0</min>
@@ -227,7 +227,7 @@
 			<property>controls/flight/va</property>
 		</input>
 		<reference>
-			<property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
+			<property>velocities/airspeed-kt</property>
 		</reference>
 		<output>instrumentation/pfd/va-diff</output>
 		<min>-60</min>
@@ -245,7 +245,7 @@
 			<property>controls/flight/vf5</property>
 		</input>
 		<reference>
-			<property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
+			<property>velocities/airspeed-kt</property>
 		</reference>
 		<output>instrumentation/pfd/vf5-diff</output>
 		<min>-60</min>
@@ -263,7 +263,7 @@
 			<property>controls/flight/vf15</property>
 		</input>
 		<reference>
-			<property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
+			<property>velocities/airspeed-kt</property>
 		</reference>
 		<output>instrumentation/pfd/vf15-diff</output>
 		<min>-60</min>
@@ -281,7 +281,7 @@
 			<property>controls/flight/vf35</property>
 		</input>
 		<reference>
-			<property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
+			<property>velocities/airspeed-kt</property>
 		</reference>
 		<output>instrumentation/pfd/vf35-diff</output>
 		<min>-60</min>
@@ -299,7 +299,7 @@
 			<property>controls/flight/vref</property>
 		</input>
 		<reference>
-			<property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
+			<property>velocities/airspeed-kt</property>
 		</reference>
 		<output>instrumentation/pfd/vref-diff</output>
 		<min>-60</min>
@@ -378,7 +378,7 @@
 			<gain>1.0</gain> 
      <input>instrumentation/pfd/stall-speed</input>
       <reference>
-          <property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
+          <property>velocities/airspeed-kt</property>
       </reference>
       <output>instrumentation/pfd/stall-diff</output>
       <min>-205</min>

@@ -2,6 +2,24 @@
 
 <PropertyList>
 
+<!-- Throttles vs Cut-off -->
+
+  <flipflop>
+    <type>RS</type>
+    <R>
+      <property>controls/engines/engine/cutoff</property>
+    </R>
+    <output>controls/engines/engine/throttle</output>
+  </flipflop>
+
+  <flipflop>
+    <type>RS</type>
+    <R>
+      <property>controls/engines/engine[1]/cutoff</property>
+    </R>
+    <output>controls/engines/engine[1]/throttle</output>
+  </flipflop>
+
   <!-- Low Rudder -->
 
   <!-- The rudder trim is achieved by electrically displacing the trim

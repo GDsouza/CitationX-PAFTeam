@@ -625,10 +625,8 @@
 						</condition>							
 		        <command>property-cycle</command>
 		        <property>instrumentation/adf/mode</property>
-							<value>ANT</value>
-							<value>ADF</value>
-							<value>BFO</value>
-							<value>VOICE</value>
+							<value>adf</value>
+							<value>bfo</value>
 		      </binding>
 		      <binding>
 						<condition>

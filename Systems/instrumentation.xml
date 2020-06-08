@@ -15,7 +15,7 @@ This file selects the instrumentation modules that should be available.
 
     <adf>
         <name>adf</name>
-        <number>1</number>
+        <number>0</number>
     </adf>
 
     <airspeed-indicator>

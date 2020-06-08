@@ -16,6 +16,7 @@
   <model>
     <path>Aircraft/Generic/marker.xml</path>
   </model>
+<!--
   <nasal>
       <load>
           var livery_update = aircraft.livery_update.new("Aircraft/CitationX/Models/Liveries", 10);
@@ -24,6 +25,7 @@
           livery_update.stop();
       </unload>
   </nasal>
+-->
 
   <animation>
     <type>material</type>
@@ -59,12 +61,12 @@
     <object-name>wing.heater</object-name>
     <object-name>LHslat</object-name>
     <object-name>RHslat</object-name>
-
+    <object-name>frtshock</object-name>
     <property-base>sim/model/livery</property-base>
     <texture-prop>texture</texture-prop>
     <texture>Liveries/F-GCLM.png</texture>
   </animation>
-<!--
+
   <effect>
     <inherits-from>Aircraft/CitationX/Models/Effects/skin-reflect</inherits-from>
     <object-name>Fuselage</object-name>
@@ -102,8 +104,9 @@
     <object-name>RupReverser1</object-name>
     <object-name>RlwReverser</object-name>
     <object-name>RlwReverser1</object-name>
+    <object-name>frtshock</object-name>
   </effect>
--->
+
   <model>
       <name>shadow</name>
       <path>Aircraft/CitationX/Models/shadow.xml</path>

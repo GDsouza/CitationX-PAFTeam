@@ -3,8 +3,8 @@
 
 setprop("instrumentation/dme/frequencies/source","instrumentation/dme/frequencies/selected-mhz");
 setprop("instrumentation/dme[1]/frequencies/source","instrumentation/dme[1]/frequencies/selected-mhz");
-setprop("instrumentation/adf/mode","ADF");
-setprop("instrumentation/adf[1]/mode","ADF");
+setprop("instrumentation/adf/mode","adf");
+setprop("instrumentation/adf[1]/mode","adf");
 
 var nav_freq = ["instrumentation/nav/frequencies/selected-mhz","instrumentation/nav[1]/frequencies/selected-mhz"];
 var nav_id = ["instrumentation/nav/nav-id","instrumentation/nav[1]/nav-id"];
@@ -667,7 +667,7 @@ var RMU = {
     }
     if (me.adf_enabled) {
 			me.text.adfFreq.setText(sprintf("%d",getprop("instrumentation/adf["~x~"]/frequencies/selected-khz")));
-			me.text.adfMode.setText(getprop("instrumentation/adf["~x~"]/mode"));
+			me.text.adfMode.setText(string.uc(getprop("instrumentation/adf["~x~"]/mode")));
     } else {
 			me.text.adfFreq.setText("-----");
 			me.text.adfMode.setText("-----");
