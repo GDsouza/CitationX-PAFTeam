@@ -53,8 +53,12 @@ var eng_run = ["controls/engines/engine/running",
 var ext_pwr = "controls/electric/external-power";
 var gen_volts = ["systems/electrical/left-gen-volts",
                  "systems/electrical/right-gen-volts"];
+var gps = ["systems/electrical/outputs/gps1",
+           "systems/electrical/outputs/gps2"];
 var main_volts = ["systems/electrical/left-main-bus-volts",
                 "systems/electrical/right-main-bus-volts"];
+var nav = ["systems/electrical/outputs/nav1",
+           "systems/electrical/outputs/nav2"];
 var right_main_bus = "systems/electrical/right-main-bus";
 var stby_batt = "systems/electrical/stby-batt-volts";
 var stby_bus = "systems/electrical/stby-bus-volts";
@@ -115,13 +119,41 @@ var Electrical = {
   },
 
   listen : func {
-        ### however ADF doesn't work ###
+        ### For Fg internal instruments working ###
     setlistener(adf[0], func(n) {
       if (n.getValue()) setprop("systems/electrical/outputs/adf",me.main_volts[0]);
     },0,0);
 
     setlistener(adf[1], func(n) {
       if (n.getValue()) setprop("systems/electrical/outputs/adf",me.main_volts[1]);
+    },0,0);
+
+    setlistener(nav[0], func(n) {
+      if (n.getValue()) setprop("systems/electrical/outputs/nav",me.main_volts[0]);
+    },0,0);
+
+    setlistener(nav[1], func(n) {
+      if (n.getValue()) setprop("systems/electrical/outputs/nav",me.main_volts[1]);
+    },0,0);
+
+    setlistener(gps[0], func(n) {
+      if (n.getValue()) setprop("systems/electrical/outputs/gps",me.main_volts[0]);
+    },0,0);
+
+    setlistener(gps[1], func(n) {
+      if (n.getValue()) setprop("systems/electrical/outputs/gps",me.main_volts[1]);
+    },0,0);
+
+    setlistener(main_volts[0], func(n) {
+      if (n.getValue()) setprop("systems/electrical/outputs/dme",me.main_volts[0]);
+    },0,0);
+
+    setlistener(main_volts[0], func(n) {
+      if (n.getValue()) setprop("systems/electrical/outputs/mkviii",me.main_volts[0]);
+    },0,0);
+
+    setlistener(main_volts[0], func(n) {
+      if (n.getValue()) setprop("systems/electrical/outputs/transponder",me.main_volts[0]);
     },0,0);
   }, # end of listen
 
