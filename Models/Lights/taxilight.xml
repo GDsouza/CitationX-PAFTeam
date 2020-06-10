@@ -61,10 +61,6 @@
 		<near-m>15</near-m>
 		<far-m>480</far-m>
 		<cutoff>580</cutoff>
-    <dim-factor>
-      <property>systems/electrical/outputs/taxi-lights</property>
-      <factor>0.4</factor>
-    </dim-factor>
 	</animation>
 	
 	<effect>
