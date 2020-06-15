@@ -161,13 +161,13 @@
       <error>
         <condition>
           <not>
-					  <property>controls/lighting/strobe</property>
+					  <property>controls/lighting/strobes</property>
           </not>
         </condition>
       </error>
       <exit>
 				<condition>
-					<property>controls/lighting/strobe</property>
+					<property>controls/lighting/strobes</property>
 				</condition>
       </exit>
     </step>

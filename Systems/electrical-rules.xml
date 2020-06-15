@@ -159,7 +159,7 @@
         <value>0</value>
       </greater-than>
     </input>
-    <output>controls/lighting/beacon</output>
+    <output>controls/lighting/beacons</output>
   </logic>
 
   <logic>
@@ -169,8 +169,38 @@
         <value>2</value>
       </equals>
     </input>
-    <output>controls/lighting/strobe</output>
+    <output>controls/lighting/strobes</output>
   </logic>
+
+  <!-- Set Boost-pumps-->
+  <flipflop>
+    <type>RS</type>
+    <S>
+      <equals>
+        <property>controls/fuel/tank[0]/boost-btn</property>
+        <value>2</value>
+      </equals>
+    </S>
+    <R>
+      <property>systems/electrical/cb/lh-boost-pump-fuse-tripped</property>
+    </R>
+    <output>controls/fuel/tank[0]/boost-pump</output>
+  </flipflop>
+
+  <flipflop>
+    <type>RS</type>
+    <S>
+      <equals>
+        <property>controls/fuel/tank[1]/boost-btn</property>
+        <value>2</value>
+      </equals>
+    </S>
+    <R>
+      <property>systems/electrical/cb/rh-boost-pump-fuse-tripped</property>
+    </R>
+    <output>controls/fuel/tank[1]/boost-pump</output>
+  </flipflop>
+
 
   <!-- Set the ALS system to taxi and Landing lights-->
 

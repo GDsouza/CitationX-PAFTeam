@@ -280,6 +280,18 @@
                     </binding>
                 </button>
 
+               <button>
+                    <x>1</x>
+                    <y>1</y>
+                    <pref-width>50</pref-width>
+                    <height>30</height>
+                    <legend>SPD</legend>
+                    <binding>
+                      <command>property-toggle</command>
+                      <property>autopilot/locks/speed-ctrl</property>
+                    </binding>
+                </button>
+
             </group>
         </frame>
 

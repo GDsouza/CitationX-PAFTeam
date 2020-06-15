@@ -95,10 +95,6 @@ var Pressur = {
       me.cabin_tgt(n.getValue());
    },0,0);
 
-    setlistener(mode, func {
-      me.cabin_tgt(getprop(ap_alt));
-   },0,0);
-
     setlistener(bleed_air, func(n) {
       if (n.getValue()) setprop(pack2,n.getValue());
    },0,0);

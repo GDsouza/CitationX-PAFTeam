@@ -125,7 +125,7 @@
 		  </signal>
 		  <signal>
 		    <type>bool</type>
-				<property type="string">controls/lighting/beacon</property>
+				<property type="string">controls/lighting/beacons</property>
 		  </signal>
 		  <signal>
 		    <type>float</type>
@@ -201,7 +201,7 @@
 		  </signal>
 		  <signal>
 		    <type>bool</type>
-				<property type="string">controls/lighting/strobe</property>
+				<property type="string">controls/lighting/strobes</property>
 		  </signal>
 		  <signal>
 		    <type>bool</type>

@@ -98,13 +98,13 @@
       <error>
         <condition>
           <not>
-					  <property>controls/lighting/beacon</property>
+					  <property>controls/lighting/beacons</property>
           </not>
         </condition>
       </error>
       <exit>
 				<condition>
-					<property>controls/lighting/beacon</property>
+					<property>controls/lighting/beacons</property>
 				</condition>
       </exit>
     </step>

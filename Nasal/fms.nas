@@ -94,7 +94,7 @@ var FMS = {
 		m.tg_alt = "autopilot/settings/target-altitude-ft";
     m.tg_climb = "autopilot/internal/target-climb-rate-fps";
 		m.tg_spd_kt = "autopilot/settings/target-speed-kt";
-		m.tg_spd_mc = "autopilot/settings/target-speed-mc";
+		m.tg_spd_mc = "autopilot/settings/target-speed-mach";
 		m.tot_dist = "autopilot/route-manager/total-distance";
     setprop("instrumentation/nav/gs-rate-of-climb",0);
     setprop("instrumentation/nav[1]/gs-rate-of-climb",0);

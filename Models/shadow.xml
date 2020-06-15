@@ -1,46 +1,64 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- Adapted from Douglas-Dc3 by clm76 (june 2020)-->
+
+
 <PropertyList>
 
-    <path>shadow.ac</path>
+  <path>shadow.ac</path>
 
-        <animation>
-            <type>select</type>
-            <object-name>shadow</object-name>
-            <condition>
-                <and>
-                    <less-than>
-                        <property>position/gear-agl-ft</property>
-                        <value>1000</value>
-                    </less-than>
-                    <greater-than>
-                        <property>rendering/scene/ambient/blue</property>
-                        <value>0.25</value>
-                    </greater-than>
-                    <property>sim/model/shadow-2d</property>
-                </and>
-            </condition>
-        </animation>
+  <animation>
+    <type>select</type>
+    <object-name>shadow</object-name>
+    <condition>
+      <greater-than>
+        <property>rendering/scene/ambient/blue</property>
+        <value>0.25</value>
+      </greater-than>
+      <property>sim/model/shadow-2d</property>
+    </condition>
+  </animation>
 
-        <animation>
-            <type>rotate</type>
-            <object-name>shadow</object-name>
-            <property>orientation/pitch-deg</property>
-            <axis>
-                <x>0</x>
-                <y>-1</y>
-                <z>0</z>
-            </axis>
-        </animation>
+  <animation>
+      <type>rotate</type>
+      <object-name>shadow</object-name>
+      <property>orientation/pitch-deg</property>
+      <factor>-1</factor>
+      <center>
+        <x>-4.3</x>
+        <y>0</y>
+        <z>0</z>
+      </center>
+     <axis>
+        <x>0</x>
+        <y>1</y>
+        <z>0</z>
+      </axis>
+  </animation>
 
-        <animation>
-            <type>rotate</type>
-            <object-name>shadow</object-name>
-            <property>orientation/roll-deg</property>
-            <axis>
-                <x>1</x>
-                <y>0</y>
-                <z>0</z>
-            </axis>
-        </animation>
+  <animation>
+    <type>rotate</type>
+    <object-name>shadow</object-name>
+    <property>orientation/roll-deg</property>
+    <factor>1</factor>
+    <axis>
+        <x>1</x>
+        <y>0</y>
+        <z>0</z>
+    </axis>
+  </animation>
+
+  <!-- Translate to ground level -->
+  <animation>
+    <type>translate</type>
+    <object-name>shadow</object-name>
+    <!--<property>position/gear-agl-ft</property>-->
+    <property>sim/multiplay/generic/float[0]</property>
+    <factor>-1</factor>
+    <axis>
+     <x>0</x>
+     <y>0</y>
+     <z>1</z>
+    </axis>
+  </animation>
 
 </PropertyList>

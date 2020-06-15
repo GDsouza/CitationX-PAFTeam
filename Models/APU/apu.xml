@@ -5,23 +5,12 @@
     <path>apu.ac</path>
 
     <model>
-        <name>apu screen pilot</name>
+        <name>apu screen</name>
         <path>Models/APU/screen.xml</path>
         <offsets>
             <x-m>0.00</x-m>
             <y-m>0.00</y-m>
             <z-m>0.00</z-m>
-        </offsets>
-    </model>
-
-    <model>
-        <name>apu screen copilot</name>
-        <path>Models/APU/screen.xml</path>
-        <offsets>
-          <x-m>-1.749</x-m>
-          <y-m>0.002</y-m>
-          <z-m>0</z-m>
-          <heading-deg>180</heading-deg>
         </offsets>
     </model>
 

@@ -693,7 +693,7 @@
         </condition>
       </enable>
       <input>instrumentation/airspeed-indicator/indicated-mach</input>
-      <reference>autopilot/settings/target-speed-mc</reference>
+      <reference>autopilot/settings/target-speed-mach</reference>
       <output>
 				<property>controls/engines/engine[0]/throttle</property>
 				<property>controls/engines/engine[1]/throttle</property>		
@@ -997,7 +997,7 @@
 									</equals>
 								</or>
 							</and>
-							<property>/autopilot/locks/speed</property>
+							<property>/autopilot/locks/speed-ctrl</property>
 						</or>
 					</and>
 				</condition>
@@ -1078,13 +1078,13 @@
 									</equals>
 								</or>
 							</and>
-							<property>/autopilot/locks/speed</property>
+							<property>/autopilot/locks/speed-ctrl</property>
 						</or>
 					</and>
 					</condition>
 				</enable>
 				<input>instrumentation/airspeed-indicator/indicated-mach</input>
-				<reference>autopilot/settings/target-speed-mc</reference>
+				<reference>autopilot/settings/target-speed-mach</reference>
 				<output>
 					<property>controls/engines/engine[0]/throttle</property>
 					<property>controls/engines/engine[1]/throttle</property>		

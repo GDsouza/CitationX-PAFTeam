@@ -23,7 +23,7 @@ var NAVprop = "autopilot/settings/nav-source";
 var pitch = "orientation/pitch-deg";
 var tg_pitch = "autopilot/settings/target-pitch-deg";
 var tg_spd_kt = "autopilot/settings/target-speed-kt";
-var tg_spd_mc = "autopilot/settings/target-speed-mc";
+var tg_spd_mc = "autopilot/settings/target-speed-mach";
 var Vertical = "autopilot/locks/altitude";
 var Vertical_arm = "autopilot/locks/altitude-arm";
 var v_speed = "autopilot/internal/vert-speed-fpm";
@@ -103,7 +103,7 @@ setlistener("autopilot/locks/heading",func(n) {
 },0,0);
 
 setlistener("autopilot/locks/alt-mach",func(n) {
-    if (n.getValue() and getprop("autopilot/locks/speed") and left(NAVSRC,3)!="FMS")
+    if (n.getValue() and getprop("autopilot/locks/speed-ctrl") and left(NAVSRC,3)!="FMS")
       setprop(tg_spd_mc,0.60);
 },0,0);
 
@@ -304,7 +304,7 @@ var set_nav_mode = func {
 var pitch_wheel = func(pw) {
     var Vmode=getprop(Vertical);
     var CO = getprop("autopilot/settings/changeover");
-		var SP = getprop("autopilot/locks/speed");
+		var SP = getprop("autopilot/locks/speed-ctrl");
     var amt=0;
     if(Vmode=="VS"){
         amt = int(getprop("autopilot/settings/vertical-speed-fpm")) + (pw* 100);
@@ -420,7 +420,7 @@ var kill_Ap = func(msg){
     setprop(AP,msg);
     setprop(AutoCoord,Coord);
 		setprop("autopilot/locks/disengage",1);
-		setprop("autopilot/locks/speed",getprop(toga) ? 1 : 0);
+		setprop("autopilot/locks/speed-ctrl",getprop(toga) ? 1 : 0);
 }
 
 ### Elapsed time ###

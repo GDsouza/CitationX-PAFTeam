@@ -81,9 +81,9 @@ var potential = nil;
 var switch = nil;
 var x =  nil;
 
-var strobe_switch = "controls/lighting/strobe";
+var strobe_switch = "controls/lighting/strobes";
 aircraft.light.new("controls/lighting/strobe-state", [0.05, 1.30], strobe_switch);
-var beacon_switch = "controls/lighting/beacon";
+var beacon_switch = "controls/lighting/beacons";
 aircraft.light.new("controls/lighting/beacon-state", [1.0, 1.0], beacon_switch);
 var recog_pulse = "controls/lighting/recog-pulse";
 aircraft.light.new("controls/lighting/recog-state", [0.5, 0.5], recog_pulse);

@@ -94,7 +94,7 @@
         <value>0</value>
       </set>
       <set>
-        <property>controls/lighting/strobe</property>
+        <property>controls/lighting/strobes</property>
         <value>1</value>
       </set>
       <set>

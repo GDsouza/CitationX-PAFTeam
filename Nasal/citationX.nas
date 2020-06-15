@@ -101,6 +101,7 @@ var JetEngine = {
     m.running = "controls/engines/engine["~eng_num~"]/running";
     m.pack = "controls/pressurization/pack["~eng_num~"]/pack-on";
     m.sysoil = "systems/hydraulics/psi-norm["~eng_num~"]"; 
+    m.boost_p = "controls/fuel/tank["~eng_num~"]/boost-pump";
     m.diseng = "controls/engines/disengage";
     m.synchro = "controls/engines/synchro";
     if (eng_num == 0) m.el_start = "systems/electrical/outputs/lh-start";
@@ -127,19 +128,6 @@ var JetEngine = {
 
   listen : func {
 
-    setlistener(me.starter, func(n) {
-      if (n.getValue() and !getprop(me.cutoff) and getprop (me.el_start))
-        setprop(me.cycle_up,1);     
-    },0,0);
-
-    setlistener(me.cutoff, func(n) {
-      if(n.getValue()) {
-        me.engine_on = 0;
-        setprop(me.cycle_up,0);
-        setprop(me.pack,0);
-      }
-    },0,0);
-
     setlistener(me.diseng, func(n){
 	    if(n.getValue()) setprop(me.cycle_up,0);
     },0,0);
@@ -156,10 +144,17 @@ var JetEngine = {
         else setprop(me.fadec,"A");
       }
     },0,0);
-
-  },
+  }, # end of listen
 
   update : func {
+    if (getprop(me.cutoff)) {
+      me.engine_on = 0;
+      setprop(me.cycle_up,0);
+      setprop(me.pack,0);
+    }
+    if (getprop(me.starter) and !getprop(me.cutoff) and getprop (me.el_start))
+      setprop(me.cycle_up,1);     
+
     me.thr = getprop(me.throttle);
     if(me.engine_on){
       if (getprop(me.fan) < getprop(me.n1)) me.spool_up(10);
@@ -187,9 +182,9 @@ var JetEngine = {
     else setprop(me.surf_pos,getprop(me.throttle));
 
     ### Fuel ###
-    if (getprop(me.turbine) <= 56) {
-      setprop(me.fuel_pph,getprop(me.turbine));
-    } else setprop(me.fuel_pph,getprop(me.fuel_gph) * me.fdensity);
+    if (getprop(me.turbine) <= 58) me.fuel = getprop(me.turbine);
+    else me.fuel = getprop(me.fuel_gph)*me.fdensity;
+    setprop(me.fuel_pph,getprop(me.boost_p) ? me.fuel*1.1 : me.fuel);
 
     ### Engines Oil Pressure Display ###
      setprop(me.oilp,getprop(me.sysoil)*56); # nominal press = 56 psi
@@ -428,8 +423,8 @@ var Startup = func{
     setprop("controls/electric/stby-pwr",1);
     setprop("controls/electric/avionics-switch",2);
     setprop("controls/lighting/nav-lights",1);
-    setprop("controls/lighting/beacon",1);
-    setprop("controls/lighting/strobe",1);
+    setprop("controls/lighting/beacons",1);
+    setprop("controls/lighting/strobes",1);
     setprop("controls/lighting/recog-lights",1);
     setprop("controls/lighting/anti-coll",2);
     setprop("controls/lighting/emer-lights",2);
@@ -459,8 +454,8 @@ var Shutdown = func{
     setprop("controls/electric/batt2-switch",0);
     setprop("controls/electric/stby-pwr",0);
     setprop("controls/lighting/nav-lights",0);
-    setprop("controls/lighting/beacon",0);
-    setprop("controls/lighting/strobe",0);
+    setprop("controls/lighting/beacons",0);
+    setprop("controls/lighting/strobes",0);
     setprop("controls/lighting/recog-lights",0);
     setprop("controls/lighting/anti-coll",0);
     setprop("controls/lighting/emer-lights",0);

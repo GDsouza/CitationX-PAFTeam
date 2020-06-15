@@ -68,7 +68,7 @@ var SgRev = "/instrumentation/eicas/sg-rev";
 var sgTest = ["instrumentation/reversionary/sg-test",
               "instrumentation/reversionary/sg-test[1]"];
 var SpdTgKt = "/autopilot/settings/target-speed-kt";
-var SpdTgMc = "/autopilot/settings/target-speed-mc";
+var SpdTgMc = "/autopilot/settings/target-speed-mach";
 var SpdTrd = "/instrumentation/pfd/speed-trend-kt";
 var StallDiff = "/instrumentation/pfd/stall-diff";
 var V1 = "/controls/flight/v1";
@@ -500,7 +500,7 @@ var PFDDisplay = {
   update_SPD : func {
     if (!me.madc_enabled) return;
     else {
-      if ((getprop("/autopilot/locks/altitude") == "FLC" or getprop("/autopilot/locks/altitude") == "VFLC" or getprop("/autopilot/settings/fms") or getprop("/autopilot/locks/speed"))) {
+      if ((getprop("/autopilot/locks/altitude") == "FLC" or getprop("/autopilot/locks/altitude") == "VFLC" or getprop("/autopilot/settings/fms") or getprop("/autopilot/locks/speed-ctrl"))) {
         me.Spd.TgSpd.show();
         if (getprop(AltFt)  <= 30650) {
           me.Spd.TgSpd.setText(sprintf("%.0f",getprop(SpdTgKt)));

@@ -214,7 +214,6 @@
   <animation>
       <type>rotate</type>
       <object-name>NAV-flag</object-name>
-      <!--<property>controls/electric/avionics-power</property>-->
       <property>instrumentation/nav/in-range</property>
       <factor>25</factor>
       <center>
@@ -232,7 +231,6 @@
   <animation>
       <type>rotate</type>
       <object-name>VERT-flag</object-name>
-      <!--<property>controls/electric/avionics-power</property>-->
       <property>instrumentation/nav/gs-in-range</property>
       <factor>25</factor>      
       <center>

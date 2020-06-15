@@ -2416,7 +2416,7 @@
     <animation>
       <type>rotate</type>
       <object-name>Lh-boost-pump</object-name>
-      <property>controls/fuel/tank[0]/boost-pump</property>
+      <property>controls/fuel/tank[0]/boost-btn</property>
       <factor>15</factor>
       <center>
         <x-m>0.066</x-m>
@@ -2437,11 +2437,33 @@
         <button>0</button>
         <binding>
           <command>property-adjust</command>
-            <property>controls/fuel/tank[0]/boost-pump</property>
+            <property>controls/fuel/tank[0]/boost-btn</property>
             <step>1</step>
             <min>0</min>
             <max>2</max>
             <wrap>false</wrap>
+        </binding>
+        <binding>
+          <condition>
+            <not-equals>
+              <property>controls/fuel/tank[0]/boost-btn</property>
+              <value>2</value>
+            </not-equals>
+          </condition>
+          <command>property-assign</command>
+            <property>controls/fuel/tank[0]/boost-pump</property>
+            <value>0</value>
+        </binding>
+        <binding>
+          <condition>
+            <equals>
+              <property>controls/fuel/tank[0]/boost-btn</property>
+              <value>2</value>
+            </equals>
+          </condition>
+          <command>property-assign</command>
+            <property>controls/fuel/tank[0]/boost-pump</property>
+            <value>1</value>
         </binding>
         <binding>
 	        <command>property-toggle</command>
@@ -2453,7 +2475,7 @@
           <command>set-tooltip</command>
           <tooltip-id>Lh-boost-pump</tooltip-id>
           <label>Lh Boost Pump : %s</label>
-          <property>controls/fuel/tank[0]/boost-pump</property>
+          <property>controls/fuel/tank[0]/boost-btn</property>
           <mapping>nasal</mapping>
           <script>
             var modes = ['NORM','OFF','ON'];
@@ -2470,11 +2492,33 @@
         <button>0</button>
         <binding>
           <command>property-adjust</command>
-          <property>controls/fuel/tank[0]/boost-pump</property>
+          <property>controls/fuel/tank[0]/boost-btn</property>
             <step>-1</step>
             <min>0</min>
             <max>2</max>
             <wrap>false</wrap>
+        </binding>
+        <binding>
+          <condition>
+            <not-equals>
+              <property>controls/fuel/tank[0]/boost-btn</property>
+              <value>2</value>
+            </not-equals>
+          </condition>
+          <command>property-assign</command>
+            <property>controls/fuel/tank[0]/boost-pump</property>
+            <value>0</value>
+        </binding>
+        <binding>
+          <condition>
+            <equals>
+              <property>controls/fuel/tank[0]/boost-btn</property>
+              <value>2</value>
+            </equals>
+          </condition>
+          <command>property-assign</command>
+            <property>controls/fuel/tank[0]/boost-pump</property>
+            <value>1</value>
         </binding>
         <binding>
 	        <command>property-toggle</command>
@@ -2488,7 +2532,7 @@
     <animation>
       <type>rotate</type>
       <object-name>Rh-boost-pump</object-name>
-      <property>controls/fuel/tank[1]/boost-pump</property>
+      <property>controls/fuel/tank[1]/boost-btn</property>
       <factor>15</factor>
       <center>
         <x-m>0.066</x-m>
@@ -2509,11 +2553,33 @@
         <button>0</button>
         <binding>
           <command>property-adjust</command>
-          <property>controls/fuel/tank[1]/boost-pump</property>
+          <property>controls/fuel/tank[1]/boost-btn</property>
             <step>1</step>
             <min>0</min>
             <max>2</max>
             <wrap>false</wrap>
+        </binding>
+        <binding>
+          <condition>
+            <not-equals>
+              <property>controls/fuel/tank[1]/boost-btn</property>
+              <value>2</value>
+            </not-equals>
+          </condition>
+          <command>property-assign</command>
+            <property>controls/fuel/tank[1]/boost-pump</property>
+            <value>0</value>
+        </binding>
+        <binding>
+          <condition>
+            <equals>
+              <property>controls/fuel/tank[1]/boost-btn</property>
+              <value>2</value>
+            </equals>
+          </condition>
+          <command>property-assign</command>
+            <property>controls/fuel/tank[1]/boost-pump</property>
+            <value>1</value>
         </binding>
         <binding>
 	        <command>property-toggle</command>
@@ -2525,7 +2591,7 @@
           <command>set-tooltip</command>
           <tooltip-id>Rh-boost-pump</tooltip-id>
           <label>Rh Boost Pump : %s</label>
-	        <property>controls/fuel/tank[1]/boost-pump</property>
+	        <property>controls/fuel/tank[1]/boost-btn</property>
           <mapping>nasal</mapping>
           <script>
             var modes = ['NORM','OFF','ON'];
@@ -2542,11 +2608,33 @@
         <button>0</button>
         <binding>
           <command>property-adjust</command>
-            <property>controls/fuel/tank[1]/boost-pump</property>
+            <property>controls/fuel/tank[1]/boost-btn</property>
             <step>-1</step>
             <min>0</min>
             <max>2</max>
             <wrap>false</wrap>
+        </binding>
+        <binding>
+          <condition>
+            <not-equals>
+              <property>controls/fuel/tank[1]/boost-btn</property>
+              <value>2</value>
+            </not-equals>
+          </condition>
+          <command>property-assign</command>
+            <property>controls/fuel/tank[1]/boost-pump</property>
+            <value>0</value>
+        </binding>
+        <binding>
+          <condition>
+            <equals>
+              <property>controls/fuel/tank[1]/boost-btn</property>
+              <value>2</value>
+            </equals>
+          </condition>
+          <command>property-assign</command>
+            <property>controls/fuel/tank[1]/boost-pump</property>
+            <value>1</value>
         </binding>
         <binding>
 	        <command>property-toggle</command>
@@ -5332,7 +5420,7 @@
             <property>systems/electrical/outputs/fgc-cont-A</property>
             <property>systems/electrical/outputs/fgc-cont-B</property>
           </or>
-	        <property>autopilot/locks/speed</property>
+	        <property>autopilot/locks/speed-ctrl</property>
 					<not>
 						<property>autopilot/settings/fms</property>
 					</not>
@@ -5740,7 +5828,7 @@
           <repeatable>false</repeatable>
           <binding>
             <command>property-toggle</command>
-              <property>autopilot/locks/speed</property>
+              <property>autopilot/locks/speed-ctrl</property>
           </binding>
           <binding>
             <command>property-toggle</command>

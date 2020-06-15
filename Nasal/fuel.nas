@@ -33,17 +33,10 @@ var fuelsys = {
 		m.level2 = m.fuel~"/tank[2]/level-lbs";
 		m.level3 = m.fuel~"/tank[3]/level-lbs";
 		m.totalCtrTk = m.fuel~"/total-ctrtk-lbs";
+    m.boost_pump = [m.Xfuel~"tank/boost-pump",m.Xfuel~"tank[1]/boost-pump"];
     m.el_boost_pumpL = m.elec~"/lh-boost-pump";
     m.el_boost_pumpR = m.elec~"/rh-boost-pump";
 
-    m.bp0 = 0;
-    m.bp1 = 0;
-    m.bpTimer = maketimer(1, func() {
-  		fgph = [getprop("engines/engine[0]/fuel-flow-gph"),
-  					  getprop("engines/engine[1]/fuel-flow-gph")];				
-		  if (m.bp0) {setprop("engines/engine[0]/fuel-flow-gph",fgph[0] * 1.1)}
-      if (m.bp1) {setprop("engines/engine[1]/fuel-flow-gph",fgph[1] * 1.1)}
-    });
 		return m
     },
 
@@ -52,28 +45,11 @@ var fuelsys = {
 		setprop(me.tank[1],0);		
 		setprop(me.tank[2],0);		
 		setprop(me.tank[3],0);
-    setprop(me.level0,2000);
-    setprop(me.level1,2000);
-    setprop(me.level2,2000);
-    setprop(me.level3,2000);
+    setprop(me.level0,2160);
+    setprop(me.level1,2160);
+    setprop(me.level2,1840);
+    setprop(me.level3,1840);
 	},
-
-  listen : func {
-    setlistener("controls/fuel/tank[0]/boost-pump",func(n) { 
-		  if (n.getValue() == 2 and me.el_boost_pumpL) {
-        me.bp0 = 1;
-        if (!me.bpTimer.isRunning) me.bpTimer.start();
-      } else {me.bp0 = 0; if (!me.bp1) me.bpTimer.stop()}
-    },0,0);
-
-    setlistener("controls/fuel/tank[1]/boost-pump",func(n) { 
-		  if (n.getValue() == 2 and me.el_boost_pumpR) {
-        me.bp1 = 1;
-        if (!me.bpTimer.isRunning) me.bpTimer.start();
-      } else {me.bp1 = 0;if (!me.bp0) me.bpTimer.stop()}
-    },0,0);
-
-  },
 
 	update : func{		
 		setprop(me.totalCtrTk,getprop(me.level2) + getprop(me.level3));
@@ -144,6 +120,7 @@ var fuelsys = {
 					me.oof();
 			}
 		}
+
 		settimer(func {me.update();},0.3);
 	},
 
@@ -219,7 +196,6 @@ var crossfeed = func {
 var fuel = fuelsys.new();
 var fuel_stl = setlistener("/sim/signals/fdm-initialized", func {
 	fuel.init_fuel();
-	fuel.listen();
 	fuel.update();
   removelistener(fuel_stl);
 },0,0);

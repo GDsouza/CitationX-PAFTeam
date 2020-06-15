@@ -3,6 +3,7 @@
 # C. Le Moigne (clm76) - 2015 -> Canvas : 2017
 ######################################################
 
+var avionics = "controls/electric/avionics-switch";
 var curr_wp = "autopilot/route-manager/current-wp";
 var dataLoad = "systems/electrical/outputs/data-loader";
 var depAirport = "autopilot/route-manager/departure/airport";
@@ -94,7 +95,7 @@ var cduMain = {
   }, # end of init
 
   listen : func (x) {
-    setlistener("instrumentation/cdu["~x~"]/init",func(n) { #### Reinit CDU ###
+    setlistener("instrumentation/cdu["~x~"]/init",func(n) { # Reinit CDU #
 	    if (n.getValue()) {
 		    setprop("autopilot/route-manager/input","@CLEAR");
 		    setprop(destAirport,"");
@@ -116,6 +117,9 @@ var cduMain = {
 		    setprop("autopilot/locks/heading","ROLL");
 	      setprop(depAirport,getprop("/sim/airport/closest-airport-id"));
 	      setprop(depRwy,getprop("sim/atc/runway"));
+        me.fuel_wgt(8000);
+        setprop("sim/weight[2]/weight-lb",4000);
+				setprop("sim/weight[1]/weight-lb",8*170);
         setprop(pos_init[x],0);
         setprop(irs_pos[x],0);
         irsPos = 0;
@@ -199,6 +203,9 @@ var cduMain = {
       if (getprop(fp_active)) setprop(nbpage[x],getprop(nbpage[x])+1);
     },0,0);
 
+    setlistener(avionics, func(n) {
+      setprop("instrumentation/cdu["~x~"]/init", n.getValue() < 2 ? 1 : 0);
+    },0,0);
   }, ### end of listen
 
   btn : func (v,x) { ### Alphanumeric Buttons treatment
@@ -217,7 +224,6 @@ var cduMain = {
       setprop("autopilot/route-manager/alternate["~x~"]/set-flag",0);
       cduInput = "";
       if (cduDisplay == "POS-INIT") {
-# 				if (getprop(pos_init[x]) and getprop(irs_pos[x])) {
         if (cduPos) {v = "";cduDisplay = "FLT-PLAN[0]"}
       } else if (cduDisplay != "NAVIDENT") {
           v="";
@@ -937,13 +943,8 @@ var cduMain = {
 			if (v == "B2L"){
 				v = "";					
 				if (cduInput) {
-					if (cduInput > 13000) {cduInput = "FUEL MAX = 13000"}
-					else {
-						setprop("consumables/fuel/tank[0]/level-lbs",cduInput*0.27);
-						setprop("consumables/fuel/tank[1]/level-lbs",cduInput*0.27);
-						setprop("consumables/fuel/tank[2]/level-lbs",cduInput*0.23);
-						setprop("consumables/fuel/tank[3]/level-lbs",cduInput*0.23);
-					}
+					if (cduInput > 13000) cduInput = "FUEL MAX = 13000";
+					else me.fuel_wgt(cduInput);
 				}
 				cduInput = "";
 			}			
@@ -999,12 +1000,19 @@ var cduMain = {
       }
     }
 
-    #### FINAL ####
+    #### Save ####
 		setprop(display[x],cduDisplay);
 		setprop("/instrumentation/cdu["~x~"]/input",cduInput);
+
   }, # end of key
 
   ####### Common Functions ######
+  fuel_wgt : func(weight) {
+		setprop("consumables/fuel/tank[0]/level-lbs",weight*0.27);
+		setprop("consumables/fuel/tank[1]/level-lbs",weight*0.27);
+		setprop("consumables/fuel/tank[2]/level-lbs",weight*0.23);
+		setprop("consumables/fuel/tank[3]/level-lbs",weight*0.23);
+  },
 
   lineSelect : func(v) {
     for (var i = 1;i<4;i+=1) {
@@ -1021,7 +1029,6 @@ var cduMain = {
 
   insertWayp : func(ind,cduInput,fp,x) {
     cduInput = left(cduInput,2) == "FL" ? substr(cduInput,2,3)*100 : cduInput;
-#    var wpt = fp.getWP(ind).wp_name;
     var wp_spd = fp.getWP(ind).speed_cstr;
 
 	  if (cduInput and cduInput <= 400) { ### Speed

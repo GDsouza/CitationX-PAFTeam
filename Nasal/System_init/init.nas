@@ -100,7 +100,7 @@ props.globals.initNode("autopilot/locks/fms-gs",0,"BOOL");
 props.globals.initNode("autopilot/locks/fms-app",0,"BOOL");
 props.globals.initNode("autopilot/locks/altitude","PTCH","STRING");
 props.globals.initNode("autopilot/locks/heading","ROLL","STRING");
-props.globals.initNode("autopilot/locks/speed",0,"BOOL");
+props.globals.initNode("autopilot/locks/speed-ctrl",0,"BOOL");
 props.globals.initNode("autopilot/locks/back-course",0,"BOOL");
 props.globals.initNode("autopilot/locks/to-ga",0,"BOOL");
 props.globals.initNode("autopilot/internal/fms-climb-rate-fps",0,"DOUBLE");
@@ -204,8 +204,8 @@ props.globals.initNode("controls/flight/va",200,"DOUBLE");
 
 ### Fuel ###
 for(var n=0;n<2;n+=1) {
-  props.globals.initNode("controls/fuel/tank["~n~"]/boost-pump",0,"INT");
-  props.globals.initNode("controls/fuel/tank["~n~"]/boost-pump",0,"INT");
+  props.globals.initNode("controls/fuel/tank["~n~"]/boost-btn",0,"INT");
+  props.globals.initNode("controls/fuel/tank["~n~"]/boost-btn",0,"INT");
 }
 props.globals.initNode("controls/fuel/xfer-L",0,"INT");
 props.globals.initNode("controls/fuel/xfer-R",0,"INT");
