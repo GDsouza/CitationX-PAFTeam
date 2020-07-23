@@ -29,7 +29,21 @@ var fuel_flow = ["engines/engine[0]/fuel-flow-pph",
                  "engines/engine[1]/fuel-flow-pph"];
 
 var _alm = nil;
+var Agl = nil;
+var AppSpeed5 = nil;
+var AppSpeed15 = nil;
+var AppSpeed35 = nil;
+var ClimbSpeed_kt = nil;
+var ClimbSpeed_mc = nil;
+var conv = nil;
+var Cruise_alt = nil;
+var CruiseSpeed_kt = nil;
+var CruiseSpeed_mc = nil;
 var data_load = nil;
+var dep_spd = nil;
+var DescAngle = nil;
+var DescSpeed_kt = nil;
+var DescSpeed_mc = nil;
 var destApt = nil;
 var dist = nil;
 var g_speed = nil;
@@ -53,8 +67,14 @@ var Nav1_id = nil;
 var Nav1_freq = nil;
 var Nav2_id = nil;
 var Nav2_freq = nil;
+var Nm = nil;
 var p = nil;
+var Wcarg = nil;
+var Wcrew = nil;
+var Wfuel = nil;
+var Wpass = nil;
 var xfile = nil;
+
 
 var cduDsp = {
 	new: func (x) {
@@ -81,9 +101,9 @@ var cduDsp = {
 		  canvas.parsesvg(m.group, "Aircraft/CitationX/Models/Instruments/CDU/cdu.svg");
     }
 		m.line = {};
-		m.line_val = ["title","l1","l2","l2r","l3","l4","l4r","l5","l6","l7",
+		m.line_val = ["title","l1","l1m","l2","l2r","l3","l4","l4r","l5","l6","l7",
                   "r1","r2l","r2r","r3","r4l","r4r",
-                  "r5","r6l","r6r","r7"];
+                  "r5","r6l","r6r","r7","r7m"];
 		foreach(var i;m.line_val) {
 			m.line[i] = m.group.getElementById(i);
 		}    
@@ -196,6 +216,8 @@ var cduDsp = {
   	if (left(getprop(dsp[x]),8) == "NAV-LIST") me.Nav_list(x);
   	if (left(getprop(dsp[x]),8) == "NAV-SELT") me.Nav_sel(x);
     if (left(getprop(dsp[x]),8) == "NAV-ACTV") me.Nav_activ(x);
+    if (left(getprop(dsp[x]),8) == "NAV-CONV") me.Nav_conv(x);
+    if (left(getprop(dsp[x]),8) == "NAV-PATT") me.Nav_patt(x);
     if (left(getprop(dsp[x]),8) == "PRG-PAGE") me.Progress(x);
   },
 
@@ -598,7 +620,7 @@ var cduDsp = {
   ### Performances Pages ###
   Prf : func(x) {
     me.nrPage = substr(getprop(dsp[x]),9,1);
-    if (me.nrPage > getprop(nbpage[x])) {me.nrPage = getprop(nbpage[x])}
+    if (me.nrPage > getprop(nbpage[x])) me.nrPage = getprop(nbpage[x]);
     if (me.nrPage == 1) {
       me.Raz_lines(x);
       me.line.title.setText("PERFORMANCE INIT "~me.nrPage~" / "~getprop(nbpage[x]));
@@ -611,14 +633,14 @@ var cduDsp = {
 		  me.line.r7.setText("NEXT PAGE >");
     }
     if (me.nrPage == 2) {
-		  var ClimbSpeed_kt = sprintf("%.0f",getprop("autopilot/settings/climb-speed-kt"));
-		  var ClimbSpeed_mc = sprintf("%.2f",getprop("autopilot/settings/climb-speed-mc"));
-		  var DescSpeed_kt = getprop("autopilot/settings/descent-speed-kt");
-		  var DescSpeed_mc = sprintf("%.2f",getprop("autopilot/settings/descent-speed-mc"));
-		  var DescAngle = sprintf("%.1f",getprop("autopilot/settings/descent-angle"));
-		  var CruiseSpeed_kt = getprop("autopilot/settings/cruise-speed-kt");
-		  var CruiseSpeed_mc = sprintf("%.2f",getprop("autopilot/settings/cruise-speed-mc"));
-		  var Cruise_alt = getprop("autopilot/settings/asel");
+		  ClimbSpeed_kt = sprintf("%.0f",getprop("autopilot/settings/climb-speed-kt"));
+		  ClimbSpeed_mc = sprintf("%.2f",getprop("autopilot/settings/climb-speed-mc"));
+		  DescSpeed_kt = getprop("autopilot/settings/descent-speed-kt");
+		  DescSpeed_mc = sprintf("%.2f",getprop("autopilot/settings/descent-speed-mc"));
+		  DescAngle = sprintf("%.1f",getprop("autopilot/settings/descent-angle"));
+		  CruiseSpeed_kt = getprop("autopilot/settings/cruise-speed-kt");
+		  CruiseSpeed_mc = sprintf("%.2f",getprop("autopilot/settings/cruise-speed-mc"));
+		  Cruise_alt = getprop("autopilot/settings/asel");
       me.Raz_lines(x);
       me.line.title.setText("PERFORMANCE INIT "~me.nrPage~" / "~getprop(nbpage[x]));
       me.line.l1.setText(" CLIMB");
@@ -632,9 +654,9 @@ var cduDsp = {
 			me.line.r4r.setText("FL "~Cruise_alt).setColor(me.green);
     }
     if (me.nrPage == 3) {
-		  var dep_spd = sprintf("%i",getprop("autopilot/settings/dep-speed-kt"));
-		  var Agl = sprintf("%i",getprop("autopilot/settings/dep-agl-limit-ft"));
-		  var Nm = sprintf("%.1f",getprop("autopilot/settings/dep-limit-nm"));
+		  dep_spd = sprintf("%i",getprop("autopilot/settings/dep-speed-kt"));
+		  Agl = sprintf("%i",getprop("autopilot/settings/dep-agl-limit-ft"));
+		  Nm = sprintf("%.1f",getprop("autopilot/settings/dep-limit-nm"));
       me.Raz_lines(x);
       me.line.title.setText("DEPARTURE SPEED 1 / 1");
       me.line.l1.setText(" SPEED LIMIT");
@@ -646,9 +668,9 @@ var cduDsp = {
 		  me.line.r7.setText("RETURN >");
     }
     if (me.nrPage == 4) {
-		  var AppSpeed5 = sprintf("%i",getprop("autopilot/settings/app5-speed-kt"));
-		  var AppSpeed15 = sprintf("%i",getprop("autopilot/settings/app15-speed-kt"));
-		  var AppSpeed35 = sprintf("%i",getprop("autopilot/settings/app35-speed-kt"));
+		  AppSpeed5 = sprintf("%i",getprop("autopilot/settings/app5-speed-kt"));
+		  AppSpeed15 = sprintf("%i",getprop("autopilot/settings/app15-speed-kt"));
+		  AppSpeed35 = sprintf("%i",getprop("autopilot/settings/app35-speed-kt"));
       me.Raz_lines(x);
       me.line.title.setText("APPROACH SPEED 1 / 1");
       me.line.l1.setText(" FLAPS 5");
@@ -661,10 +683,10 @@ var cduDsp = {
 		  me.line.r7.setText("RETURN >");
     }
     if (me.nrPage == 5) {
-		  var Wfuel = sprintf("%3i", math.ceil(getprop("consumables/fuel/total-fuel-lbs")));
-		  var Wcrew = getprop("sim/weight[0]/weight-lb");
-		  var Wpass = getprop("sim/weight[1]/weight-lb");
-		  var Wcarg = getprop("sim/weight[2]/weight-lb");
+		  Wfuel = sprintf("%3i", math.ceil(getprop("consumables/fuel/total-fuel-lbs")));
+		  Wcrew = getprop("sim/weight[0]/weight-lb");
+		  Wpass = getprop("sim/weight[1]/weight-lb");
+		  Wcarg = getprop("sim/weight[2]/weight-lb");
       me.Raz_lines(x);
       me.line.title.setText("PERFORMANCE INIT "~me.nrPage~" / "~getprop(nbpage[x]));
       me.line.l1.setText(" BOW");
@@ -672,7 +694,7 @@ var cduDsp = {
       me.line.l3.setText(" FUEL");
       me.line.l4.setText(Wfuel);
       me.line.l5.setText(" CARGO");
-      me.line.l6.setText(Wcarg);
+      me.line.l6.setText(sprintf("%.0f",Wcarg));
       me.line.r1.setText("PASS/CREW LBS  ").setColor(me.white);
       me.line.r2r.setText(" "~int(Wpass/170)~" / 2  "~" 170  ")
                  .setColor(me.green);
@@ -688,11 +710,13 @@ var cduDsp = {
   ##### Nav Pages #####
   Nav : func(x) {
     me.nrPage = substr(getprop(dsp[x]),9,1);
-    if (me.nrPage > getprop(nbpage[x])) {me.nrPage = getprop(nbpage[x])}
-    if (me.nrPage == 1) {
-      me.Raz_lines(x);
-      me.line.title.setText("NAV INDEX "~me.nrPage~" / "~getprop(nbpage[x]));
-		  me.line.l1.setText("< FPL LIST");
+    if (me.nrPage > getprop(nbpage[x])) me.nrPage = getprop(nbpage[x]);
+    me.Raz_lines(x);
+    me.line.title.setText("NAV INDEX "~me.nrPage~" / "~getprop(nbpage[x]));
+    if (me.nrPage == 1) me.line.l1.setText("< FPL LIST");
+    if (me.nrPage == 2) {
+      me.line.l1.setText("< CONVERSION");
+      me.line.r1.setText("PATERNS >").setColor(me.white);
     }
   }, #end of Nav
 
@@ -766,7 +790,109 @@ var cduDsp = {
     me.line.l5.setText("     ACTIVE FLIGHT PLAN").setColor(me.amber);
     me.line.l7.setText("< NO");
     me.line.r7.setText("YES >");
-  },
+  }, # end of Nav_activ
+
+  Nav_conv : func(x) {
+    me.nrPage = substr(getprop(dsp[x]),9,1);
+    me.Raz_lines(x);
+    conv = cdu.cduMain.conv_table(x);
+    if (me.nrPage == 1 ) {
+      me.line.title.setText("CONVERSION 1 / 4").setColor(me.white);
+      me.line.l1.setText("   FT").setColor(me.white);
+      me.line.l3.setText("   LB").setColor(me.white);
+      me.line.l5.setText("   GAL").setColor(me.white);
+      me.line.r1.setText("M    ").setColor(me.white);
+      me.line.r3.setText("KG   ").setColor(me.white);
+      me.line.r5.setText("L    ").setColor(me.white);
+      me.line.l1m.setText(conv.FL != nil ? "FL" : "" )
+                .setColor(me.white);
+      me.line.l2.setText(conv.FT != nil ? " "~conv.FT : " ------.-" )
+                .setColor(me.green);
+      me.line.l2r.setText(conv.FL != nil ? "           "~conv.FL : "" )
+                .setColor(me.green);
+      me.line.r2r.setText(conv.M != nil ? conv.M~" " : " ------.-" )
+                .setColor(me.green);
+      me.line.l4.setText(conv.LB != nil ? " "~conv.LB : " ------.-" )
+                .setColor(me.green);
+      me.line.r4r.setText(conv.KG != nil ? conv.KG~" " : " ------.-" )
+                .setColor(me.green);
+      me.line.l6.setText(conv.GAL != nil ? " "~conv.GAL : " ------.-" )
+                .setColor(me.green);
+      me.line.r6r.setText(conv.L != nil ? conv.L~" " : " ------.-" )
+                .setColor(me.green);
+    } 
+    if (me.nrPage == 2 ) {
+      me.line.title.setText("CONVERSION 2 / 4").setColor(me.white);
+      me.line.l1.setText("   F").setColor(me.white);
+      me.line.l3.setText("   KTS").setColor(me.white);
+      me.line.l5.setText("   NM").setColor(me.white);
+      me.line.r1.setText("C    ").setColor(me.white);
+      me.line.r3.setText("M/S  ").setColor(me.white);
+      me.line.r5.setText("KM   ").setColor(me.white);
+      me.line.l2.setText(conv.F != nil ? " "~conv.F : " ----.-" )
+                .setColor(me.green);
+      me.line.r2r.setText(conv.C != nil ? conv.C~" " : " ---.-" )
+                .setColor(me.green);
+      me.line.l4.setText(conv.KTS != nil ? " "~conv.KTS : " ---.-" )
+                .setColor(me.green);
+      me.line.r4r.setText(conv.MS != nil ? conv.MS~" " : " ------.-" )
+                .setColor(me.green);
+      me.line.l6.setText(conv.NM != nil ? " "~conv.NM : " ------.-" )
+                .setColor(me.green);
+      me.line.r6r.setText(conv.KM != nil ? conv.KM~" " : " ------.-" )
+                .setColor(me.green);
+    }
+    if (me.nrPage == 3 ) {
+      me.line.title.setText("CONVERSION 3 / 4").setColor(me.white);
+      me.line.l1.setText("  LB").setColor(me.white);
+      me.line.l3.setText("  GAL").setColor(me.white);
+      me.line.l5.setText("  LB/GAL").setColor(me.white);
+      me.line.r1.setText("WT-VOLUME     KG   ").setColor(me.white);
+      me.line.r3.setText("L   ").setColor(me.white);
+      me.line.r5.setText("<- SP WT ->   KG/L ").setColor(me.white);
+      me.line.l2.setText(conv.LB != nil ? " "~conv.LB : " ------.-" )
+                .setColor(me.green);
+      me.line.r2r.setText(conv.KG != nil ? conv.KG~" " : " ------.-" )
+                .setColor(me.green);
+      me.line.l4.setText(conv.GAL != nil ? " "~conv.GAL : " ------.-" )
+                .setColor(me.green);
+      me.line.r4r.setText(conv.L != nil ? conv.L~" " : " ------.-" )
+                .setColor(me.green);
+      me.line.l6.setText(conv.LBGAL != nil ? " "~conv.LBGAL : " ------.-" )
+                .setColor(me.green);
+      me.line.r6r.setText(conv.KGL != nil ? conv.KGL~" " : " ------.-" )
+                .setColor(me.green);
+    }
+    if (me.nrPage == 4 ) {
+      me.line.title.setText("CONVERSION 4 / 4").setColor(me.white);
+      me.line.l3.setText("  QFE").setColor(me.white);
+      me.line.l4.setText(conv.QFE != nil ? " "~conv.QFE : " --.--" )
+                .setColor(me.green);
+      me.line.l6.setText(conv.QFE != nil ? " "~sprintf("%.0f",conv.QFE*33.8639) : " ---" ).setColor(me.green);
+      me.line.l7.setText(conv.QFE != nil ? " "~sprintf("%.0f",conv.QFE*25.4) : " ---" ).setColor(me.green);
+      me.line.r1.setText("QFE-QNH      ELEV ").setColor(me.white);
+      me.line.r2r.setText(conv.ELEV != nil ? " "~conv.ELEV : " -----" )
+                .setColor(me.green);
+      me.line.r3.setText("QNH  ").setColor(me.white);
+      me.line.r4l.setText("<-IN  HG->   ").setColor(me.white);
+      me.line.r4r.setText(conv.QNH != nil ? conv.QNH : " --.--" )
+                .setColor(me.green);
+      me.line.r6l.setText("<--MB/HPA-->  ").setColor(me.white);
+      me.line.r6r.setText(conv.QNH != nil ? sprintf("%.0f",conv.QNH*33.8639) : " ----" ).setColor(me.green);
+      me.line.r7m.setText(" <----MM---->").setColor(me.white);
+      me.line.r7.setText(conv.QNH != nil ? " "~sprintf("%.0f",conv.QNH*25.4) : " ---" ).setColor(me.green);
+    }
+  }, # end of Nav_conv
+
+  Nav_patt : func(x) {
+    me.nrPage = substr(getprop(dsp[x]),9,1);
+    me.Raz_lines(x);
+    if (me.nrPage == 1 ) {
+      me.line.title.setText("PATTERN 1 / 1").setColor(me.white);
+      me.line.r4l.setText("COMING SOON !!!").setColor(me.yellow);
+      me.line.l7.setText("< RETURN");
+    }
+  }, # end of Nav_patt
 
   ##### Prog Pages #####
   Progress : func(x) {
@@ -914,11 +1040,12 @@ var cduDsp = {
     me.blue = [0,0.8,1,getprop("controls/lighting/cdu["~x~"]")];
     me.magenta = [0.9,0,0.9,getprop("controls/lighting/cdu["~x~"]")];
 
-    me.l_color = [me.white,me.white,me.green,me.green,    # title,l1,l2,l2r
+    me.l_color = [me.white,me.white,me.white,me.green,me.green, # title,l1,l1m,l2,l2r
                   me.white,me.green,me.green,me.white,    # l3,l4,l4r,l5
                   me.green,me.magenta,me.green,me.blue,   # l6,l7,r1,r2l  
                   me.blue,me.green,me.blue,me.blue,       # r2r,r3,r4l,r4r
-                  me.green,me.blue,me.blue, me.magenta];   # r5,r6l,r6r,r7
+                  me.green,me.blue,me.blue,me.magenta,    # r5,r6l,r6r,r7
+                  me.white];                              # r7m
     var ind = 0;
     foreach(var i;me.line_val) {    
       me.line[i].setColor(me.l_color[ind]);

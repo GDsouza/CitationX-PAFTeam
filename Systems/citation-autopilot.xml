@@ -3,85 +3,48 @@
 <PropertyList>
 
 <!-- ====== FD enable ====== -->
-<!--
-		<logic>
-       <name>FD enable</name>
-       <input>
-         <greater-than>
-           <property>position/altitude-agl-ft</property>
-           <value>50</value>
-         </greater-than>
-       </input>
-       <output>autopilot/locks/FD-status</output>
-		</logic>
-
-		<logic>
-       <name>FD bars shown</name>
-       <input>
-         <and>
-           <property>autopilot/locks/FD-status</property>
-           <or>
-             <not>
-               <equals>
-                 <property>/autopilot/locks/heading</property>
-                 <value>ROLL</value>
-               </equals>
-             </not>
-             <not>
-               <equals>
-                 <property>/autopilot/locks/altitude</property>
-                 <value>PTCH</value>
-               </equals>
-             </not>
-           </or>
-         </and>
-       </input>
-       <output>autopilot/internal/show-bars</output>
-		</logic>
--->
-    <logic>
-      <name>FD status</name>
-      <input>
-        <or>
-          <equals>
-            <property>/autopilot/locks/heading</property>
-            <value>HDG</value>
-          </equals>
-          <equals>
-            <property>/autopilot/locks/heading</property>
-            <value>LOC</value>
-          </equals>
-          <equals>
-            <property>/autopilot/locks/heading</property>
-            <value>LNAV</value>
-          </equals>
-          <equals>
-            <property>/autopilot/locks/heading</property>
-            <value>VOR</value>
-          </equals>
-          <equals>
-            <property>/autopilot/locks/altitude</property>
-            <value>ALT</value>
-          </equals>
-          <equals>
-            <property>/autopilot/locks/altitude</property>
-            <value>VALT</value>
-          </equals>
-          <property>/autopilot/locks/to-ga</property>
-        </or>
-      </input>
-      <output>autopilot/locks/FD-status</output>
-    </logic>
-
+  <logic>
+    <name>FD status</name>
+    <input>
+      <or>
+        <equals>
+          <property>/autopilot/locks/heading</property>
+          <value>HDG</value>
+        </equals>
+        <equals>
+          <property>/autopilot/locks/heading</property>
+          <value>LOC</value>
+        </equals>
+        <equals>
+          <property>/autopilot/locks/heading</property>
+          <value>LNAV</value>
+        </equals>
+        <equals>
+          <property>/autopilot/locks/heading</property>
+          <value>VOR</value>
+        </equals>
+        <equals>
+          <property>/autopilot/locks/altitude</property>
+          <value>ALT</value>
+        </equals>
+        <equals>
+          <property>/autopilot/locks/altitude</property>
+          <value>VALT</value>
+        </equals>
+        <property>/autopilot/locks/to-ga</property>
+      </or>
+    </input>
+    <output>autopilot/locks/FD-status</output>
+  </logic>
 
 <!-- ======  Lateral Modes  ====== -->
 
-    <filter>
-      <name>nav heading error</name>
-      <debug>false</debug>
-      <type>gain</type>
-      <gain>1.0</gain>
-      <input>
+	  <filter>
+		  <name>nav1 heading error</name>
+		  <debug>false</debug>
+		  <type>gain</type>
+		  <gain>1.0</gain>
+		  <input>
         <condition>
           <or>
             <equals>
@@ -94,9 +57,13 @@
             </equals>
           </or>
         </condition>
-        <property>instrumentation/nav/radials/target-auto-hdg-deg</property>
-      </input>
-      <input>
+			  <property>instrumentation/nav/radials/target-auto-hdg-deg</property>
+			  <offset>
+				  <property>orientation/heading-magnetic-deg</property>
+				  <scale>-1</scale>
+			  </offset>
+		  </input>
+		  <input>
         <condition>
           <or>
             <equals>
@@ -109,58 +76,18 @@
             </equals>
           </or>
         </condition>
-        <property>instrumentation/nav[1]/radials/target-auto-hdg-deg</property>
-      </input>
-      <reference>orientation/heading-magnetic-deg</reference>
-      <output>autopilot/internal/nav-heading-error-deg</output>
-      <period>
-        <min>-180</min>
-        <max>180</max>
-      </period>
-    </filter>
-
-    <filter>
-      <name>heading deflection</name>
-      <debug>false</debug>
-      <type>gain</type>
-      <gain>1.0</gain>
-      <input>
-        <condition>
-          <or>
-            <equals>
-              <property>autopilot/settings/nav-source</property>
-              <value>NAV1</value>
-            </equals>
-            <equals>
-              <property>autopilot/settings/nav-source</property>
-              <value>FMS1</value>
-            </equals>
-          </or>
-        </condition>
-        <property>instrumentation/nav/heading-needle-deflection</property>
-      </input>
-      <input>
-        <condition>
-          <or>
-            <equals>
-              <property>autopilot/settings/nav-source</property>
-              <value>NAV2</value>
-            </equals>
-            <equals>
-              <property>autopilot/settings/nav-source</property>
-              <value>FMS2</value>
-            </equals>
-          </or>
-        </condition>
-        <property>instrumentation/nav[1]/heading-needle-deflection</property>
-      </input>
-      <reference>0</reference>
-      <output>autopilot/internal/heading-deflection-deg</output>
-      <period>
-        <min>-180</min>
-        <max>180</max>
-      </period>
-    </filter>
+			  <property>instrumentation/nav[1]/radials/target-auto-hdg-deg</property>
+			  <offset>
+				  <property>/orientation/heading-magnetic-deg</property>
+				  <scale>-1</scale>
+			  </offset>
+		  </input>
+		  <output>autopilot/internal/nav1-heading-error-deg</output>
+		  <period>
+			  <min>-180</min>
+			  <max>180</max>
+		  </period>
+	  </filter>
 
     <filter>
       <name>Course offset</name>
@@ -199,7 +126,9 @@
         </condition>
         <property>instrumentation/nav[1]/radials/selected-deg</property>
       </input>
-      <reference>orientation/heading-magnetic-deg</reference>
+      <reference>
+        <property>orientation/heading-magnetic-deg</property>
+      </reference>
       <output>
         <condition>
           <not>
@@ -344,17 +273,33 @@
     </pi-simple-controller>
 
     <pi-simple-controller>
-        <name>VOR</name>
+        <name>VOR-LOC</name>
         <debug>false</debug>
         <enable>
           <condition>
-            <equals>
-    		      <property>autopilot/locks/heading</property>
-    		      <value>VOR</value>
-            </equals>
+            <and>
+              <or>
+                <equals>
+        		      <property>autopilot/locks/heading</property>
+        		      <value>VOR</value>
+                </equals>
+                <equals>
+        		      <property>autopilot/locks/heading</property>
+        		      <value>LOC</value>
+                </equals>
+              </or>
+              <not-equals>
+                <property>autopilot/settings/nav-source</property>
+                <value>FMS1</value>
+              </not-equals>
+              <not-equals>
+                <property>autopilot/settings/nav-source</property>
+                <value>FMS2</value>
+              </not-equals>
+            </and>
           </condition>
         </enable>
-        <input>autopilot/internal/nav-heading-error-deg</input>
+        <input>autopilot/internal/nav1-heading-error-deg</input>
         <reference>0.0</reference>
         <output>autopilot/internal/roll-filter</output>
         <config>
@@ -371,44 +316,39 @@
     </pi-simple-controller>
 
     <pi-simple-controller>
-        <name>LOC</name>
+        <name>Lnav-GS</name>
         <debug>false</debug>
         <enable>
           <condition>
-            <equals>
-	            <property>autopilot/locks/heading</property>
-	            <value>LOC</value>
-            </equals>
+            <and>
+              <or>
+                <equals>
+		              <property>autopilot/locks/heading</property>
+		              <value>LNAV</value>
+                </equals>
+                <equals>
+		              <property>autopilot/locks/heading</property>
+		              <value>LOC</value>
+                </equals>
+              </or>
+              <or> 
+               <equals>
+                  <property>autopilot/settings/nav-source</property>
+                  <value>FMS1</value>
+                </equals>
+                <equals>
+                  <property>autopilot/settings/nav-source</property>
+                  <value>FMS2</value>
+                </equals>
+              </or>
+            </and>
           </condition>
-        </enable>
-        <input>autopilot/internal/nav-heading-error-deg</input>
-        <reference>0.0</reference>
-        <output>autopilot/internal/roll-filter</output>
-        <config>
-            <Kp>-1.5</Kp> <!-- old -1.5 -->
-            <Ki>0.0</Ki> <!-- old 0 -->
-            <min>
-              <property>autopilot/settings/bank-limit</property>
-              <scale>-1</scale>
-            </min>
-            <max>
-              <property>autopilot/settings/bank-limit</property>
-            </max>
-        </config>
-    </pi-simple-controller>
-
-    <pi-simple-controller>
-        <name>Lnav</name>
-        <debug>false</debug>
-        <enable>
-				    <property>autopilot/locks/heading</property>
-				    <value>LNAV</value>
         </enable>
         <input>autopilot/internal/course-offset</input>
         <reference>0.0</reference>
         <output>autopilot/internal/roll-filter</output>
         <config>
-            <Kp>-1.5</Kp>
+            <Kp>-2.5</Kp>
             <Ki>0</Ki>
             <min>
               <property>autopilot/settings/bank-limit</property>
@@ -459,17 +399,46 @@
 <!-- ======= Vertical Modes ======= -->
 
     <filter>
-        <name>pitch control</name>
+        <name>Take-off</name>
+        <debug>false</debug>
+        <feedback-if-disabled>false</feedback-if-disabled>
+        <initialize-to>input</initialize-to>
+        <enable>
+          <condition>
+            <not-equals>
+              <property>autopilot/locks/AP-status</property>
+              <value>AP</value>
+            </not-equals>
+          </condition>
+        </enable>
+        <input>
+          <property>orientation/pitch-deg</property>
+          <max>19</max>
+          <min>-15</min>
+        </input>
+        <output>autopilot/internal/pitch-filter</output>
+        <type>noise-spike</type>
+        <max-rate-of-change>10.0</max-rate-of-change>
+    </filter>
+
+    <filter>
+        <name>PTCH-TOGA</name>
         <debug>false</debug>
         <feedback-if-disabled>false</feedback-if-disabled>
         <initialize-to>output</initialize-to>
         <enable>
           <condition>
             <or>
-              <equals>
-                <property>autopilot/locks/altitude</property>
-                <value>PTCH</value>
-              </equals>
+              <and>
+                <equals>
+                  <property>autopilot/locks/altitude</property>
+                  <value>PTCH</value>
+                </equals>
+                <equals>
+                  <property>autopilot/locks/AP-status</property>
+                  <value>AP</value>
+                </equals>
+              </and>
               <equals>
                 <property>autopilot/locks/altitude</property>
                 <value>TO</value>
@@ -492,82 +461,44 @@
     </filter>
 
     <pid-controller>
-        <name>Altitude Hold 1</name>
-        <debug>false</debug>
-        <enable>
-          <condition>
-            <equals>
-              <property>/autopilot/locks/altitude</property>
-              <value>ALT</value>
-            </equals>
-          </condition>
-        </enable>
-        <input>instrumentation/altimeter/indicated-altitude-ft</input>
-        <reference>
-						<property>autopilot/settings/asel</property>
-            <scale>100</scale>
-        </reference>
-        <output>autopilot/internal/target-climb-rate-fps</output>
-        <config>
-            <Kp>0.25</Kp> <!--origin = 0.25-->
-            <beta>1.0</beta>
-            <alpha>0.1</alpha>
-            <gamma>0.0</gamma>
-            <Ti>15.0</Ti> <!-- origin 10.0 -->
-            <Td>0.000001</Td>
-            <min>-40</min> <!-- origin -30 -->
-            <max>66</max> <!-- origin = 66-->
-        </config>
-    </pid-controller>
-
-    <pi-simple-controller>
-        <name>Altitude 2</name>
-        <debug>false</debug>
-        <enable>
-          <condition>
-            <equals>
-              <property>/autopilot/locks/altitude</property>
-              <value>ALT</value>
-            </equals>
-          </condition>
-        </enable>
-	      <input>velocities/vertical-speed-fps</input>
-        <reference>autopilot/internal/target-climb-rate-fps</reference>
-        <output>autopilot/internal/pitch-filter</output>
-        <config>
-            <Kp>0.20</Kp> 	<!-- origin 0.15 -->
-            <Ki>0.0</Ki>		<!-- origin 0.0 -->
-            <min>-30</min> 	<!-- origin -20 -->
-            <max>30</max>		<!-- origin 20 -->
-        </config>
-    </pi-simple-controller>
-
-    <pid-controller>
-        <name>Vnav 1</name>
+        <name>Altitude 1</name>
         <debug>false</debug>
         <enable>
           <condition>
             <and>
               <equals>
-                <property>autopilot/locks/altitude</property>
-                <value>VALT</value>
+                <property>autopilot/locks/AP-status</property>
+                <value>AP</value>
               </equals>
+              <or>
+                <equals>
+                  <property>/autopilot/locks/altitude</property>
+                  <value>ALT</value>
+                </equals>
+                <equals>
+                  <property>/autopilot/locks/altitude</property>
+                  <value>VALT</value>
+                </equals>
+              </or>
               <not>
                 <property>autopilot/locks/fms-gs</property>
+              </not>
+              <not>
+                <property>autopilot/locks/fms-app</property>
               </not>
             </and>
           </condition>
         </enable>
         <input>instrumentation/altimeter/indicated-altitude-ft</input>
-        <reference>autopilot/settings/target-altitude-ft</reference>
+        <reference>autopilot/settings/tg-alt-ft</reference>
         <output>autopilot/internal/target-climb-rate-fps</output>
         <config>
-            <Kp>0.25</Kp>
+            <Kp>0.50</Kp> 
             <beta>1.0</beta>
             <alpha>0.1</alpha>
             <gamma>0.0</gamma>
-            <Ti>10.0</Ti>
-            <Td>0.000001</Td>
+            <Ti>10.0</Ti> 
+            <Td>0.00001</Td>
             <min>
               <property>autopilot/settings/fps-limit</property>
             </min>
@@ -575,32 +506,147 @@
         </config>
     </pid-controller>
 
-    <pi-simple-controller>
-        <name>Vnav 2</name>
+    <filter>
+      <name>GS</name>
+      <debug>false</debug>
+      <type>gain</type>
+      <gain>1.0</gain>
+      <enable>
+        <condition>
+          <and>
+            <equals>
+              <property>autopilot/locks/altitude</property>
+              <value>GS</value>
+            </equals>
+            <or>
+              <equals>
+                <property>autopilot/settings/nav-source</property>
+                <value>NAV1</value>
+              </equals>
+              <equals>
+                <property>autopilot/settings/nav-source</property>
+                <value>NAV2</value>
+              </equals>
+            </or>
+            <or>
+              <equals>
+                <property>autopilot/settings/nav-source</property>
+                <value>FMS1</value>
+              </equals>
+              <equals>
+                <property>autopilot/settings/nav-source</property>
+                <value>FMS2</value>
+              </equals>
+            </or>
+          </and>
+        </condition>
+      </enable>
+      <input>
+        <condition>
+          <or>
+            <equals>
+              <property>autopilot/settings/nav-source</property>
+              <value>NAV1</value>
+            </equals>
+            <equals>
+              <property>autopilot/settings/nav-source</property>
+              <value>FMS1</value>
+            </equals>
+          </or>
+        </condition>
+        <property>instrumentation/nav/gs-rate-of-climb</property>
+      </input>
+      <input>
+        <condition>
+          <or>
+            <equals>
+              <property>autopilot/settings/nav-source</property>
+              <value>NAV2</value>
+            </equals>
+            <equals>
+              <property>autopilot/settings/nav-source</property>
+              <value>FMS2</value>
+            </equals>
+          </or>
+        </condition>
+        <property>instrumentation/nav[1]/gs-rate-of-climb</property>
+      </input>
+      <output>autopilot/internal/target-climb-rate-fps</output>
+    </filter>
+
+    <pid-controller>
+      <name>FMS without GS</name>
+      <debug>false</debug>
+      <enable>
+        <condition>
+          <property>autopilot/locks/fms-app</property>
+        </condition>
+      </enable>
+      <input>
+        <property>autopilot/settings/target-pitch-deg</property>
+        <scale>10</scale>
+      </input>
+      <reference>
+        <property>autopilot/settings/descent-angle</property>
+        <scale>-10</scale>
+      </reference>
+      <output>autopilot/internal/pitch-filter</output>
+      <config>
+        <Kp>-1</Kp>
+        <beta>1.0</beta>
+        <alpha>0.1</alpha>
+        <gamma>0.0</gamma>
+        <Ti>20.0</Ti>
+        <Td>0.000001</Td>
+        <min>-10</min>
+        <max>10</max>
+      </config>
+    </pid-controller>
+
+    <pid-controller>
+        <name>Altitude 2</name>
         <debug>false</debug>
         <enable>
           <condition>
             <and>
               <equals>
-                <property>/autopilot/locks/altitude</property>
-                <value>VALT</value>
+                <property>autopilot/locks/AP-status</property>
+                <value>AP</value>
               </equals>
               <not>
-                <property>autopilot/locks/fms-gs</property>
+                <property>/autopilot/locks/fms-app</property>
               </not>
+              <or>
+                <equals>
+                  <property>/autopilot/locks/altitude</property>
+                  <value>ALT</value>
+                </equals>
+                <equals>
+                  <property>/autopilot/locks/altitude</property>
+                  <value>VALT</value>
+                </equals>
+                <equals>
+                  <property>/autopilot/locks/altitude</property>
+                  <value>GS</value>
+                </equals>
+              </or>
             </and>
           </condition>
         </enable>
-        <input>velocities/vertical-speed-fps</input>
+	      <input>velocities/vertical-speed-fps</input>
         <reference>autopilot/internal/target-climb-rate-fps</reference>
         <output>autopilot/internal/pitch-filter</output>
         <config>
-            <Kp>0.5</Kp> 	<!-- origin 0.30 -->
-            <Ki>0.0</Ki>		<!-- origin 0.0 -->
-            <min>-30</min> 	<!-- origin -20 -->
-            <max>30</max>		<!-- origin 20 -->
+          <Kp>0.15</Kp>
+          <beta>1.0</beta>
+          <alpha>0.1</alpha>
+          <gamma>0.0</gamma>
+          <Ti>30.0</Ti>
+          <Td>0.1</Td>
+          <min>-10</min>
+          <max>10</max>
         </config>
-    </pi-simple-controller>
+    </pid-controller>
 
     <pid-controller>
         <name>Vertical Speed Hold</name>
@@ -627,6 +673,170 @@
             <max>20</max>
         </config>
     </pid-controller>
+
+    <pid-controller>
+        <name>flc 2</name>
+        <debug>false</debug>
+        <enable>
+          <condition>
+            <or>
+              <equals>
+                <property>/autopilot/locks/altitude</property>
+                <value>FLC</value>
+              </equals>
+              <equals>
+                <property>/autopilot/locks/altitude</property>
+                <value>VFLC</value>
+              </equals>
+            </or>
+          </condition>
+      </enable>
+        <input>instrumentation/altimeter/indicated-altitude-ft</input>
+        <reference>
+						<property>autopilot/settings/asel</property>
+            <scale>100</scale>
+        </reference>
+        <output>autopilot/internal/target-climb-rate-fps</output>
+        <config>
+            <Kp>0.20</Kp>
+            <beta>1.0</beta>
+            <alpha>0.1</alpha>
+            <gamma>0.0</gamma>
+            <Ti>10.0</Ti> 
+            <Td>0.000001</Td>
+            <min>-45</min>
+            <max>65</max>
+        </config>
+    </pid-controller>
+
+    <pi-simple-controller>
+        <name>flc 3</name>
+        <debug>false</debug>
+        <enable>
+          <condition>
+            <or>
+              <equals>
+                <property>/autopilot/locks/altitude</property>
+                <value>FLC</value>
+              </equals>
+              <equals>
+                <property>/autopilot/locks/altitude</property>
+                <value>VFLC</value>
+              </equals>
+            </or>
+          </condition>
+        </enable>
+        <input>velocities/vertical-speed-fps</input>
+        <reference>autopilot/internal/target-climb-rate-fps</reference>
+        <output>autopilot/internal/pitch-filter</output>
+        <config>
+            <Kp>0.30</Kp>
+            <Ki>0.0</Ki>
+            <min>-30</min>
+            <max>30</max>
+        </config>
+    </pi-simple-controller>
+
+    <filter>
+        <name>pitch command</name>
+        <debug>false</debug>
+        <feedback-if-disabled>true</feedback-if-disabled>
+        <initialize-to>output</initialize-to>
+        <enable>
+          <condition>
+            <property>autopilot/locks/FD-status</property>
+          </condition>
+        </enable>
+        <input>autopilot/internal/pitch-filter</input>
+        <output>autopilot/internal/pitch-bars</output>
+        <type>noise-spike</type>
+        <max-rate-of-change>0.8</max-rate-of-change>
+    </filter>
+
+    <pid-controller>
+        <name>Elevator Trim Control</name>
+        <debug>false</debug>
+        <enable>
+          <condition>
+            <or>
+              <equals>
+                <property>autopilot/locks/AP-status</property>
+                <value>AP</value>
+              </equals>
+              <and>
+                <property>autopilot/locks/to-ga</property>
+                <greater-than>
+                  <property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
+                  <property>controls/flight/v1</property>
+                </greater-than>
+              </and>
+            </or>
+          </condition>
+        </enable>
+        <input>orientation/pitch-deg</input>
+        <reference>autopilot/internal/pitch-bars</reference>
+        <output>controls/flight/elevator</output>
+        <config>
+          <Kp>-0.025</Kp> <!-- old -0.015 -->
+          <beta>1.0</beta>
+          <alpha>0.1</alpha>
+          <gamma>0.0</gamma>
+          <Ti>10.0</Ti>	
+          <Td>0.01</Td> 
+          <min>-1</min>
+          <max>1</max>
+        </config>
+    </pid-controller>
+
+<!-- Glide Deflection -->
+
+    <filter>
+      <name>gs deflection</name>
+      <debug>false</debug>
+      <feedback-if-disabled>true</feedback-if-disabled>
+      <initialize-to>output</initialize-to>
+      <enable>
+        <equals>
+          <property>/autopilot/locks/altitude</property>
+          <value>GS</value>
+        </equals>
+      </enable>
+      <input>
+        <condition>
+          <or>
+            <equals>
+              <property>autopilot/settings/nav-source</property>
+              <value>NAV1</value>
+            </equals>
+            <equals>
+              <property>autopilot/settings/nav-source</property>
+              <value>FMS1</value>
+            </equals>
+          </or>
+        </condition>
+        <property>instrumentation/nav/gs-needle-deflection-deg</property>
+      </input>
+      <input>
+        <condition>
+          <or>
+            <equals>
+              <property>autopilot/settings/nav-source</property>
+              <value>NAV2</value>
+            </equals>
+            <equals>
+              <property>autopilot/settings/nav-source</property>
+              <value>FMS2</value>
+            </equals>
+          </or>
+        </condition>
+        <property>instrumentation/nav[1]/gs-needle-deflection-deg</property>
+      </input>
+      <output>autopilot/internal/gs-deflection</output>
+      <type>noise-spike</type>
+      <max-rate-of-change>10</max-rate-of-change>
+    </filter>
+
+<!-- Speed Control  -->
 
     <pid-controller>
       <name>flc kt</name>
@@ -709,266 +919,6 @@
         <max>0.95</max>
       </config>
     </pid-controller>
-
-    <pid-controller>
-        <name>flc 2</name>
-        <debug>false</debug>
-        <enable>
-          <condition>
-            <or>
-              <equals>
-                <property>/autopilot/locks/altitude</property>
-                <value>FLC</value>
-              </equals>
-              <equals>
-                <property>/autopilot/locks/altitude</property>
-                <value>VFLC</value>
-              </equals>
-            </or>
-          </condition>
-      </enable>
-        <input>instrumentation/altimeter/indicated-altitude-ft</input>
-        <reference>
-						<property>autopilot/settings/asel</property>
-            <scale>100</scale>
-        </reference>
-        <output>autopilot/internal/target-climb-rate-fps</output>
-        <config>
-            <Kp>0.20</Kp>
-            <beta>1.0</beta>
-            <alpha>0.1</alpha>
-            <gamma>0.0</gamma>
-            <Ti>10.0</Ti> 
-            <Td>0.000001</Td>
-            <min>-45</min>
-            <max>65</max>
-        </config>
-    </pid-controller>
-
-    <pi-simple-controller>
-        <name>flc 3</name>
-        <debug>false</debug>
-        <enable>
-          <condition>
-            <or>
-              <equals>
-                <property>/autopilot/locks/altitude</property>
-                <value>FLC</value>
-              </equals>
-              <equals>
-                <property>/autopilot/locks/altitude</property>
-                <value>VFLC</value>
-              </equals>
-            </or>
-          </condition>
-        </enable>
-        <input>velocities/vertical-speed-fps</input>
-        <reference>autopilot/internal/target-climb-rate-fps</reference>
-        <output>autopilot/internal/pitch-filter</output>
-        <config>
-            <Kp>0.30</Kp>
-            <Ki>0.0</Ki>
-            <min>-30</min>
-            <max>30</max>
-        </config>
-    </pi-simple-controller>
-
-    <filter>
-        <name>pitch command</name>
-        <debug>false</debug>
-        <feedback-if-disabled>true</feedback-if-disabled>
-        <initialize-to>output</initialize-to>
-        <enable>
-          <condition>
-            <property>autopilot/locks/FD-status</property>
-          </condition>
-        </enable>
-        <input>autopilot/internal/pitch-filter</input>
-        <output>autopilot/internal/pitch-bars</output>
-        <type>noise-spike</type>
-        <max-rate-of-change>5.0</max-rate-of-change>
-    </filter>
-
-    <pid-controller>
-        <name>Elevator Trim Control</name>
-        <debug>false</debug>
-        <enable>
-          <condition>
-            <or>
-              <equals>
-                <property>autopilot/locks/AP-status</property>
-                <value>AP</value>
-              </equals>
-              <and>
-                <property>autopilot/locks/to-ga</property>
-                <greater-than>
-                  <property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
-                  <property>controls/flight/v1</property> -->
-                </greater-than>
-              </and>
-            </or>
-          </condition>
-        </enable>
-        <input>orientation/pitch-deg</input>
-        <reference>autopilot/internal/pitch-bars</reference>
-        <output>controls/flight/elevator</output>
-        <config>
-            <Kp>-0.025</Kp> <!-- old -0.015 -->
-            <beta>1.0</beta>
-            <alpha>0.1</alpha>
-            <gamma>0.0</gamma>
-            <Ti>10.0</Ti>	
-            <Td>0.01</Td> 
-            <min>-1</min>
-            <max>1</max>
-        </config>
-    </pid-controller>
-
-<!-- Glide Slope -->
-
-    <filter>
-        <name>nav1 gs deflection</name>
-        <debug>false</debug>
-        <feedback-if-disabled>true</feedback-if-disabled>
-        <initialize-to>output</initialize-to>
-        <enable>
-          <condition>
-            <or>
-              <equals>
-                <property>autopilot/settings/nav-source</property>
-                <value>NAV1</value>
-              </equals>
-              <equals>
-                <property>autopilot/settings/nav-source</property>
-                <value>FMS1</value>
-              </equals>
-            </or>
-          </condition>
-        </enable>
-        <input>instrumentation/nav/gs-needle-deflection-norm</input>
-        <output>autopilot/internal/gs-deflection</output>
-        <type>noise-spike</type>
-        <max-rate-of-change>10</max-rate-of-change>
-    </filter>
-
-    <filter>
-      <name>nav1 gs rate</name>
-      <debug>false</debug>
-      <type>gain</type>
-      <gain>1.0</gain>
-      <enable>
-        <condition>
-          <equals>
-            <property>autopilot/settings/nav-source</property>
-            <value>NAV1</value>
-          </equals>
-        </condition>
-      </enable>
-      <input>instrumentation/nav/gs-rate-of-climb</input>
-      <output>autopilot/internal/gs-rate-fps</output>
-    </filter>
-
-    <filter>
-        <name>nav2 gs deflection</name>
-        <debug>false</debug>
-        <feedback-if-disabled>true</feedback-if-disabled>
-        <initialize-to>output</initialize-to>
-        <enable>
-          <condition>
-              <or>
-                <equals>
-                  <property>autopilot/settings/nav-source</property>
-                  <value>NAV2</value>
-                </equals>
-                <equals>
-                  <property>autopilot/settings/nav-source</property>
-                  <value>FMS2</value>
-                </equals>
-              </or>
-          </condition>
-        </enable>
-        <input>instrumentation/nav[1]/gs-needle-deflection-norm</input>
-        <output>autopilot/internal/gs-deflection</output>
-        <type>noise-spike</type>
-        <max-rate-of-change>10</max-rate-of-change>
-    </filter>
-
-    <filter>
-        <name>nav2 gs rate</name>
-        <debug>false</debug>
-        <feedback-if-disabled>true</feedback-if-disabled>
-        <initialize-to>output</initialize-to>
-        <enable>
-          <condition>
-            <equals>
-              <property>autopilot/settings/nav-source</property>
-              <value>NAV2</value>
-            </equals>
-          </condition>
-        </enable>
-        <input>instrumentation/nav[1]/gs-rate-of-climb</input>
-        <output>autopilot/internal/gs-rate-fps</output>
-        <type>noise-spike</type>
-        <max-rate-of-change>10</max-rate-of-change>
-    </filter>
-
-    <pi-simple-controller>
-        <name>FMS-GS</name>
-        <debug>false</debug>
-        <enable>
-          <condition>
-            <or>
-              <equals>
-                <property>autopilot/settings/nav-source</property>
-                <value>FMS1</value>
-              </equals>
-              <equals>
-                <property>autopilot/settings/nav-source</property>
-                <value>FMS2</value>
-              </equals>
-            </or>
-          </condition>
-        </enable>
-        <input>velocities/vertical-speed-fps</input>
-        <reference>autopilot/internal/fms-climb-rate-fps</reference>
-        <output>autopilot/internal/pitch-filter</output>
-        <config>
-            <Kp>1.5</Kp>
-            <Ki>0.0</Ki> 
-            <Td>0.000001</Td>
-            <min>-15</min>
-            <max>15</max>
-        </config>
-    </pi-simple-controller>
-
-    <pi-simple-controller>
-        <name>GS</name>
-        <debug>false</debug>
-        <enable>
-          <condition>
-            <and>
-              <equals>
-                <property>/autopilot/locks/altitude</property>
-                <value>GS</value>
-              </equals>
-              <not>
-                <property>/autopilot/locks/fms-gs</property>
-              </not>
-            </and>
-          </condition>
-        </enable>
-        <input>velocities/vertical-speed-fps</input>
-        <reference>autopilot/internal/gs-rate-fps</reference>
-        <output>autopilot/internal/pitch-filter</output>
-        <config>
-            <Kp>1.5</Kp> <!-- old 1.5 -->
-            <Ki>0.0</Ki> <!-- old 0 -->
-            <min>-15.0</min> <!-- old -30.0 -->
-            <max>15.0</max>	<!-- old 15.0 -->
-        </config>
-    </pi-simple-controller>
-
-<!-- Speed Control  -->
 
     <pid-controller>
       <name>Speed Control kt</name>
@@ -1229,50 +1179,5 @@
       </config>
 	  </pi-simple-controller>
 
-  <!-- Elevator Controls -->
-<!--
-    <filter>
-      <name>Elevator Control</name>
-      <type>noise-spike</type>
-      <debug>false</debug>
-      <max-rate-of-change>
-        <condition>
-          <equals>
-            <property>autopilot/locks/AP-status</property>
-            <value>AP</value>
-          </equals>
-        </condition>
-        <value>0.01</value>
-        </max-rate-of-change>
-        <max-rate-of-change>100.0</max-rate-of-change>
-        <input>
-          <condition>
-            <equals>
-              <property>autopilot/locks/AP-status</property>
-               	<value>AP</value>
-            </equals>
-          </condition>
-          <value>0</value>
-        </input>
-        <input>controls/flight/elevator</input>
-        <output>autopilot/internal/elevator-cmd-norm</output>
-			</filter>
-
-			<filter>
-					<name>Elevator Output</name>
-					<type>gain</type>
-					<gain>1.0</gain>
-					<enable>
-						<condition>
-              <equals>
-                <property>autopilot/locks/AP-status</property>
-                <value>AP</value>
-              </equals>
-						</condition>
-		      </enable>
-					<input>autopilot/internal/elevator-cmd-norm</input>
-					<output>controls/flight/elevator</output>
-       </filter>
--->
 </PropertyList>
 

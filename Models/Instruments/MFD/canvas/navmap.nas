@@ -343,7 +343,7 @@ var NavMap = {
       me.symbols.tfcRangeInt.setVisible(Tcas);
     }
 
-    AltDiff = (getprop("autopilot/settings/target-altitude-ft") or 0)-(getprop("instrumentation/altimeter/indicated-altitude-ft") or 0);
+    AltDiff = (getprop("autopilot/settings/tg-alt-ft") or 0)-(getprop("instrumentation/altimeter/indicated-altitude-ft") or 0);
 		if (abs(Vspd) > 1 and AltDiff/Vspd > 0) {
 			AltRange = AltDiff/Vspd*GndSpd*KT2MPS*M2NM;
 			if(AltRange > 1) {

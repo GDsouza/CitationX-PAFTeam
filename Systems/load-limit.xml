@@ -13,7 +13,7 @@
           <or>
             <greater-than>
               <property>accelerations/pilot-g</property>
-              <value>2.7</value>
+              <value>3.7</value> <!-- 2.7 + 1 -->
             </greater-than>
             <less-than>
               <property>accelerations/pilot-g</property>
@@ -27,7 +27,7 @@
               <or>
                 <greater-than>
                   <property>accelerations/pilot-g</property>
-                  <value>2.0</value>
+                  <value>3.0</value>
                 </greater-than>
                 <less-than>
                   <property>accelerations/pilot-g</property>

@@ -629,7 +629,7 @@
       </scale>
     </max-rate-of-change>
     <input>controls/gear/gear-down</input>
-    <output>gear/gear[0]/position-norm</output>
+    <output>gear/gear/position-norm</output>
   </filter>
 
   <filter>

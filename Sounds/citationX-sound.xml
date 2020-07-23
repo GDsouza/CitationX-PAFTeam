@@ -44,7 +44,7 @@
         <name>left engine int</name>
         <path>Aircraft/CitationX/Sounds/turbojet_fan_int.wav</path>
         <condition>
-                <property>sim/current-view/internal</property>
+          <property>sim/current-view/internal</property>
         </condition>
         <mode>looped</mode>
         <pitch>
@@ -65,7 +65,7 @@
         <name>right engine int</name>
         <path>Aircraft/CitationX/Sounds/turbojet_fan_int.wav</path>
         <condition>
-                <property>sim/current-view/internal</property>
+          <property>sim/current-view/internal</property>
         </condition>
         <mode>looped</mode>
         <pitch>
@@ -121,9 +121,9 @@
           <value>1</value>
           </greater-than>
             <and>
-                <not>
-                    <property>sim/current-view/internal</property>
-                </not>
+              <not>
+                <property>sim/current-view/internal</property>
+              </not>
             </and>
           </condition>
           <mode>looped</mode>
@@ -349,43 +349,43 @@
 
 <!-- REVERSE -->
     <engine>
-        <name>reverse</name>
+      <name>reverse</name>
 	    <path>Aircraft/CitationX/Sounds/6-lights.wav</path>
-        <mode>once</mode>
-        <condition>
-            <greater-than>
-                <property>surface-positions/reverser-norm</property>
-                <value>0.9</value>
-            </greater-than>
-            <and>
-                <property>sim/current-view/internal</property>
-            </and>
-        </condition>
+      <mode>once</mode>
+      <condition>
+        <and>
+          <greater-than>
+            <property>surface-positions/reverser-norm</property>
+            <value>0.9</value>
+          </greater-than>
+          <property>sim/current-view/internal</property>
+        </and>
+      </condition>
     </engine>
 
     <engine>
-        <name>reverse-action</name>
+      <name>reverse-action</name>
 	    <path>Aircraft/CitationX/Sounds/reverse.wav</path>
-        <mode>once</mode>
-        <condition>
-            <greater-than>
-                <property>surface-positions/reverser-norm</property>
-                <value>0.1</value>
-            </greater-than>
-            <and>
-                <property>sim/current-view/internal</property>
-            </and>
-        </condition>
+      <mode>once</mode>
+      <condition>
+        <and>
+          <greater-than>
+            <property>surface-positions/reverser-norm</property>
+            <value>0.1</value>
+          </greater-than>
+          <property>sim/current-view/internal</property>
+        </and>
+      </condition>
     </engine>
 
     <engine>
         <name>reverser</name>
         <path>Sounds/exhaust_loop.wav</path>
         <condition>
-            <greater-than>
-                <property>surface-positions/reverser-norm</property>
-                <value>0</value>
-            </greater-than>
+          <greater-than>
+              <property>surface-positions/reverser-norm</property>
+              <value>0</value>
+          </greater-than>
         </condition>
         <mode>looped</mode>
         <volume>
@@ -417,23 +417,23 @@
         <name>rumble</name>
         <path>Sounds/rumble.wav</path>
         <condition>
-            <or>
-                <property>gear/gear[0]/wow</property>
-                <property>gear/gear[1]/wow</property>
-                <property>gear/gear[2]/wow</property>
-            </or>
+          <or>
+            <property>gear/gear[0]/wow</property>
+            <property>gear/gear[1]/wow</property>
+            <property>gear/gear[2]/wow</property>
+          </or>
         </condition>
         <mode>looped</mode>
         <volume>
-            <property>velocities/groundspeed-kt</property>
-            <factor>0.02</factor>
-            <min>0</min>
-            <max>0.5</max>
+          <property>velocities/groundspeed-kt</property>
+          <factor>0.02</factor>
+          <min>0</min>
+          <max>0.5</max>
         </volume>
         <position>
-            <x> 0.0 </x>
-            <y> 0.0 </y>
-            <z>-1.0 </z>
+          <x> 0.0 </x>
+          <y> 0.0 </y>
+          <z>-1.0 </z>
         </position>
         <reference-dist>10.0</reference-dist>
         <max-dist>50.0</max-dist>
@@ -479,28 +479,28 @@
         <name>gear-lock</name>
         <path>Sounds/gear-lck.wav</path>
         <condition>
-            <or>
-              <equals>
-                  <property>gear/gear[0]/position-norm</property>
-                  <value>0</value>
-              </equals>
-							<and>
-                <greater-than>
-                    <property>gear/gear[1]/position-norm</property>
-                    <value>0.95</value>
-                </greater-than>
-                <less-than>
-                    <property>gear/gear[1]/position-norm</property>
-                    <value>0.99</value>
-                </less-than>
-							</and>
-            </or>
+          <or>
+            <equals>
+              <property>gear/gear[0]/position-norm</property>
+              <value>0</value>
+            </equals>
+						<and>
+              <greater-than>
+                <property>gear/gear[1]/position-norm</property>
+                <value>0.95</value>
+              </greater-than>
+              <less-than>
+                <property>gear/gear[1]/position-norm</property>
+                <value>0.99</value>
+              </less-than>
+						</and>
+          </or>
         </condition>
         <mode>once</mode>
         <position>
-            <x>-7.0 </x>
-            <y> 0.0 </y>
-            <z> 0.0 </z>
+          <x>-7.0 </x>
+          <y> 0.0 </y>
+          <z> 0.0 </z>
         </position>
         <reference-dist>2.0</reference-dist>
         <max-dist>10.0</max-dist>
@@ -573,18 +573,18 @@
         <name>squeal</name>
         <path>Sounds/squeal2.wav</path>
         <condition>
-            <or>
-                <property>gear/gear[0]/wow</property>
-                <property>gear/gear[1]/wow</property>
-                <property>gear/gear[2]/wow</property>
-            </or>
+          <or>
+            <property>gear/gear[0]/wow</property>
+            <property>gear/gear[1]/wow</property>
+            <property>gear/gear[2]/wow</property>
+          </or>
         </condition>
         <volume>
-            <property>velocities/airspeed-kt</property>
-            <factor>0.01</factor>
+          <property>velocities/airspeed-kt</property>
+          <factor>0.01</factor>
         </volume>
         <volume>
-            <property>sim/sound/volume</property>
+          <property>sim/sound/volume</property>
         </volume>
         <position>
             <x>-4.0 </x>
@@ -642,6 +642,7 @@
     </speedbrakecp>
 
 <!-- WIND -->
+<!--
     <wind>
         <name>wind</name>
         <path>Sounds/wind.wav</path>
@@ -666,7 +667,7 @@
         <reference-dist>1</reference-dist>
         <max-dist>5.0</max-dist>
     </wind>
-
+-->
 <!--  BRAKES   -->
 
         <brakes>

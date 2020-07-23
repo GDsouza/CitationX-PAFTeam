@@ -25,7 +25,7 @@ var DmeIR = ["/instrumentation/dme/in-range",
              "/instrumentation/dme[1]/in-range"];
 var dispCtrl = ["/systems/electrical/outputs/disp-cont1",
                 "/systems/electrical/outputs/disp-cont2"];
-var FmsAltDsp = "/autopilot/settings/target-altitude-ft";
+var FmsAltDsp = "/autopilot/settings/tg-alt-ft";
 var GsDefl = "/autopilot/internal/gs-deflection";
 var GsInRange = "/autopilot/internal/gs-in-range";
 var Hdg = "/autopilot/settings/heading-bug-deg";
@@ -35,8 +35,7 @@ var Iac = ["/systems/electrical/outputs/iac1",
            "/systems/electrical/outputs/iac2"];
 var Ias = "/velocities/airspeed-kt";
 var InRange = "/autopilot/internal/in-range";
-var InRange = "/autopilot/internal/in-range";
-var LocDefl = "/autopilot/internal/heading-deflection-deg";
+var LocDef = "/autopilot/internal/nav1-heading-error-deg";
 var Mach = "/velocities/mach";
 var Marker_i = "/instrumentation/marker-beacon/inner";
 var Marker_m = "/instrumentation/marker-beacon/middle";
@@ -79,7 +78,7 @@ var VR = "/controls/flight/vr";
 var Vf = "/controls/flight/flaps-select";
 var Vne = "/instrumentation/pfd/max-airspeed-kts";
 var Vref = "/controls/flight/vref";
-var Vspd = "/autopilot/internal/vert-speed-fpm";
+var Vert_spd = "/autopilot/internal/vert-speed-fpm";
 var alt = nil;
 var alt_corr = nil;
 var alt_diff = nil;
@@ -87,6 +86,7 @@ var alt_trend = nil;
 var crs_offset = nil;
 var disp_cont = [nil,nil];
 var dme_ind = nil;
+var gs_defl = nil;
 var hdg = nil;
 var hdg_bug = nil;
 var ias = nil;
@@ -481,9 +481,10 @@ var PFDDisplay = {
 
       if (getprop(GsInRange) and getprop(InRange) and !getprop("/gear/gear[1]/wow")) {
         me.Hor.GsScale.show();
-        me.Hor.GsIls.setTranslation(0,getprop(GsDefl)*0.7 * -115);
+        gs_defl = math.clamp(getprop(GsDefl),-1.25,1.25);
+        me.Hor.GsIls.setTranslation(0,gs_defl* -115);
         me.Hor.LocScale.show();
-        loc_defl = math.clamp(getprop(LocDefl), -1.25, 1.25);
+        loc_defl = math.clamp(getprop(CrsDefl), -1.25, 1.25);
         me.Hor.LocDefl.setTranslation(loc_defl * 90, 0);
       } else {
         me.Hor.GsScale.setVisible(getprop(sgTest[x]));
@@ -529,7 +530,7 @@ var PFDDisplay = {
             if (wow) {me.SpdInks[n].hide(); me.SpdInks[7].hide()}
             else {
               me.SpdInks[n].setTranslation(0,(ias-spd) * 5.143).show();
-              me.SpdInks[7].setTranslation(0,(ias-spd) * 5.143).show();
+              me.SpdInks[7].show();
             }
           } else me.SpdInks[n].setTranslation(0,(ias-spd) * 5.143)
                               .setVisible(v_dis);
@@ -630,7 +631,7 @@ var PFDDisplay = {
   }, # end of update_HSI
 
   update_VSP : func {
-    v_spd = getprop(Vspd) or 0;
+    v_spd = getprop(Vert_spd) or 0;
     me.Vspd.VSpdVal.setText(sprintf("%+.0f",v_spd)).setVisible(me.madc_enabled);
     me.Vspd.Arrow.setRotation(v_spd * 0.0188 * D2R).setVisible(me.madc_enabled);
     me.Vspd.VSpdInd.setVisible(me.madc_enabled);

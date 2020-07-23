@@ -14,7 +14,7 @@ var num_wpts = "/autopilot/route-manager/route/num";
 var set_range = ["/instrumentation/mfd/range-nm",
                  "/instrumentation/mfd[1]/range-nm"];
 var svg_path = "/Aircraft/CitationX/Models/Instruments/MFD/canvas/Images/vsd.svg"; 
-var tg_alt = "autopilot/settings/target-altitude-ft";
+var tg_alt = "autopilot/settings/tg-alt-ft";
 var toggle_vsd = ["/instrumentation/efis/vsd",
                   "/instrumentation/efis/vsd[1]"];
 var totDist = "autopilot/route-manager/total-distance";

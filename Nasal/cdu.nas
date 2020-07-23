@@ -9,6 +9,7 @@ var dataLoad = "systems/electrical/outputs/data-loader";
 var depAirport = "autopilot/route-manager/departure/airport";
 var depRwy = "autopilot/route-manager/departure/runway";
 var destAirport = "autopilot/route-manager/destination/airport";
+var destAlt = "autopilot/route-manager/destination/field-elevation-ft";
 var destRwy = "autopilot/route-manager/destination/runway";
 var fp_active = "autopilot/route-manager/active";
 var navSrc = "autopilot/settings/nav-source";
@@ -32,7 +33,12 @@ var pos_init = ["instrumentation/cdu/pos-init",
 var alm = [[],[]];
 alm[0] = std.Vector.new();
 alm[1] = std.Vector.new();
+var cnv = [nil,nil];
+cnv[0] =  cnv[1] = {FT:nil,M:nil,FL:nil,LB:nil,KG:nil,GAL:nil,L:nil,F:nil,C:nil,
+                        KTS:nil,MS:nil,NM:nil,KM:nil,LBGAL:nil,KGL:nil,
+                        ELEV:nil,QFE:nil,QNH:nil};
 var app_id = nil;
+var calc = nil;
 var cduDisplay = nil;
 var cduInput = "";
 var cduPos = 0;
@@ -70,8 +76,7 @@ var cduMain = {
 	  setprop("autopilot/settings/cruise-speed-kt",330);
 	  setprop("autopilot/settings/cruise-speed-mc",0.88);
 	  setprop("autopilot/route-manager/cruise/altitude-ft",10000);
-	  setprop("autopilot/route-manager/cruise/flight-level",100);
-	  setprop("autopilot/settings/asel",getprop("autopilot/route-manager/cruise/flight-level"));
+	  setprop("autopilot/settings/asel",100);
 	  setprop("autopilot/settings/climb-speed-kt",250);
 	  setprop("autopilot/settings/climb-speed-mc",0.65);
 	  setprop("autopilot/settings/descent-speed-kt",200);
@@ -88,6 +93,9 @@ var cduMain = {
 	  setprop("autopilot/route-manager/wp/altitude-ft",0);
     setprop(display[0],"NAVIDENT");
     setprop(display[1],"NAVIDENT");
+        ### set Conversion Values ###
+    cnv[0].LBGAL = cnv[1].LBGAL = sprintf("%.3f",6.667);
+    cnv[0].KGL = cnv[1].KGL = sprintf("%.3f",0.799);
 
         ### Create FlightPlans path if not exists ###
     var flt_dir = os.path.new(getprop("/sim/fg-home")~"/Export/FlightPlans/create.txt");
@@ -123,6 +131,10 @@ var cduMain = {
         setprop(pos_init[x],0);
         setprop(irs_pos[x],0);
         irsPos = 0;
+        foreach(var i;keys(cnv[x])) {
+          if (i == "LBGAL" or i == "KGL") continue;
+          cnv[x][i] = nil;
+        }
 	    }	
     },0,0);
 
@@ -195,7 +207,10 @@ var cduMain = {
 
     setlistener(fp_active, func(n) {
       me.nb_pages(getprop(num),3,x);
-      if (n.getValue()) setprop(nbpage[x],getprop(nbpage[x])+1);
+      if (n.getValue()) {
+        setprop(nbpage[x],getprop(nbpage[x])+1);
+        cnv[0].ELEV = cnv[1].ELEV = getprop(destAlt); # for Conversion Page
+      } else cnv[0].ELEV = cnv[1].ELEV = nil;
     },0,0);
 
     setlistener(num, func(n) {
@@ -239,7 +254,7 @@ var cduMain = {
     }
 		if (v=="NAV" and cduPos) {
 				v = "";
-        setprop(nbpage[x],1);
+        setprop(nbpage[x],2);
 				cduDisplay = "NAV-PAGE[1]";
 		}		
     if (v=="PERF" and cduPos) {v="";cduDisplay = "PRF-PAGE[1]"}
@@ -728,7 +743,14 @@ var cduMain = {
 #			if (v == "B1R") {v = "";cduDisplay = "NAV-FSEL[1]"}
 #			if (v == "B2R") {v = "";cduDisplay = "NAV-DATB[1]"}
 #			if (v == "B3R") {v = "";cduDisplay = "NAV-ARRV[1]"}
+#			if (v == "B4R") {v = "";cduDisplay = "NAV-PAGE[2]"}
+
 		}
+		if (cduDisplay == "NAV-PAGE[2]") {		
+      cduInput = "";
+			if (v == "B1L") {v = "";cduDisplay = "NAV-CONV[1]"}
+			if (v == "B1R") {v = "";cduDisplay = "NAV-PATT[1]"}
+    }
 
 		if (left(cduDisplay,8) == "NAV-LIST") {
       if (v) {
@@ -816,6 +838,257 @@ var cduMain = {
  		if (cduDisplay == "NAV-ACTV[1]") {
       if (v == "B4L") {v = "";cduDisplay = "NAV-SELT[3]"}        
       if (v == "B4R") {v = "";me.load_flightplan();cduDisplay = "NAV-SELT[3]"}
+    }
+
+    if (left(cduDisplay,8) == "NAV-CONV") setprop(nbpage[x],4);
+		if (cduDisplay == "NAV-CONV[1]") {
+      if (size(cduInput) > 8) {cduInput = "";me.set_alm(x,"MAX 8 Car")}
+      else {
+		    if (v == "B1L") {
+          cnv[x].FT = sprintf("%8.1f",cduInput);
+          cnv[x].M = sprintf("%8.1f",cduInput/3.2808);
+          cnv[x].FL = nil;
+		      cduInput = "";
+        }
+		    if (v == "B1R") {
+          cnv[x].M = sprintf("%8.1f",cduInput);
+          cnv[x].FT = sprintf("%8.1f",cduInput*3.2808);
+          cnv[x].FL = math.round(cduInput*0.0328,5);
+    			cduInput = "";
+        }
+		    if (v == "B2L") {
+          cnv[x].LB = sprintf("%8.1f",cduInput);
+          cnv[x].KG = sprintf("%8.1f",cduInput/2.2046);
+    			cduInput = "";
+        }
+		    if (v == "B2R") {
+          cnv[x].KG = sprintf("%8.1f",cduInput);
+          cnv[x].LB = sprintf("%8.1f",cduInput*2.2046);
+    			cduInput = "";
+        }
+		    if (v == "B3L") {
+          cnv[x].GAL = sprintf("%8.1f",cduInput);
+          cnv[x].L = sprintf("%8.1f",cduInput/0.26417);
+    			cduInput = "";
+        }
+		    if (v == "B3R") {
+          cnv[x].L = sprintf("%8.1f",cduInput);
+          cnv[x].GAL = sprintf("%8.1f",cduInput*0.26417);
+    			cduInput = "";
+        }
+      }
+#		  if (v == "B4L") {v = "";cduDisplay = "NAV-PAGE[2]"} 
+#		  if (v == "B4R") {v = "";cduDisplay = "NAV-CONV[2]"} 
+    }
+		if (cduDisplay == "NAV-CONV[2]") {
+      if (size(cduInput) > 8) {cduInput = "";me.set_alm(x,"MAX 8 Car")}
+      else { 
+        me.clear_alm(x,"MAX 8 Car");
+			  if (v == "B1L") {
+          if (cduInput < -112 or cduInput > 129) {
+            cduInput = ""; me.set_alm(x,"range -112° to 129° F");
+          } else {
+            cnv[x].F = sprintf("%+.1f",cduInput);
+            cnv[x].C = sprintf("%+.1f",(cduInput-32)/1.8);
+          }
+		      cduInput = "";
+        }
+			  if (v == "B1R") {
+          if (cduInput < -80 or cduInput > 54) {
+            cduInput = ""; me.set_alm(x,"range -80° to 54° C");
+          } else {
+            cnv[x].C = sprintf("%+.1f",cduInput);
+            cnv[x].F = sprintf("%+.1f",(cduInput*1.8) + 32);
+      			cduInput = "";
+          }
+        }
+			  if (v == "B2L") {
+          if (cduInput < 0 or cduInput > 999.9) {
+            cduInput = ""; me.set_alm(x,"range 0 to 999.9 Kts");
+          } else {
+            cnv[x].KTS = sprintf("%.1f",cduInput);
+            cnv[x].MS = sprintf("%.1f",cduInput*1852/3600);
+      			cduInput = "";
+          }
+        }
+			  if (v == "B2R") {
+          if (cduInput < 0 or cduInput > 999.9) {
+            cduInput = ""; me.set_alm(x,"range 0 to 999.9 M/S");
+          } else {
+            cnv[x].MS = sprintf("%.1f",cduInput);
+            cnv[x].KTS = sprintf("%.1f",cduInput*3600/1852);
+      			cduInput = "";
+          }
+        }
+			  if (v == "B3L") {
+          cnv[x].NM = sprintf("%.1f",cduInput);
+          cnv[x].KM = sprintf("%.1f",cduInput*1.852);
+    			cduInput = "";
+        }
+			  if (v == "B3R") {
+          cnv[x].KM = sprintf("%.1f",cduInput);
+          cnv[x].NM = sprintf("%.1f",cduInput/1.852);
+    			cduInput = "";
+        }
+			  if (v == "B4L") {v = "";cduDisplay = "NAV-CONV[1]"} 
+			  if (v == "B4R") {v = "";cduDisplay = "NAV-CONV[3]"} 
+      }
+		}
+		if (cduDisplay == "NAV-CONV[3]") {
+      if (size(cduInput) > 8) me.set_alm(x,"MAX 8 Car"); 
+      else { 
+        me.clear_alm(x,"MAX 8 Car");
+			  if (v == "B1L") {
+          cnv[x].LB = sprintf("%.1f",cduInput);
+          cnv[x].KG = sprintf("%.1f",cduInput*0.453592);
+          cnv[x].GAL = sprintf("%.1f",cduInput/cnv[x].LBGAL);
+          cnv[x].L = sprintf("%.1f",cnv[x].KG/cnv[x].KGL);
+			    cduInput = "";
+        }
+			  if (v == "B1R") {
+          cnv[x].KG = cduInput;
+          cnv[x].LB = sprintf("%.1f",cduInput*2.20462);
+          cnv[x].L = sprintf("%.1f",cduInput/cnv[x].KGL);
+          cnv[x].GAL = sprintf("%.1f",cnv[x].LB/cnv[x].LBGAL);
+    			cduInput = "";
+        }
+			  if (v == "B2L") {
+          cnv[x].GAL = sprintf("%.1f",cduInput);
+          cnv[x].L = sprintf("%.1f",cduInput*3.78541);
+          cnv[x].LB = sprintf("%.1f",cduInput*cnv[x].LBGAL);
+          cnv[x].KG = sprintf("%.1f",cnv[x].L*cnv[x].KGL);
+    			cduInput = "";
+        }
+			  if (v == "B2R") {
+          cnv[x].L = sprintf("%.1f",cduInput);
+          cnv[x].GAL = sprintf("%.1f",cnv[x].L*0.264172);
+          cnv[x].KG = sprintf("%.1f",cduInput*cnv[x].KGL);
+          cnv[x].LB = sprintf("%.1f",cnv[x].GAL*cnv[x].LBGAL);
+    			cduInput = "";
+        }
+			  if (v == "B3L") {
+          cnv[x].LBGAL = sprintf("%.3f",cduInput);
+          cnv[x].KGL = sprintf("%.3f",cduInput*0.1198);
+          if (cnv[x].GAL != nil) {
+            cnv[x].L = sprintf("%.1f",cnv[x].KG/cnv[x].KGL);
+            cnv[x].GAL = sprintf("%.1f",cnv[x].LB/cnv[x].LBGAL);
+          }
+    			cduInput = "";
+        }
+			  if (v == "B3R") {
+          cnv[x].KGL = sprintf("%.3f",cduInput);
+          cnv[x].LBGAL = sprintf("%.3f",cduInput*8.3454);
+          if (cnv[x].L != nil) {
+            cnv[x].L = sprintf("%.1f",cnv[x].KG/cnv[x].KGL);
+            cnv[x].GAL = sprintf("%.1f",cnv[x].LB/cnv[x].LBGAL);
+          }
+    			cduInput = "";
+        }
+			  if (v == "B4L") {v = "";cduDisplay = "NAV-CONV[2]"} 
+			  if (v == "B4R") {v = "";cduDisplay = "NAV-CONV[4]"} 
+      }
+		}
+
+		if (cduDisplay == "NAV-CONV[4]") {
+      if (size(cduInput) > 8) me.set_alm(x,"MAX 8 Car"); 
+      else { 
+        me.clear_alm(x,"MAX 8 Car");
+			  if (v == "B1R") {
+          if (cduInput == "*DELETE*") 
+            cduInput = getprop(destAirport) ? getprop(destAlt) : ""; 
+          if (cduInput != "") {
+              if (cduInput < -1300 or cduInput > 60000) {
+                me.set_alm(x,"range -1300 to 60000 Ft");
+                cduInput = "";
+              } else cnv[x].ELEV = sprintf("%.0f",cduInput);
+          } else cnv[x].ELEV = nil;
+          cduInput = "";
+        }
+			  if (v == "B2L") {
+          if (cduInput == "*DELETE*") cnv[x].QFE = nil;
+          else {
+            if (cduInput != "") {
+              if (cduInput < 16.00 or cduInput > 32.00) {
+                me.set_alm(x,"range 16.00 to 32.00");cduInput = "";
+              } else {
+                cnv[x].QFE = sprintf("%.2f",cduInput);
+                if (cnv[x].ELEV != nil) {
+                  calc = 1-(0.0065*cnv[x].ELEV*0.3048/288.15);
+                  cnv[x].QNH = sprintf("%.2f",cduInput*33.8639/math.pow(calc,5.255)*0.02953);
+                }
+              }
+            }
+          } 
+ 			  cduInput = "";
+        }
+			  if (v == "B2R") {
+          if (cduInput == "*DELETE*") cnv[x].QNH = nil;
+          else {
+            if (cduInput != "") {
+              if (cduInput < 16.00 or cduInput > 32.00) {
+                me.set_alm(x,"range 16.00 to 32.00");cduInput = "";
+              } else {
+                cnv[x].QNH = sprintf("%.2f",cduInput);
+                if (cnv[x].ELEV != nil) {
+                  calc = 1-(0.0065*cnv[x].ELEV*0.3048/288.15);
+                  cnv[x].QFE = sprintf("%.2f",cduInput*33.8639*math.pow(calc,5.255)*0.02953);
+                }
+              }
+            }
+          }
+    			cduInput = "";
+        }
+			  if (v == "B3L") {
+          if (cduInput == "*DELETE*") cnv[x].QFE = nil;
+          else {
+            if (cduInput != "") {
+              if (cduInput < 542 or cduInput > 1084) {
+                me.set_alm(x,"range 542 to 1084");cduInput = "";
+              } else cnv[x].QFE = sprintf("%.2f",cduInput*0.02953);
+            }
+          }
+          cduInput = "";
+        }
+			  if (v == "B3R") {
+          if (cduInput == "*DELETE*") cnv[x].QNH = nil;
+          else {
+            if (cduInput != "") {
+              if (cduInput < 542 or cduInput > 1084) {
+                me.set_alm(x,"range 542 to 1084");cduInput = "";
+              } else cnv[x].QNH = sprintf("%.2f",cduInput*0.02953);
+            }
+          }
+    			cduInput = "";
+        }
+			  if (v == "B4L") {
+          if (cduInput == "*DELETE*") cnv[x].QFE = nil;
+          else {
+            if (cduInput != "") {
+              if (cduInput < 407 or cduInput > 813) {
+                me.set_alm(x,"range 407 to 813");cduInput = "";
+              } else cnv[x].QFE = sprintf("%.2f",cduInput*0.03937);
+            }
+          }
+          cduInput = "";
+        }
+			  if (v == "B4R") {
+          if (cduInput == "*DELETE*") cnv[x].QNH = nil;
+          else {
+            if (cduInput != "") {
+              if (cduInput < 407 or cduInput > 813) {
+                me.set_alm(x,"range 407 to 813");cduInput = "";
+              } else cnv[x].QNH = sprintf("%.2f",cduInput*0.03937);
+            }
+          }
+          cduInput = "";
+        }
+      }
+		}
+
+    if (left(cduDisplay,8) == "NAV-PATT") setprop(nbpage[x],1);
+		if (cduDisplay == "NAV-PATT[1]") {
+      cduInput = "";
+			if (v == "B4L") {v = "";cduDisplay = "NAV-PAGE[2]";setprop(nbpage[x],2)}
     }
 
 		#### PERF PAGES ####
@@ -1135,7 +1408,7 @@ var cduMain = {
 		del_length = size(getprop(cdu_input[x])) - 1;
 		setprop(cdu_input[x],substr(getprop(cdu_input[x]),0,del_length));
 		if (del_length == -1 ) {
-			setprop(cdu_input[x],"DELETE");
+			setprop(cdu_input[x],"*DELETE*");
 		}
   }, # end of delete_key
 
@@ -1200,10 +1473,13 @@ var cduMain = {
      return (altFp);
   },
 
-  alarms_scrpad : func (x) { ### for CDUpages scrpad
+  alarms_scrpad : func(x) { ### for CDUpages scrpad
     return (alm[x].vector);
   },
 
+  conv_table : func(x) { ### for CDUpages conv
+    return (cnv[x]);
+  },
 }; # end of cduMain
 
 var setl = setlistener("/sim/signals/fdm-initialized", func () {

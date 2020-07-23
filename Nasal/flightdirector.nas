@@ -53,6 +53,7 @@ var dstCoeff = 1;
 var flag_wp = 0;
 var fp = nil;
 var geocoord = nil;
+var geo_coord = nil;
 var gs_err = nil;
 var gspd = nil;
 var heading = nil;
@@ -393,7 +394,7 @@ var monitor_V_armed = func{
       if(getprop(Lateral)=="LOC"){
         if(getprop(gs_in_range)){
           gs_err = getprop("autopilot/internal/gs-deflection");
-          if(gs_err >-1 and gs_err < 1){
+          if(gs_err >-3 and gs_err < 3){
             setprop(Vertical,"GS");
             setprop(Vertical_arm,"");
 					}
@@ -459,7 +460,6 @@ var set_apr = func{
 			setprop(Vertical_arm,"");
 			setprop(Lateral,"HDG");
 			setprop(Vertical,"PTCH"); 
-#			setprop("autopilot/settings/target-pitch-deg",getprop("autopilot/settings/descent-angle"));
 		} else if(getprop("instrumentation/nav["~ind_apr~"]/nav-loc") and getprop("instrumentation/nav["~ind_apr~"]/has-gs")){
 			setprop(Lateral_arm,"LOC");
 			setprop(Vertical_arm,"GS");
@@ -490,7 +490,6 @@ var update_nav = func {
         if (getprop(gs_in_range) and dst <= 20) {
           setprop("autopilot/internal/in-range",1)
         }
-#        setprop("autopilot/internal/to-flag",getprop("instrumentation/nav["~ind~"]/to-flag"));
         setprop("autopilot/locks/from-flag",getprop("instrumentation/nav["~ind~"]/from-flag"));
 
     } else if(left(NAVSRC,3) == "FMS"){
@@ -500,7 +499,6 @@ var update_nav = func {
       setprop(gs_in_range,getprop("instrumentation/nav["~ind~"]/gs-in-range"));
       setprop("autopilot/internal/nav-distance",getprop("instrumentation/gps/wp/wp[1]/distance-nm"));
       setprop("autopilot/internal/nav-id",getprop("instrumentation/gps/wp/wp[1]/ID"));
-#      setprop("autopilot/internal/to-flag",getprop("instrumentation/gps/wp/wp[1]/to-flag"));
       setprop("autopilot/locks/from-flag",getprop("instrumentation/gps/wp/wp[1]/from-flag"));
       setprop("autopilot/internal/course-deflection",getprop("instrumentation/gps/cdi-deflection"));
 
@@ -511,23 +509,20 @@ var update_nav = func {
 			heading = getprop("orientation/heading-deg");
 			geocoord = geo.aircraft_position();
       if (dist_rem <= 10) {
-#        if (getprop("autopilot/internal/gs-in-range")) {
-#          setprop("autopilot/settings/target-altitude-ft",getprop("autopilot/route-manager/destination/field-elevation-ft"));
-#        } else {
-        if (!getprop(gs_in_range)) {
+#        if (!getprop(gs_in_range)) {
           dstCoeff -= 0.001;
           if (dstCoeff <= 0.20) dstCoeff = 0.20;
           targetCourse = fp.pathGeod(-1, -dist_rem + dstCoeff);
-          courseCoord = geo.Coord.new().set_latlon(targetCourse.lat, targetCourse.lon);
+          courseCoord = geo_coord.set_latlon(targetCourse.lat, targetCourse.lon);
           crs_offset = geocoord.course_to(courseCoord) - heading;
 			    crs_set = geocoord.course_to(courseCoord);
-        }
+#        }
       } else {
 			  refCourse = fp.pathGeod(-1, -dist_rem);
-        courseCoord = geo.Coord.new().set_latlon(refCourse.lat, refCourse.lon);
+        courseCoord = geo_coord.set_latlon(refCourse.lat, refCourse.lon);
         CourseError = (geocoord.distance_to(courseCoord) / 1852) + 1;
         targetCourse = fp.pathGeod(-1, -dist_rem + CourseError);
-        courseCoord = geo.Coord.new().set_latlon(targetCourse.lat, targetCourse.lon);
+        courseCoord = geo_coord.set_latlon(targetCourse.lat, targetCourse.lon);
         CourseError = geocoord.course_to(courseCoord) - heading;
         CourseError = geo.normdeg180(CourseError);
 			  crs_set = geocoord.course_to(courseCoord);
@@ -557,7 +552,7 @@ var update_nav = func {
 				}
 
 				### Maintain alarm wp ###
-				wpCoord = geo.Coord.new().set_latlon(fp.getWP(wp_curr).wp_lat, fp.getWP(wp_curr).wp_lon);
+				wpCoord = geo_coord.set_latlon(fp.getWP(wp_curr).wp_lat, fp.getWP(wp_curr).wp_lon);
 				courseDist = geocoord.distance_to(wpCoord)/1852;
 				if (courseDist < dist_wp) {
 					dist_wp = courseDist;
@@ -592,6 +587,7 @@ var fd_stl = setlistener("sim/signals/fdm-initialized", func {
 },0,0);
 
 var update_fd = func {
+    geo_coord = geo.Coord.new();
     update_nav();
 		alt_mach();
     toga_throttles();

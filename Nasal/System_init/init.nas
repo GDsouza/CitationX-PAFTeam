@@ -92,6 +92,7 @@ props.globals.initNode("autopilot/settings/nav-btn",0,"BOOL");
 props.globals.initNode("autopilot/settings/fms-btn",0,"BOOL");
 props.globals.initNode("autopilot/settings/fgc","A","STRING");
 props.globals.initNode("autopilot/settings/fms",0,"BOOL");
+props.globals.initNode("autopilot/settings/tg-alt-ft",0,"DOUBLE");
 props.globals.initNode("autopilot/locks/alt-mach",0,"BOOL");
 props.globals.initNode("autopilot/locks/alm-tod",0,"BOOL");
 props.globals.initNode("autopilot/locks/alm-wp",0,"BOOL");
@@ -103,7 +104,6 @@ props.globals.initNode("autopilot/locks/heading","ROLL","STRING");
 props.globals.initNode("autopilot/locks/speed-ctrl",0,"BOOL");
 props.globals.initNode("autopilot/locks/back-course",0,"BOOL");
 props.globals.initNode("autopilot/locks/to-ga",0,"BOOL");
-props.globals.initNode("autopilot/internal/fms-climb-rate-fps",0,"DOUBLE");
 props.globals.initNode("autopilot/internal/nav-ete","ETE 0+00","STRING");
 props.globals.initNode("autopilot/internal/pitch-bars","0","DOUBLE");
 

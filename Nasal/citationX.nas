@@ -35,46 +35,46 @@ var et = 0;
 var elec = 1;
 
 ### tire rotation per minute by circumference ####
-var TireSpeed = {
-  new : func(number){
-    m = { parents : [TireSpeed] };
-    m.num = number;
-    m.circumference = [];
-    m.tire = [];
-    m.rpm = [];
-    m.speed = nil;
-    m.wow = nil;
-    for(var i=0; i<m.num; i+=1) {
-      m.diam = arg[i];
-      m.circ = m.diam * math.pi;
-      append(m.circumference,m.circ);
-      append(m.tire,"gear/gear["~i~"]/tire-rpm");
-      append(m.rpm,0);
-    }
-    m.count = 0;
-    return m;
-  },
+#var TireSpeed = {
+#  new : func(number){
+#    m = { parents : [TireSpeed] };
+#    m.num = number;
+#    m.circumference = [];
+#    m.tire = [];
+#    m.rpm = [];
+#    m.speed = nil;
+#    m.wow = nil;
+#    for(var i=0; i<m.num; i+=1) {
+#      m.diam = arg[i];
+#      m.circ = m.diam * math.pi;
+#      append(m.circumference,m.circ);
+#      append(m.tire,"gear/gear["~i~"]/tire-rpm");
+#      append(m.rpm,0);
+#    }
+#    m.count = 0;
+#    return m;
+#  },
   #### calculate and write rpm ###########
-  get_rotation: func (fdm1){
-    me.speed = 0;
-    if(fdm1 == "yasim"){
-      me.speed = getprop("gear/gear["~me.count~"]/rollspeed-ms") or 0;
-      me.speed = me.speed*60;
-    }else if(fdm1=="jsb"){
-      me.speed = getprop("fdm/jsbsim/gear/unit["~me.count~"]/wheel-speed-fps") or 0;
-      me.speed = me.speed*18.288;
-    }
-    me.wow = getprop("gear/gear["~me.count~"]/wow");
-    if(me.wow){
-        me.rpm[me.count] = me.speed / me.circumference[me.count];
-    }else{
-        if(me.rpm[me.count] > 0) me.rpm[me.count] = me.rpm[me.count]*0.95;
-    }
-    setprop(me.tire[me.count],me.rpm[me.count]);
-    me.count += 1;
-    if(me.count >= me.num) me.count=0;
-  },
-}; # end of TireSpeed
+#  get_rotation: func (fdm1){
+#    me.speed = 0;
+#    if(fdm1 == "yasim"){
+#      me.speed = getprop("gear/gear["~me.count~"]/rollspeed-ms") or 0;
+#      me.speed = me.speed*60;
+#    }else if(fdm1=="jsb"){
+#      me.speed = getprop("fdm/jsbsim/gear/unit["~me.count~"]/wheel-speed-fps") or 0;
+#      me.speed = me.speed*18.288;
+#    }
+#    me.wow = getprop("gear/gear["~me.count~"]/wow");
+#    if(me.wow){
+#        me.rpm[me.count] = me.speed / me.circumference[me.count];
+#    }else{
+#        if(me.rpm[me.count] > 0) me.rpm[me.count] = me.rpm[me.count]*0.95;
+#    }
+#    setprop(me.tire[me.count],me.rpm[me.count]);
+#    me.count += 1;
+#    if(me.count >= me.num) me.count=0;
+#  },
+#}; # end of TireSpeed
 
 #Jet Engine Helper class 
 var JetEngine = {
@@ -555,7 +555,7 @@ var ud = 1; # for engines synchro
 
 var citation_stl = setlistener("/sim/signals/fdm-initialized", func {
     checkVersion();
-    tire = TireSpeed.new(3,0.430,0.615,0.615);
+#    tire = TireSpeed.new(3,0.430,0.615,0.615);
     Leng = JetEngine.new(0);
     Reng = JetEngine.new(1);
     Leng.listen();
@@ -577,7 +577,7 @@ var update_systems = func{
     Leng.update();
     Reng.update();
     FHupdate();
-    tire.get_rotation("yasim");
+#    tire.get_rotation("yasim");
     grspd = getprop("velocities/groundspeed-kt");
     if (grspd > 40 and getprop("systems/electrical/outputs/cabin-door-monitor"))
      setprop("controls/cabin-door/open",0);

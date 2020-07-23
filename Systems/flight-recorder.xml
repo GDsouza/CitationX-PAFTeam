@@ -245,7 +245,7 @@
 		  </signal>
 		  <signal>
 		    <type>int16</type>
-				<property type="string">autopilot/settings/target-altitude-ft</property>
+				<property type="string">autopilot/settings/tg-alt-ft</property>
 		  </signal>
 		  <signal>
 		    <type>int16</type>
