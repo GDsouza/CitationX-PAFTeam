@@ -324,7 +324,6 @@ var cduMain = {
           me.lineSelect(v);
 				  if (getprop("instrumentation/cdu["~x~"]/"~select) !="") {
 					  var SidName = getprop("instrumentation/cdu["~x~"]/"~select);
-					  fp.sid = SidName;
 					  setprop("/autopilot/route-manager/departure/sid",SidName);
     				cduInput = getprop("/autopilot/route-manager/departure/sid") ~ " Loaded";
           }
@@ -373,7 +372,6 @@ var cduMain = {
           me.lineSelect(v);
 				  if (getprop("instrumentation/cdu["~x~"]/"~select) !="") {
 					  var StarName = getprop("instrumentation/cdu["~x~"]/"~select);
-					  fp.star = StarName;
 					  setprop("/autopilot/route-manager/destination/star",StarName);
 					  cduInput = getprop("autopilot/route-manager/destination/star") ~ " Loaded";
 				  }			
@@ -394,8 +392,6 @@ var cduMain = {
 				  if (getprop("instrumentation/cdu["~x~"]/"~select) !="") {			
 					  var ApprName = getprop("instrumentation/cdu["~x~"]/"~select);
             var n = 99;
-					  fp.approach = ApprName;
-
             #### Delete Wp after Dest Airport ####
             for (var i=1;i<fp.getPlanSize();i+=1) {
               if (left(fp.getWP(i).wp_name,4) == destAirport) {
@@ -427,7 +423,6 @@ var cduMain = {
 			      setprop(destAirport,cduInput);
 			      cduInput = "";
 			      cduDisplay = "FLT-PLAN[1]";
-#            setprop(display[x],cduDisplay);
           } else {cduInput = "NOT AN AIRPORT"}
         }
       }
