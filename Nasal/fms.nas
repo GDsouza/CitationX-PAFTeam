@@ -361,8 +361,11 @@ var FMS = {
 					    } else if (me.dist_dep < 10) {
 							    setprop(me.tg_spd_kt,getprop(me.climb_kt));
 					    } else {
+                      ### Holding patterns ###
+                if (getprop("autopilot/auto-hold/enable-exit"))
+                  setprop(me.tg_spd_kt,getprop("autopilot/auto-hold/speed")); 
 									    ### Near before TOD ###
-						    if (getprop(me.alm_tod)) {
+						    else if (getprop(me.alm_tod)) {
 							    setprop(me.tg_spd_mc,getprop(me.desc_mc));
 							    setprop(me.tg_spd_kt,getprop(me.desc_kt));
 						    } else {

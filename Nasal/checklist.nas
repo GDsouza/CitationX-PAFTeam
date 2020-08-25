@@ -102,6 +102,7 @@ var L = [
     {name: 'L-R Pitot Heat',        val : 'ON',                 check : 0},
     {name: 'L-R WSHD Heat',         val : 'ON',                 check : 0},
     {name: 'Pressurization',        val : 'CHECK',              check : 0},
+    {name: 'Seat Belts Lights',     val : 'ON',                 check : 0},
     {name: 'Passengers Oxygen',     val : 'AUTO',               check : 0},
     {name: 'Transponder',           val : 'CODE SET STBY',      check : 0},
     {name: 'Altimeter',             val : 'SET',                check : 0},
@@ -519,13 +520,14 @@ var CHKLIST = {
 		      or nr_ligne == 3 and getprop("controls/anti-ice/lh-pitot") and getprop("controls/anti-ice/rh-pitot")
 		      or nr_ligne == 4 and getprop("controls/anti-ice/lh-ws") and getprop("controls/anti-ice/rh-ws")
 		      or nr_ligne == 5
-		      or nr_ligne == 6 and getprop("controls/oxygen/pass-oxy") == 1
-		      or nr_ligne == 7 and getprop("instrumentation/transponder/unit/display-mode") == "STANDBY" and getprop("instrumentation/transponder/unit/id-code") != 7777 or getprop("instrumentation/transponder/unit[1]/display-mode") == "STANDBY" and getprop("instrumentation/transponder/unit[1]/id-code") != 7777
-		      or nr_ligne == 8 and getprop("instrumentation/altimeter/indicated-altitude-ft") < 20 and getprop("instrumentation/altimeter/indicated-altitude-ft") > -20
-		      or nr_ligne == 9
+          or nr_ligne == 6 and getprop("controls/lighting/seat-belts") == 1
+		      or nr_ligne == 7 and getprop("controls/oxygen/pass-oxy") == 1
+		      or nr_ligne == 8 and getprop("instrumentation/transponder/unit/display-mode") == "STANDBY" and getprop("instrumentation/transponder/unit/id-code") != 7777 or getprop("instrumentation/transponder/unit[1]/display-mode") == "STANDBY" and getprop("instrumentation/transponder/unit[1]/id-code") != 7777
+		      or nr_ligne == 9 and getprop("instrumentation/altimeter/indicated-altitude-ft") < 20 and getprop("instrumentation/altimeter/indicated-altitude-ft") > -20
 		      or nr_ligne == 10
-		      or nr_ligne == 11 and getprop("controls/lighting/anti-coll") == 2
-		      or nr_ligne == 12 and getprop("controls/lighting/nav-lights"))
+		      or nr_ligne == 11
+		      or nr_ligne == 12 and getprop("controls/lighting/anti-coll") == 2
+		      or nr_ligne == 13 and getprop("controls/lighting/nav-lights"))
         L[page][nr_ligne].check = 1;
 	    }
 	    if (page == 6) {   ### Taxiing ###

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
 <PropertyList>
-    <name>1b-Cold start with APU </name>
-    <description>Cold start with APU</description>
+    <name>1b-Demarrage avec APU </name>
+    <description>Demarrage avec APU</description>
 		<step-time>3</step-time>
     <init>
       <set>
@@ -29,7 +29,7 @@
 
     <step>
       <message>
-          Hide Yoke Left(click on yoke){|.}
+        Supprimer le manche gauche (cliquer dessus){|.}
       </message>
       <view>
   			<heading-offset-deg>0.0</heading-offset-deg>
@@ -59,7 +59,7 @@
 
     <step>
       <message>
-          Hide Yoke Right (click on yoke){|.}
+        Supprimer le manche droit (cliquer dessus){|.}
       </message>
       <view>
   			<heading-offset-deg>294.2</heading-offset-deg>
@@ -89,7 +89,7 @@
 
 		<step>
 			<message>
-				Switch on Standby Power{|.}
+				Basculer le bouton STBY PWR sur ON{|.}
 			</message>
 			<view>
 				<heading-offset-deg>344.953</heading-offset-deg>
@@ -118,7 +118,7 @@
 
 		<step>
 			<message>
-				Switch on BATT 2{|.}
+				Basculer sur BATT 2{|.}
 			</message>
 			<view>
 				<heading-offset-deg>350.578</heading-offset-deg>
@@ -132,6 +132,9 @@
 			    <scale>1.40</scale>
 				</marker>
 			<error>
+				<message>
+					Commutateur sur BATT 2  **  Switch on BATT 2{|.}
+				</message>
 				<condition>
 					<not>
 						<property>controls/electric/batt2-switch</property>
@@ -147,10 +150,10 @@
 
 		<step>
 			<message>
-				Set APU Master to ON{|.}
+				Basculer l'interrupteur MASTER sur ON{|.}
 			</message>
 			<view>
-				<heading-offset-deg>289.42</heading-offset-deg>
+				<heading-offset-deg>299.42</heading-offset-deg>
 				<pitch-offset-deg>-21.4</pitch-offset-deg>
 				<field-of-view>23.1</field-of-view>
 			</view>
@@ -176,7 +179,7 @@
 
 		<step>
 			<message>
-				Set APU Start to ON{|.}
+				 cliquer sur APU START{|.}
 			</message>
 			<view>
 				<heading-offset-deg>289.42</heading-offset-deg>
@@ -205,7 +208,7 @@
 
 		<step>
 			<message>
-				Wait for "READY TO LOAD"{|.}
+				Attendre l'affichage de READY TO LOAD{|.}
 			</message>
 			<view>
 				<heading-offset-deg>289.42</heading-offset-deg>
@@ -237,7 +240,7 @@
 
 		<step>
 			<message>
-				Switch on GENERATOR{|.}
+				Basculer le bouton GENERATOR sur ON{|.}
 			</message>
 			<view>
 				<heading-offset-deg>289.42</heading-offset-deg>
@@ -266,7 +269,7 @@
 
 		<step>
 			<message>
-				Switch on BLEED AIR (first step){|.}
+				Basculer le bouton BLEED AIR sur ON (premier cran){|.}
 			</message>
 			<view>
 				<heading-offset-deg>289.42</heading-offset-deg>
@@ -299,7 +302,7 @@
 
 		<step>
 			<message>
-				Switch on BATT 1{|.}
+				Basculer sur BATT 1{|.}
 			</message>
 			<view>
 				<heading-offset-deg>350.578</heading-offset-deg>
@@ -328,7 +331,7 @@
 
 		<step>
 			<message>
-				Switch on AVIONICS (2 steps){|.}
+				basculer le bouton AVIONICS sur AVN (2 crans){|.}
 			</message>
 			<view>
 				<heading-offset-deg>350.578</heading-offset-deg>
@@ -361,7 +364,7 @@
 
 		<step>
 			<message>
-				Push Master Warning Reset to stop alarm{|.}
+				 Appuyer sur MASTER WARNING RESET pour acquitter les alarmes{|.}
 			</message>
 			<view>
 				<heading-offset-deg>0.0</heading-offset-deg>
@@ -390,7 +393,7 @@
 
 		<step>
 			<message>
-				Push Master Caution Reset to stop alarm{|.}
+				Appuyer sur MASTER CAUTION RESET pour acquitter les alarmes{|.}
 			</message>
 			<view>
 				<heading-offset-deg>0.0</heading-offset-deg>
@@ -419,7 +422,7 @@
 
 		<step>
 			<message>
-				Load : 2 - Engines Startup to start engines {|.}
+				Tuto suivant : 2 - Demarrage des reacteurs{|.}
 			</message>
 		</step>
 

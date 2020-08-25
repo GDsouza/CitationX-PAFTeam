@@ -228,11 +228,15 @@
     </filter>
 
     <pid-controller>
-        <name>ROLL hold</name>
+        <name>ROLL</name>
         <debug>false</debug>
         <enable>
-          <property>autopilot/locks/heading</property>
-          <value>ROLL</value>
+          <condition>
+            <equals>
+              <property>autopilot/locks/heading</property>
+              <value>ROLL</value>
+            </equals>
+          </condition>
         </enable>
         <input>orientation/roll-deg</input>
         <reference>autopilot/settings/target-roll-deg</reference>
@@ -250,11 +254,15 @@
     </pid-controller>
 
     <pi-simple-controller>
-        <name>Heading Bug Hold</name>
+        <name>Heading Bug</name>
         <debug>false</debug>
         <enable>
-          <property>autopilot/locks/heading</property>
-          <value>HDG</value>
+          <condition>
+            <equals>
+              <property>autopilot/locks/heading</property>
+              <value>HDG</value>
+            </equals>
+          </condition>
         </enable>
         <input>autopilot/internal/heading-bug-error-deg</input>
         <reference>0.0</reference>
@@ -366,7 +374,12 @@
         <feedback-if-disabled>true</feedback-if-disabled>
         <initialize-to>output</initialize-to>
         <enable>
-           <property>autopilot/locks/FD-status</property>
+          <condition>
+            <equals>  
+               <property>autopilot/locks/FD-status</property>
+              <value>1</value>
+            </equals>
+          </condition>
         </enable>
         <input>autopilot/internal/roll-filter</input>
         <output>autopilot/internal/roll-bars</output>
@@ -378,8 +391,12 @@
         <name>Aileron Control</name>
         <debug>false</debug>
         <enable>
-          <property>autopilot/locks/AP-status</property>
-          <value>AP</value>
+          <condition>
+            <equals>
+              <property>autopilot/locks/AP-status</property>
+              <value>AP</value>
+            </equals>
+          </condition>
         </enable>
         <input>orientation/roll-deg</input>
         <reference>autopilot/internal/roll-bars</reference>
@@ -935,7 +952,7 @@
 					  </not>
 						<or>
 							<and>
-                <property>autopilot/settings/fms</property>
+<!--                <property>autopilot/settings/fms</property> -->
 								<or>
 									<equals>
 										<property>/autopilot/locks/altitude</property>
@@ -959,11 +976,11 @@
 				<property>controls/engines/engine[1]/throttle</property>		
 			</output>
       <config>
-        <Kp>0.1</Kp> <!-- old 0.1 -->
+        <Kp>0.1</Kp>
         <beta>1.0</beta>
         <alpha>0.1</alpha>
         <gamma>0.0</gamma>
-        <Ti>5.0</Ti>	<!-- old 10.0 -->
+        <Ti>5.0</Ti>
         <Td>0.001</Td>
         <min>0.0</min>
         <max>0.95</max>
@@ -992,11 +1009,11 @@
 				<property>controls/engines/engine[1]/throttle</property>		
 			</output>
       <config>
-        <Kp>0.1</Kp> <!-- old 0.1 -->
+        <Kp>0.1</Kp>
         <beta>1.0</beta>
         <alpha>0.1</alpha>
         <gamma>0.0</gamma>
-        <Ti>5.0</Ti>	<!-- old 10.0 -->
+        <Ti>5.0</Ti>
         <Td>0.001</Td>
         <min>0.0</min>
         <max>0.90</max>

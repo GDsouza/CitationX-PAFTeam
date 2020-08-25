@@ -128,6 +128,11 @@ for(var n=0;n<2;n+=1) {
   props.globals.initNode("/instrumentation/cdu["~n~"]/nbpage",1,"INT");
   props.globals.initNode("/instrumentation/cdu["~n~"]/alarms",0,"INT");
   props.globals.initNode("/instrumentation/cdu["~n~"]/fltplan",0,"BOOL");
+  props.globals.initNode("/instrumentation/cdu["~n~"]/hold/active",0,"BOOL");
+  props.globals.initNode("/instrumentation/cdu["~n~"]/hold/clear",0,"BOOL");
+  props.globals.initNode("/instrumentation/cdu["~n~"]/hold/inbound",0,"INT");
+  props.globals.initNode("/instrumentation/cdu["~n~"]/hold/speed",0,"INT");
+  props.globals.initNode("/instrumentation/cdu["~n~"]/hold/wpt",0,"INT");
 }
 
 ### Checklists ###

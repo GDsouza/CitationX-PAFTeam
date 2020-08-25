@@ -54,12 +54,18 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 			</preview>
 		</previews>
   
-    <tutorials>
+    <tutorials>      
         <tutorial include="Tutorials/cold-start-with-external-power.xml"/>
         <tutorial include="Tutorials/cold-start-with-APU.xml"/>
         <tutorial include="Tutorials/engines-startup.xml"/>
         <tutorial include="Tutorials/taxiing.xml"/>
         <tutorial include="Tutorials/take-off.xml"/>
+        <tutorial include="Tutorials/french.xml"/>
+        <tutorial include="Tutorials/demarrage-avec-generateur-externe.xml"/>
+        <tutorial include="Tutorials/demarrage-avec-APU.xml"/>
+        <tutorial include="Tutorials/demarrage-reacteurs.xml"/>
+        <tutorial include="Tutorials/roulage.xml"/>
+        <tutorial include="Tutorials/decollage.xml"/>
     </tutorials>
 
     <model>
@@ -653,7 +659,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
           <target-roll-deg type="double">0</target-roll-deg>
           <target-pitch-deg type="double">0</target-pitch-deg>
           <nav-source type="string">NAV1</nav-source>
-          <bank-limit type="int">30</bank-limit>
+          <bank-limit type="int">40</bank-limit>
           <target-speed-kt type="int">250</target-speed-kt>
           <target-speed-mach type="double">0.88</target-speed-mach>
           <changeover type="bool">0</changeover>
@@ -799,6 +805,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 			<cdu>
 				<file>Aircraft/CitationX/Nasal/cdu.nas</file>
 				<file>Aircraft/CitationX/Nasal/cdu-pages.nas</file>
+				<file>Aircraft/CitationX/Nasal/holding-pattern.nas</file>
 			</cdu>
       <citation>
         <file>Aircraft/CitationX/Nasal/citationX.nas</file>

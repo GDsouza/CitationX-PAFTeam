@@ -4,29 +4,36 @@
 ###############################################
 
 var currWp = "autopilot/route-manager/current-wp";
+var dataLoad = "systems/electrical/outputs/data-loader";
 var dep_apt = "autopilot/route-manager/departure/airport";
 var dep_rwy = "autopilot/route-manager/departure/runway";
 var dest_apt = "autopilot/route-manager/destination/airport";
 var dest_rwy = "autopilot/route-manager/destination/runway";	
+var direct = ["instrumentation/cdu/direct",
+              "instrumentation/cdu[1]/direct"];
+var dist_rem = "autopilot/route-manager/distance-remaining-nm";
+var dsp = ["instrumentation/cdu/display",
+           "instrumentation/cdu[1]/display"];
+var enable_exit = "autopilot/auto-hold/enable_exit";
+var exit = "autopilot/auto-hold/exit";
 var fp_active = "autopilot/route-manager/active";
 var fp_saved = "autopilot/route-manager/flight-plan";
+var fuel_flow = ["engines/engine[0]/fuel-flow-pph",
+                 "engines/engine[1]/fuel-flow-pph"];
+var hld_activ = ["instrumentation/cdu/hold/active",
+                 "instrumentation/cdu[1]/hold/active"];
+var hld_path = ["instrumentation/cdu/hold/",
+                 "instrumentation/cdu[1]/hold/"];
+var irs_pos = ["instrumentation/irs/positionned",
+               "instrumentation/irs[1]/positionned"];
+var nav_dist = "autopilot/internal/nav-distance";
+var nbpage = ["instrumentation/cdu/nbpage",
+              "instrumentation/cdu[1]/nbpage"];
 var num = "autopilot/route-manager/route/num";
 var pos_init = ["instrumentation/cdu/pos-init",
                 "instrumentation/cdu[1]/pos-init"];
-var irs_pos = ["instrumentation/irs/positionned",
-               "instrumentation/irs[1]/positionned"];
-var dataLoad = "systems/electrical/outputs/data-loader";
-var gps1 = "systems/electrical/outputs/gps1";
-var gps2 = "systems/electrical/outputs/gps2";
-var dsp = ["instrumentation/cdu/display",
-           "instrumentation/cdu[1]/display"];
-var nbpage = ["instrumentation/cdu/nbpage",
-              "instrumentation/cdu[1]/nbpage"];
-var nav_dist = "autopilot/internal/nav-distance";
-var dist_rem = "autopilot/route-manager/distance-remaining-nm";
+var route_path = "autopilot/route-manager/route/wp[";
 var velocity = "velocities/groundspeed-kt";
-var fuel_flow = ["engines/engine[0]/fuel-flow-pph",
-                 "engines/engine[1]/fuel-flow-pph"];
 
 var _alm = nil;
 var Agl = nil;
@@ -35,6 +42,7 @@ var AppSpeed15 = nil;
 var AppSpeed35 = nil;
 var ClimbSpeed_kt = nil;
 var ClimbSpeed_mc = nil;
+var cdu_ret = nil;
 var conv = nil;
 var Cruise_alt = nil;
 var CruiseSpeed_kt = nil;
@@ -45,6 +53,8 @@ var DescAngle = nil;
 var DescSpeed_kt = nil;
 var DescSpeed_mc = nil;
 var destApt = nil;
+var diff1 = nil;
+var diff2 = nil;
 var dist = nil;
 var g_speed = nil;
 var FuelEstWp = nil;
@@ -56,6 +66,16 @@ var ETA = nil;
 var ETE = nil;
 var fp_size = nil;
 var flpLine = nil;
+var hld_id = nil;
+var hld_ind = nil;
+var hld_bearing = nil;
+var hld_clear = 0;
+var hld_dist = nil;
+var hld_entry = nil;
+var hld_inbound = nil;
+var hld_time = nil;
+var hld_turn = nil;
+var hld_spd = nil;
 var my_lat = nil;
 var my_lon = nil;
 var n = nil;
@@ -69,6 +89,9 @@ var Nav2_id = nil;
 var Nav2_freq = nil;
 var Nm = nil;
 var p = nil;
+var pat_alt = nil;
+var quad = nil;
+var spd = nil;
 var Wcarg = nil;
 var Wcrew = nil;
 var Wfuel = nil;
@@ -187,14 +210,18 @@ var cduDsp = {
       }
     },0,0);
 
-    setlistener("instrumentation/cdu["~x~"]/direct",func(n) {
+    setlistener(direct[x],func(n) {
       if (n.getValue() and left(getprop(dsp[x]),8) == "FLT-PLAN" or left(getprop(dsp[x]),8) == "ALT-PAGE") {
         me.line.l1.setText("---- DIRECT").setColor(me.amber);
+        me.line.l7.setText("< PATTERN");
+#        me.line.r7.setText("INTERCEPT >");
       }
       else{
         me.line.l1.setText(" ORIGIN / ETD").setColor(me.white);
+#        me.line.l7.setText("< DEPARTURE");
+        me.line.r7.setText("ARRIVAL >");
       }
-    },0,0);
+    },0,1);
 
   }, # end of listen
 
@@ -217,7 +244,8 @@ var cduDsp = {
   	if (left(getprop(dsp[x]),8) == "NAV-SELT") me.Nav_sel(x);
     if (left(getprop(dsp[x]),8) == "NAV-ACTV") me.Nav_activ(x);
     if (left(getprop(dsp[x]),8) == "NAV-CONV") me.Nav_conv(x);
-    if (left(getprop(dsp[x]),8) == "NAV-PATT") me.Nav_patt(x);
+    if (left(getprop(dsp[x]),8) == "PAT-PAGE") me.Patterns(x);
+    if (left(getprop(dsp[x]),8) == "HLD-PATT") me.HoldPat(x);
     if (left(getprop(dsp[x]),8) == "PRG-PAGE") me.Progress(x);
   },
 
@@ -284,7 +312,7 @@ var cduDsp = {
   Flp0 : func(x) {
     me.Raz_lines(x);
     me.line.title.setText("ACTIVE FLT PLAN 1/1");
-    me.line.l1.setText("ORIGIN / ETD");
+    me.line.l1.setText("ORIGIN / ETD").setColor(me.white);
     me.apt = getprop(dep_apt) != "" ? getprop(dep_apt) : "----";
     me.rwy = getprop(dep_rwy) != "" ? "-"~getprop(dep_rwy) : "";
     me.line.l2.setText(me.apt~me.rwy);    
@@ -328,7 +356,7 @@ var cduDsp = {
 			  if(n==0) {
           me.line.l1.setText(sprintf(" %3i    %.1f",me.fp.getWP(i).leg_bearing,me.fp.getWP(i).leg_distance));
           flpLine = me.line.l2;
-          me.Flp_offset(flpLine,i);
+          me.Flp_offset(flpLine,i,x);
           me.line.r2l.setText(me.fp.getWP(i).speed_cstr ? sprintf("%i",me.fp.getWP(i).speed_cstr)~" /" : "--- /");
           if (me.fp.getWP(i).alt_cstr > 0 and me.fp.getWP(i).alt_cstr < 10000) {
             me.line.r2r.setText(sprintf("%i",me.fp.getWP(i).alt_cstr));
@@ -339,13 +367,14 @@ var cduDsp = {
              me.line.r4l.setText("");me.line.r4r.setText("");
              me.line.r6l.setText("");me.line.r6r.setText("");
           } else {me.line.r2r.setText("-----")}
+          setprop(direct[x],getprop(direct[x])); #to wake up the listener
           me.Arrow(n,i,x);
         }
 
 			  if(n==1) {
           me.line.l3.setText(sprintf(" %3i    %.1f",me.fp.getWP(i).leg_bearing,me.fp.getWP(i).leg_distance));
           flpLine = me.line.l4;
-          me.Flp_offset(flpLine,i);
+          me.Flp_offset(flpLine,i,x);
           me.line.r4l.setText(me.fp.getWP(i).speed_cstr ? sprintf("%i",me.fp.getWP(i).speed_cstr)~" /" : "--- /");
           if (me.fp.getWP(i).alt_cstr > 0 and me.fp.getWP(i).alt_cstr < 10000) {
             me.line.r4r.setText(sprintf("%i",me.fp.getWP(i).alt_cstr));
@@ -355,13 +384,14 @@ var cduDsp = {
              me.line.r4l.setText("");me.line.r4r.setText("");
              me.line.r6l.setText("");me.line.r6r.setText("");
           } else {me.line.r4r.setText("-----")}
+          setprop(direct[x],getprop(direct[x])); #to wake up the listener
           me.Arrow(n,i,x);
        }
 
 			  if(n==2) {
           me.line.l5.setText(sprintf(" %3i    %.1f",me.fp.getWP(i).leg_bearing,me.fp.getWP(i).leg_distance));
           flpLine = me.line.l6;
-          me.Flp_offset(flpLine,i);
+          me.Flp_offset(flpLine,i,x);
           me.line.r5.setText("");
           me.line.r6l.setText(me.fp.getWP(i).speed_cstr ? sprintf("%i",me.fp.getWP(i).speed_cstr)~" /" : "--- /");
           me.line.r6r.setColor(me.blue);
@@ -372,23 +402,26 @@ var cduDsp = {
           } else if (i == fp_size-1 and me.fp_closed) {
              me.line.r6l.setText("");me.line.r6r.setText("");
           } else {me.line.r6r.setText("-----")}
+          setprop(direct[x],getprop(direct[x])); #to wake up the listener
           me.Arrow(n,i,x);
         }
 			  p+=1;
 	  }
   }, ### end of FlpMain
 
-  Flp_offset : func(flpLine,i) {
+  Flp_offset : func(flpLine,i,x) {
+    hld_ind = getprop(hld_path[x]~"wpt");
     if (left(me.fp.getWP(i).wp_name,4) != me.dest_apt or me.fp_closed) {
       if (me.fp.getWP(i).wp_type == "offset-navaid"
           or (size(me.fp.getWP(i).wp_name) == 8 
             and left(me.fp.getWP(i).wp_name,4) != getprop(dep_apt)
-              and left(me.fp.getWP(i).wp_name,4) != me.dest_apt)) {
+              and left(me.fp.getWP(i).wp_name,4) != me.dest_apt))
         flpLine.setText("*"~me.fp.getWP(i).wp_name);
-      } else {flpLine.setText(me.fp.getWP(i).wp_name)}
-    } else if (i == 0 and left(me.fp.getWP(i).wp_name,4) == me.dest_apt) {
+      else if (getprop(hld_activ[x]) and i == hld_ind and !getprop(exit))
+        flpLine.setText(me.fp.getWP(i).wp_name~" H").setColor(me.amber);
+      else flpLine.setText(me.fp.getWP(i).wp_name).setColor(me.green);
+    } else if (i == 0 and left(me.fp.getWP(i).wp_name,4) == me.dest_apt)
       flpLine.setText(me.fp.getWP(i).wp_name);      
-    }
   }, ### end of Flp_offset
 
   Flp1 : func(x) {
@@ -402,7 +435,9 @@ var cduDsp = {
 		me.line.l4.setText("----");
 		me.line.l5.setText("VIA TO");
 		me.line.l6.setText("----");
-		me.line.l7.setText("< DEPARTURE");
+    if (getprop(enable_exit) and !getprop(exit)) me.line.l7.setText("< EXIT");
+    else me.line.l7.setText("< DEPARTURE");
+#    else if (!getprop(enable_exit) or getprop(exit)) me.line.l7.setText("< DEPARTURE");
     me.line.r2l.setText("--- /");
     me.line.r2r.setText("-----");
     me.line.r4l.setText("--- /");
@@ -415,8 +450,10 @@ var cduDsp = {
 
     if (me.nrPage == 1) {
       me.line.l1.setText("ORIGIN / ETD");
-      me.line.r1.setText("SPD  /  CMD ");me.line.r1.setColor(me.white);
-      me.line.r2l.setText("");me.line.r2r.setText("");
+      me.line.r1.setText("SPD  /  CMD ").setColor(me.white);
+      me.line.r2l.setText("");
+      me.line.r2r.setText("");
+      setprop(direct[x],getprop(direct[x])); #to wake up the listener
     }
     if (me.nrPage <= getprop(nbpage[x])) {
        if (n != nil and n < 3 ) {
@@ -615,7 +652,67 @@ var cduDsp = {
         me.line.l7.setText("< FLT PLAN");
       }
     }
-  },
+  }, # end of Alternate
+
+  ##### Pattern Pages #####
+  Patterns : func(x) {
+    me.nrPage = substr(getprop(dsp[x]),9,1);
+    me.Raz_lines(x);
+    me.line.title.setText("PATTERNS 1 / 1").setColor(me.white);
+    me.line.l1.setText("< HOLD");
+#    me.line.l3.setText("< FLYOVER");
+#    me.line.l5.setText("< RADIAL");
+    me.line.l7.setText("< REVIEW").setColor(me.white);
+#    me.line.r1.setText("PCDR TURN >").setColor(me.white);
+#    me.line.r3.setText("ORBIT >").setColor(me.white);
+  }, # end of Patterns
+
+  HoldPat : func(x) {
+    hld_ind = getprop(hold_path[x]~"wpt");
+    hld_turn = getprop(hold_path[x]~"turn");
+    hld_inbound = getprop(hold_path[x]~"inbound");
+    hld_time = getprop(hold_path[x]~"time");
+    hld_dist = getprop(hold_path[x]~"leg-distance-nm");
+    hld_spd = getprop(hold_path[x]~"speed");
+    hld_clear = getprop(hold_path[x]~"clear");
+    hld_id = hld_clear ? "UNDEFINED" : getprop("autopilot/route-manager/route/wp["~hld_ind~"]/id");
+    if (hld_inbound >= 0 and hld_inbound < 45) quad = "S";
+    if (hld_inbound >= 45 and hld_inbound < 90) quad = "SW";
+    if (hld_inbound >= 90 and hld_inbound < 135) quad = "W";
+    if (hld_inbound >= 135 and hld_inbound < 180) quad = "NW";
+    if (hld_inbound >= 180 and hld_inbound < 225) quad = "N";
+    if (hld_inbound >= 225 and hld_inbound < 270) quad = "NE";
+    if (hld_inbound >= 270 and hld_inbound < 315) quad = "E";
+    if (hld_inbound >= 315 and hld_inbound < 360) quad = "SE";
+
+    hld_bearing = getprop(route_path~hld_ind~"]/leg-bearing-true-deg");
+    diff1 = geo.normdeg(hld_inbound - hld_bearing);
+    diff2 = geo.normdeg(hld_bearing - hld_inbound);
+    if (diff1 <= 110 or diff2 <= 70) hld_entry = "DIRECT";
+    else if (diff1 > 110 and diff2 <= 180) hld_entry = "TEARDROP";
+    else hld_entry = "PARALLEL";
+    setprop(hld_path[x]~"entry",hld_entry);
+
+    me.nrPage = substr(getprop(dsp[x]),9,1);
+    me.Raz_lines(x);
+    me.line.title.setText("HOLDING PATTERN 1 / 1").setColor(me.white);
+    me.line.l1.setText("HOLD FIX");
+    me.line.l2.setText(hld_id);
+    if (!hld_clear) {
+      me.line.l3.setText("QUAD  ENTRY");
+      me.line.l5.setText("INBD CRS/DIR");
+      me.line.l7.setText("< CLEAR").setColor(me.magenta);
+      me.line.r1.setText("MAX END SPD").setColor(me.white);
+      me.line.r3.setText("LEG TIME").setColor(me.white);
+      me.line.r5.setText("LEG DIST").setColor(me.white);
+      me.line.r7.setText("ACTIVATE >").setColor(me.magenta);
+      me.line.l4.setText(quad~"  "~hld_entry);
+      me.line.l6.setText(sprintf("%03.f",hld_inbound)~"° /"~hld_turn~" TURN");
+      me.line.r2r.setText(sprintf("%.0f",hld_spd));
+      me.line.r4r.setText(hld_time~" MIN");
+      me.line.r6r.setText(sprintf("%.1f",hld_dist)~" NM");
+    }
+  }, # end of HoldPat
 
   ### Performances Pages ###
   Prf : func(x) {
@@ -884,16 +981,6 @@ var cduDsp = {
     }
   }, # end of Nav_conv
 
-  Nav_patt : func(x) {
-    me.nrPage = substr(getprop(dsp[x]),9,1);
-    me.Raz_lines(x);
-    if (me.nrPage == 1 ) {
-      me.line.title.setText("PATTERN 1 / 1").setColor(me.white);
-      me.line.r4l.setText("COMING SOON !!!").setColor(me.yellow);
-      me.line.l7.setText("< RETURN");
-    }
-  }, # end of Nav_patt
-
   ##### Prog Pages #####
   Progress : func(x) {
     me.nrPage = substr(getprop(dsp[x]),9,1);
@@ -1058,7 +1145,7 @@ var cduDsp = {
 
   Arrow : func(n,i,x) {
     if (left(getprop(dsp[x]),8) == "FLT-PLAN") {
-      if (i == me.curr_wp) {
+      if (i == getprop(currWp)) {
         me.arrow.show();
         me.arrow.setTranslation(0,145*n);
         if (i == getprop("instrumentation/cdu["~x~"]/direct-to")) {

@@ -5439,7 +5439,7 @@
           </or>
           <less-than>
             <property>autopilot/settings/bank-limit</property>
-            <value>30</value>
+            <value>40</value>
           </less-than>
         </and>
       </condition>
@@ -5747,8 +5747,8 @@
           <binding>
               <command>property-cycle</command>
               <property>autopilot/settings/bank-limit</property>
-              <value>30</value>
-              <value>15</value>
+              <value>40</value>
+              <value>20</value>
           </binding>
           <binding>
             <command>property-toggle</command>

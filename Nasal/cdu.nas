@@ -12,6 +12,10 @@ var destAirport = "autopilot/route-manager/destination/airport";
 var destAlt = "autopilot/route-manager/destination/field-elevation-ft";
 var destRwy = "autopilot/route-manager/destination/runway";
 var fp_active = "autopilot/route-manager/active";
+var hold_activ = ["instrumentation/cdu/hold/active",
+                  "instrumentation/cdu[1]/hold/active"];
+var hold_path = ["instrumentation/cdu/hold/",
+                 "instrumentation/cdu[1]/hold/"];
 var navSrc = "autopilot/settings/nav-source";
 var num = "autopilot/route-manager/route/num";
 var path = getprop("/sim/fg-home")~"/Export/FlightPlans/";
@@ -19,6 +23,8 @@ var alarm = ["instrumentation/cdu/alarms",
              "instrumentation/cdu[1]/alarms"];
 var cdu_input = ["instrumentation/cdu/input",
                 "instrumentation/cdu[1]/input"];
+var direct = ["instrumentation/cdu/direct",
+              "instrumentation/cdu[1]/direct"];
 var display = ["instrumentation/cdu/display",
                "instrumentation/cdu[1]/display"];
 var irs_align = ["instrumentation/irs/align",
@@ -29,10 +35,17 @@ var nbpage = ["instrumentation/cdu/nbpage",
               "instrumentation/cdu[1]/nbpage"];
 var pos_init = ["instrumentation/cdu/pos-init",
                 "instrumentation/cdu[1]/pos-init"];
+var route_path = "autopilot/route-manager/route/wp[";
 
 var alm = [[],[]];
 alm[0] = std.Vector.new();
 alm[1] = std.Vector.new();
+var hold_ind = nil;
+var hold_turn = nil;
+var hold_inbound = nil;
+var hold_time = nil;
+var hold_dist = nil;
+var hold_spd = nil;
 var cnv = [nil,nil];
 cnv[0] =  cnv[1] = {FT:nil,M:nil,FL:nil,LB:nil,KG:nil,GAL:nil,L:nil,F:nil,C:nil,
                         KTS:nil,MS:nil,NM:nil,KM:nil,LBGAL:nil,KGL:nil,
@@ -43,11 +56,14 @@ var cduDisplay = nil;
 var cduInput = "";
 var cduPos = 0;
 var del_length = nil;
+var display_mem = nil;
 var dist = 0;
 var flp_closed = 0;
 var fltName = nil;
 var fltPath = nil;
 var g_speed = nil;
+var hold = 0;
+var hold_alt = nil;
 var ind = nil;
 var irsPos = nil;
 var navSel = nil;
@@ -116,7 +132,11 @@ var cduMain = {
 		    setprop(display[1],"NAVIDENT");
         setprop(nbpage[x],1);
 		    setprop(pos_init[x],0);
-		    setprop("instrumentation/cdu["~x~"]/direct",0);
+		    setprop(direct[x],0);
+        setprop(hold_activ[x],0);
+        setprop("autopilot/auto-hold/enable-exit",0);
+        setprop("autopilot/auto-hold/exit",0);
+        setprop("autopilot/auto-hold/phase",0);
 		    setprop("instrumentation/cdu["~x~"]/direct-to",-1);
 		    setprop(cdu_input[x],"");
 		    setprop("autopilot/locks/TOD",0);
@@ -131,6 +151,8 @@ var cduMain = {
         setprop(pos_init[x],0);
         setprop(irs_pos[x],0);
         irsPos = 0;
+        hold = 0;
+        hold_ind = nil;
         foreach(var i;keys(cnv[x])) {
           if (i == "LBGAL" or i == "KGL") continue;
           cnv[x][i] = nil;
@@ -251,6 +273,9 @@ var cduMain = {
               ###
           } else {cduDisplay = "FLT-PLAN[0]"}
       }
+      setprop(hold_path[x]~"clear",0);
+      setprop(direct[x],0);
+      hold = 0;
     }
 		if (v=="NAV" and cduPos) {
 				v = "";
@@ -493,30 +518,43 @@ var cduMain = {
 					cduInput = "";						
 				}
 				else if (getprop(fp_active)) {
-          if (getprop("instrumentation/cdu["~x~"]/direct")) {
-            if (fp.getWP(ind).wp_name != "TOD") {setprop("instrumentation/cdu["~x~"]/direct-to",ind)}
-            else {setprop("instrumentation/cdu["~x~"]/direct-to",ind+1)}
+          if (getprop(direct[x]) and !hold) {
+            if (fp.getWP(ind).wp_name != "TOD") setprop("instrumentation/cdu["~x~"]/direct-to",ind);
+            else setprop("instrumentation/cdu["~x~"]/direct-to",ind+1);
             var dir_wp = fp.getWP(getprop("instrumentation/cdu["~x~"]/direct-to")).wp_name;
             var currWp = getprop(curr_wp);
             for (var i=currWp;i<fp.getPlanSize()-1;i+=1) {
-              if (fp.getWP(i).wp_name == dir_wp) {break}
+              if (fp.getWP(i).wp_name == dir_wp) break
               else {fp.deleteWP(i);i-=1}
             }
             setprop(fp_active,1); # to recreate TOD
             setprop(curr_wp,currWp);
-          } else if (cduDisplay != "FLT-PLAN["~getprop(nbpage[x])~"]") {
+            setprop(direct[x],0);
+          } else if (hold) {
+            hold_ind = ind;
+            me.clear_alm(x,"* HOLD *");
+            setprop(direct[x],0);
+            cduDisplay = "HLD-PATT[1]";
+          } else if (cduDisplay != "FLT-PLAN["~getprop(nbpage[x])~"]")
               cduInput = "FLT PLAN CLOSED";
-          }
 				}
 			}
 
 			if (v == "B4L") {
 			  if (getprop(fp_active) and nrPage == getprop(nbpage[x])) {
-          v="";
-          cduDisplay = "PRF-PAGE[1]";
-        }
+          v=""; cduDisplay = "PRF-PAGE[1]";
+        }  
+        else if (getprop(fp_active)) {
+          v=""; 
+          display_mem = cduDisplay;
+          if (getprop("autopilot/auto-hold/enable-exit")) {
+            setprop("autopilot/auto-hold/exit",1);
+            hold = 0;
+            cduDisplay = display_mem;
+          } else cduDisplay = "PAT-PAGE[1]";
+        } 
         else {v="";cduDisplay = "FLT-DEPT[1]"}
-      }
+     }
 
 			if (v == "B1R") {
 				if (left(cduDisplay,8) == "FLT-PLAN" and nrPage > 1) {
@@ -640,7 +678,7 @@ var cduMain = {
 					cduInput = "";						
 				}
 				else if (getprop("autopilot/route-manager/alternate["~x~"]/closed")) {
-          if (getprop("instrumentation/cdu["~x~"]/direct")) {
+          if (getprop(direct[x])) {
             setprop("instrumentation/cdu["~x~"]/direct-to",ind);
             fp = flightplan();
             while(fp.getPlanSize() != wpCurr) {
@@ -660,7 +698,7 @@ var cduMain = {
             setprop("autopilot/route-manager/destination/approach","DEFAULT");
             setprop(fp_active,1); # to create new TOD
             setprop("autopilot/route-manager/alternate["~x~"]/set-flag",0);
-            setprop("instrumentation/cdu["~x~"]/direct",0);
+            setprop(direct[x],0);
             setprop("instrumentation/cdu["~x~"]/direct-to",-1);
         		setprop(display[x],"FLT-PLAN[1]");
             setprop(curr_wp,wpCurr); # for automatic page change
@@ -728,6 +766,65 @@ var cduMain = {
       }
     } # end of alternate FP
 
+    #### PATTERN PAGES ####
+    if (left(cduDisplay,8) == "PAT-PAGE") {
+      setprop(nbpage[x],1);
+      cduInput = "";
+			if (v == "B1L") {
+        v = "";
+        cduDisplay = display_mem;
+        hold = 1;
+        me.set_alm(x,"* HOLD *");
+      }
+			if (v == "B4L") {
+        v = "";
+        cduDisplay = "HLD-PATT[1]";
+      }
+    }
+    if (cduDisplay == "HLD-PATT[1]") {
+      setprop(nbpage[x],1);
+      if (hold_ind == nil) v="B4L";
+			if (v == "B3L") {
+        v = "";
+        if  (right(cduInput,1) == "L" or right(cduInput,1) =="R") {
+          hold_turn = right(cduInput,1);
+          if (size(cduInput) > 1) hold_inbound = left(cduInput,size(cduInput)-1);
+        } else hold_inbound = cduInput;
+        cduInput = "";
+      }
+			if (v == "B4L") {
+        v = "";
+        setprop(hold_path[x]~"clear",1);
+        setprop(direct[x],0);
+        hold = 0;
+        cduInput = "";
+      }
+			if (v == "B1R") {
+        v = "";
+        if (cduInput != "*DELETE*") hold_spd = cduInput;
+        else hold_spd = nil;
+        cduInput = "";
+      }
+			if (v == "B2R") {
+        v = "";
+        hold_time = cduInput;
+        cduInput = "";
+      }
+			if (v == "B3R") {
+        v = "";
+        hold_dist = cduInput;
+        cduInput = "";
+      }
+			if (v == "B4R") {
+        v = "";
+        setprop(hold_activ[x],1);
+        setprop(direct[x],0);
+        cduInput = "";
+        cduDisplay = display_mem;
+      }
+      me.hold_save(x);
+    } # end of Pattern
+
 		#### NAV PAGES ####
 		if (cduDisplay == "NAV-PAGE[1]") {		
       cduInput = "";
@@ -744,7 +841,7 @@ var cduMain = {
 		if (cduDisplay == "NAV-PAGE[2]") {		
       cduInput = "";
 			if (v == "B1L") {v = "";cduDisplay = "NAV-CONV[1]"}
-			if (v == "B1R") {v = "";cduDisplay = "NAV-PATT[1]"}
+			if (v == "B1R") {v = "";cduDisplay = "PAT-PAGE[1]"}
     }
 
 		if (left(cduDisplay,8) == "NAV-LIST") {
@@ -1080,12 +1177,6 @@ var cduMain = {
       }
 		}
 
-    if (left(cduDisplay,8) == "NAV-PATT") setprop(nbpage[x],1);
-		if (cduDisplay == "NAV-PATT[1]") {
-      cduInput = "";
-			if (v == "B4L") {v = "";cduDisplay = "NAV-PAGE[2]";setprop(nbpage[x],2)}
-    }
-
 		#### PERF PAGES ####
 		if (cduDisplay == "PRF-PAGE[1]") {
       cduInput = "";
@@ -1284,10 +1375,10 @@ var cduMain = {
 
   lineSelect : func(v) {
     for (var i = 1;i<4;i+=1) {
-      if (v == "B"~i~"L"){select = "l"~i}
+      if (v == "B"~i~"L") select = "l"~i;
     }
     for (var i = 1;i<4;i+=1) {
-      if (v == "B"~i~"R"){select = "l"~(i+3)}
+      if (v == "B"~i~"R") select = "l"~(i+3);
     }
   }, # end of lineSelect
 
@@ -1418,7 +1509,7 @@ var cduMain = {
   previous_key : func(x) {
 	  cduDisplay = getprop(display[x]);
     nrPage = size(cduDisplay)<12 ? substr(cduDisplay,9,1) : substr(cduDisplay,9,2); 
-	  if (nrPage > 1) {
+   if (nrPage > 1) {
 		  nrPage -= 1;
 		  setprop("/instrumentation/cdu["~x~"]/display",left(cduDisplay,8)~"["~nrPage~"]");
 	  }
@@ -1442,7 +1533,7 @@ var cduMain = {
           nrPage += 1;
           setprop("/instrumentation/cdu["~x~"]/display",left(cduDisplay,8)~"["~nrPage~"]");
       }
-    } else if (cduDisplay != "ALT-PAGE[0]") {
+    } else if (cduDisplay != "ALT-PAGE[0]" and cduDisplay != "HLD-PATT[1]") {
         if (nrPage < getprop(nbpage[x])) {
           nrPage += 1;
           setprop("/instrumentation/cdu["~x~"]/display",left(cduDisplay,8)~"["~nrPage~"]");
@@ -1474,6 +1565,27 @@ var cduMain = {
 
   conv_table : func(x) { ### for CDUpages conv
     return (cnv[x]);
+  },
+
+  hold_save : func(x) { 
+    if (hold_ind != nil) {
+      hold_bearing = getprop(route_path~hold_ind~"]/leg-bearing-true-deg");
+      hold_alt = fp.getWP(hold_ind).alt_cstr or getprop("instrumentation/altimeter/indicated-altitude-ft");
+      if (hold_spd == nil) hold_spd = fp.getWP(hold_ind).speed_cstr or 200;
+      if (hold_time != nil and hold_dist == nil) hold_dist = hold_spd/60*hold_time;
+      else if (hold_time == nil and hold_dist != nil) hold_time = hold_dist/hold_spd*60;
+      else {
+        hold_time = hold_alt >= 14000 ? 1.5 : 1;
+        hold_dist = hold_spd/60*hold_time;
+      }
+      setprop(hold_path[x]~"wpt",hold_ind);
+      setprop(hold_path[x]~"inbound",hold_inbound or hold_bearing);
+      setprop(hold_path[x]~"turn",hold_turn == nil ? "R" : hold_turn);
+      setprop(hold_path[x]~"time",hold_time);
+      setprop(hold_path[x]~"leg-distance-nm",hold_dist);
+      setprop(hold_path[x]~"altitude",hold_alt);
+      setprop(hold_path[x]~"speed",hold_spd);
+    }
   },
 }; # end of cduMain
 

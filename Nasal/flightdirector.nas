@@ -492,7 +492,7 @@ var update_nav = func {
         }
         setprop("autopilot/locks/from-flag",getprop("instrumentation/nav["~ind~"]/from-flag"));
 
-    } else if(left(NAVSRC,3) == "FMS"){
+    } else if(left(NAVSRC,3) == "FMS" and getprop(Fms)){
       ind = (NAVSRC == "FMS1" ? 0 : 1);
       in_range = getprop("instrumentation/nav["~ind~"]/in-range");
       setprop("autopilot/internal/nav-type","FMS"~(ind+1));
@@ -509,14 +509,12 @@ var update_nav = func {
 			heading = getprop("orientation/heading-deg");
 			geocoord = geo.aircraft_position();
       if (dist_rem <= 10) {
-#        if (!getprop(gs_in_range)) {
-          dstCoeff -= 0.001;
-          if (dstCoeff <= 0.20) dstCoeff = 0.20;
-          targetCourse = fp.pathGeod(-1, -dist_rem + dstCoeff);
-          courseCoord = geo_coord.set_latlon(targetCourse.lat, targetCourse.lon);
-          crs_offset = geocoord.course_to(courseCoord) - heading;
-			    crs_set = geocoord.course_to(courseCoord);
-#        }
+        dstCoeff -= 0.001;
+        if (dstCoeff <= 0.20) dstCoeff = 0.20;
+        targetCourse = fp.pathGeod(-1, -dist_rem + dstCoeff);
+        courseCoord = geo_coord.set_latlon(targetCourse.lat, targetCourse.lon);
+        crs_offset = geocoord.course_to(courseCoord) - heading;
+		    crs_set = geocoord.course_to(courseCoord);
       } else {
 			  refCourse = fp.pathGeod(-1, -dist_rem);
         courseCoord = geo_coord.set_latlon(refCourse.lat, refCourse.lon);
@@ -531,13 +529,13 @@ var update_nav = func {
           crs_offset = geo.normdeg180(crs_offset);
 			  } else { # in flight
 				  crs_offset = CourseError;
-				  gspd = getprop("velocities/groundspeed-kt")/8000; # old 10000
+				  gspd = getprop("velocities/groundspeed-kt")/10000; # old 8000
 				  curr_bearing = fp.getWP(fp.current).leg_bearing;
 				  if (fp.current < fp.getPlanSize()-1) {
 					  next_bearing = fp.getWP(fp.current+1).leg_bearing;
 				  } else {next_bearing = curr_bearing}
-				  if (abs(curr_bearing - next_bearing) > 150) {diff_crs = 0}
-				  else {diff_crs = abs(curr_bearing - next_bearing)*gspd}
+				  if (abs(curr_bearing - next_bearing) > 150) diff_crs = 0;
+				  else diff_crs = abs(curr_bearing - next_bearing)*gspd;
 				  if (wp_dist <= diff_crs) {
 					  setprop("autopilot/route-manager/current-wp",fp.current +1);
 				  }

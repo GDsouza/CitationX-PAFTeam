@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
 <PropertyList>
-    <name>2 - Engines Start-up</name>
-    <description>Engines Start-up : Right engine first, then left engine</description>
+    <name>2 - Demarrage des reacteurs</name>
+    <description>Demarrage du reacteur droit puis du reacteur gauche</description>
 		<step-time>3</step-time>
     <init>
       <set>
@@ -53,7 +53,7 @@
 
     <step>
         <message>
-            Hide Yoke (click on yoke){|.}
+            Supprimer le manche (cliquer dessus){|.}
         </message>
         <view>
     			<heading-offset-deg>0.0</heading-offset-deg>
@@ -82,7 +82,7 @@
 
     <step>
       <message>
-        Switch on Ground Recog Lights (step 1){|.}
+        Positionner sur GND REC (1 cran){|.}
       </message>
       <view>
   			<heading-offset-deg>316</heading-offset-deg>
@@ -111,7 +111,7 @@
 
     <step>
       <message>
-        Set right ignition switch to NORM (click on NORM){|.}
+        Basculer le bouton IGNITION RH sur NORM{|.}
       </message>
       <view>
   			<heading-offset-deg>354</heading-offset-deg>
@@ -144,11 +144,11 @@
 
 		<step>
 			<message>
-				Set right throttle to "IDLE" position (click on throttle lever) {|.}
+				Cliquer sur la manette des gaz droite pour la mettre en position IDLE{|.}
 			</message>
 			<view>
 				<heading-offset-deg>315</heading-offset-deg>
-				<pitch-offset-deg>-52</pitch-offset-deg>
+				<pitch-offset-deg>-52</pitch-offset-deg>Poussez
 				<field-of-view>35</field-of-view>
 			</view>
 			<marker>
@@ -185,7 +185,7 @@
 
 		<step>
 			<message>
-				Push right starter button{|.}
+				Pousser le bouton ENGINE STARTER RH{|.}
 			</message>
 			<view>
 				<heading-offset-deg>348.46</heading-offset-deg>
@@ -214,7 +214,7 @@
 
 		<step>
 			<message>
-				Wait for fan > 40{|.}
+				Attendre que FAN (compresseur) droit soit a 40%{|.}
 			</message>
 			<view>
 				<heading-offset-deg>337</heading-offset-deg>
@@ -247,7 +247,7 @@
 
 		<step>
 			<message>
-				Switch on GEN 2{|.}
+				Basculer sur RH GEN{|.}
 			</message>
 			<view>
 				<heading-offset-deg>350.578</heading-offset-deg>
@@ -276,7 +276,7 @@
 
 		<step>
 			<message>
-        Set left ignition switch to NORM (click on NORM){|.}
+        Basculer le bouton IGNITION LH sur NORM {|.}
 			</message>
 			<view>
 				<heading-offset-deg>348.46</heading-offset-deg>
@@ -309,7 +309,7 @@
 
 		<step>
 			<message>
-				Set left throttle to "IDLE" position (click on throttle lever) {|.}
+				Cliquer sur la manette des gaz gauche pour la mettre en position IDLE{|.}
 			</message>
 			<view>
 				<heading-offset-deg>315</heading-offset-deg>
@@ -350,7 +350,7 @@
 
 		<step>
 			<message>
-				Push left starter button{|.}
+			Pousser le bouton ENGINE STARTER LH{|.}
 			</message>
 			<view>
 				<heading-offset-deg>348.46</heading-offset-deg>
@@ -379,7 +379,7 @@
 
 		<step>
 			<message>
-				Wait for fan > 40{|.}
+				Attendre que FAN (compresseur) gauche soit à 40%{|.}
 			</message>
 			<view>
 				<heading-offset-deg>337</heading-offset-deg>
@@ -412,7 +412,7 @@
 
 		<step>
 			<message>
-				Switch on GEN 1{|.}
+				Basculer sur LH GEN{|.}
 			</message>
 			<view>
 				<heading-offset-deg>350.578</heading-offset-deg>
@@ -441,7 +441,7 @@
 
 		<step>
 			<message>
-				Push Master Warning Reset to stop alarm{|.}
+				Appuyer sur MASTER WARNING RESET pour acquitter les alarmes{|.}
 			</message>
 			<view>
 				<heading-offset-deg>0.0</heading-offset-deg>
@@ -470,7 +470,7 @@
 
 		<step>
 			<message>
-				Push Master Caution Reset to stop alarm{|.}
+				Appuyer sur MASTER CAUTION RESET pour acquitter les alarmes{|.}
 			</message>
 			<view>
 				<heading-offset-deg>0.0</heading-offset-deg>
@@ -499,7 +499,7 @@
 
 		<step>
 			<message>
-				Set Ext Pwr OFF if in service{|.}
+				Mettre EXT PWR sur AVAIL s'il est sur ON{|.}
 			</message>
 			<view>
 				<heading-offset-deg>350.578</heading-offset-deg>
@@ -528,7 +528,7 @@
 
 		<step>
 			<message>
-				Shutdown APU if in service{|.}
+				Arreter l'APU s'il est en service{|.}
 			</message>
 			<view>
 				<heading-offset-deg>289</heading-offset-deg>
@@ -557,7 +557,7 @@
 
 		<step>
 			<message>
-				Set left winshield heat switch to ON position{|.}
+				Basculer l'interrupteur WINDSHIELD (pare-brise gauche) sur LH{|.}
 			</message>
 			<view>
 				<heading-offset-deg>319</heading-offset-deg>
@@ -586,7 +586,7 @@
 
 		<step>
 			<message>
-				Set right winshield heat switch to ON position{|.}
+				Basculer l'interrupteur WINDSHIELD (pare-brise droit) sur RH{|.}
 			</message>
 			<view>
 				<heading-offset-deg>319</heading-offset-deg>
@@ -615,7 +615,7 @@
 
 		<step>
 			<message>
-				Set left pitot heat switch to ON position{|.}
+				Basculer l'interrupteur PITOT/STATIC sur LH{|.}
 			</message>
 			<view>
 				<heading-offset-deg>319</heading-offset-deg>
@@ -644,7 +644,7 @@
 
 		<step>
 			<message>
-				Set right pitot heat switch to ON position{|.}
+				Basculer l'interrupteur PITOT/STATIC sur RH{|.}
 			</message>
 			<view>
 				<heading-offset-deg>319</heading-offset-deg>
@@ -673,7 +673,7 @@
 
 		<step>
 			<message>
-				Next step : 3 - Taxiing{|.}
+				Tuto suivant : 3 - Roulage{|.}
 			</message>
 		</step>
 
