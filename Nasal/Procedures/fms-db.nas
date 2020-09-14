@@ -302,7 +302,7 @@ var fmsDB = {
         if (s.tp_type == "star") {
           foreach(var r; s.runways) {
             if (r == runway or r == "All") {
-							#print(s.wp_name);
+			        #print(s.wp_name);
               append(starList, s);
             }
           }

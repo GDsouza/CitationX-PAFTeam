@@ -5421,9 +5421,11 @@
             <property>systems/electrical/outputs/fgc-cont-B</property>
           </or>
 	        <property>autopilot/locks/speed-ctrl</property>
+<!--
 					<not>
 						<property>autopilot/settings/fms</property>
 					</not>
+-->
 				</and>
       </condition>
     </animation>

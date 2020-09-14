@@ -465,7 +465,7 @@ var cduMain = {
 					cduInput = "";
 					cduDisplay = "FLT-PLAN["~(getprop(nbpage[x]))~"]";
 				} 
-				if (cduInput == "DELETE") {
+				if (cduInput == "*DELETE*") {
 					if (ind == 0 or ind == -3) {
 						setprop(depAirport,"");
 						setprop("autopilot/route-manager/input","@CLEAR");
@@ -592,7 +592,7 @@ var cduMain = {
 
 			if (v == "B3R") {
         ind = nrPage*3-(3-substr(v,1,1))-1;
-				if (nrPage > 0 and nrPage <= getprop(nbpage[x])) {					if (ind == getprop(num)-1 and cduInput == "DELETE") {
+				if (nrPage > 0 and nrPage <= getprop(nbpage[x])) {					if (ind == getprop(num)-1 and cduInput == "*DELETE*") {
 							setprop(destAirport,"");
 							cduInput = "";
 							cduDisplay = "FLT-PLAN[0]";
@@ -650,7 +650,7 @@ var cduMain = {
 					cduInput = "";
 					cduDisplay = "ALT-PAGE["~(getprop(nbpage[x]));
 				} 
-				if (cduInput == "DELETE") {
+				if (cduInput == "*DELETE*") {
           if (ind == altFp.getPlanSize()-1) {
 					  setprop("autopilot/route-manager/alternate["~x~"]/closed",0);
 					  cduInput = "";
@@ -739,7 +739,7 @@ var cduMain = {
 			if (v == "B3R") {
         ind = nrPage*3-(3-substr(v,1,1))-1;
 				if (nrPage > 0 and nrPage <= getprop(nbpage[x])) {
-					if (ind == altFp.getPlanSize()-1 and cduInput == "DELETE") {
+					if (ind == altFp.getPlanSize()-1 and cduInput == "*DELETE*") {
             altFp.cleanPlan();
             altFp.deleteWP(1);
 						setprop("autopilot/route-manager/alternate["~x~"]/airport","");

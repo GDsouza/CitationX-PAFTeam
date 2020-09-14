@@ -327,7 +327,7 @@ var pitch_wheel = func(pw) {
         amt = getprop(tg_pitch) + (pw*0.1);
         amt = (amt < -15 ? -15 : amt > 19 ? 19 : amt); # see flight controls doc
         setprop(tg_pitch,amt);
-    } else if (SP and left(NAVSRC,3)!="FMS") {
+    } else if (SP) {
 				if (getprop("autopilot/locks/alt-mach")) {
           amt = getprop(tg_spd_mc) + (pw*0.01);
           amt = (amt < 0.60 ? 0.60 : amt > 0.92 ? 0.92 : amt);
