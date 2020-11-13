@@ -38,7 +38,7 @@ props.globals.initNode("controls/anti-ice/slat",0,"BOOL");
 props.globals.initNode("controls/anti-ice/wing-insp",0,"BOOL");
 props.globals.initNode("controls/anti-ice/ws-air",0,"BOOL");
 
-### APU ###
+### Apu ###
 props.globals.initNode("controls/APU/battery",0,"DOUBLE");
 props.globals.initNode("controls/APU/bleed",0,"INT");
 props.globals.initNode("controls/APU/bleed-air",0,"BOOL");
@@ -84,10 +84,10 @@ props.globals.initNode("instrumentation/audio/speaker",0.7,"DOUBLE");
 ### Autopilot ###
 props.globals.initNode("autopilot/route-manager/alternate/set-flag",0,"BOOL");
 props.globals.initNode("autopilot/route-manager/alternate/closed",0,"BOOL");
-props.globals.initNode("/autopilot/route-manager/alternate[1]/airport","","STRING");
-props.globals.initNode("/autopilot/route-manager/alternate[1]/closed",0,"BOOL");
-props.globals.initNode("/autopilot/route-manager/alternate[1]/runway","","STRING");
-props.globals.initNode("/autopilot/route-manager/alternate[1]/set-flag",0,"BOOL");
+props.globals.initNode("autopilot/route-manager/alternate[1]/airport","","STRING");
+props.globals.initNode("autopilot/route-manager/alternate[1]/closed",0,"BOOL");
+props.globals.initNode("autopilot/route-manager/alternate[1]/runway","","STRING");
+props.globals.initNode("autopilot/route-manager/alternate[1]/set-flag",0,"BOOL");
 props.globals.initNode("autopilot/settings/nav-btn",0,"BOOL");
 props.globals.initNode("autopilot/settings/fms-btn",0,"BOOL");
 props.globals.initNode("autopilot/settings/fgc","A","STRING");
@@ -99,8 +99,6 @@ props.globals.initNode("autopilot/locks/alm-wp",0,"BOOL");
 props.globals.initNode("autopilot/locks/from-flag",0,"BOOL");
 props.globals.initNode("autopilot/locks/fms-gs",0,"BOOL");
 props.globals.initNode("autopilot/locks/fms-app",0,"BOOL");
-props.globals.initNode("autopilot/locks/altitude","PTCH","STRING");
-props.globals.initNode("autopilot/locks/heading","ROLL","STRING");
 props.globals.initNode("autopilot/locks/speed-ctrl",0,"BOOL");
 props.globals.initNode("autopilot/locks/back-course",0,"BOOL");
 props.globals.initNode("autopilot/locks/to-ga",0,"BOOL");
@@ -119,7 +117,7 @@ for(var n=1;n<9;n+=1) {
   props.globals.initNode("controls/bar/bar-door-"~n,0,"DOUBLE");
 }
 
-### CDU ###
+### Cdu ###
 for(var n=0;n<2;n+=1) {
   props.globals.initNode("instrumentation/cdu["~n~"]/init",0,"BOOL");
   props.globals.initNode("instrumentation/cdu["~n~"]/pos-init",0,"BOOL");
@@ -133,6 +131,14 @@ for(var n=0;n<2;n+=1) {
   props.globals.initNode("/instrumentation/cdu["~n~"]/hold/inbound",0,"INT");
   props.globals.initNode("/instrumentation/cdu["~n~"]/hold/speed",0,"INT");
   props.globals.initNode("/instrumentation/cdu["~n~"]/hold/wpt",0,"INT");
+  props.globals.initNode("/instrumentation/cdu["~n~"]/flyover",0,"INT");
+  props.globals.initNode("/instrumentation/cdu["~n~"]/pcdr/active",0,"BOOL");
+  props.globals.initNode("/instrumentation/cdu["~n~"]/pcdr/turn","L","STRING");
+  props.globals.initNode("/instrumentation/cdu["~n~"]/pcdr/inbound",0,"INT");
+  props.globals.initNode("/instrumentation/cdu["~n~"]/pcdr/speed",0,"INT");
+  props.globals.initNode("/instrumentation/cdu["~n~"]/pcdr/wpt",0,"INT");
+  props.globals.initNode("/instrumentation/cdu["~n~"]/pcdr/clear",0,"INT");
+  props.globals.initNode("/instrumentation/cdu["~n~"]/pcdr/angle",45,"INT");
 }
 
 ### Checklists ###
@@ -146,12 +152,12 @@ props.globals.initNode("instrumentation/checklists/page",0,"INT");
 ### Clock ###
 props.globals.initNode("instrumentation/clock/flight-meter-hour",0,"DOUBLE");
 
-### EFIS ###
+### Efis ###
 props.globals.initNode("instrumentation/efis/baro-hpa",0,"BOOL");
 props.globals.initNode("instrumentation/efis/vsd",0,"BOOL");
 props.globals.initNode("instrumentation/efis/vsd[1]",0,"BOOL");
 
-### EICAS ###
+### Eicas ###
 props.globals.initNode("instrumentation/eicas/xfr",0,"INT");
 props.globals.initNode("instrumentation/eicas/sg-rev",0,"INT");
 props.globals.initNode("instrumentation/eicas/dau1",0,"BOOL");
@@ -220,7 +226,7 @@ for(var n=0;n<3;n+=1) {
   props.globals.initNode("gear/gear["~n~"]/tire-rpm",0,"DOUBLE");
 }
 
-### HF ###
+### Hf ###
 props.globals.initNode("instrumentation/kfs-594/mode",0,"INT");
 props.globals.initNode("instrumentation/kfs-594/store",0,"BOOL");
 props.globals.initNode("instrumentation/kfs-594/vol-knob",0.7,"DOUBLE");
@@ -236,7 +242,7 @@ props.globals.initNode("controls/hydraulic/aux-pump",0,"BOOL");
 props.globals.initNode("controls/hydraulic/pumpA",1,"BOOL");
 props.globals.initNode("controls/hydraulic/pumpB",1,"BOOL");
 
-### IRS ###
+### Irs ###
 for(var n=0;n<2;n+=1) {
   props.globals.initNode("instrumentation/irs["~n~"]/positionned",0,"BOOL");
   props.globals.initNode("instrumentation/irs["~n~"]/align",0,"BOOL");
@@ -284,7 +290,7 @@ props.globals.initNode("controls/lighting/rh-map",0,"DOUBLE");
 props.globals.initNode("controls/lighting/seat-belts",0,"INT");
 props.globals.initNode("controls/lighting/aux-panel",0,"DOUBLE");
 
-### MFD ###
+### Mfd ###
 for(var n=0;n<2;n+=1) {
   props.globals.initNode("instrumentation/mfd["~n~"]/menu2",0,"BOOL");
   props.globals.initNode("instrumentation/mfd["~n~"]/s-menu",0,"INT");
@@ -323,7 +329,13 @@ props.globals.initNode("controls/oxygen/mic-select-pilot",0,"BOOL");
 props.globals.initNode("controls/oxygen/mic-select-copilot",0,"BOOL");
 props.globals.initNode("controls/oxygen/pass-oxy",0,"INT");
 
-### PFD ###
+### Patterns ###
+props.globals.initNode("autopilot/locks/hold/enable-exit",0,"BOOL");
+props.globals.initNode("autopilot/locks/hold/exit",0,"BOOL");
+props.globals.initNode("autopilot/locks/hold/phase",0,"INT");
+props.globals.initNode("autopilot/locks/hold/active",0,"BOOL");
+
+### Pfd ###
 props.globals.initNode("instrumentation/pfd/madc",0,"BOOL");
 props.globals.initNode("instrumentation/pfd/madc-btn",0,"BOOL");
 
@@ -356,7 +368,7 @@ props.globals.initNode("controls/pressurization/baggage-isol",0,"BOOL");
 props.globals.initNode("controls/pressurization/cabin-alt-dsp",0,"DOUBLE");
 props.globals.initNode("controls/pressurization/high-altitude",0,"BOOL");
 
-### RCU ###
+### Rcu ###
 props.globals.initNode("instrumentation/rcu/selected","COM","STRING");
 props.globals.initNode("instrumentation/rcu/mode",0,"BOOL");
 props.globals.initNode("instrumentation/rcu/squelch",0,"BOOL");
@@ -365,7 +377,7 @@ props.globals.initNode("instrumentation/rcu/squelch",0,"BOOL");
 props.globals.initNode("instrumentation/reversionary/sg-test",0,"BOOL");
 props.globals.initNode("instrumentation/reversionary/sg-test[1]",0,"BOOL");
 
-### RMU ###
+### Rmu ###
 props.globals.initNode("instrumentation/rmu/trsp-num",1,"INT");
 for(var n=0;n<2;n+=1) {
   props.globals.initNode("instrumentation/rmu/unit["~n~"]/dim",0,"BOOL");

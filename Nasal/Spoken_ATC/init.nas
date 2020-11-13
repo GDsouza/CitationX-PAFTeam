@@ -1,14 +1,14 @@
 # **  Specific Properties Initialization      **
 # ********************************************
 #         This file is part of SpokenATC.
-# ** Copyright Rodolfo Leibner (rleibner@gmail.com) 2017 **
+# ** Copyright Rodolfo Leibner (rleibner@gmail.com) 2017, 2020 **
 # ** under GPL licence, see <http://www.gnu.org/licenses/>
 #
-# ** Adapted by Christian Le Moigne (clm76) - janv 2018, janv 2019  **
+# ** Adapted by Christian Le Moigne (clm76) - janv 2018, janv 2019, sept 2020  **
 
 
 var init = func {
-  var root = getprop("/sim/fg-aircraft")~"/CitationX/Nasal/Spoken_ATC"; 
+  var root = getprop("/sim/aircraft-dir")~"/Nasal/Spoken_ATC"; 
   foreach(var f; ['atc_tools.nas', 'voice.nas']) {
     io.load_nasal( root ~ "/" ~ f, "spoken_atc" );
   };

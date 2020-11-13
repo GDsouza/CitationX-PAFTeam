@@ -1,5 +1,5 @@
 #var addon = addons.getAddon("org.flightgear.addons.PAR");
-var root = getprop("/sim/fg-aircraft")~"/CitationX/Nasal/PAR"; 
+var root = getprop("/sim/aircraft-dir")~"/Nasal/PAR"; 
 foreach(helper;['plot2D','graph','skinnable'])  if (canvas[helper]==nil) io.load_nasal(root ~'/'~ helper~'.nas', "canvas" );
 var (white,grey,dark,red,green,blue,yellow,mauve,brown,sky) = 
   ['#eeeeee','#777777','#355535','#ee0000','#00aa00','#0000ee','#fcf800',

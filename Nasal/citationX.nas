@@ -415,6 +415,14 @@ controls.flapsDown = func(step) {
     }
 }
 
+controls.gearDown = func(pos) {
+    if (pos == -1 and !getprop("/gear/gear[0]/wow")
+                  and !getprop("/gear/gear[1]/wow")
+                  and !getprop("/gear/gear[2]/wow"))
+      setprop("controls/gear/gear-down",0);
+    else if (pos == 1) setprop("controls/gear/gear-down",1);
+}
+
 var Startup = func{
     setprop("controls/electric/engine[0]/generator",1);
     setprop("controls/electric/engine[1]/generator",1);

@@ -15,7 +15,7 @@ var skp = ["instrumentation/dc840/skip-btn",
 var throttle = ["controls/engines/engine/throttle",
                 "controls/engines/engine[1]/throttle"];
 
-var root = getprop("/sim/fg-aircraft")~"/CitationX/Sounds/Checklists/"; 
+var root = getprop("/sim/aircraft-dir")~"/Sounds/Checklists/"; 
 var pge = [0,0];
 var page = 0;
 var tittle = "";

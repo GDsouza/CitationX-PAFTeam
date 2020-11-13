@@ -41,7 +41,7 @@ var Charts_dsp = {
       path.create_dir();
     }
 
-    me.path1 = getprop("sim/fg-aircraft")~"/CitationX/Nasal/Charts/charts.png";
+    me.path1 = getprop("sim/aircraft-dir")~"/Nasal/Charts/charts.png";
 #    var pos = geo.aircraft_position();
 #    me.icao = airportinfo(pos.lat(),pos.lon(),'airport').id;
     me.icao = me.old_icao = getprop("autopilot/route-manager/departure/airport");

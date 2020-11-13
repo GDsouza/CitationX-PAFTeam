@@ -18,7 +18,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 var main = func {
-  var root = getprop("/sim/fg-aircraft")~"/CitationX/Nasal/PAR"; 
+  var root = getprop("/sim/aircraft-dir")~"/Nasal/PAR"; 
   foreach(var f; ['par.nas','tools.nas', 'controller.nas'] ) {
     io.load_nasal( root ~ "/" ~ f, "par" );
   };

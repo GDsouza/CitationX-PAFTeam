@@ -39,56 +39,6 @@
 
 <!-- ======  Lateral Modes  ====== -->
 
-	  <filter>
-		  <name>nav1 heading error</name>
-		  <debug>false</debug>
-		  <type>gain</type>
-		  <gain>1.0</gain>
-		  <input>
-        <condition>
-          <or>
-            <equals>
-              <property>autopilot/settings/nav-source</property>
-              <value>NAV1</value>
-            </equals>
-            <equals>
-              <property>autopilot/settings/nav-source</property>
-              <value>FMS1</value>
-            </equals>
-          </or>
-        </condition>
-			  <property>instrumentation/nav/radials/target-auto-hdg-deg</property>
-			  <offset>
-				  <property>orientation/heading-magnetic-deg</property>
-				  <scale>-1</scale>
-			  </offset>
-		  </input>
-		  <input>
-        <condition>
-          <or>
-            <equals>
-              <property>autopilot/settings/nav-source</property>
-              <value>NAV2</value>
-            </equals>
-            <equals>
-              <property>autopilot/settings/nav-source</property>
-              <value>FMS2</value>
-            </equals>
-          </or>
-        </condition>
-			  <property>instrumentation/nav[1]/radials/target-auto-hdg-deg</property>
-			  <offset>
-				  <property>/orientation/heading-magnetic-deg</property>
-				  <scale>-1</scale>
-			  </offset>
-		  </input>
-		  <output>autopilot/internal/nav1-heading-error-deg</output>
-		  <period>
-			  <min>-180</min>
-			  <max>180</max>
-		  </period>
-	  </filter>
-
     <filter>
       <name>Course offset</name>
       <debug>false</debug>
@@ -110,10 +60,10 @@
       </enable>
       <input>
         <condition>
-            <equals>
-              <property>autopilot/settings/nav-source</property>
-              <value>NAV1</value>
-            </equals>
+          <equals>
+            <property>autopilot/settings/nav-source</property>
+            <value>NAV1</value>
+          </equals>
         </condition>
         <property>instrumentation/nav/radials/selected-deg</property>
       </input>
@@ -135,7 +85,7 @@
             <property>autopilot/back-course</property>
           </not>
         </condition>
-          <property>autopilot/internal/course-offset</property>
+        <property>autopilot/internal/course-offset</property>
       </output>
       <output>
         <condition>
@@ -227,32 +177,6 @@
       <output>autopilot/internal/course-deflection</output>
     </filter>
 
-    <pid-controller>
-        <name>ROLL</name>
-        <debug>false</debug>
-        <enable>
-          <condition>
-            <equals>
-              <property>autopilot/locks/heading</property>
-              <value>ROLL</value>
-            </equals>
-          </condition>
-        </enable>
-        <input>orientation/roll-deg</input>
-        <reference>autopilot/settings/target-roll-deg</reference>
-        <output>autopilot/internal/roll-filter</output>
-        <config>
-            <Kp>0.5</Kp>
-            <beta>1.0</beta>
-            <alpha>0.1</alpha>
-            <gamma>0.0</gamma>
-            <Ti>1.0</Ti>
-            <Td>0.00001</Td>
-            <min>-30</min>
-            <max>30</max>
-        </config>
-    </pid-controller>
-
     <pi-simple-controller>
         <name>Heading Bug</name>
         <debug>false</debug>
@@ -312,7 +236,7 @@
         <output>autopilot/internal/roll-filter</output>
         <config>
             <Kp>-1.5</Kp>
-            <Ki>0.0</Ki>
+            <Ki>0.1</Ki>
             <min>
               <property>autopilot/settings/bank-limit</property>
               <scale>-1</scale>
@@ -356,8 +280,8 @@
         <reference>0.0</reference>
         <output>autopilot/internal/roll-filter</output>
         <config>
-            <Kp>-2.5</Kp>
-            <Ki>0</Ki>
+            <Kp>-1.5</Kp>
+            <Ki>0.0</Ki>
             <min>
               <property>autopilot/settings/bank-limit</property>
               <scale>-1</scale>
@@ -370,6 +294,7 @@
 
     <filter>
         <name>Roll command</name>
+        <type>noise-spike</type>
         <debug>false</debug>
         <feedback-if-disabled>true</feedback-if-disabled>
         <initialize-to>output</initialize-to>
@@ -383,8 +308,7 @@
         </enable>
         <input>autopilot/internal/roll-filter</input>
         <output>autopilot/internal/roll-bars</output>
-        <type>noise-spike</type>
-        <max-rate-of-change>7</max-rate-of-change>
+        <max-rate-of-change>10</max-rate-of-change>
     </filter>
 
     <pid-controller>
@@ -414,32 +338,9 @@
     </pid-controller>
 
 <!-- ======= Vertical Modes ======= -->
-
-    <filter>
-        <name>Take-off</name>
-        <debug>false</debug>
-        <feedback-if-disabled>false</feedback-if-disabled>
-        <initialize-to>input</initialize-to>
-        <enable>
-          <condition>
-            <not-equals>
-              <property>autopilot/locks/AP-status</property>
-              <value>AP</value>
-            </not-equals>
-          </condition>
-        </enable>
-        <input>
-          <property>orientation/pitch-deg</property>
-          <max>19</max>
-          <min>-15</min>
-        </input>
-        <output>autopilot/internal/pitch-filter</output>
-        <type>noise-spike</type>
-        <max-rate-of-change>10.0</max-rate-of-change>
-    </filter>
-
     <filter>
         <name>PTCH-TOGA</name>
+        <type>noise-spike</type>
         <debug>false</debug>
         <feedback-if-disabled>false</feedback-if-disabled>
         <initialize-to>output</initialize-to>
@@ -473,8 +374,7 @@
           <min>-15</min>
         </input>
         <output>autopilot/internal/pitch-filter</output>
-        <type>noise-spike</type>
-        <max-rate-of-change>10.0</max-rate-of-change>
+        <max-rate-of-change>10</max-rate-of-change>
     </filter>
 
     <pid-controller>
@@ -508,7 +408,7 @@
         </enable>
         <input>instrumentation/altimeter/indicated-altitude-ft</input>
         <reference>autopilot/settings/tg-alt-ft</reference>
-        <output>autopilot/internal/target-climb-rate-fps</output>
+        <output>autopilot/settings/target-climb-rate-fps</output>
         <config>
             <Kp>0.50</Kp> 
             <beta>1.0</beta>
@@ -544,8 +444,6 @@
                 <property>autopilot/settings/nav-source</property>
                 <value>NAV2</value>
               </equals>
-            </or>
-            <or>
               <equals>
                 <property>autopilot/settings/nav-source</property>
                 <value>FMS1</value>
@@ -588,7 +486,7 @@
         </condition>
         <property>instrumentation/nav[1]/gs-rate-of-climb</property>
       </input>
-      <output>autopilot/internal/target-climb-rate-fps</output>
+      <output>autopilot/settings/target-climb-rate-fps</output>
     </filter>
 
     <pid-controller>
@@ -615,8 +513,8 @@
         <gamma>0.0</gamma>
         <Ti>20.0</Ti>
         <Td>0.000001</Td>
-        <min>-10</min>
-        <max>10</max>
+        <min>-30</min>
+        <max>30</max>
       </config>
     </pid-controller>
 
@@ -646,12 +544,16 @@
                   <property>/autopilot/locks/altitude</property>
                   <value>GS</value>
                 </equals>
+                <equals>
+                  <property>/autopilot/locks/altitude</property>
+                  <value>VS</value>
+                </equals>
               </or>
             </and>
           </condition>
         </enable>
 	      <input>velocities/vertical-speed-fps</input>
-        <reference>autopilot/internal/target-climb-rate-fps</reference>
+        <reference>autopilot/settings/target-climb-rate-fps</reference>
         <output>autopilot/internal/pitch-filter</output>
         <config>
           <Kp>0.15</Kp>
@@ -659,40 +561,14 @@
           <alpha>0.1</alpha>
           <gamma>0.0</gamma>
           <Ti>30.0</Ti>
-          <Td>0.1</Td>
+          <Td>0.000001</Td>
           <min>-10</min>
           <max>10</max>
         </config>
     </pid-controller>
 
     <pid-controller>
-        <name>Vertical Speed Hold</name>
-        <debug>false</debug>
-        <enable>
-          <condition>
-            <equals>
-              <property>/autopilot/locks/altitude</property>
-              <value>VS</value>
-            </equals>
-          </condition>
-        </enable>
-        <input>autopilot/internal/vert-speed-fpm</input>
-        <reference>autopilot/settings/vertical-speed-fpm</reference>
-        <output>autopilot/internal/pitch-filter</output>
-        <config>
-            <Kp>0.015</Kp>
-            <beta>1.0</beta>
-            <alpha>0.1</alpha>
-            <gamma>0.0</gamma>
-            <Ti>10.0</Ti>
-            <Td>0.1</Td>
-            <min>-5</min>
-            <max>20</max>
-        </config>
-    </pid-controller>
-
-    <pid-controller>
-        <name>flc 2</name>
+        <name>flc 1</name>
         <debug>false</debug>
         <enable>
           <condition>
@@ -707,13 +583,13 @@
               </equals>
             </or>
           </condition>
-      </enable>
+        </enable>
         <input>instrumentation/altimeter/indicated-altitude-ft</input>
         <reference>
 						<property>autopilot/settings/asel</property>
             <scale>100</scale>
         </reference>
-        <output>autopilot/internal/target-climb-rate-fps</output>
+        <output>autopilot/settings/target-climb-rate-fps</output>
         <config>
             <Kp>0.20</Kp>
             <beta>1.0</beta>
@@ -727,7 +603,7 @@
     </pid-controller>
 
     <pi-simple-controller>
-        <name>flc 3</name>
+        <name>flc 2</name>
         <debug>false</debug>
         <enable>
           <condition>
@@ -744,7 +620,7 @@
           </condition>
         </enable>
         <input>velocities/vertical-speed-fps</input>
-        <reference>autopilot/internal/target-climb-rate-fps</reference>
+        <reference>autopilot/settings/target-climb-rate-fps</reference>
         <output>autopilot/internal/pitch-filter</output>
         <config>
             <Kp>0.30</Kp>
@@ -756,18 +632,13 @@
 
     <filter>
         <name>pitch command</name>
+        <type>noise-spike</type>
         <debug>false</debug>
         <feedback-if-disabled>true</feedback-if-disabled>
         <initialize-to>output</initialize-to>
-        <enable>
-          <condition>
-            <property>autopilot/locks/FD-status</property>
-          </condition>
-        </enable>
         <input>autopilot/internal/pitch-filter</input>
         <output>autopilot/internal/pitch-bars</output>
-        <type>noise-spike</type>
-        <max-rate-of-change>0.8</max-rate-of-change>
+        <max-rate-of-change>5</max-rate-of-change>
     </filter>
 
     <pid-controller>
@@ -809,6 +680,7 @@
 
     <filter>
       <name>gs deflection</name>
+      <type>noise-spike</type>
       <debug>false</debug>
       <feedback-if-disabled>true</feedback-if-disabled>
       <initialize-to>output</initialize-to>
@@ -849,7 +721,6 @@
         <property>instrumentation/nav[1]/gs-needle-deflection-deg</property>
       </input>
       <output>autopilot/internal/gs-deflection</output>
-      <type>noise-spike</type>
       <max-rate-of-change>10</max-rate-of-change>
     </filter>
 

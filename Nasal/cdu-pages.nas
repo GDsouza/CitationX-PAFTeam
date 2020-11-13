@@ -14,8 +14,10 @@ var direct = ["instrumentation/cdu/direct",
 var dist_rem = "autopilot/route-manager/distance-remaining-nm";
 var dsp = ["instrumentation/cdu/display",
            "instrumentation/cdu[1]/display"];
-var enable_exit = "autopilot/auto-hold/enable_exit";
-var exit = "autopilot/auto-hold/exit";
+var enable_exit = "autopilot/locks/hold/enable-exit";
+var exit = "autopilot/locks/hold/exit";
+var flyover_path = ["instrumentation/cdu/flyover/",
+                 "instrumentation/cdu[1]/flyover/"];
 var fp_active = "autopilot/route-manager/active";
 var fp_saved = "autopilot/route-manager/flight-plan";
 var fuel_flow = ["engines/engine[0]/fuel-flow-pph",
@@ -30,6 +32,10 @@ var nav_dist = "autopilot/internal/nav-distance";
 var nbpage = ["instrumentation/cdu/nbpage",
               "instrumentation/cdu[1]/nbpage"];
 var num = "autopilot/route-manager/route/num";
+var pcd_activ = ["instrumentation/cdu/pcdr/active",
+                 "instrumentation/cdu[1]/pcdr/active"];
+var pcd_path = ["instrumentation/cdu/pcdr/",
+                 "instrumentation/cdu[1]/pcdr/"];
 var pos_init = ["instrumentation/cdu/pos-init",
                 "instrumentation/cdu[1]/pos-init"];
 var route_path = "autopilot/route-manager/route/wp[";
@@ -66,6 +72,7 @@ var ETA = nil;
 var ETE = nil;
 var fp_size = nil;
 var flpLine = nil;
+var fly_over = nil;
 var hld_id = nil;
 var hld_ind = nil;
 var hld_bearing = nil;
@@ -89,7 +96,20 @@ var Nav2_id = nil;
 var Nav2_freq = nil;
 var Nm = nil;
 var p = nil;
+var page = nil;
 var pat_alt = nil;
+var pcd_id = nil;
+var pcd_ind = nil;
+var pcd_bearing = nil;
+var pcd_clear = 0;
+var pcd_crs = nil;
+var pcd_dist = nil;
+var pcd_entry = nil;
+var pcd_inbound = nil;
+var pcd_leg = nil;
+var pcd_time = nil;
+var pcd_turn = nil;
+var pcd_spd = nil;
 var quad = nil;
 var spd = nil;
 var Wcarg = nil;
@@ -195,29 +215,27 @@ var cduDsp = {
 
     setlistener(fp_active, func {me.Flp1(x);},0,0);
 
-    setlistener("instrumentation/cdu["~x~"]/speed", func(n) {
-      setprop("instrumentation/cdu["~x~"]/speed",n.getValue());
-      me.Flp1(x);
-    },0,0);
+#    setlistener("instrumentation/cdu["~x~"]/speed", func(n) {
+#      setprop("instrumentation/cdu["~x~"]/speed",n.getValue());
+#      me.Flp1(x);
+#    },0,0);
 
     setlistener(currWp, func(n) {
       if (left(getprop(dsp[x]),3) == "FLT") {
-				me.curr_wp = n.getValue();
           ### automatic page change during flight ###
-        var page = int(me.curr_wp/3)+1;
+        page = int(n.getValue()/3)+1;
         setprop(dsp[x],"FLT-PLAN["~page~"]");
         me.Flp1(x);
       }
     },0,0);
 
     setlistener(direct[x],func(n) {
-      if (n.getValue() and left(getprop(dsp[x]),8) == "FLT-PLAN" or left(getprop(dsp[x]),8) == "ALT-PAGE") {
+      if (n.getValue() and (left(getprop(dsp[x]),8) == "FLT-PLAN" or left(getprop(dsp[x]),8) == "ALT-PAGE")) {
         me.line.l1.setText("---- DIRECT").setColor(me.amber);
         me.line.l7.setText("< PATTERN");
 #        me.line.r7.setText("INTERCEPT >");
       }
       else{
-        me.line.l1.setText(" ORIGIN / ETD").setColor(me.white);
 #        me.line.l7.setText("< DEPARTURE");
         me.line.r7.setText("ARRIVAL >");
       }
@@ -246,6 +264,7 @@ var cduDsp = {
     if (left(getprop(dsp[x]),8) == "NAV-CONV") me.Nav_conv(x);
     if (left(getprop(dsp[x]),8) == "PAT-PAGE") me.Patterns(x);
     if (left(getprop(dsp[x]),8) == "HLD-PATT") me.HoldPat(x);
+    if (left(getprop(dsp[x]),8) == "PCD-TURN") me.PcdrTurn(x);
     if (left(getprop(dsp[x]),8) == "PRG-PAGE") me.Progress(x);
   },
 
@@ -411,14 +430,19 @@ var cduDsp = {
 
   Flp_offset : func(flpLine,i,x) {
     hld_ind = getprop(hld_path[x]~"wpt");
+    fly_over = getprop(flyover_path[x]);
     if (left(me.fp.getWP(i).wp_name,4) != me.dest_apt or me.fp_closed) {
       if (me.fp.getWP(i).wp_type == "offset-navaid"
           or (size(me.fp.getWP(i).wp_name) == 8 
             and left(me.fp.getWP(i).wp_name,4) != getprop(dep_apt)
               and left(me.fp.getWP(i).wp_name,4) != me.dest_apt))
         flpLine.setText("*"~me.fp.getWP(i).wp_name);
-      else if (getprop(hld_activ[x]) and i == hld_ind and !getprop(exit))
+      else if (getprop(hld_activ[x]) and hld_ind == i and !getprop(exit))
         flpLine.setText(me.fp.getWP(i).wp_name~" H").setColor(me.amber);
+      else if (fly_over > 0 and fly_over == i)
+        flpLine.setText(me.fp.getWP(i).wp_name~" F").setColor(me.amber);
+      else if (getprop(pcd_activ[x]) and pcd_ind == i)
+        flpLine.setText(me.fp.getWP(i).wp_name~" P").setColor(me.amber);
       else flpLine.setText(me.fp.getWP(i).wp_name).setColor(me.green);
     } else if (i == 0 and left(me.fp.getWP(i).wp_name,4) == me.dest_apt)
       flpLine.setText(me.fp.getWP(i).wp_name);      
@@ -437,7 +461,6 @@ var cduDsp = {
 		me.line.l6.setText("----");
     if (getprop(enable_exit) and !getprop(exit)) me.line.l7.setText("< EXIT");
     else me.line.l7.setText("< DEPARTURE");
-#    else if (!getprop(enable_exit) or getprop(exit)) me.line.l7.setText("< DEPARTURE");
     me.line.r2l.setText("--- /");
     me.line.r2r.setText("-----");
     me.line.r4l.setText("--- /");
@@ -447,7 +470,6 @@ var cduDsp = {
 		me.line.r7.setText("ARRIVAL >");
     me.FlpMain(x);
     me.line.title.setText("ACTIVE FLT PLAN  "~me.nrPage~" / "~getprop(nbpage[x]));
-
     if (me.nrPage == 1) {
       me.line.l1.setText("ORIGIN / ETD");
       me.line.r1.setText("SPD  /  CMD ").setColor(me.white);
@@ -660,10 +682,10 @@ var cduDsp = {
     me.Raz_lines(x);
     me.line.title.setText("PATTERNS 1 / 1").setColor(me.white);
     me.line.l1.setText("< HOLD");
-#    me.line.l3.setText("< FLYOVER");
+    me.line.l3.setText("< FLYOVER");
 #    me.line.l5.setText("< RADIAL");
     me.line.l7.setText("< REVIEW").setColor(me.white);
-#    me.line.r1.setText("PCDR TURN >").setColor(me.white);
+    me.line.r1.setText("PCDR TURN >").setColor(me.white);
 #    me.line.r3.setText("ORBIT >").setColor(me.white);
   }, # end of Patterns
 
@@ -672,7 +694,7 @@ var cduDsp = {
     hld_turn = getprop(hold_path[x]~"turn");
     hld_inbound = getprop(hold_path[x]~"inbound");
     hld_time = getprop(hold_path[x]~"time");
-    hld_dist = getprop(hold_path[x]~"leg-distance-nm");
+    hld_dist = getprop(hold_path[x]~"leg-dist-nm");
     hld_spd = getprop(hold_path[x]~"speed");
     hld_clear = getprop(hold_path[x]~"clear");
     hld_id = hld_clear ? "UNDEFINED" : getprop("autopilot/route-manager/route/wp["~hld_ind~"]/id");
@@ -714,6 +736,40 @@ var cduDsp = {
     }
   }, # end of HoldPat
 
+  PcdrTurn : func(x) {
+    pcd_ind = getprop(pcd_path[x]~"wpt");
+    pcd_angle = getprop(pcd_path[x]~"angle");
+    pcd_turn = getprop(pcd_path[x]~"turn");
+    pcd_inbound = getprop(pcd_path[x]~"inbound");
+    pcd_time = getprop(pcd_path[x]~"time");
+    pcd_leg = getprop(pcd_path[x]~"leg-dist-nm");
+    pcd_dist = getprop(pcd_path[x]~"dist");
+    pcd_spd = getprop(pcd_path[x]~"speed");
+    pcd_clear = getprop(pcd_path[x]~"clear");
+    pcd_id = pcd_clear ? "UNDEFINED" : getprop("autopilot/route-manager/route/wp["~pcd_ind~"]/id");
+    pcd_crs = geo.normdeg(pcd_inbound + 180);
+    if (pcd_turn == "L") pcd_crs = int(pcd_crs - pcd_angle);
+    else pcd_crs = int(pcd_crs + pcd_angle);    
+    me.Raz_lines(x);
+    me.line.title.setText("PROCEDURE TURN 1 / 1").setColor(me.white);
+    me.line.l1.setText("PT FIX");
+    me.line.l2.setText(pcd_id);
+    if (!pcd_clear) {
+      me.line.l3.setText("PT ANG (CRS)");
+      me.line.l5.setText("INBD CRS");
+      me.line.r1.setText("BOUNDARY DIST").setColor(me.white);
+      me.line.r3.setText("OUTBD TIME").setColor(me.white);
+      me.line.r5.setText("OUTBD DIST").setColor(me.white);
+      me.line.r7.setText("ACTIVATE >").setColor(me.magenta);
+      me.line.l4.setText(pcd_turn~pcd_angle~"°"~" ("~pcd_crs~")");
+      me.line.l6.setText(sprintf("%03.f",pcd_inbound)~" °");
+      me.line.r2r.setText(sprintf("%.1f",pcd_leg)~" NM");
+      me.line.r4r.setText(sprintf("%.1f",pcd_time)~" MIN");
+      me.line.r6r.setText(sprintf("%.1f",pcd_dist)~" NM");
+    }
+
+  }, # end of PcdrTurn
+  
   ### Performances Pages ###
   Prf : func(x) {
     me.nrPage = substr(getprop(dsp[x]),9,1);

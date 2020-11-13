@@ -305,12 +305,7 @@
 							</or>
 						</not>
 						<property>autopilot/locks/alm-wp</property>
-							
-<!--						<less-than>
- 		       		<property>autopilot/internal/nav-distance</property>
-								<value>1</value>						
-						</less-than>
--->					</and>
+					</and>
         </condition>
         <mode>once</mode>
         <reference-dist>1.0</reference-dist>
@@ -881,7 +876,7 @@
 				</condition>
     </warnings>
 
-    <!-- SPEED CALLOUTS -->
+    <!-- FLIGHT CALLOUTS -->
     <callout>
       <name>80 knots</name>
       <mode>once</mode>
@@ -967,7 +962,7 @@
           </less-than>
           <greater-than>
             <property>velocities/airspeed-kt</property>
-              <property>controls/flight/v2</property>
+            <property>controls/flight/v2</property>
           </greater-than>
           <greater-than-equals>
             <property>autopilot/internal/vert-speed-fpm</property>
@@ -987,6 +982,24 @@
           </less-than>
         </and>
       </condition>
+    </callout>
+
+    <callout>
+        <name>bank-angle</name>
+        <path>Aircraft/CitationX/Sounds/bank-angle.wav</path>
+        <mode>looped</mode>
+				<condition>
+          <or>
+  					<greater-than>
+						  <property>orientation/roll-deg</property>
+							<value>40</value>
+  					</greater-than>
+  					<less-than>
+						  <property>orientation/roll-deg</property>
+							<value>-40</value>
+  					</less-than>
+          </or>
+				</condition>
     </callout>
 
 <!-- APU -->
@@ -1883,9 +1896,6 @@
     </volume>
 		</test>
 -->
-
-
-
 </fx>
 
 </PropertyList>

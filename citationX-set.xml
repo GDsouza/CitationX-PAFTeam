@@ -272,7 +272,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
     <systems>
         <path>Aircraft/CitationX/Systems/systems.xml</path>
         <autopilot>
-          <path>Aircraft/CitationX/Systems/citation-autopilot.xml</path>
+          <path>Aircraft/CitationX/Systems/autopilot.xml</path>
         </autopilot>
         <autopilot n="100">
           <path>Aircraft/CitationX/Systems/actuators.xml</path>
@@ -400,11 +400,35 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
         </key>
         <key>
             <name>Control B</name>
-            <desc>Speedbrakes</desc>
+            <desc>Toggle Speedbrakes</desc>
         </key>
         <key>
             <name>Control D</name>
-            <desc>Cabin Door</desc>
+            <desc>Toggle Cabin Door</desc>
+        </key>
+        <key>
+            <name></name>
+            <desc></desc>
+        </key>
+        <key>
+            <name>Spoken ATC</name>
+            <desc></desc>
+        </key>
+        <key>
+            <name>Key &lt;</name>
+            <desc>To request clearance</desc>
+        </key>
+        <key>
+            <name>CTRL + &lt;</name>
+            <desc>To request a runway with ILS</desc>
+        </key>
+        <key>
+            <name>ALT + &lt;</name>
+            <desc>To toggle between Comm1 and Comm2</desc>
+        </key>
+        <key>
+            <name>CTRL +  ALT + &lt;</name>
+            <desc>To request a vector to the closest airport</desc>
         </key>
     </help>
 
@@ -494,6 +518,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
        <configuration-module>
           <category-1> 255 </category-1>  <!-- AIRCRAFT_MODE_TYPE_SELECT -->
 					<category-4> 13 </category-4> <!-- ALTITUDE CALLOUTS -->
+          <category-7> 0 </category-7> <!-- bank angle disabled -->
           <category-8> 3 </category-8> <!-- RADIO ALTITUDE YASIM-->
           <category-14> 2 </category-14> <!-- AUDIO OUTPUT LEVEL -->
        </configuration-module>
@@ -659,12 +684,11 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
           <target-roll-deg type="double">0</target-roll-deg>
           <target-pitch-deg type="double">0</target-pitch-deg>
           <nav-source type="string">NAV1</nav-source>
-          <bank-limit type="int">40</bank-limit>
+          <bank-limit type="int">35</bank-limit>
           <target-speed-kt type="int">250</target-speed-kt>
           <target-speed-mach type="double">0.88</target-speed-mach>
           <changeover type="bool">0</changeover>
           <heading-bug-deg type="int">0</heading-bug-deg>
-          <vertical-speed-fpm type="int">0</vertical-speed-fpm>
           <selected-crs type="int">0</selected-crs>
       </settings>
       <locks>
@@ -806,6 +830,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 				<file>Aircraft/CitationX/Nasal/cdu.nas</file>
 				<file>Aircraft/CitationX/Nasal/cdu-pages.nas</file>
 				<file>Aircraft/CitationX/Nasal/holding-pattern.nas</file>
+				<file>Aircraft/CitationX/Nasal/procedure-turn.nas</file>
 			</cdu>
       <citation>
         <file>Aircraft/CitationX/Nasal/citationX.nas</file>

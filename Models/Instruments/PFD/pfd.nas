@@ -25,12 +25,14 @@ var DmeIR = ["/instrumentation/dme/in-range",
              "/instrumentation/dme[1]/in-range"];
 var dispCtrl = ["/systems/electrical/outputs/disp-cont1",
                 "/systems/electrical/outputs/disp-cont2"];
+var fms = "autopilot/settings/fms";
 var FmsAltDsp = "/autopilot/settings/tg-alt-ft";
 var GsDefl = "/autopilot/internal/gs-deflection";
 var GsInRange = "/autopilot/internal/gs-in-range";
 var Hdg = "/autopilot/settings/heading-bug-deg";
 var Heading = "/orientation/heading-magnetic-deg";
 var HeadingBug = "/autopilot/internal/heading-bug-error-deg";
+var hold_active = "autopilot/locks/hold/active";
 var Iac = ["/systems/electrical/outputs/iac1",
            "/systems/electrical/outputs/iac2"];
 var Ias = "/velocities/airspeed-kt";
@@ -57,15 +59,16 @@ var PfdHsi = ["/instrumentation/dc840/hsi",
 var PfdSel = "instrumentation/pfd/madc";
 var PitchBars = "/autopilot/internal/pitch-bars";
 var PitchDeg = "/orientation/pitch-deg";
-var roll =  "/orientation/roll-deg";
 var RollBars = "/autopilot/internal/roll-bars";
 var RollDeg = "/orientation/roll-deg";
 var SelAlt = "/autopilot/settings/altitude-setting-ft";
-var SelCrs = "/autopilot/settings/selected-crs";
+var SelCrs = ["instrumentation/nav/radials/selected-deg",
+              "instrumentation/nav[1]/radials/selected-deg"];
 var SelHdg = "/autopilot/settings/heading-bug-deg";
 var SgRev = "/instrumentation/eicas/sg-rev";
 var sgTest = ["instrumentation/reversionary/sg-test",
               "instrumentation/reversionary/sg-test[1]"];
+var spd_ctrl = "/autopilot/locks/speed-ctrl";
 var SpdTgKt = "/autopilot/settings/target-speed-kt";
 var SpdTgMc = "/autopilot/settings/target-speed-mach";
 var SpdTrd = "/instrumentation/pfd/speed-trend-kt";
@@ -329,7 +332,7 @@ var PFDDisplay = {
       me.Txt.NavId.setText(n.getValue());
     },1,0);
 
-		setlistener(SelCrs, func(n) {
+		setlistener(SelCrs[x], func(n) {
       me.Txt.DtkVal.setText(sprintf("%03i",n.getValue()));
     },1,0);
 
@@ -471,8 +474,8 @@ var PFDDisplay = {
       me.Fail.HorizScale.show();
       me.Fail.HorizGnd.show();
 		  me.h_trans.setTranslation(0,getprop(PitchDeg)*7.5);
-		  me.h_rot.setRotation(-getprop(roll)*D2R,me.Hor.Horizon.getCenter());
-      me.Hor.BankPtr.setRotation(-getprop(roll)*D2R);
+		  me.h_rot.setRotation(-getprop(RollDeg)*D2R,me.Hor.Horizon.getCenter());
+      me.Hor.BankPtr.setRotation(-getprop(RollDeg)*D2R);
       if (getprop("/autopilot/locks/FD-status")) {
         me.Hor.Vbars.show();
         me.Hor.Vbars.setTranslation(0,(getprop(PitchBars)-getprop(PitchDeg))*-5.711);
@@ -501,7 +504,8 @@ var PFDDisplay = {
   update_SPD : func {
     if (!me.madc_enabled) return;
     else {
-      if ((getprop("/autopilot/locks/altitude") == "FLC" or getprop("/autopilot/locks/altitude") == "VFLC" or getprop("/autopilot/settings/fms") or getprop("/autopilot/locks/speed-ctrl"))) {
+      if (getprop(ApAlt) == "FLC" or getprop(ApAlt) == "VFLC" 
+          or getprop(fms) or getprop(spd_ctrl) or getprop(hold_active)) {
         me.Spd.TgSpd.show();
         if (getprop(AltFt)  <= 30650) {
           me.Spd.TgSpd.setText(sprintf("%.0f",getprop(SpdTgKt)));

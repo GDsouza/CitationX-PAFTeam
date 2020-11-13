@@ -19,12 +19,6 @@ You should have received a copy of the GNU General Public License
 along with FlightGear.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
-<!--
-Misspelings are intentionally  to improve intelligibility.
-must be declared as <replace>phoo:foo</replace>
-at the bottom of this file.
--->
-
 <PropertyList>
   <version type="double">2.1</version>
 <!-- # starting: -->  
@@ -52,6 +46,10 @@ at the bottom of this file.
   <goapp type="string">% /satc/freqs/app-fmt</goapp>
   <goapp type="string">. </goapp>
 
+  <godep type="string">Contact departure at </godep>
+  <godep type="string">% /satc/freqs/dep-fmt</godep>
+  <godep type="string">. </godep>
+
 <!-- # Cleared to approach: -->  
   <app type="string">Cleared to approach. Turn to </app>
   <app type="string">%/satc/course-to-final</app>
@@ -69,18 +67,18 @@ at the bottom of this file.
   <qnh type="string"> inches. </qnh>
   
 <!-- # Cleared to land: -->  
-  <land type="string">Winnded </land>
+  <land type="string">Wind </land>
   <land type="string">%/satc/wind-dir-fmt</land>
   <land type="string"> degrees, </land>
   <land type="string">%/satc/wind-speed-fmt</land>
-  <land type="string"> knots. Runwaide </land>
+  <land type="string"> knots. Runway </land>
   <land type="string">%/satc/rwy-in-use</land>
   <land type="string">. Cleared to land.</land>
   
 <!-- # After landing: -->  
-  <exitrwy type="string">Exit Runwaide at first taxiway and taxi to plattform. </exitrwy>
+  <exitrwy type="string">Exit runway at first taxiway and taxi to plattform. </exitrwy>
   
-  <exrwygnd type="string">Exit Runwaide at first taxiway and taxi to plattform. Wellcome to </exrwygnd>
+  <exrwygnd type="string">Exit runway at first taxiway and taxi to plattform. Welcome to </exrwygnd>
   <exrwygnd type="string">%/satc/station-name</exrwygnd>
 
 <!-- # Departure: -->  
@@ -91,45 +89,67 @@ at the bottom of this file.
 <!-- # Tower: -->  
   <joinpttn type="string">Join </joinpttn>
   <joinpttn type="string">%/satc/pattern-hand</joinpttn>
-  <joinpttn type="string"> pattern Runwaide </joinpttn>
+  <joinpttn type="string"> pattern runway </joinpttn>
   <joinpttn type="string">%/satc/rwy-in-use</joinpttn>
   <joinpttn type="string"> and report.</joinpttn>
   
-  <pttn type="string">and join pattern Runwaide </pttn>
+  <pttn type="string">and join pattern runway </pttn>
   <pttn type="string">%/satc/rwy-in-use</pttn>
   
-  <makefinal type="string">Join final Runwaide </makefinal>
+  <makefinal type="string">Join final runway </makefinal>
   <makefinal type="string">~joinpttn[3]</makefinal>
 
 
 <!-- # Cleared to takeoff: -->  
-  <takeoff type="string">Winnded </takeoff>
+  <takeoff type="string">Wind </takeoff>
   <takeoff type="string">%/satc/wind-dir-fmt</takeoff>
   <takeoff type="string"> degrees, </takeoff>
   <takeoff type="string">%/satc/wind-speed-fmt</takeoff>
-  <takeoff type="string"> knots. Runwaide </takeoff>
+  <takeoff type="string"> knots. Runway </takeoff>
   <takeoff type="string">%/satc/rwy-in-use</takeoff>
   <takeoff type="string">. Cleared to take off.</takeoff>
   
 <!-- # Taxi: -->  
-  <taxi2rwy type="string">Taxi to holding point Runwaide </taxi2rwy>
+  <taxi2rwy type="string">Taxi to holding point runway </taxi2rwy>
   <taxi2rwy type="string">%/satc/rwy-in-use</taxi2rwy>
   <taxi2rwy type="string"> and report when ready.</taxi2rwy>
 
   <taxi2plat type="string">Taxi to platform.</taxi2plat>
   
-  <taxigotwr type="string">Taxi to holding point Runwaide </taxigotwr>
+  <taxigotwr type="string">Taxi to holding point runway </taxigotwr>
   <taxigotwr type="string">%/satc/rwy-in-use</taxigotwr>
   <taxigotwr type="string">. Contact tower at </taxigotwr>
   <taxigotwr type="string">%/satc/freqs/twr-fmt</taxigotwr>
   <taxigotwr type="string"> when ready.</taxigotwr>
 
+<!-- # Acknownledges --> 
+  <Ataxi2rwy type="string">To runway </Ataxi2rwy>
+  <Ataxi2rwy type="string">%/satc/rwy-in-use</Ataxi2rwy>
+  <Atakeoff type="string">~takeoff[6]</Atakeoff>
+  <Amakefinal type="string">~makefinal</Amakefinal>
+  <Ajoinpttn type="string">To </Ajoinpttn>
+  <Ajoinpttn type="string">~joinpttn[2]</Ajoinpttn>
+  <Adeparture type="string">%/satc/dep-altitude</Adeparture>
+  <Adeparture type="string"> feet and report leaving. </Adeparture>
+  <Aexrwygnd type="string">Leaving runway and taxi to plattform. </Aexrwygnd>
+  <Aexitrwy type="string">~Aexrwygnd</Aexitrwy>
+  <Aland type="string">Cleared to land, runway </Aland>
+  <Aland type="string">%/satc/rwy-in-use</Aland>
+  <Aapp type="string">Approach to runway </Aapp>
+  <Aapp type="string">~app[3]</Aapp>
+
+<!-- # Requestings --> 
+  <Rtaxi2rwy type="string">Request for taxiing. </Rtaxi2rwy>
+  <Rtakeoff type="string">Ready to takeoff.</Rtakeoff>
+  <Rmakefinal type="string">Request for join pattern.</Rmakefinal>
+  <Rjoinpttn type="string">Request for join pattern.</Rjoinpttn>
+  <Rdeparture type="string">Leaving airport.</Rdeparture>
+  <Rland type="string">Requesting for landing.</Rland>
+  <Rapp type="string">Requesting for approach.</Rapp>
+
 <!-- # Others: -->  
+  <bye type="string">Have a good fly. Bye. </bye> 
   <report type="string">Report your position. </report> 
   <none type="string">I do not understand. </none> 
-  
-<!-- # Replacements: -->  
-  <replace type="string">Runwaide:Runway</replace> 
-  <replace type="string">Winnded:Wind</replace> 
   
 </PropertyList>

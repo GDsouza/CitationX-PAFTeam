@@ -94,7 +94,9 @@
     <type>select</type>
     <object-name>To-flag</object-name>
     <condition>
-      <property>instrumentation/nav/to-flag</property>
+      <not>
+        <property>instrumentation/nav/from-flag</property>
+      </not>
     </condition>      
   </animation>  
   

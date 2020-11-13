@@ -156,7 +156,7 @@ var Electrical = {
   }, # end of listen
 
   load_components : func {
-    var file = getprop("/sim/fg-aircraft")~'/CitationX/Nasal/System_init/elec_components.nas';
+    var file = getprop("/sim/aircraft-dir")~"/Nasal/System_init/elec_components.nas";
     io.load_nasal(file,"Elec");
     Elec.components();
   }, # end of load_components
