@@ -1,12 +1,28 @@
-# **              atc_tools.nas  v.: 2.2                 **
-# **          by rleibner (rleibner@gmail.com)           **
-# *********************************************************
+# **     atc_tools.nas  v.: 2.2                 **
+# **   by rleibner (rleibner@gmail.com)         **
+# ** Modified by C. Le Moigne (clm76) nov 2020  **
+# ************************************************
 #         This file is part of FlightGear.
 # 
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or any later version.
+
+var fs = nil;
+var info = nil;
+var j = nil;
+var k = nil;
+var lenth = nil;
+var out = nil;
+var prop = nil;
+var r = nil;
+var repl = nil;
+var s = nil;
+var strg = nil;
+var tag = nil;
+var text_w = nil;
+var vec = nil;
 
 # **** point func. **************************
 var pnt = func(str) {
@@ -18,7 +34,7 @@ var pnt = func(str) {
 # used to spell <str> numbers forced to<dig> digits. (dig=0 means no force). 
 var spell = func(str, dig) {
   if(dig>0 and size(str)<dig) str = right("000000" ~str ,dig);
-  var s = split("",str);
+  s = split("",str);
   for(var i=0;i<size(s);i=i+1) {
   # ~ if(streq(s[i],"."))  s[i]="point" ;
   }
@@ -27,12 +43,12 @@ var spell = func(str, dig) {
       
 # **** alpha func. *****************************
 var alpha = func(str) {
-  var repl = {A:"Alpha", B:"Bravo", C:"Charlie", D:"Delta", E:"Echo", F:"Foxtrot",
-             G:"Golf", H:"Hotel", I:"India", J:"Juliet", K:"Kilo", L:"Lima", M:"Mike",
-             N:"November", O:"Oscar", P:"Papa",Q:"Quebec", R:"Romeo", S:"Sierra", 
-             T:"Tango", U:"Uniform", V:"Victor", W:"Whiskey", X:"X-ray", Y:"Yanki",                Z:"Zulu"};
+  repl = {A:"Alpha", B:"Bravo", C:"Charlie", D:"Delta", E:"Echo", F:"Foxtrot",
+          G:"Golf", H:"Hotel", I:"India", J:"Juliet", K:"Kilo", L:"Lima", M:"Mike",
+          N:"November", O:"Oscar", P:"Papa",Q:"Quebec", R:"Romeo", S:"Sierra", 
+          T:"Tango", U:"Uniform", V:"Victor", W:"Whiskey", X:"X-ray", Y:"Yanki",                  Z:"Zulu"};
   
-  var s = "";
+  s = "";
   for(var i=0;i<size(str);i=i+1) {
     if(str[i]<91 and str[i]>64) s ~=repl[substr(str,i,1)] ~" ";   # Translate only capital letters  
     if(str[i]<58 and str[i]>47) s ~=substr(str,i,1) ~" ";   # and digits  
@@ -48,9 +64,9 @@ var isEven = func(n) {
 
 # **** getfreqs func. *****************************
 var getfreqs = func(apt) { # apt may be an airportinfo() ghost, an ICAO or any other parm accepted by airportinfo() .
-  var prop = ["twr","gnd","app","dep"];
+  prop = ["twr","gnd","app","dep"];
   foreach (var p; prop)  setprop("/satc/freqs/"~p, 0);
-  var info =(typeof(apt)=="ghost")? apt : airportinfo(apt);
+  info =(typeof(apt)=="ghost")? apt : airportinfo(apt);
   foreach (var hash; info.comms()) {
     if(!getprop("/satc/freqs/"~string.lc(split(" ",hash.ident)[-1]))) {
      setprop("/satc/freqs/" ~string.lc(split(" ",hash.ident)[-1]),num(sprintf("%.3f",hash.frequency))); 
@@ -79,14 +95,14 @@ var getfreqs = func(apt) { # apt may be an airportinfo() ghost, an ICAO or any o
 
 # **** capit func. *****************************
 var capit = func(str) { # Rtrim 'TWR', 'APP',etc. and Capitalize words.
-  var len = size(str) - 4;
-  var out = str;
+  lenth = size(str) - 4;
+  out = str;
   if(string.match(str,"*APP-DEP") or string.match(str,"*DEP-APP"))  
-     out = left(str,len-4);
+     out = left(str,lenth-4);
   if(string.match(str,"*TWR") or string.match(str,"*GND") or string.match(str,"*APP")
-     or string.match(str,"*DEP")) out = left(str,len);
+     or string.match(str,"*DEP")) out = left(str,lenth);
   out = string.lc(out);
-  var vec = split(" ",out);
+  vec = split(" ",out);
   for(var i=0;i<size(vec);i=i+1) 
     vec[i] = string.uc(left(vec[i],1)) ~substr(vec[i],1);
   return string.join(" ",vec);
@@ -95,22 +111,22 @@ var capit = func(str) { # Rtrim 'TWR', 'APP',etc. and Capitalize words.
 # **** join func. Joins /satc/phrases/key[] props ************
 var join = func(key="none", p="") {
   if(string.match(key,"*[][]?[][]")) {
-    var j = num(substr(key,-2,1));
+    j = num(substr(key,-2,1));
     key = left(key,size(key)-3);
-  } else var j = 0;
-  var fs = props.globals.getNode("/satc/phrases").getChildren(key);
-  var str = "";
-  var i = 0;
+  } else j = 0;
+  fs = props.globals.getNode("/satc/phrases").getChildren(key);
+  strg = "";
+  k = 0;
   foreach (var f; fs) {
-    if(i>=j){
-     str = f.getValue();
-     if(str==nil or str=="") continue;
-     if(left(str,1)=="%") str=getprop(string.trim(str, 0, func(c) c == `%` or c == ` `));
-     str = sprintf(str); # double-->string
-     if(left(str,1)=="~") str= " " ~join(right(str,size(str)-1));
-     p ~= str;
+    if(k>=j){
+     strg = f.getValue();
+     if(strg==nil or strg=="") continue;
+     if(left(strg,1)=="%") strg=getprop(string.trim(strg, 0, func(c) c == `%` or c == ` `));
+     strg = sprintf(strg); # double-->string
+     if(left(strg,1)=="~") strg= " " ~join(right(strg,size(strg)-1));
+     p ~= strg;
     }
-    i +=1;
+    k+=1;
   }
   return p;    
 }    
@@ -124,7 +140,7 @@ var say = func(key) {
 
 # ***********************************
 var pronounce = func(msg) {
-  var r="";
+  r = "";
   foreach(var f ; split(". ", msg)){
     if(string.match(f,"*[0-9].[0-9]*")) f=string.replace(f,'.',' point ');
     r ~= f~". ";
@@ -136,20 +152,18 @@ var pronounce = func(msg) {
 }
 
 # ***********************************
-var speach = func(who,text,secs,color=YELLOW) {
+var speach = func(who,text,secs,color=WHITE) {
   window.fg = color;
+#  text_w = who == "pilot" ? "Pilot -> "~text: "Twr -> "~text; 
   window.write(string.replace(text,"..", "."));
-# print(size(text)~" ch: "~text);
   setprop("/sim/sound/voices/"~who, pronounce(text));
 }
 # ***********************************
 var acknowledge = func(received,mycs,qnh) {
-  var tag = "A"~received;
-  if(join(tag) ==nil) speach("pilot","Roger. "~getprop("/satc/callsign-fmt"),3,GREEN);
-  else speach("pilot",join(tag)~". "~qnh~mycs,3,GREEN);
+  tag = "A"~received;
+  if(join(tag) ==nil) speach("pilot","Roger. "~getprop("/satc/callsign-fmt"),4,DKRED);
+  else speach("pilot",join(tag)~". "~qnh~mycs,4,DKRED);
   return 
 }
-
-#print("atc_tools loaded."); 
 
 

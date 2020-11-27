@@ -463,10 +463,58 @@
   </animation>
 
   <animation>
+      <type>translate</type>
+      <object-name>Slat-L</object-name>
+      <property>surface-positions/flap-pos-norm</property>
+      <interpolation>
+          <entry>
+              <ind>0.0</ind><dep>0.0</dep>
+          </entry>
+          <entry>
+              <ind>0.0428</ind><dep>0.150</dep>
+          </entry>
+      </interpolation>
+      <axis>
+          <x>-1</x>
+          <y>0</y>
+          <z>0</z>
+      </axis>
+  </animation>
+
+  <animation>
+      <type>translate</type>
+      <object-name>Slat-R</object-name>
+      <property>surface-positions/flap-pos-norm</property>
+      <interpolation>
+          <entry>
+              <ind>0.0</ind><dep>0.0</dep>
+          </entry>
+          <entry>
+              <ind>0.0428</ind><dep>0.150</dep>
+          </entry>
+      </interpolation>
+      <axis>
+          <x>-1</x>
+          <y>0</y>
+          <z>0</z>
+      </axis>
+  </animation>
+
+  <animation>
       <type>rotate</type>
       <object-name>LHFlap0</object-name>
       <property>surface-positions/flap-pos-norm</property>
-      <factor>35</factor>
+      <interpolation>
+          <entry>
+              <ind>0.0</ind><dep>0.0</dep>
+          </entry>
+          <entry>
+              <ind>0.0428</ind><dep>0.0</dep>
+          </entry>
+          <entry>
+              <ind>1</ind><dep>35</dep>
+          </entry>
+      </interpolation>
       <axis>
           <x1-m>1.120</x1-m>
           <y1-m>-3.203</y1-m>
@@ -481,7 +529,17 @@
       <type>rotate</type>
       <object-name>RHFlap0</object-name>
       <property>surface-positions/flap-pos-norm</property>
-      <factor>-35</factor>
+      <interpolation>
+          <entry>
+              <ind>0.0</ind><dep>0.0</dep>
+          </entry>
+          <entry>
+              <ind>0.0428</ind><dep>0.0</dep>
+          </entry>
+          <entry>
+              <ind>1</ind><dep>-35</dep>
+          </entry>
+      </interpolation>
       <axis>
           <x1-m>1.120</x1-m>
           <y1-m>3.203</y1-m>
@@ -496,7 +554,17 @@
       <type>rotate</type>
       <object-name>LHFlap1</object-name>
       <property>surface-positions/flap-pos-norm</property>
-      <factor>35</factor>
+      <interpolation>
+          <entry>
+              <ind>0.0</ind><dep>0.0</dep>
+          </entry>
+          <entry>
+              <ind>0.0428</ind><dep>0.0</dep>
+          </entry>
+          <entry>
+              <ind>1</ind><dep>35</dep>
+          </entry>
+      </interpolation>
       <axis>
           <x1-m>3.232</x1-m>
           <y1-m>-6.890</y1-m>
@@ -511,7 +579,17 @@
       <type>rotate</type>
       <object-name>RHFlap1</object-name>
       <property>surface-positions/flap-pos-norm</property>
-      <factor>-35</factor>
+      <interpolation>
+          <entry>
+              <ind>0.0</ind><dep>0.0</dep>
+          </entry>
+          <entry>
+              <ind>0.0428</ind><dep>0.0</dep>
+          </entry>
+          <entry>
+              <ind>1</ind><dep>-35</dep>
+          </entry>
+      </interpolation>
       <axis>
           <x1-m>3.232</x1-m>
           <y1-m>6.890</y1-m>

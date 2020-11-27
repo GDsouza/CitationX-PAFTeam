@@ -107,7 +107,7 @@ along with FlightGear.  If not, see <http://www.gnu.org/licenses/>.
   <takeoff type="string">%/satc/wind-speed-fmt</takeoff>
   <takeoff type="string"> knots. Runway </takeoff>
   <takeoff type="string">%/satc/rwy-in-use</takeoff>
-  <takeoff type="string">. Cleared to take off.</takeoff>
+  <takeoff type="string">. Cleared to take off .</takeoff>
   
 <!-- # Taxi: -->  
   <taxi2rwy type="string">Taxi to holding point runway </taxi2rwy>

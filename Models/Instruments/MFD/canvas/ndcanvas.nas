@@ -1,14 +1,12 @@
 ##
 ##### Citation X - Canvas NdDisplay #####
-##### Christian Le Moigne (clm76) - oct 2016 - Nov 2018 ###
+##### Christian Le Moigne (clm76) - oct 2016 - Nov 2018 - nov 2020 ###
 
 var nasal_dir = getprop("/sim/aircraft-dir") ~ "/Models/Instruments/MFD/canvas";
 io.load_nasal(nasal_dir ~ '/navmap.nas', "fgMap");
 io.include('init.nas');
 
-var clk_hour = "sim/time/real/hour";
-var clk_min = "sim/time/real/minute";
-var clk_sec = "sim/time/real/second";
+var clk_gmt = "sim/time/gmt-string";
 var chrono = ["instrumentation/mfd/chrono",
                 "instrumentation/mfd[1]/chrono"];
 var wx = ["instrumentation/mfd/range-nm","instrumentation/mfd[1]/range-nm"];
@@ -182,7 +180,7 @@ var va = "controls/flight/va";
 		}, # end of listen
 
 		update: func(x) {
-			me.text.clock.setText(sprintf("%02d",getprop(clk_hour))~":"~ sprintf("%02d",getprop(clk_min))~ ":"~sprintf("%02d",getprop(clk_sec)));
+			me.text.clock.setText(getprop(clk_gmt));
 			if (getprop(etx[x])!=0) {
         chron = int(getprop(chrono[x]));
         chronS = math.fmod(chron,60);

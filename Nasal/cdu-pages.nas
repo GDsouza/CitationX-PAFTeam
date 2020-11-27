@@ -36,9 +36,13 @@ var pcd_activ = ["instrumentation/cdu/pcdr/active",
                  "instrumentation/cdu[1]/pcdr/active"];
 var pcd_path = ["instrumentation/cdu/pcdr/",
                  "instrumentation/cdu[1]/pcdr/"];
+var perf_confd = ["instrumentation/cdu/perf-confirm",
+                 "instrumentation/cdu[1]/perf-confirm"];
 var pos_init = ["instrumentation/cdu/pos-init",
                 "instrumentation/cdu[1]/pos-init"];
 var route_path = "autopilot/route-manager/route/wp[";
+var trs_alt = ["instrumentation/cdu/trans-alt",
+                "instrumentation/cdu[1]/trans-alt"];
 var velocity = "velocities/groundspeed-kt";
 
 var _alm = nil;
@@ -112,8 +116,12 @@ var pcd_turn = nil;
 var pcd_spd = nil;
 var quad = nil;
 var spd = nil;
+var titl = nil;
+var trans_alt = nil;
 var Wcarg = nil;
 var Wcrew = nil;
+var wind_spd_hd = nil;
+var wind_spd_kt = nil;
 var Wfuel = nil;
 var Wpass = nil;
 var xfile = nil;
@@ -772,18 +780,19 @@ var cduDsp = {
   
   ### Performances Pages ###
   Prf : func(x) {
-    me.nrPage = substr(getprop(dsp[x]),9,1);
+    me.addPage = me.nrPage = substr(getprop(dsp[x]),9,1);
     if (me.nrPage > getprop(nbpage[x])) me.nrPage = getprop(nbpage[x]);
+    titl = getprop(perf_confd[x]) ? "DATA " : "INIT ";
+    titl = me.nrPage~" / "~getprop(nbpage[x]);
     if (me.nrPage == 1) {
       me.Raz_lines(x);
-      me.line.title.setText("PERFORMANCE INIT "~me.nrPage~" / "~getprop(nbpage[x]));
+      me.line.title.setText("PERFORMANCE INIT "~titl);
 		  me.line.l3.setText("  ACFT TYPE");
 		  me.line.l4.setText(string.uc(getprop("sim/description")));
 		  me.line.l7.setText("< FLT PLAN");
       me.line.r3.setText("TAIL #").setColor(me.white);
       me.line.r4r.setText(string.uc(getprop("sim/multiplay/callsign")))
                  .setColor(me.green);
-		  me.line.r7.setText("NEXT PAGE >");
     }
     if (me.nrPage == 2) {
 		  ClimbSpeed_kt = sprintf("%.0f",getprop("autopilot/settings/climb-speed-kt"));
@@ -795,7 +804,7 @@ var cduDsp = {
 		  CruiseSpeed_mc = sprintf("%.2f",getprop("autopilot/settings/cruise-speed-mc"));
 		  Cruise_alt = getprop("autopilot/settings/asel");
       me.Raz_lines(x);
-      me.line.title.setText("PERFORMANCE INIT "~me.nrPage~" / "~getprop(nbpage[x]));
+      me.line.title.setText("PERFORMANCE INIT "~titl);
       me.line.l1.setText(" CLIMB");
       me.line.l2.setText(ClimbSpeed_kt~" / "~ClimbSpeed_mc);
       me.line.l3.setText(" CRUISE");
@@ -807,33 +816,34 @@ var cduDsp = {
 			me.line.r4r.setText("FL "~Cruise_alt).setColor(me.green);
     }
     if (me.nrPage == 3) {
-		  dep_spd = sprintf("%i",getprop("autopilot/settings/dep-speed-kt"));
-		  Agl = sprintf("%i",getprop("autopilot/settings/dep-agl-limit-ft"));
-		  Nm = sprintf("%.1f",getprop("autopilot/settings/dep-limit-nm"));
       me.Raz_lines(x);
-      me.line.title.setText("DEPARTURE SPEED 1 / 1");
-      me.line.l1.setText(" SPEED LIMIT");
-      me.line.l2.setText(dep_spd);
-      me.line.l3.setText(" AGL  <------LIMIT ------> NM");
-      me.line.l4.setText(Agl);
-			me.line.l7.setText("< APP SPD");
-			me.line.r4r.setText(Nm).setColor(me.green);
-		  me.line.r7.setText("RETURN >");
+      me.line.title.setText("PERFORMANCE INIT "~titl);
+      me.line.l1.setText(" STEP INCREMENT");
+      me.line.l2.setText("0");
+      me.line.l3.setText(" FUEL RESERVE");
+      me.line.l4.setText("NBAA");
+      me.line.l5.setText(" TO / LDG FUEL");
+      me.line.l6.setText("400 / 200 LB");
+#      me.line.r4r.setText("OR >").setColor(me.green);
     }
     if (me.nrPage == 4) {
-		  AppSpeed5 = sprintf("%i",getprop("autopilot/settings/app5-speed-kt"));
-		  AppSpeed15 = sprintf("%i",getprop("autopilot/settings/app15-speed-kt"));
-		  AppSpeed35 = sprintf("%i",getprop("autopilot/settings/app35-speed-kt"));
       me.Raz_lines(x);
-      me.line.title.setText("APPROACH SPEED 1 / 1");
-      me.line.l1.setText(" FLAPS 5");
-      me.line.l2.setText(AppSpeed5);
-      me.line.l3.setText(" FLAPS 15");
-      me.line.l4.setText(AppSpeed15);
-      me.line.l5.setText(" FLAPS 35");
-      me.line.l6.setText(AppSpeed35);
-			me.line.l7.setText("< NEXT PAGE");
-		  me.line.r7.setText("RETURN >");
+      wind_spd_kt = sprintf("%.0f",getprop("environment/wind-speed-kt"));
+      wind_spd_hd = sprintf(" %3i",getprop("environment/wind-from-heading-deg"));
+      trans_alt = sprintf("% .0f",getprop(trs_alt[x]));
+      me.line.title.setText("PERFORMANCE INIT "~titl);
+      me.line.l1.setText(" TRANS ALT");
+      me.line.l2.setText(trans_alt);
+      me.line.l3.setText(" INIT CRZ ALT");
+      me.line.l4.setText(" OPTIMUM");
+      me.line.l5.setText(" CRZ WINDS AT ALTITUDE");
+      me.line.l6.setText(wind_spd_hd~" / "~wind_spd_kt);
+			me.line.r1.setText("SPD/ALT LIM").setColor(me.white);
+      me.line.r2r.setText("260 / 7800 ").setColor(me.green);
+      me.line.r3.setText("ISA DEV  ").setColor(me.white);
+      me.line.r4r.setText("+0 °C ").setColor(me.green);
+      me.line.r6r.setText("FL "~Cruise_alt~" ").setColor(me.green);
+#		  me.line.r7.setText("NEXT PAGE >");
     }
     if (me.nrPage == 5) {
 		  Wfuel = sprintf("%3i", math.ceil(getprop("consumables/fuel/total-fuel-lbs")));
@@ -841,7 +851,7 @@ var cduDsp = {
 		  Wpass = getprop("sim/weight[1]/weight-lb");
 		  Wcarg = getprop("sim/weight[2]/weight-lb");
       me.Raz_lines(x);
-      me.line.title.setText("PERFORMANCE INIT "~me.nrPage~" / "~getprop(nbpage[x]));
+      me.line.title.setText("PERFORMANCE INIT "~titl);
       me.line.l1.setText(" BOW");
       me.line.l2.setText("21700");
       me.line.l3.setText(" FUEL");
@@ -856,6 +866,36 @@ var cduDsp = {
       me.line.r5.setText("GROSS WT  ").setColor(me.white);
       me.line.r6r.setText(sprintf("%3i",21700 + Wfuel + Wcrew + Wpass + Wcarg)~"  ")
                  .setColor(me.green);
+#		  me.line.r7.setText(getprop(perf_confd[x]) ? "RETURN > ":"CONFIRM INIT >");
+		  me.line.r7.setText("RETURN >");
+    }
+### Additional pages ###
+    if (me.addPage == 6) {
+		  dep_spd = sprintf("%i",getprop("autopilot/settings/dep-speed-kt"));
+		  Agl = sprintf("%i",getprop("autopilot/settings/dep-agl-limit-ft"));
+		  Nm = sprintf("%.1f",getprop("autopilot/settings/dep-limit-nm"));
+      me.Raz_lines(x);
+      me.line.title.setText("DEPARTURE SPEED 1 / 1");
+      me.line.l1.setText(" SPEED LIMIT");
+      me.line.l2.setText(dep_spd);
+      me.line.l3.setText(" AGL  <------LIMIT ------> NM");
+      me.line.l4.setText(Agl);
+			me.line.l7.setText("< APP SPD");
+			me.line.r4r.setText(Nm).setColor(me.green);
+		  me.line.r7.setText("RETURN >");
+    }
+    if (me.addPage == 7) {
+		  AppSpeed5 = sprintf("%i",getprop("autopilot/settings/app5-speed-kt"));
+		  AppSpeed15 = sprintf("%i",getprop("autopilot/settings/app15-speed-kt"));
+		  AppSpeed35 = sprintf("%i",getprop("autopilot/settings/app35-speed-kt"));
+      me.Raz_lines(x);
+      me.line.title.setText("APPROACH SPEED  1 / 1");
+      me.line.l1.setText(" FLAPS 5");
+      me.line.l2.setText(AppSpeed5);
+      me.line.l3.setText(" FLAPS 15");
+      me.line.l4.setText(AppSpeed15);
+      me.line.l5.setText(" FLAPS 35");
+      me.line.l6.setText(AppSpeed35);
 		  me.line.r7.setText("RETURN >");
     }
   }, # end of Prf

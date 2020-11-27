@@ -15,8 +15,12 @@ var ApVarmed = "/autopilot/locks/altitude-arm";
 var Asel = "/autopilot/settings/asel";
 var Baro = "/instrumentation/altimeter/setting-inhg";
 var BaroMode = "/instrumentation/efis/baro-hpa";
-var CrsOffset = "/autopilot/internal/course-offset";
-var CrsDefl = "/autopilot/internal/course-deflection";
+var crsDefl_fms = "autopilot/internal/course-deflection";
+var crsDefl_nav = ["instrumentation/nav/heading-needle-deflection",
+               "instrumentation/nav[1]/heading-needle-deflection"];
+var crsOffset_fms = "autopilot/internal/course-offset";
+var crsOffset_nav = ["instrumentation/pfd/course-offset",
+                  "instrumentation/pfd[1]/course-offset"];
 var DmeDst = ["/instrumentation/dme/indicated-distance-nm",
               "/instrumentation/dme[1]/indicated-distance-nm"];
 var DmeID = ["/instrumentation/dme/dme-id",
@@ -48,6 +52,8 @@ var MinimumsValue = "/autopilot/settings/minimums";
 var NavFrom = "/autopilot/locks/from-flag";
 var NavDist = "/autopilot/internal/nav-distance";
 var NavId = "/autopilot/internal/nav-id";
+var nav_inRange = ["instrumentation/nav/in-range",
+                   "instrumentation/nav[1]/in-range"];
 var Nav1Ptr = "/autopilot/internal/nav1-pointer";
 var Nav2Ptr = "/autopilot/internal/nav2-pointer";
 var NavPtr1 = "/instrumentation/sc840/nav1ptr";
@@ -86,6 +92,7 @@ var alt = nil;
 var alt_corr = nil;
 var alt_diff = nil;
 var alt_trend = nil;
+var crs_defl = nil;
 var crs_offset = nil;
 var disp_cont = [nil,nil];
 var dme_ind = nil;
@@ -97,6 +104,7 @@ var ias_corr = nil;
 var loc_defl = nil;
 var min_diff = nil;
 var n = nil;
+var nav_type = nil;
 var pfd_hsi = [0,0];
 var spd_trend = nil;
 var v_dis = nil;
@@ -175,12 +183,12 @@ var PFDDisplay = {
     foreach(var i;m.Spd_keys) m.Spd[i] = m.pfd.getElementById(i);
 
     m.Hsi = {};
-    m.Hsi_keys = ["Rose","Ptr1","Ptr2","CrsDeflect","CrsNeedle",
+    m.Hsi_keys = ["Rose","Ptr1","Ptr2","CrsDeflect","CrsNeedle","scale",
                   "HdgBug","To","From","COMPASS","Lh","Lb","Fl"];
     foreach(var i;m.Hsi_keys) m.Hsi[i] = m.pfd.getElementById(i);
 
     m.Hsi1 = {};
-    m.Hsi1_keys = ["Rose1","Ptr11","Ptr21","CrsDeflect1","CrsNeedle1",
+    m.Hsi1_keys = ["Rose1","Ptr11","Ptr21","CrsDeflect1","CrsNeedle1","scale1",
                   "HdgBug1","To1","From1","COMPASS1","ArrowL","ArrowR",
                   "Lh1","Lb1","Fl1"];
     foreach(var i;m.Hsi1_keys) m.Hsi1[i] = m.pfd.getElementById(i);
@@ -244,6 +252,8 @@ var PFDDisplay = {
     me.atthdg_enabled = 1;
     me.atthdgAux_enabled = 1;
     me.madc_enabled = 1;
+
+    nav_dev = getprop("autopilot/internal/nav1-course-error");
 
     return m;
   }, # end of new
@@ -326,6 +336,7 @@ var PFDDisplay = {
 
 		setlistener(NavType, func(n) {
       me.Txt.NavType.setText(n.getValue());
+      nav_type = left(n.getValue(),3) == "FMS" ? 1 : 0;
     },1,0);
 
 		setlistener(NavId, func(n) {
@@ -391,16 +402,15 @@ var PFDDisplay = {
       }
     },1,0);
 
-    setlistener(PfdSel, func(n) {
+    setlistener(PfdSel,func(n) {
       me.pfdSelL.setVisible(!n.getValue());
       me.pfdSelR.setVisible(n.getValue());
     },1,0);
 
-    setlistener(sgTest[x], func(n) {
+    setlistener(sgTest[x],func(n) {
       me.Txt.ApStat.setText("AP").setVisible(n.getValue());
       me.Fail.MadcFail.setVisible(n.getValue());
     },0,0);
-
   }, # end of listen
 
   update_PFD : func(x) {
@@ -487,7 +497,7 @@ var PFDDisplay = {
         gs_defl = math.clamp(getprop(GsDefl),-1.25,1.25);
         me.Hor.GsIls.setTranslation(0,gs_defl* -115);
         me.Hor.LocScale.show();
-        loc_defl = math.clamp(getprop(CrsDefl), -1.25, 1.25);
+        loc_defl = math.clamp(getprop(crsDefl_nav[x]), -1.25, 1.25);
         me.Hor.LocDefl.setTranslation(loc_defl * 90, 0);
       } else {
         me.Hor.GsScale.setVisible(getprop(sgTest[x]));
@@ -575,7 +585,9 @@ var PFDDisplay = {
   update_HSI : func(x) {
     hdg = getprop(Heading) or 0;
     hdg_bug = getprop(HeadingBug) or 0;
-    crs_offset = getprop(CrsOffset) or 0;
+    crs_offset = nav_type ? getprop(crsOffset_fms) : getprop(crsOffset_nav[x]) or 0;
+    if (nav_type) crs_defl = getprop(crsDefl_fms);
+    else crs_defl = getprop(nav_inRange[x]) ? getprop(crsDefl_nav[x]) : -10;
     me.Txt.Ptr1Txt.setText(me.Nav1Ptr[getprop(NavPtr1)])
                   .setVisible(disp_cont[x]);
     me.Txt.Ptr1Ind.setVisible(getprop(NavPtr1) and disp_cont[x]);
@@ -590,7 +602,8 @@ var PFDDisplay = {
         me.Hsi.Rose.setRotation(-hdg * D2R);
         me.Hsi.HdgBug.setRotation(hdg_bug * D2R);
         me.Hsi.CrsNeedle.setRotation(crs_offset * D2R).show();
-        me.Hsi.CrsDeflect.setTranslation(getprop(CrsDefl) * 10.5,0);
+        me.Hsi.scale.setRotation(crs_offset * D2R).show();
+        me.Hsi.CrsDeflect.setTranslation(crs_defl * 10.5,0);
         ### Vor Adf Fms ###
         me.Hsi.Ptr1.setRotation((getprop(Nav1Ptr) or 0) * D2R);
         me.Hsi.Ptr2.setRotation((getprop(Nav2Ptr) or 0) * D2R);
@@ -598,7 +611,8 @@ var PFDDisplay = {
         me.Hsi1.Rose1.setRotation(-hdg * D2R);
         me.Hsi1.HdgBug1.setRotation(hdg_bug * D2R);
         me.Hsi1.CrsNeedle1.setRotation(crs_offset * D2R).show();
-        me.Hsi1.CrsDeflect1.setTranslation(getprop(CrsDefl) * 10.5,0);
+        me.Hsi1.scale1.setRotation(crs_offset * D2R).show();
+        me.Hsi1.CrsDeflect1.setTranslation(crs_defl * 10.5,0);
         me.Hsi1.ArrowL.setVisible(hdg_bug < -53);
         me.Hsi1.ArrowR.setVisible(hdg_bug > 53);
         ### Vor Adf Fms ###

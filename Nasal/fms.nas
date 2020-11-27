@@ -9,6 +9,8 @@ var altWP_curr = nil;
 var altWP_next = nil;
 var apr_set = 0;
 var asel = nil;
+var cr_kt = nil;
+var cr_mc = nil;
 var curr_wp = nil;
 var desc_flag = 0;
 var dist = nil; # for fps limit function
@@ -256,7 +258,7 @@ var FMS = {
 				} else { 
 					v = 6.25/10000000*math.pow(asel,2)+0.039225*asel + 647;
 				}
-				if (tod_dist < fp.getWP(i+1).distance_along_route 
+				if (tod_dist != nil and tod_dist < fp.getWP(i+1).distance_along_route 
             and flag_tod == 0 and tod_dist > v) {
           if (wp != nil) {
 					  fp.insertWP(wp,i+1);
@@ -450,10 +452,14 @@ var FMS = {
   }, # end of speed
 
 	cruise_spd : func {
+    cr_kt = getprop(cruise_kt);
+    cr_mc = getprop(cruise_mc);
 		if (getprop(alt_ind) <= 7800) vmo = 270;
 		if (getprop(alt_ind) > 7800 and getprop(alt_ind) < 30650) vmo = 350;
-		if (getprop(cruise_kt) >= vmo) setprop(tg_spd_kt,vmo-10);
-		if (getprop(cruise_mc) > mmo) setprop(tg_spd_mc,mmo-0.02);
+		if (cr_kt >= vmo) cr_kt = vmo-10;
+		if (cr_mc > mmo) cr_mc = mmo-0.02;
+    setprop(tg_spd_kt,cr_kt);
+    setprop(tg_spd_mc,cr_mc);
 	}, # end of cruise_spd
 
   fps_lim : func(v) {  ### Descent fps limit ###
