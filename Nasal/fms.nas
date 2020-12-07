@@ -15,6 +15,7 @@ var curr_wp = nil;
 var desc_flag = 0;
 var dist = nil; # for fps limit function
 var dist_b_tod = 4; # alarm distance before TOD
+var dist_dep = nil;
 var f_dist = nil;
 var flag_pcdr = 0;
 var flag_tod = nil;
@@ -165,10 +166,10 @@ var FMS = {
 			me.fpCalc();
 
       ### Aircraft pos ###
-			me.dist_dep = getprop(tot_dst)-getprop(dist_rem);
+			dist_dep = getprop(tot_dst)-getprop(dist_rem);
       ### Search Current Wp ###
 			for (var i=0;i<fp.getPlanSize()-1;i+=1) {
-        if (me.dist_dep < fp.getWP(i).distance_along_route) {
+        if (dist_dep < fp.getWP(i).distance_along_route) {
           curr_wp = i;
           break;
         }
@@ -301,10 +302,10 @@ var FMS = {
 
 	update : func {
 		if (getprop(fms)) {
-			me.dist_dep = getprop(tot_dst)-getprop(dist_rem);
+			dist_dep = getprop(tot_dst)-getprop(dist_rem);
 			setprop(cruise_alt,getprop(cr_asel)*100);
       curr_wp = fp.current;
-      if (!getprop(spd_ctrl)) me.speed();
+#      if (!getprop(spd_ctrl)) me.speed();
 
 				### Takeoff ###
 			if (getprop(lock_alt) == "VALT" and getprop(ap_stat) != "AP") {
@@ -347,7 +348,6 @@ var FMS = {
             
                 ### Switch FMS --> GS ###
           gs_climb = getprop("instrumentation/nav["~ind~"]/gs-rate-of-climb");
-          
           if (in_range) {
             set_tgAlt = getprop(dest_alt);
             if (!apr_set) {
@@ -355,7 +355,8 @@ var FMS = {
             }
             if (!lock_gs) {
               gs_calc = getprop(tg_climb);
-              if (abs(gs_climb - getprop(tg_climb)) <= 5 or getprop(dist_rem) < 9) lock_gs = 1;
+              if (abs(gs_climb - getprop(tg_climb)) <= 5 or getprop(dist_rem) < 9)
+                lock_gs = 1;
               else lock_gs = 0;
             } else gs_calc = gs_climb;
             setprop(tg_climb,gs_calc);
@@ -367,7 +368,7 @@ var FMS = {
             else if (getprop(dist_rem) < 9 and !tod) {
               fms_app = 1;
               set_tgAlt = getprop(dest_alt);             
-              me.fps_lim(1);
+              me.fpsLim(1);
             } else {
               fms_app = 0;
 
@@ -384,9 +385,13 @@ var FMS = {
                   set_tgAlt = math.round(lastWp_alt,100);
                 else set_tgAlt = math.round(v_alt.vector[curr_wp],100);
 				      } else set_tgAlt = math.round(v_tod[v_ind+2],100);
+              if (!getprop(spd_ctrl)) me.speed();
             }
           }
         }
+        if (getprop(flaps)==2) setprop(tg_spd_kt,getprop(app5_spd));
+        else if (getprop(flaps)==3) setprop(tg_spd_kt,getprop(app15_spd));
+        else if (getprop(flaps)==4) setprop(tg_spd_kt,getprop(app35_spd));
         setprop("autopilot/locks/fms-gs",lock_gs);
         setprop("autopilot/locks/fms-app",fms_app);
 			} # end of AP
@@ -397,9 +402,9 @@ var FMS = {
 
   speed : func {
 				      ### Departure ###
-    if (me.dist_dep < getprop(dep_lim) and getprop(alt_ind) < getprop(dep_agl)) {
+    if (dist_dep < getprop(dep_lim) and getprop(alt_ind) < getprop(dep_agl)) {
       setprop(tg_spd_kt,getprop(dep_spd));
-    } else if (me.dist_dep < 10) {
+    } else if (dist_dep < 10) {
 	      setprop(tg_spd_kt,getprop(climb_kt));
     } else {
             ### Holding patterns ###
@@ -414,7 +419,7 @@ var FMS = {
         if (tod) {
           setprop(tg_spd_mc,getprop(desc_mc));
           setprop(tg_spd_kt,getprop(desc_kt));
-          me.fps_lim(0);
+          me.fpsLim(0);
 	      } else {
 		      ### Climb ###
 		      if (getprop(alt_ind) < getprop(tg_alt)-100) {
@@ -423,32 +428,25 @@ var FMS = {
 			      ### Descent ###
 		      } else if (getprop(dist_rem) <= 20) {
 				      setprop(tg_spd_kt,200);
-              me.fps_lim(0);
+              me.fpsLim(0);
 		      }	else if (desc_flag){
 				      setprop(tg_spd_mc,getprop(desc_mc));
 				      setprop(tg_spd_kt,getprop(desc_kt));
-              me.fps_lim(0);
+              me.fpsLim(0);
 		      } else if (fp.getWP(curr_wp).wp_name == 'TOD' and fp.getWP(curr_wp).leg_distance < 8) {
               setprop(tg_spd_mc,getprop(tg_spd_mc));
 				      setprop(tg_spd_kt,getprop(tg_spd_kt));
 		      }	else {
 				      ### Cruise ###
 			      if (getprop(cruise_kt)) {
-				      if (fp.getWP(curr_wp).speed_cstr) {
+				      if (fp.getWP(curr_wp).speed_cstr)
                 setprop(cruise_kt,fp.getWP(curr_wp).speed_cstr);
-              }
               me.cruise_spd();
 			      }
 		      }	
         }
 	    }
     }
-    if (getprop(flaps)==2)	
-      setprop(tg_spd_kt,getprop(app5_spd));
-    else if (getprop(flaps)==3)
-  	  setprop(tg_spd_kt,getprop(app15_spd));
-    else if (getprop(flaps)==4)
-	    setprop(tg_spd_kt,getprop(app35_spd));
   }, # end of speed
 
 	cruise_spd : func {
@@ -462,7 +460,7 @@ var FMS = {
     setprop(tg_spd_mc,cr_mc);
 	}, # end of cruise_spd
 
-  fps_lim : func(v) {  ### Descent fps limit ###
+  fpsLim : func(v) {  ### Descent fps limit ###
     if (tod) dist = getprop(dist_rem)-v_tod[v_ind+1];
     else {
       if (v == 0) dist = getprop("autopilot/internal/nav-distance");
@@ -479,7 +477,7 @@ var FMS = {
     if (fps_limit > 0) fps_limit = -5;
     if (fps_limit < -40) me.fps_limit = -40;
     setprop(fps_lim,fps_limit);
-  }, # end of fps_lim
+  }, # end of fpsLim
 
 }; # end of FMS
 

@@ -44,14 +44,6 @@
     <debug>false</debug>
     <type>gain</type>
     <gain>1.0</gain>
-    <enable>
-      <condition>
-        <equals>
-          <property>autopilot/settings/nav-source</property>
-          <value>NAV2</value>
-        </equals>
-      </condition>
-    </enable>
     <input>
       <property>instrumentation/nav[1]/radials/target-auto-hdg-deg</property>
       <offset>
@@ -60,120 +52,6 @@
       </offset>
     </input>
     <output>autopilot/internal/nav2-heading-error-deg</output>
-    <period>
-      <min>-180</min>
-      <max>180</max>
-    </period>
-  </filter>
-
-  <filter>
-    <name>Course offset pfd-L</name>
-    <debug>false</debug>
-    <type>gain</type>
-    <gain>1.0</gain>
-    <enable>
-      <condition>
-        <or>
-          <equals>
-            <property>autopilot/settings/nav-source</property>
-              <value>NAV1</value>
-          </equals>
-          <equals>
-            <property>autopilot/settings/nav-source</property>
-              <value>NAV2</value>
-          </equals>
-        </or>
-      </condition>
-    </enable>
-    <input>
-      <condition>
-        <not-equals>
-          <property>autopilot/locks/heading</property>
-          <value>LOC</value>
-        </not-equals>
-      </condition>
-      <property>instrumentation/nav/radials/selected-deg</property>
-    </input>
-    <input>
-      <condition>
-        <equals>
-          <property>autopilot/locks/heading</property>
-          <value>LOC</value>
-        </equals>
-      </condition>
-      <property>autopilot/internal/nav1-course-error-deg</property>
-    </input>
-    <reference>
-      <condition>
-        <not-equals>
-          <property>autopilot/locks/heading</property>
-          <value>LOC</value>
-        </not-equals>
-      </condition>
-      <property>orientation/heading-magnetic-deg</property>
-    </reference>
-    <reference>
-      <condition>
-        <equals>
-          <property>autopilot/locks/heading</property>
-          <value>LOC</value>
-        </equals>
-      </condition>
-      <value>0</value>
-    </reference>
-    <output>
-      <property>instrumentation/pfd/course-offset</property>
-    </output>
-    <period>
-      <min>-180</min>
-      <max>180</max>
-    </period>
-  </filter>
-
-  <filter>
-    <name>Course offset pfd-R</name>
-    <debug>false</debug>
-    <type>gain</type>
-    <gain>1.0</gain>
-    <input>
-      <condition>
-        <not-equals>
-          <property>autopilot/locks/heading</property>
-          <value>LOC</value>
-        </not-equals>
-      </condition>
-      <property>instrumentation/nav[1]/radials/selected-deg</property>
-    </input>
-    <input>
-      <condition>
-        <equals>
-          <property>autopilot/locks/heading</property>
-          <value>LOC</value>
-        </equals>
-      </condition>
-      <property>autopilot/internal/nav2-course-error-deg</property>
-    </input>
-    <reference>
-      <condition>
-        <not-equals>
-          <property>autopilot/locks/heading</property>
-          <value>LOC</value>
-        </not-equals>
-      </condition>
-      <property>orientation/heading-magnetic-deg</property>
-    </reference>
-    <reference>
-      <condition>
-        <equals>
-          <property>autopilot/locks/heading</property>
-          <value>LOC</value>
-        </equals>
-      </condition>
-      <value>0</value>
-    </reference>
-    <output>
-      <property>instrumentation/pfd[1]/course-offset</property>
-    </output>
     <period>
       <min>-180</min>
       <max>180</max>
@@ -198,11 +76,11 @@
           <Kp>-1.5</Kp>
           <Ki>0.0</Ki>
           <min>
-              <property>autopilot/settings/bank-limit</property>
-              <scale>-1</scale>
+            <property>autopilot/settings/bank-limit</property>
+            <scale>-1</scale>
           </min>
           <max>
-              <property>autopilot/settings/bank-limit</property>
+            <property>autopilot/settings/bank-limit</property>
           </max>
       </config>
   </pi-simple-controller>
@@ -223,14 +101,9 @@
       		      <value>LOC</value>
               </equals>
             </or>
-            <not-equals>
-              <property>autopilot/settings/nav-source</property>
-              <value>FMS1</value>
-            </not-equals>
-            <not-equals>
-              <property>autopilot/settings/nav-source</property>
-              <value>FMS2</value>
-            </not-equals>
+            <not>
+              <property>autopilot/settings/fms</property>
+            </not>
           </and>
         </condition>
       </enable>
@@ -283,16 +156,7 @@
 	              <value>LOC</value>
               </equals>
             </or>
-            <or> 
-             <equals>
-                <property>autopilot/settings/nav-source</property>
-                <value>FMS1</value>
-              </equals>
-              <equals>
-                <property>autopilot/settings/nav-source</property>
-                <value>FMS2</value>
-              </equals>
-            </or>
+            <property>autopilot/settings/fms</property>
           </and>
         </condition>
       </enable>
@@ -464,14 +328,7 @@
               <property>autopilot/settings/nav-source</property>
               <value>NAV2</value>
             </equals>
-            <equals>
-              <property>autopilot/settings/nav-source</property>
-              <value>FMS1</value>
-            </equals>
-            <equals>
-              <property>autopilot/settings/nav-source</property>
-              <value>FMS2</value>
-            </equals>
+            <property>autopilot/settings/fms</property>
           </or>
         </and>
       </condition>

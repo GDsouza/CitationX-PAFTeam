@@ -224,7 +224,6 @@ var FD_set_mode = func(btn){
 			setprop(Vertical_arm,"");
 			if(Vmode!="VS"){
 				setprop(Vertical,"VS");
-        setprop(tg_climb,50);
 			} else set_pitch("PTCH");
     }
     if(btn == "stby"){
@@ -482,7 +481,9 @@ var update_nav = func {
       ind = (NAVSRC == "NAV1" ? 0 : 1);
       if(getprop("instrumentation/nav["~ind~"]/data-is-valid"))sgnl="VOR"~(ind+1);
       in_range = getprop("instrumentation/nav["~ind~"]/in-range");
-      setprop(gs_in_range,getprop("instrumentation/nav["~ind~"]/gs-in-range"));
+      if (getprop("instrumentation/nav/gs-in-range") 
+        or getprop("instrumentation/nav[1]/gs-in-range")) setprop(gs_in_range,1);
+      else setprop(gs_in_range,0);
       setprop("autopilot/internal/nav-id",getprop("instrumentation/nav["~ind~"]/nav-id") or "");
       if (getprop("autopilot/internal/nav-id") != "")
         dst = getprop("instrumentation/nav["~ind~"]/nav-distance") ;
@@ -493,18 +494,17 @@ var update_nav = func {
       if(getprop("instrumentation/nav["~ind~"]/has-gs"))sgnl="ILS"~(ind+1);
       setprop("autopilot/internal/nav-type",sgnl);
       if (getprop(gs_in_range) and dst <= 20) setprop("autopilot/internal/in-range",1);
-      setprop("autopilot/locks/from-flag",getprop("instrumentation/nav["~ind~"]/from-flag"));
     } else if(left(NAVSRC,3) == "FMS"){
       ind = (NAVSRC == "FMS1" ? 0 : 1);
       in_range = getprop("instrumentation/nav["~ind~"]/in-range");
       setprop("autopilot/internal/nav-type","FMS"~(ind+1));
-      setprop(gs_in_range,getprop("instrumentation/nav["~ind~"]/gs-in-range"));
+      if (getprop("instrumentation/nav/gs-in-range") 
+        or getprop("instrumentation/nav[1]/gs-in-range")) setprop(gs_in_range,1);
+      else setprop(gs_in_range,0);
       setprop("autopilot/internal/nav-distance",getprop("instrumentation/gps/wp/wp[1]/distance-nm"));
       setprop("autopilot/internal/nav-id",getprop("instrumentation/gps/wp/wp[1]/ID"));
-      setprop("autopilot/locks/from-flag",getprop("instrumentation/gps/wp/wp[1]/from-flag"));
       if (getprop(Fms)) {
         setprop("autopilot/internal/course-deflection",getprop("instrumentation/gps/cdi-deflection"));
-
 			  dist_rem = getprop("autopilot/route-manager/distance-remaining-nm");
 			  heading = getprop("orientation/heading-deg");
 			  geocoord = geo.aircraft_position();
@@ -521,7 +521,7 @@ var update_nav = func {
           fp.getWP(fp.current).wp_name == "*int03")) {
             crs_set = getprop("instrumentation/gps/wp/wp[1]/bearing-true-deg");
             crs_offset = geo.normdeg180(crs_set - heading);
-         } else { ### Turn anticipation ###
+        } else { ### Turn anticipation ###
           if (dist_rem <= 10 and !getprop(pcdr_active)) {
             dstCoeff -= 0.001;
             if (dstCoeff <= 0.20) dstCoeff = 0.20;
@@ -539,7 +539,7 @@ var update_nav = func {
 			      crs_set = geocoord.course_to(courseCoord);
           }
         }
-		    setprop("autopilot/internal/course-offset",crs_offset);
+        setprop("autopilot/internal/course-offset",crs_offset);
 		    setprop("autopilot/settings/selected-crs",int(crs_set));
 
         ### Wp change ###

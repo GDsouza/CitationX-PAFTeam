@@ -96,12 +96,12 @@ props.globals.initNode("autopilot/settings/tg-alt-ft",0,"DOUBLE");
 props.globals.initNode("autopilot/locks/alt-mach",0,"BOOL");
 props.globals.initNode("autopilot/locks/alm-tod",0,"BOOL");
 props.globals.initNode("autopilot/locks/alm-wp",0,"BOOL");
-props.globals.initNode("autopilot/locks/from-flag",0,"BOOL");
 props.globals.initNode("autopilot/locks/fms-gs",0,"BOOL");
 props.globals.initNode("autopilot/locks/fms-app",0,"BOOL");
 props.globals.initNode("autopilot/locks/speed-ctrl",0,"BOOL");
 props.globals.initNode("autopilot/locks/back-course",0,"BOOL");
 props.globals.initNode("autopilot/locks/to-ga",0,"BOOL");
+props.globals.initNode("autopilot/locks/pcdr-turn-active",0,"BOOL");
 props.globals.initNode("autopilot/internal/nav-ete","ETE 0+00","STRING");
 props.globals.initNode("autopilot/internal/pitch-bars","0","DOUBLE");
 
@@ -395,7 +395,7 @@ for(var n=0;n<2;n+=1) {
   props.globals.initNode("instrumentation/rmu/unit["~n~"]/mem-dsp",-1,"INT");
   props.globals.initNode("instrumentation/rmu/unit["~n~"]/mem-freq",0,"DOUBLE");
   props.globals.initNode("instrumentation/rmu/unit["~n~"]/mem-nav",0,"INT");
-  props.globals.initNode("instrumentation/rmu/unit["~n~"]/pge",0,"INT");
+  props.globals.initNode("instrumentation/rmu/unit["~n~"]/pge",0,"BOOL");
   props.globals.initNode("instrumentation/rmu/unit["~n~"]/selected",0,"INT");
   props.globals.initNode("instrumentation/rmu/unit["~n~"]/sto",0,"BOOL");
   props.globals.initNode("instrumentation/rmu/unit["~n~"]/swp1",0,"BOOL");

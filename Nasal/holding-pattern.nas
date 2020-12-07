@@ -148,7 +148,6 @@ var Hold = {
       setprop("autopilot/settings/selected-crs",course);
 	    setprop("autopilot/internal/course-offset",CourseError);
       setprop(crs_defl,getprop(cdi_defl));
-      setprop("autopilot/locks/from-flag",0);
     }
     # Check if Target is Reached
     if (pos_lat <= tg_lat + 0.0075 and pos_lat >= tg_lat - 0.0075 and pos_lon <= tg_lon + 0.0075 and pos_lon >= tg_lon - 0.0075) { 

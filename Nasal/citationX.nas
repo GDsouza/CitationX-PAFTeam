@@ -231,7 +231,7 @@ setlistener("/sim/crashed", func(n){
     if(n.getValue()){
       screen.log.write("Crashhhh!", 1.0, 0.0, 0.0);
 
-      # Instanteous silence...
+      # Instantaneous silence...
       Shutdown();
       setprop("engines/engine[1]/fan", 0);
       setprop("engines/engine[1]/turbine", 0);

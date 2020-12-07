@@ -265,7 +265,6 @@
 		  <visible>true</visible>
 		  <action>
 		    <button>0</button>
-		    <button>3</button>
 		    <repeatable>true</repeatable>
 				<interval-sec>0.1</interval-sec>
 		    <binding>
@@ -292,27 +291,6 @@
 						</script>
 			    </binding>
 				</hovered>
-    </animation>
-
-    <animation>
-		  <type>pick</type>
-		  <object-name>RCU.mode</object-name>
-		  <visible>true</visible>
-		  <action>
-		    <button>4</button>
-		    <repeatable>true</repeatable>
-				<interval-sec>0.1</interval-sec>
-		    <binding>
-          <command>property-cycle</command>
-					<property>instrumentation/rcu/mode</property>
-					<value>0</value>
-					<value>1</value>
-	      </binding>
-				<binding>
-				    <command>property-toggle</command>
-				    <property>sim/sound/click</property>
-				</binding>
-			</action>
     </animation>
 
     <animation>

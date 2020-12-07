@@ -251,8 +251,7 @@ var Warnings = {
 			  else if (me.xfer_L == 2)	append(me.msg_l2,"2CTR XFER OFF L");
 			  else if (me.xfer_R == 2) append(me.msg_l2,"2CTR XFER OFF R");
 
-			  if (me.speedbrake and me.cabin_alt < 500) 
-          append(me.msg_l2,"2SPEEDBRAKES");
+			  if (me.speedbrake and me.agl < 500) append(me.msg_l2,"2SPEEDBRAKES");
 
         if (!me.madc1 and !me.madc2) append(me.msg_l2,"2RAT PROB FAIL L-R");
 
@@ -395,6 +394,7 @@ var Warnings = {
 			  if (me.xfeed_L or me.xfeed_R) append(me.msg_l0,"0FUEL XFEED OPEN");
 			  if (me.grav_xflow) append(me.msg_l0,"0FUEL GRV XFLOW OPEN");
 			  if (me.ext_pwr) append(me.msg_l0,"0EXT POWER ON");
+			  if (me.speedbrake and me.agl >= 500) append(me.msg_l0,"0SPEEDBRAKES");
         if (me.ckpt_pac == 1 and me.cbn_pac == 1) append(me.msg_l0,"0PAC HI CKPT-CBN");
         else if (me.ckpt_pac == 1) append(me.msg_l0,"0PAC HI CKPT");
         else if (me.cbn_pac == 1) append(me.msg_l0,"0PAC HI CBN");

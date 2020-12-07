@@ -66,6 +66,8 @@
   <animation>
       <type>translate</type>
       <object-name>CRS.deflect</object-name>              
+      <object-name>To-flag</object-name>
+      <object-name>From-flag</object-name>
       <property>instrumentation/nav/heading-needle-deflection</property>
       <interpolation>
           <entry>
@@ -94,9 +96,7 @@
     <type>select</type>
     <object-name>To-flag</object-name>
     <condition>
-      <not>
-        <property>instrumentation/nav/from-flag</property>
-      </not>
+      <property>instrumentation/nav/to-flag</property>
     </condition>      
   </animation>  
   

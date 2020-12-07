@@ -17,10 +17,8 @@ var Baro = "/instrumentation/altimeter/setting-inhg";
 var BaroMode = "/instrumentation/efis/baro-hpa";
 var crsDefl_fms = "autopilot/internal/course-deflection";
 var crsDefl_nav = ["instrumentation/nav/heading-needle-deflection",
-               "instrumentation/nav[1]/heading-needle-deflection"];
-var crsOffset_fms = "autopilot/internal/course-offset";
-var crsOffset_nav = ["instrumentation/pfd/course-offset",
-                  "instrumentation/pfd[1]/course-offset"];
+                   "instrumentation/nav[1]/heading-needle-deflection"];
+var crsOffset = "autopilot/internal/course-offset";
 var DmeDst = ["/instrumentation/dme/indicated-distance-nm",
               "/instrumentation/dme[1]/indicated-distance-nm"];
 var DmeID = ["/instrumentation/dme/dme-id",
@@ -29,8 +27,10 @@ var DmeIR = ["/instrumentation/dme/in-range",
              "/instrumentation/dme[1]/in-range"];
 var dispCtrl = ["/systems/electrical/outputs/disp-cont1",
                 "/systems/electrical/outputs/disp-cont2"];
-var fms = "autopilot/settings/fms";
+var fmsSet = "autopilot/settings/fms";
 var FmsAltDsp = "/autopilot/settings/tg-alt-ft";
+var FromFlag = ["instrumentation/nav/from-flag",
+                 "instrumentation/nav[1]/from-flag"];
 var GsDefl = "/autopilot/internal/gs-deflection";
 var GsInRange = "/autopilot/internal/gs-in-range";
 var Hdg = "/autopilot/settings/heading-bug-deg";
@@ -41,7 +41,6 @@ var Iac = ["/systems/electrical/outputs/iac1",
            "/systems/electrical/outputs/iac2"];
 var Ias = "/velocities/airspeed-kt";
 var InRange = "/autopilot/internal/in-range";
-var LocDef = "/autopilot/internal/nav1-heading-error-deg";
 var Mach = "/velocities/mach";
 var Marker_i = "/instrumentation/marker-beacon/inner";
 var Marker_m = "/instrumentation/marker-beacon/middle";
@@ -49,7 +48,8 @@ var Marker_o = "/instrumentation/marker-beacon/outer";
 var MinDiff = "/instrumentation/pfd/minimum-diff";
 var MinimumsMode = "/autopilot/settings/minimums-mode";
 var MinimumsValue = "/autopilot/settings/minimums";
-var NavFrom = "/autopilot/locks/from-flag";
+var navErr = ["autopilot/internal/nav1-heading-error-deg",
+              "autopilot/internal/nav2-heading-error-deg"];
 var NavDist = "/autopilot/internal/nav-distance";
 var NavId = "/autopilot/internal/nav-id";
 var nav_inRange = ["instrumentation/nav/in-range",
@@ -62,6 +62,8 @@ var NavSrc = "/autopilot/settings/nav-source";
 var NavType = "/autopilot/internal/nav-type";
 var PfdHsi = ["/instrumentation/dc840/hsi",
               "/instrumentation/dc840[1]/hsi"];
+var pfdOffset = ["instrumentation/pfd/course-offset",
+                 "instrumentation/pfd[1]/course-offset"];
 var PfdSel = "instrumentation/pfd/madc";
 var PitchBars = "/autopilot/internal/pitch-bars";
 var PitchDeg = "/orientation/pitch-deg";
@@ -79,6 +81,8 @@ var SpdTgKt = "/autopilot/settings/target-speed-kt";
 var SpdTgMc = "/autopilot/settings/target-speed-mach";
 var SpdTrd = "/instrumentation/pfd/speed-trend-kt";
 var StallDiff = "/instrumentation/pfd/stall-diff";
+var ToFlag = ["instrumentation/nav/to-flag",
+                 "instrumentation/nav[1]/to-flag"];
 var V1 = "/controls/flight/v1";
 var V2 = "/controls/flight/v2";
 var VA = "/controls/flight/va";
@@ -96,6 +100,8 @@ var crs_defl = nil;
 var crs_offset = nil;
 var disp_cont = [nil,nil];
 var dme_ind = nil;
+var fms = 0;
+var from_flag = [0,0];
 var gs_defl = nil;
 var hdg = nil;
 var hdg_bug = nil;
@@ -104,9 +110,9 @@ var ias_corr = nil;
 var loc_defl = nil;
 var min_diff = nil;
 var n = nil;
-var nav_type = nil;
 var pfd_hsi = [0,0];
 var spd_trend = nil;
+var to_flag = [0,0];
 var v_dis = nil;
 var Vflaps = nil;
 var v_ind = nil;
@@ -291,6 +297,7 @@ var PFDDisplay = {
     },0,0);
 
       ##### Others #####
+
 		setlistener(MinimumsMode, func(n) {	
 			me.Alt.MinMode.setText(n.getValue());
 		},1,0);
@@ -324,19 +331,24 @@ var PFDDisplay = {
       }
 		},1,0);
 
-		setlistener(NavFrom, func(n) {
-      if (!pfd_hsi[x]) {
-        me.Hsi.To.setVisible(!n.getValue());
-        me.Hsi.From.setVisible(n.getValue());
-      } else {
-        me.Hsi1.To1.setVisible(!n.getValue());
-        me.Hsi1.From1.setVisible(n.getValue());
-      }
+    setlistener(fmsSet,func(n) {
+      fms = n.getValue();
+    },1,0);
+
+		setlistener(ToFlag[x], func(n) {
+      to_flag[x] = n.getValue();
+    },1,0);
+
+		setlistener(FromFlag[x], func(n) {
+      from_flag[x] = n.getValue();
+    },1,0);
+
+		setlistener(PfdHsi[x], func(n) {
+      pfd_hsi[x] = n.getValue();
     },1,0);
 
 		setlistener(NavType, func(n) {
       me.Txt.NavType.setText(n.getValue());
-      nav_type = left(n.getValue(),3) == "FMS" ? 1 : 0;
     },1,0);
 
 		setlistener(NavId, func(n) {
@@ -372,16 +384,12 @@ var PFDDisplay = {
       me.Txt.ApVarm.setText(n.getValue());
     },1,0);
 
-		setlistener(PfdHsi[x], func(n) {
-      pfd_hsi[x] = n.getValue();
-    },1,0);
-
 		setlistener(dispCtrl[x], func(n) {
       disp_cont[x] = n.getValue();
     },0,0);
 
 		setlistener(NavSrc, func(n) {
-      if (left(n.getValue(),3) != "FMS") {
+      if (!fms) {
         me.Hsi.CrsNeedle.setColor(me.COLORS.green);
         me.Hsi.Fl.setColorFill(me.COLORS.green);
         me.Hsi.To.setColorFill(me.COLORS.green);
@@ -393,12 +401,8 @@ var PFDDisplay = {
       } else {
         me.Hsi.CrsNeedle.setColor(me.COLORS.magenta);
         me.Hsi.Fl.setColorFill(me.COLORS.magenta);
-        me.Hsi.To.setColorFill(me.COLORS.magenta);
-        me.Hsi.From.setColorFill(me.COLORS.magenta);
         me.Hsi1.CrsNeedle1.setColor(me.COLORS.magenta);
         me.Hsi1.Fl1.setColorFill(me.COLORS.magenta);
-        me.Hsi1.To1.setColorFill(me.COLORS.magenta);
-        me.Hsi1.From1.setColorFill(me.COLORS.magenta);
       }
     },1,0);
 
@@ -414,6 +418,9 @@ var PFDDisplay = {
   }, # end of listen
 
   update_PFD : func(x) {
+    if (fms) setprop(pfdOffset[x],getprop(crsOffset) or 0);
+    else if (getprop(ApHeading) == "LOC") setprop(pfdOffset[x],getprop(navErr[x]));
+    else setprop(pfdOffset[x],geo.normdeg(getprop(SelCrs[x])-getprop(Heading)));
     me.update_ALT();
     me.update_HOR(x);
     me.update_SPD();
@@ -497,8 +504,8 @@ var PFDDisplay = {
         gs_defl = math.clamp(getprop(GsDefl),-1.25,1.25);
         me.Hor.GsIls.setTranslation(0,gs_defl* -115);
         me.Hor.LocScale.show();
-        loc_defl = math.clamp(getprop(crsDefl_nav[x]), -1.25, 1.25);
-        me.Hor.LocDefl.setTranslation(loc_defl * 90, 0);
+        loc_defl = math.clamp(getprop(pfdOffset[x]), -2.5, 2.5);
+        me.Hor.LocDefl.setTranslation(loc_defl * 45, 0);
       } else {
         me.Hor.GsScale.setVisible(getprop(sgTest[x]));
         me.Hor.LocScale.setVisible(getprop(sgTest[x]));
@@ -515,7 +522,7 @@ var PFDDisplay = {
     if (!me.madc_enabled) return;
     else {
       if (getprop(ApAlt) == "FLC" or getprop(ApAlt) == "VFLC" 
-          or getprop(fms) or getprop(spd_ctrl) or getprop(hold_active)) {
+          or fms or getprop(spd_ctrl) or getprop(hold_active)) {
         me.Spd.TgSpd.show();
         if (getprop(AltFt)  <= 30650) {
           me.Spd.TgSpd.setText(sprintf("%.0f",getprop(SpdTgKt)));
@@ -585,9 +592,16 @@ var PFDDisplay = {
   update_HSI : func(x) {
     hdg = getprop(Heading) or 0;
     hdg_bug = getprop(HeadingBug) or 0;
-    crs_offset = nav_type ? getprop(crsOffset_fms) : getprop(crsOffset_nav[x]) or 0;
-    if (nav_type) crs_defl = getprop(crsDefl_fms);
-    else crs_defl = getprop(nav_inRange[x]) ? getprop(crsDefl_nav[x]) : -10;
+    crs_offset = getprop(pfdOffset[x]) or 0;
+    me.Hsi.To.setVisible(to_flag[x] and !fms and !pfd_hsi[x]);
+    me.Hsi.From.setVisible(from_flag[x] and !fms and !pfd_hsi[x]);
+    me.Hsi1.To1.setVisible(to_flag[x] and !fms and pfd_hsi[x]);
+    me.Hsi1.From1.setVisible(from_flag[x] and !fms and pfd_hsi[x]);
+    if (fms) crs_defl = getprop(crsDefl_fms);
+    else {
+      crs_defl = getprop(nav_inRange[x]) ? getprop(crsDefl_nav[x]) : -10;
+      crs_defl = math.clamp(crs_defl,-10,10);
+    }
     me.Txt.Ptr1Txt.setText(me.Nav1Ptr[getprop(NavPtr1)])
                   .setVisible(disp_cont[x]);
     me.Txt.Ptr1Ind.setVisible(getprop(NavPtr1) and disp_cont[x]);

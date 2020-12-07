@@ -59,16 +59,14 @@ var speak = func(secs=3) {
   if(getprop("/devices/status/keyboard/alt") and getprop("/devices/status/keyboard/ctrl"))    closest=1; # Vector to closest airport
   else closest=0;
 
-  if(getprop("/devices/status/keyboard/alt") and ! getprop("/devices/status/keyboard/ctrl")) { # Toggle Comm1 <--> Comm2
-    if(getprop("/satc/comm2")) {
-      setprop("/satc/comm2",0);
-      gui.popupTip("ATC on Comm1");
-    } else {
+#  if(getprop("/devices/status/keyboard/alt") and !getprop("/devices/status/keyboard/ctrl")) { # Toggle Comm1 <--> Comm2
+    if (getprop("instrumentation/rcu/mode")) {
       setprop("/satc/comm2",1);
       gui.popupTip("ATC on Comm2");
+    } else {
+      setprop("/satc/comm2",1);
+      gui.popupTip("ATC on Comm1");
     }
-    return;
-  }
 
   # 0) Check dependencies
   needConf = 2.2;

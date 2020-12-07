@@ -702,7 +702,7 @@
     <animation>
         <type>translate</type>
         <object-name>btn.r6</object-name>	
-        <property>instrumentation/rmu/unit[1]/delete</property>
+        <property>instrumentation/rmu/unit[1]/del-btn</property>
 				<factor>0.0016</factor>
         <axis>
             <x>-1</x>
@@ -719,6 +719,10 @@
 		      <button>0</button>
 		      <repeatable>false</repeatable>
 		      <binding>
+		        <command>property-toggle</command>
+				      <property>instrumentation/rmu/unit[1]/del-btn</property>
+		      </binding>
+		      <binding>
 						<condition>
 						    <property>instrumentation/rmu/unit[1]/pge</property>
 						</condition>							
@@ -732,7 +736,7 @@
 					<mod-up>
 		        <binding>
 		            <command>property-toggle</command>
-		            <property>instrumentation/rmu/unit[1]/delete</property>
+		            <property>instrumentation/rmu/unit[1]/del-btn</property>
 		        </binding>
 					</mod-up>
 		    </action>
