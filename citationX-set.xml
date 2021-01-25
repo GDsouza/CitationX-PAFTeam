@@ -332,13 +332,15 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
         <menu n="10">
           <label>Citation-X</label>
           <enabled type="bool">true</enabled>
-          <item>
+ 
+         <item>
             <label>Autostart</label>
             <binding>
               <command>property-toggle</command>
               <property>sim/model/autostart</property>
             </binding>
           </item>
+
           <item>
             <label>Options</label>
             <binding>
@@ -346,29 +348,24 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
               <script>dialogs.options.open()</script>
             </binding>
           </item>
-          <item>
+ 
+         <item>
             <label>Select Livery</label>
             <binding>
                 <command>nasal</command>
                 <script>aircraft.livery.dialog.toggle()</script>
             </binding>
           </item>
+
           <item>
-  					<label>Ground Services Controls</label>
+  					<label>Ground Services</label>
 		        <binding>
       			  <command>nasal</command>
-      			  <script>var ground_services = gui.Dialog.new("sim/gui/dialogs/ground_services/dialog", "Aircraft/CitationX/Systems/ground_services-dlg.xml");
+      			  <script>var ground_services = gui.Dialog.new("sim/gui/dialogs/ground_services/dialog", "Aircraft/CitationX/Systems/ground_services.xml");
 			   ground_services.open();</script>
       		  </binding>
       	  </item>
-          <item>
-        	  <label>Fuel Truck Controls</label>
-	          <binding>
-	            <command>nasal</command>
-	            <script>var fuel_truck = gui.Dialog.new("sim/gui/dialogs/fuel_truck/dialog", "Aircraft/CitationX/Systems/fuel_truck.xml");
-					           fuel_truck.open();</script>
-	          </binding>
-          </item>
+
           <item>
             <label>Charts</label>
             <binding>
@@ -383,6 +380,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
               <property>controls/fire/engines-fire</property>
             </binding>
           </item>
+
         </menu>
      </default>
     </menubar>
@@ -511,6 +509,14 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 		<pfd>
 			<minimums-baro type="int">200</minimums-baro>
 			<minimums-radio type="int">200</minimums-radio>
+      <nav1ptr type="int">0</nav1ptr>
+      <nav2ptr type="int">0</nav2ptr>
+		</pfd>
+		<pfd>
+			<minimums-baro type="int">200</minimums-baro>
+			<minimums-radio type="int">200</minimums-radio>
+      <nav1ptr type="int">0</nav1ptr>
+      <nav2ptr type="int">0</nav2ptr>
 		</pfd>
 
     <mk-viii>
@@ -589,11 +595,6 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
       <rcl type="bool">0</rcl>
       <ent type="bool">0</ent>
 	  </dc840>
-
-	  <sc840>
-      <nav1ptr type="int">0</nav1ptr>
-      <nav2ptr type="int">0</nav2ptr>
-	  </sc840>
 
     <cdu n="0">
 		  <input type="string"/>
@@ -683,6 +684,8 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
           <minimums type="int">200</minimums>
           <target-roll-deg type="double">0</target-roll-deg>
           <target-pitch-deg type="double">0</target-pitch-deg>
+          <nav-type type="string"></nav-type>
+          <nav-id type="string"></nav-id>
           <nav-source type="string">NAV1</nav-source>
           <bank-limit type="int">35</bank-limit>
           <target-speed-kt type="int">250</target-speed-kt>
@@ -703,8 +706,6 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
       </locks>
       <internal>
           <nav-distance type="double">0</nav-distance>
-          <nav-type type="string"></nav-type>
-          <nav-id type="string"></nav-id>
           <course-deflection type="double">0.0</course-deflection>
           <gs-deflection type="double">0</gs-deflection>
           <in-range type="bool">0</in-range>

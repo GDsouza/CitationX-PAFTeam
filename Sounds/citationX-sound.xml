@@ -299,7 +299,7 @@
 				        <property>gear/gear[1]/wow</property>
 				        <property>gear/gear[2]/wow</property>
 								<equals>
-				      		<property>autopilot/internal/nav-id</property>
+				      		<property>autopilot/settings/nav-id</property>
 									<value>""</value>
 								</equals>
 							</or>

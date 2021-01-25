@@ -21,7 +21,6 @@ aircraft.livery.init("Aircraft/CitationX/Models/Liveries");
 var FHmeter = aircraft.timer.new("/instrumentation/clock/flight-meter-sec", 1,1); 
 var Chrono = [aircraft.timer.new("/instrumentation/mfd/chrono", 1,1),
              aircraft.timer.new("/instrumentation/mfd[1]/chrono", 1,1)];
-var Inhg = "instrumentation/altimeter/setting-inhg";
 var flaps = "controls/flight/flaps";
 var flaps_pos = nil;
 var flaps_sel = nil;
@@ -248,8 +247,9 @@ setlistener("accelerations/limit-exceeded-alert", func(n) {
 
 setlistener("sim/model/autostart", func(n){
     if(n.getValue()){
+#      setprop("services/ext-pwr",1);
       setprop("controls/electric/external-power",1);
-      settimer(func {Startup();},1);
+      Startup();
     }else{
         Shutdown();
     }
@@ -451,6 +451,7 @@ var Startup = func{
     settimer(func() {
 		  setprop("engines/engine[0]/cycle-up",1);
       setprop("controls/electric/external-power",0);
+      setprop("services/ext-pwr",0);
     },12);
 }
 
@@ -476,7 +477,6 @@ var Shutdown = func{
 		setprop("controls/engines/engine[1]/running",0);
 		setprop("instrumentation/annunciators/ack-caution",1);
 		setprop("instrumentation/annunciators/ack-warning",1);
-		setprop("controls/electric/external-power",0);
 		setprop("controls/flight/flaps-select",0);
 		setprop("controls/anti-ice/lh-pitot",0);
 		setprop("controls/anti-ice/rh-pitot",0);
@@ -570,13 +570,13 @@ var citation_stl = setlistener("/sim/signals/fdm-initialized", func {
     Reng.listen();
     settimer(update_systems,2);
     settimer(Vref_update,10);
-		setprop(Inhg,29.92001);
 		setprop("instrumentation/clock/flight-meter-sec",0);
 #		setprop("sim/sound/startup",int(10*rand()));
     setprop("controls/engines/engine/ignition",1);
     setprop("controls/engines/engine[1]/ignition",1);
-    setprop("sim/model/shadow-2d",1);
-    setprop("sim/rendering/shaders/model",1);
+#    setprop("sim/model/shadow-2d",1);
+#    setprop("sim/rendering/shaders/model",1);
+    setprop("services/ext-pwr",1);
 		FH_load();   		
     removelistener(citation_stl);
 },0,0);
@@ -589,7 +589,7 @@ var update_systems = func{
     grspd = getprop("velocities/groundspeed-kt");
     if (grspd > 40 and getprop("systems/electrical/outputs/cabin-door-monitor"))
      setprop("controls/cabin-door/open",0);
-    # Gear Steering #
+    ### Gear Steering ###
     wspd = (120-grspd) * 0.01;
     if(wspd>1.0) wspd = 1.0;
     if(wspd<0.001) wspd = 0.001;

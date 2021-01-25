@@ -15,10 +15,22 @@
    viewBox="0 0 900.00001 1024"
    id="svg4136"
    version="1.1"
-   inkscape:version="0.92.3 (2405546, 2018-03-11)"
-   sodipodi:docname="ND_F.svg">
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
+   sodipodi:docname="nd-front.svg">
   <defs
      id="defs4138">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient4690">
+      <stop
+         style="stop-color:#e600e6;stop-opacity:1;"
+         offset="0"
+         id="stop4686" />
+      <stop
+         style="stop-color:#e600e6;stop-opacity:0;"
+         offset="1"
+         id="stop4688" />
+    </linearGradient>
     <linearGradient
        inkscape:collect="always"
        id="linearGradient4297">
@@ -167,6 +179,15 @@
        x2="849.04706"
        y2="757.15973"
        gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4690"
+       id="linearGradient4692"
+       x1="788.61566"
+       y1="92.041016"
+       x2="813.61957"
+       y2="92.041016"
+       gradientUnits="userSpaceOnUse" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -176,14 +197,14 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.75260994"
-     inkscape:cx="404.78856"
-     inkscape:cy="113.38342"
+     inkscape:cx="335.09775"
+     inkscape:cy="798.11858"
      inkscape:document-units="px"
-     inkscape:current-layer="layer6"
+     inkscape:current-layer="layer5"
      showgrid="false"
      units="px"
-     inkscape:window-width="1366"
-     inkscape:window-height="711"
+     inkscape:window-width="1680"
+     inkscape:window-height="998"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
@@ -191,44 +212,9 @@
      inkscape:guide-bbox="true"
      inkscape:snap-to-guides="true">
     <sodipodi:guide
-       position="781.85808,636.3961"
+       position="146.15805,944.71248"
        orientation="1,0"
-       id="guide5682"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="781.85808,723.26922"
-       orientation="1,0"
-       id="guide5684"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="686.90374,1349.5638"
-       orientation="0,1"
-       id="guide4398"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="449.53129,792.97849"
-       orientation="1,0"
-       id="guide4539"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="155,916.42857"
-       orientation="0,1"
-       id="guide4336"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="616.61372,541.0288"
-       orientation="0,1"
-       id="guide4347"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="120.67064,916.42857"
-       orientation="1,0"
-       id="guide4392"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="851.70282,342.80706"
-       orientation="1,0"
-       id="guide125"
+       id="guide1019"
        inkscape:locked="false" />
   </sodipodi:namedview>
   <metadata
@@ -384,6 +370,42 @@
          x="40.396744"
          y="50.461227"
          style="font-size:45px;line-height:1.25">HDG</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:36px;line-height:0%;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;display:inline;fill:#00ff00;fill-opacity:1;stroke:none;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;"
+       x="145.10626"
+       y="47.614235"
+       id="dmeTxt"
+       inkscape:transform-center-x="-2.6574191"
+       inkscape:transform-center-y="17.273224"><tspan
+         sodipodi:role="line"
+         id="tspan144"
+         x="145.10626"
+         y="47.614235">DME</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:36.00000039px;line-height:0%;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;display:inline;fill:#00ff00;fill-opacity:1;stroke:none;stroke-width:0.22325028;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;"
+       x="127.46594"
+       y="91.699715"
+       id="dmeDist"
+       transform="scale(1.1162514,0.89585552)"><tspan
+         sodipodi:role="line"
+         id="tspan1017"
+         x="127.46594"
+         y="91.699715"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:36.00000039px;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr;text-anchor:start;stroke-width:0.22325028;">X</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:36px;line-height:0%;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;display:inline;fill:#00ff00;fill-opacity:1;stroke:none;stroke-width:0.22325028;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;"
+       x="127.76797"
+       y="131.74542"
+       id="dmeId"
+       transform="scale(1.1162514,0.89585553)"><tspan
+         sodipodi:role="line"
+         id="tspan1017-1"
+         x="127.76797"
+         y="131.74542"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:36px;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr;text-anchor:start;stroke-width:0.22325028;">X</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
@@ -529,7 +551,7 @@
          style="font-size:45px;line-height:1.25;">X</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:0%;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono, Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;display:inline;opacity:1;fill:#19e600;fill-opacity:1;stroke:#19e600;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:0%;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono, Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;display:inline;opacity:1;fill:#e600e6;fill-opacity:1;stroke:#e600e6;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
        x="801.11761"
        y="105.21484"
        id="distRem"><tspan
@@ -537,7 +559,7 @@
          id="tspan4313-6"
          x="801.11761"
          y="105.21484"
-         style="font-size:40px;line-height:1.25">X</tspan></text>
+         style="font-size:40px;line-height:1.25;fill:#e600e6;fill-opacity:1;stroke:#e600e6;stroke-opacity:1;">X</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"

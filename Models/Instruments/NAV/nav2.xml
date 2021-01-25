@@ -57,141 +57,145 @@
     </emission>
   </animation>
 
-  <animation>
+	<animation>
     <type>pick</type>
     <object-name>RIC2.crs</object-name>
     <action>
-        <button>0</button>
-        <repeatable>false</repeatable>
-        <binding>
-            <command>property-assign</command>
-            <property>instrumentation/nav[1]/radials/selected-deg</property>
-            <property>orientation/heading-magnetic-deg</property>
-        </binding>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>property-assign</command>
+        <property>instrumentation/pfd[1]/selected-deg</property>
+        <property>orientation/heading-magnetic-deg</property>
+      </binding>
     </action>
     <action>
-        <button>3</button>
-        <repeatable>true</repeatable>
-        <binding>
-            <command>property-adjust</command>
-            <property>instrumentation/nav[1]/radials/selected-deg</property>
-            <step>1</step>
-            <min>0</min>
-            <max>360</max>
-            <wrap>1</wrap>
-        </binding>
+      <button>3</button>
+      <repeatable>true</repeatable>
+      <binding>
+        <command>property-adjust</command>
+        <property>instrumentation/pfd[1]/selected-deg</property>
+        <step>1</step>
+        <min>0</min>
+        <max>360</max>
+        <wrap>1</wrap>
+      </binding>
     </action>
     <action>
-        <button>4</button>
-        <repeatable>true</repeatable>
-        <binding>
-            <command>property-adjust</command>
-            <property>instrumentation/nav[1]/radials/selected-deg</property>
-            <step>-1</step>
-            <min>0</min>
-            <max>360</max>
-            <wrap>1</wrap>
-        </binding>
+      <button>4</button>
+      <repeatable>true</repeatable>
+      <binding>
+        <command>property-adjust</command>
+        <property>instrumentation/pfd[1]/selected-deg</property>
+        <step>-1</step>
+        <min>0</min>
+        <max>360</max>
+        <wrap>1</wrap>
+      </binding>
     </action>
-        <hovered>
-            <binding>
-                <command>set-tooltip</command>
-                <tooltip-id>CRS2-selected</tooltip-id>
-                <label>CRS2 sel: %.0f</label>
-            <property>instrumentation/nav[1]/radials/selected-deg</property>
-            </binding>
-        </hovered>
-</animation>
+    <hovered>
+			<binding>
+			  <command>set-tooltip</command>
+			  <tooltip-id>CRS 2</tooltip-id>
+    	  <label>CRS : %.0f</label>
+    	  <property>instrumentation/pfd[1]/selected-deg</property>
+ 	    </binding>
+	  </hovered>
+	</animation>
 
-<animation>
+	<animation>
     <type>pick</type>
     <object-name>RIC2.hdg</object-name>
     <action>
-        <button>0</button>
-        <repeatable>false</repeatable>
-        <binding>
-            <command>property-assign</command>
-            <property>autopilot/settings/heading-bug-deg</property>
-            <property>orientation/heading-magnetic-deg</property>
-        </binding>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>property-assign</command>
+        <property>instrumentation/pfd[1]/heading-deg</property>
+        <property>orientation/heading-magnetic-deg</property>
+      </binding>
     </action>
     <action>
-        <button>3</button>
-        <repeatable>true</repeatable>
-        <binding>
-            <command>property-adjust</command>
-            <property>autopilot/settings/heading-bug-deg</property>
-            <step>1</step>
-            <min>0</min>
-            <max>360</max>
-            <wrap>1</wrap>
-        </binding>
+      <button>3</button>
+      <repeatable>true</repeatable>
+      <binding>
+        <command>property-adjust</command>
+        <property>instrumentation/pfd[1]/heading-deg</property>
+        <step>1</step>
+        <min>0</min>
+        <max>360</max>
+        <wrap>1</wrap>
+      </binding>
     </action>
     <action>
-        <button>4</button>
-        <repeatable>true</repeatable>
-        <binding>
-            <command>property-adjust</command>
-            <property>autopilot/settings/heading-bug-deg</property>
-            <step>-1</step>
-            <min>0</min>
-            <max>360</max>
-            <wrap>1</wrap>
-        </binding>
+      <button>4</button>
+      <repeatable>true</repeatable>
+      <binding>
+        <command>property-adjust</command>
+        <property>instrumentation/pfd[1]/heading-deg</property>
+        <step>-1</step>
+        <min>0</min>
+        <max>360</max>
+        <wrap>1</wrap>
+      </binding>
     </action>
-        <hovered>
-            <binding>
-                <command>set-tooltip</command>
-                <tooltip-id>HDG</tooltip-id>
-                <label>HDG sel: %.0f</label>
-            <property>autopilot/settings/heading-bug-deg</property>
-            </binding>
-        </hovered>
-</animation>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>HDG 2</tooltip-id>
+        <label>HDG : %.0f</label>
+        <property>instrumentation/pfd[1]/heading-deg</property>
+      </binding>
+    </hovered>
+  </animation>
 
-<animation>
+  <animation>
     <type>pick</type>
     <object-name>RIC2.alt</object-name>
+    <condition>
+      <property>instrumentation/pfd/pfd-sel</property>
+    </condition>
     <action>
-        <button>0</button>
-        <repeatable>false</repeatable>
-        <binding>
-					<command>nasal</command>
-					<script>citation.set_alt();</script>
-        </binding>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>property-assign</command>
+        <property>instrumentation/pfd[1]/asel</property>
+        <value>100</value>
+      </binding>
     </action>
     <action>
-        <button>3</button>
-        <repeatable>true</repeatable>
-        <binding>
-            <command>property-adjust</command>
-            <property>autopilot/settings/asel</property>
-            <step>5</step>
-            <min>0</min>
-            <max>510</max>
-            <wrap>0</wrap>
-        </binding>
+      <button>3</button>
+      <repeatable>true</repeatable>
+      <binding>
+         <command>property-adjust</command>
+          <property>instrumentation/pfd[1]/asel</property>
+          <step>5</step>
+          <min>0</min>
+          <max>510</max>
+          <wrap>0</wrap>
+      </binding>
     </action>
     <action>
-        <button>4</button>
-        <repeatable>true</repeatable>
-        <binding>
-            <command>property-adjust</command>
-            <property>autopilot/settings/asel</property>
-            <step>-5</step>
-            <min>0</min>
-            <max>510</max>
-            <wrap>0</wrap>
-        </binding>
+      <button>4</button>
+      <repeatable>true</repeatable>
+      <binding>
+        <command>property-adjust</command>
+        <property>instrumentation/pfd[1]/asel</property>
+        <step>-5</step>
+        <min>0</min>
+        <max>510</max>
+        <wrap>0</wrap>
+      </binding>
     </action>
-        <hovered>
-            <binding>
-                <command>set-tooltip</command>
-                <tooltip-id>AP-ALT</tooltip-id>
-                <label>ALT sel: %.0f</label>
-            <property>autopilot/settings/asel</property>
-            </binding>
-        </hovered>
-</animation>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>ALT 2</tooltip-id>
+        <label>ALT : %.0f</label>
+        <property>instrumentation/pfd[1]/asel</property>
+      </binding>
+    </hovered>
+  </animation>
 
 </PropertyList>

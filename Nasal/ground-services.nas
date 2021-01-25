@@ -9,7 +9,7 @@ var ground_services = {
 	  if (getprop("/velocities/groundspeed-kt") > 10) {
 		  setprop("/services/chokes", 0);
 		  setprop("/services/fuel-truck/enable", 0);
-		  setprop("/services/ext-pwr/enable", 0);
+		  setprop("/services/ext-pwr", 0);
 	  }
     me.update();
 	}, # end of init
@@ -27,7 +27,7 @@ var ground_services = {
       if (n.getValue()) me.update_controls();
     },0,0);
 
-    setlistener("/services/ext-pwr/enable", func(n) {
+    setlistener("/services/ext-pwr", func(n) {
       if (n.getValue()) me.update_controls();
     },0,0);
   }, # end of listen
@@ -43,7 +43,7 @@ var ground_services = {
       setprop("/services/chokes",0); 
 	    setprop("/services/fuel-truck/enable",0);
 	    setprop("/services/fuel-truck/connect",0);
-	    setprop("/services/ext-pwr/enable",0);
+	    setprop("/services/ext-pwr",0);
       if(update_timer.isRunning) update_timer.stop();
     }	
   }, # end of update_controls
@@ -51,18 +51,18 @@ var ground_services = {
 	update : func {
 		  if(getprop("/services/chokes") | 
 		     getprop("/services/fuel-truck/enable") |
-		     getprop("/services/ext-pwr/enable")){		   
+		     getprop("/services/ext-pwr")){		   
 		        setprop("controls/gear/brake-parking",1);
       } else {
 		    if(!getprop("services/chokes") & 
 		       !getprop("/services/fuel-truck/enable") &
-		       !getprop("/services/ext-pwr/enable")){		   
+		       !getprop("/services/ext-pwr")){		   
             if(update_timer.isRunning) update_timer.stop();
         }
       }
 	
 		  # External Power Stuff	
-		  if (!getprop("/services/ext-pwr/enable"))
+		  if (!getprop("/services/ext-pwr"))
 			  setprop("/controls/electric/external-power", 0);
 		
 		  # Fuel Truck Controls

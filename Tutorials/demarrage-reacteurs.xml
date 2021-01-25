@@ -499,35 +499,6 @@
 
 		<step>
 			<message>
-				Mettre EXT PWR sur AVAIL s'il est sur ON{|.}
-			</message>
-			<view>
-				<heading-offset-deg>350.578</heading-offset-deg>
-				<pitch-offset-deg>-39.3</pitch-offset-deg>
-				<field-of-view>18</field-of-view>
-			</view>
-				<marker>
-			    <x-m>-7.7165</x-m>
-			    <y-m>-0.1909</y-m>
-			    <z-m>-0.1496</z-m>
-			    <scale>1.30</scale>
-				</marker>
-			<error>
-				<condition>
-					<property>controls/electric/external-power</property>
-				</condition>
-			</error>
-			<exit>
-				<condition>
-					<not>
-						<property>controls/electric/external-power</property>
-					</not>
-				</condition>
-			</exit>
-		</step>
-
-		<step>
-			<message>
 				Arreter l'APU s'il est en service{|.}
 			</message>
 			<view>
@@ -671,6 +642,13 @@
 			</exit>
 		</step>
 
+    <step>
+      <set>
+        <property>services/ext-pwr</property>
+        <value>0</value>
+      </set>
+    </step>
+
 		<step>
 			<message>
 				Tuto suivant : 3 - Roulage{|.}
@@ -678,7 +656,7 @@
 		</step>
 
     <end>
-     <view>
+      <view>
         <heading-offset-deg>0</heading-offset-deg>
         <pitch-offset-deg>-11</pitch-offset-deg>
         <field-of-view>81</field-of-view>

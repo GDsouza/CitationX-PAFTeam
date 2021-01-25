@@ -176,25 +176,6 @@
       </config>
   </pi-simple-controller>
 
-  <filter>
-      <name>Roll command</name>
-      <type>noise-spike</type>
-      <debug>false</debug>
-      <feedback-if-disabled>true</feedback-if-disabled>
-      <initialize-to>output</initialize-to>
-      <enable>
-        <condition>
-          <equals>  
-             <property>autopilot/locks/FD-status</property>
-            <value>1</value>
-          </equals>
-        </condition>
-      </enable>
-      <input>autopilot/internal/roll-filter</input>
-      <output>autopilot/internal/roll-bars</output>
-      <max-rate-of-change>10</max-rate-of-change>
-  </filter>
-
   <pid-controller>
       <name>Aileron Control</name>
       <debug>false</debug>
@@ -207,7 +188,7 @@
         </condition>
       </enable>
       <input>orientation/roll-deg</input>
-      <reference>autopilot/internal/roll-bars</reference>
+      <reference>autopilot/internal/roll-filter</reference>
       <output>controls/flight/aileron</output>
       <config>
           <Kp>0.50</Kp>
@@ -817,16 +798,30 @@
   </pid-controller>
 
 <!-- Bearing -->
-
+<!--
   <pi-simple-controller>
     <name>NAV1 bearing </name>
     <debug>false</debug>
     <enable>
       <condition>
-        <equals>
-          <property>/instrumentation/sc840/nav1ptr</property>
-          <value>1</value>
-        </equals>
+        <or>
+          <and>
+            <equals>
+              <property>instrumentation/pfd/nav1ptr</property>
+              <value>1</value>
+            </equals>
+            <not>
+              <property>instrumentation/pfd/pfd-sel</property>
+            </not>
+          </and>
+          <and>
+            <equals>
+              <property>instrumentation/pfd[1]/nav1ptr</property>
+              <value>1</value>
+            </equals>
+            <property>instrumentation/pfd/pfd-sel</property>
+          </and>
+        </or>
       </condition>
     </enable>
     <input>orientation/heading-magnetic-deg</input>
@@ -845,10 +840,24 @@
     <debug>false</debug>
     <enable>
       <condition>
-        <equals>
-          <property>/instrumentation/sc840/nav2ptr</property>
-          <value>1</value>
-        </equals>
+        <or>
+          <and>
+            <equals>
+              <property>instrumentation/pfd/nav2ptr</property>
+              <value>1</value>
+            </equals>
+            <not>
+              <property>instrumentation/pfd/pfd-sel</property>
+            </not>
+          </and>
+          <and>
+            <equals>
+              <property>instrumentation/pfd[1]/nav2ptr</property>
+              <value>1</value>
+            </equals>
+            <property>instrumentation/pfd/pfd-sel</property>
+          </and>
+        </or>
       </condition>
     </enable>
     <input>orientation/heading-magnetic-deg</input>
@@ -869,34 +878,62 @@
     <initialize-to>input</initialize-to>
     <enable>
       <condition>
-        <equals>
-          <property>/instrumentation/sc840/nav1ptr</property>
-          <value>2</value>
-        </equals>
+        <or>
+          <and>
+            <equals>
+              <property>instrumentation/pfd/nav1ptr</property>
+              <value>2</value>
+            </equals>
+            <not>
+              <property>instrumentation/pfd/pfd-sel</property>
+            </not>
+          </and>
+          <and>
+            <equals>
+              <property>instrumentation/pfd[1]/nav1ptr</property>
+              <value>2</value>
+            </equals>
+            <property>instrumentation/pfd/pfd-sel</property>
+          </and>
+        </or>
       </condition>
     </enable>
     <input>instrumentation/adf/indicated-bearing-deg</input>
-    <output>/autopilot/internal/nav1-pointer</output>
+    <output>instrumentation/pfd/adf1ptr</output>
     <type>noise-spike</type>
-    <max-rate-of-change>90</max-rate-of-change>
+    <max-rate-of-change>10</max-rate-of-change>
   </filter>
 
   <filter>
     <name>ADF2 bearing</name>
+    <type>noise-spike</type>
     <debug>false</debug>
     <feedback-if-disabled>false</feedback-if-disabled>
     <initialize-to>input</initialize-to>
     <enable>
       <condition>
-        <equals>
-          <property>/instrumentation/sc840/nav2ptr</property>
-          <value>2</value>
-        </equals>
+        <or>
+          <and>
+            <equals>
+              <property>instrumentation/pfd/nav2ptr</property>
+              <value>2</value>
+            </equals>
+            <not>
+              <property>instrumentation/pfd/pfd-sel</property>
+            </not>
+          </and>
+          <and>
+            <equals>
+              <property>instrumentation/pfd[1]/nav2ptr</property>
+              <value>2</value>
+            </equals>
+            <property>instrumentation/pfd/pfd-sel</property>
+          </and>
+        </or>
       </condition>
     </enable>
     <input>instrumentation/adf[1]/indicated-bearing-deg</input>
     <output>/autopilot/internal/nav2-pointer</output>
-    <type>noise-spike</type>
     <max-rate-of-change>90</max-rate-of-change>
   </filter>
 
@@ -905,10 +942,24 @@
     <debug>false</debug>
     <enable>
       <condition>
-        <equals>
-          <property>/instrumentation/sc840/nav1ptr</property>
-          <value>3</value>
-        </equals>
+        <or>
+          <and>
+            <equals>
+              <property>instrumentation/pfd/nav1ptr</property>
+              <value>3</value>
+            </equals>
+            <not>
+              <property>instrumentation/pfd/pfd-sel</property>
+            </not>
+          </and>
+          <and>
+            <equals>
+              <property>instrumentation/pfd[1]/nav1ptr</property>
+              <value>3</value>
+            </equals>
+            <property>instrumentation/pfd/pfd-sel</property>
+          </and>
+        </or>
       </condition>
     </enable>
     <input>orientation/heading-magnetic-deg</input>
@@ -927,10 +978,24 @@
     <debug>false</debug>
     <enable>
       <condition>
-        <equals>
-          <property>/instrumentation/sc840/nav2ptr</property>
-          <value>3</value>
-        </equals>
+        <or>
+          <and>
+            <equals>
+              <property>instrumentation/pfd/nav2ptr</property>
+              <value>3</value>
+            </equals>
+            <not>
+              <property>instrumentation/pfd/pfd-sel</property>
+            </not>
+          </and>
+          <and>
+            <equals>
+              <property>instrumentation/pfd[1]/nav2ptr</property>
+              <value>3</value>
+            </equals>
+            <property>instrumentation/pfd/pfd-sel</property>
+          </and>
+        </or>
       </condition>
     </enable>
     <input>orientation/heading-magnetic-deg</input>
@@ -943,6 +1008,6 @@
         <max>360</max>
     </config>
   </pi-simple-controller>
-
+-->
 </PropertyList>
 

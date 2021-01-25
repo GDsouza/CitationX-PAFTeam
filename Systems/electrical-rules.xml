@@ -76,14 +76,14 @@
     </enable>
     <R>
       <or>
-        <equals>
+        <greater-than>
           <property>systems/electrical/right-gen-volts</property>
           <value>28</value>
-        </equals>
-        <equals>
+        </greater-than>
+        <greater-than>
           <property>systems/electrical/apu-gen-volts</property>
           <value>28</value>
-        </equals>
+        </greater-than>
       </or>
     </R>
     <output>controls/electric/external-power</output>

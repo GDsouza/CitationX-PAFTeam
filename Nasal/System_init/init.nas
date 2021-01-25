@@ -88,8 +88,6 @@ props.globals.initNode("autopilot/route-manager/alternate[1]/airport","","STRING
 props.globals.initNode("autopilot/route-manager/alternate[1]/closed",0,"BOOL");
 props.globals.initNode("autopilot/route-manager/alternate[1]/runway","","STRING");
 props.globals.initNode("autopilot/route-manager/alternate[1]/set-flag",0,"BOOL");
-props.globals.initNode("autopilot/settings/nav-btn",0,"BOOL");
-props.globals.initNode("autopilot/settings/fms-btn",0,"BOOL");
 props.globals.initNode("autopilot/settings/fgc","A","STRING");
 props.globals.initNode("autopilot/settings/fms",0,"BOOL");
 props.globals.initNode("autopilot/settings/tg-alt-ft",0,"DOUBLE");
@@ -155,7 +153,6 @@ props.globals.initNode("instrumentation/checklists/page",0,"INT");
 props.globals.initNode("instrumentation/clock/flight-meter-hour",0,"DOUBLE");
 
 ### Efis ###
-props.globals.initNode("instrumentation/efis/baro-hpa",0,"BOOL");
 props.globals.initNode("instrumentation/efis/vsd",0,"BOOL");
 props.globals.initNode("instrumentation/efis/vsd[1]",0,"BOOL");
 
@@ -166,7 +163,6 @@ props.globals.initNode("instrumentation/eicas/dau1",0,"BOOL");
 props.globals.initNode("instrumentation/eicas/dau2",0,"BOOL");
 props.globals.initNode("instrumentation/eicas/warn",0,"BOOL");
 props.globals.initNode("instrumentation/eicas/knob",0,"INT");
-#props.globals.initNode("instrumentation/eicas/hidden-lines",0,"INT");
 props.globals.initNode("instrumentation/eicas/messages",0,"INT");
 
 ### Electrical ###
@@ -304,6 +300,8 @@ for(var n=0;n<2;n+=1) {
   props.globals.initNode("instrumentation/mfd["~n~"]/outputs/fms",0,"BOOL");
   props.globals.initNode("instrumentation/mfd["~n~"]/outputs/src",0,"BOOL");
   props.globals.initNode("instrumentation/mfd["~n~"]/etx",0,"INT");
+  props.globals.initNode("instrumentation/mfd["~n~"]/baro-hpa",0,"BOOL");
+  props.globals.initNode("instrumentation/mfd["~n~"]/alt-meters",0,"BOOL");
 }
 for (var n=0;n<9;n+=1) {
 	props.globals.initNode("instrumentation/mfd/cdr"~n,0,"BOOL");
@@ -338,8 +336,17 @@ props.globals.initNode("autopilot/locks/hold/phase",0,"INT");
 props.globals.initNode("autopilot/locks/hold/active",0,"BOOL");
 
 ### Pfd ###
-props.globals.initNode("instrumentation/pfd/madc",0,"BOOL");
+props.globals.initNode("instrumentation/pfd/pfd-sel",0,"BOOL");
 props.globals.initNode("instrumentation/pfd/madc-btn",0,"BOOL");
+for (var n=0;n<2;n+=1) {
+  props.globals.initNode("instrumentation/pfd["~n~"]/nav-btn",0,"BOOL");
+  props.globals.initNode("instrumentation/pfd["~n~"]/source","NAV1","STRING");
+  props.globals.initNode("instrumentation/pfd["~n~"]/fms-btn",0,"BOOL");
+  props.globals.initNode("instrumentation/pfd["~n~"]/selected-deg",0,"INT");
+  props.globals.initNode("instrumentation/pfd["~n~"]/heading-deg",0,"DOUBLE");
+  props.globals.initNode("instrumentation/pfd["~n~"]/heading-error-deg",0,"DOUBLE");
+  props.globals.initNode("instrumentation/pfd["~n~"]/asel",100,"INT");
+}
 
 ### Pressurization ###
 props.globals.initNode("systems/pressurization/cabin-alt-ft",0,"DOUBLE");
@@ -415,7 +422,7 @@ props.globals.initNode("controls/flight/rudder-fail",0,"BOOL");
 
 ### Services ###
 props.globals.initNode("/services/chokes", 0, "BOOL");	
-props.globals.initNode("/services/ext-pwr/enable", 0, "BOOL");
+props.globals.initNode("/services/ext-pwr", 0, "BOOL");
 props.globals.initNode("/services/fuel-truck/enable", 0, "BOOL");
 props.globals.initNode("/services/fuel-truck/connect", 0, "BOOL");
 props.globals.initNode("/services/fuel-truck/transfer", 0, "BOOL");

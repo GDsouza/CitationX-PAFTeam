@@ -1137,7 +1137,7 @@ var cduDsp = {
 		  FuelEstWp = int(EstWp_time * fuel_cons);
       EstDest_time = getprop(velocity) > 1 ? int(getprop(dist_rem))/int(getprop(velocity)) : 0;
 		  FuelEstDest = int(EstDest_time * fuel_cons);
-      nav_id = getprop("autopilot/internal/nav-id");
+      nav_id = getprop("autopilot/settings/nav-id");
 		  ETA = getprop("autopilot/route-manager/wp/eta");
 		  if (!ETA) {ETA = "0+00"}
       else {
@@ -1149,7 +1149,7 @@ var cduDsp = {
 		  ETE = getprop("/autopilot/internal/nav-ete");
       me.vec_ete = split("ETE ",ETE);
       ETE = me.vec_ete[1];
-		  Nav_type = getprop("/autopilot/internal/nav-type");
+		  Nav_type = getprop("/autopilot/settings/nav-type");
 		  Nav1_id = getprop("/instrumentation/nav/nav-id") or "";
 		  Nav1_freq = sprintf("%.3f",getprop("/instrumentation/nav/frequencies/selected-mhz"));
 		  Nav2_id = getprop("/instrumentation/nav[1]/nav-id");

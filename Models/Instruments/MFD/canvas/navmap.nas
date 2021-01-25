@@ -81,20 +81,16 @@ var NavMap = {
 
   new : func(x) {
     var m = {parents : [NavMap],
-      _center : [450,475], #old 450,475
-      _zoom : 20,
-      _declutter : 0,
-      _airways : 0,
-      _map : nil,
-      _plan : nil,
-      _layerRanges : {},
-      _static : 0,
-      _cdr0 : [0,0],
-      _cdr1 : [0,0],
-      _cdr2 : [0,0],
-      _source : 1,
-      _wxr : [0,0],
-      _ndb : [0,0],
+      center : [450,475], #old 450,475
+      zoom : 20,
+      mp : nil,
+      plan : nil,
+      layerRan : {},
+      vor : [0,0],
+      apt : [0,0],
+      fix : [0,0],
+      wxr : [0,0],
+      ndb : [0,0],
       white : [1,1,1],
       amber : [0.9,0.5,0],
     };
@@ -126,7 +122,7 @@ var NavMap = {
 		foreach(var element;m.layer_val) {
 			m.layer[element] = m.nd.getElementById(element);
 		}
-    m.layer.layerMap.setTranslation(m._center[0], m._center[1]).hide();
+    m.layer.layerMap.setTranslation(m.center[0], m.center[1]).hide();
     m.layer.layerPlan.show();
 
     m.symbols = {};
@@ -145,7 +141,7 @@ var NavMap = {
     m.Styles = fgMap.NavMapStyles.new();
 
     foreach (var i; keys(NavMap.layerRanges)) {
-      m._layerRanges[i] = NavMap.layerRanges[i];
+      m.layerRan[i] = NavMap.layerRanges[i];
     }
 
     if (NavMap.ENABLE == 1) {
@@ -157,11 +153,11 @@ var NavMap = {
   }, # end of new
 
   createMapElement : func(x) {
-    if (me._map != nil) return;
-    me._map = me.layer.layerMap.createChild("map");
-    me._map.setScreenRange(277);
-    me._plan = me.layer.layerPlan.createChild("map");
-    me._plan.setScreenRange(360);
+    if (me.mp != nil) return;
+    me.mp = me.layer.layerMap.createChild("map");
+    me.mp.setScreenRange(277);
+    me.plan = me.layer.layerPlan.createChild("map");
+    me.plan.setScreenRange(360);
 
     # Initialize the controllers:
     var ctrl_ns = canvas.Map.Controller.get("Aircraft position");
@@ -173,27 +169,27 @@ var NavMap = {
     };
 
       # Make it move with our aircraft:
-      me._map.setController("Aircraft position", "current-pos"); # from aircraftpos.controller
-      me._plan.setController("Aircraft position", "current-pos");
+      me.mp.setController("Aircraft position", "current-pos"); # from aircraftpos.controller
+      me.plan.setController("Aircraft position", "current-pos");
 
     foreach (var layer_name; me.getLayerNames()) {
       var layer = me.getLayer(layer_name);
       if (layer.static == 1) {
-        me._map.addLayer(
+        me.mp.addLayer(
           factory: layer.factory,
           type_arg: layer_name,
           priority: layer.priority,
           style: me.Styles.getStyle(layer_name),
           options: nil,
           visible: 0);
-        me._plan.addLayer(
+        me.plan.addLayer(
           factory: layer.factory,
           type_arg: layer_name,
           priority: layer.priority,
           style: me.Styles.getStyle(layer_name),
           options: nil,
           visible: 0);
-        me._plan.setTranslation(450,475); # old 450,475
+        me.plan.setTranslation(450,475); # old 450,475
       }
     }
 
@@ -207,23 +203,23 @@ var NavMap = {
       me.setZoom(x,n.getValue(x) or 20);
    },1,0);
 
-    setlistener("instrumentation/mfd["~x~"]/cdr0", func(n) {
-      me._cdr0[x] = n.getValue();
+    setlistener("instrumentation/mfd["~x~"]/outputs/vor", func(n) {
+      me.vor[x] = n.getValue();
       me.updateVisibility(x);
     },0,0);
 
-    setlistener("instrumentation/mfd["~x~"]/cdr1", func(n) {
-      me._cdr1[x] = n.getValue(x);
+    setlistener("instrumentation/mfd["~x~"]/outputs/apt", func(n) {
+      me.apt[x] = n.getValue(x);
       me.updateVisibility(x);
     },0,0);
 
-    setlistener("instrumentation/mfd["~x~"]/cdr2", func(n) {
-      me._cdr2[x] = n.getValue();
+    setlistener("instrumentation/mfd["~x~"]/outputs/fix", func(n) {
+      me.fix[x] = n.getValue();
       me.updateVisibility(x);
     },0,0);
 
     setlistener("instrumentation/efis/wxr["~x~"]", func(n) {
-      me._wxr[x] = n.getValue();
+      me.wxr[x] = n.getValue();
       me.updateVisibility(x);
     },0,0);
 
@@ -234,9 +230,9 @@ var NavMap = {
       me.updateVisibility(x);
     },0,0);
 
-    setlistener("instrumentation/sc840/nav"~(x+1)~"ptr", func(n) {
-      if (n.getValue() == 2) me._ndb[x] = 1;
-      else me._ndb[x] = 0;
+    setlistener("instrumentation/pfd["~x~"]/nav"~(x+1)~"ptr", func(n) {
+      if (n.getValue() == 2) me.ndb[x] = 1;
+      else me.ndb[x] = 0;
       me.updateVisibility(x);
     },0,0);
 
@@ -251,8 +247,8 @@ var NavMap = {
   }, # end of createMapElement
 
   setZoom : func(x,zoom) {
-    me._map.setRange(zoom);
-    me._plan.setRange(zoom);
+    me.mp.setRange(zoom);
+    me.plan.setRange(zoom);
     me.updateVisibility(x);
   },
 
@@ -260,54 +256,54 @@ var NavMap = {
     # Determine which layers should be visible.
     foreach (var layer_name; me.getLayerNames()) {
       var layer = me.getLayer(layer_name);
-      if (me._map.getLayer(layer_name) == nil) continue;
+      if (me.mp.getLayer(layer_name) == nil) continue;
 
       # Layers are only displayed if:
       # 1) the user has enabled them.
       # 2) The current zoom level is _less than the maximum range for the layer
       #    (i.e. as the range gets larger, we remove layers).  
-      if (layer.enabled and me._zoom <= layer.range) {
-            me._map.getLayer(layer_name).setVisible(1);
+      if (layer.enabled and me.zoom <= layer.range) {
+            me.mp.getLayer(layer_name).setVisible(1);
         if (layer.vis){
-          me._plan.getLayer(layer_name).setVisible(1);
-          me._map.getLayer('FIX').setVisible(me._cdr2[x]);
-          me._plan.getLayer('FIX').setVisible(me._cdr2[x]);
-          me._map.getLayer('VOR_cit').setVisible(me._cdr0[x]);
-          me._plan.getLayer('VOR_cit').setVisible(me._cdr0[x]);
-          me._map.getLayer('APT_cit').setVisible(me._cdr1[x]);
-          me._plan.getLayer('APT_cit').setVisible(me._cdr1[x]);
-          me._plan.getLayer('DME').setVisible(me._zoom > 80 ? 0 : me._cdr0[x]);
-          me._map.getLayer('NDB_cit').setVisible(me._ndb[x]);
-          me._plan.getLayer('NDB_cit').setVisible(me._ndb[x]);
-          me._map.getLayer('TFC').setVisible(Tfc[x]);
-          me._plan.getLayer('TFC').setVisible(Tfc[x]);
-          me._map.getLayer('WXR').setVisible(me._wxr[x]);
-          me._plan.getLayer('WXR').setVisible(me._wxr[x]);
-        } else me._map.getLayer(layer_name).setVisible(1);
+          me.plan.getLayer(layer_name).setVisible(1);
+          me.mp.getLayer('FIX').setVisible(me.fix[x]);
+          me.plan.getLayer('FIX').setVisible(me.fix[x]);
+          me.mp.getLayer('VOR_cit').setVisible(me.vor[x]);
+          me.plan.getLayer('VOR_cit').setVisible(me.vor[x]);
+          me.mp.getLayer('APT_cit').setVisible(me.apt[x]);
+          me.plan.getLayer('APT_cit').setVisible(me.apt[x]);
+          me.plan.getLayer('DME').setVisible(me.zoom > 80 ? 0 : me.vor[x]);
+          me.mp.getLayer('NDB_cit').setVisible(me.ndb[x]);
+          me.plan.getLayer('NDB_cit').setVisible(me.ndb[x]);
+          me.mp.getLayer('TFC').setVisible(Tfc[x]);
+          me.plan.getLayer('TFC').setVisible(Tfc[x]);
+          me.mp.getLayer('WXR').setVisible(me.wxr[x]);
+          me.plan.getLayer('WXR').setVisible(me.wxr[x]);
+        } else me.mp.getLayer(layer_name).setVisible(1);
       } else {
-        me._map.getLayer(layer_name).setVisible(0);
-        me._plan.getLayer(layer_name).setVisible(0);
+        me.mp.getLayer(layer_name).setVisible(0);
+        me.plan.getLayer(layer_name).setVisible(0);
       }
     }
   }, # end of updateVisibility
 
   getLayerNames : func() {
-    return keys(me._layerRanges);
+    return keys(me.layerRan);
   },
 
   getLayer : func (name) {
-    return me._layerRanges[name];
+    return me.layerRan[name];
   },
 
   setVisible : func(visible) {
     if (visible) {
-      me._map.setVisible(visible);
-      me._plan.setVisible(visible);
+      me.mp.setVisible(visible);
+      me.plan.setVisible(visible);
     } else {
-      if (me._map != nil) me._map.setVisible(visible);
-      if (me._plan != nil) me._plan.setVisible(visible);
-      if (NavMap.ENABLE) me._map = nil;
-      if (NavMap.ENABLE) me._plan = nil;
+      if (me.mp != nil) me.mp.setVisible(visible);
+      if (me.plan != nil) me.plan.setVisible(visible);
+      if (NavMap.ENABLE) me.mp = nil;
+      if (NavMap.ENABLE) me.plan = nil;
     }
   },
   

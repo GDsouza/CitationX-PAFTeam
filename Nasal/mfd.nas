@@ -7,8 +7,10 @@ var path = ["instrumentation/mfd/",
             "instrumentation/mfd[1]/"];
 var s_menu = ["instrumentation/mfd/s-menu",
               "instrumentation/mfd[1]/s-menu"];
-var alt_m = "instrumentation/efis/alt-meters";
-var baro = "instrumentation/efis/baro-hpa";
+var alt_m = ["instrumentation/mfd/alt-meters",
+             "instrumentation/mfd[1]/alt-meters"];
+var baro = ["instrumentation/mfd/baro-hpa",
+           "instrumentation/mfd[1]/baro-hpa"];
 var apt = ["instrumentation/mfd/outputs/apt",
            "instrumentation/mfd[1]/outputs/apt"];
 var vor = ["instrumentation/mfd/outputs/vor",
@@ -130,36 +132,36 @@ var menu = func(x) {
 	if (btn_0) {setprop(s_menu[x],0);raz_c()}
       ### Menu 1 ###
   if (!getprop(menu2[x])) { 
-    if (btn_1 and getprop(s_menu[x])==0) {
+    if (btn_1 and getprop(s_menu[x]) == 0) {
 	    setprop(s_menu[x],1);
 	    btn_1 = 0;
 	    n = 0;
     }
 
-    if (btn_2 and getprop(s_menu[x])==0) {
+    if (btn_2 and getprop(s_menu[x]) == 0) {
 	    setprop(s_menu[x],2);
 	    btn_2 = 0;
 	    n = 0;
     }
-    if (btn_5 and getprop(s_menu[x])==0) {
+    if (btn_5 and getprop(s_menu[x]) == 0) {
 	    setprop(s_menu[x],5);
 	    btn_5 = 0;
 	    n = 0;
     }
 
     if (getprop(s_menu[x])==1) {
-	    if (getprop(baro)) {setprop(path[x],cdr[0],1)}	
-	    else {setprop(path[x],cdr[0],0)}
-	    if (getprop(alt_m)) {setprop(path[x],cdr[1],1)}	
-	    else {setprop(path[x],cdr[1],0)}
+	    if (getprop(baro[x])) setprop(path[x],cdr[0],1);
+	    else setprop(path[x],cdr[0],0);
+	    if (getprop(alt_m[x])) setprop(path[x],cdr[1],1);
+	    else setprop(path[x],cdr[1],0);
 
 	    if (btn_1) {
-			    if (getprop(baro)) {setprop(baro,0);setprop(path[x],cdr[0],0)}
-			    else {setprop(baro,1);setprop(path[x],cdr[0],1)}				
+		    if (getprop(baro[x])) {setprop(baro[x],0);setprop(path[x],cdr[0],0)}
+		    else {setprop(baro[x],1);setprop(path[x],cdr[0],1)}				
 	    }
 	    if (btn_2){
-			    if (getprop(alt_m)) {setprop(alt_m,0);setprop(path[x],cdr[1],0)}
-			    else {setprop(alt_m,1);setprop(path[x],cdr[1],1)}				
+		    if (getprop(alt_m[x])) {setprop(alt_m[x],0);setprop(path[x],cdr[1],0)}
+		    else {setprop(alt_m[x],1);setprop(path[x],cdr[1],1)}				
 	    }
     }
 

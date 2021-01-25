@@ -164,7 +164,6 @@ var FMS = {
 			v_ind = 0;
 			v_alt.clear();
 			me.fpCalc();
-
       ### Aircraft pos ###
 			dist_dep = getprop(tot_dst)-getprop(dist_rem);
       ### Search Current Wp ###

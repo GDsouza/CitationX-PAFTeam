@@ -1,6 +1,6 @@
 ##
 ##### Citation X - Canvas NdDisplay #####
-##### Christian Le Moigne (clm76) - oct 2016 - Nov 2018 - nov 2020 ###
+##### Christian Le Moigne (clm76) - oct 2016 - release Jan 2021 ###
 
 var nasal_dir = getprop("/sim/aircraft-dir") ~ "/Models/Instruments/MFD/canvas";
 io.load_nasal(nasal_dir ~ '/navmap.nas', "fgMap");
@@ -16,10 +16,16 @@ var tas = "instrumentation/airspeed-indicator/true-speed-kt";
 var gspd = "velocities/groundspeed-kt";
 var etx = ["instrumentation/mfd/etx","instrumentation/mfd[1]/etx"];
 var nav_dist = "autopilot/internal/nav-distance";
-var nav_id = "autopilot/internal/nav-id";
-var nav_type = "autopilot/internal/nav-type";
+var nav_id = "autopilot/settings/nav-id";
+var nav_type = "autopilot/settings/nav-type";
 var hdg_ann = "autopilot/settings/heading-bug-deg";
 var dist_rem = "autopilot/route-manager/distance-remaining-nm";
+var dme_dist = ["instrumentation/dme/indicated-distance-nm",
+              "instrumentation/dme[1]/indicated-distance-nm"];
+var dme_id = ["instrumentation/dme/dme-id",
+             "instrumentation/dme[1]/dme-id"];
+var dme_ir = ["instrumentation/dme/in-range",
+             "instrumentation/dme[1]/in-range"];
 var Wtot = nil;
 var flaps = nil;
 var v1 = nil;
@@ -29,6 +35,8 @@ var vref = nil;
 var chronH = nil;
 var chronM = nil;
 var chronS = nil;
+var nav_src = "NAV";
+var nav_num = 0;
 var v1_m = "controls/flight/v1";
 var vr_m = "controls/flight/vr";
 var v2_m = "controls/flight/v2";
@@ -64,7 +72,7 @@ var va = "controls/flight/va";
 			m.text = {};
 			m.text_val = ["wx","bank","sat","tas","gspd","clock",
 										"chrono","navDist","navId","navTtw","navType",
-										"hdgAnn","main","range","distRem"];
+										"hdgAnn","main","range","distRem","dmeTxt","dmeId","dmeDist"];
 			foreach(var element;m.text_val) {
 				m.text[element] = m.mfd.getElementById(element);
 			}
@@ -105,7 +113,10 @@ var va = "controls/flight/va";
       m.ete = nil;
       m.white = [1,1,1];
       m.blue = [0,1,0.9];
-      m.amber = [0.9,0.5,0];
+      m.magenta = [0.9,0,0.9];
+      m.green = [0,1,0];
+
+#      me.dme_enabled = 1; # electrical init
 			return m;	
 		}, # end of new
 
@@ -177,9 +188,19 @@ var va = "controls/flight/va";
         me.VspeedMenu();
       },0,0);
 
+		  setlistener("systems/electrical/outputs/dme"~(x+1),func(n) {
+        me.dme_enabled = n.getValue();
+        me.dme_color = n.getValue() ? [1,0,0] : [0,1,0];
+      },1,0);
+
+      setlistener("autopilot/settings/nav-source",func(n) {
+        nav_src = left(n.getValue(),3);
+        nav_num = right(n.getValue(),1)-1;
+      },0,0);
 		}, # end of listen
 
 		update: func(x) {
+      me.DME();
 			me.text.clock.setText(getprop(clk_gmt));
 			if (getprop(etx[x])!=0) {
         chron = int(getprop(chrono[x]));
@@ -196,8 +217,11 @@ var va = "controls/flight/va";
 			me.text.gspd.setText(sprintf("%3d",getprop(gspd)));
 			me.text.navDist.setText(sprintf("%3.1f",getprop(nav_dist))~" NM");			
 			me.text.navId.setText(getprop(nav_id));
-			me.text.navType.setText(getprop(nav_type)).setColor(me.amber);
+			me.text.navType.setText(getprop(nav_type)).setColor(left(getprop(nav_type),3) == "FMS" ? me.magenta : me.green);
 			me.text.hdgAnn.setText(sprintf("%03d",getprop(hdg_ann)));
+			if (getprop(dist_rem) > 0 and left(getprop(nav_type),3) == "FMS")
+				me.text.distRem.setText(sprintf("%.0f",getprop(dist_rem))~" NM");
+			else me.text.distRem.setText("");
 
       me.ete = getprop("autopilot/internal/nav-ttw");
 		  if (!me.ete or size(me.ete) > 11) me.ete = "ETE 0+00";
@@ -210,13 +234,30 @@ var va = "controls/flight/va";
       }
       setprop("autopilot/internal/nav-ete",me.ete);
 			me.text.navTtw.setText(me.ete);
-			if (getprop(dist_rem) > 0) {
-				me.text.distRem.setText(sprintf("%.0f",getprop(dist_rem))~" NM");
-			} else {me.text.distRem.setText("")}
 
 			settimer(func me.update(x),0.1);
 
 		}, # end of update
+
+    DME : func {
+      if (!me.dme_enabled) {
+        me.text.dmeTxt.show().setColor(1,0,0);
+        me.text.dmeId.hide();
+        me.text.dmeDist.hide();
+      } else {
+        if (nav_src == "NAV" and getprop(dme_id[nav_num]) != "") {
+          me.text.dmeTxt.show().setColor(0,1,0);
+          me.text.dmeId.show().setText(getprop(dme_id[nav_num]));
+          if (getprop(dme_ir[nav_num])) 
+            me.text.dmeDist.show().setText(sprintf("%.1f",getprop(dme_dist[nav_num]))~" NM");
+          else me.text.dmeDist.show().setText("--- NM");
+        } else {
+          me.text.dmeTxt.hide();
+          me.text.dmeId.hide();
+          me.text.dmeDist.hide();
+        }
+      }
+    }, # end of DME
 
     selectMenu : func (x) {
       me.setColor(me.white);

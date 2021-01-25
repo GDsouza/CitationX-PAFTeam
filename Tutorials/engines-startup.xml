@@ -499,35 +499,6 @@
 
 		<step>
 			<message>
-				Set Ext Pwr OFF if in service{|.}
-			</message>
-			<view>
-				<heading-offset-deg>350.578</heading-offset-deg>
-				<pitch-offset-deg>-39.3</pitch-offset-deg>
-				<field-of-view>18</field-of-view>
-			</view>
-				<marker>
-			    <x-m>-7.7165</x-m>
-			    <y-m>-0.1909</y-m>
-			    <z-m>-0.1496</z-m>
-			    <scale>1.30</scale>
-				</marker>
-			<error>
-				<condition>
-					<property>controls/electric/external-power</property>
-				</condition>
-			</error>
-			<exit>
-				<condition>
-					<not>
-						<property>controls/electric/external-power</property>
-					</not>
-				</condition>
-			</exit>
-		</step>
-
-		<step>
-			<message>
 				Shutdown APU if in service{|.}
 			</message>
 			<view>
@@ -670,6 +641,13 @@
 				</condition>
 			</exit>
 		</step>
+
+    <step>
+      <set>
+        <property>services/ext-pwr</property>
+        <value>0</value>
+      </set>
+    </step>
 
 		<step>
 			<message>

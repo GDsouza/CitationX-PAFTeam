@@ -10,8 +10,8 @@
         <path>Models/Callsign/screenC.xml</path>
         <offsets>
             <x-m>0.002</x-m>
-            <y-m>0.360</y-m>
-            <z-m>0.005</z-m>
+            <y-m>0.443</y-m>
+            <z-m>-0.025</z-m>
         </offsets>
     </model>
 
@@ -48,7 +48,7 @@
         <path>Models/Instruments/NAV/nav2.xml</path>
         <offsets>
             <x-m>0.00</x-m>
-            <y-m>0.00</y-m>
+            <y-m>0.004</y-m>
             <z-m>0.00</z-m>
         </offsets>
     </model>
@@ -1504,6 +1504,9 @@
       <object-name>Ext.power</object-name>
       <object-name>Xpower.on</object-name>
 		  <object-name>Xpower.avail</object-name>
+      <condition>
+        <property>services/ext-pwr</property>
+      </condition>
       <action>
           <button>0</button>
           <repeatable>false</repeatable>
@@ -2930,15 +2933,10 @@
       <object-name>Xpower.avail</object-name>
       <condition>
         <and>
-          <property>controls/gear/brake-parking</property>
-          <property>gear/gear[0]/wow</property>
+          <property>services/ext-pwr</property>
           <not>
             <property>controls/electric/external-power</property>
           </not>
-          <greater-than>
-            <property>systems/electrical/stby-bus-volts</property>
-            <value>10</value>
-          </greater-than>
         </and>
       </condition>
     </animation>
@@ -2947,7 +2945,10 @@
         <type>select</type>
         <object-name>Xpower.on</object-name>
         <condition>
+        <and>
+          <property>services/ext-pwr</property>
           <property>controls/electric/external-power</property>
+        </and>
         </condition>
     </animation>
 
@@ -3183,26 +3184,26 @@
     <type>pick</type>
     <object-name>Logo.switch</object-name>
     <action>
-        <button>0</button>
-        <repeatable>false</repeatable>
-        <binding>
-            <command>property-toggle</command>
-            <property>controls/lighting/logo-lights</property>
-        </binding>
-        <binding>
-            <command>property-toggle</command>
-            <property>sim/sound/click</property>
-        </binding>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>property-toggle</command>
+        <property>controls/lighting/logo-lights</property>
+      </binding>
+      <binding>
+        <command>property-toggle</command>
+        <property>sim/sound/click</property>
+      </binding>
     </action>
-        <hovered>
-            <binding>
-                <command>set-tooltip</command>
-                <tooltip-id>Logo-switch</tooltip-id>
-                <label>Logo-light: %s</label>
-                <mapping>on-off</mapping>
-            <property>controls/lighting/logo-lights</property>
-            </binding>
-        </hovered>
+      <hovered>
+        <binding>
+          <command>set-tooltip</command>
+          <tooltip-id>Logo-switch</tooltip-id>
+          <label>Logo-light: %s</label>
+          <mapping>on-off</mapping>
+        <property>controls/lighting/logo-lights</property>
+        </binding>
+      </hovered>
 	</animation>
 
 <!-- PFD -->
@@ -3210,7 +3211,7 @@
     <animation>
         <type>translate</type>
         <object-name>PFD_L.std</object-name>
-        <property>instrumentation/altimeter/std</property>
+        <property>instrumentation/pfd/std-button</property>
 				<factor>0.005</factor>
         <axis>
             <x>-1</x>
@@ -3227,13 +3228,18 @@
           <button>0</button>
           <repeatable>false</repeatable>
           <binding>
-              <command>property-assign</command>
-              <property>instrumentation/altimeter/setting-inhg</property>
-              <value>29.92</value>
+            <condition>
+              <not>
+                <property>instrumentation/pfd/pfd-sel</property>
+              </not>
+            </condition>
+            <command>property-assign</command>
+            <property>instrumentation/altimeter/setting-inhg</property>
+            <value>29.92</value>
           </binding>
 					<binding>
 						<command>property-toggle</command>
-		        <property>instrumentation/altimeter/std</property>				
+		        <property>instrumentation/pfd/std-button</property>
 					</binding>
           <binding>
             <command>property-toggle</command>
@@ -3242,7 +3248,7 @@
 						<mod-up>
 				   		<binding>
 				     		<command>property-toggle</command>
-				        <property>instrumentation/altimeter/std</property>
+				        <property>instrumentation/pfd/std-button</property>
 					    </binding>
 						</mod-up>
         </action>
@@ -3251,12 +3257,12 @@
     <animation>
         <type>translate</type>
         <object-name>PFD_R.std</object-name>
-        <property>instrumentation/altimeter/std</property>
+        <property>instrumentation/pfd[1]/std-button</property>
 				<factor>0.005</factor>
         <axis>
-            <x>-1</x>
-            <y>0</y>
-            <z>0</z>
+          <x>-1</x>
+          <y>0</y>
+          <z>0</z>
         </axis>
     </animation>
 
@@ -3268,13 +3274,16 @@
           <button>0</button>
           <repeatable>false</repeatable>
           <binding>
+            <condition>
+              <property>instrumentation/pfd/pfd-sel</property>
+            </condition>
               <command>property-assign</command>
               <property>instrumentation/altimeter/setting-inhg</property>
               <value>29.92</value>
           </binding>
 					<binding>
 						<command>property-toggle</command>
-		        <property>instrumentation/altimeter/std</property>				
+		        <property>instrumentation/pfd[1]/std-button</property>
 					</binding>
           <binding>
             <command>property-toggle</command>
@@ -3283,7 +3292,7 @@
 						<mod-up>
 				   		<binding>
 				     		<command>property-toggle</command>
-				        <property>instrumentation/altimeter/std</property>
+				        <property>instrumentation/pfd[1]/std-button</property>
 					    </binding>
 						</mod-up>
         </action>
@@ -3307,6 +3316,55 @@
     </animation>
 
     <animation>
+        <type>pick</type>
+        <object-name>PFD_L.baro</object-name>
+        <action>
+            <button>3</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.2</interval-sec>
+            <binding>
+              <condition>
+                <not>
+                  <property>instrumentation/pfd/pfd-sel</property>
+                </not>
+              </condition>
+               <command>property-adjust</command>
+                <property>instrumentation/altimeter/setting-inhg</property>
+                <step>0.01</step>
+                <min>26.0</min>
+                <max>33.0</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+        <action>
+            <button>4</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.2</interval-sec>
+            <binding>
+              <condition>
+                <not>
+                  <property>instrumentation/pfd/pfd-sel</property>
+                </not>
+              </condition>
+                <command>property-adjust</command>
+                <property>instrumentation/altimeter/setting-inhg</property>
+                <step>-0.01</step>
+                <min>26.0</min>
+                <max>33.0</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>Set Inhg</tooltip-id>
+                <label>Set Inhg: %4.2f </label> 
+                <property>instrumentation/altimeter/setting-inhg</property>
+            </binding>
+        </hovered>
+    </animation>
+
+    <animation>
         <type>rotate</type>
         <object-name>PFD_R.baro</object-name>
         <property>instrumentation/altimeter/setting-inhg</property>
@@ -3325,13 +3383,15 @@
 
     <animation>
         <type>pick</type>
-        <object-name>PFD_L.baro</object-name>
         <object-name>PFD_R.baro</object-name>
         <action>
             <button>3</button>
             <repeatable>true</repeatable>
             <interval-sec>0.2</interval-sec>
             <binding>
+              <condition>
+                <property>instrumentation/pfd/pfd-sel</property>
+              </condition>
                 <command>property-adjust</command>
                 <property>instrumentation/altimeter/setting-inhg</property>
                 <step>0.01</step>
@@ -3345,6 +3405,9 @@
             <repeatable>true</repeatable>
             <interval-sec>0.2</interval-sec>
             <binding>
+              <condition>
+                <property>instrumentation/pfd/pfd-sel</property>
+              </condition>
                 <command>property-adjust</command>
                 <property>instrumentation/altimeter/setting-inhg</property>
                 <step>-0.01</step>
@@ -3400,47 +3463,101 @@
     <animation>
         <type>pick</type>
         <object-name>PFD_L.minimums</object-name>
-        <object-name>PFD_R.minimums</object-name>
         <action>
-            <button>3</button>
-            <repeatable>true</repeatable>
-            <interval-sec>0.2</interval-sec>
-            <binding>
-                <command>property-adjust</command>
-                <property>autopilot/settings/minimums</property>
-                <step>50</step>
-                <min>0</min>
-                <max>1000</max>
-                <wrap>false</wrap>
-            </binding>
+          <button>3</button>
+          <repeatable>true</repeatable>
+          <interval-sec>0.2</interval-sec>
+          <binding>
+            <condition>
+              <not>
+                <property>instrumentation/pfd/pfd-sel</property>
+              </not>
+            </condition>
+            <command>property-adjust</command>
+            <property>autopilot/settings/minimums</property>
+            <step>50</step>
+            <min>0</min>
+            <max>1000</max>
+            <wrap>false</wrap>
+          </binding>
         </action>
         <action>
-            <button>4</button>
-            <repeatable>true</repeatable>
-            <interval-sec>0.2</interval-sec>
-            <binding>
-                <command>property-adjust</command>
-                <property>autopilot/settings/minimums</property>
-                <step>-50</step>
-                <min>0</min>
-                <max>1000</max>
-                <wrap>false</wrap>
-            </binding>
+          <button>4</button>
+          <repeatable>true</repeatable>
+          <interval-sec>0.2</interval-sec>
+          <binding>
+            <condition>
+              <not>
+                <property>instrumentation/pfd/pfd-sel</property>
+              </not>
+            </condition>
+              <command>property-adjust</command>
+              <property>autopilot/settings/minimums</property>
+              <step>-50</step>
+              <min>0</min>
+              <max>1000</max>
+              <wrap>false</wrap>
+          </binding>
         </action>
         <hovered>
-            <binding>
-                <command>set-tooltip</command>
-                <tooltip-id>Minimums</tooltip-id>
-                <label>Minimums: %s </label> 
-                <property>autopilot/settings/minimums</property>
-            </binding>
+          <binding>
+            <command>set-tooltip</command>
+            <tooltip-id>Minimums</tooltip-id>
+            <label>Minimums: %s </label> 
+            <property>autopilot/settings/minimums</property>
+          </binding>
         </hovered>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>PFD_R.minimums</object-name>
+        <action>
+        <button>3</button>
+        <repeatable>true</repeatable>
+        <interval-sec>0.2</interval-sec>
+        <binding>
+          <condition>
+            <property>instrumentation/pfd/pfd-sel</property>
+          </condition>
+          <command>property-adjust</command>
+          <property>autopilot/settings/minimums</property>
+          <step>50</step>
+          <min>0</min>
+          <max>1000</max>
+          <wrap>false</wrap>
+        </binding>
+      </action>
+      <action>
+        <button>4</button>
+        <repeatable>true</repeatable>
+        <interval-sec>0.2</interval-sec>
+        <binding>
+          <condition>
+            <property>instrumentation/pfd/pfd-sel</property>
+          </condition>
+            <command>property-adjust</command>
+            <property>autopilot/settings/minimums</property>
+            <step>-50</step>
+            <min>0</min>
+            <max>1000</max>
+            <wrap>false</wrap>
+        </binding>
+        </action>
+        <hovered>
+          <binding>
+            <command>set-tooltip</command>
+            <tooltip-id>Minimums</tooltip-id>
+            <label>Minimums: %s </label> 
+            <property>autopilot/settings/minimums</property>
+          </binding>
+      </hovered>
     </animation>
 
     <animation>
         <type>translate</type>
         <object-name>PFD_L.ra-baro</object-name>
-        <property>autopilot/settings/min-ba</property>
+        <property>instrumentation/pfd/min-button</property>
 				<factor>0.005</factor>
         <axis>
             <x>-1</x>
@@ -3457,6 +3574,11 @@
           <button>0</button>
           <repeatable>false</repeatable>
           <binding>
+            <condition>
+              <not>
+                <property>instrumentation/pfd/pfd-sel</property>
+              </not>
+            </condition>
 						<command>property-cycle</command>
               <property>autopilot/settings/minimums-mode</property>
 							<value>BA</value>
@@ -3464,7 +3586,7 @@
 					</binding>
 					<binding>
 						<command>property-toggle</command>
-						<property>autopilot/settings/min-ba</property>
+						<property>instrumentation/pfd/min-button</property>
 					</binding>
           <binding>
             <command>property-toggle</command>
@@ -3473,7 +3595,7 @@
 						<mod-up>
 				   		<binding>
 				     		<command>property-toggle</command>
-				        <property>autopilot/settings/min-ba</property>
+				        <property>instrumentation/pfd/min-button</property>
 					    </binding>
 						</mod-up>
         </action>
@@ -3490,7 +3612,7 @@
     <animation>
         <type>translate</type>
         <object-name>PFD_R.ra-baro</object-name>
-        <property>autopilot/settings/min-ba</property>
+        <property>instrumentation/pfd[1]/min-button</property>
 				<factor>0.005</factor>
         <axis>
             <x>-1</x>
@@ -3507,6 +3629,9 @@
           <button>0</button>
           <repeatable>false</repeatable>
           <binding>
+            <condition>
+              <property>instrumentation/pfd/pfd-sel</property>
+            </condition>
 						<command>property-cycle</command>
               <property>autopilot/settings/minimums-mode</property>
 							<value>BA</value>
@@ -3514,7 +3639,7 @@
 					</binding>
 					<binding>
 						<command>property-toggle</command>
-						<property>autopilot/settings/min-ba</property>
+						<property>instrumentation/pfd[1]/min-button</property>
 					</binding>
           <binding>
             <command>property-toggle</command>
@@ -3523,7 +3648,7 @@
 						<mod-up>
 				   		<binding>
 				     		<command>property-toggle</command>
-				        <property>autopilot/settings/min-ba</property>
+				        <property>instrumentation/pfd[1]/min-button</property>
 					    </binding>
 						</mod-up>
         </action>
@@ -5021,7 +5146,7 @@
         <condition>
           <and>
             <not>
-              <property>instrumentation/pfd/madc</property>
+              <property>instrumentation/pfd/pfd-sel</property>
             </not>
             <property>systems/electrical/outputs/madc1</property>
           </and>
@@ -5033,7 +5158,7 @@
         <object-name>FD.pfdsel-B</object-name>
         <condition>
           <and>
-            <property>instrumentation/pfd/madc</property>
+            <property>instrumentation/pfd/pfd-sel</property>
             <property>systems/electrical/outputs/madc2</property>
           </and>
         </condition>
@@ -5185,7 +5310,7 @@
           </binding>
           <binding>
             <command>property-toggle</command>
-            <property>instrumentation/pfd/madc</property>
+            <property>instrumentation/pfd/pfd-sel</property>
           </binding>
           <binding>
             <command>property-toggle</command>
@@ -5421,11 +5546,6 @@
             <property>systems/electrical/outputs/fgc-cont-B</property>
           </or>
 	        <property>autopilot/locks/speed-ctrl</property>
-<!--
-					<not>
-						<property>autopilot/settings/fms</property>
-					</not>
--->
 				</and>
       </condition>
     </animation>
@@ -5995,7 +6115,7 @@
     <animation>
         <type>rotate</type>
         <object-name>FMC.knob1</object-name>
-        <property>instrumentation/sc840/nav1ptr</property>
+        <property>instrumentation/pfd/nav1ptr</property>
         <factor>40</factor>
         <axis>
             <x>-1.0</x>
@@ -6012,7 +6132,7 @@
     <animation>
         <type>rotate</type>
         <object-name>FMC1.knob1</object-name>
-        <property>instrumentation/sc840/nav1ptr</property>
+        <property>instrumentation/pfd[1]/nav1ptr</property>
         <factor>40</factor>
         <axis>
             <x>-1.0</x>
@@ -6029,7 +6149,7 @@
     <animation>
         <type>rotate</type>
         <object-name>FMC.knob2</object-name>
-        <property>instrumentation/sc840/nav2ptr</property>
+        <property>instrumentation/pfd/nav2ptr</property>
         <factor>40</factor>
         <axis>
             <x>-1.0</x>
@@ -6046,7 +6166,7 @@
     <animation>
         <type>rotate</type>
         <object-name>FMC1.knob2</object-name>
-        <property>instrumentation/sc840/nav2ptr</property>
+        <property>instrumentation/pfd[1]/nav2ptr</property>
         <factor>40</factor>
         <axis>
             <x>-1.0</x>
@@ -6061,25 +6181,26 @@
     </animation>
 
     <animation>
-        <type>pick</type>
-        <object-name>FMC.nav</object-name>
-        <object-name>FMC1.nav</object-name>
-        <visible>true</visible>
-        <action>
-            <button>0</button>
-            <repeatable>false</repeatable>
-            <binding>
-                <command>nasal</command>
-                <script>citation.nav_src_set("nav");</script>
-            </binding>
-       		<binding>
-         		<command>property-toggle</command>
-            <property>autopilot/settings/nav-btn</property>
+      <type>pick</type>
+      <object-name>FMC.nav</object-name>
+      <visible>true</visible>
+      <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+     		<binding>
+       		<command>property-cycle</command>
+          <property>instrumentation/pfd/source</property>
+					<value>NAV1</value>
+					<value>NAV2</value>
+        </binding>
+     		<binding>
+       		<command>property-toggle</command>
+          <property>instrumentation/pfd/nav-btn</property>
         </binding>
 				<mod-up>
        		<binding>
          		<command>property-toggle</command>
-            <property>autopilot/settings/nav-btn</property>
+            <property>instrumentation/pfd/nav-btn</property>
 	        </binding>
 				</mod-up>
 				<binding>
@@ -6090,192 +6211,411 @@
     </animation>
 
     <animation>
-        <type>translate</type>
-        <object-name>FMC.nav</object-name>
-        <object-name>FMC1.nav</object-name>
-        <property>autopilot/settings/nav-btn</property>
-				<factor>0.0062</factor>
-        <axis>
-            <x>-1</x>
-            <y>0</y>
-            <z>0</z>
-        </axis>
+      <type>translate</type>
+      <object-name>FMC.nav</object-name>
+      <property>instrumentation/pfd/nav-btn</property>
+			<factor>0.0062</factor>
+      <axis>
+        <x>-1</x>
+        <y>0</y>
+        <z>0</z>
+      </axis>
     </animation>
 
     <animation>
-        <type>pick</type>
-        <object-name>FMC.fms</object-name>
-        <object-name>FMC1.fms</object-name>
-        <visible>true</visible>
-        <action>
-            <button>0</button>
-            <repeatable>false</repeatable>
-            <binding>
-                <command>nasal</command>
-                <script>citation.nav_src_set("fms");</script>
-            </binding>
-       		<binding>
-         		<command>property-toggle</command>
-            <property>autopilot/settings/fms-btn</property>
+      <type>pick</type>
+      <object-name>FMC1.nav</object-name>
+      <visible>true</visible>
+      <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+       		<command>property-cycle</command>
+          <property>instrumentation/pfd[1]/source</property>
+					<value>NAV1</value>
+					<value>NAV2</value>
+        </binding>
+     		<binding>
+       		<command>property-toggle</command>
+          <property>instrumentation/pfd[1]/nav-btn</property>
         </binding>
 				<mod-up>
        		<binding>
          		<command>property-toggle</command>
-            <property>autopilot/settings/fms-btn</property>
+            <property>instrumentation/pfd[1]/nav-btn</property>
 	        </binding>
 				</mod-up>
 				<binding>
 		      <command>property-toggle</command>
 		      <property>sim/sound/click</property>
  	     </binding>
-        </action>
+      </action>
     </animation>
 
     <animation>
-        <type>translate</type>
-        <object-name>FMC.fms</object-name>
-        <object-name>FMC1.fms</object-name>
-        <property>autopilot/settings/fms-btn</property>
-				<factor>0.0062</factor>
-        <axis>
-            <x>-1</x>
-            <y>0</y>
-            <z>0</z>
-        </axis>
+      <type>translate</type>
+      <object-name>FMC1.nav</object-name>
+      <property>instrumentation/pfd[1]/nav-btn</property>
+			<factor>0.0062</factor>
+      <axis>
+        <x>-1</x>
+        <y>0</y>
+        <z>0</z>
+      </axis>
     </animation>
 
     <animation>
-        <type>pick</type>
-        <object-name>FMC.knob1</object-name>
-        <object-name>FMC1.knob1</object-name>
-        <action>
-            <button>0</button>
-            <repeatable>false</repeatable>
-            <binding>
-                <command>property-adjust</command>
-                <property>instrumentation/sc840/nav1ptr</property>
-                <step>1</step>
-                <min>0</min>
-                <max>3</max>
-                <wrap>0</wrap>
-            </binding>
-    				<binding>
-            <command>property-toggle</command>
-            <property>sim/sound/click</property>
-	        </binding>
-        </action>
-        <action>
-            <button>3</button>
-            <repeatable>false</repeatable>
-            <binding>
-                <command>property-adjust</command>
-                <property>instrumentation/sc840/nav1ptr</property>
-                <step>1</step>
-                <min>0</min>
-                <max>3</max>
-                <wrap>0</wrap>
-            </binding>
-    				<binding>
-            <command>property-toggle</command>
-            <property>sim/sound/click</property>
-	        </binding>
-        </action>
-        <action>
-            <button>4</button>
-            <repeatable>false</repeatable>
-            <binding>
-                <command>property-adjust</command>
-                <property>instrumentation/sc840/nav1ptr</property>
-                <step>-1</step>
-                <min>0</min>
-                <max>3</max>
-                <wrap>0</wrap>
-            </binding>
-    				<binding>
-            <command>property-toggle</command>
-            <property>sim/sound/click</property>
-	        </binding>
-        </action>
-        <hovered>
-            <binding>
-                <command>set-tooltip</command>
-                <tooltip-id>Nav1_select</tooltip-id>
-                <label>Nav1 select: %s </label> 
-                <property>instrumentation/sc840/nav1ptr</property> 
-               <mapping>nasal</mapping>
-								<script>
-									var modes = ['OFF','VOR1','ADF1','FMS1'];
-									return modes[arg[0]];
-								</script>
-            </binding>
-        </hovered>
+      <type>pick</type>
+      <object-name>FMC.fms</object-name>
+      <visible>true</visible>
+      <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+          <condition>
+            <property>autopilot/route-manager/active</property> 
+          </condition>
+      		<command>property-cycle</command>
+          <property>instrumentation/pfd/source</property>
+					<value>FMS1</value>
+					<value>FMS2</value>
+        </binding>
+     		<binding>
+       		<command>property-toggle</command>
+          <property>instrumentation/pfd/fms-btn</property>
+        </binding>
+			  <mod-up>
+       		<binding>
+         		<command>property-toggle</command>
+            <property>instrumentation/pfd/fms-btn</property>
+          </binding>
+			  </mod-up>
+			  <binding>
+	        <command>property-toggle</command>
+	        <property>sim/sound/click</property>
+        </binding>
+      </action>
+    </animation>
+
+    <animation>
+      <type>translate</type>
+      <object-name>FMC.fms</object-name>
+      <property>instrumentation/pfd/fms-btn</property>
+			<factor>0.0062</factor>
+      <axis>
+        <x>-1</x>
+        <y>0</y>
+        <z>0</z>
+      </axis>
+    </animation>
+
+    <animation>
+      <type>pick</type>
+      <object-name>FMC1.fms</object-name>
+      <visible>true</visible>
+      <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+          <condition>
+            <property>autopilot/route-manager/active</property> 
+          </condition>
+       		<command>property-cycle</command>
+          <property>instrumentation/pfd[1]/source</property>
+					<value>FMS1</value>
+					<value>FMS2</value>
+        </binding>
+     		<binding>
+       		<command>property-toggle</command>
+          <property>instrumentation/pfd[1]/fms-btn</property>
+        </binding>
+			  <mod-up>
+       		<binding>
+         		<command>property-toggle</command>
+            <property>instrumentation/pfd[1]/fms-btn</property>
+          </binding>
+			  </mod-up>
+			  <binding>
+	        <command>property-toggle</command>
+	        <property>sim/sound/click</property>
+        </binding>
+      </action>
+    </animation>
+
+    <animation>
+      <type>translate</type>
+      <object-name>FMC1.fms</object-name>
+      <property>instrumentation/pfd[1]/fms-btn</property>
+			<factor>0.0062</factor>
+      <axis>
+        <x>-1</x>
+        <y>0</y>
+        <z>0</z>
+      </axis>
+    </animation>
+
+    <animation>
+      <type>pick</type>
+      <object-name>FMC.knob1</object-name>
+      <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+          <command>property-adjust</command>
+          <property>instrumentation/pfd/nav1ptr</property>
+          <step>1</step>
+          <min>0</min>
+          <max>3</max>
+          <wrap>0</wrap>
+        </binding>
+				<binding>
+          <command>property-toggle</command>
+          <property>sim/sound/click</property>
+        </binding>
+      </action>
+      <action>
+          <button>3</button>
+          <repeatable>false</repeatable>
+          <binding>
+              <command>property-adjust</command>
+              <property>instrumentation/pfd/nav1ptr</property>
+              <step>1</step>
+              <min>0</min>
+              <max>3</max>
+              <wrap>0</wrap>
+          </binding>
+  				<binding>
+          <command>property-toggle</command>
+          <property>sim/sound/click</property>
+        </binding>
+      </action>
+      <action>
+          <button>4</button>
+          <repeatable>false</repeatable>
+          <binding>
+              <command>property-adjust</command>
+              <property>instrumentation/pfd/nav1ptr</property>
+              <step>-1</step>
+              <min>0</min>
+              <max>3</max>
+              <wrap>0</wrap>
+          </binding>
+  				<binding>
+          <command>property-toggle</command>
+          <property>sim/sound/click</property>
+        </binding>
+      </action>
+      <hovered>
+        <binding>
+          <command>set-tooltip</command>
+          <tooltip-id>Nav1_select</tooltip-id>
+          <label>Nav1 : %s </label> 
+          <property>instrumentation/pfd/nav1ptr</property> 
+         <mapping>nasal</mapping>
+					<script>
+						var modes = ['OFF','VOR1','ADF1','FMS1'];
+						return modes[arg[0]];
+					</script>
+        </binding>
+      </hovered>
    </animation>
 
     <animation>
-        <type>pick</type>
-        <object-name>FMC.knob2</object-name>
-        <object-name>FMC1.knob2</object-name>
-        <action>
-            <button>0</button>
-            <repeatable>false</repeatable>
-            <binding>
-                <command>property-adjust</command>
-                <property>instrumentation/sc840/nav2ptr</property>
-                <step>1</step>
-                <min>0</min>
-                <max>3</max>
-                <wrap>0</wrap>
-            </binding>
-    				<binding>
-            <command>property-toggle</command>
-            <property>sim/sound/click</property>
-	        </binding>
-        </action>
-        <action>
-            <button>3</button>
-            <repeatable>false</repeatable>
-            <binding>
-                <command>property-adjust</command>
-                <property>instrumentation/sc840/nav2ptr</property>
-                <step>1</step>
-                <min>0</min>
-                <max>3</max>
-                <wrap>0</wrap>
-            </binding>
-    				<binding>
-            <command>property-toggle</command>
-            <property>sim/sound/click</property>
- 	       </binding>
-        </action>
-        <action>
-            <button>4</button>
-            <repeatable>false</repeatable>
-            <binding>
-                <command>property-adjust</command>
-                <property>instrumentation/sc840/nav2ptr</property>
-                <step>-1</step>
-                <min>0</min>
-                <max>3</max>
-                <wrap>0</wrap>
-            </binding>
-    				<binding>
-            <command>property-toggle</command>
-            <property>sim/sound/click</property>
- 	       </binding>
-        </action>
-        <hovered>
-            <binding>
-                <command>set-tooltip</command>
-                <tooltip-id>Nav2_select</tooltip-id>
-                <label>Nav2 select: %s </label> 
-                <property>instrumentation/sc840/nav2ptr</property> 
-               <mapping>nasal</mapping>
-								<script>
-									var modes = ['OFF','VOR2','ADF2','FMS2'];
-									return modes[arg[0]];
-								</script>
-            </binding>
-        </hovered>
+      <type>pick</type>
+      <object-name>FMC1.knob1</object-name>
+      <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+          <command>property-adjust</command>
+          <property>instrumentation/pfd[1]/nav1ptr</property>
+          <step>1</step>
+          <min>0</min>
+          <max>3</max>
+          <wrap>0</wrap>
+        </binding>
+				<binding>
+          <command>property-toggle</command>
+          <property>sim/sound/click</property>
+        </binding>
+      </action>
+      <action>
+          <button>3</button>
+          <repeatable>false</repeatable>
+          <binding>
+              <command>property-adjust</command>
+              <property>instrumentation/pfd[1]/nav1ptr</property>
+              <step>1</step>
+              <min>0</min>
+              <max>3</max>
+              <wrap>0</wrap>
+          </binding>
+  				<binding>
+          <command>property-toggle</command>
+          <property>sim/sound/click</property>
+        </binding>
+      </action>
+      <action>
+          <button>4</button>
+          <repeatable>false</repeatable>
+          <binding>
+              <command>property-adjust</command>
+              <property>instrumentation/pfd[1]/nav1ptr</property>
+              <step>-1</step>
+              <min>0</min>
+              <max>3</max>
+              <wrap>0</wrap>
+          </binding>
+  				<binding>
+          <command>property-toggle</command>
+          <property>sim/sound/click</property>
+        </binding>
+      </action>
+      <hovered>
+        <binding>
+          <command>set-tooltip</command>
+          <tooltip-id>Nav1_select</tooltip-id>
+          <label>Nav1 : %s </label> 
+          <property>instrumentation/pfd[1]/nav1ptr</property> 
+         <mapping>nasal</mapping>
+					<script>
+						var modes = ['OFF','VOR1','ADF1','FMS1'];
+						return modes[arg[0]];
+					</script>
+        </binding>
+      </hovered>
+   </animation>
+
+    <animation>
+      <type>pick</type>
+      <object-name>FMC.knob2</object-name>
+      <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+          <command>property-adjust</command>
+          <property>instrumentation/pfd/nav2ptr</property>
+          <step>1</step>
+          <min>0</min>
+          <max>3</max>
+          <wrap>0</wrap>
+        </binding>
+				<binding>
+          <command>property-toggle</command>
+          <property>sim/sound/click</property>
+        </binding>
+      </action>
+      <action>
+        <button>3</button>
+        <repeatable>false</repeatable>
+        <binding>
+          <command>property-adjust</command>
+          <property>instrumentation/pfd/nav2ptr</property>
+          <step>1</step>
+          <min>0</min>
+          <max>3</max>
+          <wrap>0</wrap>
+        </binding>
+        <binding>
+        <command>property-toggle</command>
+        <property>sim/sound/click</property>
+       </binding>
+      </action>
+      <action>
+        <button>4</button>
+        <repeatable>false</repeatable>
+        <binding>
+          <command>property-adjust</command>
+          <property>instrumentation/pfd/nav2ptr</property>
+          <step>-1</step>
+          <min>0</min>
+          <max>3</max>
+          <wrap>0</wrap>
+        </binding>
+				<binding>
+        <command>property-toggle</command>
+        <property>sim/sound/click</property>
+       </binding>
+      </action>
+      <hovered>
+        <binding>
+          <command>set-tooltip</command>
+          <tooltip-id>Nav2_select</tooltip-id>
+          <label>Nav2 : %s </label> 
+          <property>instrumentation/pfd/nav2ptr</property> 
+         <mapping>nasal</mapping>
+					<script>
+						var modes = ['OFF','VOR2','ADF2','FMS2'];
+						return modes[arg[0]];
+					</script>
+        </binding>
+      </hovered>
+   </animation>
+
+    <animation>
+      <type>pick</type>
+      <object-name>FMC1.knob2</object-name>
+      <action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+          <command>property-adjust</command>
+          <property>instrumentation/pfd[1]/nav2ptr</property>
+          <step>1</step>
+          <min>0</min>
+          <max>3</max>
+          <wrap>0</wrap>
+        </binding>
+				<binding>
+          <command>property-toggle</command>
+          <property>sim/sound/click</property>
+        </binding>
+      </action>
+      <action>
+        <button>3</button>
+        <repeatable>false</repeatable>
+        <binding>
+          <command>property-adjust</command>
+          <property>instrumentation/pfd[1]/nav2ptr</property>
+          <step>1</step>
+          <min>0</min>
+          <max>3</max>
+          <wrap>0</wrap>
+        </binding>
+        <binding>
+        <command>property-toggle</command>
+        <property>sim/sound/click</property>
+       </binding>
+      </action>
+      <action>
+        <button>4</button>
+        <repeatable>false</repeatable>
+        <binding>
+          <command>property-adjust</command>
+          <property>instrumentation/pfd[1]/nav2ptr</property>
+          <step>-1</step>
+          <min>0</min>
+          <max>3</max>
+          <wrap>0</wrap>
+        </binding>
+				<binding>
+        <command>property-toggle</command>
+        <property>sim/sound/click</property>
+       </binding>
+      </action>
+      <hovered>
+        <binding>
+          <command>set-tooltip</command>
+          <tooltip-id>Nav2_select</tooltip-id>
+          <label>Nav2 : %s </label> 
+          <property>instrumentation/pfd[1]/nav2ptr</property> 
+         <mapping>nasal</mapping>
+					<script>
+						var modes = ['OFF','VOR2','ADF2','FMS2'];
+						return modes[arg[0]];
+					</script>
+        </binding>
+      </hovered>
    </animation>
 
 <!-- Reversionary -->

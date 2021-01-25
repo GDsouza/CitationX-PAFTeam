@@ -10,6 +10,10 @@
         <value>0</value>
       </set>
       <set>
+        <property>services/ext-pwr</property>
+        <value>0</value>
+      </set>
+      <set>
         <property>controls/gear/brake-parking</property>
         <value>1</value>
       </set>

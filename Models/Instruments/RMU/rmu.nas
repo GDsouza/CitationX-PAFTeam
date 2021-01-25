@@ -6,7 +6,10 @@ setprop("instrumentation/dme[1]/frequencies/source","instrumentation/dme[1]/freq
 setprop("instrumentation/adf/mode","adf");
 setprop("instrumentation/adf[1]/mode","adf");
 
-var nav_freq = ["instrumentation/nav/frequencies/selected-mhz","instrumentation/nav[1]/frequencies/selected-mhz"];
+var nav_freq = ["instrumentation/nav/frequencies/selected-mhz",
+                "instrumentation/nav[1]/frequencies/selected-mhz",
+                "instrumentation/nav[2]/frequencies/selected-mhz",
+                "instrumentation/nav[3]/frequencies/selected-mhz"];
 var nav_id = ["instrumentation/nav/nav-id","instrumentation/nav[1]/nav-id"];
 var dme_freq = ["instrumentation/dme/frequencies/selected-mhz","instrumentation/dme[1]/frequencies/selected-mhz"];
 var dme_id = ["instrumentation/dme/dme-id","instrumentation/dme[1]/dme-id"];
@@ -262,10 +265,11 @@ var RMU = {
 
       ##### NAV #####
 		setlistener(nav_freq[x], func(n) {
+      setprop(nav_freq[x+2],getprop(nav_freq[x]));
       me.display(x);
       if (dme[x] == 0) setprop(dme_freq[x],getprop(nav_freq[x]));     
       else me.dmeDisplay(x,0);
-		},0,0);
+		},1,0);
 
 		setlistener("instrumentation/nav["~x~"]/frequencies/standby-mhz", func(n) {
       me.freqLimits(x);

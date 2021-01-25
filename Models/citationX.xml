@@ -1868,7 +1868,7 @@
     <path>Aircraft/CitationX/Models/Services/External-Power/ext-pwr-box.ac</path>
     <condition>
       <and>
-        <property>/services/ext-pwr/enable</property>
+        <property>/services/ext-pwr</property>
         <property>/gear/gear/wow</property>
       </and>
     </condition>
