@@ -1427,9 +1427,26 @@
       <button>0</button>
       <repeatable>false</repeatable>
       <binding>
+        <condition>
+          <equals>
+            <property>instrumentation/pfd/source</property>
+            <value>NAV1</value>
+          </equals>
+        </condition>
         <command>property-assign</command>
-        <property>instrumentation/pfd/selected-deg</property>
-        <property>orientation/heading-magnetic-deg</property>
+          <property>instrumentation/pfd/selected-deg</property>
+          <property>instrumentation/nav/heading-deg</property>
+      </binding>
+      <binding>
+        <condition>
+          <equals>
+            <property>instrumentation/pfd/source</property>
+            <value>NAV2</value>
+          </equals>
+        </condition>
+        <command>property-assign</command>
+          <property>instrumentation/pfd/selected-deg</property>
+          <property>instrumentation/nav[1]/heading-deg</property>
       </binding>
     </action>
     <action>
@@ -1473,9 +1490,26 @@
       <button>0</button>
       <repeatable>false</repeatable>
       <binding>
+        <condition>
+          <equals>
+            <property>instrumentation/pfd[1]/source</property>
+            <value>NAV1</value>
+          </equals>
+        </condition>
         <command>property-assign</command>
-        <property>instrumentation/pfd[1]/selected-deg</property>
-        <property>orientation/heading-magnetic-deg</property>
+          <property>instrumentation/pfd[1]/selected-deg</property>
+          <property>instrumentation/nav/heading-deg</property>
+      </binding>
+      <binding>
+        <condition>
+          <equals>
+            <property>instrumentation/pfd[1]/source</property>
+            <value>NAV2</value>
+          </equals>
+        </condition>
+        <command>property-assign</command>
+          <property>instrumentation/pfd[1]/selected-deg</property>
+          <property>instrumentation/nav[1]/heading-deg</property>
       </binding>
     </action>
     <action>

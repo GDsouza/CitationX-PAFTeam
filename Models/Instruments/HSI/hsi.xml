@@ -50,7 +50,8 @@
       <object-name>CRS.deflect</object-name>
       <object-name>From-flag</object-name>
       <object-name>To-flag</object-name>
-        <property>instrumentation/nav/radials/selected-deg</property>
+<!--      <property>instrumentation/nav/radials/selected-deg</property>-->
+      <property>instrumentation/pfd/selected-deg</property>
       <axis>
           <x>-1</x>
           <y>0</y>
@@ -91,7 +92,7 @@
           <z-m>0</z-m>
       </center>
   </animation>
-  
+
   <animation>
     <type>select</type>
     <object-name>To-flag</object-name>
@@ -143,7 +144,8 @@
 <animation>
   <type>rotate</type>
   <object-name>CRS.knob</object-name>
-  <property>instrumentation/nav/radials/selected-deg</property>    
+<!--  <property>instrumentation/nav/radials/selected-deg</property> -->
+  <property>instrumentation/pfd/selected-deg</property>    
   <factor>5</factor>
   <center>      
     <x-m>  0.00913 </x-m>
@@ -166,7 +168,8 @@
           <repeatable>true</repeatable>
            <binding>
            <command>property-adjust</command>
-          <property>instrumentation/nav/radials/selected-deg</property>
+<!--  <property>instrumentation/nav/radials/selected-deg</property> -->
+          <property>instrumentation/pfd/selected-deg</property>    
           <factor>1</factor>
           <min>0</min>
           <max>360</max>
@@ -179,7 +182,8 @@
           <repeatable>true</repeatable>
            <binding>
            <command>property-adjust</command>
-          <property>instrumentation/nav/radials/selected-deg</property>
+<!--  <property>instrumentation/nav/radials/selected-deg</property> -->
+          <property>instrumentation/pfd/selected-deg</property>    
           <step>-1</step>
           <min>0</min>
           <max>360</max>

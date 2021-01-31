@@ -64,7 +64,7 @@ var speak = func(secs=3) {
       setprop("/satc/comm2",1);
       gui.popupTip("ATC on Comm2");
     } else {
-      setprop("/satc/comm2",1);
+      setprop("/satc/comm2",0);
       gui.popupTip("ATC on Comm1");
     }
 

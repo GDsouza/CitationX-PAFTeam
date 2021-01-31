@@ -3,6 +3,7 @@
 # C. Le Moigne (clm76) - 2017 - Rev1 2018
 ###############################################
 
+var cruise_alt = "autopilot/settings/asel";
 var currWp = "autopilot/route-manager/current-wp";
 var dataLoad = "systems/electrical/outputs/data-loader";
 var dep_apt = "autopilot/route-manager/departure/airport";
@@ -54,7 +55,6 @@ var ClimbSpeed_kt = nil;
 var ClimbSpeed_mc = nil;
 var cdu_ret = nil;
 var conv = nil;
-var Cruise_alt = nil;
 var CruiseSpeed_kt = nil;
 var CruiseSpeed_mc = nil;
 var data_load = nil;
@@ -802,7 +802,6 @@ var cduDsp = {
 		  DescAngle = sprintf("%.1f",getprop("autopilot/settings/descent-angle"));
 		  CruiseSpeed_kt = getprop("autopilot/settings/cruise-speed-kt");
 		  CruiseSpeed_mc = sprintf("%.2f",getprop("autopilot/settings/cruise-speed-mc"));
-		  Cruise_alt = getprop("autopilot/settings/asel");
       me.Raz_lines(x);
       me.line.title.setText("PERFORMANCE INIT "~titl);
       me.line.l1.setText(" CLIMB");
@@ -813,7 +812,7 @@ var cduDsp = {
       me.line.l6.setText(DescSpeed_kt~" / "~DescSpeed_mc~" / "~DescAngle);
 			me.line.l7.setText("< DEP/APP SPD");
 			me.line.r3.setText("<------>  ALTITUDE").setColor(me.white);
-			me.line.r4r.setText("FL "~Cruise_alt).setColor(me.green);
+			me.line.r4r.setText("FL "~getprop(cruise_alt)).setColor(me.green);
     }
     if (me.nrPage == 3) {
       me.Raz_lines(x);
@@ -842,7 +841,7 @@ var cduDsp = {
       me.line.r2r.setText("260 / 7800 ").setColor(me.green);
       me.line.r3.setText("ISA DEV  ").setColor(me.white);
       me.line.r4r.setText("+0 °C ").setColor(me.green);
-      me.line.r6r.setText("FL "~Cruise_alt~" ").setColor(me.green);
+      me.line.r6r.setText("FL "~getprop(cruise_alt)~" ").setColor(me.green);
 #		  me.line.r7.setText("NEXT PAGE >");
     }
     if (me.nrPage == 5) {

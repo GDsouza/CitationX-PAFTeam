@@ -24,9 +24,7 @@ var BaroMode = ["instrumentation/mfd/baro-hpa",
                 "instrumentation/mfd[1]/baro-hpa"];
 var crsDefl_fms = "autopilot/internal/course-deflection";
 var crsDefl_nav = ["instrumentation/nav/heading-needle-deflection",
-                   "instrumentation/nav[1]/heading-needle-deflection",
-                   "instrumentation/nav[2]/heading-needle-deflection",
-                   "instrumentation/nav[3]/heading-needle-deflection"];
+                   "instrumentation/nav[1]/heading-needle-deflection"];
 var crsOffset = "autopilot/internal/course-offset";
 var dispCtrl = ["systems/electrical/outputs/disp-cont1",
                 "systems/electrical/outputs/disp-cont2"];
@@ -95,9 +93,7 @@ var PitchDeg = "/orientation/pitch-deg";
 var RollBars = "/autopilot/internal/roll-filter";
 var RollDeg = "/orientation/roll-deg";
 var SelCrs = ["instrumentation/nav/radials/selected-deg",
-              "instrumentation/nav[1]/radials/selected-deg",
-              "instrumentation/nav[2]/radials/selected-deg",
-              "instrumentation/nav[3]/radials/selected-deg"];
+              "instrumentation/nav[1]/radials/selected-deg"];
 var SgRev = "/instrumentation/eicas/sg-rev";
 var SgTest = ["instrumentation/reversionary/sg-test",
               "instrumentation/reversionary/sg-test[1]"];
@@ -434,6 +430,7 @@ var PFDDisplay = {
 
 		setlistener(Asel, func(n) {
       me.Alt.AltSelText.setText(sprintf("%.0f",n.getValue()));
+      setprop(PfdAsel[x],n.getValue());
 		},1,0);
 
     setlistener(SgTest[x],func(n) {
@@ -639,7 +636,8 @@ var PFDDisplay = {
       nav_id = getprop("instrumentation/gps/wp/wp[1]/ID");
       sgnl = "FMS"~(fms_num[x]+1);
     } else {
-      crs_defl = getprop(NavInRange[nav_num[x]]) ? getprop(crsDefl_nav[nav_num[x]]) : -10;
+#      crs_defl = getprop(NavInRange[nav_num[x]]) ? getprop(crsDefl_nav[nav_num[x]]) : -10;
+      crs_defl = getprop(crsDefl_nav[nav_num[x]]) or -10;
       sgnl = getprop(NavData[nav_num[x]]) ? "VOR"~(nav_num[x]+1) : "?";
       if(getprop("instrumentation/nav["~nav_num[x]~"]/nav-loc")) sgnl="LOC"~(nav_num[x]+1);
       if(getprop("instrumentation/nav["~nav_num[x]~"]/has-gs")) sgnl="ILS"~(nav_num[x]+1);       
