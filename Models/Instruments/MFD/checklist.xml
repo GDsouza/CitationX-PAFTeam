@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<PropertyList>
+
+	<path>checklist.ac</path>
+
+  <animation>
+    <type>select</type>
+    <object-name>chklist.screen</object-name>
+    <condition>
+			<and>
+        <property>instrumentation/checklists/chklst-pilot</property>
+				<property>systems/electrical/outputs/mfd1</property>
+			</and>
+    </condition>
+  </animation>
+
+</PropertyList>

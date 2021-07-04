@@ -144,7 +144,6 @@
 <animation>
   <type>rotate</type>
   <object-name>CRS.knob</object-name>
-<!--  <property>instrumentation/nav/radials/selected-deg</property> -->
   <property>instrumentation/pfd/selected-deg</property>    
   <factor>5</factor>
   <center>      
@@ -168,7 +167,6 @@
           <repeatable>true</repeatable>
            <binding>
            <command>property-adjust</command>
-<!--  <property>instrumentation/nav/radials/selected-deg</property> -->
           <property>instrumentation/pfd/selected-deg</property>    
           <factor>1</factor>
           <min>0</min>
@@ -182,7 +180,6 @@
           <repeatable>true</repeatable>
            <binding>
            <command>property-adjust</command>
-<!--  <property>instrumentation/nav/radials/selected-deg</property> -->
           <property>instrumentation/pfd/selected-deg</property>    
           <step>-1</step>
           <min>0</min>

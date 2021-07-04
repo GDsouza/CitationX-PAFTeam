@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
  <!--
  Syd Adams
  Cessna CE-750 Citation X
@@ -85,7 +86,7 @@ Fuel 12938 lbs jet
   sweep="37" taper="0.3" dihedral="1.4" camber="0"  effectiveness="1.5">
     <stall aoa="18" width="4" peak="1.5"/>
     <flap0 start="0" end="1" lift="1.5" drag="1.2"/>
-     <!-- Argh, /controls/elevator/trim is hardcoded in yasim sources -->
+     <!-- controls/elevator/trim is hardcoded in yasim sources -->
     <control-input axis="/controls/flight/elevator-trim" control="FLAP0"/>
     <control-input axis="/surface-positions/yasim-elevator-minus-trim" control="FLAP0"/>
   </hstab>
@@ -129,16 +130,20 @@ Fuel 12938 lbs jet
   <tank x="0.8" y="0.0" z="-1.2" capacity="2990" jet="true"/>
   <tank x="0.8" y="0.0" z="-1.2" capacity="2990" jet="true"/>
 
-  <gear x="8.014" y="0.00" z="-2.2" 
+<!--  <gear x="8.014" y="0.00" z="-2.2" 
     compression="0.48" spring="1.0" sfric="0.8" dfric="0.7">
+-->
+    <gear x="8.014" y="0.00" z="-2.2" compression="0.5" spring="0.5">
     <control-input axis="/controls/gear/steering" control="STEER" invert="true"/>
     <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
     <control-output control="EXTEND" prop="/gear/gear[0]/position-norm"/>
     <control-speed control="EXTEND" transition-time="5"/>
     </gear>
 
-  <gear x="-1.5" y="1.7" z="-2.55" 
+<!--  <gear x="-1.5" y="1.7" z="-2.55" 
     compression="0.6" spring="1.0" sfric="0.8" dfric="0.7">
+-->
+    <gear x="-1.5" y="1.7" z="-2.55" compression=".5" spring="0.5">
     <control-input axis="/controls/gear/brake-left" control="BRAKE"/>
     <control-input axis="/controls/gear/brake-parking" control="BRAKE"/>
     <control-input axis="/controls/gear/emer-brake" control="BRAKE"/>
@@ -147,8 +152,10 @@ Fuel 12938 lbs jet
     <control-output control="EXTEND" prop="/gear/gear[1]/position-norm"/>
   </gear>
 
-  <gear x="-1.5" y="-1.7" z="-2.55" 
+<!--  <gear x="-1.5" y="-1.7" z="-2.55" 
     compression="0.6" spring="1.0" sfric="0.8" dfric="0.7">
+-->
+    <gear x="-1.5" y="-1.7" z="-2.55" compression=".5" spring="0.5">
     <control-input axis="/controls/gear/brake-right" control="BRAKE"/>
     <control-input axis="/controls/gear/brake-parking" control="BRAKE"/>
     <control-input axis="/controls/gear/emer-brake" control="BRAKE"/>

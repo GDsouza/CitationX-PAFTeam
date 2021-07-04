@@ -24,7 +24,7 @@
         <alignment>right-center</alignment>
         <axis-alignment>reversed-xz-plane</axis-alignment>
         <type type="string">number-value</type>
-        <property>instrumentation/clock/flight-meter-dsp</property>
+        <property>instrumentation/clock/flight-hour-tot</property>
         <format>%.1f</format>
         <font>helvetica_bold.txf</font>
         <character-size>0.009</character-size>

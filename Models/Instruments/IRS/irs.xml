@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- Inertial Reference System - Light version-->
+<!-- C.Le Moigne (clm76) - 2021 -->
+
+<PropertyList>
+
+    <path>irs.ac</path>
+
+    <animation>
+        <type>material</type>
+        <object-name>IRS.labels</object-name>
+        <emission>
+            <red>1</red>
+            <green>1</green>
+            <blue>1</blue>
+            <factor-prop>controls/lighting/el-norm</factor-prop>
+        </emission>
+    </animation>
+
+    <animation>
+        <type>material</type>
+        <object-name>IRS.console</object-name>
+        <emission>
+            <red>1</red>
+            <green>1</green>
+            <blue>1</blue>
+            <factor-prop>controls/lighting/flood-norm</factor-prop>
+        </emission>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>IRS.knob</object-name>
+        <property>instrumentation/irs/selected</property>
+        <factor>45</factor>
+        <center>
+            <x-m>0.645</x-m>
+            <y-m>-0.107</y-m>
+            <z-m>0</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>-1</z>
+        </axis>
+    </animation>
+
+		<animation>
+		  <type>pick</type>
+		  <object-name>IRS.knob</object-name>
+		  <action>
+	      <button>3</button>
+	      <repeatable>false</repeatable>
+				<binding>
+				  <command>property-adjust</command>
+				  <property>instrumentation/irs/selected</property>
+						<step>1</step>
+						<min>-2</min>
+						<max>1</max>
+						<wrap>false</wrap>
+				</binding>
+	      <binding>
+	          <command>property-toggle</command>
+	          <property>sim/sound/click</property>
+	      </binding>
+			</action>
+      <hovered>
+        <binding>
+          <command>set-tooltip</command>
+          	<tooltip-id>IRS</tooltip-id>
+            <label>IRS: %s</label>
+       			<property>instrumentation/irs/selected</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['NAV','ATT','NAV','ALIGN'];
+							return modes[arg[0]];
+						</script>
+		      </binding>
+		    </hovered>
+			</animation>
+
+		<animation>
+		  <type>pick</type>
+		  <object-name>IRS.knob</object-name>
+		  <action>
+	      <button>4</button>
+	      <repeatable>false</repeatable>
+				<binding>
+				  <command>property-adjust</command>
+				  <property>instrumentation/irs/selected</property>
+						<step>-1</step>
+						<min>-2</min>
+						<max>1</max>
+						<wrap>false</wrap>
+				</binding>
+	      <binding>
+	          <command>property-toggle</command>
+	          <property>sim/sound/click</property>
+	      </binding>
+			</action>
+      <hovered>
+        <binding>
+          <command>set-tooltip</command>
+          	<tooltip-id>IRS</tooltip-id>
+            <label>IRS: %s</label>
+       			<property>instrumentation/irs/selected</property>
+            <mapping>nasal</mapping>
+						<script>
+							var modes = ['NAV','ATT','NAV','ALIGN'];
+							return modes[arg[0]];
+						</script>
+		      </binding>
+		    </hovered>
+			</animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>IRS.test</object-name>	
+        <property>instrumentation/irs/test</property>
+				<factor>-0.004</factor>
+        <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>1</z>
+        </axis>
+    </animation>
+
+		<animation>
+    	<type>pick</type>
+    	<object-name>IRS.test</object-name>
+   		<action>
+        <button>0</button>
+        <repeatable>false</repeatable>
+        <binding>
+            <command>property-toggle</command>
+            <property>sim/sound/click</property>
+        </binding>
+        <binding>
+            <command>property-assign</command>
+            <property>instrumentation/irs/test</property>
+							<value>1</value>
+        </binding>
+			<mod-up>
+       		<binding>
+         		<command>property-assign</command>
+            <property>instrumentation/irs/test</property>
+							<value>0</value>
+        </binding>
+			</mod-up>
+    		</action>
+        	<hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>IRS.test</tooltip-id>
+                <label>Test IRS</label>
+                <mapping>push</mapping>
+            		<property>instrumentation/irs/test</property>
+            </binding>
+        </hovered>
+		</animation>
+
+</PropertyList>

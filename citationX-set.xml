@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="ISO-8859-1"?> 
 <!--
 ************************************************************************
-Cessna Citation-X
+Cessna Citation X - Light Version
 Started Oct 2005  Syd Adams
-Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
+Completed 2015-2021 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 ************************************************************************
 -->
 <PropertyList>
   <sim>
-    <description>Cessna Citation-X</description>
+    <description>Cessna Citation X (Yasim)</description>
     <author>Syd Adams (creator), C.Le Moigne (clm76), C.Thiriot (PATTEN), F-ORKI, Laurent (F5SLQ)</author>
     <status>devel</status>
     <rating>
@@ -53,6 +53,10 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 				<path>splash3.png</path>
 			</preview>
 		</previews>
+
+    <aircraft-data>
+      <path>instrumentation/clock/flight-hour-tot</path>
+    </aircraft-data>
   
     <tutorials>      
         <tutorial include="Tutorials/cold-start-with-external-power.xml"/>
@@ -287,15 +291,12 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
             <path>Aircraft/CitationX/Systems/pfd.xml</path>
         </property-rule>
         <property-rule n="101">
-            <path>Aircraft/CitationX/Models/Lights/lights.xml</path>
-        </property-rule>
-        <property-rule n="102">
             <path>Aircraft/CitationX/Systems/electrical-rules.xml</path>
         </property-rule>
-        <property-rule n="103">
+        <property-rule n="102">
             <path>Aircraft/CitationX/Systems/air-conditioning.xml</path>
         </property-rule>
-        <property-rule n="104">
+        <property-rule n="103">
             <path>Aircraft/CitationX/Systems/oxygen.xml</path>
         </property-rule>
     </systems>
@@ -361,7 +362,7 @@ Completed 2015 C. Le Moigne (clm76), C-Thiriot (PATTEN).
   					<label>Ground Services</label>
 		        <binding>
       			  <command>nasal</command>
-      			  <script>var ground_services = gui.Dialog.new("sim/gui/dialogs/ground_services/dialog", "Aircraft/CitationX/Systems/ground_services.xml");
+      			  <script>var ground_services = gui.Dialog.new("sim/gui/dialogs/ground-services/dialog", "Aircraft/CitationX/Systems/ground-services.xml");
 			   ground_services.open();</script>
       		  </binding>
       	  </item>

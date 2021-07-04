@@ -1,5 +1,5 @@
 ### Properties Initialization   ###
-### C. Le Moigne (clm76) - 2019 ###
+### C. Le Moigne (clm76) - 2019 -- light version 2021 ###
 
 ### Air Conditioning ###
 props.globals.initNode("/controls/air-conditioning/cabin/degC", 0, "DOUBLE");	
@@ -116,45 +116,41 @@ for(var n=1;n<9;n+=1) {
 }
 
 ### Cdu ###
-for(var n=0;n<2;n+=1) {
-  props.globals.initNode("instrumentation/cdu["~n~"]/init",0,"BOOL");
-  props.globals.initNode("instrumentation/cdu["~n~"]/pos-init",0,"BOOL");
-  props.globals.initNode("instrumentation/cdu["~n~"]/direct",0,"BOOL");
-  props.globals.initNode("instrumentation/cdu["~n~"]/direct-to",-1,"INT");
-  props.globals.initNode("/instrumentation/cdu["~n~"]/nbpage",1,"INT");
-  props.globals.initNode("/instrumentation/cdu["~n~"]/alarms",0,"INT");
-  props.globals.initNode("/instrumentation/cdu["~n~"]/fltplan",0,"BOOL");
-  props.globals.initNode("/instrumentation/cdu["~n~"]/perf-confirm",0,"BOOL");
-  props.globals.initNode("/instrumentation/cdu["~n~"]/trans-alt",18000,"DOUBLE");
-  props.globals.initNode("/instrumentation/cdu["~n~"]/hold/active",0,"BOOL");
-  props.globals.initNode("/instrumentation/cdu["~n~"]/hold/clear",0,"BOOL");
-  props.globals.initNode("/instrumentation/cdu["~n~"]/hold/inbound",0,"INT");
-  props.globals.initNode("/instrumentation/cdu["~n~"]/hold/speed",0,"INT");
-  props.globals.initNode("/instrumentation/cdu["~n~"]/hold/wpt",0,"INT");
-  props.globals.initNode("/instrumentation/cdu["~n~"]/flyover",0,"INT");
-  props.globals.initNode("/instrumentation/cdu["~n~"]/pcdr/active",0,"BOOL");
-  props.globals.initNode("/instrumentation/cdu["~n~"]/pcdr/turn","L","STRING");
-  props.globals.initNode("/instrumentation/cdu["~n~"]/pcdr/inbound",0,"INT");
-  props.globals.initNode("/instrumentation/cdu["~n~"]/pcdr/speed",0,"INT");
-  props.globals.initNode("/instrumentation/cdu["~n~"]/pcdr/wpt",0,"INT");
-  props.globals.initNode("/instrumentation/cdu["~n~"]/pcdr/clear",0,"INT");
-  props.globals.initNode("/instrumentation/cdu["~n~"]/pcdr/angle",45,"INT");
-}
+props.globals.initNode("instrumentation/cdu/init",0,"BOOL");
+props.globals.initNode("instrumentation/cdu/pos-init",0,"BOOL");
+props.globals.initNode("instrumentation/cdu/direct",0,"BOOL");
+props.globals.initNode("instrumentation/cdu/direct-to",-1,"INT");
+props.globals.initNode("/instrumentation/cdu/nbpage",1,"INT");
+props.globals.initNode("/instrumentation/cdu/alarms",0,"INT");
+props.globals.initNode("/instrumentation/cdu/fltplan",0,"BOOL");
+props.globals.initNode("/instrumentation/cdu/perf-confirm",0,"BOOL");
+props.globals.initNode("/instrumentation/cdu/trans-alt",18000,"DOUBLE");
+props.globals.initNode("/instrumentation/cdu/hold/active",0,"BOOL");
+props.globals.initNode("/instrumentation/cdu/hold/clear",0,"BOOL");
+props.globals.initNode("/instrumentation/cdu/hold/inbound",0,"INT");
+props.globals.initNode("/instrumentation/cdu/hold/speed",0,"INT");
+props.globals.initNode("/instrumentation/cdu/hold/wpt",0,"INT");
+props.globals.initNode("/instrumentation/cdu/flyover",0,"INT");
+props.globals.initNode("/instrumentation/cdu/pcdr/active",0,"BOOL");
+props.globals.initNode("/instrumentation/cdu/pcdr/turn","L","STRING");
+props.globals.initNode("/instrumentation/cdu/pcdr/inbound",0,"INT");
+props.globals.initNode("/instrumentation/cdu/pcdr/speed",0,"INT");
+props.globals.initNode("/instrumentation/cdu/pcdr/wpt",0,"INT");
+props.globals.initNode("/instrumentation/cdu/pcdr/clear",0,"INT");
+props.globals.initNode("/instrumentation/cdu/pcdr/angle",45,"INT");
 
 ### Checklists ###
 props.globals.initNode("instrumentation/checklists/chklst-pilot",0,"BOOL");
 props.globals.initNode("instrumentation/checklists/chklst-copilot",0,"BOOL");
 props.globals.initNode("instrumentation/checklists/nr-page",0,"INT");
-props.globals.initNode("instrumentation/checklists/nr-page[1]",0,"INT");
 props.globals.initNode("instrumentation/checklists/nr-voice",0,"INT");
 props.globals.initNode("instrumentation/checklists/page",0,"INT");
 
 ### Clock ###
-props.globals.initNode("instrumentation/clock/flight-meter-hour",0,"DOUBLE");
+props.globals.initNode("instrumentation/clock/flight-hour-tot",0,"DOUBLE");
 
 ### Efis ###
 props.globals.initNode("instrumentation/efis/vsd",0,"BOOL");
-props.globals.initNode("instrumentation/efis/vsd[1]",0,"BOOL");
 
 ### Eicas ###
 props.globals.initNode("instrumentation/eicas/xfr",0,"INT");
@@ -241,13 +237,11 @@ props.globals.initNode("controls/hydraulic/pumpA",1,"BOOL");
 props.globals.initNode("controls/hydraulic/pumpB",1,"BOOL");
 
 ### Irs ###
-for(var n=0;n<2;n+=1) {
-  props.globals.initNode("instrumentation/irs["~n~"]/positionned",0,"BOOL");
-  props.globals.initNode("instrumentation/irs["~n~"]/align",0,"BOOL");
-  props.globals.initNode("instrumentation/irs["~n~"]/test",0,"BOOL");
-  props.globals.initNode("instrumentation/irs["~n~"]/selected",0,"INT");
-  props.globals.initNode("instrumentation/irs["~n~"]/failure",0,"BOOL");
-}
+props.globals.initNode("instrumentation/irs/positioned",0,"BOOL");
+props.globals.initNode("instrumentation/irs/align",0,"BOOL");
+props.globals.initNode("instrumentation/irs/test",0,"BOOL");
+props.globals.initNode("instrumentation/irs/selected",0,"INT");
+props.globals.initNode("instrumentation/irs/failure",0,"BOOL");
 
 ### Lighting ###
 props.globals.initNode("controls/lighting/landing-light[0]",0,"BOOL");
@@ -289,27 +283,23 @@ props.globals.initNode("controls/lighting/seat-belts",0,"INT");
 props.globals.initNode("controls/lighting/aux-panel",0,"DOUBLE");
 
 ### Mfd ###
-for(var n=0;n<2;n+=1) {
-  props.globals.initNode("instrumentation/mfd["~n~"]/menu2",0,"BOOL");
-  props.globals.initNode("instrumentation/mfd["~n~"]/s-menu",0,"INT");
-  props.globals.initNode("instrumentation/mfd["~n~"]/cdr-tot",0,"INT");
-  props.globals.initNode("instrumentation/mfd["~n~"]/map",0,"BOOL");
-  props.globals.initNode("instrumentation/mfd["~n~"]/outputs/apt",0,"BOOL");
-  props.globals.initNode("instrumentation/mfd["~n~"]/outputs/vor",0,"BOOL");
-  props.globals.initNode("instrumentation/mfd["~n~"]/outputs/fix",0,"BOOL");
-  props.globals.initNode("instrumentation/mfd["~n~"]/outputs/fms",0,"BOOL");
-  props.globals.initNode("instrumentation/mfd["~n~"]/outputs/src",0,"BOOL");
-  props.globals.initNode("instrumentation/mfd["~n~"]/etx",0,"INT");
-  props.globals.initNode("instrumentation/mfd["~n~"]/baro-hpa",0,"BOOL");
-  props.globals.initNode("instrumentation/mfd["~n~"]/alt-meters",0,"BOOL");
-}
+props.globals.initNode("instrumentation/mfd/menu2",0,"BOOL");
+props.globals.initNode("instrumentation/mfd/s-menu",0,"INT");
+props.globals.initNode("instrumentation/mfd/cdr-tot",0,"INT");
+props.globals.initNode("instrumentation/mfd/map",0,"BOOL");
+props.globals.initNode("instrumentation/mfd/outputs/apt",0,"BOOL");
+props.globals.initNode("instrumentation/mfd/outputs/vor",0,"BOOL");
+props.globals.initNode("instrumentation/mfd/outputs/fix",0,"BOOL");
+props.globals.initNode("instrumentation/mfd/outputs/fms",0,"BOOL");
+props.globals.initNode("instrumentation/mfd/outputs/src",0,"BOOL");
+props.globals.initNode("instrumentation/mfd/etx",0,"INT");
+props.globals.initNode("instrumentation/mfd/baro-hpa",0,"BOOL");
+props.globals.initNode("instrumentation/mfd/alt-meters",0,"BOOL");
 for (var n=0;n<9;n+=1) {
 	props.globals.initNode("instrumentation/mfd/cdr"~n,0,"BOOL");
-	props.globals.initNode("instrumentation/mfd[1]/cdr"~n,0,"BOOL");
 }
 for (var n=0;n<6;n+=1) {
 	props.globals.initNode("instrumentation/mfd/btn"~n,0,"BOOL");
-	props.globals.initNode("instrumentation/mfd[1]/btn"~n,0,"BOOL");
 }
 
 ### Model ###
@@ -338,15 +328,13 @@ props.globals.initNode("autopilot/locks/hold/active",0,"BOOL");
 ### Pfd ###
 props.globals.initNode("instrumentation/pfd/pfd-sel",0,"BOOL");
 props.globals.initNode("instrumentation/pfd/madc-btn",0,"BOOL");
-for (var n=0;n<2;n+=1) {
-  props.globals.initNode("instrumentation/pfd["~n~"]/nav-btn",0,"BOOL");
-  props.globals.initNode("instrumentation/pfd["~n~"]/source","NAV1","STRING");
-  props.globals.initNode("instrumentation/pfd["~n~"]/fms-btn",0,"BOOL");
-  props.globals.initNode("instrumentation/pfd["~n~"]/selected-deg",0,"INT");
-  props.globals.initNode("instrumentation/pfd["~n~"]/heading-deg",0,"DOUBLE");
-  props.globals.initNode("instrumentation/pfd["~n~"]/heading-error-deg",0,"DOUBLE");
-  props.globals.initNode("instrumentation/pfd["~n~"]/asel",100,"INT");
-}
+props.globals.initNode("instrumentation/pfd/nav-btn",0,"BOOL");
+props.globals.initNode("instrumentation/pfd/source","NAV1","STRING");
+props.globals.initNode("instrumentation/pfd/fms-btn",0,"BOOL");
+props.globals.initNode("instrumentation/pfd/selected-deg",0,"INT");
+props.globals.initNode("instrumentation/pfd/heading-deg",0,"DOUBLE");
+props.globals.initNode("instrumentation/pfd/heading-error-deg",0,"DOUBLE");
+props.globals.initNode("instrumentation/pfd/asel",100,"INT");
 
 ### Pressurization ###
 props.globals.initNode("systems/pressurization/cabin-alt-ft",0,"DOUBLE");

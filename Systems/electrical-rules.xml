@@ -235,7 +235,7 @@
       <binding>
         <command>property-assign</command>
         <property>sim/rendering/als-secondary-lights/landing-light2-offset-deg</property>
-        <value>0</value>
+        <value>5</value>
       </binding>
       <binding>
         <command>property-assign</command>

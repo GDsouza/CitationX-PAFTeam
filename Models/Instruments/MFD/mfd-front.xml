@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<PropertyList>
+
+<path>screen-front.ac</path>
+
+  <animation>
+    <type>material</type>
+    <object-name>screen_F</object-name>
+    <condition>
+      <property>systems/electrical/outputs/mfd1</property>
+    </condition>
+    <emission>
+      <red>1</red>
+      <green>1</green>
+      <blue>1</blue>
+      <factor-prop>controls/lighting/mfd</factor-prop>
+    </emission>
+  </animation>
+
+</PropertyList>

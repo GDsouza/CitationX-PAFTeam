@@ -140,67 +140,6 @@
       </offsets>
   </model>
 
-  <model>
-    <name>Lights</name>
-    <path>Aircraft/CitationX/Models/Lights/lights.xml</path>
-    <offsets>
-      <x-m>0</x-m>
-      <y-m>0</y-m>
-      <z-m>0</z-m>
-      <pitch-deg>0</pitch-deg>
-    </offsets>
-  </model>
-
-<!-- ################################## -->
-<!-- ####### REMBRANDT LIGHTING ####### -->
-<!-- ################################## -->
-	<model>
-      <name>TaxiLight</name>
-      <path>Aircraft/CitationX/Models/Lights/taxilight.xml</path>
-      <offsets>
-          <x-m>-8.259</x-m>
-          <y-m> 0.000</y-m>
-          <z-m>-1.235</z-m>
-          <pitch-deg>0</pitch-deg>
-      </offsets>
-  </model>
-
-	<model>
-      <name>LLandingLight</name>
-      <path>Aircraft/CitationX/Models/Lights/left-landinglight.xml</path>
-      <offsets>
-          <x-m>-3.298</x-m>
-          <y-m>-1.185</y-m>
-          <z-m>-0.918</z-m>
-          <pitch-deg>0</pitch-deg>
-      </offsets>
-  </model>
-
-	<model>
-      <name>RLandingLight</name>
-      <path>Aircraft/CitationX/Models/Lights/right-landinglight.xml</path>
-      <offsets>
-          <x-m>-3.298</x-m>
-          <y-m> 1.185</y-m>
-          <z-m>-0.918</z-m>
-          <pitch-deg>0</pitch-deg>
-      </offsets>
-  </model>
-
-  <animation>
-      <type>range</type>
-      <object-name>cabin</object-name>
-      <min-m>0</min-m>
-      <max-m>100</max-m>
-  </animation>
-
-  <animation>
-      <type>range</type>
-      <object-name>flightdeck</object-name>
-      <min-m>0</min-m>
-      <max-m>100</max-m>
-  </animation>
-
   <animation>
       <type>shader</type>
       <shader>chrome</shader>

@@ -8,8 +8,11 @@
 var alm_wp = "autopilot/locks/alm-wp";
 var alt = "instrumentation/altimeter/indicated-altitude-ft";
 var AP = "autopilot/locks/AP-status";
+var ap_dist = "autopilot/internal/nav-distance";
 var AutoCoord = "controls/flight/auto-coordination";
+var back_crs = "autopilot/locks/back-course";
 var cdi = "autopilot/internal/course-deflection";
+#var dme_dist = "instrumentation/dme/indicated-distance-nm";
 var el_fgc = "autopilot/settings/fgc";
 var el_sec = "sim/time/elapsed-sec";
 var flyover = ["instrumentation/cdu/flyover",
@@ -17,6 +20,7 @@ var flyover = ["instrumentation/cdu/flyover",
 var Fms = "autopilot/settings/fms";
 var fp_active = "autopilot/route-manager/active";
 var gs_in_range = "autopilot/internal/gs-in-range";
+var head = "autopilot/locks/heading";
 var ind_kt = "velocities/airspeed-kt";
 var ind_mc = "instrumentation/airspeed-indicator/indicated-mach";
 var Lateral = "autopilot/locks/heading";
@@ -24,12 +28,18 @@ var Lateral_arm = "autopilot/locks/heading-arm";
 var mag_var = "environment/magnetic-variation-deg";
 var minimums = "autopilot/settings/minimums";
 var nav_source = "autopilot/settings/nav-source";
+var nav_tgHdg = ["instrumentation/nav/radials/target-auto-hdg-deg",
+                 "instrumentation/nav[1]/radials/target-auto-hdg-deg"];
+var nav_type = "autopilot/settings/nav-type";
+var orient = "orientation/heading-deg";
 var pcdr_active = "autopilot/locks/pcdr-turn-active";
 var pitch = "orientation/pitch-deg";
 var throttle = ["controls/engines/engine/throttle",
                 "controls/engines/engine[1]/throttle"];
 var tg_climb = "autopilot/settings/target-climb-rate-fps";
 var tg_pitch = "autopilot/settings/target-pitch-deg";
+var tg_radial = ["instrumentation/nav/radials/target-radial-deg",
+                 "instrumentation/nav[1]/radials/target-radial-deg"];
 var tg_spd_kt = "autopilot/settings/target-speed-kt";
 var tg_spd_mc = "autopilot/settings/target-speed-mach";
 var to_ga = ["controls/engines/engine/to-ga",
@@ -52,6 +62,7 @@ var CourseError = nil;
 var crs_offset = nil;
 var crs_set = nil;
 var dist_rem = nil;
+var dme_flag = 0;
 var dst = nil;
 var dstCoeff = 1;
 var et_ind = 0;
@@ -96,8 +107,12 @@ setlistener(nav_source, func(n) {
     navsrc = n.getValue();
 },1,0);
 
-setlistener("autopilot/locks/heading",func(n) {
-    if (n.getValue() != "VOR") setprop("autopilot/locks/back-course",0);
+setlistener("autopilot/settings/btn/bc", func(n) {
+  if (n.getValue()) {
+    if (getprop(head) == 'VOR' or getprop(head) == 'LOC') 
+      setprop("autopilot/locks/back-course",1);
+    else setprop("autopilot/locks/back-course",0);
+  }
 },0,0);
 
 setlistener("autopilot/locks/alt-mach",func(n) {
@@ -136,7 +151,10 @@ var FD_set_mode = func(btn){
 		if(btn == "ap"){
 			Coord = getprop(AutoCoord);
 			if(getprop(AP) != "AP") {
-				setprop(Vertical_arm,"");
+        if (Vmode == 'TO' or Vmode == 'GA') {
+          setprop(Vertical,getprop(Vertical_arm));
+				  setprop(Vertical_arm,"");
+        }
 				setprop("autopilot/locks/disengage",0);
         if(Vmode=="PTCH") set_pitch("PTCH");
         if(Vmode=="VS") setprop(tg_climb,50);
@@ -160,8 +178,10 @@ var FD_set_mode = func(btn){
     }
     if(btn=="alt"){
 			if(Vmode!="ALT"){
-        setprop(Vertical,"ALT");
-        setprop(toga,0);
+        if (Vmode == 'TO' or Vmode == 'GA') {
+          if (getprop(Vertical_arm) != "ALT") setprop(Vertical_arm,"ALT");
+          else setprop(Vertical_arm,"");
+        } else setprop(Vertical,"ALT");
       } else set_pitch("PTCH");
     }
     if(btn == "flc"){
@@ -187,7 +207,6 @@ var FD_set_mode = func(btn){
 					}
         }
 			} else set_pitch("PTCH");
-      setprop(toga,0);
 		}
     if(btn == "nav"){
 			set_nav_mode();
@@ -199,11 +218,13 @@ var FD_set_mode = func(btn){
     if(btn == "vnav"){
 			if(Vmode!="VALT" and asel > 0 and getprop(fp_active)) {
 				if(left(navsrc,3)=="FMS"){
-					setprop(Vertical,"VALT");
+          if (Vmode == 'TO' or Vmode == 'GA') {
+            if (getprop(Vertical_arm) != "VALT") setprop(Vertical_arm,"VALT");
+            else setprop(Vertical_arm,"");
+          } else setprop(Vertical,"VALT");
 					setprop(Lateral,"LNAV");
 				} else set_pitch("PTCH");
-      }else if (Vmode!="ALT") set_pitch("PTCH");
-      setprop(toga,0);      
+      } else if (Vmode!="ALT") set_pitch("PTCH");
     }
     if(btn == "app"){
 			if (Vmode!="GS") {
@@ -227,7 +248,6 @@ var FD_set_mode = func(btn){
 			setprop(Vertical_arm,"");
 			set_pitch("PTCH");
 			set_roll();
-      setprop(toga,0);
     }
     if(btn == "co"){
 			var Co= 1- getprop("autopilot/settings/changeover");
@@ -239,6 +259,8 @@ var FD_set_mode = func(btn){
 ###  TO-GA Buttons  ###
 controls.ToGa_set_mode = func {
     setprop(toga,1);
+    if (getprop(Vertical) == "ALT") setprop(Vertical_arm,"ALT");
+    if (getprop(Vertical) == "VALT") setprop(Vertical_arm,"VALT");
     if (!getprop(_wow[0]) and !getprop(_wow[1])) {
       kill_Ap("");
       set_pitch("GA");
@@ -283,8 +305,9 @@ var set_nav_mode = func {
 		setprop(Vertical_arm,"");
     var ind_nav = nil;
     if(left(navsrc,3)=="NAV"){
-      if(navsrc=="NAV1") ind_nav = 0;
-      if(navsrc=="NAV2") ind_nav = 1;
+      ind_nav = navsrc=="NAV1" ? 0 : 1;
+#      if(navsrc=="NAV1") ind_nav = 0;
+#      if(navsrc=="NAV2") ind_nav = 1;
 		  if(getprop("instrumentation/nav["~ind_nav~"]/data-is-valid")){
 			  if(getprop("instrumentation/nav["~ind_nav~"]/nav-loc")) {
 				  setprop(Lateral_arm,"LOC");
@@ -472,16 +495,31 @@ var set_apr = func{
 var update_nav = func {
     sgnl = "- - -";
 		ind = 0;
-    if (navsrc == "") setprop("autopilot/settings/nav-type","");
+    if (navsrc == "") setprop(nav_type,"");
     else if(left(navsrc,3) == "NAV") {
       ind = (navsrc == "NAV1" ? 0 : 1);
       in_range = getprop("instrumentation/nav["~ind~"]/in-range");
+      setprop("autopilot/locks/to-flag",getprop("instrumentation/nav["~ind~"]/to-flag"));
+      setprop("autopilot/locks/from-flag",getprop("instrumentation/nav["~ind~"]/from-flag"));
       if (getprop("instrumentation/nav/gs-in-range") 
         or getprop("instrumentation/nav[1]/gs-in-range")) setprop(gs_in_range,1);
       else setprop(gs_in_range,0);
       nav_id = getprop("instrumentation/nav["~ind~"]/nav-id");
       dst = nav_id ? getprop("instrumentation/nav["~ind~"]/nav-distance")*0.000539 :0;
       if (getprop(gs_in_range) and dst <= 20) setprop("autopilot/internal/in-range",1);
+      ### Back Course ###
+      if(left(getprop(nav_type),3) == "ILS" and getprop(back_crs)) {
+        if (getprop(ap_dist) > 10) {
+          setprop(back_crs,0);
+          dme_flag = 0;
+          return;
+        }
+        crs_offset = geo.normdeg(getprop(tg_radial[ind]) - 180)- getprop(orient);
+        if (getprop(ap_dist) < 2) dme_flag = 1;
+        if (dme_flag and getprop(ap_dist) > 5) crs_offset = crs_offset - 45;
+      } else crs_offset = (getprop(nav_tgHdg[ind]) or 0) - getprop(orient);
+      ###################
+
     } else if(left(navsrc,3) == "FMS"){
       ind = (navsrc == "FMS1" ? 0 : 1);
       in_range = getprop("instrumentation/nav["~ind~"]/in-range");
@@ -493,7 +531,7 @@ var update_nav = func {
       if (getprop(Fms)) {
         setprop("autopilot/internal/course-deflection",getprop("instrumentation/gps/cdi-deflection"));
 			  dist_rem = getprop("autopilot/route-manager/distance-remaining-nm");
-			  heading = getprop("orientation/heading-deg");
+			  heading = getprop(orient);
 			  geocoord = geo.aircraft_position();
 
         if (fp.getWP(fp.current).wp_name == "*int03")
@@ -526,7 +564,6 @@ var update_nav = func {
 			      crs_set = geocoord.course_to(courseCoord);
           }
         }
-        setprop("autopilot/internal/course-offset",crs_offset);
 		    setprop("autopilot/settings/selected-crs",int(crs_set));
 
         ### Wp change ###
@@ -548,6 +585,7 @@ var update_nav = func {
         } 
       }
     }
+    setprop("autopilot/internal/course-offset",crs_offset);
     setprop("autopilot/settings/nav-id",nav_id);
     setprop("autopilot/internal/nav-distance",dst);
 } # end of update

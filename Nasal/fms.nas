@@ -86,6 +86,7 @@ var tg_alt = "autopilot/settings/tg-alt-ft";
 var tg_climb = "autopilot/settings/target-climb-rate-fps";
 var tg_spd_kt = "autopilot/settings/target-speed-kt";
 var tg_spd_mc = "autopilot/settings/target-speed-mach";
+var toga = "autopilot/locks/to-ga";
 var tot_dst = "autopilot/route-manager/total-distance";
 
 var FMS = {
@@ -126,7 +127,8 @@ var FMS = {
 		},0,1);
 
 		setlistener(fms, func(n) {
-      if (!n.getValue()) {
+      if (n.getValue()) setprop(spd_ctrl,1);
+      else {
         setprop(tg_alt,getprop(cr_asel)*100);
         setprop("autopilot/settings/fps-limit",-40);
       }
@@ -304,7 +306,7 @@ var FMS = {
 			dist_dep = getprop(tot_dst)-getprop(dist_rem);
 			setprop(cruise_alt,getprop(cr_asel)*100);
       curr_wp = fp.current;
-#      if (!getprop(spd_ctrl)) me.speed();
+      me.speed();
 
 				### Takeoff ###
 			if (getprop(lock_alt) == "VALT" and getprop(ap_stat) != "AP") {
@@ -323,10 +325,6 @@ var FMS = {
 					### Alarm before TOD ###
 					if (fp.getWP(curr_wp).wp_name == 'TOD' and getprop(nav_dist) >= 0 
               and getprop(nav_dist) < dist_b_tod) almTod = 1;
-#					else if (size(v_tod) > 0 
-#              and getprop(dist_rem) <= v_tod[v_ind] + dist_b_tod 
-#              and  getprop(dist_rem) > v_tod[v_ind]) almTod = 1;
-
 					else almTod = 0;
 					if (almTod != getprop(alm_tod)) setprop(alm_tod,almTod);
 
@@ -384,13 +382,9 @@ var FMS = {
                   set_tgAlt = math.round(lastWp_alt,100);
                 else set_tgAlt = math.round(v_alt.vector[curr_wp],100);
 				      } else set_tgAlt = math.round(v_tod[v_ind+2],100);
-              if (!getprop(spd_ctrl)) me.speed();
             }
           }
         }
-        if (getprop(flaps)==2) setprop(tg_spd_kt,getprop(app5_spd));
-        else if (getprop(flaps)==3) setprop(tg_spd_kt,getprop(app15_spd));
-        else if (getprop(flaps)==4) setprop(tg_spd_kt,getprop(app35_spd));
         setprop("autopilot/locks/fms-gs",lock_gs);
         setprop("autopilot/locks/fms-app",fms_app);
 			} # end of AP
@@ -420,13 +414,13 @@ var FMS = {
           setprop(tg_spd_kt,getprop(desc_kt));
           me.fpsLim(0);
 	      } else {
-		      ### Climb ###
-		      if (getprop(alt_ind) < getprop(tg_alt)-100) {
-			      setprop(tg_spd_mc,getprop(climb_mc));
-		        setprop(tg_spd_kt,getprop(climb_kt));
 			      ### Descent ###
-		      } else if (getprop(dist_rem) <= 20) {
-				      setprop(tg_spd_kt,200);
+          if (getprop(toga)) setprop(tg_spd_kt,getprop(climb_kt));
+		      else if (getprop(dist_rem) <= 20) {
+              if (getprop(flaps)==2) setprop(tg_spd_kt,getprop(app5_spd));
+              else if (getprop(flaps)==3) setprop(tg_spd_kt,getprop(app15_spd));
+              else if (getprop(flaps)==4) setprop(tg_spd_kt,getprop(app35_spd));
+              else setprop(tg_spd_kt,200);
               me.fpsLim(0);
 		      }	else if (desc_flag){
 				      setprop(tg_spd_mc,getprop(desc_mc));
@@ -435,12 +429,17 @@ var FMS = {
 		      } else if (fp.getWP(curr_wp).wp_name == 'TOD' and fp.getWP(curr_wp).leg_distance < 8) {
               setprop(tg_spd_mc,getprop(tg_spd_mc));
 				      setprop(tg_spd_kt,getprop(tg_spd_kt));
-		      }	else {
-				      ### Cruise ###
-			      if (getprop(cruise_kt)) {
-				      if (fp.getWP(curr_wp).speed_cstr)
-                setprop(cruise_kt,fp.getWP(curr_wp).speed_cstr);
-              me.cruise_spd();
+
+		            ### Climb ###
+		      }	else if (getprop(alt_ind) < getprop(tg_alt)-100) {
+			        setprop(tg_spd_mc,getprop(climb_mc));
+		          setprop(tg_spd_kt,getprop(climb_kt));
+		      } else {
+				        ### Cruise ###
+            if (getprop(cruise_kt)) {
+				        if (fp.getWP(curr_wp).speed_cstr)
+                  setprop(cruise_kt,fp.getWP(curr_wp).speed_cstr);
+                me.cruise_spd();
 			      }
 		      }	
         }

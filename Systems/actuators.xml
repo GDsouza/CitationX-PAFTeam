@@ -263,9 +263,6 @@
         </sum>
       </expression>
     </input>
-    <!--<factor>
-           # TODO: high/low ratio when
-    </factor>-->
     <min>-1</min>
     <max>1</max>
     <output>controls/flight/aileron-cmd-norm</output>

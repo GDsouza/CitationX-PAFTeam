@@ -36,19 +36,21 @@
     </model>
 
     <model>
-        <path>Models/Instruments/NAV/nav1.xml</path>
+        <name>Nav1</name>
+        <path>Models/Instruments/NAV/nav.xml</path>
         <offsets>
             <x-m>0.00</x-m>
-            <y-m>0.00</y-m>
+            <y-m>-0.425</y-m>
             <z-m>0.00</z-m>
         </offsets>
     </model>
 
     <model>
-        <path>Models/Instruments/NAV/nav2.xml</path>
+        <name>Nav2</name>
+        <path>Models/Instruments/NAV/nav.xml</path>
         <offsets>
             <x-m>0.00</x-m>
-            <y-m>0.004</y-m>
+            <y-m>0.438</y-m>
             <z-m>0.00</z-m>
         </offsets>
     </model>
@@ -192,7 +194,7 @@
 
     <model>
         <name>MFD_L</name>
-        <path>Models/Instruments/MFD/mfdL-front.xml</path>
+        <path>Models/Instruments/MFD/mfd-front.xml</path>
         <condition>
           <not-equals>
             <property>instrumentation/eicas/xfr</property>
@@ -207,7 +209,7 @@
     </model>
     <model>
         <name>MFD_L</name>
-        <path>Models/Instruments/MFD/mfdL-front.xml</path>
+        <path>Models/Instruments/MFD/mfd-front.xml</path>
         <condition>
           <equals>
             <property>instrumentation/eicas/xfr</property>
@@ -223,7 +225,7 @@
 
     <model>
         <name>Layers_L</name>
-        <path>Models/Instruments/MFD/mfdL-back.xml</path>
+        <path>Models/Instruments/MFD/mfd-back.xml</path>
         <condition>
           <not-equals>
             <property>instrumentation/eicas/xfr</property>
@@ -238,7 +240,7 @@
     </model>
     <model>
         <name>Layers_L</name>
-        <path>Models/Instruments/MFD/mfdL-back.xml</path>
+        <path>Models/Instruments/MFD/mfd-back.xml</path>
         <condition>
           <equals>
             <property>instrumentation/eicas/xfr</property>
@@ -254,7 +256,7 @@
 
     <model>
         <name>MfdL_Buttons</name>
-        <path>Models/Instruments/MFD/mfdL-buttons.xml</path>
+        <path>Models/Instruments/MFD/mfd-buttons.xml</path>
         <condition>
           <not-equals>
             <property>instrumentation/eicas/xfr</property>
@@ -269,7 +271,7 @@
     </model>
     <model>
         <name>MfdL_Buttons</name>
-        <path>Models/Instruments/MFD/mfdL-buttons.xml</path>
+        <path>Models/Instruments/MFD/mfd-buttons.xml</path>
         <condition>
           <equals>
             <property>instrumentation/eicas/xfr</property>
@@ -285,7 +287,7 @@
 
     <model>
         <name>MFD_R</name>
-        <path>Models/Instruments/MFD/mfdR-front.xml</path>
+        <path>Models/Instruments/MFD/mfd-front.xml</path>
         <condition>
           <not-equals>
             <property>instrumentation/eicas/xfr</property>
@@ -300,7 +302,7 @@
     </model>
     <model>
         <name>MFD_R</name>
-        <path>Models/Instruments/MFD/mfdR-front.xml</path>
+        <path>Models/Instruments/MFD/mfd-front.xml</path>
         <condition>
           <equals>
             <property>instrumentation/eicas/xfr</property>
@@ -316,7 +318,7 @@
 
     <model>
         <name>Layers_R</name>
-        <path>Models/Instruments/MFD/mfdR-back.xml</path>
+        <path>Models/Instruments/MFD/mfd-back.xml</path>
         <condition>
           <not-equals>
             <property>instrumentation/eicas/xfr</property>
@@ -331,7 +333,7 @@
      </model>
     <model>
         <name>Layers_R</name>
-        <path>Models/Instruments/MFD/mfdR-back.xml</path>
+        <path>Models/Instruments/MFD/mfd-back.xml</path>
         <condition>
           <equals>
             <property>instrumentation/eicas/xfr</property>
@@ -347,7 +349,7 @@
 
     <model>
         <name>MfdR_Buttons</name>
-        <path>Models/Instruments/MFD/mfdR-buttons.xml</path>
+        <path>Models/Instruments/MFD/mfd-buttons.xml</path>
         <condition>
           <not-equals>
             <property>instrumentation/eicas/xfr</property>
@@ -362,7 +364,7 @@
     </model>
     <model>
         <name>MfdR_Buttons</name>
-        <path>Models/Instruments/MFD/mfdR-buttons.xml</path>
+        <path>Models/Instruments/MFD/mfd-buttons.xml</path>
         <condition>
           <equals>
             <property>instrumentation/eicas/xfr</property>
@@ -384,7 +386,7 @@
             <value>-1</value>
           </not-equals>
         </condition>
-        <path>Models/Instruments/MFD/vsdL.xml</path>
+        <path>Models/Instruments/MFD/vsd.xml</path>
         <offsets>
             <x-m>0.0010</x-m>
             <y-m>-0.1890</y-m>
@@ -393,7 +395,7 @@
     </model>
     <model>
         <name>Vsd_L</name>
-        <path>Models/Instruments/MFD/vsdL.xml</path>
+        <path>Models/Instruments/MFD/vsd.xml</path>
         <condition>
           <equals>
             <property>instrumentation/eicas/xfr</property>
@@ -409,7 +411,7 @@
 
     <model>
         <name>Vsd_R</name>
-        <path>Models/Instruments/MFD/vsdR.xml</path>
+        <path>Models/Instruments/MFD/vsd.xml</path>
         <condition>
           <not-equals>
             <property>instrumentation/eicas/xfr</property>
@@ -424,7 +426,7 @@
     </model>
     <model>
         <name>Vsd_R</name>
-        <path>Models/Instruments/MFD/vsdR.xml</path>
+        <path>Models/Instruments/MFD/vsd.xml</path>
         <condition>
           <equals>
             <property>instrumentation/eicas/xfr</property>
@@ -440,7 +442,7 @@
 
     <model>
         <name>PFD1</name>
-        <path>Models/Instruments/PFD/pfd-L.xml</path>
+        <path>Models/Instruments/PFD/pfd.xml</path>
         <offsets>
             <x-m>0.002</x-m>
             <y-m>-0.375</y-m>
@@ -450,7 +452,7 @@
 
     <model>
         <name>PFD2</name>
-        <path>Models/Instruments/PFD/pfd-R.xml</path>
+        <path>Models/Instruments/PFD/pfd.xml</path>
         <offsets>
             <x-m>0.002</x-m>
             <y-m>0.384</y-m>
@@ -3211,7 +3213,8 @@
     <animation>
         <type>translate</type>
         <object-name>PFD_L.std</object-name>
-        <property>instrumentation/pfd/std-button</property>
+        <object-name>PFD_R.std</object-name>
+        <property>instrumentation/altimeter/std</property>
 				<factor>0.005</factor>
         <axis>
             <x>-1</x>
@@ -3223,23 +3226,19 @@
     <animation>
         <type>pick</type>
         <object-name>PFD_L.std</object-name>
+        <object-name>PFD_R.std</object-name>
         <visible>true</visible>
         <action>
           <button>0</button>
           <repeatable>false</repeatable>
           <binding>
-            <condition>
-              <not>
-                <property>instrumentation/pfd/pfd-sel</property>
-              </not>
-            </condition>
             <command>property-assign</command>
             <property>instrumentation/altimeter/setting-inhg</property>
             <value>29.92</value>
           </binding>
 					<binding>
 						<command>property-toggle</command>
-		        <property>instrumentation/pfd/std-button</property>
+            <property>instrumentation/altimeter/std</property>
 					</binding>
           <binding>
             <command>property-toggle</command>
@@ -3248,51 +3247,7 @@
 						<mod-up>
 				   		<binding>
 				     		<command>property-toggle</command>
-				        <property>instrumentation/pfd/std-button</property>
-					    </binding>
-						</mod-up>
-        </action>
-    </animation>
-
-    <animation>
-        <type>translate</type>
-        <object-name>PFD_R.std</object-name>
-        <property>instrumentation/pfd[1]/std-button</property>
-				<factor>0.005</factor>
-        <axis>
-          <x>-1</x>
-          <y>0</y>
-          <z>0</z>
-        </axis>
-    </animation>
-
-    <animation>
-        <type>pick</type>
-        <object-name>PFD_R.std</object-name>
-        <visible>true</visible>
-        <action>
-          <button>0</button>
-          <repeatable>false</repeatable>
-          <binding>
-            <condition>
-              <property>instrumentation/pfd/pfd-sel</property>
-            </condition>
-              <command>property-assign</command>
-              <property>instrumentation/altimeter/setting-inhg</property>
-              <value>29.92</value>
-          </binding>
-					<binding>
-						<command>property-toggle</command>
-		        <property>instrumentation/pfd[1]/std-button</property>
-					</binding>
-          <binding>
-            <command>property-toggle</command>
-            <property>sim/sound/click</property>
-          </binding>
-						<mod-up>
-				   		<binding>
-				     		<command>property-toggle</command>
-				        <property>instrumentation/pfd[1]/std-button</property>
+                <property>instrumentation/altimeter/std</property>
 					    </binding>
 						</mod-up>
         </action>
@@ -3316,55 +3271,6 @@
     </animation>
 
     <animation>
-        <type>pick</type>
-        <object-name>PFD_L.baro</object-name>
-        <action>
-            <button>3</button>
-            <repeatable>true</repeatable>
-            <interval-sec>0.2</interval-sec>
-            <binding>
-              <condition>
-                <not>
-                  <property>instrumentation/pfd/pfd-sel</property>
-                </not>
-              </condition>
-               <command>property-adjust</command>
-                <property>instrumentation/altimeter/setting-inhg</property>
-                <step>0.01</step>
-                <min>26.0</min>
-                <max>33.0</max>
-                <wrap>false</wrap>
-            </binding>
-        </action>
-        <action>
-            <button>4</button>
-            <repeatable>true</repeatable>
-            <interval-sec>0.2</interval-sec>
-            <binding>
-              <condition>
-                <not>
-                  <property>instrumentation/pfd/pfd-sel</property>
-                </not>
-              </condition>
-                <command>property-adjust</command>
-                <property>instrumentation/altimeter/setting-inhg</property>
-                <step>-0.01</step>
-                <min>26.0</min>
-                <max>33.0</max>
-                <wrap>false</wrap>
-            </binding>
-        </action>
-        <hovered>
-            <binding>
-                <command>set-tooltip</command>
-                <tooltip-id>Set Inhg</tooltip-id>
-                <label>Set Inhg: %4.2f </label> 
-                <property>instrumentation/altimeter/setting-inhg</property>
-            </binding>
-        </hovered>
-    </animation>
-
-    <animation>
         <type>rotate</type>
         <object-name>PFD_R.baro</object-name>
         <property>instrumentation/altimeter/setting-inhg</property>
@@ -3383,21 +3289,19 @@
 
     <animation>
         <type>pick</type>
+        <object-name>PFD_L.baro</object-name>
         <object-name>PFD_R.baro</object-name>
         <action>
             <button>3</button>
             <repeatable>true</repeatable>
             <interval-sec>0.2</interval-sec>
             <binding>
-              <condition>
-                <property>instrumentation/pfd/pfd-sel</property>
-              </condition>
-                <command>property-adjust</command>
-                <property>instrumentation/altimeter/setting-inhg</property>
-                <step>0.01</step>
-                <min>26.0</min>
-                <max>33.0</max>
-                <wrap>false</wrap>
+              <command>property-adjust</command>
+              <property>instrumentation/altimeter/setting-inhg</property>
+              <step>0.01</step>
+              <min>26.0</min>
+              <max>33.0</max>
+              <wrap>false</wrap>
             </binding>
         </action>
         <action>
@@ -3405,15 +3309,12 @@
             <repeatable>true</repeatable>
             <interval-sec>0.2</interval-sec>
             <binding>
-              <condition>
-                <property>instrumentation/pfd/pfd-sel</property>
-              </condition>
-                <command>property-adjust</command>
-                <property>instrumentation/altimeter/setting-inhg</property>
-                <step>-0.01</step>
-                <min>26.0</min>
-                <max>33.0</max>
-                <wrap>false</wrap>
+              <command>property-adjust</command>
+              <property>instrumentation/altimeter/setting-inhg</property>
+              <step>-0.01</step>
+              <min>26.0</min>
+              <max>33.0</max>
+              <wrap>false</wrap>
             </binding>
         </action>
         <hovered>
@@ -3425,6 +3326,7 @@
             </binding>
         </hovered>
     </animation>
+
 
     <animation>
         <type>rotate</type>
@@ -3463,16 +3365,12 @@
     <animation>
         <type>pick</type>
         <object-name>PFD_L.minimums</object-name>
+        <object-name>PFD_R.minimums</object-name>
         <action>
           <button>3</button>
           <repeatable>true</repeatable>
           <interval-sec>0.2</interval-sec>
           <binding>
-            <condition>
-              <not>
-                <property>instrumentation/pfd/pfd-sel</property>
-              </not>
-            </condition>
             <command>property-adjust</command>
             <property>autopilot/settings/minimums</property>
             <step>50</step>
@@ -3486,63 +3384,13 @@
           <repeatable>true</repeatable>
           <interval-sec>0.2</interval-sec>
           <binding>
-            <condition>
-              <not>
-                <property>instrumentation/pfd/pfd-sel</property>
-              </not>
-            </condition>
-              <command>property-adjust</command>
-              <property>autopilot/settings/minimums</property>
-              <step>-50</step>
-              <min>0</min>
-              <max>1000</max>
-              <wrap>false</wrap>
-          </binding>
-        </action>
-        <hovered>
-          <binding>
-            <command>set-tooltip</command>
-            <tooltip-id>Minimums</tooltip-id>
-            <label>Minimums: %s </label> 
-            <property>autopilot/settings/minimums</property>
-          </binding>
-        </hovered>
-    </animation>
-
-    <animation>
-        <type>pick</type>
-        <object-name>PFD_R.minimums</object-name>
-        <action>
-        <button>3</button>
-        <repeatable>true</repeatable>
-        <interval-sec>0.2</interval-sec>
-        <binding>
-          <condition>
-            <property>instrumentation/pfd/pfd-sel</property>
-          </condition>
-          <command>property-adjust</command>
-          <property>autopilot/settings/minimums</property>
-          <step>50</step>
-          <min>0</min>
-          <max>1000</max>
-          <wrap>false</wrap>
-        </binding>
-      </action>
-      <action>
-        <button>4</button>
-        <repeatable>true</repeatable>
-        <interval-sec>0.2</interval-sec>
-        <binding>
-          <condition>
-            <property>instrumentation/pfd/pfd-sel</property>
-          </condition>
             <command>property-adjust</command>
             <property>autopilot/settings/minimums</property>
             <step>-50</step>
             <min>0</min>
             <max>1000</max>
             <wrap>false</wrap>
-        </binding>
+          </binding>
         </action>
         <hovered>
           <binding>
@@ -3551,68 +3399,25 @@
             <label>Minimums: %s </label> 
             <property>autopilot/settings/minimums</property>
           </binding>
-      </hovered>
-    </animation>
-
-    <animation>
-        <type>translate</type>
-        <object-name>PFD_L.ra-baro</object-name>
-        <property>instrumentation/pfd/min-button</property>
-				<factor>0.005</factor>
-        <axis>
-            <x>-1</x>
-            <y>0</y>
-            <z>0</z>
-        </axis>
-    </animation>
-
-    <animation>
-        <type>pick</type>
-        <object-name>PFD_L.ra-baro</object-name>
-        <visible>true</visible>
-        <action>
-          <button>0</button>
-          <repeatable>false</repeatable>
-          <binding>
-            <condition>
-              <not>
-                <property>instrumentation/pfd/pfd-sel</property>
-              </not>
-            </condition>
-						<command>property-cycle</command>
-              <property>autopilot/settings/minimums-mode</property>
-							<value>BA</value>
-							<value>RA</value>
-					</binding>
-					<binding>
-						<command>property-toggle</command>
-						<property>instrumentation/pfd/min-button</property>
-					</binding>
-          <binding>
-            <command>property-toggle</command>
-            <property>sim/sound/click</property>
-          </binding>
-						<mod-up>
-				   		<binding>
-				     		<command>property-toggle</command>
-				        <property>instrumentation/pfd/min-button</property>
-					    </binding>
-						</mod-up>
-        </action>
-        <hovered>
-          <binding>
-            <command>set-tooltip</command>
-            <tooltip-id>RA-BARO</tooltip-id>
-            <label>RADIO-BARO: %s </label> 
-            <property>autopilot/settings/minimums-mode</property>
-          </binding>
         </hovered>
     </animation>
 
     <animation>
         <type>translate</type>
+        <object-name>PFD_L.ra-baro</object-name>
+        <property>autopilot/settings/min-ba</property>
+				<factor>0.005</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>translate</type>
         <object-name>PFD_R.ra-baro</object-name>
-        <property>instrumentation/pfd[1]/min-button</property>
+        <property>autopilot/settings/min-ba</property>
 				<factor>0.005</factor>
         <axis>
             <x>-1</x>
@@ -3623,15 +3428,13 @@
 
     <animation>
         <type>pick</type>
+        <object-name>PFD_L.ra-baro</object-name>
         <object-name>PFD_R.ra-baro</object-name>
         <visible>true</visible>
         <action>
           <button>0</button>
           <repeatable>false</repeatable>
           <binding>
-            <condition>
-              <property>instrumentation/pfd/pfd-sel</property>
-            </condition>
 						<command>property-cycle</command>
               <property>autopilot/settings/minimums-mode</property>
 							<value>BA</value>
@@ -3639,7 +3442,7 @@
 					</binding>
 					<binding>
 						<command>property-toggle</command>
-						<property>instrumentation/pfd[1]/min-button</property>
+						<property>autopilot/settings/min-ba</property>
 					</binding>
           <binding>
             <command>property-toggle</command>
@@ -3648,7 +3451,7 @@
 						<mod-up>
 				   		<binding>
 				     		<command>property-toggle</command>
-				        <property>instrumentation/pfd[1]/min-button</property>
+				        <property>autopilot/settings/min-ba</property>
 					    </binding>
 						</mod-up>
         </action>
@@ -3781,7 +3584,7 @@
 
     <animation>
         <type>rotate</type>
-        <object-name>MFD_L.knob</object-name>
+        <object-name>MFD.knob</object-name>
         <property>instrumentation/mfd/range-nm</property>
         <factor>5</factor>
         <axis>
@@ -3798,7 +3601,7 @@
 
     <animation>
         <type>pick</type>
-        <object-name>MFD_L.knob</object-name>
+        <object-name>MFD.knob</object-name>
         <action>
             <button>0</button>
             <button>3</button>
@@ -3820,7 +3623,7 @@
 
     <animation>
         <type>translate</type>
-        <object-name>MFD_L.btn0</object-name>	
+        <object-name>MFD.btn0</object-name>	
         <property>instrumentation/mfd/btn0</property>
 				<factor>0.0032</factor>
         <axis>
@@ -3831,7 +3634,7 @@
     </animation>
     <animation>
         <type>pick</type>
-        <object-name>MFD_L.btn0</object-name>
+        <object-name>MFD.btn0</object-name>
         <visible>true</visible>
         <action>
           <button>0</button>
@@ -3867,7 +3670,7 @@
 
     <animation>
         <type>translate</type>
-        <object-name>MFD_L.btn1</object-name>	
+        <object-name>MFD.btn1</object-name>	
         <property>instrumentation/mfd/btn1</property>
 				<factor>0.0032</factor>
         <axis>
@@ -3878,7 +3681,7 @@
     </animation>
     <animation>
         <type>pick</type>
-        <object-name>MFD_L.btn1</object-name>
+        <object-name>MFD.btn1</object-name>
         <visible>true</visible>
         <action>
           <button>0</button>
@@ -3908,7 +3711,7 @@
 
     <animation>
         <type>translate</type>
-        <object-name>MFD_L.btn2</object-name>	
+        <object-name>MFD.btn2</object-name>	
         <property>instrumentation/mfd/btn2</property>
 				<factor>0.0032</factor>
         <axis>
@@ -3919,7 +3722,7 @@
     </animation>
     <animation>
         <type>pick</type>
-        <object-name>MFD_L.btn2</object-name>
+        <object-name>MFD.btn2</object-name>
         <visible>true</visible>
         <action>
           <button>0</button>
@@ -3949,7 +3752,7 @@
 
     <animation>
         <type>translate</type>
-        <object-name>MFD_L.btn3</object-name>	
+        <object-name>MFD.btn3</object-name>	
         <property>instrumentation/mfd/btn3</property>
 				<factor>0.0032</factor>
         <axis>
@@ -3960,7 +3763,7 @@
     </animation>
     <animation>
         <type>pick</type>
-        <object-name>MFD_L.btn3</object-name>
+        <object-name>MFD.btn3</object-name>
         <visible>true</visible>
         <action>
           <button>0</button>
@@ -3990,7 +3793,7 @@
 
     <animation>
         <type>translate</type>
-        <object-name>MFD_L.btn4</object-name>	
+        <object-name>MFD.btn4</object-name>	
         <property>instrumentation/mfd/btn4</property>
 				<factor>0.0032</factor>
         <axis>
@@ -4001,7 +3804,7 @@
     </animation>
     <animation>
         <type>pick</type>
-        <object-name>MFD_L.btn4</object-name>
+        <object-name>MFD.btn4</object-name>
         <visible>true</visible>
         <action>
           <button>0</button>
@@ -4031,7 +3834,7 @@
 
     <animation>
         <type>translate</type>
-        <object-name>MFD_L.btn5</object-name>	
+        <object-name>MFD.btn5</object-name>	
         <property>instrumentation/mfd/btn5</property>
 				<factor>0.0032</factor>
         <axis>
@@ -4042,7 +3845,7 @@
     </animation>
     <animation>
         <type>pick</type>
-        <object-name>MFD_L.btn5</object-name>
+        <object-name>MFD.btn5</object-name>
         <visible>true</visible>
         <action>
           <button>0</button>
@@ -4185,299 +3988,6 @@
         </hovered>
     </animation>
 
-<!-- MFD RIGHT -->
-
-    <animation>
-        <type>rotate</type>
-        <object-name>MFD_R.knob</object-name>
-        <property>instrumentation/mfd[1]/range-nm</property>
-        <factor>5</factor>
-        <axis>
-            <x>-1.0</x>
-            <y>0.0</y>
-            <z>0.0</z>
-        </axis>
-        <center>
-            <x-m>0.00</x-m>
-            <y-m>0.0724</y-m> 
-            <z-m>0.035</z-m>
-        </center>
-    </animation>
-
-    <animation>
-        <type>pick</type>
-        <object-name>MFD_R.knob</object-name>
-        <action>
-            <button>0</button>
-            <button>3</button>
-            <repeatable>false</repeatable>
-            <binding>
-                <command>nasal</command>
-                <script>mfd.set_range(1,1);</script>
-            </binding>
-        </action>
-        <action>
-            <button>4</button>
-            <repeatable>false</repeatable>
-            <binding>
-                <command>nasal</command>
-                <script>mfd.set_range(-1,1);</script>
-            </binding>
-        </action>
-    </animation>
-
-    <animation>
-        <type>translate</type>
-        <object-name>MFD_R.btn0</object-name>	
-        <property>instrumentation/mfd[1]/btn0</property>
-				<factor>0.0032</factor>
-        <axis>
-            <x>-1</x>
-            <y>0</y>
-            <z>0</z>
-				</axis>
-    </animation>
-    <animation>
-        <type>pick</type>
-        <object-name>MFD_R.btn0</object-name>
-        <visible>true</visible>
-        <action>
-          <button>0</button>
-          <repeatable>false</repeatable>
-			    <binding>
-			        <command>property-assign</command>
-			        <property>instrumentation/mfd[1]/btn0</property>
-								<value>1</value>
-			    </binding>
-          <binding>
-              <command>property-cycle</command>
-              <property>instrumentation/mfd[1]/menu2</property>
-              <value>0</value>
-              <value>1</value>
-          </binding>
-          <binding>
-              <command>nasal</command>
-              <script>mfd.menu(1);</script>
-          </binding>
-          <binding>
-            <command>property-toggle</command>
-            <property>sim/sound/click</property>
-          </binding>
-						<mod-up>
-							<binding>
-								<command>property-assign</command>
-									<property>instrumentation/mfd[1]/btn0</property>
-									<value>0</value>
-							</binding>
-						</mod-up>
-        </action>
-    </animation>
-
-    <animation>
-        <type>translate</type>
-        <object-name>MFD_R.btn1</object-name>	
-        <property>instrumentation/mfd[1]/btn1</property>
-				<factor>0.0032</factor>
-        <axis>
-            <x>-1</x>
-            <y>0</y>
-            <z>0</z>
-				</axis>
-    </animation>
-    <animation>
-        <type>pick</type>
-        <object-name>MFD_R.btn1</object-name>
-        <visible>true</visible>
-        <action>
-          <button>0</button>
-          <repeatable>false</repeatable>
-			    <binding>
-			        <command>property-assign</command>
-			        <property>instrumentation/mfd[1]/btn1</property>
-								<value>1</value>
-			    </binding>
-          <binding>
-              <command>nasal</command>
-              <script>mfd.menu(1);</script>
-          </binding>
-          <binding>
-            <command>property-toggle</command>
-            <property>sim/sound/click</property>
-          </binding>
-						<mod-up>
-							<binding>
-								<command>property-assign</command>
-									<property>instrumentation/mfd[1]/btn1</property>
-									<value>0</value>
-							</binding>
-						</mod-up>
-        </action>
-    </animation>
-
-    <animation>
-        <type>translate</type>
-        <object-name>MFD_R.btn2</object-name>	
-        <property>instrumentation/mfd[1]/btn2</property>
-				<factor>0.0032</factor>
-        <axis>
-            <x>-1</x>
-            <y>0</y>
-            <z>0</z>
-				</axis>
-    </animation>
-    <animation>
-        <type>pick</type>
-        <object-name>MFD_R.btn2</object-name>
-        <visible>true</visible>
-        <action>
-          <button>0</button>
-          <repeatable>false</repeatable>
-			    <binding>
-			        <command>property-assign</command>
-			        <property>instrumentation/mfd[1]/btn2</property>
-								<value>1</value>
-			    </binding>
-          <binding>
-              <command>nasal</command>
-              <script>mfd.menu(1);</script>
-          </binding>
-          <binding>
-            <command>property-toggle</command>
-            <property>sim/sound/click</property>
-          </binding>
-						<mod-up>
-							<binding>
-								<command>property-assign</command>
-									<property>instrumentation/mfd[1]/btn2</property>
-									<value>0</value>
-							</binding>
-						</mod-up>
-        </action>
-    </animation>
-
-    <animation>
-        <type>translate</type>
-        <object-name>MFD_R.btn3</object-name>	
-        <property>instrumentation/mfd[1]/btn3</property>
-				<factor>0.0032</factor>
-        <axis>
-            <x>-1</x>
-            <y>0</y>
-            <z>0</z>
-				</axis>
-    </animation>
-    <animation>
-        <type>pick</type>
-        <object-name>MFD_R.btn3</object-name>
-        <visible>true</visible>
-        <action>
-          <button>0</button>
-          <repeatable>false</repeatable>
-			    <binding>
-			        <command>property-assign</command>
-			        <property>instrumentation/mfd[1]/btn3</property>
-								<value>1</value>
-			    </binding>
-          <binding>
-              <command>nasal</command>
-              <script>mfd.menu(1);</script>
-          </binding>
-          <binding>
-            <command>property-toggle</command>
-            <property>sim/sound/click</property>
-          </binding>
-					<mod-up>
-						<binding>
-							<command>property-assign</command>
-								<property>instrumentation/mfd[1]/btn3</property>
-								<value>0</value>
-						</binding>
-					</mod-up>
-        </action>
-    </animation>
-
-    <animation>
-        <type>translate</type>
-        <object-name>MFD_R.btn4</object-name>	
-        <property>instrumentation/mfd[1]/btn4</property>
-				<factor>0.0032</factor>
-        <axis>
-            <x>-1</x>
-            <y>0</y>
-            <z>0</z>
-				</axis>
-    </animation>
-    <animation>
-        <type>pick</type>
-        <object-name>MFD_R.btn4</object-name>
-        <visible>true</visible>
-        <action>
-          <button>0</button>
-          <repeatable>false</repeatable>
-			    <binding>
-			        <command>property-assign</command>
-			        <property>instrumentation/mfd[1]/btn4</property>
-								<value>1</value>
-			    </binding>
-          <binding>
-              <command>nasal</command>
-              <script>mfd.menu(1);</script>
-          </binding>
-          <binding>
-            <command>property-toggle</command>
-            <property>sim/sound/click</property>
-          </binding>
-						<mod-up>
-							<binding>
-								<command>property-assign</command>
-									<property>instrumentation/mfd[1]/btn4</property>
-									<value>0</value>
-							</binding>
-						</mod-up>
-        </action>
-    </animation>
-
-    <animation>
-        <type>translate</type>
-        <object-name>MFD_R.btn5</object-name>	
-        <property>instrumentation/mfd[1]/btn5</property>
-				<factor>0.0032</factor>
-        <axis>
-            <x>-1</x>
-            <y>0</y>
-            <z>0</z>
-				</axis>
-    </animation>
-    <animation>
-        <type>pick</type>
-        <object-name>MFD_R.btn5</object-name>
-        <visible>true</visible>
-        <action>
-          <button>0</button>
-          <repeatable>false</repeatable>
-			    <binding>
-			        <command>property-assign</command>
-			        <property>instrumentation/mfd[1]/btn5</property>
-								<value>1</value>
-			    </binding>
-          <binding>
-              <command>nasal</command>
-              <script>mfd.menu(1);</script>
-          </binding>
-          <binding>
-            <command>property-toggle</command>
-            <property>sim/sound/click</property>
-          </binding>
-					<mod-up>
-						<binding>
-							<command>property-assign</command>
-								<property>instrumentation/mfd[1]/btn5</property>
-								<value>0</value>
-						</binding>
-					</mod-up>
-        </action>
-    </animation>
-
 <!-- EICAS -->
 
     <animation>
@@ -4496,6 +4006,7 @@
             <z-m>0.0350</z-m>
         </center>
     </animation>
+
     <animation>
         <type>pick</type>
         <object-name>EICAS.knob</object-name>
@@ -5374,26 +4885,26 @@
             <property>systems/electrical/outputs/fgc-cont-B</property>
           </or>
           <or>
-              <equals>
-                  <property>autopilot/locks/heading</property>
-                  <value>LNAV</value>
-              </equals>
-              <equals>
-                  <property>autopilot/locks/heading</property>
-                  <value>VOR</value>
-              </equals>
-              <equals>
-                  <property>autopilot/locks/heading</property>
-                  <value>LOC</value>
-              </equals>
-              <equals>
-                  <property>autopilot/locks/heading-arm</property>
-                  <value>VOR</value>
-              </equals>
-              <equals>
-                  <property>autopilot/locks/heading-arm</property>
-                  <value>LOC</value>
-              </equals>
+            <equals>
+                <property>autopilot/locks/heading</property>
+                <value>LNAV</value>
+            </equals>
+            <equals>
+                <property>autopilot/locks/heading</property>
+                <value>VOR</value>
+            </equals>
+            <equals>
+                <property>autopilot/locks/heading</property>
+                <value>LOC</value>
+            </equals>
+            <equals>
+                <property>autopilot/locks/heading-arm</property>
+                <value>VOR</value>
+            </equals>
+            <equals>
+                <property>autopilot/locks/heading-arm</property>
+                <value>LOC</value>
+            </equals>
           </or>
         </and>
       </condition>
@@ -5428,15 +4939,13 @@
                 <value>VALT</value>
             </equals>
             <equals>
+                <property>autopilot/locks/altitude-arm</property>
+                <value>VALT</value>
+            </equals>
+            <equals>
                 <property>autopilot/locks/altitude</property>
                 <value>VFLC</value>
             </equals>
-<!--
-            <equals>
-                <property>autopilot/locks/altitude</property>
-                <value>VPTH</value>
-            </equals>
--->
           </or>
         </and>
       </condition>
@@ -5474,10 +4983,16 @@
             <property>systems/electrical/outputs/fgc-cont-A</property>
             <property>systems/electrical/outputs/fgc-cont-B</property>
           </or>
-          <equals>
-            <property>autopilot/locks/altitude</property>
-            <value>ALT</value>
-          </equals>
+          <or>
+            <equals>
+              <property>autopilot/locks/altitude</property>
+              <value>ALT</value>
+            </equals>
+            <equals>
+              <property>autopilot/locks/altitude-arm</property>
+              <value>ALT</value>
+            </equals>
+          </or>
         </and>
       </condition>
     </animation>
@@ -5985,12 +5500,14 @@
         <type>pick</type>
         <object-name>FD.bc</object-name>
         <visible>true</visible>
+<!--
 				<condition>
           <equals>
             <property>autopilot/locks/heading</property>
             <value>VOR</value>
           </equals>
 				</condition>
+-->
         <action>
           <button>0</button>
           <repeatable>false</repeatable>
@@ -6132,7 +5649,7 @@
     <animation>
         <type>rotate</type>
         <object-name>FMC1.knob1</object-name>
-        <property>instrumentation/pfd[1]/nav1ptr</property>
+        <property>instrumentation/pfd/nav1ptr</property>
         <factor>40</factor>
         <axis>
             <x>-1.0</x>
@@ -6166,7 +5683,7 @@
     <animation>
         <type>rotate</type>
         <object-name>FMC1.knob2</object-name>
-        <property>instrumentation/pfd[1]/nav2ptr</property>
+        <property>instrumentation/pfd/nav2ptr</property>
         <factor>40</factor>
         <axis>
             <x>-1.0</x>
@@ -6183,13 +5700,14 @@
     <animation>
       <type>pick</type>
       <object-name>FMC.nav</object-name>
+      <object-name>FMC1.nav</object-name>
       <visible>true</visible>
       <action>
         <button>0</button>
         <repeatable>false</repeatable>
      		<binding>
        		<command>property-cycle</command>
-          <property>instrumentation/pfd/source</property>
+          <property>autopilot/settings/nav-source</property>
 					<value>NAV1</value>
 					<value>NAV2</value>
         </binding>
@@ -6213,49 +5731,8 @@
     <animation>
       <type>translate</type>
       <object-name>FMC.nav</object-name>
+      <object-name>FMC1.nav</object-name>
       <property>instrumentation/pfd/nav-btn</property>
-			<factor>0.0062</factor>
-      <axis>
-        <x>-1</x>
-        <y>0</y>
-        <z>0</z>
-      </axis>
-    </animation>
-
-    <animation>
-      <type>pick</type>
-      <object-name>FMC1.nav</object-name>
-      <visible>true</visible>
-      <action>
-        <button>0</button>
-        <repeatable>false</repeatable>
-        <binding>
-       		<command>property-cycle</command>
-          <property>instrumentation/pfd[1]/source</property>
-					<value>NAV1</value>
-					<value>NAV2</value>
-        </binding>
-     		<binding>
-       		<command>property-toggle</command>
-          <property>instrumentation/pfd[1]/nav-btn</property>
-        </binding>
-				<mod-up>
-       		<binding>
-         		<command>property-toggle</command>
-            <property>instrumentation/pfd[1]/nav-btn</property>
-	        </binding>
-				</mod-up>
-				<binding>
-		      <command>property-toggle</command>
-		      <property>sim/sound/click</property>
- 	     </binding>
-      </action>
-    </animation>
-
-    <animation>
-      <type>translate</type>
-      <object-name>FMC1.nav</object-name>
-      <property>instrumentation/pfd[1]/nav-btn</property>
 			<factor>0.0062</factor>
       <axis>
         <x>-1</x>
@@ -6276,7 +5753,7 @@
             <property>autopilot/route-manager/active</property> 
           </condition>
       		<command>property-cycle</command>
-          <property>instrumentation/pfd/source</property>
+          <property>autopilot/settings/nav-source</property>
 					<value>FMS1</value>
 					<value>FMS2</value>
         </binding>
@@ -6300,6 +5777,7 @@
     <animation>
       <type>translate</type>
       <object-name>FMC.fms</object-name>
+      <object-name>FMC1.fms</object-name>
       <property>instrumentation/pfd/fms-btn</property>
 			<factor>0.0062</factor>
       <axis>
@@ -6311,52 +5789,8 @@
 
     <animation>
       <type>pick</type>
-      <object-name>FMC1.fms</object-name>
-      <visible>true</visible>
-      <action>
-        <button>0</button>
-        <repeatable>false</repeatable>
-        <binding>
-          <condition>
-            <property>autopilot/route-manager/active</property> 
-          </condition>
-       		<command>property-cycle</command>
-          <property>instrumentation/pfd[1]/source</property>
-					<value>FMS1</value>
-					<value>FMS2</value>
-        </binding>
-     		<binding>
-       		<command>property-toggle</command>
-          <property>instrumentation/pfd[1]/fms-btn</property>
-        </binding>
-			  <mod-up>
-       		<binding>
-         		<command>property-toggle</command>
-            <property>instrumentation/pfd[1]/fms-btn</property>
-          </binding>
-			  </mod-up>
-			  <binding>
-	        <command>property-toggle</command>
-	        <property>sim/sound/click</property>
-        </binding>
-      </action>
-    </animation>
-
-    <animation>
-      <type>translate</type>
-      <object-name>FMC1.fms</object-name>
-      <property>instrumentation/pfd[1]/fms-btn</property>
-			<factor>0.0062</factor>
-      <axis>
-        <x>-1</x>
-        <y>0</y>
-        <z>0</z>
-      </axis>
-    </animation>
-
-    <animation>
-      <type>pick</type>
       <object-name>FMC.knob1</object-name>
+      <object-name>FMC1.knob1</object-name>
       <action>
         <button>0</button>
         <repeatable>false</repeatable>
@@ -6422,73 +5856,8 @@
 
     <animation>
       <type>pick</type>
-      <object-name>FMC1.knob1</object-name>
-      <action>
-        <button>0</button>
-        <repeatable>false</repeatable>
-        <binding>
-          <command>property-adjust</command>
-          <property>instrumentation/pfd[1]/nav1ptr</property>
-          <step>1</step>
-          <min>0</min>
-          <max>3</max>
-          <wrap>0</wrap>
-        </binding>
-				<binding>
-          <command>property-toggle</command>
-          <property>sim/sound/click</property>
-        </binding>
-      </action>
-      <action>
-          <button>3</button>
-          <repeatable>false</repeatable>
-          <binding>
-              <command>property-adjust</command>
-              <property>instrumentation/pfd[1]/nav1ptr</property>
-              <step>1</step>
-              <min>0</min>
-              <max>3</max>
-              <wrap>0</wrap>
-          </binding>
-  				<binding>
-          <command>property-toggle</command>
-          <property>sim/sound/click</property>
-        </binding>
-      </action>
-      <action>
-          <button>4</button>
-          <repeatable>false</repeatable>
-          <binding>
-              <command>property-adjust</command>
-              <property>instrumentation/pfd[1]/nav1ptr</property>
-              <step>-1</step>
-              <min>0</min>
-              <max>3</max>
-              <wrap>0</wrap>
-          </binding>
-  				<binding>
-          <command>property-toggle</command>
-          <property>sim/sound/click</property>
-        </binding>
-      </action>
-      <hovered>
-        <binding>
-          <command>set-tooltip</command>
-          <tooltip-id>Nav1_select</tooltip-id>
-          <label>Nav1 : %s </label> 
-          <property>instrumentation/pfd[1]/nav1ptr</property> 
-         <mapping>nasal</mapping>
-					<script>
-						var modes = ['OFF','VOR1','ADF1','FMS1'];
-						return modes[arg[0]];
-					</script>
-        </binding>
-      </hovered>
-   </animation>
-
-    <animation>
-      <type>pick</type>
       <object-name>FMC.knob2</object-name>
+      <object-name>FMC1.knob2</object-name>
       <action>
         <button>0</button>
         <repeatable>false</repeatable>
@@ -6552,71 +5921,6 @@
       </hovered>
    </animation>
 
-    <animation>
-      <type>pick</type>
-      <object-name>FMC1.knob2</object-name>
-      <action>
-        <button>0</button>
-        <repeatable>false</repeatable>
-        <binding>
-          <command>property-adjust</command>
-          <property>instrumentation/pfd[1]/nav2ptr</property>
-          <step>1</step>
-          <min>0</min>
-          <max>3</max>
-          <wrap>0</wrap>
-        </binding>
-				<binding>
-          <command>property-toggle</command>
-          <property>sim/sound/click</property>
-        </binding>
-      </action>
-      <action>
-        <button>3</button>
-        <repeatable>false</repeatable>
-        <binding>
-          <command>property-adjust</command>
-          <property>instrumentation/pfd[1]/nav2ptr</property>
-          <step>1</step>
-          <min>0</min>
-          <max>3</max>
-          <wrap>0</wrap>
-        </binding>
-        <binding>
-        <command>property-toggle</command>
-        <property>sim/sound/click</property>
-       </binding>
-      </action>
-      <action>
-        <button>4</button>
-        <repeatable>false</repeatable>
-        <binding>
-          <command>property-adjust</command>
-          <property>instrumentation/pfd[1]/nav2ptr</property>
-          <step>-1</step>
-          <min>0</min>
-          <max>3</max>
-          <wrap>0</wrap>
-        </binding>
-				<binding>
-        <command>property-toggle</command>
-        <property>sim/sound/click</property>
-       </binding>
-      </action>
-      <hovered>
-        <binding>
-          <command>set-tooltip</command>
-          <tooltip-id>Nav2_select</tooltip-id>
-          <label>Nav2 : %s </label> 
-          <property>instrumentation/pfd[1]/nav2ptr</property> 
-         <mapping>nasal</mapping>
-					<script>
-						var modes = ['OFF','VOR2','ADF2','FMS2'];
-						return modes[arg[0]];
-					</script>
-        </binding>
-      </hovered>
-   </animation>
 
 <!-- Reversionary -->
 
@@ -6799,8 +6103,21 @@
     </animation>
 
     <animation>
+        <type>translate</type>
+        <object-name>pfdhsi.R</object-name>	
+        <property>instrumentation/dc840/hsi-btn</property>
+				<factor>0.0027</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
       <type>pick</type>
       <object-name>pfdhsi.L</object-name>
+      <object-name>pfdhsi.R</object-name>
       <action>
         <button>0</button>
         <binding>
@@ -6836,54 +6153,6 @@
       </hovered>
     </animation>
 
-    <animation>
-        <type>translate</type>
-        <object-name>pfdhsi.R</object-name>	
-        <property>instrumentation/dc840[1]/hsi-btn</property>
-				<factor>0.0027</factor>
-        <axis>
-            <x>-1</x>
-            <y>0</y>
-            <z>0</z>
-				</axis>
-    </animation>
-    <animation>
-      <type>pick</type>
-      <object-name>pfdhsi.R</object-name>
-      <action>
-        <button>0</button>
-        <binding>
-          <command>property-toggle</command>
-          <property>instrumentation/dc840[1]/hsi-btn</property>
-        </binding>
-				<mod-up>
-					<binding>
-						<command>property-toggle</command>
-						<property>instrumentation/dc840[1]/hsi-btn</property>
-					</binding>
-				</mod-up>
-        <binding>
-          <condition>
-            <property>systems/electrical/outputs/disp-cont2</property>
-          </condition>
-          <command>property-toggle</command>
-          <property>instrumentation/dc840[1]/hsi</property>
-        </binding>
-        <binding>
-          <command>property-toggle</command>
-          <property>sim/sound/click</property>
-        </binding>
-      </action>
-      <hovered>
-        <binding>
-          <command>set-tooltip</command>
-          <tooltip-id>pfdhsi.R</tooltip-id>
-          <label>PFD HSI : %s</label>
-          <property>instrumentation/dc840[1]/hsi</property>
-          <mapping>0-1</mapping>
-        </binding>
-      </hovered>
-    </animation>
 
     <animation>
         <type>translate</type>
@@ -6896,10 +6165,23 @@
             <z>0</z>
 				</axis>
     </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>pfdwx.R</object-name>	
+        <property>instrumentation/dc840/wx-btn</property>
+				<factor>0.0027</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+				</axis>
+    </animation>
  
    <animation>
       <type>pick</type>
       <object-name>pfdwx.L</object-name>
+      <object-name>pfdwx.R</object-name>
       <action>
         <button>0</button>
         <binding>
@@ -6937,59 +6219,7 @@
         </binding>
       </hovered>
     </animation>
-
-    <animation>
-        <type>translate</type>
-        <object-name>pfdwx.R</object-name>	
-        <property>instrumentation/dc840[1]/wx-btn</property>
-				<factor>0.0027</factor>
-        <axis>
-            <x>-1</x>
-            <y>0</y>
-            <z>0</z>
-				</axis>
-    </animation>
  
-   <animation>
-      <type>pick</type>
-      <object-name>pfdwx.R</object-name>
-      <action>
-        <button>0</button>
-        <binding>
-          <command>property-toggle</command>
-          <property>instrumentation/dc840[1]/wx-btn</property>
-        </binding>
-				<mod-up>
-          <binding>
-            <command>property-toggle</command>
-	          <property>instrumentation/dc840[1]/wx-btn</property>
-          </binding>					
-				</mod-up>
-        <binding>
-          <condition>
-            <and>
-              <property>systems/electrical/outputs/disp-cont2</property>
-              <property>systems/electrical/outputs/radar</property>
-            </and>
-          </condition>
-          <command>property-toggle</command>
-            <property>instrumentation/dc840[1]/wx</property>
-        </binding>
-        <binding>
-          <command>property-toggle</command>
-          <property>sim/sound/click</property>
-        </binding>
-      </action>
-      <hovered>
-        <binding>
-          <command>set-tooltip</command>
-          <tooltip-id>pfdwx.R</tooltip-id>
-          <label>PFD WEATHER : %s</label>
-          <property>instrumentation/dc840[1]/wx</property>
-          <mapping>on-off</mapping>
-        </binding>
-      </hovered>
-    </animation>
 
     <animation>
         <type>translate</type>
@@ -7004,8 +6234,21 @@
     </animation>
 
     <animation>
+        <type>translate</type>
+        <object-name>et.R</object-name>	
+        <property>instrumentation/mfd/et</property>
+				<factor>0.0027</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+				</axis>
+    </animation>
+
+    <animation>
       <type>pick</type>
       <object-name>et.L</object-name>
+      <object-name>et.R</object-name>
       <action>
         <button>0</button>
         <repeatable>false</repeatable>
@@ -7043,8 +6286,8 @@
 
     <animation>
         <type>translate</type>
-        <object-name>et.R</object-name>	
-        <property>instrumentation/mfd[1]/et</property>
+        <object-name>tcas.L</object-name>	
+        <property>instrumentation/dc840/tcas</property>
 				<factor>0.0027</factor>
         <axis>
             <x>-1</x>
@@ -7054,46 +6297,8 @@
     </animation>
 
     <animation>
-        <type>pick</type>
-        <object-name>et.R</object-name>
-        <action>
-          <button>0</button>
-          <repeatable>false</repeatable>
-          <binding>
-            <command>property-assign</command>
-        		<property>instrumentation/mfd[1]/et</property>
-						<value>1</value>
-          </binding>
-          <binding>
-            <command>property-toggle</command>
-            <property>sim/sound/click</property>
-          </binding>
-					<mod-up>
-						<binding>
-							<command>property-assign</command>
-								<property>instrumentation/mfd[1]/et</property>
-								<value>0</value>
-						</binding>
-					</mod-up>
-        </action>
-        <hovered>
-            <binding>
-                <command>set-tooltip</command>
-                <tooltip-id>et.btn</tooltip-id>
-                <label>ET : %s</label>
-	              <property>instrumentation/mfd[1]/etx</property>
-                <mapping>nasal</mapping>
-                <script>
-                  var modes = ['OFF','ON','STOP','RESET'];
-                  return modes[arg[0]];
-                </script>            
-            </binding>
-        </hovered>
-    </animation>
-
-    <animation>
         <type>translate</type>
-        <object-name>tcas.L</object-name>	
+        <object-name>tcas.R</object-name>	
         <property>instrumentation/dc840/tcas</property>
 				<factor>0.0027</factor>
         <axis>
@@ -7106,6 +6311,7 @@
     <animation>
       <type>pick</type>
       <object-name>tcas.L</object-name>
+      <object-name>tcas.R</object-name>
       <action>
         <button>0</button>
         <repeatable>false</repeatable>
@@ -7145,59 +6351,6 @@
       </hovered>
     </animation>
 
-    <animation>
-        <type>translate</type>
-        <object-name>tcas.R</object-name>	
-        <property>instrumentation/dc840[1]/tcas</property>
-				<factor>0.0027</factor>
-        <axis>
-            <x>-1</x>
-            <y>0</y>
-            <z>0</z>
-				</axis>
-    </animation>
-
-    <animation>
-        <type>pick</type>
-        <object-name>tcas.R</object-name>
-        <action>
-          <button>0</button>
-          <repeatable>false</repeatable>
-        <binding>
-          <command>property-toggle</command>
-          <property>instrumentation/dc840[1]/tcas</property>
-        </binding>
-				<mod-up>
-					<binding>
-						<command>property-toggle</command>
-						<property>instrumentation/dc840[1]/tcas</property>
-					</binding>
-				</mod-up>
-        <binding>
-          <condition>
-            <and>
-              <property>systems/electrical/outputs/disp-cont2</property>
-              <property>systems/electrical/outputs/tcas</property>
-            </and>
-          </condition>
-          <command>property-toggle</command>
-          <property>instrumentation/tcas/tfc[1]</property>
-        </binding>
-          <binding>
-            <command>property-toggle</command>
-            <property>sim/sound/click</property>
-          </binding>
-        </action>
-        <hovered>
-          <binding>
-            <command>set-tooltip</command>
-            <tooltip-id>tcas.R</tooltip-id>
-            <label>TRAFIC : %s</label>
-            <property>instrumentation/tcas/tfc[1]</property>
-            <mapping>on-off</mapping>
-          </binding>
-        </hovered>
-    </animation>
 
     <animation>
         <type>translate</type>
@@ -7543,10 +6696,20 @@
 
     <model>
         <name>chklst-pilot</name>
-        <path>Aircraft/CitationX/Models/Instruments/MFD/checklist-L.xml</path>
+        <path>Aircraft/CitationX/Models/Instruments/MFD/checklist.xml</path>
         <offsets>
             <x-m>0.002</x-m>
             <y-m>-0.187</y-m>
+            <z-m>0.138</z-m>
+        </offsets>
+    </model>
+
+    <model>
+        <name>chklst-copilot</name>
+        <path>Aircraft/CitationX/Models/Instruments/MFD/checklist.xml</path>
+        <offsets>
+            <x-m>0.002</x-m>
+            <y-m>0.194</y-m>
             <z-m>0.138</z-m>
         </offsets>
     </model>
@@ -7558,27 +6721,6 @@
         <and>
 				  <property>instrumentation/checklists/chklst-pilot</property>
 				  <property>systems/electrical/outputs/disp-cont1</property>
-        </and>
-			</condition>
-		</animation>
-
-    <model>
-        <name>chklst-copilot</name>
-        <path>Aircraft/CitationX/Models/Instruments/MFD/checklist-R.xml</path>
-        <offsets>
-            <x-m>0.002</x-m>
-            <y-m>0.194</y-m>
-            <z-m>0.138</z-m>
-        </offsets>
-    </model>
-
-		<animation>
-			<object-name>chklst-copilot</object-name>
-			<type>select</type>
-			<condition>
-        <and>
-				  <property>instrumentation/checklists/chklst-copilot</property>
-				  <property>systems/electrical/outputs/disp-cont2</property>
         </and>
 			</condition>
 		</animation>
@@ -7596,8 +6738,21 @@
     </animation>
 
     <animation>
+        <type>translate</type>
+        <object-name>norm.R</object-name>	
+        <property>instrumentation/dc840/norm</property>
+				<factor>0.0027</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
       <type>pick</type>
       <object-name>norm.L</object-name>
+      <object-name>norm.R</object-name>
       <action>
         <button>0</button>
         <repeatable>false</repeatable>
@@ -7632,54 +6787,6 @@
 			</hovered>
     </animation>
 
-    <animation>
-        <type>translate</type>
-        <object-name>norm.R</object-name>	
-        <property>instrumentation/dc840[1]/norm</property>
-				<factor>0.0027</factor>
-        <axis>
-            <x>-1</x>
-            <y>0</y>
-            <z>0</z>
-        </axis>
-    </animation>
-
-    <animation>
-      <type>pick</type>
-      <object-name>norm.R</object-name>
-      <action>
-        <button>0</button>
-        <repeatable>false</repeatable>
-        <binding>
-          <command>property-toggle</command>
-          <property>instrumentation/dc840[1]/norm</property>
-        </binding>
-        <mod-up>
-          <binding>
-            <command>property-toggle</command>
-            <property>instrumentation/dc840[1]/norm</property>
-          </binding>
-        </mod-up>
-        <binding>
-          <condition>
-            <property>systems/electrical/outputs/disp-cont2</property>
-          </condition>
-            <command>property-toggle</command>
-            <property>instrumentation/checklists/chklst-copilot</property>
-        </binding>
-				<binding>
-			    <command>property-toggle</command>
-			    <property>sim/sound/click</property>
-				</binding>
-	    </action>
-			<hovered>
-		    <binding>
-	        <command>set-tooltip</command>
-	        <tooltip-id>NormBtn</tooltip-id>
-	        <label>Checklist Copilot</label>
-		    </binding>
-			</hovered>
-    </animation>
 
     <animation>
         <type>translate</type>
@@ -7694,8 +6801,21 @@
     </animation>
 
     <animation>
+        <type>translate</type>
+        <object-name>abn.R</object-name>	
+        <property>instrumentation/dc840/abn-btn</property>
+				<factor>0.0027</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
       <type>pick</type>
       <object-name>abn.L</object-name>
+      <object-name>abn.R</object-name>
       <action>
         <button>0</button>
         <repeatable>false</repeatable>
@@ -7733,59 +6853,9 @@
     </animation>
 
     <animation>
-        <type>translate</type>
-        <object-name>abn.R</object-name>	
-        <property>instrumentation/dc840[1]/abn-btn</property>
-				<factor>0.0027</factor>
-        <axis>
-            <x>-1</x>
-            <y>0</y>
-            <z>0</z>
-        </axis>
-    </animation>
-
-    <animation>
-      <type>pick</type>
-      <object-name>abn.R</object-name>
-      <action>
-        <button>0</button>
-        <repeatable>false</repeatable>
-        <binding>
-          <command>property-toggle</command>
-          <property>instrumentation/dc840[1]/abn-btn</property>
-        </binding>
-				<mod-up>
-          <binding>
-            <command>property-toggle</command>
-	          <property>instrumentation/dc840[1]/abn-btn</property>
-          </binding>					
-				</mod-up>
-        <binding>
-          <condition>
-            <property>systems/electrical/outputs/disp-cont2</property>
-          </condition>
-          <command>property-toggle</command>
-          <property>instrumentation/dc840[1]/abn</property>
-        </binding>
-        <binding>
-          <command>property-toggle</command>
-          <property>sim/sound/click</property>
-        </binding>
-	    </action>
-			<hovered>
-		    <binding>
-	        <command>set-tooltip</command>
-	        <tooltip-id>abnBtn</tooltip-id>
-	        <label>Checklist voice : %s</label>
-		      <property>instrumentation/dc840[1]/abn</property>
-	        <mapping>on-off</mapping>
-		    </binding>
-			</hovered>
-    </animation>
-
-    <animation>
         <type>pick</type>
         <object-name>page-L.up</object-name>
+        <object-name>page-R.up</object-name>
         <action>
           <button>0</button>
           <repeatable>false</repeatable>
@@ -7812,6 +6882,7 @@
     <animation>
         <type>pick</type>
         <object-name>page-L.dwn</object-name>
+        <object-name>page-R.dwn</object-name>
         <action>
           <button>0</button>
           <repeatable>false</repeatable>
@@ -7836,58 +6907,6 @@
     </animation>
 
     <animation>
-        <type>pick</type>
-        <object-name>page-R.up</object-name>
-        <action>
-          <button>0</button>
-          <repeatable>false</repeatable>
-          <binding>
-            <command>nasal</command>
-          	<script>checklist.CHKLIST.next_page(1);</script>
-          </binding>
-          <binding>
-            <command>property-toggle</command>
-            <property>sim/sound/click</property>
-          </binding>
-        </action>
-				<hovered>
-			    <binding>
-			        <command>set-tooltip</command>
-			        <tooltip-id>PageLUpDwn</tooltip-id>
-			        <label>Checklist Up : %s</label>
-				      <property>instrumentation/checklists/nr-page[1]</property>
-			        <mapping>heading</mapping>
-			    </binding>
-				</hovered>
-    </animation>
-
-    <animation>
-        <type>pick</type>
-        <object-name>page-R.dwn</object-name>
-        <action>
-          <button>0</button>
-          <repeatable>false</repeatable>
-          <binding>
-            <command>nasal</command>
-          	<script>checklist.CHKLIST.prev_page(1);</script>
-          </binding>
-          <binding>
-            <command>property-toggle</command>
-            <property>sim/sound/click</property>
-          </binding>
-        </action>
-				<hovered>
-			    <binding>
-			        <command>set-tooltip</command>
-			        <tooltip-id>PageLUpDwn</tooltip-id>
-			        <label>Checklist Down : %s</label>
-				      <property>instrumentation/checklists/nr-page[1]</property>
-			        <mapping>heading</mapping>
-			    </binding>
-				</hovered>
-    </animation>
-
-    <animation>
         <type>translate</type>
         <object-name>skp.L</object-name>	
         <property>instrumentation/dc840/skip-btn</property>
@@ -7900,8 +6919,21 @@
     </animation>
 
     <animation>
+        <type>translate</type>
+        <object-name>skp.R</object-name>	
+        <property>instrumentation/dc840/skip-btn</property>
+				<factor>0.0027</factor>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
       <type>pick</type>
       <object-name>skp.L</object-name>
+      <object-name>skp.R</object-name>
       <action>
         <button>0</button>
         <repeatable>false</repeatable>
@@ -7926,55 +6958,6 @@
 				    <command>property-toggle</command>
 				    <property>sim/sound/click</property>
 				</binding>
-	    </action>
-			<hovered>
-		    <binding>
-		        <command>set-tooltip</command>
-		        <tooltip-id>skpBtn</tooltip-id>
-		        <label>Skip</label>
-		    </binding>
-			</hovered>
-    </animation>
-
-    <animation>
-        <type>translate</type>
-        <object-name>skp.R</object-name>	
-        <property>instrumentation/dc840[1]/skip-btn</property>
-				<factor>0.0027</factor>
-        <axis>
-            <x>-1</x>
-            <y>0</y>
-            <z>0</z>
-        </axis>
-    </animation>
-
-    <animation>
-      <type>pick</type>
-      <object-name>skp.R</object-name>
-      <action>
-        <button>0</button>
-        <repeatable>false</repeatable>
-        <binding>
-          <command>property-toggle</command>
-          <property>instrumentation/dc840[1]/skip-btn</property>
-        </binding>
-			  <mod-up>
-          <binding>
-            <command>property-toggle</command>
-            <property>instrumentation/dc840[1]/skip-btn</property>
-          </binding>					
-			  </mod-up>
-				<binding>
-          <condition>
-            <property>systems/electrical/outputs/disp-cont2</property>
-          </condition>          
-				    <command>property-toggle</command>
-				    <property>instrumentation/dc840[1]/skip</property>
-				</binding>
-        <binding>
-          <command>property-toggle</command>
-          <property>sim/sound/click</property>
-        </binding>
 	    </action>
 			<hovered>
 		    <binding>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!--  Citation X - Canvas CDU light version -->
+<!--   C.Le Moigne (clm76) - 2021 -->
+
+
+<PropertyList>
+
+<path>cdu-screen.ac</path>
+
+  <animation>
+    <type>select</type>
+    <object-name>CDU.screen</object-name>
+		<condition>
+      <property>systems/electrical/outputs/fms1</property>
+		</condition>
+  </animation>
+
+</PropertyList>

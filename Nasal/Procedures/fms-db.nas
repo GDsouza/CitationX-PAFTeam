@@ -263,17 +263,12 @@ var fmsDB = {
       }
 
      ############ constructor ####################
-			root = getprop("/sim/fg-scenery");
-			fn = call(func parsexml(root~"/Airports/"~left(icao,1)~"/"~substr(icao,1,1)~"/"~substr(icao,2,1)~ "/"~icao~".procedures.xml", start, end, data),nil,var err = []);
-
-      if (size(err)) {
-#         print("[FMS] failed to find SID/STAR database file for: "~icao);
-#         foreach(var e; err) {
-#           print("[FMS] error: "~e);
-#        }
-         return nil;  # return nil to the caller, to indicate error.
-      }
-      return me;
+			var root = getprop("/sim/fg-scenery")~"/Airports/"~left(icao,1)~"/"~substr(icao,1,1)~"/"~substr(icao,2,1)~ "/"~icao~".procedures.xml";
+      var proc_path = os.path.new(root);
+      if (proc_path.exists()) {
+			  parsexml(root, start, end, data);
+        return me;
+      } else return nil;
     },
 
     ##################################

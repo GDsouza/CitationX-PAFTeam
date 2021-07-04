@@ -10,7 +10,7 @@
 
   <animation>
     <type>select</type>
-    <object-name>CDU.screenL</object-name>
+    <object-name>CDU.screen</object-name>
     <object-name>CDU-lamp</object-name>
     <object-name>annun.1W</object-name>
     <object-name>annun.2A</object-name>

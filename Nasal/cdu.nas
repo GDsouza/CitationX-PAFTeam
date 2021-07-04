@@ -3,11 +3,9 @@
 # C. Le Moigne (clm76) - 2015 -> Canvas : 2017
 ######################################################
 
-var alarm = ["instrumentation/cdu/alarms",
-             "instrumentation/cdu[1]/alarms"];
+var alarm = "instrumentation/cdu/alarms";
 var avionics = "controls/electric/avionics-switch";
-var cdu_input = ["instrumentation/cdu/input",
-                "instrumentation/cdu[1]/input"];
+var cdu_input = "instrumentation/cdu/input";
 var curr_wp = "autopilot/route-manager/current-wp";
 var dataLoad = "systems/electrical/outputs/data-loader";
 var depAirport = "autopilot/route-manager/departure/airport";
@@ -15,42 +13,28 @@ var depRwy = "autopilot/route-manager/departure/runway";
 var destAirport = "autopilot/route-manager/destination/airport";
 var destAlt = "autopilot/route-manager/destination/field-elevation-ft";
 var destRwy = "autopilot/route-manager/destination/runway";
-var direct = ["instrumentation/cdu/direct",
-              "instrumentation/cdu[1]/direct"];
-var display = ["instrumentation/cdu/display",
-               "instrumentation/cdu[1]/display"];
+var direct = "instrumentation/cdu/direct";
+var display = "instrumentation/cdu/display";
 var fp_active = "autopilot/route-manager/active";
-var flyover = ["instrumentation/cdu/flyover",
-                 "instrumentation/cdu[1]/flyover"];
-var hold_activ = ["instrumentation/cdu/hold/active",
-                  "instrumentation/cdu[1]/hold/active"];
+var flyover = "instrumentation/cdu/flyover";
+var hold_activ = "instrumentation/cdu/hold/active";
 var hold_exit = "autopilot/locks/hold/enable-exit";
-var hold_path = ["instrumentation/cdu/hold/",
-                 "instrumentation/cdu[1]/hold/"];
-var irs_align = ["instrumentation/irs/align",
-                 "instrumentation/irs[1]/align"];
-var irs_pos = ["instrumentation/irs/positionned",
-               "instrumentation/irs[1]/positionned"];
+var hold_path = "instrumentation/cdu/hold/";
+var irs_align = "instrumentation/irs/align";
+var irs_pos = "instrumentation/irs/positioned";
 var navSrc = "autopilot/settings/nav-source";
-var nbpage = ["instrumentation/cdu/nbpage",
-              "instrumentation/cdu[1]/nbpage"];
+var nbpage = "instrumentation/cdu/nbpage";
 var num = "autopilot/route-manager/route/num";
 var path = getprop("/sim/fg-home")~"/Export/FlightPlans/";
-var pcdr_activ = ["instrumentation/cdu/pcdr/active",
-                 "instrumentation/cdu[1]/pcdr/active"];
-var pcdr_path = ["instrumentation/cdu/pcdr/",
-                 "instrumentation/cdu[1]/pcdr/"];
-var pos_init = ["instrumentation/cdu/pos-init",
-                "instrumentation/cdu[1]/pos-init"];
+var pcdr_activ = "instrumentation/cdu/pcdr/active";
+var pcdr_path = "instrumentation/cdu/pcdr/";
+var pos_init = "instrumentation/cdu/pos-init";
 var route_path = "autopilot/route-manager/route/wp[";
-var trs_alt = ["instrumentation/cdu/trans-alt",
-                "instrumentation/cdu[1]/trans-alt"];
+var trs_alt = "instrumentation/cdu/trans-alt";
 
-var alm = [[],[]];
-alm[0] = std.Vector.new();
-alm[1] = std.Vector.new();
-var cnv = [nil,nil];
-cnv[0] =  cnv[1] = {FT:nil,M:nil,FL:nil,LB:nil,KG:nil,GAL:nil,L:nil,F:nil,C:nil,
+var alm = [];
+alm = std.Vector.new();
+var cnv = {FT:nil,M:nil,FL:nil,LB:nil,KG:nil,GAL:nil,L:nil,F:nil,C:nil,
                         KTS:nil,MS:nil,NM:nil,KM:nil,LBGAL:nil,KGL:nil,
                         ELEV:nil,QFE:nil,QNH:nil};
 
@@ -130,40 +114,38 @@ var cduMain = {
 	  setprop("autopilot/settings/app15-speed-kt",160);
 	  setprop("autopilot/settings/app35-speed-kt",140);
 	  setprop("autopilot/route-manager/wp/altitude-ft",0);
-    setprop(display[0],"NAVIDENT");
-    setprop(display[1],"NAVIDENT");
+    setprop(display,"NAVIDENT");
         ### set Conversion Values ###
-    cnv[0].LBGAL = cnv[1].LBGAL = sprintf("%.3f",6.667);
-    cnv[0].KGL = cnv[1].KGL = sprintf("%.3f",0.799);
+    cnv.LBGAL = sprintf("%.3f",6.667);
+    cnv.KGL = sprintf("%.3f",0.799);
 
         ### Create FlightPlans path if not exists ###
     var flt_dir = os.path.new(getprop("/sim/fg-home")~"/Export/FlightPlans/create.txt");
     if (!flt_dir.exists()) flt_dir.create_dir();
   }, # end of init
 
-  listen : func (x) {
-    setlistener("instrumentation/cdu["~x~"]/init",func(n) { # Reinit CDU #
+  listen : func {
+    setlistener("instrumentation/cdu/init",func(n) { # Reinit CDU #
 	    if (n.getValue()) {
 		    setprop("autopilot/route-manager/input","@CLEAR");
 		    setprop(destAirport,"");
 		    setprop(depAirport,"");
-		    setprop("autopilot/route-manager/alternate["~x~"]/airport","");
-		    setprop("autopilot/route-manager/alternate["~x~"]/runway","");
-		    setprop("autopilot/route-manager/alternate["~x~"]/closed",0);
-		    setprop("autopilot/route-manager/alternate["~x~"]/set-flag",0);
-		    setprop(display[0],"NAVIDENT");
-		    setprop(display[1],"NAVIDENT");
-        setprop(nbpage[x],1);
-		    setprop(pos_init[x],0);
-		    setprop(direct[x],0);
-        setprop(hold_activ[x],0);
+		    setprop("autopilot/route-manager/alternate/airport","");
+		    setprop("autopilot/route-manager/alternate/runway","");
+		    setprop("autopilot/route-manager/alternate/closed",0);
+		    setprop("autopilot/route-manager/alternate/set-flag",0);
+		    setprop(display,"NAVIDENT");
+        setprop(nbpage,1);
+		    setprop(pos_init,0);
+		    setprop(direct,0);
+        setprop(hold_activ,0);
         setprop("autopilot/locks/hold/active",0);
         setprop("autopilot/locks/hold/enable-exit",0);
         setprop("autopilot/locks/hold/exit",0);
         setprop("autopilot/locks/hold/phase",0);
-        setprop(pcdr_activ[x],0);
-		    setprop("instrumentation/cdu["~x~"]/direct-to",-1);
-		    setprop(cdu_input[x],"");
+        setprop(pcdr_activ,0);
+		    setprop("instrumentation/cdu/direct-to",-1);
+		    setprop(cdu_input,"");
 		    setprop("autopilot/locks/TOD",0);
 		    setprop(navSrc, "NAV1");
 		    setprop("autopilot/locks/altitude","PTCH");
@@ -173,120 +155,118 @@ var cduMain = {
         me.fuel_wgt(8000);
         setprop("sim/weight[2]/weight-lb",4000);
 				setprop("sim/weight[1]/weight-lb",8*170);
-        setprop(pos_init[x],0);
-        setprop(irs_pos[x],0);
-        irsPos = 0;
+        setprop(display, irsPos ? "POS-INIT" : "NAVIDENT");
         hold = 0;
         patt_ind = nil;
         pcdr = 0;
         pcdr_ind = nil;
-        foreach(var i;keys(cnv[x])) {
+        foreach(var i;keys(cnv)) {
           if (i == "LBGAL" or i == "KGL") continue;
-          cnv[x][i] = nil;
+          cnv[i] = nil;
         }
 	    }	
     },0,0);
 
     ### Electrical Fuses ###
 		setlistener(dataLoad, func(n) {
-      if (!n.getValue()) me.set_alm(x,"DB TRANSFER ABORTED");
-      else me.clear_alm(x,"DB TRANSFER ABORTED");
+      if (!n.getValue()) me.set_alm("DB TRANSFER ABORTED");
+      else me.clear_alm("DB TRANSFER ABORTED");
     },0,0);
 
-		setlistener("systems/electrical/outputs/gps"~(x+1), func(n) {
-      if (!n.getValue()) me.set_alm(x,"GPS"~(x+1)~" FAILED");
-      else me.clear_alm(x,"GPS"~(x+1)~" FAILED");
+		setlistener("systems/electrical/outputs/gps", func(n) {
+      if (!n.getValue()) me.set_alm("GPS FAILED");
+      else me.clear_alm("GPS FAILED");
     },0,0);
 
-		setlistener("systems/electrical/outputs/att-hdg"~(x+1), func(n) {
-      if (!n.getValue()) me.set_alm(x,"ATT/HDG"~(x+1)~" FAILED");
-      else me.clear_alm(x,"ATT/HDG"~(x+1)~" FAILED");
+		setlistener("systems/electrical/outputs/att-hdg", func(n) {
+      if (!n.getValue()) me.set_alm("ATT/HDG FAILED");
+      else me.clear_alm("ATT/HDG FAILED");
     },0,0);
 
-		setlistener("systems/electrical/outputs/att-hdg-aux"~(x+1), func(n) {
-      if (!n.getValue()) me.set_alm(x,"ATT/HDG"~(x+1)~" FAILED");
-      else me.clear_alm(x,"ATT/HDG"~(x+1)~" FAILED");
+		setlistener("systems/electrical/outputs/att-hdg-aux", func(n) {
+      if (!n.getValue()) me.set_alm("ATT/HDG FAILED");
+      else me.clear_alm("ATT/HDG FAILED");
     },0,0);
 
 		setlistener("systems/electrical/outputs/afis", func(n) {
-      if (!n.getValue()) me.set_alm(x,"AFIS DMU FAILED");
-      else me.clear_alm(x,"AFIS DMU FAILED");
+      if (!n.getValue()) me.set_alm("AFIS DMU FAILED");
+      else me.clear_alm("AFIS DMU FAILED");
     },0,0);
 
-		setlistener("instrumentation/irs["~x~"]/failure", func(n) {
-      if (n.getValue()) me.set_alm(x,"IRS"~(x+1)~" FAILED");
-      else me.clear_alm(x,"IRS"~(x+1)~" FAILED");
+		setlistener("instrumentation/irs/failure", func(n) {
+      if (n.getValue()) me.set_alm("IRS FAILED");
+      else me.clear_alm("IRS FAILED");
     },0,0);
 
 		setlistener("controls/electric/stby-batt-fail", func(n) {
-      if (n.getValue()) me.set_alm(x,"IRS"~(x+1)~" FAILED");
-      else me.clear_alm(x,"IRS"~(x+1)~" FAILED");
+      if (n.getValue()) me.set_alm("IRS FAILED");
+      else me.clear_alm("IRS FAILED");
     },0,0);
 
-		setlistener("systems/electrical/outputs/nav["~x~"]", func(n) {
-      setprop("instrumentation/nav["~x~"]/serviceable",n.getValue());
+		setlistener("systems/electrical/outputs/nav", func(n) {
+      setprop("instrumentation/nav/serviceable",n.getValue());
     },0,0);
 
     ### Others ###
-    setlistener(irs_align[x], func(n) { ### IRS Alignment ###
-      if (n.getValue()) me.set_alm(x,"POSITIONNING");
-      else me.clear_alm(x,"POSITIONNING");
+    setlistener(irs_align, func(n) { ### IRS Alignment ###
+      if (n.getValue()) me.set_alm("POSITIONING");
+      else me.clear_alm("POSITIONING");
     },0,0);
 
-    setlistener(irs_pos[x], func(n) { ### End of Positionning ###
-      if (!getprop(irs_pos[0]) or !getprop(irs_pos[1])) irsPos = 0;
-      else irsPos = 1;
+    setlistener(irs_pos, func(n) { ### End of Positioning ###
+      irsPos = n.getValue();
+      setprop(display, irsPos ? "POS-INIT" : "NAVIDENT");
     },0,0);
 
-    setlistener(pos_init[x], func(n) { ### CDU positionned ###
+    setlistener(pos_init, func(n) { ### CDU positioned ###
 	    if (n.getValue()) cduPos = 1;
     },0,0);
 
-    setlistener(display[x],func(n) {
+    setlistener(display,func(n) {
       cduDisplay = n.getValue();
       nrPage = size(cduDisplay)<12 ? substr(cduDisplay,9,1) : substr(cduDisplay,9,2); 
       if (left(n.getValue(),8) == "FLT-PLAN") {
-        me.nb_pages(getprop(num),3,x);
-        if (getprop(fp_active)) setprop(nbpage[x],getprop(nbpage[x])+1);
-        setprop("instrumentation/cdu["~x~"]/fltplan",1);
-      } else setprop("instrumentation/cdu["~x~"]/fltplan",0);
+        me.nb_pages(getprop(num),3);
+        if (getprop(fp_active)) setprop(nbpage,getprop(nbpage)+1);
+        setprop("instrumentation/cdu/fltplan",1);
+      } else setprop("instrumentation/cdu/fltplan",0);
       if (left(n.getValue(),8) == "ALT-PAGE" and altFp != nil)
-        me.nb_pages(altFp.getPlanSize(),3,x);
+        me.nb_pages(altFp.getPlanSize(),3);
     },0,0);
 
     setlistener(fp_active, func(n) {
-      me.nb_pages(getprop(num),3,x);
+      me.nb_pages(getprop(num),3);
       if (n.getValue()) {
-        setprop(nbpage[x],getprop(nbpage[x])+1);
-        cnv[0].ELEV = cnv[1].ELEV = getprop(destAlt); # for Conversion Page
-      } else cnv[0].ELEV = cnv[1].ELEV = nil;
+        setprop(nbpage,getprop(nbpage)+1);
+        cnv.ELEV = getprop(destAlt); # for Conversion Page
+      } else cnv.ELEV = nil;
     },0,0);
 
     setlistener(num, func(n) {
-      me.nb_pages(n.getValue(),3,x);
-      if (getprop(fp_active)) setprop(nbpage[x],getprop(nbpage[x])+1);
+      me.nb_pages(n.getValue(),3);
+      if (getprop(fp_active)) setprop(nbpage,getprop(nbpage)+1);
     },0,0);
 
     setlistener(avionics, func(n) {
-      setprop("instrumentation/cdu["~x~"]/init", n.getValue() < 2 ? 1 : 0);
+      setprop("instrumentation/cdu/init", n.getValue() < 2 ? 1 : 0);
     },0,0);
 
   }, ### end of listen
 
-  btn : func (v,x) { ### Alphanumeric Buttons treatment
-	  var n = size(getprop("/instrumentation/cdu["~x~"]/input"));
+  btn : func (v) { ### Alphanumeric Buttons treatment
+	  var n = size(getprop("/instrumentation/cdu/input"));
 		  if (n < 13) {
-			  setprop(cdu_input[x],getprop(cdu_input[x])~v);
+			  setprop(cdu_input,getprop(cdu_input)~v);
 		  }
   }, # end of btn
 
-  key : func(v,x) { ### Keys treatment
-    cduInput = getprop("/instrumentation/cdu["~x~"]/input");	
-    cduDisplay = getprop("/instrumentation/cdu["~x~"]/display");
-    fp = getprop("autopilot/route-manager/alternate["~x~"]/set-flag") ? altFp : flightplan();
+  key : func(v) { ### Keys treatment
+    cduInput = getprop("/instrumentation/cdu/input");	
+    cduDisplay = getprop("/instrumentation/cdu/display");
+    fp = getprop("autopilot/route-manager/alternate/set-flag") ? altFp : flightplan();
 
     if (v == "FPL") {
-      setprop("autopilot/route-manager/alternate["~x~"]/set-flag",0);
+      setprop("autopilot/route-manager/alternate/set-flag",0);
       cduInput = "";
       if (cduDisplay == "POS-INIT") {
         if (cduPos) {v = "";cduDisplay = "FLT-PLAN[0]"}
@@ -296,7 +276,7 @@ var cduMain = {
               ### automatic page change ###
             var page = int(getprop(curr_wp)/3)+1;
             cduDisplay = "FLT-PLAN["~page~"]";
-        		setprop("/instrumentation/cdu["~x~"]/display",cduDisplay);
+        		setprop("/instrumentation/cdu/display",cduDisplay);
             setprop(curr_wp,getprop(curr_wp));
               ###
           } else {cduDisplay = "FLT-PLAN[0]"}
@@ -307,7 +287,7 @@ var cduMain = {
     }
 		if (v == "NAV" and cduPos) {
 				v = "";
-        setprop(nbpage[x],2);
+        setprop(nbpage,2);
 				cduDisplay = "NAV-PAGE[1]";
 		}		
     if (v == "PERF" and cduPos) {v="";cduDisplay = "PRF-PAGE[1]"}
@@ -318,31 +298,29 @@ var cduMain = {
       if (v == "B4R"){
         data_load = getprop(dataLoad); # Data Loader Fuse
         v="";
-        for (var i=0;i<2;i+=1){
-          setprop(display[i], data_load ? "POS-INIT" : "NAVIDENT");
-        }
+        setprop(display, data_load ? "POS-INIT" : "NAVIDENT");
       }
 		}
 
 		#### POS-INIT ####
 		if (cduDisplay == "POS-INIT") {
 		  if (v == "B1R" or v == "B2R" or v == "B3R" and irsPos) {	
-         setprop(pos_init[0],1);setprop(pos_init[1],1);cduPos = 1;
+         setprop(pos_init,1);cduPos = 1;
       }
 		  if (v == "B4R" and cduPos) cduDisplay = "FLT-PLAN[0]";
-      setprop(display[0],cduDisplay); setprop(display[1],cduDisplay);
+      setprop(display,cduDisplay); setprop(display,cduDisplay);
 		}
 
 		#### FLT-LIST ####
 		if (left(cduDisplay,8) == "FLT-LIST") {
 			if (v == "B4L") {
         v="";cduInput=""; 
-        me.clear_alm(0,"NO FILE");me.clear_alm(1,"NO FILE");    
+        me.clear_alm(0,"NO FILE");
         cduDisplay = getprop(destAirport) ? "FLT-PLAN[1]":"FLT-PLAN[0]";
 			} else {
         me.lineSelect(v);
-				if (getprop("instrumentation/cdu["~x~"]/"~select) !="") {
-          navSel = getprop("instrumentation/cdu["~x~"]/"~select);
+				if (getprop("instrumentation/cdu/"~select) !="") {
+          navSel = getprop("instrumentation/cdu/"~select);
           setprop("autopilot/route-manager/flight-plan",navSel);
           me.load_flightplan();
 					var data = io.read_properties(fltPath);
@@ -353,7 +331,7 @@ var cduMain = {
 					cduInput ="";
 				}
 			}
-      setprop(display[0],cduDisplay);setprop(display[1],cduDisplay);
+      setprop(display,cduDisplay);
 		}
 
 		#### DEPARTURE ####
@@ -362,8 +340,8 @@ var cduMain = {
 			else if (v == "B4L") {v = "";cduInput = "";cduDisplay = "FLT-SIDS[1]"}
 			else {
         me.lineSelect(v);
-				if (getprop("instrumentation/cdu["~x~"]/"~select) !="") {
-					setprop(depRwy,getprop("instrumentation/cdu["~x~"]/"~select));
+				if (getprop("instrumentation/cdu/"~select) !="") {
+					setprop(depRwy,getprop("instrumentation/cdu/"~select));
 					cduInput = "RWY " ~ getprop(depRwy) ~ " Loaded";
 				}
 			}
@@ -375,8 +353,8 @@ var cduMain = {
 			else if (v != "") {
         if (!getprop(fp_active)) {
           me.lineSelect(v);
-				  if (getprop("instrumentation/cdu["~x~"]/"~select) !="") {
-					  var SidName = getprop("instrumentation/cdu["~x~"]/"~select);
+				  if (getprop("instrumentation/cdu/"~select) !="") {
+					  var SidName = getprop("instrumentation/cdu/"~select);
 					  setprop("/autopilot/route-manager/departure/sid",SidName);
     				cduInput = getprop("/autopilot/route-manager/departure/sid") ~ " Loaded";
           }
@@ -394,18 +372,19 @@ var cduMain = {
 		if (left(cduDisplay,8) == "FLT-ARWY") {
 			if (v == "B4L") {
 				cduInput = "";
-        if (getprop("autopilot/route-manager/alternate["~x~"]/set-flag")) {v="";cduDisplay = "ALT-PAGE[1]"}
+        if (getprop("autopilot/route-manager/alternate/set-flag")) 
+          {v="";cduDisplay = "ALT-PAGE[1]"}
         else {v="";cduDisplay = "FLT-ARRV[1]"}
 			}
 			else if (v != "") {
         me.lineSelect(v);
-				if (getprop("instrumentation/cdu["~x~"]/"~select) !="") {
-          if (getprop("autopilot/route-manager/alternate["~x~"]/set-flag")) {
-            setprop("autopilot/route-manager/alternate["~x~"]/runway",getprop("instrumentation/cdu["~x~"]/"~select));
+				if (getprop("instrumentation/cdu/"~select) !="") {
+          if (getprop("autopilot/route-manager/alternate/set-flag")) {
+            setprop("autopilot/route-manager/alternate/runway",getprop("instrumentation/cdu/"~select));
           } else {
-  					setprop(destRwy,getprop("instrumentation/cdu["~x~"]/"~select));
+  					setprop(destRwy,getprop("instrumentation/cdu/"~select));
           }
-					cduInput = "RWY "~getprop("instrumentation/cdu["~x~"]/"~select)~" Loaded";
+					cduInput = "RWY "~getprop("instrumentation/cdu/"~select)~" Loaded";
 				}
 			}
 		}
@@ -423,8 +402,8 @@ var cduMain = {
 			else if (v != "") {
         if (!getprop(fp_active)) {
           me.lineSelect(v);
-				  if (getprop("instrumentation/cdu["~x~"]/"~select) !="") {
-					  var StarName = getprop("instrumentation/cdu["~x~"]/"~select);
+				  if (getprop("instrumentation/cdu/"~select) !="") {
+					  var StarName = getprop("instrumentation/cdu/"~select);
 					  setprop("/autopilot/route-manager/destination/star",StarName);
 					  cduInput = getprop("autopilot/route-manager/destination/star") ~ " Loaded";
 				  }			
@@ -442,8 +421,8 @@ var cduMain = {
 			else if (v != "") {
         if (!getprop(fp_active)) {
           me.lineSelect(v);
-				  if (getprop("instrumentation/cdu["~x~"]/"~select) !="") {			
-					  var ApprName = getprop("instrumentation/cdu["~x~"]/"~select);
+				  if (getprop("instrumentation/cdu/"~select) !="") {			
+					  var ApprName = getprop("instrumentation/cdu/"~select);
             var n = 99;
             #### Delete Wp after Dest Airport ####
             for (var i=1;i<fp.getPlanSize();i+=1) {
@@ -479,7 +458,7 @@ var cduMain = {
           } else cduInput = "NOT AN AIRPORT";
         }
       }
-      setprop(display[0],cduDisplay); setprop(display[1],cduDisplay);      
+      setprop(display,cduDisplay);    
     }
 		else if (left(cduDisplay,8) == "FLT-PLAN") {
       nrPage = size(cduDisplay)<12 ? substr(cduDisplay,9,1) : substr(cduDisplay,9,2); 
@@ -491,7 +470,7 @@ var cduMain = {
           setprop("autopilot/route-manager/flight-plan",getprop(depAirport)~"-"~getprop(destAirport));
           nrPage+=1;
 					cduInput = "";
-					cduDisplay = "FLT-PLAN["~(getprop(nbpage[x]))~"]";
+					cduDisplay = "FLT-PLAN["~(getprop(nbpage))~"]";
 				} 
         ### DEL Button ###
 				if (cduInput == "*DELETE*") {
@@ -517,15 +496,15 @@ var cduMain = {
 					      setprop("autopilot/route-manager/input","@DELETE"~ind);
 					      cduInput = "";
     					  setprop(fp_active,1); # to recreate TOD
-              } else if (getprop(flyover[x]) > 0) {
-                setprop(flyover[x],0);
+              } else if (getprop(flyover) > 0) {
+                setprop(flyover,0);
                 cduInput = "";
-              } else if (getprop(pcdr_activ[x])) {
-                setprop(pcdr_activ[x],0);
+              } else if (getprop(pcdr_activ)) {
+                setprop(pcdr_activ,0);
                 cduInput = "";
-              } else if (getprop(hold_activ[x])) {
+              } else if (getprop(hold_activ)) {
                 if (!getprop(hold_exit)) {
-                  setprop(hold_activ[x],0);
+                  setprop(hold_activ,0);
                   setprop(hold_exit,0);
                   cduInput = "";
                 } else cduInput = "*INVALID DELETE*";
@@ -562,23 +541,23 @@ var cduMain = {
 				else if (getprop(fp_active)) {
           if (hold) {
             patt_ind = ind;
-            me.clear_alm(x,"* HOLD *");
-            setprop(direct[x],0);
+            me.clear_alm("* HOLD *");
+            setprop(direct,0);
             cduDisplay = "HLD-PATT[1]";
           } else if (flyovr) {
-            setprop(flyover[x],ind);
-            me.clear_alm(x,"* FLYOVER *");
-            setprop(direct[x],0);
+            setprop(flyover,ind);
+            me.clear_alm("* FLYOVER *");
+            setprop(direct,0);
             flyovr = 0;
           } else if (pcdr) {
             pcdr_ind = ind;
-            me.clear_alm(x,"* PCDR TURN *");
-            setprop(direct[x],0);
+            me.clear_alm("* PCDR TURN *");
+            setprop(direct,0);
             cduDisplay = "PCD-TURN[1]";
-          } else if (getprop(direct[x])) {
-            if (fp.getWP(ind).wp_name != "TOD") setprop("instrumentation/cdu["~x~"]/direct-to",ind);
-            else setprop("instrumentation/cdu["~x~"]/direct-to",ind+1);
-            var dir_wp = fp.getWP(getprop("instrumentation/cdu["~x~"]/direct-to")).wp_name;
+          } else if (getprop(direct)) {
+            if (fp.getWP(ind).wp_name != "TOD") setprop("instrumentation/cdu/direct-to",ind);
+            else setprop("instrumentation/cdu/direct-to",ind+1);
+            var dir_wp = fp.getWP(getprop("instrumentation/cdu/direct-to")).wp_name;
             var currWp = getprop(curr_wp);
             for (var i=currWp;i<fp.getPlanSize()-1;i+=1) {
               if (fp.getWP(i).wp_name == dir_wp) break
@@ -586,8 +565,8 @@ var cduMain = {
             }
             setprop(fp_active,1); # to recreate TOD
             setprop(curr_wp,currWp);
-            setprop(direct[x],0);
-          } else if (cduDisplay != "FLT-PLAN["~getprop(nbpage[x])~"]")
+            setprop(direct,0);
+          } else if (cduDisplay != "FLT-PLAN["~getprop(nbpage)~"]")
               cduInput = "*FLT PLAN CLOSED*";
 				}
         v="";
@@ -595,7 +574,7 @@ var cduMain = {
 
 			if (v == "B4L") {
 			  if (getprop(fp_active)) { 
-          if (nrPage == getprop(nbpage[x])) {
+          if (nrPage == getprop(nbpage)) {
             v=""; cduDisplay = "PRF-PAGE[1]";  
           } else {
             v=""; 
@@ -604,7 +583,7 @@ var cduMain = {
                 setprop("autopilot/locks/hold/exit",1);
                 hold = 0;
                 cduDisplay = display_mem;
-            } else if (getprop(direct[x])) cduDisplay = "PAT-PAGE[1]";
+            } else if (getprop(direct)) cduDisplay = "PAT-PAGE[1]";
             else {v="";cduDisplay = "FLT-DEPT[1]"}
           }
         } else {v="";cduDisplay = "FLT-DEPT[1]"}
@@ -614,7 +593,7 @@ var cduMain = {
 				if (left(cduDisplay,8) == "FLT-PLAN" and nrPage > 1) {
           ind = nrPage*3-(3-substr(v,1,1))-1;
           if (left(fp.getWP(ind).wp_name,4) != getprop(destAirport)) {
-  					me.insertWayp(ind,cduInput,fp,x);
+  					me.insertWayp(ind,cduInput,fp);
           }
 					cduInput = "";
 				}
@@ -622,7 +601,7 @@ var cduMain = {
 
 			if (v == "B2R") {
         ind = nrPage*3-(3-substr(v,1,1))-1;
-			  if (nrPage == getprop(nbpage[x])) {
+			  if (nrPage == getprop(nbpage)) {
 					if (!getprop(depAirport)){cduInput = "NO DEPT AIRPORT"}
 				  else if (getprop(depRwy)=="") {cduInput = "NO DEPT RUNWAY"}
 					else if (getprop(destRwy)=="") {cduInput = "NO DEST RUNWAY"}
@@ -636,17 +615,17 @@ var cduMain = {
 					  setprop("autopilot/route-manager/flight-plan",fltName);
 					  cduInput = "";
           } else if (left(fp.getWP(ind).wp_name,4) != getprop(destAirport)) {
-              me.insertWayp(ind,cduInput,fp,x);
+              me.insertWayp(ind,cduInput,fp);
           }
         } else if (left(fp.getWP(ind).wp_name,4) != getprop(destAirport)) {
-				      me.insertWayp(ind,cduInput,fp,x);
+				      me.insertWayp(ind,cduInput,fp);
 				}
         cduInput = "";
 			}
 
 			if (v == "B3R") {
         ind = nrPage*3-(3-substr(v,1,1))-1;
-				if (nrPage > 0 and nrPage <= getprop(nbpage[x])) {
+				if (nrPage > 0 and nrPage <= getprop(nbpage)) {
 					if (ind == getprop(num)-1 and cduInput == "*DELETE*") {
 							setprop(destAirport,"");
 							cduInput = "";
@@ -654,20 +633,19 @@ var cduMain = {
           } else if (ind >= getprop(num)-1) {
 							if (getprop(destRwy)== "") {
 								cduInput = "NO DEST RUNWAY";
-							} else {cduInput = getprop(destAirport)}
-					}	else if (left(fp.getWP(ind).wp_name,4) != getprop(destAirport)) {
-					      me.insertWayp(ind,cduInput,fp,x);
-					}
+							} else cduInput = getprop(destAirport);
+					}	else if (left(fp.getWP(ind).wp_name,4) != getprop(destAirport))
+					      me.insertWayp(ind,cduInput,fp);
 				}			
 			}
 
 			if (v == "B4R") {
-        if (nrPage == getprop(nbpage[x]) and getprop(fp_active)) {
+        if (nrPage == getprop(nbpage) and getprop(fp_active)) {
           v = "";
-          setprop(nbpage[x],1);
-          if (getprop("autopilot/route-manager/alternate["~x~"]/airport") and getprop("autopilot/route-manager/alternate["~x~"]/runway")) {
+          setprop(nbpage,1);
+          if (getprop("autopilot/route-manager/alternate/airport") and getprop("autopilot/route-manager/alternate/runway")) {
 				    cduDisplay = "ALT-PAGE[1]";
-          } else {cduDisplay = "ALT-PAGE[0]"}
+          } else cduDisplay = "ALT-PAGE[0]";
         } else {v="";cduInput="";cduDisplay = "FLT-ARRV[1]"}
 			}
 		}		
@@ -681,7 +659,7 @@ var cduMain = {
         dest = findNavaidsByID(cduInput,"airport");
         if (size(dest) == 1) {
           altFp.destination = airportinfo(cduInput);
-			    setprop("autopilot/route-manager/alternate["~x~"]/airport",cduInput);
+			    setprop("autopilot/route-manager/alternate/airport",cduInput);
           cduInput = "";
           cduDisplay = "ALT-PAGE[0]";
         } else cduInput = "NOT AN AIRPORT";
@@ -689,8 +667,8 @@ var cduMain = {
       if (v == "B4R") {
         v="";
         cduInput="";
-        if (getprop("autopilot/route-manager/alternate["~x~"]/airport")) {
-					setprop("autopilot/route-manager/alternate["~x~"]/set-flag",1);
+        if (getprop("autopilot/route-manager/alternate/airport")) {
+					setprop("autopilot/route-manager/alternate/set-flag",1);
 					cduDisplay = "FLT-ARWY[1]";
 				}
       }
@@ -700,23 +678,23 @@ var cduMain = {
 			if (v == "B1L" or v == "B2L" or v == "B3L") {
         ind = nrPage*3-(3-substr(v,1,1))-1;
         var wpCurr = getprop(curr_wp);        
-				if (cduInput == getprop("autopilot/route-manager/alternate["~x~"]/airport")) {
-					setprop("autopilot/route-manager/alternate["~x~"]/closed",1);		
+				if (cduInput == getprop("autopilot/route-manager/alternate/airport")) {
+					setprop("autopilot/route-manager/alternate/closed",1);		
 					cduInput = "";
-					cduDisplay = "ALT-PAGE["~(getprop(nbpage[x]));
+					cduDisplay = "ALT-PAGE["~(getprop(nbpage));
 				} 
 				if (cduInput == "*DELETE*") {
           if (ind == altFp.getPlanSize()-1) {
-					  setprop("autopilot/route-manager/alternate["~x~"]/closed",0);
+					  setprop("autopilot/route-manager/alternate/closed",0);
 					  cduInput = "";
-    			}	else if (getprop("autopilot/route-manager/alternate["~x~"]/closed")) {
+    			}	else if (getprop("autopilot/route-manager/alternate/closed")) {
             cduInput = "ALT FPL CLOSED";
   				} else {
 					  altFp.deleteWP(ind);
 					  cduInput = "";
           }
 				}
-				else if (!getprop("autopilot/route-manager/alternate["~x~"]/closed")) {
+				else if (!getprop("autopilot/route-manager/alternate/closed")) {
           var navaid = findNavaidsByID(cduInput);
           if (size(navaid) > 0) {
             navaid = navaid[0];
@@ -732,9 +710,9 @@ var cduMain = {
           }
 					cduInput = "";						
 				}
-				else if (getprop("autopilot/route-manager/alternate["~x~"]/closed")) {
-          if (getprop(direct[x])) {
-            setprop("instrumentation/cdu["~x~"]/direct-to",ind);
+				else if (getprop("autopilot/route-manager/alternate/closed")) {
+          if (getprop(direct)) {
+            setprop("instrumentation/cdu/direct-to",ind);
             fp = flightplan();
             while(fp.getPlanSize() != wpCurr) {
               fp.deleteWP(fp.getPlanSize()-1);
@@ -748,17 +726,17 @@ var cduMain = {
 #              fp.insertWP(altFp.getWP(i),wpCurr+i);
               call(func {fp.getWP(wpCurr).setSpeed(altFp.getWP(i).speed_cstr,'at')},nil,var err = []);
             }
-            setprop(destAirport,getprop("autopilot/route-manager/alternate["~x~"]/airport"));
-            setprop(destRwy,getprop("autopilot/route-manager/alternate["~x~"]/runway"));
+            setprop(destAirport,getprop("autopilot/route-manager/alternate/airport"));
+            setprop(destRwy,getprop("autopilot/route-manager/alternate/runway"));
             setprop("autopilot/route-manager/destination/approach","DEFAULT");
             setprop(fp_active,1); # to create new TOD
-            setprop("autopilot/route-manager/alternate["~x~"]/set-flag",0);
-            setprop(direct[x],0);
-            setprop("instrumentation/cdu["~x~"]/direct-to",-1);
-        		setprop(display[x],"FLT-PLAN[1]");
+            setprop("autopilot/route-manager/alternate/set-flag",0);
+            setprop(direct,0);
+            setprop("instrumentation/cdu/direct-to",-1);
+        		setprop(display,"FLT-PLAN[1]");
             setprop(curr_wp,wpCurr); # for automatic page change
           }
-          else if (cduDisplay != "ALT-PAGE["~getprop(nbpage[x])) {
+          else if (cduDisplay != "ALT-PAGE["~getprop(nbpage)) {
               cduInput = "ALT FPL CLOSED";
           }
 				}
@@ -766,7 +744,7 @@ var cduMain = {
 
 			if (v == "B4L") {
         v = ""; cduInput = "";
-        setprop("autopilot/route-manager/alternate["~x~"]/set-flag",0);
+        setprop("autopilot/route-manager/alternate/set-flag",0);
         cduDisplay = "FLT-PLAN[1]";
       }
 
@@ -774,8 +752,8 @@ var cduMain = {
         v = "";
 				if (left(cduDisplay,8) == "ALT-PAGE" and nrPage > 1) {
           ind = nrPage*3-(3-substr(v,1,1))-1;
-          if (left(altFp.getWP(ind).wp_name,4) != getprop("autopilot/route-manager/alternate["~x~"]/airport")) {
-  					me.insertWayp(ind,cduInput,altFp,x);
+          if (left(altFp.getWP(ind).wp_name,4) != getprop("autopilot/route-manager/alternate/airport")) {
+  					me.insertWayp(ind,cduInput,altFp);
           }
 					cduInput = "";
 				}
@@ -784,8 +762,8 @@ var cduMain = {
 
 			if (v == "B2R") {
         ind = nrPage*3-(3-substr(v,1,1))-1;
-          if (left(altFp.getWP(ind).wp_name,4) != getprop("autopilot/route-manager/alternate["~x~"]/airport")) {
-              me.insertWayp(ind,cduInput,altFp,x);
+          if (left(altFp.getWP(ind).wp_name,4) != getprop("autopilot/route-manager/alternate/airport")) {
+              me.insertWayp(ind,cduInput,altFp);
           }
         cduInput = "";
         cduDisplay = "ALT-PAGE["~nrPage~"]";
@@ -793,21 +771,21 @@ var cduMain = {
 
 			if (v == "B3R") {
         ind = nrPage*3-(3-substr(v,1,1))-1;
-				if (nrPage > 0 and nrPage <= getprop(nbpage[x])) {
+				if (nrPage > 0 and nrPage <= getprop(nbpage)) {
 					if (ind == altFp.getPlanSize()-1 and cduInput == "*DELETE*") {
             altFp.cleanPlan();
             altFp.deleteWP(1);
-						setprop("autopilot/route-manager/alternate["~x~"]/airport","");
-            setprop("autopilot/route-manager/alternate["~x~"]/runway","");
-            setprop("autopilot/route-manager/alternate["~x~"]/closed",0);
+						setprop("autopilot/route-manager/alternate/airport","");
+            setprop("autopilot/route-manager/alternate/runway","");
+            setprop("autopilot/route-manager/alternate/closed",0);
             v="";
 						cduInput = "";
 						cduDisplay = "ALT-PAGE[0]";
           } else if (ind >= altFp.getPlanSize()-1) {
-							cduInput = getprop("autopilot/route-manager/alternate["~x~"]/airport");
+							cduInput = getprop("autopilot/route-manager/alternate/airport");
               cduDisplay = "ALT-PAGE["~nrPage~"]";
-					}	else if (left(altFp.getWP(ind).wp_name,4) != getprop("autopilot/route-manager/alternate["~x~"]/airport")) {
-					      me.insertWayp(ind,cduInput,altFp,x);
+					}	else if (left(altFp.getWP(ind).wp_name,4) != getprop("autopilot/route-manager/alternate/airport")) {
+					      me.insertWayp(ind,cduInput,altFp);
                 cduDisplay = "ALT-PAGE["~nrPage~"]";
 					}
 				}			
@@ -815,7 +793,7 @@ var cduMain = {
 
 			if (v == "B4R") {
         v = "";
-        if (nrPage > 0 and nrPage < getprop(nbpage[x])) {
+        if (nrPage > 0 and nrPage < getprop(nbpage)) {
           cduDisplay = "ALT-PAGE["~(nrPage+1)~"]";
         }
       }
@@ -823,19 +801,19 @@ var cduMain = {
 
     #### PATTERN PAGES ####
     if (left(cduDisplay,8) == "PAT-PAGE") {
-      setprop(nbpage[x],1);
+      setprop(nbpage,1);
       cduInput = "";
 			if (v == "B1L") {
         v = "";
         cduDisplay = display_mem;
         hold = 1;
-        me.set_alm(x,"* HOLD *");
+        me.set_alm("* HOLD *");
       }
 			if (v == "B2L") {
         v = "";
         cduDisplay = display_mem;
         flyovr = 1;
-        me.set_alm(x,"* FLYOVER *");
+        me.set_alm("* FLYOVER *");
       }
 			if (v == "B4L") {
         v = "";
@@ -845,11 +823,11 @@ var cduMain = {
         v = "";
         cduDisplay = display_mem;
         pcdr = 1; 
-        me.set_alm(x,"* PCDR TURN *");
+        me.set_alm("* PCDR TURN *");
       }
     }
     if (cduDisplay == "HLD-PATT[1]") {
-      setprop(nbpage[x],1);
+      setprop(nbpage,1);
       if (patt_ind == nil) v = "B4L";
 			if (v == "B3L") {
         v = "";
@@ -861,8 +839,8 @@ var cduMain = {
       }
 			if (v == "B4L") {
         v = "";
-        setprop(hold_path[x]~"clear",1);
-        setprop(direct[x],0);
+        setprop(hold_path~"clear",1);
+        setprop(direct,0);
         hold = 0;
         cduInput = "";
       }
@@ -884,17 +862,17 @@ var cduMain = {
       }
 			if (v == "B4R") {
         v = "";
-        setprop(hold_activ[x],1);
+        setprop(hold_activ,1);
         setprop("autopilot/locks/hold/active",1);
-        setprop(direct[x],0);
+        setprop(direct,0);
         cduInput = "";
         cduDisplay = display_mem;
       }
-      me.hold_save(x);
+      me.hold_save();
     }
 
     if (cduDisplay == "PCD-TURN[1]") {
-      setprop(nbpage[x],1);
+      setprop(nbpage,1);
 			if (v == "B2L") {
         v = "";
         if (left(cduInput,1) == "L" or left(cduInput,1) =="R")
@@ -918,12 +896,12 @@ var cduMain = {
       }
 			if (v == "B4R") {
         v = "";
-        setprop(pcdr_activ[x],1);
-        setprop(direct[x],0);
+        setprop(pcdr_activ,1);
+        setprop(direct,0);
         cduInput = "";
         cduDisplay = display_mem;
       }
-      me.pcdr_save(x);
+      me.pcdr_save();
     } # end of Pattern
 
 		#### NAV PAGES ####
@@ -951,8 +929,8 @@ var cduMain = {
 			  me.lineSelect(v);
 			  if (v == "B4R" and cduInput) {v="";cduDisplay = "NAV-SELT[1]"}
         if (select) {
-			    if (getprop("instrumentation/cdu["~x~"]/"~select) !="") {
-            cduInput = getprop("instrumentation/cdu["~x~"]/"~select);
+			    if (getprop("instrumentation/cdu/"~select) !="") {
+            cduInput = getprop("instrumentation/cdu/"~select);
             navSel = cduInput;
           }
         }
@@ -1033,40 +1011,40 @@ var cduMain = {
       if (v == "B4R") {v = "";me.load_flightplan();cduDisplay = "NAV-SELT[3]"}
     }
 
-    if (left(cduDisplay,8) == "NAV-CONV") setprop(nbpage[x],4);
+    if (left(cduDisplay,8) == "NAV-CONV") setprop(nbpage,4);
 		if (cduDisplay == "NAV-CONV[1]") {
-      if (size(cduInput) > 8) {cduInput = "";me.set_alm(x,"MAX 8 Car")}
+      if (size(cduInput) > 8) {cduInput = "";me.set_alm("MAX 8 Car")}
       else {
 		    if (v == "B1L") {
-          cnv[x].FT = sprintf("%8.1f",cduInput);
-          cnv[x].M = sprintf("%8.1f",cduInput/3.2808);
-          cnv[x].FL = nil;
+          cnv.FT = sprintf("%8.1f",cduInput);
+          cnv.M = sprintf("%8.1f",cduInput/3.2808);
+          cnv.FL = nil;
 		      cduInput = "";
         }
 		    if (v == "B1R") {
-          cnv[x].M = sprintf("%8.1f",cduInput);
-          cnv[x].FT = sprintf("%8.1f",cduInput*3.2808);
-          cnv[x].FL = math.round(cduInput*0.0328,5);
+          cnv.M = sprintf("%8.1f",cduInput);
+          cnv.FT = sprintf("%8.1f",cduInput*3.2808);
+          cnv.FL = math.round(cduInput*0.0328,5);
     			cduInput = "";
         }
 		    if (v == "B2L") {
-          cnv[x].LB = sprintf("%8.1f",cduInput);
-          cnv[x].KG = sprintf("%8.1f",cduInput/2.2046);
+          cnv.LB = sprintf("%8.1f",cduInput);
+          cnv.KG = sprintf("%8.1f",cduInput/2.2046);
     			cduInput = "";
         }
 		    if (v == "B2R") {
-          cnv[x].KG = sprintf("%8.1f",cduInput);
-          cnv[x].LB = sprintf("%8.1f",cduInput*2.2046);
+          cnv.KG = sprintf("%8.1f",cduInput);
+          cnv.LB = sprintf("%8.1f",cduInput*2.2046);
     			cduInput = "";
         }
 		    if (v == "B3L") {
-          cnv[x].GAL = sprintf("%8.1f",cduInput);
-          cnv[x].L = sprintf("%8.1f",cduInput/0.26417);
+          cnv.GAL = sprintf("%8.1f",cduInput);
+          cnv.L = sprintf("%8.1f",cduInput/0.26417);
     			cduInput = "";
         }
 		    if (v == "B3R") {
-          cnv[x].L = sprintf("%8.1f",cduInput);
-          cnv[x].GAL = sprintf("%8.1f",cduInput*0.26417);
+          cnv.L = sprintf("%8.1f",cduInput);
+          cnv.GAL = sprintf("%8.1f",cduInput*0.26417);
     			cduInput = "";
         }
       }
@@ -1074,106 +1052,107 @@ var cduMain = {
 #		  if (v == "B4R") {v = "";cduDisplay = "NAV-CONV[2]"} 
     }
 		if (cduDisplay == "NAV-CONV[2]") {
-      if (size(cduInput) > 8) {cduInput = "";me.set_alm(x,"MAX 8 Car")}
+      if (size(cduInput) > 8) {cduInput = "";me.set_alm("MAX 8 Car")}
       else { 
-        me.clear_alm(x,"MAX 8 Car");
+        me.clear_alm("MAX 8 Car");
 			  if (v == "B1L") {
           if (cduInput < -112 or cduInput > 129) {
-            cduInput = ""; me.set_alm(x,"range -112° to 129° F");
+            cduInput = ""; me.set_alm("range -112° to 129° F");
           } else {
-            cnv[x].F = sprintf("%+.1f",cduInput);
-            cnv[x].C = sprintf("%+.1f",(cduInput-32)/1.8);
+            cnv.F = sprintf("%+.1f",cduInput);
+            cnv.C = sprintf("%+.1f",(cduInput-32)/1.8);
           }
 		      cduInput = "";
         }
 			  if (v == "B1R") {
           if (cduInput < -80 or cduInput > 54) {
-            cduInput = ""; me.set_alm(x,"range -80° to 54° C");
+            cduInput = ""; me.set_alm("range -80° to 54° C");
           } else {
-            cnv[x].C = sprintf("%+.1f",cduInput);
-            cnv[x].F = sprintf("%+.1f",(cduInput*1.8) + 32);
+            cnv.C = sprintf("%+.1f",cduInput);
+            cnv.F = sprintf("%+.1f",(cduInput*1.8) + 32);
       			cduInput = "";
           }
         }
 			  if (v == "B2L") {
           if (cduInput < 0 or cduInput > 999.9) {
-            cduInput = ""; me.set_alm(x,"range 0 to 999.9 Kts");
+            cduInput = ""; me.set_alm("range 0 to 999.9 Kts");
           } else {
-            cnv[x].KTS = sprintf("%.1f",cduInput);
-            cnv[x].MS = sprintf("%.1f",cduInput*1852/3600);
+            cnv.KTS = sprintf("%.1f",cduInput);
+            cnv.MS = sprintf("%.1f",cduInput*1852/3600);
       			cduInput = "";
           }
         }
 			  if (v == "B2R") {
           if (cduInput < 0 or cduInput > 999.9) {
-            cduInput = ""; me.set_alm(x,"range 0 to 999.9 M/S");
+            cduInput = ""; me.set_alm("range 0 to 999.9 M/S");
           } else {
-            cnv[x].MS = sprintf("%.1f",cduInput);
-            cnv[x].KTS = sprintf("%.1f",cduInput*3600/1852);
+            cnv.MS = sprintf("%.1f",cduInput);
+            cnv.KTS = sprintf("%.1f",cduInput*3600/1852);
       			cduInput = "";
           }
         }
 			  if (v == "B3L") {
-          cnv[x].NM = sprintf("%.1f",cduInput);
-          cnv[x].KM = sprintf("%.1f",cduInput*1.852);
+          cnv.NM = sprintf("%.1f",cduInput);
+          cnv.KM = sprintf("%.1f",cduInput*1.852);
     			cduInput = "";
         }
 			  if (v == "B3R") {
-          cnv[x].KM = sprintf("%.1f",cduInput);
-          cnv[x].NM = sprintf("%.1f",cduInput/1.852);
+          cnv.KM = sprintf("%.1f",cduInput);
+          cnv.NM = sprintf("%.1f",cduInput/1.852);
     			cduInput = "";
         }
 			  if (v == "B4L") {v = "";cduDisplay = "NAV-CONV[1]"} 
 			  if (v == "B4R") {v = "";cduDisplay = "NAV-CONV[3]"} 
       }
 		}
+
 		if (cduDisplay == "NAV-CONV[3]") {
-      if (size(cduInput) > 8) me.set_alm(x,"MAX 8 Car"); 
+      if (size(cduInput) > 8) me.set_alm("MAX 8 Car"); 
       else { 
-        me.clear_alm(x,"MAX 8 Car");
+        me.clear_alm("MAX 8 Car");
 			  if (v == "B1L") {
-          cnv[x].LB = sprintf("%.1f",cduInput);
-          cnv[x].KG = sprintf("%.1f",cduInput*0.453592);
-          cnv[x].GAL = sprintf("%.1f",cduInput/cnv[x].LBGAL);
-          cnv[x].L = sprintf("%.1f",cnv[x].KG/cnv[x].KGL);
+          cnv.LB = sprintf("%.1f",cduInput);
+          cnv.KG = sprintf("%.1f",cduInput*0.453592);
+          cnv.GAL = sprintf("%.1f",cduInput/cnv.LBGAL);
+          cnv.L = sprintf("%.1f",cnv.KG/cnv.KGL);
 			    cduInput = "";
         }
 			  if (v == "B1R") {
-          cnv[x].KG = cduInput;
-          cnv[x].LB = sprintf("%.1f",cduInput*2.20462);
-          cnv[x].L = sprintf("%.1f",cduInput/cnv[x].KGL);
-          cnv[x].GAL = sprintf("%.1f",cnv[x].LB/cnv[x].LBGAL);
+          cnv.KG = cduInput;
+          cnv.LB = sprintf("%.1f",cduInput*2.20462);
+          cnv.L = sprintf("%.1f",cduInput/cnv.KGL);
+          cnv.GAL = sprintf("%.1f",cnv.LB/cnv.LBGAL);
     			cduInput = "";
         }
 			  if (v == "B2L") {
-          cnv[x].GAL = sprintf("%.1f",cduInput);
-          cnv[x].L = sprintf("%.1f",cduInput*3.78541);
-          cnv[x].LB = sprintf("%.1f",cduInput*cnv[x].LBGAL);
-          cnv[x].KG = sprintf("%.1f",cnv[x].L*cnv[x].KGL);
+          cnv.GAL = sprintf("%.1f",cduInput);
+          cnv.L = sprintf("%.1f",cduInput*3.78541);
+          cnv.LB = sprintf("%.1f",cduInput*cnv.LBGAL);
+          cnv.KG = sprintf("%.1f",cnv.L*cnv.KGL);
     			cduInput = "";
         }
 			  if (v == "B2R") {
-          cnv[x].L = sprintf("%.1f",cduInput);
-          cnv[x].GAL = sprintf("%.1f",cnv[x].L*0.264172);
-          cnv[x].KG = sprintf("%.1f",cduInput*cnv[x].KGL);
-          cnv[x].LB = sprintf("%.1f",cnv[x].GAL*cnv[x].LBGAL);
+          cnv.L = sprintf("%.1f",cduInput);
+          cnv.GAL = sprintf("%.1f",cnv.L*0.264172);
+          cnv.KG = sprintf("%.1f",cduInput*cnv.KGL);
+          cnv.LB = sprintf("%.1f",cnv.GAL*cnv.LBGAL);
     			cduInput = "";
         }
 			  if (v == "B3L") {
-          cnv[x].LBGAL = sprintf("%.3f",cduInput);
-          cnv[x].KGL = sprintf("%.3f",cduInput*0.1198);
-          if (cnv[x].GAL != nil) {
-            cnv[x].L = sprintf("%.1f",cnv[x].KG/cnv[x].KGL);
-            cnv[x].GAL = sprintf("%.1f",cnv[x].LB/cnv[x].LBGAL);
+          cnv.LBGAL = sprintf("%.3f",cduInput);
+          cnv.KGL = sprintf("%.3f",cduInput*0.1198);
+          if (cnv.GAL != nil) {
+            cnv.L = sprintf("%.1f",cnv.KG/cnv.KGL);
+            cnv.GAL = sprintf("%.1f",cnv.LB/cnv.LBGAL);
           }
     			cduInput = "";
         }
 			  if (v == "B3R") {
-          cnv[x].KGL = sprintf("%.3f",cduInput);
-          cnv[x].LBGAL = sprintf("%.3f",cduInput*8.3454);
-          if (cnv[x].L != nil) {
-            cnv[x].L = sprintf("%.1f",cnv[x].KG/cnv[x].KGL);
-            cnv[x].GAL = sprintf("%.1f",cnv[x].LB/cnv[x].LBGAL);
+          cnv.KGL = sprintf("%.3f",cduInput);
+          cnv.LBGAL = sprintf("%.3f",cduInput*8.3454);
+          if (cnv.L != nil) {
+            cnv.L = sprintf("%.1f",cnv.KG/cnv.KGL);
+            cnv.GAL = sprintf("%.1f",cnv.LB/cnv.LBGAL);
           }
     			cduInput = "";
         }
@@ -1183,31 +1162,31 @@ var cduMain = {
 		}
 
 		if (cduDisplay == "NAV-CONV[4]") {
-      if (size(cduInput) > 8) me.set_alm(x,"MAX 8 Car"); 
+      if (size(cduInput) > 8) me.set_alm("MAX 8 Car"); 
       else { 
-        me.clear_alm(x,"MAX 8 Car");
+        me.clear_alm("MAX 8 Car");
 			  if (v == "B1R") {
           if (cduInput == "*DELETE*") 
             cduInput = getprop(destAirport) ? getprop(destAlt) : ""; 
           if (cduInput != "") {
               if (cduInput < -1300 or cduInput > 60000) {
-                me.set_alm(x,"range -1300 to 60000 Ft");
+                me.set_alm("range -1300 to 60000 Ft");
                 cduInput = "";
-              } else cnv[x].ELEV = sprintf("%.0f",cduInput);
-          } else cnv[x].ELEV = nil;
+              } else cnv.ELEV = sprintf("%.0f",cduInput);
+          } else cnv.ELEV = nil;
           cduInput = "";
         }
 			  if (v == "B2L") {
-          if (cduInput == "*DELETE*") cnv[x].QFE = nil;
+          if (cduInput == "*DELETE*") cnv.QFE = nil;
           else {
             if (cduInput != "") {
               if (cduInput < 16.00 or cduInput > 32.00) {
-                me.set_alm(x,"range 16.00 to 32.00");cduInput = "";
+                me.set_alm("range 16.00 to 32.00");cduInput = "";
               } else {
-                cnv[x].QFE = sprintf("%.2f",cduInput);
-                if (cnv[x].ELEV != nil) {
-                  calc = 1-(0.0065*cnv[x].ELEV*0.3048/288.15);
-                  cnv[x].QNH = sprintf("%.2f",cduInput*33.8639/math.pow(calc,5.255)*0.02953);
+                cnv.QFE = sprintf("%.2f",cduInput);
+                if (cnv.ELEV != nil) {
+                  calc = 1-(0.0065*cnv.ELEV*0.3048/288.15);
+                  cnv.QNH = sprintf("%.2f",cduInput*33.8639/math.pow(calc,5.255)*0.02953);
                 }
               }
             }
@@ -1215,16 +1194,16 @@ var cduMain = {
  			  cduInput = "";
         }
 			  if (v == "B2R") {
-          if (cduInput == "*DELETE*") cnv[x].QNH = nil;
+          if (cduInput == "*DELETE*") cnv.QNH = nil;
           else {
             if (cduInput != "") {
               if (cduInput < 16.00 or cduInput > 32.00) {
-                me.set_alm(x,"range 16.00 to 32.00");cduInput = "";
+                me.set_alm("range 16.00 to 32.00");cduInput = "";
               } else {
-                cnv[x].QNH = sprintf("%.2f",cduInput);
-                if (cnv[x].ELEV != nil) {
-                  calc = 1-(0.0065*cnv[x].ELEV*0.3048/288.15);
-                  cnv[x].QFE = sprintf("%.2f",cduInput*33.8639*math.pow(calc,5.255)*0.02953);
+                cnv.QNH = sprintf("%.2f",cduInput);
+                if (cnv.ELEV != nil) {
+                  calc = 1-(0.0065*cnv.ELEV*0.3048/288.15);
+                  cnv.QFE = sprintf("%.2f",cduInput*33.8639*math.pow(calc,5.255)*0.02953);
                 }
               }
             }
@@ -1232,45 +1211,45 @@ var cduMain = {
     			cduInput = "";
         }
 			  if (v == "B3L") {
-          if (cduInput == "*DELETE*") cnv[x].QFE = nil;
+          if (cduInput == "*DELETE*") cnv.QFE = nil;
           else {
             if (cduInput != "") {
               if (cduInput < 542 or cduInput > 1084) {
-                me.set_alm(x,"range 542 to 1084");cduInput = "";
-              } else cnv[x].QFE = sprintf("%.2f",cduInput*0.02953);
+                me.set_alm("range 542 to 1084");cduInput = "";
+              } else cnv.QFE = sprintf("%.2f",cduInput*0.02953);
             }
           }
           cduInput = "";
         }
 			  if (v == "B3R") {
-          if (cduInput == "*DELETE*") cnv[x].QNH = nil;
+          if (cduInput == "*DELETE*") cnv.QNH = nil;
           else {
             if (cduInput != "") {
               if (cduInput < 542 or cduInput > 1084) {
-                me.set_alm(x,"range 542 to 1084");cduInput = "";
-              } else cnv[x].QNH = sprintf("%.2f",cduInput*0.02953);
+                me.set_alm("range 542 to 1084");cduInput = "";
+              } else cnv.QNH = sprintf("%.2f",cduInput*0.02953);
             }
           }
     			cduInput = "";
         }
 			  if (v == "B4L") {
-          if (cduInput == "*DELETE*") cnv[x].QFE = nil;
+          if (cduInput == "*DELETE*") cnv.QFE = nil;
           else {
             if (cduInput != "") {
               if (cduInput < 407 or cduInput > 813) {
-                me.set_alm(x,"range 407 to 813");cduInput = "";
-              } else cnv[x].QFE = sprintf("%.2f",cduInput*0.03937);
+                me.set_alm("range 407 to 813");cduInput = "";
+              } else cnv.QFE = sprintf("%.2f",cduInput*0.03937);
             }
           }
           cduInput = "";
         }
 			  if (v == "B4R") {
-          if (cduInput == "*DELETE*") cnv[x].QNH = nil;
+          if (cduInput == "*DELETE*") cnv.QNH = nil;
           else {
             if (cduInput != "") {
               if (cduInput < 407 or cduInput > 813) {
-                me.set_alm(x,"range 407 to 813");cduInput = "";
-              } else cnv[x].QNH = sprintf("%.2f",cduInput*0.03937);
+                me.set_alm("range 407 to 813");cduInput = "";
+              } else cnv.QNH = sprintf("%.2f",cduInput*0.03937);
             }
           }
           cduInput = "";
@@ -1281,7 +1260,7 @@ var cduMain = {
 		#### PERF PAGES ####
 		if (cduDisplay == "PRF-PAGE[1]") {
       cduInput = "";
-			setprop(nbpage[x],5);
+			setprop(nbpage,5);
 			if (v == "B4L") {
         v = "";
         cduDisplay = getprop(destAirport) ? "FLT-PLAN[1]" : "FLT-PLAN[0]";
@@ -1289,7 +1268,7 @@ var cduMain = {
 			if (v == "B2R"){
 				v = "";
 				setprop("sim/multiplay/callsign",cduInput);
-        setprop("/instrumentation/cdu["~x~"]/display","PRF-PAGE[1]");
+        setprop("/instrumentation/cdu/display","PRF-PAGE[1]");
 				cduInput = "";
 			}
     }
@@ -1341,7 +1320,7 @@ var cduMain = {
 			  }
 			  cduInput = "";
 		  }
-      setprop("/instrumentation/cdu["~x~"]/display","PRF-PAGE[2]");      
+      setprop("/instrumentation/cdu/display","PRF-PAGE[2]");      
 		  if (v == "B4L"){v = "";cduDisplay = "PRF-PAGE[6]"}
     }
 
@@ -1351,7 +1330,7 @@ var cduMain = {
 		if (cduDisplay == "PRF-PAGE[4]") {	
 			if (v == "B1L") {
 				v = "";					
-				if (cduInput > 3499) setprop(trs_alt[x],cduInput);
+				if (cduInput > 3499) setprop(trs_alt,cduInput);
 				cduInput = "";
 			}			
 #      if (v == "B3L") { # Argh ! wind cannot be set here
@@ -1368,7 +1347,7 @@ var cduMain = {
 #          }
 #        }
 #      }
-      setprop("/instrumentation/cdu["~x~"]/display","PRF-PAGE[4]");      
+      setprop("/instrumentation/cdu/display","PRF-PAGE[4]");      
     }
 		if (cduDisplay == "PRF-PAGE[5]") {
 			if (v == "B2L"){
@@ -1396,7 +1375,7 @@ var cduMain = {
 					}
 				}
 			}
-      setprop("/instrumentation/cdu["~x~"]/display","PRF-PAGE[5]");      
+      setprop("/instrumentation/cdu/display","PRF-PAGE[5]");      
 			if (v == "B4R"){
 				v = "";
 					if (getprop("yasim/gross-weight-lbs") > 36100) {
@@ -1431,7 +1410,7 @@ var cduMain = {
 				}
 				cduInput = "";
 			}
-      setprop("/instrumentation/cdu["~x~"]/display","PRF-PAGE[6]");      
+      setprop("/instrumentation/cdu/display","PRF-PAGE[6]");      
 			if (v == "B4L") {v = "";cduDisplay = "PRF-PAGE[7]"}
 			if (v == "B4R") {v = "";cduDisplay = "PRF-PAGE[2]"}
 		}
@@ -1458,21 +1437,21 @@ var cduMain = {
 				}
 				cduInput = "";
 			}
-      setprop("/instrumentation/cdu["~x~"]/display","PRF-PAGE[7]");      
+      setprop("/instrumentation/cdu/display","PRF-PAGE[7]");      
 			if (v == "B4R") {v = "";cduDisplay = "PRF-PAGE[2]"}
 		}
 
 		#### PROG PAGES ####
 		if (cduDisplay == "PRG-PAGE[1]") {
-			setprop(nbpage[x],3);
+			setprop(nbpage,3);
 			if (v == "B4L") {v = "";cduDisplay = "PRG-PAGE[2]"}
 			if (v == "B4R") {v = "";cduDisplay = "PRG-PAGE[3]"}
     } else if (left(cduDisplay,8) == "PRG-PAGE") {
 			if (v == "B4L") {v = "";cduInput = "";cduDisplay = "PRG-PAGE[1]"}
       else if (v != "B4R") {
         me.lineSelect(v);
-			  if (getprop("instrumentation/cdu["~x~"]/"~select) !="") {
-          var freq_sel = getprop("instrumentation/cdu["~x~"]/"~select);
+			  if (getprop("instrumentation/cdu/"~select) !="") {
+          var freq_sel = getprop("instrumentation/cdu/"~select);
           if (cduDisplay == "PRG-PAGE[2]") {
             setprop("instrumentation/nav/frequencies/selected-mhz",freq_sel);
           } 
@@ -1485,8 +1464,8 @@ var cduMain = {
     }
 
     #### Save ####
-		setprop(display[x],cduDisplay);
-		setprop("/instrumentation/cdu["~x~"]/input",cduInput);
+		setprop(display,cduDisplay);
+		setprop("/instrumentation/cdu/input",cduInput);
 
   }, # end of key
 
@@ -1507,11 +1486,11 @@ var cduMain = {
     }
   }, # end of lineSelect
 
-  nb_pages : func (nbFiles,nb,x) {
-		setprop(nbpage[x],math.ceil(nbFiles/nb));
+  nb_pages : func (nbFiles,nb) {
+		setprop(nbpage,math.ceil(nbFiles/nb));
   }, # end of nb_pages
 
-  insertWayp : func(ind,cduInput,fp,x) {
+  insertWayp : func(ind,cduInput,fp) {
     cduInput = left(cduInput,2) == "FL" ? substr(cduInput,2,3)*100 : cduInput;
     var wp_spd = fp.getWP(ind).speed_cstr;
 
@@ -1520,7 +1499,7 @@ var cduMain = {
       wp_spd = fp.getWP(ind).speed_cstr;
 #      setprop("instrumentation/cdu["~x~"]/speed",1);
     } else { ### Altitude
-        if (getprop("autopilot/route-manager/alternate["~x~"]/set-flag")) {
+        if (getprop("autopilot/route-manager/alternate/set-flag")) {
           call(func {fp.getWP(ind).setAltitude(cduInput,'at')},nil,var err = []);
         } else {
             call(func {fp.getWP(ind).setAltitude(cduInput,'at')},nil,var err = []);
@@ -1615,65 +1594,65 @@ var cduMain = {
 	  return dist;
   }, # end of calc_dist
 
-  delete_key : func(x) {
-		del_length = size(getprop(cdu_input[x])) - 1;
-		setprop(cdu_input[x],substr(getprop(cdu_input[x]),0,del_length));
+  delete_key : func {
+		del_length = size(getprop(cdu_input)) - 1;
+		setprop(cdu_input,substr(getprop(cdu_input),0,del_length));
 		if (del_length == -1 ) {
-			setprop(cdu_input[x],"*DELETE*");
+			setprop(cdu_input,"*DELETE*");
 		}
   }, # end of delete_key
 
-  clear_key : func(x) {
-    if (getprop(cdu_input[x]) != "") setprop(cdu_input[x],"");
-    else if (alm[x].size() != 0) {
-      alm[x].pop(alm[x].size()-1);
-      setprop(alarm[x], alm[x].size());
+  clear_key : func {
+    if (getprop(cdu_input) != "") setprop(cdu_input,"");
+    else if (alm.size() != 0) {
+      alm.pop(alm.size()-1);
+      setprop(alarm, alm.size());
     }
   }, # end of clear_key
 
-  previous_key : func(x) {
-	  cduDisplay = getprop(display[x]);
+  previous_key : func {
+	  cduDisplay = getprop(display);
     nrPage = size(cduDisplay)<12 ? substr(cduDisplay,9,1) : substr(cduDisplay,9,2); 
    if (nrPage > 1) {
 		  nrPage -= 1;
-		  setprop("/instrumentation/cdu["~x~"]/display",left(cduDisplay,8)~"["~nrPage~"]");
+		  setprop("/instrumentation/cdu/display",left(cduDisplay,8)~"["~nrPage~"]");
 	  }
   }, # end of previous_key
 
-  next_key : func(x) {
-	  cduDisplay = getprop(display[x]);
+  next_key : func {
+	  cduDisplay = getprop(display);
     nrPage = size(cduDisplay)<12 ? substr(cduDisplay,9,1) : substr(cduDisplay,9,2); 
 	  if (cduDisplay == "FLT-PLAN[0]") {
       if (getprop(depAirport) == "") {
-   		  setprop("/instrumentation/cdu["~x~"]/input", "NO DEP AIRPORT");
+   		  setprop("/instrumentation/cdu/input", "NO DEP AIRPORT");
       } else if (getprop(destAirport) == "") {
-   		  setprop("/instrumentation/cdu["~x~"]/input", "NO DEST AIRPORT");
+   		  setprop("/instrumentation/cdu/input", "NO DEST AIRPORT");
       }
-    } else if (left(cduDisplay,8) == "FLT-PLAN" and nrPage < getprop(nbpage[x])) {
+    } else if (left(cduDisplay,8) == "FLT-PLAN" and nrPage < getprop(nbpage)) {
       if (getprop(destAirport) == "") {
-	      setprop("/instrumentation/cdu["~x~"]/input", "NO DEST AIRPORT");
+	      setprop("/instrumentation/cdu/input", "NO DEST AIRPORT");
     	} else if (getprop(destRwy) == "") {
-	      setprop("/instrumentation/cdu["~x~"]/input", "NO DEST RUNWAY");
+	      setprop("/instrumentation/cdu/input", "NO DEST RUNWAY");
       } else {
           nrPage += 1;
-          setprop("/instrumentation/cdu["~x~"]/display",left(cduDisplay,8)~"["~nrPage~"]");
+          setprop("/instrumentation/cdu/display",left(cduDisplay,8)~"["~nrPage~"]");
       }
     } else if (cduDisplay != "ALT-PAGE[0]" and cduDisplay != "HLD-PATT[1]") {
-        if (nrPage < getprop(nbpage[x])) {
+        if (nrPage < getprop(nbpage)) {
           nrPage += 1;
-          setprop("/instrumentation/cdu["~x~"]/display",left(cduDisplay,8)~"["~nrPage~"]");
+          setprop("/instrumentation/cdu/display",left(cduDisplay,8)~"["~nrPage~"]");
         }
     }
   }, # end of next_key
 
-  set_alm : func (x,txt) {
-    alm[x].append(txt);
-    setprop(alarm[x],alm[x].size());
+  set_alm : func (txt) {
+    alm.append(txt);
+    setprop(alarm,alm.size());
   }, 
 
-  clear_alm :func(x,txt) {
-    alm[x].contains(txt) ? alm[x].remove(txt) : return; # automatic clearance
-    setprop(alarm[x],alm[x].size());
+  clear_alm :func(txt) {
+    alm.contains(txt) ? alm.remove(txt) : return; # automatic clearance
+    setprop(alarm,alm.size());
   }, 
 
   nav_var : func { ### for Nav Display
@@ -1684,15 +1663,15 @@ var cduMain = {
      return (altFp);
   },
 
-  alarms_scrpad : func(x) { ### for CDUpages scrpad
-    return (alm[x].vector);
+  alarms_scrpad : func { ### for CDUpages scrpad
+    return (alm.vector);
   },
 
-  conv_table : func(x) { ### for CDUpages conv
-    return (cnv[x]);
+  conv_table : func { ### for CDUpages conv
+    return (cnv);
   },
 
-  hold_save : func(x) { 
+  hold_save : func { 
     if (patt_ind != nil) {
       hold_bearing = getprop(route_path~patt_ind~"]/leg-bearing-true-deg");
       hold_alt = fp.getWP(patt_ind).alt_cstr or getprop("instrumentation/altimeter/indicated-altitude-ft");
@@ -1703,34 +1682,33 @@ var cduMain = {
         hold_time = hold_alt >= 14000 ? 1.5 : 1;
         hold_dist = hold_spd/60*hold_time;
       }
-      setprop(hold_path[x]~"wpt",patt_ind);
-      setprop(hold_path[x]~"inbound",hold_inbound or hold_bearing);
-      setprop(hold_path[x]~"turn",hold_turn == nil ? "R" : hold_turn);
-      setprop(hold_path[x]~"time",hold_time);
-      setprop(hold_path[x]~"leg-dist-nm",hold_dist);
-      setprop(hold_path[x]~"altitude",hold_alt);
-      setprop(hold_path[x]~"speed",hold_spd);
+      setprop(hold_path~"wpt",patt_ind);
+      setprop(hold_path~"inbound",hold_inbound or hold_bearing);
+      setprop(hold_path~"turn",hold_turn == nil ? "R" : hold_turn);
+      setprop(hold_path~"time",hold_time);
+      setprop(hold_path~"leg-dist-nm",hold_dist);
+      setprop(hold_path~"altitude",hold_alt);
+      setprop(hold_path~"speed",hold_spd);
     }
   }, # end of hold_save
 
-  pcdr_save : func(x) {
+  pcdr_save : func {
       pcdr_bearing = fp.destination_runway.heading;
-      setprop(pcdr_path[x]~"wpt",pcdr_ind);
-      setprop(pcdr_path[x]~"inbound",pcdr_bearing);
-      setprop(pcdr_path[x]~"leg-dist-nm",10);
-      setprop(pcdr_path[x]~"angle",pcdr_angle);
-      setprop(pcdr_path[x]~"turn",pcdr_turn);
-      setprop(pcdr_path[x]~"dist",pcdr_dist);
-      setprop(pcdr_path[x]~"time",pcdr_time);
-      setprop(pcdr_path[x]~"speed",200);
+      setprop(pcdr_path~"wpt",pcdr_ind);
+      setprop(pcdr_path~"inbound",pcdr_bearing);
+      setprop(pcdr_path~"leg-dist-nm",10);
+      setprop(pcdr_path~"angle",pcdr_angle);
+      setprop(pcdr_path~"turn",pcdr_turn);
+      setprop(pcdr_path~"dist",pcdr_dist);
+      setprop(pcdr_path~"time",pcdr_time);
+      setprop(pcdr_path~"speed",200);
   }, # end of pcdr_save
 }; # end of cduMain
 
 var setl = setlistener("/sim/signals/fdm-initialized", func () {
   var cdu = cduMain.new();
 	cdu.init();
-  cdu.listen(0);
-  cdu.listen(1);
+  cdu.listen();
   print("CDU Canvas ... Ok");
 	removelistener(setl);
 },0,0);

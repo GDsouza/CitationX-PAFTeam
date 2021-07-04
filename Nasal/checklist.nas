@@ -1,33 +1,28 @@
 ## Citation X ##
 ## Checklists System ##
-## Christian Le Moigne (clm76) - Mai 2020 ##
+## Christian Le Moigne (clm76) - May 2020 - Light version June 2021 ##
 
-var abn = ["instrumentation/dc840/abn",
-             "instrumentation/dc840[1]/abn"];
-var elec = ["systems/electrical/outputs/disp-cont1",
-            "systems/electrical/outputs/disp-cont2"];
-var norm = ["instrumentation/checklists/chklst-pilot",
-            "instrumentation/checklists/chklst-copilot"];
-var nr_page = ["instrumentation/checklists/nr-page",
-               "instrumentation/checklists/nr-page[1]"];
-var skp = ["instrumentation/dc840/skip-btn",
-            "instrumentation/dc840[1]/skip-btn"];
+var abn = "instrumentation/dc840/abn";
+var elec = "systems/electrical/outputs/disp-cont1";
+var norm = "instrumentation/checklists/chklst-pilot";
+var nr_page = "instrumentation/checklists/nr-page";
+var skp = "instrumentation/dc840/skip-btn";
 var throttle = ["controls/engines/engine/throttle",
                 "controls/engines/engine[1]/throttle"];
 
 var root = getprop("/sim/aircraft-dir")~"/Sounds/Checklists/"; 
-var pge = [0,0];
+var pge = 0;
 var page = 0;
 var tittle = "";
 var chklst = 0;
 var nr_voice = nil;
 var nr_ligne = nil;
-var upd = [0,0];
+var upd = 0;
 var nb = 0;
 var np = nil;
 var prop = nil;
 var running = nil;
-var skip = [0,0];
+var skip = 0;
 
 var L = [
   var L0 = [
@@ -248,25 +243,15 @@ var L = [
 ];
 
 var CHKLIST = {
-  new: func(x) {
+  new: func {
     var m = {parents:[CHKLIST]};
-    if (!x) {
-      m.canvas = canvas.new({
-        "name": "CHKLIST",
-        "size" : [1024,1024],
-        "view" : [900,1024],
-		    "mipmapping": 1 
-	    });
-  	  m.canvas.addPlacement({"node": "chklist.screenL"});
-    } else {
-      m.canvas = canvas.new({
-        "name": "CHKLIST",
-        "size" : [1024,1024],
-        "view" : [900,1024],
-		    "mipmapping": 1 
-	    });
-  	  m.canvas.addPlacement({"node": "chklist.screenR"});
-    }
+    m.canvas = canvas.new({
+      "name": "CHKLIST",
+      "size" : [1024,1024],
+      "view" : [900,1024],
+	    "mipmapping": 1 
+    });
+	  m.canvas.addPlacement({"node": "chklist.screen"});
 	  m.chklst = m.canvas.createGroup();
     m.tittle = m.chklst.createChild("text")
       .setTranslation(450,50)
@@ -282,8 +267,8 @@ var CHKLIST = {
     return m;
   }, # end of new
 
-  init : func(x) {
-    me.timer[x] = maketimer(1.8,func() {	
+  init : func {
+    me.timer = maketimer(1.8,func() {	
       np = size(L[page])*2-2;
 	    if (nb <= np) {
         nr_ligne = int((nb+1)/2);
@@ -294,72 +279,72 @@ var CHKLIST = {
         	  me.sound = {path : root~'pilot-voices/',file : string.lc(L[page][nr_ligne].val)~'.wav', volume : 0.5};
           fgcommand("play-audio-sample",me.sound);
         }
-        me.check_prop(x);
+        me.check_prop();
         nb+=1;
       } else {
-        upd[x] = 0;
-        me.timer[x].stop();
-        setprop(abn[x],0);
+        upd = 0;
+        me.timer.stop();
+        setprop(abn,0);
       }
     });
   }, # end of init
 
-  listen : func(x) {
+  listen : func {
     ### Listener Norm Buttons ###
-    setlistener(norm[x], func(n) {
+    setlistener(norm, func(n) {
 	    if (n.getValue()) {
         setprop("/sim/sound/chatter/enabled",1);
-		    pge[x] = getprop(nr_page[x]);		
-		    me.display(pge[x]);
+		    pge = getprop(nr_page);		
+		    me.display(pge);
 	    } else {
-		      if (me.timer[x].isRunning) me.timer[x].stop();
+		      if (me.timer.isRunning) me.timer.stop();
 		      nb = 0;
-		      upd[x] = 0;
-          setprop(abn[x],0);
+		      upd = 0;
+          setprop(abn,0);
           setprop("/sim/sound/chatter/enabled",0);
 	    }
     },0,0);
 
     ### Listener Page Button ###
-    setlistener(nr_page[x], func(n) {
-	    if (getprop(norm[x])) {
-		    if (me.timer[x].isRunning) me.timer[x].stop();
-		    pge[x] = n.getValue();
+    setlistener(nr_page, func(n) {
+	    if (getprop(norm)) {
+		    if (me.timer.isRunning) me.timer.stop();
+		    pge = n.getValue();
 		    setprop("instrumentation/checklists/nr-voice",0);
-        setprop(abn[x],0);
-		    upd[x] = 0;
-		    me.display(pge[x]);
-		    me.clear_voice(x);
+        setprop(abn,0);
+		    upd = 0;
+		    me.display(pge);
+		    me.clear_voice();
 	    }
     },0,0);
 
     ### Listener abn Button ###
-    setlistener(abn[x], func(n) {
+    setlistener(abn, func(n) {
 	    if (n.getValue()) {
-        x == 0 ? setprop(abn[1],0) : setprop(abn[0],0);
-        if (me.timer[x].isRunning) me.timer[x].stop();
-			    me.clear_voice(x);
-			    upd[x] = 1;
+        setprop(abn,0);
+        if (me.timer.isRunning) me.timer.stop();
+			    me.clear_voice();
+			    upd = 1;
 			    nb = 1;
           nr_ligne = 1;
-          page = pge[x];
-          setprop("instrumentation/checklists/page",pge[x]);
-			    me.timer[x].start();
+          page = pge;
+          setprop("instrumentation/checklists/page",pge);
+			    me.timer.start();
 	    } else {
-			    upd[x] = 0;
+			    upd = 0;
 			    nb = 0;
-			    me.clear_voice(x);
-			    me.timer[x].stop();
+			    me.clear_voice();
+			    me.timer.stop();
       }
     },0,0);
 
-    setlistener(skp[x], func(n) {
-      skip[x] = (getprop(elec[x]) and n.getValue()) ? n.getValue() : 0;
+    setlistener(skp, func(n) {
+      skip = (getprop(elec) and n.getValue()) ? n.getValue() : 0;
     },0,0);
 
   }, # end of listen
 
-  clear_voice : func(x) {
+  clear_voice : func {
     for (var i=0;i<size(L);i+=1) {
       for (var j=0;j<size(L[i]);j+=1) {
         if (L[i][j].check != nil) L[i][j].check = 0;
@@ -404,39 +389,39 @@ var CHKLIST = {
 
   }, # end of display
 
-  next_page : func(x) {
-    if (getprop(elec[x])) {
-	    pge[x] = getprop(nr_page[x]);
-	    if (pge[x] < 17) {
-		    pge[x] += 1;
-		    setprop(nr_page[x],pge[x]);
+  next_page : func {
+    if (getprop(elec)) {
+	    pge = getprop(nr_page);
+	    if (pge < 17) {
+		    pge += 1;
+		    setprop(nr_page,pge);
 	    }
     }
   }, # end of next_page
 
-  prev_page : func(x) {
-    if (getprop(elec[x]))	{
-      pge[x] = getprop(nr_page[x]);
-	    if (pge[x] >= 1) {
-		    pge[x] -= 1;		
-		    setprop(nr_page[x],pge[x]);
+  prev_page : func {
+    if (getprop(elec))	{
+      pge = getprop(nr_page);
+	    if (pge >= 1) {
+		    pge -= 1;		
+		    setprop(nr_page,pge);
 	    }
     }
   }, # end of prev_page
 
-  check_prop : func(x) {
-    if (upd[x]) {
+  check_prop : func {
+    if (upd) {
       if (!L[page][nr_ligne].check) {
-        me.timer[x].stop();
+        me.timer.stop();
 			  running = 1;
 			  me.loop = func {   ### boucle d'attente de validation ###
-				  if (running and upd[x]) {
-            me.prop_table(x);
-					  if (L[page][nr_ligne].check or L[page][nr_ligne].val == "" or skip[x]) {				
-              if (skip[x]) {nb+=1;skip[x]=0}
+				  if (running and upd) {
+            me.prop_table();
+					  if (L[page][nr_ligne].check or L[page][nr_ligne].val == "" or skip) {				
+              if (skip) {nb+=1;skip=0}
               if (L[page][nr_ligne].val == "") nb+=1;
 						  running = 0;
-						  me.timer[x].restart(1.8);				
+						  me.timer.restart(1.8);				
 					  }
 					  settimer(me.loop,0);
 				  }       
@@ -446,8 +431,8 @@ var CHKLIST = {
     }
   }, # end of check_prop
 
-  prop_table : func(x) {
-    if (upd[x]) {
+  prop_table : func {
+    if (upd) {
 	    if (page == 0) {   ### Cold Start with Ext Pwr ###
         if (nr_ligne == 1
           or nr_ligne == 2
@@ -641,11 +626,9 @@ var CHKLIST = {
 
 #### Main ####
 var chklist_setl = setlistener("/sim/signals/fdm-initialized", func () {	
-  for (var x=0;x<2;x+=1) {
-    var checklist = CHKLIST.new(x);
-    checklist.init(x);
-    checklist.listen(x);
-  }
+    var checklist = CHKLIST.new();
+    checklist.init();
+    checklist.listen();
   print("Vocal Checklists ... Ok");
   removelistener(chklist_setl);
 });

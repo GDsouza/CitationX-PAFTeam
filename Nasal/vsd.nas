@@ -11,12 +11,10 @@ var dist_rem = "autopilot/route-manager/distance-remaining-nm";
 var fp_active = "/autopilot/route-manager/active";
 var	heading_ind =	"/instrumentation/heading-indicator/indicated-heading-deg";
 var num_wpts = "/autopilot/route-manager/route/num";
-var set_range = ["/instrumentation/mfd/range-nm",
-                 "/instrumentation/mfd[1]/range-nm"];
+var set_range = "/instrumentation/mfd/range-nm";
 var svg_path = "/Aircraft/CitationX/Models/Instruments/MFD/canvas/Images/vsd.svg"; 
 var tg_alt = "autopilot/settings/tg-alt-ft";
-var toggle_vsd = ["/instrumentation/efis/vsd",
-                  "/instrumentation/efis/vsd[1]"];
+var toggle_vsd = "/instrumentation/efis/vsd";
 var totDist = "autopilot/route-manager/total-distance";
 var	vert_spd = "/velocities/vertical-speed-fps";
 var rangeHdg = [];
@@ -51,25 +49,15 @@ var vsd = {
 	terr_offset: 22,		# Offset between start of terrain polygon y and bottom_left corner
 	bottom_left: {x:190, y:294},	# {x:x,y:y_max - y} of bottom-left corner of plot area - looks like canvas starts it's y axis from the top going down - old 233,294
 
-	new: func(x) {
+	new: func {
 		var m = {parents:[vsd]};
-    if (!x) {
-		  m.display = canvas.new({
-			  "name": "vsdLScreen",
-			  "size": [1024, 320],
-			  "view": [1024, 320],
-			  "mipmapping": 1
-		  });	
-		  m.display.addPlacement({"node": "VsdL.screen"});
-    } else {
-		  m.display = canvas.new({
-			  "name": "vsdRScreen",
-			  "size": [1024, 320],
-			  "view": [1024, 320],
-			  "mipmapping": 1
-  		});	
-		  m.display.addPlacement({"node": "VsdR.screen"});
-    }
+	  m.display = canvas.new({
+		  "name": "vsdScreen",
+		  "size": [1024, 320],
+		  "view": [1024, 320],
+		  "mipmapping": 1
+	  });	
+	  m.display.addPlacement({"node": "Vsd.screen"});
     m.group = m.display.createGroup();
     canvas.parsesvg(m.group, svg_path);	
 		m.text = m.display.createGroup();					# Group for waypoints text
@@ -83,7 +71,7 @@ var vsd = {
 		m.wpt_tod = geo.Coord.new();
 
 		### Display init ###
-		m.h_range = getprop(set_range[x]);
+		m.h_range = getprop(set_range);
 		m.group.getElementById("text_range1").setText(sprintf("%3.0f",m.h_range*0.25));
 		m.group.getElementById("text_range2").setText(sprintf("%3.0f",m.h_range*0.5));
 		m.group.getElementById("text_range3").setText(sprintf("%3.0f",m.h_range*0.75));
@@ -105,13 +93,13 @@ var vsd = {
 	}, # end of new
 
 			### Listeners ###
-	listen : func (x){		
+	listen : func {		
 		setlistener(fp_active, func(n) {
 			if (n.getValue()) {
 				me.fp = flightplan();
 				me.tot_dist = getprop(totDist);
 				me.v_alt = fms.vsd_alt(); # Call altitudes vector from fms
-        if (getprop(toggle_vsd[x]))me.update_timer.start();
+        if (getprop(toggle_vsd)) me.update_timer.start();
 			} else {
         me.path.hide();
         me.text.removeAllChildren();
@@ -119,7 +107,7 @@ var vsd = {
       }
 		},0,0);
 
-		setlistener(toggle_vsd[x], func(n) {
+		setlistener(toggle_vsd, func(n) {
 			if (n.getValue() and getprop(fp_active)) {
         me.update_timer.start();
       } else {
@@ -129,7 +117,7 @@ var vsd = {
       }
 		},0,0);
 
-		setlistener(set_range[x], func(n) {
+		setlistener(set_range, func(n) {
 			me.range = n.getValue();
 			if(me.range > 10) {
 				me.group.getElementById("text_range1").setText(sprintf("%3.0f",me.range*0.25));
@@ -154,7 +142,7 @@ var vsd = {
 
 	}, # end of listen
 
-	update: func(x) {
+	update: func {
 		# Generate elevation profile		
 		me.altitude = getprop(alt_ind);
 		if(me.altitude == nil) {
@@ -300,10 +288,8 @@ var vsd = {
 		me.lastalt = me.new_markerPos;
 	}, # end of update
 
-  updateTimer : func (x) {
-    me.update_timer = maketimer(1,func() {
-      me.update(x);
-    });
+  updateTimer : func {
+    me.update_timer = maketimer(1,func() {me.update()});
   }, # end of updateTimer
 
 	get_elevation : func (lat, lon) {
@@ -317,12 +303,10 @@ var vsd = {
 
 ### START ###
 var vsd_stl = setlistener("sim/signals/fdm-initialized", func { 
-  for (var x=0;x<2;x+=1) {
-	  var vsd = vsd.new(x);
-	  vsd.listen(x);
-    vsd.updateTimer(x);
-    vsd.update(x);
-  }
+  var vsd = vsd.new();
+  vsd.listen();
+  vsd.updateTimer();
+  vsd.update();
 	print("VSD ... Ok");
 	removelistener(vsd_stl);
 },0,0);

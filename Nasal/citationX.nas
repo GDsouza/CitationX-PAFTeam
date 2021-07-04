@@ -1,5 +1,5 @@
 ### Citation X ####
-### Révision C. Le Moigne (clm76) - 2015,2016,2019  ###
+### Révision C. Le Moigne (clm76) - 2015,2016,2019,2021  ###
 
 ### Check FG version ###
 var checkVersion = func {
@@ -18,18 +18,17 @@ var checkVersion = func {
 };
 
 aircraft.livery.init("Aircraft/CitationX/Models/Liveries");
-var FHmeter = aircraft.timer.new("/instrumentation/clock/flight-meter-sec", 1,1); 
+var FHmeter = aircraft.timer.new("/instrumentation/clock/flight-meter-sec",60,0); 
 var Chrono = [aircraft.timer.new("/instrumentation/mfd/chrono", 1,1),
              aircraft.timer.new("/instrumentation/mfd[1]/chrono", 1,1)];
 var flaps = "controls/flight/flaps";
+var fh_tot = "instrumentation/clock/flight-hour-tot";
+var fh_sec = "instrumentation/clock/flight-meter-sec";
+var fh_get = 0;
 var flaps_pos = nil;
 var flaps_sel = nil;
 var elt = [0,0];
-var fl_tot = nil;
-var fl_calc = nil;
-var fcalc = nil;
 var fhour = nil;
-var fmeter = nil;
 var et = 0;
 var elec = 1;
 
@@ -247,12 +246,9 @@ setlistener("accelerations/limit-exceeded-alert", func(n) {
 
 setlistener("sim/model/autostart", func(n){
     if(n.getValue()){
-#      setprop("services/ext-pwr",1);
       setprop("controls/electric/external-power",1);
       Startup();
-    }else{
-        Shutdown();
-    }
+    } else Shutdown();
 },0,0);
 
 setlistener("/sim/current-view/internal", func(n) {
@@ -270,18 +266,24 @@ setlistener("/sim/current-view/internal", func(n) {
 		}
 },0,0);
 
-setlistener("/gear/gear[0]/wow", func(ww){
-    if(ww.getValue()){
+setlistener("/gear/gear[0]/wow", func(n){
+    if(n.getValue()){
         FHmeter.stop();
         setprop("controls/engines/grnd-idle",1);			
-				FH_write();
         setprop("autopilot/locks/fms-gs",0);
-    }else{
+    } else{
         setprop("controls/engines/grnd-idle",0);			
         FHmeter.start();
+        fh_get = getprop(fh_tot);
 				### raz clock to prevent restart on bounce ###
 				setprop("/instrumentation/clock/flight-meter-sec",0);
     }
+},0,0);
+
+### Flight Meter ###
+setlistener(fh_sec, func {
+    fhour = getprop(fh_sec)/3600;
+    setprop(fh_tot,fh_get + fhour);
 },0,0);
 
 ### Flaps ###
@@ -330,49 +332,6 @@ var el_time = func(x,elec,et) {
       elt[x] = 0;
 	    setprop("instrumentation/mfd["~x~"]/etx",0);
   }
-}
-
-### Flight Meter ###
-var FHupdate = func {
-    fmeter = getprop("/instrumentation/clock/flight-meter-sec");
-    fhour = fmeter/3600;
-    fl_calc = fl_tot + fhour;
-    fcalc = int((fl_calc-int(fl_calc))*10);
-    fdsp = int(fl_calc)+fcalc/10;
-    setprop("instrumentation/clock/flight-meter-dsp",fdsp);
-}
-
-var FH_load = func{
-    ### Create CitationX Path if not exists ### 
-		var path = os.path.new(getprop("/sim/fg-home")~"/Export/CitationX/create.txt");
-    if (!path.exists()) {
-      path.create_dir();
-    }
-    ######
-    var FH_path  = getprop("/sim/fg-home")~"/Export/CitationX/";
-		var name = FH_path~"FHmeter.xml";
-		var xfile = subvec(directory(FH_path),2);
-		var v = std.Vector.new(xfile);
-		if (!v.contains("FHmeter.xml")) {
-			var data = props.Node.new({
-					TotalFlight : 0
-			});		
-			io.write_properties(name,data);
-		} 
-		var data = io.read_properties(name);
-		fl_tot = data.getValue("TotalFlight");
-}
-
-var FH_write = func {
-    if (fl_calc != nil) {
-		  var FH_path = getprop("/sim/fg-home")~"/Export/CitationX/FHmeter.xml";
-		  var data = io.read_properties(FH_path);
-		  var name = data.getChild("TotalFlight");
-      fl_tot = fl_calc;
-      name.setValue(fl_calc);
-		  io.write_properties(FH_path,data);
-      setprop("/instrumentation/clock/flight-meter-sec",0);
-    }
 }
 
 ######################
@@ -577,14 +536,14 @@ var citation_stl = setlistener("/sim/signals/fdm-initialized", func {
 #    setprop("sim/model/shadow-2d",1);
 #    setprop("sim/rendering/shaders/model",1);
     setprop("services/ext-pwr",1);
-		FH_load();   		
+#		FH_load();   		
     removelistener(citation_stl);
 },0,0);
 
 var update_systems = func{
     Leng.update();
     Reng.update();
-    FHupdate();
+#    FHupdate();
 #    tire.get_rotation("yasim");
     grspd = getprop("velocities/groundspeed-kt");
     if (grspd > 40 and getprop("systems/electrical/outputs/cabin-door-monitor"))
