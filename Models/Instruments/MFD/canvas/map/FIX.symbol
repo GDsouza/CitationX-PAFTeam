@@ -1,0 +1,53 @@
+# See: http://wiki.flightgear.org/MapStructure
+# Class things:
+var name = 'FIX_cit';
+var parents = [DotSym];
+var __self__ = caller(0)[0];
+DotSym.makeinstance( name, __self__ );
+
+SymbolLayer.get(name).df_style = { # style to use by default
+	line_width: 3,
+	scale_factor: 1,
+	font: "LiberationFonts/LiberationSans-Bold.ttf",
+	font_size: 22,
+	color: [0, 0.6, 0.9],
+	show_labels: 1,
+};
+
+var element_type = "group"; # we want a group, becomes "me.element"
+
+var drawFIX = func(group) {
+	group.createChild("path")
+		.moveTo(-15,15)
+		.lineTo(0,0)
+		.lineTo(15,15)
+		.close()
+		.setStrokeLineWidth(line_width)
+		.setColor(color)
+		.setColorFill(color);
+}
+var _name = name;
+
+var init = func {
+	# initialize the cached fix symbol
+	var cache = StyleableCacheable.new(
+		name:_name,
+		draw_func: drawFIX,
+		cache: SymbolCache32x32,
+		draw_mode: SymbolCache.DRAW_CENTERED,
+		relevant_keys: ["line_width", "color"],
+	);
+	cache.render(me.element, me.style).setScale(me.style.scale_factor);
+
+	var txt_offset = me.getStyle('text_offset', [3, 0]);
+	var txt_alignment = me.getStyle('text_alignment', 'left-bottom');
+	var txt_color = me.getStyle('text_color', [0,0.6,0.9]);
+	if (me.style.show_labels){
+		me.text_fix = me.newText(me.model.id)
+		.setScale(me.style.scale_factor)
+		.setTranslation(txt_offset)
+		.setAlignment(txt_alignment)
+		.setColor(txt_color)
+	}
+}
+var draw = func {me.callback('draw');};

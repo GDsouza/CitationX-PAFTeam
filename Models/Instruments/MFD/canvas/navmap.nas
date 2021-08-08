@@ -64,7 +64,7 @@ var NavMap = {
     DME  : { enabled: 1, declutter: 3, range: 20, max_range: 80, static : 1, factory : canvas.SymbolLayer, priority : 4, vis :1},
     VOR_cit  : { enabled: 1, declutter: 1, range: 80, max_range: 160, static : 1, factory : canvas.SymbolLayer, priority : 4, vis : 1},
     NDB_cit  : { enabled: 1, declutter: 1, range: 40, max_range: 80, static : 1, factory : canvas.SymbolLayer, priority : 4, vis :1},
-    FIX  : { enabled: 1, declutter: 1, range: 10, max_range: 30, static : 1, factory : canvas.SymbolLayer, priority : 4, vis :1},
+    FIX_cit  : { enabled: 1, declutter: 1, range: 10, max_range: 30, static : 1, factory : canvas.SymbolLayer, priority : 4, vis :1},
     RTE  : { enabled: 1, declutter: 3, range: 2000, max_range: 2000, static : 1, factory : canvas.SymbolLayer, priority : 2, vis :1},
     WPT_cit  : { enabled: 1, declutter: 3, range: 2000, max_range: 2000, static : 1, factory : canvas.SymbolLayer, priority : 4, vis :1},
     FLT  : { enabled: 1, declutter: 4, range: 2000, max_range: 2000, static : 1, factory : canvas.SymbolLayer, priority : 3, vis :0},
@@ -258,8 +258,8 @@ var NavMap = {
             me.mp.getLayer(layer_name).setVisible(1);
         if (layer.vis){
           me.plan.getLayer(layer_name).setVisible(1);
-          me.mp.getLayer('FIX').setVisible(me.fix);
-          me.plan.getLayer('FIX').setVisible(me.fix);
+          me.mp.getLayer('FIX_cit').setVisible(me.fix);
+          me.plan.getLayer('FIX_cit').setVisible(me.fix);
           me.mp.getLayer('VOR_cit').setVisible(me.vor);
           me.plan.getLayer('VOR_cit').setVisible(me.vor);
           me.mp.getLayer('APT_cit').setVisible(me.apt);
