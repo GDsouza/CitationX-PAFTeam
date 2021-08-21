@@ -511,9 +511,7 @@ var PFDDisplay = {
   update_SPD : func {
     if (!me.madc_enabled) return;
     else {
-#      if (getprop(ApAlt) == "FLC" or getprop(ApAlt) == "VFLC" 
-#          or fms or getprop(SpdCtrl) or getprop(hold_active)) {
-      if (getprop(SpdCtrl)) {
+      if (fms or getprop(SpdCtrl)) {
         me.Spd.TgSpd.show();
         if (getprop(AltFt)  <= 30650) {
           me.Spd.TgSpd.setText(sprintf("%.0f",getprop(SpdTgKt)));

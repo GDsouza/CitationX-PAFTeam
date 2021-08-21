@@ -47,7 +47,7 @@
   </animation>
 
     <effect>
-      <inherits-from>Aircraft/CitationX/Models/Effects/skin-reflect</inherits-from>
+      <inherits-from>Models/Effects/skin-reflect</inherits-from>
       <object-name>Map.light</object-name>
       <object-name>Left.light</object-name>
       <object-name>Map.sphere</object-name>
@@ -58,7 +58,7 @@
     </effect>
 
     <effect>
-      <inherits-from>Aircraft/CitationX/Models/Effects/flashlight</inherits-from>
+      <inherits-from>Models/Effects/flashlight</inherits-from>
       <object-name>Map.light</object-name>
       <object-name>Left.light</object-name>
       <object-name>Map.sphere</object-name>
@@ -125,7 +125,7 @@
 
     <model>
         <name>Circuit Breaker Left</name>
-        <path>Aircraft/CitationX/Models/cb-panel_L.xml</path>
+        <path>Models/cb-panel_L.xml</path>
         <offsets>
             <x-m> 0.00 </x-m>
             <y-m> 0.00 </y-m>
@@ -136,7 +136,7 @@
 
     <model>
         <name>Circuit Breaker Right</name>
-        <path>Aircraft/CitationX/Models/cb-panel_R.xml</path>
+        <path>Models/cb-panel_R.xml</path>
         <offsets>
             <x-m> 0.00 </x-m>
             <y-m> 0.00 </y-m>
@@ -147,7 +147,7 @@
 
     <model>
         <name>pilot-seat</name>
-        <path>Aircraft/CitationX/Models/Seats/pilot-seat.xml</path>
+        <path>Models/Seats/pilot-seat.xml</path>
         <offsets>
             <x-m> 0.00 </x-m>
             <y-m> 0.00 </y-m>
@@ -158,7 +158,7 @@
 
     <model>
         <name>copilot-seat</name>
-        <path>Aircraft/CitationX/Models/Seats/copilot-seat.xml</path>
+        <path>Models/Seats/copilot-seat.xml</path>
         <offsets>
             <x-m> 0.00 </x-m>
             <y-m> 0.00 </y-m>
@@ -169,7 +169,7 @@
 
     <model>
         <name>Yokes</name>
-        <path>Aircraft/CitationX/Models/yokes.xml</path>
+        <path>Models/yokes.xml</path>
         <offsets>
             <x-m> 0.00 </x-m>
             <y-m> 0.00 </y-m>
@@ -428,7 +428,7 @@
     <!-- Pilots -->
   <model>
 		<name>Captain</name>
-    <path>Aircraft/CitationX/Models/Pilot/pilot.xml</path>
+    <path>Models/Pilot/pilot.xml</path>
 		<condition>
 			<property>sim/model/show-pilot</property>
 		</condition>
@@ -446,7 +446,7 @@
 
   <model>
 		<name>First officer</name>
-      <path>Aircraft/CitationX/Models/Pilot/copilot.xml</path>
+      <path>Models/Pilot/copilot.xml</path>
 			<condition>
 				<property>sim/model/show-copilot</property>
 			</condition>

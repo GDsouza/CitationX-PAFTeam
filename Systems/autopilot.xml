@@ -293,35 +293,6 @@
     <output>autopilot/settings/target-climb-rate-fps</output>
   </filter>
 
-  <pid-controller>
-    <name>FMS without GS</name>
-    <debug>false</debug>
-    <enable>
-      <condition>
-        <property>autopilot/locks/fms-app</property>
-      </condition>
-    </enable>
-    <input>
-      <property>autopilot/settings/target-pitch-deg</property>
-      <scale>10</scale>
-    </input>
-    <reference>
-      <property>autopilot/settings/descent-angle</property>
-      <scale>-10</scale>
-    </reference>
-    <output>autopilot/internal/pitch-filter</output>
-    <config>
-      <Kp>-1</Kp>
-      <beta>1.0</beta>
-      <alpha>0.1</alpha>
-      <gamma>0.0</gamma>
-      <Ti>20.0</Ti>
-      <Td>0.00001</Td>
-      <min>-20</min>
-      <max>20</max>
-    </config>
-  </pid-controller>
-
   <pi-simple-controller>
       <name>Altitude 2</name>
       <debug>false</debug>
@@ -425,8 +396,8 @@
       <config>
           <Kp>0.30</Kp>
           <Ki>0.0</Ki>
-          <min>-20</min>
-          <max>20</max>
+          <min>-30</min>
+          <max>30</max>
       </config>
   </pi-simple-controller>
 
@@ -447,10 +418,15 @@
       <enable>
         <condition>
           <or>
-            <equals>
-              <property>autopilot/locks/AP-status</property>
-              <value>AP</value>
-            </equals>
+            <and>
+              <equals>
+                <property>autopilot/locks/AP-status</property>
+                <value>AP</value>
+              </equals>
+              <not>
+                <property>autopilot/locks/fms-app</property>
+              </not>
+            </and>
             <and>
               <property>autopilot/locks/to-ga</property>
               <greater-than>
@@ -465,17 +441,69 @@
       <reference>autopilot/internal/pitch-bars</reference>
       <output>controls/flight/elevator-trim</output>
       <config>
-        <Kp>-0.025</Kp>
+        <Kp>-0.035</Kp>
         <beta>1.0</beta>
         <alpha>0.1</alpha>
         <gamma>0.0</gamma>
         <Ti>10.0</Ti>	
-        <Td>0.00001</Td> 
+        <Td>0.000001</Td> 
         <min>-1</min>
         <max>1</max>
       </config>
   </pid-controller>
 
+<!-- FMS without GS -->
+  <pi-simple-controller>
+    <name>FMS without GS</name>
+    <debug>false</debug>
+    <enable>
+      <condition>
+        <property>autopilot/locks/fms-app</property>
+      </condition>
+    </enable>
+    <input>
+      <property>autopilot/settings/target-pitch-deg</property>
+      <scale>10</scale>
+    </input>
+    <reference>
+      <property>autopilot/settings/descent-angle</property>
+      <scale>-10</scale>
+    </reference>
+    <output>autopilot/internal/pitch-filter</output>
+    <config>
+      <Kp>-1.5</Kp>
+      <Ki>0.0</Ki>
+      <min>-20</min>
+      <max>20</max>
+    </config>
+  </pi-simple-controller>
+
+  <pi-simple-controller>
+      <name>Elevator Trim Control for Fms without Gs</name>
+      <debug>false</debug>
+      <enable>
+        <condition>
+          <and>
+            <equals>
+              <property>autopilot/locks/AP-status</property>
+              <value>AP</value>
+            </equals>
+            <property>autopilot/locks/fms-app</property>
+          </and>
+        </condition>
+      </enable>
+      <input>orientation/pitch-deg</input>
+      <reference>autopilot/internal/pitch-bars</reference>
+      <output>controls/flight/elevator-trim</output>
+      <config>
+        <Kp>-0.25</Kp>
+        <Ki>0.0</Ki>	
+        <min>-1</min>
+        <max>1</max>
+      </config>
+  </pi-simple-controller>
+
+<!-- GS -->
   <filter>
     <name>gs deflection</name>
     <type>noise-spike</type>
@@ -522,6 +550,7 @@
     <max-rate-of-change>10</max-rate-of-change>
   </filter>
 
+<!-- FLC -->
   <pid-controller>
     <name>flight level change</name>
     <debug>false</debug>
@@ -591,6 +620,8 @@
     </config>
   </pid-controller>
 
+<!-- Speed -->
+
   <pid-controller>
     <name>Speed Control</name>
     <debug>false</debug>
@@ -601,7 +632,10 @@
 					  <property>/autopilot/locks/AP-status</property>
 						  <value>AP</value>
 				  </equals>
-          <property>autopilot/locks/speed-ctrl</property>
+          <or>
+            <property>autopilot/locks/speed-ctrl</property>
+            <property>autopilot/settings/fms</property>
+          </or>
 				</and>
 			</condition>
 		</enable>
@@ -642,7 +676,7 @@
       <beta>1.0</beta>
       <alpha>0.1</alpha>
       <gamma>0.0</gamma>
-      <Ti>10.0</Ti>
+      <Ti>5.0</Ti>
       <Td>0.00001</Td>
       <min>0.0</min>
       <max>0.95</max>

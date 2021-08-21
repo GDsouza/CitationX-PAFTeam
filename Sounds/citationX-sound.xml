@@ -8,7 +8,7 @@
 
     <ambiance>
 		  <name>ambiance</name>
-        <path>Aircraft/CitationX/Sounds/ambiance.wav</path>
+        <path>Sounds/ambiance.wav</path>
 				<mode>once</mode>
   	    <volume>
           <property>systems/electrical/outputs/audio2</property>
@@ -25,7 +25,7 @@
 
     <announcement>
         <name>welcome</name>
-        <path>Aircraft/CitationX/Sounds/welcome.wav</path>
+        <path>Sounds/welcome.wav</path>
         <mode>once</mode>
 		    <property>sim/signals/fdm-initialized</property>
 				<delay-sec>15</delay-sec>
@@ -42,7 +42,7 @@
 
     <engine>
         <name>left engine int</name>
-        <path>Aircraft/CitationX/Sounds/turbojet_fan_int.wav</path>
+        <path>Sounds/turbojet_fan_int.wav</path>
         <condition>
           <property>sim/current-view/internal</property>
         </condition>
@@ -63,7 +63,7 @@
 
     <engine>
         <name>right engine int</name>
-        <path>Aircraft/CitationX/Sounds/turbojet_fan_int.wav</path>
+        <path>Sounds/turbojet_fan_int.wav</path>
         <condition>
           <property>sim/current-view/internal</property>
         </condition>
@@ -148,7 +148,7 @@
 
     <engine>
         <name>left gen</name>
-        <path>Aircraft/CitationX/Sounds/gen-start.wav</path>
+        <path>Sounds/gen-start.wav</path>
         <condition>
 					<and>
 						<property>sim/current-view/internal</property>						
@@ -170,7 +170,7 @@
 
     <engine>
         <name>left gen1</name>
-        <path>Aircraft/CitationX/Sounds/gen.wav</path>
+        <path>Sounds/gen.wav</path>
         <condition>
 					<and>
 						<property>sim/current-view/internal</property>						
@@ -196,7 +196,7 @@
 
     <engine>
         <name>right gen</name>
-        <path>Aircraft/CitationX/Sounds/gen-start.wav</path>
+        <path>Sounds/gen-start.wav</path>
         <condition>
 					<and>
 						<property>sim/current-view/internal</property>						
@@ -218,7 +218,7 @@
 
     <engine>
         <name>right gen1</name>
-        <path>Aircraft/CitationX/Sounds/gen.wav</path>
+        <path>Sounds/gen.wav</path>
         <condition>
 					<and>
 						<property>sim/current-view/internal</property>						
@@ -246,7 +246,7 @@
 
     <avionics>
         <name>avionics1</name>
-        <path>Aircraft/CitationX/Sounds/avionics.wav</path>
+        <path>Sounds/avionics.wav</path>
         <condition>
     			<property>systems/electrical/outputs/warn-audio1</property>
         </condition>
@@ -259,7 +259,7 @@
    <radio>
       <name>Radio</name>
       <mode>looped</mode>
-      <path>Aircraft/CitationX/Sounds/radio-5s.wav</path>
+      <path>Sounds/radio-5s.wav</path>
         <condition>
 					<and>
 						<property>systems/electrical/outputs/comm2</property>
@@ -275,7 +275,7 @@
 
     <tcas>
         <name>tcas system fail</name>
-        <path>Aircraft/CitationX/Sounds/tcas/female/tcas_system_fail.wav</path>
+        <path>Sounds/tcas/female/tcas_system_fail.wav</path>
         <condition>
           <not>
     			  <property>systems/electrical/outputs/tcas</property>
@@ -290,7 +290,7 @@
 
     <waypoints>
         <name>waypoints</name>
-        <path>Aircraft/CitationX/Sounds/wp.wav</path>
+        <path>Sounds/wp.wav</path>
         <condition>
 					<and>
 						<not>
@@ -314,7 +314,7 @@
 
     <tod>
         <name>Alm-tod</name>
-        <path>Aircraft/CitationX/Sounds/wp.wav</path>
+        <path>Sounds/wp.wav</path>
         <condition>
        		<property>autopilot/locks/alm-tod</property>			
         </condition>
@@ -327,7 +327,7 @@
 
 		<fuel>
       <name>crossfeed</name>
-        <path>Aircraft/CitationX/Sounds/avionics.wav</path>
+        <path>Sounds/avionics.wav</path>
         <condition>
 					<and>
             <property>systems/electrical/outputs/warn-audio1</property>
@@ -345,7 +345,7 @@
 <!-- REVERSE -->
     <engine>
       <name>reverse</name>
-	    <path>Aircraft/CitationX/Sounds/6-lights.wav</path>
+	    <path>Sounds/6-lights.wav</path>
       <mode>once</mode>
       <condition>
         <and>
@@ -360,7 +360,7 @@
 
     <engine>
       <name>reverse-action</name>
-	    <path>Aircraft/CitationX/Sounds/reverse.wav</path>
+	    <path>Sounds/reverse.wav</path>
       <mode>once</mode>
       <condition>
         <and>
@@ -504,17 +504,17 @@
 <!--  GEAR DOWN -->
     <gear>
         <name>gear-down</name>
-	    <path>Aircraft/CitationX/Sounds/gear-down.wav</path>
+	    <path>Sounds/gear-down.wav</path>
         <mode>once</mode>
         <condition>
 					<and>
 						<property>controls/gear/gear-down</property>						
 						<less-than>
-							<property>gear/gear[1]/position-norm</property>							
+							<property>gear/gear[1]/position-norm</property>
 							<value>0.99</value>
 						</less-than>
 						<greater-than>
-							<property>gear/gear[1]/position-norm</property>							
+							<property>gear/gear[1]/position-norm</property>
 							<value>0.65</value>
 						</greater-than>
          </and>
@@ -524,7 +524,7 @@
 <!--  GEAR UP -->
     <gear>
         <name>gear-up</name>
-	    <path>Aircraft/CitationX/Sounds/gear-up.wav</path>
+	    <path>Sounds/gear-up.wav</path>
         <mode>once</mode>
         <condition>
 					<and>
@@ -593,12 +593,9 @@
 <!-- FLAPS -->
     <flap>
         <name>flaps</name>
-        <path>Aircraft/CitationX/Sounds/flaps.wav</path>
-            <property>surface-positions/flap-pos-norm</property>
+        <path>Sounds/flaps.wav</path>
+          <property>surface-positions/flap-pos-norm</property>
         <mode>in-transit</mode>
-        <volume>
-            <property>sim/sound/volume</property>
-        </volume>
         <position>
             <x>-1.0 </x>
             <y>-2.0 </y>
@@ -607,6 +604,18 @@
         <reference-dist>1.0</reference-dist>
         <max-dist>10.0</max-dist>
     </flap>
+
+    <flapcp>
+        <name>flaps-cp</name>
+        <path>Sounds/flaps4-cp.wav</path>
+        <condition>
+          <equals>
+            <property>surface-positions/flap-pos-norm</property>
+            <value>1</value>
+          </equals>
+        </condition>
+        <mode>once</mode>
+    </flapcp>
 
 <!-- SPEED BRAKE -->
     <speedbrake>
@@ -668,7 +677,7 @@
         <brakes>
             <name>brake-lever-off</name>
             <mode>once</mode>
-            <path>Aircraft/CitationX/Sounds/brake-lever.wav</path>
+            <path>Sounds/brake-lever.wav</path>
             <condition>
               <equals>
                 <property>controls/gear/brake-parking</property>
@@ -693,7 +702,7 @@
         <brakes>
             <name>brake-lever-on</name>
             <mode>once</mode>
-            <path>Aircraft/CitationX/Sounds/brake-lever.wav</path>
+            <path>Sounds/brake-lever.wav</path>
             <condition>
               <less-than>
                 <property>controls/gear/brake-parking</property>
@@ -742,7 +751,7 @@
     <alarm>
         <name>Master warning</name>
         <mode>once</mode>
-        <path>Aircraft/CitationX/Sounds/chime2.wav</path>
+        <path>Sounds/chime2.wav</path>
         <condition>
 					<and>
             <property>systems/electrical/outputs/warn-audio2</property>
@@ -756,7 +765,7 @@
 
     <warnings>
         <name>master caution</name>
-        <path>Aircraft/CitationX/Sounds/chime2.wav</path>
+        <path>Sounds/chime2.wav</path>
         <mode>once</mode>
 				<condition>
 					<and>
@@ -772,7 +781,7 @@
     <alarm>
         <name>Overspeed alarm</name>
         <mode>looped</mode>
-        <path>Aircraft/CitationX/Sounds/overspeed.wav</path>
+        <path>Sounds/overspeed.wav</path>
         <condition>
 					<or>
             <property>sim/alarms/overspeed-alarm</property>
@@ -787,7 +796,7 @@
     <warnings>
         <name>Stall alarm</name>
         <mode>looped</mode>
-        <path>Aircraft/CitationX/Sounds/stall.wav</path>
+        <path>Sounds/stall.wav</path>
 				<condition>
 					<and>
 						<greater-than>
@@ -802,7 +811,7 @@
     <alarm>
         <name>Autopilot disconnect</name>
         <mode>once</mode>
-        <path>Aircraft/CitationX/Sounds/autopilot-disconnect.wav</path>
+        <path>Sounds/autopilot-disconnect.wav</path>
         <condition>
           <property>autopilot/locks/disengage</property>     
         </condition>
@@ -813,7 +822,7 @@
 
     <warnings>
       <name>crack</name>
-      <path>Aircraft/CitationX/Sounds/aircraft-crack.wav</path>
+      <path>Sounds/aircraft-crack.wav</path>
       <mode>once</mode>
         <condition>
           <property>accelerations/limit-exceeded-alert</property>
@@ -822,7 +831,7 @@
 
     <warnings>
       <name>crash</name>
-      <path>Aircraft/CitationX/Sounds/aircraft-crash.wav</path>
+      <path>Sounds/aircraft-crash.wav</path>
       <mode>once</mode>
       <condition>
         <property>sim/crashed</property>
@@ -831,7 +840,7 @@
 
     <warnings>
       <name>stby-pwr</name>
-      <path>Aircraft/CitationX/Sounds/chime2.wav</path>
+      <path>Sounds/chime2.wav</path>
       <mode>looped</mode>
 			<condition>
 				<equals>
@@ -843,7 +852,7 @@
 
     <warnings>
       <name>selcal</name>
-      <path>Aircraft/CitationX/Sounds/chime2.wav</path>
+      <path>Sounds/chime2.wav</path>
       <mode>once</mode>
 			<condition>
 				<not>
@@ -854,7 +863,7 @@
 
     <warnings>
         <name>fasten-seat-belts</name>
-        <path>Aircraft/CitationX/Sounds/seat-belt.wav</path>
+        <path>Sounds/seat-belt.wav</path>
         <mode>once</mode>
 				<condition>
 						<equals>
@@ -866,7 +875,7 @@
 
     <warnings>
         <name>no-smoking</name>
-        <path>Aircraft/CitationX/Sounds/no-smoking.wav</path>
+        <path>Sounds/no-smoking.wav</path>
         <mode>once</mode>
 				<condition>
 					<equals>
@@ -880,7 +889,7 @@
     <callout>
       <name>80 knots</name>
       <mode>once</mode>
-      <path>Aircraft/CitationX/Sounds/80kts.wav</path>
+      <path>Sounds/80kts.wav</path>
       	<condition>
           <and>
             <or>
@@ -907,7 +916,7 @@
     <callout>
     	<name>V1</name>
       <mode>once</mode>
-      <path>Aircraft/CitationX/Sounds/v1.wav</path>
+      <path>Sounds/v1.wav</path>
       <condition>
         <and>
           <or>
@@ -930,7 +939,7 @@
     <callout>
 			<name>Vr</name>
 			<mode>once</mode>
-			<path>Aircraft/CitationX/Sounds/rotate.wav</path>
+			<path>Sounds/rotate.wav</path>
 			<condition>
         <and>
           <or>
@@ -953,7 +962,7 @@
 		<callout>
 			<name>Positive climb rate</name>
       <mode>once</mode>
-      <path>Aircraft/CitationX/Sounds/p-climb.wav</path>
+      <path>Sounds/p-climb.wav</path>
       <condition>
         <and>
           <less-than>
@@ -986,7 +995,7 @@
 
     <callout>
         <name>bank-angle</name>
-        <path>Aircraft/CitationX/Sounds/bank-angle.wav</path>
+        <path>Sounds/bank-angle.wav</path>
         <mode>looped</mode>
 				<condition>
           <or>
@@ -1007,7 +1016,7 @@
 	<apu>
 	    <name>APU starting</name>
 	    <mode>once</mode>
-	    <path>Aircraft/CitationX/Sounds/apu_start.wav</path>
+	    <path>Sounds/apu_start.wav</path>
 	    <condition>
 				<and>
 					<property>controls/APU/running</property>
@@ -1024,7 +1033,7 @@
 	<apu>
 	    <name>APU running</name>
 	    <mode>looped</mode>
-	    <path>Aircraft/CitationX/Sounds/apu_run.wav</path>
+	    <path>Sounds/apu_run.wav</path>
 	    <condition>
 				<and>
 					<greater-than-equals>
@@ -1044,7 +1053,7 @@
 	<apu>
 	    <name>APU shutdown</name>
 	    <mode>once</mode>
-	    <path>Aircraft/CitationX/Sounds/apu_shutdown.wav</path>
+	    <path>Sounds/apu_shutdown.wav</path>
 	    <condition>
 				<and>
 					<not>
@@ -1063,7 +1072,7 @@
 	<apu>
 	    <name>APU warning</name>
       <mode>once</mode>
-      <path>Aircraft/CitationX/Sounds/chime1.wav</path>
+      <path>Sounds/chime1.wav</path>
       <condition>
 				<and>
 					<not>
@@ -1083,7 +1092,7 @@
 	<apu>
 	    <name>APU bleed</name>
       <mode>once</mode>
-      <path>Aircraft/CitationX/Sounds/chime1.wav</path>
+      <path>Sounds/chime1.wav</path>
       <condition>
 				<or>
 					<and>
@@ -1106,7 +1115,7 @@
         <doors>
             <name>separation-door-open</name>
             <mode>once</mode>
-            <path>Aircraft/CitationX/Sounds/cabin-door.wav</path>
+            <path>Sounds/cabin-door.wav</path>
             <condition>
                 <greater-than>
                     <property>controls/separation-door/open</property>
@@ -1131,7 +1140,7 @@
         <doors>
             <name>separation-door-closed</name>
             <mode>once</mode>
-            <path>Aircraft/CitationX/Sounds/cabin-door.wav</path>
+            <path>Sounds/cabin-door.wav</path>
             <condition>
               <and>
                 <less-than>
@@ -1154,7 +1163,7 @@
         <doors>
             <name>toilet-door-open</name>
             <mode>once</mode>
-            <path>Aircraft/CitationX/Sounds/cabin-door.wav</path>
+            <path>Sounds/cabin-door.wav</path>
             <condition>
                 <greater-than>
                     <property>controls/toilet-door/open</property>
@@ -1175,7 +1184,7 @@
         <doors>
             <name>toilet-door-closed</name>
             <mode>once</mode>
-            <path>Aircraft/CitationX/Sounds/cabin-door.wav</path>
+            <path>Sounds/cabin-door.wav</path>
             <condition>
               <and>
                 <less-than>
@@ -1204,7 +1213,7 @@
         <doors>
             <name>ext-cabin-door-open</name>
             <mode>once</mode>
-            <path>Aircraft/CitationX/Sounds/ext-cabin-door-open.wav</path>
+            <path>Sounds/ext-cabin-door-open.wav</path>
             <condition>
                 <greater-than>
                     <property>controls/cabin-door/position-norm</property>
@@ -1225,7 +1234,7 @@
         <doors>
             <name>ext-cabin-door-closed</name>
             <mode>once</mode>
-            <path>Aircraft/CitationX/Sounds/ext-cabin-door-closed.wav</path>
+            <path>Sounds/ext-cabin-door-closed.wav</path>
             <condition>
               <and>
                 <less-than>
@@ -1254,7 +1263,7 @@
         <doors>
             <name>bar-door-1-open</name>
             <mode>once</mode>
-            <path>Aircraft/CitationX/Sounds/bar-door-open.wav</path>
+            <path>Sounds/bar-door-open.wav</path>
             <condition>
                 <greater-than>
                     <property>controls/bar/bar-door-1</property>
@@ -1275,7 +1284,7 @@
         <doors>
             <name>bar-door-1-closed</name>
             <mode>once</mode>
-            <path>Aircraft/CitationX/Sounds/bar-door-closed.wav</path>
+            <path>Sounds/bar-door-closed.wav</path>
             <condition>
               <and>
                 <less-than>
@@ -1302,7 +1311,7 @@
         <doors>
             <name>bar-door-2-open</name>
             <mode>once</mode>
-            <path>Aircraft/CitationX/Sounds/bar-door-open.wav</path>
+            <path>Sounds/bar-door-open.wav</path>
             <condition>
                 <greater-than>
                     <property>controls/bar/bar-door-2</property>
@@ -1323,7 +1332,7 @@
         <doors>
             <name>bar-door-2-closed</name>
             <mode>once</mode>
-            <path>Aircraft/CitationX/Sounds/bar-door-closed.wav</path>
+            <path>Sounds/bar-door-closed.wav</path>
             <condition>
               <and>
                 <less-than>
@@ -1350,7 +1359,7 @@
         <doors>
             <name>bar-door-3-open</name>
             <mode>once</mode>
-            <path>Aircraft/CitationX/Sounds/bar-door-open.wav</path>
+            <path>Sounds/bar-door-open.wav</path>
             <condition>
                 <greater-than>
                     <property>controls/bar/bar-door-3</property>
@@ -1371,7 +1380,7 @@
         <doors>
             <name>bar-door-3-closed</name>
             <mode>once</mode>
-            <path>Aircraft/CitationX/Sounds/bar-door-closed.wav</path>
+            <path>Sounds/bar-door-closed.wav</path>
             <condition>
               <and>
                 <less-than>
@@ -1398,7 +1407,7 @@
         <doors>
             <name>bar-door-4-open</name>
             <mode>once</mode>
-            <path>Aircraft/CitationX/Sounds/bar-door-open.wav</path>
+            <path>Sounds/bar-door-open.wav</path>
             <condition>
                 <greater-than>
                     <property>controls/bar/bar-door-4</property>
@@ -1419,7 +1428,7 @@
         <doors>
             <name>bar-door-4-closed</name>
             <mode>once</mode>
-            <path>Aircraft/CitationX/Sounds/bar-door-closed.wav</path>
+            <path>Sounds/bar-door-closed.wav</path>
             <condition>
               <and>
                 <less-than>
@@ -1446,7 +1455,7 @@
         <doors>
             <name>bar-door-5-open</name>
             <mode>once</mode>
-            <path>Aircraft/CitationX/Sounds/bar-door-open.wav</path>
+            <path>Sounds/bar-door-open.wav</path>
             <condition>
                 <greater-than>
                     <property>controls/bar/bar-door-5</property>
@@ -1467,7 +1476,7 @@
         <doors>
             <name>bar-door-5-closed</name>
             <mode>once</mode>
-            <path>Aircraft/CitationX/Sounds/bar-door-closed.wav</path>
+            <path>Sounds/bar-door-closed.wav</path>
             <condition>
               <and>
                 <less-than>
@@ -1494,7 +1503,7 @@
         <doors>
             <name>bar-door-6-open</name>
             <mode>once</mode>
-            <path>Aircraft/CitationX/Sounds/bar-door-open.wav</path>
+            <path>Sounds/bar-door-open.wav</path>
             <condition>
                 <greater-than>
                     <property>controls/bar/bar-door-6</property>
@@ -1515,7 +1524,7 @@
         <doors>
             <name>bar-door-6-closed</name>
             <mode>once</mode>
-            <path>Aircraft/CitationX/Sounds/bar-door-closed.wav</path>
+            <path>Sounds/bar-door-closed.wav</path>
             <condition>
               <and>
                 <less-than>
@@ -1542,7 +1551,7 @@
         <doors>
             <name>bar-door-7-open</name>
             <mode>once</mode>
-            <path>Aircraft/CitationX/Sounds/bar-door-open.wav</path>
+            <path>Sounds/bar-door-open.wav</path>
             <condition>
                 <greater-than>
                     <property>controls/bar/bar-door-7</property>
@@ -1563,7 +1572,7 @@
         <doors>
             <name>bar-door-7-closed</name>
             <mode>once</mode>
-            <path>Aircraft/CitationX/Sounds/bar-door-closed.wav</path>
+            <path>Sounds/bar-door-closed.wav</path>
             <condition>
               <and>
                 <less-than>
@@ -1590,7 +1599,7 @@
         <doors>
             <name>bar-door-8-open</name>
             <mode>once</mode>
-            <path>Aircraft/CitationX/Sounds/bar-door-open.wav</path>
+            <path>Sounds/bar-door-open.wav</path>
             <condition>
                 <greater-than>
                     <property>controls/bar/bar-door-8</property>
@@ -1611,7 +1620,7 @@
         <doors>
             <name>bar-door-8-closed</name>
             <mode>once</mode>
-            <path>Aircraft/CitationX/Sounds/bar-door-closed.wav</path>
+            <path>Sounds/bar-door-closed.wav</path>
             <condition>
               <and>
                 <less-than>
@@ -1640,7 +1649,7 @@
         <tables>
           <name>table1-open</name>
           <mode>once</mode>
-          <path>Aircraft/CitationX/Sounds/table-open.wav</path>
+          <path>Sounds/table-open.wav</path>
           <condition>
              <property>controls/tables/table1/extend</property>
           </condition>
@@ -1658,7 +1667,7 @@
         <tables>
           <name>table1-closed</name>
           <mode>once</mode>
-          <path>Aircraft/CitationX/Sounds/table-closed.wav</path>
+          <path>Sounds/table-closed.wav</path>
           <condition>
             <and>
               <not>
@@ -1684,7 +1693,7 @@
         <tables>
           <name>cache-table1-closed</name>
           <mode>in-transit</mode>
-          <path>Aircraft/CitationX/Sounds/cache-table.wav</path>
+          <path>Sounds/cache-table.wav</path>
             <property>controls/tables/table1/cache/position-norm</property>
           <volume>
             <property>sim/signals/fdm-initialized</property>
@@ -1701,7 +1710,7 @@
         <tables>
           <name>table2-open</name>
           <mode>once</mode>
-          <path>Aircraft/CitationX/Sounds/table-open.wav</path>
+          <path>Sounds/table-open.wav</path>
           <condition>
              <property>controls/tables/table2/extend</property>
           </condition>
@@ -1719,7 +1728,7 @@
         <tables>
           <name>table2-closed</name>
           <mode>once</mode>
-          <path>Aircraft/CitationX/Sounds/table-closed.wav</path>
+          <path>Sounds/table-closed.wav</path>
           <condition>
             <and>
               <not>
@@ -1745,7 +1754,7 @@
         <tables>
           <name>cache-table2-closed</name>
           <mode>in-transit</mode>
-          <path>Aircraft/CitationX/Sounds/cache-table.wav</path>
+          <path>Sounds/cache-table.wav</path>
           <property>controls/tables/table2/cache/position-norm</property>
           <volume>
             <property>sim/signals/fdm-initialized</property>
@@ -1762,7 +1771,7 @@
      <tables>
         <name>table3-open</name>
         <mode>once</mode>
-        <path>Aircraft/CitationX/Sounds/table-open.wav</path>
+        <path>Sounds/table-open.wav</path>
         <condition>
 					<property>controls/tables/table3/extend</property>
         </condition>
@@ -1780,7 +1789,7 @@
         <tables>
           <name>table3-closed</name>
           <mode>once</mode>
-          <path>Aircraft/CitationX/Sounds/table-closed.wav</path>
+          <path>Sounds/table-closed.wav</path>
           <condition>
             <and>
               <not>
@@ -1806,7 +1815,7 @@
         <tables>
           <name>cache-table3-closed</name>
           <mode>in-transit</mode>
-          <path>Aircraft/CitationX/Sounds/cache-table.wav</path>
+          <path>Sounds/cache-table.wav</path>
             <property>controls/tables/table3/cache/position-norm</property>
           <volume>
             <property>sim/signals/fdm-initialized</property>
@@ -1823,7 +1832,7 @@
         <tables>
           <name>table4-open</name>
           <mode>once</mode>
-          <path>Aircraft/CitationX/Sounds/table-open.wav</path>
+          <path>Sounds/table-open.wav</path>
           <condition>
             <property>controls/tables/table4/extend</property>
           </condition>
@@ -1841,7 +1850,7 @@
         <tables>
           <name>table4-closed</name>
           <mode>once</mode>
-          <path>Aircraft/CitationX/Sounds/table-closed.wav</path>
+          <path>Sounds/table-closed.wav</path>
           <condition>
             <and>
               <not>
@@ -1867,7 +1876,7 @@
         <tables>
           <name>cache-table4-closed</name>
           <mode>in-transit</mode>
-          <path>Aircraft/CitationX/Sounds/cache-table.wav</path>
+          <path>Sounds/cache-table.wav</path>
             <property>controls/tables/table4/cache/position-norm</property>
           <volume>
             <property>sim/signals/fdm-initialized</property>
@@ -1889,7 +1898,7 @@
 				<value>110</value>
 			</equals>
     </condition>
-    <path>Aircraft/CitationX/Sounds/horn.wav</path>
+    <path>Sounds/horn.wav</path>
     <volume>
       <property>sim/signals/fdm-initialized</property>
       <factor>0.5</factor>

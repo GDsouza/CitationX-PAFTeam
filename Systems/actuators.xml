@@ -341,23 +341,16 @@
 
   <!-- Elevators -->
 
-  <!-- Full elevator travel is through a range of 19 degrees nose up to 15
-          degrees nose down.
+  <!-- Full elevator travel is through a range of 19 degrees nose up to 15 degrees nose down.
 
-          Pitch trim is accomplished by repositioning the entire horizontal
-          stabilizer. Full travel of the stabilizer is from 12 degrees in the
-          airplane nose up direction to 2 degrees in the airplane nose down
-          direction.
-
-          [Ok, so our yasim system does not model moving the entire horizontal
-           stabilizer. So we just add up the degrees and normalize for yasim.
-           
+       Pitch trim is accomplished by repositioning the entire horizontal stabilizer. Full travel of the stabilizer is from 12 degrees in the airplane nose up direction to 2 degrees in the airplane nose down direction.
+          [Ok, so our yasim system does not model moving the entire horizontal stabilizer. So we just add up the degrees and normalize for yasim.        
            Also, we trim to -5 nose down for elevator-trim == 0.]
   -->
 
   <filter>
     <type>gain</type>
-    <gain>19.0</gain>
+    <gain>20.0</gain>
     <input>controls/flight/elevator</input>
     <min>-19</min>
     <max>15</max>

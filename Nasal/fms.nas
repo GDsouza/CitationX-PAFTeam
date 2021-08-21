@@ -21,7 +21,7 @@ var flag_pcdr = 0;
 var flag_tod = nil;
 var fms_app = 0;
 var fp = nil; # flightplan
-var fps_limit = nil;
+var fps_limit = 0;
 var gs_calc = nil;
 var gs_climb = nil;
 var ind = nil;
@@ -127,8 +127,7 @@ var FMS = {
 		},0,1);
 
 		setlistener(fms, func(n) {
-      if (n.getValue()) setprop(spd_ctrl,1);
-      else {
+      if (!n.getValue()) {
         setprop(tg_alt,getprop(cr_asel)*100);
         setprop("autopilot/settings/fps-limit",-40);
       }
@@ -306,7 +305,7 @@ var FMS = {
 			dist_dep = getprop(tot_dst)-getprop(dist_rem);
 			setprop(cruise_alt,getprop(cr_asel)*100);
       curr_wp = fp.current;
-      me.speed();
+      if (!getprop(spd_ctrl)) me.speed();
 
 				### Takeoff ###
 			if (getprop(lock_alt) == "VALT" and getprop(ap_stat) != "AP") {
@@ -358,7 +357,7 @@ var FMS = {
             } else gs_calc = gs_climb;
             setprop(tg_climb,gs_calc);
           } else {
-            if (getprop(gs_in_range) and getprop(dist_rem) <= 20
+            if (getprop(gs_in_range) and getprop(dist_rem) <= 10
                 and !getprop(pcdr_active)) in_range = 1;
 
                 ### Without GS ###

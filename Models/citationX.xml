@@ -68,7 +68,7 @@
   </animation>
 
   <effect>
-    <inherits-from>Aircraft/CitationX/Models/Effects/skin-reflect</inherits-from>
+    <inherits-from>Models/Effects/skin-reflect</inherits-from>
     <object-name>Fuselage</object-name>
     <object-name>RHfrt.geardoor</object-name>
     <object-name>LHfrt.geardoor</object-name>
@@ -109,7 +109,7 @@
 
   <model>
       <name>shadow</name>
-      <path>Aircraft/CitationX/Models/shadow.xml</path>
+      <path>Models/shadow.xml</path>
       <offsets>
           <x-m>0</x-m>
           <y-m>0</y-m>
@@ -120,7 +120,7 @@
 
   <model>
   <name>cabin</name>
-      <path>Aircraft/CitationX/Models/cabin.xml</path>
+      <path>Models/cabin.xml</path>
       <offsets>
           <x-m>0</x-m>
           <y-m>0</y-m>
@@ -131,7 +131,7 @@
 
   <model>
   <name>flightdeck</name>
-      <path>Aircraft/CitationX/Models/flightdeck.xml</path>
+      <path>Models/flightdeck.xml</path>
       <offsets>
           <x-m>-6.613</x-m>
           <y-m>0</y-m>
@@ -1703,7 +1703,7 @@
   </animation>
 
   <model>
-    <path>Aircraft/CitationX/Models/Effects/contrail1.xml</path>
+    <path>Models/Effects/contrail1.xml</path>
     <offsets>
       <x-m>20.0</x-m>
       <y-m>-1.69</y-m>
@@ -1714,7 +1714,7 @@
     </offsets>
   </model>
   <model>
-    <path>Aircraft/CitationX/Models/Effects/contrail2.xml</path>
+    <path>Models/Effects/contrail2.xml</path>
     <offsets>
       <x-m>20</x-m>
       <y-m>1.69</y-m>
@@ -1727,7 +1727,7 @@
 
   <model>
       <name>tyre-smoke-n</name>
-      <path>Aircraft/CitationX/Models/Effects/tyre-smoke-nose.xml</path>
+      <path>Models/Effects/tyre-smoke-nose.xml</path>
       <offsets>
           <x-m>-8.098</x-m>
           <y-m> 0.0</y-m>
@@ -1737,7 +1737,7 @@
 
   <model>
       <name>tyre-smoke-n</name>
-      <path>Aircraft/CitationX/Models/Effects/tyre-smoke-left.xml</path>
+      <path>Models/Effects/tyre-smoke-left.xml</path>
       <offsets>
           <x-m> 0.122</x-m>
           <y-m>-1.354</y-m>
@@ -1747,7 +1747,7 @@
 
   <model>
       <name>tyre-smoke-n</name>
-      <path>Aircraft/CitationX/Models/Effects/tyre-smoke-right.xml</path>
+      <path>Models/Effects/tyre-smoke-right.xml</path>
       <offsets>
           <x-m> 0.122</x-m>
           <y-m> 1.354</y-m>
@@ -1759,7 +1759,7 @@
 
   <model>
     <name>fuel-truck</name>
-    <path>Aircraft/CitationX/Models/Services/Fuel-Truck/volvo.ac</path>
+    <path>Models/Services/Fuel-Truck/volvo.ac</path>
     <condition>
       <and>
         <property>/services/fuel-truck/enable</property>
@@ -1804,7 +1804,7 @@
   
   <model>
     <name>ext-pwr</name>
-    <path>Aircraft/CitationX/Models/Services/External-Power/ext-pwr-box.ac</path>
+    <path>Models/Services/External-Power/ext-pwr-box.ac</path>
     <condition>
       <and>
         <property>/services/ext-pwr</property>
@@ -1821,7 +1821,7 @@
   
   <model>
     <name>choke_nose</name>
-    <path>Aircraft/CitationX/Models/Services/Chokes/choke.ac</path>
+    <path>Models/Services/Chokes/choke.ac</path>
     <condition>
       <and>
         <property>/services/chokes</property>
@@ -1837,7 +1837,7 @@
   
   <model>
     <name>choke_left</name>
-    <path>Aircraft/CitationX/Models/Services/Chokes/choke.ac</path>
+    <path>Models/Services/Chokes/choke.ac</path>
     <condition>
       <and>
         <property>/services/chokes</property>
@@ -1853,7 +1853,7 @@
   
   <model>
     <name>choke_right</name>
-    <path>Aircraft/CitationX/Models/Services/Chokes/choke.ac</path>
+    <path>Models/Services/Chokes/choke.ac</path>
     <condition>
       <and>
         <property>/services/chokes</property>
@@ -1870,7 +1870,7 @@
   <!-- dark smoke at engine fire -->
     <model>
       <name>fire_smoke_L</name>
-      <path>Aircraft/CitationX/Models/Effects/left-fire-smoke.xml</path>
+      <path>Models/Effects/left-fire-smoke.xml</path>
       <offsets>
        <x-m>5.8</x-m>
        <y-m>-1.6</y-m>
@@ -1880,7 +1880,7 @@
 
     <model>
       <name>fire_smoke_R</name>
-      <path>Aircraft/CitationX/Models/Effects/right-fire-smoke.xml</path>
+      <path>Models/Effects/right-fire-smoke.xml</path>
       <offsets>
        <x-m>5.8</x-m>
        <y-m>1.6</y-m>
