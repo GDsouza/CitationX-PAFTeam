@@ -491,8 +491,8 @@ var PFDDisplay = {
 
       if (getprop(GsInRange) and getprop(InRange) and !getprop("/gear/gear[1]/wow")) {
         me.Hor.GsScale.show();
-        gs_defl = math.clamp(getprop(GsDefl),-1.25,1.25);
-        me.Hor.GsIls.setTranslation(0,gs_defl* -115);
+        gs_defl = math.clamp(getprop(GsDefl),-1.7,1.7);
+        me.Hor.GsIls.setTranslation(0,-gs_defl*58);
         me.Hor.LocScale.show();
         loc_defl = math.clamp(getprop(PfdOffset), -2.5, 2.5);
         me.Hor.LocDefl.setTranslation(loc_defl * 45, 0);

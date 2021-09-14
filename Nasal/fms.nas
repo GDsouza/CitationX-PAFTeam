@@ -351,13 +351,13 @@ var FMS = {
             }
             if (!lock_gs) {
               gs_calc = getprop(tg_climb);
-              if (abs(gs_climb - getprop(tg_climb)) <= 5 or getprop(dist_rem) < 9)
+              if (abs(gs_climb - getprop(tg_climb)) <= 5 or getprop(dist_rem) <= 9.5)
                 lock_gs = 1;
               else lock_gs = 0;
             } else gs_calc = gs_climb;
             setprop(tg_climb,gs_calc);
           } else {
-            if (getprop(gs_in_range) and getprop(dist_rem) <= 10
+            if (getprop(gs_in_range) and getprop(dist_rem) <= 9.5
                 and !getprop(pcdr_active)) in_range = 1;
 
                 ### Without GS ###
