@@ -2,16 +2,16 @@
 
 <PropertyList>
 
-<path>mfd-buttons.ac</path>
+<path>mfdL-buttons.ac</path>
 
   <animation>
     <type>material</type>
-    <object-name>MFD.group</object-name>
+    <object-name>MFD_L.btn</object-name>
       <emission>
           <red>1</red>
           <green>1</green>
           <blue>1</blue>
-          <factor-prop>controls/lighting/lh-norm</factor-prop>
+          <factor-prop>controls/lighting/el-norm</factor-prop>
       </emission>
   </animation>
 

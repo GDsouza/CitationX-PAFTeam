@@ -3,11 +3,14 @@
 #  C. Le Moigne (clm76) - 2020
 ########################################
 
-var hold_activ = "instrumentation/cdu/hold/active";
-var direct = "instrumentation/cdu/direct";
+var hold_activ = ["instrumentation/cdu/hold/active",
+                  "instrumentation/cdu[1]/hold/active"];
+var direct = ["instrumentation/cdu/direct",
+              "instrumentation/cdu[1]/direct"];
 var fms = "autopilot/settings/nav-source";
 var wp = "autopilot/route-manager/route/wp[";
-var h_path = "instrumentation/cdu/hold/";
+var h_path = ["instrumentation/cdu/hold/",
+              "instrumentation/cdu[1]/hold/"];
 var htree = "autopilot/locks/hold/";
 var exit = "autopilot/locks/hold/exit";
 var enable_exit = "autopilot/locks/hold/enable-exit";
@@ -56,20 +59,20 @@ var Hold = {
     setprop(htree~"phase",0);
   }, # end of init
   
-  listen : func{
-		setlistener(hold_activ, func(n) {
-      if (n.getValue() and left(getprop(fms),3) == "FMS") {
-        setprop("autopilot/settings/target-speed-kt",getprop(h_path ~"speed"));
+  listen : func(x) {
+		setlistener(hold_activ[x], func(n) {
+      if (n.getValue() and getprop(fms) == "FMS"~(x+1)) {
+        setprop("autopilot/settings/target-speed-kt",getprop(h_path[x] ~"speed"));
         setprop(htree~"phase",0);
-        me.pattern_calc();
+        me.pattern_calc(x);
         enable_update = 1;
-        me.update();
-       # me.plot_hold(); for debug
+        me.update(x);
+       # me.plot_hold(x); for test
       }
     },0,0);
   }, # end of listen
 
-  update : func {
+  update : func (x) {
 	  phase = getprop(htree ~"phase");
     heading = getprop("orientation/heading-deg");
 #	  heading = getprop("/orientation/heading-magnetic-deg");
@@ -101,7 +104,7 @@ var Hold = {
       if (getprop(exit)) me.exit_hold(x);
     }
     else if (phase == 1) { ## Fly to point 1
-      if (getprop(exit)) me.exit_hold();
+      if (getprop(exit)) me.exit_hold(x);
       if (me.flyto(y1,x1) == 1) phase = 2;
     } 
     else if (phase == 2) { ## Fly to point 2
@@ -122,16 +125,16 @@ var Hold = {
     else if (phase == 4) { ## Return to point 0
       coord.set_latlon(y0,x0);
       if (getprop(exit)) {
-        if (h_entry == "PARALLEL") me.exit_hold();
+        if (h_entry == "PARALLEL") me.exit_hold(x);
       }
       if (me.flyto(y0,x0) == 1) {
-        if (getprop(exit)) me.exit_hold();
+        if (getprop(exit)) me.exit_hold(x);
         else phase = 1;
       }
     } 
 
     setprop(htree~"phase",phase);
-    if (enable_update) settimer(func {me.update();},0.1);
+    if (enable_update) settimer(func {me.update(x);},0.1);
 
   }, # end of update
 
@@ -153,17 +156,17 @@ var Hold = {
 
   }, # end of flyto
 
-  pattern_calc : func {
-	  h_turn = getprop(h_path ~"turn");
-	  h_inbound = getprop(h_path ~"inbound");
-	  h_entry = getprop(h_path ~"entry");
-	  wpt = getprop(h_path ~"wpt");
-	  h_dist = getprop(h_path ~"leg-dist-nm");
+  pattern_calc : func(x) {
+	  h_turn = getprop(h_path[x] ~"turn");
+	  h_inbound = getprop(h_path[x] ~"inbound");
+	  h_entry = getprop(h_path[x] ~"entry");
+	  wpt = getprop(h_path[x] ~"wpt");
+	  h_dist = getprop(h_path[x] ~"leg-dist-nm");
 	  left0 = geo.normdeg(h_inbound - 90);
 	  left1 = geo.normdeg(h_inbound - 180);
 	  right0 = geo.normdeg(h_inbound + 90);
 	  right1 = geo.normdeg(h_inbound + 180);
-    grd_spd = getprop("instrumentation/cdu/hold/speed") + 20;
+    grd_spd = getprop("instrumentation/cdu["~x~"]/hold/speed") + 20;
       ### R = V*V/tg(°incl in rad)*9.81 in meters
 	  turn_diam = 2*math.pow(grd_spd*0.5144,2)/(math.tan(getprop(bank)*D2R)*9.81); 
     x0 = getprop(wp~wpt~"]/longitude-deg");
@@ -187,18 +190,18 @@ var Hold = {
 
   }, # end of pattern_calc
 
-  exit_hold : func {
+  exit_hold : func(x) {
     setprop("autopilot/settings/fms",1);
     setprop("autopilot/locks/hold/active",0);
     setprop(enable_exit,0);
     setprop(htree~"phase",0);
-    setprop(hold_activ,0);
-    setprop(direct,0);
+    setprop(hold_activ[x],0);
+    setprop(direct[x],0);
     enable_update = 0;
     setprop(exit,0);
   }, # end of exit_hold
 
-  plot_hold : func { # for debug, not used
+  plot_hold : func(x) { # for tests, not used
     var fp = flightplan();
     var wp = createWP(y1,x1,"1");
     fp.insertWP(wp,wpt+1);
@@ -213,7 +216,8 @@ var Hold = {
 var setl_hold = setlistener("/sim/signals/fdm-initialized", func {
   var hld_pat = Hold.new();
   hld_pat.init();
-  hld_pat.listen();
+  hld_pat.listen(0);
+  hld_pat.listen(1);
 	removelistener(setl_hold);
 },0,0);
 

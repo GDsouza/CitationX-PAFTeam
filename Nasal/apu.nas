@@ -31,7 +31,7 @@ var APU = {
 		});
 		m.canvas.addPlacement({"node": "apu.screen"});
 		m.apu = m.canvas.createGroup();
-		canvas.parsesvg(m.apu,"Aircraft/CitationX/Models/APU/apu.svg");
+		canvas.parsesvg(m.apu,"Models/APU/apu.svg");
     m.rpm = m.apu.getElementById("rpm").hide();
     m.egt = m.apu.getElementById("egt").hide();
     m.volts = m.apu.getElementById("volts").hide();

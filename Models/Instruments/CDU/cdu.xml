@@ -10,7 +10,7 @@
 
   <animation>
     <type>select</type>
-    <object-name>CDU.screen</object-name>
+    <object-name>CDU.screenL</object-name>
     <object-name>CDU-lamp</object-name>
     <object-name>annun.1W</object-name>
     <object-name>annun.2A</object-name>
@@ -154,7 +154,7 @@
         <red>1</red>
         <green>1</green>
         <blue>1</blue>
-        <factor-prop>controls/lighting/ctr-norm</factor-prop>
+        <factor-prop>controls/lighting/el-norm</factor-prop>
     </emission>
   </animation>
 

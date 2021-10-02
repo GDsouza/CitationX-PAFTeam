@@ -2,11 +2,11 @@
 
 <PropertyList>
 
-	<path>checklist.ac</path>
+	<path>checklist-L.ac</path>
 
   <animation>
     <type>select</type>
-    <object-name>chklist.screen</object-name>
+    <object-name>chklist.screenL</object-name>
     <condition>
 			<and>
         <property>instrumentation/checklists/chklst-pilot</property>

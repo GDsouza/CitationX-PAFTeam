@@ -1,13 +1,10 @@
 AC3Db
 MATERIAL "panel" rgb 0.8 0.8 0.8  amb 1 1 1  emis 0.1 0.1 0.1  spec 1 1 1  shi 50  trans 0
 OBJECT world
-kids 1
-OBJECT group
-name "MFD.group"
-loc 0 0 0.19138
-kids 7
+kids 2
 OBJECT poly
-name "MFD.knob"
+name "MFD_L.knob"
+loc 0 0 0.19138
 texture "buttons.png"
 crease 45.000000
 numvert 25
@@ -194,8 +191,12 @@ refs 4
 11 0.958737 0.438714
 23 0.802241 0.438714
 kids 0
+OBJECT group
+name "MFD_L.btn"
+loc 0 0 0.19138
+kids 6
 OBJECT poly
-name "MFD.btn0"
+name "MFD_L.btn0"
 texture "buttons.png"
 crease 30.000002
 numvert 17
@@ -323,7 +324,9 @@ refs 4
 8 0.121959 0.514743
 kids 0
 OBJECT poly
-name "MFD.btn1"
+name "MFD_L.btn1"
+data 8
+MFD.btn1
 texture "buttons.png"
 crease 30.000002
 numvert 17
@@ -451,7 +454,7 @@ refs 4
 8 0.128111 0.516314
 kids 0
 OBJECT poly
-name "MFD.btn2"
+name "MFD_L.btn2"
 texture "buttons.png"
 crease 30.000002
 numvert 17
@@ -579,7 +582,7 @@ refs 4
 8 0.128111 0.516314
 kids 0
 OBJECT poly
-name "MFD.btn3"
+name "MFD_L.btn3"
 texture "buttons.png"
 crease 30.000002
 numvert 17
@@ -707,7 +710,7 @@ refs 3
 16 0.50001 0.501844
 kids 0
 OBJECT poly
-name "MFD.btn4"
+name "MFD_L.btn4"
 texture "buttons.png"
 crease 30.000002
 numvert 17
@@ -835,7 +838,7 @@ refs 4
 8 0.126774 0.517315
 kids 0
 OBJECT poly
-name "MFD.btn5"
+name "MFD_L.btn5"
 texture "buttons.png"
 crease 30.000002
 numvert 17

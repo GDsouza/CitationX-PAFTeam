@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?> 
 <!--
 ************************************************************************
-Cessna Citation X - Light Version
+Cessna Citation X - Complete Version
 Started Oct 2005  Syd Adams
 Completed 2015-2021 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 ************************************************************************
@@ -73,10 +73,7 @@ Completed 2015-2021 C. Le Moigne (clm76), C-Thiriot (PATTEN).
     </tutorials>
 
     <model>
-        <path>Aircraft/CitationX/Models/citationX.xml</path>
-        <livery>
-            <file type="string">blackstripes</file>
-        </livery>
+        <path>Models/citationX.xml</path>
         <gctest type="bool">1</gctest>
         <shadow-2d  type="bool" userarchive="y">0</shadow-2d>
         <shadeless  type="bool" userarchive="y">0</shadeless>
@@ -270,39 +267,39 @@ Completed 2015-2021 C. Le Moigne (clm76), C-Thiriot (PATTEN).
     </airport>
 
     <instrumentation>
-      <path>Aircraft/CitationX/Systems/instrumentation.xml</path>
+      <path>Systems/instrumentation.xml</path>
     </instrumentation>
 
     <systems>
-        <path>Aircraft/CitationX/Systems/systems.xml</path>
+        <path>Systems/systems.xml</path>
         <autopilot>
-          <path>Aircraft/CitationX/Systems/autopilot.xml</path>
+          <path>Systems/autopilot.xml</path>
         </autopilot>
         <autopilot n="100">
-          <path>Aircraft/CitationX/Systems/actuators.xml</path>
+          <path>Systems/actuators.xml</path>
         </autopilot>
         <autopilot n="101">
-          <path>Aircraft/CitationX/Systems/load-limit.xml</path>
+          <path>Systems/load-limit.xml</path>
         </autopilot>
         <autopilot n="102">
-            <path>Aircraft/CitationX/Systems/pressurization.xml</path>
+            <path>Systems/pressurization.xml</path>
         </autopilot>
         <property-rule n="100">
-            <path>Aircraft/CitationX/Systems/pfd.xml</path>
+            <path>Systems/pfd.xml</path>
         </property-rule>
         <property-rule n="101">
-            <path>Aircraft/CitationX/Systems/electrical-rules.xml</path>
+            <path>Systems/electrical-rules.xml</path>
         </property-rule>
         <property-rule n="102">
-            <path>Aircraft/CitationX/Systems/air-conditioning.xml</path>
+            <path>Systems/air-conditioning.xml</path>
         </property-rule>
         <property-rule n="103">
-            <path>Aircraft/CitationX/Systems/oxygen.xml</path>
+            <path>Systems/oxygen.xml</path>
         </property-rule>
     </systems>
 
     <sound>
-        <path>Aircraft/CitationX/Sounds/citationX-sound.xml</path>
+        <path>Sounds/citationX-sound.xml</path>
     </sound>
 
     <virtual-cockpit archive="y">true</virtual-cockpit>
@@ -331,7 +328,7 @@ Completed 2015-2021 C. Le Moigne (clm76), C-Thiriot (PATTEN).
     <menubar>
       <default>
         <menu n="10">
-          <label>Citation-X</label>
+          <label>Citation X</label>
           <enabled type="bool">true</enabled>
  
          <item>
@@ -362,7 +359,7 @@ Completed 2015-2021 C. Le Moigne (clm76), C-Thiriot (PATTEN).
   					<label>Ground Services</label>
 		        <binding>
       			  <command>nasal</command>
-      			  <script>var ground_services = gui.Dialog.new("sim/gui/dialogs/ground-services/dialog", "Aircraft/CitationX/Systems/ground-services.xml");
+      			  <script>var ground_services = gui.Dialog.new("sim/gui/dialogs/ground-services/dialog", "Systems/ground-services.xml");
 			   ground_services.open();</script>
       		  </binding>
       	  </item>
@@ -387,7 +384,7 @@ Completed 2015-2021 C. Le Moigne (clm76), C-Thiriot (PATTEN).
     </menubar>
 
     <help>
-        <title>Cessna Citation-X</title>
+        <title>Cessna Citation X</title>
         <line></line>
         <key>
             <name>Keypad Delete</name>
@@ -618,7 +615,7 @@ Completed 2015-2021 C. Le Moigne (clm76), C-Thiriot (PATTEN).
         <mode type="int">1</mode> <!--0=off,1=standby,2=TA-only,3=auto(TA/RA)-->
       </inputs>
 			<voice>
-				<file-prefix type="string">Aircraft/CitationX/Sounds/tcas/female/</file-prefix>
+				<file-prefix type="string">Sounds/tcas/female/</file-prefix>
 			</voice>
       <tfc n="0" type="bool">0</tfc>
       <tfc n="1" type="bool">0</tfc>
@@ -814,102 +811,102 @@ Completed 2015-2021 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 
   <nasal>
       <init>
-				<file>Aircraft/CitationX/Nasal/System_init/init.nas</file>
+				<file>Nasal/System_init/init.nas</file>
       </init>
       <apu>
-				<file>Aircraft/CitationX/Nasal/apu.nas</file>
+				<file>Nasal/apu.nas</file>
       </apu>
 			<atc>
-				<file>Aircraft/CitationX/Nasal/Spoken_ATC/init.nas</file>
+				<file>Nasal/Spoken_ATC/init.nas</file>
 			</atc>
 			<audio>
-				<file>Aircraft/CitationX/Models/Instruments/Audio/audio.nas</file>
+				<file>Models/Instruments/Audio/audio.nas</file>
 			</audio>
       <callsign>
-        <file>Aircraft/CitationX/Models/Callsign/callsign.nas</file>
+        <file>Models/Callsign/callsign.nas</file>
       </callsign>
 			<cdu>
-				<file>Aircraft/CitationX/Nasal/cdu.nas</file>
-				<file>Aircraft/CitationX/Nasal/cdu-pages.nas</file>
-				<file>Aircraft/CitationX/Nasal/holding-pattern.nas</file>
-				<file>Aircraft/CitationX/Nasal/procedure-turn.nas</file>
+				<file>Nasal/cdu.nas</file>
+				<file>Nasal/cdu-pages.nas</file>
+				<file>Nasal/holding-pattern.nas</file>
+				<file>Nasal/procedure-turn.nas</file>
 			</cdu>
       <citation>
-        <file>Aircraft/CitationX/Nasal/citationX.nas</file>
-        <file>Aircraft/CitationX/Nasal/electrical.nas</file>
-        <file>Aircraft/CitationX/Nasal/fuel.nas</file>
-        <file>Aircraft/CitationX/Nasal/flightdirector.nas</file>
-				<file>Aircraft/CitationX/Nasal/warnings.nas</file>
-		    <file>Aircraft/CitationX/Nasal/ground-services.nas</file>
+        <file>Nasal/citationX.nas</file>
+        <file>Nasal/electrical.nas</file>
+        <file>Nasal/fuel.nas</file>
+        <file>Nasal/flightdirector.nas</file>
+				<file>Nasal/warnings.nas</file>
+		    <file>Nasal/ground-services.nas</file>
       </citation>
       <charts>
-        <file>Aircraft/CitationX/Nasal/Charts/charts.nas</file>
+        <file>Nasal/Charts/charts.nas</file>
       </charts>
 			<checklist>
-				<file>Aircraft/CitationX/Nasal/checklist.nas</file>
+				<file>Nasal/checklist.nas</file>
 			</checklist>
 			<cvr>
-				<file>Aircraft/CitationX/Nasal/cvr.nas</file>
+				<file>Nasal/cvr.nas</file>
 			</cvr>
       <dialogs>
-        <file>Aircraft/CitationX/Nasal/dialogs.nas</file>
+        <file>Nasal/dialogs.nas</file>
       </dialogs>
       <eicas>
-				<file>Aircraft/CitationX/Models/Instruments/EICAS/eicas.nas</file>
+				<file>Models/Instruments/EICAS/eicas.nas</file>
       </eicas>
       <elec>
-				<file>Aircraft/CitationX/Models/Instruments/Elec/elec.nas</file>
+				<file>Models/Instruments/Elec/elec.nas</file>
       </elec>
 			<eng>
-				<file>Aircraft/CitationX/Models/Instruments/Engines/eng.nas</file>
-				<file>Aircraft/CitationX/Nasal/engines-fire.nas</file>
+				<file>Models/Instruments/Engines/eng.nas</file>
+				<file>Nasal/engines-fire.nas</file>
 			</eng>
 			<fms>
-        <file>Aircraft/CitationX/Nasal/fms.nas</file>
+        <file>Nasal/fms.nas</file>
 			</fms>
 			<hf>
-				<file>Aircraft/CitationX/Models/Instruments/HF/hf.nas</file>
-				<file>Aircraft/CitationX/Models/Instruments/HF/selcal.nas</file>
+				<file>Models/Instruments/HF/hf.nas</file>
+				<file>Models/Instruments/HF/selcal.nas</file>
 			</hf>
 			<irs>
-				<file>Aircraft/CitationX/Nasal/irs.nas</file>
+				<file>Nasal/irs.nas</file>
 			</irs>
 			<mfd>
-				<file>Aircraft/CitationX/Nasal/mfd.nas</file>
-				<file>Aircraft/CitationX/Models/Instruments/MFD/canvas/ndcanvas.nas</file>
+				<file>Nasal/mfd.nas</file>
+				<file>Models/Instruments/MFD/canvas/ndcanvas.nas</file>
 			</mfd>
       <par>
-				<file>Aircraft/CitationX/Nasal/PAR/main.nas</file>
+				<file>Nasal/PAR/main.nas</file>
       </par>
       <pfd>
-				<file>Aircraft/CitationX/Models/Instruments/PFD/pfd.nas</file>
+				<file>Models/Instruments/PFD/pfd.nas</file>
       </pfd>
 			<pressurization>
-				<file>Aircraft/CitationX/Nasal/pressurization.nas</file>
+				<file>Nasal/pressurization.nas</file>
 			</pressurization>
 			<procedures>
-				<file>Aircraft/CitationX/Nasal/Procedures/fms-db.nas</file>
-				<file>Aircraft/CitationX/Nasal/Procedures/fms-wp.nas</file>
-				<file>Aircraft/CitationX/Nasal/Procedures/fms-tp.nas</file>
-				<file>Aircraft/CitationX/Nasal/Procedures/fms-transition.nas</file>
+				<file>Nasal/Procedures/fms-db.nas</file>
+				<file>Nasal/Procedures/fms-wp.nas</file>
+				<file>Nasal/Procedures/fms-tp.nas</file>
+				<file>Nasal/Procedures/fms-transition.nas</file>
 			</procedures>
 			<rcu>
-				<file>Aircraft/CitationX/Models/Instruments/RCU/rcu.nas</file>
+				<file>Models/Instruments/RCU/rcu.nas</file>
 			</rcu>
 			<rmu>
-				<file>Aircraft/CitationX/Models/Instruments/RMU/rmu.nas</file>
+				<file>Models/Instruments/RMU/rmu.nas</file>
 			</rmu>
 			<tpre>
-				<file>Aircraft/CitationX/Models/Instruments/Air-conditioning/ac.nas</file>
+				<file>Models/Instruments/Air-conditioning/ac.nas</file>
 			</tpre>
 			<tyresmoke>
-				<file>Aircraft/CitationX/Nasal/tyresmoke.nas</file>
+				<file>Nasal/tyresmoke.nas</file>
 			</tyresmoke>
 			<vsd>
-				<file>Aircraft/CitationX/Nasal/vsd.nas</file> 
+				<file>Nasal/vsd.nas</file> 
 			</vsd>
 			<weather>
-				<file>Aircraft/CitationX/Nasal/weather.nas</file>
+				<file>Nasal/weather.nas</file>
 			</weather>
   </nasal>
 

@@ -61,7 +61,7 @@
     </animation>
 
     <effect>
-      <inherits-from>Aircraft/CitationX/Models/Effects/skin-reflect</inherits-from>
+      <inherits-from>Models/Effects/skin-reflect</inherits-from>
         <object-name>bouton1</object-name>
         <object-name>bouton2</object-name>
         <object-name>bouton3</object-name>

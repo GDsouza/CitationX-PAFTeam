@@ -244,17 +244,17 @@ var Pressur = {
 
   fast_update : func {
 	  me.update_alt();
-	  settimer(func me.fast_update(),0);
+	  settimer(func me.fast_update(), 0);
   },
 
   slow_update : func {
 	 me.update_mode();
-	  settimer(func me.slow_update(),10);
+	  settimer(func me.slow_update(), 10);
   },
 
   climb_desc : func {
 	  me.descend_detector();
-    settimer(func me.climb_desc(),20);
+    settimer(func me.climb_desc(), 20);
   },
 }; # end of Pressur
 

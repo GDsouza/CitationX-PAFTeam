@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- Canvas - Primary Flight Display -->
+<!-- C. Le Moigne (clm76) - 2019 -->
+
+<PropertyList>
+
+<path>pfd-screenL.ac</path>
+
+    <animation>
+      <type>select</type>
+      <object-name>screenL</object-name>
+      <condition>
+        <and>
+          <property>systems/electrical/outputs/pfd1</property>
+          <or>
+            <property>systems/electrical/outputs/iac1</property>
+            <property>systems/electrical/outputs/iac2</property>
+          </or>
+        </and>
+			</condition>
+    </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>screenL</object-name>
+		<condition>
+      <property>systems/electrical/outputs/pfd1</property>
+		</condition>
+    <emission>
+      <red>1</red>
+      <green>1</green>
+      <blue>1</blue>
+      <factor-prop>controls/lighting/pfd</factor-prop>
+    </emission>
+  </animation>
+
+</PropertyList>

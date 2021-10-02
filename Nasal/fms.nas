@@ -282,7 +282,6 @@ var FMS = {
 					append(v_tod,lastWp_dist);
 					append(v_tod,lastWp_alt);
 				}
-				
 				### Calculate intermediates altitudes for VSD ###
 				me.altCalc(tot_dist,i);
 			}
@@ -358,7 +357,7 @@ var FMS = {
             setprop(tg_climb,gs_calc);
           } else {
             if (getprop(gs_in_range) and getprop(dist_rem) <= 9.5
-                and !getprop(pcdr_active)) in_range = 1;
+                and !getprop(pcdr_active)) in_range = 1
 
                 ### Without GS ###
             else if (getprop(dist_rem) < 9 and !tod) {

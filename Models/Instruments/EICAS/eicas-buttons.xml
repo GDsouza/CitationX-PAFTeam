@@ -11,7 +11,7 @@
 
     <animation>
         <type>material</type>
-        <object-name>EICAS.group</object-name>
+        <object-name>EICAS.btn</object-name>
         <condition>
            	<property>systems/electrical/outputs/eicas</property>
         </condition>
@@ -19,7 +19,7 @@
             <red>1</red>
             <green>1</green>
             <blue>1</blue>
-            <factor-prop>controls/lighting/ctr-norm</factor-prop>
+            <factor-prop>controls/lighting/el-norm</factor-prop>
         </emission>
     </animation>
 

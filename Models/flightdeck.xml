@@ -537,4 +537,11 @@
       </action>
     </animation>
 
+   <!-- Lights -->
+    <model>
+        <name>Panel-Light</name>
+        <path>Models/Lights/cockpit-lights.xml</path>
+    </model>
+
+
 </PropertyList>

@@ -3,7 +3,7 @@ MATERIAL "ac3dmat1" rgb 1 1 1  amb 0.2 0.2 0.2  emis 1 1 1  spec 0.2 0.2 0.2  sh
 OBJECT world
 kids 1
 OBJECT poly
-name "screen_B"
+name "screenR_F"
 loc -0.000291146 0.0244335 0.000242049
 texture "transparent.png"
 crease 30.000002

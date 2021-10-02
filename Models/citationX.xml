@@ -19,7 +19,7 @@
 <!--
   <nasal>
       <load>
-          var livery_update = aircraft.livery_update.new("Aircraft/CitationX/Models/Liveries", 10);
+          var livery_update = aircraft.livery_update.new("Models/Liveries", 10);
       </load>
       <unload>
           livery_update.stop();
@@ -151,24 +151,6 @@
       <object-name>RHslat</object-name>
       <object-name>LHslat</object-name>
       <object-name>frtshock</object-name>
-  </animation>
-
-  <animation>
-      <type>shader</type>
-      <shader>chrome</shader>
-      <texture>chrome1.png</texture>
-      <object-name>Glass</object-name>
-  </animation>
-
-  <animation>
-      <type>select</type>
-      <object-name>Glass</object-name>
-      <condition>
-        <not-equals>
-          <property>sim/current-view/view-number</property>
-          <value>0</value>
-        </not-equals>
-      </condition>
   </animation>
 
   <animation>
@@ -794,7 +776,7 @@
       <object-name>FUdamper</object-name>
       <object-name>FLdamper</object-name>
       <property>gear/gear[0]/compression-m</property>
-      <factor>228.5</factor>
+      <factor>40</factor>
       <center>
           <x-m>-8.149</x-m>
           <y-m>0</y-m>
@@ -806,16 +788,16 @@
           <z>0</z>
       </axis>
   </animation>
-
+<!--
   <animation>
       <type>rotate</type>
       <object-name>FLdamper</object-name>
       <property>gear/gear[0]/compression-m</property>
-      <factor>228.5</factor>
+      <factor>10</factor>
       <center>
           <x-m>-7.949</x-m>
           <y-m>0</y-m>
-          <z-m>-1.619</z-m>
+          <z-m>-1.450</z-m>
       </center>
       <axis>
           <x>0</x>
@@ -823,10 +805,11 @@
           <z>0</z>
       </axis>
   </animation>
-
+-->
   <animation>
       <type>translate</type>
       <object-name>frtshock</object-name>
+      <object-name>FrtStrut1</object-name>
       <object-name>Nosewheel</object-name>
       <property>gear/gear[0]/compression-m</property>
       <axis>
@@ -929,6 +912,7 @@
   <animation>
       <type>rotate</type>
       <object-name>FrtStrut</object-name>
+      <object-name>FrtStrut1</object-name>
       <object-name>Nosewheel</object-name>
       <object-name>frtshock</object-name>
       <object-name>FUdamper</object-name>
@@ -965,9 +949,12 @@
       <object-name>FLdamper</object-name>
       <object-name>FUdamper</object-name>
       <object-name>frtshock</object-name>
+      <object-name>FrtStrut</object-name>
+      <object-name>FrtStrut1</object-name>
       <object-name>Nosewheel</object-name>
+      <object-name>Taxi.lights</object-name>
       <property>controls/gear/steering</property>
-      <factor>100</factor> <!-- old 60 -->
+      <factor>100</factor>
       <center>
           <x-m>-8.149</x-m>
           <y-m>0</y-m>
@@ -1281,23 +1268,87 @@
 
 <!-- Ext Lights -->
 
-  <effect>
-    <inherits-from>Effects/model-transparent</inherits-from>
-      <object-name>navlights.on</object-name>
-      <object-name>navlights.off</object-name>
-      <object-name>aft-navlight.on</object-name>
-      <object-name>aft-navlight.off</object-name>
-      <object-name>Bcn1</object-name>
-      <object-name>Bcn2</object-name>
-      <object-name>Taxi</object-name>
+  <model>
+      <name>landing-lights</name>
+      <path>Models/Lights/landing-lights.xml</path>
+  </model>
+
+  <animation>
+      <type>select</type>
       <object-name>Land.L</object-name>
       <object-name>Land.L1</object-name>
+      <condition>
+        <and>
+  				<property>controls/lighting/landing-light</property>
+          <greater-than>
+  				  <property>systems/electrical/left-main-bus-volts</property>
+            <value>10</value>
+          </greater-than>
+        </and>
+      </condition>
+  </animation>
+
+  <animation>
+      <type>select</type>
       <object-name>Land.R</object-name>
       <object-name>Land.R1</object-name>
       <condition>
-       <property>sim/rendering/rembrandt/enabled</property>
+        <and>
+  				<property>controls/lighting/landing-light[1]</property>
+          <greater-than>
+  				  <property>systems/electrical/right-main-bus-volts</property>
+            <value>10</value>
+          </greater-than>
+        </and>
       </condition>
-  </effect>
+  </animation>
+
+  <model>
+      <name>taxi-lights</name>
+      <path>Models/Lights/taxi-lights.xml</path>
+  </model>
+
+  <animation>
+      <type>select</type>
+      <object-name>Taxi.lights</object-name>
+      <condition>
+        <and>
+          <property>controls/lighting/taxi-light</property>
+          <greater-than>
+  				  <property>systems/electrical/right-main-bus-volts</property>
+            <value>10</value>
+          </greater-than>
+          <greater-than>
+            <property>gear/gear[0]/position-norm</property>
+            <value>0.2</value>
+          </greater-than>
+        </and>
+      </condition>
+  </animation>
+
+  <model>
+      <name>logo-lights</name>
+      <path>Models/Lights/logo-lights.xml</path>
+  </model>
+
+  <model>
+      <name>wings-inspect-lights</name>
+      <path>Models/Lights/wings-lights.xml</path>
+  </model>
+
+  <animation>
+      <type>select</type>
+      <object-name>navlights.on</object-name>
+      <object-name>navlight_L.cone</object-name>
+      <object-name>navlight_R.cone</object-name>
+      <object-name>aft-navlight.on</object-name>
+      <condition>
+        <and>
+          <property>controls/lighting/nav-lights</property>
+          <property>systems/electrical/outputs/nav-lights</property>
+        </and>
+      </condition>
+  </animation>
 
   <animation>
       <type>select</type>
@@ -1464,194 +1515,9 @@
   </animation>
 
   <animation>
-      <type>select</type>
-      <object-name>Taxi.lights</object-name>
-      <condition>
-        <and>
-          <property>controls/lighting/taxi-light</property>
-          <greater-than>
-  				  <property>systems/electrical/right-main-bus-volts</property>
-            <value>10</value>
-          </greater-than>
-          <greater-than>
-            <property>gear/gear[0]/position-norm</property>
-            <value>0.2</value>
-          </greater-than>
-        </and>
-      </condition>
-  </animation>
-
-  <animation>
-      <type>flash</type>
-      <object-name>Taxi.lights</object-name>
-      <center>
-          <x-m>-8.26</x-m>
-          <y-m>0</y-m>
-          <z-m>-1.236</z-m>
-      </center>
-      <axis>
-          <x>-1</x>
-          <y>0</y>
-          <z>0</z>
-      </axis>
-      <power>10</power>
-      <factor>2</factor>
-      <offset>0</offset>
-      <two-sides type="bool">false</two-sides>
-      <min>0.05</min>
-      <max>5</max>
-  </animation>
-
-  <animation>
-      <type>select</type>
-      <object-name>Land.L</object-name>
-      <condition>
-        <and>
-  				<property>controls/lighting/landing-light</property>
-          <greater-than>
-  				  <property>systems/electrical/left-main-bus-volts</property>
-            <value>10</value>
-          </greater-than>
-        </and>
-      </condition>
-  </animation>
-
-  <animation>
-      <type>select</type>
-      <object-name>Land.L1</object-name>
-      <condition>
-        <and>
-				  <property>controls/lighting/recog-state/state</property>
-          <not>
-  				  <property>controls/lighting/landing-light</property>
-          </not>
-          <greater-than>
-  				  <property>systems/electrical/left-main-bus-volts</property>
-            <value>10</value>
-          </greater-than>
-        </and>
-      </condition>
-  </animation>
-
-  <animation>
-      <type>flash</type>
-      <object-name>Land.L</object-name>
-      <center>
-          <x-m>-3.299</x-m>
-          <y-m>-1.185</y-m>
-          <z-m>-0.918</z-m>
-      </center>
-      <axis>
-          <x>-1</x>
-          <y>0</y>
-          <z>0</z>
-      </axis>
-      <power>1</power>
-      <factor>2</factor>
-      <offset>0</offset>
-      <two-sides type="bool">false</two-sides>
-      <min>0.05</min>
-      <max>5</max>
-  </animation>
-
-  <animation>
-      <type>flash</type>
-      <object-name>Land.L1</object-name>
-      <center>
-          <x-m>-3.299</x-m>
-          <y-m>-1.185</y-m>
-          <z-m>-0.918</z-m>
-      </center>
-      <axis>
-          <x>-1</x>
-          <y>0</y>
-          <z>0</z>
-      </axis>
-      <power>1</power>
-      <factor>0.8</factor>
-      <offset>0</offset>
-      <two-sides type="bool">false</two-sides>
-      <min>0.05</min>
-      <max>5</max>
-  </animation>
-
-  <animation>
-      <type>select</type>
-      <object-name>Land.R</object-name>
-      <condition>
-        <and>
-  				<property>controls/lighting/landing-light[1]</property>
-          <greater-than>
-  				  <property>systems/electrical/right-main-bus-volts</property>
-            <value>10</value>
-          </greater-than>
-        </and>
-      </condition>
-  </animation>
-
-  <animation>
-      <type>select</type>
-      <object-name>Land.R1</object-name>
-      <condition>
-        <and>
-				  <property>controls/lighting/recog-state/state</property>
-          <not>
-  				  <property>controls/lighting/landing-light[1]</property>
-          </not>
-          <greater-than>
-  				  <property>systems/electrical/right-main-bus-volts</property>
-            <value>10</value>
-          </greater-than>
-        </and>
-      </condition>
-  </animation>
-
-  <animation>
-      <type>flash</type>
-      <object-name>Land.R</object-name>
-      <center>
-          <x-m>-3.299</x-m>
-          <y-m>1.185</y-m>
-          <z-m>-0.918</z-m>
-      </center>
-      <axis>
-          <x>-1</x>
-          <y>0</y>
-          <z>0</z>
-      </axis>
-      <power>1</power>
-      <factor>2</factor>
-      <offset>0</offset>
-      <two-sides type="bool">false</two-sides>
-      <min>0.05</min>
-      <max>5</max>
-  </animation>
-
-  <animation>
-      <type>flash</type>
-      <object-name>Land.R1</object-name>
-      <center>
-          <x-m>-3.299</x-m>
-          <y-m>1.185</y-m>
-          <z-m>-0.918</z-m>
-      </center>
-      <axis>
-          <x>-1</x>
-          <y>0</y>
-          <z>0</z>
-      </axis>
-      <power>1</power>
-      <factor>0.8</factor>
-      <offset>0</offset>
-      <two-sides type="bool">false</two-sides>
-      <min>0.05</min>
-      <max>5</max>
-  </animation>
-
-  <animation>
       <name>shadeless</name>
       <condition>
-          <property>sim/model/shadeless</property>
+        <property>sim/model/shadeless</property>
       </condition>
       <type>material</type>
       <object-name>flightdeck</object-name>

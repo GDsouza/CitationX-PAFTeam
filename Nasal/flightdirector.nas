@@ -499,8 +499,6 @@ var update_nav = func {
     else if(left(navsrc,3) == "NAV") {
       ind = (navsrc == "NAV1" ? 0 : 1);
       in_range = getprop("instrumentation/nav["~ind~"]/in-range");
-      setprop("autopilot/locks/to-flag",getprop("instrumentation/nav["~ind~"]/to-flag"));
-      setprop("autopilot/locks/from-flag",getprop("instrumentation/nav["~ind~"]/from-flag"));
       if (getprop("instrumentation/nav/gs-in-range") 
         or getprop("instrumentation/nav[1]/gs-in-range")) setprop(gs_in_range,1);
       else setprop(gs_in_range,0);

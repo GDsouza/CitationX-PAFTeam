@@ -17,7 +17,7 @@ var checkVersion = func {
   }
 };
 
-aircraft.livery.init("Aircraft/CitationX/Models/Liveries");
+aircraft.livery.init("Models/Liveries");
 var FHmeter = aircraft.timer.new("/instrumentation/clock/flight-meter-sec",60,0); 
 var Chrono = [aircraft.timer.new("/instrumentation/mfd/chrono", 1,1),
              aircraft.timer.new("/instrumentation/mfd[1]/chrono", 1,1)];
@@ -228,7 +228,6 @@ var JetEngine = {
 setlistener("/sim/crashed", func(n){
     if(n.getValue()){
       screen.log.write("Crashhhh!", 1.0, 0.0, 0.0);
-
       # Instantaneous silence...
       Shutdown();
       setprop("engines/engine[1]/fan", 0);

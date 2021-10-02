@@ -13,7 +13,7 @@ var ENG = {
 
 		m.canvas.addPlacement({"node": "ENG.screen"});
 		m.eng = m.canvas.createGroup();
-		canvas.parsesvg(m.eng,"Aircraft/CitationX/Models/Instruments/Engines/eng.svg");
+		canvas.parsesvg(m.eng,"Models/Instruments/Engines/eng.svg");
 
     m.Fan = ["engines/engine/fan","engines/engine[1]/fan"]; # N1
     m.Itt = ["engines/engine/itt-norm","engines/engine[1]/itt-norm"]; # ITT

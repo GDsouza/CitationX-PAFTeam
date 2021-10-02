@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Citation X Cockpit Lighting using Compositor -->
+<!-- Only available with FG 2020 -->
+<!-- Christian Le Moigne (clm76) - 2021 -->
+
+<PropertyList>
+
+  <!-- Center -->
+
+    <light>
+        <name>panel-light-ctr</name>
+        <type>spot</type>
+        <position>
+            <x-m>-1.154</x-m>
+            <y-m>0</y-m>
+            <z-m>0.872</z-m>
+        </position>
+        <direction>
+            <x>0.0</x>
+            <y>0.0</y>
+            <z>-1.0</z>
+        </direction>
+        <ambient>
+            <r>1.00</r>
+            <g>0.95</g>
+            <b>0.95</b>
+            <a>0</a>
+        </ambient>
+        <diffuse>
+            <r>1.00</r>
+            <g>0.95</g>
+            <b>0.95</b>
+            <a>0</a>
+        </diffuse>
+        <specular>
+            <r>1.00</r>
+            <g>0.95</g>
+            <b>0.95</b>
+            <a>0</a>
+        </specular>
+        <dim-factor>
+            <property>controls/lighting/ctr</property>
+        </dim-factor>
+        <attenuation>
+            <c>1.0</c>
+            <l>5</l>
+            <q>20</q>
+        </attenuation>
+        <spot-cutoff>60</spot-cutoff>
+        <spot-exponent>2</spot-exponent>
+        <range-m>0.4</range-m>
+    </light>
+
+    <animation>
+        <type>select</type>
+        <object-name>panel-light-ctr</object-name>
+        <condition>
+          <greater-than>
+            <property>controls/lighting/ctr</property>
+            <value>0.001</value>
+          </greater-than>
+        </condition>
+    </animation>
+
+  <!-- Left -->
+
+    <light>
+        <name>panel-light-left</name>
+        <type>spot</type>
+        <position>
+            <x-m>-1.145</x-m>
+            <y-m>-0.399</y-m>
+            <z-m>0.814</z-m>
+        </position>
+        <direction>
+            <x>0.0</x>
+            <y>0.0</y>
+            <z>-1.0</z>
+        </direction>
+        <ambient>
+            <r>1.00</r>
+            <g>0.95</g>
+            <b>0.95</b>
+            <a>0</a>
+        </ambient>
+        <diffuse>
+            <r>1.00</r>
+            <g>0.95</g>
+            <b>0.95</b>
+            <a>0</a>
+        </diffuse>
+        <specular>
+            <r>1.00</r>
+            <g>0.95</g>
+            <b>0.95</b>
+            <a>0</a>
+        </specular>
+        <dim-factor>
+            <property>controls/lighting/lh</property>
+        </dim-factor>
+        <attenuation>
+            <c>1.0</c>
+            <l>5</l>
+            <q>20</q>
+        </attenuation>
+        <spot-cutoff>40</spot-cutoff>
+        <spot-exponent>2</spot-exponent>
+        <range-m>0.4</range-m>
+    </light>
+
+    <animation>
+        <type>select</type>
+        <object-name>panel-light-left</object-name>
+        <condition>
+          <greater-than>
+            <property>controls/lighting/lh</property>
+            <value>0.001</value>
+          </greater-than>
+        </condition>
+    </animation>
+
+  <!-- Right -->
+
+    <light>
+        <name>panel-light-right</name>
+        <type>spot</type>
+        <position>
+            <x-m>-1.145</x-m>
+            <y-m>0.399</y-m>
+            <z-m>0.815</z-m>
+        </position>
+        <direction>
+            <x>0.0</x>
+            <y>0.0</y>
+            <z>-1.0</z>
+        </direction>
+        <ambient>
+            <r>1.00</r>
+            <g>0.95</g>
+            <b>0.95</b>
+            <a>0</a>
+        </ambient>
+        <diffuse>
+            <r>1.00</r>
+            <g>0.95</g>
+            <b>0.95</b>
+            <a>0</a>
+        </diffuse>
+        <specular>
+            <r>1.00</r>
+            <g>0.95</g>
+            <b>0.95</b>
+            <a>0</a>
+        </specular>
+        <dim-factor>
+            <property>controls/lighting/rh</property>
+        </dim-factor>
+        <attenuation>
+            <c>1.0</c>
+            <l>5</l>
+            <q>20</q>
+        </attenuation>
+        <spot-cutoff>40</spot-cutoff>
+        <spot-exponent>2</spot-exponent>
+        <range-m>0.4</range-m>
+    </light>
+
+    <animation>
+        <type>select</type>
+        <object-name>panel-light-right</object-name>
+        <condition>
+          <greater-than>
+            <property>controls/lighting/rh</property>
+            <value>0.001</value>
+          </greater-than>
+        </condition>
+    </animation>
+
+</PropertyList>

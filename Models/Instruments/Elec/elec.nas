@@ -19,7 +19,7 @@ var Elec = {
 		});
 		m.canvas.addPlacement({"node": "elec.screen"});
 		m.apu = m.canvas.createGroup();
-		canvas.parsesvg(m.apu,"Aircraft/CitationX/Models/Instruments/Elec/elec.svg");
+		canvas.parsesvg(m.apu,"Models/Instruments/Elec/elec.svg");
     m.lh_amps = m.apu.getElementById("lh-amps").hide();
     m.rh_amps = m.apu.getElementById("rh-amps").hide();
     m.dc_volts = m.apu.getElementById("volts").hide();

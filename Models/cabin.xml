@@ -72,7 +72,7 @@
   </animation>
 
   <effect>
-    <inherits-from>Aircraft/CitationX/Models/Effects/skin-reflect</inherits-from>
+    <inherits-from>Models/Effects/skin-reflect</inherits-from>
     <object-name>Cabin-LightsSup</object-name>
     <object-name>Sphere</object-name>
     <object-name>seau</object-name>
@@ -123,18 +123,10 @@
     <object-name>block-annun.L</object-name>
   </effect>
 
-  <effect>
-    <inherits-from>Effects/model-transparent</inherits-from>
-    <object-name>Bouteille</object-name>
-    <condition>
-      <property>sim/rendering/rembrandt/enabled</property>
-    </condition>
-  </effect> 
-
 <!-- TELE -->
 
     <model>
-        <path>Aircraft/CitationX/Models/Instruments/TABLET/tele.xml</path>
+        <path>Models/Instruments/TABLET/tele.xml</path>
         <offsets>
             <x-m> -5.94715 </x-m>
             <y-m> -0.43929 </y-m>
@@ -147,7 +139,7 @@
 <!-- TABLETS -->
 
     <model>
-        <path>Aircraft/CitationX/Models/Instruments/TABLET/tablet.xml</path>
+        <path>Models/Instruments/TABLET/tablet.xml</path>
         <offsets>
             <x-m> -4.10196 </x-m>
             <y-m> -0.85682 </y-m>
@@ -156,7 +148,7 @@
         </offsets>
     </model>
     <model>
-        <path>Aircraft/CitationX/Models/Instruments/TABLET/tablet.xml</path>
+        <path>Models/Instruments/TABLET/tablet.xml</path>
         <offsets>
             <x-m> -4.10196 </x-m>
             <y-m>  0.85441 </y-m>
@@ -165,7 +157,7 @@
         </offsets>
     </model>
     <model>
-        <path>Aircraft/CitationX/Models/Instruments/TABLET/tablet.xml</path>
+        <path>Models/Instruments/TABLET/tablet.xml</path>
         <offsets>
             <x-m> -1.80114 </x-m>
             <y-m>  0.85441 </y-m>
@@ -174,7 +166,7 @@
         </offsets>
     </model>
     <model>
-        <path>Aircraft/CitationX/Models/Instruments/TABLET/tablet.xml</path>
+        <path>Models/Instruments/TABLET/tablet.xml</path>
         <offsets>
             <x-m> -1.80114 </x-m>
             <y-m> -0.85441 </y-m>
@@ -1250,7 +1242,7 @@
 
     <model>
         <name>Cabin-seats</name>
-        <path>Aircraft/CitationX/Models/Seats/cabin-seats.xml</path>
+        <path>Models/Seats/cabin-seats.xml</path>
         <offsets>
             <x-m> 0.00 </x-m>
             <y-m> 0.00 </y-m>

@@ -47,7 +47,7 @@ var RMU = {
 		  });
 		  m.rmu.addPlacement({"node": "RMU.screenL"});
 		  m.group = m.rmu.createGroup();
-		  canvas.parsesvg(m.group, "Aircraft/CitationX/Models/Instruments/RMU/rmu.svg");
+		  canvas.parsesvg(m.group, "Models/Instruments/RMU/rmu.svg");
     } else {
 		  m.rmu = canvas.new({
 			  "name": "RMU-R", 
@@ -57,7 +57,7 @@ var RMU = {
 		  });
 		  m.rmu.addPlacement({"node": "RMU.screenR"});
 		  m.group = m.rmu.createGroup();
-		  canvas.parsesvg(m.group, "Aircraft/CitationX/Models/Instruments/RMU/rmu.svg");
+		  canvas.parsesvg(m.group, "Models/Instruments/RMU/rmu.svg");
     }
 
 		m.cdr =	m.group.createChild("path")
@@ -71,7 +71,7 @@ var RMU = {
           .setVisible(1);
 
 		m.mem = m.rmu.createGroup();
-		canvas.parsesvg(m.mem, "Aircraft/CitationX/Models/Instruments/RMU/mem.svg");
+		canvas.parsesvg(m.mem, "Models/Instruments/RMU/mem.svg");
 		m.fra =	m.mem.createChild("path")
 					.moveTo(95,130)
 					.horiz(420)
@@ -85,7 +85,7 @@ var RMU = {
 		m.mem.setVisible(0);
 
 		m.test = m.rmu.createGroup();
-		canvas.parsesvg(m.test, "Aircraft/CitationX/Models/Instruments/RMU/test.svg");
+		canvas.parsesvg(m.test, "Models/Instruments/RMU/test.svg");
 		m.test.setVisible(0);
 
 		m.text = {};

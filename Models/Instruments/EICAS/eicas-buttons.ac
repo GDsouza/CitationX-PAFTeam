@@ -1,13 +1,10 @@
 AC3Db
 MATERIAL "panel" rgb 0.8 0.8 0.8  amb 1 1 1  emis 0.1 0.1 0.1  spec 1 1 1  shi 50  trans 0
 OBJECT world
-kids 1
-OBJECT group
-name "EICAS.group"
-loc 0 0 0.19138
-kids 7
+kids 2
 OBJECT poly
 name "EICAS.knob"
+loc 0 0 0.19138
 texture "buttons.png"
 crease 45.000000
 numvert 25
@@ -194,6 +191,10 @@ refs 4
 11 0.958737 0.438714
 23 0.802241 0.438714
 kids 0
+OBJECT group
+name "EICAS.btn"
+loc 0 0 0.19138
+kids 6
 OBJECT poly
 name "EICAS.btn0"
 texture "buttons.png"

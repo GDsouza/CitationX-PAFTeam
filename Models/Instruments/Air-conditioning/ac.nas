@@ -27,7 +27,7 @@ var AC = {
 		});
 		m.canvas.addPlacement({"node": "tpre.screen"});
 		m.ac = m.canvas.createGroup();
-		canvas.parsesvg(m.ac,"Aircraft/CitationX/Models/Instruments/Air-conditioning/ac.svg");
+		canvas.parsesvg(m.ac,"Models/Instruments/Air-conditioning/ac.svg");
     tmp = m.ac.getElementById("tpre");
 
     setprop(Ckpt_deg,21);

@@ -41,7 +41,7 @@ setDestination: func(icao='', rwy='', final=10, minSlope=0,glidepath=3) {
 			.apply_course_distance(RWY.heading + 180, 1+me.destination.final*NM2M-RWY.threshold)
 			.apply_course_distance(RWY.heading + 90, 3*NM2M);
 setprop("/gca/appgate-alt-fmt", sprintf("%i",math.round(gateAlt,100)));
- setprop("/gca/rwy-in-use", spell(rwy, 0));
+setprop("/gca/rwy-in-use", spell(rwy, 0));
 setprop("/gca/apt-name", airportinfo(icao).name);
 },
 

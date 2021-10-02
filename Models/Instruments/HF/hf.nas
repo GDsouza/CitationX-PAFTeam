@@ -30,7 +30,7 @@ var HF = {
 
 		m.canvas.addPlacement({"node": "HFscreen"});
 		m.HF = m.canvas.createGroup();
-		canvas.parsesvg(m.HF,"Aircraft/CitationX/Models/Instruments/HF/hf.svg");
+		canvas.parsesvg(m.HF,"Models/Instruments/HF/hf.svg");
     m.digit = {};
 		m.text = {};
 		m.text_dg = ["dg1","dg2","dg3","dg4","dg5","dg6"];

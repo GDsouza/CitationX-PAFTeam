@@ -16,7 +16,7 @@
   </animation>
 
     <effect>
-      <inherits-from>Aircraft/CitationX/Models/Effects/skin-reflect</inherits-from>
+      <inherits-from>Models/Effects/skin-reflect</inherits-from>
     <object-name>Seats</object-name>
     <object-name>Reg-Seats</object-name>
     <object-name>Reg-Ceintures</object-name>

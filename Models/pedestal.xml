@@ -6,7 +6,7 @@
 
     <model>
         <name>CDU0-screen</name>
-        <path>Models/Instruments/CDU/cdu-screen.xml</path>
+        <path>Models/Instruments/CDU/cdu-screenL.xml</path>
         <offsets>
             <x-m>0.088</x-m>
             <y-m>-0.082</y-m>
@@ -17,7 +17,7 @@
 
     <model>
         <name>CDU1-screen</name>
-        <path>Models/Instruments/CDU/cdu-screen.xml</path>
+        <path>Models/Instruments/CDU/cdu-screenR.xml</path>
         <offsets>
             <x-m>0.088</x-m>
             <y-m>0.090</y-m>
@@ -39,7 +39,7 @@
 
     <model>
         <name>CDU1</name>
-        <path>Models/Instruments/CDU/cdu.xml</path>
+        <path>Models/Instruments/CDU/cdu1.xml</path>
         <offsets>
             <x-m>0.088</x-m>
             <y-m>0.090</y-m>
@@ -90,7 +90,7 @@
 
     <model>
 				<name>IRS_L</name>
-        <path>Models/Instruments/IRS/irs.xml</path>
+        <path>Models/Instruments/IRS/irs-L.xml</path>
         <offsets>
             <x-m>0</x-m>
             <y-m>0</y-m>
@@ -101,7 +101,7 @@
 
     <model>
 				<name>IRS_R</name>
-        <path>Models/Instruments/IRS/irs.xml</path>
+        <path>Models/Instruments/IRS/irs-R.xml</path>
         <offsets>
             <x-m>0</x-m>
             <y-m>0.159</y-m>
@@ -112,7 +112,7 @@
 
     <model>
 				<name>IRSscreenL</name>
-        <path>Models/Instruments/IRS/irs-screen.xml</path>
+        <path>Models/Instruments/IRS/irs-screenL.xml</path>
         <offsets>
             <x-m>0.001</x-m>
             <y-m>0</y-m>
@@ -123,7 +123,7 @@
 
     <model>
 				<name>IRSscreenR</name>
-        <path>Models/Instruments/IRS/irs-screen.xml</path>
+        <path>Models/Instruments/IRS/irs-screenR.xml</path>
         <offsets>
             <x-m>0.001</x-m>
             <y-m>0.159</y-m>
@@ -1429,7 +1429,7 @@
       <binding>
         <condition>
           <equals>
-            <property>autopilot/settings/nav-source</property>
+            <property>instrumentation/pfd/source</property>
             <value>NAV1</value>
           </equals>
         </condition>
@@ -1440,7 +1440,7 @@
       <binding>
         <condition>
           <equals>
-            <property>autopilot/settings/nav-source</property>
+            <property>instrumentation/pfd/source</property>
             <value>NAV2</value>
           </equals>
         </condition>

@@ -205,7 +205,7 @@
 		  </signal>
 		  <signal>
 		    <type>bool</type>
-				<property type="string">controls/lighting/wing-lights</property>
+				<property type="string">controls/lighting/wings-lights</property>
 		  </signal>
 		  <signal>
 		    <type>int8</type>

@@ -3,7 +3,7 @@ MATERIAL "ac3dmat14" rgb 0.8 0.8 0.8  amb 0.2 0.2 0.2  emis 1 1 1  spec 0.2 0.2 
 OBJECT world
 kids 1
 OBJECT poly
-name "chklist.screen"
+name "chklist.screenL"
 loc -7.862e-16 0.0141039 -0.000122768
 texture "transparent.png"
 crease 45.000000

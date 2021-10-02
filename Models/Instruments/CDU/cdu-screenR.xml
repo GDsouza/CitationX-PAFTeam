@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!--  Citation X - Canvas CDU -->
+<!--   C.Le Moigne (clm76) - 2017 -->
+
+
+<PropertyList>
+
+<path>cdu-screenR.ac</path>
+
+  <animation>
+    <type>select</type>
+    <object-name>CDU.screenR</object-name>
+		<condition>
+      <property>systems/electrical/outputs/fms2</property>
+		</condition>
+    </animation>
+
+</PropertyList>

@@ -4,7 +4,7 @@ OBJECT world
 kids 7
 OBJECT poly
 name "nav1.base"
-loc 0.0011325 0.170531 0.320406
+loc 0.0011325 0.170531 0.746585
 texture "nav.png"
 crease 45.000000
 numvert 8
@@ -55,7 +55,7 @@ refs 4
 kids 0
 OBJECT poly
 name "knobs.circles"
-loc 0.0011694 0.3233 0.00162277
+loc 0.0011694 0.3233 0.427802
 texture "nav.png"
 crease 30.000002
 numvert 96
@@ -495,7 +495,7 @@ refs 4
 kids 0
 OBJECT poly
 name "RIC1.alt"
-loc 0.0055524 0.323106 0.00144476
+loc 0.0055524 0.323106 0.427624
 texture "nav.png"
 crease 40.000000
 numvert 25
@@ -684,7 +684,7 @@ refs 3
 kids 0
 OBJECT poly
 name "RIC1.crs"
-loc 0.0055155 0.323173 0.0368228
+loc 0.0055155 0.323173 0.463002
 texture "nav.png"
 crease 40.000000
 numvert 25
@@ -873,7 +873,7 @@ refs 3
 kids 0
 OBJECT poly
 name "RIC1.hdg"
-loc 0.0055155 0.323173 -0.0333232
+loc 0.0055155 0.323173 0.392856
 texture "nav.png"
 crease 40.000000
 numvert 25
@@ -1062,7 +1062,7 @@ refs 4
 kids 0
 OBJECT poly
 name "nav1.labels"
-loc 0.146719 0.941065 -0.0772232
+loc 0.146719 0.941065 0.348956
 texture "nav.png"
 crease 30.000002
 numvert 12
@@ -1103,7 +1103,7 @@ refs 4
 kids 0
 OBJECT poly
 name "nav1.screws"
-loc 0.0005322 0.0329736 0.153542
+loc 0.0005322 0.0329736 0.579721
 texture "nav.png"
 crease 30.000002
 numvert 80

@@ -23,10 +23,12 @@ var turn_diam = nil;
 var wp1 = nil;
 var wp2 = nil;
 
-var p_activ = "instrumentation/cdu/pcdr/active";
+var p_activ = ["instrumentation/cdu/pcdr/active",
+               "instrumentation/cdu[1]/pcdr/active"];
 var fms = "autopilot/settings/nav-source";
 var wp = "autopilot/route-manager/route/wp[";
-var p_path = "instrumentation/cdu/pcdr/";
+var p_path = ["instrumentation/cdu/pcdr/",
+              "instrumentation/cdu[1]/pcdr/"];
 var bank = "autopilot/settings/bank-limit";
 
 var Pcdr = {
@@ -35,12 +37,12 @@ var Pcdr = {
     return m;
   }, # end of new
   
-  listen : func {
-		setlistener(p_activ, func(n) {
+  listen : func(x) {
+		setlistener(p_activ[x], func(n) {
       if (n.getValue()) {
         phase = 0;
-        me.pcdr_calc();
-        me.plot_pcdr();
+        me.pcdr_calc(x);
+        me.plot_pcdr(x);
       }
       setprop("autopilot/locks/pcdr-turn-active",n.getValue());
     },0,0);
@@ -54,11 +56,11 @@ var Pcdr = {
   #                                 #
   ###################################
 
-  pcdr_calc : func {
-	  p_turn = getprop(p_path ~"turn");
-	  p_inbound = getprop(p_path ~"inbound");
+  pcdr_calc : func(x) {
+	  p_turn = getprop(p_path[x] ~"turn");
+	  p_inbound = getprop(p_path[x] ~"inbound");
     p_outbound = geo.normdeg(p_inbound + 180);
-	  wpt = getprop(p_path ~"wpt");
+	  wpt = getprop(p_path[x] ~"wpt");
 	  left0 = geo.normdeg(p_outbound - 45);
 	  right0 = geo.normdeg(p_outbound + 45);
     x0 = getprop(wp~wpt~"]/longitude-deg");
@@ -66,7 +68,7 @@ var Pcdr = {
 
     coord = geo.Coord.new();
     coord.set_latlon(y0,x0);
-    coord.apply_course_distance(p_outbound,getprop(p_path~"dist")*1852);
+    coord.apply_course_distance(p_outbound,getprop(p_path[x]~"dist")*1852);
     x1 = coord.lon();
     y1 = coord.lat();
 
@@ -87,7 +89,8 @@ var Pcdr = {
 
   }, # end of procedure_calc
 
-  plot_pcdr : func {
+
+  plot_pcdr : func(x) {
     fp = flightplan();
     fp.getWP(wpt);
     fp.getWP(wpt);
@@ -102,7 +105,8 @@ var Pcdr = {
 
 var setl_pcdr = setlistener("/sim/signals/fdm-initialized", func {
   var turn = Pcdr.new();
-  turn.listen();
+  turn.listen(0);
+  turn.listen(1);
 	removelistener(setl_pcdr);
 },0,0);
 

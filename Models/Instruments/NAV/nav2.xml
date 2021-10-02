@@ -2,87 +2,87 @@
 
 <PropertyList>
 
-<path>nav.ac</path>
+<path>nav2.ac</path>
 
-<!-- NAV1 Controls -->
+<!-- NAV2 Controls -->
 
   <animation>
-    <type>select</type>
-    <condition>
-      <property>sim/model/nav1-visible</property>
-    </condition>
-    <object-name>nav1.base</object-name>
-    <object-name>nav1.labels</object-name>
-    <object-name>RIC1.crs</object-name>
-    <object-name>RIC1.hdg</object-name>
-    <object-name>RIC1.alt</object-name>
-    <object-name>knobs.circles</object-name>
-    <object-name>nav1.screws</object-name>
+      <type>select</type>
+      <condition>
+          <property>sim/model/nav2-visible</property>
+      </condition>
+      <object-name>nav2.base</object-name>
+      <object-name>knobs.circles</object-name>
+      <object-name>RIC2.crs</object-name>
+      <object-name>RIC2.alt</object-name>
+      <object-name>RIC2.hdg</object-name>
+      <object-name>nav2.labels</object-name>
+      <object-name>nav2.screws</object-name>
   </animation>
 
   <animation>
     <type>material</type>
-    <object-name>nav1.base</object-name>
-    <object-name>nav1.screws</object-name>
-    <object-name>RIC1.alt</object-name>
+    <object-name>nav2.base</object-name>
+    <object-name>nav2.screws</object-name>
+    <object-name>RIC2.alt</object-name>
     <emission>
-      <red>1</red>
-      <green>1</green>
-      <blue>1</blue>
-      <factor-prop>controls/lighting/flood-norm</factor-prop>
+        <red>1</red>
+        <green>1</green>
+        <blue>1</blue>
+        <factor-prop>controls/lighting/flood-norm</factor-prop>
     </emission>
   </animation>
 
   <animation>
     <type>material</type>
-    <object-name>nav1.labels</object-name>
+    <object-name>RIC2.crs</object-name>
+    <object-name>RIC2.hdg</object-name>
+    <emission>
+        <red>1</red>
+        <green>1</green>
+        <blue>1</blue>
+        <factor-prop>controls/lighting/rh-norm</factor-prop>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>nav2.labels</object-name>
     <object-name>knob.circles</object-name>
     <emission>
-      <red>1</red>
-      <green>1</green>
-      <blue>1</blue>
-      <factor-prop>controls/lighting/el-norm</factor-prop>
-    </emission>
-  </animation>
-
-  <animation>
-    <type>material</type>
-    <object-name>RIC1.crs</object-name>
-    <object-name>RIC1.hdg</object-name>
-   <emission>
-      <red>1</red>
-      <green>1</green>
-      <blue>1</blue>
-      <factor-prop>controls/lighting/lh-norm</factor-prop>
+        <red>1</red>
+        <green>1</green>
+        <blue>1</blue>
+        <factor-prop>controls/lighting/el-norm</factor-prop>
     </emission>
   </animation>
 
 	<animation>
     <type>pick</type>
-    <object-name>RIC1.crs</object-name>
+    <object-name>RIC2.crs</object-name>
     <action>
       <button>0</button>
       <repeatable>false</repeatable>
       <binding>
         <condition>
           <equals>
-            <property>autopilot/settings/nav-source</property>
+            <property>instrumentation/pfd[1]/source</property>
             <value>NAV1</value>
           </equals>
         </condition>
         <command>property-assign</command>
-          <property>instrumentation/pfd/selected-deg</property>
+          <property>instrumentation/pfd[1]/selected-deg</property>
           <property>instrumentation/nav/heading-deg</property>
       </binding>
       <binding>
         <condition>
           <equals>
-            <property>autopilot/settings/nav-source</property>
+            <property>instrumentation/pfd[1]/source</property>
             <value>NAV2</value>
           </equals>
         </condition>
         <command>property-assign</command>
-          <property>instrumentation/pfd/selected-deg</property>
+          <property>instrumentation/pfd[1]/selected-deg</property>
           <property>instrumentation/nav[1]/heading-deg</property>
       </binding>
     </action>
@@ -91,7 +91,7 @@
       <repeatable>true</repeatable>
       <binding>
         <command>property-adjust</command>
-        <property>instrumentation/pfd/selected-deg</property>
+        <property>instrumentation/pfd[1]/selected-deg</property>
         <step>1</step>
         <min>0</min>
         <max>360</max>
@@ -103,32 +103,32 @@
       <repeatable>true</repeatable>
       <binding>
         <command>property-adjust</command>
-        <property>instrumentation/pfd/selected-deg</property>
+        <property>instrumentation/pfd[1]/selected-deg</property>
         <step>-1</step>
         <min>0</min>
         <max>360</max>
         <wrap>1</wrap>
       </binding>
-     </action>
+    </action>
     <hovered>
 			<binding>
- 			  <command>set-tooltip</command>
-			  <tooltip-id>CRS 1</tooltip-id>
+			  <command>set-tooltip</command>
+			  <tooltip-id>CRS 2</tooltip-id>
     	  <label>CRS : %.0f</label>
-    	  <property>instrumentation/pfd/selected-deg</property>
+    	  <property>instrumentation/pfd[1]/selected-deg</property>
  	    </binding>
 	  </hovered>
 	</animation>
 
-  <animation>
+	<animation>
     <type>pick</type>
-    <object-name>RIC1.hdg</object-name>
+    <object-name>RIC2.hdg</object-name>
     <action>
       <button>0</button>
       <repeatable>false</repeatable>
       <binding>
         <command>property-assign</command>
-        <property>instrumentation/pfd/heading-deg</property>
+        <property>instrumentation/pfd[1]/heading-deg</property>
         <property>orientation/heading-magnetic-deg</property>
       </binding>
     </action>
@@ -137,7 +137,7 @@
       <repeatable>true</repeatable>
       <binding>
         <command>property-adjust</command>
-        <property>instrumentation/pfd/heading-deg</property>
+        <property>instrumentation/pfd[1]/heading-deg</property>
         <step>1</step>
         <min>0</min>
         <max>360</max>
@@ -149,7 +149,7 @@
       <repeatable>true</repeatable>
       <binding>
         <command>property-adjust</command>
-        <property>instrumentation/pfd/heading-deg</property>
+        <property>instrumentation/pfd[1]/heading-deg</property>
         <step>-1</step>
         <min>0</min>
         <max>360</max>
@@ -159,22 +159,25 @@
     <hovered>
       <binding>
         <command>set-tooltip</command>
-        <tooltip-id>HDG 1</tooltip-id>
+        <tooltip-id>HDG 2</tooltip-id>
         <label>HDG : %.0f</label>
-        <property>instrumentation/pfd/heading-deg</property>
+        <property>instrumentation/pfd[1]/heading-deg</property>
       </binding>
     </hovered>
   </animation>
 
   <animation>
     <type>pick</type>
-    <object-name>RIC1.alt</object-name>
+    <object-name>RIC2.alt</object-name>
+    <condition>
+      <property>instrumentation/pfd/pfd-sel</property>
+    </condition>
     <action>
       <button>0</button>
       <repeatable>false</repeatable>
       <binding>
         <command>property-assign</command>
-        <property>autopilot/settings/asel</property>
+        <property>instrumentation/pfd[1]/asel</property>
         <value>100</value>
       </binding>
     </action>
@@ -183,7 +186,7 @@
       <repeatable>true</repeatable>
       <binding>
          <command>property-adjust</command>
-          <property>autopilot/settings/asel</property>
+          <property>instrumentation/pfd[1]/asel</property>
           <step>5</step>
           <min>0</min>
           <max>510</max>
@@ -195,7 +198,7 @@
       <repeatable>true</repeatable>
       <binding>
         <command>property-adjust</command>
-        <property>autopilot/settings/asel</property>
+        <property>instrumentation/pfd[1]/asel</property>
         <step>-5</step>
         <min>0</min>
         <max>510</max>
@@ -205,9 +208,9 @@
     <hovered>
       <binding>
         <command>set-tooltip</command>
-        <tooltip-id>ALT 1</tooltip-id>
+        <tooltip-id>ALT 2</tooltip-id>
         <label>ALT : %.0f</label>
-        <property>autopilot/settings/asel</property>
+        <property>instrumentation/pfd[1]/asel</property>
       </binding>
     </hovered>
   </animation>

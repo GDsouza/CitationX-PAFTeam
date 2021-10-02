@@ -3,7 +3,7 @@ MATERIAL "CDU" rgb 1 1 1  amb 0.204 0.204 0.204  emis 1 1 1  spec 0.204 0.204 0.
 OBJECT world
 kids 1
 OBJECT poly
-name "CDU.screen"
+name "CDU.screenL"
 loc 0.000929 0 0
 texture "transparent.png"
 crease 30.000002

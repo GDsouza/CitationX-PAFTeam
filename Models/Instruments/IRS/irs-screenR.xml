@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- Inertial Reference System -->
+<!-- C.Le Moigne (clm76) - Avril 2017 -->
+
+<PropertyList>
+
+    <path>irs-screenR.ac</path>
+
+</PropertyList>

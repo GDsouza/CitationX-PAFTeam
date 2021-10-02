@@ -2,11 +2,11 @@
 
 <PropertyList>
 
-<path>screen-front.ac</path>
+<path>screenL-back.ac</path>
 
   <animation>
     <type>material</type>
-    <object-name>screen_F</object-name>
+    <object-name>screenL_B</object-name>
     <condition>
       <property>systems/electrical/outputs/mfd1</property>
     </condition>

@@ -26,7 +26,7 @@ var RCU = {
 
 		m.canvas.addPlacement({"node": "RCU.screen"});
 		m.rcu = m.canvas.createGroup();
-		canvas.parsesvg(m.rcu,"Aircraft/CitationX/Models/Instruments/RCU/rcu.svg");
+		canvas.parsesvg(m.rcu,"Models/Instruments/RCU/rcu.svg");
 		m.text = {};
 		m.text_val = ["comFreq","navFreq","navAudio","sq","tx",
 									"comInd","navInd","emrg"];
