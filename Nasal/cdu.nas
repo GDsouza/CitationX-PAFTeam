@@ -24,7 +24,6 @@ var flyover = ["instrumentation/cdu/flyover",
                  "instrumentation/cdu[1]/flyover"];
 var hold_activ = ["instrumentation/cdu/hold/active",
                   "instrumentation/cdu[1]/hold/active"];
-var hold_exit = "autopilot/locks/hold/enable-exit";
 var hold_path = ["instrumentation/cdu/hold/",
                  "instrumentation/cdu[1]/hold/"];
 var irs_align = ["instrumentation/irs/align",
@@ -519,9 +518,8 @@ var cduMain = {
                 setprop(pcdr_activ[x],0);
                 cduInput = "";
               } else if (getprop(hold_activ[x])) {
-                if (!getprop(hold_exit)) {
+                if (!getprop('autopilot/locks/hold/enable-exit')) {
                   setprop(hold_activ[x],0);
-                  setprop(hold_exit,0);
                   cduInput = "";
                 } else cduInput = "*INVALID DELETE*";
               } else cduInput = "*FLT PLAN CLOSED*";

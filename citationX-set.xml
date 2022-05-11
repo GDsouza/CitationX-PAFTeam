@@ -9,7 +9,7 @@ Completed 2015-2021 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 <PropertyList>
   <sim>
     <description>Cessna Citation X (Yasim)</description>
-    <author>Syd Adams (creator), C.Le Moigne (clm76), C.Thiriot (PATTEN), F-ORKI, Laurent (F5SLQ)</author>
+    <author>Syd Adams (creator), C.Le Moigne (clm76), C.Thiriot (PATTEN), F-ORKI, Laurent (F5SLQ) - Version 05/05/2022</author>
     <status>devel</status>
     <rating>
         <FDM type="int">4</FDM>
@@ -903,7 +903,7 @@ Completed 2015-2021 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 				<file>Nasal/tyresmoke.nas</file>
 			</tyresmoke>
 			<vsd>
-				<file>Nasal/vsd.nas</file> 
+				<file>Nasal/vsd.nas</file>
 			</vsd>
 			<weather>
 				<file>Nasal/weather.nas</file>

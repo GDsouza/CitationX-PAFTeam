@@ -111,7 +111,7 @@
       <output>autopilot/internal/roll-filter</output>
       <config>
           <Kp>-1.5</Kp>
-          <Ki>0.0</Ki>
+          <Ki>0</Ki>
           <min>
             <property>autopilot/settings/bank-limit</property>
             <scale>-1</scale>
@@ -121,6 +121,25 @@
           </max>
       </config>
   </pi-simple-controller>
+
+  <filter>
+      <name>Roll command</name>
+      <type>noise-spike</type>
+      <debug>false</debug>
+      <feedback-if-disabled>true</feedback-if-disabled>
+      <initialize-to>output</initialize-to>
+      <enable>
+        <condition>
+          <equals>  
+             <property>autopilot/locks/FD-status</property>
+            <value>1</value>
+          </equals>
+        </condition>
+      </enable>
+      <input>autopilot/internal/roll-filter</input>
+      <output>autopilot/internal/roll-bars</output>
+      <max-rate-of-change>10</max-rate-of-change>
+  </filter>
 
   <pid-controller>
       <name>Aileron Control</name>
@@ -134,7 +153,7 @@
         </condition>
       </enable>
       <input>orientation/roll-deg</input>
-      <reference>autopilot/internal/roll-filter</reference>
+      <reference>autopilot/internal/roll-bars</reference>
       <output>controls/flight/aileron-trim</output>
       <config>
           <Kp>0.50</Kp>
@@ -635,6 +654,7 @@
           <or>
             <property>autopilot/locks/speed-ctrl</property>
             <property>autopilot/settings/fms</property>
+            <property>autopilot/locks/hold/enable-exit</property>
           </or>
 				</and>
 			</condition>

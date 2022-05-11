@@ -127,7 +127,7 @@ var FMS = {
 		},0,1);
 
 		setlistener(fms, func(n) {
-      if (!n.getValue()) {
+      if (!n.getValue() and !getprop('autopilot/locks/hold/active')) {
         setprop(tg_alt,getprop(cr_asel)*100);
         setprop("autopilot/settings/fps-limit",-40);
       }

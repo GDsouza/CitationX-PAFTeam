@@ -67,7 +67,7 @@ var Hold = {
         me.pattern_calc(x);
         enable_update = 1;
         me.update(x);
-       # me.plot_hold(x); for test
+       # me.plot_hold(x); #for test
       }
     },0,0);
   }, # end of listen

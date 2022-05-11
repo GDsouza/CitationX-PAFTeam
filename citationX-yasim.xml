@@ -100,53 +100,53 @@ Fuel 12938 lbs jet
 
 <!--    Engine mounts      -->
   <mstab x="-2.5" y="0.8" z="0.72" length="1.0" chord="3.0" incidence="2.0">
-    </mstab>
+  </mstab>
 
 <!--    gear drag      -->
   <mstab x="-1.5" y="1.7" z="-1.0" length="0.3" chord="0.5">
-  <flap0 start="0" end="1" lift="0" drag="6"/>
+    <flap0 start="0" end="1" lift="0" drag="6"/>
     <control-input axis="/gear/gear[0]/position-norm" control="FLAP0"/>
-    </mstab>
+  </mstab>
 
 <!--   cabin door      -->
   <vstab x="0" y="0" z="-1.0" length="0.01" chord="0.01">
-  <flap0 start="0" end="1" lift="0" drag="1"/>
+    <flap0 start="0" end="1" lift="0" drag="1"/>
     <control-input axis="controls/cabin-door/open" control="FLAP0"/>
     <control-output control="FLAP0" prop="/controls/cabin-door/position-norm"/>
     <control-speed control="FLAP0" transition-time="3"/>
-    </vstab>
+  </vstab>
 
 <!--   apu      -->
   <vstab x="-6" y="0" z="0.5" length="0.01" chord="0.01">
-  <flap0 start="0" end="1" lift="0" drag="0"/>
+    <flap0 start="0" end="1" lift="0" drag="0"/>
     <control-input axis="/controls/APU/running" control="FLAP0"/>
     <control-output control="FLAP0" prop="controls/APU/rpm"/>
     <control-speed control="FLAP0" transition-time="30"/>
-    </vstab>
+  </vstab>
 
 <!--    Total fuel = 12931 lbs   -->
-    <tank x="0.7" y="1.0" z="-0.9" capacity="3510" jet="true"/>
-    <tank x="0.7" y="-1.0" z="-0.9" capacity="3510" jet="true"/>
-    <tank x="0.8" y="0.0" z="-1.2" capacity="2990" jet="true"/>
-    <tank x="0.8" y="0.0" z="-1.2" capacity="2990" jet="true"/>
+  <tank x="0.7" y="1.0" z="-0.9" capacity="3510" jet="true"/>
+  <tank x="0.7" y="-1.0" z="-0.9" capacity="3510" jet="true"/>
+  <tank x="0.8" y="0.0" z="-1.2" capacity="2990" jet="true"/>
+  <tank x="0.8" y="0.0" z="-1.2" capacity="2990" jet="true"/>
 
-    <gear x="8.014" y="0.00" z="-2.2" compression="0.2" spring="0.2">
+  <gear x="8.014" y="0.00" z="-2.2" compression="0.2" spring="0.2">
     <control-input axis="/controls/gear/steering" control="STEER" invert="true"/>
     <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
     <control-output control="EXTEND" prop="/gear/gear[0]/position-norm"/>
     <control-speed control="EXTEND" transition-time="5"/>
-    </gear>
+  </gear>
 
-    <gear x="-1.5" y="1.7" z="-2.55" compression=".5" spring="0.5">
+  <gear x="-1.5" y="1.7" z="-2.55" compression=".5" spring="0.5">
     <control-input axis="/controls/gear/brake-left" control="BRAKE"/>
     <control-input axis="/controls/gear/brake-parking" control="BRAKE"/>
     <control-input axis="/controls/gear/emer-brake" control="BRAKE"/>
     <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
     <control-speed control="EXTEND" transition-time="5"/>
     <control-output control="EXTEND" prop="/gear/gear[1]/position-norm"/>
-  	</gear>
+	</gear>
 
-    <gear x="-1.5" y="-1.7" z="-2.55" compression=".5" spring="0.5">
+  <gear x="-1.5" y="-1.7" z="-2.55" compression=".5" spring="0.5">
     <control-input axis="/controls/gear/brake-right" control="BRAKE"/>
     <control-input axis="/controls/gear/brake-parking" control="BRAKE"/>
     <control-input axis="/controls/gear/emer-brake" control="BRAKE"/>
@@ -161,8 +161,8 @@ Rolls Royce AE3007C1
 Thrust Fuel flow(TSFC) 0.3222 kg/s, 0.3187 kg/s with winglets
 -->
   <jet x="-2.5" y="1.5" z="0.72" mass="1700" thrust="7000"
-  tsfc="0.3187" epr="23" rotate="0.0" egt="840" spool-time="2"
-  n1-idle="40" n1-max="103.8" n2-idle="56" n2-max="104.3">
+    tsfc="0.3187" epr="23" rotate="0.0" egt="840" spool-time="2"
+    n1-idle="40" n1-max="103.8" n2-idle="56" n2-max="104.3">
     <control-input axis="/controls/engines/engine[0]/throttle" control="THROTTLE"/>
     <control-input axis="/controls/engines/engine[0]/reverser" control="REVERSE_THRUST"/> 
 <!--    <control-output control="REVERSE_THRUST" prop="surface-positions/reverser-norm"/> -->
@@ -171,8 +171,8 @@ Thrust Fuel flow(TSFC) 0.3222 kg/s, 0.3187 kg/s with winglets
   </jet>
 
   <jet x="-2.5" y="-1.5" z="0.72" mass="1700" thrust="7000"
-  tsfc="0.3187" epr="23" rotate="0.0" egt="840" spool-time="2"
-  n1-idle="40" n1-max="103.8" n2-idle="56" n2-max="104.3">
+    tsfc="0.3187" epr="23" rotate="0.0" egt="840" spool-time="2"
+    n1-idle="40" n1-max="103.8" n2-idle="56" n2-max="104.3">
     <control-input axis="/controls/engines/engine[1]/throttle" control="THROTTLE"/>
     <control-input axis="/controls/engines/engine[1]/reverser" control="REVERSE_THRUST"/>
 <!--    <control-output control="REVERSE_THRUST" prop="surface-positions/reverser-norm[1]"/> -->
@@ -180,28 +180,29 @@ Thrust Fuel flow(TSFC) 0.3222 kg/s, 0.3187 kg/s with winglets
     <actionpt x="-5.0" y="-1.5" z="0.72"/>
   </jet>
 
-<thruster x="0"  y="0.00" z="0" vx="1" vy="0" vz="0" thrust="0">
-    <control-input axis="engines/engine/fan" control="THROTTLE"
-    src0="0" src1="40" dst0="0" dst1="1"/>
-    <control-output control="THROTTLE" prop="systems/hydraulics/psi-norm[0]"/>
-    <control-speed control="THROTTLE" transition-time="5"/>
-</thruster>
+  <thruster x="0"  y="0.00" z="0" vx="1" vy="0" vz="0" thrust="0">
+      <control-input axis="engines/engine/fan" control="THROTTLE"
+      src0="0" src1="40" dst0="0" dst1="1"/>
+      <control-output control="THROTTLE" prop="systems/hydraulics/psi-norm[0]"/>
+      <control-speed control="THROTTLE" transition-time="5"/>
+  </thruster>
 
-<thruster x="0"  y="0.00" z="0" vx="1" vy="0" vz="0" thrust="0">
-    <control-input axis="engines/engine[1]/fan" control="THROTTLE"
-    src0="0" src1="40" dst0="0" dst1="1"/>
-    <control-output control="THROTTLE" prop="systems/hydraulics/psi-norm[1]"/>
-    <control-speed control="THROTTLE" transition-time="5"/>
-</thruster>
+  <thruster x="0"  y="0.00" z="0" vx="1" vy="0" vz="0" thrust="0">
+      <control-input axis="engines/engine[1]/fan" control="THROTTLE"
+      src0="0" src1="40" dst0="0" dst1="1"/>
+      <control-output control="THROTTLE" prop="systems/hydraulics/psi-norm[1]"/>
+      <control-speed control="THROTTLE" transition-time="5"/>
+  </thruster>
 
-<ballast x="-6.0" y="0.0" z="2.0" mass="-1000"/>
-<ballast x="-8.562" y="0" z="2.98" mass="-800"/>
-<ballast x="0.0" y="0" z="-0.5" mass="5000"/>
-<ballast x="-2.5" y="0" z="-0.5" mass="7000"/>
-<ballast x="2.0" y="0" z="-0.5" mass="3000"/>
+  <ballast x="-6.0" y="0.0" z="2.0" mass="-1000"/>
+  <ballast x="-8.562" y="0" z="2.98" mass="-800"/>
+  <ballast x="0.0" y="0" z="-0.5" mass="5000"/>
+  <ballast x="-2.5" y="0" z="-0.5" mass="7000"/>
+  <ballast x="2.0" y="0" z="-0.5" mass="3000"/>
 
 
-<weight x="7.0" y="0.0" z="0" mass-prop="/sim/weight[0]/weight-lb"/>
+  <weight x="7.0" y="0.0" z="0" mass-prop="/sim/weight[0]/weight-lb"/>
   <weight x="-0.7" y="0" z="0" mass-prop="/sim/weight[1]/weight-lb"/>
-	<weight x="-1.5" y="0" z="0" mass-prop="/sim/weight[2]/weight-lb"/>
+  <weight x="-1.5" y="0" z="0" mass-prop="/sim/weight[2]/weight-lb"/>
+
 </airplane>

@@ -516,6 +516,7 @@ var update_nav = func {
         if (getprop(ap_dist) < 2) dme_flag = 1;
         if (dme_flag and getprop(ap_dist) > 5) crs_offset = crs_offset - 45;
       } else crs_offset = (getprop(nav_tgHdg[ind]) or 0) - getprop(orient);
+
       ###################
 
     } else if(left(navsrc,3) == "FMS"){
@@ -562,6 +563,7 @@ var update_nav = func {
 			      crs_set = geocoord.course_to(courseCoord);
           }
         }
+        setprop("autopilot/internal/course-offset",crs_offset);
 		    setprop("autopilot/settings/selected-crs",int(crs_set));
 
         ### Wp change ###
@@ -582,10 +584,9 @@ var update_nav = func {
           sec_flag = 0;
         } 
       }
+      setprop("autopilot/settings/nav-id",nav_id);
+      setprop("autopilot/internal/nav-distance",dst);
     }
-    setprop("autopilot/internal/course-offset",crs_offset);
-    setprop("autopilot/settings/nav-id",nav_id);
-    setprop("autopilot/internal/nav-distance",dst);
 } # end of update
 
     ### TOGA throttles limit ###
@@ -598,13 +599,13 @@ var toga_throttles = func {
 
 ###  Main ###
 var fd_stl = setlistener("sim/signals/fdm-initialized", func {
+  geo_coord = geo.Coord.new();
   print("Flight Director ... Ok");
 	settimer(update_fd,6);
 	removelistener(fd_stl);
 },0,0);
 
 var update_fd = func {
-    geo_coord = geo.Coord.new();
     update_nav();
 		alt_mach();
     toga_throttles();

@@ -238,16 +238,16 @@ var cduDsp = {
     },0,0);
 
     setlistener(direct[x],func(n) {
-      if (n.getValue() and (left(getprop(dsp[x]),8) == "FLT-PLAN" or left(getprop(dsp[x]),8) == "ALT-PAGE")) {
+      if (n.getValue() and (left(getprop(dsp[x]),8) == "FLT-PLAN" 
+          or left(getprop(dsp[x]),8) == "ALT-PAGE")) {
         me.line.l1.setText("---- DIRECT").setColor(me.amber);
         me.line.l7.setText("< PATTERN");
-#        me.line.r7.setText("INTERCEPT >");
-      }
-      else{
-#        me.line.l7.setText("< DEPARTURE");
-        me.line.r7.setText("ARRIVAL >");
-      }
+      } else me.line.r7.setText("ARRIVAL >");
     },0,1);
+
+    setlistener('autopilot/locks/hold/enable-exit',func(n) {
+      if (n.getValue()) me.line.l7.setText('< EXIT');
+    },0,0);
 
   }, # end of listen
 
@@ -721,7 +721,9 @@ var cduDsp = {
     if (diff1 <= 110 or diff2 <= 70) hld_entry = "DIRECT";
     else if (diff1 > 110 and diff2 <= 180) hld_entry = "TEARDROP";
     else hld_entry = "PARALLEL";
+
     setprop(hld_path[x]~"entry",hld_entry);
+    setprop('autopilot/locks/hold/speed',hld_spd);
 
     me.nrPage = substr(getprop(dsp[x]),9,1);
     me.Raz_lines(x);
@@ -1261,14 +1263,14 @@ var cduDsp = {
 }; # end of cduDsp
   
 ##### Main #####
-var cdu_DspL = cduDsp.new(0);
-var cdu_DspR = cduDsp.new(1);
 var cdu_setl = setlistener("sim/signals/fdm-initialized", func {
   settimer(run_cdu_Dsp,2);
   removelistener(cdu_setl);
 });
 
 var run_cdu_Dsp = func {
+  var cdu_DspL = cduDsp.new(0);
+  var cdu_DspR = cduDsp.new(1);
   cdu_DspL.Listen(0);
   cdu_DspR.Listen(1);
   cdu_DspL.Nav_ident(0);
