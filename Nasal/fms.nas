@@ -207,7 +207,7 @@ var FMS = {
 				### Navaids ###
 			if (fp.getWP(i).wp_type == 'navaid') {
 				if (fp.getWP(i).alt_cstr > 0) wp_alt = fp.getWP(i).alt_cstr;
-				else if (fp.getWP(i).alt_cstr <= 0 and fp.getWP(i-1).wp_type == 'basic') 
+				else if (fp.getWP(i).alt_cstr <= 0) # and fp.getWP(i-1).wp_type == 'basic') 
 					wp_alt = asel; 
 			}
 				### Approach ###
@@ -220,6 +220,7 @@ var FMS = {
 			v_alt.append(wp_alt);
 		}
 		v_alt.append(0); # last for destination
+
 		### TOD Calc ###
 		for (var i=1;i<fp.getPlanSize()-1;i+=1) {
 			if (asel < me.highest_alt) {
@@ -282,6 +283,7 @@ var FMS = {
 					append(v_tod,lastWp_dist);
 					append(v_tod,lastWp_alt);
 				}
+
 				### Calculate intermediates altitudes for VSD ###
 				me.altCalc(tot_dist,i);
 			}

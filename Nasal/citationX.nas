@@ -25,12 +25,14 @@ var flaps = "controls/flight/flaps";
 var fh_tot = "instrumentation/clock/flight-hour-tot";
 var fh_sec = "instrumentation/clock/flight-meter-sec";
 var fh_get = 0;
+var fh_path  = getprop("/sim/fg-home")~"/Export/CitationX/FHmeter.xml";
 var flaps_pos = nil;
 var flaps_sel = nil;
 var elt = [0,0];
 var fhour = nil;
 var et = 0;
 var elec = 1;
+var data = nil;
 
 ### tire rotation per minute by circumference ####
 #var TireSpeed = {
@@ -219,7 +221,6 @@ var JetEngine = {
   shutdown : func(b){
       if(b) setprop(me.cutoff,1);
   }, # end of shutdown
-
 }; # end of JetEngine
 
 
@@ -266,11 +267,12 @@ setlistener("/sim/current-view/internal", func(n) {
 },0,0);
 
 setlistener("/gear/gear[0]/wow", func(n){
-    if(n.getValue()){
+    if (n.getValue()){
         FHmeter.stop();
         setprop("controls/engines/grnd-idle",1);			
         setprop("autopilot/locks/fms-gs",0);
-    } else{
+        FH_write();
+    } else {
         setprop("controls/engines/grnd-idle",0);			
         FHmeter.start();
         fh_get = getprop(fh_tot);
@@ -333,17 +335,35 @@ var el_time = func(x,elec,et) {
   }
 }
 
-######################
+var FH_load = func{
+    ### Create FH Path if not exists ### 
+		var path = os.path.new(getprop("/sim/fg-home")~"/Export/CitationX/create.txt");
+    if (!path.exists()) path.create_dir();
+
+    data = io.read_properties(fh_path);
+    if (data == nil) {
+      data = props.Node.new();
+      data.initNode('TotalFlight',0,'DOUBLE');
+      io.write_properties(fh_path,data);
+    } else setprop(fh_tot,data.getValue("TotalFlight"));
+}
+
+var FH_write = func {
+	  data = io.read_properties(fh_path);
+	  data.getChild("TotalFlight").setDoubleValue(getprop(fh_tot));
+	  io.write_properties(fh_path,data);
+}
+
 controls.stepSpoilers = func(v) {
-    if (v < 0) {setprop("/controls/flight/speedbrake", 0)}
-		else if (v > 0) {setprop("/controls/flight/speedbrake", 1)}
+  if (v < 0) {setprop("/controls/flight/speedbrake", 0)}
+	else if (v > 0) {setprop("/controls/flight/speedbrake", 1)}
 }
 
 controls.synchro = func {
   var synchro = "controls/engines/synchro";
-    if (getprop(synchro) == -1) ud = 1;
-    if (getprop(synchro) == 1) ud = -1;
-      setprop(synchro,getprop(synchro) + ud);
+  if (getprop(synchro) == -1) ud = 1;
+  if (getprop(synchro) == 1) ud = -1;
+  setprop(synchro,getprop(synchro) + ud);
 }
 
 controls.pilots = func() {
@@ -535,7 +555,7 @@ var citation_stl = setlistener("/sim/signals/fdm-initialized", func {
 #    setprop("sim/model/shadow-2d",1);
 #    setprop("sim/rendering/shaders/model",1);
     setprop("services/ext-pwr",1);
-#		FH_load();   		
+		FH_load();   		
     removelistener(citation_stl);
 },0,0);
 

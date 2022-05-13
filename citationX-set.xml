@@ -9,7 +9,7 @@ Completed 2015-2021 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 <PropertyList>
   <sim>
     <description>Cessna Citation X (Yasim)</description>
-    <author>Syd Adams (creator), C.Le Moigne (clm76), C.Thiriot (PATTEN), F-ORKI, Laurent (F5SLQ) - Version 05/05/2022</author>
+    <author>Syd Adams (creator), C.Le Moigne (clm76), C.Thiriot (Patten), F-ORKI, Laurent (F5SLQ), Silveraire40 - Version 13/05/2022</author>
     <status>devel</status>
     <rating>
         <FDM type="int">4</FDM>
@@ -53,11 +53,11 @@ Completed 2015-2021 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 				<path>splash3.png</path>
 			</preview>
 		</previews>
-
+<!--
     <aircraft-data>
       <path>instrumentation/clock/flight-hour-tot</path>
     </aircraft-data>
-  
+-->  
     <tutorials>      
         <tutorial include="Tutorials/cold-start-with-external-power.xml"/>
         <tutorial include="Tutorials/cold-start-with-APU.xml"/>
