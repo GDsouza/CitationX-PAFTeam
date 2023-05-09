@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?> 
+<?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
 ************************************************************************
 Cessna Citation X - Complete Version
@@ -9,7 +9,7 @@ Completed 2015-2021 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 <PropertyList>
   <sim>
     <description>Cessna Citation X (Yasim)</description>
-    <author>Syd Adams (creator), C.Le Moigne (clm76), C.Thiriot (Patten), F-ORKI, Laurent (F5SLQ), Silveraire40 - Version 13/05/2022</author>
+    <author>Syd Adams (creator), C.Le Moigne (clm76), C.Thiriot (Patten), F-ORKI, Laurent (F5SLQ), Silveraire40 - Version 08/05/2023</author>
     <status>devel</status>
     <rating>
         <FDM type="int">4</FDM>
@@ -30,7 +30,7 @@ Completed 2015-2021 C. Le Moigne (clm76), C-Thiriot (PATTEN).
         <tag>twin-engine</tag>
         <tag>glass-cockpit</tag>
     </tags>
- 
+
 		<previews>
 			<preview>
 				<type>exterior</type>
@@ -57,8 +57,8 @@ Completed 2015-2021 C. Le Moigne (clm76), C-Thiriot (PATTEN).
     <aircraft-data>
       <path>instrumentation/clock/flight-hour-tot</path>
     </aircraft-data>
--->  
-    <tutorials>      
+-->
+    <tutorials>
         <tutorial include="Tutorials/cold-start-with-external-power.xml"/>
         <tutorial include="Tutorials/cold-start-with-APU.xml"/>
         <tutorial include="Tutorials/engines-startup.xml"/>
@@ -330,7 +330,7 @@ Completed 2015-2021 C. Le Moigne (clm76), C-Thiriot (PATTEN).
         <menu n="10">
           <label>Citation X</label>
           <enabled type="bool">true</enabled>
- 
+
          <item>
             <label>Autostart</label>
             <binding>
@@ -346,7 +346,7 @@ Completed 2015-2021 C. Le Moigne (clm76), C-Thiriot (PATTEN).
               <script>dialogs.options.open()</script>
             </binding>
           </item>
- 
+
          <item>
             <label>Select Livery</label>
             <binding>
@@ -390,7 +390,7 @@ Completed 2015-2021 C. Le Moigne (clm76), C-Thiriot (PATTEN).
             <name>Keypad Delete</name>
             <desc>Toggle Thrust Reversers</desc>
         </key>
-        <key> 
+        <key>
             <name>Keypad End</name>
             <desc>Toggle Cutoff</desc>
         </key>
@@ -619,9 +619,9 @@ Completed 2015-2021 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 			</voice>
       <tfc n="0" type="bool">0</tfc>
       <tfc n="1" type="bool">0</tfc>
-      <speaker> 
+      <speaker>
         <max-dist type="double">10</max-dist>
-        <reference-dist type="double">2</reference-dist> 
+        <reference-dist type="double">2</reference-dist>
         <volume type="double"> 1 </volume>
       </speaker>
       <range type="int">6</range>
@@ -631,7 +631,7 @@ Completed 2015-2021 C. Le Moigne (clm76), C-Thiriot (PATTEN).
   <controls>
     <gear>
         <brake-parking type="double">1.0</brake-parking>
-        <emer-brake type="double">0.0</emer-brake>						
+        <emer-brake type="double">0.0</emer-brake>
     </gear>
     <engines>
         <engine n="0">

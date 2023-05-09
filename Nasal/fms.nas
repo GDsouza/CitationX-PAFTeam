@@ -98,7 +98,7 @@ var FMS = {
 		return m;
 	}, # end of new
 
-	listen : func { 
+	listen : func {
 		setlistener(fp_active, func(n) {
 			if (n.getValue()) {
 				fp = flightplan();
@@ -116,9 +116,7 @@ var FMS = {
 				v_alt.clear();
 			  v_tod = [];
 				me.fpCalc();
-			}	else {
-				setprop(fms,0);
-			}
+			}	else setprop(fms,0);
 		},0,1);
 
 		setlistener(cr_asel, func(n) {
@@ -134,10 +132,8 @@ var FMS = {
 		},0,0);
 
 		setlistener(desc_angle, func {
- 			if (getprop(fp_active)){
-				me.fpChange();
-      }
-		},0,0);     
+ 			if (getprop(fp_active)) me.fpChange();
+		},0,0);
 
 		setlistener(pcdr_active, func(n) {
  			if (n.getValue()) {
@@ -153,7 +149,7 @@ var FMS = {
         v_tod[size(v_tod)-2] += fp.getWP(fp.getPlanSize()-1).leg_distance;
         v_tod[size(v_tod)-3] += f_dist;
       }
-		},0,0);     
+		},0,0);
 
 	}, # end of listen
 
@@ -203,18 +199,18 @@ var FMS = {
 				if (fp.getWP(i).alt_cstr <= 0) wp_alt = asel;
 				else if (fp.getWP(i).alt_cstr > 0 and fp.getWP(i+1).distance_along_route > tot_dist/2) wp_alt = asel;
 				else wp_alt = fp.getWP(i).alt_cstr;
-			} 
+			}
 				### Navaids ###
 			if (fp.getWP(i).wp_type == 'navaid') {
 				if (fp.getWP(i).alt_cstr > 0) wp_alt = fp.getWP(i).alt_cstr;
-				else if (fp.getWP(i).alt_cstr <= 0) # and fp.getWP(i-1).wp_type == 'basic') 
-					wp_alt = asel; 
+				else if (fp.getWP(i).alt_cstr <= 0) # and fp.getWP(i-1).wp_type == 'basic')
+					wp_alt = asel;
 			}
 				### Approach ###
-			if (fp.getWP(i).wp_type == 'basic' and fp.getWP(i).distance_along_route > tot_dist/2) { 
+			if (fp.getWP(i).wp_type == 'basic' and fp.getWP(i).distance_along_route > tot_dist/2) {
 				if (fp.getWP(i).alt_cstr <= 0) wp_alt = v_alt.vector[i-1];
 				else wp_alt = fp.getWP(i).alt_cstr;
-			} 
+			}
 
 			 ### Store Altitudes in a vector ###
 			v_alt.append(wp_alt);
@@ -227,14 +223,14 @@ var FMS = {
 				if (v_alt.vector[i] <= 0) {
 					for (var j=i;j<fp.getPlanSize()-1;j+=1) {
 						if (v_alt.vector[j] > 0) {
-							v_alt.vector[i] = v_alt.vector[j];					
+							v_alt.vector[i] = v_alt.vector[j];
 							break;
 						}
 					}
 				}
 			}	else {
 				altWP_curr = v_alt.vector[i];
-				f_dist = 	fp.getWP(i).distance_along_route;			
+				f_dist = 	fp.getWP(i).distance_along_route;
 				### Search for tod ###
 				for (var j=i+1;j<fp.getPlanSize()-1;j+=1) {
 					if (v_alt.vector[j] < altWP_curr) {
@@ -251,16 +247,16 @@ var FMS = {
 							wp = createWP(topdescent.lat,topdescent.lon,"TOD",'pseudo');
 						}
 						break;
-					} 					
+					}
 				}
 				### Insert tod in the flightplan ###
-						# parabolic functions to calculate TOD position versus ASEL #		
+						# parabolic functions to calculate TOD position versus ASEL #
 				if (asel <= 420000) {
 					v = 1.5/100000000*math.pow(asel,2)+0.00163*asel + 9.24;
-				} else { 
+				} else {
 					v = 6.25/10000000*math.pow(asel,2)+0.039225*asel + 647;
 				}
-				if (tod_dist != nil and tod_dist < fp.getWP(i+1).distance_along_route 
+				if (tod_dist != nil and tod_dist < fp.getWP(i+1).distance_along_route
             and flag_tod == 0 and tod_dist > v) {
           if (wp != nil) {
 					  fp.insertWP(wp,i+1);
@@ -310,7 +306,7 @@ var FMS = {
 
 				### Takeoff ###
 			if (getprop(lock_alt) == "VALT" and getprop(ap_stat) != "AP") {
-          in_range = 0;			
+          in_range = 0;
 				if (v_alt.vector[curr_wp] > 0)
 					set_tgAlt = math.round(v_alt.vector[curr_wp],100);
 			}
@@ -323,13 +319,13 @@ var FMS = {
           else desc_flag = 0;
 
 					### Alarm before TOD ###
-					if (fp.getWP(curr_wp).wp_name == 'TOD' and getprop(nav_dist) >= 0 
+					if (fp.getWP(curr_wp).wp_name == 'TOD' and getprop(nav_dist) >= 0
               and getprop(nav_dist) < dist_b_tod) almTod = 1;
 					else almTod = 0;
 					if (almTod != getprop(alm_tod)) setprop(alm_tod,almTod);
 
 					### Between TOD and last reference Wp ###
-					if (size(v_tod) > 0 and getprop(dist_rem) <= v_tod[v_ind] 
+					if (size(v_tod) > 0 and getprop(dist_rem) <= v_tod[v_ind]
               and getprop(dist_rem) >= v_tod[v_ind+1]) {
             tod = 1;
             flag_pcdr = 1;
@@ -342,7 +338,7 @@ var FMS = {
           }
 					### Approach
           ind = getprop(navsrc) == "FMS1" ? 0 : 1;
-            
+
                 ### Switch FMS --> GS ###
           gs_climb = getprop("instrumentation/nav["~ind~"]/gs-rate-of-climb");
           if (in_range) {
@@ -364,21 +360,21 @@ var FMS = {
                 ### Without GS ###
             else if (getprop(dist_rem) < 9 and !tod) {
               fms_app = 1;
-              set_tgAlt = getprop(dest_alt);             
+              set_tgAlt = getprop(dest_alt);
               me.fpsLim(1);
             } else {
               fms_app = 0;
 
 				      ### Last Wp reference ###
-				      if (size(v_tod) > 0 
+				      if (size(v_tod) > 0
                   and int(getprop(dist_rem)) == int(v_tod[v_ind+1])-1) {
 					      tod = 0;
 					      if (v_ind < size(v_tod)-3) v_ind+=3;
 				      }
 				      ### Setting target altitude ###
 				      if (!tod) {
-                if (getprop(dist_rem) < prevWp_dist 
-                    and getprop(dist_rem) > lastWp_dist) 
+                if (getprop(dist_rem) < prevWp_dist
+                    and getprop(dist_rem) > lastWp_dist)
                   set_tgAlt = math.round(lastWp_alt,100);
                 else set_tgAlt = math.round(v_alt.vector[curr_wp],100);
 				      } else set_tgAlt = math.round(v_tod[v_ind+2],100);
@@ -395,14 +391,14 @@ var FMS = {
 
   speed : func {
 				      ### Departure ###
-    if (dist_dep < getprop(dep_lim) and getprop(alt_ind) < getprop(dep_agl)) {
+    if (dist_dep < getprop(dep_lim) and getprop(alt_ind) < getprop(dep_agl))
       setprop(tg_spd_kt,getprop(dep_spd));
-    } else if (dist_dep < 10) {
+    else if (dist_dep < 10)
 	      setprop(tg_spd_kt,getprop(climb_kt));
-    } else {
+    else {
             ### Holding patterns ###
       if (getprop("autopilot/locks/hold/enable-exit"))
-        setprop(tg_spd_kt,getprop("autopilot/locks/hold/speed")); 
+        setprop(tg_spd_kt,getprop("autopilot/locks/hold/speed"));
 			      ### Near before TOD ###
       else if (getprop(alm_tod)) {
 	      setprop(tg_spd_mc,getprop(desc_mc));
@@ -441,7 +437,7 @@ var FMS = {
                   setprop(cruise_kt,fp.getWP(curr_wp).speed_cstr);
                 me.cruise_spd();
 			      }
-		      }	
+		      }
         }
 	    }
     }
@@ -489,4 +485,3 @@ var fms_stl = setlistener("sim/signals/fdm-initialized", func {
 	print("FMS ... Ok");
 	removelistener(fms_stl);
 },0,0);
-
