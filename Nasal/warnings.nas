@@ -1,6 +1,6 @@
 ### Citation X ###
 ### Christian Le Moigne (clm76) - 2015 rev1:2018 rev2:2019 ###
-###	
+###
 
 ### ANNUNCIATORS ###
 var MstrWarning = "instrumentation/annunciators/master-warning";
@@ -36,7 +36,7 @@ var annun_init = func {
 		setprop(Caution,0);
 		setprop(Warn,0);
 };
-	
+
 var ann_stl = setlistener("/sim/signals/fdm-initialized", func {
     annun_init();
     removelistener(ann_stl);
@@ -52,7 +52,7 @@ var Warnings = {
 	return m
 	},
 
-	init : func {	
+	init : func {
 		me.old_caution = 0;
 		me.old_warning = 0;
 	},
@@ -111,6 +111,7 @@ var Warnings = {
     me.rudder_limit_A = getprop("systems/electrical/outputs/rudder-limit-A");
     me.rudder_limit_B = getprop("systems/electrical/outputs/rudder-limit-B");
     me.selcal = getprop("systems/electrical/outputs/selcal");
+		me.slats = getprop("controls/flight/slats");
 		me.speedbrake = getprop("controls/flight/speedbrake");
 		me.stall = getprop("sim/sound/stall-horn");
 		me.state = getprop("instrumentation/annunciators/state");
@@ -128,7 +129,7 @@ var Warnings = {
     if (getprop("systems/electrical/outputs/eicas")) me.enabled = 1;
     else me.enabled = 0;
       ### Anti-ice ###
-    if (getprop("controls/engines/engine/throttle") <= 0.1 
+    if (getprop("controls/engines/engine/throttle") <= 0.1
         and !getprop("controls/engines/engine/cutoff")) me.throttle0 = 1;
     else me.throttle0 = 0;
     if (getprop("controls/engines/engine[1]/throttle") <= 0.1
@@ -144,7 +145,7 @@ var Warnings = {
     me.pitot_R_output = getprop("systems/electrical/outputs/rh-ps-heater");
     me.rat_L_output =  getprop("systems/electrical/outputs/lh-rat-heater");
     me.rat_R_output =  getprop("systems/electrical/outputs/rh-rat-heater");
-    me.slat = getprop("controls/anti-ice/slat");
+    me.slat_ice = getprop("controls/anti-ice/slat");
     me.stab_L = getprop("controls/anti-ice/lh-stab");
     me.stab_R = getprop("controls/anti-ice/rh-stab");
     me.slat_stab_L_output = getprop("systems/electrical/outputs/lh-slat-stab");
@@ -174,9 +175,9 @@ var Warnings = {
     me.dauMsg = "2DAU";
 
 		if (me.enabled) {
-      if (me.test == 0) {		
+      if (me.test == 0) {
 				  ### lEVEL 3 - Red  - Alert ###
-			  if ((!me.high_alt and me.cabin_alt > 10000) 
+			  if ((!me.high_alt and me.cabin_alt > 10000)
           or (me.high_alt and me.cabin_alt >= 14500))
           append(me.msg_l3,"3CABIN ALTITUDE");
 
@@ -189,19 +190,19 @@ var Warnings = {
 
 			  if(me.wow and !me.eng0_shutdown and !me.eng1_shutdown and (
 					  me.ext_pwr
-					  or me.parkbrake 
-					  or me.emerbrake 
+					  or me.parkbrake
+					  or me.emerbrake
 					  or me.speedbrake
 					  or me.total_fuel <= 500)) {
 				  append(me.msg_l3,"3NO TAKEOFF");
 				  no_takeoff_l3 = 1;
-			  }			
+			  }
 			  if(me.vmo >= -59) {
 				  append(me.msg_l3,"3OVERSPEED");
 				  setprop("sim/alarms/overspeed-alarm",me.fwc1 ? 1 : 0);
 			  } else setprop("sim/alarms/overspeed-alarm",0);
 
-			  if(me.stall and me.cabin_alt > 35000) 
+			  if(me.stall and me.cabin_alt > 35000)
           append(me.msg_l3,"3MINIMUM SPEED");
 
 			  if(!me.rudder_limit_A and !me.rudder_limit_B) {
@@ -246,7 +247,7 @@ var Warnings = {
 			  else if (!me.fuel_xfer_L)	append(me.msg_l2,"2FUEL PRESS LOW L");
 			  else if (!me.fuel_xfer_R) append(me.msg_l2,"2FUEL PRESS LOW R");
 
-			  if (!me.xfer_L == 2 and !me.xfer_R == 2) 
+			  if (!me.xfer_L == 2 and !me.xfer_R == 2)
           append(me.msg_l2,"2CTR XFER OFF L-R");
 			  else if (me.xfer_L == 2)	append(me.msg_l2,"2CTR XFER OFF L");
 			  else if (me.xfer_R == 2) append(me.msg_l2,"2CTR XFER OFF R");
@@ -293,7 +294,7 @@ var Warnings = {
             append(me.msg_l2,"2P/S-RAT HEAT OFF R");
         }
 
-        if (me.pitot_L and me.pitot_R and !me.aoa_L_output 
+        if (me.pitot_L and me.pitot_R and !me.aoa_L_output
           and !me.aoa_R_output) {
           append(me.msg_l2,"2AOA HEAT FAIL L-R");
           me.nb_caution +=1;
@@ -304,7 +305,7 @@ var Warnings = {
           append(me.msg_l2,"2AOA HEAT FAIL R");
           me.nb_caution +=1;
         }
-        if (me.pitot_L and me.pitot_R and !me.pitot_L_output 
+        if (me.pitot_L and me.pitot_R and !me.pitot_L_output
           and !me.pitot_R_output)
           append(me.msg_l2,"2PITOT HTR FAIL L-R");
         else if (me.pitot_L and !me.pitot_L_output)
@@ -320,11 +321,11 @@ var Warnings = {
         else if (me.pitot_R and !me.rat_R_output)
           append(me.msg_l2,"2RAT HEAT FAIL R");
 
-        if (me.slat and !me.slat_stab_L_output and !me.slat_stab_R_output)
+        if (me.slat_ice and !me.slat_stab_L_output and !me.slat_stab_R_output)
           append(me.msg_l2,"2SLAT A/I COLD L-R");
-        else if (me.slat and !me.slat_stab_L_output)
+        else if (me.slat_ice and !me.slat_stab_L_output)
           append(me.msg_l2,"2SLAT A/I COLD L");
-        else if (me.slat and !me.slat_stab_R_output)
+        else if (me.slat_ice and !me.slat_stab_R_output)
           append(me.msg_l2,"2SLAT A/I COLD R");
 
         if (me.stab_L and me.stab_R and !me.slat_stab_L_output
@@ -354,13 +355,13 @@ var Warnings = {
 				  ### LEVEL 1  - Cyan ###
 			  if (me.eng0_shutdown and me.eng1_shutdown) {
 				  append(me.msg_l1,"1ENG SHUTDWN L-R");
-			  } 
+			  }
         else if (me.eng0_shutdown) append(me.msg_l1,"1ENG SHUTDWN L");
       	else if (me.eng1_shutdown) append(me.msg_l1,"1ENG SHUTDWN R");
 			  if (me.parkbrake) append(me.msg_l1,"1PARK BRK SET");
 			  if (me.emerbrake) append(me.msg_l1,"1EMERGENCY BRAKE");
-			  if (me.wow and me.flaps != 3 and !no_takeoff_l3)
-				  append(me.msg_l1,"1NO TAKEOFF");		
+			  if (me.wow and me.flaps < 1 and !no_takeoff_l3)
+				  append(me.msg_l1,"1NO TAKEOFF");
         if (!me.madc1 and me.madc2) append(me.msg_l1,"1RAT PROB FAIL L");
         if (!me.madc2 and me.madc1) append(me.msg_l1,"1RAT PROB FAIL R");
 			  if (!me.ydB and me.ydA) {
@@ -422,19 +423,19 @@ var Warnings = {
 
       me.EicasOutput();
       ###
-    } 
-    me.AnnunOutput();			
+    }
+    me.AnnunOutput();
     if (me.fwc1) me.stall_speed();
 
-    ### CDU ALARMS ###        
+    ### CDU ALARMS ###
     if (!me.dl)	me.nb_caution +=1;
     if (!me.gps1)	me.nb_caution +=1;
     if (!me.gps2)	me.nb_caution +=1;
 
     ### Gear oversight ###
-    if ((me.flaps == 4 or me.agl < 500) and !me.gear0 and !me.gear1 and !me.gear2 and getprop("velocities/vertical-speed-fps") <= 0) {
+    if ((me.flaps == 3 or me.agl < 500) and !me.gear0 and !me.gear1 and !me.gear2 and getprop("velocities/vertical-speed-fps") <= 0) {
       setprop("instrumentation/alerts/gear-horn",1);
-    } else setprop("instrumentation/alerts/gear-horn",0);   
+    } else setprop("instrumentation/alerts/gear-horn",0);
 
     ### Timer ###
 		settimer(func {me.update();},0.1);
@@ -515,21 +516,21 @@ var Warnings = {
 				setprop(Warn,me.state);
 				if (getprop(WarningAck)) setprop(Warn,1);
 			}
-			me.old_warning = me.nb_warning;		
+			me.old_warning = me.nb_warning;
 
 				### CAUTION ###
 			if (me.nb_caution == 0) {
 				setprop(MstrCaution,0);
-				setprop(Caution,0);										
+				setprop(Caution,0);
 				setprop(CautionAck,0);
-			} 
+			}
 			else if (me.nb_caution > me.old_caution) {
 				setprop(MstrCaution,1);
 				setprop(Caution,me.state);
 				setprop(CautionAck,0);
 			} else {
 				setprop(MstrCaution,1);
-				setprop(Caution,me.state);														
+				setprop(Caution,me.state);
 				if (getprop(CautionAck)) setprop(Caution,1);
 			}
 			me.old_caution = me.nb_caution;
@@ -547,30 +548,30 @@ var Warnings = {
 		### Activation Stall System ###
 		if (getprop("position/altitude-agl-ft") > 400)
 			setprop("instrumentation/pfd/stall-warning",1);
-    else setprop("instrumentation/pfd/stall-warning",0);		
+    else setprop("instrumentation/pfd/stall-warning",0);
 
 		### Set Stall Speed Alarm / Flaps ###
     if(stall_warn){
 			if (me.flaps == 0){
-				setprop("instrumentation/pfd/stall-speed",145);			
+				setprop("instrumentation/pfd/stall-speed",145);
       	if(kias<=145){
 					alert=1;
-					setprop(flaps_sel,1); ### Extension Slats ###
+					setprop("controls/flight/slats",1); ### Extension Slats ###
 				}
 			}
-			if (me.flaps == 1){
+			if (me.slats == 1){
 				setprop("instrumentation/pfd/stall-speed",135);
 				if (kias<=135) alert=1;
 			}
-			if (me.flaps == 2){
+			if (me.flaps == 1){
 				setprop("instrumentation/pfd/stall-speed",130);
 				if (kias<=130) alert=1;
 			}
-			if (me.flaps == 3){
+			if (me.flaps == 2){
 				setprop("instrumentation/pfd/stall-speed",125);
 				if (kias<=125) alert=1;
 			}
-			if (me.flaps == 4){
+			if (me.flaps == 3){
 				setprop("instrumentation/pfd/stall-speed",115);
 				if (kias<=115) alert=1;
 			}
@@ -584,6 +585,6 @@ var warn_stl = setlistener("/sim/signals/fdm-initialized", func {
   var alarms = Warnings.new();
 	alarms.init();
   alarms.listen();
-	alarms.update();	
+	alarms.update();
 	removelistener(warn_stl);
 });

@@ -48,19 +48,19 @@ var va = "controls/flight/va";
 			var m = {parents:[MFDDisplay]};
       if (!x) {
 			  m.canvas = canvas.new({
-				  "name": "MFD_L", 
+				  "name": "MFD_L",
 				  "size": [1024, 1024],
 				  "view": [900, 1024],
-				  "mipmapping": 1 
+				  "mipmapping": 1
 			  });
 			  m.canvas.addPlacement({"node": "screenL_F"});
 			  m.canvas.setColorBackground(0,0,0,0);
       } else {
 			  m.canvas = canvas.new({
-				  "name": "MFD_R", 
+				  "name": "MFD_R",
 				  "size": [1024, 1024],
 				  "view": [900, 1024],
-				  "mipmapping": 1 
+				  "mipmapping": 1
 			  });
 			  m.canvas.addPlacement({"node": "screenR_F"});
 			  m.canvas.setColorBackground(0,0,0,0);
@@ -117,10 +117,10 @@ var va = "controls/flight/va";
       m.green = [0,1,0];
 
 #      me.dme_enabled = 1; # electrical init
-			return m;	
+			return m;
 		}, # end of new
 
-		listen : func(x) { 
+		listen : func(x) {
 			setlistener("instrumentation/dc840["~x~"]/mfd-map", func(n) {
         me.trueNorth.setVisible(n.getValue());
 			},0,0);
@@ -129,13 +129,12 @@ var va = "controls/flight/va";
 				if (n.getValue()) {
 					var t = 0;
 					me.tod_timer = maketimer(0.5,func() {
-						if (t==0) {me.tod.show()}
-						if (t==1) {me.tod.hide()}					
+						me.tod.setVisible(t==0 ? 1 : 0);
 						t+=1;
-						if(t==2) {t=0}
+						if(t==2) t=0;
 					});
 					me.tod_timer.start();
-				} else { 
+				} else {
 					if (me.tod_timer != nil and me.tod_timer.isRunning) {
 					  me.tod_timer.stop();
 					  me.tod.hide();
@@ -215,7 +214,7 @@ var va = "controls/flight/va";
 			me.text.sat.setText(sprintf("%2d",getprop(sat)));
 			me.text.tas.setText(sprintf("%3d",getprop(tas)));
 			me.text.gspd.setText(sprintf("%3d",getprop(gspd)));
-			me.text.navDist.setText(sprintf("%3.1f",getprop(nav_dist))~" NM");			
+			me.text.navDist.setText(sprintf("%3.1f",getprop(nav_dist))~" NM");
 			me.text.navId.setText(getprop(nav_id));
 			me.text.navType.setText(getprop(nav_type)).setColor(left(getprop(nav_type),3) == "FMS" ? me.magenta : me.green);
 			me.text.hdgAnn.setText(sprintf("%03d",getprop(hdg_ann)));
@@ -248,7 +247,7 @@ var va = "controls/flight/va";
         if (nav_src == "NAV" and getprop(dme_id[nav_num]) != "") {
           me.text.dmeTxt.show().setColor(0,1,0);
           me.text.dmeId.show().setText(getprop(dme_id[nav_num]));
-          if (getprop(dme_ir[nav_num])) 
+          if (getprop(dme_ir[nav_num]))
             me.text.dmeDist.show().setText(sprintf("%.1f",getprop(dme_dist[nav_num]))~" NM");
           else me.text.dmeDist.show().setText("--- NM");
         } else {
@@ -301,7 +300,7 @@ var va = "controls/flight/va";
     VspeedUpdate : func {
 	    Wtot = getprop("yasim/gross-weight-lbs");
 	    flaps = getprop("controls/flight/flaps-select");
-	    if (flaps > 2) {
+	    if (flaps > 1) {
 		    if (Wtot <31000) {v1=115;vr=118;v2=129}
 		    if (Wtot >=31000 and Wtot <33000) {v1=116;vr=120;v2=128}
 		    if (Wtot >=33000 and Wtot <34000) {v1=121;vr=126;v2=131}
@@ -327,7 +326,7 @@ var va = "controls/flight/va";
 	    setprop("controls/flight/vf35",140);
     }, # end of VspeedUpdate
 
-    VspeedMenu : func(x) {      
+    VspeedMenu : func(x) {
 			if (getprop(me.menu[x]) == 0 and getprop(me.s_menu[x]) == 5) {
 				me.menus.menu1.setText("V1");
 				me.menus.menu1b.setText(sprintf("%03d",getprop(v1_m)));
@@ -356,9 +355,8 @@ var va = "controls/flight/va";
 		showRect: func(x) {
 			var n = 0;
 			foreach(var element;me.cdr) {
-				if (getprop("instrumentation/mfd["~x~"]/cdr"~n)) {
-          me.rect[element].show();
-				} else {me.rect[element].hide()}
+				if (getprop("instrumentation/mfd["~x~"]/cdr"~n)) me.rect[element].show();
+				else me.rect[element].hide();
 				n+=1;
 			}
 		}, # end of showRect
@@ -375,7 +373,7 @@ var mfd_setl = setlistener("sim/signals/fdm-initialized", func() {
     mfd.showRect(x);
 	  mfd.update(x);
   }
-	var v_speed = func {		
+	var v_speed = func {
 		mfd.VspeedUpdate();
     mfd.VspeedMenu(0);
     mfd.VspeedMenu(1);
@@ -383,7 +381,6 @@ var mfd_setl = setlistener("sim/signals/fdm-initialized", func() {
 	var timer = maketimer(10,v_speed);
 	timer.singleShot = 1;
 	timer.start();
-	print('MFD Canvas ... Ok');
-	removelistener(mfd_setl); 
+	print('MFD   ... Ok');
+	removelistener(mfd_setl);
 },0,0);
-

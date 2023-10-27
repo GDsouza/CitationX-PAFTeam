@@ -1,47 +1,14 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- C. Le Moigne (clm76) - oct 2023 -->
 
 <PropertyList>
   <logic>
     <name>Load Limit</name>
     <input>
-      <or>
-        <and>
-          <greater-than>
-           <property>position/altitude-agl-ft</property>
-           <value>30</value>
-          </greater-than>
-          <or>
-            <greater-than>
-              <property>accelerations/pilot-g</property>
-              <value>3.7</value> <!-- 2.7 + 1 -->
-            </greater-than>
-            <less-than>
-              <property>accelerations/pilot-g</property>
-              <value>-1.0</value>
-            </less-than>
-            <and>
-              <greater-than>
-                <property>surface-positions/flap-pos-norm</property>
-                <value>0</value>
-              </greater-than>
-              <or>
-                <greater-than>
-                  <property>accelerations/pilot-g</property>
-                  <value>3.0</value>
-                </greater-than>
-                <less-than>
-                  <property>accelerations/pilot-g</property>
-                  <value>0.0</value>
-                </less-than>
-              </or>
-            </and>
-          </or>
-        </and>
-        <greater-than>
-          <property>accelerations/pilot-g</property>
-          <value>3.5</value>
-        </greater-than>
-      </or>
+      <greater-than>
+        <property>accelerations/pilot-gdamped</property>
+        <value>3.5</value>
+      </greater-than>
     </input>
     <output>accelerations/limit-exceeded</output>
   </logic>
@@ -50,7 +17,7 @@
     <name>Crack</name>
     <type>monostable</type>
     <time>
-      <value>3</value>
+      <value>5</value>
     </time>
     <S>
       <property>accelerations/limit-exceeded</property>
@@ -58,12 +25,4 @@
     <output>accelerations/limit-exceeded-alert</output>
   </flipflop>
 
-  <flipflop>
-    <name>Limit Ever Exceeded</name>
-    <type>RS</type>
-    <S>
-      <property>accelerations/limit-exceeded</property>
-    </S>
-    <output>accelerations/limit-exceeded-ever</output>
-  </flipflop>
 </PropertyList>

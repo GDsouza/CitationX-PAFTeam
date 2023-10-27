@@ -25,7 +25,7 @@
   <!-- The rudder trim is achieved by electrically displacing the trim
           actuator, moving the whole lower rudder control system and shifting
           the neutral point of the feel and centering unit.
-          
+
           Dual electromechanical rudder travel limiters are installed on the
           lower rudder to limit the maximum rudder deflection, depending upon
           the airplane speed. [Limits: see Fig. 2-29]
@@ -178,7 +178,7 @@
           <property>controls/flight/flaps-select</property>
           <value>0</value>
         </greater-than>
-      </condition>        
+      </condition>
       <value>18</value>
     </max>
     <max>
@@ -187,7 +187,7 @@
           <property>controls/flight/flaps-select</property>
           <value>0</value>
         </equals>
-      </condition>        
+      </condition>
       <value>15</value>
     </max>
     <input>
@@ -249,7 +249,7 @@
           starts after approximately 3 degrees of aileron displacement, and the
           inboard roll spoiler starts at approximately 6 degrees of aileron
           deflection; both are at a maximum at 34 degrees of wheel deflection
-         (since SN 0150). 
+         (since SN 0150).
   -->
 
   <filter>
@@ -344,7 +344,7 @@
   <!-- Full elevator travel is through a range of 19 degrees nose up to 15 degrees nose down.
 
        Pitch trim is accomplished by repositioning the entire horizontal stabilizer. Full travel of the stabilizer is from 12 degrees in the airplane nose up direction to 2 degrees in the airplane nose down direction.
-          [Ok, so our yasim system does not model moving the entire horizontal stabilizer. So we just add up the degrees and normalize for yasim.        
+          [Ok, so our yasim system does not model moving the entire horizontal stabilizer. So we just add up the degrees and normalize for yasim.
            Also, we trim to -5 nose down for elevator-trim == 0.]
   -->
 
@@ -550,7 +550,7 @@
     <gain>23.3645</gain>
     <min>0</min>
     <max>1</max>
-    <input>controls/flight/flaps</input>
+    <input>controls/flight/slats</input>
     <output>controls/flight/slat-cmd-norm</output>
   </filter>
 
@@ -636,5 +636,3 @@
   </filter>
 
 </PropertyList>
-
-

@@ -9,7 +9,7 @@ Completed 2015-2021 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 <PropertyList>
   <sim>
     <description>Cessna Citation X (Yasim)</description>
-    <author>Syd Adams (creator), C.Le Moigne (clm76), C.Thiriot (Patten), F-ORKI, Laurent (F5SLQ), Silveraire40 - Version 08/05/2023</author>
+    <author>Syd Adams (creator), C.Le Moigne (clm76), C.Thiriot (Patten), F-ORKI, Laurent (F5SLQ), Silveraire40 - Version 24/10/2023</author>
     <status>devel</status>
     <rating>
         <FDM type="int">4</FDM>
@@ -825,12 +825,6 @@ Completed 2015-2021 C. Le Moigne (clm76), C-Thiriot (PATTEN).
       <callsign>
         <file>Models/Callsign/callsign.nas</file>
       </callsign>
-			<cdu>
-				<file>Nasal/cdu.nas</file>
-				<file>Nasal/cdu-pages.nas</file>
-				<file>Nasal/holding-pattern.nas</file>
-				<file>Nasal/procedure-turn.nas</file>
-			</cdu>
       <citation>
         <file>Nasal/citationX.nas</file>
         <file>Nasal/electrical.nas</file>
@@ -861,6 +855,12 @@ Completed 2015-2021 C. Le Moigne (clm76), C-Thiriot (PATTEN).
 				<file>Models/Instruments/Engines/eng.nas</file>
 				<file>Nasal/engines-fire.nas</file>
 			</eng>
+			<cdu>
+				<file>Nasal/cdu.nas</file>
+				<file>Nasal/cdu-pages.nas</file>
+				<file>Nasal/holding-pattern.nas</file>
+				<file>Nasal/procedure-turn.nas</file>
+			</cdu>
 			<fms>
         <file>Nasal/fms.nas</file>
 			</fms>

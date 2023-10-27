@@ -1,6 +1,6 @@
 #==========================================================
-# Citation X - EICAS Canvas 
-# Christian Le Moigne (clm76) March 2019
+# Citation X - EICAS Canvas
+# Christian Le Moigne (clm76) March 2019 - modified oct 2023
 # =========================================================
 
 var AcftBtn = ["instrumentation/dc840/acft-btn",
@@ -120,10 +120,10 @@ var EICASdsp = {
 		var m = {parents: [EICASdsp]};
 
 	  m.canvas = canvas.new({
-		  "name": "EICAS", 
+		  "name": "EICAS",
 		  "size": [1024, 1024],
 		  "view": [900, 1024],
-		  "mipmapping": 1 
+		  "mipmapping": 1
 	  });
 
 	  m.canvas.addPlacement({"node": "Eicas.screen","capture-events":1});
@@ -171,7 +171,7 @@ var EICASdsp = {
     foreach(var i;m.turb_keys) append(m.turb,m.eicas.getElementById(i));
 
     m.flaps = {};
-    m.flaps_keys = ["Flaps","flapsNeedle"];
+    m.flaps_keys = ["Flaps","flapsNeedle","Slats"];
     foreach(var i;m.flaps_keys) m.flaps[i] = m.eicas.getElementById(i);
     m.flaps.flapsNeedle.setCenter(75,822);
 
@@ -197,7 +197,7 @@ var EICASdsp = {
     batt = {};
     m.batt_keys = ["ELEC","batt1V","batt1T","batt2V","batt2T"];
     foreach(var i;m.batt_keys) batt[i] = m.eicas.getElementById(i);
-    
+
     eng = {};
     m.eng_keys = ["ENG","oil0qty","oil1qty","apuSP","apuBAV","apuON",
                   "fadec0","fadec1"];
@@ -206,7 +206,7 @@ var EICASdsp = {
     m.Sg = {};
     foreach(var i;["sg","sgTxt","sgCdr"]) m.Sg[i] = m.eicas.getElementById(i);
     m.Sg.sg.hide();
-    
+
     m.fanTgt = m.eicas.getElementById("fanTgt");
     m.rat = m.eicas.getElementById("rat");
     m.gear = m.eicas.getElementById("Gear");
@@ -232,10 +232,10 @@ var EICASdsp = {
       {name: 'tank0', val: TkLvl[0], form:"%.0f"},
       {name: 'tank1', val: TkLvl[1], form:"%.0f"},
       {name: 'tankC', val: TkLvl[2], form:"%.0f"},
-      {name: 'lbusV', val: BusV[0],   form:"%.0f"},
-      {name: 'rbusV', val: BusV[1],   form:"%.0f"},
-      {name: 'lbusA', val: BusA[0],   form:"%.0f"},
-      {name: 'rbusA', val: BusA[1],   form:"%.0f"},
+      {name: 'lbusV', val: BusV[0],  form:"%.0f"},
+      {name: 'rbusV', val: BusV[1],  form:"%.0f"},
+      {name: 'lbusA', val: BusA[0],  form:"%.0f"},
+      {name: 'rbusA', val: BusA[1],  form:"%.0f"},
       {name: 'hydr0', val: Hydr[0],  form:"%.0f"},
       {name: 'hydr1', val: Hydr[1],  form:"%.0f"},
       {name: 'fan0',  val: Fan[0],   form:"%.1f"},
@@ -244,7 +244,7 @@ var EICASdsp = {
       {name: 'n1_1',  val: N1[1],    form:"%.0f"},
       {name: 'turb0', val: Turb[0],  form:"%.0f"},
       {name: 'turb1', val: Turb[1],  form:"%.0f"},
-      {name: 'rat',   val: Rat,      form:"%.0f *C"},
+      {name: 'rat',   val: Rat,      form:"%.0f °C"},
       {name: 'stab',  val: Stab,     form:"%.1f"}];
 
     ##### Messages #####
@@ -259,19 +259,19 @@ var EICASdsp = {
 
     setlistener(MsgKnob, func(n) {
       if (n.getValue() > msg_kb) msg_diff = 1;
-      if (n.getValue() < msg_kb) msg_diff =-1;      
+      if (n.getValue() < msg_kb) msg_diff =-1;
         msg_kb = n.getValue();
         me.scroll_msg();
     },0,0);
 
     setlistener(Flaps_sel, func(n) {
-      if (n.getValue() == 2) {
+      if (n.getValue() == 1) {
         me.flaps.flapsNeedle.setRotation(25*D2R).setVisible(dau2);
         me.fl = 1;
-     } else if (n.getValue() == 3) {
+     } else if (n.getValue() == 2) {
         me.flaps.flapsNeedle.setRotation(45*D2R).setVisible(dau2);
         me.fl = 2;
-      } else if (n.getValue() == 4) {
+      } else if (n.getValue() == 3) {
         me.flaps.flapsNeedle.setRotation(85*D2R).setVisible(dau2);
         me.fl = 0;
       } else {
@@ -340,7 +340,7 @@ var EICASdsp = {
         if (i<2) {
           upd_val = upd_val <= 0.21 ? 21 : upd_val*100;
           if (upd_val > 21) me.oilT[i].setTranslation(0,-(upd_val-21)*1.2);
-          else me.oilT[i].setTranslation(0,0);         
+          else me.oilT[i].setTranslation(0,0);
           if (upd_val > 127) {
             me.color = me.COLORS.red;
             me.oilT[i].setColor(me.color).setColorFill(me.color);
@@ -403,8 +403,8 @@ var EICASdsp = {
           else me.trans = upd_val *2.86;
           if (upd_val > 100) {
             me.fan[i-16].setColor(me.COLORS.red);
-            me.fan[i-14].setColor(me.COLORS.red);            
-            me.fan[4].setColor(me.COLORS.red); 
+            me.fan[i-14].setColor(me.COLORS.red);
+            me.fan[4].setColor(me.COLORS.red);
           } else {
             me.fan[i-16].setColor(me.COLORS.green);
             me.fan[4].setColor(me.COLORS.white);
@@ -417,19 +417,19 @@ var EICASdsp = {
           if((getprop(Ignit[i-16]) == 0 and getprop(Cycle_up[i-16])) or
               getprop(Ignit[i-16]) == 2) me.fan[i-9].setVisible(i==16 ? dau1 : dau2);
           else me.fan[i-9].hide();
-            
-          if(getprop(Wow) and !getprop(Rev[i-16]) 
+
+          if(getprop(Wow) and !getprop(Rev[i-16])
               and getprop(Throt[i-16]) < 0.80) {
             me.txt = "T/O";
             me.color = me.COLORS.white;
           } else {
             me.color = me.COLORS.green;
             if (getprop(Rev[i-16])) me.txt = "REV";
-            else if (getprop(Throt[i-16]) > 0.30 
+            else if (getprop(Throt[i-16]) > 0.30
                 and getprop(Throt[i-16]) < 0.70) me.txt = "CRU";
-            else if (getprop(Throt[i-16]) >= 0.70 
+            else if (getprop(Throt[i-16]) >= 0.70
                 and getprop(Throt[i-16]) < 0.80) me.txt = "CLB";
-            else if (getprop(Throt[i-16]) >= 0.80 
+            else if (getprop(Throt[i-16]) >= 0.80
                 and getprop(Throt[i-16]) < 0.90) me.txt = "T/O";
             else if (getprop(Throt[i-16]) >= 0.90) me.txt = "MTO";
             else me.txt = "";
@@ -450,13 +450,13 @@ var EICASdsp = {
         }
         ### ITT - Turbines ###
         else if (i>19 and i<22) {
-          if (getprop(Eng[i-20])) 
+          if (getprop(Eng[i-20]))
             me.trans = math.clamp(getprop(Itt[i-20])*78.6,10,100);
           else me.trans = (getprop(Itt[i-20]) or 0)*78.6;
           if (me.trans > 90.7) me.color = me.COLORS.red;
           else if (me.trans > 85.7) me.color = me.COLORS.amber;
           else me.color = me.COLORS.white;
-          me.color1 = upd_val >= 103 ? me.COLORS.red : me.COLORS.green;  
+          me.color1 = upd_val >= 103 ? me.COLORS.red : me.COLORS.green;
           if (me.trans > 70) me.trans = (me.trans*2.85)+(me.trans-70)*2.85;
           else me.trans = me.trans*2.85;
           me.rect = i==20 ? "rect(75,347,450,320)" : "rect(75,480,450,450)";
@@ -564,9 +564,9 @@ var EICASdsp = {
         me.color = me.COLORS.amber;
         ctrlPos.whiteLine.setColor(me.COLORS.white);
       } else rudder_fail = 0;
-      ctrlPos.rudderLimit.setVisible(rudder_fail > 0).setColor(me.color); 
+      ctrlPos.rudderLimit.setVisible(rudder_fail > 0).setColor(me.color);
       ctrlPos.rudderLimitValue.setText(sprintf("%.0f",getprop(RudderLimit)*100)~"%")
-              .setVisible(rudder_fail > 0).setColor(me.color); 
+              .setVisible(rudder_fail > 0).setColor(me.color);
     } else  ctrlPos.CtrlPos.hide();
 
     ### ENG ###
@@ -601,9 +601,9 @@ var EICASdsp = {
     line = 0;
     dsp_size = size(dsp0.vector)+size(dsp1.vector);
     setprop("instrumentation/eicas/messages",dsp_size); # for checklists
-    hidden_lines = dsp_size -12 > 0 ? dsp_size -12 : 0;  
+    hidden_lines = dsp_size -12 > 0 ? dsp_size -12 : 0;
 #    setprop("instrumentation/eicas/hidden-lines",hidden_lines);
-    me.msgDsp.removeAllChildren();    
+    me.msgDsp.removeAllChildren();
     if (size(dsp0.vector) > 0) {
       for (var i=0;i<size(dsp0.vector);i+=1) {
         me.msgDsp.createChild("text","dsp0")
@@ -640,7 +640,7 @@ var EICASdsp = {
       for (var i=12;i<dsp_size;i+=1) {
         append(hide_msg,dsp1.vector[i-size(dsp0.vector)]);
       }
-      sort_msg = sort(hide_msg,func(a,b) cmp(b,a));        
+      sort_msg = sort(hide_msg,func(a,b) cmp(b,a));
       spad_color = me.lcolor[left(sort_msg[0],1)];
       me.msgDsp.getElementById("spad").setColor(spad_color);
 
@@ -653,7 +653,7 @@ var EICASdsp = {
         .setStrokeLineWidth(4)
         .setColor(spad_color)
         .setColorFill(spad_color);
-      
+
         me.msgDsp.createChild("text","spadRnb")
           .setAlignment("center-baseline")
           .setFont("LiberationFonts/LiberationSansNarrow-Bold.ttf")
@@ -738,7 +738,7 @@ var EICASdsp = {
   },
 
   update_Fwc : func {
-    if ((getprop(Fwc[0]) and getprop(Fwc[1])) 
+    if ((getprop(Fwc[0]) and getprop(Fwc[1]))
         or (getprop(Fwc[0]) and getprop(SgRev) == -1)
         or (getprop(Fwc[1]) and getprop(SgRev) == 1)) {
       me.fwcFail.hide();me.msgDsp.show();
@@ -754,6 +754,7 @@ var EICASdsp = {
     eng.fadec0.setText(dau1 ? getprop(Fadec[0]) : "");
     eng.fadec1.setText(dau2 ? getprop(Fadec[1]) : "");
     me.flaps.Flaps.setVisible(dau2 and getprop(Flaps_sel) > 0);
+    me.flaps.Slats.setVisible(dau2 and getprop(Flaps_sel) > 0);
     me.flaps.flapsNeedle.setVisible(dau2);
   },
 
@@ -764,7 +765,6 @@ var eicas_setl = setlistener("sim/signals/fdm-initialized", func() {
   eicas.listen();
   eicas.update();
   eicas.menu(1);
-	print('EICAS Canvas ... Ok');
-	removelistener(eicas_setl); 
+	print('EICAS ... Ok');
+	removelistener(eicas_setl);
 },0,0);
-

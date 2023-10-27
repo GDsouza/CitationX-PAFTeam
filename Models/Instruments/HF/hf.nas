@@ -22,10 +22,10 @@ var HF = {
 	new: func() {
 		var m = {parents:[HF]};
 		m.canvas = canvas.new({
-			"name": "HF", 
+			"name": "HF",
 			"size": [1024, 1024],
 			"view": [420,420],
-			"mipmapping": 1 
+			"mipmapping": 1
 		});
 
 		m.canvas.addPlacement({"node": "HFscreen"});
@@ -42,7 +42,7 @@ var HF = {
 			m.text[i] = m.HF.getElementById(i);
 		}
     m.text_dot = m.HF.getElementById("dot");
-    
+
 		return m;
 	},
 
@@ -62,7 +62,7 @@ var HF = {
     var v = std.Vector.new(xfile);
     if (!v.contains("HFmem.xml")) {
       me.write_freq();
-    } 
+    }
 
 	  ### Load Memories ###
     hfVec = {};
@@ -84,24 +84,17 @@ var HF = {
 
 	  ### Prog Timer ###
     me.dg_timer = maketimer(0.3,func() {
-      if (t==0) {
-        me.digit[me.text_dg[prog-1]].hide();
-        if (getprop(mode)>=2 and prog==4) me.digit[me.text_dg[prog-2]].hide();
-      }
-      if (t==1) {
-        me.digit[me.text_dg[prog-1]].show();
-        if (getprop(mode)>=2 and prog==4) me.digit[me.text_dg[prog-2]].show();
-      }
+      me.digit[me.text_dg[prog-1]].setVisible(t==1 ? 1 : 0);
+      if (getprop(mode)>=2 and prog==4) me.digit[me.text_dg[prog-2]].setVisible(t==1 ? 1 : 0);
       t+=1;
-      if (t==2) {t=0}
+      if (t==2) t=0;
     });
 
 	  ### Error Timer ###
     me.err_timer = maketimer(0.3,func() {
-      if (t==0) me.text.err.hide();
-      if (t==1) me.text.err.show();
+      me.text.err.setVisible(t==1 ? 1 : 0);
       t+=1;
-      if (t==2) {t=0}
+      if (t==2) t=0;
     });
 
   }, # end of init
@@ -126,7 +119,7 @@ var HF = {
       } else {
         me.text.channel.show();
         me.text.ch.show();
-        me.display_freq(me.frq);        
+        me.display_freq(me.frq);
       }
 		},1,0);
 
@@ -142,7 +135,7 @@ var HF = {
         me.text.channel.show();
         me.text.ch.hide();
         me.text_dot.hide();
-        me.display_freq(me.a3);        
+        me.display_freq(me.a3);
         setprop(freq_nb,0);
       } else {
         me.text_dot.show();
@@ -150,11 +143,11 @@ var HF = {
           me.text.channel.hide();
           me.text.ch.hide();
           me.display_freq(me.freq);
-        } else {        
+        } else {
           me.text.channel.show();
           me.text.ch.show();
           me.text_dot.show();
-          me.display_freq(me.frq);        
+          me.display_freq(me.frq);
         }
       }
 		},1,0);
@@ -244,7 +237,7 @@ var HF = {
         name = data.getChild(hf_mem[getprop(chn)-1]);
         name.setValue(me.frq);
         io.write_properties(memPath,data);
-        hfVec[hf_mem[getprop(chn)-1]] = me.frq;        
+        hfVec[hf_mem[getprop(chn)-1]] = me.frq;
         if (me.dg_timer.isRunning) me.dg_timer.stop();
         me.text.dash.hide();
         me.digit[me.text_dg[prog-1]].show();
@@ -261,9 +254,9 @@ var HF = {
       chan9 : "020000",chan10 : "020000",chan11 : "020000",chan12 :"020000",
       chan13 : "020000",chan14 : "020000",chan15 : "020000",
       chan16 : "020000",chan17 : "020000",chan18 : "020000",chan19 : "020000"
-    });		
+    });
     io.write_properties(memPath,base);
-  }, 
+  },
 
   load_freq : func {
     data = io.read_properties(memPath);
@@ -290,10 +283,9 @@ var HF = {
 }; # end of HF
 
 #### Main ####
-var setl = setlistener("/sim/signals/fdm-initialized", func () {	
+var setl = setlistener("/sim/signals/fdm-initialized", func () {
 	var main = HF.new();
   main.init();
 	main.listen();
 removelistener(setl);
 });
-

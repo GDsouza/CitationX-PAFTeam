@@ -413,9 +413,9 @@ var FMS = {
 			      ### Descent ###
           if (getprop(toga)) setprop(tg_spd_kt,getprop(climb_kt));
 		      else if (getprop(dist_rem) <= 20) {
-              if (getprop(flaps)==2) setprop(tg_spd_kt,getprop(app5_spd));
-              else if (getprop(flaps)==3) setprop(tg_spd_kt,getprop(app15_spd));
-              else if (getprop(flaps)==4) setprop(tg_spd_kt,getprop(app35_spd));
+              if (getprop(flaps)==1) setprop(tg_spd_kt,getprop(app5_spd));
+              else if (getprop(flaps)==2) setprop(tg_spd_kt,getprop(app15_spd));
+              else if (getprop(flaps)==3) setprop(tg_spd_kt,getprop(app35_spd));
               else setprop(tg_spd_kt,200);
               me.fpsLim(0);
 		      }	else if (desc_flag){
@@ -482,6 +482,6 @@ var vsd_alt = func { # for VSD
 var fms_stl = setlistener("sim/signals/fdm-initialized", func {
 	var _fms = FMS.new();
 	_fms.listen();
-	print("FMS ... Ok");
+	print("FMS   ... Ok");
 	removelistener(fms_stl);
 },0,0);

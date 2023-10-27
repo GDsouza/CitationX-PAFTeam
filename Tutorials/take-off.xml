@@ -20,7 +20,7 @@
       <set>
         <property>controls/electric/stby-pwr</property>
         <value>1</value>
-      </set> 
+      </set>
      <set>
         <property>controls/electric/batt1-switch</property>
         <value>1</value>
@@ -32,7 +32,7 @@
       <set>
         <property>controls/electric/avionics-switch</property>
         <value>2</value>
-      </set> 
+      </set>
      <set>
         <property>controls/engines/engine/cutoff</property>
         <value>0</value>
@@ -138,7 +138,7 @@
         <condition>
 				<not-equals>
 					<property>controls/flight/flaps-select</property>
-						<value>3</value>
+						<value>2</value>
 				</not-equals>
         </condition>
       </error>
@@ -146,7 +146,7 @@
 				<condition>
 				  <equals>
 					  <property>controls/flight/flaps-select</property>
-						  <value>3</value>
+						  <value>2</value>
 				  </equals>
 				</condition>
       </exit>
@@ -168,7 +168,7 @@
 		    <scale>2.0</scale>
 			</marker>
       <error>
-        <condition>          
+        <condition>
 					<property>controls/lighting/taxi-light</property>
         </condition>
       </error>

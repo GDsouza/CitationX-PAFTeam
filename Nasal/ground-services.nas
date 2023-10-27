@@ -4,7 +4,7 @@ var spd = "/velocities/groundspeed-kt";
 
 var ground_services = {
 	init : func {
-	
+
 	  # Set them all to 0 if the aircraft is not stationary
 	  if (getprop("/velocities/groundspeed-kt") > 10) {
 		  setprop("/services/chokes", 0);
@@ -40,31 +40,31 @@ var ground_services = {
     if (getprop(wow) & getprop(spd) < 1) {
       if(!update_timer.isRunning) update_timer.start();
     } else {
-      setprop("/services/chokes",0); 
+      setprop("/services/chokes",0);
 	    setprop("/services/fuel-truck/enable",0);
 	    setprop("/services/fuel-truck/connect",0);
 	    setprop("/services/ext-pwr",0);
       if(update_timer.isRunning) update_timer.stop();
-    }	
+    }
   }, # end of update_controls
 
 	update : func {
-		  if(getprop("/services/chokes") | 
+		  if(getprop("/services/chokes") |
 		     getprop("/services/fuel-truck/enable") |
-		     getprop("/services/ext-pwr")){		   
+		     getprop("/services/ext-pwr")){
 		        setprop("controls/gear/brake-parking",1);
       } else {
-		    if(!getprop("services/chokes") & 
+		    if(!getprop("services/chokes") &
 		       !getprop("/services/fuel-truck/enable") &
-		       !getprop("/services/ext-pwr")){		   
+		       !getprop("/services/ext-pwr")){
             if(update_timer.isRunning) update_timer.stop();
         }
       }
-	
-		  # External Power Stuff	
+
+		  # External Power Stuff
 		  if (!getprop("/services/ext-pwr"))
 			  setprop("/controls/electric/external-power", 0);
-		
+
 		  # Fuel Truck Controls
 		  if (getprop("/services/fuel-truck/enable") and getprop("/services/fuel-truck/connect")) {
 			  if (getprop("/services/fuel-truck/transfer")) {
@@ -84,21 +84,21 @@ var ground_services = {
 				  } else {
 					  setprop("/services/fuel-truck/transfer", 0);
 					  screen.log.write("Refueling complete! Have a nice flight...", 1, 1, 1);
-				  }						
+				  }
 			  }
-			
-			  if (getprop("/services/fuel-truck/clean")) {			
-				  if (getprop("consumables/fuel/total-fuel-kg") > 90) {				
+
+			  if (getprop("/services/fuel-truck/clean")) {
+				  if (getprop("consumables/fuel/total-fuel-kg") > 90) {
 					  setprop("/consumables/fuel/tank/level-kg", getprop("/consumables/fuel/tank/level-kg") - 80);
 					  setprop("/consumables/fuel/tank[1]/level-kg", getprop("/consumables/fuel/tank/level-kg") - 80);
 					  setprop("/consumables/fuel/tank[2]/level-kg", getprop("/consumables/fuel/tank/level-kg") - 80);
-					  setprop("/consumables/fuel/tank[3]/level-kg", getprop("/consumables/fuel/tank/level-kg") - 80);				
+					  setprop("/consumables/fuel/tank[3]/level-kg", getprop("/consumables/fuel/tank/level-kg") - 80);
 				  } else {
 					  setprop("/services/fuel-truck/clean", 0);
 					  screen.log.write("Finished draining the fuel tanks...", 1, 1, 1);
-				  }			
-			  }	
-		  }		
+				  }
+			  }
+		  }
       if (!getprop("/services/fuel-truck/enable"))
         setprop("/services/fuel-truck/connect",0);
 	}, # end of update
@@ -116,7 +116,7 @@ var ground_services = {
         } else {
 			    setprop("/services/fuel-truck/transfer", 1);
 			    screen.log.write("Re-fueling process started...", 0, 0.584, 1);
-        }      
+        }
 	    } else
 		    screen.log.write("Please Enable and Connect the Fuel Truck First!", 1, 0, 0);
     } else return;
@@ -128,6 +128,6 @@ var serv_stl = setlistener("sim/signals/fdm-initialized", func {
 	ground_services.updateTimer();
 	ground_services.init();
 	ground_services.listen();
-	print("Ground Services ... Ok");
-	removelistener(serv_stl);	
+	print("Ground Services  ... Ok");
+	removelistener(serv_stl);
 },0,0);

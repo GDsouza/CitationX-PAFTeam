@@ -2,23 +2,23 @@
 ### C. Le Moigne (clm76) - 2019 ###
 
 ### Air Conditioning ###
-props.globals.initNode("/controls/air-conditioning/cabin/degC", 0, "DOUBLE");	
-props.globals.initNode("/controls/air-conditioning/cabin/temp-sel", 21, "DOUBLE");	
-props.globals.initNode("/controls/air-conditioning/cabin/rotation", 315, "DOUBLE");	
-props.globals.initNode("/controls/air-conditioning/cabin/pac",0, "INT");	
-props.globals.initNode("/controls/air-conditioning/cabin/auto",1, "BOOL");	
-props.globals.initNode("/controls/air-conditioning/cabin/inflow",0, "BOOL");	
-props.globals.initNode("/controls/air-conditioning/cabin/remote",0, "BOOL");	
-props.globals.initNode("/controls/air-conditioning/cockpit/degC", 0, "DOUBLE");	
-props.globals.initNode("/controls/air-conditioning/cockpit/temp-sel", 21, "DOUBLE");	
-props.globals.initNode("/controls/air-conditioning/cockpit/rotation", 315, "DOUBLE");	
-props.globals.initNode("/controls/air-conditioning/cockpit/auto",1, "BOOL");	
-props.globals.initNode("/controls/air-conditioning/cockpit/pac", 0, "INT");	
-props.globals.initNode("/controls/air-conditioning/cockpit/inflow", 0, "BOOL");	
-props.globals.initNode("/controls/air-conditioning/select", 2, "INT");	
-props.globals.initNode("/controls/air-conditioning/isol-valve", 0, "BOOL");	
-props.globals.initNode("/controls/air-conditioning/bleed-air/left-engine", 1, "INT");	
-props.globals.initNode("/controls/air-conditioning/bleed-air/right-engine", 1, "INT");	
+props.globals.initNode("/controls/air-conditioning/cabin/degC", 0, "DOUBLE");
+props.globals.initNode("/controls/air-conditioning/cabin/temp-sel", 21, "DOUBLE");
+props.globals.initNode("/controls/air-conditioning/cabin/rotation", 315, "DOUBLE");
+props.globals.initNode("/controls/air-conditioning/cabin/pac",0, "INT");
+props.globals.initNode("/controls/air-conditioning/cabin/auto",1, "BOOL");
+props.globals.initNode("/controls/air-conditioning/cabin/inflow",0, "BOOL");
+props.globals.initNode("/controls/air-conditioning/cabin/remote",0, "BOOL");
+props.globals.initNode("/controls/air-conditioning/cockpit/degC", 0, "DOUBLE");
+props.globals.initNode("/controls/air-conditioning/cockpit/temp-sel", 21, "DOUBLE");
+props.globals.initNode("/controls/air-conditioning/cockpit/rotation", 315, "DOUBLE");
+props.globals.initNode("/controls/air-conditioning/cockpit/auto",1, "BOOL");
+props.globals.initNode("/controls/air-conditioning/cockpit/pac", 0, "INT");
+props.globals.initNode("/controls/air-conditioning/cockpit/inflow", 0, "BOOL");
+props.globals.initNode("/controls/air-conditioning/select", 2, "INT");
+props.globals.initNode("/controls/air-conditioning/isol-valve", 0, "BOOL");
+props.globals.initNode("/controls/air-conditioning/bleed-air/left-engine", 1, "INT");
+props.globals.initNode("/controls/air-conditioning/bleed-air/right-engine", 1, "INT");
 
 ### Alarms ###
 props.globals.initNode("sim/alarms/overspeed-alarm",0,"BOOL");
@@ -421,7 +421,7 @@ props.globals.initNode("controls/flight/rudder-shutoff",0,"BOOL");
 props.globals.initNode("controls/flight/rudder-fail",0,"BOOL");
 
 ### Services ###
-props.globals.initNode("/services/chokes", 0, "BOOL");	
+props.globals.initNode("/services/chokes", 0, "BOOL");
 props.globals.initNode("/services/ext-pwr", 0, "BOOL");
 props.globals.initNode("/services/fuel-truck/enable", 0, "BOOL");
 props.globals.initNode("/services/fuel-truck/connect", 0, "BOOL");
@@ -440,5 +440,3 @@ for(var n=0;n<2;n+=1) {
 
 ### Voice Recorder ###
 props.globals.initNode("instrumentation/cvr/light",0,"BOOL");
-
-

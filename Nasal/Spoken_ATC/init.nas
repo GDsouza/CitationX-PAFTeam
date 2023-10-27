@@ -8,7 +8,7 @@
 
 
 var init = func {
-  var root = getprop("/sim/aircraft-dir")~"/Nasal/Spoken_ATC"; 
+  var root = getprop("/sim/aircraft-dir")~"/Nasal/Spoken_ATC";
   foreach(var f; ['atc_tools.nas', 'voice.nas']) {
     io.load_nasal( root ~ "/" ~ f, "spoken_atc" );
   };
@@ -16,11 +16,10 @@ var init = func {
   io.read_properties(root ~ "/" ~"addon-config.xml","");
   io.read_properties(root ~ "/" ~"phraseology.xml", "/satc/phrases");
   io.read_properties(root ~ "/" ~"except.apt.xml", "/satc/exceptions");
-  print("Spoken ATC ... Ok");
+  print("Spoken ATC       ... Ok");
 }
 
 var setl = setlistener("/sim/signals/fdm-initialized", func () {
   init();
 	removelistener(setl);
 },0,0);
-

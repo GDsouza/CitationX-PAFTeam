@@ -588,7 +588,7 @@ var toga_throttles = func {
 ###  Main ###
 var fd_stl = setlistener("sim/signals/fdm-initialized", func {
   geo_coord = geo.Coord.new();
-  print("Flight Director ... Ok");
+  print("Flight Director  ... Ok");
 	settimer(update_fd,6);
 	removelistener(fd_stl);
 },0,0);

@@ -18,10 +18,11 @@ var checkVersion = func {
 };
 
 aircraft.livery.init("Models/Liveries");
-var FHmeter = aircraft.timer.new("/instrumentation/clock/flight-meter-sec",60,0); 
+var FHmeter = aircraft.timer.new("/instrumentation/clock/flight-meter-sec",60,0);
 var Chrono = [aircraft.timer.new("/instrumentation/mfd/chrono", 1,1),
              aircraft.timer.new("/instrumentation/mfd[1]/chrono", 1,1)];
 var flaps = "controls/flight/flaps";
+var slats = "controls/flight/slats";
 var fh_tot = "instrumentation/clock/flight-hour-tot";
 var fh_sec = "instrumentation/clock/flight-meter-sec";
 var fh_get = 0;
@@ -76,7 +77,7 @@ var data = nil;
 #  },
 #}; # end of TireSpeed
 
-#Jet Engine Helper class 
+#Jet Engine Helper class
 var JetEngine = {
   new : func(eng_num){
     m = { parents : [JetEngine]};
@@ -100,7 +101,7 @@ var JetEngine = {
     m.oilp = "engines/engine["~eng_num~"]/oil-pressure-psi";
     m.running = "controls/engines/engine["~eng_num~"]/running";
     m.pack = "controls/pressurization/pack["~eng_num~"]/pack-on";
-    m.sysoil = "systems/hydraulics/psi-norm["~eng_num~"]"; 
+    m.sysoil = "systems/hydraulics/psi-norm["~eng_num~"]";
     m.boost_p = "controls/fuel/tank["~eng_num~"]/boost-pump";
     m.diseng = "controls/engines/disengage";
     m.synchro = "controls/engines/synchro";
@@ -153,7 +154,7 @@ var JetEngine = {
       setprop(me.pack,0);
     }
     if (getprop(me.starter) and !getprop(me.cutoff) and getprop (me.el_start))
-      setprop(me.cycle_up,1);     
+      setprop(me.cycle_up,1);
 
     me.thr = getprop(me.throttle);
     if(me.engine_on){
@@ -189,6 +190,7 @@ var JetEngine = {
     ### Engines Oil Pressure Display ###
      setprop(me.oilp,getprop(me.sysoil)*56); # nominal press = 56 psi
 
+#    if (getprop("accelerations/pilot-gdamped") > 1.5) print("G = ",getprop("accelerations/pilot-gdamped"));
   }, # end of update
 
   spool_up : func(scnds){
@@ -257,7 +259,7 @@ setlistener("/sim/current-view/internal", func(n) {
 			setprop("sim/model/show-pilot",getprop("sim/model/mem-yoke-L"));
 			setprop("sim/model/show-yoke-R",getprop("sim/model/mem-yoke-R"));
 			setprop("sim/model/show-copilot",getprop("sim/model/mem-yoke-R"));
-		} 
+		}
 		else {
 			setprop("sim/model/show-yoke-L",1);
 			setprop("sim/model/show-yoke-R",1);
@@ -269,11 +271,11 @@ setlistener("/sim/current-view/internal", func(n) {
 setlistener("/gear/gear[0]/wow", func(n){
     if (n.getValue()){
         FHmeter.stop();
-        setprop("controls/engines/grnd-idle",1);			
+        setprop("controls/engines/grnd-idle",1);
         setprop("autopilot/locks/fms-gs",0);
         FH_write();
     } else {
-        setprop("controls/engines/grnd-idle",0);			
+        setprop("controls/engines/grnd-idle",0);
         FHmeter.start();
         fh_get = getprop(fh_tot);
 				### raz clock to prevent restart on bounce ###
@@ -290,10 +292,10 @@ setlistener(fh_sec, func {
 ### Flaps ###
 setlistener("controls/flight/flaps-select", func(n) {
   if (n.getValue() == 0) setprop(flaps,0);
-  if (n.getValue() == 1) setprop(flaps,0.0428);
-  if (n.getValue() == 2) setprop(flaps,0.142);
-  if (n.getValue() == 3) setprop(flaps,0.428);
-  if (n.getValue() == 4) setprop(flaps,1);
+  if (n.getValue() == 1) setprop(flaps,0.142);
+  if (n.getValue() == 2) setprop(flaps,0.428);
+  if (n.getValue() == 3) setprop(flaps,1);
+  if (n.getValue() > 0) setprop(slats,1);
 },0,0);
 
 ### Chrono ###
@@ -325,7 +327,7 @@ var el_time = func(x,elec,et) {
 	    setprop("instrumentation/mfd["~x~"]/etx",elt[x]);
 	    if(elt[x] == 1) Chrono[x].start();
 	    if(elt[x] == 2) Chrono[x].stop();
-	    if(elt[x] == 3) Chrono[x].reset();		
+	    if(elt[x] == 3) Chrono[x].reset();
 	  }
   } else {
       Chrono[x].stop();
@@ -336,7 +338,7 @@ var el_time = func(x,elec,et) {
 }
 
 var FH_load = func{
-    ### Create FH Path if not exists ### 
+    ### Create FH Path if not exists ###
 		var path = os.path.new(getprop("/sim/fg-home")~"/Export/CitationX/create.txt");
     if (!path.exists()) path.create_dir();
 
@@ -370,14 +372,14 @@ controls.pilots = func() {
 	if (getprop("sim/model/show-yoke-L") == 0) {
 		setprop("sim/model/show-pilot",0);
 		setprop("sim/model/mem-yoke-L",0);
-	} else {			
+	} else {
 		setprop("sim/model/show-pilot",1);
 		setprop("sim/model/mem-yoke-L",1);
 	}
 	if (getprop("sim/model/show-yoke-R") == 0) {
 		setprop("sim/model/show-copilot",0);
 		setprop("sim/model/mem-yoke-R",0);
-	} else {			
+	} else {
 		setprop("sim/model/show-copilot",1);
 		setprop("sim/model/mem-yoke-R",1);
 	}
@@ -388,7 +390,7 @@ controls.flapsDown = func(step) {
 		flaps_sel = "controls/flight/flaps-select";
     if (step == 2) setprop(flaps_sel,0);
     else {
-      if (flaps_pos + step > 4 or flaps_pos+step < 0) return;
+      if (flaps_pos + step > 3 or flaps_pos+step < 0) return;
 		  setprop(flaps_sel,flaps_pos+step);
     }
 }
@@ -415,7 +417,7 @@ var Startup = func{
     setprop("controls/lighting/anti-coll",2);
     setprop("controls/lighting/emer-lights",2);
     setprop("controls/lighting/seat-belts",1);
-		setprop("controls/flight/flaps-select",3);
+		setprop("controls/flight/flaps-select",2);
 		setprop("controls/anti-ice/lh-pitot",1);
 		setprop("controls/anti-ice/rh-pitot",1);
 		setprop("controls/anti-ice/lh-ws",1);
@@ -500,12 +502,12 @@ var tables_anim = func(i) {
 						Cache.close();
 						timer_open.stop();
 					}
-				}				
-			}			
+				}
+			}
 		}
 	});
 	if (getprop("controls/tables/table"~i~"/extend") and !getprop(cc)) {
-		Cache.open();			
+		Cache.open();
 		timer_open.start();
 	}
 
@@ -555,7 +557,7 @@ var citation_stl = setlistener("/sim/signals/fdm-initialized", func {
 #    setprop("sim/model/shadow-2d",1);
 #    setprop("sim/rendering/shaders/model",1);
     setprop("services/ext-pwr",1);
-		FH_load();   		
+		FH_load();
     removelistener(citation_stl);
 },0,0);
 
@@ -572,10 +574,9 @@ var update_systems = func{
     if(wspd>1.0) wspd = 1.0;
     if(wspd<0.001) wspd = 0.001;
     rudder_pos = getprop("controls/flight/rudder") or 0;
-    if (getprop("systems/electrical/outputs/nose-whl-steering")) 
+    if (getprop("systems/electrical/outputs/nose-whl-steering"))
       setprop("/controls/gear/steering",-rudder_pos*wspd);
     else setprop("/controls/gear/steering",0);
 
     settimer(update_systems,0);
 }
-

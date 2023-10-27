@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?> 
+<?xml version="1.0" encoding="ISO-8859-1"?>
 
 <PropertyList>
 
@@ -607,7 +607,7 @@
 
     <animation>
         <type>translate</type>
-        <object-name>ParkBrake</object-name>	
+        <object-name>ParkBrake</object-name>
         <property>controls/gear/brake-parking</property>
 				<factor>0.03</factor>
         <axis>
@@ -671,10 +671,9 @@
         <property>controls/flight/flaps-select</property>
         <interpolation>
             <entry><ind>0</ind><dep>0</dep></entry>
-            <entry><ind>1</ind><dep>0.0117</dep></entry>
-            <entry><ind>2</ind><dep>0.0275</dep></entry>
-            <entry><ind>3</ind><dep>0.0475</dep></entry>
-            <entry><ind>4</ind><dep>0.0724</dep></entry>
+            <entry><ind>1</ind><dep>0.0275</dep></entry>
+            <entry><ind>2</ind><dep>0.0475</dep></entry>
+            <entry><ind>3</ind><dep>0.0724</dep></entry>
         </interpolation>
         <axis>
             <x>0.996</x>
@@ -702,7 +701,7 @@
 				<property>controls/flight/flaps-select</property>
 				<mapping>nasal</mapping>
 				<script>
-					var modes = ['UP','SLATS','5 deg','15 deg','FULL'];
+					var modes = ['UP','5 deg','15 deg','FULL'];
 					return modes[arg[0]];
 				</script>
 			</binding>
@@ -912,7 +911,7 @@
 				  <not>
 					  <property>controls/engines/engine/cutoff</property>
 			    </not>
-				</condition> 
+				</condition>
 				<command>property-adjust</command>
 					<property>/controls/engines/engine/throttle</property>
 					<factor>0.05</factor>
@@ -928,7 +927,7 @@
 						  <property>controls/engines/engine/cutoff</property>
 				    </not>
           </and>
-				</condition> 
+				</condition>
 				<command>property-adjust</command>
 					<property>/controls/engines/engine[1]/throttle</property>
 					<factor>0.05</factor>
@@ -1107,7 +1106,7 @@
 				  <not>
 					  <property>controls/engines/engine[1]/cutoff</property>
 			    </not>
-				</condition> 
+				</condition>
 				<command>property-adjust</command>
 					<property>/controls/engines/engine[1]/throttle</property>
 					<factor>0.05</factor>
@@ -1123,7 +1122,7 @@
               <property>controls/engines/engine[1]/cutoff</property>
             </not>
           </and>
-				</condition> 
+				</condition>
 				<command>property-adjust</command>
 					<property>/controls/engines/engine[1]/throttle</property>
 					<factor>0.05</factor>
@@ -1198,7 +1197,7 @@
       <binding>
         <command>nasal</command>
           <script>controls.synchro()</script>
-      </binding>         
+      </binding>
     </action>
   </animation>
 
@@ -1783,7 +1782,7 @@
       </mod-up>
       <binding>
         <command>nasal</command>
-        <script>controls.aileronTrim(-5);</script>          
+        <script>controls.aileronTrim(-5);</script>
       </binding>
     </action>
     <hovered>
@@ -1816,7 +1815,7 @@
       </mod-up>
       <binding>
       <command>nasal</command>
-      <script>controls.aileronTrim(5);</script>          
+      <script>controls.aileronTrim(5);</script>
       </binding>
     </action>
     <hovered>
@@ -1963,7 +1962,7 @@
         </binding>
       </mod-up>
     </action>
-  </animation> 
+  </animation>
 
   <animation>
         <type>textranslate</type>

@@ -40,20 +40,20 @@ var RMU = {
 		var m = {parents:[RMU]};
     if (!x) {
 		  m.rmu = canvas.new({
-			  "name": "RMU-L", 
+			  "name": "RMU-L",
 			  "size": [1024, 1024],
 			  "view": [800, 1024],
-			  "mipmapping": 1 
+			  "mipmapping": 1
 		  });
 		  m.rmu.addPlacement({"node": "RMU.screenL"});
 		  m.group = m.rmu.createGroup();
 		  canvas.parsesvg(m.group, "Models/Instruments/RMU/rmu.svg");
     } else {
 		  m.rmu = canvas.new({
-			  "name": "RMU-R", 
+			  "name": "RMU-R",
 			  "size": [1024, 1024],
 			  "view": [800, 1024],
-			  "mipmapping": 1 
+			  "mipmapping": 1
 		  });
 		  m.rmu.addPlacement({"node": "RMU.screenR"});
 		  m.group = m.rmu.createGroup();
@@ -67,7 +67,7 @@ var RMU = {
 					.horiz(-286)
 					.close()
 					.setColor(0.95,0.75,0)
-					.setStrokeLineWidth(10)			
+					.setStrokeLineWidth(10)
           .setVisible(1);
 
 		m.mem = m.rmu.createGroup();
@@ -79,7 +79,7 @@ var RMU = {
 					.horiz(-420)
 					.close()
 					.setColor(0.95,0.75,0)
-					.setStrokeLineWidth(10)			
+					.setStrokeLineWidth(10)
 					.setVisible(0);
 
 		m.mem.setVisible(0);
@@ -120,7 +120,7 @@ var RMU = {
 	}, # end of new
 
   init : func(x) {
-        ### Create CitationX Path if not exists ### 
+        ### Create CitationX Path if not exists ###
     var RMU_path = os.path.new(getprop("/sim/fg-home")~"/Export/CitationX/create.txt");
     if (!RMU_path.exists()) {
       RMU_path.create_dir();
@@ -138,9 +138,9 @@ var RMU = {
 		    navMem1 : 0,navMem2 : 0,navMem3 : 0,navMem4 : 0,navMem5 : 0,
 		    navMem6 : 0,navMem7 : 0,navMem8 : 0,navMem9 : 0,navMem10 : 0,
 		    navMem11 : 0,navMem12 : 0
-	    });		
+	    });
 	    io.write_properties(memPath[x],base);
-    } 
+    }
 
   	### Create vector for memories ###
     memVec[x] = std.Vector.new();
@@ -161,7 +161,7 @@ var RMU = {
 							    "navMem9","navMem10","navMem11","navMem12"];
     data[x] = io.read_properties(memPath[x]);
     foreach(var i;nav_mem) navVec[x][i] = data[x].getValue(i);
-    
+
     ### Dme Init ###
     me.text.dmeFreq.hide();
     me.text.dmeId.hide();
@@ -172,15 +172,15 @@ var RMU = {
     var src = props.globals.getNode("/instrumentation/tacan");
     var dst = props.globals.getNode("/instrumentation/tacan[1]");
     props.copy(src,dst);
-    
-    ### Init Tacan[0] ###   
+
+    ### Init Tacan[0] ###
     var path = "instrumentation/tacan/frequencies/selected-channel[";
     setprop(path~1~"]","0");
     setprop(path~2~"]","9");
     setprop(path~3~"]","9");
     setprop(path~4~"]","X");
 
-    ### Init Tacan[1] ###   
+    ### Init Tacan[1] ###
     path = "instrumentation/tacan[1]/frequencies/selected-channel[";
     setprop(path~1~"]","0");
     setprop(path~2~"]","7");
@@ -233,13 +233,13 @@ var RMU = {
       me.display(x);
 			for (var i=0;i<12;i+=1) {
 				if (sprintf("%.3f",comVec[x][com_mem[i]]) == sprintf("%.3f",n.getValue())) {
-					me.text.memCom.setText("MEMORY-"~sprintf("%d",i+1));							
+					me.text.memCom.setText("MEMORY-"~sprintf("%d",i+1));
 					break;
 				}	else {
 					me.text.memCom.setText("TEMP-"~sprintf("%d",i+1));
 					if (comVec[x][com_mem[i]] == 0) {
 						break;
-					}					
+					}
   			}
 			}
 		},0,0);
@@ -264,7 +264,7 @@ var RMU = {
       ##### NAV #####
 		setlistener(nav_freq[x], func(n) {
        me.display(x);
-      if (dme[x] == 0) setprop(dme_freq[x],getprop(nav_freq[x]));     
+      if (dme[x] == 0) setprop(dme_freq[x],getprop(nav_freq[x]));
       else me.dmeDisplay(x,0);
 		},1,0);
 
@@ -273,13 +273,13 @@ var RMU = {
       me.display(x);
 			for (var i=0;i<12;i+=1) {
 				if (sprintf("%.3f",navVec[x][nav_mem[i]]) == sprintf("%.3f",n.getValue())) {
-					me.text.memNav.setText("MEMORY-"~sprintf("%d",i+1));							
+					me.text.memNav.setText("MEMORY-"~sprintf("%d",i+1));
 					break;
 				}	else {
 					me.text.memNav.setText("TEMP-"~sprintf("%d",i+1));
 					if (navVec[x][nav_mem[i]] == 0) {
 						break;
-					}					
+					}
 				}
 			}
 		},0,0);
@@ -302,11 +302,11 @@ var RMU = {
 		},0,0);
 
       ##### ADF #####
-		setlistener("instrumentation/adf["~x~"]/frequencies/selected-khz", func {	
+		setlistener("instrumentation/adf["~x~"]/frequencies/selected-khz", func {
       me.display(x);
 		},1,0);
 
-		setlistener("instrumentation/adf["~x~"]/mode", func {	
+		setlistener("instrumentation/adf["~x~"]/mode", func {
       me.display(x);
 		},1,0);
 
@@ -322,34 +322,33 @@ var RMU = {
 			setprop("instrumentation/transponder/unit["~x~"]/display-mode",mode_dsp);
 		},0,1);
 
-		setlistener("instrumentation/transponder/unit["~x~"]/id-code", func(n) {	
+		setlistener("instrumentation/transponder/unit["~x~"]/id-code", func(n) {
       me.display(x);
 			setprop("instrumentation/transponder/id-code",n.getValue());
 			setprop("instrumentation/transponder/transmitted-id",n.getValue());
 		},1,0);
 
-		setlistener("instrumentation/transponder/unit["~x~"]/display-mode", func {	
-			me.trsp_mode(x);			
+		setlistener("instrumentation/transponder/unit["~x~"]/display-mode", func {
+			me.trsp_mode(x);
 		},0,0);
 
-		setlistener("instrumentation/transponder/ident", func() {	
+		setlistener("instrumentation/transponder/ident", func() {
       if (getprop("instrumentation/rmu/unit["~x~"]/btn-id")) {
         setprop("instrumentation/transponder/unit["~x~"]/ident",1);
       } else {setprop("instrumentation/transponder/unit["~x~"]/ident",0)}
-      
+
 		},0,0);
 
     setlistener("instrumentation/transponder/unit["~x~"]/ident",func(n) {
-        var t = 0;
-        var id_timer = maketimer (0.3, func() {
-          if (t==0) {me.text.ident.setVisible(1)}
-          if (t==1) {me.text.ident.setVisible(0)}
-          t+=1;
-          if (t==2) {t=0}
-          if (!n.getValue()) {id_timer.stop();me.text.ident.setVisible(0)}
-        });
-      if (n.getValue()) {id_timer.start()}
-			else {me.text.ident.setVisible(0)}
+      var t = 0;
+      var id_timer = maketimer (0.3, func() {
+        me.text.ident.setVisible(t==0 ? 1 : 0);
+        t+=1;
+        if (t==2) t=0;
+        if (!n.getValue()) {id_timer.stop();me.text.ident.setVisible(0)}
+      });
+      if (n.getValue()) id_timer.start();
+			else me.text.ident.setVisible(0);
 		},0,0);
 
     setlistener("instrumentation/transponder/unit["~x~"]/id-code[1]",func {
@@ -360,18 +359,18 @@ var RMU = {
       me.idCode(x);
     },0,0);
 
-		setlistener("instrumentation/rmu/trsp-num", func {	
+		setlistener("instrumentation/rmu/trsp-num", func {
 			me.trsp_mode(x);
 		},0,0);
 
       ##### DME - TACAN #####
-		setlistener("instrumentation/rmu/unit["~x~"]/dme", func(n) {	
+		setlistener("instrumentation/rmu/unit["~x~"]/dme", func(n) {
       if (n.getValue()) dme[x] +=1;
       if (dme[x] == 3) dme[x] = 0;
       setprop(dme_sel[x],dme[x]);
     },0,0);
 
-		setlistener(dme_sel[x], func(n) {	
+		setlistener(dme_sel[x], func(n) {
       if (n.getValue() == 0) {
         me.text.dmeFreq.hide();
         me.text.dmeId.hide();
@@ -383,7 +382,7 @@ var RMU = {
         setprop(dme_freq[x],getprop(nav_freq[x]));
         me.dmeDisplay(x,0);
       }
-      if (n.getValue() == 1) {        
+      if (n.getValue() == 1) {
         me.text.dmeFreq.show();
         me.text.dmeId.show();
         me.text.tacChan.hide();
@@ -394,7 +393,7 @@ var RMU = {
         me.dmeDisplay(x,0);
       }
 
-      if (n.getValue() == 2) {        
+      if (n.getValue() == 2) {
         me.text.dmeFreq.hide();
         me.text.dmeId.show();
         me.text.tacChan.show();
@@ -413,7 +412,7 @@ var RMU = {
       }
 		},0,0);
 
-		setlistener(dme_freq[x], func(n) {	
+		setlistener(dme_freq[x], func(n) {
       if (dme_sel[x] == 2) me.dmeDisplay(x,1); # tacan
       else me.dmeDisplay(x,0); # dme
     },0,0);
@@ -424,7 +423,7 @@ var RMU = {
       setprop(dme_freq[x],getprop(tac_freq[x]));
     },0,0);
 
-		setlistener(nav_src, func(n) {	
+		setlistener(nav_src, func(n) {
       if (dme_sel[x] == 2) me.dmeColor(x,1); # tacan
       else me.dmeColor(x,0); # dme
     },0,0);
@@ -438,7 +437,7 @@ var RMU = {
 				if (getprop(rmu_sel[x])==0){
           var n = 0;
 					foreach(var i;com_mem) {
-						memVec[x].vector[n] = comVec[x][i];	
+						memVec[x].vector[n] = comVec[x][i];
             n+=1;
   				}
         }
@@ -471,9 +470,9 @@ var RMU = {
 			if (n.getValue() == 3) me.cdr.setTranslation(325,230);
 			if (n.getValue() == 4) me.cdr.setTranslation(0,335);
 			if (n.getValue() == 5) me.cdr.setTranslation(325,335);
-		},0,1);	
+		},0,1);
 
-		setlistener("instrumentation/rmu/unit["~x~"]/sto", func(n) {	
+		setlistener("instrumentation/rmu/unit["~x~"]/sto", func(n) {
 			if (n.getValue()) {
 				if (getprop(rmu_sel[x]) == 0) {
 					if (comVec[x][com_mem[0]] == 0) {
@@ -542,7 +541,7 @@ var RMU = {
             if (mem_dsp == 5) {
               setprop("instrumentation/rmu/unit["~x~"]/more",6);
               mem_dsp = -1;
-            } 
+            }
             setprop("instrumentation/rmu/unit["~x~"]/mem-dsp",mem_dsp+1);
 					} else {
 						full = me.full;
@@ -558,7 +557,7 @@ var RMU = {
 							var name = data[x].getChild(com_mem[i]);
 							name.setDoubleValue(comVec[x][com_mem[i]]);
 							io.write_properties(memPath[x],data[x]);
-						}										
+						}
 					}
 				if (getprop(rmu_sel[x]) == 1) {
 					for (var i=0;i<12;i+=1) {
@@ -566,26 +565,26 @@ var RMU = {
 						var name = data[x].getChild(nav_mem[i]);
 						name.setDoubleValue(navVec[x][nav_mem[i]]);
 						io.write_properties(memPath[x],data[x]);
-					}										
+					}
 				}
 				me.refreshMem(x);
 			}
 		},0,1);
 
-		setlistener("instrumentation/rmu/unit["~x~"]/mem-freq", func(n) {	
+		setlistener("instrumentation/rmu/unit["~x~"]/mem-freq", func(n) {
 			if (getprop("instrumentation/rmu/unit["~x~"]/insert")) {
         more = getprop("instrumentation/rmu/unit["~x~"]/more");
 				memVec[x].vector[getprop("instrumentation/rmu/unit["~x~"]/mem-dsp")+more] = n.getValue();
-			}			
+			}
 		},0,0);
 
-		setlistener("instrumentation/rmu/unit["~x~"]/delete", func(n) {	
+		setlistener("instrumentation/rmu/unit["~x~"]/delete", func(n) {
 			if (n.getValue()) {
 				if (!getprop("instrumentation/rmu/unit["~x~"]/insert")) {
 					me.sel = getprop("instrumentation/rmu/unit["~x~"]/mem-dsp");
 					more = getprop("instrumentation/rmu/unit["~x~"]/more");
 					if (more == 6) {me.sel = me.sel+more}
-					if (getprop(rmu_sel[x]) == 0) {					
+					if (getprop(rmu_sel[x]) == 0) {
 						memVec[x].remove(comVec[x][com_mem[me.sel]]);
 						memVec[x].insert(11,0);
 						for (var i=0;i<12;i+=1) {
@@ -593,9 +592,9 @@ var RMU = {
 							var name = data[x].getChild(com_mem[i]);
 							name.setDoubleValue(comVec[x][com_mem[i]]);
 							io.write_properties(memPath[x],data[x]);
-						}										
+						}
 					}
-					if (getprop(rmu_sel[x]) == 1) {					
+					if (getprop(rmu_sel[x]) == 1) {
 						memVec[x].remove(navVec[x][nav_mem[me.sel]]);
 						memVec[x].insert(11,0);
 						for (var i=0;i<12;i+=1) {
@@ -603,7 +602,7 @@ var RMU = {
 							var name = data[x].getChild(nav_mem[i]);
 							name.setDoubleValue(navVec[x][nav_mem[i]]);
 							io.write_properties(memPath[x],data[x]);
-						}										
+						}
 					}
 					me.refreshMem(x);
 					if (memVec[x].vector[0] == 0) {me.fra.hide()}
@@ -611,12 +610,12 @@ var RMU = {
 			}
 		},0,0);
 
-		setlistener("instrumentation/rmu/unit["~x~"]/test", func(n) {	
+		setlistener("instrumentation/rmu/unit["~x~"]/test", func(n) {
 			var p = 1;
 			var timerTst = maketimer(2,func() {
 				tstDsp(p,timerTst);
 				p+=1;
-				if (p==9) {timerTst.stop()}
+				if (p==9) timerTst.stop();
 			});
 
 			if (n.getValue()){
@@ -635,12 +634,12 @@ var RMU = {
 			} else {
 				me.test.setVisible(0);
 				me.group.setVisible(1);
-				me.mem.setVisible(0);		
+				me.mem.setVisible(0);
 				if (timerTst.isRunning) {timerTst.stop()}
 			}
 		},0,0);
 
-	}, # end of listen	
+	}, # end of listen
 
   display : func(x) {
     if (me.comm_enabled) {
@@ -696,7 +695,7 @@ var RMU = {
 			me.freq[i] = me.mem.getElementById(i);
 			me.vfreq.append(me.mem.getElementById(i));
 		}
-		
+
 		### Line number ###
 		me.num_val = ["num1","num2","num3","num4","num5","num6"];
 		me.vnum = std.Vector.new();
@@ -720,13 +719,11 @@ var RMU = {
 
 	update : func(x) { ### Memories runtime update ###
 		me.timer = maketimer(0.1,func() {
-			if (getprop(rmu_sel[x])!=1) {me.tit.setText("Com 1")}
-			if (getprop(rmu_sel[x])==1) {me.tit.setText("Nav 1")}
-			if (memVec[x].vector[6]==0) {
-				setprop("instrumentation/rmu/unit["~x~"]/more",0);
-			}
+			if (getprop(rmu_sel[x])!=1) me.tit.setText("Com 1");
+			if (getprop(rmu_sel[x])==1) me.tit.setText("Nav 1");
+			if (memVec[x].vector[6]==0) setprop("instrumentation/rmu/unit["~x~"]/more",0);
 			me.mem_redraw(x);
-			if (memVec[x].vector[0]!=0){me.mem_select(x)}
+			if (memVec[x].vector[0]!=0)me.mem_select(x);
 		});
 		me.timer.start();
 	}, # end of update
@@ -752,7 +749,7 @@ var RMU = {
 		for (var i=0;i<12;i+=1) {
 			if (memVec[x].vector[i]== 0) {me.max_sel=i-1;break}
 			else {me.max_sel = 11}
-		}		
+		}
 		me.select = getprop("instrumentation/rmu/unit["~x~"]/mem-dsp");
 		var n=nil;
 		if (getprop("instrumentation/rmu/unit["~x~"]/more") == 0) {n = 0}
@@ -768,7 +765,7 @@ var RMU = {
 			if (me.select == 3) {me.fra.setTranslation(0,400);me.fra.show()}
 			if (me.select == 4) {me.fra.setTranslation(0,560);me.fra.show()}
 			if (me.select == 5) {me.fra.setTranslation(0,680);me.fra.show()}
-		}	
+		}
 	}, # end of mem_select
 
 	trsp_mode : func(x) { ### Transponder ###
@@ -780,18 +777,18 @@ var RMU = {
     } else {
       me.text.trspNum.setText(sprintf("%d",getprop("instrumentation/rmu/trsp-num")));
       if (x == 0) {
-		    if (getprop("instrumentation/rmu/trsp-num") == 2) {				
+		    if (getprop("instrumentation/rmu/trsp-num") == 2) {
           me.text.trspMode.setText("STANDBY");
 		    } else {
 			    me.text.trspMode.setText(getprop("instrumentation/transponder/unit["~x~"]/display-mode"));
-		    }			
+		    }
       }
       if (x == 1) {
-		    if (getprop("instrumentation/rmu/trsp-num") == 1) {				
+		    if (getprop("instrumentation/rmu/trsp-num") == 1) {
 			    me.text.trspMode.setText("STANDBY");
 		    } else {
 			    me.text.trspMode.setText(getprop("instrumentation/transponder/unit["~x~"]/display-mode"));
-		    }			
+		    }
       }
     }
 	}, # end of trsp_mode
@@ -844,14 +841,14 @@ var RMU = {
 		var dg_1 = diz-int(diz/10)*10;
 		var dg_2 = int(diz/10);
 		var dg_3 = cent-int(cent/10)*10;
-		var dg_4 = int(cent/10);	
+		var dg_4 = int(cent/10);
 		var dg = [dg_1,dg_2,dg_3,dg_4];
 		for (var i=0;i<4;i+=1) {
 			if (i<2 and !dwn_1 and dg[i] >7) {dg[i]=0;dg[i+1]+=1}
 			if (i<2 and dwn_1 and dg[i] >7) {dg[i]=7}
 			if (i>1 and !dwn_2 and dg[i] >7) {dg[i]=0;dg[i+1]+=1}
 			if (i>1 and dwn_2 and dg[i] >7) {dg[i]=7}
-		}	
+		}
 		diz = dg[0]+dg[1]*10;
 		cent = dg[2]+dg[3]*10;
 		setprop("instrumentation/transponder/unit["~x~"]/id-code[1]",diz);
@@ -867,11 +864,11 @@ var RMU = {
         nav_dme = navinfo('dme',navaid.id);
         if (size(nav_dme) > 0) {
           for (var i=0;i<size(nav_dme);i+=1) {
-            if (nav_dme[i].frequency == navaid.frequency) { 
+            if (nav_dme[i].frequency == navaid.frequency) {
               if (dt) setprop(tac_id[x],navaid.id);
               else setprop(dme_id[x],navaid.id);
               break;
-            } 
+            }
           }
         } else if (dt) setprop(tac_id[x],"");
           else setprop(dme_id[x],"");
@@ -955,7 +952,7 @@ var RMU = {
 
 
 ###### Main #####
-var rmu_setl = setlistener("/sim/signals/fdm-initialized", func () {	
+var rmu_setl = setlistener("/sim/signals/fdm-initialized", func () {
   for (var x=0;x<2;x+=1) {
     var rmu = RMU.new(x);
     rmu.init(x);
@@ -964,4 +961,3 @@ var rmu_setl = setlistener("/sim/signals/fdm-initialized", func () {
   }
 removelistener(rmu_setl);
 },0,0);
-

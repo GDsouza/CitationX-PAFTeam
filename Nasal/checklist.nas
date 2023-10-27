@@ -15,7 +15,7 @@ var skp = ["instrumentation/dc840/skip-btn",
 var throttle = ["controls/engines/engine/throttle",
                 "controls/engines/engine[1]/throttle"];
 
-var root = getprop("/sim/aircraft-dir")~"/Sounds/Checklists/"; 
+var root = getprop("/sim/aircraft-dir")~"/Sounds/Checklists/";
 var pge = [0,0];
 var page = 0;
 var tittle = "";
@@ -189,9 +189,9 @@ var L = [
     {name: 'Landing lights',        val : 'ON',                 check : 0},
     {name: 'Speedbrakes as required', val : '',                 check : 0},
     {name: 'Airspeed',              val : 'MAX 250 KIAS',       check : 0},
-    {name: 'Slats',                 val : 'DEPLOY',             check : 0},
     {name: 'At approximately 7nm from Runway',val : '',         check : 0},
     {name: 'Flaps',                 val : 'SET 5 deg',          check : 0},
+    {name: 'Slats',                 val : 'DEPLOYED',             check : 0},
     {name: 'Airspeed',              val : 'MAX 210 KIAS',       check : 0},
     {name: 'Flaps',                 val : 'SET 15 deg',         check : 0},
     {name: 'Landing Gear',          val : 'DOWN',               check : 0},
@@ -255,7 +255,7 @@ var CHKLIST = {
         "name": "CHKLIST",
         "size" : [1024,1024],
         "view" : [900,1024],
-		    "mipmapping": 1 
+		    "mipmapping": 1
 	    });
   	  m.canvas.addPlacement({"node": "chklist.screenL"});
     } else {
@@ -263,7 +263,7 @@ var CHKLIST = {
         "name": "CHKLIST",
         "size" : [1024,1024],
         "view" : [900,1024],
-		    "mipmapping": 1 
+		    "mipmapping": 1
 	    });
   	  m.canvas.addPlacement({"node": "chklist.screenR"});
     }
@@ -272,7 +272,7 @@ var CHKLIST = {
       .setTranslation(450,50)
       .setAlignment("center-center")
       .setFont("helvetica_bold.txf")
-      .setFontSize(36) 
+      .setFontSize(36)
       .setColor(0.9,0,0.9)
       .setScale(1.5);
 
@@ -283,14 +283,14 @@ var CHKLIST = {
   }, # end of new
 
   init : func(x) {
-    me.timer[x] = maketimer(1.8,func() {	
+    me.timer[x] = maketimer(1.8,func() {
       np = size(L[page])*2-2;
 	    if (nb <= np) {
         nr_ligne = int((nb+1)/2);
         if (L[page][nr_ligne].val !="") {
           if (math.mod(nb,2) == 1)
         	  me.sound = {path : root~'copilot-voices/',file : string.lc(L[page][nr_ligne].name)~'.wav', volume : 0.5};
-          else 
+          else
         	  me.sound = {path : root~'pilot-voices/',file : string.lc(L[page][nr_ligne].val)~'.wav', volume : 0.5};
           fgcommand("play-audio-sample",me.sound);
         }
@@ -309,7 +309,7 @@ var CHKLIST = {
     setlistener(norm[x], func(n) {
 	    if (n.getValue()) {
         setprop("/sim/sound/chatter/enabled",1);
-		    pge[x] = getprop(nr_page[x]);		
+		    pge[x] = getprop(nr_page[x]);
 		    me.display(pge[x]);
 	    } else {
 		      if (me.timer[x].isRunning) me.timer[x].stop();
@@ -374,7 +374,7 @@ var CHKLIST = {
       .setTranslation(450,50)
       .setAlignment("center-center")
       .setFont("helvetica_bold.txf")
-      .setFontSize(36) 
+      .setFontSize(36)
       .setColor(0.9,0,0.9)
       .setScale(1.5)
       .setText(L[page][0].titre);
@@ -385,7 +385,7 @@ var CHKLIST = {
           .setTranslation(50,me.pos_l)
           .setAlignment("left-center")
           .setFont("helvetica_bold.txf")
-          .setFontSize(48,1.1) 
+          .setFontSize(48,1.1)
           .setColor(L[page][ind].val == "" ? [1,0.4,0] : [0.9,0.9,0])
           .setScale(1.0)
           .setText(L[page][ind].name);
@@ -394,7 +394,7 @@ var CHKLIST = {
           .setTranslation(850,me.pos_l)
           .setAlignment("right-center")
           .setFont("helvetica_bold.txf")
-          .setFontSize(48,1.1) 
+          .setFontSize(48,1.1)
           .setColor(0,0.9,0.9)
           .setScale(1.0)
           .setText(L[page][ind].val);
@@ -418,7 +418,7 @@ var CHKLIST = {
     if (getprop(elec[x]))	{
       pge[x] = getprop(nr_page[x]);
 	    if (pge[x] >= 1) {
-		    pge[x] -= 1;		
+		    pge[x] -= 1;
 		    setprop(nr_page[x],pge[x]);
 	    }
     }
@@ -432,14 +432,14 @@ var CHKLIST = {
 			  me.loop = func {   ### boucle d'attente de validation ###
 				  if (running and upd[x]) {
             me.prop_table(x);
-					  if (L[page][nr_ligne].check or L[page][nr_ligne].val == "" or skip[x]) {				
+					  if (L[page][nr_ligne].check or L[page][nr_ligne].val == "" or skip[x]) {
               if (skip[x]) {nb+=1;skip[x]=0}
               if (L[page][nr_ligne].val == "") nb+=1;
 						  running = 0;
-						  me.timer[x].restart(1.8);				
+						  me.timer[x].restart(1.8);
 					  }
 					  settimer(me.loop,0);
-				  }       
+				  }
 			  }
 			  me.loop();
       }
@@ -515,7 +515,7 @@ var CHKLIST = {
         L[page][nr_ligne].check = 1;
 	    }
 	    if (page == 5) {   ### Before Taxiing ###
-        if (nr_ligne == 1 and !getprop("controls/electric/external-power") 
+        if (nr_ligne == 1 and !getprop("controls/electric/external-power")
 		      or nr_ligne == 2
 		      or nr_ligne == 3 and getprop("controls/anti-ice/lh-pitot") and getprop("controls/anti-ice/rh-pitot")
 		      or nr_ligne == 4 and getprop("controls/anti-ice/lh-ws") and getprop("controls/anti-ice/rh-ws")
@@ -532,7 +532,7 @@ var CHKLIST = {
 	    }
 	    if (page == 6) {   ### Taxiing ###
         if (nr_ligne == 1 and !getprop("controls/gear/brake-parking")
-		      or nr_ligne == 2 and getprop("controls/flight/flaps-select") == 3
+		      or nr_ligne == 2 and getprop("controls/flight/flaps-select") == 2
 		      or nr_ligne == 3 and !getprop("controls/flight/speedbrake")
 		      or nr_ligne == 4 and getprop("controls/lighting/taxi-light")
 		      or nr_ligne == 5 and getprop("controls/lighting/landing-light") and getprop("controls/lighting/landing-light[1]")
@@ -588,13 +588,15 @@ var CHKLIST = {
 		      or nr_ligne == 2 and getprop("controls/lighting/seat-belts") == 1
 		      or nr_ligne == 3 and getprop("controls/lighting/landing-light") and getprop("controls/lighting/landing-light[1]")
 		      or nr_ligne == 5 and getprop("velocities/airspeed-kt") < 250
-		      or nr_ligne == 6 and getprop("controls/flight/flaps-select") == 1
-		      or nr_ligne == 8 and getprop("controls/flight/flaps-select") == 2
+
+
+		      or nr_ligne == 7 and getprop("controls/flight/flaps-select") == 1
+		      or nr_ligne == 8 and getprop("controls/flight/slats") == 1
 		      or nr_ligne == 9 and getprop("velocities/airspeed-kt") < 210
-          or nr_ligne == 10 and getprop("controls/flight/flaps-select") == 3
+          or nr_ligne == 10 and getprop("controls/flight/flaps-select") == 2
           or nr_ligne == 11 and getprop("controls/gear/gear-down")
 		      or nr_ligne == 13 and getprop("velocities/airspeed-kt") < 180
-          or nr_ligne == 14 and getprop("controls/flight/flaps-select") == 4
+          or nr_ligne == 14 and getprop("controls/flight/flaps-select") == 3
  		      or nr_ligne == 15 and !getprop("controls/gear/brake-parking"))
        L[page][nr_ligne].check = 1;
 	    }
@@ -640,7 +642,7 @@ var CHKLIST = {
 }; # end of CHKLIST
 
 #### Main ####
-var chklist_setl = setlistener("/sim/signals/fdm-initialized", func () {	
+var chklist_setl = setlistener("/sim/signals/fdm-initialized", func () {
   for (var x=0;x<2;x+=1) {
     var checklist = CHKLIST.new(x);
     checklist.init(x);
@@ -649,4 +651,3 @@ var chklist_setl = setlistener("/sim/signals/fdm-initialized", func () {
   print("Vocal Checklists ... Ok");
   removelistener(chklist_setl);
 });
-

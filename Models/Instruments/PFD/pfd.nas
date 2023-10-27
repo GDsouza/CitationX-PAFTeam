@@ -177,18 +177,18 @@ var PFDDisplay = {
 		}
     if(!x) {
 	    m.canvas = canvas.new({
-		    "name": "PFD_L", 
+		    "name": "PFD_L",
 		    "size": [1024, 1024],
 		    "view": [900, 1024],
-		    "mipmapping": 1 
+		    "mipmapping": 1
 	    });
 	    m.canvas.addPlacement({"node": "screenL"});
     } else {
 	    m.canvas = canvas.new({
-		    "name": "PFD_R", 
+		    "name": "PFD_R",
 		    "size": [1024, 1024],
 		    "view": [900, 1024],
-		    "mipmapping": 1 
+		    "mipmapping": 1
 	    });
 	    m.canvas.addPlacement({"node": "screenR"});
     }
@@ -318,11 +318,11 @@ var PFDDisplay = {
 
       ##### Others #####
 
-		setlistener(MinimumsMode, func(n) {	
+		setlistener(MinimumsMode, func(n) {
 			me.Alt.MinMode.setText(n.getValue());
 		},1,0);
 
-		setlistener(MinimumsValue, func(n) {	
+		setlistener(MinimumsValue, func(n) {
 			me.Alt.MinValue.setText(sprintf("%.0f",n.getValue()));
 		},1,0);
 
@@ -598,10 +598,10 @@ var PFDDisplay = {
       spd_trend = 6 * (getprop(SpdTrd) or 0);
       spd_trend = math.clamp(spd_trend, -228, 228);
       me.SpdTrend.reset();
-      me.SpdTrend.rect(180,338,12,-spd_trend);              
+      me.SpdTrend.rect(180,338,12,-spd_trend);
 
       ### V markers ###
-      if (ias < 30) {    
+      if (ias < 30) {
         v_ind = 1;
         me.Spd.Ind1.setText(sprintf("%.0f",getprop(V1)));
         me.Spd.Ind2.setText(sprintf("%.0f",getprop(V2)));
@@ -639,7 +639,7 @@ var PFDDisplay = {
       crs_defl = getprop(crsDefl_nav[nav_num[x]]) or -10;
       sgnl = getprop(NavData[nav_num[x]]) ? "VOR"~(nav_num[x]+1) : "?";
       if(getprop("instrumentation/nav["~nav_num[x]~"]/nav-loc")) sgnl="LOC"~(nav_num[x]+1);
-      if(getprop("instrumentation/nav["~nav_num[x]~"]/has-gs")) sgnl="ILS"~(nav_num[x]+1);       
+      if(getprop("instrumentation/nav["~nav_num[x]~"]/has-gs")) sgnl="ILS"~(nav_num[x]+1);
       nav_id = getprop("instrumentation/nav["~nav_num[x]~"]/nav-id");
       crs_defl = math.clamp(crs_defl,-10,10);
       dst = getprop(NavId[nav_num[x]]) ? getprop(NavDist[nav_num[x]])*0.000539 : 0;
@@ -729,7 +729,7 @@ var PFDDisplay = {
       if (getprop(SgRev) == 1) {me.Sg.sg.show();me.Sg.sgTxt.setText("SG2")}
     }
   },
-  
+
 }; # end of PFDDisplay
 
 ###### Main #####
@@ -739,9 +739,6 @@ var pfd_setl = setlistener("sim/signals/fdm-initialized", func() {
     pfd.listen(x);
     pfd.update_PFD(x);
   }
-	print('PFD Canvas ... Ok');
-	removelistener(pfd_setl); 
+	print('PFD   ... Ok');
+	removelistener(pfd_setl);
 },0,0);
-
-
-

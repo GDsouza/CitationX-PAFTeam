@@ -106,7 +106,7 @@ var Electrical = {
     m.apu_gen = 0;
     m.emer_amps = [0,0];
     m.emer_volts = [0,0];
-    m.main_amps =[0,0]; 
+    m.main_amps =[0,0];
     m.main_volts = [0,0];
     m.main_pwr = [0,0];
     m.stby_bus = 0;
@@ -175,7 +175,7 @@ var Electrical = {
       setprop("systems/electrical/apu-gen-amps",0);
     }
 
-        ### Engines Generators ### 
+        ### Engines Generators ###
     for (n=0;n<2;n+=1) {
       if (getprop(eng_gen_sw[n]) and getprop(eng_run[n])) {
         setprop(gen_volts[n],me.gen_volts);
@@ -183,10 +183,10 @@ var Electrical = {
       } else {setprop(gen_volts[n],0);setprop(eng_gen[n],0)}
     }
     if (getprop(ext_pwr) or me.apu_gen or getprop(eng_gen[1]))
-      me.main_pwr[1] = 1; 
-    else me.main_pwr[1] = 0; 
+      me.main_pwr[1] = 1;
+    else me.main_pwr[1] = 0;
 
-    me.main_pwr[0] = getprop(eng_gen[0]);     
+    me.main_pwr[0] = getprop(eng_gen[0]);
     me.buses_power();
 
         ### Xtie ###
@@ -204,7 +204,7 @@ var Electrical = {
 
         ### Buses management ###
     me.main_amps[0] = 0; # left main bus + eicas
-    me.outputs_main(0,0,Elec.left_gen,"lh-gen"); 
+    me.outputs_main(0,0,Elec.left_gen,"lh-gen");
     me.outputs_main(1,0,Elec.left_avi,"lh-avi");
     me.outputs_main(2,0,Elec.eicas,"eicas");
 
@@ -252,7 +252,7 @@ var Electrical = {
       }
     } else me.stby_bus = me.main_volts[1];
 
-        ### Lighting ### 
+        ### Lighting ###
     me.main_amps[0] += getprop("controls/lighting/taxi-light")*5;
     me.main_amps[0] += getprop("controls/lighting/beacon-state/state")*2.5;
     me.main_amps[0] += getprop("controls/lighting/strobe-state/state")*2.5;
@@ -297,13 +297,13 @@ var Electrical = {
         } else me.main_volts[x] = me.emer_volts[x] = 0;
       }
     }
-  }, # end of buses_power 
+  }, # end of buses_power
 
   charging_pot : func(x,batt) {
     charge = getprop(charge_norm[x]);
-    potential = charge < me.low_charge ? 
+    potential = charge < me.low_charge ?
       (me.low_batt * charge / me.low_charge) :
-      (me.low_batt + (charge - me.low_charge) 
+      (me.low_batt + (charge - me.low_charge)
         / (1 - me.low_charge)
         * (batt - me.low_batt));
   }, # end of charging_potential
@@ -323,13 +323,13 @@ var Electrical = {
   }, # end of discharging
 
   outputs_main : func(x,ind,bus_name,fuse) {
-    for(var i=0;i<size(bus_name);i+=1) { 
+    for(var i=0;i<size(bus_name);i+=1) {
       if (x < 2 ) fuse_tripped = cb_path~fuse~bus_name[i].feed~"-fuse-tripped";
       if (getprop(cb_path~bus_name[i].name~"-fuse-tripped")
         or me.main_volts[ind] < me.low_volts
         or x == 0 and getprop(fuse_tripped)
         or x == 1 and (getprop(fuse_tripped) or getprop(avionics) < 2)
-        or x == 2 and getprop(avionics) < 1) 
+        or x == 2 and getprop(avionics) < 1)
         switch = 0;
       else {
         switch = me.nonnil(bus_name[i].sw,1);
@@ -343,7 +343,7 @@ var Electrical = {
   outputs_emer : func(x,bus_name) {
     me.emer_amps[x] = 0;
     for(var i=0;i<size(bus_name);i+=1) {
-      if (getprop(cb_path~bus_name[i].name~"-fuse-tripped") 
+      if (getprop(cb_path~bus_name[i].name~"-fuse-tripped")
         or me.emer_volts[x] <= me.low_volts) switch = 0;
       else {
         switch = me.nonnil(bus_name[i].sw,1);
@@ -364,7 +364,7 @@ var Electrical = {
         if (switch == 2) switch = 1;
       }
       me.stby_amps += Elec.stby[i].amps*switch;
-      setprop(outputs_path~Elec.stby[i].name,1*switch); 
+      setprop(outputs_path~Elec.stby[i].name,1*switch);
     }
   }, # end of outputs_stby
 
@@ -372,7 +372,7 @@ var Electrical = {
     if (sw != nil) return getprop(sw);
     else return arg;
   }, # end of nonnil
-    
+
 }; # end of Electrical
 
 var elec_stl = setlistener("/sim/signals/fdm-initialized", func {
@@ -380,8 +380,6 @@ var elec_stl = setlistener("/sim/signals/fdm-initialized", func {
   elec.listen();
   elec.load_components();
   elec.update_elec();
-  print("Electrical System ... Ok");
+  print("Elec System      ... Ok");
 	removelistener(elec_stl);
 });
-
-

@@ -13,7 +13,7 @@ var	heading_ind =	"/instrumentation/heading-indicator/indicated-heading-deg";
 var num_wpts = "/autopilot/route-manager/route/num";
 var set_range = ["/instrumentation/mfd/range-nm",
                  "/instrumentation/mfd[1]/range-nm"];
-var svg_path = "Models/Instruments/MFD/canvas/Images/vsd.svg"; 
+var svg_path = "Models/Instruments/MFD/canvas/Images/vsd.svg";
 var tg_alt = "autopilot/settings/tg-alt-ft";
 var toggle_vsd = ["/instrumentation/efis/vsd",
                   "/instrumentation/efis/vsd[1]"];
@@ -59,7 +59,7 @@ var vsd = {
 			  "size": [1024, 320],
 			  "view": [1024, 320],
 			  "mipmapping": 1
-		  });	
+		  });
 		  m.display.addPlacement({"node": "VsdL.screen"});
     } else {
 		  m.display = canvas.new({
@@ -67,11 +67,11 @@ var vsd = {
 			  "size": [1024, 320],
 			  "view": [1024, 320],
 			  "mipmapping": 1
-  		});	
+  		});
 		  m.display.addPlacement({"node": "VsdR.screen"});
     }
     m.group = m.display.createGroup();
-    canvas.parsesvg(m.group, svg_path);	
+    canvas.parsesvg(m.group, svg_path);
 		m.text = m.display.createGroup();					# Group for waypoints text
 		m.terrain = m.group.createChild("path");	# Terrain Polygon
 		m.path = m.group.createChild("path");			# Flightplan Path
@@ -105,7 +105,7 @@ var vsd = {
 	}, # end of new
 
 			### Listeners ###
-	listen : func (x){		
+	listen : func (x){
 		setlistener(fp_active, func(n) {
 			if (n.getValue()) {
 				me.fp = flightplan();
@@ -155,12 +155,12 @@ var vsd = {
 	}, # end of listen
 
 	update: func(x) {
-		# Generate elevation profile		
+		# Generate elevation profile
 		me.altitude = getprop(alt_ind);
 		if(me.altitude == nil) {
 			me.altitude = 0;
 		}
-		me.alt_ceil = (getprop(asel)*100 == 0 ? 1 :getprop(asel)*100); 
+		me.alt_ceil = (getprop(asel)*100 == 0 ? 1 :getprop(asel)*100);
 
 		me.new_markerPos = -me.alt_ceil_px*(me.altitude/me.alt_ceil);
 
@@ -198,7 +198,7 @@ var vsd = {
 								} else {
 
 								### STARS ###
-									alt = me.v_alt.vector[i];								
+									alt = me.v_alt.vector[i];
 								}
 							} else {
 
@@ -249,7 +249,7 @@ var vsd = {
 		pos = geo.aircraft_position();
 
 		# Get terrain profile along the flightplan route if WPT is enabled. If WPT is not enabled, the rangeHdg vector should be empty, so it's just going to get the elevation profile along the indicated aircraft heading
-	
+
 		me.peak = 0;
 		forindex(var j; me.elev_profile) {
 			check_hdg = getprop(heading_ind);
@@ -280,7 +280,7 @@ var vsd = {
 
 		me.group.getElementById("text_alt1").setText(sprintf("%5.0f",me.alt_ceil/2));
 		me.group.getElementById("text_alt2").setText(sprintf("%5.0f",me.alt_ceil));
-		me.group.getElementById("aircraft_marker").setTranslation(0,me.new_markerPos-me.lastalt); 
+		me.group.getElementById("aircraft_marker").setTranslation(0,me.new_markerPos-me.lastalt);
 
 		### Speed Arrow ###
 		vs_fps = getprop(vert_spd);
@@ -293,7 +293,7 @@ var vsd = {
 			me.group.getElementById("speed_arrow")
 						.setTranslation(0,me.new_markerPos-me.lastalt)
 						.setRotation(-fpa)
-						.show();			
+						.show();
 		} else {
 			me.group.getElementById("speed_arrow").hide();
 		}
@@ -316,15 +316,13 @@ var vsd = {
 }; # end of VSD
 
 ### START ###
-var vsd_stl = setlistener("sim/signals/fdm-initialized", func { 
+var vsd_stl = setlistener("sim/signals/fdm-initialized", func {
   for (var x=0;x<2;x+=1) {
 	  var vsd = vsd.new(x);
 	  vsd.listen(x);
     vsd.updateTimer(x);
     vsd.update(x);
   }
-	print("VSD ... Ok");
+	print("VSD   ... Ok");
 	removelistener(vsd_stl);
 },0,0);
-
-
