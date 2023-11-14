@@ -4,7 +4,7 @@
 
     <path>citationX.ac</path>
 		<offsets>
-    	<pitch-deg>0.4</pitch-deg>   
+    	<pitch-deg>0.4</pitch-deg>
     	<heading-deg></heading-deg>
     	<roll-deg>0</roll-deg>
     	<x-m>0</x-m>
@@ -559,7 +559,7 @@
       <type>rotate</type>
       <object-name>LHspeedbrake</object-name>
       <property>surface-positions/speedbrake-pos-norm</property>
-      <factor>-45</factor>
+      <factor>-40</factor>
       <axis>
           <x1-m>3.064</x1-m>
           <y1-m>-6.981</y1-m>
@@ -589,7 +589,7 @@
       <type>rotate</type>
       <object-name>RHspeedbrake</object-name>
       <property>surface-positions/speedbrake-pos-norm</property>
-      <factor>-45</factor>
+      <factor>-40</factor>
       <axis>
           <x1-m>1.090</x1-m>
           <y1-m>3.632</y1-m>
@@ -1638,7 +1638,7 @@
       <z-m>0.3</z-m>
     </offsets>
   </model>
-  
+
   <animation>
     <type>select</type>
     <object-name>fuel_pipe</object-name>
@@ -1650,7 +1650,7 @@
       </and>
     </condition>
   </animation>
-  
+
   <animation>
     <type>select</type>
     <object-name>fuel_pipe_disconnected</object-name>
@@ -1665,9 +1665,9 @@
       </and>
     </condition>
   </animation>
- 
+
   <!-- External Power -->
-  
+
   <model>
     <name>ext-pwr</name>
     <path>Models/Services/External-Power/ext-pwr-box.ac</path>
@@ -1682,9 +1682,9 @@
       <z-m>0.3</z-m>
     </offsets>
   </model>
-  
+
   <!-- Chokes -->
-  
+
   <model>
     <name>choke_nose</name>
     <path>Models/Services/Chokes/choke.ac</path>
@@ -1700,7 +1700,7 @@
       <z-m>-2.2</z-m>
     </offsets>
   </model>
-  
+
   <model>
     <name>choke_left</name>
     <path>Models/Services/Chokes/choke.ac</path>
@@ -1716,7 +1716,7 @@
       <z-m>-2.2</z-m>
     </offsets>
   </model>
-  
+
   <model>
     <name>choke_right</name>
     <path>Models/Services/Chokes/choke.ac</path>

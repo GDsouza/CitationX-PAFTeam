@@ -573,7 +573,7 @@
     <max-rate-of-change>
       <value>1.0</value>
     </max-rate-of-change>
-    <input>controls/flight/speedbrake</input>
+    <input>controls/flight/spoilers</input>
     <output>surface-positions/speedbrake-pos-norm</output>
   </filter>
 

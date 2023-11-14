@@ -58,19 +58,6 @@ Completed 2015-2021 C. Le Moigne (clm76), C-Thiriot (PATTEN).
       <path>instrumentation/clock/flight-hour-tot</path>
     </aircraft-data>
 -->
-    <tutorials>
-        <tutorial include="Tutorials/cold-start-with-external-power.xml"/>
-        <tutorial include="Tutorials/cold-start-with-APU.xml"/>
-        <tutorial include="Tutorials/engines-startup.xml"/>
-        <tutorial include="Tutorials/taxiing.xml"/>
-        <tutorial include="Tutorials/take-off.xml"/>
-        <tutorial include="Tutorials/french.xml"/>
-        <tutorial include="Tutorials/demarrage-avec-generateur-externe.xml"/>
-        <tutorial include="Tutorials/demarrage-avec-APU.xml"/>
-        <tutorial include="Tutorials/demarrage-reacteurs.xml"/>
-        <tutorial include="Tutorials/roulage.xml"/>
-        <tutorial include="Tutorials/decollage.xml"/>
-    </tutorials>
 
     <model>
         <path>Models/citationX.xml</path>
@@ -383,73 +370,14 @@ Completed 2015-2021 C. Le Moigne (clm76), C-Thiriot (PATTEN).
      </default>
     </menubar>
 
-    <help>
-        <title>Cessna Citation X</title>
-        <line></line>
-        <key>
-            <name>Keypad Delete</name>
-            <desc>Toggle Thrust Reversers</desc>
-        </key>
-        <key>
-            <name>Keypad End</name>
-            <desc>Toggle Cutoff</desc>
-        </key>
-        <key>
-            <name>Control B</name>
-            <desc>Toggle Speedbrakes</desc>
-        </key>
-        <key>
-            <name>Control D</name>
-            <desc>Toggle Cabin Door</desc>
-        </key>
-        <key>
-            <name></name>
-            <desc></desc>
-        </key>
-        <key>
-            <name>Spoken ATC</name>
-            <desc></desc>
-        </key>
-        <key>
-            <name>Key &lt;</name>
-            <desc>To request clearance</desc>
-        </key>
-        <key>
-            <name>CTRL + &lt;</name>
-            <desc>To request a runway with ILS</desc>
-        </key>
-        <key>
-            <name>ALT + &lt;</name>
-            <desc>To toggle between Comm1 and Comm2</desc>
-        </key>
-        <key>
-            <name>CTRL +  ALT + &lt;</name>
-            <desc>To request a vector to the closest airport</desc>
-        </key>
-    </help>
+    <help include="Help/help.xml"/>
 
     <multiplay>
-        <generic>
+      <generic>
         <float n="0" alias="/position/gear-agl-m">0</float>  <!--altitude for MP shadow -->
-<!--
-            <int n="0" alias="/controls/lighting/strobes"/>
-            <int n="1" alias="/controls/lighting/beacons"/>
-            <int n="2" alias="/systems/electrical/outputs/taxi-light"/>
-            <int n="3" alias="/systems/electrical/outputs/landing-light"/>
-            <int n="4" alias="/systems/electrical/outputs/landing-light[1]"/>
-            <int n="5" alias="/systems/electrical/outputs/recog-lights"/>
-            <int n="6" alias="/systems/electrical/outputs/nav-lights"/>
-            <int n="7" alias="/instrumentation/eicas/hidden-lines"/>
-            <float n="0" alias="/controls/cabin-door/position-norm"/>
-            <float n="1" alias="/surface-positions/speedbrake-pos-norm"/>
-						<float n="2" alias="/surface-positions/reverser-norm"/>
--->
-				<!-- <string  alias="/sim/multiplay/callsign"/> -->
-        </generic>
-				<callsign>""</callsign>
+      </generic>
+			<callsign>""</callsign>
     </multiplay>
-
-    <flight-recorder include="Systems/flight-recorder.xml"></flight-recorder>
 
     <color-set>
         <white>
@@ -502,6 +430,22 @@ Completed 2015-2021 C. Le Moigne (clm76), C-Thiriot (PATTEN).
         </amber>
     </color-set>
   </sim>
+
+  <input include="Inputs/key_bindings.xml"/>
+  <flight-recorder include="Systems/flight-recorder.xml"></flight-recorder>
+  <tutorials>
+      <tutorial include="Tutorials/cold-start-with-external-power.xml"/>
+      <tutorial include="Tutorials/cold-start-with-APU.xml"/>
+      <tutorial include="Tutorials/engines-startup.xml"/>
+      <tutorial include="Tutorials/taxiing.xml"/>
+      <tutorial include="Tutorials/take-off.xml"/>
+      <tutorial include="Tutorials/french.xml"/>
+      <tutorial include="Tutorials/demarrage-avec-generateur-externe.xml"/>
+      <tutorial include="Tutorials/demarrage-avec-APU.xml"/>
+      <tutorial include="Tutorials/demarrage-reacteurs.xml"/>
+      <tutorial include="Tutorials/roulage.xml"/>
+      <tutorial include="Tutorials/decollage.xml"/>
+  </tutorials>
 
   <instrumentation>
 		<pfd>
@@ -557,15 +501,7 @@ Completed 2015-2021 C. Le Moigne (clm76), C-Thiriot (PATTEN).
         <selected type="int">0</selected>
 	    </unit>
     </rmu>
-<!--
-    <airspeed-indicator>
-      <index n="0" type="double">100</index>
-      <index n="1" type="double">120</index>
-      <ias-limit>560</ias-limit>
-      <mach-limit>0.85</mach-limit>
-      <alt-threshold>8000.0</alt-threshold>
-    </airspeed-indicator>
--->
+
 	  <dc840 n="0">
       <hsi type="bool">0</hsi>
       <wx type="bool">0</wx>
@@ -644,7 +580,6 @@ Completed 2015-2021 C. Le Moigne (clm76), C-Thiriot (PATTEN).
         </engine>
     </engines>
     <flight>
-        <speedbrake type="bool">0</speedbrake>
 		    <v1 type="double">124</v1>
 		    <vr type="double">128</vr>
 		    <v2 type="double">133</v2>
@@ -711,103 +646,6 @@ Completed 2015-2021 C. Le Moigne (clm76), C-Thiriot (PATTEN).
           <stab-target type="double">0</stab-target>
       </internal>
   </autopilot>
-
-  <input>
-    <keyboard>
-        <key n="127">
-            <name>Delete</name>
-            <desc>Toggle Reversers</desc>
-            <binding>
-                <command>property-toggle</command>
-                <property>controls/engines/engine[0]/reverser</property>
-            </binding>
-            <binding>
-                <command>property-assign</command>
-                <property>controls/engines/engine[1]/reverser</property>
-                <property>controls/engines/engine[0]/reverser</property>
-            </binding>
-        </key>
-        <key n="363">
-            <name>End</name>
-            <desc>Cutoff</desc>
-            <binding>
-              <condition>
-                <less-than>
-                  <property>controls/engines/engine/throttle</property>
-                  <value>0.05</value>
-                </less-than>
-              </condition>
-              <command>property-toggle</command>
-              <property>controls/engines/engine[0]/cutoff</property>
-            </binding>
-            <binding>
-                <command>property-assign</command>
-                <property>controls/engines/engine[1]/cutoff</property>
-                <property>controls/engines/engine[0]/cutoff</property>
-            </binding>
-        </key>
-        <key n="4">
-          <name>Ctrl-D</name>
-          <desc>Open/close door</desc>
-          <binding>
-            <condition>
-              <and>
-              <less-than>
-                  <property>velocities/airspeed-kt</property>
-                  <value>40</value>
-              </less-than>
-              <property>systems/electrical/outputs/cabin-door-monitor</property>
-              </and>
-            </condition>
-            <command>property-toggle</command>
-            <property>controls/cabin-door/open</property>
-          </binding>
-        </key>
-        <key n="267">
-            <name>F11</name>
-            <desc>Pop up autopilot dialog</desc>
-            <binding>
-                <command>nasal</command>
-                <script>dialogs.ap_settings.toggle()</script>
-            </binding>
-        </key>
-        <key n="268">
-            <name>F12</name>
-            <desc>Pop up radio dialog</desc>
-            <binding>
-                <command>nasal</command>
-                <script>dialogs.Radio.toggle()</script>
-            </binding>
-        </key>
-
-				<key n="60">
-					<name>less-than</name>
-					<desc>Spoken ATC</desc>
-					<binding>
-					 <command>nasal</command>
-					 <script><![CDATA[spoken_atc.speak(15);]]></script>
-					</binding>
-				</key>
-        <key n="62">
-            <name>greater-than</name>
-            <desc>Precision Approach Radar</desc>
-            <binding>
-              <command>nasal</command>
-              <script><![CDATA[par.instrument();]]></script>
-            </binding>
-        </key>
-
-        <key n="119">
-            <name>w</name>
-            <desc>Charts Display</desc>
-            <binding>
-              <command>nasal</command>
-              <script><![CDATA[charts.Charts_key();]]></script>
-            </binding>
-        </key>
-
-    </keyboard>
-  </input>
 
   <nasal>
       <init>

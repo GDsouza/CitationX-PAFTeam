@@ -562,12 +562,12 @@
 	  </animation>
 
 
-<!--SPEEDBRAKE -->
+<!--SPEEDBRAKE (spoilers) -->
 
     <animation>
         <type>rotate</type>
         <object-name>Speedbrk.lever</object-name>
-        <property>controls/flight/speedbrake</property>
+        <property>controls/flight/spoilers</property>
         <factor>55</factor>
         <center>
             <x-m>0.425</x-m>
@@ -581,27 +581,63 @@
         </axis>
     </animation>
 
-	<animation>
-    <type>pick</type>
-    <object-name>Speedbrk.lever</object-name>
-    <action>
+	  <animation>
+      <type>pick</type>
+      <object-name>Speedbrk.lever</object-name>
+      <action>
         <button>0</button>
+        <repeatable>true</repeatable>
+        <binding>
+          <command>property-adjust</command>
+          <property>controls/flight/spoilers</property>
+          <step>0.1</step>
+          <min>0</min>
+          <max>1</max>
+        </binding>
+      </action>
+      <action>
+        <button>1</button>
+        <repeatable>true</repeatable>
+        <binding>
+          <command>property-adjust</command>
+          <property>controls/flight/spoilers</property>
+          <step>-0.1</step>
+          <min>0</min>
+          <max>1</max>
+        </binding>
+      </action>
+      <action>
+        <button>3</button>
         <repeatable>false</repeatable>
         <binding>
-            <command>property-toggle</command>
-            <property>controls/flight/speedbrake</property>
+          <command>property-adjust</command>
+          <property>controls/flight/spoilers</property>
+          <step>0.1</step>
+          <min>0</min>
+          <max>1</max>
         </binding>
-    </action>
-    <hovered>
-      <binding>
-        <command>set-tooltip</command>
-        <tooltip-id>SpeedBrake</tooltip-id>
-        <label>Speedbrake: %s</label>
-        <mapping>on-off</mapping>
-        <property>controls/flight/speedbrake</property>
+      </action>
+       <action>
+        <button>4</button>
+        <repeatable>false</repeatable>
+        <binding>
+          <command>property-adjust</command>
+          <property>controls/flight/spoilers</property>
+          <step>-0.1</step>
+          <min>0</min>
+          <max>1</max>
         </binding>
-    </hovered>
-	</animation>
+      </action>
+     <hovered>
+        <binding>
+          <command>set-tooltip</command>
+          <tooltip-id>SpeedBrake</tooltip-id>
+          <label>Speedbrake: %s%%</label>
+          <mapping>percent</mapping>
+          <property>controls/flight/spoilers</property>
+          </binding>
+      </hovered>
+	  </animation>
 
 <!-- PARK BRAKE -->
 
@@ -836,7 +872,7 @@
         <command>property-toggle</command>
         <property>controls/engines/engine/cutoff</property>
       </binding>
-       <binding>
+      <binding>
         <condition>
           <and>
 				    <property>devices/status/keyboard/ctrl</property>

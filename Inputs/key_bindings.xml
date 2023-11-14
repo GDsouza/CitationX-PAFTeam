@@ -1,0 +1,107 @@
+<?xml version="1.0"  encoding="UTF-8"?>
+
+<PropertyList>
+
+  <keyboard>
+    <key n="2">
+      <name>Ctrl+b</name>
+      <desc>Toggle Speedbrakes</desc>
+      <repeatable type="bool">false</repeatable>
+      <binding>
+        <command>property-toggle</command>
+        <property>controls/flight/spoilers</property>
+      </binding>
+    </key>
+    <key n="4">
+      <name>Ctrl-d</name>
+      <desc>Open/close door</desc>
+      <binding>
+        <condition>
+          <and>
+          <less-than>
+              <property>velocities/airspeed-kt</property>
+              <value>40</value>
+          </less-than>
+          <property>systems/electrical/outputs/cabin-door-monitor</property>
+          </and>
+        </condition>
+        <command>property-toggle</command>
+        <property>controls/cabin-door/open</property>
+      </binding>
+    </key>
+    <key n="127">
+        <name>Delete</name>
+        <desc>Toggle Reversers</desc>
+        <binding>
+            <command>property-toggle</command>
+            <property>controls/engines/engine[0]/reverser</property>
+        </binding>
+        <binding>
+            <command>property-assign</command>
+            <property>controls/engines/engine[1]/reverser</property>
+            <property>controls/engines/engine[0]/reverser</property>
+        </binding>
+    </key>
+    <key n="363">
+        <name>End</name>
+        <desc>Cutoff</desc>
+        <binding>
+          <condition>
+            <less-than>
+              <property>controls/engines/engine/throttle</property>
+              <value>0.05</value>
+            </less-than>
+          </condition>
+          <command>property-toggle</command>
+          <property>controls/engines/engine[0]/cutoff</property>
+        </binding>
+        <binding>
+            <command>property-assign</command>
+            <property>controls/engines/engine[1]/cutoff</property>
+            <property>controls/engines/engine[0]/cutoff</property>
+        </binding>
+    </key>
+    <key n="267">
+        <name>F11</name>
+        <desc>Pop up autopilot dialog</desc>
+        <binding>
+            <command>nasal</command>
+            <script>dialogs.ap_settings.toggle()</script>
+        </binding>
+    </key>
+    <key n="268">
+        <name>F12</name>
+        <desc>Pop up radio dialog</desc>
+        <binding>
+            <command>nasal</command>
+            <script>dialogs.Radio.toggle()</script>
+        </binding>
+    </key>
+		<key n="60">
+			<name>less-than</name>
+			<desc>Spoken ATC</desc>
+			<binding>
+			 <command>nasal</command>
+			 <script><![CDATA[spoken_atc.speak(15);]]></script>
+			</binding>
+		</key>
+    <key n="62">
+        <name>greater-than</name>
+        <desc>Precision Approach Radar</desc>
+        <binding>
+          <command>nasal</command>
+          <script><![CDATA[par.instrument();]]></script>
+        </binding>
+    </key>
+
+    <key n="119">
+        <name>w</name>
+        <desc>Charts Display</desc>
+        <binding>
+          <command>nasal</command>
+          <script><![CDATA[charts.Charts_key();]]></script>
+        </binding>
+    </key>
+  </keyboard>
+
+</PropertyList>

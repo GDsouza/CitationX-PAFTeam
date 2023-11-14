@@ -8,7 +8,6 @@ setprop("instrumentation/adf[1]/mode","adf");
 
 var nav_freq = ["instrumentation/nav/frequencies/selected-mhz",
                 "instrumentation/nav[1]/frequencies/selected-mhz"];
-var nav_id = ["instrumentation/nav/nav-id","instrumentation/nav[1]/nav-id"];
 var dme_freq = ["instrumentation/dme/frequencies/selected-mhz","instrumentation/dme[1]/frequencies/selected-mhz"];
 var dme_id = ["instrumentation/dme/dme-id","instrumentation/dme[1]/dme-id"];
 var dme_sel = ["instrumentation/rmu/unit/dme-selected","instrumentation/rmu/unit[1]/dme-selected"];
@@ -149,16 +148,16 @@ var RMU = {
 	  ### Load comm memories ###
     comVec[x] = {};
     com_mem = ["comMem1","comMem2","comMem3","comMem4",
-							    "comMem5","comMem6","comMem7","comMem8",
-							    "comMem9","comMem10","comMem11","comMem12"];
+					     "comMem5","comMem6","comMem7","comMem8",
+							 "comMem9","comMem10","comMem11","comMem12"];
     data[x] = io.read_properties(memPath[x]);
     foreach(var i;com_mem) comVec[x][i] = data[x].getValue(i);
 
 	  ### Load nav memories ###
     navVec[x] = {};
     nav_mem = ["navMem1","navMem2","navMem3","navMem4",
-							    "navMem5","navMem6","navMem7","navMem8",
-							    "navMem9","navMem10","navMem11","navMem12"];
+							 "navMem5","navMem6","navMem7","navMem8",
+							 "navMem9","navMem10","navMem11","navMem12"];
     data[x] = io.read_properties(memPath[x]);
     foreach(var i;nav_mem) navVec[x][i] = data[x].getValue(i);
 
@@ -263,7 +262,7 @@ var RMU = {
 
       ##### NAV #####
 		setlistener(nav_freq[x], func(n) {
-       me.display(x);
+      me.display(x);
       if (dme[x] == 0) setprop(dme_freq[x],getprop(nav_freq[x]));
       else me.dmeDisplay(x,0);
 		},1,0);

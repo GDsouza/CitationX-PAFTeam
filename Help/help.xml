@@ -1,0 +1,50 @@
+<?xml version="1.0"  encoding="UTF-8"?>
+<!--
+written by Christian LE MOIGNE (clm76) - 2023
+-->
+<PropertyList>
+
+  <title>Cessna Citation X</title>
+        <line></line>
+        <key>
+            <name>Keypad Delete</name>
+            <desc>Toggle Thrust Reversers</desc>
+        </key>
+        <key>
+            <name>Keypad End</name>
+            <desc>Toggle Cutoff</desc>
+        </key>
+        <key>
+            <name>Control b</name>
+            <desc>Toggle Speedbrakes</desc>
+        </key>
+        <key>
+            <name>Control d</name>
+            <desc>Toggle Cabin Door</desc>
+        </key>
+        <key>
+            <name></name>
+            <desc></desc>
+        </key>
+        <key>
+            <name>Spoken ATC</name>
+            <desc></desc>
+        </key>
+        <key>
+            <name>Key &lt;</name>
+            <desc>To request clearance</desc>
+        </key>
+        <key>
+            <name>CTRL + &lt;</name>
+            <desc>To request a runway with ILS</desc>
+        </key>
+        <key>
+            <name>ALT + &lt;</name>
+            <desc>To toggle between Comm1 and Comm2</desc>
+        </key>
+        <key>
+            <name>CTRL +  ALT + &lt;</name>
+            <desc>To request a vector to the closest airport</desc>
+        </key>
+
+</PropertyList>

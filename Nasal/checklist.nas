@@ -533,7 +533,7 @@ var CHKLIST = {
 	    if (page == 6) {   ### Taxiing ###
         if (nr_ligne == 1 and !getprop("controls/gear/brake-parking")
 		      or nr_ligne == 2 and getprop("controls/flight/flaps-select") == 2
-		      or nr_ligne == 3 and !getprop("controls/flight/speedbrake")
+		      or nr_ligne == 3 and !getprop("controls/flight/spoilers")
 		      or nr_ligne == 4 and getprop("controls/lighting/taxi-light")
 		      or nr_ligne == 5 and getprop("controls/lighting/landing-light") and getprop("controls/lighting/landing-light[1]")
 		      or nr_ligne == 6 and getprop("instrumentation/eicas/messages") == 0

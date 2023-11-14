@@ -65,7 +65,7 @@ var RudderLimit_B = "systems/electrical/outputs/rudder-limit-B";
 var Iac = ["/systems/electrical/outputs/iac1",
            "/systems/electrical/outputs/iac2"];
 var SgRev = "instrumentation/eicas/sg-rev";
-var SpdBrakes = "controls/flight/speedbrake";
+var SpdBrakes = "controls/flight/spoilers";
 var Stab = "controls/flight/elevator-trim";
 var Sync = "controls/engines/synchro";
 var Throt = ["controls/engines/engine/throttle",
@@ -511,7 +511,7 @@ var EICASdsp = {
       }
     }
     ### Speedbrakes ###
-    me.speedBrakes.setVisible(getprop(SpdBrakes));
+    me.speedBrakes.setVisible(getprop(SpdBrakes)> 0.125);
 
     ### Gears ###
     me.gear.setVisible(getprop(Gear));

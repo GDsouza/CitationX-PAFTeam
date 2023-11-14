@@ -26,7 +26,7 @@ dihedral 2 degrees
 Fuel 12938 lbs jet
 -->
 <airplane mass="21700" version="YASIM_VERSION_CURRENT">
-	
+
   <approach speed="110" aoa="6" fuel="0.2">
     <control-setting axis="/controls/engines/engine[0]/throttle" value="0.35"/>
     <control-setting axis="/controls/engines/engine[1]/throttle" value="0.35"/>
@@ -124,7 +124,7 @@ Fuel 12938 lbs jet
     <control-speed control="FLAP0" transition-time="30"/>
   </vstab>
 
-<!--    Total fuel = 12931 lbs   -->
+<!--    Total fuel = 13000 lbs   -->
   <tank x="0.7" y="1.0" z="-0.9" capacity="3510" jet="true"/>
   <tank x="0.7" y="-1.0" z="-0.9" capacity="3510" jet="true"/>
   <tank x="0.8" y="0.0" z="-1.2" capacity="2990" jet="true"/>
@@ -164,10 +164,10 @@ Thrust Fuel flow(TSFC) 0.3222 kg/s, 0.3187 kg/s with winglets
     tsfc="0.3187" epr="23" rotate="0.0" egt="840" spool-time="2"
     n1-idle="40" n1-max="103.8" n2-idle="56" n2-max="104.3">
     <control-input axis="/controls/engines/engine[0]/throttle" control="THROTTLE"/>
-    <control-input axis="/controls/engines/engine[0]/reverser" control="REVERSE_THRUST"/> 
+    <control-input axis="/controls/engines/engine[0]/reverser" control="REVERSE_THRUST"/>
 <!--    <control-output control="REVERSE_THRUST" prop="surface-positions/reverser-norm"/> -->
     <control-speed control="REVERSE_THRUST" transition-time="1.5"/>
-    <actionpt x="-5.0" y="1.5" z="0.72"/> 
+    <actionpt x="-5.0" y="1.5" z="0.72"/>
   </jet>
 
   <jet x="-2.5" y="-1.5" z="0.72" mass="1700" thrust="7000"

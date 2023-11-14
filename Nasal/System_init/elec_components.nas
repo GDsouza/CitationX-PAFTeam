@@ -36,7 +36,7 @@ var rh_rat_heater = "controls/anti-ice/rh-pitot";
 var rh_stab = "controls/anti-ice/rh-stab";
 var rh_ws = "controls/anti-ice/rh-ws";
 var oxy = "controls/oxygen/pass-oxy";
-var spdbrake = "controls/flight/speedbrake";
+var spdbrake = "controls/flight/spoilers";
 var warning = "instrumentation/annunciators/warning";
 var wing_insp = "controls/anti-ice/wing-insp";
 var ws_air = "controls/anti-ice/ws-air";
@@ -44,7 +44,7 @@ var ws_air = "controls/anti-ice/ws-air";
 var components = func {
 
   left_gen = [ # left cb
-    {name: 'anti-coll',           amps: 0,    sw : nil,           feed : 1}, 
+    {name: 'anti-coll',           amps: 0,    sw : nil,           feed : 1},
     {name: 'wing-insp',           amps: 3,    sw : wing_insp,     feed : 1},
     {name: 'lh-panel',            amps: 3,    sw : lh_light,      feed : 1},
     {name: 'el-panel',            amps: 0.5,  sw : el_panel,      feed : 1},
@@ -78,33 +78,33 @@ var components = func {
     ];
 
   left_avi = [ # right cb
-    {name: 'public-addr',     amps: 3,  sw : nil, feed : 1},  
-    {name: 'adf1',            amps: 3,  sw : nil, feed : 1},  
-    {name: 'dme1',            amps: 3,  sw : nil, feed : 1},  
-    {name: 'radio-alt1',      amps: 3,  sw : nil, feed : 1},  
-    {name: 'data-loader',     amps: 3,  sw : nil, feed : 1},  
-    {name: 'gps1',            amps: 3,  sw : nil, feed : 1},  
-    {name: 'fms1',            amps: 3,  sw : nil, feed : 1},  
-    {name: 'att-hdg1',        amps: 3,  sw : nil, feed : 2},  
-    {name: 'fgc-yd-A',        amps: 3,  sw : nil, feed : 2},  
-    {name: 'fgc-cont-A',      amps: 3,  sw : nil, feed : 2},  
-    {name: 'dau1B',           amps: 3,  sw : nil, feed : 2},  
-    {name: 'fdr',             amps: 3,  sw : nil, feed : 2},  
-    {name: 'gpws',            amps: 3,  sw : nil, feed : 2},  
-    {name: 'tcas',            amps: 3,  sw : nil, feed : 2},  
-    {name: 'lighting-detect', amps: 3,  sw : nil, feed : 2},  
-    {name: 'rad-tel',         amps: 3,  sw : nil, feed : 3},  
-    {name: 'ap-A',            amps: 5,  sw : nil, feed : 3},  
-    {name: 'pfd1',            amps: 7,  sw : nil, feed : 3},  
-    {name: 'radar',           amps: 5,  sw : nil, feed : 3},  
-    {name: 'radar-cont',      amps: 3,  sw : nil, feed : 2},  
+    {name: 'public-addr',     amps: 3,  sw : nil, feed : 1},
+    {name: 'adf1',            amps: 3,  sw : nil, feed : 1},
+    {name: 'dme1',            amps: 3,  sw : nil, feed : 1},
+    {name: 'radio-alt1',      amps: 3,  sw : nil, feed : 1},
+    {name: 'data-loader',     amps: 3,  sw : nil, feed : 1},
+    {name: 'gps1',            amps: 3,  sw : nil, feed : 1},
+    {name: 'fms1',            amps: 3,  sw : nil, feed : 1},
+    {name: 'att-hdg1',        amps: 3,  sw : nil, feed : 2},
+    {name: 'fgc-yd-A',        amps: 3,  sw : nil, feed : 2},
+    {name: 'fgc-cont-A',      amps: 3,  sw : nil, feed : 2},
+    {name: 'dau1B',           amps: 3,  sw : nil, feed : 2},
+    {name: 'fdr',             amps: 3,  sw : nil, feed : 2},
+    {name: 'gpws',            amps: 3,  sw : nil, feed : 2},
+    {name: 'tcas',            amps: 3,  sw : nil, feed : 2},
+    {name: 'lighting-detect', amps: 3,  sw : nil, feed : 2},
+    {name: 'rad-tel',         amps: 3,  sw : nil, feed : 3},
+    {name: 'ap-A',            amps: 5,  sw : nil, feed : 3},
+    {name: 'pfd1',            amps: 7,  sw : nil, feed : 3},
+    {name: 'radar',           amps: 5,  sw : nil, feed : 3},
+    {name: 'radar-cont',      amps: 3,  sw : nil, feed : 2},
   ];
 
   left_emer = [
     {name: 'lh-emer',             amps: 5,    sw: nil}, # left cb
     {name: 'aux-panel',           amps: 3,    sw: nil},
     {name: 'lh-ws',               amps: 3,    sw: lh_ws},
-    {name: 'aileron-trim',        amps: 1.5,  sw: nil}, 
+    {name: 'aileron-trim',        amps: 1.5,  sw: nil},
     {name: 'pitch-feel',          amps: 1.5,  sw: nil},
     {name: 'lh-boost-pump',       amps: 0.3,  sw: lh_boost_pump},
     {name: 'lh-start',            amps: 1.5,  sw: nil},
@@ -264,4 +264,3 @@ var components = func {
     }
 
 }; # end of components
-

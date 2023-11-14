@@ -190,7 +190,6 @@ var JetEngine = {
     ### Engines Oil Pressure Display ###
      setprop(me.oilp,getprop(me.sysoil)*56); # nominal press = 56 psi
 
-#    if (getprop("accelerations/pilot-gdamped") > 1.5) print("G = ",getprop("accelerations/pilot-gdamped"));
   }, # end of update
 
   spool_up : func(scnds){
@@ -356,16 +355,16 @@ var FH_write = func {
 	  io.write_properties(fh_path,data);
 }
 
-controls.stepSpoilers = func(v) {
-  if (v < 0) {setprop("/controls/flight/speedbrake", 0)}
-	else if (v > 0) {setprop("/controls/flight/speedbrake", 1)}
-}
-
 controls.synchro = func {
   var synchro = "controls/engines/synchro";
   if (getprop(synchro) == -1) ud = 1;
   if (getprop(synchro) == 1) ud = -1;
   setprop(synchro,getprop(synchro) + ud);
+}
+
+controls.stepSpoilers = func (step) {
+    var val = 0.1 * step + getprop("/controls/flight/spoilers");
+    setprop("/controls/flight/spoilers", val > 1 ? 1 : val < 0 ? 0 : val);
 }
 
 controls.pilots = func() {
